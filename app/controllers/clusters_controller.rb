@@ -1,0 +1,2 @@
+class ClustersController < ApplicationController
+end

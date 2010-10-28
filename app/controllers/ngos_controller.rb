@@ -1,0 +1,2 @@
+class NgosController < ApplicationController
+end

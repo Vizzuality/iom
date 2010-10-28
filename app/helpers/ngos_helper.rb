@@ -1,0 +1,2 @@
+module NgosHelper
+end
