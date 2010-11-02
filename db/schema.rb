@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101028134621) do
+ActiveRecord::Schema.define(:version => 20101028135048) do
 
   create_table "clusters", :force => true do |t|
     t.column "name", :string
@@ -89,6 +89,17 @@ ActiveRecord::Schema.define(:version => 20101028134621) do
     t.column "created_at", :datetime
     t.column "updated_at", :datetime
     t.column "the_geom", :geometry
+  end
+
+  create_table "users", :force => true do |t|
+    t.column "name", :string, :limit => 100, :default => ""
+    t.column "email", :string, :limit => 100
+    t.column "crypted_password", :string, :limit => 40
+    t.column "salt", :string, :limit => 40
+    t.column "created_at", :datetime
+    t.column "updated_at", :datetime
+    t.column "remember_token", :string, :limit => 40
+    t.column "remember_token_expires_at", :datetime
   end
 
 end
