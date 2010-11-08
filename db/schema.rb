@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101028135048) do
+ActiveRecord::Schema.define(:version => 20101108163209) do
 
   create_table "clusters", :force => true do |t|
     t.column "name", :string
@@ -61,6 +61,32 @@ ActiveRecord::Schema.define(:version => 20101028135048) do
     t.column "donation_webiste", :string
     t.column "created_at", :datetime
     t.column "updated_at", :datetime
+  end
+
+  create_table "organizations", :force => true do |t|
+    t.column "name", :string
+    t.column "description", :text
+    t.column "budget", :integer
+    t.column "website", :string
+    t.column "staff", :integer
+    t.column "twitter", :string
+    t.column "facebook", :string
+    t.column "hq_address", :string
+    t.column "contact_email", :string
+    t.column "contact_phone_number", :string
+    t.column "donation_address", :string
+    t.column "zip_code", :string
+    t.column "city", :string
+    t.column "state", :string
+    t.column "donation_phone_number", :string
+    t.column "donation_website", :string
+    t.column "site_specific_information", :text
+    t.column "created_at", :datetime
+    t.column "updated_at", :datetime
+    t.column "logo_file_name", :string
+    t.column "logo_content_type", :string
+    t.column "logo_file_size", :integer
+    t.column "logo_updated_at", :datetime
   end
 
   create_table "projects", :force => true do |t|

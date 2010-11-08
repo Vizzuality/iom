@@ -96,6 +96,9 @@ GEM
       net-ssh (>= 1.99.1)
     nofxx-georuby (1.7.3)
     nokogiri (1.4.3.1)
+    paperclip (2.3.5)
+      activerecord
+      activesupport
     pg (0.9.0)
     polyglot (0.3.1)
     rack (1.2.1)
@@ -165,6 +168,7 @@ DEPENDENCIES
   database_cleaner
   launchy
   nofxx-georuby
+  paperclip
   pg (= 0.9.0)
   ppe-postgis-adapter!
   rails (= 3.0.1)

@@ -1,0 +1,11 @@
+<h1>Organizations</h1>
+
+<p><%= link_to('+ new organization', new_admin_organization_path) %></p>
+
+<ul>
+  <% @organizations.each do |organization| %>
+    <li><%= link_to(organization.name, edit_admin_organization_path(organization)) %></li>
+  <% end -%>
+</ul>
+
+<%= will_paginate(@organizations) %>

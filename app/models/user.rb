@@ -1,15 +1,25 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                        :integer         not null, primary key
+#  name                      :string(100)     default("")
+#  email                     :string(100)
+#  crypted_password          :string(40)
+#  salt                      :string(40)
+#  created_at                :datetime
+#  updated_at                :datetime
+#  remember_token            :string(40)
+#  remember_token_expires_at :datetime
+#
+
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
+
   include Authentication
   include Authentication::ByPassword
   include Authentication::ByCookieToken
-
-  set_table_name 'users'
-
-  validates :name,  :format     => { :with => Authentication.name_regex, :message => Authentication.bad_name_message },
-                    :length     => { :maximum => 100 },
-                    :allow_nil  => true
 
   validates :email, :presence   => true,
                     :uniqueness => true,
@@ -22,8 +32,6 @@ class User < ActiveRecord::Base
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
   attr_accessible :email, :name, :password, :password_confirmation
-
-
 
   # Authenticates a user by their email name and unencrypted password.  Returns the user or nil.
   #
@@ -40,9 +48,5 @@ class User < ActiveRecord::Base
   def email=(value)
     write_attribute :email, (value ? value.downcase : nil)
   end
-
-  protected
-
-
 
 end
