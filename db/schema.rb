@@ -10,12 +10,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101108163209) do
+ActiveRecord::Schema.define(:version => 20101110114438) do
 
   create_table "clusters", :force => true do |t|
     t.column "name", :string
     t.column "created_at", :datetime
     t.column "updated_at", :datetime
+  end
+
+  create_table "countries", :force => true do |t|
+    t.column "name", :string
+    t.column "code", :string
   end
 
   create_table "donations", :force => true do |t|
@@ -103,6 +108,26 @@ ActiveRecord::Schema.define(:version => 20101108163209) do
     t.column "the_geom", :geometry
   end
 
+  create_table "regions", :force => true do |t|
+    t.column "country_id", :integer
+    t.column "name", :string
+  end
+
+  create_table "resources", :force => true do |t|
+    t.column "title", :string
+    t.column "url", :string
+    t.column "element_id", :integer
+    t.column "element_type", :integer
+    t.column "created_at", :datetime
+    t.column "updated_at", :datetime
+  end
+
+  create_table "sections", :force => true do |t|
+    t.column "name", :string
+    t.column "created_at", :datetime
+    t.column "updated_at", :datetime
+  end
+
   create_table "sites", :force => true do |t|
     t.column "name", :string
     t.column "short_description", :text
@@ -115,6 +140,10 @@ ActiveRecord::Schema.define(:version => 20101108163209) do
     t.column "created_at", :datetime
     t.column "updated_at", :datetime
     t.column "the_geom", :geometry
+  end
+
+  create_table "themes", :force => true do |t|
+    t.column "name", :string
   end
 
   create_table "users", :force => true do |t|
