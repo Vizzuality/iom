@@ -11,14 +11,14 @@ gem 'ruby-debug'
 
 gem "will_paginate", "~> 3.0.pre2"
 gem 'sanitize'
-gem 'paperclip', :tag => 'v2.3.3'
+gem 'paperclip', :tag => 'v2.3.5'
 
 group :development do
   gem 'capistrano'
   gem 'capistrano-ext'
 end
 
-group :test do
+group :test, :development do
   gem 'rr', :tag => 'v1.0.0'
   gem 'steak', :git => 'git://github.com/cavalle/steak.git'
   gem 'rspec', '>= 2.0.0.beta.13'

@@ -25,11 +25,18 @@ class Admin::OrganizationsController < ApplicationController
 
   def update
     @organization = Organization.find(params[:id])
+    @organization.attributes = params[:organization]
     if @organization.save
       redirect_to edit_admin_organization_path(@organization), :flash => {:success => 'Organization has been updated successfully'}
     else
       render :action => 'edit'
     end
+  end
+
+  def destroy
+    @organization = Organization.find(params[:id])
+    @organization.destroy
+    redirect_to admin_organizations_path, :flash => {:success => 'Organization has been deleted successfully'}
   end
 
 end

@@ -13,7 +13,7 @@
   </div>
 
   <% if @organization.logo %>
-    <%= image_tag(@organization.logo.url) %>
+    <%= image_tag(@organization.logo.url(:small)) %>
   <% end -%>
 
   <div class="field">

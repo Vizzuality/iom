@@ -8,6 +8,12 @@
 </head>
 <body>
 
+<div id="header">
+  <% if logged_in? %>
+    <%= link_to('logout', logout_path) %>
+  <% end %>
+</div>
+
 <%= yield %>
 
 </body>

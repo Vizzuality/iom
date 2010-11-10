@@ -1,3 +1,8 @@
 <h1>Edit organization <%= @organization.name %></h1>
 
 <%= render :partial => 'form' %>
+
+<div>
+  <h2>Delete this NGO</h2>
+  <%= link_to("Delete this NGO", admin_organization_path(@organization), :method => :delete, :confirm => '¿Are you sure?') %>
+</div>
