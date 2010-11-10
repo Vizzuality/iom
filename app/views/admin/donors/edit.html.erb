@@ -1,0 +1,8 @@
+<h1>Edit donor <%= @donor.name %></h1>
+
+<%= render :partial => 'form' %>
+
+<div>
+  <h2>Delete this donor</h2>
+  <%= link_to("Delete this donor", admin_donor_path(@donor), :method => :delete, :confirm => '¿Are you sure?') %>
+</div>

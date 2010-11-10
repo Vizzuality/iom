@@ -1,0 +1,11 @@
+<h1>Donors</h1>
+
+<p><%= link_to('+ new donor', new_admin_donor_path) %></p>
+
+<ul>
+  <% @donors.each do |donor| %>
+    <li><%= link_to(donor.name, edit_admin_donor_path(donor)) %></li>
+  <% end -%>
+</ul>
+
+<%= will_paginate(@donors) %>

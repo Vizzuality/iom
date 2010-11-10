@@ -5,7 +5,7 @@
 #  id                        :integer         not null, primary key
 #  name                      :string(255)     
 #  description               :text            
-#  budget                    :integer         
+#  budget                    :float           
 #  website                   :string(255)     
 #  staff                     :integer         
 #  twitter                   :string(255)     

@@ -1,0 +1,68 @@
+<%= form_for(@donor, :url => (@donor.new_record? ? admin_donors_path : admin_donor_path(@donor)), :html => { :multipart => true }) do |f| %>
+
+  <%= f.error_messages %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+
+  <% if @donor.logo %>
+    <%= image_tag(@donor.logo.url(:small)) %>
+  <% end -%>
+
+  <div class="field">
+    <%= f.label :logo %>
+    <%= f.file_field :logo %>
+  </div>
+
+  <div class="field">
+    <%= f.label :website %>
+    <%= f.text_field :website %>
+  </div>
+
+  <div class="field">
+    <%= f.label :twitter %>
+    <%= f.text_field :twitter %>
+  </div>
+
+  <div class="field">
+    <%= f.label :facebook %>
+    <%= f.text_field :facebook %>
+  </div>
+
+  <div class="field">
+    <%= f.label :contact_person_name %>
+    <%= f.text_field :contact_person_name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :contact_company %>
+    <%= f.text_field :contact_company %>
+  </div>
+
+  <div class="field">
+    <%= f.label :contact_person_position %>
+    <%= f.text_field :contact_person_position %>
+  </div>
+
+  <div class="field">
+    <%= f.label :contact_email %>
+    <%= f.text_field :contact_email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :contact_phone_number %>
+    <%= f.text_field :contact_phone_number %>
+  </div>
+
+  <div class="field">
+    <%= f.submit 'Save' %>
+  </div>
+
+<% end -%>

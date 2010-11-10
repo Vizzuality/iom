@@ -12,6 +12,7 @@ Iom::Application.routes.draw do
   namespace :admin do
     match '/' => 'admin#index', :as => :admin
     resources :organizations
+    resources :donors
   end
 
 end
