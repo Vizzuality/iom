@@ -1,8 +1,70 @@
-require 'test_helper'
+require File.expand_path('../../test_helper', __FILE__)
 
 class ProjectTest < ActiveSupport::TestCase
-  # Replace this with your real tests.
-  test "the truth" do
-    assert true
+
+  test "Our data is valid" do
+    project = create_project
+    assert project.valid?
+    assert !project.new_record?
   end
+
+  test "Tag a project with a tag twice should create a tag and update the counter to 2" do
+    project = create_project
+    project.tag_with('tag1')
+    assert_equal 1, project.tags.size
+
+
+    assert_equal 1, Tag.count
+    tag = Tag.first
+    assert_equal 'tag1', tag.name
+    assert_equal 1, tag.count
+    assert_equal 1, project.tags.size
+
+    project.tag_with('tag1')
+    assert_equal 1, Tag.count
+    tag.reload
+    assert_equal 1, tag.count
+    assert_equal 1, project.tags.size
+
+    project2 = create_project :name => "Another project"
+    project2.tag_with('tag1')
+    tag.reload
+    assert_equal 1, project2.tags.size
+
+    assert_equal 1, Tag.count
+    assert_equal 2, tag.count
+
+    tag.reload
+    assert_equal 2, tag.projects.size
+  end
+
+  test "Tag a project with multiple tags" do
+    project = create_project
+    project.tag_with('tag1, tag2')
+    assert_equal 2, project.tags.count
+
+    assert_equal 2, Tag.count
+
+    tag1 = Tag.find_by_name('tag1')
+    assert_equal 1, tag1.count
+
+    tag2 = Tag.find_by_name('tag2')
+    assert_equal 1, tag2.count
+
+    project.tag_with('tag2, tag3')
+    project.reload
+    assert_equal 2, project.tags.count
+
+    assert_equal 3, Tag.count
+
+    tag1 = Tag.find_by_name('tag1')
+    assert_equal 0, tag1.count
+
+    tag2 = Tag.find_by_name('tag2')
+    assert_equal 1, tag2.count
+
+    tag3 = Tag.find_by_name('tag3')
+    assert_equal 1, tag3.count
+  end
+
 end

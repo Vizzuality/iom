@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: sections
+# Table name: sectors
 #
 #  id         :integer         not null, primary key
 #  name       :string(255)     
@@ -8,5 +8,5 @@
 #  updated_at :datetime        
 #
 
-class Section < ActiveRecord::Base
+class Sector < ActiveRecord::Base
 end
