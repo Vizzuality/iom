@@ -1,0 +1,11 @@
+<h2>Projects</h2>
+
+<p><%= link_to('+ new project', new_admin_project_path) %></p>
+
+<ul>
+  <% @projects.each do |project| %>
+    <li><%= link_to(project.name, edit_admin_project_path(project)) %></li>
+  <% end -%>
+</ul>
+
+<%= will_paginate(@projects) %>

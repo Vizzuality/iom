@@ -120,7 +120,7 @@ ActiveRecord::Schema.define(:version => 20101116091100) do
     t.column "end_date", :date
     t.column "budget", :integer
     t.column "target", :string
-    t.column "stimated_people_reached", :integer
+    t.column "estimated_people_reached", :integer
     t.column "contact_person", :string
     t.column "contact_email", :string
     t.column "contact_phone_number", :string

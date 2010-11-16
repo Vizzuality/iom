@@ -1,0 +1,188 @@
+<%= form_for(@project, :url => (@project.new_record? ? admin_projects_path : admin_project_path(@project))) do |f| %>
+
+  <%= f.error_messages %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %>
+    <%= f.text_area :description %>
+  </div>
+
+  <div class="field">
+    <%= f.label :tags %>
+    <%= f.text_field :tags, :value => @project.tags.map{ |tag| tag.name }.join(', ') %>
+  </div>
+
+  <div class="field">
+    <%= f.label :primary_organization_id %>
+    <%= f.select :primary_organization_id, Organization.all.collect{ |o| [o.name, o.id] }, :prompt => 'Select an organization' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :implementing_organization %>
+    <%= f.text_field :implementing_organization %>
+  </div>
+
+  <div class="field">
+    <%= f.label :partner_organizations %>
+    <%= f.text_field :partner_organizations %>
+  </div>
+
+  <div class="field">
+    <%= f.label :cross_cutting_issues %>
+    <%= f.text_field :cross_cutting_issues %>
+  </div>
+
+  <h3>Context</h3>
+
+  <div class="field" class="clusters">
+    <%= f.label :clusters %>
+    <div id="clusters">
+      <% unless @project.clusters.empty? %>
+        <% @project.clusters.each do |cluster| %>
+        <span id="cluster_<%= cluster.id %>"><input type="checkbox" name="project[clusters_ids][]" value="<%= cluster.id %>" checked="checked"/><%= cluster.name %><a href="#cluster_<%= cluster.id %>" class="remove_this">x</a><br /></span>
+        <% end -%>
+      <% end -%>
+    </div>
+    <%= select_tag :select_cluster, options_for_select([['Choose a cluster',nil]] + Cluster.all.collect{ |o| [o.name, o.id] }) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :sectors %>
+    <div id="sectors">
+      <% unless @project.sectors.empty? %>
+        <% @project.sectors.each do |sector| %>
+        <span id="sector_<%= sector.id %>"><input type="checkbox" name="project[sectors_ids][]" value="<%= sector.id %>" checked="checked"/><%= sector.name %><a href="#sector_<%= sector.id %>" class="remove_this">x</a><br /></span>
+        <% end -%>
+      <% end -%>
+    </div>
+    <%= select_tag :select_sector, options_for_select([['Choose a sector',nil]] + Sector.all.collect{ |o| [o.name, o.id] }) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :geographic_ubication %>
+  </div>
+
+  <div class="field">
+    <%= f.label :start_date %>
+    <%= f.date_select :start_date, :start_year => Date.today.year - 5  %>
+  </div>
+
+  <div class="field">
+    <%= f.label :end_date %>
+    <%= f.date_select :end_date, :start_year => Date.today.year - 5  %>
+  </div>
+
+  <h3>Impact</h3>
+
+  <div class="field">
+    <%= f.label :budget %>
+    <%= f.text_field :budget %>
+  </div>
+
+  <div class="field">
+    <%= f.label :target %>
+    <%= f.text_field :target %>
+  </div>
+
+  <div class="field">
+    <%= f.label :estimated_people_reached %>
+    <%= f.text_field :estimated_people_reached %>
+  </div>
+
+  <h3>Contact information</h3>
+
+  <div class="field">
+    <%= f.label :contact_person %>
+    <%= f.text_field :contact_person %>
+  </div>
+
+  <div class="field">
+    <%= f.label :contact_email %>
+    <%= f.text_field :contact_email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :contact_phone_number %>
+    <%= f.text_field :contact_phone_number %>
+  </div>
+
+  <div class="field">
+    <%= f.submit 'Save' %>
+  </div>
+
+<% end -%>
+
+
+<script type="text/javascript">
+$(function() {
+  function split( val ) {
+    return val.split( /,\s*/ );
+  }
+  $("#project_tags").autocomplete({
+    source: function( request, response ) {
+      var value = $("#project_tags").val();
+      if (value.indexOf(',') != -1 ) {
+        value = value.substring(value.indexOf(',')+1, value.length);
+      }
+      $.ajax({
+        url: '<%= admin_tags_path %>?term=' + value,
+        dataType: "json",
+        success: function( data ) {
+          if(data != null) {
+            response($.map(data, function(tag) {
+              return {
+                label: tag.name + ' ' + tag.count + ' projects',
+                value: tag.name
+              }
+            }));
+          }
+        }
+      });
+    },
+    minLength: 2,
+    focus: function() {
+      // prevent value inserted on focus
+      return false;
+    },
+    select: function( event, ui ) {
+      var terms = split( this.value );
+      // remove the current input
+      terms.pop();
+      // add the selected item
+      terms.push( ui.item.value );
+      // add placeholder to get the comma-and-space at the end
+      terms.push( "" );
+      this.value = terms.join( ", " );
+      return false;
+    },
+    refresh: function(){
+       this.element.children("li.ui-menu-item:odd a").addClass("ui-menu-item-alternate");
+    }
+  });
+  $('.remove_this').live('click',function(){
+    $($(this).attr('href')).children().each(function(){
+      $(this).remove();
+    });
+    $($(this).attr('href')).remove();
+  });
+  $('#select_cluster').change(function(){
+    var str = ""
+    $("select#select_cluster option:selected").each(function () {
+          str += $(this).text() + " ";
+        });
+    $('#clusters').append('<span id="cluster_'+$(this).val()+'"><input type="checkbox" name="project[clusters_ids][]" value="' +$(this).val() +'" checked="checked"/>' + str + ' <a href="#cluster_'+$(this).val()+'" class="remove_this">x</a><br /></span>');
+  });
+  $('#select_sector').change(function(){
+    var str = ""
+    $("select#select_sector option:selected").each(function () {
+          str += $(this).text() + " ";
+        });
+    $('#sectors').append('<span id="sector_'+$(this).val()+'"><input type="checkbox" name="project[sectors_ids][]" value="' +$(this).val() +'" checked="checked"/>' + str + ' <a href="#sector_'+$(this).val()+'" class="remove_this">x</a><br /></span>');
+  })
+});
+</script>

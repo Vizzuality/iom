@@ -12,7 +12,7 @@ class CreateProjects < ActiveRecord::Migration
       t.date        :end_date
       t.integer     :budget
       t.string      :target
-      t.integer     :stimated_people_reached
+      t.integer     :estimated_people_reached
       t.string      :contact_person
       t.string      :contact_email
       t.string      :contact_phone_number

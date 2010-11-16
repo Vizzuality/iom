@@ -1,0 +1,13 @@
+<ul>
+  <li><%= link_to_unless_current('Basic information', edit_admin_project_path(@project)) %></li>
+  <li><%= link_to_unless_current("Media (#{@project.media_resources.count})", admin_project_media_resources_path(@project)) %></li>
+  <li><a href="#">Donors (0)</a></li>
+  <li><%= link_to_unless_current("Resources (#{@project.resources.count})", admin_project_resources_path(@project)) %></li>
+</ul>
+
+
+<div class="down">
+  <h3>Delete this project</h3>
+  <%= link_to("Delete this project", admin_project_path(@project), :method => :delete, :confirm => '¿Are you sure?') %>
+</div>
+

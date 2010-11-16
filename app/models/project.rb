@@ -13,7 +13,7 @@
 #  end_date                  :date
 #  budget                    :integer
 #  target                    :string(255)
-#  stimated_people_reached   :integer
+#  estimated_people_reached  :integer
 #  contact_person            :string(255)
 #  contact_email             :string(255)
 #  contact_phone_number      :string(255)
@@ -28,7 +28,8 @@ class Project < ActiveRecord::Base
   acts_as_geom :the_geom => :multi_point
 
   belongs_to :primary_organization, :foreign_key => :primary_organization_id, :class_name => 'Organization'
-  has_and_belongs_to_many :secondary_organizations, :class_name => 'Organization', :join_table => 'organizations_projects'
+  # TODO: remove this when confirmed
+  # has_and_belongs_to_many :secondary_organizations, :class_name => 'Organization', :join_table => 'organizations_projects'
   has_and_belongs_to_many :clusters
   has_and_belongs_to_many :sectors
   has_and_belongs_to_many :tags, :after_add => :update_tag_counter, :after_remove => :update_tag_counter
@@ -39,10 +40,26 @@ class Project < ActiveRecord::Base
 
   validates_presence_of :name
 
-  def tag_with(tag_names)
+  def sectors_ids=(value)
+    value.each do |sector_id|
+      if sector = Sector.find(sector_id)
+        sectors << sector
+      end
+    end
+  end
+
+  def clusters_ids=(value)
+    value.each do |cluster_id|
+      if cluster = Cluster.find(cluster_id)
+        clusters << cluster
+      end
+    end
+  end
+
+  def tags=(tag_names)
     raise "tag names can't be blank or nil" if tag_names.blank?
     if tag_names.is_a?(String)
-      tag_names = tag_names.split(',').map{ |t| t.strip }
+      tag_names = tag_names.split(',').map{ |t| t.strip }.compact.delete_if{ |t| t.blank? }
     end
     Tag.transaction do
       tags.clear
@@ -61,6 +78,10 @@ class Project < ActiveRecord::Base
 
   def update_tag_counter(tag)
     tag.update_tag_counter
+  end
+
+  def before_save
+    self.the_geom = MultiPoint.from_points([Point.from_x_y(0, -77)])
   end
 
   private
