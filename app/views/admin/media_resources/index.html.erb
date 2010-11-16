@@ -1,0 +1,75 @@
+<div class="main">
+
+  <h2><%= @element.name %></h2>
+
+  <% unless @element.media_resources.empty? %>
+    <ul>
+    <% @element.media_resources.each do |resource| %>
+      <% if resource.is_a_video? %>
+        <li><%= raw resource.vimeo_embed_html %> <br /><%= link_to('Delete', eval("admin_#{@element.class.name.singularize.downcase}_media_resource_path(@element, resource)"), :method => :delete, :confirm => 'Are you sure?') %></li>
+      <% else %>
+        <li><%= image_tag(resource.picture.url(:medium)) %> <br /><%= link_to('Delete', eval("admin_#{@element.class.name.singularize.downcase}_media_resource_path(@element, resource)"), :method => :delete, :confirm => 'Are you sure?') %></li>
+      <% end -%>
+    <% end -%>
+    </ul>
+  <% end -%>
+
+  <div id="new_image">
+
+    <h3>Add a new image</h3>
+
+    <p>or <a href="javascript:void(null)" class="toggle_image_video">add a video</a></p>
+
+    <%= form_for([:admin, @element, @resource], :html => { :multipart => true }) do |f| %>
+
+      <%= error_messages_for :resource %>
+
+      <div class="field">
+        <%= f.label :picture %>
+        <%= f.file_field :picture %>
+      </div>
+
+      <div class="field">
+        <%= f.submit 'save' %>
+      </div>
+    <% end -%>
+
+  </div>
+
+  <div id="new_video" style="display:none">
+
+    <h3>Add a new video</h3>
+
+    <p>or <a href="javascript:void(null)" class="toggle_image_video">add an image</a></p>
+
+    <%= form_for([:admin, @element, @resource]) do |f| %>
+
+      <%= error_messages_for :resource %>
+
+      <div class="field">
+        <%= f.label :vimeo_url %>
+        <%= f.text_field :vimeo_url %>
+      </div>
+
+      <div class="field">
+        <%= f.submit 'save' %>
+      </div>
+    <% end -%>
+
+  </div>
+
+</div>
+
+<div class="sidebar">
+  <%= render :partial => "admin/#{@element.class.table_name}/sidebar" %>
+</div>
+
+<script type="text/javascript">
+$(document).ready( function() {
+  $('.toggle_image_video').click(function(){
+    $('#new_image').toggle();
+    $('#new_video').toggle();
+    return false;
+  });
+});
+</script>

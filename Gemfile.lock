@@ -166,6 +166,7 @@ DEPENDENCIES
   database_cleaner
   launchy
   nofxx-georuby
+  nokogiri
   paperclip
   pg (= 0.9.0)
   ppe-postgis-adapter!

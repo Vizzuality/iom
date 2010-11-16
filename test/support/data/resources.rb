@@ -17,7 +17,7 @@ module Iom
           {
             :title => 'Food Security Report',
             :url => 'http://foodsecurity.org/report.pdf',
-            :project => create_project(DEFAULT_PROJECT)
+            :element => create_project(DEFAULT_PROJECT)
           }
         else
           raise "Invalid fixture name"

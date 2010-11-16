@@ -118,6 +118,60 @@ feature "Organizations" do
 
     assert_equal 0, caritas.resources.count
     page.should have_css("div.sidebar ul li", :text => 'Resources (0)')
+  end
 
+  scenario "Organization media resources" do
+    login_as_administrator
+
+    click_link_or_button 'Manage Organizations'
+
+    click_link_or_button '+ new organization'
+
+    within(:xpath, "//form[@action='/admin/organizations']") do
+      fill_in 'organization_name', :with => 'Caritas'
+      fill_in 'organization_description', :with => 'Caritas is a non-profit organization'
+      attach_file('organization_logo', "#{Rails.root}/test/support/images/caritas.jpg")
+      fill_in 'organization_budget', :with => '200000'
+      fill_in 'organization_website', :with => 'http://caritas.org'
+      fill_in 'organization_staff', :with => '1500'
+      fill_in 'organization_twitter', :with => 'caritas'
+      fill_in 'organization_facebook', :with => 'www.facebook.com/caritas'
+      fill_in 'organization_hq_address', :with => 'Peace St, 3'
+      fill_in 'organization_contact_email', :with => 'caritas@exampe.com'
+      fill_in 'organization_contact_phone_number', :with => '0031 111 11 11'
+      fill_in 'organization_donation_address', :with => '(Donations) Peace St, 3'
+      fill_in 'organization_zip_code', :with => '28005'
+      fill_in 'organization_city', :with => 'New York'
+      fill_in 'organization_state', :with => 'NY'
+      fill_in 'organization_donation_phone_number', :with => '0031 111 11 12'
+      fill_in 'organization_donation_website', :with => 'http://caritas.com/donations'
+      click_link_or_button 'Save'
+    end
+
+    assert_equal 1, Organization.count
+    caritas = Organization.last
+    assert caritas.valid?
+
+    page.should have_css("div.sidebar ul li", :text => 'Basic information')
+
+    click_link_or_button "Media (0)"
+
+    page.should have_css("h2", :text => 'Caritas')
+
+    within(:xpath, "//div[@id='new_video']/form[@action='/admin/organizations/#{caritas.id}/media_resources']") do
+      fill_in 'media_resource_vimeo_url', :with => 'http://vimeo.com/11144228'
+      click_link_or_button 'save'
+    end
+
+    assert_equal 1, caritas.media_resources.count
+    assert !caritas.media_resources.first.vimeo_url.blank?
+    assert !caritas.media_resources.first.vimeo_embed_html.blank?
+
+    page.should have_css("div.sidebar ul li", :text => 'Media (1)')
+
+    click_link_or_button 'Delete'
+
+    assert_equal 0, caritas.media_resources.count
+    page.should have_css("div.sidebar ul li", :text => 'Media (0)')
   end
 end

@@ -1,7 +1,7 @@
 <ul>
   <li><%= link_to_unless_current('Basic information', edit_admin_organization_path(@organization)) %></li>
   <li><a href="#">Donated projects (0)</a></li>
-  <li><a href="#">Media (2)</a></li>
+  <li><%= link_to_unless_current("Media (#{@organization.media_resources.count})", admin_organization_media_resources_path(@organization)) %></li>
   <li><%= link_to_unless_current("Resources (#{@organization.resources.count})", admin_organization_resources_path(@organization)) %></li>
 </ul>
 
