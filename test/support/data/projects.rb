@@ -17,15 +17,16 @@ module Iom
           organization = create_organization
           {
             :name => "Food Conservation",
-            :description => "Food Conservation is a projet.....",
+            :description => "Food Conservation is a project.....",
             :primary_organization => organization,
+            :tags => "food, conservation, "
             :implementing_organization => organization.try(:name),
             :cross_cutting_issues => 'Issues defined',
             :start_date => Date.today.yesterday,
             :end_date => Date.today + 1.month,
             :budget => 250000,
             :target => 'Farmers',
-            :stimated_people_reached => 12312,
+            :estimated_people_reached => 12312,
             :contact_person => 'The Farmer',
             :contact_email => 'food_conservation@example.com',
             :contact_phone_number => '0031 345 03 23',
