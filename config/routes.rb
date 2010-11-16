@@ -11,7 +11,9 @@ Iom::Application.routes.draw do
   # Administration
   namespace :admin do
     match '/' => 'admin#index', :as => :admin
-    resources :organizations
+    resources :organizations do
+      resources :resources, :only => [:index, :create, :destroy]
+    end
     resources :donors do
       resources :resources, :only => [:index, :create, :destroy]
     end

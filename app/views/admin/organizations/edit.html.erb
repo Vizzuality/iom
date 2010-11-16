@@ -1,8 +1,11 @@
-<h1>Edit organization <%= @organization.name %></h1>
+<div class="main">
 
-<%= render :partial => 'form' %>
+  <h2>Edit organization <%= @organization.name %></h2>
 
-<div>
-  <h2>Delete this NGO</h2>
-  <%= link_to("Delete this NGO", admin_organization_path(@organization), :method => :delete, :confirm => '¿Are you sure?') %>
+  <%= render :partial => 'form' %>
+
+</div>
+
+<div class="sidebar">
+  <%= render 'sidebar' %>
 </div>
