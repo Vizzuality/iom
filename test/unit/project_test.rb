@@ -11,27 +11,25 @@ class ProjectTest < ActiveSupport::TestCase
   test "Tag a project with a tag twice should create a tag and update the counter to 2" do
     project = create_project
     project.tags = 'tag1'
+    project.save
     assert_equal 1, project.tags.size
 
-
-    assert_equal 1, Tag.count
-    tag = Tag.first
+    tag = Tag.last
     assert_equal 'tag1', tag.name
     assert_equal 1, tag.count
     assert_equal 1, project.tags.size
 
     project.tags = 'tag1'
-    assert_equal 1, Tag.count
     tag.reload
     assert_equal 1, tag.count
     assert_equal 1, project.tags.size
 
     project2 = create_project :name => "Another project"
     project2.tags = 'tag1'
+    project2.save
     tag.reload
     assert_equal 1, project2.tags.size
 
-    assert_equal 1, Tag.count
     assert_equal 2, tag.count
 
     tag.reload
@@ -43,8 +41,6 @@ class ProjectTest < ActiveSupport::TestCase
     project.tags = 'tag1, tag2'
     assert_equal 2, project.tags.count
 
-    assert_equal 2, Tag.count
-
     tag1 = Tag.find_by_name('tag1')
     assert_equal 1, tag1.count
 
@@ -55,8 +51,6 @@ class ProjectTest < ActiveSupport::TestCase
     project.reload
     assert_equal 2, project.tags.count
 
-    assert_equal 3, Tag.count
-
     tag1 = Tag.find_by_name('tag1')
     assert_equal 0, tag1.count
 
@@ -65,6 +59,14 @@ class ProjectTest < ActiveSupport::TestCase
 
     tag3 = Tag.find_by_name('tag3')
     assert_equal 1, tag3.count
+  end
+
+  test "Dates consistency" do
+    project = new_project
+    project.end_date = project.start_date - 5.days
+    project.save
+    assert !project.valid?
+    assert project.errors[:end_date]
   end
 
 end

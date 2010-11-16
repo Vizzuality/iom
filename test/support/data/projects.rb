@@ -19,7 +19,7 @@ module Iom
             :name => "Food Conservation",
             :description => "Food Conservation is a project.....",
             :primary_organization => organization,
-            :tags => "food, conservation, "
+            :tags => "food, conservation, ",
             :implementing_organization => organization.try(:name),
             :cross_cutting_issues => 'Issues defined',
             :start_date => Date.today.yesterday,

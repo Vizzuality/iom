@@ -40,6 +40,8 @@ class Project < ActiveRecord::Base
 
   validates_presence_of :name
 
+  validate :dates_consistency
+
   def sectors_ids=(value)
     value.each do |sector_id|
       if sector = Sector.find(sector_id)
@@ -89,6 +91,12 @@ class Project < ActiveRecord::Base
     def clean_html
       %W{ name description implementing_organization partner_organizations cross_cutting_issues target contact_person contact_email contact_phone_number }.each do |att|
         eval("self.#{att} = Sanitize.clean(self.#{att}.gsub(/\r/,'')) unless self.#{att}.blank?")
+      end
+    end
+
+    def dates_consistency
+      if end_date < start_date
+        errors.add(:end_date, "can't be previous to start_date")
       end
     end
 
