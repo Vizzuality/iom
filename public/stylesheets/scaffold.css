@@ -7,7 +7,7 @@ body, p, ol, ul, td {
 }
 
 h1 {
-	margin: 20px 0;
+  margin: 20px 0;
 }
 
 pre {
@@ -89,8 +89,8 @@ div.field, div.actions {
 }
 
 .pagination em {
-	background-color: #ccc;
-	padding: 2px 2px;
+  background-color: #ccc;
+  padding: 2px 2px;
 }
 
 .pagination span.disabled {
@@ -100,34 +100,34 @@ div.field, div.actions {
 }
 
 ul.main_menu {
-	margin: 0;
-	padding-top: 1.5em;
-	padding-bottom: 1.5em;
+  margin: 0;
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
 }
 
 ul.main_menu li {
-	padding: 0.2em;
+  padding: 0.2em;
   line-height: 1.6em;
   display: inline;
-	font-weight: bold;
+  font-weight: bold;
 }
 
 ul.main_menu li a {
-	font-weight: normal;
+  font-weight: normal;
 }
 
 table tr td,
 table tr th {
-	padding: 2px 10px;
-	text-align: left;
-	height: 30px;
+  padding: 2px 10px;
+  text-align: left;
+  height: 30px;
 }
 table tr th {
-	background: black;
-	color: white;
+  background: black;
+  color: white;
 }
 table tr.even {
-	background: #eee;
+  background: #eee;
 }
 #header { position: relative; height: 60px; margin-bottom: 30px;}
 #header h1 { font-size: 3em; }
@@ -144,3 +144,18 @@ table tr.even {
 .error a {color:#8a1f11;}
 .notice a {color:#514721;}
 .success a {color:#264409;}
+
+
+div.main {
+  width: 960px;
+  float: left;
+}
+
+div.sidebar {
+  overflow: hidden;
+  height: 1%;
+}
+
+div.sidebar div.down {
+  margin-top: 100px;
+}

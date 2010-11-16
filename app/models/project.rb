@@ -32,6 +32,7 @@ class Project < ActiveRecord::Base
   has_and_belongs_to_many :clusters
   has_and_belongs_to_many :sectors
   has_and_belongs_to_many :tags, :after_add => :update_tag_counter, :after_remove => :update_tag_counter
+  has_many :resources, :class_name => 'Resource', :conditions => 'resources.element_type = #{Resource::PROJECT_TYPE}', :foreign_key => :element_id, :dependent => :destroy
 
   before_validation :clean_html
 

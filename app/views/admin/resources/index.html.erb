@@ -1,0 +1,42 @@
+<div class="main">
+
+  <h2><%= @element.name %></h2>
+  <p><%= pluralize(@element.resources.count, 'resource', 'resources') %></p>
+
+  <% unless @element.resources.empty? %>
+    <dl>
+    <% @element.resources.each do |resource| %>
+      <dt><%= link_to(resource.title, resource.url) %></dt>
+      <dd>TODO: tipo de recurso</dd>
+      <dd><%= link_to('Delete', eval("admin_#{@element.class.name.singularize.downcase}_resource_path(@element, resource)"), :method => :delete, :confirm => 'Are you sure?') %></dd>
+    <% end -%>
+    </dl>
+  <% end -%>
+
+
+  <h3>Add new resource</h3>
+
+  <%= form_for([:admin, @element, @resource]) do |f| %>
+
+    <%= error_messages_for :resource %>
+
+    <div class="field">
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+    </div>
+
+    <div class="field">
+      <%= f.label :url %>
+      <%= f.text_field :url %>
+    </div>
+
+    <div class="field">
+      <%= f.submit 'add resource' %>
+    </div>
+  <% end -%>
+
+</div>
+
+<div class="sidebar">
+  <%= render :partial => "admin/#{@element.class.table_name}/sidebar" %>
+</div>

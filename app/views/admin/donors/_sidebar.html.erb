@@ -1,0 +1,13 @@
+<ul>
+  <li><%= link_to_unless_current('Basic information', edit_admin_donor_path(@donor)) %></li>
+  <li><a href="#">Donated projects (0)</a></li>
+  <li><a href="#">Media (2)</a></li>
+  <li><%= link_to_unless_current("Resources (#{@donor.resources.count})", admin_donor_resources_path(@donor)) %></li>
+</ul>
+
+
+<div class="down">
+  <h3>Delete this donor</h3>
+  <%= link_to("Delete this donor", admin_donor_path(@donor), :method => :delete, :confirm => '¿Are you sure?') %>
+</div>
+

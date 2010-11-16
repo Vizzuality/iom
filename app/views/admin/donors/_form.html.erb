@@ -12,7 +12,7 @@
     <%= f.text_area :description %>
   </div>
 
-  <% if @donor.logo %>
+  <% if @donor.logo_file_name? %>
     <%= image_tag(@donor.logo.url(:small)) %>
   <% end -%>
 
