@@ -26,7 +26,7 @@
         <p><%= image_tag(partner.logo.url(:small)) %></p>
         <p><%= partner.name %></p>
         <p><%= link_to(partner.url, partner.url) %></p>
-        <p><%= link_to('Destroy', admin_site_partner_path(@site, partner), :method => :delete, :confirm => 'Are you sure?') %></p>
+        <p><%= link_to('Delete', admin_site_partner_path(@site, partner), :method => :delete, :confirm => 'Are you sure?') %></p>
       </div>
     <% end -%>
   <% end -%>

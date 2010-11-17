@@ -114,5 +114,8 @@ feature "Sites" do
     page.should have_css("h2", :text => 'Edit site Haiti Aid Map')
     page.should have_css("div.partner", :count => 1)
 
+    click_link_or_button 'Delete'
+    assert_equal 0, site.partners.count
+
   end
 end
