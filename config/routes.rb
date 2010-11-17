@@ -20,11 +20,13 @@ Iom::Application.routes.draw do
     resources :donors do
       resources :media_resources, :only => [:index, :create, :destroy]
       resources :resources, :only => [:index, :create, :destroy]
+      get 'projects', :on => :member
     end
     resources :projects do
       resources :media_resources, :only => [:index, :create, :destroy]
       resources :resources, :only => [:index, :create, :destroy]
-      resources :donors
+      get 'donations', :on => :member
+      resources :donations, :only => [:create, :destroy]
     end
     resources :sites do
       get 'customization', :on => :member

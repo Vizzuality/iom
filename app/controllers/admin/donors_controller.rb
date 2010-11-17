@@ -19,6 +19,10 @@ class Admin::DonorsController < ApplicationController
     end
   end
 
+  def projects
+    @donor = Donor.find(params[:id])
+  end
+
   def edit
     @donor = Donor.find(params[:id])
   end

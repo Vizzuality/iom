@@ -3,23 +3,23 @@
 # Table name: projects
 #
 #  id                        :integer         not null, primary key
-#  name                      :string(255)
-#  description               :text
-#  primary_organization_id   :integer
-#  implementing_organization :string(255)
-#  partner_organizations     :string(255)
-#  cross_cutting_issues      :string(255)
-#  start_date                :date
-#  end_date                  :date
-#  budget                    :integer
-#  target                    :string(255)
-#  estimated_people_reached  :integer
-#  contact_person            :string(255)
-#  contact_email             :string(255)
-#  contact_phone_number      :string(255)
-#  site_specific_information :text
-#  created_at                :datetime
-#  updated_at                :datetime
+#  name                      :string(255)     
+#  description               :text            
+#  primary_organization_id   :integer         
+#  implementing_organization :string(255)     
+#  partner_organizations     :string(255)     
+#  cross_cutting_issues      :string(255)     
+#  start_date                :date            
+#  end_date                  :date            
+#  budget                    :integer         
+#  target                    :string(255)     
+#  estimated_people_reached  :integer         
+#  contact_person            :string(255)     
+#  contact_email             :string(255)     
+#  contact_phone_number      :string(255)     
+#  site_specific_information :text            
+#  created_at                :datetime        
+#  updated_at                :datetime        
 #  the_geom                  :geometry        not null
 #
 
@@ -35,6 +35,8 @@ class Project < ActiveRecord::Base
   has_and_belongs_to_many :tags, :after_add => :update_tag_counter, :after_remove => :update_tag_counter
   has_many :resources, :conditions => 'resources.element_type = #{Iom::ActsAsResource::PROJECT_TYPE}', :foreign_key => :element_id, :dependent => :destroy
   has_many :media_resources, :conditions => 'media_resources.element_type = #{Iom::ActsAsResource::PROJECT_TYPE}', :foreign_key => :element_id, :dependent => :destroy, :order => 'position ASC'
+  has_many :donations, :dependent => :destroy
+  has_many :donors, :through => :donations
 
   before_validation :clean_html
 

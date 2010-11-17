@@ -1,0 +1,38 @@
+<div class="main">
+
+  <h2><%= @project.name %></h2>
+  <p>by <%= @project.primary_organization.name %></p>
+
+  <% @project.donations.each do |donation| %>
+    <div class="project">
+      <h3><%= link_to(donation.donor.name, edit_admin_donor_path(donation.donor)) %></h3>
+      <p><%= donation.date.strftime("%Y/%m/%d") %></p>
+      <p>$ <%= donation.amount %></p>
+      <p><%= link_to('Delete', admin_project_donation_path(@project, donation), :method => :delete, :confirm => 'Are your sure?') %>
+    </div>
+  <% end -%>
+
+  <%= form_for([:admin, @project, (@donation || @project.donations.new)]) do |f| %>
+    <%= f.error_messages %>
+    <div class="field">
+      <%= f.label :donor_id, 'Donor name' %>
+      <%= f.select :donor_id, Donor.all.collect{ |d| [d.name, d.id] } %>
+    </div>
+    <div class="field">
+      <%= f.label :date, 'Donation date' %>
+      <%= f.date_select :date, :start_year => Date.today.year - 5  %>
+    </div>
+    <div class="field">
+      <%= f.label :amount %>
+      <%= f.text_field :amount  %>
+    </div>
+    <div class="field">
+      <%= f.submit 'Add donation' %>
+    </div>
+  <% end -%>
+
+</div>
+
+<div class="sidebar">
+  <%= render 'admin/projects/sidebar' %>
+</div>

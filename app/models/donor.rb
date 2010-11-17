@@ -27,6 +27,9 @@ class Donor < ActiveRecord::Base
   has_many :resources, :conditions => 'resources.element_type = #{Iom::ActsAsResource::DONOR_TYPE}', :foreign_key => :element_id, :dependent => :destroy
   has_many :media_resources, :conditions => 'media_resources.element_type = #{Iom::ActsAsResource::DONOR_TYPE}', :foreign_key => :element_id, :dependent => :destroy, :order => 'position ASC'
 
+  has_many :donations
+  has_many :donated_projects, :through => :donations, :source => :project
+
   has_attached_file :logo, :styles => { :small => "60x60#" }
 
   before_validation :clean_html

@@ -77,4 +77,49 @@ feature "Projects" do
     page.should have_css("div.sidebar ul li", :text => 'Resources (0)')
   end
 
+  scenario "Project and donations" do
+    donor = create_donor
+    project = create_project
+
+    login_as_administrator
+
+    click_link_or_button 'Manage Projects'
+
+    click_link_or_button 'Food Conservation'
+
+    click_link_or_button 'Donations (0)'
+
+    within(:xpath, "//form[@action='/admin/projects/#{project.id}/donations']") do
+      select donor.name, :from => 'donation_donor_id'
+      fill_in 'donation_amount', :with => 1000
+      click_link_or_button 'Add donation'
+    end
+
+    assert_equal 1, project.donations.count
+
+    page.should have_css("div.sidebar ul li", :text => 'Donations (1)')
+
+    click_link_or_button 'Manage Donors'
+    click_link_or_button donor.name
+
+    page.should have_css("div.sidebar ul li", :text => 'Donated projects (1)')
+
+    click_link_or_button 'Donated projects (1)'
+
+    page.should have_css("div.project h3", :text => project.name)
+
+    click_link_or_button 'Manage Projects'
+
+    click_link_or_button 'Food Conservation'
+
+    click_link_or_button 'Donations (1)'
+
+    click_link_or_button 'Delete'
+
+    page.should have_css("div.sidebar ul li", :text => 'Donations (0)')
+
+    assert_equal 0, project.donations.count
+
+  end
+
 end
