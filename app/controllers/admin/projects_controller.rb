@@ -3,7 +3,13 @@ class Admin::ProjectsController < ApplicationController
   before_filter :login_required
 
   def index
-    @projects = Project.paginate :per_page => 20, :order => 'created_at DESC', :page => params[:page]
+    if params[:organization_id]
+      @organization = Organization.find(params[:organization_id])
+      @projects = @organization.projects.paginate :per_page => 20, :order => 'created_at DESC', :page => params[:page]
+      render :template => 'admin/organizations/projects'
+    else
+      @projects = Project.paginate :per_page => 20, :order => 'created_at DESC', :page => params[:page]
+    end
   end
 
   def new

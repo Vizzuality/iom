@@ -95,6 +95,12 @@ feature "Organizations" do
     caritas = Organization.last
     assert caritas.valid?
 
+    # Associate a new project to this organization
+    project = new_project
+    project.primary_organization = caritas
+    project.save
+    assert project.valid?
+
     page.should have_css("div.sidebar ul li", :text => 'Basic information')
 
     click_link_or_button "Resources (0)"
@@ -118,6 +124,14 @@ feature "Organizations" do
 
     assert_equal 0, caritas.resources.count
     page.should have_css("div.sidebar ul li", :text => 'Resources (0)')
+
+    click_link_or_button 'NGO projects (1)'
+
+    page.should have_css("p", :text => '1 project by this NGO')
+    page.should have_css("div.project h3", :text => project.name)
+
+    click_link_or_button 'Create a new project'
+
   end
 
   scenario "Organization media resources" do

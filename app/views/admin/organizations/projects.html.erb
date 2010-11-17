@@ -1,0 +1,25 @@
+<div class="main">
+
+  <h2><%= @organization.name %></h2>
+  <p><%= pluralize(@projects.total_entries, 'project', 'projects') %> by this NGO</p>
+
+  <% @projects.each do |project| %>
+    <div class="project">
+      <h3><%= link_to(project.name, edit_admin_project_path(project)) %></h3>
+      <p><%= project.finished? ? 'Finished' : 'Running' %></p>
+      <ul>
+        TODO: project sites list
+      </ul>
+    </div>
+  <% end -%>
+
+</div>
+
+<div>
+  <p><%= link_to('Create a new project', new_admin_project_path) %></p>
+  <p>Adding a project to this NGO you will be adding it to the global database</p>
+</div>
+
+<div class="sidebar">
+  <%= render 'admin/organizations/sidebar' %>
+</div>

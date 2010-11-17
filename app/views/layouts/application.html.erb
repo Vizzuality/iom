@@ -8,13 +8,23 @@
 </head>
 <body>
 
-<div id="header">
-  <% if logged_in? %>
-    <%= link_to('logout', logout_path) %>
-  <% end %>
-</div>
+  <div id="header">
+    <% if logged_in? %>
+      <%= link_to('logout', logout_path) %>
+    <% end %>
+  </div>
 
-<%= yield %>
+  <div id="menu">
+    <ul class="main_menu">
+      <li><%= link_to('Dashboard', admin_admin_path) %></li>
+      <li><%= link_to('Manage Organizations', admin_organizations_path) %></li>
+      <li><%= link_to('Manage Donors', admin_donors_path) %></li>
+      <li><%= link_to('Manage Projects', admin_projects_path) %></li>
+      <li><%= link_to('Manage Sites', admin_sites_path) %></li>
+    </ul>
+  </div>
+
+  <%= yield %>
 
 </body>
 </html>
