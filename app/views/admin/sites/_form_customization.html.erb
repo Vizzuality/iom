@@ -18,6 +18,21 @@
 
   <h3>Partners</h3>
 
+  <p>Partners list</p>
+
+  <% unless @site.partners.empty? %>
+    <% @site.partners.each do |partner| %>
+      <div class="partner">
+        <p><%= image_tag(partner.logo.url(:small)) %></p>
+        <p><%= partner.name %></p>
+        <p><%= link_to(partner.url, partner.url) %></p>
+        <p><%= link_to('Destroy', admin_site_partner_path(@site, partner), :method => :delete, :confirm => 'Are you sure?') %></p>
+      </div>
+    <% end -%>
+  <% end -%>
+
+  <p><%= link_to('Add a partner', 'javascript:void(null)', :class => 'manage_partners') %></p>
+
   <h3>Map configuration</h3>
 
   <h3>Site navigation</h3>
@@ -67,11 +82,48 @@
 
 <% end -%>
 
+<div id="manage_partners" style="<%= @partner ? 'display:block' : 'display:none' %>">
+
+  <% unless @partner %>
+  <h3>New partner</h3>
+  <% else %>
+  <h3>Edit partner</h3>
+  <% end -%>
+
+  <%= form_for([:admin, @site, (@partner || @site.partners.new)], :html => { :multipart => true }) do |f| %>
+
+    <%= f.error_messages %>
+
+    <div class="field">
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="field">
+      <%= f.label :url %>
+      <%= f.text_field :url %>
+    </div>
+
+    <div class="field">
+      <%= f.label :url %>
+      <%= f.file_field :logo %>
+    </div>
+
+    <div class="field">
+      <%= f.submit 'Add partner' %>
+    </div>
+
+  <% end -%>
+</div>
+
 
 <script type="text/javascript">
 $(function() {
   $('#site_show_blog').click(function(){
     $('#tumbler_id').toggle();
+  });
+  $('.manage_partners').click(function(){
+    $('#manage_partners').show();
   });
 });
 </script>

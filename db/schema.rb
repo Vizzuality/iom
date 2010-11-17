@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101117100450) do
+ActiveRecord::Schema.define(:version => 20101117141706) do
 
   create_table "clusters", :force => true do |t|
     t.column "name", :string
@@ -102,6 +102,18 @@ ActiveRecord::Schema.define(:version => 20101117100450) do
   create_table "organizations_projects", :id => false, :force => true do |t|
     t.column "organization_id", :integer
     t.column "project_id", :integer
+  end
+
+  create_table "partners", :force => true do |t|
+    t.column "site_id", :integer
+    t.column "name", :string
+    t.column "url", :string
+    t.column "logo_file_name", :string
+    t.column "logo_content_type", :string
+    t.column "logo_file_size", :integer
+    t.column "logo_updated_at", :datetime
+    t.column "created_at", :datetime
+    t.column "updated_at", :datetime
   end
 
   create_table "projects", :force => true do |t|

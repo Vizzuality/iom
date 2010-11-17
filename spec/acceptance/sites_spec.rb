@@ -100,5 +100,19 @@ feature "Sites" do
     assert_equal 0, site.resources.count
     page.should have_css("div.sidebar ul li", :text => 'Resources (0)')
 
+    click_link_or_button 'Customization'
+
+    within(:xpath, "//form[@action='/admin/sites/#{site.id}/partners']") do
+      fill_in 'partner_name', :with => 'USA Gov'
+      fill_in 'partner_url', :with => 'http://usa.gov'
+      attach_file('partner_logo', "#{Rails.root}/test/support/images/usagov_logo.gif")
+      click_link_or_button 'Add partner'
+    end
+
+    assert_equal 1, site.partners.count
+
+    page.should have_css("h2", :text => 'Edit site Haiti Aid Map')
+    page.should have_css("div.partner", :count => 1)
+
   end
 end

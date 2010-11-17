@@ -29,6 +29,7 @@
 #  created_at                      :datetime
 #  updated_at                      :datetime
 #  geographic_context_geometry     :geometry
+#  project_context_tags_ids        :string(255)
 #
 
 class Site < ActiveRecord::Base
@@ -38,6 +39,7 @@ class Site < ActiveRecord::Base
   has_many :resources, :conditions => 'resources.element_type = #{Iom::ActsAsResource::SITE_TYPE}', :foreign_key => :element_id, :dependent => :destroy
   has_many :media_resources, :conditions => 'media_resources.element_type = #{Iom::ActsAsResource::SITE_TYPE}', :foreign_key => :element_id, :dependent => :destroy, :order => 'position ASC'
   has_one :theme
+  has_many :partners, :dependent => :destroy
 
   has_attached_file :logo, :styles => { :small => "60x60#" }
 

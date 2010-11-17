@@ -2,10 +2,10 @@
 
   <h2>Edit site <%= @site.name %></h2>
 
-  <%= render :partial => (action_name == 'edit' ? 'form' : 'form_customization') %>
+  <%= render :partial => (action_name == 'edit' ? 'admin/sites/form' : 'admin/sites/form_customization') %>
 
 </div>
 
 <div class="sidebar">
-  <%= render 'sidebar' %>
+  <%= render 'admin/sites/sidebar' %>
 </div>
