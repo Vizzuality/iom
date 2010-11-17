@@ -13,7 +13,7 @@ class Admin::SitesController < ApplicationController
   def create
     @site = Site.new(params[:site])
     if @site.save
-      redirect_to edit_admin_site_path(@site), :flash => {:success => 'Site has been created successfully'}
+      redirect_to customization_admin_site_path(@site), :flash => {:success => 'Site has been created successfully'}
     else
       render :action => 'new'
     end
