@@ -36,7 +36,7 @@ class Admin::DonorsController < ApplicationController
   def destroy
     @donor = Donor.find(params[:id])
     @donor.destroy
-    redirect_to admin_donors_path, :flash => {:success => 'donor has been deleted successfully'}
+    redirect_to admin_donors_path, :flash => {:success => 'Donor has been deleted successfully'}
   end
 
 end

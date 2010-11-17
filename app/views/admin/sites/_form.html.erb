@@ -1,0 +1,149 @@
+<%= form_for(@site, :url => (@site.new_record? ? admin_sites_path : admin_site_path(@site))) do |f| %>
+
+  <%= f.error_messages %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :short_description %>
+    <%= f.text_area :short_description %>
+  </div>
+
+  <div class="field">
+    <%= f.label :long_description %>
+    <%= f.text_area :long_description %>
+  </div>
+
+  <h3>Geographic context</h3>
+
+  <div class="field">
+    <label>Site Geographical Context</label>
+    <br />
+    <input type="radio" name="site[geographic_context]" class="choose_gc" value="worlwide" id="gc_worldwide" <%= 'checked="checked"' if @site.geographic_context_country_id.blank? && @site.geographic_context_region_id.blank? && @site.geographic_context_geometry.blank? %>/>
+    <label for="gc_worldwide">Worldwide, not limited</label><br />
+
+    <input type="radio" name="site[geographic_context]" class="choose_gc" value="country" id="gc_limited_country" <%= 'checked="checked"' if @site.geographic_context_country_id? %> />
+    <label for="gc_limited_country">Limited to a country</label><br />
+    <%= f.select :geographic_context_country_id, Country.all.collect{ |c| [c.name, c.id] }, {:prompt => 'Select a country'}, {:id => 'gc_limited_country_section', :style => (@site.geographic_context_country_id.blank? ? 'display:none' : 'display:block')} %>
+
+    <input type="radio" name="site[geographic_context]" class="choose_gc" value="region" id="gc_limited_region" <%= 'checked="checked"' if @site.geographic_context_region_id? %>/>
+    <label for="gc_limited_region">Limited to a region</label><br />
+    <%= f.select :geographic_context_region_id, Region.all.collect{ |r| [r.name, r.id] }, {:prompt => 'Select a region'}, {:id => 'gc_limited_region_section', :style => (@site.geographic_context_region_id.blank? ? 'display:none' : 'display:block')} %>
+
+    <input type="radio" name="site[geographic_context]" class="choose_gc" value="bbox" id="gc_limited_bbox" <%= 'checked="checked"' if @site.geographic_context_geometry? %>/>
+    <label for="gc_limited_bbox">Limited to a boundary box</label><br />
+    <div id="gc_limited_bbox_section" style="<%= (@site.geographic_context_geometry.blank? ? 'display:none' : 'display:block') %>">
+      Map
+    </div>
+  </div>
+
+  <h3>Project filtering</h3>
+
+  <div class="field">
+    <label>Project typology</label>
+    <br />
+
+    <input type="checkbox" name="site[project_context][]" class="choose_pc" value="cluster" id="pc_cluster" <%= 'checked="checked"' if @site.project_context_cluster_id? %>/>
+    <label for="pc_cluster">Include only projects from a particular cluster</label><br />
+    <%= f.select :project_context_cluster_id, Cluster.all.collect{ |c| [c.name, c.id] }, {:prompt => 'Select a cluster'}, {:id => 'pc_cluster_section', :style => (@site.project_context_cluster_id? ? 'display:block' : 'display:none')} %>
+
+    <input type="checkbox" name="site[project_context][]" class="choose_pc" value="organization" id="pc_organization" <%= 'checked="checked"' if @site.project_context_organization_id? %>/>
+    <label for="pc_organization">Include only projects from a particual NGO</label><br />
+    <%= f.select :project_context_organization_id, Organization.all.collect{ |o| [o.name, o.id] }, {:prompt => 'Select an organization'}, {:id => 'pc_organization_section', :style => (@site.project_context_organization_id? ? 'display:block' : 'display:none')} %>
+
+    <input type="checkbox" name="site[project_context][]" class="choose_pc" value="tags" id="pc_tags" <%= 'checked="checked"' if @site.project_context_tags? %>/>
+    <label for="pc_tags">Include only matching some tags</label><br />
+    <%= f.text_field :project_context_tags, {:id => 'pc_tags_section', :style => (@site.project_context_tags? ? 'display:block' : 'display:none')} %>
+  </div>
+
+  <h3>Contact information</h3>
+
+  <div class="field">
+    <%= f.label :contact_email %>
+    <%= f.text_field :contact_email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :contact_person %>
+    <%= f.text_field :contact_person %>
+  </div>
+
+  <h3>Technichal configuration</h3>
+
+  <div class="field">
+    <%= f.label :url %>
+    <%= f.text_field :url %>
+  </div>
+
+  <div class="field">
+    <%= f.label :google_analytics_id %>
+    <%= f.text_field :google_analytics_id %>
+  </div>
+
+  <div class="field">
+    <%= f.submit 'Save' %>
+  </div>
+
+<% end -%>
+
+
+<script type="text/javascript">
+$(function() {
+  $('.choose_gc').click(function(){
+    $('.choose_gc').each(function(){
+      $('#' + $(this).attr('id') + '_section').hide();
+    });
+    $('#' + $(this).attr('id') + '_section').show();
+  });
+  $('.choose_pc').click(function(){
+    $('#' + $(this).attr('id') + '_section').toggle();
+  });
+  function split( val ) {
+    return val.split( /,\s*/ );
+  }
+  $("#pc_tags_section").autocomplete({
+    source: function( request, response ) {
+      var value = $("#pc_tags_section").val();
+      if (value.indexOf(',') != -1 ) {
+        value = value.substring(value.indexOf(',')+1, value.length);
+      }
+      $.ajax({
+        url: '<%= admin_tags_path %>?term=' + value,
+        dataType: "json",
+        success: function( data ) {
+          if(data != null) {
+            response($.map(data, function(tag) {
+              return {
+                label: tag.name,
+                value: tag.name
+              }
+            }));
+          }
+        }
+      });
+    },
+    minLength: 2,
+    focus: function() {
+      // prevent value inserted on focus
+      return false;
+    },
+    select: function( event, ui ) {
+      var terms = split( this.value );
+      // remove the current input
+      terms.pop();
+      // add the selected item
+      terms.push( ui.item.value );
+      // add placeholder to get the comma-and-space at the end
+      terms.push( "" );
+      this.value = terms.join( ", " );
+      return false;
+    },
+    refresh: function(){
+       this.element.children("li.ui-menu-item:odd a").addClass("ui-menu-item-alternate");
+    }
+  });
+});
+</script>

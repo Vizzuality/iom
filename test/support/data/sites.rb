@@ -1,7 +1,7 @@
 module Iom
   module Data
 
-    DEFAULT_SITE = :food_security
+    DEFAULT_SITE = :haiti_aid_map
 
     def attributes_for_site(attributes_or_fixture = {})
       if attributes_or_fixture.is_a?(Hash)
@@ -12,13 +12,22 @@ module Iom
         fixture = attributes_or_fixture
       end
 
+      # TODO:
+      #  - add theme
+      #  - add logo
+      #  - project_classification
       default_attributes = case fixture
-        when :food_security
+        # Global project, associated to a cluster
+        when :haiti_aid_map
+          cluster = create_cluster :name => 'food'
           {
-            :name => 'Food Security', :short_description => 'Food Security Short Desc',
-            :long_description => 'Food Security Long Desc',
-            :contact_email => 'contact@example.com', :contact_person => 'Food Security Contact Person',
-            :url => 'http://food.security.com', :has_blog => false
+            :name => 'Haiti Aid Map', :short_description => 'Haiti Aid Map short desc',
+            :long_description => 'Haiti Aid Map long desc',
+            :contact_email => 'contact@example.com', :contact_person => 'Haiti Contact Person',
+            :url => 'http://haiti.aidmap.com', :google_analytics_id => 'GA-1234-321',
+            :blog_url => '', :word_for_clusters => 'clisters', :word_for_regions => 'rigions',
+            :show_global_donations_raises => true, :geographic_context_country_id => nil, :geographic_context_region_id => nil,
+            :project_context_cluster_id => cluster.id
           }
         else
           raise "Invalid fixture name"

@@ -32,6 +32,8 @@ class Admin::ResourcesController < ApplicationController
         @element = @organization = Organization.find(params[:organization_id])
       elsif params[:donor_id]
         @element = @donor = Donor.find(params[:donor_id])
+      elsif params[:site_id]
+        @element = @site = Site.find(params[:site_id])
       end
     end
 

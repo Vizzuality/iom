@@ -4,6 +4,7 @@ module Iom
     PROJECT_TYPE      = 0
     ORGANIZATION_TYPE = 1
     DONOR_TYPE        = 2
+    SITE_TYPE         = 3
 
     def self.included(base)
       base.send :extend, ClassMethods
@@ -14,6 +15,7 @@ module Iom
         belongs_to :project, :foreign_key => :element_id
         belongs_to :organization, :foreign_key => :element_id
         belongs_to :donor, :foreign_key => :element_id
+        belongs_to :site, :foreign_key => :element_id
 
         send :include, InstanceMethods
       end

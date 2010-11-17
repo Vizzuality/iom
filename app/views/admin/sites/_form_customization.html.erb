@@ -1,0 +1,77 @@
+<%= form_for(@site, :url => admin_site_path(@site), :html => { :multipart => true }) do |f| %>
+
+  <%= f.error_messages %>
+
+  <% if @site.logo_file_name? %>
+    <%= image_tag(@site.logo.url(:small)) %>
+  <% end -%>
+
+  <div class="field">
+    <%= f.label :logo %>
+    <%= f.file_field :logo %>
+  </div>
+
+  <div class="field">
+    <%= f.label :theme %>
+    TODO: themes
+  </div>
+
+  <h3>Partners</h3>
+
+  <h3>Map configuration</h3>
+
+  <h3>Site navigation</h3>
+
+  <div class="field">
+    <p>Projects classification</p>
+    <%= f.radio_button :project_classification, '0' %>
+    <%= f.label :project_classification_0, 'Cluster' %>
+    <%= f.radio_button :project_classification, '1' %>
+    <%= f.label :project_classification_1, 'Sector' %>
+  </div>
+
+
+  <h3>Fields & sections visibility</h3>
+
+  <div class="field">
+    <p>Configurable fields & sections</p>
+
+    <%= f.check_box :show_blog %>
+    <%= f.label :show_blog %>
+    <br />
+    <div id="tumbler_id" style="<%= (@site.blog_url.blank? ? 'display:none' : 'display:block') %>">
+      <%= f.label :blog_url, 'Write your tumbler id' %>
+      <%= f.text_field :blog_url %>
+    </div>
+    <br />
+
+    <%= f.check_box :show_global_donations_raises %>
+    <%= f.label :show_global_donations_raises %>
+  </div>
+
+  <h3>Naming</h3>
+
+  <div class="field">
+    <%= f.label :word_for_clusters %>
+    <%= f.text_field :word_for_clusters %>
+  </div>
+
+  <div class="field">
+    <%= f.label :word_for_regions %>
+    <%= f.text_field :word_for_regions %>
+  </div>
+
+  <div class="field">
+    <%= f.submit 'Save' %>
+  </div>
+
+<% end -%>
+
+
+<script type="text/javascript">
+$(function() {
+  $('#site_show_blog').click(function(){
+    $('#tumbler_id').toggle();
+  });
+});
+</script>

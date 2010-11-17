@@ -17,6 +17,7 @@ gem 'nokogiri'
 group :development do
   gem 'capistrano'
   gem 'capistrano-ext'
+  gem 'wirble'
 end
 
 group :test, :development do
