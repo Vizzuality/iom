@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101117141706) do
+ActiveRecord::Schema.define(:version => 20101119102703) do
 
   create_table "clusters", :force => true do |t|
     t.column "name", :string
@@ -26,6 +26,11 @@ ActiveRecord::Schema.define(:version => 20101117141706) do
   create_table "countries", :force => true do |t|
     t.column "name", :string
     t.column "code", :string
+  end
+
+  create_table "countries_projects", :id => false, :force => true do |t|
+    t.column "country_id", :integer
+    t.column "project_id", :integer
   end
 
   create_table "donations", :force => true do |t|
@@ -136,6 +141,11 @@ ActiveRecord::Schema.define(:version => 20101117141706) do
     t.column "the_geom", :geometry, :srid => 4326, :null => false
   end
 
+  create_table "projects_regions", :id => false, :force => true do |t|
+    t.column "region_id", :integer
+    t.column "project_id", :integer
+  end
+
   create_table "projects_sectors", :id => false, :force => true do |t|
     t.column "sector_id", :integer
     t.column "project_id", :integer
@@ -188,6 +198,7 @@ ActiveRecord::Schema.define(:version => 20101117141706) do
     t.column "geographic_context_country_id", :integer
     t.column "geographic_context_region_id", :integer
     t.column "project_context_cluster_id", :integer
+    t.column "project_context_sector_id", :integer
     t.column "project_context_organization_id", :integer
     t.column "project_context_tags", :string
     t.column "created_at", :datetime

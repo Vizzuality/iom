@@ -69,4 +69,15 @@ class ProjectTest < ActiveSupport::TestCase
     assert project.errors[:end_date]
   end
 
+  test "Project regions and countries" do
+    spain = create_country :name => 'Spain'
+    valencia = create_region :name => 'Valencia', :country => spain
+    project = create_project
+    project.countries << spain
+    project.regions << valencia
+
+    assert project.countries.include?(spain)
+    assert project.regions.include?(valencia)
+  end
+
 end

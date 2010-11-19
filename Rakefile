@@ -5,3 +5,6 @@ require File.expand_path('../config/application', __FILE__)
 require 'rake'
 
 Iom::Application.load_tasks
+
+Rake.application.instance_variable_get('@tasks').delete('default')
+task :default => ["test", "spec:acceptance"]

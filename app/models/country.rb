@@ -10,5 +10,6 @@
 class Country < ActiveRecord::Base
 
   has_many :regions
+  has_and_belongs_to_many :projects
 
 end

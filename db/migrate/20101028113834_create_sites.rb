@@ -23,6 +23,7 @@ class CreateSites < ActiveRecord::Migration
       t.integer  :geographic_context_region_id
       t.geometry :geographic_context_geometry, :srid => 4326
       t.integer  :project_context_cluster_id
+      t.integer  :project_context_sector_id
       t.integer  :project_context_organization_id
       t.string   :project_context_tags
       t.timestamps
