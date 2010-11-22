@@ -11,7 +11,6 @@ input:focus{outline:none}
 body {background:#E1E5E7;}
 ul {list-style:none;}
 
-
 /*layout*/
 div.main_layout {margin:0 auto; width:942px;}
 div.main_layout div.block {float:left; width:942px; margin:20px 0 0 0;}
