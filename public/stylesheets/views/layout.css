@@ -1,0 +1,10 @@
+body,div,ul,li,ol,h1,h2,h3,h4,h5,h6,form,fieldset,p{margin:0; padding:0; font-weight:normal;}
+img,fieldset{border:none; padding:0; margin:0;}
+body{font:11px Arial, Helvetica,serif; color:#FFFFFF;}
+span.clear{clear:both;}
+div.left{float:left; width:auto;}
+div.right{float:right; width:auto;}
+a{text-decoration:none;}
+ul:focus {outline:none;}
+input:focus{outline:none}
+
