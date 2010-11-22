@@ -34,6 +34,7 @@ Iom::Application.routes.draw do
       resources :partners, :only => [:create, :destroy]
       resources :media_resources, :only => [:index, :create, :destroy]
       resources :resources, :only => [:index, :create, :destroy]
+      resources :pages
     end
   end
 

@@ -1,0 +1,9 @@
+<div class="main">
+
+  <h2>Edit page <%= @page.title %></h2>
+
+  <%= render :partial => 'form' %>
+
+  <p><%= link_to('⟵ back to pages', admin_site_pages_path(@site)) %></p>
+
+</div>

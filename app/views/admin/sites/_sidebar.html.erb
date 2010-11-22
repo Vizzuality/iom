@@ -4,6 +4,7 @@
   <li><%= link_to_unless_current("Site projects (#{@site.total_projects})", projects_admin_site_path(@site)) %></li>
   <li><%= link_to_unless_current("Media (#{@site.media_resources.count})", admin_site_media_resources_path(@site)) %></li>
   <li><%= link_to_unless_current("Resources (#{@site.resources.count})", admin_site_resources_path(@site)) %></li>
+  <li><%= link_to_unless_current("Pages (#{@site.pages.count})", admin_site_pages_path(@site)) %></li>
 </ul>
 
 
