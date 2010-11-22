@@ -30,6 +30,7 @@ Iom::Application.routes.draw do
     end
     resources :sites do
       get 'customization', :on => :member
+      get 'projects', :on => :member
       resources :partners, :only => [:create, :destroy]
       resources :media_resources, :only => [:index, :create, :destroy]
       resources :resources, :only => [:index, :create, :destroy]

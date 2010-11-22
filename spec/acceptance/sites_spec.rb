@@ -7,6 +7,9 @@ feature "Sites" do
     food = create_cluster :name => 'food'
     africa = create_cluster :name => 'africa'
 
+    project = create_project
+    project.clusters << food
+
     login_as_administrator
 
     click_link_or_button 'Manage Sites'
@@ -38,6 +41,8 @@ feature "Sites" do
     assert_nil site.geographic_context_region_id
     assert_nil site.project_context_organization_id
     assert_nil site.project_context_tags
+
+    debugger
 
     page.should have_css("h2", :text => 'Edit site Haiti Aid Map')
 
@@ -116,6 +121,11 @@ feature "Sites" do
 
     click_link_or_button 'Delete'
     assert_equal 0, site.partners.count
+
+    click_link_or_button "Site projects (1)"
+    page.should have_css("h2", :text => 'Haiti Aid Map')
+    page.should have_css("p", :text => '1 project within this site')
+    page.should have_css("div.project h3 a", :text => project.name)
 
   end
 end

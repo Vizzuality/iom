@@ -1,7 +1,7 @@
 <ul>
   <li><%= link_to_unless_current('Basic information', edit_admin_site_path(@site)) %></li>
   <li><%= link_to_unless_current('Customization', customization_admin_site_path(@site)) %></li>
-  <li><a href="#">Site projects (0)</a></li>
+  <li><%= link_to_unless_current("Site projects (#{@site.total_projects})", projects_admin_site_path(@site)) %></li>
   <li><%= link_to_unless_current("Media (#{@site.media_resources.count})", admin_site_media_resources_path(@site)) %></li>
   <li><%= link_to_unless_current("Resources (#{@site.resources.count})", admin_site_resources_path(@site)) %></li>
 </ul>

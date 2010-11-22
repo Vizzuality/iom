@@ -142,6 +142,11 @@ class Site < ActiveRecord::Base
     result.all
   end
 
+  # TODO: with a count()
+  def total_projects(options = {})
+    projects(options).size
+  end
+
   private
 
     def clean_html

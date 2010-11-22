@@ -19,6 +19,10 @@ class Admin::SitesController < ApplicationController
     end
   end
 
+  def projects
+    @site = Site.find(params[:id])
+  end
+
   def edit
     @site = Site.find(params[:id])
   end
