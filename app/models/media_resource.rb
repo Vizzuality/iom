@@ -31,9 +31,9 @@ class MediaResource < ActiveRecord::Base
   # http://vimeo.com/api/oembed.xml?url=http://vimeo.com/7100569
   def vimeo_url=(value)
     response = open("http://vimeo.com/api/oembed.xml?url=#{value}").read
-    # doc = Nokogiri::XML(response)
-    # write_attribute(:vimeo_embed_html, doc.xpath("//html").text)
+    match = response.match(/<html>([^<]+)<\/html>/)
     write_attribute(:vimeo_url, value)
+    write_attribute(:vimeo_embed_html, match[1])
   end
 
   private

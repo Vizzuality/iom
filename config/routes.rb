@@ -19,7 +19,7 @@ Iom::Application.routes.draw do
       resources :projects, :only => [:index]
       resources :media_resources, :only => [:index, :create, :destroy]
       resources :resources, :only => [:index, :create, :destroy]
-      # get 'specific_information/:project_id', :on => :member, :action => 'specific_information'
+      get 'specific_information/:site_id', :on => :member, :action => 'specific_information', :as => 'organization_site_specific_information'
     end
     resources :donors do
       resources :media_resources, :only => [:index, :create, :destroy]

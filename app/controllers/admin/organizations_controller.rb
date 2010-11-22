@@ -19,13 +19,25 @@ class Admin::OrganizationsController < ApplicationController
     end
   end
 
+  def specific_information
+    @organization = Organization.find(params[:id])
+    @site = @organization.sites.find(params[:site_id])
+    @organization.attributes = @organization.attributes_for_site(@site.id)
+  end
+
   def edit
     @organization = Organization.find(params[:id])
   end
 
   def update
     @organization = Organization.find(params[:id])
-    @organization.attributes = params[:organization]
+    if params[:site_id]
+      if @site = @organization.sites.find(params[:site_id])
+        @organization.attributes_for_site = params[:organization], params[:site_id]
+      end
+    else
+      @organization.attributes = params[:organization]
+    end
     if @organization.save
       redirect_to edit_admin_organization_path(@organization), :flash => {:success => 'Organization has been updated successfully'}
     else

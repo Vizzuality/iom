@@ -188,4 +188,23 @@ feature "Organizations" do
     assert_equal 0, caritas.media_resources.count
     page.should have_css("div.sidebar ul li", :text => 'Media (0)')
   end
+
+  scenario "Edit site specific information" do
+    organization = create_organization
+    site = create_site :project_context_organization_id => organization.id
+
+    login_as_administrator
+
+    click_link_or_button 'Manage Organizations'
+
+    click_link_or_button organization.name
+
+    page.should have_css("div.sidebar ul li ul li", :text => site.name)
+
+    click_link_or_button site.name
+
+    page.should have_css("h2", :text => "Edit information from #{organization.name} in site #{site.name}")
+
+  end
+
 end

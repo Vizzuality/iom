@@ -59,7 +59,6 @@ class Site < ActiveRecord::Base
   end
   alias :show_blog? :show_blog
 
-
   # Filter projects from site configuration
   #
   # Use cases:
@@ -133,7 +132,7 @@ class Site < ActiveRecord::Base
       where << "ST_Contains(projects.the_geom, #{geographic_context_geometry})"
     end
 
-    result = Project.select(select).from(from.join(',')).where(where.join(' OR '))
+    result = Project.select(select).from(from.join(',')).where(where.join(' AND '))
     if options[:limit]
       result = result.limit(options[:limit])
       if options[:offset]

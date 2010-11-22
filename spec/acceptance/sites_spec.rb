@@ -9,6 +9,7 @@ feature "Sites" do
 
     project = create_project
     project.clusters << food
+    project.countries << spain
 
     login_as_administrator
 
@@ -41,8 +42,6 @@ feature "Sites" do
     assert_nil site.geographic_context_region_id
     assert_nil site.project_context_organization_id
     assert_nil site.project_context_tags
-
-    debugger
 
     page.should have_css("h2", :text => 'Edit site Haiti Aid Map')
 

@@ -44,18 +44,23 @@ class SiteTest < ActiveSupport::TestCase
 
     p1 = new_project :name => 'P1', :tags => 't1, t2, t3'
     p1.save
-    p2 = new_project :name => 'P2'
+    p1.regions << valencia
+    p1.sectors << s1
+
+    p2 = new_project :name => 'P2', :tags => 't1, t2, t3'
     p2.save
     p2.regions << valencia
+    p2.sectors << s1
 
     p3 = new_project :name => 'P3'
     p3.save
     p3.regions << madrid
 
-    p4 = new_project :name => 'P4'
+    p4 = new_project :name => 'P4', :tags => 't1, t2, t3'
     p4.save
     p4.sectors << s1
     p4.sectors << s2
+    p4.regions << valencia
 
     p5 = new_project :name => 'P5'
     p5.save
@@ -66,7 +71,7 @@ class SiteTest < ActiveSupport::TestCase
     #  - sector filtering:  s1
 
     # Projects: should return projects P1, P2 and P4
-    s = Site.new :name => 'Brand new site', :url => 'www.brand-new-site.com', :project_context_tags => 't2, t4', :geographic_context_region_id => valencia.id, :project_context_sector_id => s1.id
+    s = Site.new :name => 'Brand new site', :url => 'www.brand-new-site.com', :project_context_tags => 't2,t4', :geographic_context_region_id => valencia.id, :project_context_sector_id => s1.id
     s.save
     assert s.valid?
 

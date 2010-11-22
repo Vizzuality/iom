@@ -1,10 +1,10 @@
 <ul>
   <li>
     <%= link_to_unless_current('Basic information', edit_admin_organization_path(@organization)) %>
-    <% unless @organization.projects.empty? %>
+    <% unless @organization.sites.empty? %>
     <ul>
-      <% @organization.projects.each do |project| %>
-      <li><%= link_to(project.name, '#') %></li>
+      <% @organization.sites.each do |site| %>
+      <li><%= link_to(site.name, organization_site_specific_information_admin_organization_path(@organization, site)) %></li>
       <% end %>
     </ul>
     <% end %>
