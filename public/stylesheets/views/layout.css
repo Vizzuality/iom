@@ -11,7 +11,7 @@ input:focus{outline:none}
 
 
 div#outer_layout{margin:0 auto; width:100%; }
-div#layout {width:932px; margin:0 auto; height:auto; width:932px; z-index:10; position:relative; background-color:red;}
+div#layout {width:932px; margin:0 auto; height:auto; width:932px; z-index:10; position:relative;}
 
 /*HEADER*/
 div#outer_header{float:left; width:100%; background:url(../../images/views/common/bkg_header_repeatx.jpg) repeat-x 0 0; height:40px;}
@@ -38,13 +38,94 @@ div#map {width:100%; height:475px; border-bottom:1px solid white; border-top:1px
 
 /*LEFT INFO ORGANIZATION*/
 div#left_info_organization {position:absolute; top:92px; left:0; z-index:10; height:auto; width:303px; }
-div#left_info_organization div.content {float:left; width:303px; height:auto;}
+div#left_info_organization div.content {float:left; width:313px; height:auto;}
 div#left_info_organization div.content div.header {float:left; width:303px; height:111px; background:url('../../images/views/organization/header_title_org.png') no-repeat 0 0;}
 div#left_info_organization div.content div.header h2 {float:left; margin:25px 0 0 30px; font:bold 25px "PT Sans"; color:white; text-shadow:0px 1px #A44D40;}
 div#left_info_organization div.content div.header p.info_subtitle {float:left; margin:5px 0 0 32px; font:normal 13px Arial; color:#7C3A30;}
-div#left_info_organization div.content div.body_info {float:left; width:302px; height:auto; margin:0 0 0 1px; background:url('../../images/views/organization/content_info_org.png') repeat-y; padding:0 0 10px 0;}
-div#left_info_organization div.content div.body_info p.main_info {float:left; margin:10px 0 0 20px; font:normal 13px Arial; color:#666666; width:237px; height:auto;}
+div#left_info_organization div.content div.body_info {float:left; width:302px; height:auto; margin:0 0 0 1px; background:url('../../images/views/organization/content_info_org.png') repeat-y; padding:10px 0 16px; border-bottom:1px solid #DEDEDE;}
+div#left_info_organization div.content div.body_info.short {border-bottom:none; padding:0 0 2px 0;}
+div#left_info_organization div.content div.body_info div.content_info {float:left; margin:0 0 0 30px;}
+div#left_info_organization div.content div.body_info div.content_info.short {padding:0 0 2px 0;}
+div#left_info_organization div.content div.body_info p.main_info {float:left; margin:20px 0 0 0; font:normal 13px Arial; color:#666666; width:237px; padding:0 0 15px 0; height:auto;}
+div#left_info_organization div.content div.body_info div.share_section {float:left; margin:10px 0 0 0; width:237px; height:44px; }
+div#left_info_organization div.content div.body_info div.share_section p {float:left; font:normal 13px Arial; color:#666666; margin:0 7px;}
+div#left_info_organization div.content div.body_info div.share_section a.twitter {float:left; background:url('../../images/views/common/icons/twitter_icon.png') no-repeat 0 0; width:auto; height:auto; padding:0 0 0 20px; float:left; font:normal 13px Arial; color:#666666; text-decoration:underline;}
+div#left_info_organization div.content div.body_info div.share_section a.facebook {float:left; background:url('../../images/views/common/icons/facebook_icon.png') no-repeat 0 0; width:auto; height:auto; padding:0 0 0 20px; float:left; font:normal 13px Arial; color:#666666; text-decoration:underline;}
+div#left_info_organization div.content div.body_info div.share_section a.link_org {float:left; font:normal 13px Arial; color:#D05F4E; text-decoration:none; margin:7px 0 0 0;}
+div#left_info_organization div.content div.body_info div.share_section a.link_org:hover {text-decoration:underline;}
 
+div#left_info_organization div.content p.title_section {float:left; margin:25px 0 0 0; color:#666666; font:bold 13px "PT Sans"; width:100%;}
+div#left_info_organization div.content p.coin {float:left; margin:10px 0 0 0; color:#666666; font:normal 13px "Aller";}
+div#left_info_organization div.content p.amount {float:left; margin:4px 0 0 0; color:#666666; font:normal 25px "Aller"; letter-spacing:-1.0px;}
+div#left_info_organization div.content p.summarize_info {float:left; font:normal 13px Arial; color:#D05F4E; text-decoration:none; margin:2px 0 0 0; width:100%;}
+
+div#left_info_organization div.content div.body_info.grid {float:right; margin:0 3px 0 0; width:313px; height:auto; background:url('../../images/views/organization/grid_column_bkg.png') repeat-y 0; height:auto; border-bottom:none; padding:0;}
+div#left_info_organization div.content div.body_info.grid div.real_content {float:left; width:302px; margin:0 0 0 4px; border-bottom:1px solid #DEDEDE; padding:4px 0 25px 0;}
+div#left_info_organization div.content div.body_info.grid div.real_content.contact {border-bottom:none;}
+div#left_info_organization div.content div.body_info.grid div.real_content.bottom {height:290px; border-bottom:none;}
+div#left_info_organization div.content div.body_info.grid div.real_content.resources {background:url('../../images/views/organization/bkg_resources.png') no-repeat right 0;}
+div#left_info_organization div.content div.body_info.grid div.real_content.donations {background-color:#D8E5BC; border-bottom:1px solid #B9C4A0; border-top:1px solid #B9C4A0;}
+div#left_info_organization div.content div.body_info_bottom {float:right; width:313px; height:9px; margin:0 3px 0 0; background:url('../../images/views/organization/bottom_bkg_info_column.png') no-repeat 0 0;}
+
+div#left_info_organization div.content div.body_info ul.statistics_list {float:left; width:270px; height:auto; padding:0 0 15px 0; margin:10px 0 0 0;}
+div#left_info_organization div.content div.body_info li {float:left; margin:5px 0 0 0; height:auto; width:100%; }
+div#left_info_organization div.content div.body_info li a.plus {float:left; width:auto; background:url('../../images/views/organization/left_plus.png') no-repeat left 0; height:20px;}
+div#left_info_organization div.content div.body_info li a.drop {float:left; width:auto; background:url('../../images/views/organization/left_drop.png') no-repeat left 0;  height:20px;}
+div#left_info_organization div.content div.body_info li a span {float:left; width:auto; background:url('../../images/views/organization/right_statistics.png') no-repeat right 0; margin:0 0 0 22px; font:normal 13px "Aller"; color:#FFFFFF;  height:20px;}
+div#left_info_organization div.content div.body_info li a span p {text-align:right; margin:1px 8px 0 0;}
+
+div#left_info_organization div.content div.body_info div.pie_chart {float:left; width:85px; height:85px; background:url('../../images/views/organization/pie_chart_image.png') no-repeat 0 0; margin:10px 6px 0 0;}
+div#left_info_organization div.content div.body_info ul.info_pie_chart {float:left; width:112px; height:auto; margin:15px 0 0 15px;}
+div#left_info_organization div.content div.body_info ul.info_pie_chart li {float:left; width:100%; color:#666666; font:normal 13px Arial; text-decoration:none; margin:2px 0 0 0;}
+div#left_info_organization div.content div.body_info ul.info_pie_chart li p.name_category {float:left; color:#666666; font:normal 13px Arial; text-decoration:underline; margin:0 0 0 15px;}
+div#left_info_organization div.content div.body_info ul.info_pie_chart li p.name_category.other {text-decoration:none;}
+div#left_info_organization div.content div.body_info ul.info_pie_chart li.category1 {background:url('../../images/views/organization/piechart_category1.png') no-repeat 0 4px; padding:0 0 0 0;}
+div#left_info_organization div.content div.body_info ul.info_pie_chart li.category2 {background:url('../../images/views/organization/piechart_category2.png') no-repeat 0 4px; padding:0 0 0 0;}
+div#left_info_organization div.content div.body_info ul.info_pie_chart li.category3 {background:url('../../images/views/organization/piechart_category3.png') no-repeat 0 4px; padding:0 0 0 0;}
+div#left_info_organization div.content div.body_info ul.info_pie_chart li.category4 {background:url('../../images/views/organization/piechart_category4.png') no-repeat 0 4px; padding:0 0 0 0;}
+
+div#left_info_organization div.content div.body_info ul.additional_resources {float:left; margin:10px 0 0 0; width:240px;}
+div#left_info_organization div.content div.body_info ul.additional_resources li {float:left; margin:2px 0 0 0; width:100%; background:url('../../images/views/organization/list_style_resources.png') no-repeat 0 5px; }
+div#left_info_organization div.content div.body_info ul.additional_resources li a {float:left; font:normal 13px Arial; color:#D05F4D; text-decoration:none; margin:0 0 0 10px;}
+div#left_info_organization div.content div.body_info ul.additional_resources li a:hover {cursor:pointer; text-decoration:underline; }
+
+div#left_info_organization div.content div.body_info div.contact_info {float:left; width:100%;}
+div#left_info_organization div.content div.body_info div.contact_info p.name {float:left; font:bold 13px Arial; color:#666666; width:100%; margin:12px 0 0 0;}
+div#left_info_organization div.content div.body_info div.contact_info p.direction {float:left; font:normal 13px Arial; color:#666666; width:100%; margin:0;}
+
+div#left_info_organization div.content div.body_info div.contact_info p.telephone {float:left; font:normal 13px Arial; color:#666666; width:100%; margin:15px 0 0 0;}
+div#left_info_organization div.content div.body_info div.contact_info a.mail {float:left; font:normal 13px Arial; color:#CC5D4C; text-decoration:none;}
+div#left_info_organization div.content div.body_info div.contact_info a.mail:hover {text-decoration:underline; cursor:pointer;}
+
+
+div#right_info_projects {float:right; width:630px; height:auto; margin:25px 0 0 0; padding:0;}
+
+div#right_info_projects h3 {float:left; font:bold 13px "PT Sans"; color:#666666; text-shadow:0 1px white; width:595px; margin:0 0 0 35px;}
+div#right_info_projects ul.projects {float:left; width:100%; margin:20px 0 0 0;}
+div#right_info_projects ul.projects li {float:left; width:100%; height:auto; margin:0 0 0 0; height:114px;}
+div#right_info_projects ul.projects li.styled {background:url('../../images/views/organization/li_bkg_projects.png');}
+div#right_info_projects ul.projects li p.title {float:left; font:bold 17px "PT Sans"; color:#D05F4E; width:595px; margin:15px 0 0 30px;}
+div#right_info_projects ul.projects li p.author {float:left; font:normal 13px Arial; color:#666666; width:595px; margin:0 0 0 30px;}
+div#right_info_projects ul.projects li p.author a {text-decoration:underline; font:normal 13px Arial; color:#666666;}
+div#right_info_projects ul.projects li p.info {float:left; font:normal 13px Arial; color:#666666; width:580px; margin:10px 0 0 30px;}
+div#right_info_projects ul.projects li p.info a.learn_more {font:normal 13px Arial; color:#D05F4C; text-decoration:underline;}
+div#right_info_projects ul.projects li p.info a.learn_more:hover {cursor:pointer;}
+
+div#right_info_projects a.view_more_projects {float:left; margin:20px 0 0 250px; background:url('../../images/views/organization/view_more_projs_btn.png') no-repeat 0 0; width:162px; height:26px; font:bold 13px "PT Sans"; color:#D05F4D; text-align:center; line-height:25px; }
+div#right_info_projects a.view_more_projects:hover {cursor:pointer;}
+
+/*FOOTER*/
+div#footer{float:left; width:932px; height:96px; margin:65px 0 0 0;}
+div#footer div.left {float:left; width:304px; }
+div#footer div.left a.logo {float:left; background:url('../../images/views/common/logo_interaction.png') no-repeat 0 0; width:67px; height:43px; }
+div#footer div.left a.logo:hover {cursor:pointer;}
+div#footer div.right {float:right; width:593px;}
+div#footer div.right p.copy_info {float:left; font:bold 13px "PT Sans"; color:#A7A7A7; text-transform:uppercase; width:100%;}
+div#footer div.right p.all_rights {float:left; font:normal 13px "PT Sans"; color:#B8B8B8; width:390px;}
+div#footer div.right div.links {float:right; width:168px; height:auto;}
+div#footer div.right div.links p {float:left; font:normal 13px "PT Sans"; color:#B8B8B8; margin:0 5px;}
+div#footer div.right div.links a {float:left; font:normal 13px "PT Sans"; color:#B8B8B8; text-decoration:none;}
+div#footer div.right div.links a:hover {text-decoration:underline;}
 
 
 

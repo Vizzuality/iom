@@ -2,9 +2,14 @@
 <html>
 <head>
   <title>Iom</title>
-  <%= javascript_include_tag 'http://maps.google.com/maps/api/js?sensor=false','views/map.js' %>
+  <%= javascript_include_tag 'http://maps.google.com/maps/api/js?sensor=false','views/map.js','plugins/fonts/cufon_yui.js','plugins/fonts/PT_Sans.js','views/application.js' %>
   <%= stylesheet_link_tag 'views/layout.css' %>
 
+	<!-- TO ENABLE TYPEKIT -->
+	<!-- <script type="text/javascript" src="http://use.typekit.com/loh6bqm.js"></script>
+	<script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
+	
+	
 </head>
 <body  onload="initialize()">
 	<div id="outer_header">
@@ -48,13 +53,193 @@
 						<p class="info_subtitle">Implementing 25 projects</p>
 					</div>
 					<div class="body_info">
-						<p class="main_info">Oxfam America is an international relief and development organization that creates lasting solutions to poverty, hunger, and injustice. Together with individuals and local groups in more than 90 countries, Oxfam saves lives, helps people overcome poverty, and fights for social justice. We are one of the 14 affiliates in the international confederation, Oxfam.</p>
+						<div class="content_info">
+							<p class="main_info">Oxfam America is an international relief and development organization that creates lasting solutions to poverty, hunger, and injustice. Together with individuals and local groups in more than 90 countries, Oxfam saves lives, helps people overcome poverty, and fights for social justice. We are one of the 14 affiliates in the international confederation, Oxfam.</p>
+						
+							<div class="share_section">
+								<a class="twitter">follow us</a><p>/</p><a class="facebook">follow us</a>
+								<a href="http://www.oxfamamerica.com" class="link_org" target="_blank">www.oxfamamerica.com</a>
+							</div>
+						</div>
+					</div>
+					<!-- BUDGET -->
+					<div class="body_info short">
+						<div class="content_info">
+							<p class="title_section pt_sans">BUDGET</p>
+						</div>
+					</div>					
+					<!-- CONTINUE BUDGET - GRID -->
+					<div class="body_info grid">
+						<div class="real_content">
+							<div class="content_info">
+								<p class="coin aller">$</p>
+								<p class="amount aller">1,200,000</p>
+								<p class="summarize_info">36 donors to this organization</p>
+							</div>
+						</div>
+					</div>
+					<!-- CLUSTER -->
+					<div class="body_info grid">
+						<div class="real_content">
+							<div class="content_info">
+								<p class="title_section pt_sans">OXFAM PROJECTS BY CLUSTER</p>
+								<ul class="statistics_list">
+									<li>
+										<a class="plus"><span class="aller" style="width:203px"><p>13</p></span></a>
+									</li>
+									<li>
+										<a class="drop"><span class="aller" style="width:153px"><p>9</p></span></a>
+									</li>
+									<li>
+										<a class="drop"><span class="aller" style="width:23px"><p>2</p></span></a>
+									</li>
+								</ul>
+								<p class="summarize_info">3 projects more on other clusters</p>
+							</div>
+						</div>
+					</div>
+					<!-- PROJECTS BY AREA -->
+					<div class="body_info grid">
+						<div class="real_content">
+							<div class="content_info">
+								<p class="title_section pt_sans">OXFAM PROJECTS BY AREA</p>
+								<div class="pie_chart"></div>
+								<ul class="info_pie_chart">
+									<li class="category1"><p class="name_category">Quito</p> - 9</li>
+									<li class="category2"><p class="name_category">Machachi</p> - 7</li>
+									<li class="category3"><p class="name_category">Manta</p> - 4</li>
+									<li class="category4"><p class="name_category other">Other areas</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- ADDITIONAL RESOURCES -->
+					<div class="body_info grid">
+						<div class="real_content resources">
+							<div class="content_info">
+								<p class="title_section pt_sans">ADDITIONAL RESOURCES</p>
+								<ul class="additional_resources">
+									<li><a href="#">Jeddah in wikipedia</a></li>
+									<li><a href="#">Intermon Oxfam manifest</a></li>
+									<li><a href="#">Cultural issues in Jeddah</a></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- CONTACT INFORMATION -->
+					<div class="body_info grid">
+						<div class="real_content contact">
+							<div class="content_info">
+								<p class="title_section pt_sans">CONTACT INFORMATION</p>
+								<div class="contact_info">
+									<p class="name">Steve Balmer</p>
+									<p class="direction">Oxfam America Spokesperson</p>
+									<p class="direction">226 Causeway St., 5th Floor</p>
+									<p class="telephone">Boston, MA 02114-2206</p>
+									<a href="mailto:steve@intermonoxfam.com" class="mail">steve@intermonoxfam.com</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- DONATIONS INFORMATION -->
+					<div class="body_info grid">
+						<div class="real_content donations">
+							<div class="content_info">
+								<p class="title_section pt_sans">DONATIONS INFORMATION</p>
+								<div class="contact_info">
+									<p class="name">Steve Balmer</p>
+									<p class="direction">Oxfam America Spokesperson</p>
+									<p class="direction">226 Causeway St., 5th Floor</p>
+									<p class="telephone">Boston, MA 02114-2206</p>
+									<a href="mailto:steve@intermonoxfam.com" class="mail">steve@intermonoxfam.com</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- BOTTOM CONTENT BLANK -->
+					<div class="body_info grid">
+						<div class="real_content bottom">
+						</div>
+					</div>
+					<!-- BOTTOM IMG -->
+					<div class="body_info_bottom"></div>
+				</div>
+			</div>
+			<!-- left_info_organization -->
+			
+			<div id="right_info_projects">
+				<h3 class="pt_sans shadow_white">INTERMON OXFAM LIST OF PROYECTS</h3>
+				<ul class="projects">
+					<li class="styled">
+						<p class="title pt_sans_bold">Integrated Recovery Assistance Program</p>
+						<p class="author">at <a href="#">Jeddah</a></p>
+						<p class="info">Oxfam America is an international relief and development organization that creates lasting solutions to poverty, hunger, and injustice. What a pity that the world doesn’t do anything to... <a href="#" class="learn_more">Learn more</a></p>
+					</li>
+					<li>
+						<p class="title pt_sans_bold">Integrated Recovery Assistance Program</p>
+						<p class="author">at <a href="#">Jeddah</a></p>
+						<p class="info">Oxfam America is an international relief and development organization that creates lasting solutions to poverty, hunger, and injustice. What a pity that the world doesn’t do anything to... <a href="#" class="learn_more">Learn more</a></p>
+					</li>
+					<li class="styled">
+						<p class="title pt_sans_bold">Integrated Recovery Assistance Program</p>
+						<p class="author">at <a href="#">Jeddah</a></p>
+						<p class="info">Oxfam America is an international relief and development organization that creates lasting solutions to poverty, hunger, and injustice. What a pity that the world doesn’t do anything to... <a href="#" class="learn_more">Learn more</a></p>
+					</li>
+					<li>
+						<p class="title pt_sans_bold">Integrated Recovery Assistance Program</p>
+						<p class="author">at <a href="#">Jeddah</a></p>
+						<p class="info">Oxfam America is an international relief and development organization that creates lasting solutions to poverty, hunger, and injustice. What a pity that the world doesn’t do anything to... <a href="#" class="learn_more">Learn more</a></p>
+					</li>
+					<li class="styled">
+						<p class="title pt_sans_bold">Integrated Recovery Assistance Program</p>
+						<p class="author">at <a href="#">Jeddah</a></p>
+						<p class="info">Oxfam America is an international relief and development organization that creates lasting solutions to poverty, hunger, and injustice. What a pity that the world doesn’t do anything to... <a href="#" class="learn_more">Learn more</a></p>
+					</li>
+					<li>
+						<p class="title pt_sans_bold">Integrated Recovery Assistance Program</p>
+						<p class="author">at <a href="#">Jeddah</a></p>
+						<p class="info">Oxfam America is an international relief and development organization that creates lasting solutions to poverty, hunger, and injustice. What a pity that the world doesn’t do anything to... <a href="#" class="learn_more">Learn more</a></p>
+					</li>
+					<li class="styled">
+						<p class="title pt_sans_bold">Integrated Recovery Assistance Program</p>
+						<p class="author">at <a href="#">Jeddah</a></p>
+						<p class="info">Oxfam America is an international relief and development organization that creates lasting solutions to poverty, hunger, and injustice. What a pity that the world doesn’t do anything to... <a href="#" class="learn_more">Learn more</a></p>
+					</li>
+					<li>
+						<p class="title pt_sans_bold">Integrated Recovery Assistance Program</p>
+						<p class="author">at <a href="#">Jeddah</a></p>
+						<p class="info">Oxfam America is an international relief and development organization that creates lasting solutions to poverty, hunger, and injustice. What a pity that the world doesn’t do anything to... <a href="#" class="learn_more">Learn more</a></p>
+					</li>
+					<li class="styled">
+						<p class="title pt_sans_bold">Integrated Recovery Assistance Program</p>
+						<p class="author">at <a href="#">Jeddah</a></p>
+						<p class="info">Oxfam America is an international relief and development organization that creates lasting solutions to poverty, hunger, and injustice. What a pity that the world doesn’t do anything to... <a href="#" class="learn_more">Learn more</a></p>
+					</li>
+					<li>
+						<p class="title pt_sans_bold">Integrated Recovery Assistance Program</p>
+						<p class="author">at <a href="#">Jeddah</a></p>
+						<p class="info">Oxfam America is an international relief and development organization that creates lasting solutions to poverty, hunger, and injustice. What a pity that the world doesn’t do anything to... <a href="#" class="learn_more">Learn more</a></p>
+					</li>
+				</ul>
+				<a class="view_more_projects">view more projects</a>
+			</div>
+		
+			<div id="footer">
+				<div class="left">
+					<a class="logo"></a>
+				</div>
+				<div class="right">
+					<p class="copy_info pt_sans_bold">FOOD SECURITY MAP</p>
+					<p class="all_rights pt_sans">A project by Interaction 2010. All rigths reserved.</p>
+					<div class="links">
+						<a href="#">contact us</a><p>/</p><a href="#">About the project</a>
 					</div>
 				</div>
 			</div>
 		</div>
+		<!-- layout -->
 	</div>
-	
+
 
 </body>
 </html>
