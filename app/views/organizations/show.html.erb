@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Iom</title>
+  <%= javascript_include_tag 'http://maps.google.com/maps/api/js?sensor=false','views/map.js' %>
+  <%= stylesheet_link_tag 'views/layout.css' %>
+
+</head>
+<body  onload="initialize()">
+	<div id="outer_header">
+		<div id="inner_header">
+			<div id="header">
+				<div class="left">
+					<h1 class="geneva">FOOD SECURITY</h1>
+					<ul class="menu">
+						<li><a href="#" class="geneva">CLUSTERS<span class="with_suboptions"></span></a></li>
+						<li><a href="#" class="geneva">REGIONS<span class="with_suboptions"></span></a></li>
+						<li><a href="#" class="geneva">NGOs<span class="with_suboptions"></span></a></li>
+						<li><a href="#" class="geneva">ANALYSIS</a></li>
+						<li><a href="#" class="geneva">ABOUT</a></li>																								
+					</ul>
+				</div>
+				<!-- div left menu -->
+				
+				<div class="right">
+					<form class="search">
+						<span class="input_search">
+							<input type="text" value="Search..." onclick="this.value=''"/>
+							<input type="submit" value="" />
+						</span>
+					</form>
+				</div>
+				<!-- div right menu -->
+			</div>
+		</div>
+		<!-- inner header -->
+	</div>
+	<!-- div outer_header -->
+	
+	<div id="outer_layout">
+		<div id="map"></div>
+
+		<div id="layout">
+			<div id="left_info_organization">
+				<div class="content">
+					<div class="header">
+						<h2 class="pt_sans_bold shadow">Oxfam America</h2>
+						<p class="info_subtitle">Implementing 25 projects</p>
+					</div>
+					<div class="body_info">
+						<p class="main_info">Oxfam America is an international relief and development organization that creates lasting solutions to poverty, hunger, and injustice. Together with individuals and local groups in more than 90 countries, Oxfam saves lives, helps people overcome poverty, and fights for social justice. We are one of the 14 affiliates in the international confederation, Oxfam.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+
+</body>
+</html>
