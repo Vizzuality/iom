@@ -72,7 +72,7 @@ div#left_info_organization div.content div.body_info li {float:left; margin:5px 
 div#left_info_organization div.content div.body_info li a.plus {float:left; width:auto; background:url('../../images/views/organization/left_plus.png') no-repeat left 0; height:20px;}
 div#left_info_organization div.content div.body_info li a.drop {float:left; width:auto; background:url('../../images/views/organization/left_drop.png') no-repeat left 0;  height:20px;}
 div#left_info_organization div.content div.body_info li a span {float:left; width:auto; background:url('../../images/views/organization/right_statistics.png') no-repeat right 0; margin:0 0 0 22px; font:normal 13px "Aller"; color:#FFFFFF;  height:20px;}
-div#left_info_organization div.content div.body_info li a span p {text-align:right; margin:1px 8px 0 0;}
+div#left_info_organization div.content div.body_info li a span p {text-align:right; margin:3px 8px 0 0;}
 
 div#left_info_organization div.content div.body_info div.pie_chart {float:left; width:85px; height:85px; background:url('../../images/views/organization/pie_chart_image.png') no-repeat 0 0; margin:10px 6px 0 0;}
 div#left_info_organization div.content div.body_info ul.info_pie_chart {float:left; width:112px; height:auto; margin:15px 0 0 15px;}
@@ -105,7 +105,7 @@ div#right_info_projects ul.projects {float:left; width:100%; margin:20px 0 0 0;}
 div#right_info_projects ul.projects li {float:left; width:100%; height:auto; margin:0 0 0 0; height:114px;}
 div#right_info_projects ul.projects li.styled {background:url('../../images/views/organization/li_bkg_projects.png');}
 div#right_info_projects ul.projects li p.title {float:left; font:bold 17px "PT Sans"; color:#D05F4E; width:595px; margin:15px 0 0 30px;}
-div#right_info_projects ul.projects li p.author {float:left; font:normal 13px Arial; color:#666666; width:595px; margin:0 0 0 30px;}
+div#right_info_projects ul.projects li p.author {float:left; font:normal 13px Arial; color:#666666; width:595px; margin:2px 0 0 30px;}
 div#right_info_projects ul.projects li p.author a {text-decoration:underline; font:normal 13px Arial; color:#666666;}
 div#right_info_projects ul.projects li p.info {float:left; font:normal 13px Arial; color:#666666; width:580px; margin:10px 0 0 30px;}
 div#right_info_projects ul.projects li p.info a.learn_more {font:normal 13px Arial; color:#D05F4C; text-decoration:underline;}
@@ -122,7 +122,7 @@ div#footer div.left a.logo:hover {cursor:pointer;}
 div#footer div.right {float:right; width:593px;}
 div#footer div.right p.copy_info {float:left; font:bold 13px "PT Sans"; color:#A7A7A7; text-transform:uppercase; width:100%;}
 div#footer div.right p.all_rights {float:left; font:normal 13px "PT Sans"; color:#B8B8B8; width:390px;}
-div#footer div.right div.links {float:right; width:168px; height:auto;}
+div#footer div.right div.links {float:right; width:178px; height:auto;}
 div#footer div.right div.links p {float:left; font:normal 13px "PT Sans"; color:#B8B8B8; margin:0 5px;}
 div#footer div.right div.links a {float:left; font:normal 13px "PT Sans"; color:#B8B8B8; text-decoration:none;}
 div#footer div.right div.links a:hover {text-decoration:underline;}
