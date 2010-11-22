@@ -12,7 +12,6 @@ gem 'ruby-debug'
 gem "will_paginate", "~> 3.0.pre2"
 gem 'sanitize'
 gem 'paperclip', :tag => 'v2.3.5'
-gem 'nokogiri'
 
 group :development do
   gem 'capistrano'
