@@ -1,4 +1,65 @@
-<div class="main">
+
+    <div class="main_layout">
+      <div class="block resources">
+        <div class="top"></div>
+        <div class="med">
+          <div class="left">
+            <h2><%= @element.name %></h2>
+            <p><%= pluralize(@element.resources.count, 'resource', 'resources') %></p>
+            <ul>
+              <% unless @element.resources.empty? %>
+                <li>
+                <% @element.resources.each do |resource| %>
+                  <dt><%= link_to(resource.title, resource.url) %></dt>
+                  <dd>TODO: tipo de recurso</dd>
+                  <dd><%= link_to('Delete', eval("admin_#{@element.class.name.singularize.downcase}_resource_path(@element, resource)"), :method => :delete, :confirm => 'Are you sure?') %></dd>
+                <% end -%>
+                </li>
+              <% end -%>
+              <li>
+                
+              </li>
+            </ul>
+            
+            <%= form_for([:admin, @element, @resource]) do |f| %>
+              <%= error_messages_for :resource %>
+              <div class="field">
+                <%= f.label :title %>
+                <%= f.text_field :title %>
+              </div>
+              <div class="field">
+                <%= f.label :url %>
+                <%= f.text_field :url %>
+              </div>
+              <div class="field">
+                <%= f.submit 'add resource' %>
+              </div>
+            <% end -%>
+            
+          </div>
+          <div class="right menu">
+            <ul>
+              <li><a href="#">Basic information</a></li>
+              <li><a href="#">Funded projects</a><p><span>4</span></p></li>
+              <li><a href="#">Media</a><p><span>4</span></p></li>
+              <li class="selected"><a href="#">Resources</a><p><span>4</span></p></li>
+            </ul>
+            <div class="delete">
+              <h5>DELETE THIS DONOR</h5>
+              <p>Clicking the link below will permanently delete this donor and its references within the sites</p>
+              <a href="#">Delete this donor</a>
+            </div>
+          </div>
+        </div>
+        <div class="bottom"></div>
+      </div>
+    </div>
+
+    <script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>
+    
+    
+    
+<!-- <div class="main">
 
   <h2><%= @element.name %></h2>
   <p><%= pluralize(@element.resources.count, 'resource', 'resources') %></p>
@@ -39,4 +100,4 @@
 
 <div class="sidebar">
   <%= render :partial => "admin/#{@element.class.table_name}/sidebar" %>
-</div>
+</div> -->

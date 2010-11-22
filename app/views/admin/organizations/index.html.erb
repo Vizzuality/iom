@@ -1,4 +1,59 @@
-<h2>Organizations</h2>
+
+    <div class="main_layout">
+      <div class="block">
+        <div class="two_donors">
+          <form>
+            <label>SEARCH BY TEXT</label>
+            <input type="text" value="Search NGOs by name, place,..." />
+            <input type="submit" value="" />
+          </form>
+        </div>
+        <div class="one_donor">
+          <p>2,930</p>
+          <label>donors<br/>registered</label>
+          <a href="#">Add new NGO</a>
+        </div>
+      </div>
+  
+      <div class="block">
+        <div class="top"></div>
+        <div class="med ngos_list">
+          <h2>145 NGOs implementing projects on <a class="remove" href="#">Ecuador</a></h2>
+          <ul>
+            <li>
+              <h3><a href="#">Oxfam America</a></h3>
+              <p class="red"><a href="#">6 projects</a></p>
+              <p>contact@oxfam.org</p>
+            </li>
+            <li class="last">
+              <h3><a href="#">Oxfam America</a></h3>
+              <p class="red"><a href="#">6 projects</a></p>
+              <p>contact@oxfam.org</p>
+            </li>
+          </ul>
+        </div>
+        <div class="bottom_grey paginate">
+          <ul>
+            <li class="selected"><a href="#">1</a></li>
+            <li><a href="#">2</a></li>
+            <li><a href="#">3</a></li>
+            <li><a href="#">4</a></li>
+            <li class="last"><a href="#">NEXT</a></li>
+          </ul>
+        </div>
+      </div>
+  
+      <div class="add_new">
+        <a href="#">
+          Add a new NGO<br/>
+          <strong>There are already 2,930 NGOs registered</strong>
+        </a>
+      </div>
+    </div>
+
+
+
+<!-- <h2>Organizations</h2>
 
 <p><%= link_to('+ new organization', new_admin_organization_path) %></p>
 
@@ -8,4 +63,4 @@
   <% end -%>
 </ul>
 
-<%= will_paginate(@organizations) %>
+<%= will_paginate(@organizations) %> -->

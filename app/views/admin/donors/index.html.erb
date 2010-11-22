@@ -1,11 +1,68 @@
-<h2>Donors</h2>
 
-<p><%= link_to('+ new donor', new_admin_donor_path) %></p>
+  <div class="main_layout">
+    <div class="block">
+      <div class="two_donors">
+        <form>
+          <label>SEARCH BY TEXT</label>
+          <input type="text" value="Search donors by name, place,..." />
+          <input type="submit" value="" />
+        </form>
+      </div>
+      <div class="one_donor">
+        <p>2,930</p>
+        <label>donors<br/>registered</label>
+        <a href="#">Add new donor</a>
+      </div>
+    </div>
+    
+    <div class="block">
+      <div class="top"></div>
+      <div class="med donors_list">
+        <h2>145 donors supporting projects on <a class="remove" href="#">Ecuador</a></h2>
+        <ul>
+          <li>
+            <h3><a href="#">John Williamson Foundation</a></h3>
+            <p class="red"><a href="#">13 donations</a></p>
+            <p>$12,000</p>
+            <p class="red"><a href="#">Visit donor site</a></p>
+          </li>
+          <li class="last">
+            <h3><a href="#">John Williamson Foundation</a></h3>
+            <p class="red"><a href="#">13 donations</a></p>
+            <p>$12,000</p>
+            <p class="red"><a href="#">Visit donor site</a></p>
+          </li>
+        </ul>
+      </div>
+      <div class="bottom_grey paginate">
+        <ul>
+          <li class="selected"><a href="#">1</a></li>
+          <li><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">4</a></li>
+          <li class="last"><a href="#">NEXT</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="add_new">
+      <a href="#">
+        Add a new donor<br/>
+        <strong>There are already 2,930 donors registered</strong>
+      </a>
+    </div>
+  </div>
 
-<ul>
-  <% @donors.each do |donor| %>
-    <li><%= link_to(donor.name, edit_admin_donor_path(donor)) %></li>
-  <% end -%>
-</ul>
 
-<%= will_paginate(@donors) %>
+
+  <!-- <h2>Donors</h2>
+
+    <p><%= link_to('+ new donor', new_admin_donor_path) %></p>
+
+    <ul>
+      <% @donors.each do |donor| %>
+        <li><%= link_to(donor.name, edit_admin_donor_path(donor)) %></li>
+      <% end -%>
+    </ul>
+
+    <%= will_paginate(@donors) %> -->
