@@ -8,6 +8,9 @@ Iom::Application.routes.draw do
   match 'login' => 'sessions#new', :as => :login
   match 'logout' => 'sessions#destroy', :as => :logout
 
+  # Front
+  resources :organizations
+
   # Administration
   namespace :admin do
     match '/' => 'admin#index', :as => :admin
@@ -16,6 +19,7 @@ Iom::Application.routes.draw do
       resources :projects, :only => [:index]
       resources :media_resources, :only => [:index, :create, :destroy]
       resources :resources, :only => [:index, :create, :destroy]
+      # get 'specific_information/:project_id', :on => :member, :action => 'specific_information'
     end
     resources :donors do
       resources :media_resources, :only => [:index, :create, :destroy]

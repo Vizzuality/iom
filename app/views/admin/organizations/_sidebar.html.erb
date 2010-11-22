@@ -1,5 +1,14 @@
 <ul>
-  <li><%= link_to_unless_current('Basic information', edit_admin_organization_path(@organization)) %></li>
+  <li>
+    <%= link_to_unless_current('Basic information', edit_admin_organization_path(@organization)) %>
+    <% unless @organization.projects.empty? %>
+    <ul>
+      <% @organization.projects.each do |project| %>
+      <li><%= link_to(project.name, '#') %></li>
+      <% end %>
+    </ul>
+    <% end %>
+  </li>
   <li><%= link_to_unless_current("NGO projects (#{@organization.projects.count})", admin_organization_projects_path(@organization)) %>
   <li><%= link_to_unless_current("Media (#{@organization.media_resources.count})", admin_organization_media_resources_path(@organization)) %></li>
   <li><%= link_to_unless_current("Resources (#{@organization.resources.count})", admin_organization_resources_path(@organization)) %></li>
