@@ -8,3 +8,212 @@ a{text-decoration:none;}
 ul:focus {outline:none;}
 input:focus{outline:none}
 
+body {background:#E1E5E7;}
+ul {list-style:none;}
+
+/*layout*/
+div.main_layout {margin:0 auto; width:942px;}
+div.main_layout div.block {float:left; width:942px; margin:20px 0 0 0;}
+div.main_layout div.block div.top {float:left; width:942px; height:15px; background:url('/images/backoffice/backgrounds/top_long.png') no-repeat center 0;}
+div.main_layout div.block div.med {float:left; width:880px; padding:16px 31px 28px; background:url('/images/backoffice/backgrounds/mid_long.png') repeat-y center 0;}
+div.add_new {float:left; width:922px; height:98px; padding:5px; margin:25px 0 0 5px; background:url('/images/backoffice/dashboard/add_new_bkg.png') no-repeat center 0;}
+div.add_new a {float:left; width:922px; height:70px; padding:28px 0 0 0; margin:0px; background:url('/images/backoffice/dashboard/add_bkg_a.png') repeat-x 0 0; text-align:center; font:normal 27px "Museo Sans",Arial; color:white;}
+div.add_new a:hover {background-position:0 -98px;}
+div.add_new a strong {float:left; width:100%; font:normal 15px Arial; color:#C3DB9F; text-align:center;}
+
+/*header*/
+div#header {float:left; width:100%; height:120px; background:url('/images/backoffice/common/header_bkg.jpg') repeat-x 0 0;}
+div#header div.inner_header {margin:0 auto; width:932px;}
+div#header div.inner_header div.top {float:left; width:100%; height:26px; margin:28px 0 0 0;}
+div#header div.inner_header div.top a {font:bold 29px Arial; color:white; letter-spacing:-2px;}
+div#header div.inner_header div.top a sup {padding:0 0 0 7px; font:normal 15px "Museo Sans",Arial; color:#E93E3F; letter-spacing:0;}
+div#header div.inner_header div.bottom {float:left; width:100%; margin:24px 0 0 0;}
+div#header div.inner_header div.bottom ul.main_menu {float:left; width:auto; height:42px;}
+div#header div.inner_header div.bottom ul.main_menu li {float:left; width:auto; margin:0 3px 0 0;}
+div#header div.inner_header div.bottom ul.main_menu li a {float:left; height:42px; padding:0 0 0 4px; background:url('/images/backoffice/common/header_tab_left.png') no-repeat 0 0;}
+div#header div.inner_header div.bottom ul.main_menu li span {float:left; height:32px; width:auto; padding:10px 22px 0 18px; background:url('/images/backoffice/common/header_tab_right.png') no-repeat right 0;
+  font:normal 17px "Museo Sans", Arial; color:#DEE1E4;}
+div#header div.inner_header div.bottom ul.main_menu li a:hover {background-position:0 -42px;}
+div#header div.inner_header div.bottom ul.main_menu li a:hover span {background-position:right -42px; color:#0A0A0A;}
+div#header div.inner_header div.bottom ul.main_menu li.selected a {background-position:0 -42px;}
+div#header div.inner_header div.bottom ul.main_menu li.selected a span {background-position:right -42px; color:#0A0A0A;}
+div#header div.inner_header div.bottom ul.admin {float:right; margin:12px 0 0 0;}
+div#header div.inner_header div.bottom ul.admin li {float:left; width:auto; padding:0 11px; background:url('/images/backoffice/common/footer_list_separator.png') no-repeat right -2px;}
+div#header div.inner_header div.bottom ul.admin li a {font:normal 13px "Museo Sans", "Arial"; color:#DEE1E4; text-decoration:underline;}
+div#header div.inner_header div.bottom ul.admin li a:hover {color:white;}
+div#header div.inner_header div.bottom ul.admin li.last {padding:0 0 0 8px; background:none;}
+
+
+/*login*/
+div.login {position:absolute; top:0; bottom:0; right:0; left:0; float:left; width:100%; height:100%; background:url('/images/backoffice/login/login_bkg.png') repeat-x 0 bottom #373737;}
+div.login div.main {position:absolute; top:118px; left:50%; width:401px; margin:0 0 0 -200px;}
+div.login div.main h1 {float:left; margin:0 0 0 90px;}
+div.login div.main h1 a {font:bold 29px Arial; color:white; letter-spacing:-2px;}
+div.login div.main h1 a sup {padding:0 0 0 7px; font:normal 15px "Museo Sans",Arial; color:#E93E3F; letter-spacing:0;}
+div.login div.main div.top_data {float:left; width:100%; height:10px; margin:20px 0 0 0; background:url('/images/backoffice/login/top_login.png') no-repeat 0 0;}
+div.login div.main div.med_data {float:left; width:324px; padding:10px 38px 38px; background:white;}
+div.login div.main div.med_data label {float:left; margin:20px 0 0 2px; font:bold 11px Arial; color:#666666; text-transform: uppercase;}
+div.login div.main div.med_data input {float:left; width:311px; height:24px; padding:4px 6px; margin:5px 0 0 0; background:url('/images/backoffice/login/text_bkg.png') no-repeat 0 0; border:none; font:normal 13px "Museo Sans",Arial;
+  color:#666666;}
+div.login div.main div.med_data input.error {background-position:0 -32px;}
+div.login div.main div.med_data p.error {float:left; width:256px; height:33px; margin:20px 0 0 1px; padding:19px 0 0 65px; background:url('/images/backoffice/login/error_bkg.png') no-repeat 0 0; font:normal 13px Arial; color:white;}
+div.login div.main div.bottom_data {float:left; width:400px; height:76px; background:url('/images/backoffice/login/bottom_login.png') no-repeat scroll top left; }
+div.login div.main div.bottom_data input {float:right; width:98px; height:32px; padding:0; margin:22px 40px 0 0  ; background:url('/images/backoffice/login/submit_bkg.png') no-repeat 0 0; border:none; text-align:center;
+  font:normal 19px "Museo Sans","Arial"; color:white; text-shadow:0 1px #96272D;}
+div.login div.main div.bottom_data input:hover {background-position:0 -32px; cursor:pointer;}
+
+
+/*dashboard*/
+div.one {float:left; width:307px; height:143px; margin:20px 10px 0 0; padding:30px 0 0 0; background:url('/images/backoffice/common/one_block.png') no-repeat 0 0;}
+div.one.last {margin:20px 0 0 0;}
+div.one p {float:left; width:100%; text-align:center; font:normal 61px "Museo Sans",Arial; color:#333333; letter-spacing:-2px; line-height:59px;}
+div.one label {float:left; width:100%; text-align:center; font:normal 15px "Museo Sans",Arial; color:#EB4142;}
+div.one p.info {padding:11px 0 0 0; font:normal 15px "Museo Sans",Arial; color:#999999; letter-spacing:0; line-height:15px;}
+div.med h2 {float:left; width:100%; font:normal 27px "Museo Sans",Arial; color:#333333;}
+div.med.dashboard h2 a {color:#EB4142; text-decoration:none;}
+div.med.dashboard h2 a:hover {text-decoration:underline;}
+div.med.dashboard ul {float:left; width:100%; margin:25px 0 0 0;}
+div.med.dashboard ul li {float:left; width:auto; margin:0 30px 0 0;}
+div.med.dashboard ul li label {font:normal 11px Arial; color:#999999; text-transform:uppercase;}
+div.med.dashboard ul li p {padding:0; font:normal 35px "Museo Sans",Arial; color:#333333; letter-spacing:-1px;}
+div.med.dashboard div.info {float:left; width:100%; margin:20px 0 0 0;}
+div.med.dashboard div.info div.left {float:left; width:auto;}
+div.med.dashboard div.info div.left p {font:normal 15px Arial; color:#666666;}
+div.med.dashboard div.info div.left strong {color:#333333; font-weight:normal;}
+div.med.dashboard div.info div.left p a {color:#EB4142; text-decoration:none;}
+div.med.dashboard div.info div.left p a:hover {text-decoration:underline;}
+div.bottom_grey {float:left; width:942px; height:64px; background:url('/images/backoffice/backgrounds/bottom_grey_long.png') no-repeat center 0;}
+div.bottom_grey a {float:right; width:auto; margin:20px 32px 0 0; font:normal 17px Arial; color:#EB4142; text-decoration:none;}
+div.bottom_grey a:hover {text-decoration:underline;}
+
+
+
+/*donors funded projects*/
+div.block.donor_funded div.top {float:left; width:100%; background:url('/images/backoffice/backgrounds/top_two_columns.png') no-repeat center 0!important;}
+div.block.donor_funded div.med {float:left; width:880px; padding:16px 31px 28px; background:url('/images/backoffice/backgrounds/middle_two_columns.png') repeat-y center 0!important;}
+div.block.donor_funded div.med div.left {float:left; width:572px;}
+div.block.donor_funded div.med div.left p {float:left; width:100%; font:normal 15px Arial; color:#666666;}
+div.block.donor_funded div.med div.left ul {float:left; width:100%; margin:20px 0 0 0; border-top:1px solid #CCCCCC;}
+div.block.donor_funded div.med div.left ul li {float:left; width:100%; height:71px; border-bottom:1px solid #CCCCCC;}
+div.block.donor_funded div.med div.left ul li.last {border:none;}
+div.block.donor_funded div.med div.left ul li span {float:left; width:404px; height:71px;}
+div.block.donor_funded div.med div.left ul li span h3 {float:left; width:100%; margin:15px 0 0 0;}
+div.block.donor_funded div.med div.left ul li span h3 a {font:bold 17px Arial; color:#E93E3F;}
+div.block.donor_funded div.med div.left ul li span p {height:auto; background:none; text-align:left; padding:5px 0 0 13px;}
+div.block.donor_funded div.med div.left ul li span p.active {background:url('/images/backoffice/icons/color_circles.png') no-repeat 0 -13px;}
+div.block.donor_funded div.med div.left ul li span p.closed {background:url('/images/backoffice/icons/color_circles.png') no-repeat 0 9px;}
+div.block.donor_funded div.med div.left ul li p {float:left; width:168px; height:45px; padding:26px 0 0 0; margin:0; background:#F7F7F7; text-align:center;}
+div.block.donor_funded div.med div.right {position:relative; float:right; width:284px; min-height:300px;}
+div.block.donor_funded div.med div.right ul {float:left; width:230px; margin:10px 0 0 0;}
+div.block.donor_funded div.med div.right ul li {float:left; width:auto; padding:8px 12px 8px 0;}
+div.block.donor_funded div.med div.right ul li.selected {padding:13px 12px 13px 0; background:url('/images/backoffice/common/selected_li.png') no-repeat right 0;}
+div.block.donor_funded div.med div.right ul li a {float:left; font:bold 15px Arial; color:#E93E3F; padding:0 0 0 20px;}
+div.block.donor_funded div.med div.right ul li p {float:left; margin:2px 0 0 7px; height:14px; padding:0 0 0 5px; background:url('/images/backoffice/common/amount_left.png') no-repeat 0 0;}
+div.block.donor_funded div.med div.right ul li p span {float:left; padding:1px 7px 0 2px; height:13px; background:url('/images/backoffice/common/amount_right.png') no-repeat right 0; font:bold 11px Arial; color:white;}
+div.block.donor_funded div.med div.right ul li.selected a {color:#333333;}
+div.block.donor_funded div.med div.right ul li.selected p {background-position:0 -14px;}
+div.block.donor_funded div.med div.right ul li.selected span {background-position:right -14px;}
+div.block.donor_funded div.med div.right ul li:hover a {color:#333333;}
+div.block.donor_funded div.med div.right ul li:hover p {background-position:0 -14px;}
+div.block.donor_funded div.med div.right ul li:hover span {background-position:right -14px;}
+div.block.donor_funded div.med div.right div.delete {position:absolute; bottom:0; left:20px;}
+div.block.donor_funded div.med div.right div.delete h5 {float:left; font:normal 17px "Museo Sans"; color:#333333; letter-spacing:-1px;}
+div.block.donor_funded div.med div.right div.delete p {float:left; margin:5px 0 0 0; width:100%; font:normal 13px Arial; color:#666666;}
+div.block.donor_funded div.med div.right div.delete a {float:left; margin:17px 0 0 0; font:normal 15px Arial; color:#D8393D; text-decoration:none;}
+div.block.donor_funded div.med div.right div.delete a:hover {text-decoration:underline;}
+div.block.donor_funded div.bottom {float:left; height:15px; width:100%; background: url('/images/backoffice/backgrounds/bottom_two_columns.png') no-repeat scroll top left!important;}
+
+
+
+
+/*donors search*/
+div.two_donors {float:left; width:583px; height:100px; margin:20px 10px 0 0; padding:40px 30px 0; background:url('/images/backoffice/common/two_bkg.png') no-repeat 0 0;}
+div.two_donors label {float:left; margin:0 0 0 3px; font:bold 11px Arial; color:#999999;}
+div.two_donors form {float:left; position:relative; width:100%;}
+div.two_donors input[type="text"] {float:left; width:559px; height:27px; margin:5px 0 0 0; padding:5px 8px; font:normal 17px Arial; color:#CCCCCC; border:none; background:url('/images/backoffice/donors/input_bkg.jpg') no-repeat 0 0;}
+div.two_donors input[type="submit"] {position:absolute; width:15px; height:15px; right:20px; top:28px; background:url('/images/backoffice/donors/lens.jpg') no-repeat 0 0; border:none;}
+div.two_donors input[type="submit"]:hover {background-position:0 -15px; cursor:pointer;}
+div.one_donor {float:left; width:288px; height:140px; margin:20px 0 0 0; padding:0; background:url('/images/backoffice/common/one_donor.png') no-repeat 0 0;}
+div.one_donor p {float:left; margin:20px 5px 0 0; width:158px; font:normal 43px "Museo Sans",Arial; color:#333333; text-align:right;}
+div.one_donor label {float:left; font:normal 15px "Museo Sans",Arial; color:#666666; padding:25px 0 0 0;}
+div.one_donor a {float:left; width:152px; height:28px; margin:7px 0 0 46px; padding:4px 0 0 40px; background:url('/images/backoffice/donors/add_donor.png') no-repeat 0 0; font:normal 19px "Museo Sans",Arial; color:white; text-shadow:0 1px #5C7C31;}
+div.one_donor a:hover {background-position:0 -32px;}
+div.med.donors_list h2 a.remove {padding:0 10px 0 0; color:#333333; border-bottom:1px dotted #EB4142; background:url('/images/backoffice/icons/red_x.png') no-repeat right 17px;}
+div.med.donors_list h2 a.remove:hover {border-bottom:1px solid #EB4142; text-decoration:none;}
+div.med.donors_list ul {float:left; width:100%; padding:0; margin:23px 0 0 0; border-top:1px solid #CCCCCC;}
+div.med.donors_list ul li {float:left; width:100%; padding:0; margin:0; border-bottom:1px solid #CCCCCC; height:71px;}
+div.med.donors_list ul li.last {border:none;}
+div.med.donors_list ul li h3 {float:left; width:379px; height:71px; margin:0; padding:27px 0;}
+div.med.donors_list ul li h3 a {font:bold 17px Arial; color:#E93E3F;}
+div.med.donors_list ul li h3 a:hover {text-decoration:underline;}
+div.med.donors_list ul li p {float:left; width:167px; height:41px; padding:30px 0 0 0; margin:0; font:normal 13px Arial; color:#666666; text-align:center;}
+div.med.donors_list ul li p a {padding:0; font:normal 13px Arial; color:#EB4142;}
+div.med.donors_list ul li p a:hover {text-decoration:underline;}
+div.med.donors_list ul li p.red {background:#f7f7f7;}
+div.bottom_grey.paginate ul {float:right; margin:0 32px 0 0; padding:0; width:auto;}
+div.bottom_grey.paginate ul li {float:left; width:auto; padding:20px 10px 7px;}
+div.bottom_grey.paginate ul li.last {padding:20px 0 7px 10px;}
+div.bottom_grey.paginate ul li.selected {background:url('/images/backoffice/donors/page_selected.jpg') no-repeat center bottom;}
+div.bottom_grey.paginate ul li a {font:normal 15px "Museo Sans",Arial; color:#E93E3F; margin:0;}
+div.bottom_grey.paginate ul li a:hover {text-decoration:none; color:#333333;}
+div.bottom_grey.paginate ul li.selected a {color:#333333;}
+
+
+/*ngos search*/
+div.med.ngos_list h2 a.remove {padding:0 10px 0 0; color:#333333; border-bottom:1px dotted #EB4142; background:url('/images/backoffice/icons/red_x.png') no-repeat right 17px;}
+div.med.ngos_list h2 a.remove:hover {border-bottom:1px solid #EB4142; text-decoration:none;}
+div.med.ngos_list ul {float:left; width:100%; padding:0; margin:23px 0 0 0; border-top:1px solid #CCCCCC;}
+div.med.ngos_list ul li {float:left; width:100%; padding:0; margin:0; border-bottom:1px solid #CCCCCC; height:71px;}
+div.med.ngos_list ul li.last {border:none;}
+div.med.ngos_list ul li h3 {float:left; width:546px; height:71px; margin:0; padding:27px 0;}
+div.med.ngos_list ul li h3 a {font:bold 17px Arial; color:#E93E3F;}
+div.med.ngos_list ul li h3 a:hover {text-decoration:underline;}
+div.med.ngos_list ul li p {float:left; width:167px; height:41px; padding:30px 0 0 0; margin:0; font:normal 13px Arial; color:#666666; text-align:center;}
+div.med.ngos_list ul li p a {padding:0; font:normal 13px Arial; color:#EB4142;}
+div.med.ngos_list ul li p a:hover {text-decoration:underline;}
+div.med.ngos_list ul li p.red {background:#f7f7f7;}
+
+
+
+/*resources*/
+div.block.resources div.top {float:left; width:100%; background:url('/images/backoffice/backgrounds/top_two_columns.png') no-repeat center 0!important;}
+div.block.resources div.med {float:left; width:880px; padding:16px 31px 28px; background:url('/images/backoffice/backgrounds/middle_two_columns.png') repeat-y center 0!important;}
+div.block.resources div.med div.left {float:left; width:572px;}
+div.block.resources div.med div.left p {float:left; width:100%; font:normal 15px Arial; color:#666666;}
+div.block.resources div.med div.left ul {float:left; width:100%; margin:20px 0 0 0; border-top:1px solid #CCCCCC;}
+div.block.resources div.med div.left ul li {float:left; width:100%; height:71px; border-bottom:1px solid #CCCCCC;}
+div.block.resources div.med div.left ul li h3 {float:left; width:100%; margin:15px 0 0 0;}
+div.block.resources div.med div.left ul li h3 a {font:bold 17px Arial; color:#E93E3F;}
+div.block.resources div.med div.left ul li p {float:left; width:168px; height:45px; padding:26px 0 0 0; margin:0; background:#F7F7F7; text-align:center;}
+div.block.resources div.med div.left form {float:left; width:569px; height:251px; margin:20px 0 0 2px; background:url('/images/backoffice/common/green_form_bkg.png') no-repeat center center;}
+div.block.resources div.med div.right {position:relative; float:right; width:284px; min-height:300px;}
+div.block.resources div.med div.right ul {float:left; width:230px; margin:10px 0 0 0;}
+div.block.resources div.med div.right ul li {float:left; width:auto; padding:8px 12px 8px 0;}
+div.block.resources div.med div.right ul li.selected {padding:13px 12px 13px 0; background:url('/images/backoffice/common/selected_li.png') no-repeat right 0;}
+div.block.resources div.med div.right ul li a {float:left; font:bold 15px Arial; color:#E93E3F; padding:0 0 0 20px;}
+div.block.resources div.med div.right ul li p {float:left; margin:2px 0 0 7px; height:14px; padding:0 0 0 5px; background:url('/images/backoffice/common/amount_left.png') no-repeat 0 0;}
+div.block.resources div.med div.right ul li p span {float:left; padding:1px 7px 0 2px; height:13px; background:url('/images/backoffice/common/amount_right.png') no-repeat right 0; font:bold 11px Arial; color:white;}
+div.block.resources div.med div.right ul li.selected a {color:#333333;}
+div.block.resources div.med div.right ul li.selected p {background-position:0 -14px;}
+div.block.resources div.med div.right ul li.selected span {background-position:right -14px;}
+div.block.resources div.med div.right ul li:hover a {color:#333333;}
+div.block.resources div.med div.right ul li:hover p {background-position:0 -14px;}
+div.block.resources div.med div.right ul li:hover span {background-position:right -14px;}
+div.block.resources div.med div.right div.delete {position:absolute; bottom:0; left:20px;}
+div.block.resources div.med div.right div.delete h5 {float:left; font:normal 17px "Museo Sans"; color:#333333; letter-spacing:-1px;}
+div.block.resources div.med div.right div.delete p {float:left; margin:5px 0 0 0; width:100%; font:normal 13px Arial; color:#666666;}
+div.block.resources div.med div.right div.delete a {float:left; margin:17px 0 0 0; font:normal 15px Arial; color:#D8393D; text-decoration:none;}
+div.block.resources div.med div.right div.delete a:hover {text-decoration:underline;}
+div.block.resources div.bottom {float:left; height:15px; width:100%; background: url('/images/backoffice/backgrounds/bottom_two_columns.png') no-repeat scroll top left!important;}
+
+
+
+/*footer*/
+div#footer {float:left; width:100%; height:120px; margin:40px 0 0 0 ; background:url('/images/backoffice/common/header_bkg.jpg') repeat-x 0 0;}
+div#footer div.inner_footer {margin:0 auto; width:932px;}
+div#footer div.inner_footer a.logo {float:left; margin:35px 0 0 0;}
+div#footer div.inner_footer ul {float:right; margin:50px 0 0 0;}
+div#footer div.inner_footer ul li {float:left; width:auto; padding:0 13px; background:url('/images/backoffice/common/footer_list_separator.png') no-repeat right -2px;}
+div#footer div.inner_footer ul li.last {padding:0 0 0 10px; background:none;}
+div#footer div.inner_footer ul li a {font:normal 13px Arial; color:#999999; text-decoration:none;}
+div#footer div.inner_footer ul li a:hover {text-decoration:underline;}
