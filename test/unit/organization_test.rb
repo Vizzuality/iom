@@ -15,4 +15,18 @@ class OrganizationTest < ActiveSupport::TestCase
     assert !organization.new_record?
   end
 
+  test "Organization specific_information" do
+    organization = create_organization
+    site = create_site :project_context_organization_id => organization.id
+
+    assert_nil organization.attributes_for_site(site)
+
+    atts = {:name => "Organization name fro site #{site.id}"}
+    organization.attributes_for_site = {:organization_values => atts, :site_id => site.id}
+
+    assert organization.valid?
+
+    assert_equal "Organization name fro site #{site.id}", organization.attributes_for_site(site)[:name]
+  end
+
 end

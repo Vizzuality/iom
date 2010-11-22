@@ -22,7 +22,7 @@ class Admin::OrganizationsController < ApplicationController
   def specific_information
     @organization = Organization.find(params[:id])
     @site = @organization.sites.find(params[:site_id])
-    @organization.attributes = @organization.attributes_for_site(@site.id)
+    @organization.attributes = @organization.attributes_for_site(@site)
   end
 
   def edit
@@ -33,13 +33,17 @@ class Admin::OrganizationsController < ApplicationController
     @organization = Organization.find(params[:id])
     if params[:site_id]
       if @site = @organization.sites.find(params[:site_id])
-        @organization.attributes_for_site = params[:organization], params[:site_id]
+        @organization.attributes_for_site = {:organization_values => params[:organization], :site_id => params[:site_id]}
       end
     else
       @organization.attributes = params[:organization]
     end
     if @organization.save
-      redirect_to edit_admin_organization_path(@organization), :flash => {:success => 'Organization has been updated successfully'}
+      if params[:site_id]
+        redirect_to organization_site_specific_information_admin_organization_path(@organization, @site), :flash => {:success => 'Organization has been updated successfully'}
+      else
+        redirect_to edit_admin_organization_path(@organization), :flash => {:success => 'Organization has been updated successfully'}
+      end
     else
       render :action => 'edit'
     end

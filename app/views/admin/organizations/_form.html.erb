@@ -93,7 +93,7 @@
 
   <div class="field">
     <% if action_name == 'specific_information' %>
-      <%= f.hidden_field :site_id, :value => params[:site_id] %>
+      <%= hidden_field_tag :site_id, params[:site_id] %>
     <% end %>
     <%= f.submit 'Save' %>
   </div>

@@ -40,14 +40,17 @@ class Organization < ActiveRecord::Base
 
   validates_presence_of :name
 
+  serialize :site_specific_information
+
   def attributes_for_site(site)
-    YAML.load(read_attribute(:site_specific_information))[site.id] || {}
+    atts = site_specific_information || {}
+    atts[site.id.to_s]
   end
 
-  def attributes_for_site=(organization_values, site_id)
-    hash = YAML.load(read_attribute(:site_specific_information))[site_id] || {}
-    hash = organization_values
-    write_attribute(:site_specific_information, hash.to_yaml)
+  def attributes_for_site=(value)
+    atts = site_specific_information || {}
+    atts[value[:site_id]] = value[:organization_values]
+    update_attribute(:site_specific_information, atts)
   end
 
   private
