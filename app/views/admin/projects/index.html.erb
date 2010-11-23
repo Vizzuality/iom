@@ -1,3 +1,114 @@
+<div class="main_layout">
+  <div class="block">
+    <div class="two_projects">
+		<span class="top"></span>
+		<div class="content">
+	      <form>
+	        <label>SEARCH BY TEXT</label>
+	        <input type="text" value="Search projects by name, place,..." onclick="this.value=''" />
+	        <input type="submit" value="" />
+
+			<ul class="combos">
+				<li>
+					<label>STATUS</label>
+					<a class="combo">All status</a>
+				</li>
+				<li>
+					<label>COUNTRY</label>
+					<a class="combo">All</a>
+				</li>
+				<li>
+					<label>CLUSTER</label>
+					<a class="combo">Select cluster</a>
+				</li>
+				<li>
+					<label>SECTOR</label>
+					<a class="combo">Select sector</a>
+				</li>
+			</ul>	
+	      </form>
+		</div>
+		<span class="bottom"></span>
+    </div>
+    <div class="one_project">
+		<span class="top"></span>
+		<div class="content">
+	      <p>2,930</p>
+	      <label>projects<br/>registered</label>
+	      <a class="add_project" href="#">Add new project</a>
+	      <a class="import_csv" href="#">Import a .csv file</a>	
+		</div>
+		<span class="bottom"></span>
+    </div>
+  </div>
+  
+  <div class="block">
+    <div class="top"></div>
+    <div class="med projects_list">
+      <h2>145 projects on <a class="remove" href="#">Food</a> & <a class="remove" href="#">Health</a></h2> 
+
+
+      <ul>
+		<!-- FOR EACH PROJECT -->
+        <li>
+			<div class="project_name">
+	          <h3><a href="#">Food security at Atalahupa</a></h3>
+			  <a class="project_status closed">Closed</a>			<!-- closed is the class to change the bkg icon (and with caption Closed of course) -->
+			</div>
+			<div class="gray box single">			<!-- Single is the class to add more padding on top. If it has only 1 line  --> 
+				<p class="red"><a href="#">Food for Haiti</a></p>
+			</div>
+			<div class="white box little single"> <!-- Single is the class to add more padding on top. If it has only 1 line  --> 
+				<p><a href="#">Food</a></p>
+			</div>
+			<div class="gray box little single"> <!-- Single is the class to add more padding on top. If it has only 1 line  --> 
+				<p><a href="#">Haiti</a></p>
+			</div>
+        </li>
+
+        <li>
+			<div class="project_name">
+	          <h3><a href="#">Food system improvement in Haiti</a></h3>
+			  <a class="project_status active">Active</a> <!-- active is the class to change the bkg icon (and with caption Active of course) -->
+			</div>
+			<div class="gray box">	<!-- No single class, it has more than 1 line (only for two prepared)  --> 
+				<p class="red"><a href="#">Action against hunger</a></p>
+				<p class="red secondary"><a href="#">Food for Haiti</a></p>
+			</div>
+			<div class="white box little">
+				<p><a href="#">Food</a>,</p>
+				<p class="secondary"><a href="#">Water health</a></p>
+			</div>
+			<div class="gray box little single">
+				<p><a href="#">Haiti</a></p>
+			</div>
+        </li>
+      
+      </ul>
+    </div>
+    <div class="bottom_grey paginate">
+      <ul>
+        <li class="selected"><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li class="last"><a href="#">NEXT</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="add_new">
+    <a href="<%= new_admin_project_path %>">
+      Create new project<br/>
+      <strong>You already have 1,425 sites created</strong>
+    </a>
+  </div>
+</div>
+
+
+
+<% if false %>
+
 <h2>Projects</h2>
 
 <p><%= link_to('+ new project', new_admin_project_path) %></p>
@@ -9,3 +120,4 @@
 </ul>
 
 <%= will_paginate(@projects) %>
+<%end%>
