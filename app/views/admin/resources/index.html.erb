@@ -8,17 +8,14 @@
             <p><%= pluralize(@element.resources.count, 'resource', 'resources') %></p>
             <ul>
               <% unless @element.resources.empty? %>
-                <li>
                 <% @element.resources.each do |resource| %>
-                  <dt><%= link_to(resource.title, resource.url) %></dt>
-                  <dd>TODO: tipo de recurso</dd>
-                  <dd><%= link_to('Delete', eval("admin_#{@element.class.name.singularize.downcase}_resource_path(@element, resource)"), :method => :delete, :confirm => 'Are you sure?') %></dd>
-                <% end -%>
+                <li>
+                  <h3><%= link_to(resource.title, resource.url) %></h3>
+                  <p>TODO: tipo de recurso</p>
+                  <%= link_to('Delete', eval("admin_#{@element.class.name.singularize.downcase}_resource_path(@element, resource)"), :method => :delete, :confirm => 'Are you sure?', :class=>"delete") %>
                 </li>
+                <% end -%>
               <% end -%>
-              <li>
-                
-              </li>
             </ul>
             
             <%= form_for([:admin, @element, @resource]) do |f| %>
@@ -26,7 +23,7 @@
               <%= error_messages_for :resource %>
               <div class="field">
                 <%= f.label :title %>
-                <%= f.text_field :title %>
+                <%= f.text_field :title, :class=>"title" %>
               </div>
               <div class="field">
                 <%= f.label :url %>
@@ -39,17 +36,7 @@
             
           </div>
           <div class="right menu">
-            <ul>
-              <li><a href="#">Basic information</a></li>
-              <li><a href="#">Funded projects</a><p><span>4</span></p></li>
-              <li><a href="#">Media</a><p><span>4</span></p></li>
-              <li class="selected"><a href="#">Resources</a><p><span>4</span></p></li>
-            </ul>
-            <div class="delete">
-              <h5>DELETE THIS DONOR</h5>
-              <p>Clicking the link below will permanently delete this donor and its references within the sites</p>
-              <a href="#">Delete this donor</a>
-            </div>
+            <%= render :partial => "admin/#{@element.class.table_name}/sidebar" %>
           </div>
         </div>
         <div class="bottom"></div>
@@ -57,48 +44,4 @@
     </div>
 
     <script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>
-    
-    
-    
-<!-- <div class="main">
 
-  <h2><%= @element.name %></h2>
-  <p><%= pluralize(@element.resources.count, 'resource', 'resources') %></p>
-
-  <% unless @element.resources.empty? %>
-    <dl>
-    <% @element.resources.each do |resource| %>
-      <dt><%= link_to(resource.title, resource.url) %></dt>
-      <dd>TODO: tipo de recurso</dd>
-      <dd><%= link_to('Delete', eval("admin_#{@element.class.name.singularize.downcase}_resource_path(@element, resource)"), :method => :delete, :confirm => 'Are you sure?') %></dd>
-    <% end -%>
-    </dl>
-  <% end -%>
-
-
-  <h3>Add new resource</h3>
-
-  <%= form_for([:admin, @element, @resource]) do |f| %>
-
-    <%= error_messages_for :resource %>
-
-    <div class="field">
-      <%= f.label :title %>
-      <%= f.text_field :title %>
-    </div>
-
-    <div class="field">
-      <%= f.label :url %>
-      <%= f.text_field :url %>
-    </div>
-
-    <div class="field">
-      <%= f.submit 'add resource' %>
-    </div>
-  <% end -%>
-
-</div>
-
-<div class="sidebar">
-  <%= render :partial => "admin/#{@element.class.table_name}/sidebar" %>
-</div> -->

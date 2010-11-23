@@ -1,10 +1,27 @@
+<!-- Los errores sería meter un class error dentro de cada input relacionado -->
+
 <%= form_for(@donor, :url => (@donor.new_record? ? admin_donors_path : admin_donor_path(@donor)), :html => { :multipart => true }) do |f| %>
 
   <%= f.error_messages %>
 
   <div class="field">
     <%= f.label :name %>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, :class=>"long error" %>
+    <span>
+      <a></a>
+      <p></p>
+    </span>
+  </div>
+
+  <%= f.label :logo %>
+  <div class="image_container">
+    <% if @donor.logo_file_name? %>
+      <%= image_tag(@donor.logo.url(:small)) %>
+    <% end -%> 
+    <div class="field">
+      <p>JPG, PNG and GIF supported</p>
+      <%= f.file_field :logo %>
+    </div>
   </div>
 
   <div class="field">
@@ -12,53 +29,50 @@
     <%= f.text_area :description %>
   </div>
 
-  <% if @donor.logo_file_name? %>
-    <%= image_tag(@donor.logo.url(:small)) %>
-  <% end -%>
-
-  <div class="field">
-    <%= f.label :logo %>
-    <%= f.file_field :logo %>
-  </div>
-
   <div class="field">
     <%= f.label :website %>
-    <%= f.text_field :website %>
+    <%= f.text_field :website, :class=>"long error" %>
+    <a href="#" target="_blank">preview the link</a>
   </div>
 
   <div class="field">
     <%= f.label :twitter %>
-    <%= f.text_field :twitter %>
+    <%= f.text_field :twitter, :class=>"short twitter" %>
+    <a href="#" target="_blank">preview the link</a>
   </div>
 
   <div class="field">
     <%= f.label :facebook %>
-    <%= f.text_field :facebook %>
+    <%= f.text_field :facebook, :class=>"long facebook" %>
+    <a href="#" target="_blank">preview the link</a>
   </div>
 
-  <div class="field">
-    <%= f.label :contact_person_name %>
-    <%= f.text_field :contact_person_name %>
-  </div>
+  <div class="information">
+    <h3>CONTACT INFORMATION</h3>
+    <div class="field">
+      <%= f.label :contact_person_name %>
+      <%= f.text_field :contact_person_name, :class=>"short" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :contact_company %>
-    <%= f.text_field :contact_company %>
-  </div>
+    <div class="short_field">
+      <%= f.label :contact_company %>
+      <%= f.text_field :contact_company, :class=>"short error" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :contact_person_position %>
-    <%= f.text_field :contact_person_position %>
-  </div>
+    <div class="short_field last">
+      <%= f.label :contact_person_position %>
+      <%= f.text_field :contact_person_position, :class=>"short" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :contact_email %>
-    <%= f.text_field :contact_email %>
-  </div>
-
-  <div class="field">
-    <%= f.label :contact_phone_number %>
-    <%= f.text_field :contact_phone_number %>
+    <div class="short_field">
+      <%= f.label :contact_email %>
+      <%= f.text_field :contact_email, :class=>"short" %>
+    </div>
+    
+    <div class="short_field last">
+      <%= f.label :contact_phone_number %>
+      <%= f.text_field :contact_phone_number, :class=>"short" %>
+    </div>
   </div>
 
   <div class="field">
