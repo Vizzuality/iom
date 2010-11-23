@@ -199,13 +199,29 @@ div.med.projects_list h2 a.remove:hover {border-bottom:1px solid #EB4142; text-d
 div.med.projects_list ul {float:left; width:100%; padding:0; margin:23px 0 0 0; border-top:1px solid #CCCCCC;}
 div.med.projects_list ul li {float:left; width:100%; padding:0; margin:0; border-bottom:1px solid #CCCCCC; height:71px;}
 div.med.projects_list ul li.last {border:none;}
-div.med.projects_list ul li h3 {float:left; width:379px; height:71px; margin:0; padding:27px 0;}
 div.med.projects_list ul li h3 a {font:bold 17px Arial; color:#E93E3F;}
 div.med.projects_list ul li h3 a:hover {text-decoration:underline;}
-div.med.projects_list ul li p {float:left; width:167px; height:41px; padding:30px 0 0 0; margin:0; font:normal 13px Arial; color:#666666; text-align:center;}
-div.med.projects_list ul li p a {padding:0; font:normal 13px Arial; color:#EB4142;}
+div.med.projects_list ul li div.project_name {float:left; width:443px; height:71px;}
+div.med.projects_list ul li div.project_name h3 {float:left; width:100%; padding:17px 0 0 0;}
+div.med.projects_list ul li div.project_name a.project_status {float:left; margin:2px 0 0 0; font:normal 13px Arial; color:#666666; padding:0 0 0 12px;}
+div.med.projects_list ul li div.project_name a.project_status.active {background:url('/images/backoffice/projects/active_icon.png') no-repeat 0 3px;}
+div.med.projects_list ul li div.project_name a.project_status.closed {background:url('/images/backoffice/projects/closed_icon.png') no-repeat 0 3px;}
+div.med.projects_list ul li div.box {float:left; height:53px; width:167px; padding:18px 0 0 0;}
+div.med.projects_list ul li div.box.little {width:135px;}
+div.med.projects_list ul li div.box.single {padding:28px 0 0 0; height:43px;}
+div.med.projects_list ul li div.box.red {background:#f7f7f7;}
+div.med.projects_list ul li div.box.gray {background:#f7f7f7;}
+div.med.projects_list ul li p.red {color:#EB4142;}
+div.med.projects_list ul li p.red a {padding:0; font:normal 13px Arial; color:#EB4142;}
+
+div.med.projects_list ul li p {float:left; width:100%; height:auto; padding:0; margin:0; font:normal 13px Arial; color:#666666; text-align:center;}
+div.med.projects_list ul li p.secondary {margin:2px 0 0 0; padding:0;}
+div.med.projects_list ul li p a {padding:0; font:normal 13px Arial; color:#666666;}
 div.med.projects_list ul li p a:hover {text-decoration:underline;}
-div.med.projects_list ul li p.red {background:#f7f7f7;}
+
+
+ 
+
 
 
 /*ngos search*/

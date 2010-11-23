@@ -34,7 +34,7 @@
 		<span class="top"></span>
 		<div class="content">
 	      <p>2,930</p>
-	      <label>donors<br/>registered</label>
+	      <label>projects<br/>registered</label>
 	      <a class="add_project" href="#">Add new project</a>
 	      <a class="import_csv" href="#">Import a .csv file</a>	
 		</div>
@@ -45,20 +45,42 @@
   <div class="block">
     <div class="top"></div>
     <div class="med projects_list">
-      <h2>145 projects supporting projects on <a class="remove" href="#">Ecuador</a></h2>
+      <h2>145 projects on <a class="remove" href="#">Food</a> & <a class="remove" href="#">Health</a></h2> 
       <ul>
         <li>
-          <h3><a href="#">John Williamson Foundation</a></h3>
-          <p class="red"><a href="#">13 donations</a></p>
-          <p>$12,000</p>
-          <p class="red"><a href="#">Visit donor site</a></p>
+			<div class="project_name">
+	          <h3><a href="#">Food security at Atalahupa</a></h3>
+			  <a class="project_status closed">Closed</a>
+			</div>
+			<div class="gray box single">
+				<p class="red"><a href="#">Food for Haiti</a></p>
+			</div>
+			<div class="white box little single">
+				<p><a href="#">Food</a></p>
+			</div>
+			<div class="gray box little single">
+				<p><a href="#">Haiti</a></p>
+			</div>
         </li>
-        <li class="last">
-          <h3><a href="#">John Williamson Foundation</a></h3>
-          <p class="red"><a href="#">13 donations</a></p>
-          <p>$12,000</p>
-          <p class="red"><a href="#">Visit donor site</a></p>
+
+        <li>
+			<div class="project_name">
+	          <h3><a href="#">Food system improvement in Haiti</a></h3>
+			  <a class="project_status active">Active</a>
+			</div>
+			<div class="gray box">
+				<p class="red"><a href="#">Action against hunger</a></p>
+				<p class="red secondary"><a href="#">Food for Haiti</a></p>
+			</div>
+			<div class="white box little">
+				<p><a href="#">Food</a>,</p>
+				<p class="secondary"><a href="#">Water health</a></p>
+			</div>
+			<div class="gray box little single">
+				<p><a href="#">Haiti</a></p>
+			</div>
         </li>
+      
       </ul>
     </div>
     <div class="bottom_grey paginate">
@@ -73,9 +95,9 @@
   </div>
   
   <div class="add_new">
-    <a href="#">
-      Add a new donor<br/>
-      <strong>There are already 2,930 donors registered</strong>
+    <a href="<%= new_admin_project_path %>">
+      Create new project<br/>
+      <strong>You already have 1,425 sites created</strong>
     </a>
   </div>
 </div>
