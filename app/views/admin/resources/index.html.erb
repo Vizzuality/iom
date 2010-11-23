@@ -22,6 +22,7 @@
             </ul>
             
             <%= form_for([:admin, @element, @resource]) do |f| %>
+              <h4>Add new resources<h4>
               <%= error_messages_for :resource %>
               <div class="field">
                 <%= f.label :title %>

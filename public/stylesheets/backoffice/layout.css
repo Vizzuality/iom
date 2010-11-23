@@ -11,15 +11,41 @@ input:focus{outline:none}
 body {background:#E1E5E7;}
 ul {list-style:none;}
 
-/*layout*/
+
+/* LAYOUT */
 div.main_layout {margin:0 auto; width:942px;}
 div.main_layout div.block {float:left; width:942px; margin:20px 0 0 0;}
 div.main_layout div.block div.top {float:left; width:942px; height:15px; background:url('/images/backoffice/backgrounds/top_long.png') no-repeat center 0;}
 div.main_layout div.block div.med {float:left; width:880px; padding:16px 31px 28px; background:url('/images/backoffice/backgrounds/mid_long.png') repeat-y center 0;}
+/*add new site,donor,...*/
 div.add_new {float:left; width:922px; height:98px; padding:5px; margin:25px 0 0 5px; background:url('/images/backoffice/dashboard/add_new_bkg.png') no-repeat center 0;}
 div.add_new a {float:left; width:922px; height:70px; padding:28px 0 0 0; margin:0px; background:url('/images/backoffice/dashboard/add_bkg_a.png') repeat-x 0 0; text-align:center; font:normal 27px "Museo Sans",Arial; color:white;}
 div.add_new a:hover {background-position:0 -98px;}
 div.add_new a strong {float:left; width:100%; font:normal 15px Arial; color:#C3DB9F; text-align:center;}
+/*common right column*/
+div.block div.med div.right {position:relative; float:right; width:284px; min-height:300px;}
+div.block div.med div.right ul {float:left; width:230px; margin:10px 0 0 0;}
+div.block div.med div.right ul li {float:left; width:auto; padding:6px 12px 6px 0;}
+div.block div.med div.right ul li.selected {padding:13px 12px 13px 0; background:url('/images/backoffice/common/selected_li.png') no-repeat right 0;}
+div.block div.med div.right ul li a {float:left; font:bold 15px Arial; color:#E93E3F; padding:0 0 0 20px;}
+div.block div.med div.right ul li p {float:left; margin:2px 0 0 7px; height:14px; padding:0 0 0 5px; background:url('/images/backoffice/common/amount_left.png') no-repeat 0 0;}
+div.block div.med div.right ul li p span {float:left; padding:1px 7px 0 2px; height:13px; background:url('/images/backoffice/common/amount_right.png') no-repeat right 0; font:bold 11px Arial; color:white;}
+div.block div.med div.right ul li.selected a {color:#333333;}
+div.block div.med div.right ul li.selected p {background-position:0 -14px;}
+div.block div.med div.right ul li.selected span {background-position:right -14px;}
+div.block div.med div.right ul li:hover a {color:#333333;}
+div.block div.med div.right ul li:hover p {background-position:0 -14px;}
+div.block div.med div.right ul li:hover span {background-position:right -14px;}
+div.block div.med div.right div.delete {position:absolute; bottom:0; left:20px;}
+div.block div.med div.right div.delete h5 {float:left; font:normal 17px "Museo Sans"; color:#333333; letter-spacing:-1px;}
+div.block div.med div.right div.delete p {float:left; margin:5px 0 0 0; width:100%; font:normal 13px Arial; color:#666666;}
+div.block div.med div.right div.delete a {float:left; margin:17px 0 0 0; font:normal 15px Arial; color:#D8393D; text-decoration:none;}
+div.block div.med div.right div.delete a:hover {text-decoration:underline;}
+
+
+
+
+
 
 /*header*/
 div#header {float:left; width:100%; height:120px; background:url('/images/backoffice/common/header_bkg.jpg') repeat-x 0 0;}
@@ -103,24 +129,6 @@ div.block.donor_funded div.med div.left ul li span p {height:auto; background:no
 div.block.donor_funded div.med div.left ul li span p.active {background:url('/images/backoffice/icons/color_circles.png') no-repeat 0 -13px;}
 div.block.donor_funded div.med div.left ul li span p.closed {background:url('/images/backoffice/icons/color_circles.png') no-repeat 0 9px;}
 div.block.donor_funded div.med div.left ul li p {float:left; width:168px; height:45px; padding:26px 0 0 0; margin:0; background:#F7F7F7; text-align:center;}
-div.block.donor_funded div.med div.right {position:relative; float:right; width:284px; min-height:300px;}
-div.block.donor_funded div.med div.right ul {float:left; width:230px; margin:10px 0 0 0;}
-div.block.donor_funded div.med div.right ul li {float:left; width:auto; padding:8px 12px 8px 0;}
-div.block.donor_funded div.med div.right ul li.selected {padding:13px 12px 13px 0; background:url('/images/backoffice/common/selected_li.png') no-repeat right 0;}
-div.block.donor_funded div.med div.right ul li a {float:left; font:bold 15px Arial; color:#E93E3F; padding:0 0 0 20px;}
-div.block.donor_funded div.med div.right ul li p {float:left; margin:2px 0 0 7px; height:14px; padding:0 0 0 5px; background:url('/images/backoffice/common/amount_left.png') no-repeat 0 0;}
-div.block.donor_funded div.med div.right ul li p span {float:left; padding:1px 7px 0 2px; height:13px; background:url('/images/backoffice/common/amount_right.png') no-repeat right 0; font:bold 11px Arial; color:white;}
-div.block.donor_funded div.med div.right ul li.selected a {color:#333333;}
-div.block.donor_funded div.med div.right ul li.selected p {background-position:0 -14px;}
-div.block.donor_funded div.med div.right ul li.selected span {background-position:right -14px;}
-div.block.donor_funded div.med div.right ul li:hover a {color:#333333;}
-div.block.donor_funded div.med div.right ul li:hover p {background-position:0 -14px;}
-div.block.donor_funded div.med div.right ul li:hover span {background-position:right -14px;}
-div.block.donor_funded div.med div.right div.delete {position:absolute; bottom:0; left:20px;}
-div.block.donor_funded div.med div.right div.delete h5 {float:left; font:normal 17px "Museo Sans"; color:#333333; letter-spacing:-1px;}
-div.block.donor_funded div.med div.right div.delete p {float:left; margin:5px 0 0 0; width:100%; font:normal 13px Arial; color:#666666;}
-div.block.donor_funded div.med div.right div.delete a {float:left; margin:17px 0 0 0; font:normal 15px Arial; color:#D8393D; text-decoration:none;}
-div.block.donor_funded div.med div.right div.delete a:hover {text-decoration:underline;}
 div.block.donor_funded div.bottom {float:left; height:15px; width:100%; background: url('/images/backoffice/backgrounds/bottom_two_columns.png') no-repeat scroll top left!important;}
 
 
@@ -186,24 +194,6 @@ div.block.resources div.med div.left ul li h3 {float:left; width:100%; margin:15
 div.block.resources div.med div.left ul li h3 a {font:bold 17px Arial; color:#E93E3F;}
 div.block.resources div.med div.left ul li p {float:left; width:168px; height:45px; padding:26px 0 0 0; margin:0; background:#F7F7F7; text-align:center;}
 div.block.resources div.med div.left form {float:left; width:569px; height:251px; margin:20px 0 0 2px; background:url('/images/backoffice/common/green_form_bkg.png') no-repeat center center;}
-div.block.resources div.med div.right {position:relative; float:right; width:284px; min-height:300px;}
-div.block.resources div.med div.right ul {float:left; width:230px; margin:10px 0 0 0;}
-div.block.resources div.med div.right ul li {float:left; width:auto; padding:8px 12px 8px 0;}
-div.block.resources div.med div.right ul li.selected {padding:13px 12px 13px 0; background:url('/images/backoffice/common/selected_li.png') no-repeat right 0;}
-div.block.resources div.med div.right ul li a {float:left; font:bold 15px Arial; color:#E93E3F; padding:0 0 0 20px;}
-div.block.resources div.med div.right ul li p {float:left; margin:2px 0 0 7px; height:14px; padding:0 0 0 5px; background:url('/images/backoffice/common/amount_left.png') no-repeat 0 0;}
-div.block.resources div.med div.right ul li p span {float:left; padding:1px 7px 0 2px; height:13px; background:url('/images/backoffice/common/amount_right.png') no-repeat right 0; font:bold 11px Arial; color:white;}
-div.block.resources div.med div.right ul li.selected a {color:#333333;}
-div.block.resources div.med div.right ul li.selected p {background-position:0 -14px;}
-div.block.resources div.med div.right ul li.selected span {background-position:right -14px;}
-div.block.resources div.med div.right ul li:hover a {color:#333333;}
-div.block.resources div.med div.right ul li:hover p {background-position:0 -14px;}
-div.block.resources div.med div.right ul li:hover span {background-position:right -14px;}
-div.block.resources div.med div.right div.delete {position:absolute; bottom:0; left:20px;}
-div.block.resources div.med div.right div.delete h5 {float:left; font:normal 17px "Museo Sans"; color:#333333; letter-spacing:-1px;}
-div.block.resources div.med div.right div.delete p {float:left; margin:5px 0 0 0; width:100%; font:normal 13px Arial; color:#666666;}
-div.block.resources div.med div.right div.delete a {float:left; margin:17px 0 0 0; font:normal 15px Arial; color:#D8393D; text-decoration:none;}
-div.block.resources div.med div.right div.delete a:hover {text-decoration:underline;}
 div.block.resources div.bottom {float:left; height:15px; width:100%; background: url('/images/backoffice/backgrounds/bottom_two_columns.png') no-repeat scroll top left!important;}
 
 
