@@ -1,25 +1,27 @@
-<div class="main">
-
-  <h2><%= @donor.name %></h2>
-  <p><%= pluralize(@donor.donated_projects.count, 'project', 'projects') %> by this NGO</p>
-
-  <% @donor.donated_projects.each do |project| %>
-    <div class="project">
-      <h3><%= link_to(project.name, edit_admin_project_path(project)) %></h3>
-      <p><%= project.finished? ? 'Finished' : 'Running' %></p>
-      <ul>
-        TODO: project sites list
-      </ul>
+<div class="main_layout">
+  <div class="block first donor_funded">
+    <div class="top"></div>
+    <div class="med">
+      <div class="left">
+        <h2><%= @donor.name %></h2>
+        <p><%= pluralize(@donor.donated_projects.count, ' funded project', 'funded projects') %></p>
+        <% unless @donor.donated_projects.empty? %>
+          <ul>
+            <% @donor.donated_projects.each do |project| %>
+            <li>
+              <span class="first">
+                <h3><%= link_to(project.name, edit_admin_project_path(project)) %></h3>
+                <p class="<%= project.finished? ? 'Closed' : 'Active' %>"><%= project.finished? ? 'Closed' : 'Active' %></p>
+              </span>
+              <p>$12,000</p>
+            </li>
+            <% end -%>
+          </ul>
+        <% end -%>
+      </div>
+      <div class="right menu">
+        <%= render 'admin/donors/sidebar' %>
+      </div>
     </div>
-  <% end -%>
-
-</div>
-
-<div>
-  <p><%= link_to('Create a new project', new_admin_project_path) %></p>
-  <p>Adding a project to this NGO you will be adding it to the global database</p>
-</div>
-
-<div class="sidebar">
-  <%= render 'admin/donors/sidebar' %>
-</div>
+    <div class="bottom"></div>
+  </div>

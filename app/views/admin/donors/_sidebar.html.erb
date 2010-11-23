@@ -1,13 +1,19 @@
-<ul>
-  <li><%= link_to_unless_current('Basic information', edit_admin_donor_path(@donor)) %></li>
-  <li><%= link_to_unless_current("Donated projects (#{@donor.donated_projects.count})", projects_admin_donor_path(@donor)) %></li>
-  <li><%= link_to_unless_current("Media (#{@donor.media_resources.count})", admin_donor_media_resources_path(@donor)) %></li>
-  <li><%= link_to_unless_current("Resources (#{@donor.resources.count})", admin_donor_resources_path(@donor)) %></li>
-</ul>
 
 
-<div class="down">
-  <h3>Delete this donor</h3>
-  <%= link_to("Delete this donor", admin_donor_path(@donor), :method => :delete, :confirm => '¿Are you sure?') %>
-</div>
+  <!-- TODO: -->
+   <!--  Añadir clase selected al li cuando esten en cada controller -->
+  
+  <ul>
+    <li class="selected"><%= link_to('Basic information', edit_admin_donor_path(@donor)) %></li>
+    <li> <%= link_to('Funded projects', projects_admin_donor_path(@donor)) %><% if !@donor.donated_projects.empty? %> <p><span><%=@donor.donated_projects.count%></span></p><% end %></li>
+    <li><%= link_to("Media", admin_donor_media_resources_path(@donor)) %><% if !@donor.media_resources.empty? %> <p><span><%=@donor.media_resources.count%></span></p><% end %></li>
+    <li><%= link_to("Resources", admin_donor_resources_path(@donor)) %><% if !@donor.resources.empty? %> <p><span><%=@donor.resources.count%></span></p><% end %></li>
+  </ul>
+
+  <div class="delete">
+    <h5>DELETE THIS DONOR</h5>
+    <p>Clicking the link below will permanently delete this donor and its references within the sites</p>
+    <%= link_to("Delete this donor", admin_donor_path(@donor), :method => :delete, :confirm => '¿Are you sure?') %>
+  </div>
+
 
