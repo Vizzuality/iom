@@ -5,9 +5,9 @@ module HelperMethods
     within(:xpath, "//form[@action='/session']") do
       fill_in 'email', :with => default_user_attributes[:email]
       fill_in 'password', :with => default_user_attributes[:password]
-      click_link_or_button 'Log in'
+      click_link_or_button 'Sign in'
     end
-    page.should have_css("a", :text => 'logout', :href => '/logout')
+    page.should have_css("a", :text => 'close session', :href => '/logout')
   end
 end
 

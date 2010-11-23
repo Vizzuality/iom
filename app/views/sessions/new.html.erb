@@ -1,27 +1,22 @@
-  <div class="login">
-    <div class="main">
-      <h1><a href="#">InterAction<sup>SiteManager</sup></a></h1>
-        <%= form_tag session_path do -%>
-          <div class="top_data"></div>
-          <div class="med_data">
-            <p><%= label_tag 'email' %><br />
-            <%= text_field_tag 'email', @email %></p>
+<div class="login">
+  <div class="main">
+    <h1><a href="#">InterAction<sup>SiteManager</sup></a></h1>
 
-            <p><%= label_tag 'password' %><br/>
-            <%= password_field_tag 'password', nil, :class=>"error" %></p>
-            
-            <p class="error">Your email / password is not correct</p>
-            <!-- Uncomment this if you want this functionality
-            <p><%= label_tag 'remember_me', 'Remember me' %>
-            <%= check_box_tag 'remember_me', '1', @remember_me %></p>
-            -->
-          </div>
-          <div class="bottom_data">
-            <%= submit_tag 'Sign in' %>
-          </div>
-        <% end -%>
+    <%= form_tag session_path do -%>
+      <div class="top_data"></div>
+      <div class="med_data">
+        <p><%= label_tag 'email' %><br />
+        <%= text_field_tag 'email', @email, :class=>(flash[:alert] ? "error" : nil) %></p>
+
+        <p><%= label_tag 'password' %><br/>
+        <%= password_field_tag 'password', nil, :class=>(flash[:alert] ? "error" : nil)%></p>
+        <% if flash[:alert] %>
+        <p class="error"><%= flash[:alert] %></p>
+        <% end %>
       </div>
-      
-    </div>
+      <div class="bottom_data">
+        <%= submit_tag 'Sign in' %>
+      </div>
+    <% end -%>
   </div>
-
+</div>

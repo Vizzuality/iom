@@ -3,29 +3,29 @@
 <head>
   <title>Iom</title>
   <%= stylesheet_link_tag 'backoffice/layout.css' %>
-	<!-- TO ENABLE TYPEKIT -->
-	<script type="text/javascript" src="http://use.typekit.com/loh6bqm.js"></script>
-	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-	
+  <!-- TO ENABLE TYPEKIT -->
+  <script type="text/javascript" src="http://use.typekit.com/loh6bqm.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
   <%= javascript_include_tag 'jquery.min', 'jquery.ui.core', 'jquery.ui.widget', 'jquery.ui.position', 'jquery.ui.autocomplete', 'rails', 'application' %>
   <%= csrf_meta_tag %>
 </head>
 <body>
-  
+
   <% if logged_in? %>
   <div id="header">
     <div class="inner_header">
-    
+
       <div class="top">
         <a href="#">InterAction<sup>SiteManager</sup></a>
       </div>
       <div class="bottom">
         <ul class="main_menu">
-          <li class="<%= (controller_name == 'admin' ? 'selected' : nil) %>"><% link_to(admin_admin_path) do %><span>dashboard</span><% end %></li>
-          <li class="<%= (controller_name == 'sites' ? 'selected' : nil) %>"><% link_to(admin_sites_path) do %><span>sites</span><% end %></li>
-          <li class="<%= (controller_name == 'projects' ? 'selected' : nil) %>"><% link_to(admin_projects_path) do %><span>projects</span><% end %></li>
-          <li class="<%= (controller_name == 'organizations' ? 'selected' : nil) %>"><% link_to(admin_organizations_path) do %><span>NGOs</span><% end %></li> 
-          <li class="<%= (controller_name == 'donors' ? 'selected' : nil) %>"><% link_to(admin_donors_path) do %><span>donors</span><% end %></li>
+          <li class="<%= (controller_name == 'admin' ? 'selected' : nil) %>"><%= link_to(admin_admin_path) do %><span>dashboard</span><% end %></li>
+          <li class="<%= (controller_name == 'sites' ? 'selected' : nil) %>"><%= link_to(admin_sites_path) do %><span>sites</span><% end %></li>
+          <li class="<%= (controller_name == 'projects' ? 'selected' : nil) %>"><%= link_to(admin_projects_path) do %><span>projects</span><% end %></li>
+          <li class="<%= (controller_name == 'organizations' ? 'selected' : nil) %>"><%= link_to(admin_organizations_path) do %><span>NGOs</span><% end %></li>
+          <li class="<%= (controller_name == 'donors' ? 'selected' : nil) %>"><%= link_to(admin_donors_path) do %><span>donors</span><% end %></li>
         </ul>
         <ul class="admin">
           <li><%= link_to('settings', '#') %></li>
@@ -37,8 +37,8 @@
   <% end %>
 
   <%= yield %>
-  
-  
+
+
   <% if logged_in? %>
   <div id="footer">
     <div class="inner_footer">
@@ -50,7 +50,7 @@
     </div>
   </div>
   <% end %>
-  
+
 
 </body>
 </html>

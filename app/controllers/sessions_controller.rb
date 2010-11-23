@@ -23,6 +23,7 @@ class SessionsController < ApplicationController
       note_failed_signin
       @email       = params[:email]
       @remember_me = params[:remember_me]
+      flash[:alert] = 'Your email / password is not correct'
       render :action => 'new'
     end
   end
