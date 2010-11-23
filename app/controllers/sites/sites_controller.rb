@@ -1,4 +1,4 @@
-class SitesController < ApplicationController
+class Sites::SitesController < ApplicationController
 
   def home
     if logged_in?

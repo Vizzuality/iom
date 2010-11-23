@@ -2,14 +2,16 @@
 <html>
 <head>
   <title>Iom</title>
-  <%= javascript_include_tag 'http://maps.google.com/maps/api/js?sensor=false','views/map.js','plugins/fonts/cufon_yui.js','plugins/fonts/PT_Sans.js','plugins/fonts/Geneva.js','plugins/fonts/Aller.js','views/application.js' %>
-  <%= stylesheet_link_tag 'views/layout.css' %>
+  <%= javascript_include_tag 'http://geocommons.com/javascripts/f1.api.js','/javascripts/sites/map.js','/javascripts/plugins/fonts/cufon_yui.js','/javascripts/plugins/fonts/PT_Sans.js','/javascripts/plugins/fonts/Geneva.js','/javascripts/plugins/fonts/Aller.js' %>
+    
+  <%= stylesheet_link_tag '/stylesheets/sites/layout.css' %>
 
 	<!-- TO ENABLE TYPEKIT -->
 	<!-- <script type="text/javascript" src="http://use.typekit.com/loh6bqm.js"></script>
 	<script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
 	
-	
+
+  
 </head>
 <body  onload="initialize()">
 	<div id="outer_header">

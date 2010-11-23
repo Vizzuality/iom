@@ -1,7 +1,7 @@
 Iom::Application.routes.draw do
 
   # Home
-  root :to => "sites#home"
+  root :to => "sites_dashboard#home"
 
   # Session
   resource :session, :only => [:new, :create, :destroy]
@@ -9,8 +9,10 @@ Iom::Application.routes.draw do
   match 'logout' => 'sessions#destroy', :as => :logout
 
   # Front
-  resources :organizations
-
+  namespace :sites do
+    resources :organizations
+  end
+  
   # Administration
   namespace :admin do
     match '/' => 'admin#index', :as => :admin
