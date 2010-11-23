@@ -35,7 +35,7 @@
 		<div class="content">
 	      <p>2,930</p>
 	      <label>projects<br/>registered</label>
-	      <a class="add_project" href="#">Add new project</a>
+	      <a class="add_project" href="<%= new_admin_project_path %>">Add new project</a>
 	      <a class="import_csv" href="#">Import a .csv file</a>	
 		</div>
 		<span class="bottom"></span>
@@ -50,9 +50,10 @@
 
       <ul>
 		<!-- FOR EACH PROJECT -->
+  	    <% @projects.each do |project| %>
         <li>
 			<div class="project_name">
-	          <h3><a href="#">Food security at Atalahupa</a></h3>
+	          <h3><a href="<%= edit_admin_project_path(project) %>"><%= project.name %></a></h3>
 			  <a class="project_status closed">Closed</a>			<!-- closed is the class to change the bkg icon (and with caption Closed of course) -->
 			</div>
 			<div class="gray box single">			<!-- Single is the class to add more padding on top. If it has only 1 line  --> 
@@ -65,10 +66,13 @@
 				<p><a href="#">Haiti</a></p>
 			</div>
         </li>
-
+		<% end -%>
+		
+		
+		<!-- EXAMPLE WITH DIFFERENT POSIBILITIES -->
         <li>
 			<div class="project_name">
-	          <h3><a href="#">Food system improvement in Haiti</a></h3>
+	          <h3><a href="#">Example project (not added in backend)</a></h3>
 			  <a class="project_status active">Active</a> <!-- active is the class to change the bkg icon (and with caption Active of course) -->
 			</div>
 			<div class="gray box">	<!-- No single class, it has more than 1 line (only for two prepared)  --> 
@@ -106,7 +110,7 @@
 </div>
 
 
-
+<!-- COMMENTED BELOW -->
 <% if false %>
 
 <h2>Projects</h2>

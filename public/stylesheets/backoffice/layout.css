@@ -192,8 +192,6 @@ div.one_project a.add_project:hover {background-position:0 -32px;}
 div.one_project a.import_csv {float:left; width:165px; height:29px; margin:3px 0 0 46px; padding:3px 0 0 27px; background:url('/images/backoffice/projects/import_csv_bttn.png') no-repeat 0 0; font:normal 19px "Museo Sans",Arial; color:white; text-shadow:0 1px #000000;}
 div.one_project a.import_csv:hover {background-position:0 -32px;}
 
-
-
 div.med.projects_list h2 a.remove {padding:0 10px 0 0; color:#333333; border-bottom:1px dotted #EB4142; background:url('/images/backoffice/icons/red_x.png') no-repeat right 17px;}
 div.med.projects_list h2 a.remove:hover {border-bottom:1px solid #EB4142; text-decoration:none;}
 div.med.projects_list ul {float:left; width:100%; padding:0; margin:23px 0 0 0; border-top:1px solid #CCCCCC;}
@@ -219,10 +217,65 @@ div.med.projects_list ul li p.secondary {margin:2px 0 0 0; padding:0;}
 div.med.projects_list ul li p a {padding:0; font:normal 13px Arial; color:#666666;}
 div.med.projects_list ul li p a:hover {text-decoration:underline;}
 
+/*EDIT PROJECTS */
+/*donors funded projects*/
+div.block.project_info div.top {float:left; width:100%; background:url('/images/backoffice/backgrounds/top_two_columns.png') no-repeat center 0!important;}
+div.block.project_info div.med {float:left; width:880px; padding:16px 31px 28px; background:url('/images/backoffice/backgrounds/middle_two_columns.png') repeat-y center 0!important;}
+div.block.project_info div.med div.left {float:left; width:572px; margin:0 0 0 2px;}
+div.block.project_info div.med div.left p.by {float:left; width:100%; font:normal 15px Arial; color:#666666;}
+div.block.project_info div.med div.left p.by a {width:auto; font:normal 15px Arial; color:#E93E3F; text-decoration:none;}
+div.block.project_info div.med div.left p.by a:hover {text-decoration:underline;}
+div.block.project_info div.med div.left form {float:left; width:100%; height:auto; margin:5px 0 0 0; padding:0 0 15px 0;}
+div.block.project_info div.med div.left form p.title {float:left; margin:20px 0 0 3px; font:bold 11px Arial; color:#999999; width:100%;} 
 
- 
+div.block.project_info div.med div.left form p.title span.info {font:normal 13px Arial; color:#999999; width:auto; padding:0 5px;}
+div.block.project_info div.med div.left form span.input_large {float:left; margin:5px 0 0 0; background:url('/images/backoffice/projects/input_project_large.png') no-repeat 0 0; width:419px; height:34px; position:relative;}
+div.block.project_info div.med div.left form input[type="text"]{position:absolute; top:6px; left:7px; width:400px; height:21px; font:normal 15px Arial; color:#333333; border:none;}
+div.block.project_info div.bottom {float:left; height:15px; width:100%; background: url('/images/backoffice/backgrounds/bottom_two_columns.png') no-repeat scroll top left!important;}
 
+div.block.project_info div.med div.left form span.textarea {float:left; margin:5px 0 0 0; background:url('/images/backoffice/projects/input_project_multiple.png') no-repeat 0 0; width:564px; height:214px; position:relative;}
+div.block.project_info div.med div.left form textarea{position:absolute; top:9px; left:9px; width:546px; height:197px; font:normal 15px Arial; color:#333333; border:none; line-height:17px;}
+div.block.project_info div.med div.left form a.combo_large {float:left; margin:5px 0 0 0; background:url('/images/backoffice/projects/large_combo_head.png') no-repeat 0 0; width:408px; height:23px; font:normal 13px Arial; color:#999999; padding:9px 0 0 11px;}
+div.block.project_info div.med div.left form label.section {float:left; margin:30px 0 0 2px; width:100%; font:500 17px "Museo Sans"; color:#333333;}
+div.block.project_info div.med div.left form ul.dates {float:left; width:400px; height:auto; margin:0 0 0 0;}
+div.block.project_info div.med div.left form ul.dates li {float:left; width:145px; height:auto;}
+div.block.project_info div.med div.left form ul.dates li a.combo_date {float:left; background:url('/images/backoffice/projects/bkg_calendar.png') no-repeat 0 0; width:121px; height:24px; font:normal 15px Arial; color:#333333; margin:5px 0 0 0; padding:8px 0 0 8px;}
 
+div.block.project_info div.med div.left form ul.clusters {float:left; width:272px; height:auto; margin:0 0 0 0;}
+div.block.project_info div.med div.left form ul.clusters li {float:left; width:262px; height:24px; background:url('/images/backoffice/projects/bkg_cluster.png') no-repeat 0 0; position:relative; font:normal 13px Arial; color:#333333; padding:6px 0 0 10px; margin:10px 0 0 0;}
+div.block.project_info div.med div.left form ul.clusters li a.close {position:absolute; top:7px; right:10px; background:url('/images/backoffice/projects/close_cluster_bttn.png') no-repeat 0 0; width:16px; height:16px;}
+div.block.project_info div.med div.left form ul.clusters li a.close:hover {cursor:pointer;}
+div.block.project_info div.med div.left form div.cluster_options {float:left; margin:10px 0 0 0; background:url('/images/backoffice/projects/bkg_cluster_options.png') no-repeat 0 0; width:411px; height:50px;}
+div.block.project_info div.med div.left form div.cluster_options a.combo_cluster_options {float:left; margin:10px 0 0 10px; background:url('/images/backoffice/projects/combo_add_cluster.png') no-repeat 0 0; width:254px; height:24px; font:normal 13px Arial; color:#999999; padding:8px 0 0 10px;}
+div.block.project_info div.med div.left form div.cluster_options a.combo_cluster_options:hover {cursor:pointer;}
+div.block.project_info div.med div.left form div.cluster_options a.add_cluster {float:left; margin:10px 0 0 9px; background:url('/images/backoffice/projects/add_cluster_bttn.png') no-repeat 0 0; width:118px; height:25px; font:500 15px "Museo Sans"; color:#FFFFFF; text-shadow:0 1px #6E8C30; text-align:center; padding:7px 0 0 0;}
+div.block.project_info div.med div.left form div.cluster_options a.add_cluster:hover {cursor:pointer; background-position:0 -32px;}
+div.block.project_info div.bottom {float:left; height:15px; width:100%; background: url('/images/backoffice/backgrounds/bottom_two_columns.png') no-repeat scroll top left!important;}
+
+div.block.project_info div.med div.left form div.cluster_options_large {float:left; margin:10px 0 0 0; background:url('/images/backoffice/projects/bkg_cluster_options_large.png') no-repeat 0 0; width:569px; height:50px;}
+
+div.block.project_info div.med div.left form div.cluster_options_large a.combo_cluster_options {float:left; margin:10px 0 0 0; background:url('/images/backoffice/projects/combo_sector.png') no-repeat 0 0; width:187px; height:24px; font:normal 13px Arial; color:#999999; padding:8px 0 0 10px;}
+div.block.project_info div.med div.left form div.cluster_options_large a.combo_cluster_options:hover {cursor:pointer;}
+div.block.project_info div.med div.left form div.cluster_options_large a.combo_cluster_options.first {margin:10px 26px 0 10px;}
+div.block.project_info div.med div.left form div.cluster_options_large a.add_sector {float:left; margin:10px 0 0 9px; background:url('/images/backoffice/projects/add_cluster_bttn.png') no-repeat 0 0; width:118px; height:25px; font:500 15px "Museo Sans"; color:#FFFFFF; text-shadow:0 1px #6E8C30; text-align:center; padding:7px 0 0 0;}
+div.block.project_info div.med div.left form div.cluster_options_large a.add_sector:hover {cursor:pointer; background-position:0 -32px;}
+
+div.block.project_info div.med div.left form div.location_options.empty {float:left; margin:10px 0 0 0; background:url('/images/backoffice/projects/bkg_cluster_options.png') no-repeat 0 0; width:411px; height:50px; position:relative;}
+div.block.project_info div.med div.left form div.location_options.empty p.msg {float:left; margin:18px 0 0 12px; width:269px; font:normal 13px Arial; color:#616851;  }
+div.block.project_info div.med div.left form div.location_options.empty a.add_location {position:absolute; top:10px; right:10px; background:url('/images/backoffice/projects/add_cluster_bttn.png') no-repeat 0 0; width:118px; height:25px; font:500 15px "Museo Sans"; color:#FFFFFF; text-shadow:0 1px #6E8C30; text-align:center; padding:7px 0 0 0;}
+div.block.project_info div.med div.left form div.location_options.empty a.add_location:hover {cursor:pointer; background-position:0 -32px;}
+div.block.project_info div.med div.left form span.input_short {float:left; margin:5px 0 0 0; width:272px; height:34px; background:url('/images/backoffice/projects/bkg_input_short.png') no-repeat 0 0; position:relative;}
+div.block.project_info div.med div.left form span.input_short p.msg {position:absolute; top:8px; right:10px; font:italic 15px Arial; color:#999999;}
+div.block.project_info div.med div.left form span.input_short input[type="text"]{position:absolute; top:6px; left:7px; width:257px; height:20px; border:none;}
+
+div.block.project_info div.med div.left form span.input_short.coin p.coin {position:absolute; top:9px; left:10px; font:normal 15px Arial; color:#999999;}
+div.block.project_info div.med div.left form span.input_short.coin input[type="text"]{position:absolute; top:7px; left:23px; width:240px; height:20px; border:none;}
+
+div.block.project_info div.med div.left form div.two_columns {float:left; width:100%; height:70px;}
+div.block.project_info div.med div.left form div.two_columns div.left_column {float:left; width:289px; height:90px;}
+div.block.project_info div.med div.left form div.two_columns div.right_column {float:left; width:280px; height:90px;}
+div.block.project_info div.med div.left form input[type="submit"]{float:right; background:url('/images/backoffice/projects/save_changes_bttn.png') no-repeat 0 0; font:500 19px "Museo Sans"; color:#FFFFFF; text-shadow:0 1px #6E8C30; border:none; text-align:center; width:157px; height:32px; margin:40px 10px 0 0; padding:0 0 3px 0;} 
+div.block.project_info div.med div.left form input[type="submit"]:hover {background-position:0 -32px;}
 
 /*ngos search*/
 div.med.ngos_list h2 a.remove {padding:0 10px 0 0; color:#333333; border-bottom:1px dotted #EB4142; background:url('/images/backoffice/icons/red_x.png') no-repeat right 17px;}
