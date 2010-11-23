@@ -1,3 +1,89 @@
+<div class="main_layout">
+  <div class="block">
+    <div class="two_projects">
+		<span class="top"></span>
+		<div class="content">
+	      <form>
+	        <label>SEARCH BY TEXT</label>
+	        <input type="text" value="Search projects by name, place,..." onclick="this.value=''" />
+	        <input type="submit" value="" />
+
+			<ul class="combos">
+				<li>
+					<label>STATUS</label>
+					<a class="combo">All status</a>
+				</li>
+				<li>
+					<label>COUNTRY</label>
+					<a class="combo">All</a>
+				</li>
+				<li>
+					<label>CLUSTER</label>
+					<a class="combo">Select cluster</a>
+				</li>
+				<li>
+					<label>SECTOR</label>
+					<a class="combo">Select sector</a>
+				</li>
+			</ul>	
+	      </form>
+		</div>
+		<span class="bottom"></span>
+    </div>
+    <div class="one_project">
+		<span class="top"></span>
+		<div class="content">
+	      <p>2,930</p>
+	      <label>donors<br/>registered</label>
+	      <a class="add_project" href="#">Add new project</a>
+	      <a class="import_csv" href="#">Import a .csv file</a>	
+		</div>
+		<span class="bottom"></span>
+    </div>
+  </div>
+  
+  <div class="block">
+    <div class="top"></div>
+    <div class="med projects_list">
+      <h2>145 projects supporting projects on <a class="remove" href="#">Ecuador</a></h2>
+      <ul>
+        <li>
+          <h3><a href="#">John Williamson Foundation</a></h3>
+          <p class="red"><a href="#">13 donations</a></p>
+          <p>$12,000</p>
+          <p class="red"><a href="#">Visit donor site</a></p>
+        </li>
+        <li class="last">
+          <h3><a href="#">John Williamson Foundation</a></h3>
+          <p class="red"><a href="#">13 donations</a></p>
+          <p>$12,000</p>
+          <p class="red"><a href="#">Visit donor site</a></p>
+        </li>
+      </ul>
+    </div>
+    <div class="bottom_grey paginate">
+      <ul>
+        <li class="selected"><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li class="last"><a href="#">NEXT</a></li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="add_new">
+    <a href="#">
+      Add a new donor<br/>
+      <strong>There are already 2,930 donors registered</strong>
+    </a>
+  </div>
+</div>
+
+
+
+<% if false %>
+
 <h2>Projects</h2>
 
 <p><%= link_to('+ new project', new_admin_project_path) %></p>
@@ -9,3 +95,4 @@
 </ul>
 
 <%= will_paginate(@projects) %>
+<%end%>

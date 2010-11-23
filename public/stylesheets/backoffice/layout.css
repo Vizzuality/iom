@@ -131,9 +131,6 @@ div.block.donor_funded div.med div.left ul li span p.closed {background:url('/im
 div.block.donor_funded div.med div.left ul li p {float:left; width:168px; height:45px; padding:26px 0 0 0; margin:0; background:#F7F7F7; text-align:center;}
 div.block.donor_funded div.bottom {float:left; height:15px; width:100%; background: url('/images/backoffice/backgrounds/bottom_two_columns.png') no-repeat scroll top left!important;}
 
-
-
-
 /*donors search*/
 div.two_donors {float:left; width:583px; height:100px; margin:20px 10px 0 0; padding:40px 30px 0; background:url('/images/backoffice/common/two_bkg.png') no-repeat 0 0;}
 div.two_donors label {float:left; margin:0 0 0 3px; font:bold 11px Arial; color:#999999;}
@@ -158,6 +155,7 @@ div.med.donors_list ul li p {float:left; width:167px; height:41px; padding:30px 
 div.med.donors_list ul li p a {padding:0; font:normal 13px Arial; color:#EB4142;}
 div.med.donors_list ul li p a:hover {text-decoration:underline;}
 div.med.donors_list ul li p.red {background:#f7f7f7;}
+
 div.bottom_grey.paginate ul {float:right; margin:0 32px 0 0; padding:0; width:auto;}
 div.bottom_grey.paginate ul li {float:left; width:auto; padding:20px 10px 7px;}
 div.bottom_grey.paginate ul li.last {padding:20px 0 7px 10px;}
@@ -165,6 +163,49 @@ div.bottom_grey.paginate ul li.selected {background:url('/images/backoffice/dono
 div.bottom_grey.paginate ul li a {font:normal 15px "Museo Sans",Arial; color:#E93E3F; margin:0;}
 div.bottom_grey.paginate ul li a:hover {text-decoration:none; color:#333333;}
 div.bottom_grey.paginate ul li.selected a {color:#333333;}
+
+/*projects search*/
+div.two_projects {float:left; width:643px; height:auto; margin:20px 10px 0 0; }
+div.two_projects span.top {float:left; width:643px; height:9px; background:url('/images/backoffice/common/two_top.png') no-repeat 0 0;}
+div.two_projects div.content {float:left; width:583px; height:auto; background:url('/images/backoffice/common/two_content.png') repeat-y 0; padding:15px 30px 10px;}
+div.two_projects span.bottom {float:left; width:643px; height:9px; background:url('/images/backoffice/common/two_bottom.png') no-repeat 0 0;}
+div.two_projects ul.combos {float:left; width:680px; height:60px; margin:20px 0 0 0;}
+div.two_projects ul.combos li {float:left; width:147px; height:100%;}
+div.two_projects ul.combos li a.combo {float:left; margin:6px 0 0 0; background:url('/images/backoffice/projects/single_combo_head.png') no-repeat 0 0; font:normal 13px Arial; color:#333333; text-decoration:none; width:121px; height:24px; padding:8px 0 0 11px;}
+div.two_projects ul.combos li a.combo:hover {cursor:pointer;}
+
+div.two_projects label {float:left; margin:0 0 0 3px; font:bold 11px Arial; color:#999999;}
+div.two_projects form {float:left; position:relative; width:100%;}
+div.two_projects input[type="text"] {float:left; width:559px; height:27px; margin:5px 0 0 0; padding:5px 8px; font:normal 17px Arial; color:#CCCCCC; border:none; background:url('/images/backoffice/donors/input_bkg.jpg') no-repeat 0 0;}
+div.two_projects input[type="submit"] {position:absolute; width:15px; height:15px; right:20px; top:28px; background:url('/images/backoffice/donors/lens.jpg') no-repeat 0 0; border:none;}
+div.two_projects input[type="submit"]:hover {background-position:0 -15px; cursor:pointer;}
+
+div.one_project {float:left; width:288px; height:140px; margin:20px 0 0 0; padding:0;}
+div.one_project span.top {float:left; width:288px; height:8px; background:url('/images/backoffice/common/one_box_top.png') no-repeat 0 0;}
+div.one_project div.content {float:left; width:288px; height:auto; padding:0 0 26px; background:url('/images/backoffice/common/one_box_content.png') repeat-y 0;}
+div.one_project span.bottom {float:left; width:288px; height:15px; background:url('/images/backoffice/common/one_box_bottom.png') no-repeat 0 0;}
+
+div.one_project p {float:left; margin:12px 5px 0 0; width:158px; font:normal 43px "Museo Sans",Arial; color:#333333; text-align:right;}
+div.one_project label {float:left; font:normal 15px "Museo Sans",Arial; color:#666666; padding:17px 0 0 0;}
+div.one_project a.add_project {float:left; width:156px; height:29px; margin:5px 0 0 46px; padding:3px 0 0 36px; background:url('/images/backoffice/projects/add_donor_bttn.png') no-repeat 0 0; font:normal 19px "Museo Sans",Arial; color:white; text-shadow:0 1px #5C7C31;}
+div.one_project a.add_project:hover {background-position:0 -32px;}
+div.one_project a.import_csv {float:left; width:165px; height:29px; margin:3px 0 0 46px; padding:3px 0 0 27px; background:url('/images/backoffice/projects/import_csv_bttn.png') no-repeat 0 0; font:normal 19px "Museo Sans",Arial; color:white; text-shadow:0 1px #000000;}
+div.one_project a.import_csv:hover {background-position:0 -32px;}
+
+
+
+div.med.projects_list h2 a.remove {padding:0 10px 0 0; color:#333333; border-bottom:1px dotted #EB4142; background:url('/images/backoffice/icons/red_x.png') no-repeat right 17px;}
+div.med.projects_list h2 a.remove:hover {border-bottom:1px solid #EB4142; text-decoration:none;}
+div.med.projects_list ul {float:left; width:100%; padding:0; margin:23px 0 0 0; border-top:1px solid #CCCCCC;}
+div.med.projects_list ul li {float:left; width:100%; padding:0; margin:0; border-bottom:1px solid #CCCCCC; height:71px;}
+div.med.projects_list ul li.last {border:none;}
+div.med.projects_list ul li h3 {float:left; width:379px; height:71px; margin:0; padding:27px 0;}
+div.med.projects_list ul li h3 a {font:bold 17px Arial; color:#E93E3F;}
+div.med.projects_list ul li h3 a:hover {text-decoration:underline;}
+div.med.projects_list ul li p {float:left; width:167px; height:41px; padding:30px 0 0 0; margin:0; font:normal 13px Arial; color:#666666; text-align:center;}
+div.med.projects_list ul li p a {padding:0; font:normal 13px Arial; color:#EB4142;}
+div.med.projects_list ul li p a:hover {text-decoration:underline;}
+div.med.projects_list ul li p.red {background:#f7f7f7;}
 
 
 /*ngos search*/
