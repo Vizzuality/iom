@@ -3,7 +3,7 @@
   <div class="field">
     <%= f.label :name %>
     <%= f.text_field :name, :class=>"long #{'error' if @organization.errors[:name] && action_name != 'new'}" %>
-    <%= errors_for @donor, :name %>
+    <%= errors_for @organization, :name %>
   </div>
 
   <div class="field">
