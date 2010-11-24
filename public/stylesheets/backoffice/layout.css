@@ -203,9 +203,9 @@ div.bottom_grey.paginate ul li.selected a {color:#333333;}
 
 /*projects search*/
 div.two_projects {float:left; width:643px; height:auto; margin:20px 10px 0 0; }
-div.two_projects span.top {float:left; width:643px; height:9px; background:url('/images/backoffice/common/two_top.png') no-repeat 0 0;}
-div.two_projects div.content {float:left; width:583px; height:auto; background:url('/images/backoffice/common/two_content.png') repeat-y 0; padding:15px 30px 10px;}
-div.two_projects span.bottom {float:left; width:643px; height:9px; background:url('/images/backoffice/common/two_bottom.png') no-repeat 0 0;}
+div.two_projects span.top {float:left; width:643px; height:9px; background:url('/images/backoffice/backgrounds/two_top.png') no-repeat 0 0;}
+div.two_projects div.content {float:left; width:583px; height:auto; background:url('/images/backoffice/backgrounds/two_content.png') repeat-y 0; padding:15px 30px 10px;}
+div.two_projects span.bottom {float:left; width:643px; height:9px; background:url('/images/backoffice/backgrounds/two_bottom.png') no-repeat 0 0;}
 div.two_projects ul.combos {float:left; width:680px; height:60px; margin:20px 0 0 0;}
 div.two_projects ul.combos li {float:left; width:147px; height:100%;}
 div.two_projects ul.combos li a.combo {float:left; margin:6px 0 0 0; background:url('/images/backoffice/projects/single_combo_head.png') no-repeat 0 0; font:normal 13px Arial; color:#333333; text-decoration:none; width:121px; height:24px; padding:8px 0 0 11px;}
@@ -218,9 +218,9 @@ div.two_projects input[type="submit"] {position:absolute; width:15px; height:15p
 div.two_projects input[type="submit"]:hover {background-position:0 -15px; cursor:pointer;}
 
 div.one_project {float:left; width:288px; height:140px; margin:20px 0 0 0; padding:0;}
-div.one_project span.top {float:left; width:288px; height:8px; background:url('/images/backoffice/common/one_box_top.png') no-repeat 0 0;}
-div.one_project div.content {float:left; width:288px; height:auto; padding:0 0 26px; background:url('/images/backoffice/common/one_box_content.png') repeat-y 0;}
-div.one_project span.bottom {float:left; width:288px; height:15px; background:url('/images/backoffice/common/one_box_bottom.png') no-repeat 0 0;}
+div.one_project span.top {float:left; width:288px; height:8px; background:url('/images/backoffice/backgrounds/one_box_top.png') no-repeat 0 0;}
+div.one_project div.content {float:left; width:288px; height:auto; padding:0 0 26px; background:url('/images/backoffice/backgrounds/one_box_content.png') repeat-y 0;}
+div.one_project span.bottom {float:left; width:288px; height:15px; background:url('/images/backoffice/backgrounds/one_box_bottom.png') no-repeat 0 0;}
 
 div.one_project p {float:left; margin:12px 5px 0 0; width:158px; font:normal 43px "Museo Sans",Arial; color:#333333; text-align:right;}
 div.one_project label {float:left; font:normal 15px "Museo Sans",Arial; color:#666666; padding:17px 0 0 0;}
