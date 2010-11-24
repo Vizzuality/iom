@@ -5,6 +5,7 @@
           <%= form_tag(admin_organizations_path, :method => :get) do %>
             <label>SEARCH BY TEXT</label>
             <input type="text" value="<%= params[:q] || 'Search NGOs by name, place,...'%>" name="q" />
+            <input type="text" value="Search NGOs by name, place,..." class="main_search" />
             <input type="submit" value="" />
           <% end %>
         </div>
@@ -47,3 +48,7 @@
         </a>
       </div>
     </div>
+    
+    
+      <script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>
+    

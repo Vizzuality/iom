@@ -3,7 +3,7 @@
       <div class="two_donors">
         <%= form_tag(admin_donors_path, :method => :get) do %>
           <label>SEARCH BY TEXT</label>
-          <input type="text" value="<%= params[:q] || 'Search donors by name, place,...'%>" name="q" />
+          <input type="text" value="<%= params[:q] || 'Search donors by name, place,...'%>" name="q" class="main_search" />
           <input type="submit" value=""  />
         <% end %>
       </div>
@@ -51,3 +51,5 @@
       </a>
     </div>
   </div>
+  
+    <script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>
