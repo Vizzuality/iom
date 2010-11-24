@@ -6,7 +6,7 @@ module ApplicationHelper
 
   def errors_for(obj, attribute)
     return if action_name == 'new'
-    if obj.errors[attribute]
+    unless obj.errors[attribute].empty?
       return raw(<<-HTML
           <span class="field_error">
             <a class="error"></a>

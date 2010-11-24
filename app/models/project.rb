@@ -3,23 +3,23 @@
 # Table name: projects
 #
 #  id                        :integer         not null, primary key
-#  name                      :string(255)
-#  description               :text
-#  primary_organization_id   :integer
-#  implementing_organization :string(255)
-#  partner_organizations     :string(255)
-#  cross_cutting_issues      :string(255)
-#  start_date                :date
-#  end_date                  :date
-#  budget                    :integer
-#  target                    :string(255)
-#  estimated_people_reached  :integer
-#  contact_person            :string(255)
-#  contact_email             :string(255)
-#  contact_phone_number      :string(255)
-#  site_specific_information :text
-#  created_at                :datetime
-#  updated_at                :datetime
+#  name                      :string(255)     
+#  description               :text            
+#  primary_organization_id   :integer         
+#  implementing_organization :string(255)     
+#  partner_organizations     :string(255)     
+#  cross_cutting_issues      :string(255)     
+#  start_date                :date            
+#  end_date                  :date            
+#  budget                    :integer         
+#  target                    :string(255)     
+#  estimated_people_reached  :integer         
+#  contact_person            :string(255)     
+#  contact_email             :string(255)     
+#  contact_phone_number      :string(255)     
+#  site_specific_information :text            
+#  created_at                :datetime        
+#  updated_at                :datetime        
 #  the_geom                  :geometry        not null
 #
 

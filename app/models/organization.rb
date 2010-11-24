@@ -26,6 +26,14 @@
 #  logo_content_type         :string(255)     
 #  logo_file_size            :integer         
 #  logo_updated_at           :datetime        
+#  international_staff       :string(255)     
+#  contact_name              :string(255)     
+#  contact_position          :string(255)     
+#  contact_zip               :string(255)     
+#  contact_city              :string(255)     
+#  contact_state             :string(255)     
+#  contact_country           :string(255)     
+#  donation_country          :string(255)     
 #
 
 class Organization < ActiveRecord::Base

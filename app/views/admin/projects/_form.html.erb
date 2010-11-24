@@ -2,7 +2,7 @@
 
   <label>PROJECT NAME</label>
   <span class="input_large">
-      <%= f.text_field :name, :class=>"long #{'error' if @project.errors[:name] && action_name != 'new'}" %>
+      <%= f.text_field :name, :class=>"long #{'error' if !@project.errors[:name].empty? && action_name != 'new'}" %>
       <%= errors_for @project, :name %>
   </span>
 

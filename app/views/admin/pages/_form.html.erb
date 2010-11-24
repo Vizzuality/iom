@@ -2,7 +2,7 @@
 
   <div class="field">
     <%= f.label :title %>
-    <%= f.text_field :title, :class=>"long #{'error' if @page.errors[:title] && action_name != 'new'}" %>
+    <%= f.text_field :title, :class=>"long #{'error' if !@page.errors[:title].empty? && action_name != 'new'}" %>
     <%= errors_for @page, :title %>
   </div>
 
@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :permalink %>
-    <%= f.text_field :permalink, :class=>"long #{'error' if @page.errors[:permalink] && action_name != 'new'}" %>
+    <%= f.text_field :permalink, :class=>"long #{'error' if !@page.errors[:permalink].empty? && action_name != 'new'}" %>
     <%= errors_for @page, :permalink %>
   </div>
 

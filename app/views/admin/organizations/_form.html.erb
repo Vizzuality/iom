@@ -2,7 +2,7 @@
 
   <div class="field">
     <%= f.label :name %>
-    <%= f.text_field :name, :class=>"long #{'error' if @organization.errors[:name] && action_name != 'new'}" %>
+    <%= f.text_field :name, :class=>"long #{'error' if !@organization.errors[:name].empty? && action_name != 'new'}" %>
     <%= errors_for @organization, :name %>
   </div>
 
@@ -43,8 +43,8 @@
   </div>
 
   <div class="short_field last">
-    <label>STAFF INTERNATIONAL</label>
-    <input type="text" class="short"/>
+    <%= f.label :international_staff %>
+    <%= f.text_field :international_staff, :class=>"short" %>
   </div>
 
   <div class="common">
@@ -66,13 +66,13 @@
     <h3>CONTACT INFORMATION</h3>
 
     <div class="short_field">
-      <label>CONTACT NAME</label>
-      <input type="text" class="short"/>
+      <%= f.label :contact_name %>
+      <%= f.text_field :contact_name, :class=>"short" %>
     </div>
 
     <div class="short_field last">
-      <label>CONTACT POSITION</label>
-      <input type="text" class="short"/>
+      <%= f.label :contact_position %>
+      <%= f.text_field :contact_position, :class=>"short" %>
     </div>
 
     <div class="field">
@@ -81,23 +81,23 @@
     </div>
 
     <div class="short_field">
-      <label>CITY</label>
-      <input type="text" class="short"/>
+      <%= f.label :contact_city %>
+      <%= f.text_field :contact_city, :class=>"short" %>
     </div>
 
     <div class="short_field last">
-      <label>ZIP CODE</label>
-      <input type="text" class="short"/>
+      <%= f.label :contact_zip %>
+      <%= f.text_field :contact_zip, :class=>"short" %>
     </div>
 
     <div class="short_field">
-      <label>STATE</label>
-      <input type="text" class="short"/>
+      <%= f.label :contact_state %>
+      <%= f.text_field :contact_state, :class=>"short" %>
     </div>
 
     <div class="short_field last">
-      <label>COUNTRY</label>
-      <input type="text" class="short"/>
+      <%= f.label :contact_position %>
+      <%= f.text_field :contact_position, :class=>"short" %>
     </div>
 
     <div class="short_field">
@@ -111,7 +111,6 @@
     </div>
 
   </div>
-
 
   <div class="common">
     <h3>DONATION INFORMATION</h3>
@@ -137,8 +136,8 @@
     </div>
 
     <div class="short_field last">
-      <label>COUNTRY</label>
-      <input type="text" class="short">
+      <%= f.label :donation_country %>
+      <%= f.text_field :donation_country, :class=>"short" %>
     </div>
 
     <div class="short_field">

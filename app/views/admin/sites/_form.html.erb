@@ -4,7 +4,7 @@
 
   <div class="field">
     <%= f.label :name %>
-    <%= f.text_field :name, :class=>"long #{'error' if @site.errors[:name] && action_name != 'new'}" %>
+    <%= f.text_field :name, :class=>"long #{'error' if !@site.errors[:name].empty? && action_name != 'new'}" %>
     <%= errors_for @site, :name %>
   </div>
 
@@ -76,7 +76,7 @@
 
   <div class="field">
     <%= f.label :url %>
-    <%= f.text_field :url, :class=>"long #{'error' if @site.errors[:url] && action_name != 'new'}" %>
+    <%= f.text_field :url, :class=>"long #{'error' if !@site.errors[:url].empty? && action_name != 'new'}" %>
     <%= errors_for @site, :url %>
   </div>
 
