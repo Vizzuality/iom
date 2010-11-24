@@ -3,23 +3,23 @@
 # Table name: projects
 #
 #  id                        :integer         not null, primary key
-#  name                      :string(255)     
-#  description               :text            
-#  primary_organization_id   :integer         
-#  implementing_organization :string(255)     
-#  partner_organizations     :string(255)     
-#  cross_cutting_issues      :string(255)     
-#  start_date                :date            
-#  end_date                  :date            
-#  budget                    :integer         
-#  target                    :string(255)     
-#  estimated_people_reached  :integer         
-#  contact_person            :string(255)     
-#  contact_email             :string(255)     
-#  contact_phone_number      :string(255)     
-#  site_specific_information :text            
-#  created_at                :datetime        
-#  updated_at                :datetime        
+#  name                      :string(255)
+#  description               :text
+#  primary_organization_id   :integer
+#  implementing_organization :string(255)
+#  partner_organizations     :string(255)
+#  cross_cutting_issues      :string(255)
+#  start_date                :date
+#  end_date                  :date
+#  budget                    :integer
+#  target                    :string(255)
+#  estimated_people_reached  :integer
+#  contact_person            :string(255)
+#  contact_email             :string(255)
+#  contact_phone_number      :string(255)
+#  site_specific_information :text
+#  created_at                :datetime
+#  updated_at                :datetime
 #  the_geom                  :geometry        not null
 #
 
@@ -28,8 +28,6 @@ class Project < ActiveRecord::Base
   acts_as_geom :the_geom => :multi_point
 
   belongs_to :primary_organization, :foreign_key => :primary_organization_id, :class_name => 'Organization'
-  # TODO: remove this when confirmed
-  # has_and_belongs_to_many :secondary_organizations, :class_name => 'Organization', :join_table => 'organizations_projects'
   has_and_belongs_to_many :clusters
   has_and_belongs_to_many :sectors
   has_and_belongs_to_many :countries
@@ -105,6 +103,7 @@ class Project < ActiveRecord::Base
     end
 
     def dates_consistency
+      return true if end_date.nil? || start_date.nil?
       if end_date < start_date
         errors.add(:end_date, "can't be previous to start_date")
       end

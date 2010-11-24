@@ -1,8 +1,10 @@
-<!-- TODO: -->
- <!--  Añadir clase selected al li cuando esten en cada controller -->
-
 <ul>
+<<<<<<< HEAD
   <li class="selected">
+=======
+  <li <%= selected_if_current_page(edit_admin_organization_path(@organization)) %>>
+    <div class="top_selected"></div>
+>>>>>>> 7a02004bb30f945c5a67034d774bc70606134b2b
     <div class="bottom_selected">
       <%= link_to('Basic information', edit_admin_organization_path(@organization)) %>
     <% unless !@organization.sites.empty? %>
@@ -15,20 +17,13 @@
       <% end %>
     </div>
   </li>
-  <li> <%= link_to('NGO projects', admin_organization_projects_path(@organization)) %><% if !@organization.sites.empty? %> <p><span><%=@organization.projects.count%></span></p><% end %></li>
-  <li><%= link_to("Media", admin_organization_media_resources_path(@organization)) %><% if !@organization.media_resources.empty? %> <p><span><%=@organization.media_resources.count%></span></p><% end %></li>
-  <li><%= link_to("Resources", admin_organization_resources_path(@organization)) %><% if !@organization.resources.empty? %> <p><span><%=@organization.resources.count%></span></p><% end %></li>
+  <li <%= selected_if_current_page(admin_organization_projects_path(@organization)) %>><%= link_to('NGO projects', admin_organization_projects_path(@organization)) %><% if !@organization.sites.empty? %> <p><span><%=@organization.projects.count%></span></p><% end %></li>
+  <li <%= selected_if_current_page(admin_organization_media_resources_path(@organization)) %>><%= link_to("Media", admin_organization_media_resources_path(@organization)) %><% if !@organization.media_resources.empty? %> <p><span><%=@organization.media_resources.count%></span></p><% end %></li>
+  <li <%= selected_if_current_page(admin_organization_resources_path(@organization)) %>><%= link_to("Resources", admin_organization_resources_path(@organization)) %><% if !@organization.resources.empty? %> <p><span><%=@organization.resources.count%></span></p><% end %></li>
 </ul>
-
 
 <div class="delete">
   <h5>DELETE THIS NGO</h5>
   <p>Clicking the link below will permanently delete this donor and its references within the sites</p>
   <%= link_to("Delete this NGO", admin_organization_path(@organization), :method => :delete, :confirm => '¿Are you sure?') %>
 </div>
-
-
-
-
-
-

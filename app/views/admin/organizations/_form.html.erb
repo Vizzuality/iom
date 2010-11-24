@@ -1,12 +1,9 @@
-<!-- Los errores sería meter un class error dentro de cada input relacionado -->
-
 <%= form_for(@organization, :url => (@organization.new_record? ? admin_organizations_path : admin_organization_path(@organization)), :html => { :multipart => true }) do |f| %>
-
-  <%= f.error_messages %>
 
   <div class="field">
     <%= f.label :name %>
-    <%= f.text_field :name, :class=>"long" %>
+    <%= f.text_field :name, :class=>"long #{'error' if @organization.errors[:name] && action_name != 'new'}" %>
+    <%= errors_for @organization, :name %>
   </div>
 
   <div class="field">
@@ -44,7 +41,7 @@
     <%= f.label :staff %>
     <%= f.text_field :staff, :class=>"short" %>
   </div>
-  
+
   <div class="short_field last">
     <label>STAFF INTERNATIONAL</label>
     <input type="text" class="short"/>
@@ -57,7 +54,7 @@
       <%= f.text_field :twitter, :class=>"short twitter" %>
     </div>
     <a href="#" class="preview" target="_blank">preview the link</a>
-    
+
     <div class="field">
       <%= f.label :facebook %>
       <%= f.text_field :facebook, :class=>"long facebook" %>
@@ -67,27 +64,27 @@
 
   <div class="common">
     <h3>CONTACT INFORMATION</h3>
-    
+
     <div class="short_field">
       <label>CONTACT NAME</label>
       <input type="text" class="short"/>
     </div>
-    
+
     <div class="short_field last">
       <label>CONTACT POSITION</label>
       <input type="text" class="short"/>
     </div>
-    
+
     <div class="field">
       <%= f.label :hq_address %>
       <%= f.text_field :hq_address %>
     </div>
-    
+
     <div class="short_field">
       <label>CITY</label>
       <input type="text" class="short"/>
     </div>
-    
+
     <div class="short_field last">
       <label>ZIP CODE</label>
       <input type="text" class="short"/>
@@ -97,7 +94,7 @@
       <label>STATE</label>
       <input type="text" class="short"/>
     </div>
-    
+
     <div class="short_field last">
       <label>COUNTRY</label>
       <input type="text" class="short"/>
@@ -112,13 +109,13 @@
       <%= f.label :contact_phone_number %>
       <%= f.text_field :contact_phone_number, :class=>"short" %>
     </div>
-    
+
   </div>
-  
-  
+
+
   <div class="common">
     <h3>DONATION INFORMATION</h3>
-    
+
     <div class="field">
       <%= f.label :donation_address %>
       <%= f.text_field :donation_address, :class=>"long" %>
@@ -138,28 +135,28 @@
       <%= f.label :state %>
       <%= f.text_field :state, :class=>"short" %>
     </div>
-    
+
     <div class="short_field last">
       <label>COUNTRY</label>
       <input type="text" class="short">
     </div>
-    
+
     <div class="short_field">
       <%= f.label :donation_phone_number %>
       <%= f.text_field :donation_phone_number, :class=>"short" %>
     </div>
-    
+
     <div class="field">
       <%= f.label :donation_website %>
       <%= f.text_field :donation_website, :class=>"long" %>
     </div>
 
   </div>
-  
 
   <% if action_name == 'specific_information' %>
     <%= hidden_field_tag :site_id, params[:site_id] %>
   <% end %>
-  <%= f.submit 'Save' %>
+
+  <%= f.submit 'Save', :class => "#{'error' if @organization.invalid? && action_name != 'new'}" %>
 
 <% end -%>
