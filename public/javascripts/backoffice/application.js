@@ -15,4 +15,27 @@
         $(this).parent().hide();
       }
     );
+	
+	//  combo tags click
+	$('div.list_combo').children('span.combo_large').click(function(ev){
+		if ($(this).attr('id') == 'hidden'){
+			$('div.list_combo').find('ul.list_combo_content').css('display','inline');
+			$(this).addClass('displayed');
+			$(this).attr('id','visible');
+		}else{
+			$('div.list_combo').find('ul.list_combo_content').css('display','none');
+			$(this).attr('id','hidden');
+			$(this).removeClass('displayed');
+		}
+	});
+	
+	$('ul.list_combo_content').find('li.element').click(function(ev){
+		$('input#project_primary_organization_id').val($(this).attr('id'));
+		
+		$('div.list_combo').find('ul.list_combo_content').css('display','none');
+		$('div.list_combo').children('span.combo_large').attr('id','hidden');
+		$('div.list_combo').children('span.combo_large').removeClass('displayed');
+	});
+		
+	
   });

@@ -17,7 +17,20 @@
   </span>
 
   <label>ORGANIZATION</label>
-  <a class="combo_large">Food For Haiti</a>
+	<div class="list_combo">
+		
+  		<span id="hidden" class="combo_large">
+			<a class="organization"><%= Organization.first.name %></a>
+		</span>
+		<%= f.hidden_field :primary_organization_id , :value => Organization.first.id %>
+		<ul class="list_combo_content">
+			<li class="first"></li>
+				<% Organization.all.each do |organization| %>
+					<li class="element" id="<%= organization.id %>"><%= organization.name %></li>
+				<% end -%>
+			<li class="last"></li>
+		</ul>
+	</div>
 
   <!-- *************** AÑADIR EL COMBO DE TAGS *************** -->
   <%if false %>
@@ -221,9 +234,9 @@ Aliquam sed tellus augue. Integer et lorem quis urna pharetra pellentesque rhonc
 
   <%= f.submit 'Save changes', :class => "#{'error' if @project.invalid? && action_name != 'new'}" %>
   <!-- END EDIT PAGE -->
->>>>>>> adf97c78cc0bbed429056b14ab754e174427316d
 
 <%end%>
+
 <script type="text/javascript">
 $(function() {
   function split( val ) {
