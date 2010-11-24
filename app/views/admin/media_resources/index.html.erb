@@ -5,7 +5,6 @@
       <div class="med">
         <div class="left">
           <h2><%= @element.name %></h2>
-
           <% unless @element.media_resources.empty? %>
             <ul>
             <% @element.media_resources.each do |resource| %>
@@ -16,7 +15,9 @@
                     <%= raw(CGI.unescapeHTML(resource.vimeo_embed_html)) %>
                     <p class="caption">No caption provided, <a href="#">add it?</a></p>
                     <span class="over">
-                      <%= link_to('Delete', eval("admin_#{@element.class.name.singularize.downcase}_media_resource_path(@element, resource)"), :method => :delete, :confirm => 'Are you sure?') %>
+                      <a href="#" class="up">UP</a>
+                      <%= link_to('Delete', eval("admin_#{@element.class.name.singularize.downcase}_media_resource_path(@element, resource)"), :method => :delete, :confirm => 'Are you sure?', :class=>"delete") %>
+                      <a href="#" class="down">DOWN</a>
                     </span>
                   </div>
                   <div class="bottom_media"></div>
@@ -27,7 +28,9 @@
                   <div class="med_media">
                     <%= image_tag(resource.picture.url(:medium)) %>
                     <span class="over">
-                    <%= link_to('Delete', eval("admin_#{@element.class.name.singularize.downcase}_media_resource_path(@element, resource)"), :method => :delete, :confirm => 'Are you sure?') %>
+                      <a href="#" class="up">UP</a>
+                      <%= link_to('Delete', eval("admin_#{@element.class.name.singularize.downcase}_media_resource_path(@element, resource)"), :method => :delete, :confirm => 'Are you sure?', :class=>"delete") %>
+                      <a href="#" class="down">DOWN</a>
                     </span>
                     <p class="caption">No caption provided, <a href="#">add it?</a></p>
                   </div>
@@ -44,7 +47,6 @@
             <%= form_for([:admin, @element, @resource], :html => { :multipart => true }) do |f| %>
               <%= error_messages_for :resource %>
               <div class="field">
-                <%= f.label :picture %>
                 <%= f.file_field :picture %>
               </div>
               <div class="field">
@@ -59,7 +61,6 @@
             <%= form_for([:admin, @element, @resource]) do |f| %>
               <%= error_messages_for :resource %>
               <div class="field">
-                <%= f.label :vimeo_url %>
                 <%= f.text_field :vimeo_url %>
               </div>
               <div class="field">

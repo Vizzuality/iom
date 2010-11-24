@@ -27,7 +27,7 @@ div.add_new a strong {float:left; width:100%; font:normal 15px Arial; color:#C3D
 div.block div.med div.right {position:relative; float:right; width:284px; min-height:300px;}
 div.block div.med div.right ul {float:left; width:230px; margin:10px 0 0 0;}
 div.block div.med div.right ul li {float:left; width:200px; padding:6px 12px 6px 0;}
-div.block div.med div.right ul li.selected {float:left; width:auto; padding:15px 0 0; background:url('/images/backoffice/backgrounds/menu_top.png') no-repeat right 0;}
+div.block div.med div.right ul li.selected {float:left; width:auto; padding:15px 14px 15px 0; background:url('/images/backoffice/common/selected_li.png') no-repeat right 0;}
 div.block div.med div.right ul li.disabled {width:200px;}
 div.block div.med div.right ul li.disabled a {color:#cccccc;}
 div.block div.med div.right ul li a {float:left; font:bold 15px Arial; color:#E93E3F; padding:0 0 0 20px;}
@@ -44,6 +44,22 @@ div.block div.med div.right ul li:hover a {color:#333333;}
 div.block div.med div.right ul li:hover p {background-position:0 -14px;}
 div.block div.med div.right ul li:hover span {background-position:right -14px;}
 div.block div.med div.right ul li.disabled:hover a {color:#cccccc; cursor:default;}
+div.block div.med div.right ul li.list_selected {float:left; width:auto; padding:15px 0 0 0; background:url('/images/backoffice/donors/menu_top.png') no-repeat right 0;}
+div.block div.med div.right ul li.list_selected div.bottom_selected {float:left; width:auto; padding:0 14px 15px 0; background:url('/images/backoffice/donors/menu_bottom.png') no-repeat right bottom;}
+div.block div.med div.right ul li.list_selected div.bottom_selected a.basic {color:#333333; padding:0 0 0 20px;}
+div.block div.med div.right ul li.list_selected div.bottom_selected a.basic:hover {cursor:default;}
+div.block div.med div.right ul li.list_selected div.bottom_selected p {float:left; width:auto; margin:5px 0 0 15px; background:none;}
+div.block div.med div.right ul li.list_selected div.bottom_selected p a {float:left; width:auto; padding:0 0 0 6px; background:url('/images/backoffice/icons/red_square.jpg') no-repeat 0 7px; font:normal 13px Arial; color:#E93E3F}
+div.block div.med div.right ul li.list_selected div.bottom_selected p a:hover {text-decoration:underline;}
+div.block div.med div.right ul li.list_selected:hover div.bottom_selected p a {color:#E93E3F;}
+div.block div.med div.right ul li.list_unselected {float:left; width:200px; padding:15px 0 0 0; background:none;}
+div.block div.med div.right ul li.list_unselected div.bottom_selected {float:left; padding:0 14px 0 0; background:none;}
+div.block div.med div.right ul li.list_unselected div.bottom_selected a.basic {color:#E93E3F; padding:0 0 5px 20px;}
+div.block div.med div.right ul li.list_unselected div.bottom_selected a.basic:hover {color:#333333; cursor:pointer;}
+div.block div.med div.right ul li.list_unselected div.bottom_selected p {float:left; width:auto; margin:0 0 0 20px; background:none;}
+div.block div.med div.right ul li.list_unselected div.bottom_selected p a {float:left; width:auto; padding:0 0 0 6px; background:url('/images/backoffice/icons/red_square.jpg') no-repeat 0 7px; font:normal 13px Arial; color:#E93E3F}
+div.block div.med div.right ul li.list_unselected div.bottom_selected p a:hover {text-decoration:underline;}
+div.block div.med div.right ul li.list_unselected:hover div.bottom_selected p a {color:#E93E3F;}
 div.block div.med div.right div.delete {position:absolute; bottom:0; left:20px;}
 div.block div.med div.right div.delete h5 {float:left; font:normal 17px "Museo Sans"; color:#333333; letter-spacing:-1px;}
 div.block div.med div.right div.delete p {float:left; margin:5px 0 0 0; width:100%; font:normal 13px Arial; color:#666666;}
@@ -382,9 +398,15 @@ div.block.media div.med div.left p {float:left; width:100%; font:normal 15px Ari
 div.block.media div.med div.left ul {float:left; width:100%; margin:0;}
 div.block.media div.med div.left ul li {position:relative; float:left; width:100%; height:auto; margin:28px 0 0;}
 div.block.media div.med div.left ul li div.top_media {float:left; width:566px; height:10px; background:url('/images/backoffice/backgrounds/top_media.png') no-repeat 0 0;}
-div.block.media div.med div.left ul li div.med_media {float:left; width:549px; height:auto; padding:0 9px; background:url('/images/backoffice/backgrounds/med_media.png') repeat-y 0 0;}
+div.block.media div.med div.left ul li div.med_media {position:relative; float:left; width:549px; height:auto; padding:0 9px; background:url('/images/backoffice/backgrounds/med_media.png') repeat-y 0 0;}
 div.block.media div.med div.left ul li div.med_media img {max-width:549px;}
-div.block.media div.med div.left ul li div.med_media span {display:none;}
+div.block.media div.med div.left ul li div.med_media span.over {position:absolute; top:50%; left:50%; margin:-37px 0 0 -104px; z-index:10000; width:208px; height:74px; background:url('/images/backoffice/media/over_bkg.png') no-repeat 0 0;}
+div.block.media div.med div.left ul li div.med_media span.over a.up {float:left; width:24px; height:27px; margin:24px 0 0 45px; background:url('/images/backoffice/media/up.png') no-repeat 0 0; text-indent:-9999px; font-size:0; display:block; line-height:0;}
+div.block.media div.med div.left ul li div.med_media span.over a.down {float:left; width:24px; height:27px; margin:24px 0 0 20px; background:url('/images/backoffice/media/down.png') no-repeat 0 0; text-indent:-9999px; font-size:0; display:block; line-height:0;}
+div.block.media div.med div.left ul li div.med_media span.over a.up:hover {background-position:0 -27px;}
+div.block.media div.med div.left ul li div.med_media span.over a.down:hover {background-position:0 -27px;}
+div.block.media div.med div.left ul li div.med_media span.over a.delete {float:left; width:28px; height:30px; margin:22px 0 0 20px; background:url('/images/backoffice/media/delete.png') no-repeat 0 0; text-indent:-9999px; font-size:0; display:block; line-height:0;}
+div.block.media div.med div.left ul li div.med_media span.over a.delete:hover {background-position:0 -30px;}
 div.block.media div.med div.left ul li div.med_media p {padding:12px 0; font:normal 15px Arial; color:#999999;}
 div.block.media div.med div.left ul li div.med_media p a {font:normal 15px Arial; color:#E93E3F; text-decoration:underline;}
 div.block.media div.med div.left ul li div.med_media p a:hover {color:#7F2023;}
