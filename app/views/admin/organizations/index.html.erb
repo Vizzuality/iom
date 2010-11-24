@@ -23,21 +23,30 @@
             <% @organizations.each do |organization| %>
               <li>
                 <h3><%= link_to(organization.name, edit_admin_organization_path(organization)) %></h3>
-                <p class="red"><a href="#">6 projects</a></p>
-                <p>contact@oxfam.org</p>
+                <p class="red"><%= link_to(pluralize(organization.projects.count,' project','projects'), edit_admin_organization_path(organization)) %></a></p>
+                <p><%= organization.contact_email%></p>
               </li>
             <% end -%>
           </ul>
         </div>
         <div class="bottom_grey paginate">
           <!-- <%= will_paginate(@organizations) %> -->
-          <ul>
+          
+          <div class="pagination">
+            <a class="previous_page" href="/admin/donors?page=1" rel="prev start">Previous</a>
+            <a href="/admin/donors?page=1" rel="prev start">1</a>
+            <em>2</em>
+            <span class="next_page disabled">Next</span>
+          </div>
+          
+          
+          <!-- <ul>
             <li class="selected"><a href="#">1</a></li>
             <li><a href="#">2</a></li>
             <li><a href="#">3</a></li>
             <li><a href="#">4</a></li>
             <li class="last"><a href="#">NEXT</a></li>
-          </ul>
+          </ul> -->
         </div>
       </div>
   
