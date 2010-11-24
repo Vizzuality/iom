@@ -1,20 +1,15 @@
-# This controller handles the login/logout function of the site.
 class SessionsController < ApplicationController
-  # Be sure to include AuthenticationSystem in Application Controller instead
+
   include AuthenticatedSystem
 
-  # render new.rhtml
   def new
+    redirect_back_or_default('/') and return if logged_in?
   end
 
   def create
     logout_keeping_session!
     user = User.authenticate(params[:email], params[:password])
     if user
-      # Protects against session fixation attacks, causes request forgery
-      # protection if user resubmits an earlier form using back
-      # button. Uncomment if you understand the tradeoffs.
-      # reset_session
       self.current_user = user
       new_cookie_flag = (params[:remember_me] == "1")
       handle_remember_cookie! new_cookie_flag
@@ -33,10 +28,11 @@ class SessionsController < ApplicationController
     redirect_back_or_default('/', :notice => "You have been logged out.")
   end
 
-protected
-  # Track failed email attempts
-  def note_failed_signin
-    flash.now[:error] = "Couldn't log you in as '#{params[:email]}'"
-    logger.warn "Failed email for '#{params[:email]}' from #{request.remote_ip} at #{Time.now.utc}"
-  end
+  protected
+
+    def note_failed_signin
+      flash.now[:error] = "Couldn't log you in as '#{params[:email]}'"
+      logger.warn "Failed email for '#{params[:email]}' from #{request.remote_ip} at #{Time.now.utc}"
+    end
+
 end
