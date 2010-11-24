@@ -1,13 +1,12 @@
 <ul>
-  <li><%= link_to_unless_current('Basic information', edit_admin_project_path(@project)) %></li>
-  <li><%= link_to_unless_current("Media (#{@project.media_resources.count})", admin_project_media_resources_path(@project)) %></li>
-  <li><%= link_to_unless_current("Donations (#{@project.donations.count})", donations_admin_project_path(@project)) %>
-  <li><%= link_to_unless_current("Resources (#{@project.resources.count})", admin_project_resources_path(@project)) %></li>
+  <li class="selected"><%= link_to_unless_current('Basic information', edit_admin_donor_path(@donor)) %></li>
+  <li> <%= link_to_unless_current('Funded projects', projects_admin_donor_path(@project)) %><% if !@project.donations.empty? %> <p><span><%=@project.donations.count%></span></p><% end %></li>
+  <li><%= link_to_unless_current("Media", admin_donor_media_resources_path(@project)) %><% if !@project.media_resources.empty? %> <p><span><%=@project.media_resources.count%></span></p><% end %></li>
+  <li><%= link_to_unless_current("Resources", admin_donor_resources_path(@project)) %><% if !@project.resources.empty? %> <p><span><%=@@project.resources.count%></span></p><% end %></li>
 </ul>
 
-
-<div class="down">
-  <h3>Delete this project</h3>
+<div class="delete">
+  <h5>DELETE THIS PROJECT</h5>
+  <p>Clicking the link below will permanently delete this donor and its references within the sites</p>
   <%= link_to("Delete this project", admin_project_path(@project), :method => :delete, :confirm => '¿Are you sure?') %>
 </div>
-

@@ -1,7 +1,5 @@
 <!-- Los errores sería meter un class error dentro de cada input relacionado -->
-
 <%= form_for(@donor, :url => (@donor.new_record? ? admin_donors_path : admin_donor_path(@donor)), :html => { :multipart => true }) do |f| %>
-
   <%= f.error_messages %>
 
   <div class="field">
