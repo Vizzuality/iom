@@ -28,7 +28,7 @@
           <li class="<%= (controller_name == 'donors' ? 'selected' : nil) %>"><%= link_to(admin_donors_path) do %><span>donors</span><% end %></li>
         </ul>
         <ul class="admin">
-          <li><%= link_to('settings', '#') %></li>
+          <li><%= link_to('settings', edit_admin_setting_path(Settings.first)) %></li>
           <li class="last"><%= link_to('close session', logout_path) %></li>
         </ul>
       </div>

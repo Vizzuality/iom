@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101124120201) do
+ActiveRecord::Schema.define(:version => 20101124144950) do
 
   create_table "clusters", :force => true do |t|
     t.column "name", :string
@@ -184,6 +184,13 @@ ActiveRecord::Schema.define(:version => 20101124120201) do
     t.column "name", :string
     t.column "created_at", :datetime
     t.column "updated_at", :datetime
+  end
+
+  create_table "settings", :force => true do |t|
+    t.column "default_email", :string
+    t.column "default_contact_name", :string
+    t.column "geoiq_parameter_1", :string
+    t.column "geoiq_parameter_2", :string
   end
 
   create_table "sites", :force => true do |t|

@@ -1,6 +1,7 @@
 # Mandatory seeds
 
 User.create :email => 'admin@example.com', :password => 'admin', :password_confirmation => 'admin'
+Settings.create
 
 # Env seeds (development)
 
