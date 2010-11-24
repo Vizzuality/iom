@@ -1,7 +1,5 @@
 <%= form_for(@settings, :url => admin_setting_path(@settings)) do |f| %>
 
-  <%= f.error_messages %>
-
   <div class="field">
     <%= f.label :default_email %>
     <%= f.text_field :default_email %>

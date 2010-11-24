@@ -1,23 +1,16 @@
-<!-- Los errores sería meter un class error dentro de cada input relacionado -->
 <%= form_for(@donor, :url => (@donor.new_record? ? admin_donors_path : admin_donor_path(@donor)), :html => { :multipart => true }) do |f| %>
-  <%= f.error_messages %>
 
   <div class="field">
     <%= f.label :name %>
-    <%= f.text_field :name, :class=>"long error" %>
-    <span class="field_error">
-      <a class="error"></a>
-      <div class="error_msg">
-        <p><span>can't be blank</span></p>
-      </div>
-    </span>
+    <%= f.text_field :name, :class=>"long #{'error' if @donor.errors[:name] && action_name != 'new'}" %>
+    <%= errors_for @donor, :name %>
   </div>
 
   <%= f.label :logo %>
   <div class="image_container">
     <% if @donor.logo_file_name? %>
       <%= image_tag(@donor.logo.url(:small)) %>
-    <% end -%> 
+    <% end -%>
     <div class="field">
       <p>JPG, PNG and GIF supported</p>
       <%= f.file_field :logo %>
@@ -31,24 +24,24 @@
 
   <div class="field">
     <%= f.label :website %>
-    <%= f.text_field :website, :class=>"long error" %>
+    <%= f.text_field :website, :class=>"long" %>
   </div>
   <a href="#" class="preview" target="_blank">preview the link</a>
-  
+
 
   <div class="short_field">
     <%= f.label :twitter %>
     <%= f.text_field :twitter, :class=>"short twitter" %>
   </div>
   <a href="#" class="preview" target="_blank">preview the link</a>
-  
+
 
   <div class="field">
     <%= f.label :facebook %>
     <%= f.text_field :facebook, :class=>"long facebook" %>
   </div>
   <a href="#" class="preview" target="_blank">preview the link</a>
-  
+
 
   <div class="common">
     <h3>CONTACT INFORMATION</h3>
@@ -71,13 +64,13 @@
       <%= f.label :contact_email %>
       <%= f.text_field :contact_email, :class=>"short" %>
     </div>
-    
+
     <div class="short_field last">
       <%= f.label :contact_phone_number %>
       <%= f.text_field :contact_phone_number, :class=>"short" %>
     </div>
   </div>
 
-  <%= f.submit 'Save' %>
+  <%= f.submit 'Save', :class => "#{'error' if @donor.invalid? && action_name != 'new'}" %>
 
 <% end -%>
