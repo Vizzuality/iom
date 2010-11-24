@@ -7,7 +7,9 @@
     <%= f.text_field :name, :class=>"long error" %>
     <span class="field_error">
       <a class="error"></a>
-      <p><span>can't be blank</span></p>
+      <div class="error_msg">
+        <p><span>can't be blank</span></p>
+      </div>
     </span>
   </div>
 
@@ -30,22 +32,25 @@
   <div class="field">
     <%= f.label :website %>
     <%= f.text_field :website, :class=>"long error" %>
-    <a href="#" target="_blank">preview the link</a>
   </div>
+  <a href="#" class="preview" target="_blank">preview the link</a>
+  
 
-  <div class="field">
+  <div class="short_field">
     <%= f.label :twitter %>
     <%= f.text_field :twitter, :class=>"short twitter" %>
-    <a href="#" target="_blank">preview the link</a>
   </div>
+  <a href="#" class="preview" target="_blank">preview the link</a>
+  
 
   <div class="field">
     <%= f.label :facebook %>
     <%= f.text_field :facebook, :class=>"long facebook" %>
-    <a href="#" target="_blank">preview the link</a>
   </div>
+  <a href="#" class="preview" target="_blank">preview the link</a>
+  
 
-  <div class="information">
+  <div class="common">
     <h3>CONTACT INFORMATION</h3>
     <div class="field">
       <%= f.label :contact_person_name %>
@@ -73,8 +78,6 @@
     </div>
   </div>
 
-  <div class="field">
-    <%= f.submit 'Save' %>
-  </div>
+  <%= f.submit 'Save' %>
 
 <% end -%>
