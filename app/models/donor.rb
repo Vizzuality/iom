@@ -3,23 +3,23 @@
 # Table name: donors
 #
 #  id                        :integer         not null, primary key
-#  name                      :string(255)     
-#  description               :text            
-#  website                   :string(255)     
-#  twitter                   :string(255)     
-#  facebook                  :string(255)     
-#  contact_person_name       :string(255)     
-#  contact_company           :string(255)     
-#  contact_person_position   :string(255)     
-#  contact_email             :string(255)     
-#  contact_phone_number      :string(255)     
-#  logo_file_name            :string(255)     
-#  logo_content_type         :string(255)     
-#  logo_file_size            :integer         
-#  logo_updated_at           :datetime        
-#  site_specific_information :text            
-#  created_at                :datetime        
-#  updated_at                :datetime        
+#  name                      :string(255)
+#  description               :text
+#  website                   :string(255)
+#  twitter                   :string(255)
+#  facebook                  :string(255)
+#  contact_person_name       :string(255)
+#  contact_company           :string(255)
+#  contact_person_position   :string(255)
+#  contact_email             :string(255)
+#  contact_phone_number      :string(255)
+#  logo_file_name            :string(255)
+#  logo_content_type         :string(255)
+#  logo_file_size            :integer
+#  logo_updated_at           :datetime
+#  site_specific_information :text
+#  created_at                :datetime
+#  updated_at                :datetime
 #
 
 class Donor < ActiveRecord::Base
@@ -35,6 +35,10 @@ class Donor < ActiveRecord::Base
   before_validation :clean_html
 
   validates_presence_of :name
+
+  def donations_amount
+    donations.inject(0){ |result, donation| result + donation.amount }
+  end
 
   private
 

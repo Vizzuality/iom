@@ -1,52 +1,53 @@
   <div class="main_layout">
     <div class="block">
       <div class="two_donors">
-        <form>
+        <%= form_tag(admin_donors_path, :method => :get) do %>
           <label>SEARCH BY TEXT</label>
-          <input type="text" value="Search donors by name, place,..." class="main_search" />
-          <input type="submit" value="" />
-        </form>
+          <input type="text" value="<%= params[:q] || 'Search donors by name, place,...'%>" name="q" class="main_search" />
+          <input type="submit" value=""  />
+        <% end %>
       </div>
       <div class="one_donor">
-        <p>2,930</p>
-        <label>donors<br/>registered</label>
-        <a href="/admin/donors/new">Add new donor</a>
+        <p><%= Donor.count %></p>
+        <label><%= Donor.count == 1 ? 'donor' : 'donors' %><br/>registered</label>
+        <a href="<%= new_admin_donor_path %>">Add new donor</a>
       </div>
     </div>
-    
+
     <div class="block">
       <div class="top"></div>
       <div class="med donors_list">
-        <h2><% @donors.count %> donors supporting projects on <a class="remove" href="#">Ecuador</a></h2>
+        <h2><% pluralize(@donors.total_entries, 'donor', 'donors') %> supporting projects
+          <% if params[:q]%>
+          on <a class="remove" href="#"><%= params[:q] %></a>
+          <% end %>
+        </h2>
         <% unless @donors.empty? %>
           <ul>
             <% @donors.each do |donor| %>
               <li>
                 <h3><%= link_to(donor.name, edit_admin_donor_path(donor)) %></h3>
-                <p class="red"><a href="#">13 donations</a></p>
-                <p>$12,000</p>
-                <p class="red"><a href="#">Visit donor site</a></p>
+                <p class="red"><a href="<%= edit_admin_donor_path(donor) %>"><%= pluralize(donor.donations.count, 'donation', 'donations') %></a></p>
+                <% if donor.donations.count > 0 %>
+                <p>$<%= number_with_delimiter(donor.donations_amount) %></p>
+                <% end %>
+                <% if donor.website? %>
+                <p class="red"><a href="<%= donor.website %>" target="_blank">Visit donor site</a></p>
+                <% end %>
               </li>
             <% end -%>
           </ul>
         <% end -%>
       </div>
       <div class="bottom_grey paginate">
-        <!-- <%= will_paginate(@donors) %> -->
-        <ul>
-          <li class="selected"><a href="#">1</a></li>
-          <li><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
-          <li class="last"><a href="#">NEXT</a></li>
-        </ul>
+        <%= will_paginate(@donors) %>
       </div>
     </div>
-    
+
     <div class="add_new">
-      <a href="/admin/donors/new">
+      <a href="<%= new_admin_donor_path %>">
         Add a new donor<br/>
-        <strong>There are already 2,930 donors registered</strong>
+        <strong>There are already <%= pluralize(Donor.count, 'donor', 'donors') %> registered</strong>
       </a>
     </div>
   </div>
