@@ -1,227 +1,227 @@
-<!-- Los errores sería meter un class error dentro de cada input relacionado -->
-
 <%= form_for(@project, :url => (@project.new_record? ? admin_projects_path : admin_project_path(@project))) do |f| %>
 
-	<label>PROJECT NAME</label>
-	<span class="input_large">
-    	<%= f.text_field :name %>
-	</span>
-	
-	<label>DESCRIPTION</label>
-	<span class="textarea">
-    	<%= f.text_area :description %>
-	</span>
-	
-	<p class="title">TAGS <span class="info">Use comma (",") to separate project tags</span></p>
-	<span class="input_large">
-		<%= f.text_field :tags, :value => @project.tags.map{ |tag| tag.name }.join(', ') %>
-	</span>
+  <label>PROJECT NAME</label>
+  <span class="input_large">
+      <%= f.text_field :name, :class=>"long #{'error' if !@project.errors[:name].empty? && action_name != 'new'}" %>
+      <%= errors_for @project, :name %>
+  </span>
 
-	<label>ORGANIZATION</label>
-	<a class="combo_large">Food For Haiti</a>
+  <label>DESCRIPTION</label>
+  <span class="textarea">
+      <%= f.text_area :description %>
+  </span>
 
-	<!-- *************** AÑADIR EL COMBO DE TAGS *************** -->
-	<%if false %>
-	  <div class="field">
-	    <%= f.label :primary_organization_id %>
-	    <%= f.select :primary_organization_id, Organization.all.collect{ |o| [o.name, o.id] }, :prompt => 'Select an organization' %>
-	  </div>
-	<%end %>
-	<!-- *************** FIN AÑADIR EL COMBO DE TAGS *************** -->
-	
-	<label>IMPLEMENTING NGO</label>
-	<span class="input_large">
-		<%= f.text_field :implementing_organization %>
-	</span>
-	
-	<label>PARTNER NGOS</label>
-	<span class="input_large">
-		<%= f.text_field :partner_organizations %>
-	</span>
-	
-	<label>CROSS-CUTTING ISSUES</label>
-	<span class="input_large">
-		<%= f.text_field :cross_cutting_issues %>	
-	</span>
-	
-	<!-- *************** FALTA  *************** -->
-	<label>ACTIVITIES</label>
-	<span class="textarea">
-		<textarea>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dolor dolor, lobortis at tempor quis, fringilla quis ipsum. Morbi a erat eu tellus dictum sollicitudin ut at sem. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec at felis sed nisi faucibus blandit in ut quam. Cras posuere vehicula semper.
+  <p class="title">TAGS <span class="info">Use comma (",") to separate project tags</span></p>
+  <span class="input_large">
+    <%= f.text_field :tags, :value => @project.tags.map{ |tag| tag.name }.join(', ') %>
+  </span>
 
-Aliquam sed tellus augue. Integer et lorem quis urna pharetra pellentesque rhoncus vitae elit. Fusce vitae orci nec elit aliquet pellentesque. Etiam adipiscing nunc magna. Phasellus dignissim libero nec dui scelerisque mollis. Duis at velit erat, ac scelerisque ligula. Integer vitae lorem arcu, nec aliquet velit. Donec ut ligula ornare nunc ornare hendrerit.</textarea>
-	</span>
-	<!-- *************** FIN - FALTA  *************** -->
-	
-	<!-- SECTION  -->
-	<h3 class="section">PROJECT MANAGEMENT</h3>
+  <label>ORGANIZATION</label>
+  <a class="combo_large">Food For Haiti</a>
 
+  <!-- *************** AÑADIR EL COMBO DE TAGS *************** -->
+  <%if false %>
+    <div class="field">
+      <%= f.label :primary_organization_id %>
+      <%= f.select :primary_organization_id, Organization.all.collect{ |o| [o.name, o.id] }, :prompt => 'Select an organization' %>
+    </div>
+  <%end %>
+  <!-- *************** FIN AÑADIR EL COMBO DE TAGS *************** -->
 
-	<!-- *************** FALTA  *************** -->
-	<label>INTERVENTION ID</label>
-	<span class="input_large">
-		<input type="text" value="30045"/>
-	</span>
+  <label>IMPLEMENTING NGO</label>
+  <span class="input_large">
+    <%= f.text_field :implementing_organization %>
+  </span>
 
-	<label>ADDITIONAL INFORMATION</label>
-	<span class="textarea">
-		<textarea>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dolor dolor, lobortis at tempor quis, fringilla quis ipsum. Morbi a erat eu tellus dictum sollicitudin ut at sem. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec at felis sed nisi faucibus blandit in ut quam. Cras posuere vehicula semper.
+  <label>PARTNER NGOS</label>
+  <span class="input_large">
+    <%= f.text_field :partner_organizations %>
+  </span>
+
+  <label>CROSS-CUTTING ISSUES</label>
+  <span class="input_large">
+    <%= f.text_field :cross_cutting_issues %>
+  </span>
+
+  <!-- *************** FALTA  *************** -->
+  <label>ACTIVITIES</label>
+  <span class="textarea">
+    <textarea>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dolor dolor, lobortis at tempor quis, fringilla quis ipsum. Morbi a erat eu tellus dictum sollicitudin ut at sem. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec at felis sed nisi faucibus blandit in ut quam. Cras posuere vehicula semper.
 
 Aliquam sed tellus augue. Integer et lorem quis urna pharetra pellentesque rhoncus vitae elit. Fusce vitae orci nec elit aliquet pellentesque. Etiam adipiscing nunc magna. Phasellus dignissim libero nec dui scelerisque mollis. Duis at velit erat, ac scelerisque ligula. Integer vitae lorem arcu, nec aliquet velit. Donec ut ligula ornare nunc ornare hendrerit.</textarea>
-	</span>
+  </span>
+  <!-- *************** FIN - FALTA  *************** -->
 
-	<label>AWARDEE TYPE</label>
-	<span class="input_large">
-		<input type="text" value=""/>
-	</span>
-	<!-- *************** FIN - FALTA  *************** -->
+  <!-- SECTION  -->
+  <h3 class="section">PROJECT MANAGEMENT</h3>
 
-	<ul class="dates">
-		<li>
-			<label>AWARDEE TYPE</label>
-			 <%= f.date_select :start_date, :start_year => Date.today.year - 5  %>
-			<!-- <a class="combo_date">09/10/2010</a> -->
-		</li>
-		<li>
-			<label>DATE UPDATED</label>
- 			<%= f.date_select :end_date, :start_year => Date.today.year - 5  %>			
-			<!-- <a class="combo_date">09/10/2010</a> -->
-		</li>
-	</ul>
-	
-	
-	<!-- SECTION  -->
-	<h3 class="section">CONTEXT</h3>
-	
-	<label>CLUSTERS</label>
-	<ul class="clusters">
-		<% @project.clusters.each do |cluster| %>
-			<li><%= cluster.id %><a class="close"></a></li>
-		<% end -%>
-	</ul>
-	
-	<div class="cluster_options">
-		<a class="combo_cluster_options">Select more clusters</a>
-		<a class="add_cluster">add cluster</a>
-	</div>
-	
-	
-	<!-- CLUSTERS COMBOS - REDO -->
-	<%if false%>
-		<div id="clusters">
-	      <% unless @project.clusters.empty? %>
-	        <% @project.clusters.each do |cluster| %>
-	        <span id="cluster_<%= cluster.id %>"><input type="checkbox" name="project[clusters_ids][]" value="<%= cluster.id %>" checked="checked"/><%= cluster.name %><a href="#cluster_<%= cluster.id %>" class="remove_this">x</a><br /></span>
-	        <% end -%>
-	      <% end -%>
-	    </div>
-	    <%= select_tag :select_cluster, options_for_select([['Choose a cluster',nil]] + Cluster.all.collect{ |o| [o.name, o.id] }) %>
-	  </div>
-	<%end%>
+
+  <!-- *************** FALTA  *************** -->
+  <label>INTERVENTION ID</label>
+  <span class="input_large">
+    <input type="text" value="30045"/>
+  </span>
+
+  <label>ADDITIONAL INFORMATION</label>
+  <span class="textarea">
+    <textarea>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras dolor dolor, lobortis at tempor quis, fringilla quis ipsum. Morbi a erat eu tellus dictum sollicitudin ut at sem. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec at felis sed nisi faucibus blandit in ut quam. Cras posuere vehicula semper.
+
+Aliquam sed tellus augue. Integer et lorem quis urna pharetra pellentesque rhoncus vitae elit. Fusce vitae orci nec elit aliquet pellentesque. Etiam adipiscing nunc magna. Phasellus dignissim libero nec dui scelerisque mollis. Duis at velit erat, ac scelerisque ligula. Integer vitae lorem arcu, nec aliquet velit. Donec ut ligula ornare nunc ornare hendrerit.</textarea>
+  </span>
+
+  <label>AWARDEE TYPE</label>
+  <span class="input_large">
+    <input type="text" value=""/>
+  </span>
+  <!-- *************** FIN - FALTA  *************** -->
+
+  <ul class="dates">
+    <li>
+      <label>AWARDEE TYPE</label>
+       <%= f.date_select :start_date, :start_year => Date.today.year - 5  %>
+      <!-- <a class="combo_date">09/10/2010</a> -->
+    </li>
+    <li>
+      <label>DATE UPDATED</label>
+       <%= f.date_select :end_date, :start_year => Date.today.year - 5  %>
+      <!-- <a class="combo_date">09/10/2010</a> -->
+    </li>
+  </ul>
+
+
+  <!-- SECTION  -->
+  <h3 class="section">CONTEXT</h3>
+
+  <label>CLUSTERS</label>
+  <ul class="clusters">
+    <% @project.clusters.each do |cluster| %>
+      <li><%= cluster.id %><a class="close"></a></li>
+    <% end -%>
+  </ul>
+
+  <div class="cluster_options">
+    <a class="combo_cluster_options">Select more clusters</a>
+    <a class="add_cluster">add cluster</a>
+  </div>
+
+
+  <!-- CLUSTERS COMBOS - REDO -->
+  <%if false%>
+    <div id="clusters">
+        <% unless @project.clusters.empty? %>
+          <% @project.clusters.each do |cluster| %>
+          <span id="cluster_<%= cluster.id %>"><input type="checkbox" name="project[clusters_ids][]" value="<%= cluster.id %>" checked="checked"/><%= cluster.name %><a href="#cluster_<%= cluster.id %>" class="remove_this">x</a><br /></span>
+          <% end -%>
+        <% end -%>
+      </div>
+      <%= select_tag :select_cluster, options_for_select([['Choose a cluster',nil]] + Cluster.all.collect{ |o| [o.name, o.id] }) %>
+    </div>
+  <%end%>
   <!-- END CLUSTERS COMBOS - REDO -->
 
-	<label>SECTORS / SUBSECTORS</label>
-	<ul class="clusters">
-		<li>FOOD <a class="close"></a></li>
-		<li>HEALTH - Vaccination <a class="close"></a></li>				
-	</ul>
-	
-	<div class="cluster_options_large">
-		<a class="combo_cluster_options first">Select more sectors</a>
-		<a class="combo_cluster_options">Select a subsector</a>
-		<a class="add_sector">add sector</a>
-	</div>
-	
-	<!-- SECTORS COMBOS - REDO -->
-	<%if false%>
-		<div id="sectors">
-	      <% unless @project.sectors.empty? %>
-	        <% @project.sectors.each do |sector| %>
-	        <span id="sector_<%= sector.id %>"><input type="checkbox" name="project[sectors_ids][]" value="<%= sector.id %>" checked="checked"/><%= sector.name %><a href="#sector_<%= sector.id %>" class="remove_this">x</a><br /></span>
-	        <% end -%>
-	      <% end -%>
-	    </div>
-	    <%= select_tag :select_sector, options_for_select([['Choose a sector',nil]] + Sector.all.collect{ |o| [o.name, o.id] }) %>
-	  	</div>
-	<%end%>
-	<!-- END SECTORS COMBOS - REDO -->
-	
-	
-	<!-- ************************ FALTA ************************ -->
-	<label>GEOGRAPHIC UBICATION</label>
-	<ul class="clusters">
-		<li>Belladère, Haiti<a class="close"></a></li>
-		<li>Martinique, Haiti<a class="close"></a></li>				
-	</ul>
-	<div class="location_options empty">
-		<p class="msg">Add / edit the different locations of the project</p>
-		<a class="add_location">add location</a>
-	</div>
-	<!-- ************************ FIN FALTA ************************ -->
-	
-	<ul class="dates">
-		<li>
-			<label>START DATE</label>
-    		<%= f.date_select :start_date, :start_year => Date.today.year - 5  %>			
-			<!-- <a class="combo_date">09/10/2010</a> -->
-		</li>
-		<li>
-			<label>END DATE</label>
-    		<%= f.date_select :end_date, :start_year => Date.today.year - 5  %>			
-			<!-- <a class="combo_date">09/10/2010</a> -->
-		</li>
-	</ul>
-	
-	<!-- SECTION  -->
-	<h3 class="section">IMPACT</h3>
-	<label>PROJECT BUDGET</label>
-	
-	<span class="input_short coin">
-		<%= f.text_field :budget %>
-		<p class="coin">$</p>
-	</span>
-	
-	<div class="two_columns">
-		<div class="left_column">
-			<label>TARGET</label>
-			<span class="input_short">
-				<%= f.text_field :target %>
-			</span>
-		</div>
-		<div class="right_column">
-			<label>ESTIMATED PEOPLE REACHED</label>
-			<span class="input_short">
-				<%= f.text_field :estimated_people_reached %>
-				<p class="msg">people</p>
-			</span>
-		</div>
-	</div>
-	
-	<!-- SECTION  -->
-	<h3 class="section">CONTACT INFORMATION</h3>
-	<label>CONTACT PERSON</label>
-	<span class="input_short">
-			<%= f.text_field :contact_person %>
-	</span>
+  <label>SECTORS / SUBSECTORS</label>
+  <ul class="clusters">
+    <li>FOOD <a class="close"></a></li>
+    <li>HEALTH - Vaccination <a class="close"></a></li>
+  </ul>
 
-	
-	<div class="two_columns">
-		<div class="left_column">
-			<label>CONTACT EMAIL</label>
-			<span class="input_short">
-				<%= f.text_field :contact_email %>
-			</span>
-		</div>
-		<div class="right_column">
-			<p class="title">CONTACT PHONE <span class="info">Include international prefix</span></p>
-			<span class="input_short">
-				<%= f.text_field :contact_phone_number %>
-			</span>
-		</div>
-	</div>
-	
-	<%= f.submit 'Save changes' %>
-	<!-- END EDIT PAGE -->
+  <div class="cluster_options_large">
+    <a class="combo_cluster_options first">Select more sectors</a>
+    <a class="combo_cluster_options">Select a subsector</a>
+    <a class="add_sector">add sector</a>
+  </div>
+
+  <!-- SECTORS COMBOS - REDO -->
+  <%if false%>
+    <div id="sectors">
+        <% unless @project.sectors.empty? %>
+          <% @project.sectors.each do |sector| %>
+          <span id="sector_<%= sector.id %>"><input type="checkbox" name="project[sectors_ids][]" value="<%= sector.id %>" checked="checked"/><%= sector.name %><a href="#sector_<%= sector.id %>" class="remove_this">x</a><br /></span>
+          <% end -%>
+        <% end -%>
+      </div>
+      <%= select_tag :select_sector, options_for_select([['Choose a sector',nil]] + Sector.all.collect{ |o| [o.name, o.id] }) %>
+      </div>
+  <%end%>
+  <!-- END SECTORS COMBOS - REDO -->
+
+
+  <!-- ************************ FALTA ************************ -->
+  <label>GEOGRAPHIC UBICATION</label>
+  <ul class="clusters">
+    <li>Belladère, Haiti<a class="close"></a></li>
+    <li>Martinique, Haiti<a class="close"></a></li>
+  </ul>
+  <div class="location_options empty">
+    <p class="msg">Add / edit the different locations of the project</p>
+    <a class="add_location">add location</a>
+  </div>
+  <!-- ************************ FIN FALTA ************************ -->
+
+  <ul class="dates">
+    <li>
+      <label>START DATE</label>
+        <%= f.date_select :start_date, :start_year => Date.today.year - 5  %>
+      <!-- <a class="combo_date">09/10/2010</a> -->
+    </li>
+    <li>
+      <label>END DATE</label>
+        <%= f.date_select :end_date, :start_year => Date.today.year - 5  %>
+      <!-- <a class="combo_date">09/10/2010</a> -->
+    </li>
+  </ul>
+
+  <!-- SECTION  -->
+  <h3 class="section">IMPACT</h3>
+  <label>PROJECT BUDGET</label>
+
+  <span class="input_short coin">
+    <%= f.text_field :budget %>
+    <p class="coin">$</p>        <!-- SE PUEDE SEPARAR LA MONEDA??¿?¿?¿? -->
+  </span>
+
+  <div class="two_columns">
+    <div class="left_column">
+      <label>TARGET</label>
+      <span class="input_short">
+        <%= f.text_field :target %>
+      </span>
+    </div>
+    <div class="right_column">
+      <label>ESTIMATED PEOPLE REACHED</label>
+      <span class="input_short">
+        <%= f.text_field :estimated_people_reached %>
+        <p class="msg">people</p>
+      </span>
+    </div>
+  </div>
+
+  <!-- SECTION  -->
+  <h3 class="section">CONTACT INFORMATION</h3>
+  <label>CONTACT PERSON</label>
+  <span class="input_short">
+      <%= f.text_field :contact_person %>
+  </span>
+
+
+  <div class="two_columns">
+    <div class="left_column">
+      <label>CONTACT EMAIL</label>
+      <span class="input_short">
+        <%= f.text_field :contact_email %>
+      </span>
+    </div>
+    <div class="right_column">
+      <p class="title">CONTACT PHONE <span class="info">Include international prefix</span></p>
+      <span class="input_short">
+        <%= f.text_field :contact_phone_number %>
+      </span>
+    </div>
+  </div>
+
+  <%= f.submit 'Save changes', :class => "#{'error' if @project.invalid? && action_name != 'new'}" %>
+  <!-- END EDIT PAGE -->
+>>>>>>> adf97c78cc0bbed429056b14ab754e174427316d
 
 <%end%>
 <script type="text/javascript">

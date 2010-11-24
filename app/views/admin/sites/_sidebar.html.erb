@@ -1,12 +1,19 @@
 <ul>
-  <li><%= link_to_unless_current('Basic information', edit_admin_site_path(@site)) %></li>
-  <li><%= link_to_unless_current('Customization', customization_admin_site_path(@site)) %></li>
-  <li><%= link_to_unless_current("Site projects (#{@site.total_projects})", projects_admin_site_path(@site)) %></li>
-  <li><%= link_to_unless_current("Media (#{@site.media_resources.count})", admin_site_media_resources_path(@site)) %></li>
-  <li><%= link_to_unless_current("Resources (#{@site.resources.count})", admin_site_resources_path(@site)) %></li>
-  <li><%= link_to_unless_current("Pages (#{@site.pages.count})", admin_site_pages_path(@site)) %></li>
+  <li <%= selected_if_current_page(edit_admin_site_path(@site)) %>>
+    <%= link_to_unless_current('Basic information', edit_admin_site_path(@site)) %>
+  </li>
+  <li <%= selected_if_current_page(customization_admin_site_path(@site)) %>>
+    <%= link_to_unless_current('Customization', customization_admin_site_path(@site)) %>
+  </li>
+  <li <%= selected_if_current_page(projects_admin_site_path(@site)) %>>
+    <%= link_to_unless_current("Site projects (#{@site.total_projects})", projects_admin_site_path(@site)) %></li>
+  <li <%= selected_if_current_page(admin_site_media_resources_path(@site)) %>>
+    <%= link_to_unless_current("Media (#{@site.media_resources.count})", admin_site_media_resources_path(@site)) %></li>
+  <li <%= selected_if_current_page(admin_site_resources_path(@site)) %>>
+    <%= link_to_unless_current("Resources (#{@site.resources.count})", admin_site_resources_path(@site)) %></li>
+  <li <%= selected_if_current_page(admin_site_pages_path(@site)) %>>
+    <%= link_to_unless_current("Pages (#{@site.pages.count})", admin_site_pages_path(@site)) %></li>
 </ul>
-
 
 <div class="down">
   <h3>Delete this site</h3>

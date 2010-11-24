@@ -1,0 +1,53 @@
+
+  <div class="main_layout">
+    <div class="block edit first">
+      <div class="top"></div>
+      <div class="med">
+        <div class="left">
+          <h2>Settings</h2>
+          <%= form_for(@settings, :url => admin_setting_path(@settings)) do |f| %>
+            <div class="common">
+              <h3>DEFAULT CONTACT INFORMATION</h3>
+              <div class="short_field">
+                <%= f.label :default_email %>
+                <%= f.text_field :default_email, :class=>"short" %>
+              </div>
+              <div class="short_field">
+                <%= f.label :default_contact_name %>
+                <%= f.text_field :default_contact_name, :class=>"short" %>
+              </div>
+            </div>
+
+            <div class="common">
+              <h3>DEFAULT CONTACT INFORMATION</h3>
+              <div class="short_field">
+                <%= f.label :geoiq_parameter_1 %>
+                <%= f.text_field :geoiq_parameter_1, :class=>"short" %>
+              </div>
+              <div class="short_field">
+                <%= f.label :geoiq_parameter_2 %>
+                <%= f.text_field :geoiq_parameter_2, :class=>"short" %>
+              </div>
+            </div>
+            
+            <div class="final">
+              <%= f.submit 'Save' %>
+            </div>
+          <% end -%>
+        </div>
+        <div class="right tips">
+          <div class="big_bubble">
+            <h3>WHAT IS THIS?</h3>
+            <p>This is the default data that will be used for the sites. It can be redefined for each site.</p>
+          </div>
+          <div class="small_bubble">
+            <h3>WHAT IS THIS?</h3>
+            <p>Technical configuration of the NGO Aid / GeoIQ integration</p>
+          </div>
+        </div>
+      </div>
+      <div class="bottom"></div>
+    </div>
+  </div>
+  
+    

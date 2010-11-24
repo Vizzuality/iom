@@ -1,10 +1,9 @@
 <%= form_for(@organization, :url => (@organization.new_record? ? admin_organizations_path : admin_organization_path(@organization)), :html => { :multipart => true }) do |f| %>
 
-  <%= f.error_messages %>
-
   <div class="field">
     <%= f.label :name %>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, :class=>"long #{'error' if !@organization.errors[:name].empty? && action_name != 'new'}" %>
+    <%= errors_for @organization, :name %>
   </div>
 
   <div class="field">
@@ -16,86 +15,147 @@
     <%= image_tag(@organization.logo.url(:small)) %>
   <% end -%>
 
-  <div class="field">
-    <%= f.label :logo %>
-    <%= f.file_field :logo %>
+  <%= f.label :logo %>
+  <div class="image_container">
+    <% if @organization.logo_file_name? %>
+      <%= image_tag(@organization.logo.url(:small)) %>
+    <% end -%>
+    <div class="field">
+      <p>JPG, PNG and GIF supported</p>
+      <%= f.file_field :logo %>
+    </div>
   </div>
 
-  <div class="field">
+  <div class="short_field">
     <%= f.label :budget %>
-    <%= f.text_field :budget %>
+    <%= f.text_field :budget, :class=>"short budget" %>
   </div>
 
-  <div class="field">
+  <div class="short_field">
     <%= f.label :website %>
-    <%= f.text_field :website %>
+    <%= f.text_field :website, :class=>"short" %>
   </div>
+  <a href="#" class="preview" target="_blank">preview the link</a>
 
-  <div class="field">
+  <div class="short_field">
     <%= f.label :staff %>
-    <%= f.text_field :staff %>
+    <%= f.text_field :staff, :class=>"short" %>
   </div>
 
-  <div class="field">
-    <%= f.label :twitter %>
-    <%= f.text_field :twitter %>
+  <div class="short_field last">
+    <%= f.label :international_staff %>
+    <%= f.text_field :international_staff, :class=>"short" %>
   </div>
 
-  <div class="field">
-    <%= f.label :facebook %>
-    <%= f.text_field :facebook %>
+  <div class="common">
+    <h3>SOCIAL LINK</h3>
+    <div class="short_field">
+      <%= f.label :twitter %>
+      <%= f.text_field :twitter, :class=>"short twitter" %>
+    </div>
+    <a href="#" class="preview" target="_blank">preview the link</a>
+
+    <div class="field">
+      <%= f.label :facebook %>
+      <%= f.text_field :facebook, :class=>"long facebook" %>
+    </div>
+    <a href="#" class="preview" target="_blank">preview the link</a>
   </div>
 
-  <div class="field">
-    <%= f.label :hq_address %>
-    <%= f.text_field :hq_address %>
+  <div class="common">
+    <h3>CONTACT INFORMATION</h3>
+
+    <div class="short_field">
+      <%= f.label :contact_name %>
+      <%= f.text_field :contact_name, :class=>"short" %>
+    </div>
+
+    <div class="short_field last">
+      <%= f.label :contact_position %>
+      <%= f.text_field :contact_position, :class=>"short" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :hq_address %>
+      <%= f.text_field :hq_address %>
+    </div>
+
+    <div class="short_field">
+      <%= f.label :contact_city %>
+      <%= f.text_field :contact_city, :class=>"short" %>
+    </div>
+
+    <div class="short_field last">
+      <%= f.label :contact_zip %>
+      <%= f.text_field :contact_zip, :class=>"short" %>
+    </div>
+
+    <div class="short_field">
+      <%= f.label :contact_state %>
+      <%= f.text_field :contact_state, :class=>"short" %>
+    </div>
+
+    <div class="short_field last">
+      <%= f.label :contact_position %>
+      <%= f.text_field :contact_position, :class=>"short" %>
+    </div>
+
+    <div class="short_field">
+      <%= f.label :contact_email %>
+      <%= f.text_field :contact_email, :class=>"short" %>
+    </div>
+
+    <div class="short_field last">
+      <%= f.label :contact_phone_number %>
+      <%= f.text_field :contact_phone_number, :class=>"short" %>
+    </div>
+
   </div>
 
-  <div class="field">
-    <%= f.label :contact_email %>
-    <%= f.text_field :contact_email %>
+  <div class="common">
+    <h3>DONATION INFORMATION</h3>
+
+    <div class="field">
+      <%= f.label :donation_address %>
+      <%= f.text_field :donation_address, :class=>"long" %>
+    </div>
+
+    <div class="short_field">
+      <%= f.label :city %>
+      <%= f.text_field :city, :class=>"short" %>
+    </div>
+
+    <div class="short_field last">
+      <%= f.label :zip_code %>
+      <%= f.text_field :zip_code, :class=>"short" %>
+    </div>
+
+    <div class="short_field">
+      <%= f.label :state %>
+      <%= f.text_field :state, :class=>"short" %>
+    </div>
+
+    <div class="short_field last">
+      <%= f.label :donation_country %>
+      <%= f.text_field :donation_country, :class=>"short" %>
+    </div>
+
+    <div class="short_field">
+      <%= f.label :donation_phone_number %>
+      <%= f.text_field :donation_phone_number, :class=>"short" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :donation_website %>
+      <%= f.text_field :donation_website, :class=>"long" %>
+    </div>
+
   </div>
 
-  <div class="field">
-    <%= f.label :contact_phone_number %>
-    <%= f.text_field :contact_phone_number %>
-  </div>
+  <% if action_name == 'specific_information' %>
+    <%= hidden_field_tag :site_id, params[:site_id] %>
+  <% end %>
 
-  <div class="field">
-    <%= f.label :donation_address %>
-    <%= f.text_field :donation_address %>
-  </div>
-
-  <div class="field">
-    <%= f.label :zip_code %>
-    <%= f.text_field :zip_code %>
-  </div>
-
-  <div class="field">
-    <%= f.label :city %>
-    <%= f.text_field :city %>
-  </div>
-
-  <div class="field">
-    <%= f.label :state %>
-    <%= f.text_field :state %>
-  </div>
-
-  <div class="field">
-    <%= f.label :donation_phone_number %>
-    <%= f.text_field :donation_phone_number %>
-  </div>
-
-  <div class="field">
-    <%= f.label :donation_website %>
-    <%= f.text_field :donation_website %>
-  </div>
-
-  <div class="field">
-    <% if action_name == 'specific_information' %>
-      <%= hidden_field_tag :site_id, params[:site_id] %>
-    <% end %>
-    <%= f.submit 'Save' %>
-  </div>
+  <%= f.submit 'Save', :class => "#{'error' if @organization.invalid? && action_name != 'new'}" %>
 
 <% end -%>

@@ -1,22 +1,29 @@
 <ul>
-  <li>
-    <%= link_to_unless_current('Basic information', edit_admin_organization_path(@organization)) %>
-    <% unless @organization.sites.empty? %>
-    <ul>
-      <% @organization.sites.each do |site| %>
-      <li><%= link_to(site.name, organization_site_specific_information_admin_organization_path(@organization, site)) %></li>
+<<<<<<< HEAD
+  <li class="selected">
+=======
+  <li <%= selected_if_current_page(edit_admin_organization_path(@organization)) %>>
+    <div class="top_selected"></div>
+>>>>>>> 7a02004bb30f945c5a67034d774bc70606134b2b
+    <div class="bottom_selected">
+      <%= link_to('Basic information', edit_admin_organization_path(@organization)) %>
+    <% unless !@organization.sites.empty? %>
+       <ul>
+         <% @organization.sites.each do |site| %>
+           <li><%= link_to(site.name, organization_site_specific_information_admin_organization_path(@organization, site)) %></li>
+         <% end %>
+         <li><a href="#">asdfkjafkñlas</a></li>
+       </ul>
       <% end %>
-    </ul>
-    <% end %>
+    </div>
   </li>
-  <li><%= link_to_unless_current("NGO projects (#{@organization.projects.count})", admin_organization_projects_path(@organization)) %>
-  <li><%= link_to_unless_current("Media (#{@organization.media_resources.count})", admin_organization_media_resources_path(@organization)) %></li>
-  <li><%= link_to_unless_current("Resources (#{@organization.resources.count})", admin_organization_resources_path(@organization)) %></li>
+  <li <%= selected_if_current_page(admin_organization_projects_path(@organization)) %>><%= link_to('NGO projects', admin_organization_projects_path(@organization)) %><% if !@organization.sites.empty? %> <p><span><%=@organization.projects.count%></span></p><% end %></li>
+  <li <%= selected_if_current_page(admin_organization_media_resources_path(@organization)) %>><%= link_to("Media", admin_organization_media_resources_path(@organization)) %><% if !@organization.media_resources.empty? %> <p><span><%=@organization.media_resources.count%></span></p><% end %></li>
+  <li <%= selected_if_current_page(admin_organization_resources_path(@organization)) %>><%= link_to("Resources", admin_organization_resources_path(@organization)) %><% if !@organization.resources.empty? %> <p><span><%=@organization.resources.count%></span></p><% end %></li>
 </ul>
 
-
-<div class="down">
-  <h2>Delete this NGO</h2>
+<div class="delete">
+  <h5>DELETE THIS NGO</h5>
+  <p>Clicking the link below will permanently delete this donor and its references within the sites</p>
   <%= link_to("Delete this NGO", admin_organization_path(@organization), :method => :delete, :confirm => '¿Are you sure?') %>
 </div>
-

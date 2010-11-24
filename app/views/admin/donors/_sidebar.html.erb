@@ -1,17 +1,20 @@
-  <!-- TODO: -->
-   <!--  Añadir clase selected al li cuando esten en cada controller -->
-  
-  <ul>
-    <li class="selected"><%= link_to('Basic information', edit_admin_donor_path(@donor)) %></li>
-    <li> <%= link_to('Funded projects', projects_admin_donor_path(@donor)) %><% if !@donor.donated_projects.empty? %> <p><span><%=@donor.donated_projects.count%></span></p><% end %></li>
-    <li><%= link_to("Media", admin_donor_media_resources_path(@donor)) %><% if !@donor.media_resources.empty? %> <p><span><%=@donor.media_resources.count%></span></p><% end %></li>
-    <li><%= link_to("Resources", admin_donor_resources_path(@donor)) %><% if !@donor.resources.empty? %> <p><span><%=@donor.resources.count%></span></p><% end %></li>
-  </ul>
+<ul>
+  <li <%= selected_if_current_page(edit_admin_donor_path(@donor)) %>>
+    <%= link_to('Basic information', edit_admin_donor_path(@donor)) %>
+  </li>
+  <li <%= selected_if_current_page(projects_admin_donor_path(@donor)) %>>
+    <%= link_to('Funded projects', projects_admin_donor_path(@donor)) %><% if !@donor.donated_projects.empty? %> <p><span><%=@donor.donated_projects.count%></span></p><% end %>
+  </li>
+  <li <%= selected_if_current_page(admin_donor_media_resources_path(@donor)) %>>
+    <%= link_to("Media", admin_donor_media_resources_path(@donor)) %><% if !@donor.media_resources.empty? %> <p><span><%=@donor.media_resources.count%></span></p><% end %>
+  </li>
+  <li <%= selected_if_current_page(admin_donor_resources_path(@donor)) %>>
+    <%= link_to("Resources", admin_donor_resources_path(@donor)) %><% if !@donor.resources.empty? %> <p><span><%=@donor.resources.count%></span></p><% end %>
+  </li>
+</ul>
 
-  <div class="delete">
-    <h5>DELETE THIS DONOR</h5>
-    <p>Clicking the link below will permanently delete this donor and its references within the sites</p>
-    <%= link_to("Delete this donor", admin_donor_path(@donor), :method => :delete, :confirm => '¿Are you sure?') %>
-  </div>
-
-
+<div class="delete">
+  <h5>DELETE THIS DONOR</h5>
+  <p>Clicking the link below will permanently delete this donor and its references within the sites</p>
+  <%= link_to("Delete this donor", admin_donor_path(@donor), :method => :delete, :confirm => '¿Are you sure?') %>
+</div>

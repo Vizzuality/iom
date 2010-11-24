@@ -28,8 +28,6 @@ class Project < ActiveRecord::Base
   acts_as_geom :the_geom => :multi_point
 
   belongs_to :primary_organization, :foreign_key => :primary_organization_id, :class_name => 'Organization'
-  # TODO: remove this when confirmed
-  # has_and_belongs_to_many :secondary_organizations, :class_name => 'Organization', :join_table => 'organizations_projects'
   has_and_belongs_to_many :clusters
   has_and_belongs_to_many :sectors
   has_and_belongs_to_many :countries
@@ -105,6 +103,7 @@ class Project < ActiveRecord::Base
     end
 
     def dates_consistency
+      return true if end_date.nil? || start_date.nil?
       if end_date < start_date
         errors.add(:end_date, "can't be previous to start_date")
       end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101122081057) do
+ActiveRecord::Schema.define(:version => 20101124155515) do
 
   create_table "clusters", :force => true do |t|
     t.column "name", :string
@@ -101,6 +101,14 @@ ActiveRecord::Schema.define(:version => 20101122081057) do
     t.column "logo_content_type", :string
     t.column "logo_file_size", :integer
     t.column "logo_updated_at", :datetime
+    t.column "international_staff", :string
+    t.column "contact_name", :string
+    t.column "contact_position", :string
+    t.column "contact_zip", :string
+    t.column "contact_city", :string
+    t.column "contact_state", :string
+    t.column "contact_country", :string
+    t.column "donation_country", :string
   end
 
   create_table "organizations_projects", :id => false, :force => true do |t|
@@ -186,6 +194,13 @@ ActiveRecord::Schema.define(:version => 20101122081057) do
     t.column "updated_at", :datetime
   end
 
+  create_table "settings", :force => true do |t|
+    t.column "default_email", :string
+    t.column "default_contact_name", :string
+    t.column "geoiq_parameter_1", :string
+    t.column "geoiq_parameter_2", :string
+  end
+
   create_table "sites", :force => true do |t|
     t.column "name", :string
     t.column "short_description", :text
@@ -215,6 +230,7 @@ ActiveRecord::Schema.define(:version => 20101122081057) do
     t.column "updated_at", :datetime
     t.column "geographic_context_geometry", :geometry, :srid => 4326
     t.column "project_context_tags_ids", :string
+    t.column "status", :boolean, :default => false
   end
 
   create_table "tags", :force => true do |t|

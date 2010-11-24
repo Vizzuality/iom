@@ -3,47 +3,54 @@
 # Table name: sites
 #
 #  id                              :integer         not null, primary key
-#  name                            :string(255)
-#  short_description               :text
-#  long_description                :text
-#  contact_email                   :string(255)
-#  contact_person                  :string(255)
-#  url                             :string(255)
-#  permalink                       :string(255)
-#  google_analytics_id             :string(255)
-#  logo_file_name                  :string(255)
-#  logo_content_type               :string(255)
-#  logo_file_size                  :integer
-#  logo_updated_at                 :datetime
-#  theme_id                        :integer
-#  blog_url                        :string(255)
-#  word_for_clusters               :string(255)
-#  word_for_regions                :string(255)
-#  show_global_donations_raises    :boolean
+#  name                            :string(255)     
+#  short_description               :text            
+#  long_description                :text            
+#  contact_email                   :string(255)     
+#  contact_person                  :string(255)     
+#  url                             :string(255)     
+#  permalink                       :string(255)     
+#  google_analytics_id             :string(255)     
+#  logo_file_name                  :string(255)     
+#  logo_content_type               :string(255)     
+#  logo_file_size                  :integer         
+#  logo_updated_at                 :datetime        
+#  theme_id                        :integer         
+#  blog_url                        :string(255)     
+#  word_for_clusters               :string(255)     
+#  word_for_regions                :string(255)     
+#  show_global_donations_raises    :boolean         
 #  project_classification          :integer         default(0)
-#  geographic_context_country_id   :integer
-#  geographic_context_region_id    :integer
-#  project_context_cluster_id      :integer
-#  project_context_sector_id       :integer
-#  project_context_organization_id :integer
-#  project_context_tags            :string(255)
-#  created_at                      :datetime
-#  updated_at                      :datetime
-#  geographic_context_geometry     :geometry
-#  project_context_tags_ids        :string(255)
+#  geographic_context_country_id   :integer         
+#  geographic_context_region_id    :integer         
+#  project_context_cluster_id      :integer         
+#  project_context_sector_id       :integer         
+#  project_context_organization_id :integer         
+#  project_context_tags            :string(255)     
+#  created_at                      :datetime        
+#  updated_at                      :datetime        
+#  geographic_context_geometry     :geometry        
+#  project_context_tags_ids        :string(255)     
+#  status                          :boolean         
 #
 
 class Site < ActiveRecord::Base
 
   acts_as_geom :the_geom => :polygon
 
+  has_one :cluster, :foreign_key => :project_context_cluster_id
+  has_one :sector,  :foreign_key => :project_context_sector_id
+
   has_many :resources, :conditions => 'resources.element_type = #{Iom::ActsAsResource::SITE_TYPE}', :foreign_key => :element_id, :dependent => :destroy
   has_many :media_resources, :conditions => 'media_resources.element_type = #{Iom::ActsAsResource::SITE_TYPE}', :foreign_key => :element_id, :dependent => :destroy, :order => 'position ASC'
-  has_one :theme
+  has_one  :theme
   has_many :partners, :dependent => :destroy
   has_many :pages, :dependent => :destroy
 
   has_attached_file :logo, :styles => { :small => "60x60#" }
+
+  scope :published, where(:status => true)
+  scope :draft,     where(:status => false)
 
   validates_presence_of :name, :url
   validates_uniqueness_of :url
@@ -58,6 +65,7 @@ class Site < ActiveRecord::Base
     !blog_url.blank?
   end
   alias :show_blog? :show_blog
+
 
   # Filter projects from site configuration
   #
@@ -88,7 +96,7 @@ class Site < ActiveRecord::Base
     default_options = { :limit => 10, :offset => 0 }
     options = default_options.merge(options)
 
-    select = "distinct(projects.*)"
+    select = "projects.*"
     from = ["projects"]
     where = []
 
@@ -145,6 +153,19 @@ class Site < ActiveRecord::Base
   # TODO: with a count()
   def total_projects(options = {})
     projects(options).size
+  end
+
+  # TODO: performance
+  def projects_ids
+    projects.map{ |p| p.id } + [-1]
+  end
+
+  def donors
+    Donor.find_by_sql("select donors.* from donors, donations where donations.project_id IN (#{projects_ids.join(',')}) AND donations.donor_id = donors.id")
+  end
+
+  def organizations
+    Organization.find_by_sql("select organizations.* from organizations, projects where projects.id IN (#{projects_ids.join(',')}) AND projects.primary_organization_id = organizations.id")
   end
 
   private

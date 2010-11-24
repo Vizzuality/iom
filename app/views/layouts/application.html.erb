@@ -22,13 +22,13 @@
       <div class="bottom">
         <ul class="main_menu">
           <li class="<%= (controller_name == 'admin' ? 'selected' : nil) %>"><%= link_to(admin_admin_path) do %><span>dashboard</span><% end %></li>
-          <li class="<%= (controller_name == 'sites' ? 'selected' : nil) %>"><%= link_to(admin_sites_path) do %><span>sites</span><% end %></li>
-          <li class="<%= (controller_name == 'projects' ? 'selected' : nil) %>"><%= link_to(admin_projects_path) do %><span>projects</span><% end %></li>
-          <li class="<%= (controller_name == 'organizations' ? 'selected' : nil) %>"><%= link_to(admin_organizations_path) do %><span>NGOs</span><% end %></li>
-          <li class="<%= (controller_name == 'donors' ? 'selected' : nil) %>"><%= link_to(admin_donors_path) do %><span>donors</span><% end %></li>
+          <li class="<%= ((controller_name == 'sites' || (@element && @element.is_a?(Site))) ? 'selected' : nil) %>"><%= link_to(admin_sites_path) do %><span>sites</span><% end %></li>
+          <li class="<%= (((controller_name == 'projects' && !@organization) || (@element && @element.is_a?(Project))) ? 'selected' : nil) %>"><%= link_to(admin_projects_path) do %><span>projects</span><% end %></li>
+          <li class="<%= ((@organization || controller_name == 'organizations' || (@element && @element.is_a?(Organization))) ? 'selected' : nil) %>"><%= link_to(admin_organizations_path) do %><span>NGOs</span><% end %></li>
+          <li class="<%= ((controller_name == 'donors' || (@element && @element.is_a?(Donor))) ? 'selected' : nil) %>"><%= link_to(admin_donors_path) do %><span>donors</span><% end %></li>
         </ul>
         <ul class="admin">
-          <li><%= link_to('settings', '#') %></li>
+          <li><%= link_to('settings', edit_admin_setting_path(Settings.first)) %></li>
           <li class="last"><%= link_to('close session', logout_path) %></li>
         </ul>
       </div>

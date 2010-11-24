@@ -1,10 +1,9 @@
 <%= form_for([:admin, @site, @page || @site.pages.new]) do |f| %>
 
-  <%= f.error_messages %>
-
   <div class="field">
     <%= f.label :title %>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, :class=>"long #{'error' if !@page.errors[:title].empty? && action_name != 'new'}" %>
+    <%= errors_for @page, :title %>
   </div>
 
   <div class="field">
@@ -14,7 +13,8 @@
 
   <div class="field">
     <%= f.label :permalink %>
-    <%= f.text_field :permalink %>
+    <%= f.text_field :permalink, :class=>"long #{'error' if !@page.errors[:permalink].empty? && action_name != 'new'}" %>
+    <%= errors_for @page, :permalink %>
   </div>
 
   <div class="field">
@@ -23,7 +23,7 @@
   </div>
 
   <div class="field">
-    <%= f.submit 'Save' %>
+    <%= f.submit 'Save', :class => "#{'error' if @page.invalid? && action_name != 'new'}" %>
   </div>
 
 <% end -%>
