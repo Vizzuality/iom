@@ -273,6 +273,11 @@ $.widget( "ui.autocomplete", {
 	},
 
 	close: function( event ) {
+		
+		if (($('span#tags_combo')[0] != null) && ($('span#tags_combo').hasClass('active'))){
+			$('span#tags_combo').removeClass('active');	
+		}
+		
 		clearTimeout( this.closing );
 		if ( this.menu.element.is(":visible") ) {
 			this._trigger( "close", event );
@@ -474,7 +479,10 @@ $.widget("ui.menu", {
 	},
 
 	last: function() {
+		// $('ui-autocomplete').append('<li class="ui-menu-item last"></li>');
 		return this.active && !this.active.nextAll(".ui-menu-item").length;
+
+		
 	},
 
 	move: function(direction, edge, event) {

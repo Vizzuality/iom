@@ -283,7 +283,15 @@ div.block.project_info div.med div.left form label {float:left; margin:20px 0 0 
 div.block.project_info div.med div.left form p.title {float:left; margin:20px 0 0 3px; font:bold 11px Arial; color:#999999; width:100%;} 
 div.block.project_info div.med div.left form p.title span.info {font:normal 13px Arial; color:#999999; width:auto; padding:0 5px;}
 div.block.project_info div.med div.left form span.input_large {float:left; margin:5px 0 0 0; background:url('/images/backoffice/projects/input_project_large.png') no-repeat 0 0; width:419px; height:34px; position:relative;}
-div.block.project_info div.med div.left form input[type="text"]{position:absolute; top:6px; left:7px; width:400px; height:21px; font:normal 15px Arial; color:#333333; border:none;}
+div.block.project_info div.med div.left form span.input_large.active {background:url('/images/backoffice/projects/large_combo_head_displayed.png') no-repeat 0 0;}
+/*AUTOCOMPLETE - TAGS*/
+.ui-autocomplete {position:absolute; top:40px; width:419px; display:none;}
+.ui-menu-item {float:right; margin:6px 0 0 0; background:url('/images/backoffice/projects/repeat_content_tags.png') no-repeat 0 0; width:413px; height:22px; font:normal 15px Arial; color:#333333; padding:5px 0 0 12px; position:relative;}
+.ui-menu-item:hover {cursor:pointer; background:url('/images/backoffice/projects/repeat_content_tags_hover.png') no-repeat 0 0;}
+.ui-menu-item.last{float:left; width:419px; height:7px; margin:0; background:url('/images/backoffice/projects/bottom_content_tags.png') no-repeat 0 0; padding:0;}
+
+/*END - AUTOCOMPLETE - TAGS*/
+div.block.project_info div.med div.left form input[type="text"]{position:absolute; top:6px; left:7px; width:400px; height:21px; font:normal 15px Arial; color:#333333; border:none; padding:0;}
 div.block.project_info div.bottom {float:left; height:15px; width:100%; background: url('/images/backoffice/backgrounds/bottom_two_columns.png') no-repeat scroll top left!important;}
 
 div.block.project_info div.med div.left form span.textarea {float:left; margin:5px 0 0 0; background:url('/images/backoffice/projects/input_project_multiple.png') no-repeat 0 0; width:564px; height:214px; position:relative;}
@@ -291,7 +299,8 @@ div.block.project_info div.med div.left form textarea{position:absolute; top:9px
 div.block.project_info div.med div.left form div.list_combo {float:left; width:419px; height:auto; position:relative;}
 div.block.project_info div.med div.left form ul.list_combo_content {position:absolute; top:36px; width:419px; display:none; left:0;}
 div.block.project_info div.med div.left form ul.list_combo_content li.first {float:left; width:419px; height:4px; margin:0; background:url('/images/backoffice/projects/top_content_tags.png') no-repeat 0 0; padding:0;}
-div.block.project_info div.med div.left form ul.list_combo_content li.element {float:left; margin:0; background:url('/images/backoffice/projects/repeat_content_tags.png') no-repeat 0 0; width:407px; height:22px; font:normal 15px Arial; color:#333333; padding:5px 0 0 12px;}
+div.block.project_info div.med div.left form ul.list_combo_content li.element {float:left; margin:0; background:url('/images/backoffice/projects/repeat_content_tags.png') no-repeat 0 0; width:407px; height:22px; font:normal 15px Arial; color:#333333; padding:5px 0 0 12px; position:relative;}
+div.block.project_info div.med div.left form ul.list_combo_content li.element p.amount_projects {position:absolute; top:7px; right:10px; font:normal 13px Arial; color:#666666; width:auto;}
 div.block.project_info div.med div.left form ul.list_combo_content li.element:hover {cursor:pointer; background:url('/images/backoffice/projects/repeat_content_tags_hover.png') no-repeat 0 0;}
 div.block.project_info div.med div.left form ul.list_combo_content li.last {float:left; width:419px; height:7px; margin:0; background:url('/images/backoffice/projects/bottom_content_tags.png') no-repeat 0 0; padding:0;}
 

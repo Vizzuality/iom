@@ -12,7 +12,7 @@
   </span>
 
   <p class="title">TAGS <span class="info">Use comma (",") to separate project tags</span></p>
-  <span class="input_large">
+  <span id="tags_combo" class="input_large">
     <%= f.text_field :tags, :value => @project.tags.map{ |tag| tag.name }.join(', ') %>
   </span>
 
@@ -26,20 +26,11 @@
 		<ul class="list_combo_content">
 			<li class="first"></li>
 				<% Organization.all.each do |organization| %>
-					<li class="element" id="<%= organization.id %>"><%= organization.name %></li>
+					<li class="element" id="<%= organization.id %>"><%= organization.name %><p class="amount_projects"><%= pluralize(organization.projects.count, 'project', 'projects')%></p></li>
 				<% end -%>
 			<li class="last"></li>
 		</ul>
 	</div>
-
-  <!-- *************** AÑADIR EL COMBO DE TAGS *************** -->
-  <%if false %>
-    <div class="field">
-      <%= f.label :primary_organization_id %>
-      <%= f.select :primary_organization_id, Organization.all.collect{ |o| [o.name, o.id] }, :prompt => 'Select an organization' %>
-    </div>
-  <%end %>
-  <!-- *************** FIN AÑADIR EL COMBO DE TAGS *************** -->
 
   <label>IMPLEMENTING NGO</label>
   <span class="input_large">
@@ -56,18 +47,15 @@
     <%= f.text_field :cross_cutting_issues %>
   </span>
 
-  <!-- *************** FALTA  *************** -->
+
   <label>ACTIVITIES</label>
   <span class="textarea">
     <%= f.text_area :activities %>
   </span>
-  <!-- *************** FIN - FALTA  *************** -->
 
   <!-- SECTION  -->
   <h3 class="section">PROJECT MANAGEMENT</h3>
 
-
-  <!-- *************** FALTA  *************** -->
   <label>INTERVENTION ID</label>
   <span class="input_large">
     <%= f.text_field :intervention_id %>
@@ -82,8 +70,6 @@
   <span class="input_large">
     <%= f.text_field :awardee_type %>
   </span>
-  <!-- *************** FIN - FALTA  *************** -->
-
   <ul class="dates">
     <li>
       <label>START DATE</label>
@@ -96,7 +82,6 @@
       <!-- <a class="combo_date">09/10/2010</a> -->
     </li>
   </ul>
-
 
   <!-- SECTION  -->
   <h3 class="section">CONTEXT</h3>
@@ -112,7 +97,6 @@
     <a class="combo_cluster_options">Select more clusters</a>
     <a class="add_cluster">add cluster</a>
   </div>
-
 
   <!-- CLUSTERS COMBOS - REDO -->
   <%if false%>
@@ -147,7 +131,7 @@
           <% @project.sectors.each do |sector| %>
           <span id="sector_<%= sector.id %>"><input type="checkbox" name="project[sectors_ids][]" value="<%= sector.id %>" checked="checked"/><%= sector.name %><a href="#sector_<%= sector.id %>" class="remove_this">x</a><br /></span>
           <% end -%>
-        <% end -%>
+        <% end -%>	<!-- AÑADIR "project[sectors_ids][]" -->
       </div>
       <%= select_tag :select_sector, options_for_select([['Choose a sector',nil]] + Sector.all.collect{ |o| [o.name, o.id] }) %>
       </div>
@@ -186,7 +170,7 @@
 
   <span class="input_short coin">
     <%= f.text_field :budget %>
-    <p class="coin">$</p>        <!-- SE PUEDE SEPARAR LA MONEDA??¿?¿?¿? -->
+    <p class="coin">$</p>
   </span>
 
   <div class="two_columns">
@@ -240,6 +224,7 @@ $(function() {
   }
   $("#project_tags").autocomplete({
     source: function( request, response ) {
+	  $('span#tags_combo').addClass('active');
       var value = $("#project_tags").val();
       if (value.indexOf(',') != -1 ) {
         value = value.substring(value.indexOf(',')+1, value.length);
@@ -273,18 +258,24 @@ $(function() {
       // add placeholder to get the comma-and-space at the end
       terms.push( "" );
       this.value = terms.join( ", " );
+
       return false;
     },
     refresh: function(){
        this.element.children("li.ui-menu-item:odd a").addClass("ui-menu-item-alternate");
     }
   });
+	
+	// X 
   $('.remove_this').live('click',function(){
     $($(this).attr('href')).children().each(function(){
       $(this).remove();
     });
     $($(this).attr('href')).remove();
   });
+
+	
+	// ADD CLUSTER
   $('#select_cluster').change(function(){
     var str = ""
     $("select#select_cluster option:selected").each(function () {
@@ -292,6 +283,8 @@ $(function() {
         });
     $('#clusters').append('<span id="cluster_'+$(this).val()+'"><input type="checkbox" name="project[clusters_ids][]" value="' +$(this).val() +'" checked="checked"/>' + str + ' <a href="#cluster_'+$(this).val()+'" class="remove_this">x</a><br /></span>');
   });
+
+
   $('#select_sector').change(function(){
     var str = ""
     $("select#select_sector option:selected").each(function () {
