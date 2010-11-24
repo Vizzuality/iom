@@ -207,9 +207,9 @@ div.bottom_grey.paginate ul li.selected a {color:#333333;}
 
 /*projects search*/
 div.two_projects {float:left; width:643px; height:auto; margin:20px 10px 0 0; }
-div.two_projects span.top {float:left; width:643px; height:9px; background:url('/images/backoffice/common/two_top.png') no-repeat 0 0;}
-div.two_projects div.content {float:left; width:583px; height:auto; background:url('/images/backoffice/common/two_content.png') repeat-y 0; padding:15px 30px 10px;}
-div.two_projects span.bottom {float:left; width:643px; height:9px; background:url('/images/backoffice/common/two_bottom.png') no-repeat 0 0;}
+div.two_projects span.top {float:left; width:643px; height:9px; background:url('/images/backoffice/backgrounds/two_top.png') no-repeat 0 0;}
+div.two_projects div.content {float:left; width:583px; height:auto; background:url('/images/backoffice/backgrounds/two_content.png') repeat-y 0; padding:15px 30px 10px;}
+div.two_projects span.bottom {float:left; width:643px; height:9px; background:url('/images/backoffice/backgrounds/two_bottom.png') no-repeat 0 0;}
 div.two_projects ul.combos {float:left; width:680px; height:60px; margin:20px 0 0 0;}
 div.two_projects ul.combos li {float:left; width:147px; height:100%;}
 div.two_projects ul.combos li a.combo {float:left; margin:6px 0 0 0; background:url('/images/backoffice/projects/single_combo_head.png') no-repeat 0 0; font:normal 13px Arial; color:#333333; text-decoration:none; width:121px; height:24px; padding:8px 0 0 11px;}
@@ -222,9 +222,9 @@ div.two_projects input[type="submit"] {position:absolute; width:15px; height:15p
 div.two_projects input[type="submit"]:hover {background-position:0 -15px; cursor:pointer;}
 
 div.one_project {float:left; width:288px; height:140px; margin:20px 0 0 0; padding:0;}
-div.one_project span.top {float:left; width:288px; height:8px; background:url('/images/backoffice/common/one_box_top.png') no-repeat 0 0;}
-div.one_project div.content {float:left; width:288px; height:auto; padding:0 0 26px; background:url('/images/backoffice/common/one_box_content.png') repeat-y 0;}
-div.one_project span.bottom {float:left; width:288px; height:15px; background:url('/images/backoffice/common/one_box_bottom.png') no-repeat 0 0;}
+div.one_project span.top {float:left; width:288px; height:8px; background:url('/images/backoffice/backgrounds/one_box_top.png') no-repeat 0 0;}
+div.one_project div.content {float:left; width:288px; height:auto; padding:0 0 26px; background:url('/images/backoffice/backgrounds/one_box_content.png') repeat-y 0;}
+div.one_project span.bottom {float:left; width:288px; height:15px; background:url('/images/backoffice/backgrounds/one_box_bottom.png') no-repeat 0 0;}
 
 div.one_project p {float:left; margin:12px 5px 0 0; width:158px; font:normal 43px "Museo Sans",Arial; color:#333333; text-align:right;}
 div.one_project label {float:left; font:normal 15px "Museo Sans",Arial; color:#666666; padding:17px 0 0 0;}
@@ -266,9 +266,10 @@ div.block.project_info div.med div.left {float:left; width:572px; margin:0 0 0 2
 div.block.project_info div.med div.left p.by {float:left; width:100%; font:normal 15px Arial; color:#666666;}
 div.block.project_info div.med div.left p.by a {width:auto; font:normal 15px Arial; color:#E93E3F; text-decoration:none;}
 div.block.project_info div.med div.left p.by a:hover {text-decoration:underline;}
-div.block.project_info div.med div.left form {float:left; width:100%; height:auto; margin:5px 0 0 0; padding:0 0 15px 0;}
-div.block.project_info div.med div.left form p.title {float:left; margin:20px 0 0 3px; font:bold 11px Arial; color:#999999; width:100%;} 
+div.block.project_info div.med div.left form {float:left; width:100%; height:auto; margin:5px 0 0 0; /*padding:0 0 15px 0;*/ position:relative;}
+div.block.project_info div.med div.left form label {float:left; margin:20px 0 0 3px; font:bold 11px Arial; color:#999999; width:100%; text-transform:uppercase;} 
 
+div.block.project_info div.med div.left form p.title {float:left; margin:20px 0 0 3px; font:bold 11px Arial; color:#999999; width:100%;} 
 div.block.project_info div.med div.left form p.title span.info {font:normal 13px Arial; color:#999999; width:auto; padding:0 5px;}
 div.block.project_info div.med div.left form span.input_large {float:left; margin:5px 0 0 0; background:url('/images/backoffice/projects/input_project_large.png') no-repeat 0 0; width:419px; height:34px; position:relative;}
 div.block.project_info div.med div.left form input[type="text"]{position:absolute; top:6px; left:7px; width:400px; height:21px; font:normal 15px Arial; color:#333333; border:none;}
@@ -277,7 +278,8 @@ div.block.project_info div.bottom {float:left; height:15px; width:100%; backgrou
 div.block.project_info div.med div.left form span.textarea {float:left; margin:5px 0 0 0; background:url('/images/backoffice/projects/input_project_multiple.png') no-repeat 0 0; width:564px; height:214px; position:relative;}
 div.block.project_info div.med div.left form textarea{position:absolute; top:9px; left:9px; width:546px; height:197px; font:normal 15px Arial; color:#333333; border:none; line-height:17px;}
 div.block.project_info div.med div.left form a.combo_large {float:left; margin:5px 0 0 0; background:url('/images/backoffice/projects/large_combo_head.png') no-repeat 0 0; width:408px; height:23px; font:normal 13px Arial; color:#999999; padding:9px 0 0 11px;}
-div.block.project_info div.med div.left form label.section {float:left; margin:30px 0 0 2px; width:100%; font:500 17px "Museo Sans"; color:#333333;}
+div.block.project_info div.med div.left form a.combo_large:hover {cursor:pointer;}
+div.block.project_info div.med div.left form h3.section {float:left; margin:30px 0 0 2px; width:100%; font:500 17px "Museo Sans"; color:#333333;}
 div.block.project_info div.med div.left form ul.dates {float:left; width:400px; height:auto; margin:0 0 0 0;}
 div.block.project_info div.med div.left form ul.dates li {float:left; width:145px; height:auto;}
 div.block.project_info div.med div.left form ul.dates li a.combo_date {float:left; background:url('/images/backoffice/projects/bkg_calendar.png') no-repeat 0 0; width:121px; height:24px; font:normal 15px Arial; color:#333333; margin:5px 0 0 0; padding:8px 0 0 8px;}
@@ -315,8 +317,8 @@ div.block.project_info div.med div.left form span.input_short.coin input[type="t
 div.block.project_info div.med div.left form div.two_columns {float:left; width:100%; height:70px;}
 div.block.project_info div.med div.left form div.two_columns div.left_column {float:left; width:289px; height:90px;}
 div.block.project_info div.med div.left form div.two_columns div.right_column {float:left; width:280px; height:90px;}
-div.block.project_info div.med div.left form input[type="submit"]{float:right; background:url('/images/backoffice/projects/save_changes_bttn.png') no-repeat 0 0; font:500 19px "Museo Sans"; color:#FFFFFF; text-shadow:0 1px #6E8C30; border:none; text-align:center; width:157px; height:32px; margin:40px 10px 0 0; padding:0 0 3px 0;} 
-div.block.project_info div.med div.left form input[type="submit"]:hover {background-position:0 -32px;}
+div.block.project_info div.med div.left form input[type="submit"]{background:url('/images/backoffice/projects/save_changes_bttn.png') no-repeat 0 0; font:500 19px "Museo Sans"; color:#FFFFFF; text-shadow:0 1px #6E8C30; border:none; text-align:center; width:157px; height:32px; float:right; margin:30px 10px 0 0; /*position:absolute; bottom:0; right:0;*/} 
+div.block.project_info div.med div.left form input[type="submit"]:hover {background-position:0 -32px; cursor:pointer;}
 
 
 

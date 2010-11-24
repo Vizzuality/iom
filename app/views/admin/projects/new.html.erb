@@ -1,3 +1,22 @@
-<h2>New project</h2>
+<div class="main_layout">
+  <div class="block project_info">
+    <div class="top"></div>
+    <div class="med">
+      <div class="left">
+		<h2>Create a new project</h2>
+        <%= render :partial => 'form' %>
+      </div>
+      <div class="right menu">
+	   <ul>
+            <li class="selected"><a>Basic information</a></li>
+            <li class="disabled"><a>Funded projects</a></li>
+            <li class="disabled"><a>Media</a></li>
+            <li class="disabled"><a>Resources</a></li>
+       </ul>
+      </div>
+    </div>
+    <div class="bottom"></div>
+  </div>
+</div>
 
-<%= render :partial => 'form' %>
+<script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>
