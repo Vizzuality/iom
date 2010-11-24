@@ -1,5 +1,5 @@
   <div class="main_layout">
-    
+
     <div class="block media">
       <div class="top"></div>
       <div class="med">
@@ -13,7 +13,7 @@
                 <li>
                   <div class="top_media"></div>
                   <div class="med_media">
-                    <%= raw resource.vimeo_embed_html %>
+                    <%= raw(CGI.unescapeHTML(resource.vimeo_embed_html)) %>
                     <p class="caption">No caption provided, <a href="#">add it?</a></p>
                     <span class="over">
                       <%= link_to('Delete', eval("admin_#{@element.class.name.singularize.downcase}_media_resource_path(@element, resource)"), :method => :delete, :confirm => 'Are you sure?') %>
@@ -67,7 +67,7 @@
               </div>
             <% end -%>
           </div>
-          
+
         </div>
         <div class="right menu">
           <%= render :partial => "admin/#{@element.class.table_name}/sidebar" %>
