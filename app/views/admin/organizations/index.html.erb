@@ -1,6 +1,6 @@
 
     <div class="main_layout">
-      <div class="block">
+      <div class="block first">
         <div class="two_donors">
           <%= form_tag(admin_organizations_path, :method => :get) do %>
             <label>SEARCH BY TEXT</label>
@@ -20,7 +20,7 @@
         <div class="med ngos_list">
           <h2><%= pluralize(@organizations.total_entries, 'NGO', 'NGOs') %> implementing projects
             <% if params[:q]%>
-            on <a class="remove" href="#"><%= params[:q] %></a>
+            on <a class="remove" href="/admin/organizations"><%= params[:q] %></a>
             <% end %>
           </h2>
           <% unless @organizations.empty? %>
@@ -48,5 +48,4 @@
       </div>
     </div>
 
-
-      <script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>
