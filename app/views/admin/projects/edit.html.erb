@@ -3,12 +3,12 @@
       <div class="top"></div>
       <div class="med">
         <div class="left">
-          <h2>Food conservation at Belladère</h2>
+          <h2><%= @project.name %></h2>
           <p class="by">by <a href="#">Food for Haiti</a> / Belladeré, Haiti</p>
 		<form>
 			<p class="title">PROJECT NAME</p>
 			<span class="input_large">
-				<input type="text" value="Food conservation at Belladère"/>
+				<input type="text" value="<%= @project.name %>"/>
 			</span>
 			
 			<p class="title">DESCRIPTION</p>
