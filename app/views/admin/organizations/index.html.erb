@@ -1,24 +1,29 @@
-    
+
     <div class="main_layout">
       <div class="block">
         <div class="two_donors">
-          <form>
+          <%= form_tag(admin_organizations_path, :method => :get) do %>
             <label>SEARCH BY TEXT</label>
-            <input type="text" value="Search NGOs by name, place,..." />
+            <input type="text" value="<%= params[:q] || 'Search NGOs by name, place,...'%>" name="q" />
             <input type="submit" value="" />
-          </form>
+          <% end %>
         </div>
         <div class="one_donor">
-          <p>2,930</p>
-          <label>donors<br/>registered</label>
-          <a href="/admin/organizations/new">Add new NGO</a>
+          <p><%= Organization.count %></p>
+          <label><%= Organization.count == '1' ? 'NGO' : 'NGOs' %><br/>registered</label>
+          <a href="<%= new_admin_organization_path %>">Add new NGO</a>
         </div>
       </div>
-  
+
       <div class="block">
         <div class="top"></div>
         <div class="med ngos_list">
-          <h2><%= @organizations.count %> NGOs implementing projects on <a class="remove" href="#">Ecuador</a></h2>
+          <h2><%= pluralize(@organizations.total_entries, 'NGO', 'NGOs') %> implementing projects
+            <% if params[:q]%>
+            on <a class="remove" href="#"><%= params[:q] %></a>
+            <% end %>
+          </h2>
+          <% unless @organizations.empty? %>
           <ul>
             <% @organizations.each do |organization| %>
               <li>
@@ -28,32 +33,17 @@
               </li>
             <% end -%>
           </ul>
+          <% end %>
         </div>
         <div class="bottom_grey paginate">
-          <!-- <%= will_paginate(@organizations) %> -->
-          
-          <div class="pagination">
-            <a class="previous_page" href="/admin/donors?page=1" rel="prev start">Previous</a>
-            <a href="/admin/donors?page=1" rel="prev start">1</a>
-            <em>2</em>
-            <span class="next_page disabled">Next</span>
-          </div>
-          
-          
-          <!-- <ul>
-            <li class="selected"><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li class="last"><a href="#">NEXT</a></li>
-          </ul> -->
+          <%= will_paginate(@organizations) %>
         </div>
       </div>
-  
+
       <div class="add_new">
-        <a href="/admin/organizations/new">
+        <a href="<%= new_admin_organization_path %>">
           Add a new NGO<br/>
-          <strong>There are already 2,930 NGOs registered</strong>
+          <strong>There are already <%= pluralize(Organization.count, 'NGO', 'NGOs') %> registered</strong>
         </a>
       </div>
     </div>
