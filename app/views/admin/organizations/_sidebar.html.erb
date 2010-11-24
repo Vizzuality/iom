@@ -1,16 +1,20 @@
 <ul>
+<<<<<<< HEAD
+  <li class="selected">
+=======
   <li <%= selected_if_current_page(edit_admin_organization_path(@organization)) %>>
     <div class="top_selected"></div>
+>>>>>>> 7a02004bb30f945c5a67034d774bc70606134b2b
     <div class="bottom_selected">
-    <%= link_to('Basic information', edit_admin_organization_path(@organization)) %>
+      <%= link_to('Basic information', edit_admin_organization_path(@organization)) %>
     <% unless !@organization.sites.empty? %>
-    <ul>
-      <% @organization.sites.each do |site| %>
-        <li><%= link_to(site.name, organization_site_specific_information_admin_organization_path(@organization, site)) %></li>
+       <ul>
+         <% @organization.sites.each do |site| %>
+           <li><%= link_to(site.name, organization_site_specific_information_admin_organization_path(@organization, site)) %></li>
+         <% end %>
+         <li><a href="#">asdfkjafkñlas</a></li>
+       </ul>
       <% end %>
-      <li><a href="#">asdfkjafkñlas</a></li>
-    </ul>
-    <% end %>
     </div>
   </li>
   <li <%= selected_if_current_page(admin_organization_projects_path(@organization)) %>><%= link_to('NGO projects', admin_organization_projects_path(@organization)) %><% if !@organization.sites.empty? %> <p><span><%=@organization.projects.count%></span></p><% end %></li>
