@@ -9,10 +9,13 @@ Iom::Application.routes.draw do
   match 'logout' => 'sessions#destroy', :as => :logout
 
   # Front
-  namespace :sites do
-    resources :organizations
-  end
-  
+  resources :regions,       :only => [:index, :show]
+  resources :sectors,       :only => [:show]
+  resources :clusters,      :only => [:show]
+  resources :donors,        :only => [:index, :show]
+  resources :organizations, :only => [:index, :show]
+  resources :pages,         :only => [:show]
+
   # Administration
   namespace :admin do
     match '/' => 'admin#index', :as => :admin

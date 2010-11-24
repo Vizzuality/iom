@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101122081057) do
+ActiveRecord::Schema.define(:version => 20101124120201) do
 
   create_table "clusters", :force => true do |t|
     t.column "name", :string
@@ -215,6 +215,7 @@ ActiveRecord::Schema.define(:version => 20101122081057) do
     t.column "updated_at", :datetime
     t.column "geographic_context_geometry", :geometry, :srid => 4326
     t.column "project_context_tags_ids", :string
+    t.column "status", :boolean, :default => false
   end
 
   create_table "tags", :force => true do |t|

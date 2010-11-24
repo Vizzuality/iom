@@ -3,13 +3,13 @@
 # Table name: pages
 #
 #  id          :integer         not null, primary key
-#  title       :string(255)
-#  body        :text
-#  site_id     :integer
-#  highlighted :boolean
-#  permalink   :string(255)
-#  created_at  :datetime
-#  updated_at  :datetime
+#  title       :string(255)     
+#  body        :text            
+#  site_id     :integer         
+#  highlighted :boolean         
+#  permalink   :string(255)     
+#  created_at  :datetime        
+#  updated_at  :datetime        
 #
 
 class Page < ActiveRecord::Base
