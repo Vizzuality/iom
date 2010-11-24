@@ -3,7 +3,13 @@ class Admin::OrganizationsController < ApplicationController
   before_filter :login_required
 
   def index
-    @organizations = Organization.paginate :per_page => 20, :order => 'created_at DESC', :page => params[:page]
+    organizations = if params[:q]
+      q = "%#{params[:q]}%"
+      Organization.where(["name ilike ? OR description ilike ?", q, q])
+    else
+      Organization
+    end
+    @organizations = organizations.paginate :per_page => 20, :order => 'created_at DESC', :page => params[:page]
   end
 
   def new

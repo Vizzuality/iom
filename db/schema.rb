@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101124155515) do
+ActiveRecord::Schema.define(:version => 20101124165848) do
 
   create_table "clusters", :force => true do |t|
     t.column "name", :string
@@ -157,6 +157,10 @@ ActiveRecord::Schema.define(:version => 20101124155515) do
     t.column "created_at", :datetime
     t.column "updated_at", :datetime
     t.column "the_geom", :geometry, :srid => 4326, :null => false
+    t.column "activities", :text
+    t.column "intervention_id", :string
+    t.column "additional_information", :text
+    t.column "awardee_type", :string
   end
 
   create_table "projects_regions", :id => false, :force => true do |t|

@@ -3,7 +3,13 @@ class Admin::DonorsController < ApplicationController
   before_filter :login_required
 
   def index
-    @donors = Donor.paginate :per_page => 20, :order => 'created_at DESC', :page => params[:page]
+    donors = if params[:q]
+      q = "%#{params[:q]}%"
+      Donor.where(["name ilike ? OR description ilike ?", q, q])
+    else
+      Donor
+    end
+    @donors = donors.paginate :per_page => 20, :order => 'created_at DESC', :page => params[:page]
   end
 
   def new

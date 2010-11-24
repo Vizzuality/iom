@@ -36,6 +36,10 @@ class Donor < ActiveRecord::Base
 
   validates_presence_of :name
 
+  def donations_amount
+    donations.inject(0){ |result, donation| result + donation.amount }
+  end
+
   private
 
     def clean_html
