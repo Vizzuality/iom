@@ -3,17 +3,16 @@
 
 <ul>
   <li class="selected">
-    <div class="top_selected"></div>
     <div class="bottom_selected">
-    <%= link_to('Basic information', edit_admin_organization_path(@organization)) %>
+      <%= link_to('Basic information', edit_admin_organization_path(@organization)) %>
     <% unless !@organization.sites.empty? %>
-    <ul>
-      <% @organization.sites.each do |site| %>
-        <li><%= link_to(site.name, organization_site_specific_information_admin_organization_path(@organization, site)) %></li>
+       <ul>
+         <% @organization.sites.each do |site| %>
+           <li><%= link_to(site.name, organization_site_specific_information_admin_organization_path(@organization, site)) %></li>
+         <% end %>
+         <li><a href="#">asdfkjafkñlas</a></li>
+       </ul>
       <% end %>
-      <li><a href="#">asdfkjafkñlas</a></li>
-    </ul>
-    <% end %>
     </div>
   </li>
   <li> <%= link_to('NGO projects', admin_organization_projects_path(@organization)) %><% if !@organization.sites.empty? %> <p><span><%=@organization.projects.count%></span></p><% end %></li>
