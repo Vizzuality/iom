@@ -17,9 +17,9 @@
     <div class="block">
       <div class="top"></div>
       <div class="med donors_list">
-        <h2><% pluralize(@donors.total_entries, 'donor', 'donors') %> supporting projects
+        <h2><%= pluralize(@donors.total_entries, 'donor', 'donors') %> supporting projects
           <% if params[:q]%>
-          on <a class="remove" href="#"><%= params[:q] %></a>
+          on <a class="remove" href="/admin/donors"><%= params[:q] %></a>
           <% end %>
         </h2>
         <% unless @donors.empty? %>

@@ -1,19 +1,13 @@
 <ul>
-<<<<<<< HEAD
-  <li class="selected">
-=======
   <li <%= selected_if_current_page(edit_admin_organization_path(@organization)) %>>
-    <div class="top_selected"></div>
->>>>>>> 7a02004bb30f945c5a67034d774bc70606134b2b
     <div class="bottom_selected">
-      <%= link_to('Basic information', edit_admin_organization_path(@organization)) %>
+      <%= link_to('Basic information', edit_admin_organization_path(@organization), :class=>"basic") %>
     <% unless !@organization.sites.empty? %>
-       <ul>
+       <span class="list">
          <% @organization.sites.each do |site| %>
-           <li><%= link_to(site.name, organization_site_specific_information_admin_organization_path(@organization, site)) %></li>
+           <p><%= link_to(site.name, organization_site_specific_information_admin_organization_path(@organization, site)) %></p>
          <% end %>
-         <li><a href="#">asdfkjafkñlas</a></li>
-       </ul>
+       </span>
       <% end %>
     </div>
   </li>
