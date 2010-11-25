@@ -19,6 +19,8 @@ class CreateProjects < ActiveRecord::Migration
       t.text        :site_specific_information
       t.timestamps
     end
+    add_index :projects, :name
+    add_index :projects, :primary_organization_id
   end
 
   def self.down

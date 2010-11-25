@@ -18,6 +18,7 @@ class CreateDonors < ActiveRecord::Migration
       t.text     :site_specific_information
       t.timestamps
     end
+    add_index :donors, :name
   end
 
   def self.down

@@ -6,6 +6,8 @@ class CreateDonations < ActiveRecord::Migration
       t.float :amount
       t.date  :date
     end
+    add_index :donations, :donor_id
+    add_index :donations, :project_id
   end
 
   def self.down

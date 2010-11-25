@@ -20,6 +20,7 @@ class CreateOrganizations < ActiveRecord::Migration
       t.text        :site_specific_information
       t.timestamps
     end
+    add_index :organizations, :name
   end
 
   def self.down

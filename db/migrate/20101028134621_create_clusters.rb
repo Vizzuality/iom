@@ -2,7 +2,6 @@ class CreateClusters < ActiveRecord::Migration
   def self.up
     create_table :clusters do |t|
       t.string :name
-      t.timestamps
     end
   end
 

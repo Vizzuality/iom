@@ -28,6 +28,8 @@ class CreateSites < ActiveRecord::Migration
       t.string   :project_context_tags
       t.timestamps
     end
+    add_index :sites, :name
+    add_index :sites, :url
   end
 
   def self.down
