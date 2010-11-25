@@ -3,35 +3,35 @@
 # Table name: sites
 #
 #  id                              :integer         not null, primary key
-#  name                            :string(255)     
-#  short_description               :text            
-#  long_description                :text            
-#  contact_email                   :string(255)     
-#  contact_person                  :string(255)     
-#  url                             :string(255)     
-#  permalink                       :string(255)     
-#  google_analytics_id             :string(255)     
-#  logo_file_name                  :string(255)     
-#  logo_content_type               :string(255)     
-#  logo_file_size                  :integer         
-#  logo_updated_at                 :datetime        
-#  theme_id                        :integer         
-#  blog_url                        :string(255)     
-#  word_for_clusters               :string(255)     
-#  word_for_regions                :string(255)     
-#  show_global_donations_raises    :boolean         
+#  name                            :string(255)
+#  short_description               :text
+#  long_description                :text
+#  contact_email                   :string(255)
+#  contact_person                  :string(255)
+#  url                             :string(255)
+#  permalink                       :string(255)
+#  google_analytics_id             :string(255)
+#  logo_file_name                  :string(255)
+#  logo_content_type               :string(255)
+#  logo_file_size                  :integer
+#  logo_updated_at                 :datetime
+#  theme_id                        :integer
+#  blog_url                        :string(255)
+#  word_for_clusters               :string(255)
+#  word_for_regions                :string(255)
+#  show_global_donations_raises    :boolean
 #  project_classification          :integer         default(0)
-#  geographic_context_country_id   :integer         
-#  geographic_context_region_id    :integer         
-#  project_context_cluster_id      :integer         
-#  project_context_sector_id       :integer         
-#  project_context_organization_id :integer         
-#  project_context_tags            :string(255)     
-#  created_at                      :datetime        
-#  updated_at                      :datetime        
-#  project_context_tags_ids        :string(255)     
-#  status                          :boolean         
-#  geographic_context_geometry     :geometry        
+#  geographic_context_country_id   :integer
+#  geographic_context_region_id    :integer
+#  project_context_cluster_id      :integer
+#  project_context_sector_id       :integer
+#  project_context_organization_id :integer
+#  project_context_tags            :string(255)
+#  created_at                      :datetime
+#  updated_at                      :datetime
+#  project_context_tags_ids        :string(255)
+#  status                          :boolean
+#  geographic_context_geometry     :geometry
 #
 
 class Site < ActiveRecord::Base
@@ -201,6 +201,27 @@ class Site < ActiveRecord::Base
 
   def sectors
     Sector.find_by_sql("select sectors.* from sectors, projects_sectors where projects_sectors.project_id in (#{projects_ids.join(',')}) AND sectors.id = projects_sectors.sector_id").uniq
+  end
+
+  def visits
+    return if self.google_analytics_id.blank? || Settings.first.google_analytics_username.blank? || Settings.first.google_analytics_password.blank?
+    Garb::Session.login(Settings.first.google_analytics_username, Settings.first.google_analytics_password)
+    profile = Garb::Profile.all.detect{|p| p.web_property_id == self.google_analytics_id}
+    report = Garb::Report.new(profile)
+    report.metrics :pageviews
+    result = report.results.first
+    result.pageviews.to_i
+  end
+
+  def visits_last_week
+    return if self.google_analytics_id.blank? || Settings.first.google_analytics_username.blank? || Settings.first.google_analytics_password.blank?
+    Garb::Session.login(Settings.first.google_analytics_username, Settings.first.google_analytics_password)
+    profile = Garb::Profile.all.detect{|p| p.web_property_id == self.google_analytics_id}
+    report = Garb::Report.new(profile, :start_date => (Date.today - 7.days), :end_date => Date.today)
+    report.metrics :pageviews
+    report.dimensions :date
+    result = report.results.first
+    result.pageviews.to_i
   end
 
   private

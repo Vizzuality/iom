@@ -1,0 +1,43 @@
+<div class="block">
+  <div class="top"></div>
+  <div class="med information">
+    <h2><%= link_to(site.name, edit_admin_site_path(site)) %></h2>
+    <ul>
+      <li>
+        <label>PROJECTS INCLUDED</label>
+        <p><%= site.projects.size %></p>
+      </li>
+      <li>
+        <label>ORGANIZATIONS COMMITTED</label>
+        <p><%= site.organizations.size %></p>
+      </li>
+      <% if site.google_analytics_id? %>
+        <li>
+          <label>VISITS TO THE SITE</label>
+          <p><%= number_with_delimiter(site.visits) %></p>
+        </li>
+        <li>
+          <label>LAST 7 DAYS</label>
+          <p><%= number_with_delimiter(site.visits_last_week) %></p>
+        </li>
+      <% end %>
+    </ul>
+    <div class="info">
+      <div class="left">
+        <% if site.geographic_context_country_id? %>
+          <p>Limited to <strong><%= site.country.name %> country</strong></p>
+        <% elsif site.geographic_context_region_id? %>
+          <p>Limited to <strong><%= site.region.name %> region</strong></p>
+        <% end %>
+        <p>Available at <%= link_to(site.url, site.url) %></p>
+      </div>
+      <div class="right_graph">
+        <img src="/images/backoffice/dashboard/graph.jpg" width="590" height="60" alt="Graph">
+      </div>
+      <p></p>
+    </div>
+  </div>
+  <div class="bottom_grey">
+    <a href="<%= edit_admin_site_path(site) %>">Manage this site</a>
+  </div>
+</div>

@@ -1,63 +1,8 @@
-
 <div class="main_layout">
-
-  <% @sites.each do |site| %>
-    <div class="block first">
-      <div class="top"></div>
-      <div class="med information">
-        <h2><%= link_to(site.name, edit_admin_site_path(site)) %></h2>
-        <ul>
-          <li>
-            <label>PROJECTS INCLUDED</label>
-            <p>234</p>
-          </li>
-          <li>
-            <label>Organizations COMMITTED</label>
-            <p>23</p>
-          </li>
-          <li>
-            <label>VISITS TO THE SITE</label>
-            <p>234,890</p>
-          </li>
-          <li>
-            <label>LAST 7 DAYS</label>
-            <p>2,324</p>
-          </li>
-        </ul>
-        <div class="info">
-          <div class="left">
-            <p>Worldwide project</p>
-            <p>Limited to <strong>Haiti country</strong></p>
-            <p>Available at <a href="#">www.haitiaidmap.com</a></p>
-          </div>
-          <div class="right_graph">
-            <img src="/images/backoffice/dashboard/graph.jpg" width="590" height="60" alt="Graph">
-          </div>
-          <p></p>
-        </div>
-      </div>
-      <div class="bottom_grey">
-        <a href="#">Manage this site</a>
-        <a href="#" class="published">Published</a>
-        <!-- <a href="#" class="not_published">Not published yet</a> -->
-      </div>
-    </div>
-  <% end -%>
-
-
-
-
+  <%= render :partial => 'admin/sites/site', :collection => @sites %>
   <div class="add_new">
-    <a href="<%= new_admin_site_path %>">Create a new site<br/><strong>You already have 5 sites created</strong></a>
+    <a href="<%= new_admin_site_path %>">Create a new site<br/><strong>You already have <%= pluralize(Site.count, 'site', 'sites') %> created</strong></a>
   </div>
 </div>
-
-
-
-
-
-<ul>
-
-</ul>
 
 <%= will_paginate(@sites) %>
