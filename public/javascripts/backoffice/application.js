@@ -3,13 +3,15 @@
 
   $(document).ready(function(ev){
     if ($('div.right.menu').length>0) {
-      $('div.right.menu').height($('div.block div.med div.left').height());
+      setTimeout(function(){
+        $('div.right.menu').height($('div.block div.med div.left').height());
+        $('div.right.menu div.delete').show();
+      },300);
     }
     
     //remove text from input
     $('input.main_search').focusin(function(ev){
       var value = $(this).attr('value');
-      console.log(value);
       if (value == "Search donors by name, place,..." || value == "Search NGOs by name, place,..." || value == "Search projects by name, place,..." || value == "Search sites by name, place,...") {
         old_value = value;
         $(this).attr('value','');
@@ -20,6 +22,17 @@
       if (value == "") {                                      
         $(this).attr('value',old_value);
       }
+    });
+    
+    //change preview link if twitter/facebook/website changes
+    $('input.website').change(function(ev){
+      $('a#website').attr('href',$(this).attr('value'));
+    });
+    $('input.twitter').change(function(ev){
+      $('a#twitter').attr('href','http://twitter.com/'+$(this).attr('value'));
+    });
+    $('input.facebook').change(function(ev){
+      $('a#facebook').attr('href',$(this).attr('value'));
     });
     
     //if there is an error in some field
