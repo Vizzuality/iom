@@ -19,7 +19,31 @@
         <div class="left">
           <h1 class="geneva"><%= link_to(@site.name,'/') %></h1>
           <ul class="menu">
-            <li><a href="#" class="geneva">CLUSTERS<span class="with_suboptions"></span></a></li>
+            <% if @site.cluster %>
+              <li><a href="<%= cluster_path(@site.cluster) %>" class="geneva"><%= @site.word_for_clusters.upcase.singularize %></a></li>
+            <% elsif @site.sector %>
+              <li><a href="<%= sector_path(@site.sector) %>" class="geneva"><%= @site.word_for_sectors.upcase.singularize %></a></li>
+            <% else %>
+              <% if @site.navigate_by_cluster? %>
+              <li>
+                <a href="#" class="geneva"><%= @site.word_for_clusters.upcase %><span class="with_suboptions"></span></a>
+                <ul>
+                  <% @site.clusters.each do |cluster| %>
+                  <li><a href="<%= cluster_path(cluster) %>" class="geneva"><%= cluster.name %></a></li>
+                  <% end %>
+                </ul>
+              </li>
+              <% elsif @site.navigate_by_sector? %>
+              <li>
+                <a href="#" class="geneva"><%= @site.word_for_sectors.upcase %><span class="with_suboptions"></span></a>
+                <ul>
+                  <% @site.sectors.each do |sector| %>
+                  <li><a href="<%= sector_path(sector) %>" class="geneva"><%= sector.name %></a></li>
+                  <% end %>
+                </ul>
+              </li>
+              <% end %>
+            <% end %>
             <li><a href="#" class="geneva">REGIONS<span class="with_suboptions"></span></a></li>
             <li><a href="#" class="geneva">NGOs<span class="with_suboptions"></span></a></li>
             <li><a href="#" class="geneva">ANALYSIS</a></li>

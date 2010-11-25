@@ -165,4 +165,4 @@ donor.donations.create :project => p3, :amount =>  500
 # Sites
 #  sites for testing purposes. Add this line to your /etc/hosts:
 #  127.0.0.1       www.haitiaidmap.com haitiadimap.com
-site = Site.create :name => 'Haiti Aid Map', :url => 'www.haitiaidmap.com', :status => false, :project_context_organization_id => o1.id
+site = Site.create :name => 'Haiti Aid Map', :url => 'www.haitiaidmap.com', :status => false, :project_context_organization_id => o1.id, :project_context_cluster_id => cluster_water.id

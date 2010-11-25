@@ -1,7 +1,7 @@
-  var old_value;
+var old_value;
 
 
-  $(document).ready(function(ev){
+$(document).ready(function(ev){
     if ($('div.right.menu').length>0) {
       setTimeout(function(){
         $('div.right.menu').height($('div.block div.med div.left').height());
@@ -67,6 +67,9 @@
 		$('div.list_combo').children('span.combo_large').attr('id','hidden');
 		$('div.list_combo').children('span.combo_large').removeClass('displayed');
 	});
-		
+	// end combo tags click
 	
-  });
+	
+	
+});
+

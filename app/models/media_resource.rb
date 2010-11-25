@@ -34,7 +34,7 @@ class MediaResource < ActiveRecord::Base
     match = response.match(/<html>([^<]+)<\/html>/)
     html = match[1]
     html = html.gsub(/width=&quot;(\d+)&quot;/, 'width=&quot;549&quot;')
-    html = html.gsub(/height=&quot;(\d+)&quot;/, '')
+    html = html.gsub(/height=&quot;(\d+)&quot;/, 'height=&quot;300&quot;')
     write_attribute(:vimeo_url, value)
     write_attribute(:vimeo_embed_html, html)
   end
