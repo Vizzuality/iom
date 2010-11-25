@@ -31,8 +31,43 @@ module Iom
             :state => "New York",
             :donation_phone_number => "+32 231 11 11 11",
             :donation_website => "http://www.oxfamamerica.org/donations",
-            :site_specific_information => nil
-
+            :site_specific_information => nil,
+            :international_staff => "international staff",
+            :contact_name => "Steve Balmer",
+            :contact_position => "Intermon contact CEO",
+            :contact_zip => "123",
+            :contact_city => "Atlanta",
+            :contact_state => "Maryland",
+            :contact_country => "United States",
+            :donation_country => "United States"
+          }
+        when :caritas
+          {
+            :name => "Caritas org",
+            :description => "Description for caritas",
+            :budget => 10000,
+            :website => "http://www.caritas.es/",
+            :staff => 500,
+            :twitter => "caritas",
+            :facebook => "www.facebook.com/caritas",
+            :hq_address => "Caritas St, 32, City Center",
+            :contact_email => "contact_caritas@example.com",
+            :contact_phone_number => "+31 123 2133",
+            :donation_address => "Donation Address Caritas, 232, City Center",
+            :zip_code => "AB123",
+            :city => "Madrid",
+            :state => "Madrid",
+            :donation_phone_number => "+32 231 11 11 11",
+            :donation_website => "http://www.caritas.es/donations",
+            :site_specific_information => nil,
+            :international_staff => "international staff",
+            :contact_name => "Steve Caritas",
+            :contact_position => "Caritas contact CEO",
+            :contact_zip => "28005",
+            :contact_city => "Madrid",
+            :contact_state => "Madrid",
+            :contact_country => "Spain",
+            :donation_country => "Spain"
           }
         else
           raise "Invalid fixture name"
