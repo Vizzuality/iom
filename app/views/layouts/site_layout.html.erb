@@ -19,7 +19,9 @@
         <div class="left">
           <h1 class="geneva"><%= link_to(@site.name,'/') %></h1>
           <ul class="menu">
-            <li><a href="#" class="geneva">CLUSTERS<span class="with_suboptions"></span></a></li>
+            <% if @site.cluster %>
+            <li><a href="<%= cluster_path(@site.cluster) %>" class="geneva"><%= @site.word_for_clusters.upcase %><span class="with_suboptions"></span></a></li>
+            <% end %>
             <li><a href="#" class="geneva">REGIONS<span class="with_suboptions"></span></a></li>
             <li><a href="#" class="geneva">NGOs<span class="with_suboptions"></span></a></li>
             <li><a href="#" class="geneva">ANALYSIS</a></li>

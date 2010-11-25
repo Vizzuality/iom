@@ -38,9 +38,6 @@ class Site < ActiveRecord::Base
 
   acts_as_geom :the_geom => :polygon
 
-  has_one :cluster, :foreign_key => :project_context_cluster_id
-  has_one :sector,  :foreign_key => :project_context_sector_id
-
   has_many :resources, :conditions => 'resources.element_type = #{Iom::ActsAsResource::SITE_TYPE}', :foreign_key => :element_id, :dependent => :destroy
   has_many :media_resources, :conditions => 'media_resources.element_type = #{Iom::ActsAsResource::SITE_TYPE}', :foreign_key => :element_id, :dependent => :destroy, :order => 'position ASC'
   has_one  :theme
@@ -75,6 +72,18 @@ class Site < ActiveRecord::Base
   def word_for_sectors
     w = read_attribute(:word_for_sectors)
     w.blank? ? 'sectors' : w
+  end
+
+  def cluster
+    Cluster.find(self.project_context_cluster_id)
+  rescue ActiveRecord::RecordNotFound
+    nil
+  end
+
+  def sector
+    Sector.find(self.project_context_sector_id)
+  rescue ActiveRecord::RecordNotFound
+    nil
   end
 
   # Filter projects from site configuration
