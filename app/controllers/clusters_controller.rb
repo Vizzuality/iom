@@ -3,8 +3,7 @@ class ClustersController < ApplicationController
   layout 'site_layout'
 
   def show
-    @cluster = @site.cluster
-    raise ActiveRecord::RecordNotFound unless @cluster
+    @cluster = Cluster.find(params[:id])
     @projects = @cluster.projects.paginate :per_page => 10, :page => params[:page], :order => 'created_at DESC'
     respond_to do |format|
       format.html

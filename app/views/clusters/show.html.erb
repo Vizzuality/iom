@@ -38,15 +38,21 @@
       </div>
     </div>
     <% end %>
+    <% unless (@site.clusters - @cluster.to_a).empty? %>
     <!-- MORE  CLUSTERS -->
     <div class="body_info grid">
       <div class="real_content contact">
         <div class="content_info">
           <p class="title_section pt_sans_bold">MORE <%= @site.word_for_clusters.upcase %></p>
-          ....
+          <ul class="additional_resources">
+            <% (@site.clusters - @cluster.to_a).each do |cluster| %>
+            <li><%= link_to(cluster.name, cluster_path(cluster)) %></li>
+            <% end %>
+          </ul>
         </div>
       </div>
     </div>
+    <% end %>
     <!-- BOTTOM CONTENT BLANK -->
     <div class="body_info grid">
       <div class="real_content bottom">

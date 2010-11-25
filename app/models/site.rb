@@ -86,6 +86,14 @@ class Site < ActiveRecord::Base
     nil
   end
 
+  def navigate_by_cluster?
+    project_classification == 0
+  end
+
+  def navigate_by_sector?
+    project_classification == 1
+  end
+
   # Filter projects from site configuration
   #
   # Use cases:
@@ -184,7 +192,15 @@ class Site < ActiveRecord::Base
   end
 
   def organizations
-    Organization.find_by_sql("select organizations.* from organizations, projects where projects.id IN (#{projects_ids.join(',')}) AND projects.primary_organization_id = organizations.id")
+    Organization.find_by_sql("select organizations.* from organizations, projects where projects.id IN (#{projects_ids.join(',')}) AND projects.primary_organization_id = organizations.id").uniq
+  end
+
+  def clusters
+    Cluster.find_by_sql("select clusters.* from clusters, clusters_projects where clusters_projects.project_id in (#{projects_ids.join(',')}) AND clusters.id = clusters_projects.cluster_id").uniq
+  end
+
+  def sectors
+    Sector.find_by_sql("select sectors.* from sectors, projects_sectors where projects_sectors.project_id in (#{projects_ids.join(',')}) AND sectors.id = projects_sectors.sector_id").uniq
   end
 
   private
