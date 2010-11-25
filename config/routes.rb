@@ -13,6 +13,7 @@ Iom::Application.routes.draw do
   resources :sectors,       :only => [:show]
   resources :clusters,      :only => [:show]
   resources :donors,        :only => [:index, :show]
+  resources :projects,      :only => [:index, :show]
   resources :organizations, :only => [:index, :show]
   resources :pages,         :only => [:show]
 

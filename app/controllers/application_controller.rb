@@ -31,15 +31,14 @@ class ApplicationController < ActionController::Base
     #
     def set_site
       if request.host != main_site_host
-        @site = Site.published.where(:url => request.host).first
-        if @site.nil?
+        unless @site = Site.published.where(:url => request.host).first
           raise ActiveRecord::RecordNotFound
         end
       else
-        @site = if params[:controller] =~ /\Aadmin\/[a-z0-9]+\Z/
-          nil
-        else
-          Site.draft.where(:id => params[:site_id]).first
+        if params[:controller] !~ /\Aadmin\/[a-z0-9]+\Z/
+          unless @site = Site.draft.where(:id => params[:site_id]).first
+            raise ActiveRecord::RecordNotFound
+          end
         end
       end
       logger.info "==============================="

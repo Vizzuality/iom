@@ -35,8 +35,8 @@
       <div class="real_content">
         <div class="content_info">
           <p class="coin aller">$</p>
-          <p class="amount aller">1,200,000</p>
-          <p class="summarize_info">36 donors to this organization</p>
+          <p class="amount aller"><%= number_with_delimiter(@organization.donations.sum(:amount)) %></p>
+          <p class="summarize_info"><%= pluralize(@organization.donors_count, 'donor', 'donors') %> to this organization</p>
         </div>
       </div>
     </div>
@@ -44,8 +44,9 @@
     <div class="body_info grid">
       <div class="real_content">
         <div class="content_info">
-          <p class="title_section pt_sans_bold">OXFAM PROJECTS BY CLUSTER</p>
+          <p class="title_section pt_sans_bold"><%= @organization.name.upcase %> PROJECTS BY <%= @site.word_for_clusters.upcase %></p>
           <ul class="statistics_list">
+            <!-- TODO: assign cluster to class
             <li>
               <a class="plus"><span class="aller" style="width:203px"><p>13</p></span></a>
             </li>
@@ -55,6 +56,12 @@
             <li>
               <a class="drop"><span class="aller" style="width:23px"><p>2</p></span></a>
             </li>
+            -->
+            <% @organization.projects_clusters.each do |k,v| %>
+            <li>
+              <a class="drop"><span class="aller" style="width:153px"><p><%= v.size %></p></span></a>
+            </li>
+            <% end %>
           </ul>
           <p class="summarize_info">3 projects more on other clusters</p>
         </div>
@@ -64,7 +71,7 @@
     <div class="body_info grid">
       <div class="real_content">
         <div class="content_info">
-          <p class="title_section pt_sans_bold">OXFAM PROJECTS BY AREA</p>
+          <p class="title_section pt_sans_bold"><%= @organization.name %> PROJECTS BY <%= @site.word_for_sectors.upcase %></p>
           <div class="pie_chart"></div>
           <ul class="info_pie_chart">
             <li class="category1"><p class="name_category">Quito</p> - 9</li>
@@ -81,7 +88,7 @@
         <div class="content_info">
           <p class="title_section pt_sans_bold">ADDITIONAL RESOURCES</p>
           <ul class="additional_resources">
-            <% @organization.resoureces.each do |resource| %>
+            <% @organization.resources.each do |resource| %>
             <li><%= link_to(resource.name, resource.url, :rel => 'nofollow') %></li>
             <% end %>
           </ul>
@@ -95,10 +102,12 @@
         <div class="content_info">
           <p class="title_section pt_sans_bold">CONTACT INFORMATION</p>
           <div class="contact_info">
-            <p class="name"><%= @organization.name %></p>
+            <p class="name"><%= @organization.contact_name %></p>
+            <p class="direction"><%= @organization.contact_position %></p>
             <p class="direction"><%= @organization.hq_address %></p>
+            <p class="direction"><%= @organization.contact_zip %> <%= @organization.contact_state %></p>
             <p class="telephone"><%= @organization.contact_phone_number %></p>
-            <a href="mailto:<%= @organization.contact_email %>" class="mail"><%= @organization.contact_email %></a>
+            <p><a href="mailto:<%= @organization.contact_email %>" class="mail"><%= @organization.contact_email %></a></p>
           </div>
         </div>
       </div>
@@ -109,11 +118,12 @@
         <div class="content_info">
           <p class="title_section pt_sans_bold">DONATIONS INFORMATION</p>
           <div class="contact_info">
-            <p class="name">Steve Balmer</p>
-            <p class="direction">Oxfam America Spokesperson</p>
-            <p class="direction">226 Causeway St., 5th Floor</p>
-            <p class="telephone">Boston, MA 02114-2206</p>
-            <a href="mailto:steve@intermonoxfam.com" class="mail">steve@intermonoxfam.com</a>
+            <p class="name">Donations</p>
+            <p class="direction"><%= @organization.donation_address %></p>
+            <p class="telephone"><%= @organization.donation_phone_number %></p>
+            <% if @organization.donation_website? %>
+            <p class="telephone"><%= link_to(@organization.donation_website, @organization.donation_website, :class => 'mail') %></p>
+            <% end %>
           </div>
         </div>
       </div>
@@ -131,57 +141,7 @@
 
 <div id="right_info_projects">
   <h3 class="pt_sans_bold shadow_white"><%= @organization.name.upcase %> LIST OF PROJECTS</h3>
-  <ul class="projects">
-    <li class="styled">
-      <p class="title pt_sans_bold">Integrated Recovery Assistance Program</p>
-      <p class="author">at <a href="#">Jeddah</a></p>
-      <p class="info">Oxfam America is an international relief and development organization that creates lasting solutions to poverty, hunger, and injustice. What a pity that the world doesn’t do anything to... <a href="#" class="learn_more">Learn more</a></p>
-    </li>
-    <li>
-      <p class="title pt_sans_bold">Integrated Recovery Assistance Program</p>
-      <p class="author">at <a href="#">Jeddah</a></p>
-      <p class="info">Oxfam America is an international relief and development organization that creates lasting solutions to poverty, hunger, and injustice. What a pity that the world doesn’t do anything to... <a href="#" class="learn_more">Learn more</a></p>
-    </li>
-    <li class="styled">
-      <p class="title pt_sans_bold">Integrated Recovery Assistance Program</p>
-      <p class="author">at <a href="#">Jeddah</a></p>
-      <p class="info">Oxfam America is an international relief and development organization that creates lasting solutions to poverty, hunger, and injustice. What a pity that the world doesn’t do anything to... <a href="#" class="learn_more">Learn more</a></p>
-    </li>
-    <li>
-      <p class="title pt_sans_bold">Integrated Recovery Assistance Program</p>
-      <p class="author">at <a href="#">Jeddah</a></p>
-      <p class="info">Oxfam America is an international relief and development organization that creates lasting solutions to poverty, hunger, and injustice. What a pity that the world doesn’t do anything to... <a href="#" class="learn_more">Learn more</a></p>
-    </li>
-    <li class="styled">
-      <p class="title pt_sans_bold">Integrated Recovery Assistance Program</p>
-      <p class="author">at <a href="#">Jeddah</a></p>
-      <p class="info">Oxfam America is an international relief and development organization that creates lasting solutions to poverty, hunger, and injustice. What a pity that the world doesn’t do anything to... <a href="#" class="learn_more">Learn more</a></p>
-    </li>
-    <li>
-      <p class="title pt_sans_bold">Integrated Recovery Assistance Program</p>
-      <p class="author">at <a href="#">Jeddah</a></p>
-      <p class="info">Oxfam America is an international relief and development organization that creates lasting solutions to poverty, hunger, and injustice. What a pity that the world doesn’t do anything to... <a href="#" class="learn_more">Learn more</a></p>
-    </li>
-    <li class="styled">
-      <p class="title pt_sans_bold">Integrated Recovery Assistance Program</p>
-      <p class="author">at <a href="#">Jeddah</a></p>
-      <p class="info">Oxfam America is an international relief and development organization that creates lasting solutions to poverty, hunger, and injustice. What a pity that the world doesn’t do anything to... <a href="#" class="learn_more">Learn more</a></p>
-    </li>
-    <li>
-      <p class="title pt_sans_bold">Integrated Recovery Assistance Program</p>
-      <p class="author">at <a href="#">Jeddah</a></p>
-      <p class="info">Oxfam America is an international relief and development organization that creates lasting solutions to poverty, hunger, and injustice. What a pity that the world doesn’t do anything to... <a href="#" class="learn_more">Learn more</a></p>
-    </li>
-    <li class="styled">
-      <p class="title pt_sans_bold">Integrated Recovery Assistance Program</p>
-      <p class="author">at <a href="#">Jeddah</a></p>
-      <p class="info">Oxfam America is an international relief and development organization that creates lasting solutions to poverty, hunger, and injustice. What a pity that the world doesn’t do anything to... <a href="#" class="learn_more">Learn more</a></p>
-    </li>
-    <li>
-      <p class="title pt_sans_bold">Integrated Recovery Assistance Program</p>
-      <p class="author">at <a href="#">Jeddah</a></p>
-      <p class="info">Oxfam America is an international relief and development organization that creates lasting solutions to poverty, hunger, and injustice. What a pity that the world doesn’t do anything to... <a href="#" class="learn_more">Learn more</a></p>
-    </li>
-  </ul>
-  <a class="view_more_projects pt_sans_bold">view more projects</a>
+  <div id="projects">
+    <%= render :partial => 'projects' %>
+  </div>
 </div>
