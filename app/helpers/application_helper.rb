@@ -37,6 +37,9 @@ module ApplicationHelper
     if @organization
       result << @organization.name
     end
+    if @page
+      result << @page.title
+    end
     return result.reverse.join(" - ")
   end
 

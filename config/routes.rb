@@ -15,7 +15,10 @@ Iom::Application.routes.draw do
   resources :donors,        :only => [:index, :show]
   resources :projects,      :only => [:index, :show]
   resources :organizations, :only => [:index, :show]
-  resources :pages,         :only => [:show]
+  # pages:
+  #  - all the default pages associated to this project should be routed
+  match '/about'   => 'pages#show_about',   :as => :about
+  match '/contact' => 'pages#show_contact', :as => :contact
 
   # Administration
   namespace :admin do
