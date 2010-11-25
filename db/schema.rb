@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101124165848) do
+ActiveRecord::Schema.define(:version => 20101125162127) do
 
   create_table "clusters", :force => true do |t|
     t.column "name", :string
@@ -124,6 +124,7 @@ ActiveRecord::Schema.define(:version => 20101124165848) do
     t.column "permalink", :string
     t.column "created_at", :datetime
     t.column "updated_at", :datetime
+    t.column "parent_id", :integer
   end
 
   create_table "partners", :force => true do |t|
@@ -156,11 +157,11 @@ ActiveRecord::Schema.define(:version => 20101124165848) do
     t.column "site_specific_information", :text
     t.column "created_at", :datetime
     t.column "updated_at", :datetime
-    t.column "the_geom", :geometry, :srid => 4326, :null => false
     t.column "activities", :text
     t.column "intervention_id", :string
     t.column "additional_information", :text
     t.column "awardee_type", :string
+    t.column "the_geom", :geometry, :srid => 4326, :null => false
   end
 
   create_table "projects_regions", :id => false, :force => true do |t|
@@ -232,9 +233,9 @@ ActiveRecord::Schema.define(:version => 20101124165848) do
     t.column "project_context_tags", :string
     t.column "created_at", :datetime
     t.column "updated_at", :datetime
-    t.column "geographic_context_geometry", :geometry, :srid => 4326
     t.column "project_context_tags_ids", :string
     t.column "status", :boolean, :default => false
+    t.column "geographic_context_geometry", :geometry, :srid => 4326
   end
 
   create_table "tags", :force => true do |t|

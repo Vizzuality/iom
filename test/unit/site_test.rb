@@ -86,6 +86,7 @@ class SiteTest < ActiveSupport::TestCase
     assert !site.pages.empty?
     assert site.pages.map(&:title).include?('About')
     assert site.pages.map(&:title).include?('Contact')
+    assert site.pages.map(&:title).include?('Analysis')
   end
 
 
