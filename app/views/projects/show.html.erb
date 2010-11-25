@@ -1,0 +1,85 @@
+<div class="main">
+  <h2><%= @project.name %></h2>
+  <p>
+    <% clusters_sectors = @project.clusters + @project.sectors %>
+    <% unless clusters_sectors.empty? %>
+      on <%= raw(clusters_sectors.map{ |e| link_to(e.name, e.is_a?(Cluster) ? cluster_path(e) : sector_path(e)) }.to_sentence) %>
+    <% end %>
+    <% unless @project.countries.empty? %>
+      in <%= @project.countries.first.name %>
+    <% end %>
+    by <%= link_to(@project.primary_organization.name, organization_path(@project.primary_organization)) %>
+  </p>
+
+  <%= simple_format(@project.description) %>
+
+  <% unless @project.media_resources.empty? %>
+  <ul>
+    <% @project.media_resources.each do |media_resource| %>
+      <% if media_resource.is_a_video? %>
+        <li><%= media_resource.vimeo_embed_html %></li>
+      <% else %>
+        <li><%= image_tag(media_resource.picture.url(:small)) %></li>
+      <% end %>
+    <% end %>
+  </ul>
+  <% end %>
+
+  <%= simple_format(@project.activities) %>
+
+  <%= simple_format(@project.additional_information) %>
+
+  <%= simple_format(@project.cross_cutting_issues) %>
+
+</div>
+
+<div class="sidebar">
+  <h3>A project by</h3>
+  <p><%= image_tag(@project.primary_organization.logo.url) %></p>
+  <p><%= link_to(@project.primary_organization.name, organization_path(@project.primary_organization)) %></p>
+
+  <% if @project.implementing_organization? %>
+    <h3>Implementing organizations</h3>
+    <p><%= @project.implementing_organization %></p>
+  <% end %>
+
+  <% if @project.partner_organizations? %>
+    <h3>Partner Organizations</h3>
+    <p><%= @project.partner_organizations %></p>
+  <% end %>
+
+  <h3>Project timeline</h3>
+  <p><%= @project.start_date.strftime("%d/%M/%Y") %></p>
+  <p><%= @project.end_date.strftime("%d/%M/%Y") %></p>
+  <p><%= pluralize(@project.months_left, 'month', 'months') %> left</p>
+
+  <h3>Project funding</h3>
+  <p>$ <%= number_with_delimiter(@project.donations.sum(:amount)) %></p>
+
+  <% if @project.estimated_people_reached? %>
+    <h3>People reached</h3>
+    <p><%= @project.estimated_people_reached %></p>
+  <% end %>
+
+  <% if @project.target? %>
+    <h3>Target groups</h3>
+    <p><%= @project.target %></p>
+  <% end %>
+
+  <% unless @project.donors.empty? %>
+    <h3>Donors</h3>
+    <ul>
+    <% @project.donors.limit(5).each do |donor| %>
+      <li><%= link_to(donor.name, donor.website, :rel => 'nofollow', :target => '_blank') %></li>
+    <% end %>
+    </ul>
+    <% if @project.donors.count > 5 %>
+      <p>and <%= pluralize(@project.donors.count - 5, 'more donor', 'more donors') %></p>
+    <% end %>
+  <% end %>
+
+  <h3>Contact information</h3>
+  <p><%= @project.contact_person %></p>
+  <p><%= @project.contact_phone_number %></p>
+  <p><%= link_to(@project.contact_email, "mailto:#{@project.contact_email}") %></p>
+</div>

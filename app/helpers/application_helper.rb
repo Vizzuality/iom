@@ -46,6 +46,9 @@ module ApplicationHelper
     if @donor
       result << @donor.name
     end
+    if @project
+      result << @project.name
+    end
     return result.reverse.join(" - ")
   end
 
