@@ -43,6 +43,9 @@ module ApplicationHelper
     if @cluster
       result << @cluster.name
     end
+    if @donor
+      result << @donor.name
+    end
     return result.reverse.join(" - ")
   end
 
