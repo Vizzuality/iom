@@ -24,6 +24,34 @@ $(document).ready(function(ev){
       }
     });
     
+    
+    //window alert -> delete something (NGO, donor, site or project)
+    $('div.delete a').click(function(ev){
+      ev.stopPropagation();
+      ev.preventDefault();
+      var scroll_position = window.pageYOffset;
+      var window_height = (typeof window.innerHeight != 'undefined' ? window.innerHeight : document.body.offsetHeight);
+      $('div#modal_window').css('height',window_height+'px');
+      $('div#modal_window').css('top',scroll_position+'px');
+      $('body').css('overflow','hidden');
+      $(window).resize(function() {
+        var scroll_position = window.pageYOffset;
+        var window_height = (typeof window.innerHeight != 'undefined' ? window.innerHeight : document.body.offsetHeight);
+        $('div#modal_window').css('height',window_height+'px');
+        $('div#modal_window').css('top',scroll_position+'px');
+      });
+      $('div#modal_window').fadeIn();
+    });
+    
+    $('div#modal_window a.cancel').click(function(ev){
+      ev.stopPropagation();
+      ev.preventDefault();
+      $(window).unbind('resize');
+      $('body').css('overflow','auto');
+      $('div#modal_window').fadeOut();
+    });
+    
+    
     //change preview link if twitter/facebook/website changes
     $('input.website').change(function(ev){
       $('a#website').attr('href',$(this).attr('value'));
