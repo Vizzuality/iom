@@ -77,6 +77,9 @@ $(document).ready(function(ev){
 	
 	//  combo tags click
 	$('div.list_combo').children('span.combo_large').click(function(ev){
+		ev.stopPropagation();
+		ev.preventDefault();
+		
 		if ($(this).attr('id') == 'hidden'){
 			$('div.list_combo').find('ul.list_combo_content').css('display','inline');
 			$(this).addClass('displayed');
@@ -86,6 +89,14 @@ $(document).ready(function(ev){
 			$(this).attr('id','hidden');
 			$(this).removeClass('displayed');
 		}
+		
+		$(document).click(function(event) {
+			if (!$(event.target).closest('ul.list_combo_content').length) {
+				$('div.list_combo').find('ul.list_combo_content').css('display','none');
+				$('div.list_combo').children('span.combo_large').attr('id','hidden');
+				$('div.list_combo').children('span.combo_large').removeClass('displayed');
+			};
+		});
 	});
 	
 	$('ul.list_combo_content').find('li.element').click(function(ev){

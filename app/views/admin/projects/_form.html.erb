@@ -72,14 +72,14 @@
   </span>
   <ul class="dates">
     <li>
-      <label>START DATE</label>
-       <%= f.date_select :start_date, :start_year => Date.today.year - 5  %>
-      <!-- <a class="combo_date">09/10/2010</a> -->
+      <label>DATE PROVIDED</label>
+       <!-- <%= f.date_select :start_date, :start_year => Date.today.year - 5  %> -->
+      <a id="date_provided" class="combo_date">09/10/2010</a>
     </li>
     <li>
       <label>DATE UPDATED</label>
-       <%= f.date_select :end_date, :start_year => Date.today.year - 5  %>
-      <!-- <a class="combo_date">09/10/2010</a> -->
+       <!-- <%= f.date_select :end_date, :start_year => Date.today.year - 5  %> -->
+      <a id="date_updated" class="combo_date">09/10/2010</a>
     </li>
   </ul>
 
@@ -154,13 +154,13 @@
   <ul class="dates">
     <li>
       <label>START DATE</label>
-        <%= f.date_select :start_date, :start_year => Date.today.year - 5  %>
-      <!-- <a class="combo_date">09/10/2010</a> -->
+        <!-- <%= f.date_select :start_date, :start_year => Date.today.year - 5  %> -->
+      <a id="start_date" class="combo_date clicked">09/10/2010</a>
     </li>
     <li>
       <label>END DATE</label>
-        <%= f.date_select :end_date, :start_year => Date.today.year - 5  %>
-      <!-- <a class="combo_date">09/10/2010</a> -->
+        <!-- <%= f.date_select :end_date, :start_year => Date.today.year - 5  %> -->
+      <a id="end_date" class="combo_date">09/10/2010</a>
     </li>
   </ul>
 
