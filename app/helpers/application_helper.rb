@@ -40,6 +40,9 @@ module ApplicationHelper
     if @page
       result << @page.title
     end
+    if @cluster
+      result << @cluster.name
+    end
     return result.reverse.join(" - ")
   end
 
