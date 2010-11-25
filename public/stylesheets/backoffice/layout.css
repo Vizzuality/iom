@@ -330,7 +330,11 @@ div.block.project_info div.med div.left form span.combo_large:hover {cursor:poin
 div.block.project_info div.med div.left form h3.section {float:left; margin:30px 0 0 2px; width:100%; font:500 17px "Museo Sans"; color:#333333;}
 div.block.project_info div.med div.left form ul.dates {float:left; width:400px; height:auto; margin:0 0 0 0;}
 div.block.project_info div.med div.left form ul.dates li {float:left; width:145px; height:auto;}
-div.block.project_info div.med div.left form ul.dates li a.combo_date {float:left; background:url('/images/backoffice/projects/bkg_calendar.png') no-repeat 0 0; width:121px; height:24px; font:normal 15px Arial; color:#333333; margin:5px 0 0 0; padding:8px 0 0 8px;}
+div.block.project_info div.med div.left form ul.dates li a.combo_date {float:left; background:url('/images/backoffice/date/bkg_calendar.png') no-repeat 0 0; width:121px; height:24px; font:normal 15px Arial; color:#333333; margin:5px 0 0 0; padding:8px 0 0 8px; position:relative;}
+div.block.project_info div.med div.left form ul.dates li a.combo_date.clicked {background:url('/images/backoffice/projects/date/bkg_header_clicked_date.png') no-repeat 0 0;}
+
+div.block.project_info div.med div.left form ul.dates li  
+
 
 div.block.project_info div.med div.left form ul.clusters {float:left; width:272px; height:auto; margin:0 0 0 0;}
 div.block.project_info div.med div.left form ul.clusters li {float:left; width:262px; height:24px; background:url('/images/backoffice/projects/bkg_cluster.png') no-repeat 0 0; position:relative; font:normal 13px Arial; color:#333333; padding:6px 0 0 10px; margin:10px 0 0 0;}
