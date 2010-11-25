@@ -67,8 +67,10 @@ o2 = Organization.create  :name => "Caritas org",
                           :contact_country => "Spain",
                           :donation_country => "Spain"
 
-Cluster.create :name => 'food cluster'
-Cluster.create :name => 'health cluster'
+cluster_health = Cluster.create :name => 'Health'
+cluster_water = Cluster.create :name => 'Water'
+cluster_food_security = Cluster.create :name => 'Food Security'
+cluster_floods = Cluster.create :name => 'Floods'
 
 Sector.create :name => 'food sector'
 Sector.create :name => 'health sector'
@@ -99,6 +101,9 @@ p1 = Project.create :name => "Food Conservation",
                     :additional_information => "This is the extra information for this project...",
                     :awardee_type => 'Type of awardee #1'
 
+p1.clusters << cluster_floods
+p1.clusters << cluster_water
+
 p2 = Project.create :name => "Vegetable generation",
                     :description => "Vegetable generation....",
                     :primary_organization => o1,
@@ -117,6 +122,8 @@ p2 = Project.create :name => "Vegetable generation",
                     :intervention_id => 'i-33333',
                     :additional_information => "This is the extra information for this project...",
                     :awardee_type => 'Type of awardee #2'
+
+p2.clusters << cluster_water
 
 p3 = Project.create :name => "Fishing",
                     :description => "Fishing generation....",

@@ -36,7 +36,7 @@ class ApplicationController < ActionController::Base
         end
       else
         return true if controller_name == 'sessions'
-        if params[:controller] !~ /\Aadmin\/[a-z0-9]+\Z/
+        if params[:controller] !~ /\Aadmin\/?.+\Z/
           unless @site = Site.draft.where(:id => params[:site_id]).first
             raise ActiveRecord::RecordNotFound
           end
