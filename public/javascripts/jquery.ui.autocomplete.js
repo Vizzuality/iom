@@ -335,12 +335,19 @@ $.widget( "ui.autocomplete", {
 		$.each( items, function( index, item ) {
 			self._renderItem( ul, item );
 		});
+		$('.ui-autocomplete').append('<li class="ui-menu-item last"></li>');
 	},
 
 	_renderItem: function( ul, item) {
+		
+		// TODO: Add pluralize control relative to the concept
+		var count = item.label.split(" ")[1];
+		var concept = item.label.split(" ")[2];
+
 		return $( "<li></li>" )
 			.data( "item.autocomplete", item )
-			.append( $( "<a></a>" ).text( item.label ) )
+			.append( $( "<a></a>" ).text( item.label.split(" ")[0]))
+			.append( $( "<p class='info_amount'></p>").text(count+' '+concept))
 			.appendTo( ul );
 	},
 
@@ -481,8 +488,6 @@ $.widget("ui.menu", {
 	last: function() {
 		// $('ui-autocomplete').append('<li class="ui-menu-item last"></li>');
 		return this.active && !this.active.nextAll(".ui-menu-item").length;
-
-		
 	},
 
 	move: function(direction, edge, event) {
