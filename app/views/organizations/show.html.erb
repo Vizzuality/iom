@@ -12,7 +12,7 @@
 
         <div class="share_section">
           <% if @organization.twitter? %>
-          <a class="twitter" href="<%= @organization.twitter %>">follow us</a>
+          <a class="twitter" href="http://twitter.com/<%= @organization.twitter %>">follow us</a>
           <% end %>
           <% if @organization.twitter? && @organization.facebook? %><p>/</p><% end %>
           <% if @organization.facebook? %>

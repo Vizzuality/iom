@@ -5,7 +5,7 @@ module ApplicationHelper
       if (action_name == "specific_information" || action_name == 'new' || action_name == 'edit' || action_name == 'create' || action_name == 'update') && request.path == url_path
         raw("class=\"list_selected\"")
       else
-        raw("class=\"list_unselected\"")      
+        raw("class=\"list_unselected\"")
       end
     else
       raw("class=\"selected\"") if request.path == url_path
@@ -25,6 +25,19 @@ module ApplicationHelper
       HTML
 )
     end
+  end
+
+  def title
+    result = []
+    if @site
+      result << @site.name
+    else
+      result << "IOM"
+    end
+    if @organization
+      result << @organization.name
+    end
+    return result.reverse.join(" - ")
   end
 
 end
