@@ -81,5 +81,12 @@ class SiteTest < ActiveSupport::TestCase
     assert s.projects.include?(p4)
   end
 
+  test "After create site, pages associated to the site are created" do
+    site = create_site
+    assert !site.pages.empty?
+    assert site.pages.map(&:title).include?('About')
+    assert site.pages.map(&:title).include?('Contact')
+  end
+
 
 end

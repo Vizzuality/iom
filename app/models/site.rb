@@ -60,6 +60,7 @@ class Site < ActiveRecord::Base
   attr_accessor :geographic_context, :project_context, :show_blog
 
   before_save :set_geographic_context, :set_project_context, :set_project_context_tags_ids
+  after_create :create_pages
 
   def show_blog
     !blog_url.blank?
@@ -221,6 +222,11 @@ class Site < ActiveRecord::Base
       return if project_context_tags.blank?
       tag_names = project_context_tags.split(',').map{ |t| t.strip }.compact.delete_if{ |t| t.blank? }
       self.project_context_tags_ids = tag_names.map{ |tag_name| Tag.find_by_name(tag_name).try(:id) }.compact.join(',')
+    end
+
+    def create_pages
+      self.pages.create :title => 'About'
+      self.pages.create :title => 'Contact'
     end
 
 end
