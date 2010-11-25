@@ -8,23 +8,23 @@ $(document).ready(function(ev){
         $('div.right.menu div.delete').show();
       },300);
     }
-    
+
     //remove text from input
     $('input.main_search').focusin(function(ev){
       var value = $(this).attr('value');
-      if (value == "Search donors by name, place,..." || value == "Search NGOs by name, place,..." || value == "Search projects by name, place,..." || value == "Search sites by name, place,...") {
+      if (value == "Search donors by name, place,..." || value == "Search Organizations by name, place,..." || value == "Search projects by name, place,..." || value == "Search sites by name, place,...") {
         old_value = value;
         $(this).attr('value','');
       }
     });
     $('input.main_search').focusout(function(ev){
       var value = $(this).attr('value');
-      if (value == "") {                                      
+      if (value == "") {
         $(this).attr('value',old_value);
       }
     });
-    
-    
+
+
     //window alert -> delete something (NGO, donor, site or project)
     $('div.delete a').click(function(ev){
       ev.stopPropagation();
@@ -42,7 +42,7 @@ $(document).ready(function(ev){
       });
       $('div#modal_window').fadeIn();
     });
-    
+
     $('div#modal_window a.cancel').click(function(ev){
       ev.stopPropagation();
       ev.preventDefault();
@@ -50,8 +50,8 @@ $(document).ready(function(ev){
       $('body').css('overflow','auto');
       $('div#modal_window').fadeOut();
     });
-    
-    
+
+
     //change preview link if twitter/facebook/website changes
     $('input.website').change(function(ev){
       $('a#website').attr('href',$(this).attr('value'));
@@ -62,7 +62,7 @@ $(document).ready(function(ev){
     $('input.facebook').change(function(ev){
       $('a#facebook').attr('href',$(this).attr('value'));
     });
-    
+
     //if there is an error in some field
     $('a.error').hover(
       function() {
@@ -74,41 +74,41 @@ $(document).ready(function(ev){
         $(this).parent().hide();
       }
     );
-	
-	//  combo tags click
-	$('div.list_combo').children('span.combo_large').click(function(ev){
-		ev.stopPropagation();
-		ev.preventDefault();
-		
-		if ($(this).attr('id') == 'hidden'){
-			$('div.list_combo').find('ul.list_combo_content').css('display','inline');
-			$(this).addClass('displayed');
-			$(this).attr('id','visible');
-		}else{
-			$('div.list_combo').find('ul.list_combo_content').css('display','none');
-			$(this).attr('id','hidden');
-			$(this).removeClass('displayed');
-		}
-		
-		$(document).click(function(event) {
-			if (!$(event.target).closest('ul.list_combo_content').length) {
-				$('div.list_combo').find('ul.list_combo_content').css('display','none');
-				$('div.list_combo').children('span.combo_large').attr('id','hidden');
-				$('div.list_combo').children('span.combo_large').removeClass('displayed');
-			};
-		});
-	});
-	
-	$('ul.list_combo_content').find('li.element').click(function(ev){
-		$('input#project_primary_organization_id').val($(this).attr('id'));
-		
-		$('div.list_combo').find('ul.list_combo_content').css('display','none');
-		$('div.list_combo').children('span.combo_large').attr('id','hidden');
-		$('div.list_combo').children('span.combo_large').removeClass('displayed');
-	});
-	// end combo tags click
-	
-	
-	
+
+  //  combo tags click
+  $('div.list_combo').children('span.combo_large').click(function(ev){
+    ev.stopPropagation();
+    ev.preventDefault();
+
+    if ($(this).attr('id') == 'hidden'){
+      $('div.list_combo').find('ul.list_combo_content').css('display','inline');
+      $(this).addClass('displayed');
+      $(this).attr('id','visible');
+    }else{
+      $('div.list_combo').find('ul.list_combo_content').css('display','none');
+      $(this).attr('id','hidden');
+      $(this).removeClass('displayed');
+    }
+
+    $(document).click(function(event) {
+      if (!$(event.target).closest('ul.list_combo_content').length) {
+        $('div.list_combo').find('ul.list_combo_content').css('display','none');
+        $('div.list_combo').children('span.combo_large').attr('id','hidden');
+        $('div.list_combo').children('span.combo_large').removeClass('displayed');
+      };
+    });
+  });
+
+  $('ul.list_combo_content').find('li.element').click(function(ev){
+    $('input#project_primary_organization_id').val($(this).attr('id'));
+
+    $('div.list_combo').find('ul.list_combo_content').css('display','none');
+    $('div.list_combo').children('span.combo_large').attr('id','hidden');
+    $('div.list_combo').children('span.combo_large').removeClass('displayed');
+  });
+  // end combo tags click
+
+
+
 });
 

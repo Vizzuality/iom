@@ -8,6 +8,7 @@ class OrganizationsController < ApplicationController
 
   def show
     @organization = @site.organizations.select{ |org| org.id == params[:id].to_i }.first
+    @organization.attributes = @organization.attributes_for_site(@site)
     raise ActiveRecord::RecordNotFound unless @organization
     @projects = @organization.projects.paginate :per_page => 10, :page => params[:page], :order => 'created_at DESC'
     respond_to do |format|

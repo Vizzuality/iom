@@ -4,7 +4,7 @@
       <div class="med">
         <div class="left">
           <h2><%= @organization.name %></h2>
-          <p><%= pluralize(@projects.total_entries, 'project', 'projects') %> by this NGO</p>
+          <p><%= pluralize(@projects.total_entries, 'project', 'projects') %> by this Organization</p>
           <% unless @projects.empty? %>
             <ul>
               <% @projects.each do |project| %>
@@ -25,16 +25,16 @@
       </div>
       <div class="bottom"></div>
     </div>
-  
+
     <div class="add_new">
       <a href="<%= new_admin_project_path %>">
         Create a new project<br/>
-        <strong>Adding a project to this NGO you will be adding it to the global database</strong>
+        <strong>Adding a project to this Organization you will be adding it to the global database</strong>
       </a>
     </div>
 
   </div>
-  
+
   <script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>
 
 

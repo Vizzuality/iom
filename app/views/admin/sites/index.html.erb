@@ -1,6 +1,6 @@
 
 <div class="main_layout">
-  
+
   <% @sites.each do |site| %>
     <div class="block first">
       <div class="top"></div>
@@ -12,7 +12,7 @@
             <p>234</p>
           </li>
           <li>
-            <label>NGOs COMMITTED</label>
+            <label>Organizations COMMITTED</label>
             <p>23</p>
           </li>
           <li>
@@ -43,10 +43,10 @@
       </div>
     </div>
   <% end -%>
-  
-  
-  
-    
+
+
+
+
   <div class="add_new">
     <a href="<%= new_admin_site_path %>">Create a new site<br/><strong>You already have 5 sites created</strong></a>
   </div>
@@ -57,7 +57,7 @@
 
 
 <ul>
-  
+
 </ul>
 
 <%= will_paginate(@sites) %>

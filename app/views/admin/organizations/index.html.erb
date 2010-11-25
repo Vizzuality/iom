@@ -4,14 +4,14 @@
         <div class="two_donors">
           <%= form_tag(admin_organizations_path, :method => :get) do %>
             <label>SEARCH BY TEXT</label>
-            <input type="text" value="<%= params[:q] || 'Search NGOs by name, place,...'%>" name="q" class="main_search"/>
+            <input type="text" value="<%= params[:q] || 'Search Organizations by name, place,...'%>" name="q" class="main_search"/>
             <input type="submit" value="" />
           <% end %>
         </div>
         <div class="one_donor">
           <p><%= Organization.count %></p>
-          <label><%= Organization.count == '1' ? 'NGO' : 'NGOs' %><br/>registered</label>
-          <a href="<%= new_admin_organization_path %>">Add new NGO</a>
+          <label><%= Organization.count == '1' ? 'Organization' : 'Organizations' %><br/>registered</label>
+          <a href="<%= new_admin_organization_path %>">Add new Organization</a>
         </div>
       </div>
 
@@ -19,7 +19,7 @@
         <div class="top"></div>
         <div class="med ngos_list">
           <% unless @organizations.empty? %>
-            <h2><%= pluralize(@organizations.total_entries, 'NGO', 'NGOs') %> implementing projects
+            <h2><%= pluralize(@organizations.total_entries, 'Organization', 'Organizations') %> implementing projects
               <% if params[:q]%>
               on <a class="remove" href="<%= new_admin_organization_path %>"><%= params[:q] %></a>
               <% end %>
@@ -47,8 +47,8 @@
 
       <div class="add_new">
         <a href="<%= new_admin_organization_path %>">
-          Add a new NGO<br/>
-          <strong>There are already <%= pluralize(Organization.count, 'NGO', 'NGOs') %> registered</strong>
+          Add a new Organizations<br/>
+          <strong>There are already <%= pluralize(Organization.count, 'Organization', 'Organizations') %> registered</strong>
         </a>
       </div>
     </div>
