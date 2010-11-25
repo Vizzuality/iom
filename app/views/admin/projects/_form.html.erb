@@ -291,6 +291,6 @@ $(function() {
           str += $(this).text() + " ";
         });
     $('#sectors').append('<span id="sector_'+$(this).val()+'"><input type="checkbox" name="project[sectors_ids][]" value="' +$(this).val() +'" checked="checked"/>' + str + ' <a href="#sector_'+$(this).val()+'" class="remove_this">x</a><br /></span>');
-  })
+  });
 });
 </script>
