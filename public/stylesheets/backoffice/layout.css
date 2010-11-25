@@ -239,8 +239,16 @@ div.two_projects div.content {float:left; width:583px; height:auto; background:u
 div.two_projects span.bottom {float:left; width:643px; height:9px; background:url('/images/backoffice/backgrounds/two_bottom.png') no-repeat 0 0;}
 div.two_projects ul.combos {float:left; width:680px; height:60px; margin:20px 0 0 0;}
 div.two_projects ul.combos li {float:left; width:147px; height:100%;}
-div.two_projects ul.combos li a.combo {float:left; margin:6px 0 0 0; background:url('/images/backoffice/projects/single_combo_head.png') no-repeat 0 0; font:normal 13px Arial; color:#333333; text-decoration:none; width:121px; height:24px; padding:8px 0 0 11px;}
-div.two_projects ul.combos li a.combo:hover {cursor:pointer;}
+div.two_projects ul.combos li span.combo {float:left; margin:6px 0 0 0; background:url('/images/backoffice/projects/single_combo_head.png') no-repeat 0 0; font:normal 13px Arial; color:#333333; text-decoration:none; width:134px; height:24px; padding:8px 0 0 11px; position:relative;}
+div.two_projects ul.combos li span.combo:focus {outline:none;}
+div.two_projects ul.combos li span.combo ul.elements {display:none;}
+div.two_projects ul.combos li span.combo.clicked {background:url('/images/backoffice/projects/combos/index_search_head.png') no-repeat 0 0; width:135px; position:relative;}
+div.two_projects ul.combos li span.combo.clicked ul.elements {position:absolute; top:31px; left:0; display:inline;}
+div.two_projects ul.combos li span.combo.clicked ul.elements li {float:left; width:123px; height:auto; background:url('/images/backoffice/projects/combos/index_search_content.png') repeat-y 0; padding:5px 0 5px 12px;}
+div.two_projects ul.combos li span.combo.clicked ul.elements li:hover {background:url('/images/backoffice/projects/combos/index_search_content_hover.png') repeat-y 0;}
+div.two_projects ul.combos li span.combo.clicked ul.elements li.first {float:left; width:135px; height:6px; background:url('/images/backoffice/projects/combos/index_search_content_first.png') no-repeat 0 0; margin:0; padding:0;}
+div.two_projects ul.combos li span.combo.clicked ul.elements li.last {float:left; width:135px; height:6px; background:url('/images/backoffice/projects/combos/index_search_bottom.png') no-repeat 0 0;}
+div.two_projects ul.combos li span.combo:hover {cursor:pointer;}
 
 div.two_projects label {float:left; margin:0 0 0 3px; font:bold 11px Arial; color:#999999;}
 div.two_projects form {float:left; position:relative; width:100%;}
@@ -329,11 +337,26 @@ div.block.project_info div.med div.left form span.combo_large.displayed {backgro
 div.block.project_info div.med div.left form span.combo_large:hover {cursor:pointer;}
 div.block.project_info div.med div.left form h3.section {float:left; margin:30px 0 0 2px; width:100%; font:500 17px "Museo Sans"; color:#333333;}
 div.block.project_info div.med div.left form ul.dates {float:left; width:400px; height:auto; margin:0 0 0 0;}
-div.block.project_info div.med div.left form ul.dates li {float:left; width:145px; height:auto;}
-div.block.project_info div.med div.left form ul.dates li a.combo_date {float:left; background:url('/images/backoffice/date/bkg_calendar.png') no-repeat 0 0; width:121px; height:24px; font:normal 15px Arial; color:#333333; margin:5px 0 0 0; padding:8px 0 0 8px; position:relative;}
-div.block.project_info div.med div.left form ul.dates li a.combo_date.clicked {background:url('/images/backoffice/projects/date/bkg_header_clicked_date.png') no-repeat 0 0;}
+div.block.project_info div.med div.left form ul.dates li {float:left; width:142px; height:auto;}
+div.block.project_info div.med div.left form ul.dates li span.combo_date {float:left; background:url('/images/backoffice/projects/date/bkg_calendar.png') no-repeat 0 0; width:121px; height:24px; font:normal 15px Arial; color:#333333; margin:5px 0 0 0; padding:8px 0 0 8px; position:relative;}
+div.block.project_info div.med div.left form ul.dates li span.combo_date:hover {cursor:pointer;}
+div.block.project_info div.med div.left form ul.dates li span.combo_date div.select_dates {display:none;}
+div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked {background:url('/images/backoffice/projects/date/bkg_header_clicked_date.png') no-repeat 0 0;}
+div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates {position:absolute; top:30px; left:0; background:url('/images/backoffice/projects/date/bkg_date_content.png') no-repeat 0 0; width:416px; height:68px; z-index:20; display:inline;}
+div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates.end_date {background:url('/images/backoffice/projects/date/bkg_date_content_right.png') no-repeat 0 0; position:absolute; top:30px; left:-142px;} 
 
-div.block.project_info div.med div.left form ul.dates li  
+div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates span.month {float:left; width:124px; height:51px; margin:10px 9px 0 10px;}
+div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates span.day {float:left; width:62px; height:51px; margin:10px 9px 0 8px;}
+div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates span.year {float:left; width:76px; height:51px; margin:10px 0 0 0;}
+
+div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates p.title {float:left; margin:0 0 0 5px; font:normal 11px Arial; color:#606851; text-transform:uppercase; width:auto;}
+div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates a {font:normal 13px Arial; color:#333333;}
+div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates a:hover {cursor:pointer;}
+div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates a.month_combo {float:left; margin:2px 0 0 0; background:url('/images/backoffice/projects/date/month_combo.png') no-repeat 0 0; width:123px; height:23px; padding:9px 0 0 10px;}
+div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates a.day_combo {float:left; margin:2px 0 0 0; background:url('/images/backoffice/projects/date/day_combo.png') no-repeat 0 0; width:54px; height:23px; padding:9px 0 0 10px;}
+div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates a.year_combo {float:left; margin:2px 0 0 0; background:url('/images/backoffice/projects/date/year_combo.png') no-repeat 0 0; width:68px; height:23px; padding:9px 0 0 10px;}
+div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates a.save_date_bttn {float:left; margin:26px 0 0 10px; width:95px; height:26px; background:url('/images/backoffice/projects/date/save_bttn.png') no-repeat 0 0; font:500 15px "Museo Sans"; color:white; text-align:center; padding:6px 0 0 0; text-shadow:0 1px #759731; }
+div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates a.save_date_bttn:hover {background-position:0 -32px; cursor:pointer;}
 
 
 div.block.project_info div.med div.left form ul.clusters {float:left; width:272px; height:auto; margin:0 0 0 0;}

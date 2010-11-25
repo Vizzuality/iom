@@ -1,7 +1,7 @@
 var old_value;
 
-
 $(document).ready(function(ev){
+
     if ($('div.right.menu').length>0) {
       $('div.right.menu').height($('div.block div.med div.left').height());
     }
@@ -33,6 +33,117 @@ $(document).ready(function(ev){
         $(this).parent().hide();
       }
     );
+
+	//  combo status 
+	$('span#status_combo_search').click(function(ev){
+		ev.stopPropagation();
+		ev.preventDefault();
+
+		if (!$(this).hasClass('clicked')){
+			$(this).addClass('clicked');
+		}else {
+			$(this).removeClass('clicked');
+		}
+		
+		$(document).click(function(event) {
+			if (!$(event.target).closest('span#status_combo_search').length) {
+				$('span#status_combo_search').removeClass('clicked');
+			};
+		});
+	});
+
+	$('span#status_combo_search').find('a').click(function(ev){
+		ev.stopPropagation();
+		ev.preventDefault();
+		var id = $(this).attr('id');
+		$('input#status_input').val(id);
+		$('span#status_combo_search').removeClass('clicked');
+	});
+
+
+	//  COMBO COUNTRY
+	$('span#country_combo_search').click(function(ev){
+		ev.stopPropagation();
+		ev.preventDefault();
+
+		if (!$(this).hasClass('clicked')){
+			$(this).addClass('clicked');
+		}else {
+			$(this).removeClass('clicked');
+		}
+		
+		$(document).click(function(event) {
+			if (!$(event.target).closest('span#country_combo_search').length) {
+				$('span#country_combo_search').removeClass('clicked');
+			};
+		});
+	});
+
+	$('span#country_combo_search').find('a').click(function(ev){
+		ev.stopPropagation();
+		ev.preventDefault();
+		var id = $(this).attr('id');
+		$('input#country_input').val(id);
+		$('span#country_combo_search').removeClass('clicked');
+	});
+	
+	// END COUNTRY
+
+	//  COMBO CLUSTER
+	$('span#cluster_combo_search').click(function(ev){
+		ev.stopPropagation();
+		ev.preventDefault();
+
+		if (!$(this).hasClass('clicked')){
+			$(this).addClass('clicked');
+		}else {
+			$(this).removeClass('clicked');
+		}
+		
+		$(document).click(function(event) {
+			if (!$(event.target).closest('span#cluster_combo_search').length) {
+				$('span#cluster_combo_search').removeClass('clicked');
+			};
+		});
+	});
+
+	$('span#cluster_combo_search').find('a').click(function(ev){
+		ev.stopPropagation();
+		ev.preventDefault();
+		var id = $(this).attr('id');
+		$('input#cluster_input').val(id);
+		$('span#cluster_combo_search').removeClass('clicked');
+	});
+	
+	// END CLUSTER
+
+	//  SECTOR CLUSTER
+	$('span#sector_combo_search').click(function(ev){
+		ev.stopPropagation();
+		ev.preventDefault();
+
+		if (!$(this).hasClass('clicked')){
+			$(this).addClass('clicked');
+		}else {
+			$(this).removeClass('clicked');
+		}
+		
+		$(document).click(function(event) {
+			if (!$(event.target).closest('span#sector_combo_search').length) {
+				$('span#sector_combo_search').removeClass('clicked');
+			};
+		});
+	});
+
+	$('span#sector_combo_search').find('a').click(function(ev){
+		ev.stopPropagation();
+		ev.preventDefault();
+		var id = $(this).attr('id');
+		$('input#sector_input').val(id);
+		$('span#sector_combo_search').removeClass('clicked');
+	});
+	
+	// END CLUSTER
 	
 	//  combo tags click
 	$('div.list_combo').children('span.combo_large').click(function(ev){
@@ -67,6 +178,21 @@ $(document).ready(function(ev){
 	});
 	// end combo tags click
 	
+	$('span.combo_date').click(function(ev){
+		ev.stopPropagation();
+		ev.preventDefault();
+		
+		if (!$(this).hasClass('clicked')){
+			$('span.combo_date.clicked').removeClass('clicked');
+			$(this).addClass('clicked');
+		}
+
+		$(document).click(function(event) {
+			if (!$(event.target).closest('span.combo_date').length) {
+				$('span.combo_date.clicked').removeClass('clicked');
+			};
+		});
+	});
 	
 	
 });
