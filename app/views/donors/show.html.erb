@@ -1,0 +1,72 @@
+<h1><%= @donor.name %></h1>
+<p>Funding <%= pluralize(@donor.donated_projects.count, 'project', 'projects') %></p>
+
+<div class="main">
+<% unless @projects.empty? %>
+  <% @projects.each do |project| %>
+  <div class="project">
+    <%= link_to(project.name, project_path(project)) %>
+    by <%= project.primary_organization.name %>
+    <% clusters_sectors = project.clusters + project.sectors %>
+    <% unless clusters_sectors.empty? %>
+    on <%= raw(clusters_sectors.map{ |e| link_to(e.name, e.is_a?(Cluster) ? cluster_path(e) : sector_path(e)) }.to_sentence) %>
+    <% end %>
+    <% unless project.regions.empty? %>
+      <%= project.regions.first.name %>
+    <% end %>
+  </div>
+  <% end %>
+
+  <%= will_paginate(@projects) %>
+<% end %>
+</div>
+
+<div class="sidebar">
+  <% if @donor.logo_file_name? %>
+  <p><%= image_tag(@donor.logo.url) %></p>
+  <% end %>
+  <%= simple_format(@donor.description) %>
+
+  <% if @donor.twitter? %>
+  <p><%= link_to("follow us", "http://twitter.com/#{@donor.twitter}") %></p>
+  <% end %>
+
+  <% if @donor.facebook? %>
+  <p><%= link_to("visit our page", "http://facebook.com/#{@donor.facebook}") %></p>
+  <% end %>
+
+  <% if @donor.website? %>
+  <p><%= link_to(@donor.website, @donor.website, :rel => 'nofollow', :target => '_blank') %></p>
+  <% end %>
+
+  <div>
+    <h3>Donations by cluster</h3>
+
+  </div>
+
+  <div>
+    <h3>Donations by location</h3>
+    TODO: falta asociar proyectos a lugares, y luego filtrar y pintar gráfico
+  </div>
+
+  <% unless @donor.resources.empty? %>
+  <div>
+    <h3>Additional information</h3>
+    <ul>
+      <% @donor.resources.each do |resource| %>
+      <li><%= link_to(resource.title, resource.url, :rel => 'nofollow', :target => '_blank') %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+  <div>
+    <h3>Contact information</h3>
+    <p><%= @donor.contact_person_name %></p>
+    <p><%= @donor.contact_person_position %></p>
+    <p><%= @donor.contact_company %></p>
+    <p><%= link_to(@donor.contact_email, "mailto:#{@donor.contact_email}") %></p>
+    <p><%= @donor.contact_phone_number %></p>
+  </div>
+
+</div>

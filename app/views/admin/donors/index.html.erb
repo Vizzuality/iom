@@ -17,12 +17,12 @@
     <div class="block">
       <div class="top"></div>
       <div class="med donors_list">
-        <h2><%= pluralize(@donors.total_entries, 'donor', 'donors') %> supporting projects
-          <% if params[:q]%>
-          on <a class="remove" href="/admin/donors"><%= params[:q] %></a>
-          <% end %>
-        </h2>
         <% unless @donors.empty? %>
+          <h2><%= pluralize(@donors.total_entries, 'donor', 'donors') %> supporting projects
+            <% if params[:q]%>
+            on <a class="remove" href="/admin/donors"><%= params[:q] %></a>
+            <% end %>
+          </h2>
           <ul>
             <% @donors.each do |donor| %>
               <li>
@@ -37,6 +37,11 @@
               </li>
             <% end -%>
           </ul>
+        <% else %>
+          <div class="no_results">
+            <h2>There are not donors for your search</h2>
+            <p>Try to search with different terms or simply <a href="/admin/donors">browse all donors</a></p>
+          </div>
         <% end -%>
       </div>
       <div class="bottom_grey paginate">
@@ -52,4 +57,4 @@
     </div>
   </div>
   
-    <script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>

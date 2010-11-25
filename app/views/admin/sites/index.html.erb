@@ -1,11 +1,8 @@
-<h2>Sites</h2>
-
-<p><%= link_to('+ new site', new_admin_site_path) %></p>
-
-<ul>
-  <% @sites.each do |site| %>
-    <li><%= link_to(site.name, edit_admin_site_path(site)) %></li>
-  <% end -%>
-</ul>
+<div class="main_layout">
+  <%= render :partial => 'admin/sites/site', :collection => @sites %>
+  <div class="add_new">
+    <a href="<%= new_admin_site_path %>">Create a new site<br/><strong>You already have <%= pluralize(Site.count, 'site', 'sites') %> created</strong></a>
+  </div>
+</div>
 
 <%= will_paginate(@sites) %>

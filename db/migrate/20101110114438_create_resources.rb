@@ -7,6 +7,7 @@ class CreateResources < ActiveRecord::Migration
       t.integer :element_type
       t.timestamps
     end
+    add_index :resources, [:element_type, :element_id]
   end
 
   def self.down

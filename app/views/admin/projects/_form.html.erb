@@ -17,27 +17,27 @@
   </span>
 
   <label>ORGANIZATION</label>
-	<div class="list_combo">
-		
-  		<span id="hidden" class="combo_large">
-			<a class="organization"><%= Organization.first.name %></a>
-		</span>
-		<%= f.hidden_field :primary_organization_id , :value => Organization.first.id %>
-		<ul class="list_combo_content">
-			<li class="first"></li>
-				<% Organization.all.each do |organization| %>
-					<li class="element" id="<%= organization.id %>"><%= organization.name %><p class="amount_projects"><%= pluralize(organization.projects.count, 'project', 'projects')%></p></li>
-				<% end -%>
-			<li class="last"></li>
-		</ul>
-	</div>
+  <div class="list_combo">
 
-  <label>IMPLEMENTING NGO</label>
+      <span id="hidden" class="combo_large">
+      <a class="organization"><%= Organization.first.name %></a>
+    </span>
+    <%= f.hidden_field :primary_organization_id , :value => Organization.first.id %>
+    <ul class="list_combo_content">
+      <li class="first"></li>
+        <% Organization.all.each do |organization| %>
+          <li class="element" id="<%= organization.id %>"><%= organization.name %><p class="amount_projects"><%= pluralize(organization.projects.count, 'project', 'projects')%></p></li>
+        <% end -%>
+      <li class="last"></li>
+    </ul>
+  </div>
+
+  <label>IMPLEMENTING ORGANIZATION</label>
   <span class="input_large">
     <%= f.text_field :implementing_organization %>
   </span>
 
-  <label>PARTNER NGOS</label>
+  <label>PARTNER ORGANIZATIONS</label>
   <span class="input_large">
     <%= f.text_field :partner_organizations %>
   </span>
@@ -163,7 +163,7 @@
           <% @project.sectors.each do |sector| %>
           <span id="sector_<%= sector.id %>"><input type="checkbox" name="project[sectors_ids][]" value="<%= sector.id %>" checked="checked"/><%= sector.name %><a href="#sector_<%= sector.id %>" class="remove_this">x</a><br /></span>
           <% end -%>
-        <% end -%>	<!-- AÑADIR "project[sectors_ids][]" -->
+        <% end -%>  <!-- AÑADIR "project[sectors_ids][]" -->
       </div>
       <%= select_tag :select_sector, options_for_select([['Choose a sector',nil]] + Sector.all.collect{ |o| [o.name, o.id] }) %>
       </div>
@@ -288,7 +288,7 @@ $(function() {
   }
   $("#project_tags").autocomplete({
     source: function( request, response ) {
-	  $('span#tags_combo').addClass('active');
+    $('span#tags_combo').addClass('active');
       var value = $("#project_tags").val();
       if (value.indexOf(',') != -1 ) {
         value = value.substring(value.indexOf(',')+1, value.length);
@@ -329,8 +329,8 @@ $(function() {
        this.element.children("li.ui-menu-item:odd a").addClass("ui-menu-item-alternate");
     }
   });
-	
-	// X 
+
+  // X
   $('.remove_this').live('click',function(){
     $($(this).attr('href')).children().each(function(){
       $(this).remove();
@@ -338,8 +338,8 @@ $(function() {
     $($(this).attr('href')).remove();
   });
 
-	
-	// ADD CLUSTER
+
+  // ADD CLUSTER
   $('#select_cluster').change(function(){
     var str = ""
     $("select#select_cluster option:selected").each(function () {

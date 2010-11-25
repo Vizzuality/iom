@@ -1,38 +1,43 @@
 
     <div class="main_layout">
-      <div class="block first">
+      <div class="block">
         <div class="two_donors">
           <%= form_tag(admin_organizations_path, :method => :get) do %>
             <label>SEARCH BY TEXT</label>
-            <input type="text" value="<%= params[:q] || 'Search NGOs by name, place,...'%>" name="q" class="main_search"/>
+            <input type="text" value="<%= params[:q] || 'Search Organizations by name, place,...'%>" name="q" class="main_search"/>
             <input type="submit" value="" />
           <% end %>
         </div>
         <div class="one_donor">
           <p><%= Organization.count %></p>
-          <label><%= Organization.count == '1' ? 'NGO' : 'NGOs' %><br/>registered</label>
-          <a href="<%= new_admin_organization_path %>">Add new NGO</a>
+          <label><%= Organization.count == '1' ? 'Organization' : 'Organizations' %><br/>registered</label>
+          <a href="<%= new_admin_organization_path %>">Add new Organization</a>
         </div>
       </div>
 
       <div class="block">
         <div class="top"></div>
         <div class="med ngos_list">
-          <h2><%= pluralize(@organizations.total_entries, 'NGO', 'NGOs') %> implementing projects
-            <% if params[:q]%>
-            on <a class="remove" href="/admin/organizations"><%= params[:q] %></a>
-            <% end %>
-          </h2>
           <% unless @organizations.empty? %>
-          <ul>
-            <% @organizations.each do |organization| %>
-              <li>
-                <h3><%= link_to(organization.name, edit_admin_organization_path(organization)) %></h3>
-                <p class="red"><%= link_to(pluralize(organization.projects.count,' project','projects'), edit_admin_organization_path(organization)) %></a></p>
-                <p><%= organization.contact_email%></p>
-              </li>
-            <% end -%>
-          </ul>
+            <h2><%= pluralize(@organizations.total_entries, 'Organization', 'Organizations') %> implementing projects
+              <% if params[:q]%>
+              on <a class="remove" href="<%= new_admin_organization_path %>"><%= params[:q] %></a>
+              <% end %>
+            </h2>
+            <ul>
+              <% @organizations.each do |organization| %>
+                <li>
+                  <h3><%= link_to(organization.name, edit_admin_organization_path(organization)) %></h3>
+                  <p class="red"><%= link_to(pluralize(organization.projects.count,' project','projects'), edit_admin_organization_path(organization)) %></a></p>
+                  <p><a href="mailto:<%= organization.contact_email %>"><%= truncate(organization.contact_email, :length => 20, :omission => '...') %></a></p>
+                </li>
+              <% end -%>
+            </ul>
+          <% else %>
+            <div class="no_results">
+              <h2>There are not organizations for your search</h2>
+              <p>Try to search with different terms or simply <a href="<%= new_admin_organization_path %>">browse all organizations</a></p>
+            </div>
           <% end %>
         </div>
         <div class="bottom_grey paginate">
@@ -42,8 +47,8 @@
 
       <div class="add_new">
         <a href="<%= new_admin_organization_path %>">
-          Add a new NGO<br/>
-          <strong>There are already <%= pluralize(Organization.count, 'NGO', 'NGOs') %> registered</strong>
+          Add a new Organizations<br/>
+          <strong>There are already <%= pluralize(Organization.count, 'Organization', 'Organizations') %> registered</strong>
         </a>
       </div>
     </div>

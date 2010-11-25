@@ -9,6 +9,8 @@ class CreateTags < ActiveRecord::Migration
       t.integer :tag_id
       t.integer :project_id
     end
+    add_index :projects_tags, :tag_id
+    add_index :projects_tags, :project_id
   end
 
   def self.down

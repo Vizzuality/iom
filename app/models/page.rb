@@ -10,6 +10,7 @@
 #  permalink   :string(255)     
 #  created_at  :datetime        
 #  updated_at  :datetime        
+#  parent_id   :integer         
 #
 
 class Page < ActiveRecord::Base
@@ -21,6 +22,28 @@ class Page < ActiveRecord::Base
   validates_uniqueness_of :title, :scope => [:site_id]
 
   before_create :set_permalink
+
+  scope :parents, where(:parent_id => nil)
+
+  def children
+    Page.where(:parent_id => self.id)
+  end
+
+  def to_param
+    permalink
+  end
+
+  def self.about(site)
+    site.pages.find_by_title('About')
+  end
+
+  def self.contact(site)
+    site.pages.find_by_title('Contact')
+  end
+
+  def self.analysis(site)
+    site.pages.find_by_title('Analisys')
+  end
 
   private
 

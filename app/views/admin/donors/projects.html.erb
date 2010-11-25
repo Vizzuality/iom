@@ -11,7 +11,7 @@
             <li>
               <span class="first">
                 <h3><%= link_to(project.name, edit_admin_project_path(project)) %></h3>
-                <p class="<%= project.finished? ? 'Closed' : 'Active' %>"><%= project.finished? ? 'Closed' : 'Active' %></p>
+                <p class="<%= project.finished? ? 'closed' : 'active' %>"><%= project.finished? ? 'Closed' : 'Active' %></p>
               </span>
               <p>$12,000</p>
             </li>
@@ -25,3 +25,5 @@
     </div>
     <div class="bottom"></div>
   </div>
+  
+  <script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>

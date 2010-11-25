@@ -20,11 +20,11 @@
 #  site_specific_information :text            
 #  created_at                :datetime        
 #  updated_at                :datetime        
-#  the_geom                  :geometry        not null
 #  activities                :text            
 #  intervention_id           :string(255)     
 #  additional_information    :text            
 #  awardee_type              :string(255)     
+#  the_geom                  :geometry        not null
 #
 
 class Project < ActiveRecord::Base
@@ -96,6 +96,12 @@ class Project < ActiveRecord::Base
 
   def finished?
     end_date < Date.today
+  end
+
+  def months_left
+    unless finished?
+      (end_date - Date.today).to_i / 30
+    end
   end
 
   private

@@ -29,7 +29,19 @@
                 <%= f.text_field :geoiq_parameter_2, :class=>"short" %>
               </div>
             </div>
-            
+
+            <div class="common">
+              <h3>GOOGLE ANALYTICS</h3>
+              <div class="short_field">
+                <%= f.label :google_analytics_username %>
+                <%= f.text_field :google_analytics_username, :class=>"short" %>
+              </div>
+              <div class="short_field">
+                <%= f.label :google_analytics_password %>
+                <%= f.password_field :google_analytics_password, :class=>"short" %>
+              </div>
+            </div>
+
             <div class="final">
               <%= f.submit 'Save' %>
             </div>
@@ -42,12 +54,12 @@
           </div>
           <div class="small_bubble">
             <h3>WHAT IS THIS?</h3>
-            <p>Technical configuration of the NGO Aid / GeoIQ integration</p>
+            <p>Technical configuration of the Organization Aid / GeoIQ integration</p>
           </div>
         </div>
       </div>
       <div class="bottom"></div>
     </div>
   </div>
-  
-    
+
+

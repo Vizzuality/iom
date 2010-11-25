@@ -1,7 +1,7 @@
 Iom::Application.routes.draw do
 
   # Home
-  root :to => "sites_dashboard#home"
+  root :to => "sites#home"
 
   # Session
   resource :session, :only => [:new, :create, :destroy]
@@ -17,8 +17,7 @@ Iom::Application.routes.draw do
   resources :organizations, :only => [:index, :show]
   # pages:
   #  - all the default pages associated to this project should be routed
-  match '/about'   => 'pages#show_about',   :as => :about
-  match '/contact' => 'pages#show_contact', :as => :contact
+  match '/p/:id' => 'pages#show', :as => :page
 
   # Administration
   namespace :admin do

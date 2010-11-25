@@ -8,6 +8,8 @@ class CreatePages < ActiveRecord::Migration
       t.string    :permalink
       t.timestamps
     end
+    add_index :pages, :site_id
+    add_index :pages, :permalink
   end
 
   def self.down

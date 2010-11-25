@@ -10,6 +10,7 @@ class CreateUsers < ActiveRecord::Migration
       t.column :remember_token,            :string, :limit => 40
       t.column :remember_token_expires_at, :datetime
     end
+    add_index :users, :email
   end
 
   def self.down

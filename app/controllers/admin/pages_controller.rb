@@ -3,7 +3,7 @@ class Admin::PagesController < ApplicationController
   before_filter :login_required, :set_site
 
   def index
-    @pages = @site.pages.paginate :per_page => 20, :order => 'created_at DESC', :page => params[:page]
+    @pages = @site.pages.parents.paginate :per_page => 20, :order => 'created_at DESC', :page => params[:page]
   end
 
   def new

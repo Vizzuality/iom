@@ -52,7 +52,7 @@
     <%= f.select :project_context_cluster_id, Cluster.all.collect{ |c| [c.name, c.id] }, {:prompt => 'Select a cluster'}, {:id => 'pc_cluster_section', :style => (@site.project_context_cluster_id? ? 'display:block' : 'display:none')} %>
 
     <input type="checkbox" name="site[project_context][]" class="choose_pc" value="organization" id="pc_organization" <%= 'checked="checked"' if @site.project_context_organization_id? %>/>
-    <label for="pc_organization">Include only projects from a particual NGO</label><br />
+    <label for="pc_organization">Include only projects from a particual Organization</label><br />
     <%= f.select :project_context_organization_id, Organization.all.collect{ |o| [o.name, o.id] }, {:prompt => 'Select an organization'}, {:id => 'pc_organization_section', :style => (@site.project_context_organization_id? ? 'display:block' : 'display:none')} %>
 
     <input type="checkbox" name="site[project_context][]" class="choose_pc" value="tags" id="pc_tags" <%= 'checked="checked"' if @site.project_context_tags? %>/>

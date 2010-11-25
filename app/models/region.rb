@@ -3,8 +3,8 @@
 # Table name: regions
 #
 #  id         :integer         not null, primary key
-#  country_id :integer         
 #  name       :string(255)     
+#  country_id :integer         
 #
 
 class Region < ActiveRecord::Base

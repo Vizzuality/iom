@@ -29,9 +29,9 @@
 #  project_context_tags            :string(255)
 #  created_at                      :datetime
 #  updated_at                      :datetime
-#  geographic_context_geometry     :geometry
 #  project_context_tags_ids        :string(255)
 #  status                          :boolean
+#  geographic_context_geometry     :geometry
 #
 
 class Site < ActiveRecord::Base
@@ -203,6 +203,27 @@ class Site < ActiveRecord::Base
     Sector.find_by_sql("select sectors.* from sectors, projects_sectors where projects_sectors.project_id in (#{projects_ids.join(',')}) AND sectors.id = projects_sectors.sector_id").uniq
   end
 
+  def visits
+    return if self.google_analytics_id.blank? || Settings.first.google_analytics_username.blank? || Settings.first.google_analytics_password.blank?
+    Garb::Session.login(Settings.first.google_analytics_username, Settings.first.google_analytics_password)
+    profile = Garb::Profile.all.detect{|p| p.web_property_id == self.google_analytics_id}
+    report = Garb::Report.new(profile)
+    report.metrics :pageviews
+    result = report.results.first
+    result.pageviews.to_i
+  end
+
+  def visits_last_week
+    return if self.google_analytics_id.blank? || Settings.first.google_analytics_username.blank? || Settings.first.google_analytics_password.blank?
+    Garb::Session.login(Settings.first.google_analytics_username, Settings.first.google_analytics_password)
+    profile = Garb::Profile.all.detect{|p| p.web_property_id == self.google_analytics_id}
+    report = Garb::Report.new(profile, :start_date => (Date.today - 7.days), :end_date => Date.today)
+    report.metrics :pageviews
+    report.dimensions :date
+    result = report.results.first
+    result.pageviews.to_i
+  end
+
   private
 
     def clean_html
@@ -252,6 +273,7 @@ class Site < ActiveRecord::Base
     def create_pages
       self.pages.create :title => 'About'
       self.pages.create :title => 'Contact'
+      self.pages.create :title => 'Analysis'
     end
 
 end

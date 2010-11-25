@@ -12,6 +12,7 @@ class CreateMediaResources < ActiveRecord::Migration
       t.text     :vimeo_embed_html
       t.timestamps
     end
+    add_index :media_resources, [:element_type, :element_id]
   end
 
   def self.down

@@ -10,6 +10,7 @@ class CreatePartners < ActiveRecord::Migration
       t.datetime :logo_updated_at
       t.timestamps
     end
+    add_index :partners, :site_id
   end
 
   def self.down

@@ -33,9 +33,9 @@
 
   <div class="short_field">
     <%= f.label :website %>
-    <%= f.text_field :website, :class=>"short" %>
+    <%= f.text_field :website, :class=>"short website" %>
   </div>
-  <p class="preview"><a href="#" class="preview" target="_blank">preview the link</a></p>
+  <a href="<%= @organization.website %>" class="preview no_margin" id="website" target="_blank">preview the link</a>
 
   <div class="short_field">
     <%= f.label :staff %>
@@ -53,13 +53,13 @@
       <%= f.label :twitter %>
       <%= f.text_field :twitter, :class=>"short twitter" %>
     </div>
-    <p class="preview"><a href="#" class="preview" target="_blank">preview the link</a></p>
+    <a href="<%= @organization.twitter %>" class="preview no_margin" id="twitter" target="_blank">preview the link</a>
 
     <div class="field">
       <%= f.label :facebook %>
       <%= f.text_field :facebook, :class=>"long facebook" %>
     </div>
-    <p class="preview"><a href="#" class="preview" target="_blank">preview the link</a></p>
+    <a href="<%= @organization.facebook %>" class="preview" id="facebook" target="_blank">preview the link</a>
   </div>
 
   <div class="common">
@@ -159,3 +159,5 @@
   <%= f.submit 'Save', :class => "#{'error' if @organization.invalid? && action_name != 'new'}" %>
 
 <% end -%>
+
+<script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>

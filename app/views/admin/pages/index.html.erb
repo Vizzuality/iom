@@ -5,7 +5,15 @@
 
   <ul>
     <% @pages.each do |page| %>
-      <li><%= link_to(page.title, edit_admin_site_page_path(@site, page)) %> - <%= link_to("Delete", admin_site_page_path(@site, page), :method => :delete, :confirm => '¿Are you sure?') %></li>
+      <li><%= link_to(page.title, edit_admin_site_page_path(@site, page)) %> - <%= link_to("Delete", admin_site_page_path(@site, page), :method => :delete, :confirm => '¿Are you sure?') %>
+      <% unless page.children.empty? %>
+      <ul>
+        <% page.children.each do |children| %>
+        <li>-- <%= link_to(children.title, edit_admin_site_page_path(@site, children)) %> - <%= link_to("Delete", admin_site_page_path(@site, children), :method => :delete, :confirm => '¿Are you sure?') %></li>
+        <% end %>
+      </ul>
+      <% end %>
+      </li>
     <% end -%>
   </ul>
 

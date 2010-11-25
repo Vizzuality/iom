@@ -55,7 +55,7 @@ feature "Organizations" do
 
     assert_equal 200001, caritas.budget
 
-    click_link_or_button 'Delete this NGO'
+    click_link_or_button 'Delete this Organization'
 
     page.should have_css("h2", :text => "Organizations")
 
@@ -125,9 +125,9 @@ feature "Organizations" do
     assert_equal 0, caritas.resources.count
     page.should have_css("div.sidebar ul li", :text => 'Resources (0)')
 
-    click_link_or_button 'NGO projects (1)'
+    click_link_or_button 'Organization projects (1)'
 
-    page.should have_css("p", :text => '1 project by this NGO')
+    page.should have_css("p", :text => '1 project by this Organization')
     page.should have_css("div.project h3", :text => project.name)
 
     click_link_or_button 'Create a new project'
