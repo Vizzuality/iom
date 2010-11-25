@@ -33,8 +33,9 @@
     <div class="one_project">
     <span class="top"></span>
     <div class="content">
-        <p><%= Project.count %></p>
-        <label><%= pluralize(Project.count, 'project', 'projects') %><br/>registered</label>
+        <p><%= Project.count %></p>  
+		<!-- NOTE: Pluralize do the following condition but we don't want duplicate Project.count information -->
+        <label><%= ((Project.count > 1)&&(Project.count != 0))? 'projects':'project' %><br/>registered</label>   
         <a class="add_project" href="<%= new_admin_project_path %>">Add new project</a>
         <a class="import_csv" href="#">Import a .csv file</a>
     </div>
