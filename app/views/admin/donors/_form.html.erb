@@ -26,21 +26,21 @@
     <%= f.label :website %>
     <%= f.text_field :website, :class=>"long" %>
   </div>
-  <a href="#" class="preview" target="_blank">preview the link</a>
+  <a href="<%= @donor.website %>" class="preview" target="_blank" id="website">preview the link</a>
 
 
   <div class="short_field">
     <%= f.label :twitter %>
     <%= f.text_field :twitter, :class=>"short twitter" %>
   </div>
-  <a href="#" class="preview" target="_blank">preview the link</a>
+  <a href="<%= @donor.twitter %>" class="preview no_margin" target="_blank" id="twitter">preview the link</a>
 
 
   <div class="field">
     <%= f.label :facebook %>
     <%= f.text_field :facebook, :class=>"long facebook" %>
   </div>
-  <a href="#" class="preview" target="_blank">preview the link</a>
+  <a href="<%= @donor.facebook %>" class="preview" target="_blank" id="facebook">preview the link</a>
 
 
   <div class="common">

@@ -56,12 +56,12 @@
           </div>
 
           <div id="new_video" class="add_media" style="display:none">
-            <h3>Add a new video</h3>
+            <h3>Add a new video from <img src="/images/backoffice/media/vimeo.jpg" width="64" height="19" alt="Vimeo"></h3>
             <p>or <a href="javascript:void(null)" class="toggle_image_video">add an image</a></p>
             <%= form_for([:admin, @element, @resource]) do |f| %>
               <%= error_messages_for :resource %>
               <div class="field">
-                <%= f.text_field :vimeo_url %>
+                <%= f.text_field :vimeo_url, :value=>"Enter a Vimeo URL", :class=>"vimeo" %>
               </div>
               <div class="field">
                 <%= f.submit 'save' %>
@@ -81,13 +81,6 @@
   </div>
 
 
-<script type="text/javascript">
-$(document).ready( function() {
-  $('.toggle_image_video').click(function(){
-    $('#new_image').toggle();
-    $('#new_video').toggle();
-    return false;
-  });
-});
-</script>
+
+<script src="/javascripts/backoffice/media.js" type="text/javascript" charset="utf-8"></script>
 <script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>

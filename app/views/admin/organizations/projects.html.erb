@@ -1,25 +1,40 @@
-<div class="main">
-
-  <h2><%= @organization.name %></h2>
-  <p><%= pluralize(@projects.total_entries, 'project', 'projects') %> by this NGO</p>
-
-  <% @projects.each do |project| %>
-    <div class="project">
-      <h3><%= link_to(project.name, edit_admin_project_path(project)) %></h3>
-      <p><%= project.finished? ? 'Finished' : 'Running' %></p>
-      <ul>
-        TODO: project sites list
-      </ul>
+  <div class="main_layout">
+    <div class="block first donor_funded">
+      <div class="top"></div>
+      <div class="med">
+        <div class="left">
+          <h2><%= @organization.name %></h2>
+          <p><%= pluralize(@projects.total_entries, 'project', 'projects') %> by this NGO</p>
+          <% unless @projects.empty? %>
+            <ul>
+              <% @projects.each do |project| %>
+              <li>
+                <span class="first">
+                  <h3><%= link_to(project.name, edit_admin_project_path(project)) %></h3>
+                  <p class="<%= project.finished? ? 'closed' : 'active' %>"><%= project.finished? ? 'Closed' : 'Active' %></p>
+                </span>
+                <p>$12,000</p>
+              </li>
+              <% end -%>
+            </ul>
+          <% end -%>
+        </div>
+        <div class="right menu">
+          <%= render 'admin/organizations/sidebar' %>
+        </div>
+      </div>
+      <div class="bottom"></div>
     </div>
-  <% end -%>
+  
+    <div class="add_new">
+      <a href="<%= new_admin_project_path %>">
+        Create a new project<br/>
+        <strong>Adding a project to this NGO you will be adding it to the global database</strong>
+      </a>
+    </div>
 
-</div>
+  </div>
+  
+  <script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>
 
-<div>
-  <p><%= link_to('Create a new project', new_admin_project_path) %></p>
-  <p>Adding a project to this NGO you will be adding it to the global database</p>
-</div>
 
-<div class="sidebar">
-  <%= render 'admin/organizations/sidebar' %>
-</div>
