@@ -1,3 +1,28 @@
+<div class="main_layout">
+  <div class="block site_info">
+    <div class="top"></div>
+    <div class="med">
+      <div class="left">
+		<h2>Create a new site</h2>
+        <%= render :partial => 'form' %>
+      </div>
+      <div class="right menu">
+	   <ul>
+            <li class="selected"><a>Basic information</a></li>
+            <li class="disabled"><a>Media</a></li>
+            <li class="disabled"><a>Donors</a></li>
+            <li class="disabled"><a>Resources</a></li>
+       </ul>
+      </div>
+    </div>
+    <div class="bottom"></div>
+  </div>
+</div>
+
+<script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>
+
+
+<% if false %>
 <h2>New site</h2>
 
 <div>
@@ -13,3 +38,4 @@
 </div>
 
 <%= render :partial => 'form' %>
+<%end%>
