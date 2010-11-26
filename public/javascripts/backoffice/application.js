@@ -26,7 +26,7 @@ $(document).ready(function(ev){
 
 
     //window alert -> delete something (NGO, donor, site or project)
-    $('div.delete a').click(function(ev){
+    $('div.delete a, a.delete').click(function(ev){
       ev.stopPropagation();
       ev.preventDefault();
       var scroll_position = window.pageYOffset;

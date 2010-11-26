@@ -6,6 +6,8 @@
           <div class="left">
             <h2><%= @element.name %></h2>
             <p><%= pluralize(@element.resources.count, 'resource', 'resources') %></p>
+            
+            <!-- TODO if donors first block - if organizations second block -->
             <ul>
               <% unless @element.resources.empty? %>
                 <% @element.resources.each do |resource| %>
@@ -18,15 +20,36 @@
               <% end -%>
             </ul>
             
+            
+            <ul class="ngo">
+              <% unless @element.resources.empty? %>
+                <% @element.resources.each do |resource| %>
+                <li class="ngo">
+                  <div class="head">
+                    <h3><%= link_to(resource.title, resource.url) %></h3>
+                    <p>Link to http://wikipedia.org/Haiti</p>
+                    <%= link_to('Delete', eval("admin_#{@element.class.name.singularize.downcase}_resource_path(@element, resource)"), :method => :delete, :confirm => 'Are you sure?', :class=>"delete") %>
+                  </div>
+                  <div class="body">
+                    <h4>PUBLISH IN...</h4>
+                    <input type="checkbox" value="" /><label>HaitiAidMap</label>
+                  </div>
+                  <div class="down"></bottom>
+                </li>
+                <% end -%>
+              <% end -%>
+            </ul>
+            
+            
             <%= form_for([:admin, @element, @resource]) do |f| %>
               <h4>Add new resources<h4>
               <%= error_messages_for :resource %>
               <div class="field">
-                <%= f.label :title %>
+                <label>TITLE <strong>*</strong></label>
                 <%= f.text_field :title, :class=>"title" %>
               </div>
               <div class="field">
-                <%= f.label :url %>
+                <label>URL <strong>*</strong></label>
                 <%= f.text_field :url %>
               </div>
               <div class="field">

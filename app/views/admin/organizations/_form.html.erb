@@ -64,7 +64,6 @@
 
   <div class="common">
     <h3>CONTACT INFORMATION</h3>
-
     <div class="short_field">
       <%= f.label :contact_name %>
       <%= f.text_field :contact_name, :class=>"short" %>
@@ -75,9 +74,9 @@
       <%= f.text_field :contact_position, :class=>"short" %>
     </div>
 
-    <div class="field">
+    <div class="long_field">
       <%= f.label :hq_address %>
-      <%= f.text_field :hq_address %>
+      <%= f.text_field :hq_address, :class=>"address" %>
     </div>
 
     <div class="short_field">
@@ -109,15 +108,13 @@
       <%= f.label :contact_phone_number %>
       <%= f.text_field :contact_phone_number, :class=>"short" %>
     </div>
-
   </div>
 
   <div class="common">
     <h3>DONATION INFORMATION</h3>
-
-    <div class="field">
+    <div class="long_field">
       <%= f.label :donation_address %>
-      <%= f.text_field :donation_address, :class=>"long" %>
+      <%= f.text_field :donation_address, :class=>"address" %>
     </div>
 
     <div class="short_field">
@@ -149,13 +146,12 @@
       <%= f.label :donation_website %>
       <%= f.text_field :donation_website, :class=>"long" %>
     </div>
-
+    <a href="<%= @organization.donation_website %>" class="preview" id="donation_website" target="_blank">preview the link</a>
   </div>
 
   <% if action_name == 'specific_information' %>
     <%= hidden_field_tag :site_id, params[:site_id] %>
   <% end %>
-
   <%= f.submit 'Save', :class => "#{'error' if @organization.invalid? && action_name != 'new'}" %>
 
 <% end -%>
