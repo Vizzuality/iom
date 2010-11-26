@@ -1,38 +1,76 @@
-<div class="main">
-
-  <h2><%= @project.name %></h2>
-  <p>by <%= @project.primary_organization.name %></p>
-
-  <% @project.donations.each do |donation| %>
-    <div class="project">
-      <h3><%= link_to(donation.donor.name, edit_admin_donor_path(donation.donor)) %></h3>
-      <p><%= donation.date.strftime("%Y/%m/%d") %></p>
-      <p>$ <%= donation.amount %></p>
-      <p><%= link_to('Delete', admin_project_donation_path(@project, donation), :method => :delete, :confirm => 'Are your sure?') %>
+<div class="main_layout">
+  <div class="block first donations_project">
+    <div class="top"></div>
+    <div class="med">
+      <div class="left">
+        <h2><%= @project.name %></h2>
+        <p>by <%= @project.primary_organization.name %></p>
+        <% unless @project.donations.empty? %>
+          <ul>
+             <% @project.donations.each do |donation| %>
+            <li>
+              <span class="first">
+                <h3><%= link_to(donation.donor.name, edit_admin_donor_path(donation.donor)) %></h3>
+              </span>
+			<%if false %>
+			      <p><%= donation.date.strftime("%Y/%m/%d") %></p>
+			<%end%>
+              <p  >$ <%= donation.amount %></p>
+            </li>
+            <% end -%>
+          </ul>
+        <% end -%>
+      </div>
+      <div class="right menu">
+	  	<%= render 'admin/projects/sidebar' %>
+      </div>
     </div>
-  <% end -%>
+    <div class="bottom"></div>
+  </div>
+</div>  
+  <script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>
 
-  <%= form_for([:admin, @project, (@donation || @project.donations.new)]) do |f| %>
-    <%= f.error_messages %>
-    <div class="field">
-      <%= f.label :donor_id, 'Donor name' %>
-      <%= f.select :donor_id, Donor.all.collect{ |d| [d.name, d.id] } %>
-    </div>
-    <div class="field">
-      <%= f.label :date, 'Donation date' %>
-      <%= f.date_select :date, :start_year => Date.today.year - 5  %>
-    </div>
-    <div class="field">
-      <%= f.label :amount %>
-      <%= f.text_field :amount  %>
-    </div>
-    <div class="field">
-      <%= f.submit 'Add donation' %>
-    </div>
-  <% end -%>
 
-</div>
 
-<div class="sidebar">
-  <%= render 'admin/projects/sidebar' %>
-</div>
+
+<%if false %>
+	<div class="main">
+	  <h2><%= @project.name %></h2>
+	  <p>by <%= @project.primary_organization.name %></p>
+
+	  <% @project.donations.each do |donation| %>
+	    <div class="project">
+	      <h3><%= link_to(donation.donor.name, edit_admin_donor_path(donation.donor)) %></h3>
+	<%if false %>
+	      <p><%= donation.date.strftime("%Y/%m/%d") %></p>
+	<%end%>
+	      <p>$ <%= donation.amount %></p>
+	      <p><%= link_to('Delete', admin_project_donation_path(@project, donation), :method => :delete, :confirm => 'Are your sure?') %>
+	    </div>
+	  <% end -%>
+
+	  <%= form_for([:admin, @project, (@donation || @project.donations.new)]) do |f| %>
+	    <%= f.error_messages %>
+	    <div class="field">
+	      <%= f.label :donor_id, 'Donor name' %>
+	      <%= f.select :donor_id, Donor.all.collect{ |d| [d.name, d.id] } %>
+	    </div>
+	    <div class="field">
+	      <%= f.label :date, 'Donation date' %>
+	      <%= f.date_select :date, :start_year => Date.today.year - 5  %>
+	    </div>
+	    <div class="field">
+	      <%= f.label :amount %>
+	      <%= f.text_field :amount  %>
+	    </div>
+	    <div class="field">
+	      <%= f.submit 'Add donation' %>
+	    </div>
+	  <% end -%>
+
+	</div>
+
+	<div class="sidebar">
+	  <%= render 'admin/projects/sidebar' %>
+	</div>
+<%end%>

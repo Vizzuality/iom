@@ -120,39 +120,56 @@
 
   <label>CLUSTERS</label>
   <ul class="clusters">
-    <% @project.clusters.each do |cluster| %>
-      <li><%= cluster.id %><a class="close"></a></li>
-    <% end -%>
+		<% unless @project.clusters.empty? %>
+        	<% @project.clusters.each do |cluster| %>
+        		<li id="cluster_<%= cluster.id %>"><%= cluster.name %><input id="<%= cluster.id %>" type="checkbox" name="project[clusters_ids][]" value="<%= cluster.id %>" checked="true"/><a href="#cluster_<%= cluster.id %>" class="remove_this close"></a>
+				</li>
+        	<% end -%>
+      <% end -%>
   </ul>
 
   <div class="cluster_options">
-    <a class="combo_cluster_options">Select more clusters</a>
-    <a class="add_cluster">add cluster</a>
+    <span class="combo_cluster_options"><p id="0">Select more clusters</p>
+		<ul class="options">
+		<% Cluster.all.collect do |cluster| %>
+			<li><a id="<%= cluster.id %>"><%= cluster.name %></a></li>
+		<% end %>
+			<li class="last"></li>
+		</ul>
+	</span>
+    <a id="add_cluster_bttn" class="add_cluster">add cluster</a>
   </div>
 
-  <!-- CLUSTERS COMBOS - REDO -->
-  <%if false%>
-    <div id="clusters">
-        <% unless @project.clusters.empty? %>
-          <% @project.clusters.each do |cluster| %>
-          <span id="cluster_<%= cluster.id %>"><input type="checkbox" name="project[clusters_ids][]" value="<%= cluster.id %>" checked="checked"/><%= cluster.name %><a href="#cluster_<%= cluster.id %>" class="remove_this">x</a><br /></span>
-          <% end -%>
-        <% end -%>
-      </div>
-      <%= select_tag :select_cluster, options_for_select([['Choose a cluster',nil]] + Cluster.all.collect{ |o| [o.name, o.id] }) %>
-    </div>
-  <%end%>
-  <!-- END CLUSTERS COMBOS - REDO -->
-
   <label>SECTORS / SUBSECTORS</label>
-  <ul class="clusters">
-    <li>FOOD <a class="close"></a></li>
-    <li>HEALTH - Vaccination <a class="close"></a></li>
+
+  <ul class="sectors">
+		<% unless @project.sectors.empty? %>
+        	<% @project.sectors.each do |sector| %>
+				<li id="sector_<%= sector.id %>"><%= sector.name %><input id="<%= sector.id %>" type="checkbox" name="project[sectors_ids][]" value="<%= sector.id %>" checked="true"/><a href="#sector_<%= sector.id %>" class="remove_this close"></a>
+				</li>        	
+		<% end -%>
+      <% end -%>
   </ul>
 
-  <div class="cluster_options_large">
-    <a class="combo_cluster_options first">Select more sectors</a>
-    <a class="combo_cluster_options">Select a subsector</a>
+  <div class="sectors_options_large">
+    <span id="sector" class="combo_sector_options first">
+		<p id="0">Select more sectors</p>
+		<ul class="options">
+		<% Sector.all.collect do |sector| %>
+			<li><a id="<%= sector.id %>"><%= sector.name %></a></li>
+		<% end %>
+			<li class="last"></li>
+		</ul>
+		
+	</span>
+    <span id="subsector" class="combo_sector_options"><p id="0">Select a subsector</p>
+		<ul class="options">
+		<% Sector.all.collect do |sector| %>
+			<li><a id="<%= sector.id %>"><%= sector.name %></a></li>
+		<% end %>
+			<li class="last"></li>
+		</ul>
+	</span>
     <a class="add_sector">add sector</a>
   </div>
 
@@ -163,7 +180,7 @@
           <% @project.sectors.each do |sector| %>
           <span id="sector_<%= sector.id %>"><input type="checkbox" name="project[sectors_ids][]" value="<%= sector.id %>" checked="checked"/><%= sector.name %><a href="#sector_<%= sector.id %>" class="remove_this">x</a><br /></span>
           <% end -%>
-        <% end -%>  <!-- AÑADIR "project[sectors_ids][]" -->
+        <% end -%>
       </div>
       <%= select_tag :select_sector, options_for_select([['Choose a sector',nil]] + Sector.all.collect{ |o| [o.name, o.id] }) %>
       </div>
@@ -173,7 +190,7 @@
 
   <!-- ************************ FALTA ************************ -->
   <label>GEOGRAPHIC UBICATION</label>
-  <ul class="clusters">
+  <ul class="ubications">
     <li>Belladère, Haiti<a class="close"></a></li>
     <li>Martinique, Haiti<a class="close"></a></li>
   </ul>
@@ -331,30 +348,29 @@ $(function() {
   });
 
   // X
-  $('.remove_this').live('click',function(){
-    $($(this).attr('href')).children().each(function(){
-      $(this).remove();
-    });
-    $($(this).attr('href')).remove();
-  });
-
+  // $('.remove_this').live('click',function(){
+  //   $($(this).attr('href')).children().each(function(){
+  //     $(this).remove();
+  //   });
+  //   $($(this).attr('href')).remove();
+  // });
 
   // ADD CLUSTER
-  $('#select_cluster').change(function(){
-    var str = ""
-    $("select#select_cluster option:selected").each(function () {
-          str += $(this).text() + " ";
-        });
-    $('#clusters').append('<span id="cluster_'+$(this).val()+'"><input type="checkbox" name="project[clusters_ids][]" value="' +$(this).val() +'" checked="checked"/>' + str + ' <a href="#cluster_'+$(this).val()+'" class="remove_this">x</a><br /></span>');
-  });
-
-
-  $('#select_sector').change(function(){
-    var str = ""
-    $("select#select_sector option:selected").each(function () {
-          str += $(this).text() + " ";
-        });
-    $('#sectors').append('<span id="sector_'+$(this).val()+'"><input type="checkbox" name="project[sectors_ids][]" value="' +$(this).val() +'" checked="checked"/>' + str + ' <a href="#sector_'+$(this).val()+'" class="remove_this">x</a><br /></span>');
-  });
+  // $('#select_cluster').change(function(){
+  //    var str = ""
+  //    $("select#select_cluster option:selected").each(function () {
+  //          str += $(this).text() + " ";
+  //        });
+  //    $('#clusters').append('<span id="cluster_'+$(this).val()+'"><input type="checkbox" name="project[clusters_ids][]" value="' +$(this).val() +'" checked="checked"/>' + str + ' <a href="#cluster_'+$(this).val()+'" class="remove_this">x</a><br /></span>');
+  //  });
+  // 
+  // 
+  //  $('#select_sector').change(function(){
+  //    var str = ""
+  //    $("select#select_sector option:selected").each(function () {
+  //          str += $(this).text() + " ";
+  //        });
+  //    $('#sectors').append('<span id="sector_'+$(this).val()+'"><input type="checkbox" name="project[sectors_ids][]" value="' +$(this).val() +'" checked="checked"/>' + str + ' <a href="#sector_'+$(this).val()+'" class="remove_this">x</a><br /></span>');
+  //  });
 });
 </script>
