@@ -1,10 +1,10 @@
 
   <ul>
     <li <%= selected_if_current_page(edit_admin_site_path(@site)) %>>
-      <%= link_to_unless_current('Basic information', edit_admin_site_path(@site)) %>
+      <%= link_to('Basic information', edit_admin_site_path(@site)) %>
     </li>
     <li <%= selected_if_current_page(customization_admin_site_path(@site)) %>>
-      <%= link_to_unless_current('Customization', customization_admin_site_path(@site)) %>
+      <%= link_to('Customization', customization_admin_site_path(@site)) %>
     </li>
     <li <%= selected_if_current_page(projects_admin_site_path(@site)) %>>
       <%= link_to("Site projects", projects_admin_site_path(@site)) %><% if !@site.total_projects!=0 %> <p><span><%=@site.total_projects%></span></p><% end %></li>
@@ -19,6 +19,6 @@
 
   <div class="delete">
     <h5>DELETE THIS SITE</h5>
-    <p>Clicking the link below will permanently delete this site</p>
+    <p>Clicking the button below you will delete permanently this site. Please take care of the domain that was pointing to this site.</p>
     <%= link_to("Delete this SITE", '#') %> <!-- admin_organization_path(@site) -->
   </div>

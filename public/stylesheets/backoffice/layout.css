@@ -27,7 +27,7 @@ div.add_new a strong {float:left; width:100%; font:normal 15px Arial; color:#C3D
 div.block div.med div.right {position:relative; float:right; width:284px; min-height:300px;}
 div.block div.med div.right ul {float:left; width:230px; margin:10px 0 0 0;}
 div.block div.med div.right ul li {float:left; width:200px; padding:6px 12px 6px 0;}
-div.block div.med div.right ul li.selected {float:left; width:auto; padding:15px 14px 15px 0; background:url('/images/backoffice/common/selected_li.png') no-repeat right 0;}
+div.block div.med div.right ul li.selected {float:left; width:auto; padding:15px 14px 15px 0; background:url('/images/backoffice/common/selected_li.png') no-repeat right 0; font:bold 15px Arial; color:#333333;}
 div.block div.med div.right ul li.disabled {width:200px;}
 div.block div.med div.right ul li.disabled a {color:#cccccc;}
 div.block div.med div.right ul li a {float:left; font:bold 15px Arial; color:#E93E3F; padding:0 0 0 20px;}
