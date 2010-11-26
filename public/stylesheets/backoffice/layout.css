@@ -56,7 +56,7 @@ div.block div.med div.right ul li.list_unselected {float:left; width:200px; padd
 div.block div.med div.right ul li.list_unselected div.bottom_selected {float:left; padding:0 14px 0 0; background:none;}
 div.block div.med div.right ul li.list_unselected div.bottom_selected a.basic {color:#E93E3F; padding:0 0 0px 20px;}
 div.block div.med div.right ul li.list_unselected div.bottom_selected a.basic:hover {color:#333333; cursor:pointer;}
-div.block div.med div.right ul li.list_unselected div.bottom_selected p {float:left; width:auto; margin:0 0 0 20px; background:none;}
+div.block div.med div.right ul li.list_unselected div.bottom_selected p {float:left; width:auto; margin:5px 0 0 20px; background:none;}
 div.block div.med div.right ul li.list_unselected div.bottom_selected p a {float:left; width:auto; padding:0 0 0 6px; background:url('/images/backoffice/icons/red_square.jpg') no-repeat 0 7px; font:normal 13px Arial; color:#E93E3F}
 div.block div.med div.right ul li.list_unselected div.bottom_selected p a:hover {text-decoration:underline;}
 div.block div.med div.right ul li.list_unselected:hover div.bottom_selected p a {color:#E93E3F;}
@@ -285,6 +285,7 @@ div.block.edit div.med div.left div.specific_edit.closed div.bottom {float:left;
 div.block.edit div.med div.left div.specific_edit.closed textarea {max-width:508px!important; min-width:508px!important; max-height:198px!important; min-height:198px!important; padding:8px; background:url('/images/backoffice/ngos/textarea_bkg.png') no-repeat 0 -214px!important; color:#CCCCCC;}
 div.block.edit div.med div.left div.specific_edit.closed div.image_container {width:506px; height:62px; background:url('/images/backoffice/ngos/logo_bkg.png') no-repeat 0 -82px;}
 div.block.edit div.med div.left div.specific_edit.enabled {height:auto; padding:0; background:none;}
+div.block.edit div.med div.left div.specific_edit.enabled p.paylock {background-position:right -21px;}
 div.block.edit div.med div.left div.specific_edit.enabled h3 {color:#333333;}
 div.block.edit div.med div.left div.specific_edit.enabled div.top {float:left; width:566px; height:20px; background:url('/images/backoffice/ngos/top_specific_edit.png') no-repeat 0 -20px!important;}
 div.block.edit div.med div.left div.specific_edit.enabled div.med {float:left; width:526px; height:auto; padding:0 20px; background:url('/images/backoffice/ngos/med_specific_edit_enabled.png') repeat-y 0 0!important;}
@@ -294,8 +295,8 @@ div.block.edit div.med div.left div.specific_edit.enabled input.twitter {width:2
 div.block.edit div.med div.left div.specific_edit.enabled input.facebook {width:359px!important; padding:8px 8px 8px 30px; background:url('/images/backoffice/ngos/facebook_input.png') no-repeat 0 0!important;}
 div.block.edit div.med div.left div.specific_edit.enabled input.people {width:200px!important; padding:8px 44px 8px 8px; background:url('/images/backoffice/ngos/people_input.png') no-repeat 0 0!important;}
 div.block.edit div.med div.left div.specific_edit.enabled input.budget {width:214px!important; padding:8px 30px 8px 8px; background:url('/images/backoffice/ngos/budget_input.png') no-repeat 0 0!important;}
-div.block.edit div.med div.left div.specific_edit.enabled div.bottom {float:left; width:566px; height:20px; background:url('/images/backoffice/ngos/bottom_specific_edit.png') no-repeat 0 0!important;}
-div.block.edit div.med div.left div.specific_edit.enabled textarea {max-width:508px!important; min-width:508px!important; max-height:198px!important; min-height:198px!important; padding:8px; background:url('/images/backoffice/ngos/textarea_bkg.png') no-repeat 0 0!important; color:#CCCCCC;}
+div.block.edit div.med div.left div.specific_edit.enabled div.bottom {float:left; width:566px; height:20px; background:url('/images/backoffice/ngos/bottom_specific_edit.png') no-repeat 0 -20px!important;}
+div.block.edit div.med div.left div.specific_edit.enabled textarea {max-width:508px!important; min-width:508px!important; max-height:198px!important; min-height:198px!important; padding:8px; background:url('/images/backoffice/ngos/textarea_bkg.png') no-repeat 0 0!important; color:#333333;}
 div.block.edit div.med div.left div.specific_edit.enabled div.image_container {width:506px; height:62px; background:url('/images/backoffice/ngos/logo_bkg.png') no-repeat 0 0;}
 
 

@@ -1,0 +1,151 @@
+<%= form_for(@organization, :url => (@organization.new_record? ? admin_organizations_path : admin_organization_path(@organization)), :html => { :multipart => true }) do |f| %>
+
+
+  <div class="specific_edit closed">
+    <div class="top"></div>
+    <div class="med">
+      <span>
+        <h3>BASIC INFORMATION</h3>
+        <p class="paylock close"><a href="#">Click to edit the specific fields</a></p>
+      </span>
+      
+      <div class="field">
+        <%= f.label :name %>
+        <%= f.text_field :name, :class=>"long #{'error' if !@organization.errors[:name].empty? && action_name != 'new'}", :disabled=>"true" %>
+        <%= errors_for @organization, :name %>
+      </div>
+
+      <div class="field">
+        <%= f.label :description %>
+        <%= f.text_area :description, :disabled=>"true" %>
+      </div>
+
+
+      <%= f.label :logo %>
+      <div class="image_container">
+        <% if @organization.logo_file_name? %>
+          <%= image_tag(@organization.logo.url(:small)) %>
+        <% end -%>
+        <div class="field">
+          <p>JPG, PNG and GIF supported</p>
+          <%= f.file_field :logo, :disabled=>"true" %>
+        </div>
+      </div>
+
+      <div class="field">
+        <%= f.label :budget %>
+        <%= f.text_field :budget, :disabled=>"true", :class=>"short budget" %>
+      </div>
+
+      <div class="short_field">
+        <%= f.label :website %>
+        <%= f.text_field :website, :disabled=>"true", :class=>"short" %>
+      </div>
+
+      <div class="short_field">
+        <%= f.label :staff %>
+        <%= f.text_field :staff, :disabled=>"true", :class=>"short people" %>
+      </div>
+     
+    </div>
+    <div class="bottom"></div>
+  </div>
+  
+  
+  
+  <div class="specific_edit closed">
+    <div class="top"></div>
+    <div class="med">
+      <span>
+        <h3>SOCIAL LINKS</h3>
+        <p class="paylock close"><a href="#">Click to edit the specific fields</a></p>
+      </span>
+      <div class="field">
+        <%= f.label :twitter %>
+        <%= f.text_field :twitter, :disabled=>"true", :class=>"short twitter" %>
+      </div>
+
+      <div class="field">
+        <%= f.label :facebook %>
+        <%= f.text_field :facebook, :disabled=>"true", :class=>"long facebook" %>
+      </div>
+     
+    </div>
+    <div class="bottom"></div>
+  </div>
+  
+  
+  
+  <div class="specific_edit disabled">
+    <div class="top"></div>
+    <div class="med">
+      <span>
+        <h3>CONTACT INFORMATION</h3>
+        <p class="paylock disabled">This info cannot be specific</p>
+      </span>
+      <div class="field">
+        <%= f.label :contact_email %>
+        <%= f.text_field :contact_email, :class=>"short", :disabled=>"true" %>
+      </div>
+      
+      <div class="short_field">
+        <%= f.label :hq_address %>
+        <%= f.text_field :hq_address, :class=>"short", :disabled=>"true" %>
+      </div>
+
+      <div class="short_field last">
+        <%= f.label :contact_phone_number %>
+        <%= f.text_field :contact_phone_number, :class=>"short", :disabled=>"true" %>
+      </div>
+    </div>
+    <div class="bottom"></div>
+  </div>
+  
+
+  <div class="specific_edit">
+    <span>
+      <h3>DONATION INFORMATION</h3>
+      <p class="paylock open">Changing this into for just this project</p>
+    </span>
+    <div class="field">
+      <%= f.label :donation_address %>
+      <%= f.text_field :donation_address, :class=>"long" %>
+    </div>
+    
+    <div class="tiny_field last">
+      <%= f.label :zip_code %>
+      <%= f.text_field :zip_code, :class=>"tiny" %>
+    </div>
+
+    <div class="short_field">
+      <%= f.label :city %>
+      <%= f.text_field :city, :class=>"short" %>
+    </div>
+
+    <div class="short_field last">
+      <%= f.label :state %>
+      <%= f.text_field :state, :class=>"short" %>
+    </div>
+
+    <div class="short_field">
+      <%= f.label :donation_phone_number %>
+      <%= f.text_field :donation_phone_number, :class=>"short" %>
+    </div>
+
+    <div class="short_field">
+      <%= f.label :donation_website %>
+      <%= f.text_field :donation_website, :class=>"short" %>
+    </div>
+  </div>
+  
+  
+  
+
+  <% if action_name == 'specific_information' %>
+    <%= hidden_field_tag :site_id, params[:site_id] %>
+  <% end %>
+  <%= f.submit 'Save', :class => "#{'error' if @organization.invalid? && action_name != 'new'}" %>
+
+<% end -%>
+
+<script src="/javascripts/backoffice/organization.js" type="text/javascript" charset="utf-8"></script>
