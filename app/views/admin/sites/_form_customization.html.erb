@@ -2,87 +2,176 @@
 
   <%= f.error_messages %>
 
-  <% if @site.logo_file_name? %>
-    <%= image_tag(@site.logo.url(:small)) %>
-  <% end -%>
 
-  <div class="field">
+  <div class="common">
+    <h3>SITE CUSTOMIZATION</h3>  
     <%= f.label :logo %>
-    <%= f.file_field :logo %>
-  </div>
-
-  <div class="field">
-    <%= f.label :theme %>
-    TODO: themes
-  </div>
-
-  <h3>Partners</h3>
-
-  <p>Partners list</p>
-
-  <% unless @site.partners.empty? %>
-    <% @site.partners.each do |partner| %>
-      <div class="partner">
-        <p><%= image_tag(partner.logo.url(:small)) %></p>
-        <p><%= partner.name %></p>
-        <p><%= link_to(partner.url, partner.url) %></p>
-        <p><%= link_to('Delete', admin_site_partner_path(@site, partner), :method => :delete, :confirm => 'Are you sure?') %></p>
+    <div class="image_container">
+      <% if @site.logo_file_name? %>
+        <%= image_tag(@site.logo.url(:small)) %>
+      <% end -%>
+      <div class="field">
+        <p>JPG, PNG and GIF supported</p>
+        <%= f.file_field :logo %>
       </div>
-    <% end -%>
-  <% end -%>
-
-  <p><%= link_to('Add a partner', 'javascript:void(null)', :class => 'manage_partners') %></p>
-
-  <h3>Map configuration</h3>
-
-  <h3>Site navigation</h3>
-
-  <div class="field">
-    <p>Projects classification</p>
-    <%= f.radio_button :project_classification, '0' %>
-    <%= f.label :project_classification_0, 'Cluster' %>
-    <%= f.radio_button :project_classification, '1' %>
-    <%= f.label :project_classification_1, 'Sector' %>
-  </div>
-
-
-  <h3>Fields & sections visibility</h3>
-
-  <div class="field">
-    <p>Configurable fields & sections</p>
-
-    <%= f.check_box :show_blog %>
-    <%= f.label :show_blog %>
-    <br />
-    <div id="tumbler_id" style="<%= (@site.blog_url.blank? ? 'display:none' : 'display:block') %>">
-      <%= f.label :blog_url, 'Write your tumbler id' %>
-      <%= f.text_field :blog_url %>
     </div>
-    <br />
-
-    <%= f.check_box :show_global_donations_raises %>
-    <%= f.label :show_global_donations_raises %>
+    
+    <div class="field">
+      <%= f.label :theme %>
+      <ul class="themes">
+        <li class="selected">
+          <img src="/images/backoffice/sites/theme_1.png" width="157" height="135" alt="Theme 1">
+          <a class="preview">PREVIEW</a>
+          <span class="ready"></span>
+        </li>
+        <li>
+          <img src="/images/backoffice/sites/theme_2.png" width="157" height="135" alt="Theme 2">
+          <a class="preview">PREVIEW</a>
+          <span class="ready"></span>
+        </li>
+        <li class="last">
+          <img src="/images/backoffice/sites/theme_3.png" width="157" height="135" alt="Theme 3">
+          <a class="preview">PREVIEW</a>
+          <span class="ready"></span>
+        </li>
+      </ul>
+    </div>
   </div>
 
-  <h3>Naming</h3>
+  <div class="common">
+    <h3>Partners</h3>
+    <label>PARTNERS LIST</label>
+    <% unless @site.partners.empty? %>
+      <% @site.partners.each do |partner| %>
+        <div class="partner">
+          <p><%= image_tag(partner.logo.url(:small)) %></p>
+          <p><%= partner.name %></p>
+          <p><%= link_to(partner.url, partner.url) %></p>
+          <p><%= link_to('Delete', admin_site_partner_path(@site, partner), :method => :delete, :confirm => 'Are you sure?') %></p>
+        </div>
+      <% end -%>
+    <% end -%>
+    <p><%= link_to('Add a partner', 'javascript:void(null)', :class => 'manage_partners') %></p>
+  </div>
+  
+  
+  <div class="common">
+    <h3>Map configuration</h3>
+    
+    <label>HOME MAP</label>
+    <div class="list_combo">
+      <span id="hidden" class="combo_large">
+        <a class="organization">Default</a>
+      </span>
+      <ul class="list_combo_content">
+        <li class="first"></li>
+        <li class="element" id="16">Default<p class="amount_projects">Deafult</p></li>
+        <li class="last"></li>
+      </ul>
+    </div>
+    
+    <label>PROJECT PAGE MAP</label>
+    <div class="list_combo">
+      <span id="hidden" class="combo_large">
+        <a class="organization">Default</a>
+      </span>
+      <ul class="list_combo_content">
+        <li class="first"></li>
+        <li class="element" id="15">Default<p class="amount_projects">Deafult</p></li>
+        <li class="last"></li>
+      </ul>
+    </div>
+    
+    <label>REGION PAGE MAP</label>
+    <div class="list_combo">
+      <span id="hidden" class="combo_large">
+        <a class="organization">Default</a>
+      </span>
+      <ul class="list_combo_content">
+        <li class="first"></li>
+        <li class="element" id="14">Default<p class="amount_projects">Deafult</p></li>
+        <li class="last"></li>
+      </ul>
+    </div>
+    
+    <label>CLUSTER/SECTOR PAGE MAP</label>
+    <div class="list_combo">
+      <span id="hidden" class="combo_large">
+        <a class="organization">Default</a>
+      </span>
+      <ul class="list_combo_content">
+        <li class="first"></li>
+        <li class="element" id="13">Default<p class="amount_projects">Deafult</p></li>
+        <li class="last"></li>
+      </ul>
+    </div>
+    
+    <label>NGO PAGE MAP</label>
+    <div class="list_combo">
+      <span id="hidden" class="combo_large">
+        <a class="organization">Default</a>
+      </span>
+      <ul class="list_combo_content">
+        <li class="first"></li>
+        <li class="element" id="12">Default<p class="amount_projects">Deafult</p></li>
+        <li class="last"></li>
+      </ul>
+    </div>
+ 
+  </div>
+  
 
-  <div class="field">
-    <%= f.label :word_for_clusters %>
-    <%= f.text_field :word_for_clusters %>
+  <div class="common">
+    <h3>Site navigation</h3>
+    <label>Projects classification</label>
+    <div class="field">
+      <span>
+        <%= f.radio_button :project_classification, '0' %>
+        <p>Cluster</p>
+      </span>
+      <span>
+        <%= f.radio_button :project_classification, '1' %>
+        <p>Sector</p>
+      </span>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :word_for_regions %>
-    <%= f.text_field :word_for_regions %>
+  <div class="common">
+    <h3>Fields & sections visibility</h3>
+    <label>Configurable fields & sections</label>
+    
+    <div class="field">
+      <span>
+        <%= f.check_box :show_blog %><p>Show blog</p>
+      </span>
+      <div id="tumbler_id" style="<%= (@site.blog_url.blank? ? 'display:none' : 'display:block') %>">
+        <%= f.label :blog_url, 'Write your tumbler id' %>
+        <%= f.text_field :blog_url %>
+      </div>
+      <span>
+        <%= f.check_box :show_global_donations_raises %><p>Show global donations raises</p>
+      </span>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.submit 'Save' %>
+  <div class="common">
+    <h3>NAMING</h3>
+    <div class="field">
+      <%= f.label :word_for_clusters %>
+      <%= f.text_field :word_for_clusters, :class=>"short" %>
+    </div>
+    <div class="field">
+      <%= f.label :word_for_regions %>
+      <%= f.text_field :word_for_regions, :class=>"short" %>
+    </div>
   </div>
+
+  <%= f.submit 'Save' %>
 
 <% end -%>
 
-<div id="manage_partners" style="<%= @partner ? 'display:block' : 'display:none' %>">
+
+<!-- <div id="manage_partners" style="<%= @partner ? 'display:block' : 'display:none' %>">
 
   <% unless @partner %>
   <h3>New partner</h3>
@@ -114,7 +203,7 @@
     </div>
 
   <% end -%>
-</div>
+</div> -->
 
 
 <script type="text/javascript">

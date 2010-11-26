@@ -90,6 +90,7 @@ div#header div.inner_header div.bottom ul.admin li a {font:normal 13px "Museo Sa
 div#header div.inner_header div.bottom ul.admin li a:hover {color:white;}
 div#header div.inner_header div.bottom ul.admin li.last {padding:0 0 0 8px; background:none;}
 
+
 /*login*/
 div.login {position:absolute; top:0; bottom:0; right:0; left:0; float:left; width:100%; height:100%; background:url('/images/backoffice/login/login_bkg.png') repeat-x 0 bottom #373737;}
 div.login div.main {position:absolute; top:118px; left:50%; width:401px; margin:0 0 0 -200px;}
@@ -156,7 +157,7 @@ div.block.edit div.med div.left textarea {float:left; min-width:548px; max-width
 div.block.edit div.med div.left textarea:focus {outline:none;}
 div.block.edit div.med div.left label {float:left; width:100%; margin:18px 0 0 0; font:bold 11px Arial; color:#999999; text-transform:uppercase;}
 div.block.edit div.med div.left div.common {float:left; width:100%; margin:35px 0 0 0;}
-div.block.edit div.med div.left div.common h3 {float:left; width:100%; padding:0 0 5px 0; font:normal 17px "Museo Sans","Arial"; color:#333333;}
+div.block.edit div.med div.left div.common h3 {float:left; width:100%; padding:0 0 5px 0; font:normal 17px "Museo Sans","Arial"; color:#333333; text-transform:uppercase;}
 div.block.edit div.med div.left div.short_field {float:left; width:272px; margin:0px 20px 0 0;}
 div.block.edit div.med div.left div.short_field.last {margin:0;}
 div.block.edit div.med div.left div.short_field input[type="text"].short {float:left; width:256px; height:18px; margin:5px 0 0 0; padding:8px; font:normal 15px Arial; color:#333333; border:none; background:url('/images/backoffice/donors/short_input.png') no-repeat 0 0;}
@@ -165,7 +166,12 @@ div.block.edit div.med div.left a.preview {float:left; width:auto; margin:43px 0
 div.block.edit div.med div.left a.preview.no_margin {margin:43px 0 0 0;}
 div.block.edit div.med div.left a.preview:hover {color:#7F2023;}
 div.block.edit div.med div.left div.field input[type="text"] {float:left; width:403px; height:18px; margin:5px 0 0 0; padding:8px; font:normal 15px Arial; color:#333333; border:none; background:url('/images/backoffice/donors/long_input.png') no-repeat 0 0;}
+div.block.edit div.med div.left div span {float:left; width:100%; margin:10px 0 0 0;}
+div.block.edit div.med div.left div span input[type="radio"] {float:left; margin:3px 5px 0 10px;}
+div.block.edit div.med div.left div span input[type="checkbox"] {float:left; margin:3px 5px 0 10px;}
+div.block.edit div.med div.left div span p {float:left; font:normal 15px Arial; color:#333333;}
 div.block.edit div.med div.left div.field input[type="text"].short {float:left; width:256px; height:18px; margin:5px 0 0 0; padding:8px; font:normal 15px Arial; color:#333333; border:none; background:url('/images/backoffice/donors/short_input.png') no-repeat 0 0;}
+div.block.edit div.med div.left div input[type="password"].short {float:left; width:256px; height:18px; margin:5px 0 0 0; padding:8px; font:normal 15px Arial; color:#333333; border:none; background:url('/images/backoffice/donors/short_input.png') no-repeat 0 0;}
 div.block.edit div.med div.left div.long_field {float:left; width:100%;}
 div.block.edit div.med div.left div.long_field input[type="text"].address {float:left; width:548px; height:18px; margin:5px 0 0 0; padding:8px; font:normal 15px Arial; color:#333333; border:none; background:url('/images/backoffice/donors/input_address.png') no-repeat 0 0;}
 div.block.edit div.med div.left div.short_field input[type="text"].twitter {width:234px; padding:8px 8px 8px 30px; background:url('/images/backoffice/donors/twitter_bkg.png') no-repeat 0 0;}
@@ -299,7 +305,19 @@ div.block.edit div.med div.left div.specific_edit.enabled div.bottom {float:left
 div.block.edit div.med div.left div.specific_edit.enabled textarea {max-width:508px!important; min-width:508px!important; max-height:198px!important; min-height:198px!important; padding:8px; background:url('/images/backoffice/ngos/textarea_bkg.png') no-repeat 0 0!important; color:#333333;}
 div.block.edit div.med div.left div.specific_edit.enabled div.image_container {width:506px; height:62px; background:url('/images/backoffice/ngos/logo_bkg.png') no-repeat 0 0;}
 
-
+/*site customize*/
+div.block.edit div.med div.left form div.list_combo {float:left; width:419px; height:auto; position:relative;}
+div.block.edit div.med div.left form ul.list_combo_content {position:absolute; top:35px; width:419px; display:none; left:0; z-index:10;}
+div.block.edit div.med div.left form ul.list_combo_content li.first {float:left; width:419px; height:4px; margin:0; background:url('/images/backoffice/projects/top_content_combo_large.png') no-repeat 0 0; padding:0;}
+div.block.edit div.med div.left form ul.list_combo_content li.element {float:left; margin:0; background:url('/images/backoffice/projects/repeat_content_combo_large.png') no-repeat 0 0; width:407px; height:22px; font:normal 15px Arial; color:#333333; padding:5px 0 0 12px; position:relative;}
+div.block.edit div.med div.left form ul.list_combo_content li.element p.amount_projects {position:absolute; top:7px; right:10px; font:normal 13px Arial; color:#666666; width:auto;}
+div.block.edit div.med div.left form ul.list_combo_content li.element:hover {cursor:pointer; background:url('/images/backoffice/projects/repeat_content_combo_large_hover.png') no-repeat 0 0;}
+div.block.edit div.med div.left form ul.list_combo_content li.last {float:left; width:419px; height:7px; margin:0; background:url('/images/backoffice/projects/bottom_content_combo_large.png') no-repeat 0 0; padding:0;}
+div.block.edit div.med div.left form ul.list_combo_content li.last:hover {background:url('/images/backoffice/projects/bottom_content_combo_large.png') no-repeat 0 0;}
+div.block.edit div.med div.left form span.combo_large {float:left; margin:5px 0 0 0; background:url('/images/backoffice/projects/large_combo_head.png') no-repeat 0 0; width:410px; height:24px; font:normal 13px Arial; color:#999999; padding:9px 0 0 11px; position:relative;}
+div.block.edit div.med div.left form span.combo_large a.organization {position:absolute; top:10px; left:12px; width:374px; height:19px; font:normal 13px Arial; color:#999999;}
+div.block.edit div.med div.left form span.combo_large a.organization:hover {cursor:pointer;}
+div.block.edit div.med div.left form span.combo_large.displayed {background:url('/images/backoffice/projects/large_combo_head_displayed2.png') no-repeat 0 0;}
 
 
 /*projects search*/
