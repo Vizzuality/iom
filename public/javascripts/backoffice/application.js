@@ -243,5 +243,163 @@ $(document).ready(function(ev){
 			};
 		});
 	});
+	
+	/************** CLUSTERS ************************** */
+	$('span.combo_cluster_options').click(function(ev){
+		ev.stopPropagation();
+		ev.preventDefault();
+		
+		if (!$(this).hasClass('clicked')){
+			$(this).addClass('clicked');
+		}else {
+			$(this).removeClass('clicked');
+		} 
+			
+		$(document).click(function(event) {
+			if (!$(event.target).closest('span.combo_cluster_options').length) {
+				$('span.combo_cluster_options.clicked').removeClass('clicked');
+			};
+		});			
+	});
+	
+	// IF WE ADD SOME CLUSTER
+	$('span.combo_cluster_options').find('ul.options li').click(function(ev){
+		ev.stopPropagation();
+		ev.preventDefault();
+		$('span.combo_cluster_options').children('p').text($(this).children('a').text());
+		$('span.combo_cluster_options').children('p').attr('id',$(this).children('a').attr('id'));
+		$('span.combo_cluster_options.clicked').removeClass('clicked');
+
+	});
+	
+	// CLICK ON ADD CLUSTER
+	$('a#add_cluster_bttn').click(function(ev){
+		ev.stopPropagation();
+		ev.preventDefault();
+		
+		var id = $('span.combo_cluster_options').children('p').attr('id');
+		
+		// If we have some element (id=0 is a simple control to test it)
+		if (id != 0){
+			var text = $('span.combo_cluster_options').children('p').text();
+
+			var htmlToAdd = '<li id="cluster_'+id+'">'+text+'<input id="'+id+'"type="checkbox" name="project[clusters_ids][]" value="'+id+'" checked="true"" /><a id="'+id+'" class="remove_this close"></a></li>';
+
+			$('ul.clusters').append(htmlToAdd);
+			$('span.combo_cluster_options').children('p').text('Select more clusters');
+			$('span.combo_cluster_options').children('p').attr('id','0');
+		}
+  	});
+
+	// CLICK ON REMOVE CLUSTER
+	$('ul.clusters').find('a.remove_this').live('click',function(ev){
+		$(this).parent().children('input#' + $(this).attr('id') +'').attr('checked',false);
+		$(this).parent().remove();
+	});
+  
+
+	/************** SECTORS ************************** */
+	$('span#sector').click(function(ev){
+		ev.stopPropagation();
+		ev.preventDefault();
+		
+		if (!$(this).hasClass('clicked')){
+			$(this).addClass('clicked');
+		}else {
+			$(this).removeClass('clicked');
+		} 
+
+		$(document).click(function(event) {
+			if (!$(event.target).closest('span.combo_sector_options').length) {
+				$('span.combo_sector_options.clicked').removeClass('clicked');
+			};
+		});			
+	});
+	
+	 	// IF WE ADD SOME SECTOR
+		$('span#sector').find('ul.options li').click(function(ev){
+			ev.stopPropagation();
+			ev.preventDefault();
+			$('span#sector').children('p').text($(this).children('a').text());
+			$('span#sector').children('p').attr('id',$(this).children('a').attr('id'));
+			$('span#sector.clicked').removeClass('clicked');
+		});
+
+		// CLICK ON ADD SECTOR
+		$('a.add_sector').click(function(ev){
+
+			ev.stopPropagation();
+			ev.preventDefault();
+	
+			var id = $('span#sector').children('p').attr('id');
+			
+			// If we have some element (id=0 is a simple control to test it)
+			if (id != 0){
+				var text = $('span#sector').children('p').text();
+				var htmlToAdd = '<li id="sector_'+id+'">'+text+'<input id="'+id+'"type="checkbox" name="project[sectors_ids][]" value="'+id+'" checked="true"" /><a id="'+id+'" class="remove_this close"></a></li>';
+			
+				$('ul.sectors').append(htmlToAdd);
+				$('span#sector').children('p').text('Select more sectors');
+				$('span#sector').children('p').attr('id','0');
+			}
+	  	});
+	
+		// CLICK ON REMOVE SECTOR
+		$('ul.sectors').find('a.remove_this').live('click',function(ev){
+			$(this).parent().children('input#' + $(this).attr('id') +'').attr('checked',false);
+			$(this).parent().remove();
+		});
+		
+		/************** SUBSECTORS ************************** */
+		$('span#subsector').click(function(ev){
+			ev.stopPropagation();
+			ev.preventDefault();
+
+			if (!$(this).hasClass('clicked')){
+				$(this).addClass('clicked');
+			}else {
+				$(this).removeClass('clicked');
+			} 
+
+			$(document).click(function(event) {
+				if (!$(event.target).closest('span#subsector').length) {
+					$('span#subsector.clicked').removeClass('clicked');
+				};
+			});			
+		});
+
+		 	// IF WE ADD SOME SECTOR
+			$('span#subsector').find('ul.options li').click(function(ev){
+				ev.stopPropagation();
+				ev.preventDefault();
+				$('span#subsector').children('p').text($(this).children('a').text());
+				$('span#subsector').children('p').attr('id',$(this).children('a').attr('id'));
+				$('span#subsector.clicked').removeClass('clicked');
+			});
+
+			// CLICK ON ADD SECTOR
+			// $('a.add_sector').click(function(ev){
+			// 
+			// 	ev.stopPropagation();
+			// 	ev.preventDefault();
+			// 
+			// 	var id = $('span#sector').children('p').attr('id');
+			// 
+			// 	// If we have some element (id=0 is a simple control to test it)
+			// 	if (id != 0){
+			// 		var text = $('span#sector').children('p').text();
+			// 		var htmlToAdd = '<li id="sector_'+id+'">'+text+'<input id="'+id+'"type="checkbox" name="project[sectors_ids][]" value="'+id+'" checked="true"" /><a id="'+id+'" class="remove_this close"></a></li>';
+			// 
+			// 		$('ul.sectors').append(htmlToAdd);
+			// 		$('span#sector').children('p').text('Select more sectors');
+			// 		$('span#sector').children('p').attr('id','0');
+			// 	}
+			// 		  	});
+
+			// CLICK ON REMOVE SECTOR
+			// $('ul.sectors').find('a.remove_this').live('click',function(ev){
+			// 	$(this).parent().children('input#' + $(this).attr('id') +'').attr('checked',false);
+			// 	$(this).parent().remove();
+			// });		
 });
 

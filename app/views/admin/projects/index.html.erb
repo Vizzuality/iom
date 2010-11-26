@@ -133,11 +133,12 @@
         <% end -%>
       </ul>
     </div>
-    <% if @projects.total_pages > 2 %>
+
     <div class="bottom_grey paginate">
-      <%= will_paginate(@projects) %>
+	    <% if @projects.total_pages > 2 %>	
+	      <%= will_paginate(@projects) %>
+	    <% end %>
     </div>
-    <% end %>
   </div>
 
   <div class="add_new">
