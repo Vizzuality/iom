@@ -75,17 +75,20 @@ $(document).ready(function(ev){
       }
     );
 
+	// **************************************************** COMBOS
 	//  combo status 
 	$('span#status_combo_search').click(function(ev){
 		ev.stopPropagation();
 		ev.preventDefault();
 		
 		if (!$(this).hasClass('clicked')){
+			$('span.clicked').removeClass('clicked');
 			$(this).addClass('clicked');
 		}else {
+			$('span.clicked').removeClass('clicked');
 			$(this).removeClass('clicked');
 		}
-		
+
 		$(document).click(function(event) {
 			if (!$(event.target).closest('span#status_combo_search').length) {
 				$('span#status_combo_search').removeClass('clicked');
@@ -108,8 +111,10 @@ $(document).ready(function(ev){
 		ev.preventDefault();
 
 		if (!$(this).hasClass('clicked')){
+			$('span.clicked').removeClass('clicked');
 			$(this).addClass('clicked');
 		}else {
+			$('span.clicked').removeClass('clicked');			
 			$(this).removeClass('clicked');
 		}
 		
@@ -136,8 +141,10 @@ $(document).ready(function(ev){
 		ev.preventDefault();
 
 		if (!$(this).hasClass('clicked')){
+			$('span.clicked').removeClass('clicked');			
 			$(this).addClass('clicked');
 		}else {
+			$('span.clicked').removeClass('clicked');			
 			$(this).removeClass('clicked');
 		}
 		
@@ -164,8 +171,10 @@ $(document).ready(function(ev){
 		ev.preventDefault();
 
 		if (!$(this).hasClass('clicked')){
+			$('span.clicked').removeClass('clicked');			
 			$(this).addClass('clicked');
 		}else {
+			$('span.clicked').removeClass('clicked');			
 			$(this).removeClass('clicked');
 		}
 		
