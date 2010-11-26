@@ -1,7 +1,7 @@
 <%= form_for(@donor, :url => (@donor.new_record? ? admin_donors_path : admin_donor_path(@donor)), :html => { :multipart => true }) do |f| %>
 
   <div class="field">
-    <%= f.label :name %>
+    <label>NAME <strong>*</strong></label>
     <%= f.text_field :name, :class=>"long #{'error' if !@donor.errors[:name].empty? && action_name != 'new'}" %>
     <%= errors_for @donor, :name %>
   </div>

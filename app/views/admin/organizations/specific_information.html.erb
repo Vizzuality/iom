@@ -1,11 +1,17 @@
-<div class="main">
 
-  <h2>Edit information from <%= @organization.name %> in site <%= @site.name %></h2>
 
-  <%= render :partial => 'form' %>
-
-</div>
-
-<div class="sidebar">
-  <%= render 'sidebar' %>
-</div>
+    <div class="main_layout">
+      <div class="block edit first">
+        <div class="top"></div>
+        <div class="med">
+          <div class="left">
+            <h2><%= @organization.name %></h2>
+            <%= render :partial => 'specific_form' %>
+          </div>
+          <div class="right menu">
+            <%= render 'sidebar' %>
+          </div>
+        </div>
+        <div class="bottom"></div>
+      </div>
+    </div>

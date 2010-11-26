@@ -1,11 +1,18 @@
-<div class="main">
 
-  <h2>Edit site <%= @site.name %></h2>
+  <div class="main_layout">
+    <div class="block first <%= (action_name == 'edit' ? '' : 'edit') %>">
+      <div class="top"></div>
+      <div class="med">
+        <div class="left">
+          <h2><%= @site.name %></h2>
+          <%= render :partial => (action_name == 'edit' ? 'admin/sites/form' : 'admin/sites/form_customization') %>
+        </div>
+        <div class="right menu">
+          <%= render 'admin/sites/sidebar' %>
+        </div>
+      </div>
+      <div class="bottom"></div>
+    </div>
+  </div>
 
-  <%= render :partial => (action_name == 'edit' ? 'admin/sites/form' : 'admin/sites/form_customization') %>
-
-</div>
-
-<div class="sidebar">
-  <%= render 'admin/sites/sidebar' %>
-</div>
+  <script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>

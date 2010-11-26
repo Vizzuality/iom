@@ -1,22 +1,24 @@
-<ul>
-  <li <%= selected_if_current_page(edit_admin_site_path(@site)) %>>
-    <%= link_to_unless_current('Basic information', edit_admin_site_path(@site)) %>
-  </li>
-  <li <%= selected_if_current_page(customization_admin_site_path(@site)) %>>
-    <%= link_to_unless_current('Customization', customization_admin_site_path(@site)) %>
-  </li>
-  <li <%= selected_if_current_page(projects_admin_site_path(@site)) %>>
-    <%= link_to_unless_current("Site projects (#{@site.total_projects})", projects_admin_site_path(@site)) %></li>
-  <li <%= selected_if_current_page(admin_site_media_resources_path(@site)) %>>
-    <%= link_to_unless_current("Media (#{@site.media_resources.count})", admin_site_media_resources_path(@site)) %></li>
-  <li <%= selected_if_current_page(admin_site_resources_path(@site)) %>>
-    <%= link_to_unless_current("Resources (#{@site.resources.count})", admin_site_resources_path(@site)) %></li>
-  <li <%= selected_if_current_page(admin_site_pages_path(@site)) %>>
-    <%= link_to_unless_current("Pages (#{@site.pages.count})", admin_site_pages_path(@site)) %></li>
-</ul>
 
-<div class="down">
-  <h3>Delete this site</h3>
-  <%= link_to("Delete this site", admin_site_path(@site), :method => :delete, :confirm => '¿Are you sure?') %>
-</div>
+  <ul>
+    <li <%= selected_if_current_page(edit_admin_site_path(@site)) %>>
+      <%= link_to('Basic information', edit_admin_site_path(@site)) %>
+    </li>
+    <li <%= selected_if_current_page(customization_admin_site_path(@site)) %>>
+      <%= link_to('Customization', customization_admin_site_path(@site)) %>
+    </li>
+    <li <%= selected_if_current_page(projects_admin_site_path(@site)) %>>
+      <%= link_to("Site projects", projects_admin_site_path(@site)) %><% if !@site.total_projects!=0 %> <p><span><%=@site.total_projects%></span></p><% end %></li>
+    <li <%= selected_if_current_page(admin_site_media_resources_path(@site)) %>>
+      <%= link_to("Media", admin_site_media_resources_path(@site)) %><% if !@site.media_resources.empty? %> <p><span><%=@site.media_resources.count%></span></p><% end %></li>
+    <li <%= selected_if_current_page(admin_site_resources_path(@site)) %>>
+      <%= link_to("Resources", admin_site_resources_path(@site)) %><% if !@site.resources.empty? %> <p><span><%=@site.resources.count%></span></p><% end %></li>
+    <li <%= selected_if_current_page(admin_site_pages_path(@site)) %>>
+      <%= link_to("Pages", admin_site_pages_path(@site)) %><% if !@site.pages.empty? %> <p><span><%=@site.pages.count%></span></p><% end %></li>
+  </ul>
 
+
+  <div class="delete">
+    <h5>DELETE THIS SITE</h5>
+    <p>Clicking the button below you will delete permanently this site. Please take care of the domain that was pointing to this site.</p>
+    <%= link_to("Delete this SITE", '#') %> <!-- admin_organization_path(@site) -->
+  </div>
