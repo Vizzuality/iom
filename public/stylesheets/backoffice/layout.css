@@ -454,17 +454,37 @@ div.block.donations_project div.med div.left {float:left; width:572px;}
 div.block.donations_project div.med div.left p {float:left; width:100%; font:normal 15px Arial; color:#666666;}
 div.block.donations_project div.med div.left ul {float:left; width:100%; margin:20px 0 0 0; border-top:1px solid #CCCCCC;}
 div.block.donations_project div.med div.left ul li {position:relative; float:left; width:100%; height:71px; border-bottom:1px solid #CCCCCC;}
-div.block.donations_project div.med div.left ul li h3 {float:left; width:100%; margin:15px 0 0 0;}
-div.block.donations_project div.med div.left ul li h3 a {font:bold 17px Arial; color:#E93E3F;}
-div.block.donations_project div.med div.left ul li p {float:left; padding:5px 0 0 0; font:normal 13px Arial; color:#666666;}
-div.block.donations_project div.med div.left ul li a.delete {position:absolute; right:0; top:25px; width:15px; height:16px; background:url('/images/backoffice/icons/close_bkg.png') no-repeat 0 0; text-indent:-9999px; font-size:0; display:block; line-height:0;}
-div.block.donations_project div.med div.left ul li a.delete:hover {background-position:0 -16px;}
-div.block.donations_project div.med div.left form {float:left; width:527px; height:209px; padding:21px; margin:20px 0 0 2px; background:url('/images/backoffice/common/green_form_bkg.png') no-repeat center center;}
-div.block.donations_project div.med div.left form h4 {font:normal 21px "Museo Sans",Arial; color:#333333; text-shadow:0 1px white;}
-div.block.donations_project div.med div.left form label {float:left; width:400px; margin:17px 0 0 3px; font:normal 11px Arial; color:#333333; text-shadow:none; text-transform:uppercase;}
-div.block.donations_project div.med div.left form input[type="text"] {float:left; width:509px; height:22px; padding:6px 8px; margin:5px 0 0 0; font:normal 13px Arial; color:#666666; background:url('/images/backoffice/resources/url_input_bkg.png') no-repeat 0 0; border:none;}
-div.block.donations_project div.med div.left form input[type="text"].title {float:left; width:319px; height:22px; background:url('/images/backoffice/resources/title_input_bkg.png') no-repeat 0 0;}
-div.block.donations_project div.med div.left form input[type="submit"] {float:right; width:130px; height:32px; margin:15px 3px 0 0; background:url('/images/backoffice/resources/add_input_bkg.png') no-repeat 0 0; border:none; text-indent:-9999px; font-size:0; display:block; line-height:0;}
+div.block.donations_project div.med div.left ul li div.name_box {float:left; width:266px; height:71px;}
+div.block.donations_project div.med div.left ul li div.date_box {float:left; width:167px; background-color:#F7F7F7; height:71px;}
+div.block.donations_project div.med div.left ul li div.amount_box {float:left; width:137px; position:relative; }
+div.block.donations_project div.med div.left ul li div.amount_box a.delete {position:absolute; right:5px; top:28px; width:15px; height:16px; background:url('/images/backoffice/icons/close_bkg.png') no-repeat 0 0; text-indent:-9999px; font-size:0; display:block; line-height:0;}
+div.block.donations_project div.med div.left ul li div.amount_box a.delete:hover {background-position:0 -16px;}
+div.block.donations_project div.med div.left ul li div.name_box h3 {float:left; width:100%; margin:22px 0 0 0;}
+div.block.donations_project div.med div.left ul li div.name_box h3 a {font:bold 17px Arial; color:#E93E3F;}
+div.block.donations_project div.med div.left ul li p {float:left; padding:5px 0 0 0; font:normal 13px Arial; color:#666666; margin:22px 0 0 19px;}
+div.block.donations_project div.med div.left h4.total {float:left; margin:25px 0 0 268px; font:500 17px "Museo Sans"; color:#333333; width:150px;}
+div.block.donations_project div.med div.left span.total_account {float:left; width:auto; font:bold 15px Arial; color:#333333; margin:26px 0 0 36px;}
+div.block.donations_project div.med div.left p.amount {float:left; width:auto; font:bold 15px Arial; color:#333333; margin:26px 0 0 5px;}
+
+
+
+div.block.donations_project div.med div.left form {float:left; width:543px; height:143px; padding:21px; margin:20px 0 0 2px; background:url('/images/backoffice/projects/bkg_add_donation_form.png') no-repeat center center; position:relative;}
+div.block.donations_project div.med div.left form div#donor_name {float:left; width:234px; height:64px; margin:0 10px 0 0;}
+div.block.donations_project div.med div.left form div#donor_name span {float:left; background:url('/images/backoffice/projects/input_donation_name.png') no-repeat 0 0; width:226px; height:32px; position:relative; margin:3px 0 0 7px;}
+div.block.donations_project div.med div.left form div#donor_name span input[type="text"] {border:none; font:normal 13px Arial; color:#999999; position:absolute; top:8px; left:10px; width:210px;}
+div.block.donations_project div.med div.left form div#donation_date {float:left; width:173px; height:64px; margin:0 7px 0 0;}
+div.block.donations_project div.med div.left form div#donation_date span {float:left; background:url('/images/backoffice/projects/date_input_amount.png') no-repeat 0 0; font:normal 15px Arial; color:#333333; width:164px; height:24px; position:relative; margin:3px 0 0 7px; padding:8px 0 0 9px;}
+
+div.block.donations_project div.med div.left form div#donation_amount {float:left; width:92px; height:32px; margin:0 0 0 10px;}
+div.block.donations_project div.med div.left form div#donation_amount span {float:left; width:92px; height:32px; background:url('/images/backoffice/projects/amount_donation_input.png') no-repeat 0 0; position:relative; margin:3px 0 0 8px;}
+div.block.donations_project div.med div.left form div#donation_amount span input[type="text"]{position:absolute; top:5px; left:22px; border:none; width:64px; height:21px; font:normal 15px Arial; color:#333333;}
+div.block.donations_project div.med div.left form h4 {font:normal 21px "Museo Sans",Arial; color:#333333; text-shadow:0 1px white; margin:0 0 0 8px;}
+div.block.donations_project div.med div.left form label {float:left; width:400px; margin:17px 0 0 9px; font:normal 11px Arial; color:#666666; text-shadow:none; text-transform:uppercase; width:100px; }
+
+
+
+
+div.block.donations_project div.med div.left form input[type="submit"] {position:absolute; bottom:25px; right:30px; width:128px; height:32px; background:url('/images/backoffice/projects/add_donation_bttn.png') no-repeat 0 0; border:none; text-indent:-9999px; font-size:0; display:block; line-height:0;}
 div.block.donations_project div.med div.left form input[type="submit"]:hover {background-position:0 -32px; cursor:pointer;}
 div.block.donations_project div.bottom {float:left; height:15px; width:100%; background: url('/images/backoffice/backgrounds/bottom_two_columns.png') no-repeat scroll top left!important;}
 

@@ -7,19 +7,58 @@
         <p>by <%= @project.primary_organization.name %></p>
         <% unless @project.donations.empty? %>
           <ul>
+			<% total_account = 0 %>
              <% @project.donations.each do |donation| %>
             <li>
-              <span class="first">
-                <h3><%= link_to(donation.donor.name, edit_admin_donor_path(donation.donor)) %></h3>
-              </span>
-			<%if false %>
-			      <p><%= donation.date.strftime("%Y/%m/%d") %></p>
-			<%end%>
-              <p  >$ <%= donation.amount %></p>
+				<div class="name_box">			
+                	<h3>
+						<%= link_to(donation.donor.name, edit_admin_donor_path(donation.donor)) %>
+					</h3>
+				</div>
+				<div class="date_box">			
+					<%if false %>
+					      <p><%= donation.date.strftime("%Y/%m/%d") %></p>
+					<%end%>
+				</div>
+				<div class="amount_box">
+              		<p>$ <%= donation.amount %></p>
+					<%= link_to('', admin_project_donation_path(@project, donation), :method => :delete, :confirm => 'Are your sure?', :class => 'delete') %>
+				</div>
+				<%= total_account += donation.amount %>
             </li>
             <% end -%>
           </ul>
+		  <h4 class="total">TOTAL DONATED:</h4><span class="total_account">$</span><p class="amount"><%= total_account %></p>
         <% end -%>
+		<%= form_for([:admin, @project, (@donation || @project.donations.new)]) do |f| %>
+			<h4>Add a new donation</h4>
+		    <%= f.error_messages %>
+		
+		    <div id="donor_name" class="field">
+		      	<%= f.label :donor_id, 'DONOR NAME' %>			
+				<span id="donor_name_input">
+					<!--  TO ADD SOME DONOR BY DEFAULT MEANWHILE IS STYLED -->
+					<%= f.text_field :donor_id, :value => '1' %>
+					<% if false %>
+			    	<%= f.text_field :donor_id, :value => Donor.all.collect{ |d| [d.name, d.id] }.join(', ') %>
+					<% end %>
+				</span>
+		    </div>
+		    <div id="donation_date" class="field">
+		      <%= f.label :date, 'DONATION DATE' %>				
+				<span>09/10/20010</span>
+				<%= f.date_select :date, :start_year => Date.today.year - 5  %>	
+
+		    </div>
+		    <div id="donation_amount" class="field">
+		      <%= f.label :amount, 'AMOUNT' %>
+				<span>
+			      <%= f.text_field :amount  %>
+				</span>
+
+		    </div>
+		      <%= f.submit 'Add donation' %>
+		  <% end -%>
       </div>
       <div class="right menu">
 	  	<%= render 'admin/projects/sidebar' %>
@@ -28,10 +67,7 @@
     <div class="bottom"></div>
   </div>
 </div>  
-  <script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>
-
-
-
+ <script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>
 
 <%if false %>
 	<div class="main">

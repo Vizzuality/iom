@@ -400,6 +400,5 @@ $(document).ready(function(ev){
 			// $('ul.sectors').find('a.remove_this').live('click',function(ev){
 			// 	$(this).parent().children('input#' + $(this).attr('id') +'').attr('checked',false);
 			// 	$(this).parent().remove();
-			// });		
+			// });	
 });
-
