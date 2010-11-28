@@ -46,42 +46,36 @@
         <div class="content_info">
           <p class="title_section pt_sans_bold"><%= @organization.name.upcase %> PROJECTS BY <%= @site.word_for_clusters.upcase %></p>
           <ul class="statistics_list">
-            <!-- TODO: assign cluster to class
+            <% @organization.projects_clusters[0...3].each do |cluster,count| %>
             <li>
-              <a class="plus"><span class="aller" style="width:203px"><p>13</p></span></a>
-            </li>
-            <li>
-              <a class="drop"><span class="aller" style="width:153px"><p>9</p></span></a>
-            </li>
-            <li>
-              <a class="drop"><span class="aller" style="width:23px"><p>2</p></span></a>
-            </li>
-            -->
-            <% @organization.projects_clusters.each do |k,v| %>
-            <li>
-              <a class="drop"><span class="aller" style="width:153px"><p><%= v.size %></p></span></a>
+              <a class="<%= cluster_class(cluster) %>"><span class="aller" style="width:<%= cluster_width(count) %>px"><p><%= count %></p></span></a>
             </li>
             <% end %>
           </ul>
-          <p class="summarize_info">3 projects more on other clusters</p>
+          <% if @organization.projects_clusters.size > 3 %>
+            <p class="summarize_info"><%= pluralize(@organization.projects_clusters.size - 3, 'project', 'projects') %> more on other clusters</p>
+          <% end %>
         </div>
       </div>
     </div>
+
     <!-- PROJECTS BY AREA -->
+    <% unless @organization.projects_regions.empty? %>
     <div class="body_info grid">
       <div class="real_content">
         <div class="content_info">
-          <p class="title_section pt_sans_bold"><%= @organization.name %> PROJECTS BY <%= @site.word_for_sectors.upcase %></p>
+          <p class="title_section pt_sans_bold"><%= @organization.name.upcase %> PROJECTS BY REGIONS</p>
           <div class="pie_chart"></div>
           <ul class="info_pie_chart">
-            <li class="category1"><p class="name_category">Quito</p> - 9</li>
-            <li class="category2"><p class="name_category">Machachi</p> - 7</li>
-            <li class="category3"><p class="name_category">Manta</p> - 4</li>
-            <li class="category4"><p class="name_category other">Other areas</li>
+            <% @organization.projects_regions.each do |region, count| %>
+              <li class="category1"><p class="name_category"><%= region.name %></p> - <%= count %></li>
+            <% end %>
           </ul>
         </div>
       </div>
     </div>
+    <% end %>
+
     <% unless @organization.resources.empty? %>
     <div class="body_info grid">
       <div class="real_content resources">

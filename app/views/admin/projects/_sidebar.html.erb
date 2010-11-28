@@ -1,15 +1,17 @@
 <ul>
-  <li <%= selected_if_current_page(edit_admin_donor_path(@donor)) %>>
-    <%= link_to_unless_current('Basic information', edit_admin_donor_path(@donor)) %>
+  <li <%= selected_if_current_page(edit_admin_project_path(@project)) %>>
+    <%= link_to('Basic information', edit_admin_project_path(@project)) %>
   </li>
-  <li <%= selected_if_current_page(projects_admin_donor_path(@project)) %>>
-    <%= link_to_unless_current('Funded projects', projects_admin_donor_path(@project)) %><% if !@project.donations.empty? %> <p><span><%=@project.donations.count%></span></p><% end %>
+  <li <%= selected_if_current_page(admin_project_media_resources_path(@project)) %>>
+    <%= link_to("Media", admin_project_media_resources_path(@project)) %><% if !@project.media_resources.empty? %> <p><span><%=@project.media_resources.count%></span></p><% end %>
   </li>
-  <li <%= selected_if_current_page(admin_donor_media_resources_path(@project)) %>>
-    <%= link_to_unless_current("Media", admin_donor_media_resources_path(@project)) %><% if !@project.media_resources.empty? %> <p><span><%=@project.media_resources.count%></span></p><% end %>
+
+  <li <%= selected_if_current_page(donations_admin_project_path(@project)) %>>
+    	<%= link_to('Donations', donations_admin_project_path(@project)) %><% if !@project.donations.empty? %> <p><span><%=@project.donations.count%></span></p><% end %>
   </li>
-  <li <%= selected_if_current_page(admin_donor_resources_path(@project)) %>>
-    <%= link_to_unless_current("Resources", admin_donor_resources_path(@project)) %><% if !@project.resources.empty? %> <p><span><%=@@project.resources.count%></span></p><% end %>
+
+  <li <%= selected_if_current_page(admin_project_resources_path(@project)) %>>
+    <%= link_to("Resources", admin_project_resources_path(@project)) %><% if !@project.resources.empty? %> <p><span><%=@@project.resources.count%></span></p><% end %>
   </li>
 </ul>
 

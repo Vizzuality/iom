@@ -4,6 +4,7 @@ class Admin::DonorsController < ApplicationController
 
   def index
     donors = if params[:q]
+      # TODO: escape to avoid SQL injection
       q = "%#{params[:q]}%"
       Donor.where(["name ilike ? OR description ilike ?", q, q])
     else

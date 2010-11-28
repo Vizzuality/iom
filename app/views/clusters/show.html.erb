@@ -9,21 +9,24 @@
         <p class="main_info">Texto para el cluster. Esto no aparece en el back de administración porque no hay gestión de clusters, así que a ver de dónde lo sacamos.</p>
       </div>
     </div>
+
     <!-- PROJECTS BY AREA -->
+    <% unless @cluster.projects_regions.empty? %>
     <div class="body_info grid">
       <div class="real_content">
         <div class="content_info">
-          <p class="title_section pt_sans_bold"><%= @cluster.name %> PROJECTS BY <%= @site.word_for_sectors.upcase %></p>
+          <p class="title_section pt_sans_bold"><%= @cluster.name.upcase %> PROJECTS BY REGIONS</p>
           <div class="pie_chart"></div>
           <ul class="info_pie_chart">
-            <li class="category1"><p class="name_category">Quito</p> - 9</li>
-            <li class="category2"><p class="name_category">Machachi</p> - 7</li>
-            <li class="category3"><p class="name_category">Manta</p> - 4</li>
-            <li class="category4"><p class="name_category other">Other areas</li>
+            <% @cluster.projects_regions.each do |region, count| %>
+              <li class="category1"><p class="name_category"><%= region.name %></p> - <%= count %></li>
+            <% end %>
           </ul>
         </div>
       </div>
     </div>
+    <% end %>
+
     <% unless @cluster.donors.empty? %>
     <div class="body_info grid">
       <div class="real_content resources">
@@ -31,7 +34,7 @@
           <p class="title_section pt_sans_bold">DONORS</p>
           <ul class="additional_resources">
             <% @cluster.donors.each do |donor| %>
-            <li><%= link_to(donor.name, donor.website, :rel => 'nofollow') %></li>
+            <li><%= link_to(donor.name, donor_path(donor)) %></li>
             <% end %>
           </ul>
         </div>

@@ -1,3 +1,8 @@
+
+
+
+
+<% if false %>
 <%= form_for(@site, :url => (@site.new_record? ? admin_sites_path : admin_site_path(@site))) do |f| %>
 
   <%= f.error_messages %>
@@ -149,3 +154,4 @@ $(function() {
   });
 });
 </script>
+<%end%>

@@ -103,6 +103,8 @@ p1 = Project.create :name => "Food Conservation",
 
 p1.clusters << cluster_floods
 p1.clusters << cluster_water
+p1.regions  << valencia
+p1.regions  << madrid
 
 p2 = Project.create :name => "Vegetable generation",
                     :description => "Vegetable generation....",
@@ -124,7 +126,7 @@ p2 = Project.create :name => "Vegetable generation",
                     :awardee_type => 'Type of awardee #2'
 
 p2.clusters << cluster_water
-
+p2.regions  << madrid
 p3 = Project.create :name => "Fishing",
                     :description => "Fishing generation....",
                     :primary_organization => o2,

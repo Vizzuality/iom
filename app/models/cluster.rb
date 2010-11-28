@@ -3,7 +3,7 @@
 # Table name: clusters
 #
 #  id   :integer         not null, primary key
-#  name :string(255)     
+#  name :string(255)
 #
 
 class Cluster < ActiveRecord::Base
@@ -14,6 +14,15 @@ class Cluster < ActiveRecord::Base
     projects.map do |project|
       project.donors
     end.flatten.uniq
+  end
+
+  # Array of arrays
+  # [[region, count], [region, count]]
+  def projects_regions
+    result = ActiveRecord::Base.connection.execute("select region_id, count(region_id) as count from projects_regions where project_id IN (select project_id from clusters_projects where cluster_id=#{self.id}) group by region_id order by count desc")
+    result.map do |row|
+      [Region.find(row['region_id']), row['count'].to_i]
+    end
   end
 
 end

@@ -11,19 +11,68 @@
 			<ul class="combos">
 				<li>
 					<label>STATUS</label>
-					<a class="combo">All status</a>
+					<span id="status_combo_search" class="combo">All status 
+						<!-- INPUT HIDDEN -->
+			          <input id="status_input" type="hidden" value="active" />
+						<ul class="elements">
+							<li class="first"></li>
+							<li>
+								<a id="active" class="status">Active</a>
+							</li>
+							<li>
+								<a id="closed" class="status">Closed</a>
+							</li>
+							<li class="last"></li>
+						</ul>
+					</span>
 				</li>
 				<li>
 					<label>COUNTRY</label>
-					<a class="combo">All</a>
+					<span id="country_combo_search" class="combo">All
+							<!-- INPUT HIDDEN -->
+				          <input id="country_input" type="hidden" value="" />
+							<ul class="elements">
+								<li class="first"></li>
+								   <% Country.all.each do |country| %>
+									<li>
+										<a id="<%= country.id%>"><%= country.name %></a>
+									</li>		
+								   <% end %>
+								<li class="last"></li>
+							</ul>
+					</span>
 				</li>
 				<li>
 					<label>CLUSTER</label>
-					<a class="combo">Select cluster</a>
+					<span id="cluster_combo_search" class="combo">Select cluster
+							<!-- INPUT HIDDEN -->
+				          <input id="cluster_input" type="hidden" value=""/>
+							<ul class="elements">
+								<li class="first"></li>
+								   <% Cluster.all.each do |cluster| %>
+									<li>
+										<a id="<%= cluster.id%>"><%= cluster.name %></a>
+									</li>		
+								   <% end %>
+								<li class="last"></li>
+							</ul>
+					</span>
 				</li>
 				<li>
 					<label>SECTOR</label>
-					<a class="combo">Select sector</a>
+					<span id="sector_combo_search" class="combo">Select sector
+							<!-- INPUT HIDDEN -->
+				          <input id="sector_input" type="hidden" value=""/>
+							<ul class="elements">
+								<li class="first"></li>
+								   <% Sector.all.each do |sector| %>
+									<li>
+										<a id="<%= sector.id%>"><%= sector.name %></a>
+									</li>		
+								   <% end %>
+								<li class="last"></li>
+							</ul>
+					</span>					
 				</li>
 			</ul>		
 	      </form>
@@ -64,7 +113,7 @@
           </div>
           <% unless project.clusters.empty? %>
             <% if project.clusters.count == 1 %>
-            <div class="white box single">
+            <div class="white box single little">
               <p><%= project.clusters.first.name %></p>
             </div>
             <% else %>
@@ -84,11 +133,12 @@
         <% end -%>
       </ul>
     </div>
-    <% if @projects.total_pages > 2 %>
+
     <div class="bottom_grey paginate">
-      <%= will_paginate(@projects) %>
+	    <% if @projects.total_pages > 2 %>	
+	      <%= will_paginate(@projects) %>
+	    <% end %>
     </div>
-    <% end %>
   </div>
 
   <div class="add_new">
@@ -98,3 +148,4 @@
     </a>
   </div>
 </div>
+<script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>

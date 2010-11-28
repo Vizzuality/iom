@@ -56,4 +56,19 @@ module ApplicationHelper
     return result.reverse.join(" - ")
   end
 
+  def cluster_width(count)
+    count = count*10
+    if count > 203
+      203
+    elsif count < 0
+      0
+    else
+      count
+    end
+  end
+
+  def cluster_class(cluster)
+    %W{ drop plus }[rand(2)-1]
+  end
+
 end

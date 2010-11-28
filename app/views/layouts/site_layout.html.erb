@@ -53,12 +53,12 @@
         <!-- div left menu -->
 
         <div class="right">
-          <form class="search">
+          <%= form_tag(search_path, :method => :get, :class => 'search') do %>
             <span class="input_search">
-              <input type="text" value="Search..." onclick="this.value=''"/>
-              <input type="submit" value="" />
+              <%= text_field_tag :q, params[:q] %>
+              <%= submit_tag '' %>
             </span>
-          </form>
+          <% end %>
         </div>
         <!-- div right menu -->
       </div>

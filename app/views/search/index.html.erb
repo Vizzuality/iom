@@ -1,0 +1,32 @@
+<div class="main">
+  <h1>Search projects</h1>
+
+  <%= form_tag(search_path, :method => :get) do %>
+    <%= text_field_tag :q, params[:q] %>
+    <%= submit_tag 'Search' %>
+  <% end %>
+
+  <% if @projects && @projects.any? %>
+
+    <% @projects.each do |project| %>
+      <div class="project">
+        <h3><%= link_to(project.name, project_path(project)) %></h3>
+        by <%= link_to(project.primary_organization.name, organization_path(project.primary_organization)) %>
+      </div>
+    <% end %>
+
+
+    <%= will_paginate(@projects) %>
+
+  <% else %>
+
+    <% if params[:q] %>
+      <p>No projects were found for '<%= params[:q] %>'</p>
+    <% end %>
+
+  <% end %>
+</div>
+
+<div class="sidebar">
+
+</div>
