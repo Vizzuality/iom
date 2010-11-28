@@ -32,6 +32,8 @@
 #  project_context_tags_ids        :string(255)
 #  status                          :boolean
 #  geographic_context_geometry     :geometry
+#  visits                          :float           default(0.0)
+#  visits_last_week                :float           default(0.0)
 #
 
 class Site < ActiveRecord::Base
@@ -177,12 +179,12 @@ class Site < ActiveRecord::Base
     result.all
   end
 
-  # TODO: with a count()
+  # TODO: perform query with a count()
   def total_projects(options = {})
     projects(options).size
   end
 
-  # TODO: performance
+  # TODO: performance, don't get all fields
   def projects_ids
     projects.map{ |p| p.id } + [-1]
   end
@@ -203,17 +205,17 @@ class Site < ActiveRecord::Base
     Sector.find_by_sql("select sectors.* from sectors, projects_sectors where projects_sectors.project_id in (#{projects_ids.join(',')}) AND sectors.id = projects_sectors.sector_id").uniq
   end
 
-  def visits
+  def set_visits!
     return if self.google_analytics_id.blank? || Settings.first.google_analytics_username.blank? || Settings.first.google_analytics_password.blank?
     Garb::Session.login(Settings.first.google_analytics_username, Settings.first.google_analytics_password)
     profile = Garb::Profile.all.detect{|p| p.web_property_id == self.google_analytics_id}
     report = Garb::Report.new(profile)
     report.metrics :pageviews
     result = report.results.first
-    result.pageviews.to_i
+    update_attribute(:visits, result.pageviews.to_i)
   end
 
-  def visits_last_week
+  def set_visits_from_last_week!
     return if self.google_analytics_id.blank? || Settings.first.google_analytics_username.blank? || Settings.first.google_analytics_password.blank?
     Garb::Session.login(Settings.first.google_analytics_username, Settings.first.google_analytics_password)
     profile = Garb::Profile.all.detect{|p| p.web_property_id == self.google_analytics_id}
@@ -221,7 +223,7 @@ class Site < ActiveRecord::Base
     report.metrics :pageviews
     report.dimensions :date
     result = report.results.first
-    result.pageviews.to_i
+    update_attribute(:visits_last_week, result.pageviews.to_i)
   end
 
   private
@@ -264,6 +266,7 @@ class Site < ActiveRecord::Base
       end
     end
 
+    # Get project tags names and sets the id's from that tags
     def set_project_context_tags_ids
       return if project_context_tags.blank?
       tag_names = project_context_tags.split(',').map{ |t| t.strip }.compact.delete_if{ |t| t.blank? }

@@ -8,15 +8,14 @@ Iom::Application.routes.draw do
   match 'login' => 'sessions#new', :as => :login
   match 'logout' => 'sessions#destroy', :as => :logout
 
-  # Front
+  # Front urls
   resources :regions,       :only => [:index, :show]
   resources :sectors,       :only => [:show]
   resources :clusters,      :only => [:show]
   resources :donors,        :only => [:index, :show]
   resources :projects,      :only => [:index, :show]
   resources :organizations, :only => [:index, :show]
-  # pages:
-  #  - all the default pages associated to this project should be routed
+  # pages
   match '/p/:id' => 'pages#show', :as => :page
 
   # Administration
