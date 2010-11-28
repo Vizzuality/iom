@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101125182340) do
+ActiveRecord::Schema.define(:version => 20101128172940) do
 
   create_table "clusters", :force => true do |t|
     t.column "name", :string
@@ -274,6 +274,8 @@ ActiveRecord::Schema.define(:version => 20101125182340) do
     t.column "project_context_tags_ids", :string
     t.column "status", :boolean, :default => false
     t.column "geographic_context_geometry", :geometry, :srid => 4326
+    t.column "visits", :float
+    t.column "visits_last_week", :float
   end
 
   add_index "sites", ["name"], :name => "index_sites_on_name"
