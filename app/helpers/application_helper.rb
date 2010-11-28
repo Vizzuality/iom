@@ -2,10 +2,14 @@ module ApplicationHelper
 
   def selected_if_current_page(url_path)
     if @organization
-      if (action_name == "specific_information" || action_name == 'new' || action_name == 'edit' || action_name == 'create' || action_name == 'update') && request.path == url_path
-        raw("class=\"list_selected\"")
+      if (action_name == "specific_information" || action_name == 'new' || action_name == 'edit' || action_name == 'create' || action_name == 'update')
+        if request.path == url_path
+          raw("class=\"list_selected\"")
+        else
+          raw("class=\"list_unselected\"")
+        end
       else
-        raw("class=\"list_unselected\"")
+        raw("class=\"selected\"") if request.path == url_path
       end
     else
       raw("class=\"selected\"") if request.path == url_path
