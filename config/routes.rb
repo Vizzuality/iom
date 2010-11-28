@@ -17,6 +17,8 @@ Iom::Application.routes.draw do
   resources :organizations, :only => [:index, :show]
   # pages
   match '/p/:id' => 'pages#show', :as => :page
+  # search
+  match '/search' => 'search#index', :as => :search
 
   # Administration
   namespace :admin do
