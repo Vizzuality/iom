@@ -11,6 +11,13 @@ class ApplicationController < ActionController::Base
 
   protected
 
+    # Site management
+    # ---------------
+    #
+    # Every environment has a main_site_host which is the host in which the applicacion administrator is
+    # running and can have many site_urls, which are the url's associated to each site.
+    # Depending on the controller_name, the request should only be handled in the main_site_host.
+    #
     def main_site_host
       case Rails.env
       when 'development'
@@ -22,29 +29,29 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    # Site management
-    # ---------------
-    #
-    # Every environment has a main_site_host which is the host in which the applicacion administrator is
-    # running and can have many site_urls, which are the url's associated to each site.
-    # Depending on the controller_name, the request should only be handled in the main_site_host.
-    #
+    # Filter to set the variable @site, available and used in all the application
     def set_site
+      # If the request host isn't the main_site_host, it should be the host from a site
       if request.host != main_site_host
         unless @site = Site.published.where(:url => request.host).first
           raise ActiveRecord::RecordNotFound
         end
       else
+        # Sessions controller doesn't depend on the host
         return true if controller_name == 'sessions'
+        # If the controller is not in the namespace /admin,
+        # and the host is the main_site_host, it should be a Site
+        # in draft mode.
         if params[:controller] !~ /\Aadmin\/?.+\Z/
           unless @site = Site.draft.where(:id => params[:site_id]).first
             raise ActiveRecord::RecordNotFound
+          else
+            # If a project is a draft, the host of the project is the main_site_host
+            # and the site is guessed by the site_id attribute
+            self.default_url_options = {:site_id => @site.id}
           end
         end
       end
-      logger.info "==============================="
-      logger.info "== @site: #{@site ? @site.name : 'nil'} =="
-      logger.info "==============================="
     end
 
     def render_404
