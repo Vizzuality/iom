@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101128172940) do
+ActiveRecord::Schema.define(:version => 20101128174136) do
 
   create_table "clusters", :force => true do |t|
     t.column "name", :string
@@ -84,6 +84,7 @@ ActiveRecord::Schema.define(:version => 20101128172940) do
     t.column "vimeo_embed_html", :text
     t.column "created_at", :datetime
     t.column "updated_at", :datetime
+    t.column "caption", :string
   end
 
   add_index "media_resources", ["element_id", "element_type"], :name => "index_media_resources_on_element_type_and_element_id"
@@ -274,8 +275,8 @@ ActiveRecord::Schema.define(:version => 20101128172940) do
     t.column "project_context_tags_ids", :string
     t.column "status", :boolean, :default => false
     t.column "geographic_context_geometry", :geometry, :srid => 4326
-    t.column "visits", :float
-    t.column "visits_last_week", :float
+    t.column "visits", :float, :default => 0.0
+    t.column "visits_last_week", :float, :default => 0.0
   end
 
   add_index "sites", ["name"], :name => "index_sites_on_name"

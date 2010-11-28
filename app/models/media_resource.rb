@@ -14,6 +14,7 @@
 #  vimeo_embed_html     :text            
 #  created_at           :datetime        
 #  updated_at           :datetime        
+#  caption              :string(255)     
 #
 
 class MediaResource < ActiveRecord::Base
