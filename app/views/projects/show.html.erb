@@ -70,7 +70,7 @@
     <h3>Donors</h3>
     <ul>
     <% @project.donors.limit(5).each do |donor| %>
-      <li><%= link_to(donor.name, donor.website, :rel => 'nofollow', :target => '_blank') %></li>
+      <li><%= link_to(donor.name, donor_path(donor)) %></li>
     <% end %>
     </ul>
     <% if @project.donors.count > 5 %>

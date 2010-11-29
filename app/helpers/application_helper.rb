@@ -53,6 +53,13 @@ module ApplicationHelper
     if @project
       result << @project.name
     end
+    if controller_name == 'search' && action_name == 'index'
+      if params[:q].blank?
+        result << "Search"
+      else
+        result << "Search results for '#{params[:q]}'"
+      end
+    end
     return result.reverse.join(" - ")
   end
 
@@ -67,6 +74,7 @@ module ApplicationHelper
     end
   end
 
+  # TODO: get real classes
   def cluster_class(cluster)
     %W{ drop plus }[rand(2)-1]
   end

@@ -83,7 +83,7 @@ Tag.create :name => 'earthquake'
 # Projects
 
 p1 = Project.create :name => "Food Conservation",
-                    :description => "Food Conservation is a project.....",
+                    :description => "Food Conservation is a project .....",
                     :primary_organization => o1,
                     :tags => "asia, childhood",
                     :implementing_organization => o1.try(:name),
@@ -107,7 +107,7 @@ p1.regions  << valencia
 p1.regions  << madrid
 
 p2 = Project.create :name => "Vegetable generation",
-                    :description => "Vegetable generation....",
+                    :description => "Vegetable generation is a project ....",
                     :primary_organization => o1,
                     :tags => "childhood, earthquake",
                     :implementing_organization => o1.try(:name),
@@ -128,7 +128,7 @@ p2 = Project.create :name => "Vegetable generation",
 p2.clusters << cluster_water
 p2.regions  << madrid
 p3 = Project.create :name => "Fishing",
-                    :description => "Fishing generation....",
+                    :description => "Fishing generation is a project ....",
                     :primary_organization => o2,
                     :tags => "earthquake",
                     :implementing_organization => o2.try(:name),
@@ -167,4 +167,4 @@ donor.donations.create :project => p3, :amount =>  500
 # Sites
 #  sites for testing purposes. Add this line to your /etc/hosts:
 #  127.0.0.1       www.haitiaidmap.com haitiadimap.com
-site = Site.create :name => 'Haiti Aid Map', :url => 'www.haitiaidmap.com', :status => false, :project_context_organization_id => o1.id, :project_context_cluster_id => cluster_water.id
+site = Site.create :name => 'Haiti Aid Map', :url => 'www.haitiaidmap.com', :status => true, :project_context_organization_id => o1.id, :project_context_cluster_id => cluster_water.id

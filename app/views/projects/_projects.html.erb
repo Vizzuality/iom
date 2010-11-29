@@ -6,7 +6,7 @@
     <% if project.countries.any? %>
     <p class="author">at <a href="#">Jeddah</a></p>
     <% end %>
-    <p class="info"><%= truncate(project.name, :truncate => 180) %> <a href="<%= projects_path(project) %>" class="learn_more">Learn more</a></p>
+    <p class="info"><%= truncate(project.name, :truncate => 180) %> <a href="<%= project_path(project) %>" class="learn_more">Learn more</a></p>
   </li>
   <% end %>
 </ul>

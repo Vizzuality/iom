@@ -8,6 +8,15 @@
 
   <% if @projects && @projects.any? %>
 
+    <p>Results for '<%= params[:q] %>'
+      <% if @cluster %>
+      in <%= @site.word_for_clusters %> <%= @cluster.name %>
+      <% end %>
+      <% if @region %>
+      in region <%= @region.name %>
+      <% end %>
+    </p>
+
     <% @projects.each do |project| %>
       <div class="project">
         <h3><%= link_to(project.name, project_path(project)) %></h3>
@@ -15,12 +24,11 @@
       </div>
     <% end %>
 
-
     <%= will_paginate(@projects) %>
 
   <% else %>
 
-    <% if params[:q] %>
+    <% unless params[:q].blank? %>
       <p>No projects were found for '<%= params[:q] %>'</p>
     <% end %>
 
@@ -28,5 +36,31 @@
 </div>
 
 <div class="sidebar">
+
+  <% if @regions && @regions.any? %>
+    <h2>Filter by region</h2>
+    <ul>
+    <% @regions.each do |region, count| %>
+      <% if params[:region_id] && params[:region_id].to_i == region.id %>
+        <li><%= region.name %></li>
+      <% else %>
+        <li><%= link_to(region.name, search_path(:q => params[:q], :region_id => region.id)) %> (<%= count %>)</li>
+      <% end %>
+    <% end %>
+    </ul>
+  <% end %>
+
+  <% if @clusters && @clusters.any? %>
+    <h2>Filter by <%= @site.word_for_clusters %></h2>
+    <ul>
+    <% @clusters.each do |cluster, count| %>
+      <% if params[:cluster_id] && params[:cluster_id].to_i == cluster.id %>
+        <li><%= cluster.name %></li>
+      <% else %>
+        <li><%= link_to(cluster.name, search_path(:q => params[:q], :cluster_id => cluster.id)) %> (<%= count %>)</li>
+      <% end %>
+    <% end %>
+    </ul>
+  <% end %>
 
 </div>
