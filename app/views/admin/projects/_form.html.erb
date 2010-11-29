@@ -7,11 +7,7 @@
 
   <label>DESCRIPTION</label>
   <span class="textarea">
-<<<<<<< HEAD
-      <%= f.text_area :description %>
-=======
       <%= f.text_area :description, :class => "#{'error' if !@project.errors[:description].empty? && action_name != 'new'}" %>
->>>>>>> 103a1c62635df04b349183071dad574b51540d78
   </span>
 
   <p class="title">TAGS <span class="info">Use comma (",") to separate project tags</span></p>
