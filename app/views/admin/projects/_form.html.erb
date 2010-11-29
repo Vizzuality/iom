@@ -196,7 +196,7 @@
   </ul>
   <div class="location_options empty">
     <p class="msg">Add / edit the different locations of the project</p>
-    <a class="add_location">add location</a>
+    <a class="add_location" id="add_location_map">add location</a>
   </div>
   <!-- ************************ FIN FALTA ************************ -->
 
@@ -298,6 +298,23 @@
 
 <%end%>
 
+
+
+  <div class="map_window">
+    <a class="close">Close</a>
+    <h3>Geolocate this project</h3>
+    <div class="outer_map">
+      <form class="geocoder" action="javascript:void searchPlace()">
+        <input type="text" value="Location, latitude or longitude" />
+        <input type="submit" />
+      </form>
+      <div id="map"></div>
+    </div>
+    <p>You can click multiple points to add<br/>several locations to the project</p>
+    <a class="save">save position</a>
+  </div>
+
+
 <script type="text/javascript">
 $(function() {
   function split( val ) {
@@ -374,3 +391,7 @@ $(function() {
   //  });
 });
 </script>
+
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> 
+  <script src="/javascripts/backoffice/project_map.js" type="text/javascript" charset="utf-8"></script>
+  
