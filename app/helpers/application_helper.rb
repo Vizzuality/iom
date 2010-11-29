@@ -53,6 +53,9 @@ module ApplicationHelper
     if @project
       result << @project.name
     end
+    if @region
+      result << @region.name
+    end
     if controller_name == 'search' && action_name == 'index'
       if params[:q].blank?
         result << "Search"
