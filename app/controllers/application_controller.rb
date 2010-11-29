@@ -50,6 +50,9 @@ class ApplicationController < ActionController::Base
           end
         end
       end
+      if @site && params[:theme_id]
+        @site.theme = Theme.find(params[:theme_id])
+      end
     end
 
     def render_404
