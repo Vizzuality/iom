@@ -1,195 +1,200 @@
 <%= form_for(@project, :url => (@project.new_record? ? admin_projects_path : admin_project_path(@project))) do |f| %>
 
-
-  <label>PROJECT NAME  <strong>*</strong></label>
-
-  <span class="input_large">
-      <%= f.text_field :name, :class=>"long #{'error' if !@project.errors[:name].empty? && action_name != 'new'}" %>
-      <%= errors_for @project, :name %>
-  </span>
-
-
-  <label>DESCRIPTION  <strong>*</strong></label>
-  <span class="textarea">
-      <%= f.text_area :description, :class => "#{'error' if !@project.errors[:description].empty? && action_name != 'new'}" %>
-  </span>
-
-  <p class="title">TAGS <span class="info">Use comma (",") to separate project tags</span></p>
-  <span id="tags_combo" class="input_large">
-    <%= f.text_field :tags, :value => @project.tags.map{ |tag| tag.name }.join(', ') %>
-  </span>
-
-  <label>ORGANIZATION  <strong>*</strong></label>
-  <div class="list_combo">
-
-      <span id="hidden" class="combo_large">
-      <a class="organization"><%= Organization.first.name %></a>
+  <div class="field">
+    <label>PROJECT NAME  <strong>*</strong></label>
+    <span class="input_large">
+        <%= f.text_field :name, :class=>"long #{'error' if !@project.errors[:name].empty? && action_name != 'new'}" %>
+        <%= errors_for @project, :name %>
     </span>
-    <%= f.hidden_field :primary_organization_id , :value => Organization.first.id %>
-    <ul class="list_combo_content">
-      <li class="first"></li>
-        <% Organization.all.each do |organization| %>
-          <li class="element" id="<%= organization.id %>"><p class="project_name"><%= organization.name %></p><p class="amount_projects"><%= pluralize(organization.projects.count, 'project', 'projects')%></p></li>
-        <% end -%>
-      <li class="last"></li>
-    </ul>
   </div>
+  <div class="field">
+    <label>DESCRIPTION  <strong>*</strong></label>
+    <span class="textarea">
+        <%= f.text_area :description, :class => "#{'error' if !@project.errors[:description].empty? && action_name != 'new'}" %>
+    </span>
+  </div>
+  <div class="field">
+    <p class="title">TAGS <span class="info">Use comma (",") to separate project tags</span></p>
+    <span id="tags_combo" class="input_large">
+      <%= f.text_field :tags, :value => @project.tags.map{ |tag| tag.name }.join(', ') %>
+    </span>
+  </div>
+  <div class="field">
+    <label>ORGANIZATION  <strong>*</strong></label>
 
-  <label>IMPLEMENTING ORGANIZATION</label>
-  <span class="input_large">
-    <%= f.text_field :implementing_organization %>
-  </span>
-
-  <label>PARTNER ORGANIZATIONS</label>
-  <span class="input_large">
-    <%= f.text_field :partner_organizations %>
-  </span>
-
-  <label>CROSS-CUTTING ISSUES</label>
-  <span class="input_large">
-    <%= f.text_field :cross_cutting_issues %>
-  </span>
-
-
-  <label>ACTIVITIES</label>
-  <span class="textarea">
-    <%= f.text_area :activities %>
-  </span>
-
+    <div class="list_combo">
+        <span id="hidden" class="combo_large">
+          
+          <!-- ERROR SIMPLE EXAMPLE -->
+          <span class="simple_field_error">
+              <a class="simple_error"></a>      
+              <div class="error_msg">
+                <p><span>can't be blank</span></p>
+              </div>
+              
+          </span>
+          
+        <a class="organization"><%= Organization.first.name %></a>
+      </span>
+      <%= f.hidden_field :primary_organization_id , :value => Organization.first.id %>
+      <ul class="list_combo_content">
+        <li class="first"></li>
+          <% Organization.all.each do |organization| %>
+            <li class="element" id="<%= organization.id %>"><p class="project_name"><%= organization.name %></p><p class="amount_projects"><%= pluralize(organization.projects.count, 'project', 'projects')%></p></li>
+          <% end -%>
+        <li class="last"></li>
+      </ul>
+    </div>
+  </div>
+  <div class="field">
+    <label>IMPLEMENTING ORGANIZATION</label>
+    <span class="input_large">
+      <%= f.text_field :implementing_organization %>
+    </span>
+  </div>
+  <div class="field">
+    <label>PARTNER ORGANIZATIONS</label>
+    <span class="input_large">
+      <%= f.text_field :partner_organizations %>
+    </span>
+  </div> <!-- field -->
+  <div class="field">
+    <label>CROSS-CUTTING ISSUES</label>
+    <span class="input_large">
+      <%= f.text_field :cross_cutting_issues %>
+    </span>
+  </div>
+  <div class="field">
+    <label>ACTIVITIES</label>
+    <span class="textarea">
+      <%= f.text_area :activities %>
+    </span>
+  </div>
   <!-- SECTION  -->
   <h3 class="section">PROJECT MANAGEMENT</h3>
-
-  <label>INTERVENTION ID</label>
-  <span class="input_large">
-    <%= f.text_field :intervention_id %>
-  </span>
-
-  <label>ADDITIONAL INFORMATION</label>
-  <span class="textarea">
-    <%= f.text_area :additional_information %>
-  </span>
-
-  <label>AWARDEE TYPE</label>
-  <span class="input_large">
-    <%= f.text_field :awardee_type %>
-  </span>
-  <ul class="dates">
-    <li>
-      <label>DATE PROVIDED</label>
-       <%= f.date_select :start_date, :start_year => Date.today.year - 5  %>
-      <span id="date_provided" class="combo_date">09/10/2010
-		<div class="select_dates">
-			<span class="month">
-				<p class="title">MONTH</p>
-				<a class="month_combo">SEPTEMBER</a>
-			</span>
-			<span class="day">
-				<p class="title">DAY</p>
-				<a class="day_combo">10</a>
-			</span>
-			<span class="year">
-				<p class="title">YEAR</p>
-				<a class="year_combo">2010</a>
-			</span>
-			<a class="save_date_bttn">Save date</a>
-		</div>
-	 </span>
-    </li>
-    <li>
-      <label>DATE UPDATED</label>
-       <%= f.date_select :end_date, :start_year => Date.today.year - 5  %>
-      <span id="date_updated" class="combo_date">09/10/2010
-		<div class="select_dates end_date">
-			<span class="month">
-				<p class="title">MONTH</p>
-				<a class="month_combo">SEPTEMBER</a>
-			</span>
-			<span class="day">
-				<p class="title">DAY</p>
-				<a class="day_combo">10</a>
-			</span>
-			<span class="year">
-				<p class="title">YEAR</p>
-				<a class="year_combo">2010</a>
-			</span>
-			<a class="save_date_bttn">Save date</a>
-		</div>
-	  </span>
-    </li>
-  </ul>
-
+  <div class="field">
+    <label>INTERVENTION ID</label>
+    <span class="input_large">
+      <%= f.text_field :intervention_id %>
+    </span>
+  </div>
+  <div class="field">
+    <label>ADDITIONAL INFORMATION</label>
+    <span class="textarea">
+      <%= f.text_area :additional_information %>
+    </span>
+  </div>
+  <div class="field">
+    <label>AWARDEE TYPE</label>
+    <span class="input_large">
+      <%= f.text_field :awardee_type %>
+    </span>
+    <ul class="dates">
+      <li>
+        <label>DATE PROVIDED</label>
+         <%= f.date_select :start_date, :start_year => Date.today.year - 5  %>
+        <span id="date_provided" class="combo_date">09/10/2010
+  		<div class="select_dates">
+  			<span class="month">
+  				<p class="title">MONTH</p>
+  				<a class="month_combo">SEPTEMBER</a>
+  			</span>
+  			<span class="day">
+  				<p class="title">DAY</p>
+  				<a class="day_combo">10</a>
+  			</span>
+  			<span class="year">
+  				<p class="title">YEAR</p>
+  				<a class="year_combo">2010</a>
+  			</span>
+  			<a class="save_date_bttn">Save date</a>
+  		</div>
+  	 </span>
+      </li>
+      <li>
+        <label>DATE UPDATED</label>
+         <%= f.date_select :end_date, :start_year => Date.today.year - 5  %>
+        <span id="date_updated" class="combo_date">09/10/2010
+  		<div class="select_dates end_date">
+  			<span class="month">
+  				<p class="title">MONTH</p>
+  				<a class="month_combo">SEPTEMBER</a>
+  			</span>
+  			<span class="day">
+  				<p class="title">DAY</p>
+  				<a class="day_combo">10</a>
+  			</span>
+  			<span class="year">
+  				<p class="title">YEAR</p>
+  				<a class="year_combo">2010</a>
+  			</span>
+  			<a class="save_date_bttn">Save date</a>
+  		</div>
+  	  </span>
+      </li>
+    </ul>
+  </div>
   <!-- SECTION  -->
   <h3 class="section">CONTEXT</h3>
 
-  <label>CLUSTERS  <strong>*</strong></label>
-  <ul class="clusters">
-		<% unless @project.clusters.empty? %>
-        	<% @project.clusters.each do |cluster| %>
-        		<li id="cluster_<%= cluster.id %>"><%= cluster.name %><input id="<%= cluster.id %>" type="checkbox" name="project[clusters_ids][]" value="<%= cluster.id %>" checked="true"/><a href="#cluster_<%= cluster.id %>" class="remove_this close"></a>
-				</li>
-        	<% end -%>
-      <% end -%>
-  </ul>
-
-  <div class="cluster_options">
-    <span class="combo_cluster_options"><p id="0">Select more clusters</p>
-		<ul class="options">
-		<% Cluster.all.collect do |cluster| %>
-			<li><a id="<%= cluster.id %>"><%= cluster.name %></a></li>
-		<% end %>
-			<li class="last"></li>
-		</ul>
-	</span>
-    <a id="add_cluster_bttn" class="add_cluster">add cluster</a>
-  </div>
-
-  <label>SECTORS / SUBSECTORS  <strong>*</strong></label>
-
-  <ul class="sectors">
-		<% unless @project.sectors.empty? %>
-        	<% @project.sectors.each do |sector| %>
-				<li id="sector_<%= sector.id %>"><%= sector.name %><input id="<%= sector.id %>" type="checkbox" name="project[sectors_ids][]" value="<%= sector.id %>" checked="true"/><a href="#sector_<%= sector.id %>" class="remove_this close"></a>
-				</li>        	
-		<% end -%>
-      <% end -%>
-  </ul>
-
-  <div class="sectors_options_large">
-    <span id="sector" class="combo_sector_options first">
-		<p id="0">Select more sectors</p>
-		<ul class="options">
-		<% Sector.all.collect do |sector| %>
-			<li><a id="<%= sector.id %>"><%= sector.name %></a></li>
-		<% end %>
-			<li class="last"></li>
-		</ul>
-		
-	</span>
-    <span id="subsector" class="combo_sector_options"><p id="0">Select a subsector</p>
-		<ul class="options">
-		<% Sector.all.collect do |sector| %>
-			<li><a id="<%= sector.id %>"><%= sector.name %></a></li>
-		<% end %>
-			<li class="last"></li>
-		</ul>
-	</span>
-    <a class="add_sector">add sector</a>
-  </div>
-
-  <!-- SECTORS COMBOS - REDO -->
-  <%if false%>
-    <div id="sectors">
-        <% unless @project.sectors.empty? %>
-          <% @project.sectors.each do |sector| %>
-          <span id="sector_<%= sector.id %>"><input type="checkbox" name="project[sectors_ids][]" value="<%= sector.id %>" checked="checked"/><%= sector.name %><a href="#sector_<%= sector.id %>" class="remove_this">x</a><br /></span>
-          <% end -%>
+  <div class="field">
+    <label>CLUSTERS  <strong>*</strong></label>
+    <ul class="clusters">
+  		<% unless @project.clusters.empty? %>
+          	<% @project.clusters.each do |cluster| %>
+          		<li id="cluster_<%= cluster.id %>"><%= cluster.name %><input id="<%= cluster.id %>" type="checkbox" name="project[clusters_ids][]" value="<%= cluster.id %>" checked="true"/><a href="#cluster_<%= cluster.id %>" class="remove_this close"></a>
+  				</li>
+          	<% end -%>
         <% end -%>
-      </div>
-      <%= select_tag :select_sector, options_for_select([['Choose a sector',nil]] + Sector.all.collect{ |o| [o.name, o.id] }) %>
-      </div>
-  <%end%>
-  <!-- END SECTORS COMBOS - REDO -->
+    </ul>
 
+    <div class="cluster_options">
+      <span class="combo_cluster_options"><p id="0">Select more clusters</p>
+  		<ul class="options">
+  		<% Cluster.all.collect do |cluster| %>
+  			<li><a id="<%= cluster.id %>"><%= cluster.name %></a></li>
+  		<% end %>
+  			<li class="last"></li>
+  		</ul>
+  	</span>
+      <a id="add_cluster_bttn" class="add_cluster">add cluster</a>
+    </div>
+  </div>
+  
+  <div class="field">
+    <label>SECTORS / SUBSECTORS  <strong>*</strong></label>
+
+    <ul class="sectors">
+  		<% unless @project.sectors.empty? %>
+          	<% @project.sectors.each do |sector| %>
+  				<li id="sector_<%= sector.id %>"><%= sector.name %><input id="<%= sector.id %>" type="checkbox" name="project[sectors_ids][]" value="<%= sector.id %>" checked="true"/><a href="#sector_<%= sector.id %>" class="remove_this close"></a>
+  				</li>        	
+  		<% end -%>
+        <% end -%>
+    </ul>
+
+    <div class="sectors_options_large">
+      <span id="sector" class="combo_sector_options first">
+  		<p id="0">Select more sectors</p>
+  		<ul class="options">
+  		<% Sector.all.collect do |sector| %>
+  			<li><a id="<%= sector.id %>"><%= sector.name %></a></li>
+  		<% end %>
+  			<li class="last"></li>
+  		</ul>
+		
+  	</span>
+      <span id="subsector" class="combo_sector_options"><p id="0">Select a subsector</p>
+  		<ul class="options">
+  		<% Sector.all.collect do |sector| %>
+  			<li><a id="<%= sector.id %>"><%= sector.name %></a></li>
+  		<% end %>
+  			<li class="last"></li>
+  		</ul>
+  	</span>
+      <a class="add_sector">add sector</a>
+    </div>
+  </div>
 
   <!-- ************************ FALTA ************************ -->
   <label>GEOGRAPHIC UBICATION  <strong>*</strong></label>
@@ -202,97 +207,109 @@
     <a class="add_location" id="add_location_map">add location</a>
   </div>
   <!-- ************************ FIN FALTA ************************ -->
-
-  <ul class="dates">
-    <li>
-      <label>START DATE</label>
-        <%= f.date_select :start_date, :start_year => Date.today.year - 5  %>
-      <span id="start_date" class="combo_date">09/10/2010
-		<div class="select_dates">
-			<span class="month">
-				<p class="title">MONTH</p>
-				<a class="month_combo">SEPTEMBER</a>
-			</span>
-			<span class="day">
-				<p class="title">DAY</p>
-				<a class="day_combo">10</a>
-			</span>
-			<span class="year">
-				<p class="title">YEAR</p>
-				<a class="year_combo">2010</a>
-			</span>
-			<a class="save_date_bttn">Save date</a>
-		</div>
-	  </span>
-    </li>
-    <li>
-      <label>END DATE</label>
-        <%= f.date_select :end_date, :start_year => Date.today.year - 5  %>
-      <span id="end_date" class="combo_date">09/10/2010
-		<div class="select_dates end_date">
-			<span class="month">
-				<p class="title">MONTH</p>
-				<a class="month_combo">SEPTEMBER</a>
-			</span>
-			<span class="day">
-				<p class="title">DAY</p>
-				<a class="day_combo">10</a>
-			</span>
-			<span class="year">
-				<p class="title">YEAR</p>
-				<a class="year_combo">2010</a>
-			</span>
-			<a class="save_date_bttn">Save date</a>
-		</div>
-	  </span>
-    </li>
-  </ul>
-
+ 
+  <div class="field"> 
+    <ul class="dates">
+      <li>
+        <label>START DATE</label>
+          <%= f.date_select :start_date, :start_year => Date.today.year - 5  %>
+        <span id="start_date" class="combo_date">09/10/2010
+  		<div class="select_dates">
+  			<span class="month">
+  				<p class="title">MONTH</p>
+  				<a class="month_combo">SEPTEMBER</a>
+  			</span>
+  			<span class="day">
+  				<p class="title">DAY</p>
+  				<a class="day_combo">10</a>
+  			</span>
+  			<span class="year">
+  				<p class="title">YEAR</p>
+  				<a class="year_combo">2010</a>
+  			</span>
+  			<a class="save_date_bttn">Save date</a>
+  		</div>
+  	  </span>
+      </li>
+      <li>
+        <label>END DATE</label>
+          <%= f.date_select :end_date, :start_year => Date.today.year - 5  %>
+        <span id="end_date" class="combo_date">09/10/2010
+  		<div class="select_dates end_date">
+  			<span class="month">
+  				<p class="title">MONTH</p>
+  				<a class="month_combo">SEPTEMBER</a>
+  			</span>
+  			<span class="day">
+  				<p class="title">DAY</p>
+  				<a class="day_combo">10</a>
+  			</span>
+  			<span class="year">
+  				<p class="title">YEAR</p>
+  				<a class="year_combo">2010</a>
+  			</span>
+  			<a class="save_date_bttn">Save date</a>
+  		</div>
+  	  </span>
+      </li>
+    </ul>
+  </div>
   <!-- SECTION  -->
   <h3 class="section">IMPACT</h3>
+  
+
   <label>PROJECT BUDGET</label>
-
-  <span class="input_short coin">
-    <%= f.text_field :budget %>
-    <p class="coin">$</p>
-  </span>
-
+  <div class="field">
+    <span class="input_short coin">
+      <%= f.text_field :budget %>
+      <p class="coin">$</p>
+    </span>
+  </div>
   <div class="two_columns">
     <div class="left_column">
-      <label>TARGET</label>
-      <span class="input_short">
-        <%= f.text_field :target %>
-      </span>
+      <div class="field">
+        <label>TARGET</label>
+        <span class="input_short">
+          <%= f.text_field :target %>
+        </span>
+      </div>
     </div>
     <div class="right_column">
-      <label>ESTIMATED PEOPLE REACHED</label>
-      <span class="input_short">
-        <%= f.text_field :estimated_people_reached %>
-        <p class="msg">people</p>
-      </span>
+       <div class="field">
+          <label>ESTIMATED PEOPLE REACHED</label>
+          <span class="input_short">
+            <%= f.text_field :estimated_people_reached %>
+            <p class="msg">people</p>
+          </span>
+        </div>
     </div>
   </div>
 
   <!-- SECTION  -->
   <h3 class="section">CONTACT INFORMATION</h3>
-  <label>CONTACT PERSON</label>
-  <span class="input_short">
-      <%= f.text_field :contact_person %>
-  </span>
-
+  <div class="field">
+    <label>CONTACT PERSON</label>
+    <span class="input_short">
+        <%= f.text_field :contact_person %>
+    </span>
+  </div>
 
   <div class="two_columns">
     <div class="left_column">
-      <label>CONTACT EMAIL</label>
-      <span class="input_short">
-        <%= f.text_field :contact_email %>
-      </span>
+      <div class="field">
+        <label>CONTACT EMAIL</label>
+        <span class="input_short">
+          <%= f.text_field :contact_email %>
+        </span>
+      </div>
     </div>
     <div class="right_column">
-      <p class="title">CONTACT PHONE <span class="info">Include international prefix</span></p>
-      <span class="input_short">
-        <%= f.text_field :contact_phone_number %>
-      </span>
+      <div class="field">
+        <p class="title">CONTACT PHONE <span class="info">Include international prefix</span></p>
+        <span class="input_short">
+          <%= f.text_field :contact_phone_number %>
+        </span>
+      </div> <!-- field -->
     </div>
   </div>
 
@@ -300,8 +317,6 @@
   <!-- END EDIT PAGE -->
 
 <%end%>
-
-
 
   <div class="map_window">
     <a class="close">Close</a>
