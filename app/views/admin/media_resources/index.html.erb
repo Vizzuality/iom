@@ -7,7 +7,7 @@
           <h2><%= @element.name %></h2>
           <% unless @element.media_resources.empty? %>
             <ul>
-            <% @element.media_resources.each do |resource| %>
+            <% @element.media_resources.order("position ASC").each do |resource| %>
               <% if resource.is_a_video? %>
                 <li>
                   <div class="top_media"></div>
@@ -27,9 +27,9 @@
                     </div>
 
                     <span class="over">
-                      <a href="#" class="up">UP</a>
-                      <%= link_to('Delete', eval("admin_#{@element.class.name.singularize.downcase}_media_resource_path(@element, resource)"), :method => :delete, :confirm => 'Are you sure?', :class=>"delete") %>
-                      <a href="#" class="down">DOWN</a>
+                      <%= link_to('UP', eval("admin_#{@element.class.name.singularize.downcase}_media_resource_path(@element, resource, :up => true)"), :method => :put, :class => 'up') %>
+                      <%= link_to('Delete', eval("admin_#{@element.class.name.singularize.downcase}_media_resource_path(@element, resource)"), :method => :delete, :confirm => 'Are you sure?', :class=>"delete", :rel => eval("admin_#{@element.class.name.singularize.downcase}_media_resource_path(@element, resource)"), :att_name => @element.class.name.singularize.downcase) %>
+                      <%= link_to('DOWN', eval("admin_#{@element.class.name.singularize.downcase}_media_resource_path(@element, resource, :down => true)"), :method => :put, :class => 'down') %>
                     </span>
                   </div>
                   <div class="bottom_media"></div>
@@ -40,15 +40,23 @@
                   <div class="med_media">
                     <%= image_tag(resource.picture.url(:medium)) %>
                     <span class="over">
-                      <a href="#" class="up">UP</a>
-                      <%= link_to('Delete', eval("admin_#{@element.class.name.singularize.downcase}_media_resource_path(@element, resource)"), :method => :delete, :confirm => 'Are you sure?', :class=>"delete") %>
-                      <a href="#" class="down">DOWN</a>
+                      <%= link_to('UP', eval("admin_#{@element.class.name.singularize.downcase}_media_resource_path(@element, resource, :up => true)"), :method => :put, :class => 'up') %>
+                      <%= link_to('Delete', eval("admin_#{@element.class.name.singularize.downcase}_media_resource_path(@element, resource)"), :method => :delete, :confirm => 'Are you sure?', :class=>"delete", :rel => eval("admin_#{@element.class.name.singularize.downcase}_media_resource_path(@element, resource)"), :att_name => @element.class.name.singularize.downcase) %>
+                      <%= link_to('DOWN', eval("admin_#{@element.class.name.singularize.downcase}_media_resource_path(@element, resource, :down => true)"), :method => :put, :class => 'down') %>
                     </span>
                     <% if resource.caption? %>
                       <p class="caption"><%= resource.caption %>, <a href="#edit">edit it?</a></p>
                     <% else %>
                       <p class="caption">No caption provided, <a href="#add">add it?</a></p>
                     <% end %>
+
+                    <div>
+                      <%= form_for([:admin, @element, resource]) do |f| %>
+                        <%= f.text_field :caption %>
+                        <%= f.submit 'Save' %>
+                      <% end %>
+                    </div>
+
                   </div>
                   <div class="bottom_media"></div>
                 </li>
