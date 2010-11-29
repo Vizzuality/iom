@@ -168,6 +168,8 @@ p4 = Project.create :name => "Pescando",
                     :additional_information => "This is the extra information for this project...",
                     :awardee_type => 'Type of awardee #3'
 
+p4.regions  << madrid
+
 # Donors & donations
 donor = Donor.create  :name => "Fernando Blat",
                       :description => "Fernando Blat has decide to be a donor in this project.",

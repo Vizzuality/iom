@@ -77,4 +77,8 @@ class String
      self.gsub(/<[^>]+>/m,'').strip
    end
 
+   def sanitize_sql!
+     self.gsub(/\\/, '\&\&').gsub(/'/, "''")
+   end
+
 end
