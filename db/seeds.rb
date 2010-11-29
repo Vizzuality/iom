@@ -3,6 +3,10 @@
 User.create :email => 'admin@example.com', :password => 'admin', :password_confirmation => 'admin'
 Settings.create
 
+Theme.create :name => 'Yellow', :css_file => '/stylesheets/themes/yellow.css', :thumbnail_path => '/images/backoffice/sites/theme_1.png'
+Theme.create :name => 'Pink',   :css_file => '/stylesheets/themes/pink.css',   :thumbnail_path => '/images/backoffice/sites/theme_2.png'
+Theme.create :name => 'Blue',   :css_file => '/stylesheets/themes/blue.css',   :thumbnail_path => '/images/backoffice/sites/theme_3.png'
+
 # Env seeds (development)
 spain = Country.create :name => 'Spain', :code => 'ES'
 usa   = Country.create :name => 'United States', :code => 'US'
@@ -166,4 +170,7 @@ donor.donations.create :project => p3, :amount =>  500
 # Sites
 #  sites for testing purposes. Add this line to your /etc/hosts:
 #  127.0.0.1       www.haitiaidmap.com haitiadimap.com
-site = Site.create :name => 'Haiti Aid Map', :url => 'www.haitiaidmap.com', :status => true, :project_context_organization_id => o1.id, :project_context_cluster_id => cluster_water.id
+site = Site.create :name => 'Haiti Aid Map', :url => 'www.haitiaidmap.com', :status => true,
+                   :project_context_organization_id => o1.id,
+                   :project_context_cluster_id => cluster_water.id,
+                   :theme => Theme.find_by_name('Blue')
