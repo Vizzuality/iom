@@ -1,6 +1,6 @@
   <div class="main_layout">
 
-    <div class="block media">
+    <div class="block first media">
       <div class="top"></div>
       <div class="med">
         <div class="left">
@@ -14,9 +14,9 @@
                   <div class="med_media">
                     <%= raw(CGI.unescapeHTML(resource.vimeo_embed_html)) %>
                     <% if resource.caption? %>
-                      <p class="caption"><%= resource.caption %></p>
+                      <p class="caption"><%= resource.caption %>, <a href="#edit">edit it?</a></p>
                     <% else %>
-                      <p class="caption">No caption provided, <a href="#">add it?</a></p>
+                      <p class="caption">No caption provided, <a href="#add">add it?</a></p>
                     <% end %>
                     <span class="over">
                       <a href="#" class="up">UP</a>
@@ -37,9 +37,9 @@
                       <a href="#" class="down">DOWN</a>
                     </span>
                     <% if resource.caption? %>
-                      <p class="caption"><%= resource.caption %></p>
+                      <p class="caption"><%= resource.caption %>, <a href="#edit">edit it?</a></p>
                     <% else %>
-                      <p class="caption">No caption provided, <a href="#">add it?</a></p>
+                      <p class="caption">No caption provided, <a href="#add">add it?</a></p>
                     <% end %>
                   </div>
                   <div class="bottom_media"></div>
@@ -55,10 +55,6 @@
             <%= form_for([:admin, @element, @resource], :html => { :multipart => true }) do |f| %>
               <%= error_messages_for :resource %>
               <div class="field">
-                <%= f.label :caption %>
-                <%= f.text_field :caption %>
-              </div>
-              <div class="field">
                 <%= f.file_field :picture %>
               </div>
               <div class="field">
@@ -72,10 +68,6 @@
             <p>or <a href="javascript:void(null)" class="toggle_image_video">add an image</a></p>
             <%= form_for([:admin, @element, @resource]) do |f| %>
               <%= error_messages_for :resource %>
-              <div class="field">
-                <%= f.label :caption %>
-                <%= f.text_field :caption %>
-              </div>
               <div class="field">
                 <%= f.text_field :vimeo_url, :value=>"Enter a Vimeo URL", :class=>"vimeo" %>
               </div>

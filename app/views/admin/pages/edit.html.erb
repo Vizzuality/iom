@@ -1,9 +1,19 @@
-<div class="main">
 
-  <h2>Edit page <%= @page.title %></h2>
-
-  <%= render :partial => 'form' %>
-
-  <p><%= link_to('⟵ back to pages', admin_site_pages_path(@site)) %></p>
-
-</div>
+  <div class="main_layout">
+    <div class="block first edit">
+      <div class="top"></div>
+      <div class="med">
+        <div class="left">
+          <h2>Edit <%= @page.title %></h2>
+          <%= render :partial => 'form' %>
+        </div>
+        <div class="right menu">
+          <ul>
+            <li class="selected"><a>Basic information</a></li>
+          </ul>
+          <p><%= link_to('⟵ back to pages', admin_site_pages_path(@site)) %></p>
+        </div>
+      </div>
+      <div class="bottom"></div>
+    </div>
+  </div>

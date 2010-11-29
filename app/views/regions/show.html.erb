@@ -1,0 +1,72 @@
+<div class="sidebar">
+  <p>Region</p>
+  <h2><%= @region.name %>, <%= @region.country.try(:name) %></h2>
+
+  <div class="map"></div>
+
+  TODO: wikipedia
+
+  <!-- CLUSTER -->
+  <div class="body_info grid">
+    <div class="real_content">
+      <div class="content_info">
+        <p class="title_section pt_sans_bold"><%= @region.name.upcase %> PROJECTS BY <%= @site.word_for_clusters.upcase %></p>
+        <ul class="statistics_list">
+          <% @region.projects_clusters[0...3].each do |cluster,count| %>
+          <li>
+            <a class="<%= cluster_class(cluster) %>"><span class="aller" style="width:<%= cluster_width(count) %>px"><p><%= count %></p></span></a>
+          </li>
+          <% end %>
+        </ul>
+        <% if @region.projects_clusters.size > 3 %>
+          <p class="summarize_info"><%= pluralize(@region.projects_clusters.size - 3, 'project', 'projects') %> more on other clusters</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <!-- PROJECTS BY ORGANIZATION -->
+  <% unless @region.projects_organizations.empty? %>
+  <div class="body_info grid">
+    <div class="real_content">
+      <div class="content_info">
+        <p class="title_section pt_sans_bold">PROJECTS BY ORGANIZATION</p>
+        <div class="pie_chart"></div>
+        <ul class="info_pie_chart">
+          <% @region.projects_organizations.each do |organization, count| %>
+            <li class="category1"><p class="name_category"><%= organization.name %></p> - <%= count %></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <% end %>
+
+
+  <h3>Budget</h3>
+  <p>$ <%= number_with_delimiter(@region.donors_budget) %></p>
+
+  <h3>Donors</h3>
+  <% unless @region.donors.empty? %>
+    <ul>
+      <% @region.donors[0...10].each do |donor| %>
+      <li><%= link_to(donor.name, donor_path(donor)) %></li>
+      <% end %>
+    </ul>
+    <% if @region.donors.size > 10 %>
+    <p>and <%= pluralize(@region.donors.size - 10, 'more donor', 'more donors') %></p>
+    <% end %>
+  <% end %>
+
+  <div>
+    MORE REGIONS:
+    TODO: no tiene sentido si un proyecto sólo puede tener una región!
+  </div>
+
+</div>
+
+<div id="right_info_projects">
+  <h3 class="pt_sans_bold shadow_white"><%= pluralize(@region.projects.size, 'PROJECT', 'PROJECTS') %> AT <%= @region.name.upcase %></h3>
+  <div id="projects">
+    <%= render :partial => 'projects/projects' %>
+  </div>
+</div>

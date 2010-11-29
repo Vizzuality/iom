@@ -24,7 +24,7 @@ div.add_new a {float:left; width:922px; height:70px; padding:28px 0 0 0; margin:
 div.add_new a:hover {background-position:0 -98px;}
 div.add_new a strong {float:left; width:100%; font:normal 15px Arial; color:#C3DB9F; text-align:center;}
 /*common right column*/
-div.block div.med div.right {position:relative; float:right; width:284px; min-height:300px;}
+div.block div.med div.right {position:relative; float:right; width:284px; min-height:350px;}
 div.block div.med div.right ul {float:left; width:230px; margin:10px 0 0 0;}
 div.block div.med div.right ul li {float:left; width:200px; padding:6px 12px 6px 0;}
 div.block div.med div.right ul li.selected {float:left; width:auto; padding:15px 14px 15px 0; background:url('/images/backoffice/common/selected_li.png') no-repeat right 0; font:bold 15px Arial; color:#333333;}
@@ -136,6 +136,7 @@ div.bottom_grey a:hover {text-decoration:underline;}
 div.bottom_grey a.published {float:left; margin:20px 0 0 30px; color:#99CC33; text-decoration:underline;}
 div.bottom_grey a.not_published {float:left; margin:20px 0 0 30px; color:#FF6600; text-decoration:underline;}
 
+
 /*settings*/
 div.right.tips {width:286px;}
 div.right.tips div.big_bubble {float:left; width:220px; height:71px; padding:20px 20px 20px 33px; margin:0 0 0 14px;  background:url('/images/backoffice/common/big_bubble.png') no-repeat 0 0;}
@@ -189,7 +190,6 @@ div.block.edit div.med div.left div.field span.field_error div.error_msg {positi
 div.block.edit div.med div.left div.field span.field_error div.error_msg p {position:relative; float:left; padding:0 0 0 27px; height:31px; background: url('../../images/backoffice/common/left_error.png') no-repeat scroll top left;}
 div.block.edit div.med div.left div.field span.field_error div.error_msg p span {position:relative; float:left!important; height:15px; padding:8px 15px 8px 2px; display:block; background:url('/images/backoffice/common/right_error.png') no-repeat right 0; font:normal 13px Arial; color:#333333;}
 div.block.edit div.bottom {float:left; height:15px; width:100%; background: url('/images/backoffice/backgrounds/bottom_two_columns.png') no-repeat scroll top left!important;}
-
 
 
 /*donors funded projects*/
@@ -250,7 +250,6 @@ div.bottom_grey div.pagination a:hover {color:#333333; text-decoration:none;}
 div.bottom_grey div.pagination span.disabled {display:none;}
 
 
-
 /*specific NGO*/
 div.block.edit div.med div.left div.specific_edit {float:left; width:526px; height:312px; margin:30px 0 0 0; padding:20px; background:url('/images/backoffice/ngos/edit_specific_bkg.png') no-repeat 0 0;}
 div.block.edit div.med div.left div.specific_edit span {float:left; width:100%;}
@@ -305,7 +304,28 @@ div.block.edit div.med div.left div.specific_edit.enabled div.bottom {float:left
 div.block.edit div.med div.left div.specific_edit.enabled textarea {max-width:508px!important; min-width:508px!important; max-height:198px!important; min-height:198px!important; padding:8px; background:url('/images/backoffice/ngos/textarea_bkg.png') no-repeat 0 0!important; color:#333333;}
 div.block.edit div.med div.left div.specific_edit.enabled div.image_container {width:506px; height:62px; background:url('/images/backoffice/ngos/logo_bkg.png') no-repeat 0 0;}
 
+
 /*site customize*/
+div.block.edit div.med div.left ul.themes {float:left; width:100%; margin:15px 0 0 0;}
+div.block.edit div.med div.left ul.themes li {position:relative; float:left; width:157px; height:136px; padding:10px; margin:0 15px 0 0; background:url('/images/backoffice/sites/theme_bkg.png') no-repeat 0 0;}
+div.block.edit div.med div.left ul.themes li:hover {background-position:0 -156px; cursor:pointer;}
+div.block.edit div.med div.left ul.themes li.last { margin:0;}
+div.block.edit div.med div.left ul.themes li.selected {background-position:0 -156px;}
+div.block.edit div.med div.left ul.themes li a.preview {position:absolute; display:none; bottom:0; right:0; width:93px; height:24px; text-indent:-9999px; background:url('/images/backoffice/sites/preview_site.png') no-repeat 0 0;}
+div.block.edit div.med div.left ul.themes li.selected a.preview {display:block;}
+div.block.edit div.med div.left ul.themes li.selected a.preview:hover {cursor:pointer;}
+div.block.edit div.med div.left ul.themes li.selected span.ready {position:absolute; top:46px; left:61px; width:54px; height:54px; background:url('/images/backoffice/sites/ready.png') no-repeat 0 0;}
+div.block.edit div.med div.left div.partner {position:relative; float:left; width:396px; height:60px; padding:10px; margin:10px 0 0 0; background:url('/images/backoffice/sites/partner_bkg.png') no-repeat 0 0;}
+div.block.edit div.med div.left div.partner img {float:left; height:60px; margin:0 15px 0 0;}
+div.block.edit div.med div.left div.partner p {float:left; width:150px; margin:5px 0 0 0; font:normal 15px Arial; color:#333333;}
+div.block.edit div.med div.left div.partner p.bottom {font-size:13px; color:#666666;}
+div.block.edit div.med div.left div.partner p a {float:left; width:auto; font:normal 15px Arial; color:#333333;}
+div.block.edit div.med div.left div.partner a.delete {position:absolute; right:5px; top:28px; width:15px; height:16px; background:url('/images/backoffice/icons/close_bkg.png') no-repeat 0 0; text-indent:-9999px; font-size:0; display:block; line-height:0;}
+div.block.edit div.med div.left div.partner a.delete:hover {background-position:0 -16px;}
+div.block.edit div.med div.left span.add_partner {float:left; width:565px; height:53px; background:url('/images/backoffice/sites/add_partner_bkg.png') no-repeat 0 0;}
+div.block.edit div.med div.left span.add_partner p {float:left; margin:17px 0 0 15px; font:normal 15px Arial; color:#333333;}
+div.block.edit div.med div.left span.add_partner a {float:right; width:132px; height:32px; margin:11px 15px 0 0; padding:0; text-indent:-9999px; background:url('/images/backoffice/sites/add_partner_button.png') no-repeat 0 0;}
+div.block.edit div.med div.left span.add_partner a:hover {background-position:0 -32px; cursor:pointer;}
 div.block.edit div.med div.left form div.list_combo {float:left; width:419px; height:auto; position:relative;}
 div.block.edit div.med div.left form ul.list_combo_content {position:absolute; top:35px; width:419px; display:none; left:0; z-index:10;}
 div.block.edit div.med div.left form ul.list_combo_content li.first {float:left; width:419px; height:4px; margin:0; background:url('/images/backoffice/projects/top_content_combo_large.png') no-repeat 0 0; padding:0;}
@@ -318,6 +338,26 @@ div.block.edit div.med div.left form span.combo_large {float:left; margin:5px 0 
 div.block.edit div.med div.left form span.combo_large a.organization {position:absolute; top:10px; left:12px; width:374px; height:19px; font:normal 13px Arial; color:#999999;}
 div.block.edit div.med div.left form span.combo_large a.organization:hover {cursor:pointer;}
 div.block.edit div.med div.left form span.combo_large.displayed {background:url('/images/backoffice/projects/large_combo_head_displayed2.png') no-repeat 0 0;}
+div.block.edit div.med div.left form span.blog.selected {float:left; width:569px; height:82px; background:url('/images/backoffice/sites/blog_bkg.png') no-repeat center 0;}
+div.block.edit div.med div.left form span.blog {float:left; height:auto; background:none;}
+div.block.edit div.med div.left form span.blog input[type="checkbox"] {margin:13px 0 0 10px;}
+div.block.edit div.med div.left form span.blog p {margin:10px 0 0 6px; width:200px;}
+div.block.edit div.med div.left form span.blog input[type="text"] {margin:5px 0 0 28px;}
+div#manage_partners {position:absolute; display:none; top:0; left:0; width:372px; height:339px; padding:20px 25px; background:url('/images/backoffice/sites/add_partner_window.png') no-repeat 0 0; z-index:1000;}
+div#manage_partners a.close {position:absolute; right:20px; top:18px; width:12px; height:12px; background:url('/images/backoffice/icons/close_window.png') no-repeat 0 0; text-indent:-9999px;}
+div#manage_partners a.close:hover {cursor:pointer; background-position:0 -12px;}
+div#manage_partners h3 {float:left; font:normal 21px "Museo Sans",Arial; color:#333333;}
+div#manage_partners label {font:normal 11px Arial; color:#333333;}
+div#manage_partners div.field {float:left; width:100%; padding:0 0 15px;}
+div#manage_partners div.image_container {float:left; width:100%; padding:0; margin:0; background:none;}
+div#manage_partners div.image_container span.white {background:white; width:117px; height:60px;}
+div#manage_partners div.image_container p {float:left; width:auto; margin:15px 0 0 15px; font:normal 13px Arial; color:#666666;}
+div#manage_partners div.image_container input[type="file"] {margin:5px 0 0 15px;}
+div#manage_partners input[type="submit"] {width:132px; height:32px; margin:25px 0 0 0; text-indent:-9999px; background:url('/images/backoffice/sites/add_partner_button.png') no-repeat 0 0;}
+div#manage_partners input[type="submit"]:hover {background-position:0 -32px;}
+
+
+/**/
 
 
 /*projects search*/

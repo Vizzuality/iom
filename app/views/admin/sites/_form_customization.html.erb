@@ -16,26 +16,24 @@
       </div>
     </div>
     
-    <div class="field">
-      <%= f.label :theme %>
-      <ul class="themes">
-        <li class="selected">
-          <img src="/images/backoffice/sites/theme_1.png" width="157" height="135" alt="Theme 1">
-          <a class="preview">PREVIEW</a>
-          <span class="ready"></span>
-        </li>
-        <li>
-          <img src="/images/backoffice/sites/theme_2.png" width="157" height="135" alt="Theme 2">
-          <a class="preview">PREVIEW</a>
-          <span class="ready"></span>
-        </li>
-        <li class="last">
-          <img src="/images/backoffice/sites/theme_3.png" width="157" height="135" alt="Theme 3">
-          <a class="preview">PREVIEW</a>
-          <span class="ready"></span>
-        </li>
-      </ul>
-    </div>
+    <%= f.label :theme %>
+    <ul class="themes">
+      <li class="selected">
+        <img src="/images/backoffice/sites/theme_1.png" width="157" height="135" alt="Theme 1">
+        <a class="preview">PREVIEW</a>
+        <span class="ready"></span>
+      </li>
+      <li>
+        <img src="/images/backoffice/sites/theme_2.png" width="157" height="135" alt="Theme 2">
+        <a class="preview">PREVIEW</a>
+        <span class="ready"></span>
+      </li>
+      <li class="last">
+        <img src="/images/backoffice/sites/theme_3.png" width="157" height="135" alt="Theme 3">
+        <a class="preview">PREVIEW</a>
+        <span class="ready"></span>
+      </li>
+    </ul>
   </div>
 
   <div class="common">
@@ -46,12 +44,14 @@
         <div class="partner">
           <p><%= image_tag(partner.logo.url(:small)) %></p>
           <p><%= partner.name %></p>
-          <p><%= link_to(partner.url, partner.url) %></p>
-          <p><%= link_to('Delete', admin_site_partner_path(@site, partner), :method => :delete, :confirm => 'Are you sure?') %></p>
+          <p class="bottom"><%= link_to(partner.url, partner.url) %></p>
+          <%= link_to('Delete', admin_site_partner_path(@site, partner), :method => :delete, :confirm => 'Are you sure?') %>
         </div>
       <% end -%>
     <% end -%>
-    <p><%= link_to('Add a partner', 'javascript:void(null)', :class => 'manage_partners') %></p>
+    
+    
+    <span class="add_partner"><p>Add / edit the partners of the site</p><%= link_to('Add a partner', '#', :class => 'manage_partners') %></span>
   </div>
   
   
@@ -65,7 +65,7 @@
       </span>
       <ul class="list_combo_content">
         <li class="first"></li>
-        <li class="element" id="16">Default<p class="amount_projects">Deafult</p></li>
+        <li class="element" id="16">Default<p class="amount_projects">Default</p></li>
         <li class="last"></li>
       </ul>
     </div>
@@ -77,7 +77,7 @@
       </span>
       <ul class="list_combo_content">
         <li class="first"></li>
-        <li class="element" id="15">Default<p class="amount_projects">Deafult</p></li>
+        <li class="element" id="15">Default<p class="amount_projects">Default</p></li>
         <li class="last"></li>
       </ul>
     </div>
@@ -89,7 +89,7 @@
       </span>
       <ul class="list_combo_content">
         <li class="first"></li>
-        <li class="element" id="14">Default<p class="amount_projects">Deafult</p></li>
+        <li class="element" id="14">Default<p class="amount_projects">Default</p></li>
         <li class="last"></li>
       </ul>
     </div>
@@ -101,7 +101,7 @@
       </span>
       <ul class="list_combo_content">
         <li class="first"></li>
-        <li class="element" id="13">Default<p class="amount_projects">Deafult</p></li>
+        <li class="element" id="13">Default<p class="amount_projects">Default</p></li>
         <li class="last"></li>
       </ul>
     </div>
@@ -113,7 +113,7 @@
       </span>
       <ul class="list_combo_content">
         <li class="first"></li>
-        <li class="element" id="12">Default<p class="amount_projects">Deafult</p></li>
+        <li class="element" id="12">Default<p class="amount_projects">Default</p></li>
         <li class="last"></li>
       </ul>
     </div>
@@ -141,13 +141,12 @@
     <label>Configurable fields & sections</label>
     
     <div class="field">
-      <span>
+      <span class="blog">
         <%= f.check_box :show_blog %><p>Show blog</p>
+        <div id="tumbler_id" style="<%= (@site.blog_url.blank? ? 'display:none' : 'display:block') %>">
+          <%= f.text_field :blog_url, :value=>"Please write Tumblr ID", :id=>"tumblr" %>
+        </div>
       </span>
-      <div id="tumbler_id" style="<%= (@site.blog_url.blank? ? 'display:none' : 'display:block') %>">
-        <%= f.label :blog_url, 'Write your tumbler id' %>
-        <%= f.text_field :blog_url %>
-      </div>
       <span>
         <%= f.check_box :show_global_donations_raises %><p>Show global donations raises</p>
       </span>
@@ -171,8 +170,10 @@
 <% end -%>
 
 
-<!-- <div id="manage_partners" style="<%= @partner ? 'display:block' : 'display:none' %>">
-
+<div id="manage_partners" style="<%= @partner ? 'display:block' : 'display:none' %>">
+  
+  <a class="close">Close</a>
+  
   <% unless @partner %>
   <h3>New partner</h3>
   <% else %>
@@ -183,36 +184,31 @@
 
     <%= f.error_messages %>
 
-    <div class="field">
+    <div class="short_field">
       <%= f.label :name %>
-      <%= f.text_field :name %>
+      <%= f.text_field :name, :class=>"short" %>
     </div>
 
-    <div class="field">
+    <div class="short_field">
       <%= f.label :url %>
-      <%= f.text_field :url %>
+      <%= f.text_field :url, :class=>"short" %>
     </div>
 
     <div class="field">
-      <%= f.label :url %>
-      <%= f.file_field :logo %>
+      <%= f.label :logo %>
+      <div class="image_container">
+        <span class="white"></span>
+        <p>JPG, PNG and GIF supported</p>
+        <%= f.file_field :logo %>
+      </div>
     </div>
 
     <div class="field">
-      <%= f.submit 'Add partner' %>
+      <%= f.submit 'Add partner', :class=>"partner" %>
     </div>
 
   <% end -%>
-</div> -->
+</div>
 
 
-<script type="text/javascript">
-$(function() {
-  $('#site_show_blog').click(function(){
-    $('#tumbler_id').toggle();
-  });
-  $('.manage_partners').click(function(){
-    $('#manage_partners').show();
-  });
-});
-</script>
+<script src="/javascripts/backoffice/customize.js" type="text/javascript" charset="utf-8"></script>
