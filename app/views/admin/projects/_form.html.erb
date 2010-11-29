@@ -3,12 +3,15 @@
   <label>PROJECT NAME</label>
   <span class="input_large">
       <%= f.text_field :name, :class=>"long #{'error' if !@project.errors[:name].empty? && action_name != 'new'}" %>
-      <%= errors_for @project, :name %>
   </span>
 
   <label>DESCRIPTION</label>
   <span class="textarea">
+<<<<<<< HEAD
       <%= f.text_area :description %>
+=======
+      <%= f.text_area :description, :class => "#{'error' if !@project.errors[:description].empty? && action_name != 'new'}" %>
+>>>>>>> 103a1c62635df04b349183071dad574b51540d78
   </span>
 
   <p class="title">TAGS <span class="info">Use comma (",") to separate project tags</span></p>
@@ -118,7 +121,7 @@
   <!-- SECTION  -->
   <h3 class="section">CONTEXT</h3>
 
-  <label>CLUSTERS</label>
+  <label>CLUSTERS<strong>*</strong></label>
   <ul class="clusters">
 		<% unless @project.clusters.empty? %>
         	<% @project.clusters.each do |cluster| %>
@@ -140,7 +143,7 @@
     <a id="add_cluster_bttn" class="add_cluster">add cluster</a>
   </div>
 
-  <label>SECTORS / SUBSECTORS</label>
+  <label>SECTORS / SUBSECTORS<strong>*</strong></label>
 
   <ul class="sectors">
 		<% unless @project.sectors.empty? %>
@@ -189,7 +192,7 @@
 
 
   <!-- ************************ FALTA ************************ -->
-  <label>GEOGRAPHIC UBICATION</label>
+  <label>GEOGRAPHIC UBICATION<strong>*</strong></label>
   <ul class="ubications">
     <li>Belladère, Haiti<a class="close"></a></li>
     <li>Martinique, Haiti<a class="close"></a></li>
