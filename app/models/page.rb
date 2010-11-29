@@ -3,14 +3,14 @@
 # Table name: pages
 #
 #  id          :integer         not null, primary key
-#  title       :string(255)     
-#  body        :text            
-#  site_id     :integer         
-#  highlighted :boolean         
-#  permalink   :string(255)     
-#  created_at  :datetime        
-#  updated_at  :datetime        
-#  parent_id   :integer         
+#  title       :string(255)
+#  body        :text
+#  site_id     :integer
+#  highlighted :boolean
+#  permalink   :string(255)
+#  created_at  :datetime
+#  updated_at  :datetime
+#  parent_id   :integer
 #
 
 class Page < ActiveRecord::Base
@@ -23,7 +23,8 @@ class Page < ActiveRecord::Base
 
   before_create :set_permalink
 
-  scope :parents, where(:parent_id => nil)
+  scope :published, where(:published => true)
+  scope :highlighted, where(:parent_id => nil)
 
   def children
     Page.where(:parent_id => self.id)

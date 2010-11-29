@@ -137,7 +137,7 @@ ActiveRecord::Schema.define(:version => 20101129152739) do
     t.column "title", :string
     t.column "body", :text
     t.column "site_id", :integer
-    t.column "highlighted", :boolean, :default => false
+    t.column "published", :boolean, :default => false
     t.column "permalink", :string
     t.column "created_at", :datetime
     t.column "updated_at", :datetime
