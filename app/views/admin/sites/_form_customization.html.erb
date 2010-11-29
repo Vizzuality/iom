@@ -4,7 +4,7 @@
 
 
   <div class="common">
-    <h3>SITE CUSTOMIZATION</h3>  
+    <h3>SITE CUSTOMIZATION</h3>
     <%= f.label :logo %>
     <div class="image_container">
       <% if @site.logo_file_name? %>
@@ -15,24 +15,16 @@
         <%= f.file_field :logo %>
       </div>
     </div>
-    
+
     <%= f.label :theme %>
     <ul class="themes">
-      <li class="selected">
-        <img src="/images/backoffice/sites/theme_1.png" width="157" height="135" alt="Theme 1">
-        <a class="preview">PREVIEW</a>
+      <% Theme.all.each_with_index do |theme, i| %>
+      <li rel="<%= theme.id %>" class="<%='selected' if i == 0 %> <%= 'last' if i == Theme.count - 1 %>">
+        <img src="<%= theme.thumbnail_path %>" width="157" height="135" alt="<%= theme.name %>">
+        <a class="preview" href="#">PREVIEW</a>
         <span class="ready"></span>
       </li>
-      <li>
-        <img src="/images/backoffice/sites/theme_2.png" width="157" height="135" alt="Theme 2">
-        <a class="preview">PREVIEW</a>
-        <span class="ready"></span>
-      </li>
-      <li class="last">
-        <img src="/images/backoffice/sites/theme_3.png" width="157" height="135" alt="Theme 3">
-        <a class="preview">PREVIEW</a>
-        <span class="ready"></span>
-      </li>
+      <% end %>
     </ul>
   </div>
 
@@ -49,15 +41,15 @@
         </div>
       <% end -%>
     <% end -%>
-    
-    
+
+
     <span class="add_partner"><p>Add / edit the partners of the site</p><%= link_to('Add a partner', '#', :class => 'manage_partners') %></span>
   </div>
-  
-  
+
+
   <div class="common">
     <h3>Map configuration</h3>
-    
+
     <label>HOME MAP</label>
     <div class="list_combo">
       <span id="hidden" class="combo_large">
@@ -69,7 +61,7 @@
         <li class="last"></li>
       </ul>
     </div>
-    
+
     <label>PROJECT PAGE MAP</label>
     <div class="list_combo">
       <span id="hidden" class="combo_large">
@@ -81,7 +73,7 @@
         <li class="last"></li>
       </ul>
     </div>
-    
+
     <label>REGION PAGE MAP</label>
     <div class="list_combo">
       <span id="hidden" class="combo_large">
@@ -93,7 +85,7 @@
         <li class="last"></li>
       </ul>
     </div>
-    
+
     <label>CLUSTER/SECTOR PAGE MAP</label>
     <div class="list_combo">
       <span id="hidden" class="combo_large">
@@ -105,7 +97,7 @@
         <li class="last"></li>
       </ul>
     </div>
-    
+
     <label>NGO PAGE MAP</label>
     <div class="list_combo">
       <span id="hidden" class="combo_large">
@@ -117,9 +109,9 @@
         <li class="last"></li>
       </ul>
     </div>
- 
+
   </div>
-  
+
 
   <div class="common">
     <h3>Site navigation</h3>
@@ -139,7 +131,7 @@
   <div class="common">
     <h3>Fields & sections visibility</h3>
     <label>Configurable fields & sections</label>
-    
+
     <div class="field">
       <span class="blog">
         <%= f.check_box :show_blog %><p>Show blog</p>
@@ -164,16 +156,15 @@
       <%= f.text_field :word_for_regions, :class=>"short" %>
     </div>
   </div>
-
+  <%= f.hidden_field :theme_id, :value => Theme.first.id %>
   <%= f.submit 'Save' %>
 
 <% end -%>
 
-
 <div id="manage_partners" style="<%= @partner ? 'display:block' : 'display:none' %>">
-  
+
   <a class="close">Close</a>
-  
+
   <% unless @partner %>
   <h3>New partner</h3>
   <% else %>

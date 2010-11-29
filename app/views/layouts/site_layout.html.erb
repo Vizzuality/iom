@@ -7,6 +7,7 @@
   <%= javascript_include_tag 'jquery.min', 'jquery.ui.core', 'jquery.ui.widget', 'jquery.ui.position', 'jquery.ui.autocomplete', 'rails', 'application' %>
 
   <%= stylesheet_link_tag '/stylesheets/sites/layout.css' %>
+  <%= stylesheet_link_tag @site.theme.css_file %>
 
   <!-- TO ENABLE TYPEKIT -->
   <!-- <script type="text/javascript" src="http://use.typekit.com/loh6bqm.js"></script>

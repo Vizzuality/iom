@@ -1,32 +1,168 @@
-
-
-
-
-<% if false %>
 <%= form_for(@site, :url => (@site.new_record? ? admin_sites_path : admin_site_path(@site))) do |f| %>
 
   <%= f.error_messages %>
 
-  <div class="field">
-    <%= f.label :name %>
+  <label>SITE NAME</label>
+  <span class="input_large">
     <%= f.text_field :name, :class=>"long #{'error' if !@site.errors[:name].empty? && action_name != 'new'}" %>
     <%= errors_for @site, :name %>
-  </div>
+  </span>
 
-  <div class="field">
-    <%= f.label :short_description %>
+  <label>SHORT DESCRIPTION</label>
+  <span class="textarea_short">
     <%= f.text_area :short_description %>
-  </div>
+  </span>
 
-  <div class="field">
-    <%= f.label :long_description %>
+  <label>LONG DESCRIPTION</label>
+  <span class="textarea">
     <%= f.text_area :long_description %>
-  </div>
+  </span>
 
-  <h3>Geographic context</h3>
+  <h3 class="section">GEOGRAPHIC CONTEXT</h3>
+  <label>SITE GEOGRAPHICAL CONTEXT</label>
+  <ul class="geographic_options">
+	<li id="gc_worldwide" class="selected"><a class="limited">Worldwide, not limited</a></li>
+	<li id="gc_limited_country">
+		<a class="limited">Limited to a country</a>
+		<div class="content">
+			
+			<span class="select_country_combo"><p class="country">Select a country</p>
+				
+  		    	<%= f.hidden_field :geographic_context_country_id %>
+				<div class="values country">
+					<ul>
+			        	<% Country.all.collect.each do |country| %>
+							<li><a class="country_value" id="<%= country.id %>"><%= country.name %></a></li>
+						<%end -%>
+					</ul>
+				</div>
+			</span>
+		</div>
+	</li>
+	<li id="gc_limited_region">
+		<a class="limited">Limited to a region</a>
+		
+		<div class="content">
+			<span class="select_country_combo"><p class="country">Select a country</p>
+  		    	<%= f.hidden_field :geographic_context_country_id %>
+				<div class="values country">
+					<ul>
+			        	<% Country.all.collect.each do |country| %>
+							<li><a class="country_value" id="<%= country.id %>"><%= country.name %></a></li>
+						<%end -%>
+					</ul>
+				</div>
+			</span>
+			<%= image_tag("backoffice/sites/arrow.png", :class=>'arrow') %>
+			<span class="select_country_combo region"><p class="region">Select a region</p>
+  		    	<%= f.hidden_field :geographic_context_region_id %>
+				<div class="values region">
+					<ul>
+			        	<% Region.all.collect.each do |region| %>
+							<li><a class="region_value" id="<%= region.id %>"><%= region.name %></a></li>
+						<%end -%>
+					</ul>
+				</div>
+			</span>
+		</div>		
+	</li>		
+	<li id="gc_limited_bbox">
+		<a class="limited">Limited by a boundary box</a>		
+		<div class="content">
+			<div id="map_bbox">
+				<!-- TODO: ADD MAP  -->
+			</div>
+		</div>
+	</li>
+  </ul>
 
-  <div class="field">
-    <label>Site Geographical Context</label>
+	<h3 class="section">PROJECT FILTERING</h3>
+	<label>PROJECT TYPOLOGY</label>
+
+	<ul class="project_tipo_options">
+		<li id="include_sector_cluster">
+			<a>Include only projects from a particular cluster or sector</a>
+			<div class="content">
+				<span class="select_combo_typology"><p class="cluster_sector">Select a cluster or a sector</p>
+					<div class="values">
+						<%= f.hidden_field :project_context_cluster_id  %>
+						<ul class="clusters_or_sectors">
+							<li class="section"><p>CLUSTERS</p></li>
+				        	<% Cluster.all.collect.each do |cluster| %>
+								<li><a class="cluster_value" id="<%= cluster.id %>"><%= cluster.name %></a></li>
+							<%end -%>
+
+							<%= f.hidden_field :project_context_sector_id  %>
+							<li class="section"><p>SECTORS</p></li>
+				        	<% Sector.all.collect.each do |sector| %>								
+								<li><a class="sector_value" id="<%= sector.id %>"><%= sector.name %></a></li>
+							<%end -%>
+						</ul>
+					</div>
+				</span>
+			</div>
+		</li>
+		<li id="include_ngo">
+			<a>Include only projects from a particular NGO</a>
+			<div class="content">
+				<span class="select_combo_typology"><p class="ngo">Select an NGO</p>
+					<div class="values">
+						<ul class="organizations">
+							<%= f.hidden_field :project_context_organization_id  %>
+							<% Organization.all.collect.each do |organization| %>								
+								<li><a class="organization" id="<%= organization.id %>"><%= organization.name %></a></li>
+							<%end -%>
+						</ul>
+					</div>
+				</span>
+			</div>
+		</li>
+		<li id="include_tags">
+			<a>Include only matching some tags</a>
+			<div class="content">
+				<span class="tags_site">
+					<%= f.text_field :project_context_tags, {:id => 'pc_tags_section'} %>
+					
+				</span>
+			</div>
+		</li>
+	</ul>
+	
+	<h3 class="section">CONTACT INFORMATION</h3>
+
+	  <div class="two_columns">
+	    <div class="left_column">
+	      <label>CONTACT EMAIL</label>
+	      <span class="input_short">
+	        <%= f.text_field :contact_email %>
+	      </span>
+	    </div>
+	    <div class="right_column">
+	      <p class="title">CONTACT PERSON / ORGANIZATION</p>
+	      <span class="input_short">
+	        <%= f.text_field :contact_person %>
+	      </span>
+	    </div>
+	  </div>
+	
+	<h3 class="section">TECHNICAL CONFIGURATION</h3>	
+	<label>SITE URL</label>
+	<span class="input_url">		
+		<%= f.text_field :url, :class=>"long #{'error' if !@site.errors[:url].empty? && action_name != 'new'}" %>
+		<%= errors_for @site, :url %>
+	</span>
+	
+  	<label>GOOGLE ANALYTICS ID</label>
+	<span class="input_short">
+        <%= f.text_field :google_analytics_id %>
+    </span>
+ 	
+	<%= f.submit 'Save changes', :class => "#{'error' if @site.invalid? && action_name != 'new'}" %>
+
+<!-- REMOVE THIS "COMMENTED CODE" WHEN BLAT SAYS "OK" -->	
+<%if false %>
+
+	<div class="field">
     <br />
     <input type="radio" name="site[geographic_context]" class="choose_gc" value="worlwide" id="gc_worldwide" <%= 'checked="checked"' if @site.geographic_context_country_id.blank? && @site.geographic_context_region_id.blank? && @site.geographic_context_geometry.blank? %>/>
     <label for="gc_worldwide">Worldwide, not limited</label><br />
@@ -45,8 +181,6 @@
       Map
     </div>
   </div>
-
-  <h3>Project filtering</h3>
 
   <div class="field">
     <label>Project typology</label>
@@ -99,18 +233,19 @@
 
 <script type="text/javascript">
 $(function() {
-  $('.choose_gc').click(function(){
-    $('.choose_gc').each(function(){
-      $('#' + $(this).attr('id') + '_section').hide();
-    });
-    $('#' + $(this).attr('id') + '_section').show();
-  });
-  $('.choose_pc').click(function(){
-    $('#' + $(this).attr('id') + '_section').toggle();
-  });
-  function split( val ) {
-    return val.split( /,\s*/ );
-  }
+  // $('.choose_gc').click(function(){
+  //     $('.choose_gc').each(function(){
+  //       $('#' + $(this).attr('id') + '_section').hide();
+  //     });
+  //     $('#' + $(this).attr('id') + '_section').show();
+  //   });
+  //   $('.choose_pc').click(function(){
+  //     $('#' + $(this).attr('id') + '_section').toggle();
+  //   });
+  //   function split( val ) {
+  //     return val.split( /,\s*/ );
+  //   }
+
   $("#pc_tags_section").autocomplete({
     source: function( request, response ) {
       var value = $("#pc_tags_section").val();
