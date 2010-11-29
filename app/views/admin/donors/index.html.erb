@@ -28,7 +28,7 @@
             <% @donors.each do |donor| %>
               <li>
                 <h3><%= link_to(donor.name, edit_admin_donor_path(donor)) %></h3>
-                <p class="red"><a href="<%= edit_admin_donor_path(donor) %>"><%= pluralize(donor.donations.count, 'donation', 'donations') %></a></p>
+                <p class="red"><a href="<%= projects_admin_donor_path(donor) %>"><%= pluralize(donor.donations.count, 'donation', 'donations') %></a></p>
                 <% if donor.donations.count > 0 %>
                 <p>$<%= number_with_delimiter(donor.donations_amount) %></p>
                 <% end %>
@@ -57,5 +57,5 @@
       </a>
     </div>
   </div>
-  
+
   <script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>

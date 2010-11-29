@@ -9,7 +9,8 @@ Iom::Application.routes.draw do
   match 'logout' => 'sessions#destroy', :as => :logout
 
   # Front urls
-  resources :regions,       :only => [:index, :show]
+  resources :regions,       :only => [:show]
+  resources :countries,     :only => [:show]
   resources :sectors,       :only => [:show]
   resources :clusters,      :only => [:show]
   resources :donors,        :only => [:index, :show]

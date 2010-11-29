@@ -5,8 +5,6 @@ class ApplicationController < ActionController::Base
 
   before_filter :set_site
 
-  protect_from_forgery
-
   include AuthenticatedSystem
 
   protected

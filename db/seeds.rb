@@ -4,7 +4,6 @@ User.create :email => 'admin@example.com', :password => 'admin', :password_confi
 Settings.create
 
 # Env seeds (development)
-
 spain = Country.create :name => 'Spain', :code => 'ES'
 usa   = Country.create :name => 'United States', :code => 'US'
 
