@@ -7,7 +7,7 @@ class RegionsController < ApplicationController
 
   def show
     @region = Region.find(params[:id])
-    @projects = @region.projects.paginate :per_page => 10, :page => params[:page], :order => 'created_at DESC'
+    @projects = @region.projects.where("id IN (#{@site.projects_ids.join(',')})").paginate :per_page => 10, :page => params[:page], :order => 'created_at DESC'
     respond_to do |format|
       format.html
       format.js do

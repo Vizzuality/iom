@@ -4,7 +4,7 @@ class CountriesController < ApplicationController
 
   def show
     @country = Country.find(params[:id])
-    @projects = @country.projects.paginate :per_page => 10, :page => params[:page], :order => 'created_at DESC'
+    @projects = @country.projects.where("projects.id IN (#{@site.projects_ids.join(',')})").paginate :per_page => 10, :page => params[:page], :order => 'created_at DESC'
     respond_to do |format|
       format.html
       format.js do

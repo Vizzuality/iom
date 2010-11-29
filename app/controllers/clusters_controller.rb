@@ -4,7 +4,7 @@ class ClustersController < ApplicationController
 
   def show
     @cluster = Cluster.find(params[:id])
-    @projects = @cluster.projects.paginate :per_page => 10, :page => params[:page], :order => 'created_at DESC'
+    @projects = @cluster.projects.where("projects.id IN (#{@site.projects_ids.join(',')})").paginate :per_page => 10, :page => params[:page], :order => 'created_at DESC'
     respond_to do |format|
       format.html
       format.js do

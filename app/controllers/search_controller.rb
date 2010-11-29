@@ -4,9 +4,8 @@ class SearchController < ApplicationController
 
   def index
     return if params[:q].blank?
-    # TODO: escape to avoid SQL injection
-    q = "%#{params[:q]}%"
-    projects = Project.where(["name ilike ? OR description ilike ?", q, q])
+    q = "%#{params[:q].sanitize_sql!}%"
+    projects = Project.where(["name ilike ? OR description ilike ?", q, q]).where("id IN (#{@site.projects_ids.join(',')})")
     if params[:region_id] || params[:cluster_id]
       if params[:region_id]
         if @region = Region.find(params[:region_id])

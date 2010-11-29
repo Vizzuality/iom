@@ -4,8 +4,7 @@ class Admin::OrganizationsController < ApplicationController
 
   def index
     organizations = if params[:q]
-      # TODO: escape to avoid SQL injection
-      q = "%#{params[:q]}%"
+      q = "%#{params[:q].sanitize_sql!}%"
       Organization.where(["name ilike ? OR description ilike ?", q, q])
     else
       Organization

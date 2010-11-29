@@ -7,10 +7,11 @@ class OrganizationsController < ApplicationController
   end
 
   def show
-    @organization = @site.organizations.select{ |org| org.id == params[:id].to_i }.first
+    unless @organization = @site.organizations.select{ |org| org.id == params[:id].to_i }.first
+      raise ActiveRecord::RecordNotFound
+    end
     @organization.attributes = @organization.attributes_for_site(@site)
-    raise ActiveRecord::RecordNotFound unless @organization
-    @projects = @organization.projects.paginate :per_page => 10, :page => params[:page], :order => 'created_at DESC'
+    @projects = @organization.projects.where("projects.id IN (#{@site.projects_ids.join(',')})").paginate :per_page => 10, :page => params[:page], :order => 'created_at DESC'
     respond_to do |format|
       format.html
       format.js do
