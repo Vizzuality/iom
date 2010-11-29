@@ -27,8 +27,8 @@
 		<div class="content">
 			
 			<span class="select_country_combo"><p class="country">Select a country</p>
-				<!-- DEFAULT VALUE	 -->
-  		    	<%= f.hidden_field :geographic_context_country_id , :value => Country.first.id %>
+				
+  		    	<%= f.hidden_field :geographic_context_country_id %>
 				<div class="values country">
 					<ul>
 			        	<% Country.all.collect.each do |country| %>
@@ -44,8 +44,7 @@
 		
 		<div class="content">
 			<span class="select_country_combo"><p class="country">Select a country</p>
-				<!-- DEFAULT VALUE	 -->
-  		    	<%= f.hidden_field :geographic_context_country_id , :value => Country.first.id %>
+  		    	<%= f.hidden_field :geographic_context_country_id %>
 				<div class="values country">
 					<ul>
 			        	<% Country.all.collect.each do |country| %>
@@ -56,8 +55,7 @@
 			</span>
 			<%= image_tag("backoffice/sites/arrow.png", :class=>'arrow') %>
 			<span class="select_country_combo region"><p class="region">Select a region</p>
-				<!-- DEFAULT VALUE	 -->
-  		    	<%= f.hidden_field :geographic_context_region_id , :value => Region.first.id %>
+  		    	<%= f.hidden_field :geographic_context_region_id %>
 				<div class="values region">
 					<ul>
 			        	<% Region.all.collect.each do |region| %>
@@ -82,7 +80,7 @@
 	<label>PROJECT TYPOLOGY</label>
 
 	<ul class="project_tipo_options">
-		<li class="selected">
+		<li id="include_sector_cluster">
 			<a>Include only projects from a particular cluster or sector</a>
 			<div class="content">
 				<span class="select_combo_typology"><p class="cluster_sector">Select a cluster or a sector</p>
@@ -104,7 +102,7 @@
 				</span>
 			</div>
 		</li>
-		<li class="selected">
+		<li id="include_ngo">
 			<a>Include only projects from a particular NGO</a>
 			<div class="content">
 				<span class="select_combo_typology"><p class="ngo">Select an NGO</p>
@@ -119,7 +117,7 @@
 				</span>
 			</div>
 		</li>
-		<li class="selected">
+		<li id="include_tags">
 			<a>Include only matching some tags</a>
 			<div class="content">
 				<span class="tags_site">
@@ -131,7 +129,35 @@
 	</ul>
 	
 	<h3 class="section">CONTACT INFORMATION</h3>
+
+	  <div class="two_columns">
+	    <div class="left_column">
+	      <label>CONTACT EMAIL</label>
+	      <span class="input_short">
+	        <%= f.text_field :contact_email %>
+	      </span>
+	    </div>
+	    <div class="right_column">
+	      <p class="title">CONTACT PERSON / ORGANIZATION</p>
+	      <span class="input_short">
+	        <%= f.text_field :contact_person %>
+	      </span>
+	    </div>
+	  </div>
 	
+	<h3 class="section">TECHNICAL CONFIGURATION</h3>	
+	<label>SITE URL</label>
+	<span class="input_url">		
+		<%= f.text_field :url, :class=>"long #{'error' if !@site.errors[:url].empty? && action_name != 'new'}" %>
+		<%= errors_for @site, :url %>
+	</span>
+	
+  	<label>GOOGLE ANALYTICS ID</label>
+	<span class="input_short">
+        <%= f.text_field :google_analytics_id %>
+    </span>
+ 	
+	<%= f.submit 'Save changes', :class => "#{'error' if @site.invalid? && action_name != 'new'}" %>
 
 <!-- REMOVE THIS "COMMENTED CODE" WHEN BLAT SAYS "OK" -->	
 <%if false %>
