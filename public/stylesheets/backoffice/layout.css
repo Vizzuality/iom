@@ -357,7 +357,6 @@ div#manage_partners input[type="submit"] {width:132px; height:32px; margin:25px 
 div#manage_partners input[type="submit"]:hover {background-position:0 -32px;}
 
 
-/**/
 
 
 /*projects search*/
@@ -561,6 +560,21 @@ div.block.project_info div.med div.left form div.two_columns div.left_column {fl
 div.block.project_info div.med div.left form div.two_columns div.right_column {float:left; width:280px; height:90px;}
 div.block.project_info div.med div.left form input[type="submit"]{background:url('/images/backoffice/projects/save_changes_bttn.png') no-repeat 0 0; font:500 19px "Museo Sans"; color:#FFFFFF; text-shadow:0 1px #6E8C30; border:none; text-align:center; width:157px; height:32px; float:right; margin:30px 10px 0 0; /*position:absolute; bottom:0; right:0;*/} 
 div.block.project_info div.med div.left form input[type="submit"]:hover {background-position:0 -32px; cursor:pointer;}
+/*geolocate map*/
+div.map_window {position:absolute; display:none; top:0; bottom:0; width:386px; height:296px; padding:14px; background:url('/images/backoffice/projects/add_position_bkg.png') no-repeat 0 0;}
+div.map_window h3 {float:left; width:100%; font:normal 21px "Museo Sans",Arial; color:#333333;}
+div.map_window a.close {position:absolute; right:20px; top:18px; width:12px; height:12px; background:url('/images/backoffice/icons/close_window.png') no-repeat 0 0; text-indent:-9999px;}
+div.map_window a.close:hover {cursor:pointer; background-position:0 -12px;}
+div.map_window div.outer_map {position:relative; float:left; width:382px; height:206px; margin:5px 0 0 0; padding:2px; background:white;}
+div.map_window div.outer_map div#map {float:left; width:382px; height:206px;}
+div.map_window div.outer_map form.geocoder {position:absolute!important; top:5px; left:8px; width:367px; z-index:100;}
+div.map_window div.outer_map form.geocoder input[type="text"] {position:relative!important; float:left; left:0!important; top:0!important; width:319px!important; height:18px!important; margin:0!important; padding:8px!important; background:url('/images/backoffice/projects/geolocate_textinput_bkg.png') no-repeat 0 0;}
+div.map_window div.outer_map form.geocoder input[type="submit"] {position:relative; float:left!important; width:32px!important; height:34px!important; margin:0!important; background:url('/images/backoffice/projects/geolocate_submit_bkg.png') no-repeat 0 0!important; text-indent:-9999px;}
+div.map_window div.outer_map form.geocoder input[type="submit"]:hover {background-position:0 -34px;}
+div.map_window p {float:left; width:230px; margin:10px 0 0 0; font:normal 13px Arial; color:#666666;}
+div.map_window a.save {float:right; width:118px; height:32px; margin:9px 0 0 0; background:url('/images/backoffice/projects/save_position.png') no-repeat 0 0; text-indent:-9999px;}
+div.map_window a.save:hover {background-position:0 -32px; cursor:pointer;}
+
 
 
 /* DONATIONS PROJECT */
@@ -791,6 +805,17 @@ div.block.site_info div.med div.left form ul.project_tipo_options li.selected p.
 
 div.block.site_info div.med div.left form ul.project_tipo_options li.selected span.tags_site {float:left; margin:10px 0 0 12px; width:509px; height:34px; background:url('/images/backoffice/sites/bkg_tags_site.png') no-repeat 0 0; position:relative;}
 div.block.site_info div.med div.left form ul.project_tipo_options li.selected span.tags_site input[type="text"]{position:absolute; top:5px; left:8px; width:472px; height:25px; display:inline;}
+
+div.block.site_info div.med div.left form div.two_columns {float:left; width:100%; height:70px;}
+div.block.site_info div.med div.left form div.two_columns div.left_column {float:left; width:289px; height:90px;}
+div.block.site_info div.med div.left form div.two_columns div.right_column {float:left; width:280px; height:90px;}
+div.block.site_info div.med div.left form span.input_short {float:left; margin:5px 0 0 0; width:272px; height:34px; background:url('/images/backoffice/projects/bkg_input_short.png') no-repeat 0 0; position:relative;}
+div.block.site_info div.med div.left form span.input_short input[type="text"]{position:absolute; top:6px; left:7px; width:257px; height:20px; border:none;}
+
+div.block.site_info div.med div.left form span.input_url {float:left; margin:5px 0 0 0; width:566px; height:34px; background:url('/images/backoffice/sites/site_url_input.png') no-repeat 0 0; position:relative;}
+div.block.site_info div.med div.left form span.input_url input[type="text"]{position:absolute; top:5px; left:7px; width:550px; height:28px; font:normal 15px Arial; color:#333333;}
+div.block.site_info div.med div.left form input[type="submit"]{background:url('/images/backoffice/projects/save_changes_bttn.png') no-repeat 0 0; font:500 19px "Museo Sans"; color:#FFFFFF; text-shadow:0 1px #6E8C30; border:none; text-align:center; width:157px; height:32px; float:right; margin:60px 10px 0 0; /*position:absolute; bottom:0; right:0;*/} 
+div.block.site_info div.med div.left form input[type="submit"]:hover {background-position:0 -32px; cursor:pointer;}
 
 div.block.site_info div.bottom {float:left; height:15px; width:100%; background: url('/images/backoffice/backgrounds/bottom_two_columns.png') no-repeat scroll top left!important;}
 

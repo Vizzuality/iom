@@ -410,6 +410,22 @@ $(document).ready(function(ev){
 				ev.preventDefault();
 				
 				if (!$(this).parent().hasClass('selected')){
+					var id = $('ul.geographic_options').children('li.selected').attr('id');
+
+					// IF "selected" - before was... 
+					if (id == 'gc_limited_country'){
+						$('input#geographic_context_country_id').val(null);
+						$('li.selected').find('p.country').text('Select a country');
+						
+					}else  if (id == 'gc_limited_region'){
+						$('input#geographic_context_country_id').val(null);
+						$('input#geographic_context_region_id').val(null);
+						$('li.selected').find('p.country').text('Select a country');
+						$('li.selected').find('p.region').text('Select a region');
+					}else if (id == 'gc_limited_bbox'){
+						// TODO
+					}
+					
 					$('ul.geographic_options').children('li.selected').removeClass('selected');
 					$(this).parent().addClass('selected');
 				}
@@ -476,6 +492,20 @@ $(document).ready(function(ev){
 			$('ul.project_tipo_options').children('li').children('a').click(function(ev){
 				if ($(this).parent().hasClass('selected')){
 					$(this).parent().removeClass('selected');
+					
+					// RESET VALUES
+					var id = $(this).parent().attr('id');
+					if (id == 'include_sector_cluster'){
+						$('input#project_context_cluster_id').val(null);
+						$('input#project_context_sector_id').val(null);
+						$(this).parent().find('p.cluster_sector').text('Select a cluster or a sector');
+					}else if (id == 'include_ngo'){
+						$('input#project_context_organization_id').val(null);
+						$(this).parent().find('p.ngo').text('Select an NGO');
+					}else if (id == 'include_tags'){
+						$('input#project_context_tags').val(null);
+					}
+					
 				}else {
 					$(this).parent().addClass('selected');
 				}
