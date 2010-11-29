@@ -15,5 +15,5 @@
 <div class="delete">
   <h5>DELETE THIS DONOR</h5>
   <p>Clicking the link below will permanently delete this donor and its references within the sites</p>
-  <%= link_to("Delete this donor", '#') %> <!-- admin_donor_path(@donor) -->
+  <%= link_to("Delete this donor", '#', :rel=>admin_donor_path(@donor), :att_name=>"donor") %>
 </div>

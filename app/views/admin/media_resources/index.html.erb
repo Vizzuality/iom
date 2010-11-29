@@ -28,7 +28,7 @@
 
                     <span class="over">
                       <%= link_to('UP', eval("admin_#{@element.class.name.singularize.downcase}_media_resource_path(@element, resource, :up => true)"), :method => :put, :class => 'up') %>
-                      <%= link_to('Delete', eval("admin_#{@element.class.name.singularize.downcase}_media_resource_path(@element, resource)"), :method => :delete, :confirm => 'Are you sure?', :class=>"delete", :rel => eval("admin_#{@element.class.name.singularize.downcase}_media_resource_path(@element, resource)"), :att_name => @element.class.name.singularize.downcase) %>
+                      <%= link_to('Delete', eval("admin_#{@element.class.name.singularize.downcase}_media_resource_path(@element, resource)"), :method => :delete, :class=>"delete", :rel => eval("admin_#{@element.class.name.singularize.downcase}_media_resource_path(@element, resource)"), :att_name => @element.class.name.singularize.downcase) %>
                       <%= link_to('DOWN', eval("admin_#{@element.class.name.singularize.downcase}_media_resource_path(@element, resource, :down => true)"), :method => :put, :class => 'down') %>
                     </span>
                   </div>
@@ -41,7 +41,7 @@
                     <%= image_tag(resource.picture.url(:medium)) %>
                     <span class="over">
                       <%= link_to('UP', eval("admin_#{@element.class.name.singularize.downcase}_media_resource_path(@element, resource, :up => true)"), :method => :put, :class => 'up') %>
-                      <%= link_to('Delete', eval("admin_#{@element.class.name.singularize.downcase}_media_resource_path(@element, resource)"), :method => :delete, :confirm => 'Are you sure?', :class=>"delete", :rel => eval("admin_#{@element.class.name.singularize.downcase}_media_resource_path(@element, resource)"), :att_name => @element.class.name.singularize.downcase) %>
+                      <%= link_to('Delete', eval("admin_#{@element.class.name.singularize.downcase}_media_resource_path(@element, resource)"), :method => :delete, :class=>"delete", :rel => eval("admin_#{@element.class.name.singularize.downcase}_media_resource_path(@element, resource)"), :att_name => @element.class.name.singularize.downcase) %>
                       <%= link_to('DOWN', eval("admin_#{@element.class.name.singularize.downcase}_media_resource_path(@element, resource, :down => true)"), :method => :put, :class => 'down') %>
                     </span>
                     <% if resource.caption? %>

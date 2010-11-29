@@ -8,8 +8,7 @@
 
   <div class="field">
     <%= f.label :description, raw("Description<strong>*</strong>") %>
-    <%= f.text_area :description, :class => "#{'error' if !@organization.errors[:description].empty? && action_name != 'new'}}" %>
-    <%= errors_for @organization, :description %>
+    <%= f.text_area :description, :class => "#{'error' if !@organization.errors[:description].empty? && action_name != 'new'}" %>
   </div>
 
   <% if @organization.logo_file_name? %>

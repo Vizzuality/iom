@@ -155,6 +155,7 @@ div.block.edit div.med div.left div.image_container div.field {float:left; width
 div.block.edit div.med div.left div.image_container div.field p {float:left; width:300px; margin:5px 0 0 0; font:normal 13px Arial; color:#666666;}
 div.block.edit div.med div.left div.image_container div.field input {float:left; width:300px; margin:5px 0 0 0;}
 div.block.edit div.med div.left textarea {float:left; min-width:548px; max-width:548px; max-height:204px; min-height:204px; margin:5px 0 0 0; padding:5px 8px; background:url('/images/backoffice/donors/textarea_bkg.png') no-repeat 0 0; border:none; font:normal 15px Arial; color:#333333;}
+div.block.edit div.med div.left textarea.error {background-position:0 -214px;}
 div.block.edit div.med div.left textarea:focus {outline:none;}
 div.block.edit div.med div.left label {float:left; width:100%; margin:18px 0 0 0; font:bold 11px Arial; color:#999999; text-transform:uppercase;}
 div.block.edit div.med div.left div.common {float:left; width:100%; margin:35px 0 0 0;}
@@ -183,12 +184,12 @@ div.block.edit div.med div.left input[type="submit"]:hover {background-position:
 div.block.edit div.med div.left input[type="submit"].error {background:url('/images/backoffice/donors/save_changes.png') no-repeat 0 -64px;}
 div.block.edit div.med div.left input[type="submit"].error:hover {background:url('/images/backoffice/donors/save_changes.png') no-repeat 0 -96px; cursor:pointer;}
 div.block.edit div.med div.left div.field input.error {width:379px; padding:8px 32px 8px 8px; background-position:0 -34px;}
-div.block.edit div.med div.left span.field_error {position:absolute; bottom:10px; right:10px; margin:0; padding:0;}
+div.block.edit div.med div.left span.field_error {position:absolute; bottom:10px; right:10px; margin:0; padding:0; width:auto;}
 div.block.edit div.med div.left span.field_error a.error {float:right; width:14px; height:14px; background: url('../../images/backoffice/icons/error.png') no-repeat scroll top left;}
 div.block.edit div.med div.left span.field_error a.error:hover {cursor:pointer;}
 div.block.edit div.med div.left span.field_error div.error_msg {position:absolute; display:none; top:-9px; left:-9px;width:200px;}
-div.block.edit div.med div.left span.field_error div.error_msg p {position:relative; float:left; padding:0 0 0 27px; height:31px; background: url('../../images/backoffice/common/left_error.png') no-repeat scroll top left;}
-div.block.edit div.med div.left span.field_error div.error_msg p span {position:relative; float:left!important; height:15px; padding:8px 15px 8px 2px; display:block; background:url('/images/backoffice/common/right_error.png') no-repeat right 0; font:normal 13px Arial; color:#333333;}
+div.block.edit div.med div.left span.field_error div.error_msg p {position:relative; float:left; width:auto; height:31px; padding:0 0 0 27px; background: url('../../images/backoffice/common/left_error.png') no-repeat scroll top left;}
+div.block.edit div.med div.left span.field_error div.error_msg p span {position:relative; float:left!important; height:15px; padding:8px 10px 8px 2px; margin:0!important; display:block; background:url('/images/backoffice/common/right_error.png') no-repeat right 0; font:normal 13px Arial; color:#333333;}
 div.block.edit div.bottom {float:left; height:15px; width:100%; background: url('/images/backoffice/backgrounds/bottom_two_columns.png') no-repeat scroll top left!important;}
 
 
@@ -830,8 +831,8 @@ div#modal_window div.alert p {float:left; width:100%; margin:5px 0 0 0; font:nor
 div#modal_window div.alert span {float:right; margin:20px 0 0 0;}
 div#modal_window div.alert span a.cancel {float:left; margin:5px 12px 0 0; font:normal 15px Arial; color:#E93E3F; text-decoration:underline;}
 div#modal_window div.alert span a.cancel:hover {color:#7F2023;}
-div#modal_window div.alert span a.delete {float:left; width:63px; height:26px; background:url('/images/backoffice/common/delete_button.png') no-repeat 0 0; text-indent:-9999px; font-size:0; display:block; line-height:0;}
-div#modal_window div.alert span a.delete:hover {background-position:0 -26px;}
+div#modal_window div.alert span a.remove {float:left; width:63px; height:26px; background:url('/images/backoffice/common/delete_button.png') no-repeat 0 0; text-indent:-9999px; font-size:0; display:block; line-height:0;}
+div#modal_window div.alert span a.remove:hover {background-position:0 -26px;}
 
 
 
