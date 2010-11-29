@@ -176,19 +176,19 @@ div.block.edit div.med div.left div input[type="password"].short {float:left; wi
 div.block.edit div.med div.left div.long_field {float:left; width:100%;}
 div.block.edit div.med div.left div.long_field input[type="text"].address {float:left; width:548px; height:18px; margin:5px 0 0 0; padding:8px; font:normal 15px Arial; color:#333333; border:none; background:url('/images/backoffice/donors/input_address.png') no-repeat 0 0;}
 div.block.edit div.med div.left div.short_field input[type="text"].twitter {width:234px; padding:8px 8px 8px 30px; background:url('/images/backoffice/donors/twitter_bkg.png') no-repeat 0 0;}
-div.block.edit div.med div.left div.field input[type="text"].facebook {width:381px; padding:8px 8px 8px 30px; background:url('/images/backoffice/donors/facebook_input.png') no-repeat 0 0;}  
+div.block.edit div.med div.left div.field input[type="text"].facebook {width:381px; padding:8px 8px 8px 30px; background:url('/images/backoffice/donors/facebook_input.png') no-repeat 0 0;}
 div.block.edit div.med div.left div.final {float:left; width:100%;}
 div.block.edit div.med div.left input[type="submit"] {float:right; width:157px; height:32px; margin:20px 8px 0 0; text-indent:-9999px; font-size:0; display:block; line-height:0; background:url('/images/backoffice/donors/save_changes.png') no-repeat 0 0; border:none;}
 div.block.edit div.med div.left input[type="submit"]:hover {background-position:0 -32px; cursor:pointer;}
 div.block.edit div.med div.left input[type="submit"].error {background:url('/images/backoffice/donors/save_changes.png') no-repeat 0 -64px;}
 div.block.edit div.med div.left input[type="submit"].error:hover {background:url('/images/backoffice/donors/save_changes.png') no-repeat 0 -96px; cursor:pointer;}
 div.block.edit div.med div.left div.field input.error {width:379px; padding:8px 32px 8px 8px; background-position:0 -34px;}
-div.block.edit div.med div.left div.field span.field_error {position:absolute; bottom:10px; right:10px; margin:0; padding:0;}
-div.block.edit div.med div.left div.field span.field_error a.error {float:right; width:14px; height:14px; background: url('../../images/backoffice/icons/error.png') no-repeat scroll top left;}
-div.block.edit div.med div.left div.field span.field_error a.error:hover {cursor:pointer;}
-div.block.edit div.med div.left div.field span.field_error div.error_msg {position:absolute; display:none; top:-9px; left:-9px;width:200px;}
-div.block.edit div.med div.left div.field span.field_error div.error_msg p {position:relative; float:left; padding:0 0 0 27px; height:31px; background: url('../../images/backoffice/common/left_error.png') no-repeat scroll top left;}
-div.block.edit div.med div.left div.field span.field_error div.error_msg p span {position:relative; float:left!important; height:15px; padding:8px 15px 8px 2px; display:block; background:url('/images/backoffice/common/right_error.png') no-repeat right 0; font:normal 13px Arial; color:#333333;}
+div.block.edit div.med div.left span.field_error {position:absolute; bottom:10px; right:10px; margin:0; padding:0;}
+div.block.edit div.med div.left span.field_error a.error {float:right; width:14px; height:14px; background: url('../../images/backoffice/icons/error.png') no-repeat scroll top left;}
+div.block.edit div.med div.left span.field_error a.error:hover {cursor:pointer;}
+div.block.edit div.med div.left span.field_error div.error_msg {position:absolute; display:none; top:-9px; left:-9px;width:200px;}
+div.block.edit div.med div.left span.field_error div.error_msg p {position:relative; float:left; padding:0 0 0 27px; height:31px; background: url('../../images/backoffice/common/left_error.png') no-repeat scroll top left;}
+div.block.edit div.med div.left span.field_error div.error_msg p span {position:relative; float:left!important; height:15px; padding:8px 15px 8px 2px; display:block; background:url('/images/backoffice/common/right_error.png') no-repeat right 0; font:normal 13px Arial; color:#333333;}
 div.block.edit div.bottom {float:left; height:15px; width:100%; background: url('/images/backoffice/backgrounds/bottom_two_columns.png') no-repeat scroll top left!important;}
 
 
@@ -432,9 +432,9 @@ div.block.project_info div.med div.left p.by a:hover {text-decoration:underline;
 div.block.project_info div.med div.left form {float:left; width:100%; height:auto; margin:5px 0 0 0; /*padding:0 0 15px 0;*/ position:relative;}
 
 div.block.project_info div.med div.left form input[type="checkbox"]{visibility:hidden;}
-div.block.project_info div.med div.left form label {float:left; margin:20px 0 0 3px; font:bold 11px Arial; color:#999999; width:100%; text-transform:uppercase;} 
+div.block.project_info div.med div.left form label {float:left; margin:20px 0 0 3px; font:bold 11px Arial; color:#999999; width:100%; text-transform:uppercase;}
 
-div.block.project_info div.med div.left form p.title {float:left; margin:20px 0 0 3px; font:bold 11px Arial; color:#999999; width:100%;} 
+div.block.project_info div.med div.left form p.title {float:left; margin:20px 0 0 3px; font:bold 11px Arial; color:#999999; width:100%;}
 div.block.project_info div.med div.left form p.title span.info {font:normal 13px Arial; color:#999999; width:auto; padding:0 5px;}
 div.block.project_info div.med div.left form span.input_large {float:left; margin:5px 0 0 0; background:url('/images/backoffice/projects/input_project_large.png') no-repeat 0 0; width:419px; height:34px; position:relative;}
 div.block.project_info div.med div.left form span.input_large.active {background:url('/images/backoffice/projects/large_combo_head_displayed.png') no-repeat 0 0;}
@@ -473,7 +473,7 @@ div.block.project_info div.med div.left form ul.dates li span.combo_date:hover {
 div.block.project_info div.med div.left form ul.dates li span.combo_date div.select_dates {display:none;}
 div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked {background:url('/images/backoffice/projects/date/bkg_header_clicked_date.png') no-repeat 0 0;}
 div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates {position:absolute; top:30px; left:0; background:url('/images/backoffice/projects/date/bkg_date_content.png') no-repeat 0 0; width:416px; height:68px; z-index:20; display:inline;}
-div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates.end_date {background:url('/images/backoffice/projects/date/bkg_date_content_right.png') no-repeat 0 0; position:absolute; top:30px; left:-142px;} 
+div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates.end_date {background:url('/images/backoffice/projects/date/bkg_date_content_right.png') no-repeat 0 0; position:absolute; top:30px; left:-142px;}
 
 div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates span.month {float:left; width:124px; height:51px; margin:10px 9px 0 10px;}
 div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates span.day {float:left; width:62px; height:51px; margin:10px 9px 0 8px;}
@@ -517,7 +517,7 @@ div.block.project_info div.med div.left form div.cluster_options span.combo_clus
 div.block.project_info div.med div.left form div.cluster_options span.combo_cluster_options.clicked ul.options li.last {background:url('/images/backoffice/projects/combos/combo_add_cluster_lielement_last.png') no-repeat 0 0; height:6px;}
 div.block.project_info div.med div.left form div.cluster_options span.combo_cluster_options.clicked ul.options li.last:hover {background:url('/images/backoffice/projects/combos/combo_add_cluster_lielement_last.png') no-repeat 0 0;}
 div.block.project_info div.med div.left form div.cluster_options span.combo_cluster_options.clicked ul.options li:hover {background:url('/images/backoffice/projects/combos/combo_add_cluster_lielement_hover.png') repeat-y 0;}
-div.block.project_info div.med div.left form div.cluster_options span.combo_cluster_options.clicked ul.options li a {font:normal 13px Arial; color:#666666; text-decoration:none; } 
+div.block.project_info div.med div.left form div.cluster_options span.combo_cluster_options.clicked ul.options li a {font:normal 13px Arial; color:#666666; text-decoration:none; }
 
 div.block.project_info div.med div.left form div.cluster_options span.combo_cluster_options:hover {cursor:pointer;}
 div.block.project_info div.med div.left form div.cluster_options a.add_cluster {float:left; margin:10px 0 0 9px; background:url('/images/backoffice/projects/add_cluster_bttn.png') no-repeat 0 0; width:118px; height:25px; font:500 15px "Museo Sans"; color:#FFFFFF; text-shadow:0 1px #6E8C30; text-align:center; padding:7px 0 0 0;}
@@ -537,7 +537,7 @@ div.block.project_info div.med div.left form div.sectors_options_large span.comb
 div.block.project_info div.med div.left form div.sectors_options_large span.combo_sector_options.clicked ul.options li.last {background:url('/images/backoffice/projects/combos/combo_sector_element_last.png') no-repeat 0 0; height:6px;}
 div.block.project_info div.med div.left form div.sectors_options_large span.combo_sector_options.clicked ul.options li.last:hover {background:url('/images/backoffice/projects/combos/combo_sector_element_last.png') no-repeat 0 0;}
 div.block.project_info div.med div.left form div.sectors_options_large span.combo_sector_options.clicked ul.options li:hover {background:url('/images/backoffice/projects/combos/combo_sector_element_hover.png') repeat-y 0;}
-div.block.project_info div.med div.left form div.sectors_options_large span.combo_sector_options.clicked ul.options li a {font:normal 13px Arial; color:#666666; text-decoration:none; } 
+div.block.project_info div.med div.left form div.sectors_options_large span.combo_sector_options.clicked ul.options li a {font:normal 13px Arial; color:#666666; text-decoration:none; }
 
 div.block.project_info div.med div.left form div.sectors_options_large span.combo_sector_options:hover {cursor:pointer;}
 div.block.project_info div.med div.left form div.sectors_options_large span.combo_sector_options.first {margin:10px 26px 0 10px;}
@@ -558,7 +558,7 @@ div.block.project_info div.med div.left form span.input_short.coin input[type="t
 div.block.project_info div.med div.left form div.two_columns {float:left; width:100%; height:70px;}
 div.block.project_info div.med div.left form div.two_columns div.left_column {float:left; width:289px; height:90px;}
 div.block.project_info div.med div.left form div.two_columns div.right_column {float:left; width:280px; height:90px;}
-div.block.project_info div.med div.left form input[type="submit"]{background:url('/images/backoffice/projects/save_changes_bttn.png') no-repeat 0 0; font:500 19px "Museo Sans"; color:#FFFFFF; text-shadow:0 1px #6E8C30; border:none; text-align:center; width:157px; height:32px; float:right; margin:30px 10px 0 0; /*position:absolute; bottom:0; right:0;*/} 
+div.block.project_info div.med div.left form input[type="submit"]{background:url('/images/backoffice/projects/save_changes_bttn.png') no-repeat 0 0; font:500 19px "Museo Sans"; color:#FFFFFF; text-shadow:0 1px #6E8C30; border:none; text-align:center; width:157px; height:32px; float:right; margin:30px 10px 0 0; /*position:absolute; bottom:0; right:0;*/}
 div.block.project_info div.med div.left form input[type="submit"]:hover {background-position:0 -32px; cursor:pointer;}
 /*geolocate map*/
 div.map_window {position:absolute; display:none; top:0; bottom:0; width:386px; height:296px; padding:14px; background:url('/images/backoffice/projects/add_position_bkg.png') no-repeat 0 0;}
@@ -633,7 +633,7 @@ div.med.ngos_list ul li p {float:left; width:167px; height:41px; padding:30px 0 
 div.med.ngos_list ul li p a {padding:0; font:normal 13px Arial; color:#666666;}
 div.med.ngos_list ul li p a:hover {text-decoration:underline;}
 div.med.ngos_list ul li p.red {background:#f7f7f7;}
-div.med.ngos_list ul li p.red a {color:#EB4142;} 
+div.med.ngos_list ul li p.red a {color:#EB4142;}
 div.med.ngos_list div.no_results {float:left; width:100%; padding:70px 0 80px;}
 div.med.ngos_list div.no_results h2 {float:left; width:100%; text-align:center;}
 div.med.ngos_list div.no_results p {float:left; width:100%; margin:6px 0 0 0; text-align:center; font:normal 17px Arial; color:#666666;}
@@ -734,9 +734,9 @@ div.block.site_info div.med div.left p.by a:hover {text-decoration:underline;}
 div.block.site_info div.med div.left form {float:left; width:100%; height:auto; margin:5px 0 0 0; /*padding:0 0 15px 0;*/ position:relative;}
 
 div.block.site_info div.med div.left form input[type="checkbox"]{visibility:hidden;}
-div.block.site_info div.med div.left form label {float:left; margin:20px 0 0 3px; font:bold 11px Arial; color:#999999; width:100%; text-transform:uppercase;} 
+div.block.site_info div.med div.left form label {float:left; margin:20px 0 0 3px; font:bold 11px Arial; color:#999999; width:100%; text-transform:uppercase;}
 
-div.block.site_info div.med div.left form p.title {float:left; margin:20px 0 0 3px; font:bold 11px Arial; color:#999999; width:100%;} 
+div.block.site_info div.med div.left form p.title {float:left; margin:20px 0 0 3px; font:bold 11px Arial; color:#999999; width:100%;}
 div.block.site_info div.med div.left form p.title span.info {font:normal 13px Arial; color:#999999; width:auto; padding:0 5px;}
 div.block.site_info div.med div.left form span.input_large {float:left; margin:5px 0 0 0; background:url('/images/backoffice/projects/input_project_large.png') no-repeat 0 0; width:419px; height:34px; position:relative;}
 div.block.site_info div.med div.left form span.input_large.active {background:url('/images/backoffice/projects/large_combo_head_displayed.png') no-repeat 0 0;}
@@ -779,7 +779,7 @@ div.block.site_info div.med div.left form ul.geographic_options li.selected#gc_l
 /* -------------- PROJECT TYPOLOGY*/
 div.block.site_info div.med div.left form ul.project_tipo_options {float:left; width:235px; height:auto; margin:10px 0 0 0px;}
 div.block.site_info div.med div.left form ul.project_tipo_options li {float:left; margin:7px 0 0 12px; width:600px;}
-div.block.site_info div.med div.left form ul.project_tipo_options li.selected {margin:10px 0 0 0; background:url('/images/backoffice/sites/bkg_limited_country.png') no-repeat 0 0; width:544px; height:65px; padding:10px 13px;} 
+div.block.site_info div.med div.left form ul.project_tipo_options li.selected {margin:10px 0 0 0; background:url('/images/backoffice/sites/bkg_limited_country.png') no-repeat 0 0; width:544px; height:65px; padding:10px 13px;}
 
 div.block.site_info div.med div.left form ul.project_tipo_options li a {float:left; font:normal 15px Arial; color:#333333; text-decoration:none; background:url('/images/backoffice/sites/project_tipo_check.png') no-repeat 0 4px; padding:0 0 0 15px; height:14px;}
 div.block.site_info div.med div.left form ul.project_tipo_options li a:hover {cursor:pointer;}
@@ -814,7 +814,7 @@ div.block.site_info div.med div.left form span.input_short input[type="text"]{po
 
 div.block.site_info div.med div.left form span.input_url {float:left; margin:5px 0 0 0; width:566px; height:34px; background:url('/images/backoffice/sites/site_url_input.png') no-repeat 0 0; position:relative;}
 div.block.site_info div.med div.left form span.input_url input[type="text"]{position:absolute; top:5px; left:7px; width:550px; height:28px; font:normal 15px Arial; color:#333333;}
-div.block.site_info div.med div.left form input[type="submit"]{background:url('/images/backoffice/projects/save_changes_bttn.png') no-repeat 0 0; font:500 19px "Museo Sans"; color:#FFFFFF; text-shadow:0 1px #6E8C30; border:none; text-align:center; width:157px; height:32px; float:right; margin:60px 10px 0 0; /*position:absolute; bottom:0; right:0;*/} 
+div.block.site_info div.med div.left form input[type="submit"]{background:url('/images/backoffice/projects/save_changes_bttn.png') no-repeat 0 0; font:500 19px "Museo Sans"; color:#FFFFFF; text-shadow:0 1px #6E8C30; border:none; text-align:center; width:157px; height:32px; float:right; margin:60px 10px 0 0; /*position:absolute; bottom:0; right:0;*/}
 div.block.site_info div.med div.left form input[type="submit"]:hover {background-position:0 -32px; cursor:pointer;}
 
 div.block.site_info div.bottom {float:left; height:15px; width:100%; background: url('/images/backoffice/backgrounds/bottom_two_columns.png') no-repeat scroll top left!important;}

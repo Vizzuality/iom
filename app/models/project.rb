@@ -44,7 +44,7 @@ class Project < ActiveRecord::Base
 
   before_validation :clean_html
 
-  validates_presence_of :name
+  validates_presence_of :name, :description
 
   validate :dates_consistency
 
