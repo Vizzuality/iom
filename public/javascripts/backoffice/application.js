@@ -226,8 +226,11 @@ $(document).ready(function(ev){
 	});
 	
 	$('ul.list_combo_content').find('li.element').click(function(ev){
+		var id = $(this).attr('id');
+		var name = $(this).children('p.project_name').text();
+
 		$('input#project_primary_organization_id').val($(this).attr('id'));
-		
+		$('div.list_combo').find('a.organization').text(name);
 		$('div.list_combo').find('ul.list_combo_content').css('display','none');
 		$('div.list_combo').children('span.combo_large').attr('id','hidden');
 		$('div.list_combo').children('span.combo_large').removeClass('displayed');
@@ -552,6 +555,8 @@ $(document).ready(function(ev){
 			
 			// CLICK ON ORGANIZATION
 			$('span.select_combo_typology').find('ul.organizations').children('li').click(function(ev){
+				
+				console.log('entra')
 				ev.stopPropagation();
 				ev.preventDefault();
 				

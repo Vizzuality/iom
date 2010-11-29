@@ -1,24 +1,28 @@
 <%= form_for(@site, :url => (@site.new_record? ? admin_sites_path : admin_site_path(@site))) do |f| %>
 
   <%= f.error_messages %>
-
-  <label>SITE NAME</label>
-  <span class="input_large">
-    <%= f.text_field :name, :class=>"long #{'error' if !@site.errors[:name].empty? && action_name != 'new'}" %>
-    <%= errors_for @site, :name %>
-  </span>
-
-  <label>SHORT DESCRIPTION</label>
-  <span class="textarea_short">
-    <%= f.text_area :short_description %>
-  </span>
-
-  <label>LONG DESCRIPTION</label>
-  <span class="textarea">
-    <%= f.text_area :long_description %>
-  </span>
-
+  <div class="field">
+    <label>SITE NAME</label>
+    <span class="input_large">
+      <%= f.text_field :name, :class=>"long #{'error' if !@site.errors[:name].empty? && action_name != 'new'}" %>
+      <%= errors_for @site, :name %>
+    </span>
+  </div>
+  <div class="field">
+    <label>SHORT DESCRIPTION</label>
+    <span class="textarea_short">
+      <%= f.text_area :short_description %>
+    </span>
+  </div>
+  <div class="field">
+    <label>LONG DESCRIPTION</label>
+    <span class="textarea">
+      <%= f.text_area :long_description %>
+    </span>
+  </div>
   <h3 class="section">GEOGRAPHIC CONTEXT</h3>
+
+  <div class="field">
   <label>SITE GEOGRAPHICAL CONTEXT</label>
   <ul class="geographic_options">
 	<li id="gc_worldwide" class="selected"><a class="limited">Worldwide, not limited</a></li>
@@ -75,8 +79,10 @@
 		</div>
 	</li>
   </ul>
-
+  </div>  <!-- field -->
 	<h3 class="section">PROJECT FILTERING</h3>
+
+  <div class="field">
 	<label>PROJECT TYPOLOGY</label>
 
 	<ul class="project_tipo_options">
@@ -127,36 +133,43 @@
 			</div>
 		</li>
 	</ul>
-	
+	</div> <!-- field -->
 	<h3 class="section">CONTACT INFORMATION</h3>
 
 	  <div class="two_columns">
 	    <div class="left_column">
-	      <label>CONTACT EMAIL</label>
-	      <span class="input_short">
-	        <%= f.text_field :contact_email %>
-	      </span>
+        <div class="field">
+  	      <label>CONTACT EMAIL</label>
+  	      <span class="input_short">
+  	        <%= f.text_field :contact_email %>
+  	      </span>
+	      </div> <!-- field -->
 	    </div>
 	    <div class="right_column">
-	      <p class="title">CONTACT PERSON / ORGANIZATION</p>
-	      <span class="input_short">
-	        <%= f.text_field :contact_person %>
-	      </span>
+        <div class="field">
+  	      <p class="title">CONTACT PERSON / ORGANIZATION</p>
+  	      <span class="input_short">
+  	        <%= f.text_field :contact_person %>
+  	      </span>
+  	    </div> <!-- field -->
 	    </div>
 	  </div>
 	
-	<h3 class="section">TECHNICAL CONFIGURATION</h3>	
-	<label>SITE URL</label>
-	<span class="input_url">		
-		<%= f.text_field :url, :class=>"long #{'error' if !@site.errors[:url].empty? && action_name != 'new'}" %>
-		<%= errors_for @site, :url %>
-	</span>
+	<h3 class="section">TECHNICAL CONFIGURATION</h3>
 	
+  <div class="field">	
+  	<label>SITE URL</label>
+  	<span class="input_url">		
+  		<%= f.text_field :url, :class=>"long #{'error' if !@site.errors[:url].empty? && action_name != 'new'}" %>
+  		<%= errors_for @site, :url %>
+  	</span>
+	</div>
+  <div class="field">
   	<label>GOOGLE ANALYTICS ID</label>
-	<span class="input_short">
-        <%= f.text_field :google_analytics_id %>
-    </span>
- 	
+  	<span class="input_short">
+          <%= f.text_field :google_analytics_id %>
+      </span>
+ 	</div>
 	<%= f.submit 'Save changes', :class => "#{'error' if @site.invalid? && action_name != 'new'}" %>
 
 <!-- REMOVE THIS "COMMENTED CODE" WHEN BLAT SAYS "OK" -->	
