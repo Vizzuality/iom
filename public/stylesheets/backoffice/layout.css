@@ -727,6 +727,71 @@ div.block.site_info div.med div.left form p.title span.info {font:normal 13px Ar
 div.block.site_info div.med div.left form span.input_large {float:left; margin:5px 0 0 0; background:url('/images/backoffice/projects/input_project_large.png') no-repeat 0 0; width:419px; height:34px; position:relative;}
 div.block.site_info div.med div.left form span.input_large.active {background:url('/images/backoffice/projects/large_combo_head_displayed.png') no-repeat 0 0;}
 div.block.site_info div.med div.left form input[type="text"]{position:absolute; top:6px; left:7px; width:400px; height:21px; font:normal 15px Arial; color:#333333; border:none; padding:0;}
+div.block.site_info div.med div.left form span.textarea {float:left; margin:5px 0 0 0; background:url('/images/backoffice/projects/input_project_multiple.png') no-repeat 0 0; width:564px; height:214px; position:relative;}
+div.block.site_info div.med div.left form span.textarea textarea{position:absolute; top:9px; left:9px; width:546px; height:197px; font:normal 15px Arial; color:#333333; border:none; line-height:17px;}
+
+div.block.site_info div.med div.left form span.textarea_short {float:left; margin:5px 0 0 0; background:url('/images/backoffice/sites/short_descript.png') no-repeat 0 0; width:564px; height:114px; position:relative;}
+div.block.site_info div.med div.left form span.textarea_short textarea{position:absolute; top:9px; left:9px; width:546px; height:97px; font:normal 15px Arial; color:#333333; border:none; line-height:17px;}
+div.block.site_info div.med div.left form h3.section {float:left; margin:30px 0 0 2px; width:100%; font:500 17px "Museo Sans"; color:#333333;}
+
+/* -------------- GEOGRAPHIC OPTIONS*/
+div.block.site_info div.med div.left form ul.geographic_options {float:left; width:235px; height:auto; margin:10px 0 0 0px;}
+div.block.site_info div.med div.left form ul.geographic_options li {float:left; margin:7px 0 0 12px; width:215px;}
+div.block.site_info div.med div.left form ul.geographic_options li.selected {margin:10px 0 0 0;}
+div.block.site_info div.med div.left form ul.geographic_options li a {float:left; font:normal 15px Arial; color:#333333; text-decoration:none; background:url('/images/backoffice/sites/option_bkg.png') no-repeat 0 4px; padding:0 0 0 15px; height:14px;}
+div.block.site_info div.med div.left form ul.geographic_options li a:hover {cursor:pointer;}
+div.block.site_info div.med div.left form ul.geographic_options li.selected a {background:url('/images/backoffice/sites/option_bkg_selected.png') no-repeat 0 4px;}
+div.block.site_info div.med div.left form ul.geographic_options li div.content {display:none; width:100%;}
+div.block.site_info div.med div.left form ul.geographic_options li.selected div.content {float:left; display:inline; width:100%;}
+div.block.site_info div.med div.left form ul.geographic_options li.selected#gc_worldwide {margin:7px 0 0 12px;}
+div.block.site_info div.med div.left form ul.geographic_options li.selected#gc_limited_country {background:url('/images/backoffice/sites/bkg_limited_country.png') no-repeat 0 0; width:544px; height:65px; padding:10px 13px;}
+div.block.site_info div.med div.left form ul.geographic_options li.selected span.select_country_combo {float:left; background:url('/images/backoffice/sites/select_country_combo.png') no-repeat 0 0; width:240px; height:32px; margin:12px 0 0 12px;}
+div.block.site_info div.med div.left form ul.geographic_options li.selected span.select_country_combo.region {margin:12px 0 0 3px;}
+div.block.site_info div.med div.left form ul.geographic_options li.selected span.select_country_combo:hover {cursor:pointer;}
+div.block.site_info div.med div.left form ul.geographic_options li.selected span.select_country_combo.clicked {background:url('/images/backoffice/sites/select_country_combo_head.png') no-repeat 0 0; height:32px; position:relative; }
+div.block.site_info div.med div.left form ul.geographic_options li.selected span.select_country_combo.clicked div.values {position:absolute; width:239px; height:202px; top:32px; left:0; background:url('/images/backoffice/sites/select_country_combo_body.png') no-repeat 0 0; z-index:30; display:inline;}
+div.block.site_info div.med div.left form ul.geographic_options li.selected span.select_country_combo ul {display:none;}
+div.block.site_info div.med div.left form ul.geographic_options li.selected span.select_country_combo.clicked div.values ul {float:left; width:234px; height:180px; margin:4px 0 0 1px; padding:0; overflow-y:auto; display:inline;}
+div.block.site_info div.med div.left form ul.geographic_options li.selected span.select_country_combo.clicked div.values ul li {float:left; margin:0; width:233px; height:25px;}
+div.block.site_info div.med div.left form ul.geographic_options li.selected span.select_country_combo.clicked div.values ul li:hover {background-color:#E4F0CA;}
+div.block.site_info div.med div.left form ul.geographic_options li.selected span.select_country_combo.clicked div.values ul li a {float:left; font:normal 15px Arial; color:#666666; background:none; padding:0; margin:4px 9px;}
+div.block.site_info div.med div.left form ul.geographic_options li.selected p.country {float:left; margin:8px 0 0 10px; font:normal 13px Arial; color:#999999;}
+div.block.site_info div.med div.left form ul.geographic_options li.selected p.region {float:left; margin:8px 0 0 10px; font:normal 13px Arial; color:#999999;}
+div.block.site_info div.med div.left form ul.geographic_options li.selected#gc_limited_region {background:url('/images/backoffice/sites/bkg_limited_country.png') no-repeat 0 0; width:544px; height:65px; padding:10px 13px;}
+div.block.site_info div.med div.left form ul.geographic_options li.selected#gc_limited_bbox {background:url('/images/backoffice/sites/bkg_limited_bbox.png') no-repeat 0 0; width:539px; height:176px; padding:13px;}
+div.block.site_info div.med div.left form ul.geographic_options li div.content img.arrow {float:left; margin:24px 10px; width:14px; height:9px;}
+div.block.site_info div.med div.left form ul.geographic_options li.selected#gc_limited_bbox div#map_bbox {float:left; width:505px; height:153px; margin:10px 15px; border:2px solid #8EA06B;}
+
+/* -------------- PROJECT TYPOLOGY*/
+div.block.site_info div.med div.left form ul.project_tipo_options {float:left; width:235px; height:auto; margin:10px 0 0 0px;}
+div.block.site_info div.med div.left form ul.project_tipo_options li {float:left; margin:7px 0 0 12px; width:600px;}
+div.block.site_info div.med div.left form ul.project_tipo_options li.selected {margin:10px 0 0 0; background:url('/images/backoffice/sites/bkg_limited_country.png') no-repeat 0 0; width:544px; height:65px; padding:10px 13px;} 
+
+div.block.site_info div.med div.left form ul.project_tipo_options li a {float:left; font:normal 15px Arial; color:#333333; text-decoration:none; background:url('/images/backoffice/sites/project_tipo_check.png') no-repeat 0 4px; padding:0 0 0 15px; height:14px;}
+div.block.site_info div.med div.left form ul.project_tipo_options li a:hover {cursor:pointer;}
+div.block.site_info div.med div.left form ul.project_tipo_options li.selected a {background:url('/images/backoffice/sites/project_tipo_checked.png') no-repeat 0 4px;}
+div.block.site_info div.med div.left form ul.project_tipo_options li.selected div.content {display:inline;}
+div.block.site_info div.med div.left form ul.project_tipo_options li div.content {display:none; width:100%;}
+div.block.site_info div.med div.left form ul.project_tipo_options li.selected span.select_combo_typology {float:left; background:url('/images/backoffice/sites/select_country_combo.png') no-repeat 0 0; width:240px; height:32px; margin:12px 0 0 12px;}
+div.block.site_info div.med div.left form ul.project_tipo_options li.selected span.select_combo_typology.region {margin:12px 0 0 3px;}
+div.block.site_info div.med div.left form ul.project_tipo_options li.selected span.select_combo_typology:hover {cursor:pointer;}
+div.block.site_info div.med div.left form ul.project_tipo_options li.selected span.select_combo_typology.clicked {background:url('/images/backoffice/sites/select_country_combo_head.png') no-repeat 0 0; height:32px; position:relative; }
+div.block.site_info div.med div.left form ul.project_tipo_options li.selected span.select_combo_typology.clicked div.values {position:absolute; width:239px; height:202px; top:32px; left:0; background:url('/images/backoffice/sites/select_country_combo_body.png') no-repeat 0 0; z-index:30; display:inline;}
+div.block.site_info div.med div.left form ul.project_tipo_options li.selected span.select_combo_typology ul {display:none;}
+div.block.site_info div.med div.left form ul.project_tipo_options li.selected span.select_combo_typology.clicked div.values ul {float:left; width:234px; height:190px; margin:5px 0 0 1px; padding:0; overflow-y:auto; display:inline; overflow-x:hidden;}
+div.block.site_info div.med div.left form ul.project_tipo_options li.selected span.select_combo_typology.clicked div.values ul li {float:left; margin:0; width:233px; height:21px;}
+div.block.site_info div.med div.left form ul.project_tipo_options li.selected span.select_combo_typology.clicked div.values ul li.section {float:left; margin:2px 0 0 0; width:233px; height:25px;}
+div.block.site_info div.med div.left form ul.project_tipo_options li.selected span.select_combo_typology.clicked div.values ul li.section p {float:left; font:bold 11px Arial; color:#333333; margin:7px 9px;}
+div.block.site_info div.med div.left form ul.project_tipo_options li.selected span.select_combo_typology.clicked div.values ul li.section:hover {background:none;}
+div.block.site_info div.med div.left form ul.project_tipo_options li.selected span.select_combo_typology.clicked div.values ul li:hover {background-color:#E4F0CA;}
+div.block.site_info div.med div.left form ul.project_tipo_options li.selected span.select_combo_typology.clicked div.values ul li a {float:left; font:normal 13px Arial; color:#666666; background:url('/images/backoffice/sites/bkg_li_subelement.png') no-repeat 0 5px; padding:0 0 0 10px; margin:4px 9px;}
+div.block.site_info div.med div.left form ul.project_tipo_options li.selected span.select_combo_typology.clicked div.values ul li a.organization {background:none; margin:4px 0px;}
+div.block.site_info div.med div.left form ul.project_tipo_options li.selected p.cluster_sector {float:left; margin:9px 0 0 10px; font:normal 13px Arial; color:#999999;}
+div.block.site_info div.med div.left form ul.project_tipo_options li.selected p.ngo {float:left; margin:9px 0 0 10px; font:normal 13px Arial; color:#999999;}
+
+div.block.site_info div.med div.left form ul.project_tipo_options li.selected span.tags_site {float:left; margin:10px 0 0 12px; width:509px; height:34px; background:url('/images/backoffice/sites/bkg_tags_site.png') no-repeat 0 0; position:relative;}
+div.block.site_info div.med div.left form ul.project_tipo_options li.selected span.tags_site input[type="text"]{position:absolute; top:5px; left:8px; width:472px; height:25px; display:inline;}
+
 div.block.site_info div.bottom {float:left; height:15px; width:100%; background: url('/images/backoffice/backgrounds/bottom_two_columns.png') no-repeat scroll top left!important;}
 
 
