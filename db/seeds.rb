@@ -149,6 +149,25 @@ p3 = Project.create :name => "Fishing",
                     :additional_information => "This is the extra information for this project...",
                     :awardee_type => 'Type of awardee #3'
 
+p4 = Project.create :name => "Pescando",
+                    :description => "Fishing project in spanish",
+                    :primary_organization => o2,
+                    :tags => "fishing",
+                    :implementing_organization => o2.try(:name),
+                    :cross_cutting_issues => 'Issues defined for fishing',
+                    :start_date => Date.today.yesterday,
+                    :end_date => Date.today + 3.month,
+                    :budget => 200,
+                    :target => 'Fishers',
+                    :estimated_people_reached => 12312,
+                    :contact_person => 'The fishing maker',
+                    :contact_email => 'fishing_generation@example.com',
+                    :contact_phone_number => '0031 345 03 23',
+                    :the_geom => MultiPoint.from_points([Point.from_lon_lat(-3.726489543914795, 40.453423411115494),  Point.from_lon_lat(-3.7259557843208313, 40.45303562320312), Point.from_lon_lat(3.726789951324463, 40.44353412028846)]),
+                    :intervention_id => 'i-22222',
+                    :additional_information => "This is the extra information for this project...",
+                    :awardee_type => 'Type of awardee #3'
+
 # Donors & donations
 donor = Donor.create  :name => "Fernando Blat",
                       :description => "Fernando Blat has decide to be a donor in this project.",
@@ -166,6 +185,7 @@ donor.donations.create :project => p1, :amount => 1000
 donor.donations.create :project => p1, :amount => 2000
 donor.donations.create :project => p1, :amount => 3000
 donor.donations.create :project => p3, :amount =>  500
+donor.donations.create :project => p4, :amount =>  100
 
 # Sites
 #  sites for testing purposes. Add this line to your /etc/hosts:
@@ -174,3 +194,7 @@ site = Site.create :name => 'Haiti Aid Map', :url => 'www.haitiaidmap.com', :sta
                    :project_context_organization_id => o1.id,
                    :project_context_cluster_id => cluster_water.id,
                    :theme => Theme.find_by_name('Blue')
+#  127.0.0.1       www.foodsecurity.com foodsecurity.com
+site = Site.create :name => 'Food Security', :url => 'www.foodsecurity.com', :status => true,
+                  :project_context_organization_id => o2.id,
+                  :theme => Theme.find_by_name('Yellow')
