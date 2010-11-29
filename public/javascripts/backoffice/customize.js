@@ -38,4 +38,12 @@
           $(this).attr('value','Please write Tumblr ID');
         }
       });
+      
+      
+      $('ul.themes li').click(function(ev){
+        if (!$(this).hasClass('selected')) {
+          $('ul.themes li').removeClass('selected');
+          $(this).addClass('selected');
+        }
+      });
     });

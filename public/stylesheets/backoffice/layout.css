@@ -357,6 +357,9 @@ div#manage_partners input[type="submit"] {width:132px; height:32px; margin:25px 
 div#manage_partners input[type="submit"]:hover {background-position:0 -32px;}
 
 
+/**/
+
+
 /*projects search*/
 div.two_projects {float:left; width:643px; height:auto; margin:20px 10px 0 0; }
 div.two_projects span.top {float:left; width:643px; height:9px; background:url('/images/backoffice/backgrounds/two_top.png') no-repeat 0 0;}
