@@ -29,7 +29,7 @@
     <ul class="list_combo_content">
       <li class="first"></li>
         <% Organization.all.each do |organization| %>
-          <li class="element" id="<%= organization.id %>"><%= organization.name %><p class="amount_projects"><%= pluralize(organization.projects.count, 'project', 'projects')%></p></li>
+          <li class="element" id="<%= organization.id %>"><p class="project_name"><%= organization.name %></p><p class="amount_projects"><%= pluralize(organization.projects.count, 'project', 'projects')%></p></li>
         <% end -%>
       <li class="last"></li>
     </ul>

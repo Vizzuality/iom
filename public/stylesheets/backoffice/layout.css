@@ -329,7 +329,8 @@ div.block.edit div.med div.left span.add_partner a:hover {background-position:0 
 div.block.edit div.med div.left form div.list_combo {float:left; width:419px; height:auto; position:relative;}
 div.block.edit div.med div.left form ul.list_combo_content {position:absolute; top:35px; width:419px; display:none; left:0; z-index:10;}
 div.block.edit div.med div.left form ul.list_combo_content li.first {float:left; width:419px; height:4px; margin:0; background:url('/images/backoffice/projects/top_content_combo_large.png') no-repeat 0 0; padding:0;}
-div.block.edit div.med div.left form ul.list_combo_content li.element {float:left; margin:0; background:url('/images/backoffice/projects/repeat_content_combo_large.png') no-repeat 0 0; width:407px; height:22px; font:normal 15px Arial; color:#333333; padding:5px 0 0 12px; position:relative;}
+div.block.edit div.med div.left form ul.list_combo_content li.element {float:left; margin:0; background:url('/images/backoffice/projects/repeat_content_combo_large.png') no-repeat 0 0; width:407px; height:22px; padding:5px 0 0 12px; position:relative;}
+div.block.edit div.med div.left form ul.list_combo_content li.element p.project_name {float:left; font:normal 15px Arial; color:#333333; width:auto;}
 div.block.edit div.med div.left form ul.list_combo_content li.element p.amount_projects {position:absolute; top:7px; right:10px; font:normal 13px Arial; color:#666666; width:auto;}
 div.block.edit div.med div.left form ul.list_combo_content li.element:hover {cursor:pointer; background:url('/images/backoffice/projects/repeat_content_combo_large_hover.png') no-repeat 0 0;}
 div.block.edit div.med div.left form ul.list_combo_content li.last {float:left; width:419px; height:7px; margin:0; background:url('/images/backoffice/projects/bottom_content_combo_large.png') no-repeat 0 0; padding:0;}
