@@ -1,11 +1,15 @@
 <%= form_for(@project, :url => (@project.new_record? ? admin_projects_path : admin_project_path(@project))) do |f| %>
 
-  <label>PROJECT NAME</label>
+
+  <label>PROJECT NAME  <strong>*</strong></label>
+
   <span class="input_large">
       <%= f.text_field :name, :class=>"long #{'error' if !@project.errors[:name].empty? && action_name != 'new'}" %>
+      <%= errors_for @project, :name %>
   </span>
 
-  <label>DESCRIPTION</label>
+
+  <label>DESCRIPTION  <strong>*</strong></label>
   <span class="textarea">
       <%= f.text_area :description, :class => "#{'error' if !@project.errors[:description].empty? && action_name != 'new'}" %>
   </span>
@@ -15,7 +19,7 @@
     <%= f.text_field :tags, :value => @project.tags.map{ |tag| tag.name }.join(', ') %>
   </span>
 
-  <label>ORGANIZATION</label>
+  <label>ORGANIZATION  <strong>*</strong></label>
   <div class="list_combo">
 
       <span id="hidden" class="combo_large">
@@ -117,7 +121,7 @@
   <!-- SECTION  -->
   <h3 class="section">CONTEXT</h3>
 
-  <label>CLUSTERS<strong>*</strong></label>
+  <label>CLUSTERS  <strong>*</strong></label>
   <ul class="clusters">
 		<% unless @project.clusters.empty? %>
         	<% @project.clusters.each do |cluster| %>
@@ -139,7 +143,7 @@
     <a id="add_cluster_bttn" class="add_cluster">add cluster</a>
   </div>
 
-  <label>SECTORS / SUBSECTORS<strong>*</strong></label>
+  <label>SECTORS / SUBSECTORS  <strong>*</strong></label>
 
   <ul class="sectors">
 		<% unless @project.sectors.empty? %>
@@ -188,7 +192,7 @@
 
 
   <!-- ************************ FALTA ************************ -->
-  <label>GEOGRAPHIC UBICATION<strong>*</strong></label>
+  <label>GEOGRAPHIC UBICATION  <strong>*</strong></label>
   <ul class="ubications">
     <li>Belladère, Haiti<a class="close"></a></li>
     <li>Martinique, Haiti<a class="close"></a></li>

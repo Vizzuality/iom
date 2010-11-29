@@ -1,13 +1,13 @@
 <%= form_for(@organization, :url => (@organization.new_record? ? admin_organizations_path : admin_organization_path(@organization)), :html => { :multipart => true }) do |f| %>
 
   <div class="field">
-    <label>NAME<strong>*</strong></label>
+    <label>NAME  <strong>*</strong></label>
     <%= f.text_field :name, :class=>"long #{'error' if !@organization.errors[:name].empty? && action_name != 'new'}" %>
     <%= errors_for @organization, :name %>
   </div>
 
   <div class="field">
-    <%= f.label :description, raw("Description<strong>*</strong>") %>
+    <%= f.label :description, raw("Description  <strong>*</strong>") %>
     <%= f.text_area :description, :class => "#{'error' if !@organization.errors[:description].empty? && action_name != 'new'}}" %>
     <%= errors_for @organization, :description %>
   </div>

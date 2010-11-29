@@ -1,13 +1,13 @@
 <%= form_for([:admin, @site, @page || @site.pages.new]) do |f| %>
 
   <div class="field">
-    <%= f.label :title, raw("TITLE<strong>*</strong>") %>
+    <%= f.label :title, raw("TITLE  <strong>*</strong>") %>
     <%= f.text_field :title, :class=>"long #{'error' if !@page.errors[:title].empty? && action_name != 'new'}" %>
     <%= errors_for @page, :title %>
   </div>
 
   <div class="field">
-    <%= f.label :body, raw("BODY<strong>*</strong>") %>
+    <%= f.label :body, raw("BODY  <strong>*</strong>") %>
     <%= f.text_area :body %>
   </div>
 
