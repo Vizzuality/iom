@@ -17,6 +17,16 @@ class Admin::MediaResourcesController < ApplicationController
     end
   end
 
+  def update
+    @resource = @element.media_resources.find(params[:id])
+    @resource.attributes = params[:media_resource]
+    if @resource.save
+      redirect_to eval("admin_#{@element.class.name.singularize.downcase}_media_resources_path(@element)"), :flash => {:success => 'Resource has been updated successfully'}
+    else
+      render :action => 'index'
+    end
+  end
+
   def destroy
     @resource = @element.media_resources.find(params[:id])
     @resource.destroy

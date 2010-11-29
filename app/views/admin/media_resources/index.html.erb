@@ -14,10 +14,18 @@
                   <div class="med_media">
                     <%= raw(CGI.unescapeHTML(resource.vimeo_embed_html)) %>
                     <% if resource.caption? %>
-                      <p class="caption"><%= resource.caption %>, <a href="#edit">edit it?</a></p>
+                      <p class="caption"><%= resource.caption %>, <a href="#edit" class="edit_caption">edit it?</a></p>
                     <% else %>
-                      <p class="caption">No caption provided, <a href="#add">add it?</a></p>
+                      <p class="caption">No caption provided, <a href="#add" class="edit_caption">add it?</a></p>
                     <% end %>
+
+                    <div>
+                      <%= form_for([:admin, @element, resource]) do |f| %>
+                        <%= f.text_field :caption %>
+                        <%= f.submit 'Save' %>
+                      <% end %>
+                    </div>
+
                     <span class="over">
                       <a href="#" class="up">UP</a>
                       <%= link_to('Delete', eval("admin_#{@element.class.name.singularize.downcase}_media_resource_path(@element, resource)"), :method => :delete, :confirm => 'Are you sure?', :class=>"delete") %>

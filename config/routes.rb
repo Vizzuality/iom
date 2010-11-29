@@ -28,12 +28,12 @@ Iom::Application.routes.draw do
     resources :tags, :only => [:index]
     resources :organizations do
       resources :projects, :only => [:index]
-      resources :media_resources, :only => [:index, :create, :destroy]
+      resources :media_resources, :only => [:index, :create, :update, :destroy]
       resources :resources, :only => [:index, :create, :destroy]
       get 'specific_information/:site_id', :on => :member, :action => 'specific_information', :as => 'organization_site_specific_information'
     end
     resources :donors do
-      resources :media_resources, :only => [:index, :create, :destroy]
+      resources :media_resources, :only => [:index, :create, :update, :destroy]
       resources :resources, :only => [:index, :create, :destroy]
       get 'projects', :on => :member
     end
@@ -47,7 +47,7 @@ Iom::Application.routes.draw do
       get 'customization', :on => :member
       get 'projects', :on => :member
       resources :partners, :only => [:create, :destroy]
-      resources :media_resources, :only => [:index, :create, :destroy]
+      resources :media_resources, :only => [:index, :create, :update, :destroy]
       resources :resources, :only => [:index, :create, :destroy]
       resources :pages
     end
