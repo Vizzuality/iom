@@ -424,6 +424,7 @@ $(document).ready(function(ev){
 						$('li.selected').find('p.region').text('Select a region');
 					}else if (id == 'gc_limited_bbox'){
 						// TODO
+						
 					}
 					
 					$('ul.geographic_options').children('li.selected').removeClass('selected');
