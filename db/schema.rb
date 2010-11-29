@@ -274,9 +274,9 @@ ActiveRecord::Schema.define(:version => 20101128174136) do
     t.column "updated_at", :datetime
     t.column "project_context_tags_ids", :string
     t.column "status", :boolean, :default => false
-    t.column "geographic_context_geometry", :geometry, :srid => 4326
     t.column "visits", :float, :default => 0.0
     t.column "visits_last_week", :float, :default => 0.0
+    t.column "geographic_context_geometry", :geometry, :srid => 4326
   end
 
   add_index "sites", ["name"], :name => "index_sites_on_name"

@@ -27,8 +27,6 @@
     <%= f.select :parent_id, (Page.parents - [@page]).collect{ |p| [p.title, p.id] }, :prompt => 'Select a parent page' %>
   </div>
 
-  <div class="field">
-    <%= f.submit 'Save', :class => "#{'error' if @page.invalid? && action_name != 'new'}" %>
-  </div>
+  <%= f.submit 'Save', :class => "#{'error' if @page.invalid? && action_name != 'new'}" %>
 
 <% end -%>
