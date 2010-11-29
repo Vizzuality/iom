@@ -9,7 +9,9 @@
         $('#tumbler_id').toggle();
       });
     
-      $('a.manage_partners').click(function(){
+      $('a.manage_partners').click(function(ev){
+        ev.preventDefault();
+        ev.stopPropagation();
         var position = $('a.manage_partners').position();
         $('#manage_partners').css('top',position.top-360+'px');
         $('#manage_partners').css('left',position.left-145+'px');
