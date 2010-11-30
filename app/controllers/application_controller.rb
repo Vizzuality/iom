@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
       when 'test'
         'example.com'
       when 'production'
-        nil
+        'iom-stage.ipq.co'
       end
     end
 
