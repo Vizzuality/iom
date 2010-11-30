@@ -47,7 +47,7 @@ class Page < ActiveRecord::Base
   end
 
   def set_status
-    self.status ||= true
+    self.published ||= true
   end
 
   private
