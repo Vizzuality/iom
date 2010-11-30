@@ -1,6 +1,5 @@
 <%= form_for(@site, :url => (@site.new_record? ? admin_sites_path : admin_site_path(@site))) do |f| %>
 
-  <%= f.error_messages %>
   <div class="field">
     <label>SITE NAME <strong>*</strong></label>
     <span class="input_large <%= 'error' if !@site.errors[:name].empty? && action_name != 'new' %>">
@@ -55,7 +54,8 @@
           </ul>
         </div>
       </span>
-      <div id="regions"></div>
+      <div id="regions">
+      </div>
     </div>
   </li>
   <li id="gc_limited_bbox">
@@ -249,8 +249,7 @@ $(function() {
 
   $('.country_region_value').click(function(){
     $.ajax({
-      url: '<%= admin_regions_path %>?country_id=' + $(this).id,
-      dataType: "json"
+      url: '<%= admin_regions_path %>?country_id=' + $(this).children('a').attr('id')
     });
   });
 
