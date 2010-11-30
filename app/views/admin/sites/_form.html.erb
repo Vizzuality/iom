@@ -55,7 +55,8 @@
           </ul>
         </div>
       </span>
-      <div id="regions"></div>
+      <div id="regions">
+      </div>
     </div>
   </li>
   <li id="gc_limited_bbox">
@@ -249,8 +250,7 @@ $(function() {
 
   $('.country_region_value').click(function(){
     $.ajax({
-      url: '<%= admin_regions_path %>?country_id=' + $(this).id,
-      dataType: "json"
+      url: '<%= admin_regions_path %>?country_id=' + $(this).children('a').attr('id')
     });
   });
 
