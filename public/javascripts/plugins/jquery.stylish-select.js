@@ -160,7 +160,7 @@ Dual licensed under the MIT and GPL licenses.
                     $input.onTop = true;
                 } else {
                     $newUl.css({
-                        top: containerHeight+'px',
+                        top: '32px',
                         height: newUlHeight
                     });
                     $input.onTop = false;
@@ -215,6 +215,7 @@ Dual licensed under the MIT and GPL licenses.
             });
 
             $newLi.bind('click.sSelect',function(e){
+				$newUl.parent().children('div.selectedTxt').parent('div.newListSelected').css('background-position','0 0');
                 var $clickedLi = $(e.target);
 
                 //update counter

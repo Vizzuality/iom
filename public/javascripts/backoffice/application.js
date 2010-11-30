@@ -1,5 +1,6 @@
 var old_value;
 
+
 $(document).ready(function(ev){
 
 		if ($('div.select_dates').length > 0){
@@ -9,6 +10,41 @@ $(document).ready(function(ev){
 			$('select#project_start_date_2i').sSelect({ddMaxWidth: '131px',ddMaxHeight:'200px',containerClass:'month'});
 			// DAY
 			$('select#project_start_date_3i').sSelect({ddMaxWidth: '62px',ddMaxHeight:'200px',containerClass:'day'});
+
+			// YEAR
+			$('select#project_end_date_1i').sSelect({ddMaxWidth: '76px',ddMaxHeight:'200px',containerClass:'year'});
+			// MONTH
+			$('select#project_end_date_2i').sSelect({ddMaxWidth: '131px',ddMaxHeight:'200px',containerClass:'month'});
+			// DAY
+			$('select#project_end_date_3i').sSelect({ddMaxWidth: '62px',ddMaxHeight:'200px',containerClass:'day'});
+
+			
+			$('a.save_date_bttn.provided').click(function(ev){
+				ev.stopPropagation();
+				ev.preventDefault();
+
+				var year = $('select#project_start_date_1i option:selected').val();
+				var month = $('select#project_start_date_2i option:selected').val();
+				var day = $('select#project_start_date_3i option:selected').val();
+				
+				var dateValue = day + '/' + month + '/' + year;
+				$('span#date_provided').children('p').text(dateValue);
+				$('span#date_provided').removeClass('clicked');				
+			});
+			
+			$('a.save_date_bttn.updated').click(function(ev){
+				ev.stopPropagation();
+				ev.preventDefault();
+
+				var year = $('select#project_start_date_1i option:selected').val();
+				var month = $('select#project_start_date_2i option:selected').val();
+				var day = $('select#project_start_date_3i option:selected').val();
+				
+				var dateValue = day + '/' + month + '/' + year;
+				$('span#date_updated').children('p').text(dateValue);
+				$('span#date_updated').removeClass('clicked');
+			});
+			
 		}
 	
 
@@ -279,6 +315,8 @@ $(document).ready(function(ev){
     if (!$(this).hasClass('clicked')){
       $('span.combo_date.clicked').removeClass('clicked');
       $(this).addClass('clicked');
+	  $(this).find('div.newListSelected').css('background-position','0 0');
+
     }
 
     $(document).click(function(event) {
