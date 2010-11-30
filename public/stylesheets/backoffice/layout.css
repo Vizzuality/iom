@@ -66,17 +66,17 @@ div.block div.med div.right ul li.list_selected div.bottom_selected {float:left;
 div.block div.med div.right ul li.list_selected div.bottom_selected a.basic {color:#333333; padding:0 0 0 20px;}
 div.block div.med div.right ul li.list_selected div.bottom_selected a.basic:hover {cursor:default;}
 div.block div.med div.right ul li.list_selected div.bottom_selected p {float:left; width:auto; margin:5px 0 0 15px; background:none;}
-div.block div.med div.right ul li.list_selected div.bottom_selected p a {float:left; width:auto; padding:0 0 0 6px; background:url('/images/backoffice/icons/red_square.jpg') no-repeat 0 7px; font:normal 13px Arial; color:#E93E3F}
+div.block div.med div.right ul li.list_selected div.bottom_selected p a {float:left; width:auto; padding:0 0 0 6px; background:url('/images/backoffice/icons/red_square.jpg') no-repeat 0 7px!important; font:normal 13px Arial; color:#E93E3F}
 div.block div.med div.right ul li.list_selected div.bottom_selected p a:hover {text-decoration:underline;}
 div.block div.med div.right ul li.list_selected:hover div.bottom_selected p a {color:#E93E3F;}
 div.block div.med div.right ul li.list_unselected {float:left; width:205px; padding:15px 0 0 0; background:none;}
-div.block div.med div.right ul li.list_unselected div.bottom_selected {float:left; padding:0 14px 0 0; background:none;}
-div.block div.med div.right ul li.list_unselected div.bottom_selected a.basic {color:#E93E3F; padding:0 0 0px 20px;}
-div.block div.med div.right ul li.list_unselected div.bottom_selected a.basic:hover {color:#333333; cursor:pointer;}
-div.block div.med div.right ul li.list_unselected div.bottom_selected p {float:left; width:auto; margin:5px 0 0 20px; background:none;}
-div.block div.med div.right ul li.list_unselected div.bottom_selected p a {float:left; width:auto; padding:0 0 0 6px; background:url('/images/backoffice/icons/red_square.jpg') no-repeat 0 7px; font:normal 13px Arial; color:#E93E3F}
-div.block div.med div.right ul li.list_unselected div.bottom_selected p a:hover {text-decoration:underline;}
-div.block div.med div.right ul li.list_unselected:hover div.bottom_selected p a {color:#E93E3F;}
+div.block div.med div.right ul li div.bottom_selected {float:left; padding:0 14px 0 0; background:none;}
+div.block div.med div.right ul li div.bottom_selected a.basic {color:#E93E3F; padding:0 0 0px 20px;}
+div.block div.med div.right ul li div.bottom_selected a.basic:hover {color:#333333; cursor:pointer;}
+div.block div.med div.right ul li div.bottom_selected p {float:left; width:auto; margin:5px 0 0 20px; background:none!important;}
+div.block div.med div.right ul li div.bottom_selected p a {float:left; width:auto; padding:0 0 0 6px; background:url('/images/backoffice/icons/red_square.jpg') no-repeat 0 7px!important; font:normal 13px Arial; color:#E93E3F}
+div.block div.med div.right ul li div.bottom_selected p a:hover {text-decoration:underline;}
+div.block div.med div.right ul li:hover div.bottom_selected p a {color:#E93E3F;}
 div.block div.med div.right div.delete {position:absolute; display:none; bottom:0; left:20px;}
 div.block div.med div.right div.delete h5 {float:left; font:normal 17px "Museo Sans"; color:#333333; letter-spacing:-1px;}
 div.block div.med div.right div.delete p {float:left; margin:5px 0 0 0; width:100%; font:normal 13px Arial; color:#666666;}
@@ -725,6 +725,11 @@ div.block.media div.med div.left ul li div.med_media span.over a.delete:hover {b
 div.block.media div.med div.left ul li div.med_media p {padding:12px 0; font:normal 15px Arial; color:#999999;}
 div.block.media div.med div.left ul li div.med_media p a {font:normal 15px Arial; color:#E93E3F; text-decoration:underline;}
 div.block.media div.med div.left ul li div.med_media p a:hover {color:#7F2023;}
+div.block.media div.med div.left ul li div.med_media div.caption {float:left; width:100%; display:none;}
+div.block.media div.med div.left ul li div.med_media div.caption form {position:relative; float:left; width:547px;}
+div.block.media div.med div.left ul li div.med_media div.caption form input[type="text"] {float:left; width:469px; height:16px; padding:8px 70px 8px 8px; background:url('/images/backoffice/media/caption_input_bkg.png') no-repeat 0 0; border:none; font:normal 13px Arial; color:#333333;}
+div.block.media div.med div.left ul li div.med_media div.caption form input[type="submit"] {position:absolute; width:58px; height:26px; right:3px; top:3px; background:url('/images/backoffice/media/caption_input.png') no-repeat 0 0; border:none; text-indent:-9999px;}
+div.block.media div.med div.left ul li div.med_media div.caption form input[type="submit"]:hover {background-position:0 -26px; cursor:pointer;}
 div.block.media div.med div.left ul li div.bottom_media {float:left; width:566px; height:10px; background:url('/images/backoffice/backgrounds/bottom_media.png') repeat-y 0 0;}
 div.block.media div.med div.left div.add_media {float:left; margin:20px 0 0 0; width:526px; height:66px; padding:20px; background:url('/images/backoffice/media/add_bkg.png') no-repeat center center;}
 div.block.media div.med div.left div.add_media h3 {float:left; width:auto; font:normal 21px "Museo Sans",Arial; line-height:21px; text-shadow:0 1px white; color:#333333;}
