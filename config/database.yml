@@ -14,3 +14,10 @@ test:
   username: postgres
   password:
 
+produciton:
+  adapter: postgresql
+  template: template_postgis
+  encoding: unicode
+  database: iom
+  username: postgres
+  password:
