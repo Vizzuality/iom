@@ -1,6 +1,24 @@
 var old_value;
 
 $(document).ready(function(ev){
+		// YEAR
+		$('select#project_start_date_1i').sSelect({ddMaxWidth: '76px',ddMaxHeight:'200px',containerClass:'year'});
+
+		// MONTH
+		$('select#project_start_date_2i').sSelect({ddMaxWidth: '131px',ddMaxHeight:'200px',containerClass:'month'});
+		
+		// DAY
+		$('select#project_start_date_3i').sSelect({ddMaxWidth: '62px',containerClass:'day'});
+	
+	// // YEAR
+	// $('select#project_start_date_1i').selectmenu({style:'dropdown',width:'76px'});
+	// 
+	// // MONTH
+	// $('select#project_start_date_2i').selectmenu({style:'dropdown',width:'131px'});
+	// 
+	// // DAY
+	// $('select#project_start_date_3i').selectmenu({style:'dropdown',width:'62px'});
+	
 
     if ($('div.right.menu').length>0) {
       setTimeout(function(){
