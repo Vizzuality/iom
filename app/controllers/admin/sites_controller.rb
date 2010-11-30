@@ -42,6 +42,23 @@ class Admin::SitesController < ApplicationController
     end
   end
 
+  def toggle_status
+    @site = Site.find(params[:id])
+    @site.status = !@site.status
+    if @site.save
+      respond_to do |format|
+        format.html do
+          redirect_to edit_admin_site_path(@site), :flash => {:success => 'Site has been updated successfully'}
+        end
+        format.js do
+          render :update do |page|
+            page << "$('#site_#{@site.id}').html('#{escape_javascript(render(:inline => "<%= link_to((@site.published? ? 'Published' : 'Not published'), toggle_status_admin_site_path(@site), :method => :post,:remote => true,:class => (@site.published? ? 'published' : 'no_published')) %>"))}');"
+          end
+        end
+      end
+    end
+  end
+
   def destroy
     @site = Site.find(params[:id])
     @site.destroy

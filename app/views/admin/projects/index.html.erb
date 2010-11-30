@@ -11,7 +11,7 @@
           <li>
             <label>STATUS</label>
             <span id="status_combo_search" class="combo"><p>Select status</p>
-            <input id="status_input" type="hidden" value="active" name="status" />
+            <input id="status_input" type="hidden" value="" name="status" />
             <ul class="elements">
               <li class="first"></li>
               <li>
@@ -117,6 +117,7 @@
         )%>
         <% end %>
       </h2>
+      <% if @projects.any? %>
       <ul>
         <% @projects.each do |project| %>
         <li>
@@ -148,12 +149,23 @@
         </li>
         <% end -%>
       </ul>
+      <% else %>
+        <% if Project.count>1 %>
+          <div class="no_results">
+            <h2>There are not projects for your search</h2>
+            <p>Try to search with different terms or simply <a href="<%= admin_projects_path %>">browse all projects</a></p>
+          </div>
+        <% else %>
+          <div class="no_results">
+            <h2>There are not projects in the site</h2>
+            <p>Try to <a href="<%= new_admin_project_path %>">add new one</a>.</p>
+          </div>
+        <% end %>
+      <% end %>
     </div>
 
     <div class="bottom_grey paginate">
-      <% if @projects.total_pages > 2 %>
-        <%= will_paginate(@projects) %>
-      <% end %>
+      <%= will_paginate(@projects) %>
     </div>
   </div>
 

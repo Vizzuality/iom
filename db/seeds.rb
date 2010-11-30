@@ -75,8 +75,8 @@ cluster_water = Cluster.create :name => 'Water'
 cluster_food_security = Cluster.create :name => 'Food Security'
 cluster_floods = Cluster.create :name => 'Floods'
 
-Sector.create :name => 'food sector'
-Sector.create :name => 'health sector'
+sector_food = Sector.create :name => 'food sector'
+sector_health = Sector.create :name => 'health sector'
 
 Tag.create :name => 'asia'
 Tag.create :name => 'africa'
@@ -108,6 +108,7 @@ p1.clusters << cluster_floods
 p1.clusters << cluster_water
 p1.regions  << valencia
 p1.regions  << madrid
+p1.sectors << sector_food
 
 p2 = Project.create :name => "Vegetable generation",
                     :description => "Vegetable generation is a project ....",
@@ -130,6 +131,8 @@ p2 = Project.create :name => "Vegetable generation",
 
 p2.clusters << cluster_water
 p2.regions  << madrid
+p2.sectors << sector_food
+
 p3 = Project.create :name => "Fishing for the earthquake",
                     :description => "Fishing generation is a project ....",
                     :primary_organization => o2,
@@ -150,6 +153,7 @@ p3 = Project.create :name => "Fishing for the earthquake",
                     :awardee_type => 'Type of awardee #3'
 
 p3.clusters << cluster_water
+p3.sectors << sector_food
 
 p4 = Project.create :name => "Pescando para el terremoto",
                     :description => "Fishing project in spanish",
@@ -172,6 +176,7 @@ p4 = Project.create :name => "Pescando para el terremoto",
 
 p4.regions  << madrid
 p4.clusters << cluster_water
+p4.sectors << sector_food
 
 # Donors & donations
 donor = Donor.create  :name => "Fernando Blat",

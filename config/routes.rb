@@ -46,6 +46,7 @@ Iom::Application.routes.draw do
     resources :sites do
       get 'customization', :on => :member
       get 'projects', :on => :member
+      post 'toggle_status', :on => :member
       resources :partners, :only => [:create, :destroy]
       resources :media_resources, :only => [:index, :create, :update, :destroy]
       resources :resources, :only => [:index, :create, :destroy]
