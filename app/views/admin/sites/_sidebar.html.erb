@@ -17,7 +17,14 @@
       <% if controller_name == 'pages' %>
       <ul>
         <% @site.pages.highlighted.each do |highlighted_page| %>
-        <li><%= link_to(highlighted_page.title, admin_site_pages_path(highlighted_page)) %></li>
+          <li><%= link_to(highlighted_page.title, edit_admin_site_page_path(@site, highlighted_page.id)) %></li>
+          <% unless highlighted_page.children.empty? %>
+          <ul>
+            <% highlighted_page.children.each do |child| %>
+            <li><%= link_to(child.title, edit_admin_site_page_path(@site, child.id)) %></li>
+            <% end %>
+          </ul>
+          <% end %>
         <% end %>
       </ul>
       <% end %>
@@ -28,5 +35,5 @@
   <div class="delete">
     <h5>DELETE THIS SITE</h5>
     <p>Clicking the button below you will delete permanently this site. Please take care of the domain that was pointing to this site.</p>
-    <%= link_to("Delete this SITE", '#') %> <!-- admin_organization_path(@site) -->
+    <%= link_to("Delete this SITE", '#', :destroy_url => admin_site_path(@site), :att_name => 'Site') %>
   </div>
