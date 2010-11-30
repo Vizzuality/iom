@@ -19,7 +19,7 @@
                       <p class="caption">No caption provided, <a href="#add" class="edit_caption">add it?</a></p>
                     <% end %>
 
-                    <div>
+                    <div class="caption">
                       <%= form_for([:admin, @element, resource]) do |f| %>
                         <%= f.text_field :caption %>
                         <%= f.submit 'Save' %>
@@ -50,7 +50,7 @@
                       <p class="caption">No caption provided, <a href="#add">add it?</a></p>
                     <% end %>
 
-                    <div>
+                    <div class="caption">
                       <%= form_for([:admin, @element, resource]) do |f| %>
                         <%= f.text_field :caption %>
                         <%= f.submit 'Save' %>
