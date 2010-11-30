@@ -3,101 +3,94 @@
     <div class="two_projects">
     <span class="top"></span>
     <div class="content">
-        <form>
-          <label>SEARCH BY TEXT</label>
-          <input type="text" value="Search projects by name, place,..." onclick="this.value=''" />
-          <input type="submit" value="" />
-
-			<ul class="combos">
-				<li>
-					<label>STATUS</label>
-					<span id="status_combo_search" class="combo"><p>Select status</p>
-						<!-- INPUT HIDDEN -->
-	          <input id="status_input" type="hidden" value="active" />
-						<ul class="elements">
-							<li class="first"></li>
-							<li>
-								<a id="0" class="status">All</a>
-							</li>
-							<li>
-								<a id="active" class="status">Active</a>
-							</li>
-							<li>
-								<a id="closed" class="status">Closed</a>
-							</li>
-							<li class="last"></li>
-						</ul>
-					</span>
-				</li>
-				<li>
-					<label>COUNTRY</label>
-					<span id="country_combo_search" class="combo"><p>Select country</p>
-							<!-- INPUT HIDDEN -->
-				          <input id="country_input" type="hidden" value="" />
-							<ul class="elements">
-								<li class="first"></li>
-                  <li>
-  									<a id="0">All</a>
-  								</li>								
-								   <% Country.all.each do |country| %>
-									<li>
-										<a id="<%= country.id%>"><%= country.name %></a>
-									</li>		
-								   <% end %>
-								<li class="last"></li>
-							</ul>
-					</span>
-				</li>
-				<li>
-					<label>CLUSTER</label>
-					<span id="cluster_combo_search" class="combo"><p>Select cluster</p>
-							<!-- INPUT HIDDEN -->
-				          <input id="cluster_input" type="hidden" value=""/>
-							<ul class="elements">
-								<li class="first"></li>
-  								<li>
-  									<a id="0">All</a>
-  								</li>		
-								   <% Cluster.all.each do |cluster| %>
-									<li>
-										<a id="<%= cluster.id%>"><%= cluster.name %></a>
-									</li>		
-								   <% end %>
-								<li class="last"></li>
-							</ul>
-					</span>
-				</li>
-				<li>
-					<label>SECTOR</label>
-					<span id="sector_combo_search" class="combo"><p>Select sector</p>
-							<!-- INPUT HIDDEN -->
-				          <input id="sector_input" type="hidden" value=""/>
-							<ul class="elements">
-								<li class="first"></li>
-  								<li>
-  									<a id="0">All</a>
-  								</li>
-								
-								   <% Sector.all.each do |sector| %>
-									<li>
-										<a id="<%= sector.id%>"><%= sector.name %></a>
-									</li>		
-								   <% end %>
-								<li class="last"></li>
-							</ul>
-					</span>					
-				</li>
-			</ul>		
-	      </form>
-		</div>
-		<span class="bottom"></span>
+      <%= form_tag(admin_projects_path, :method => :get) do %>
+        <label>SEARCH BY TEXT</label>
+        <input type="text" value="<%= params[:q] || 'Search projects by name, place,...'%>" name="q" class="main_search"/>
+        <input type="submit" value="" />
+        <ul class="combos">
+          <li>
+            <label>STATUS</label>
+            <span id="status_combo_search" class="combo"><p>Select status</p>
+            <input id="status_input" type="hidden" value="active" name="status" />
+            <ul class="elements">
+              <li class="first"></li>
+              <li>
+                <a id="0" class="status">All</a>
+              </li>
+              <li>
+                <a id="active" class="status">Active</a>
+              </li>
+              <li>
+                <a id="closed" class="status">Closed</a>
+              </li>
+              <li class="last"></li>
+            </ul>
+          </span>
+        </li>
+        <li>
+          <label>COUNTRY</label>
+          <span id="country_combo_search" class="combo"><p>Select country</p>
+          <input id="country_input" type="hidden" value="" name="country" />
+          <ul class="elements">
+            <li class="first"></li>
+            <li>
+              <a id="0">All</a>
+            </li>
+             <% Country.all.each do |country| %>
+            <li>
+              <a id="<%= country.id%>"><%= country.name %></a>
+            </li>
+             <% end %>
+            <li class="last"></li>
+          </ul>
+          </span>
+        </li>
+        <li>
+          <label>CLUSTER</label>
+          <span id="cluster_combo_search" class="combo"><p>Select cluster</p>
+          <input id="cluster_input" type="hidden" value="" name="cluster" />
+          <ul class="elements">
+            <li class="first"></li>
+            <li>
+              <a id="0">All</a>
+            </li>
+             <% Cluster.all.each do |cluster| %>
+            <li>
+              <a id="<%= cluster.id%>"><%= cluster.name %></a>
+            </li>
+            <% end %>
+            <li class="last"></li>
+          </ul>
+          </span>
+        </li>
+        <li>
+          <label>SECTOR</label>
+          <span id="sector_combo_search" class="combo"><p>Select sector</p>
+          <input id="sector_input" type="hidden" value="" name="sector" />
+          <ul class="elements">
+            <li class="first"></li>
+            <li>
+              <a id="0">All</a>
+            </li>
+            <% Sector.all.each do |sector| %>
+            <li>
+              <a id="<%= sector.id%>"><%= sector.name %></a>
+            </li>
+            <% end %>
+            <li class="last"></li>
+          </ul>
+          </span>
+        </li>
+      </ul>
+      <% end %>
+    </div>
+    <span class="bottom"></span>
     </div>
     <div class="one_project">
     <span class="top"></span>
     <div class="content">
-        <p><%= Project.count %></p>  
-		<!-- NOTE: Pluralize do the following condition but we don't want duplicate Project.count information -->
-        <label><%= ((Project.count > 1)&&(Project.count != 0))? 'projects':'project' %><br/>registered</label>   
+        <p><%= Project.count %></p>
+        <label><%= pluralize(Project.count,'project','projects') %><br/>registered</label>
         <a class="add_project" href="<%= new_admin_project_path %>">Add new project</a>
         <a class="import_csv" href="#">Import a .csv file</a>
     </div>
@@ -110,8 +103,18 @@
     <div class="med projects_list">
       <h2>
         <%= pluralize(@projects.total_entries, 'project', 'projects') %>
-        <% if params[:q]%>
-          on <a class="remove" href="#">Food</a> & <a class="remove" href="#">Health</a>
+        <% if @conditions.any? %>
+          on
+        <%=raw(
+        @conditions.map do |c, vh|
+            if new_conditions = @conditions.dup.delete_if{ |k,v| k == c }.values.first
+              new_conditions.merge!(:q => params[:q])
+            else
+              new_conditions = {:q => params[:q]}
+            end
+            link_to(c, admin_projects_path(new_conditions), :class => 'remove')
+        end.join(' & ')
+        )%>
         <% end %>
       </h2>
       <ul>
@@ -148,9 +151,9 @@
     </div>
 
     <div class="bottom_grey paginate">
-	    <% if @projects.total_pages > 2 %>	
-	      <%= will_paginate(@projects) %>
-	    <% end %>
+      <% if @projects.total_pages > 2 %>
+        <%= will_paginate(@projects) %>
+      <% end %>
     </div>
   </div>
 

@@ -10,7 +10,7 @@
         </div>
         <div class="one_donor">
           <p><%= Organization.count %></p>
-          <label><%= Organization.count == '1' ? 'Organization' : 'Organizations' %><br/>registered</label>
+          <label><%= Organization.count == 1 ? 'Organization' : 'Organizations' %><br/>registered</label>
           <a href="<%= new_admin_organization_path %>">Add new org.</a>
         </div>
       </div>
@@ -21,7 +21,7 @@
           <% unless @organizations.empty? %>
             <h2><%= pluralize(@organizations.total_entries, 'Organization', 'Organizations') %> implementing projects
               <% if params[:q]%>
-              on <a class="remove" href="<%= new_admin_organization_path %>"><%= params[:q] %></a>
+              on <a class="remove" href="<%= admin_organizations_path %>"><%= params[:q] %></a>
               <% end %>
             </h2>
             <ul>
