@@ -544,25 +544,26 @@ div.block.project_info div.med div.left form div.cluster_options a.add_cluster {
 div.block.project_info div.med div.left form div.cluster_options a.add_cluster:hover {cursor:pointer; background-position:0 -32px;}
 div.block.project_info div.bottom {float:left; height:15px; width:100%; background: url('/images/backoffice/backgrounds/bottom_two_columns.png') no-repeat scroll top left!important;}
 
-div.block.project_info div.med div.left form div.sectors_options_large {float:left; margin:10px 0 0 0; background:url('/images/backoffice/projects/bkg_cluster_options_large.png') no-repeat 0 0; width:569px; height:50px;}
 
-div.block.project_info div.med div.left form div.sectors_options_large span.combo_sector_options {float:left; margin:10px 0 0 0; background:url('/images/backoffice/projects/combos/combo_sector.png') no-repeat 0 0; width:188px; height:23px; padding:9px 0 0 10px; position:relative;}
-div.block.project_info div.med div.left form div.sectors_options_large span.combo_sector_options p {font:normal 13px Arial; color:#999999;}
+div.block.project_info div.med div.left form div.sector_options {float:left; margin:10px 0 0 0; background:url('/images/backoffice/projects/bkg_cluster_options.png') no-repeat 0 0; width:411px; height:50px;}
 
 
-div.block.project_info div.med div.left form div.sectors_options_large span.combo_sector_options ul.options {display:none;}
-div.block.project_info div.med div.left form div.sectors_options_large span.combo_sector_options.clicked {background:url('/images/backoffice/projects/combos/combo_sector_clicked.png') no-repeat 0 0;}
-div.block.project_info div.med div.left form div.sectors_options_large span.combo_sector_options.clicked ul.options {position:absolute; top:32px; left:0; width:187px; height:auto; display:inline; z-index:20;}
-div.block.project_info div.med div.left form div.sectors_options_large span.combo_sector_options.clicked ul.options li {float:left; margin:0; background:url('/images/backoffice/projects/combos/combo_sector_element.png') repeat-y 0; width:187px; height:auto; padding:4px 11px;}
-div.block.project_info div.med div.left form div.sectors_options_large span.combo_sector_options.clicked ul.options li.last {background:url('/images/backoffice/projects/combos/combo_sector_element_last.png') no-repeat 0 0; height:6px;}
-div.block.project_info div.med div.left form div.sectors_options_large span.combo_sector_options.clicked ul.options li.last:hover {background:url('/images/backoffice/projects/combos/combo_sector_element_last.png') no-repeat 0 0;}
-div.block.project_info div.med div.left form div.sectors_options_large span.combo_sector_options.clicked ul.options li:hover {background:url('/images/backoffice/projects/combos/combo_sector_element_hover.png') repeat-y 0;}
-div.block.project_info div.med div.left form div.sectors_options_large span.combo_sector_options.clicked ul.options li a {font:normal 13px Arial; color:#666666; text-decoration:none; }
+div.block.project_info div.med div.left form div.sector_options span.combo_sector_options {float:left; margin:10px 0 0 10px; background:url('/images/backoffice/projects/combos/combo_add_cluster.png') no-repeat 0 0; width:254px; height:24px; padding:8px 0 0 10px; position:relative;}
+div.block.project_info div.med div.left form div.sector_options span.combo_sector_options p {font:normal 13px Arial; color:#999999;}
+div.block.project_info div.med div.left form div.sector_options span.combo_sector_options ul.options {display:none;}
+div.block.project_info div.med div.left form div.sector_options span.combo_sector_options.clicked {background:url('/images/backoffice/projects/combos/combo_add_cluster_clicked.png') no-repeat 0 0;}
+div.block.project_info div.med div.left form div.sector_options span.combo_sector_options.clicked ul.options {position:absolute; top:32px; left:0; width:264px; height:auto; display:inline; z-index:20;}
+div.block.project_info div.med div.left form div.sector_options span.combo_sector_options.clicked ul.options li {float:left; margin:0; background:url('/images/backoffice/projects/combos/combo_add_cluster_lielement.png') repeat-y 0; width:242px; height:auto; padding:4px 11px;}
+div.block.project_info div.med div.left form div.sector_options span.combo_sector_options.clicked ul.options li.last {background:url('/images/backoffice/projects/combos/combo_add_cluster_lielement_last.png') no-repeat 0 0; height:6px;}
+div.block.project_info div.med div.left form div.sector_options span.combo_sector_options.clicked ul.options li.last:hover {background:url('/images/backoffice/projects/combos/combo_add_cluster_lielement_last.png') no-repeat 0 0;}
+div.block.project_info div.med div.left form div.sector_options span.combo_sector_options.clicked ul.options li:hover {background:url('/images/backoffice/projects/combos/combo_add_cluster_lielement_hover.png') repeat-y 0;}
+div.block.project_info div.med div.left form div.sector_options span.combo_sector_options.clicked ul.options li a {font:normal 13px Arial; color:#666666; text-decoration:none; }
 
-div.block.project_info div.med div.left form div.sectors_options_large span.combo_sector_options:hover {cursor:pointer;}
-div.block.project_info div.med div.left form div.sectors_options_large span.combo_sector_options.first {margin:10px 26px 0 10px;}
-div.block.project_info div.med div.left form div.sectors_options_large a.add_sector {float:left; margin:10px 0 0 9px; background:url('/images/backoffice/projects/add_cluster_bttn.png') no-repeat 0 0; width:118px; height:25px; font:500 15px "Museo Sans"; color:#FFFFFF; text-shadow:0 1px #6E8C30; text-align:center; padding:7px 0 0 0;}
-div.block.project_info div.med div.left form div.sectors_options_large a.add_sector:hover {cursor:pointer; background-position:0 -32px;}
+div.block.project_info div.med div.left form div.sector_options span.combo_sector_options:hover {cursor:pointer;}
+
+
+div.block.project_info div.med div.left form div.sector_options a.add_sector {float:left; margin:10px 0 0 9px; background:url('/images/backoffice/projects/add_cluster_bttn.png') no-repeat 0 0; width:118px; height:25px; font:500 15px "Museo Sans"; color:#FFFFFF; text-shadow:0 1px #6E8C30; text-align:center; padding:7px 0 0 0;}
+div.block.project_info div.med div.left form div.sector_options a.add_sector:hover {cursor:pointer; background-position:0 -32px;}
 
 div.block.project_info div.med div.left form div.location_options.empty {float:left; margin:10px 0 0 0; background:url('/images/backoffice/projects/bkg_cluster_options.png') no-repeat 0 0; width:411px; height:50px; position:relative;}
 div.block.project_info div.med div.left form div.location_options.empty p.msg {float:left; margin:18px 0 0 12px; width:269px; font:normal 13px Arial; color:#616851;  }

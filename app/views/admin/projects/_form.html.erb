@@ -173,8 +173,8 @@
         <% end -%>
     </ul>
 
-    <div class="sectors_options_large">
-      <span id="sector" class="combo_sector_options first">
+    <div class="sector_options">
+      <span id="sector" class="combo_sector_options">
   		<p id="0">Select more sectors</p>
   		<ul class="options">
   		<% Sector.all.collect do |sector| %>
@@ -183,14 +183,6 @@
   			<li class="last"></li>
   		</ul>
 		
-  	</span>
-      <span id="subsector" class="combo_sector_options"><p id="0">Select a subsector</p>
-  		<ul class="options">
-  		<% Sector.all.collect do |sector| %>
-  			<li><a id="<%= sector.id %>"><%= sector.name %></a></li>
-  		<% end %>
-  			<li class="last"></li>
-  		</ul>
   	</span>
       <a class="add_sector">add sector</a>
     </div>
