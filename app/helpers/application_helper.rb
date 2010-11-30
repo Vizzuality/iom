@@ -1,8 +1,8 @@
 module ApplicationHelper
 
   def selected_if_current_page(url_path)
-    if @organization
-      if (action_name == "specific_information" || action_name == 'new' || action_name == 'edit' || action_name == 'create' || action_name == 'update')
+    if @organization || @pages
+      if (action_name == "specific_information" || action_name == 'new' || action_name == 'edit' || action_name == 'create' || action_name == 'update' || action_name == "index")
         if request.path == url_path
           raw("class=\"list_selected\"")
         else
@@ -11,10 +11,16 @@ module ApplicationHelper
       else
         raw("class=\"selected\"") if request.path == url_path
       end
+    elsif @page
+      if action_name == 'edit' && controller_name == 'pages'
+        raw("class=\"sublist_selected\"") if request.path == url_path
+      end
     else
       raw("class=\"selected\"") if request.path == url_path
     end
   end
+  
+
 
   def errors_for(obj, attribute)
     return if action_name == 'new'

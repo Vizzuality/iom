@@ -52,7 +52,7 @@ class Admin::SitesController < ApplicationController
         end
         format.js do
           render :update do |page|
-            page << "$('#site_#{@site.id}').html('#{escape_javascript(render(:inline => "<%= link_to((@site.published? ? 'Published' : 'Not published'), toggle_status_admin_site_path(@site), :method => :post,:remote => true,:class => (@site.published? ? 'published' : 'no_published')) %>"))}');"
+            page << "$('#site_#{@site.id}').html('#{escape_javascript(render(:inline => "<%= link_to((@site.published? ? 'Published' : 'Not published'), toggle_status_admin_site_path(@site), :method => :post,:remote => true,:class => (@site.published? ? 'published' : 'not_published')) %>"))}');"
           end
         end
       end

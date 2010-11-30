@@ -8,10 +8,7 @@
           <%= render :partial => 'form' %>
         </div>
         <div class="right menu">
-          <ul>
-            <li class="selected"><a>Basic information</a></li>
-          </ul>
-          <p><%= link_to('⟵ back to pages', admin_site_pages_path(@site)) %></p>
+          <%= render 'admin/sites/sidebar' %>
         </div>
       </div>
       <div class="bottom"></div>
