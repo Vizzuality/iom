@@ -1,6 +1,5 @@
 <%= form_for(@site, :url => (@site.new_record? ? admin_sites_path : admin_site_path(@site))) do |f| %>
 
-  <%= f.error_messages %>
   <div class="field">
     <label>SITE NAME <strong>*</strong></label>
     <span class="input_large <%= 'error' if !@site.errors[:name].empty? && action_name != 'new' %>">
