@@ -2,9 +2,7 @@
 <html>
 <head>
   <title><%= title %></title>
-  <%= javascript_include_tag 'http://geocommons.com/javascripts/f1.api.js', '/javascripts/sites/map.js' %>
   <%= javascript_include_tag '/javascripts/plugins/fonts/cufon_yui.js','/javascripts/plugins/fonts/PT_Sans.js','/javascripts/plugins/fonts/Geneva.js','/javascripts/plugins/fonts/Aller.js' %>
-  <%= javascript_include_tag 'jquery.min', 'jquery.ui.core', 'jquery.ui.widget', 'jquery.ui.position', 'jquery.ui.autocomplete', 'rails', 'application' %>
 
   <%= stylesheet_link_tag '/stylesheets/sites/layout.css' %>
   <%= stylesheet_link_tag @site.theme.css_file %>
@@ -90,5 +88,6 @@
     </div>
     <!-- layout -->
   </div>
+  <%=yield :js %>
 </body>
 </html>

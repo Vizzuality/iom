@@ -1,3 +1,12 @@
+<% content_for :js do%>
+<%= javascript_include_tag 'http://geocommons.com/javascripts/f1.api.js', '/javascripts/sites/map.js' %>
+<script>
+  $(document).ready( function() {
+    initialize();
+  });
+</script>
+<%end%>
+
 <div id="left_info_organization">
   <div class="content">
     <div class="header">
