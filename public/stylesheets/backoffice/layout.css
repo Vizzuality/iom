@@ -21,13 +21,12 @@ span.field_error div.error_msg {position:absolute; display:none; top:-9px; left:
 span.field_error div.error_msg p {position:relative; float:left; padding:0 0 0 27px; height:31px; background: url('../../images/backoffice/common/left_error.png') no-repeat scroll top left;}
 span.field_error div.error_msg p span {position:relative; float:left!important; height:15px; padding:8px 15px 8px 2px; display:block; background:url('/images/backoffice/common/right_error.png') no-repeat right 0; font:normal 13px Arial; color:#333333;}
 
-span.simple_field_error {position:absolute; bottom:0; right:0; margin:0; padding:0;}
+span.simple_field_error {position:absolute; top:0; left:455px; margin:0; padding:0;}
 span.simple_field_error a.simple_error {float:right; width:34px; height:32px; background: url('../../images/backoffice/icons/simple_error.png') no-repeat scroll top left;}
 span.simple_field_error a.simple_error:hover {cursor:pointer;}
-/*span.simple_field_error div.error_msg {position:absolute; display:none; top:-9px; left:-9px;width:200px;}
+span.simple_field_error div.error_msg {position:absolute; display:none; top:-9px; left:-9px;width:200px;}
 span.simple_field_error div.error_msg p {position:relative; float:left; padding:0 0 0 27px; height:31px; background: url('../../images/backoffice/common/left_error.png') no-repeat scroll top left;}
 span.simple_field_error div.error_msg p span {position:relative; float:left!important; height:15px; padding:8px 15px 8px 2px; display:block; background:url('/images/backoffice/common/right_error.png') no-repeat right 0; font:normal 13px Arial; color:#333333;}
-*/
 
 
 /* LAYOUT */
@@ -433,6 +432,13 @@ div.med.projects_list ul li div.box.little {width:135px;}
 div.med.projects_list ul li div.box.single {padding:28px 0 0 0; height:43px;}
 div.med.projects_list ul li div.box.red {background:#f7f7f7;}
 div.med.projects_list ul li div.box.gray {background:#f7f7f7;}
+div.med.projects_list div.no_results {float:left; width:100%; padding:70px 0 80px;}
+div.med.projects_list div.no_results h2 {float:left; width:100%; text-align:center;}
+div.med.projects_list div.no_results p {float:left; width:100%; margin:6px 0 0 0; text-align:center; font:normal 17px Arial; color:#666666;}
+div.med.projects_list div.no_results p a {color:#E93E3F; text-decoration:underline;}
+div.med.projects_list div.no_results p a:hover {color:#7F2023;}
+
+
 div.med.projects_list ul li p.red {color:#EB4142;}
 div.med.projects_list ul li p.red a {padding:0; font:normal 13px Arial; color:#EB4142;}
 
@@ -500,12 +506,15 @@ div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked
 div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates span.year {float:left; width:76px; height:51px; margin:10px 0 0 0;}
 
 div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates p.title {float:left; margin:0 0 0 5px; font:normal 11px Arial; color:#606851; text-transform:uppercase; width:auto;}
+div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates p.title#month {float:left; margin:12px 10px 0 10px; width:132px;}
+div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates p.title#day {float:left; margin:12px 10px 0 0; width:63px;}
+div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates p.title#year {float:left; margin:12px 10px 0 0; width:100px;}
 div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates a {font:normal 13px Arial; color:#333333;}
 div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates a:hover {cursor:pointer;}
 div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates a.month_combo {float:left; margin:2px 0 0 0; background:url('/images/backoffice/projects/date/month_combo.png') no-repeat 0 0; width:123px; height:23px; padding:9px 0 0 10px;}
 div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates a.day_combo {float:left; margin:2px 0 0 0; background:url('/images/backoffice/projects/date/day_combo.png') no-repeat 0 0; width:54px; height:23px; padding:9px 0 0 10px;}
 div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates a.year_combo {float:left; margin:2px 0 0 0; background:url('/images/backoffice/projects/date/year_combo.png') no-repeat 0 0; width:68px; height:23px; padding:9px 0 0 10px;}
-div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates a.save_date_bttn {float:left; margin:26px 0 0 10px; width:95px; height:26px; background:url('/images/backoffice/projects/date/save_bttn.png') no-repeat 0 0; font:500 15px "Museo Sans"; color:white; text-align:center; padding:6px 0 0 0; text-shadow:0 1px #759731; }
+div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates a.save_date_bttn {float:left; margin:5px 0 0 10px; width:95px; height:26px; background:url('/images/backoffice/projects/date/save_bttn.png') no-repeat 0 0; font:500 15px "Museo Sans"; color:white; text-align:center; padding:6px 0 0 0; text-shadow:0 1px #759731; }
 div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates a.save_date_bttn:hover {background-position:0 -32px; cursor:pointer;}
 
 
@@ -849,7 +858,7 @@ div.block.site_info div.bottom {float:left; height:15px; width:100%; background:
 
 
 /*window alert*/
-div#modal_window {position:absolute; display:none; top:0; left:0; right:0; bottom:0; background:url('/images/backoffice/common/modal_bkg.png') repeat 0 0; z-index:10000;}
+div#modal_window {position:absolute; display:none; top:0; left:0; right:0; bottom:0; background:url('/images/backoffice/common/modal_bkg.png') repeat 0 0;}
 div#modal_window div.alert {position:absolute; top:50%; left:50%; width:450px; height:88px; padding:22px; margin:-66px 0 0 -247px; background:url('/images/backoffice/common/alert_bkg.png') no-repeat 0 0!important;}
 div#modal_window div.alert h4 {float:left; width:100%; font:bold 17px Arial; color:#333333;}
 div#modal_window div.alert p {float:left; width:100%; margin:5px 0 0 0; font:normal 15px Arial; color:#666666;}
@@ -870,3 +879,62 @@ div#footer div.inner_footer ul li {float:left; width:auto; padding:0 13px; backg
 div#footer div.inner_footer ul li.last {padding:0 0 0 10px; background:none;}
 div#footer div.inner_footer ul li a {font:normal 13px Arial; color:#999999; text-decoration:none;}
 div#footer div.inner_footer ul li a:hover {text-decoration:underline;}
+
+
+
+
+/*REMOVE THIS (IS ONLY TO TEST - SELECT MENU)*/
+/*----------------------------------*/
+/*==================================
+Hide lists on page load
+====================================*/
+
+.stylish-select ul.newList {left:-9999px;}
+
+/*==================================
+red curvy example
+====================================*/
+ul.newList:focus {outline:none;}
+ul.newList * {margin:0; padding:0;}
+ul.newList a {color: #000; text-decoration:none; display:block;}
+ul.newList {margin:0; padding:0; list-style:none; color:#000; width:131px; background:#fff; position:absolute;  border:1px solid #ccc; top:22px; left:0; overflow-x:hidden; z-index:9999;}
+
+ul.newList.month {float:left; background:url('../../images/backoffice/common/dates/body_month.png') no-repeat 0 0;}
+ul.newList.day {float:left; background:url('../../images/backoffice/common/dates/body_month.png') no-repeat 0 0;}
+ul.newList.year {float:left; background:url('../../images/backoffice/common/dates/body_month.png') no-repeat 0 0;}
+
+.newListSelected {width:128px; color:#000; height:29px; padding:3px 0 0 6px; float:left; background:url('/images/backoffice/common/dates/head_month.png') no-repeat 0 0; margin:2px 0 0 7px;}
+
+.newListSelected:focus {outline:none;}
+.newListSelected.month {width:129px; color:#000; height:30px; padding:3px 0 0 6px; float:left; background:url('/images/backoffice/common/dates/head_month.png') no-repeat 0 0;}
+.newListSelected.day {width:60px; color:#000; height:30px; padding:3px 0 0 6px; float:left; background:url('/images/backoffice/common/dates/head_day.png') no-repeat 0 0;}
+.newListSelected.year {width:72px; color:#000; height:30px; padding:3px 0 0 6px; float:left; background:url('/images/backoffice/common/dates/head_year.png') no-repeat 0 0;}
+
+
+.newListSelected span {width:284px; display:block;}
+ul.newList li a {padding:3px 8px; display: block;}
+ul.newList li a:focus {-moz-outline-style: none;}
+.selectedTxt {width:auto; overflow:hidden; height:16px; margin:5px 0 0 3px;}
+.hiLite {background:#650101!important; color:#fff!important;}
+.hiLite a {background:#650101!important; color:#fff!important;}
+.newListHover {background:#ccc!important; color:#000!important; cursor:default;}
+/*.newListSelHover {background-position:0 -32px; cursor:default;}*/
+.newListSelFocus {background-position:0 -32px; cursor:default;}
+.newListOptionTitle {font-weight:bold;}
+.newListOptionTitle ul {margin:3px 0 0;}
+.newListOptionTitle li {font-weight:normal; border-left:1px solid #ccc;}
+
+/*======================================
+windows xp style - div that contains the
+<select> has been given an id of #win-xp
+(for the purposes of this example
+========================================*/
+#win-xp .newListSelected {background:#FFF url(dropdown.gif) no-repeat scroll 155px 1px; border:1px solid #A5ACB2; color:#000; height:17px; margin-bottom:10px; padding:0; width:173px;}
+#win-xp .newListSelected div {display:block; font-size:0.85em; padding:2px 21px 2px 4px; text-align:left !important; width:149px;}
+#win-xp ul.newList {list-style:none; color:#000; width:172px; background:#fff; border:1px solid #000; top:22px; left:0; height:auto; overflow:auto; font-size: 0.85em; text-align:left!important; position:absolute; z-index:9999;}
+#win-xp ul.newList li {padding:2px 5px!important; border-bottom: 1px solid #cccccc;}
+#win-xp .hiLite {background:#316ac5!important; color:#fff!important;}
+#win-xp .newListHover {background:#ccc!important; color:#000!important; cursor:default;}
+#win-xp .newListSelHover {cursor:default;}
+#win-xp .newListSelHover, #win-xp .newListSelFocus {background-position:auto;}
+#win-xp .newListSelHover div, #win-xp .newListSelFocus div {font-weight:bold;}

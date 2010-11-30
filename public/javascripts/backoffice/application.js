@@ -2,6 +2,16 @@ var old_value;
 
 $(document).ready(function(ev){
 
+		if ($('div.select_dates').length > 0){
+			// YEAR
+			$('select#project_start_date_1i').sSelect({ddMaxWidth: '76px',ddMaxHeight:'200px',containerClass:'year'});
+			// MONTH
+			$('select#project_start_date_2i').sSelect({ddMaxWidth: '131px',ddMaxHeight:'200px',containerClass:'month'});
+			// DAY
+			$('select#project_start_date_3i').sSelect({ddMaxWidth: '62px',containerClass:'day'});
+		}
+	
+
     if ($('div.right.menu').length>0) {
       setTimeout(function(){
         $('div.right.menu').height($('div.block div.med div.left').height());

@@ -36,7 +36,9 @@ class ApplicationController < ActionController::Base
         end
       else
         # Sessions controller doesn't depend on the host
-        return true if controller_name == 'sessions'
+        return true if controller_name == 'sessions' || controller_name == 'dashboard'
+        # If root path, redirect to the dashboard of projects
+        redirect_to dashboard_path and return false if controller_name == 'sites' && action_name == 'home'
         # If the controller is not in the namespace /admin,
         # and the host is the main_site_host, it should be a Site
         # in draft mode.

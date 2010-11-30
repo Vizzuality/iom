@@ -21,11 +21,15 @@ Iom::Application.routes.draw do
   # search
   match '/search' => 'search#index', :as => :search
 
+  # Dashboard
+  match '/dashboard' => 'dashboard#index', :as => :dashboard
+
   # Administration
   namespace :admin do
     match '/' => 'admin#index', :as => :admin
     resources :settings, :only => [:edit, :update]
     resources :tags, :only => [:index]
+    resources :regions, :only => [:index]
     resources :organizations do
       resources :projects, :only => [:index]
       resources :media_resources, :only => [:index, :create, :update, :destroy]
@@ -46,6 +50,7 @@ Iom::Application.routes.draw do
     resources :sites do
       get 'customization', :on => :member
       get 'projects', :on => :member
+      post 'toggle_status', :on => :member
       resources :partners, :only => [:create, :destroy]
       resources :media_resources, :only => [:index, :create, :update, :destroy]
       resources :resources, :only => [:index, :create, :destroy]

@@ -1,3 +1,5 @@
+<link rel="Stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/ui-darkness/jquery-ui.css" type="text/css" />
+
 <%= form_for(@project, :url => (@project.new_record? ? admin_projects_path : admin_project_path(@project))) do |f| %>
 
   <div class="field">
@@ -24,16 +26,7 @@
 
     <div class="list_combo">
         <span id="hidden" class="combo_large">
-          
-          <!-- ERROR SIMPLE EXAMPLE -->
-          <span class="simple_field_error">
-              <a class="simple_error"></a>      
-              <div class="error_msg">
-                <p><span>can't be blank</span></p>
-              </div>
-              
-          </span>
-          
+          <%= errors_for_span(@project, :primary_organization) %>
         <a class="organization"><%= Organization.first.name %></a>
       </span>
       <%= f.hidden_field :primary_organization_id , :value => Organization.first.id %>
@@ -92,45 +85,27 @@
     <ul class="dates">
       <li>
         <label>DATE PROVIDED</label>
-         <%= f.date_select :start_date, :start_year => Date.today.year - 5  %>
-        <span id="date_provided" class="combo_date">09/10/2010
-  		<div class="select_dates">
-  			<span class="month">
-  				<p class="title">MONTH</p>
-  				<a class="month_combo">SEPTEMBER</a>
-  			</span>
-  			<span class="day">
-  				<p class="title">DAY</p>
-  				<a class="day_combo">10</a>
-  			</span>
-  			<span class="year">
-  				<p class="title">YEAR</p>
-  				<a class="year_combo">2010</a>
-  			</span>
-  			<a class="save_date_bttn">Save date</a>
-  		</div>
-  	 </span>
+
+        <span id="date_provided" class="combo_date clicked"><p>09/10/2010</p>
+      <div class="select_dates">
+        <p id="month" class="title">MONTH</p>
+        <p id="day" class="title">DAY</p>
+        <p id="year" class="title">YEAR</p>
+
+         <%= f.date_select :start_date, :start_year => Date.today.year - 5, :order => [:month, :day, :year]  %>
+
+        <a class="save_date_bttn">Save date</a>
+      </div>
+     </span>
       </li>
       <li>
         <label>DATE UPDATED</label>
+        <span id="date_updated" class="combo_date"><p>09/10/2010</p>
+      <div class="select_dates end_date">
          <%= f.date_select :end_date, :start_year => Date.today.year - 5  %>
-        <span id="date_updated" class="combo_date">09/10/2010
-  		<div class="select_dates end_date">
-  			<span class="month">
-  				<p class="title">MONTH</p>
-  				<a class="month_combo">SEPTEMBER</a>
-  			</span>
-  			<span class="day">
-  				<p class="title">DAY</p>
-  				<a class="day_combo">10</a>
-  			</span>
-  			<span class="year">
-  				<p class="title">YEAR</p>
-  				<a class="year_combo">2010</a>
-  			</span>
-  			<a class="save_date_bttn">Save date</a>
-  		</div>
-  	  </span>
+        <a class="save_date_bttn">Save date</a>
+      </div>
+      </span>
       </li>
     </ul>
   </div>
@@ -140,50 +115,55 @@
   <div class="field">
     <label>CLUSTERS  <strong>*</strong></label>
     <ul class="clusters">
-  		<% unless @project.clusters.empty? %>
-          	<% @project.clusters.each do |cluster| %>
-          		<li id="cluster_<%= cluster.id %>"><%= cluster.name %><input id="<%= cluster.id %>" type="checkbox" name="project[clusters_ids][]" value="<%= cluster.id %>" checked="true"/><a href="#cluster_<%= cluster.id %>" class="remove_this close"></a>
-  				</li>
-          	<% end -%>
+      <% unless @project.clusters.empty? %>
+            <% @project.clusters.each do |cluster| %>
+              <li id="cluster_<%= cluster.id %>"><%= cluster.name %><input id="<%= cluster.id %>" type="checkbox" name="project[clusters_ids][]" value="<%= cluster.id %>" checked="true"/><a href="#cluster_<%= cluster.id %>" class="remove_this close"></a>
+          </li>
+            <% end -%>
         <% end -%>
     </ul>
 
     <div class="cluster_options">
-      <span class="combo_cluster_options"><p id="0">Select more clusters</p>
-  		<ul class="options">
-  		<% Cluster.all.collect do |cluster| %>
-  			<li><a id="<%= cluster.id %>"><%= cluster.name %></a></li>
-  		<% end %>
-  			<li class="last"></li>
-  		</ul>
-  	</span>
+      <span class="combo_cluster_options">
+        <%= errors_for_span(@project, :clusters) %>
+
+        <p id="0">Select more clusters</p>
+        <ul class="options">
+        <% Cluster.all.collect do |cluster| %>
+          <li><a id="<%= cluster.id %>"><%= cluster.name %></a></li>
+        <% end %>
+          <li class="last"></li>
+        </ul>
+      </span>
       <a id="add_cluster_bttn" class="add_cluster">add cluster</a>
     </div>
   </div>
-  
+
   <div class="field">
-    <label>SECTORS / SUBSECTORS  <strong>*</strong></label>
+    <label>SECTORS  <strong>*</strong></label>
 
     <ul class="sectors">
-  		<% unless @project.sectors.empty? %>
-          	<% @project.sectors.each do |sector| %>
-  				<li id="sector_<%= sector.id %>"><%= sector.name %><input id="<%= sector.id %>" type="checkbox" name="project[sectors_ids][]" value="<%= sector.id %>" checked="true"/><a href="#sector_<%= sector.id %>" class="remove_this close"></a>
-  				</li>        	
-  		<% end -%>
+      <% unless @project.sectors.empty? %>
+            <% @project.sectors.each do |sector| %>
+          <li id="sector_<%= sector.id %>"><%= sector.name %><input id="<%= sector.id %>" type="checkbox" name="project[sectors_ids][]" value="<%= sector.id %>" checked="true"/><a href="#sector_<%= sector.id %>" class="remove_this close"></a>
+          </li>
+      <% end -%>
         <% end -%>
     </ul>
 
     <div class="sector_options">
       <span id="sector" class="combo_sector_options">
-  		<p id="0">Select more sectors</p>
-  		<ul class="options">
-  		<% Sector.all.collect do |sector| %>
-  			<li><a id="<%= sector.id %>"><%= sector.name %></a></li>
-  		<% end %>
-  			<li class="last"></li>
-  		</ul>
-		
-  	</span>
+        <%= errors_for_span(@project, :sectors) %>
+
+      <p id="0">Select more sectors</p>
+      <ul class="options">
+      <% Sector.all.collect do |sector| %>
+        <li><a id="<%= sector.id %>"><%= sector.name %></a></li>
+      <% end %>
+        <li class="last"></li>
+      </ul>
+
+    </span>
       <a class="add_sector">add sector</a>
     </div>
   </div>
@@ -199,56 +179,56 @@
     <a class="add_location" id="add_location_map">add location</a>
   </div>
   <!-- ************************ FIN FALTA ************************ -->
- 
-  <div class="field"> 
+
+  <div class="field">
     <ul class="dates">
       <li>
         <label>START DATE</label>
           <%= f.date_select :start_date, :start_year => Date.today.year - 5  %>
         <span id="start_date" class="combo_date">09/10/2010
-  		<div class="select_dates">
-  			<span class="month">
-  				<p class="title">MONTH</p>
-  				<a class="month_combo">SEPTEMBER</a>
-  			</span>
-  			<span class="day">
-  				<p class="title">DAY</p>
-  				<a class="day_combo">10</a>
-  			</span>
-  			<span class="year">
-  				<p class="title">YEAR</p>
-  				<a class="year_combo">2010</a>
-  			</span>
-  			<a class="save_date_bttn">Save date</a>
-  		</div>
-  	  </span>
+      <div class="select_dates">
+        <span class="month">
+          <p class="title">MONTH</p>
+          <a class="month_combo">SEPTEMBER</a>
+        </span>
+        <span class="day">
+          <p class="title">DAY</p>
+          <a class="day_combo">10</a>
+        </span>
+        <span class="year">
+          <p class="title">YEAR</p>
+          <a class="year_combo">2010</a>
+        </span>
+        <a class="save_date_bttn">Save date</a>
+      </div>
+      </span>
       </li>
       <li>
         <label>END DATE</label>
           <%= f.date_select :end_date, :start_year => Date.today.year - 5  %>
         <span id="end_date" class="combo_date">09/10/2010
-  		<div class="select_dates end_date">
-  			<span class="month">
-  				<p class="title">MONTH</p>
-  				<a class="month_combo">SEPTEMBER</a>
-  			</span>
-  			<span class="day">
-  				<p class="title">DAY</p>
-  				<a class="day_combo">10</a>
-  			</span>
-  			<span class="year">
-  				<p class="title">YEAR</p>
-  				<a class="year_combo">2010</a>
-  			</span>
-  			<a class="save_date_bttn">Save date</a>
-  		</div>
-  	  </span>
+      <div class="select_dates end_date">
+        <span class="month">
+          <p class="title">MONTH</p>
+          <a class="month_combo">SEPTEMBER</a>
+        </span>
+        <span class="day">
+          <p class="title">DAY</p>
+          <a class="day_combo">10</a>
+        </span>
+        <span class="year">
+          <p class="title">YEAR</p>
+          <a class="year_combo">2010</a>
+        </span>
+        <a class="save_date_bttn">Save date</a>
+      </div>
+      </span>
       </li>
     </ul>
   </div>
   <!-- SECTION  -->
   <h3 class="section">IMPACT</h3>
-  
+
 
   <label>PROJECT BUDGET</label>
   <div class="field">
@@ -305,7 +285,7 @@
     </div>
   </div>
 
-  <%= f.submit 'Save changes', :class => "#{'error' if @project.invalid? && action_name != 'new'}" %>
+  <%= f.submit '', :class => "#{'error' if @project.invalid? && action_name != 'new'}" %>
   <!-- END EDIT PAGE -->
 
 <%end%>
@@ -390,8 +370,8 @@ $(function() {
   //        });
   //    $('#clusters').append('<span id="cluster_'+$(this).val()+'"><input type="checkbox" name="project[clusters_ids][]" value="' +$(this).val() +'" checked="checked"/>' + str + ' <a href="#cluster_'+$(this).val()+'" class="remove_this">x</a><br /></span>');
   //  });
-  // 
-  // 
+  //
+  //
   //  $('#select_sector').change(function(){
   //    var str = ""
   //    $("select#select_sector option:selected").each(function () {
@@ -401,7 +381,6 @@ $(function() {
   //  });
 });
 </script>
-  
-  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> 
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
   <script src="/javascripts/backoffice/project_map.js" type="text/javascript" charset="utf-8"></script>
-  
+  <script src="/javascripts/plugins/jquery.stylish-select.js" type="text/javascript" charset="utf-8"></script>
