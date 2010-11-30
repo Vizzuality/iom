@@ -492,29 +492,29 @@ div.block.project_info div.med div.left form span.combo_large.displayed {backgro
 div.block.project_info div.med div.left form span.combo_large:hover {cursor:pointer;}
 div.block.project_info div.med div.left form h3.section {float:left; margin:30px 0 0 2px; width:100%; font:500 17px "Museo Sans"; color:#333333;}
 div.block.project_info div.med div.left form ul.dates {float:left; width:400px; height:auto; margin:0 0 0 0;}
-div.block.project_info div.med div.left form ul.dates li {float:left; width:142px; height:auto;}
-div.block.project_info div.med div.left form ul.dates li span.combo_date {float:left; background:url('/images/backoffice/projects/date/bkg_calendar.png') no-repeat 0 0; width:121px; height:24px; font:normal 15px Arial; color:#333333; margin:5px 0 0 0; padding:8px 0 0 8px; position:relative;}
-div.block.project_info div.med div.left form ul.dates li span.combo_date:hover {cursor:pointer;}
-div.block.project_info div.med div.left form ul.dates li span.combo_date div.select_dates {display:none;}
-div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked {background:url('/images/backoffice/projects/date/bkg_header_clicked_date.png') no-repeat 0 0;}
-div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates {position:absolute; top:30px; left:0; background:url('/images/backoffice/projects/date/bkg_date_content.png') no-repeat 0 0; width:416px; height:68px; z-index:20; display:inline;}
-div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates.end_date {background:url('/images/backoffice/projects/date/bkg_date_content_right.png') no-repeat 0 0; position:absolute; top:30px; left:-142px;}
+div.block.project_info div.med div.left form ul.dates li.date {float:left; width:142px; height:auto;}
+div.block.project_info div.med div.left form ul.dates li.date span.combo_date {float:left; background:url('/images/backoffice/projects/date/bkg_calendar.png') no-repeat 0 0; width:121px; height:24px; font:normal 15px Arial; color:#333333; margin:5px 0 0 0; padding:8px 0 0 8px; position:relative;}
+div.block.project_info div.med div.left form ul.dates li.date span.combo_date:hover {cursor:pointer;}
+div.block.project_info div.med div.left form ul.dates li.date span.combo_date div.select_dates {display:none;}
+div.block.project_info div.med div.left form ul.dates li.date span.combo_date.clicked {background:url('/images/backoffice/projects/date/bkg_header_clicked_date.png') no-repeat 0 0;}
+div.block.project_info div.med div.left form ul.dates li.date span.combo_date.clicked div.select_dates {position:absolute; top:30px; left:0; background:url('/images/backoffice/projects/date/bkg_date_content.png') no-repeat 0 0; width:416px; height:68px; z-index:20; display:inline;}
+div.block.project_info div.med div.left form ul.dates li.date span.combo_date.clicked div.select_dates.end_date {background:url('/images/backoffice/projects/date/bkg_date_content_right.png') no-repeat 0 0; position:absolute; top:30px; left:-142px;}
 
-div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates span.month {float:left; width:124px; height:51px; margin:10px 9px 0 10px;}
-div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates span.day {float:left; width:62px; height:51px; margin:10px 9px 0 8px;}
-div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates span.year {float:left; width:76px; height:51px; margin:10px 0 0 0;}
+div.block.project_info div.med div.left form ul.dates li.date span.combo_date.clicked div.select_dates span.month {float:left; width:124px; height:51px; margin:10px 9px 0 10px;}
+div.block.project_info div.med div.left form ul.dates li.date span.combo_date.clicked div.select_dates span.day {float:left; width:62px; height:51px; margin:10px 9px 0 8px;}
+div.block.project_info div.med div.left form ul.dates li.date span.combo_date.clicked div.select_dates span.year {float:left; width:76px; height:51px; margin:10px 0 0 0;}
 
-div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates p.title {float:left; margin:0 0 0 5px; font:normal 11px Arial; color:#606851; text-transform:uppercase; width:auto;}
-div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates p.title#month {float:left; margin:12px 10px 0 10px; width:132px;}
-div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates p.title#day {float:left; margin:12px 10px 0 0; width:63px;}
-div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates p.title#year {float:left; margin:12px 10px 0 0; width:100px;}
-div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates a {font:normal 13px Arial; color:#333333;}
-div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates a:hover {cursor:pointer;}
-div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates a.month_combo {float:left; margin:2px 0 0 0; background:url('/images/backoffice/projects/date/month_combo.png') no-repeat 0 0; width:123px; height:23px; padding:9px 0 0 10px;}
-div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates a.day_combo {float:left; margin:2px 0 0 0; background:url('/images/backoffice/projects/date/day_combo.png') no-repeat 0 0; width:54px; height:23px; padding:9px 0 0 10px;}
-div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates a.year_combo {float:left; margin:2px 0 0 0; background:url('/images/backoffice/projects/date/year_combo.png') no-repeat 0 0; width:68px; height:23px; padding:9px 0 0 10px;}
-div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates a.save_date_bttn {float:left; margin:5px 0 0 10px; width:95px; height:26px; background:url('/images/backoffice/projects/date/save_bttn.png') no-repeat 0 0; font:500 15px "Museo Sans"; color:white; text-align:center; padding:6px 0 0 0; text-shadow:0 1px #759731; }
-div.block.project_info div.med div.left form ul.dates li span.combo_date.clicked div.select_dates a.save_date_bttn:hover {background-position:0 -32px; cursor:pointer;}
+div.block.project_info div.med div.left form ul.dates li.date span.combo_date.clicked div.select_dates p.title {float:left; margin:0 0 0 5px; font:normal 11px Arial; color:#606851; text-transform:uppercase; width:auto;}
+div.block.project_info div.med div.left form ul.dates li.date span.combo_date.clicked div.select_dates p.title#month {float:left; margin:12px 10px 0 10px; width:132px;}
+div.block.project_info div.med div.left form ul.dates li.date span.combo_date.clicked div.select_dates p.title#day {float:left; margin:12px 10px 0 0; width:63px;}
+div.block.project_info div.med div.left form ul.dates li.date span.combo_date.clicked div.select_dates p.title#year {float:left; margin:12px 10px 0 0; width:100px;}
+div.block.project_info div.med div.left form ul.dates li.date span.combo_date.clicked div.select_dates a {font:normal 13px Arial; color:#333333;}
+div.block.project_info div.med div.left form ul.dates li.date span.combo_date.clicked div.select_dates a:hover {cursor:pointer;}
+div.block.project_info div.med div.left form ul.dates li.date span.combo_date.clicked div.select_dates a.month_combo {float:left; margin:2px 0 0 0; background:url('/images/backoffice/projects/date/month_combo.png') no-repeat 0 0; width:123px; height:23px; padding:9px 0 0 10px;}
+div.block.project_info div.med div.left form ul.dates li.date span.combo_date.clicked div.select_dates a.day_combo {float:left; margin:2px 0 0 0; background:url('/images/backoffice/projects/date/day_combo.png') no-repeat 0 0; width:54px; height:23px; padding:9px 0 0 10px;}
+div.block.project_info div.med div.left form ul.dates li.date span.combo_date.clicked div.select_dates a.year_combo {float:left; margin:2px 0 0 0; background:url('/images/backoffice/projects/date/year_combo.png') no-repeat 0 0; width:68px; height:23px; padding:9px 0 0 10px;}
+div.block.project_info div.med div.left form ul.dates li.date span.combo_date.clicked div.select_dates a.save_date_bttn {float:left; margin:2px 0 0 4px; width:95px; height:26px; background:url('/images/backoffice/projects/date/save_bttn.png') no-repeat 0 0; font:500 15px "Museo Sans"; color:white; text-align:center; padding:6px 0 0 0; text-shadow:0 1px #759731; }
+div.block.project_info div.med div.left form ul.dates li.date span.combo_date.clicked div.select_dates a.save_date_bttn:hover {background-position:0 -32px; cursor:pointer;}
 
 
 /*CLUSTERS*/
@@ -894,46 +894,35 @@ Hide lists on page load
 red curvy example
 ====================================*/
 ul.newList:focus {outline:none;}
-ul.newList * {margin:0; padding:0;}
-ul.newList a {color: #000; text-decoration:none; display:block;}
-ul.newList {margin:0; padding:0; list-style:none; color:#000; width:131px; background:#fff; position:absolute;  border:1px solid #ccc; top:22px; left:0; overflow-x:hidden; z-index:9999;}
+ul.newList {top:32px;}
+ul.newList * {margin:0; padding:0; border:none; overflow:hidden;}
+ul.newList a {color: #333333; text-decoration:none; display:block;}
+ul.newList {margin:0; padding:0; list-style:none; color:#000; width:100px; background:#fff; position:absolute; top:22px; left:0; overflow-x:hidden; z-index:9999;}
 
-ul.newList.month {float:left; background:url('../../images/backoffice/common/dates/body_month.png') no-repeat 0 0;}
-ul.newList.day {float:left; background:url('../../images/backoffice/common/dates/body_month.png') no-repeat 0 0;}
-ul.newList.year {float:left; background:url('../../images/backoffice/common/dates/body_month.png') no-repeat 0 0;}
+ul.newList.month {float:left; background:url('/images/backoffice/common/dates/body_month.png') no-repeat 0 0; height:198px; overflow-x:hidden; width:150px;}
+ul.newList.month li {width:131px; margin:0 0 0 1px;}
+ul.newList.day {float:left; background:url('/images/backoffice/common/dates/body_day.png') no-repeat 0 0; height:198px; overflow-x:hidden; width:84px;}
+ul.newList.day li {width:64px; margin:0 0 0 1px;}
+ul.newList.year {float:left; background:url('/images/backoffice/common/dates/body_year.png') no-repeat 0 0; height:198px; overflow-x:hidden;}
+ul.newList.year li {width:78px; margin:0 0 0 1px;}
 
 .newListSelected {width:128px; color:#000; height:29px; padding:3px 0 0 6px; float:left; background:url('/images/backoffice/common/dates/head_month.png') no-repeat 0 0; margin:2px 0 0 7px;}
 
 .newListSelected:focus {outline:none;}
-.newListSelected.month {width:129px; color:#000; height:30px; padding:3px 0 0 6px; float:left; background:url('/images/backoffice/common/dates/head_month.png') no-repeat 0 0;}
-.newListSelected.day {width:60px; color:#000; height:30px; padding:3px 0 0 6px; float:left; background:url('/images/backoffice/common/dates/head_day.png') no-repeat 0 0;}
-.newListSelected.year {width:72px; color:#000; height:30px; padding:3px 0 0 6px; float:left; background:url('/images/backoffice/common/dates/head_year.png') no-repeat 0 0;}
+.newListSelected.month {width:131px; color:#000; height:30px; padding:3px 0 0 6px; float:left; backgroundPosition:url('/images/backoffice/common/dates/head_month.png') no-repeat 0 0;}
+.newListSelected.day {width:59px; color:#000; height:30px; padding:3px 0 0 6px; float:left; background:url('/images/backoffice/common/dates/head_day.png') no-repeat 0 0;}
+.newListSelected.year {width:78px; color:#000; height:30px; padding:3px 0 0 6px; float:left; background:url('/images/backoffice/common/dates/head_year.png') no-repeat 0 0;}
 
 
-.newListSelected span {width:284px; display:block;}
 ul.newList li a {padding:3px 8px; display: block;}
 ul.newList li a:focus {-moz-outline-style: none;}
-.selectedTxt {width:auto; overflow:hidden; height:16px; margin:5px 0 0 3px;}
-.hiLite {background:#650101!important; color:#fff!important;}
-.hiLite a {background:#650101!important; color:#fff!important;}
-.newListHover {background:#ccc!important; color:#000!important; cursor:default;}
+.selectedTxt {width:auto; overflow:hidden; height:16px; margin:5px 0 0 3px; font:normal 13px Arial; color:#333333; text-transform:uppercase;}
+.hiLite {background:#CBE499!important; color:#333333!important;}
+.hiLite a {background:#CBE499!important; color:#333333!important;}
+.newListHover {background:#CBE499; color:#333333!important; cursor:default;}
 /*.newListSelHover {background-position:0 -32px; cursor:default;}*/
 .newListSelFocus {background-position:0 -32px; cursor:default;}
 .newListOptionTitle {font-weight:bold;}
 .newListOptionTitle ul {margin:3px 0 0;}
 .newListOptionTitle li {font-weight:normal; border-left:1px solid #ccc;}
-
-/*======================================
-windows xp style - div that contains the
-<select> has been given an id of #win-xp
-(for the purposes of this example
-========================================*/
-#win-xp .newListSelected {background:#FFF url(dropdown.gif) no-repeat scroll 155px 1px; border:1px solid #A5ACB2; color:#000; height:17px; margin-bottom:10px; padding:0; width:173px;}
-#win-xp .newListSelected div {display:block; font-size:0.85em; padding:2px 21px 2px 4px; text-align:left !important; width:149px;}
-#win-xp ul.newList {list-style:none; color:#000; width:172px; background:#fff; border:1px solid #000; top:22px; left:0; height:auto; overflow:auto; font-size: 0.85em; text-align:left!important; position:absolute; z-index:9999;}
-#win-xp ul.newList li {padding:2px 5px!important; border-bottom: 1px solid #cccccc;}
-#win-xp .hiLite {background:#316ac5!important; color:#fff!important;}
-#win-xp .newListHover {background:#ccc!important; color:#000!important; cursor:default;}
-#win-xp .newListSelHover {cursor:default;}
-#win-xp .newListSelHover, #win-xp .newListSelFocus {background-position:auto;}
-#win-xp .newListSelHover div, #win-xp .newListSelFocus div {font-weight:bold;}
+.newListOptionTitle li a {text-transform:uppercase; font:normal 11px Arial; color:#333333;}
