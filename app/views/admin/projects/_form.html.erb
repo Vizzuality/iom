@@ -96,7 +96,7 @@
 
           <a class="save_date_bttn provided">Save date</a>
         </div>
-     </span>
+        </span>
       </li>
       <li class="date">
         <label>DATE UPDATED</label>
@@ -190,45 +190,32 @@
     <ul class="dates">
       <li class="date">
         <label>START DATE</label>
-          <%= f.date_select :start_date, :start_year => Date.today.year - 5  %>
-        <span id="start_date" class="combo_date">09/10/2010
-      <div class="select_dates">
-        <span class="month">
-          <p class="title">MONTH</p>
-          <a class="month_combo">SEPTEMBER</a>
+        <span id="start_date" class="combo_date"><p>09/10/2010</p>
+          <div class="select_dates start_date">
+            <p id="month" class="title">MONTH</p>
+            <p id="day" class="title">DAY</p>
+            <p id="year" class="title">YEAR</p>
+
+              <%= f.date_select :start_date, :start_year => Date.today.year - 5, :order => [:month, :day, :year]  %>
+
+            <a class="save_date_bttn start">Save date</a>
+          </div>
         </span>
-        <span class="day">
-          <p class="title">DAY</p>
-          <a class="day_combo">10</a>
-        </span>
-        <span class="year">
-          <p class="title">YEAR</p>
-          <a class="year_combo">2010</a>
-        </span>
-        <a class="save_date_bttn start">Save date</a>
-      </div>
-      </span>
       </li>
       <li class="date">
         <label>END DATE</label>
-          <%= f.date_select :end_date, :start_year => Date.today.year - 5  %>
-        <span id="end_date" class="combo_date">09/10/2010
-      <div class="select_dates end_date">
-        <span class="month">
-          <p class="title">MONTH</p>
-          <a class="month_combo">SEPTEMBER</a>
+        
+        <span id="end_date" class="combo_date"><p>09/10/2010</p>
+          <div class="select_dates end_date">
+            <p id="month" class="title">MONTH</p>
+            <p id="day" class="title">DAY</p>
+            <p id="year" class="title">YEAR</p>
+
+              <%= f.date_select :end_date, :start_year => Date.today.year - 5, :order => [:month, :day, :year]  %>
+
+            <a class="save_date_bttn end">Save date</a>
+          </div>
         </span>
-        <span class="day">
-          <p class="title">DAY</p>
-          <a class="day_combo">10</a>
-        </span>
-        <span class="year">
-          <p class="title">YEAR</p>
-          <a class="year_combo">2010</a>
-        </span>
-        <a class="save_date_bttn end">Save date</a>
-      </div>
-      </span>
       </li>
     </ul>
   </div>

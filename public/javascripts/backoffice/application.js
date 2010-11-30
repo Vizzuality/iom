@@ -4,6 +4,24 @@ var old_value;
 $(document).ready(function(ev){
 
 		if ($('div.select_dates').length > 0){
+			
+			// *********** DATE PROVIDED
+			// YEAR
+			$('select#project_date_provided_1i').sSelect({ddMaxWidth: '76px',ddMaxHeight:'200px',containerClass:'year'});
+			// MONTH
+			$('select#project_date_provided_2i').sSelect({ddMaxWidth: '131px',ddMaxHeight:'200px',containerClass:'month'});
+			// DAY
+			$('select#project_date_provided_3i').sSelect({ddMaxWidth: '62px',ddMaxHeight:'200px',containerClass:'day'});
+
+			// *********** DATE UPDATED
+			// YEAR
+			$('select#project_date_updated_1i').sSelect({ddMaxWidth: '76px',ddMaxHeight:'200px',containerClass:'year'});
+			// MONTH
+			$('select#project_date_updated_2i').sSelect({ddMaxWidth: '131px',ddMaxHeight:'200px',containerClass:'month'});
+			// DAY
+			$('select#project_date_updated_3i').sSelect({ddMaxWidth: '62px',ddMaxHeight:'200px',containerClass:'day'});
+			
+			// *********** DATE START			
 			// YEAR
 			$('select#project_start_date_1i').sSelect({ddMaxWidth: '76px',ddMaxHeight:'200px',containerClass:'year'});
 			// MONTH
@@ -11,6 +29,7 @@ $(document).ready(function(ev){
 			// DAY
 			$('select#project_start_date_3i').sSelect({ddMaxWidth: '62px',ddMaxHeight:'200px',containerClass:'day'});
 
+			// *********** DATE END
 			// YEAR
 			$('select#project_end_date_1i').sSelect({ddMaxWidth: '76px',ddMaxHeight:'200px',containerClass:'year'});
 			// MONTH
@@ -23,9 +42,9 @@ $(document).ready(function(ev){
 				ev.stopPropagation();
 				ev.preventDefault();
 
-				var year = $('select#project_start_date_1i option:selected').val();
-				var month = $('select#project_start_date_2i option:selected').val();
-				var day = $('select#project_start_date_3i option:selected').val();
+				var year = $('select#project_date_provided_1i option:selected').val();
+				var month = $('select#project_date_provided_2i option:selected').val();
+				var day = $('select#project_date_provided_3i option:selected').val();
 				
 				var dateValue = day + '/' + month + '/' + year;
 				$('span#date_provided').children('p').text(dateValue);
