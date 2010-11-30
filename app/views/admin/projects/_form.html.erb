@@ -92,7 +92,7 @@
         <p id="day" class="title">DAY</p>
         <p id="year" class="title">YEAR</p>
 
-         <%= f.date_select :start_date, :start_year => Date.today.year - 5, :order => [:month, :day, :year]  %>
+         <%= f.date_select :date_provided, :start_year => Date.today.year - 5, :order => [:month, :day, :year]  %>
 
         <a class="save_date_bttn">Save date</a>
       </div>
@@ -102,7 +102,7 @@
         <label>DATE UPDATED</label>
         <span id="date_updated" class="combo_date"><p>09/10/2010</p>
       <div class="select_dates end_date">
-         <%= f.date_select :end_date, :start_year => Date.today.year - 5  %>
+         <%= f.date_select :date_updated, :start_year => Date.today.year - 5  %>
         <a class="save_date_bttn">Save date</a>
       </div>
       </span>

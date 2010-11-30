@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101130152816) do
+ActiveRecord::Schema.define(:version => 20101130164947) do
 
   create_table "clusters", :force => true do |t|
     t.column "name", :string
@@ -185,6 +185,8 @@ ActiveRecord::Schema.define(:version => 20101130152816) do
     t.column "additional_information", :text
     t.column "awardee_type", :string
     t.column "the_geom", :geometry, :srid => 4326, :null => false
+    t.column "date_provided", :date
+    t.column "date_updated", :date
   end
 
   add_index "projects", ["name"], :name => "index_projects_on_name"
