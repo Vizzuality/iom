@@ -8,7 +8,7 @@ $(document).ready(function(ev){
 			// MONTH
 			$('select#project_start_date_2i').sSelect({ddMaxWidth: '131px',ddMaxHeight:'200px',containerClass:'month'});
 			// DAY
-			$('select#project_start_date_3i').sSelect({ddMaxWidth: '62px',containerClass:'day'});
+			$('select#project_start_date_3i').sSelect({ddMaxWidth: '62px',ddMaxHeight:'200px',containerClass:'day'});
 		}
 	
 
