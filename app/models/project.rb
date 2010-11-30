@@ -44,14 +44,16 @@ class Project < ActiveRecord::Base
 
   before_validation :clean_html
 
-  validates_presence_of :name, :description
+  validates_presence_of :name, :description, :primary_organization_id
 
-  validate :dates_consistency
+  validate :dates_consistency, :presence_of_clusters_and_sectors
+
+  attr_accessor :sectors_ids, :clusters_ids
 
   def sectors_ids=(value)
     value.each do |sector_id|
       if sector = Sector.find(sector_id)
-        sectors << sector
+        sectors << sector unless sectors.include?(sector)
       end
     end
   end
@@ -59,7 +61,7 @@ class Project < ActiveRecord::Base
   def clusters_ids=(value)
     value.each do |cluster_id|
       if cluster = Cluster.find(cluster_id)
-        clusters << cluster
+        clusters << cluster unless clusters.include?(cluster)
       end
     end
   end
@@ -125,6 +127,16 @@ class Project < ActiveRecord::Base
 
     def remove_from_country(region)
       countries.delete(region.country)
+    end
+
+    def presence_of_clusters_and_sectors
+      return unless self.new_record?
+      if sectors_ids.blank? && sectors.empty?
+        errors.add(:sectors, "can't be blank")
+      end
+      if clusters_ids.blank? && clusters.empty?
+        errors.add(:clusters, "can't be blank")
+      end
     end
 
 end

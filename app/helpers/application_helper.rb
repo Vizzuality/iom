@@ -31,6 +31,21 @@ module ApplicationHelper
     end
   end
 
+  def errors_for_span(obj, attribute)
+    return if action_name == 'new'
+    unless obj.errors[attribute].empty?
+      return raw(<<-HTML
+<span class="simple_field_error">
+  <a class="simple_error"></a>
+  <div class="error_msg">
+    <p><span>can't be blank</span></p>
+  </div>
+</span>
+HTML
+)
+    end
+  end
+
   def title
     result = []
     if @site

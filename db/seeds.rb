@@ -149,6 +149,8 @@ p3 = Project.create :name => "Fishing for the earthquake",
                     :additional_information => "This is the extra information for this project...",
                     :awardee_type => 'Type of awardee #3'
 
+p3.clusters << cluster_water
+
 p4 = Project.create :name => "Pescando para el terremoto",
                     :description => "Fishing project in spanish",
                     :primary_organization => o2,
@@ -169,6 +171,7 @@ p4 = Project.create :name => "Pescando para el terremoto",
                     :awardee_type => 'Type of awardee #3'
 
 p4.regions  << madrid
+p4.clusters << cluster_water
 
 # Donors & donations
 donor = Donor.create  :name => "Fernando Blat",

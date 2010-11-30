@@ -54,7 +54,7 @@ class Admin::ProjectsController < ApplicationController
 
   def create
     @project = Project.new(params[:project])
-    if @project.save
+    if @project.valid? && @project.save
       redirect_to edit_admin_project_path(@project), :flash => {:success => 'Project has been created successfully'}
     else
       render :action => 'new'
