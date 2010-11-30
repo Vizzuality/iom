@@ -29,6 +29,7 @@ Iom::Application.routes.draw do
     match '/' => 'admin#index', :as => :admin
     resources :settings, :only => [:edit, :update]
     resources :tags, :only => [:index]
+    resources :regions, :only => [:index]
     resources :organizations do
       resources :projects, :only => [:index]
       resources :media_resources, :only => [:index, :create, :update, :destroy]
