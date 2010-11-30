@@ -3,28 +3,30 @@
 # Table name: projects
 #
 #  id                        :integer         not null, primary key
-#  name                      :string(255)     
-#  description               :text            
-#  primary_organization_id   :integer         
-#  implementing_organization :string(255)     
-#  partner_organizations     :string(255)     
-#  cross_cutting_issues      :string(255)     
-#  start_date                :date            
-#  end_date                  :date            
-#  budget                    :integer         
-#  target                    :string(255)     
-#  estimated_people_reached  :integer         
-#  contact_person            :string(255)     
-#  contact_email             :string(255)     
-#  contact_phone_number      :string(255)     
-#  site_specific_information :text            
-#  created_at                :datetime        
-#  updated_at                :datetime        
-#  activities                :text            
-#  intervention_id           :string(255)     
-#  additional_information    :text            
-#  awardee_type              :string(255)     
+#  name                      :string(255)
+#  description               :text
+#  primary_organization_id   :integer
+#  implementing_organization :string(255)
+#  partner_organizations     :string(255)
+#  cross_cutting_issues      :string(255)
+#  start_date                :date
+#  end_date                  :date
+#  budget                    :integer
+#  target                    :string(255)
+#  estimated_people_reached  :integer
+#  contact_person            :string(255)
+#  contact_email             :string(255)
+#  contact_phone_number      :string(255)
+#  site_specific_information :text
+#  created_at                :datetime
+#  updated_at                :datetime
+#  activities                :text
+#  intervention_id           :string(255)
+#  additional_information    :text
+#  awardee_type              :string(255)
 #  the_geom                  :geometry        not null
+#  date_provided             :date
+#  date_updated              :date
 #
 
 class Project < ActiveRecord::Base
@@ -116,8 +118,11 @@ class Project < ActiveRecord::Base
 
     def dates_consistency
       return true if end_date.nil? || start_date.nil?
-      if end_date < start_date
+      if !end_date.nil? && !start_date.nil? && end_date < start_date
         errors.add(:end_date, "can't be previous to start_date")
+      end
+      if !date_updated.nil? && !date_provided.nil? && date_updated < date_provided
+        errors.add(:date_updated, "can't be previous to date_provided")
       end
     end
 
