@@ -43,7 +43,6 @@ end
 
 task :symlinks, :roles => [:app] do
   run <<-CMD
-    ln -s #{shared_path}/system #{release_path}/public/system;
   CMD
 end
 
