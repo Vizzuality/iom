@@ -130,7 +130,7 @@ p2 = Project.create :name => "Vegetable generation",
 
 p2.clusters << cluster_water
 p2.regions  << madrid
-p3 = Project.create :name => "Fishing",
+p3 = Project.create :name => "Fishing for the earthquake",
                     :description => "Fishing generation is a project ....",
                     :primary_organization => o2,
                     :tags => "earthquake",
@@ -149,7 +149,7 @@ p3 = Project.create :name => "Fishing",
                     :additional_information => "This is the extra information for this project...",
                     :awardee_type => 'Type of awardee #3'
 
-p4 = Project.create :name => "Pescando",
+p4 = Project.create :name => "Pescando para el terremoto",
                     :description => "Fishing project in spanish",
                     :primary_organization => o2,
                     :tags => "fishing",
