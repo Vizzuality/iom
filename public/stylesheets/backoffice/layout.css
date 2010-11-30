@@ -358,9 +358,10 @@ div.block.edit div.med div.left form span.combo_large a.organization:hover {curs
 div.block.edit div.med div.left form span.combo_large.displayed {background:url('/images/backoffice/projects/large_combo_head_displayed2.png') no-repeat 0 0;}
 div.block.edit div.med div.left form span.blog.selected {float:left; width:569px; height:82px; background:url('/images/backoffice/sites/blog_bkg.png') no-repeat center 0;}
 div.block.edit div.med div.left form span.blog {float:left; height:auto; background:none;}
-div.block.edit div.med div.left form span.blog input[type="checkbox"] {margin:13px 0 0 10px;}
+div.block.edit div.med div.left form span.blog input[type="checkbox"] {margin:13px 0 0 10px; display:block!important; visibility:visible;}
+div.block.edit div.med div.left form span input[type="checkbox"] {visibility:visible;}
 div.block.edit div.med div.left form span.blog p {margin:10px 0 0 6px; width:200px;}
-div.block.edit div.med div.left form span.blog input[type="text"] {margin:5px 0 0 28px;}
+div.block.edit div.med div.left form span.blog input[type="text"] {position:relative; margin:5px 0 0 23px!important;}
 div#manage_partners {position:absolute; display:none; top:0; left:0; width:372px; height:339px; padding:20px 25px; background:url('/images/backoffice/sites/add_partner_window.png') no-repeat 0 0; z-index:1000;}
 div#manage_partners a.close {position:absolute; right:20px; top:18px; width:12px; height:12px; background:url('/images/backoffice/icons/close_window.png') no-repeat 0 0; text-indent:-9999px;}
 div#manage_partners a.close:hover {cursor:pointer; background-position:0 -12px;}
