@@ -4,8 +4,6 @@ require 'rails/all'
 
 Bundler.require(:default, Rails.env) if defined?(Bundler)
 
-require 'acts_as_resource'
-
 module Iom
   class Application < Rails::Application
     config.action_view.javascript_expansions[:defaults] = %w()
@@ -20,3 +18,4 @@ end
 
 require 'open-uri'
 require 'authenticated_system'
+require 'acts_as_resource'
