@@ -857,7 +857,25 @@ div.block.site_info div.med div.left form input[type="submit"]:hover {background
 div.block.site_info div.bottom {float:left; height:15px; width:100%; background: url('/images/backoffice/backgrounds/bottom_two_columns.png') no-repeat scroll top left!important;}
 
 
+/*pages index*/
 
+ul.pages {float:left; width:100%; margin:0;}
+ul.pages li {float:left; width:100%;}
+ul.pages li div.head {position:relative; float:left; width:535px; height:42px; padding:15px;}
+ul.pages li div.head.more {background:url('/images/backoffice/resources/header_resources.png') no-repeat 0 0!important; margin:20px 0 0 0;}
+ul.pages li div.head.one {background:url('/images/backoffice/pages/one_page_list.png') no-repeat 0 0!important;}
+ul.pages li div.head h3 {margin:12px 0 0 0; font:bold 17px Arial;}
+ul.pages li div.head h3 a {color:#E93E3F;}
+ul.pages li div.head h3 a:hover {text-decoration:underline;}
+ul.pages li div.head a.delete {position:absolute; right:17px; top:28px; width:15px; height:16px; background:url('/images/backoffice/icons/close_bkg.png') no-repeat 0 0; text-indent:-9999px; font-size:0; display:block; line-height:0;}
+ul.pages li div.head a.delete:hover {background-position:0 -16px;}
+ul.pages li div.body {float:left; width:535px; padding:15px 15px 0; background:url('/images/backoffice/resources/resources_med.png') repeat-y 0 0;}
+ul.pages li div.body span {float:left; width:100%; padding:0 0 5px 0;}
+ul.pages li div.body span a {float:left; font:normal 15px Arial; color:#E93E3F; text-decoration:none;}
+ul.pages li div.body span a:hover {text-decoration:underline;}
+ul.pages li div.body span a.delete {float:left; width:14px; height:14px; margin:2px 0 0 7px; background:url('/images/backoffice/icons/tiny_close.png') no-repeat 0 0; text-indent:-9999px;}
+ul.pages li div.body span a.delete:hover {background-position:0 -14px;}
+ul.pages li div.down {float:left; width:565px; height:15px; background:url('/images/backoffice/resources/resources_bottom.png') no-repeat 0 bottom;}
 
 /*window alert*/
 div#modal_window {position:absolute; display:none; top:0; left:0; right:0; bottom:0; background:url('/images/backoffice/common/modal_bkg.png') repeat 0 0;}

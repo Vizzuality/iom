@@ -1,23 +1,41 @@
-<h2>Pages from <%= @site.name %></h2>
 
-<div class="main">
-  <p><%= link_to('+ new page', new_admin_site_page_path(@site)) %></p>
 
-  <ul>
-    <% @pages.each do |page| %>
-      <li><%= link_to(page.title, edit_admin_site_page_path(@site, page.id)) %> - <%= link_to("Delete", admin_site_page_path(@site, page.id), :method => :delete, :confirm => '¿Are you sure?') %>
-      <% unless page.children.empty? %>
-      <ul>
-        <% page.children.each do |children| %>
-        <li>-- <%= link_to(children.title, edit_admin_site_page_path(@site, children.id)) %> - <%= link_to("Delete", admin_site_page_path(@site, children.id), :method => :delete, :confirm => '¿Are you sure?') %></li>
-        <% end %>
-      </ul>
-      <% end %>
-      </li>
-    <% end -%>
-  </ul>
-
-  <%= will_paginate(@pages) %>
-
-  <p><%= link_to("⟵ back to #{@site.name}", edit_admin_site_path(@site)) %></p>
-</div>
+    <div class="main_layout">
+      <div class="block first edit">
+        <div class="top"></div>
+        <div class="med">
+          <div class="left">
+            <h2><%= @site.name %> pages</h2>
+            <p><%= pluralize(@pages.count, 'page','pages') %></p>
+            <ul class="pages">
+              <% @pages.each do |page| %>
+                <li>
+                  <div class="head <%= page.children.empty? ? 'one' :'more' %>">
+                    <h3><%= link_to(page.title, edit_admin_site_page_path(@site, page.id)) %></h3>
+                    <%= link_to("Delete", '#delete' ,:class=>"delete", :destroy_url=>admin_site_page_path(@site, page.id), :att_name=>"page") %>
+                  </div>
+                  <% if !page.children.empty? %>
+                    <div class="body">
+                      <% page.children.each do |children| %>
+                        <span><%= link_to(children.title, edit_admin_site_page_path(@site, children.id)) %> - <%= link_to("Delete", '#delete', :destroy_url=>admin_site_page_path(@site, children.id), :att_name=>"subpage") %></span>
+                      <% end %>
+                    </div>
+                  <div class="down"></bottom>
+                  <% end %>
+                </li>
+              <% end -%>
+            </ul>
+          </div>
+          <div class="right menu">
+            <ul>
+              <li class="selected"><a>Basic information</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="bottom"></div>
+      </div>
+      
+      <div class="add_new">
+        <a href="<%= new_admin_site_page_path(@site) %>">Create new page on this site</a>
+      </div>
+    </div>
