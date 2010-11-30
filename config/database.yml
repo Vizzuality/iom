@@ -14,7 +14,7 @@ test:
   username: postgres
   password:
 
-produciton:
+production:
   adapter: postgresql
   template: template_postgis
   encoding: unicode
