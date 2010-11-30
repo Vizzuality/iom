@@ -12,7 +12,7 @@
               <% @element.resources.each do |resource| %>
               <li>
                 <h3><%= link_to(resource.title, resource.url) %></h3>
-                <%= link_to('Delete', eval("admin_#{@element.class.name.singularize.downcase}_resource_path(@element, resource)"), :method => :delete, :confirm => 'Are you sure?', :class=>"delete") %>
+                <%= link_to("Delete", '#', :destroy_url => eval("admin_#{@element.class.name.singularize.downcase}_resource_path(@element, resource)"), :att_name=>"resource", :class => 'delete') %>
               </li>
               <% end -%>
             <% end -%>
@@ -24,7 +24,7 @@
               <li class="ngo">
                 <div class="head">
                   <h3><%= link_to(resource.title, resource.url) %></h3>
-                  <%= link_to('Delete', eval("admin_#{@element.class.name.singularize.downcase}_resource_path(@element, resource)"), :method => :delete, :confirm => 'Are you sure?', :class=>"delete") %>
+                  <%= link_to("Delete", '#', :destroy_url => eval("admin_#{@element.class.name.singularize.downcase}_resource_path(@element, resource)"), :att_name=>"resource",:class => 'delete') %>
                 </div>
                 <% if Site.count > 0 %>
                   <%= form_for([:admin, @element, resource]) do |f| %>
