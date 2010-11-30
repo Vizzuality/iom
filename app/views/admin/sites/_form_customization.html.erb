@@ -34,10 +34,10 @@
     <% unless @site.partners.empty? %>
       <% @site.partners.each do |partner| %>
         <div class="partner">
-          <p><%= image_tag(partner.logo.url(:small)) %></p>
+          <%= image_tag(partner.logo.url(:small)) %>
           <p><%= partner.name %></p>
           <p class="bottom"><%= link_to(partner.url, partner.url) %></p>
-          <%= link_to('Delete', admin_site_partner_path(@site, partner), :method => :delete, :confirm => 'Are you sure?') %>
+          <%= link_to('Delete', '#delete', :class => "delete", :destroy_url=>admin_site_partner_path(@site, partner), :att_name=>"logo") %>
         </div>
       <% end -%>
     <% end -%>

@@ -344,10 +344,12 @@ div.block.edit div.med div.left ul.themes li.selected a.preview:hover {cursor:po
 div.block.edit div.med div.left ul.themes li.selected span.ready {position:absolute; top:46px; left:61px; width:54px; height:54px; background:url('/images/backoffice/sites/ready.png') no-repeat 0 0;}
 div.block.edit div.med div.left div.partner {position:relative; float:left; width:396px; height:60px; padding:10px; margin:10px 0 0 0; background:url('/images/backoffice/sites/partner_bkg.png') no-repeat 0 0;}
 div.block.edit div.med div.left div.partner img {float:left; height:60px; margin:0 15px 0 0;}
-div.block.edit div.med div.left div.partner p {float:left; width:150px; margin:5px 0 0 0; font:normal 15px Arial; color:#333333;}
-div.block.edit div.med div.left div.partner p.bottom {font-size:13px; color:#666666;}
+div.block.edit div.med div.left div.partner p {float:left; width:250px; margin:5px 0 0 0; font:normal 15px Arial; color:#333333;}
 div.block.edit div.med div.left div.partner p a {float:left; width:auto; font:normal 15px Arial; color:#333333;}
-div.block.edit div.med div.left div.partner a.delete {position:absolute; right:5px; top:28px; width:15px; height:16px; background:url('/images/backoffice/icons/close_bkg.png') no-repeat 0 0; text-indent:-9999px; font-size:0; display:block; line-height:0;}
+div.block.edit div.med div.left div.partner p.bottom {font-size:13px; color:#666666;}
+div.block.edit div.med div.left div.partner p.bottom a {font-size:13px; color:#666666;}
+div.block.edit div.med div.left div.partner p.bottom a:hover {text-decoration:underline;}
+div.block.edit div.med div.left div.partner a.delete {position:absolute; right:15px; top:30px; width:15px; height:16px; background:url('/images/backoffice/icons/close_bkg.png') no-repeat 0 0; text-indent:-9999px; font-size:0; display:block; line-height:0;}
 div.block.edit div.med div.left div.partner a.delete:hover {background-position:0 -16px;}
 div.block.edit div.med div.left span.add_partner {float:left; width:565px; height:53px; background:url('/images/backoffice/sites/add_partner_bkg.png') no-repeat 0 0;}
 div.block.edit div.med div.left span.add_partner p {float:left; margin:17px 0 0 15px; font:normal 15px Arial; color:#333333;}
