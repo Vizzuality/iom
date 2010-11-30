@@ -4,14 +4,14 @@
 
   <div class="field">
     <label>PROJECT NAME  <strong>*</strong></label>
-    <span class="input_large">
+    <span class="input_large <%= 'error' if !@project.errors[:name].empty? && action_name != 'new' %>">
         <%= f.text_field :name, :class=>"long #{'error' if !@project.errors[:name].empty? && action_name != 'new'}" %>
         <%= errors_for @project, :name %>
     </span>
   </div>
   <div class="field">
     <label>DESCRIPTION  <strong>*</strong></label>
-    <span class="textarea">
+    <span class="textarea <%= 'error' if !@project.errors[:description].empty? && action_name != 'new' %>">
         <%= f.text_area :description, :class => "#{'error' if !@project.errors[:description].empty? && action_name != 'new'}" %>
     </span>
   </div>

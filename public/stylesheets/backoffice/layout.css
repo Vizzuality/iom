@@ -21,13 +21,12 @@ span.field_error div.error_msg {position:absolute; display:none; top:-9px; left:
 span.field_error div.error_msg p {position:relative; float:left; padding:0 0 0 27px; height:31px; background: url('../../images/backoffice/common/left_error.png') no-repeat scroll top left;}
 span.field_error div.error_msg p span {position:relative; float:left!important; height:15px; padding:8px 15px 8px 2px; display:block; background:url('/images/backoffice/common/right_error.png') no-repeat right 0; font:normal 13px Arial; color:#333333;}
 
-span.simple_field_error {position:absolute; top:0; left:455px; margin:0; padding:0;}
+span.simple_field_error {position:absolute; top:0; left:405px; margin:0; padding:0;}
 span.simple_field_error a.simple_error {float:right; width:34px; height:32px; background: url('../../images/backoffice/icons/simple_error.png') no-repeat scroll top left;}
 span.simple_field_error a.simple_error:hover {cursor:pointer;}
-span.simple_field_error div.error_msg {position:absolute; display:none; top:-9px; left:-9px;width:200px;}
+span.simple_field_error div.error_msg {position:absolute; display:none; top:0; left:1px; width:200px;}
 span.simple_field_error div.error_msg p {position:relative; float:left; padding:0 0 0 27px; height:31px; background: url('../../images/backoffice/common/left_error.png') no-repeat scroll top left;}
 span.simple_field_error div.error_msg p span {position:relative; float:left!important; height:15px; padding:8px 15px 8px 2px; display:block; background:url('/images/backoffice/common/right_error.png') no-repeat right 0; font:normal 13px Arial; color:#333333;}
-
 
 /* LAYOUT */
 div.main_layout {margin:0 auto; width:942px;}
@@ -66,17 +65,17 @@ div.block div.med div.right ul li.list_selected div.bottom_selected {float:left;
 div.block div.med div.right ul li.list_selected div.bottom_selected a.basic {color:#333333; padding:0 0 0 20px;}
 div.block div.med div.right ul li.list_selected div.bottom_selected a.basic:hover {cursor:default;}
 div.block div.med div.right ul li.list_selected div.bottom_selected p {float:left; width:auto; margin:5px 0 0 15px; background:none;}
-div.block div.med div.right ul li.list_selected div.bottom_selected p a {float:left; width:auto; padding:0 0 0 6px; background:url('/images/backoffice/icons/red_square.jpg') no-repeat 0 7px; font:normal 13px Arial; color:#E93E3F}
+div.block div.med div.right ul li.list_selected div.bottom_selected p a {float:left; width:auto; padding:0 0 0 6px; background:url('/images/backoffice/icons/red_square.jpg') no-repeat 0 7px!important; font:normal 13px Arial; color:#E93E3F}
 div.block div.med div.right ul li.list_selected div.bottom_selected p a:hover {text-decoration:underline;}
 div.block div.med div.right ul li.list_selected:hover div.bottom_selected p a {color:#E93E3F;}
 div.block div.med div.right ul li.list_unselected {float:left; width:205px; padding:15px 0 0 0; background:none;}
-div.block div.med div.right ul li.list_unselected div.bottom_selected {float:left; padding:0 14px 0 0; background:none;}
-div.block div.med div.right ul li.list_unselected div.bottom_selected a.basic {color:#E93E3F; padding:0 0 0px 20px;}
-div.block div.med div.right ul li.list_unselected div.bottom_selected a.basic:hover {color:#333333; cursor:pointer;}
-div.block div.med div.right ul li.list_unselected div.bottom_selected p {float:left; width:auto; margin:5px 0 0 20px; background:none;}
-div.block div.med div.right ul li.list_unselected div.bottom_selected p a {float:left; width:auto; padding:0 0 0 6px; background:url('/images/backoffice/icons/red_square.jpg') no-repeat 0 7px; font:normal 13px Arial; color:#E93E3F}
-div.block div.med div.right ul li.list_unselected div.bottom_selected p a:hover {text-decoration:underline;}
-div.block div.med div.right ul li.list_unselected:hover div.bottom_selected p a {color:#E93E3F;}
+div.block div.med div.right ul li div.bottom_selected {float:left; padding:0 14px 0 0; background:none;}
+div.block div.med div.right ul li div.bottom_selected a.basic {color:#E93E3F; padding:0 0 0px 20px;}
+div.block div.med div.right ul li div.bottom_selected a.basic:hover {color:#333333; cursor:pointer;}
+div.block div.med div.right ul li div.bottom_selected p {float:left; width:auto; margin:5px 0 0 20px; background:none!important;}
+div.block div.med div.right ul li div.bottom_selected p a {float:left; width:auto; padding:0 0 0 6px; background:url('/images/backoffice/icons/red_square.jpg') no-repeat 0 7px!important; font:normal 13px Arial; color:#E93E3F}
+div.block div.med div.right ul li div.bottom_selected p a:hover {text-decoration:underline;}
+div.block div.med div.right ul li:hover div.bottom_selected p a {color:#E93E3F;}
 div.block div.med div.right div.delete {position:absolute; display:none; bottom:0; left:20px;}
 div.block div.med div.right div.delete h5 {float:left; font:normal 17px "Museo Sans"; color:#333333; letter-spacing:-1px;}
 div.block div.med div.right div.delete p {float:left; margin:5px 0 0 0; width:100%; font:normal 13px Arial; color:#666666;}
@@ -464,6 +463,7 @@ div.block.project_info div.med div.left form p.title {float:left; margin:20px 0 
 div.block.project_info div.med div.left form p.title span.info {font:normal 13px Arial; color:#999999; width:auto; padding:0 5px;}
 div.block.project_info div.med div.left form span.input_large {float:left; margin:5px 0 0 0; background:url('/images/backoffice/projects/input_project_large.png') no-repeat 0 0; width:419px; height:34px; position:relative;}
 div.block.project_info div.med div.left form span.input_large.active {background:url('/images/backoffice/projects/large_combo_head_displayed.png') no-repeat 0 0;}
+div.block.project_info div.med div.left form span.error {background-position:0 -34px;}
 /*AUTOCOMPLETE - TAGS*/
 .ui-autocomplete {position:absolute; top:40px; width:419px; display:none; z-index:20;}
 .ui-menu-item {float:right; margin:7px 0 0 0; background:url('/images/backoffice/projects/repeat_content_tags.png') no-repeat 0 0; width:413px; height:22px; font:normal 15px Arial; color:#333333; padding:5px 0 0 12px; position:relative;}
@@ -474,7 +474,7 @@ div.block.project_info div.med div.left form span.input_large.active {background
 /*END - AUTOCOMPLETE - TAGS*/
 div.block.project_info div.med div.left form input[type="text"]{position:absolute; top:6px; left:7px; width:400px; height:21px; font:normal 15px Arial; color:#333333; border:none; padding:0;}
 div.block.project_info div.bottom {float:left; height:15px; width:100%; background: url('/images/backoffice/backgrounds/bottom_two_columns.png') no-repeat scroll top left!important;}
-
+div.block.project_info div.med div.left form span.textarea.error {background-position:0 -214px;}
 div.block.project_info div.med div.left form span.textarea {float:left; margin:5px 0 0 0; background:url('/images/backoffice/projects/input_project_multiple.png') no-repeat 0 0; width:564px; height:214px; position:relative;}
 div.block.project_info div.med div.left form textarea{position:absolute; top:9px; left:9px; width:546px; height:197px; min-width:546px; max-width:546px; min-height:197px; max-height:197px; font:normal 15px Arial; color:#333333; border:none; line-height:17px;}
 div.block.project_info div.med div.left form div.list_combo {float:left; width:419px; height:auto; position:relative;}
@@ -725,6 +725,11 @@ div.block.media div.med div.left ul li div.med_media span.over a.delete:hover {b
 div.block.media div.med div.left ul li div.med_media p {padding:12px 0; font:normal 15px Arial; color:#999999;}
 div.block.media div.med div.left ul li div.med_media p a {font:normal 15px Arial; color:#E93E3F; text-decoration:underline;}
 div.block.media div.med div.left ul li div.med_media p a:hover {color:#7F2023;}
+div.block.media div.med div.left ul li div.med_media div.caption {float:left; width:100%; display:none;}
+div.block.media div.med div.left ul li div.med_media div.caption form {position:relative; float:left; width:547px;}
+div.block.media div.med div.left ul li div.med_media div.caption form input[type="text"] {float:left; width:469px; height:16px; padding:8px 70px 8px 8px; background:url('/images/backoffice/media/caption_input_bkg.png') no-repeat 0 0; border:none; font:normal 13px Arial; color:#333333;}
+div.block.media div.med div.left ul li div.med_media div.caption form input[type="submit"] {position:absolute; width:58px; height:26px; right:3px; top:3px; background:url('/images/backoffice/media/caption_input.png') no-repeat 0 0; border:none; text-indent:-9999px;}
+div.block.media div.med div.left ul li div.med_media div.caption form input[type="submit"]:hover {background-position:0 -26px; cursor:pointer;}
 div.block.media div.med div.left ul li div.bottom_media {float:left; width:566px; height:10px; background:url('/images/backoffice/backgrounds/bottom_media.png') repeat-y 0 0;}
 div.block.media div.med div.left div.add_media {float:left; margin:20px 0 0 0; width:526px; height:66px; padding:20px; background:url('/images/backoffice/media/add_bkg.png') no-repeat center center;}
 div.block.media div.med div.left div.add_media h3 {float:left; width:auto; font:normal 21px "Museo Sans",Arial; line-height:21px; text-shadow:0 1px white; color:#333333;}
@@ -775,6 +780,7 @@ div.block.site_info div.med div.left form span.textarea {float:left; margin:5px 
 div.block.site_info div.med div.left form span.textarea textarea{position:absolute; top:9px; left:9px; width:546px; height:197px; font:normal 15px Arial; color:#333333; border:none; line-height:17px;}
 
 div.block.site_info div.med div.left form span.textarea_short {float:left; margin:5px 0 0 0; background:url('/images/backoffice/sites/short_descript.png') no-repeat 0 0; width:564px; height:114px; position:relative;}
+div.block.site_info div.med div.left form span.textarea_short.error {background-position:0 -114px;}
 div.block.site_info div.med div.left form span.textarea_short textarea{position:absolute; top:9px; left:9px; width:546px; height:97px; font:normal 15px Arial; color:#333333; border:none; line-height:17px;}
 div.block.site_info div.med div.left form h3.section {float:left; margin:30px 0 0 2px; width:100%; font:500 17px "Museo Sans"; color:#333333;}
 
@@ -844,7 +850,7 @@ div.block.site_info div.med div.left form span.input_short input[type="text"]{po
 
 div.block.site_info div.med div.left form span.input_url {float:left; margin:5px 0 0 0; width:566px; height:34px; background:url('/images/backoffice/sites/site_url_input.png') no-repeat 0 0; position:relative;}
 div.block.site_info div.med div.left form span.input_url input[type="text"]{position:absolute; top:5px; left:7px; width:550px; height:28px; font:normal 15px Arial; color:#333333;}
-div.block.site_info div.med div.left form input[type="submit"]{background:url('/images/backoffice/projects/save_changes_bttn.png') no-repeat 0 0; font:500 19px "Museo Sans"; color:#FFFFFF; text-shadow:0 1px #6E8C30; border:none; text-align:center; width:157px; height:32px; float:right; margin:60px 10px 0 0; /*position:absolute; bottom:0; right:0;*/}
+div.block.site_info div.med div.left form input[type="submit"]{background:url('/images/backoffice/projects/save_changes_bttn.png') no-repeat 0 0; font:500 19px "Museo Sans"; color:#FFFFFF; text-shadow:0 1px #6E8C30; border:none; text-align:center; width:157px; height:32px; float:right; margin:60px 10px 0 0; text-indent:-9999px; /*position:absolute; bottom:0; right:0;*/}
 div.block.site_info div.med div.left form input[type="submit"]:hover {background-position:0 -32px; cursor:pointer;}
 
 div.block.site_info div.bottom {float:left; height:15px; width:100%; background: url('/images/backoffice/backgrounds/bottom_two_columns.png') no-repeat scroll top left!important;}

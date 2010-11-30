@@ -2,21 +2,21 @@
 
   <%= f.error_messages %>
   <div class="field">
-    <label>SITE NAME</label>
-    <span class="input_large">
+    <label>SITE NAME <strong>*</strong></label>
+    <span class="input_large <%= 'error' if !@site.errors[:name].empty? && action_name != 'new' %>">
       <%= f.text_field :name, :class=>"long #{'error' if !@site.errors[:name].empty? && action_name != 'new'}" %>
       <%= errors_for @site, :name %>
     </span>
   </div>
   <div class="field">
-    <label>SHORT DESCRIPTION</label>
-    <span class="textarea_short">
+    <label>SHORT DESCRIPTION <strong>*</strong></label>
+    <span class="textarea_short <%= 'error' if !@site.errors[:short_description].empty? && action_name != 'new' %>">
       <%= f.text_area :short_description %>
     </span>
   </div>
   <div class="field">
-    <label>LONG DESCRIPTION</label>
-    <span class="textarea">
+    <label>LONG DESCRIPTION <strong>*</strong></label>
+    <span class="textarea <%= 'error' if !@site.errors[:long_description].empty? && action_name != 'new' %>">
       <%= f.text_area :long_description %>
     </span>
   </div>
