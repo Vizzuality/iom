@@ -90,6 +90,14 @@ $(document).ready(function(ev){
       }
     );
 
+    //if there is an error in some field
+    $('a.simple_error').hover(
+      function() {
+        $(this).parent().find('div.error_msg').show();
+      }
+    );
+
+
   // **************************************************** COMBOS
   //  combo status
   $('span#status_combo_search').click(function(ev){

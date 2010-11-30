@@ -37,11 +37,8 @@
 		    <div id="donor_name" class="field">
 		      	<%= f.label :donor_id, 'DONOR NAME' %>			
 				<span id="donor_name_input">
-					<!--  TO ADD SOME DONOR BY DEFAULT MEANWHILE IS STYLED -->
-					<%= f.text_field :donor_id, :value => '1' %>
-					<% if false %>
 			    	<%= f.text_field :donor_id, :value => Donor.all.collect{ |d| [d.name, d.id] }.join(', ') %>
-					<% end %>
+
 				</span>
 		    </div>
 		    <div id="donation_date" class="field">
