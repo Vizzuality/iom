@@ -952,9 +952,9 @@ ul.newList {margin:0; padding:0; list-style:none; color:#000; width:100px; backg
 ul.newList.month {float:left; background:url('/images/backoffice/common/dates/body_month.png') no-repeat 0 0; height:198px; overflow-x:hidden; width:150px;}
 ul.newList.month li {width:131px; margin:0 0 0 1px;}
 ul.newList.day {float:left; background:url('/images/backoffice/common/dates/body_day.png') no-repeat 0 0; height:198px; overflow-x:hidden; width:84px;}
-ul.newList.day li {width:64px; margin:0 0 0 1px;}
+ul.newList.day li {width:62px; margin:0 0 0 1px;}
 ul.newList.year {float:left; background:url('/images/backoffice/common/dates/body_year.png') no-repeat 0 0; height:198px; overflow-x:hidden;}
-ul.newList.year li {width:78px; margin:0 0 0 1px;}
+ul.newList.year li {width:76px; margin:0 0 0 1px;}
 
 .newListSelected {width:128px; color:#000; height:29px; padding:3px 0 0 6px; float:left; background:url('/images/backoffice/common/dates/head_month.png') no-repeat 0 0; margin:2px 0 0 7px;}
 

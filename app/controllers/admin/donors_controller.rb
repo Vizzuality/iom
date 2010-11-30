@@ -10,6 +10,12 @@ class Admin::DonorsController < ApplicationController
       Donor
     end
     @donors = donors.paginate :per_page => 20, :order => 'created_at DESC', :page => params[:page]
+    respond_to do |format|
+      format.html
+      format.json do
+        render :json => @donors.map{ |donor| {:name => donor.name, :id => donor.id} }.to_json
+      end
+    end
   end
 
   def new

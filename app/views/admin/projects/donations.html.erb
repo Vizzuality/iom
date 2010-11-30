@@ -7,103 +7,102 @@
         <p>by <%= @project.primary_organization.name %></p>
         <% unless @project.donations.empty? %>
           <ul>
-			<% total_account = 0 %>
+      <% total_account = 0 %>
              <% @project.donations.each do |donation| %>
             <li>
-				<div class="name_box">			
-                	<h3>
-						<%= link_to(donation.donor.name, edit_admin_donor_path(donation.donor)) %>
-					</h3>
-				</div>
-				<div class="date_box">			
-					<%if false %>
-					      <p><%= donation.date.strftime("%Y/%m/%d") %></p>
-					<%end%>
-				</div>
-				<div class="amount_box">
-              		<p>$ <%= donation.amount %></p>
-					<%= link_to('', admin_project_donation_path(@project, donation), :method => :delete, :confirm => 'Are your sure?', :class => 'delete') %>
-				</div>
-				<%= total_account += donation.amount %>
+        <div class="name_box">
+                  <h3>
+            <%= link_to(donation.donor.name, edit_admin_donor_path(donation.donor)) %>
+          </h3>
+        </div>
+        <div class="date_box">
+          <%if false %>
+                <p><%= donation.date.strftime("%Y/%m/%d") %></p>
+          <%end%>
+        </div>
+        <div class="amount_box">
+                  <p>$ <%= donation.amount %></p>
+          <%= link_to('', admin_project_donation_path(@project, donation), :method => :delete, :confirm => 'Are your sure?', :class => 'delete') %>
+        </div>
+        <%= total_account += donation.amount %>
             </li>
             <% end -%>
           </ul>
-		  <h4 class="total">TOTAL DONATED:</h4><span class="total_account">$</span><p class="amount"><%= total_account %></p>
+      <h4 class="total">TOTAL DONATED:</h4><span class="total_account">$</span><p class="amount"><%= total_account %></p>
         <% end -%>
-		<%= form_for([:admin, @project, (@donation || @project.donations.new)]) do |f| %>
-			<h4>Add a new donation</h4>
-		    <%= f.error_messages %>
-		
-		    <div id="donor_name" class="field">
-		      	<%= f.label :donor_id, 'DONOR NAME' %>			
-				<span id="donor_name_input">
-			    	<%= f.text_field :donor_id, :value => Donor.all.collect{ |d| [d.name, d.id] }.join(', ') %>
+    <%= form_for([:admin, @project, (@donation || @project.donations.new)]) do |f| %>
+      <h4>Add a new donation</h4>
 
-				</span>
-		    </div>
-		    <div id="donation_date" class="field">
-		      <%= f.label :date, 'DONATION DATE' %>				
-				<span>09/10/20010</span>
-				<%= f.date_select :date, :start_year => Date.today.year - 5  %>	
+        <div id="donor_name" class="field">
+          <%= f.label :donor_id, 'DONOR NAME' %>
+          <span id="donor_name_input">
+          <input type="text" id="autocomplete_donor_name" >
+          <%= f.hidden_field :donor_id %>
+          </span>
+        </div>
+        <div id="donation_date" class="field">
+          <%= f.label :date, 'DONATION DATE' %>
+        <span>09/10/20010</span>
+        <%= f.date_select :date, :start_year => Date.today.year - 5  %>
 
-		    </div>
-		    <div id="donation_amount" class="field">
-		      <%= f.label :amount, 'AMOUNT' %>
-				<span>
-			      <%= f.text_field :amount  %>
-				</span>
+        </div>
+        <div id="donation_amount" class="field">
+          <%= f.label :amount, 'AMOUNT' %>
+        <span>
+            <%= f.text_field :amount  %>
+        </span>
 
-		    </div>
-		      <%= f.submit 'Add donation' %>
-		  <% end -%>
+        </div>
+          <%= f.submit 'Add donation' %>
+      <% end -%>
       </div>
       <div class="right menu">
-	  	<%= render 'admin/projects/sidebar' %>
+      <%= render 'admin/projects/sidebar' %>
       </div>
     </div>
     <div class="bottom"></div>
   </div>
-</div>  
+</div>
  <script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>
 
-<%if false %>
-	<div class="main">
-	  <h2><%= @project.name %></h2>
-	  <p>by <%= @project.primary_organization.name %></p>
 
-	  <% @project.donations.each do |donation| %>
-	    <div class="project">
-	      <h3><%= link_to(donation.donor.name, edit_admin_donor_path(donation.donor)) %></h3>
-	<%if false %>
-	      <p><%= donation.date.strftime("%Y/%m/%d") %></p>
-	<%end%>
-	      <p>$ <%= donation.amount %></p>
-	      <p><%= link_to('Delete', admin_project_donation_path(@project, donation), :method => :delete, :confirm => 'Are your sure?') %>
-	    </div>
-	  <% end -%>
+ <script type="text/javascript">
+ $(function() {
+   function split( val ) {
+     return val.split( /,\s*/ );
+   }
+   $("#autocomplete_donor_name").autocomplete({
+     source: function( request, response ) {
+       var value = $("#autocomplete_donor_name").val();
+       $.ajax({
+         url: '<%= admin_donors_path %>?q=' + value,
+         dataType: "json",
+         success: function( data ) {
+           if(data != null) {
+             response($.map(data, function(donor) {
+               return {
+                 label: donor.name,
+                 value: donor.name,
+                 element_id: donor.id
+               }
+             }));
+           }
+         }
+       });
+     },
+     minLength: 2,
+     focus: function() {
+       // prevent value inserted on focus
+       return false;
+     },
+     select: function( event, ui ) {
+       $('#autocomplete_donor_name').val(ui.item.value);
+       $('#donation_donor_id').val(ui.item.element_id);
+     },
+     refresh: function(){
+        this.element.children("li.ui-menu-item:odd a").addClass("ui-menu-item-alternate");
+     }
+   });
 
-	  <%= form_for([:admin, @project, (@donation || @project.donations.new)]) do |f| %>
-	    <%= f.error_messages %>
-	    <div class="field">
-	      <%= f.label :donor_id, 'Donor name' %>
-	      <%= f.select :donor_id, Donor.all.collect{ |d| [d.name, d.id] } %>
-	    </div>
-	    <div class="field">
-	      <%= f.label :date, 'Donation date' %>
-	      <%= f.date_select :date, :start_year => Date.today.year - 5  %>
-	    </div>
-	    <div class="field">
-	      <%= f.label :amount %>
-	      <%= f.text_field :amount  %>
-	    </div>
-	    <div class="field">
-	      <%= f.submit 'Add donation' %>
-	    </div>
-	  <% end -%>
-
-	</div>
-
-	<div class="sidebar">
-	  <%= render 'admin/projects/sidebar' %>
-	</div>
-<%end%>
+ });
+ </script>
