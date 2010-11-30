@@ -39,10 +39,17 @@
             <% end -%>
           </ul>
         <% else %>
-          <div class="no_results">
-            <h2>There are not donors for your search</h2>
-            <p>Try to search with different terms or simply <a href="/admin/donors">browse all donors</a></p>
-          </div>
+          <% if Donor.count>1 %>
+            <div class="no_results">
+              <h2>There are not donors for your search</h2>
+              <p>Try to search with different terms or simply <a href="/admin/donors">browse all donors</a>.</p>
+            </div>
+          <% else %>
+            <div class="no_results">
+              <h2>There are not donors in the site</h2>
+              <p>Try to <a href="/admin/donors/new">add new one</a>.</p>
+            </div>
+          <% end %>
         <% end -%>
       </div>
       <div class="bottom_grey paginate">

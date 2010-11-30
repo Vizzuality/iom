@@ -34,10 +34,17 @@
               <% end -%>
             </ul>
           <% else %>
-            <div class="no_results">
-              <h2>There are not organizations for your search</h2>
-              <p>Try to search with different terms or simply <a href="<%= new_admin_organization_path %>">browse all organizations</a></p>
-            </div>
+            <% if Organization.count>1 %>
+              <div class="no_results">
+                <h2>There are not organizations for your search</h2>
+                <p>Try to search with different terms or simply <a href="<%= new_admin_organization_path %>">browse all organizations</a></p>
+              </div>
+            <% else %>
+              <div class="no_results">
+                <h2>There are not organizations in the site</h2>
+                <p>Try to <a href="/admin/organizations/new">add new one</a>.</p>
+              </div>
+            <% end %>
           <% end %>
         </div>
         <div class="bottom_grey paginate">

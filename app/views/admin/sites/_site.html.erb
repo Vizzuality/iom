@@ -38,6 +38,7 @@
     </div>
   </div>
   <div class="bottom_grey">
+    <a href="#" class="<%= site.published? ? 'published' : 'no_published' %>"><%= site.published? ? 'Published' : 'Not published' %></a>
     <a href="<%= edit_admin_site_path(site) %>">Manage this site</a>
   </div>
 </div>
