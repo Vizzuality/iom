@@ -60,21 +60,31 @@ div.block div.med div.right ul li:hover a {color:#333333;}
 div.block div.med div.right ul li:hover p {background-position:0 -14px;}
 div.block div.med div.right ul li:hover span {background-position:right -14px;}
 div.block div.med div.right ul li.disabled:hover a {color:#cccccc; cursor:default;}
-div.block div.med div.right ul li.list_selected {float:left; width:auto; padding:15px 0 0 0; background:url('/images/backoffice/donors/menu_top.png') no-repeat right 0;}
+
+div.block div.med div.right ul li.list_selected {float:left; width:auto; margin:10px 0 0 0; padding:15px 0 0 0; background:url('/images/backoffice/donors/menu_top.png') no-repeat right 0;}
 div.block div.med div.right ul li.list_selected div.bottom_selected {float:left; width:auto; padding:0 14px 15px 0; background:url('/images/backoffice/donors/menu_bottom.png') no-repeat right bottom;}
-div.block div.med div.right ul li.list_selected div.bottom_selected a.basic {color:#333333; padding:0 0 0 20px;}
+div.block div.med div.right ul li.list_selected div.bottom_selected a.basic {color:#E93E3F; padding:0 0 0 20px;}
 div.block div.med div.right ul li.list_selected div.bottom_selected a.basic:hover {cursor:default;}
-div.block div.med div.right ul li.list_selected div.bottom_selected p {float:left; width:auto; margin:5px 0 0 15px; background:none;}
-div.block div.med div.right ul li.list_selected div.bottom_selected p a {float:left; width:auto; padding:0 0 0 6px; background:url('/images/backoffice/icons/red_square.jpg') no-repeat 0 7px!important; font:normal 13px Arial; color:#E93E3F}
-div.block div.med div.right ul li.list_selected div.bottom_selected p a:hover {text-decoration:underline;}
+div.block div.med div.right ul li.list_selected div.bottom_selected span.list {float:left; width:auto; margin:3px 0 0 0;}
+div.block div.med div.right ul li.list_selected div.bottom_selected span.list p {float:left; width:100%; margin:5px 0 0 15px; background:none;}
+div.block div.med div.right ul li.list_selected div.bottom_selected span.list p a {float:left; width:auto; padding:0 0 0 6px; background:url('/images/backoffice/icons/grey_square.jpg') no-repeat 0 7px!important; font:normal 13px Arial; color:#333333}
+div.block div.med div.right ul li.list_selected div.bottom_selected span.list p a:hover {text-decoration:underline;}
+div.block div.med div.right ul li.list_selected div.bottom_selected span.list p.sublist {margin:5px 0 0 40px;}
 div.block div.med div.right ul li.list_selected:hover div.bottom_selected p a {color:#E93E3F;}
-div.block div.med div.right ul li.list_unselected {float:left; width:205px; padding:15px 0 0 0; background:none;}
-div.block div.med div.right ul li div.bottom_selected {float:left; padding:0 14px 0 0; background:none;}
-div.block div.med div.right ul li div.bottom_selected a.basic {color:#E93E3F; padding:0 0 0px 20px;}
-div.block div.med div.right ul li div.bottom_selected a.basic:hover {color:#333333; cursor:pointer;}
-div.block div.med div.right ul li div.bottom_selected p {float:left; width:auto; margin:5px 0 0 20px; background:none!important;}
-div.block div.med div.right ul li div.bottom_selected p a {float:left; width:auto; padding:0 0 0 6px; background:url('/images/backoffice/icons/red_square.jpg') no-repeat 0 7px!important; font:normal 13px Arial; color:#E93E3F}
-div.block div.med div.right ul li div.bottom_selected p a:hover {text-decoration:underline;}
+
+div.block div.med div.right ul li.sublist_selected {float:left; width:auto; margin:10px 0 0 0; padding:15px 0 0 0; background:url('/images/backoffice/donors/menu_top.png') no-repeat right 0;}
+div.block div.med div.right ul li.sublist_selected div.bottom_selected {float:left; width:auto; padding:0 14px 15px 0; background:url('/images/backoffice/donors/menu_bottom.png') no-repeat right bottom;}
+div.block div.med div.right ul li.sublist_selected div.bottom_selected a.basic {color:#E93E3F; padding:0 0 0 20px;}
+div.block div.med div.right ul li.sublist_selected div.bottom_selected a.basic:hover {cursor:default;}
+div.block div.med div.right ul li.sublist_selected div.bottom_selected span.list {float:left; width:auto; margin:3px 0 0 0;}
+div.block div.med div.right ul li.sublist_selected div.bottom_selected span.list p {float:left; width:100%; margin:5px 0 0 15px; background:none;}
+div.block div.med div.right ul li.sublist_selected div.bottom_selected span.list p.no {float:left; width:auto; margin:5px 0 0 20px; padding:0 0 0 6px; background:url('/images/backoffice/icons/red_square.jpg') no-repeat 0 7px!important; font:normal 13px Arial; color:#E93E3F}
+div.block div.med div.right ul li.sublist_selected div.bottom_selected span.list p.sublist {margin:5px 0 0 40px;}
+div.block div.med div.right ul li.sublist_selected div.bottom_selected span.list p.no.sublist {margin:5px 0 0 45px;}
+div.block div.med div.right ul li.sublist_selected div.bottom_selected span.list p a {float:left; width:auto; padding:0 0 0 6px; background:url('/images/backoffice/icons/grey_square.jpg') no-repeat 0 7px!important; font:normal 13px Arial; color:#333333}
+div.block div.med div.right ul li.sublist_selected div.bottom_selected span.list p a:hover {text-decoration:underline;}
+div.block div.med div.right ul li.sublist_selected:hover div.bottom_selected p a {color:#E93E3F;}
+
 div.block div.med div.right ul li:hover div.bottom_selected p a {color:#E93E3F;}
 div.block div.med div.right div.delete {position:absolute; display:none; bottom:0; left:20px;}
 div.block div.med div.right div.delete h5 {float:left; font:normal 17px "Museo Sans"; color:#333333; letter-spacing:-1px;}
@@ -858,7 +868,6 @@ div.block.site_info div.bottom {float:left; height:15px; width:100%; background:
 
 
 /*pages index*/
-
 ul.pages {float:left; width:100%; margin:0;}
 ul.pages li {float:left; width:100%;}
 ul.pages li div.head {position:relative; float:left; width:535px; height:42px; padding:15px;}
@@ -876,6 +885,26 @@ ul.pages li div.body span a:hover {text-decoration:underline;}
 ul.pages li div.body span a.delete {float:left; width:14px; height:14px; margin:2px 0 0 7px; background:url('/images/backoffice/icons/tiny_close.png') no-repeat 0 0; text-indent:-9999px;}
 ul.pages li div.body span a.delete:hover {background-position:0 -14px;}
 ul.pages li div.down {float:left; width:565px; height:15px; background:url('/images/backoffice/resources/resources_bottom.png') no-repeat 0 bottom;}
+
+ul.subpages {}
+
+/*<li <%= selected_if_current_page(admin_site_pages_path(@site)) %>>
+  <%= link_to("Pages", admin_site_pages_path(@site)) %><% if !@site.pages.empty? %> <p><span><%=@site.pages.count%></span></p><% end %>
+  <% if controller_name == 'pages' %>
+  <ul class="subpages">
+    <% @site.pages.highlighted.each do |highlighted_page| %>
+      <li><%= link_to_unless_current(highlighted_page.title, edit_admin_site_page_path(@site, highlighted_page.id)) %></li>
+      <% unless highlighted_page.children.empty? %>
+      <ul>
+        <% highlighted_page.children.each do |child| %>
+        <li><%= link_to_unless_current(child.title, edit_admin_site_page_path(@site, child.id)) %></li>
+        <% end %>
+      </ul>
+      <% end %>
+    <% end %>
+  </ul>
+  <% end %>
+</li>*/
 
 /*window alert*/
 div#modal_window {position:absolute; display:none; top:0; left:0; right:0; bottom:0; background:url('/images/backoffice/common/modal_bkg.png') repeat 0 0;}
