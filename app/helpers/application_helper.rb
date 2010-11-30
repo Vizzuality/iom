@@ -38,7 +38,7 @@ module ApplicationHelper
 <span class="simple_field_error">
   <a class="simple_error"></a>
   <div class="error_msg">
-    <p><span>can't be blank</span></p>
+    <p><span>#{obj.errors[attribute]}</span></p>
   </div>
 </span>
 HTML

@@ -21,6 +21,9 @@ Iom::Application.routes.draw do
   # search
   match '/search' => 'search#index', :as => :search
 
+  # Dashboard
+  match '/dashboard' => 'dashboard#index', :as => :dashboard
+
   # Administration
   namespace :admin do
     match '/' => 'admin#index', :as => :admin
