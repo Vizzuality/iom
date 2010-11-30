@@ -20,7 +20,7 @@
       <div class="med donors_list">
         <% unless @donors.empty? %>
           <h2><%= pluralize(@donors.total_entries, 'donor', 'donors') %> supporting projects
-            <% if params[:q]%>
+            <% if params[:q] %>
             on <a class="remove" href="/admin/donors"><%= params[:q] %></a>
             <% end %>
           </h2>
