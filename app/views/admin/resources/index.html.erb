@@ -1,69 +1,71 @@
+<div class="main_layout">
+  <div class="block first resources">
+    <div class="top"></div>
+    <div class="med">
+      <div class="left">
+        <h2><%= @element.name %></h2>
+        <p><%= pluralize(@element.resources.count, 'resource', 'resources') %></p>
 
-    <div class="main_layout">
-      <div class="block first resources">
-        <div class="top"></div>
-        <div class="med">
-          <div class="left">
-            <h2><%= @element.name %></h2>
-            <p><%= pluralize(@element.resources.count, 'resource', 'resources') %></p>
-
-            <% if @element.is_a?(Organization) %>
-              <ul>
-                <% unless @element.resources.empty? %>
-                  <% @element.resources.each do |resource| %>
-                  <li>
-                    <h3><%= link_to(resource.title, resource.url) %></h3>
-                    <p>TODO: tipo de recurso</p>
-                    <%= link_to('Delete', eval("admin_#{@element.class.name.singularize.downcase}_resource_path(@element, resource)"), :method => :delete, :confirm => 'Are you sure?', :class=>"delete") %>
-                  </li>
-                  <% end -%>
-                <% end -%>
-              </ul>
-            <% else %>
-              <ul class="ngo">
-                <% unless @element.resources.empty? %>
-                  <% @element.resources.each do |resource| %>
-                  <li class="ngo">
-                    <div class="head">
-                      <h3><%= link_to(resource.title, resource.url) %></h3>
-                      <p>Link to http://wikipedia.org/Haiti</p>
-                      <%= link_to('Delete', eval("admin_#{@element.class.name.singularize.downcase}_resource_path(@element, resource)"), :method => :delete, :confirm => 'Are you sure?', :class=>"delete") %>
-                    </div>
+        <% unless @element.is_a?(Organization) %>
+          <ul>
+            <% unless @element.resources.empty? %>
+              <% @element.resources.each do |resource| %>
+              <li>
+                <h3><%= link_to(resource.title, resource.url) %></h3>
+                <%= link_to('Delete', eval("admin_#{@element.class.name.singularize.downcase}_resource_path(@element, resource)"), :method => :delete, :confirm => 'Are you sure?', :class=>"delete") %>
+              </li>
+              <% end -%>
+            <% end -%>
+          </ul>
+        <% else %>
+          <ul class="ngo">
+            <% unless @element.resources.empty? %>
+              <% @element.resources.each do |resource| %>
+              <li class="ngo">
+                <div class="head">
+                  <h3><%= link_to(resource.title, resource.url) %></h3>
+                  <%= link_to('Delete', eval("admin_#{@element.class.name.singularize.downcase}_resource_path(@element, resource)"), :method => :delete, :confirm => 'Are you sure?', :class=>"delete") %>
+                </div>
+                <% if Site.count > 0 %>
+                  <%= form_for([:admin, @element, resource]) do |f| %>
                     <div class="body">
                       <h4>PUBLISH IN...</h4>
-                      <input type="checkbox" value="" /><label>HaitiAidMap</label>
+                      <% Site.all.each do |site| %>
+                        <input type="checkbox" name="resource[sites_ids][]" id="site_<%= site.id %>" value="<%= site.id %>" <%= 'checked="checked"' if resource.sites_ids.include?(site.id.to_s) %> /><label for="site_<%= site.id %>"><%= site.name %></label>
+                      <% end %>
                     </div>
-                    <div class="down"></bottom>
-                  </li>
-                  <% end -%>
-                <% end -%>
-              </ul>
-            <% end %>
-
-            <%= form_for([:admin, @element, @resource]) do |f| %>
-              <h4>Add new resources<h4>
-              <%= error_messages_for :resource %>
-              <div class="field">
-                <label>TITLE <strong>*</strong></label>
-                <%= f.text_field :title, :class=>"title" %>
-              </div>
-              <div class="field">
-                <label>URL <strong>*</strong></label>
-                <%= f.text_field :url %>
-              </div>
-              <div class="field">
-                <%= f.submit 'add resource' %>
-              </div>
+                    <%= f.submit 'Update' %>
+                  <% end %>
+                <% end %>
+                <div class="down"></bottom>
+              </li>
+              <% end -%>
             <% end -%>
+          </ul>
+        <% end %>
 
+        <%= form_for([:admin, @element, @resource]) do |f| %>
+          <h4>Add new resources<h4>
+          <div class="field">
+            <label>TITLE <strong>*</strong></label>
+            <%= f.text_field :title, :class=>"title" %>
           </div>
-          <div class="right menu">
-            <%= render :partial => "admin/#{@element.class.table_name}/sidebar" %>
+          <div class="field">
+            <label>URL <strong>*</strong></label>
+            <%= f.text_field :url %>
           </div>
-        </div>
-        <div class="bottom"></div>
+          <div class="field">
+            <%= f.submit 'add resource' %>
+          </div>
+        <% end -%>
+
+      </div>
+      <div class="right menu">
+        <%= render :partial => "admin/#{@element.class.table_name}/sidebar" %>
       </div>
     </div>
+    <div class="bottom"></div>
+  </div>
+</div>
 
-    <script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>
-
+<script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>

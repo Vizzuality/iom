@@ -3,37 +3,37 @@
 # Table name: sites
 #
 #  id                              :integer         not null, primary key
-#  name                            :string(255)
-#  short_description               :text
-#  long_description                :text
-#  contact_email                   :string(255)
-#  contact_person                  :string(255)
-#  url                             :string(255)
-#  permalink                       :string(255)
-#  google_analytics_id             :string(255)
-#  logo_file_name                  :string(255)
-#  logo_content_type               :string(255)
-#  logo_file_size                  :integer
-#  logo_updated_at                 :datetime
-#  theme_id                        :integer
-#  blog_url                        :string(255)
-#  word_for_clusters               :string(255)
-#  word_for_regions                :string(255)
-#  show_global_donations_raises    :boolean
+#  name                            :string(255)     
+#  short_description               :text            
+#  long_description                :text            
+#  contact_email                   :string(255)     
+#  contact_person                  :string(255)     
+#  url                             :string(255)     
+#  permalink                       :string(255)     
+#  google_analytics_id             :string(255)     
+#  logo_file_name                  :string(255)     
+#  logo_content_type               :string(255)     
+#  logo_file_size                  :integer         
+#  logo_updated_at                 :datetime        
+#  theme_id                        :integer         
+#  blog_url                        :string(255)     
+#  word_for_clusters               :string(255)     
+#  word_for_regions                :string(255)     
+#  show_global_donations_raises    :boolean         
 #  project_classification          :integer         default(0)
-#  geographic_context_country_id   :integer
-#  geographic_context_region_id    :integer
-#  project_context_cluster_id      :integer
-#  project_context_sector_id       :integer
-#  project_context_organization_id :integer
-#  project_context_tags            :string(255)
-#  created_at                      :datetime
-#  updated_at                      :datetime
-#  project_context_tags_ids        :string(255)
-#  status                          :boolean
+#  geographic_context_country_id   :integer         
+#  geographic_context_region_id    :integer         
+#  project_context_cluster_id      :integer         
+#  project_context_sector_id       :integer         
+#  project_context_organization_id :integer         
+#  project_context_tags            :string(255)     
+#  created_at                      :datetime        
+#  updated_at                      :datetime        
+#  project_context_tags_ids        :string(255)     
+#  status                          :boolean         
 #  visits                          :float           default(0.0)
 #  visits_last_week                :float           default(0.0)
-#  geographic_context_geometry     :geometry
+#  geographic_context_geometry     :geometry        
 #
 
 class Site < ActiveRecord::Base
