@@ -102,12 +102,18 @@ $(document).ready(function(ev){
 		});
 	});
 
-	$('span#status_combo_search').find('a').click(function(ev){
+	$('span#status_combo_search').find('li').click(function(ev){
 		ev.stopPropagation();
 		ev.preventDefault();
-		var id = $(this).attr('id');
-		$('input#status_input').val(id);
-		$('span#status_combo_search').removeClass('clicked');
+		var id = $(this).children('a').attr('id');
+		var name = $(this).children('a').text();
+		
+		if ((id != undefined)&&(name != undefined)){
+			$('span#status_combo_search').children('p').text(name);
+
+			$('input#status_input').val(id);
+			$('span#status_combo_search').removeClass('clicked');
+		}
 	});
 
 
@@ -131,12 +137,16 @@ $(document).ready(function(ev){
 		});
 	});
 
-	$('span#country_combo_search').find('a').click(function(ev){
+	$('span#country_combo_search').find('li').click(function(ev){
 		ev.stopPropagation();
 		ev.preventDefault();
-		var id = $(this).attr('id');
-		$('input#country_input').val(id);
-		$('span#country_combo_search').removeClass('clicked');
+		var id = $(this).children('a').attr('id');
+		var name = $(this).children('a').text();
+		if ((id != undefined)&&(name != undefined)){
+			$('span#country_combo_search').children('p').text(name);
+			$('input#country_input').val(id);
+			$('span#country_combo_search').removeClass('clicked');
+		}
 	});
 	
 	// END COUNTRY
@@ -161,12 +171,16 @@ $(document).ready(function(ev){
 		});
 	});
 
-	$('span#cluster_combo_search').find('a').click(function(ev){
+	$('span#cluster_combo_search').find('li').click(function(ev){
 		ev.stopPropagation();
 		ev.preventDefault();
-		var id = $(this).attr('id');
-		$('input#cluster_input').val(id);
-		$('span#cluster_combo_search').removeClass('clicked');
+		var id = $(this).children('a').attr('id');
+		var name = $(this).children('a').text();
+		if ((id != undefined)&&(name != undefined)){
+			$('span#cluster_combo_search').children('p').text(name);			
+			$('input#cluster_input').val(id);
+			$('span#cluster_combo_search').removeClass('clicked');
+		}
 	});
 	
 	// END CLUSTER
@@ -191,12 +205,16 @@ $(document).ready(function(ev){
 		});
 	});
 
-	$('span#sector_combo_search').find('a').click(function(ev){
+	$('span#sector_combo_search').find('li').click(function(ev){
 		ev.stopPropagation();
 		ev.preventDefault();
-		var id = $(this).attr('id');
-		$('input#sector_input').val(id);
-		$('span#sector_combo_search').removeClass('clicked');
+		var id = $(this).children('a').attr('id');
+		var name = $(this).children('a').text();
+		if ((id != undefined)&&(name != undefined)){
+			$('span#sector_combo_search').children('p').text(name);						
+			$('input#sector_input').val(id);
+			$('span#sector_combo_search').removeClass('clicked');
+		}
 	});
 	
 	// END CLUSTER

@@ -11,11 +11,14 @@
 			<ul class="combos">
 				<li>
 					<label>STATUS</label>
-					<span id="status_combo_search" class="combo">All status 
+					<span id="status_combo_search" class="combo"><p>Select status</p>
 						<!-- INPUT HIDDEN -->
-			          <input id="status_input" type="hidden" value="active" />
+	          <input id="status_input" type="hidden" value="active" />
 						<ul class="elements">
 							<li class="first"></li>
+							<li>
+								<a id="0" class="status">All</a>
+							</li>
 							<li>
 								<a id="active" class="status">Active</a>
 							</li>
@@ -28,11 +31,14 @@
 				</li>
 				<li>
 					<label>COUNTRY</label>
-					<span id="country_combo_search" class="combo">All
+					<span id="country_combo_search" class="combo"><p>Select country</p>
 							<!-- INPUT HIDDEN -->
 				          <input id="country_input" type="hidden" value="" />
 							<ul class="elements">
 								<li class="first"></li>
+                  <li>
+  									<a id="0">All</a>
+  								</li>								
 								   <% Country.all.each do |country| %>
 									<li>
 										<a id="<%= country.id%>"><%= country.name %></a>
@@ -44,11 +50,14 @@
 				</li>
 				<li>
 					<label>CLUSTER</label>
-					<span id="cluster_combo_search" class="combo">Select cluster
+					<span id="cluster_combo_search" class="combo"><p>Select cluster</p>
 							<!-- INPUT HIDDEN -->
 				          <input id="cluster_input" type="hidden" value=""/>
 							<ul class="elements">
 								<li class="first"></li>
+  								<li>
+  									<a id="0">All</a>
+  								</li>		
 								   <% Cluster.all.each do |cluster| %>
 									<li>
 										<a id="<%= cluster.id%>"><%= cluster.name %></a>
@@ -60,11 +69,15 @@
 				</li>
 				<li>
 					<label>SECTOR</label>
-					<span id="sector_combo_search" class="combo">Select sector
+					<span id="sector_combo_search" class="combo"><p>Select sector</p>
 							<!-- INPUT HIDDEN -->
 				          <input id="sector_input" type="hidden" value=""/>
 							<ul class="elements">
 								<li class="first"></li>
+  								<li>
+  									<a id="0">All</a>
+  								</li>
+								
 								   <% Sector.all.each do |sector| %>
 									<li>
 										<a id="<%= sector.id%>"><%= sector.name %></a>
