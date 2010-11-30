@@ -25,157 +25,147 @@
   <div class="field">
   <label>SITE GEOGRAPHICAL CONTEXT</label>
   <ul class="geographic_options">
-	<li id="gc_worldwide" class="selected"><a class="limited">Worldwide, not limited</a></li>
-	<li id="gc_limited_country">
-		<a class="limited">Limited to a country</a>
-		<div class="content">
-			
-			<span class="select_country_combo"><p class="country">Select a country</p>
-				
-  		    	<%= f.hidden_field :geographic_context_country_id %>
-				<div class="values country">
-					<ul>
-			        	<% Country.all.collect.each do |country| %>
-							<li><a class="country_value" id="<%= country.id %>"><%= country.name %></a></li>
-						<%end -%>
-					</ul>
-				</div>
-			</span>
-		</div>
-	</li>
-	<li id="gc_limited_region">
-		<a class="limited">Limited to a region</a>
-		
-		<div class="content">
-			<span class="select_country_combo"><p class="country">Select a country</p>
-  		    	<%= f.hidden_field :geographic_context_country_id %>
-				<div class="values country">
-					<ul>
-			        	<% Country.all.collect.each do |country| %>
-							<li><a class="country_value" id="<%= country.id %>"><%= country.name %></a></li>
-						<%end -%>
-					</ul>
-				</div>
-			</span>
-			<%= image_tag("backoffice/sites/arrow.png", :class=>'arrow') %>
-			<span class="select_country_combo region"><p class="region">Select a region</p>
-  		    	<%= f.hidden_field :geographic_context_region_id %>
-				<div class="values region">
-					<ul>
-			        	<% Region.all.collect.each do |region| %>
-							<li><a class="region_value" id="<%= region.id %>"><%= region.name %></a></li>
-						<%end -%>
-					</ul>
-				</div>
-			</span>
-		</div>		
-	</li>		
-	<li id="gc_limited_bbox">
-		<a class="limited">Limited by a boundary box</a>		
-		<div class="content">
-			<div id="map_bbox">
-				<!-- TODO: ADD MAP  -->
-			</div>
-		</div>
-	</li>
+  <li id="gc_worldwide" class="selected"><a class="limited">Worldwide, not limited</a></li>
+  <li id="gc_limited_country">
+    <a class="limited">Limited to a country</a>
+    <div class="content">
+
+      <span class="select_country_combo"><p class="country">Select a country</p>
+
+            <%= f.hidden_field :geographic_context_country_id %>
+        <div class="values country">
+          <ul>
+                <% Country.all.collect.each do |country| %>
+              <li><a class="country_value" id="<%= country.id %>"><%= country.name %></a></li>
+            <%end -%>
+          </ul>
+        </div>
+      </span>
+    </div>
+  </li>
+  <li id="gc_limited_region">
+    <a class="limited">Limited to a region</a>
+
+    <div class="content">
+      <span class="select_country_combo"><p class="country">Select a country</p>
+        <%= f.hidden_field :geographic_context_country_id %>
+        <div class="values country">
+          <ul>
+            <% Country.all.collect.each do |country| %>
+              <li><a class="country_value" id="<%= country.id %>"><%= country.name %></a></li>
+            <%end -%>
+          </ul>
+        </div>
+      </span>
+      <div id="region"></div>
+    </div>
+  </li>
+  <li id="gc_limited_bbox">
+    <a class="limited">Limited by a boundary box</a>
+    <div class="content">
+      <div id="map_bbox">
+        <!-- TODO: ADD MAP  -->
+      </div>
+    </div>
+  </li>
   </ul>
   </div>  <!-- field -->
-	<h3 class="section">PROJECT FILTERING</h3>
+  <h3 class="section">PROJECT FILTERING</h3>
 
   <div class="field">
-	<label>PROJECT TYPOLOGY</label>
+  <label>PROJECT TYPOLOGY</label>
 
-	<ul class="project_tipo_options">
-		<li id="include_sector_cluster">
-			<a>Include only projects from a particular cluster or sector</a>
-			<div class="content">
-				<span class="select_combo_typology"><p class="cluster_sector">Select a cluster or a sector</p>
-					<div class="values">
-						<%= f.hidden_field :project_context_cluster_id  %>
-						<ul class="clusters_or_sectors">
-							<li class="section"><p>CLUSTERS</p></li>
-				        	<% Cluster.all.collect.each do |cluster| %>
-								<li><a class="cluster_value" id="<%= cluster.id %>"><%= cluster.name %></a></li>
-							<%end -%>
+  <ul class="project_tipo_options">
+    <li id="include_sector_cluster">
+      <a>Include only projects from a particular cluster or sector</a>
+      <div class="content">
+        <span class="select_combo_typology"><p class="cluster_sector">Select a cluster or a sector</p>
+          <div class="values">
+            <%= f.hidden_field :project_context_cluster_id  %>
+            <ul class="clusters_or_sectors">
+              <li class="section"><p>CLUSTERS</p></li>
+                  <% Cluster.all.collect.each do |cluster| %>
+                <li><a class="cluster_value" id="<%= cluster.id %>"><%= cluster.name %></a></li>
+              <%end -%>
 
-							<%= f.hidden_field :project_context_sector_id  %>
-							<li class="section"><p>SECTORS</p></li>
-				        	<% Sector.all.collect.each do |sector| %>								
-								<li><a class="sector_value" id="<%= sector.id %>"><%= sector.name %></a></li>
-							<%end -%>
-						</ul>
-					</div>
-				</span>
-			</div>
-		</li>
-		<li id="include_ngo">
-			<a>Include only projects from a particular NGO</a>
-			<div class="content">
-				<span class="select_combo_typology"><p class="ngo">Select an NGO</p>
-					<div class="values">
-						<ul class="organizations">
-							<%= f.hidden_field :project_context_organization_id  %>
-							<% Organization.all.collect.each do |organization| %>								
-								<li><a class="organization" id="<%= organization.id %>"><%= organization.name %></a></li>
-							<%end -%>
-						</ul>
-					</div>
-				</span>
-			</div>
-		</li>
-		<li id="include_tags">
-			<a>Include only matching some tags</a>
-			<div class="content">
-				<span class="tags_site">
-					<%= f.text_field :project_context_tags, {:id => 'pc_tags_section'} %>
-					
-				</span>
-			</div>
-		</li>
-	</ul>
-	</div> <!-- field -->
-	<h3 class="section">CONTACT INFORMATION</h3>
+              <%= f.hidden_field :project_context_sector_id  %>
+              <li class="section"><p>SECTORS</p></li>
+                  <% Sector.all.collect.each do |sector| %>
+                <li><a class="sector_value" id="<%= sector.id %>"><%= sector.name %></a></li>
+              <%end -%>
+            </ul>
+          </div>
+        </span>
+      </div>
+    </li>
+    <li id="include_ngo">
+      <a>Include only projects from a particular NGO</a>
+      <div class="content">
+        <span class="select_combo_typology"><p class="ngo">Select an NGO</p>
+          <div class="values">
+            <ul class="organizations">
+              <%= f.hidden_field :project_context_organization_id  %>
+              <% Organization.all.collect.each do |organization| %>
+                <li><a class="organization" id="<%= organization.id %>"><%= organization.name %></a></li>
+              <%end -%>
+            </ul>
+          </div>
+        </span>
+      </div>
+    </li>
+    <li id="include_tags">
+      <a>Include only matching some tags</a>
+      <div class="content">
+        <span class="tags_site">
+          <%= f.text_field :project_context_tags, {:id => 'pc_tags_section'} %>
 
-	  <div class="two_columns">
-	    <div class="left_column">
+        </span>
+      </div>
+    </li>
+  </ul>
+  </div> <!-- field -->
+  <h3 class="section">CONTACT INFORMATION</h3>
+
+    <div class="two_columns">
+      <div class="left_column">
         <div class="field">
-  	      <label>CONTACT EMAIL</label>
-  	      <span class="input_short">
-  	        <%= f.text_field :contact_email %>
-  	      </span>
-	      </div> <!-- field -->
-	    </div>
-	    <div class="right_column">
+          <label>CONTACT EMAIL</label>
+          <span class="input_short">
+            <%= f.text_field :contact_email %>
+          </span>
+        </div> <!-- field -->
+      </div>
+      <div class="right_column">
         <div class="field">
-  	      <p class="title">CONTACT PERSON / ORGANIZATION</p>
-  	      <span class="input_short">
-  	        <%= f.text_field :contact_person %>
-  	      </span>
-  	    </div> <!-- field -->
-	    </div>
-	  </div>
-	
-	<h3 class="section">TECHNICAL CONFIGURATION</h3>
-	
-  <div class="field">	
-  	<label>SITE URL</label>
-  	<span class="input_url">		
-  		<%= f.text_field :url, :class=>"long #{'error' if !@site.errors[:url].empty? && action_name != 'new'}" %>
-  		<%= errors_for @site, :url %>
-  	</span>
-	</div>
+          <p class="title">CONTACT PERSON / ORGANIZATION</p>
+          <span class="input_short">
+            <%= f.text_field :contact_person %>
+          </span>
+        </div> <!-- field -->
+      </div>
+    </div>
+
+  <h3 class="section">TECHNICAL CONFIGURATION</h3>
+
   <div class="field">
-  	<label>GOOGLE ANALYTICS ID</label>
-  	<span class="input_short">
+    <label>SITE URL</label>
+    <span class="input_url">
+      <%= f.text_field :url, :class=>"long #{'error' if !@site.errors[:url].empty? && action_name != 'new'}" %>
+      <%= errors_for @site, :url %>
+    </span>
+  </div>
+  <div class="field">
+    <label>GOOGLE ANALYTICS ID</label>
+    <span class="input_short">
           <%= f.text_field :google_analytics_id %>
       </span>
- 	</div>
-	<%= f.submit 'Save changes', :class => "#{'error' if @site.invalid? && action_name != 'new'}" %>
+   </div>
+  <%= f.submit 'Save changes', :class => "#{'error' if @site.invalid? && action_name != 'new'}" %>
 
-<!-- REMOVE THIS "COMMENTED CODE" WHEN BLAT SAYS "OK" -->	
+<!-- REMOVE THIS "COMMENTED CODE" WHEN BLAT SAYS "OK" -->
 <%if false %>
 
-	<div class="field">
+  <div class="field">
     <br />
     <input type="radio" name="site[geographic_context]" class="choose_gc" value="worlwide" id="gc_worldwide" <%= 'checked="checked"' if @site.geographic_context_country_id.blank? && @site.geographic_context_region_id.blank? && @site.geographic_context_geometry.blank? %>/>
     <label for="gc_worldwide">Worldwide, not limited</label><br />
@@ -304,5 +294,5 @@ $(function() {
 </script>
 <%end%>
 
-  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> 
-  <script src="/javascripts/backoffice/site_map.js" type="text/javascript" charset="utf-8"></script> 
+  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+  <script src="/javascripts/backoffice/site_map.js" type="text/javascript" charset="utf-8"></script>

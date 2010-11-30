@@ -40,7 +40,11 @@ class Organization < ActiveRecord::Base
 
   has_many :resources, :conditions => 'resources.element_type = #{Iom::ActsAsResource::ORGANIZATION_TYPE}', :foreign_key => :element_id, :dependent => :destroy
   has_many :media_resources, :conditions => 'media_resources.element_type = #{Iom::ActsAsResource::ORGANIZATION_TYPE}', :foreign_key => :element_id, :dependent => :destroy, :order => 'position ASC'
-  has_many :projects, :foreign_key => :primary_organization_id
+  has_many :projects, :foreign_key => :primary_organization_id do
+    def site(site)
+      self.where("projects.id IN (#{site.projects_ids.join(',')})")
+    end
+  end
   has_attached_file :logo, :styles => { :small => "60x60#" }
   has_many :sites, :foreign_key => :project_context_organization_id
   has_many :donations, :through => :projects
@@ -71,8 +75,8 @@ class Organization < ActiveRecord::Base
 
   # Array of arrays
   # [[cluster, count], [cluster, count]]
-  def projects_clusters
-    result = ActiveRecord::Base.connection.execute("select cluster_id, count(cluster_id) as count from clusters_projects where project_id IN (select id from projects where primary_organization_id=#{self.id}) group by cluster_id order by count desc")
+  def projects_clusters(site)
+    result = ActiveRecord::Base.connection.execute("select cluster_id, count(cluster_id) as count from clusters_projects where project_id IN (select id from projects where primary_organization_id=#{self.id}) AND project_id IN (#{site.projects_ids.join(',')}) group by cluster_id order by count desc")
     result.map do |row|
       [Cluster.find(row['cluster_id']), row['count'].to_i]
     end
@@ -80,8 +84,8 @@ class Organization < ActiveRecord::Base
 
   # Array of arrays
   # [[region, count], [region, count]]
-  def projects_regions
-    result = ActiveRecord::Base.connection.execute("select region_id, count(region_id) as count from projects_regions where project_id IN (select id from projects where primary_organization_id=#{self.id}) group by region_id order by count desc")
+  def projects_regions(site)
+    result = ActiveRecord::Base.connection.execute("select region_id, count(region_id) as count from projects_regions where project_id IN (select id from projects where primary_organization_id=#{self.id}) AND project_id IN (#{site.projects_ids.join(',')}) group by region_id order by count desc")
     result.map do |row|
       [Region.find(row['region_id']), row['count'].to_i]
     end

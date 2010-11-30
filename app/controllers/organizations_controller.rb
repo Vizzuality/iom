@@ -11,7 +11,7 @@ class OrganizationsController < ApplicationController
       raise ActiveRecord::RecordNotFound
     end
     @organization.attributes = @organization.attributes_for_site(@site)
-    @projects = @organization.projects.where("projects.id IN (#{@site.projects_ids.join(',')})").paginate :per_page => 10, :page => params[:page], :order => 'created_at DESC'
+    @projects = @organization.projects.site(@site).paginate :per_page => 10, :page => params[:page], :order => 'created_at DESC'
     respond_to do |format|
       format.html
       format.js do

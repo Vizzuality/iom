@@ -38,6 +38,9 @@
     </div>
   </div>
   <div class="bottom_grey">
+    <div id="site_<%= site.id %>">
+      <%= link_to((site.published? ? 'Published' : 'Not published'), toggle_status_admin_site_path(site), :method => :post,:remote => true,:class => (site.published? ? 'published' : 'no_published')) %>
+    </div>
     <a href="<%= edit_admin_site_path(site) %>">Manage this site</a>
   </div>
 </div>
