@@ -83,7 +83,7 @@
       <%= f.text_field :awardee_type %>
     </span>
     <ul class="dates">
-      <li>
+      <li class="date">
         <label>DATE PROVIDED</label>
 
         <span id="date_provided" class="combo_date clicked"><p>09/10/2010</p>
@@ -92,17 +92,17 @@
         <p id="day" class="title">DAY</p>
         <p id="year" class="title">YEAR</p>
 
-         <%= f.date_select :start_date, :start_year => Date.today.year - 5, :order => [:month, :day, :year]  %>
+         <%= f.date_select :date_provided, :start_year => Date.today.year - 5, :order => [:month, :day, :year]  %>
 
         <a class="save_date_bttn">Save date</a>
       </div>
      </span>
       </li>
-      <li>
+      <li class="date">
         <label>DATE UPDATED</label>
         <span id="date_updated" class="combo_date"><p>09/10/2010</p>
       <div class="select_dates end_date">
-         <%= f.date_select :end_date, :start_year => Date.today.year - 5  %>
+         <%= f.date_select :date_updated, :start_year => Date.today.year - 5  %>
         <a class="save_date_bttn">Save date</a>
       </div>
       </span>
@@ -182,7 +182,7 @@
 
   <div class="field">
     <ul class="dates">
-      <li>
+      <li class="date">
         <label>START DATE</label>
           <%= f.date_select :start_date, :start_year => Date.today.year - 5  %>
         <span id="start_date" class="combo_date">09/10/2010
@@ -203,7 +203,7 @@
       </div>
       </span>
       </li>
-      <li>
+      <li class="date">
         <label>END DATE</label>
           <%= f.date_select :end_date, :start_year => Date.today.year - 5  %>
         <span id="end_date" class="combo_date">09/10/2010

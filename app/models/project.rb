@@ -25,6 +25,8 @@
 #  additional_information    :text
 #  awardee_type              :string(255)
 #  the_geom                  :geometry        not null
+#  date_provided             :date
+#  date_updated              :date
 #
 
 class Project < ActiveRecord::Base
@@ -116,8 +118,11 @@ class Project < ActiveRecord::Base
 
     def dates_consistency
       return true if end_date.nil? || start_date.nil?
-      if end_date < start_date
+      if !end_date.nil? && !start_date.nil? && end_date < start_date
         errors.add(:end_date, "can't be previous to start_date")
+      end
+      if !date_updated.nil? && !date_provided.nil? && date_updated < date_provided
+        errors.add(:date_updated, "can't be previous to date_provided")
       end
     end
 

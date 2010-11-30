@@ -17,6 +17,20 @@ class Admin::ResourcesController < ApplicationController
     end
   end
 
+  def update
+    @resource = @element.resources.find(params[:id])
+    params[:resource] ||= {}
+    if params[:resource]
+      params[:resource][:sites_ids] ||= []
+    end
+    @resource.attributes = params[:resource]
+    if @resource.save
+      redirect_to eval("admin_#{@element.class.name.singularize.downcase}_resources_path(@element)"), :flash => {:success => 'Resource has been created successfully'}
+    else
+      render :action => 'index'
+    end
+  end
+
   def destroy
     @resource = @element.resources.find(params[:id])
     @resource.destroy

@@ -1,5 +1,4 @@
 
-
     <div class="main_layout">
       <div class="block first edit">
         <div class="top"></div>
@@ -27,9 +26,7 @@
             </ul>
           </div>
           <div class="right menu">
-            <ul>
-              <li class="selected"><a>Basic information</a></li>
-            </ul>
+            <%= render 'admin/sites/sidebar' %>
           </div>
         </div>
         <div class="bottom"></div>
@@ -39,3 +36,4 @@
         <a href="<%= new_admin_site_page_path(@site) %>">Create new page on this site</a>
       </div>
     </div>
+

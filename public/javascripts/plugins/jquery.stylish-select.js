@@ -154,7 +154,7 @@ Dual licensed under the MIT and GPL licenses.
                 containerPosY = containerPosY-scrollTop;
                 if (containerPosY+newUlHeight >= docHeight){
                     $newUl.css({
-                        top: '-'+newUlHeight+'px',
+                        top: containerHeight+'px',
                         height: newUlHeight
                     });
                     $input.onTop = true;
@@ -201,6 +201,13 @@ Dual licensed under the MIT and GPL licenses.
 
                 //show/hide this menu
                 $newUl.toggle();
+
+				if ($newUl.is(':visible')){
+					$newUl.parent().children('div.selectedTxt').parent('div.newListSelected').css('background-position','0 -32px');
+				}else {
+					$newUl.parent().children('div.selectedTxt').parent('div.newListSelected').css('background-position','0 0');
+				}
+
                 positionFix();
                 //scroll list to selected item
                 $newLi.eq(currentIndex).focus();
