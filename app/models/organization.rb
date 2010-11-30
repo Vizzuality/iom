@@ -38,7 +38,11 @@
 
 class Organization < ActiveRecord::Base
 
-  has_many :resources, :conditions => 'resources.element_type = #{Iom::ActsAsResource::ORGANIZATION_TYPE}', :foreign_key => :element_id, :dependent => :destroy
+  has_many :resources, :conditions => 'resources.element_type = #{Iom::ActsAsResource::ORGANIZATION_TYPE}', :foreign_key => :element_id, :dependent => :destroy do
+    def site(site)
+      self.select{ |r| r.sites_ids.include?(site.id.to_s) }
+    end
+  end
   has_many :media_resources, :conditions => 'media_resources.element_type = #{Iom::ActsAsResource::ORGANIZATION_TYPE}', :foreign_key => :element_id, :dependent => :destroy, :order => 'position ASC'
   has_many :projects, :foreign_key => :primary_organization_id do
     def site(site)

@@ -1,9 +1,9 @@
 <%= image_tag("backoffice/sites/arrow.png", :class=>'arrow') %>
 <span class="select_country_combo region"><p class="region">Select a region</p>
-  <%= f.hidden_field :geographic_context_region_id %>
+  <input type="hidden" name="site[geographic_context_region_id]" id="site_geographic_context_region_id" value="" />
   <div class="values region">
     <ul>
-      <% @regions.each do |region| %>
+      <% (@regions || Region.all).each do |region| %>
         <li><a class="region_value" id="<%= region.id %>"><%= region.name %></a></li>
       <%end -%>
     </ul>

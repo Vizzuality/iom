@@ -78,14 +78,14 @@
     </div>
     <% end %>
 
-    <% unless @organization.resources.empty? %>
+    <% unless @organization.resources.site(@site).empty? %>
     <div class="body_info grid">
       <div class="real_content resources">
         <div class="content_info">
           <p class="title_section pt_sans_bold">ADDITIONAL RESOURCES</p>
           <ul class="additional_resources">
-            <% @organization.resources.each do |resource| %>
-            <li><%= link_to(resource.name, resource.url, :rel => 'nofollow') %></li>
+            <% @organization.resources.site(@site).each do |resource| %>
+            <li><%= link_to(resource.title, resource.url, :rel => 'nofollow') %></li>
             <% end %>
           </ul>
         </div>

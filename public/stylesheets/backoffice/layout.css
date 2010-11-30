@@ -358,9 +358,10 @@ div.block.edit div.med div.left form span.combo_large a.organization:hover {curs
 div.block.edit div.med div.left form span.combo_large.displayed {background:url('/images/backoffice/projects/large_combo_head_displayed2.png') no-repeat 0 0;}
 div.block.edit div.med div.left form span.blog.selected {float:left; width:569px; height:82px; background:url('/images/backoffice/sites/blog_bkg.png') no-repeat center 0;}
 div.block.edit div.med div.left form span.blog {float:left; height:auto; background:none;}
-div.block.edit div.med div.left form span.blog input[type="checkbox"] {margin:13px 0 0 10px;}
+div.block.edit div.med div.left form span.blog input[type="checkbox"] {margin:13px 0 0 10px; display:block!important; visibility:visible;}
+div.block.edit div.med div.left form span input[type="checkbox"] {visibility:visible;}
 div.block.edit div.med div.left form span.blog p {margin:10px 0 0 6px; width:200px;}
-div.block.edit div.med div.left form span.blog input[type="text"] {margin:5px 0 0 28px;}
+div.block.edit div.med div.left form span.blog input[type="text"] {position:relative; margin:5px 0 0 23px!important;}
 div#manage_partners {position:absolute; display:none; top:0; left:0; width:372px; height:339px; padding:20px 25px; background:url('/images/backoffice/sites/add_partner_window.png') no-repeat 0 0; z-index:1000;}
 div#manage_partners a.close {position:absolute; right:20px; top:18px; width:12px; height:12px; background:url('/images/backoffice/icons/close_window.png') no-repeat 0 0; text-indent:-9999px;}
 div#manage_partners a.close:hover {cursor:pointer; background-position:0 -12px;}
@@ -463,6 +464,7 @@ div.block.project_info div.med div.left form p.title {float:left; margin:20px 0 
 div.block.project_info div.med div.left form p.title span.info {font:normal 13px Arial; color:#999999; width:auto; padding:0 5px;}
 div.block.project_info div.med div.left form span.input_large {float:left; margin:5px 0 0 0; background:url('/images/backoffice/projects/input_project_large.png') no-repeat 0 0; width:419px; height:34px; position:relative;}
 div.block.project_info div.med div.left form span.input_large.active {background:url('/images/backoffice/projects/large_combo_head_displayed.png') no-repeat 0 0;}
+div.block.project_info div.med div.left form span.error {background-position:0 -34px;}
 /*AUTOCOMPLETE - TAGS*/
 .ui-autocomplete {position:absolute; top:40px; width:419px; display:none; z-index:20;}
 .ui-menu-item {float:right; margin:7px 0 0 0; background:url('/images/backoffice/projects/repeat_content_tags.png') no-repeat 0 0; width:413px; height:22px; font:normal 15px Arial; color:#333333; padding:5px 0 0 12px; position:relative;}
@@ -473,7 +475,7 @@ div.block.project_info div.med div.left form span.input_large.active {background
 /*END - AUTOCOMPLETE - TAGS*/
 div.block.project_info div.med div.left form input[type="text"]{position:absolute; top:6px; left:7px; width:400px; height:21px; font:normal 15px Arial; color:#333333; border:none; padding:0;}
 div.block.project_info div.bottom {float:left; height:15px; width:100%; background: url('/images/backoffice/backgrounds/bottom_two_columns.png') no-repeat scroll top left!important;}
-
+div.block.project_info div.med div.left form span.textarea.error {background-position:0 -214px;}
 div.block.project_info div.med div.left form span.textarea {float:left; margin:5px 0 0 0; background:url('/images/backoffice/projects/input_project_multiple.png') no-repeat 0 0; width:564px; height:214px; position:relative;}
 div.block.project_info div.med div.left form textarea{position:absolute; top:9px; left:9px; width:546px; height:197px; min-width:546px; max-width:546px; min-height:197px; max-height:197px; font:normal 15px Arial; color:#333333; border:none; line-height:17px;}
 div.block.project_info div.med div.left form div.list_combo {float:left; width:419px; height:auto; position:relative;}
@@ -779,6 +781,7 @@ div.block.site_info div.med div.left form span.textarea {float:left; margin:5px 
 div.block.site_info div.med div.left form span.textarea textarea{position:absolute; top:9px; left:9px; width:546px; height:197px; font:normal 15px Arial; color:#333333; border:none; line-height:17px;}
 
 div.block.site_info div.med div.left form span.textarea_short {float:left; margin:5px 0 0 0; background:url('/images/backoffice/sites/short_descript.png') no-repeat 0 0; width:564px; height:114px; position:relative;}
+div.block.site_info div.med div.left form span.textarea_short.error {background-position:0 -114px;}
 div.block.site_info div.med div.left form span.textarea_short textarea{position:absolute; top:9px; left:9px; width:546px; height:97px; font:normal 15px Arial; color:#333333; border:none; line-height:17px;}
 div.block.site_info div.med div.left form h3.section {float:left; margin:30px 0 0 2px; width:100%; font:500 17px "Museo Sans"; color:#333333;}
 
@@ -848,7 +851,7 @@ div.block.site_info div.med div.left form span.input_short input[type="text"]{po
 
 div.block.site_info div.med div.left form span.input_url {float:left; margin:5px 0 0 0; width:566px; height:34px; background:url('/images/backoffice/sites/site_url_input.png') no-repeat 0 0; position:relative;}
 div.block.site_info div.med div.left form span.input_url input[type="text"]{position:absolute; top:5px; left:7px; width:550px; height:28px; font:normal 15px Arial; color:#333333;}
-div.block.site_info div.med div.left form input[type="submit"]{background:url('/images/backoffice/projects/save_changes_bttn.png') no-repeat 0 0; font:500 19px "Museo Sans"; color:#FFFFFF; text-shadow:0 1px #6E8C30; border:none; text-align:center; width:157px; height:32px; float:right; margin:60px 10px 0 0; /*position:absolute; bottom:0; right:0;*/}
+div.block.site_info div.med div.left form input[type="submit"]{background:url('/images/backoffice/projects/save_changes_bttn.png') no-repeat 0 0; font:500 19px "Museo Sans"; color:#FFFFFF; text-shadow:0 1px #6E8C30; border:none; text-align:center; width:157px; height:32px; float:right; margin:60px 10px 0 0; text-indent:-9999px; /*position:absolute; bottom:0; right:0;*/}
 div.block.site_info div.med div.left form input[type="submit"]:hover {background-position:0 -32px; cursor:pointer;}
 
 div.block.site_info div.bottom {float:left; height:15px; width:100%; background: url('/images/backoffice/backgrounds/bottom_two_columns.png') no-repeat scroll top left!important;}

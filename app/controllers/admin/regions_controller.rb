@@ -1,11 +1,11 @@
-class RegionsController < ApplicationController
+class Admin::RegionsController < ApplicationController
 
   def index
     @regions = Region.where(:country_id => params[:country_id])
     respond_to do |format|
       format.js do
         render :update do |page|
-          page.replace_html 'regions', :partial => 'regions'
+          page << "$('#regions').html('#{escape_javascript(render(:partial => "admin/regions/regions", :layout => false))}');"
         end
       end
     end

@@ -90,7 +90,7 @@
     <span class="top"></span>
     <div class="content">
         <p><%= Project.count %></p>
-        <label><%= pluralize(Project.count,'project','projects') %><br/>registered</label>
+        <label><%= Project.count == 1 ? 'project' : 'projects' %><br/>registered</label>
         <a class="add_project" href="<%= new_admin_project_path %>">Add new project</a>
         <a class="import_csv" href="#">Import a .csv file</a>
     </div>
