@@ -81,6 +81,11 @@ class Site < ActiveRecord::Base
   rescue ActiveRecord::RecordNotFound
     nil
   end
+  
+  def published?
+    status == true
+  end
+
 
   def sector
     Sector.find(self.project_context_sector_id)

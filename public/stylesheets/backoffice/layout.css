@@ -844,7 +844,7 @@ div.block.site_info div.bottom {float:left; height:15px; width:100%; background:
 
 
 /*window alert*/
-div#modal_window {position:absolute; display:none; top:0; left:0; right:0; bottom:0; background:url('/images/backoffice/common/modal_bkg.png') repeat 0 0;}
+div#modal_window {position:absolute; display:none; top:0; left:0; right:0; bottom:0; background:url('/images/backoffice/common/modal_bkg.png') repeat 0 0; z-index:10000;}
 div#modal_window div.alert {position:absolute; top:50%; left:50%; width:450px; height:88px; padding:22px; margin:-66px 0 0 -247px; background:url('/images/backoffice/common/alert_bkg.png') no-repeat 0 0!important;}
 div#modal_window div.alert h4 {float:left; width:100%; font:bold 17px Arial; color:#333333;}
 div#modal_window div.alert p {float:left; width:100%; margin:5px 0 0 0; font:normal 15px Arial; color:#666666;}
