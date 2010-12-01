@@ -6,9 +6,12 @@
     <%= errors_for @page, :title %>
   </div>
 
-  <div class="field">
-    <%= f.label :body, raw("BODY  <strong>*</strong>") %>
-    <%= f.text_area :body, :class=>"long #{'error' if !@page.errors[:body].empty? && action_name != 'new'}" %>
+  <div class="long_field">
+    <span class="chars">
+      <%= f.label :body, raw("BODY  <strong>*</strong>") %>
+      <p id="chars_left">2500 chars left</p>
+    </span>
+    <%= f.text_area :body, :class=>"huge #{'error' if !@page.errors[:body].empty? && action_name != 'new'}", :onkeyup=>"limitChars('page_body', 3000, 'chars_left')" %>
   </div>
 
   <div class="field">
@@ -31,7 +34,7 @@
       </ul>
     </span>
     
-    <%= f.select :parent_id,  (@site.pages.highlighted - [@page]).collect{ |p| [p.title, p.id] }, :prompt => 'Select a parent page' %>
+    <%= f.select :parent_id, (@site.pages.highlighted - [@page]).collect{ |p| [p.title, p.id] }, :prompt => 'Select a parent page' %>
   </div>
   
   <div class="field">
