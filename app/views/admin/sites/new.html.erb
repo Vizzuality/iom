@@ -3,21 +3,21 @@
 	<div class="steps_create_project">
 		<span class="top"></span>
 		<div class="middle">
-			<h1>You are creating a new site...</h1>
+			<h1 class="museo_sans">You are creating a new site...</h1>
 			<ul class="steps">
 				<li>
-					<span class="circle">1</span>
-					<label>ENTER THE BASIC INFORMATION</label>
+					<span class="circle museo_sans">1</span>
+					<label class="museo_sans">ENTER THE BASIC INFORMATION</label>
 					<p>Fill the projects basic data. Remember that is important to describe it good.</p>
 				</li>
 				<li>
-					<span class="circle">2</span>
-					<label>CUSTOMIZE YOUR SITE</label>
+					<span class="circle museo_sans">2</span>
+					<label class="museo_sans">CUSTOMIZE YOUR SITE</label>
 					<p>Change the naming and the appearance of your site to make it better.</p>
 				</li>				
 				<li>
-					<span class="circle">3</span>
-					<label>THAT'S IT</label>
+					<span class="circle museo_sans">3</span>
+					<label class="museo_sans">THAT'S IT</label>
 					<p>The site should be available at the URL that you've previously introduced.</p>
 				</li>				
 				
@@ -47,22 +47,3 @@
 
 <script src="/javascripts/backoffice/site.js" type="text/javascript" charset="utf-8"></script>
 <script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>
-
-
-<% if false %>
-<h2>New site</h2>
-
-<div>
-  <h3>You are creating a new site...</h3>
-  <dl>
-    <dt>1 - Enter the basic information</dt>
-    <dd>Fill the projects...</dd>
-    <dt>2 - Customize your site</dt>
-    <dd>Change the naming...</dd>
-    <dt>3 - That's it</dt>
-    <dd>The site should be available</dd>
-  </dl>
-</div>
-
-<%= render :partial => 'form' %>
-<%end%>
