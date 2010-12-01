@@ -4,6 +4,7 @@ var dateProvided = new Array(3); // date format -> month / day / year
 var dateUpdated = new Array(3);
 var dateStart = new Array(3);
 var dateEnd = new Array(3);
+var donationDate = new Array(3);
 
 $(document).ready(function(ev){
 
@@ -36,7 +37,16 @@ $(document).ready(function(ev){
 			dateEnd[2] = $('select#project_end_date_1i').val();
 			
 			dateValue = getStringDate(dateEnd[0],dateEnd[1],dateEnd[2]);			
-			$('span#end_date').children('p').text(dateValue);			
+			$('span#end_date').children('p').text(dateValue);		
+			
+			donationDate[0] = $('select#donation_date_2i').val();
+			donationDate[1] = $('select#donation_date_3i').val();
+			donationDate[2] = $('select#donation_date_1i').val();
+			
+			dateValue = getStringDate(donationDate[0],donationDate[1],donationDate[2]);			
+			$('span#donation_date').children('p').text(dateValue);		
+			
+	
 			
 			// *********** DATE PROVIDED
 			// YEAR
@@ -69,6 +79,14 @@ $(document).ready(function(ev){
 			$('select#project_end_date_2i').sSelect({ddMaxWidth: '131px',ddMaxHeight:'200px',containerClass:'month'});
 			// DAY
 			$('select#project_end_date_3i').sSelect({ddMaxWidth: '62px',ddMaxHeight:'200px',containerClass:'day'});
+			
+			// *********** DATE DONATION
+			// YEAR
+			$('select#donation_date_1i').sSelect({ddMaxWidth: '76px',ddMaxHeight:'200px',containerClass:'year'});
+			// MONTH
+			$('select#donation_date_2i').sSelect({ddMaxWidth: '131px',ddMaxHeight:'200px',containerClass:'month'});
+			// DAY
+			$('select#donation_date_3i').sSelect({ddMaxWidth: '62px',ddMaxHeight:'200px',containerClass:'day'});
 		}
 
   // **************************************************** COMBOS
@@ -265,6 +283,26 @@ $(document).ready(function(ev){
       };
     });
   });
+  
+  // COMBO DATE IN DONATIONS
+  $('span#donation_date').click(function(ev){
+    ev.stopPropagation();
+    ev.preventDefault();
+
+    if (!$(this).hasClass('clicked')){
+      $('span.combo_date.clicked').removeClass('clicked');
+      $(this).addClass('clicked');
+	  $(this).find('div.newListSelected').css('background-position','0 0');
+    }
+
+    $(document).click(function(event) {
+      if (!$(event.target).closest('span#donation_date').length) {
+        $('span#donation_date.clicked').removeClass('clicked');
+		updateDateInfoDonations();
+      };
+    });
+  });
+  
 
   /************** CLUSTERS ************************** */
   $('span.combo_cluster_options').click(function(ev){
@@ -590,6 +628,7 @@ $(document).ready(function(ev){
 }
 
 function updateDateInfo(){
+        
         // Updating dateProvided
         var year = $('select#project_date_provided_1i option:selected').val();
         var month = $('select#project_date_provided_2i option:selected').val();
@@ -640,3 +679,16 @@ function updateDateInfo(){
         $('span#end_date').children('p').text(dateValue);
         $('span#end_date').removeClass('clicked');
   }
+  
+  function updateDateInfoDonations(){
+
+          // Updating dateProvided
+          var year = $('select#donation_date_1i option:selected').val();
+          var month = $('select#donation_date_2i option:selected').val();
+          var day = $('select#donation_date_3i option:selected').val();
+
+          var dateValue = getStringDate(month,day,year);
+
+          $('span#donation_date').children('p').text(dateValue);
+    }
+  

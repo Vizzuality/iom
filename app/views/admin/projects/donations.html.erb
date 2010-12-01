@@ -6,7 +6,7 @@
         <h2><%= @project.name %></h2>
         <p>by <%= @project.primary_organization.name %></p>
         <% unless @project.donations.empty? %>
-          <ul>
+          <ul class="donations">
       <% total_account = 0 %>
              <% @project.donations.each do |donation| %>
             <li>
@@ -41,9 +41,18 @@
           </span>
         </div>
         <div id="donation_date" class="field">
-          <%= f.label :date, 'DONATION DATE' %>
-        <span>09/10/20010</span>
-        <%= f.date_select :date, :start_year => Date.today.year - 5  %>
+            
+            <%= f.label :date, 'DONATION DATE' %>
+
+            <span id="donation_date" class="combo_date"><p>09/10/2010</p>
+              <div class="select_dates end_date">
+                <p id="month" class="title">MONTH</p>
+                <p id="day" class="title">DAY</p>
+                <p id="year" class="title">YEAR</p>
+
+                  <%= f.date_select :date, :start_year => Date.today.year, :order => [:month, :day, :year]  %>
+              </div>
+            </span>
 
         </div>
         <div id="donation_amount" class="field">
@@ -63,7 +72,10 @@
     <div class="bottom"></div>
   </div>
 </div>
- <script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>
+
+<script src="/javascripts/plugins/jquery.stylish-select.js" type="text/javascript" charset="utf-8"></script>
+<script src="/javascripts/backoffice/project.js" type="text/javascript" charset="utf-8"></script>
+<script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>
 
 
  <script type="text/javascript">
