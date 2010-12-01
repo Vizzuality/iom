@@ -2,19 +2,19 @@
 
   <div class="block">
     <div class="one">
-      <p><%= number_with_delimiter(Project.count) %></p>
-      <label><%= pluralize(Project.count, 'project', 'projects') %> published</label>
-      <p class="info"><strong><%= Project.where("created_at > '#{Date.today.beginning_of_month.to_s(:db)}'").count %> new</strong> this month</p>
+      <p class="museo_sans"><%= number_with_delimiter(Project.count) %></p>
+      <label class="museo_sans"><%= pluralize(Project.count, 'project', 'projects') %> published</label>
+      <p class="info museo_sans"><strong><%= Project.where("created_at > '#{Date.today.beginning_of_month.to_s(:db)}'").count %> new</strong> this month</p>
     </div>
     <div class="one">
-      <p><%= number_with_delimiter(Organization.count) %></p>
-      <label><%= pluralize(Organization.count, 'organization', 'organizations') %> in our database</label>
-      <p class="info"><strong><%= Organization.where("created_at > '#{Date.today.beginning_of_month.to_s(:db)}'").count %> new</strong> this month</p>
+      <p class="museo_sans"><%= number_with_delimiter(Organization.count) %></p>
+      <label class="museo_sans"><%= pluralize(Organization.count, 'organization', 'organizations') %> in our database</label>
+      <p class="info museo_sans"><strong><%= Organization.where("created_at > '#{Date.today.beginning_of_month.to_s(:db)}'").count %> new</strong> this month</p>
     </div>
     <div class="one last">
-      <p><%= number_with_delimiter(Donor.count) %></p>
-      <label><%= pluralize(Donor.count, 'organization donor', 'organization donors') %></label>
-      <p class="info"><strong><%= Donor.where("created_at > '#{Date.today.beginning_of_month.to_s(:db)}'").count %> new</strong> this month</p>
+      <p class="museo_sans"><%= number_with_delimiter(Donor.count) %></p>
+      <label class="museo_sans"><%= pluralize(Donor.count, 'organization donor', 'organization donors') %></label>
+      <p class="info museo_sans"><strong><%= Donor.where("created_at > '#{Date.today.beginning_of_month.to_s(:db)}'").count %> new</strong> this month</p>
     </div>
   </div>
 

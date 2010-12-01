@@ -4,7 +4,7 @@
       <div class="top"></div>
       <div class="med">
         <div class="left">
-          <h2><%= @element.name %></h2>
+          <h2 class="museo_sans"><%= @element.name %></h2>
           <% unless @element.media_resources.empty? %>
             <ul>
             <% @element.media_resources.order("position ASC").each do |resource| %>
@@ -66,7 +66,7 @@
           <% end -%>
 
           <div id="new_image" class="add_media">
-            <h3>Add a new image</h3>
+            <h3 class="museo_sans">Add a new image</h3>
             <p>or <a href="javascript:void(null)" class="toggle_image_video">add a video</a></p>
             <%= form_for([:admin, @element, @resource], :html => { :multipart => true }) do |f| %>
               <%= error_messages_for :resource %>

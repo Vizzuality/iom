@@ -3,7 +3,7 @@
     <div class="top"></div>
     <div class="med">
       <div class="left">
-        <h2><%= @element.name %></h2>
+        <h2 class="museo_sans"><%= @element.name %></h2>
         <p><%= pluralize(@element.resources.count, 'resource', 'resources') %></p>
 
         <% unless @element.is_a?(Organization) %>
@@ -29,7 +29,7 @@
                 <% if Site.count > 0 %>
                   <%= form_for([:admin, @element, resource]) do |f| %>
                     <div class="body">
-                      <h4>PUBLISH IN...</h4>
+                      <h4 class="museo_sans">PUBLISH IN...</h4>
                       <% Site.all.each do |site| %>
                         <input type="checkbox" name="resource[sites_ids][]" id="site_<%= site.id %>" value="<%= site.id %>" <%= 'checked="checked"' if resource.sites_ids.include?(site.id.to_s) %> /><label for="site_<%= site.id %>"><%= site.name %></label>
                       <% end %>
@@ -45,7 +45,7 @@
         <% end %>
 
         <%= form_for([:admin, @element, @resource]) do |f| %>
-          <h4>Add new resources<h4>
+          <h4 class="museo_sans">Add new resources<h4>
           <div class="field">
             <label>TITLE <strong>*</strong></label>
             <%= f.text_field :title, :class=>"title" %>

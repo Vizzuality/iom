@@ -1,24 +1,24 @@
 <div class="block first">
   <div class="top"></div>
   <div class="med information">
-    <h2><%= link_to(site.name, edit_admin_site_path(site)) %></h2>
+    <h2 class="museo_sans"><%= link_to(site.name, edit_admin_site_path(site)) %></h2>
     <ul>
       <li>
         <label>PROJECTS INCLUDED</label>
-        <p><%= site.projects.size %></p>
+        <p class="museo_sans"><%= site.projects.size %></p>
       </li>
       <li>
         <label>ORGANIZATIONS COMMITTED</label>
-        <p><%= site.organizations.size %></p>
+        <p class="museo_sans"><%= site.organizations.size %></p>
       </li>
       <% if site.google_analytics_id? %>
         <li>
           <label>VISITS TO THE SITE</label>
-          <p><%= number_with_delimiter(site.visits) %></p>
+          <p class="museo_sans"><%= number_with_delimiter(site.visits) %></p>
         </li>
         <li>
           <label>LAST 7 DAYS</label>
-          <p><%= number_with_delimiter(site.visits_last_week) %></p>
+          <p class="museo_sans"><%= number_with_delimiter(site.visits_last_week) %></p>
         </li>
       <% end %>
     </ul>

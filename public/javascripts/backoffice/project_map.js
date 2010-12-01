@@ -2,6 +2,7 @@
     var markers_position = [];
     var map;
     var geocoder = new google.maps.Geocoder();
+    var first = true;
 
     $(document).ready( function() {
       
@@ -24,7 +25,25 @@
         var position = $(this).offset();
         $('div.map_window').css('top',position.top-310+'px');
         $('div.map_window').css('left',position.left-140+'px');
-        $('div.map_window').fadeIn();
+        $('div.map_window').fadeIn(function(){
+          if (first) {
+            first = false;
+            var myOptions = {
+              zoom: 4,
+              center: new google.maps.LatLng(18.971187, -72.285215),
+              disableDefaultUI: true,
+              mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+            map = new google.maps.Map(document.getElementById("map"),myOptions);
+
+            google.maps.event.addListener(map,"click",function(event){
+      				var image = new google.maps.MarkerImage('/images/backoffice/projects/project_marker.png',new google.maps.Size(34, 42),new google.maps.Point(0,0),	new google.maps.Point(17, 42));
+      				var marker = new google.maps.Marker({position: event.latLng,  map:map, icon:image});
+      				markers_position.push(event.latLng);
+      			});
+          }
+        });
+
         
         $(window).resize(function() {
           var position = $('a#add_location_map').position();
@@ -40,19 +59,6 @@
       
       
       
-      var myOptions = {
-        zoom: 4,
-        center: new google.maps.LatLng(18.971187, -72.285215),
-        disableDefaultUI: true,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      }
-      map = new google.maps.Map(document.getElementById("map"),myOptions);
-
-      google.maps.event.addListener(map,"click",function(event){
-				var image = new google.maps.MarkerImage('/images/backoffice/projects/project_marker.png',new google.maps.Size(34, 42),new google.maps.Point(0,0),	new google.maps.Point(17, 42));
-				var marker = new google.maps.Marker({position: event.latLng,  map:map, icon:image});
-				markers_position.push(event.latLng);
-			});
     });
     
     

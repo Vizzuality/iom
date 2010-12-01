@@ -4,7 +4,7 @@
       <div class="top"></div>
       <div class="med">
         <div class="left">
-          <h2><%= @site.name %></h2>
+          <h2 class="museo_sans"><%= @site.name %></h2>
           <p><%= pluralize(@site.total_projects, 'project', 'projects') %> within this site</p>
           <% unless @site.projects.empty? %>
             <ul>
