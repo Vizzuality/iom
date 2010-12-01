@@ -93,8 +93,6 @@
           <p id="year" class="title">YEAR</p>
 
          <%= f.date_select :date_provided, :start_year => Date.today.year - 5, :order => [:month, :day, :year]  %>
-
-          <a class="save_date_bttn provided">Save date</a>
         </div>
         </span>
       </li>
@@ -108,8 +106,6 @@
           <p id="year" class="title">YEAR</p>
 
             <%= f.date_select :date_updated, :start_year => Date.today.year - 5, :order => [:month, :day, :year]  %>
-
-          <a class="save_date_bttn updated">Save date</a>
         </div>
      </span>
       </li>
@@ -197,8 +193,6 @@
             <p id="year" class="title">YEAR</p>
 
               <%= f.date_select :start_date, :start_year => Date.today.year - 5, :order => [:month, :day, :year]  %>
-
-            <a class="save_date_bttn start">Save date</a>
           </div>
         </span>
       </li>
@@ -212,8 +206,6 @@
             <p id="year" class="title">YEAR</p>
 
               <%= f.date_select :end_date, :start_year => Date.today.year - 5, :order => [:month, :day, :year]  %>
-
-            <a class="save_date_bttn end">Save date</a>
           </div>
         </span>
       </li>

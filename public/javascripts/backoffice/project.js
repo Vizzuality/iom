@@ -4,6 +4,7 @@ var dateProvided = new Array(3); // date format -> month / day / year
 var dateUpdated = new Array(3);
 var dateStart = new Array(3);
 var dateEnd = new Array(3);
+var donationDate = new Array(3);
 
 $(document).ready(function(ev){
 
@@ -36,7 +37,16 @@ $(document).ready(function(ev){
 			dateEnd[2] = $('select#project_end_date_1i').val();
 			
 			dateValue = getStringDate(dateEnd[0],dateEnd[1],dateEnd[2]);			
-			$('span#end_date').children('p').text(dateValue);			
+			$('span#end_date').children('p').text(dateValue);		
+			
+			donationDate[0] = $('select#donation_date_2i').val();
+			donationDate[1] = $('select#donation_date_3i').val();
+			donationDate[2] = $('select#donation_date_1i').val();
+			
+			dateValue = getStringDate(donationDate[0],donationDate[1],donationDate[2]);			
+			$('span#donation_date').children('p').text(dateValue);		
+			
+	
 			
 			// *********** DATE PROVIDED
 			// YEAR
@@ -69,80 +79,14 @@ $(document).ready(function(ev){
 			$('select#project_end_date_2i').sSelect({ddMaxWidth: '131px',ddMaxHeight:'200px',containerClass:'month'});
 			// DAY
 			$('select#project_end_date_3i').sSelect({ddMaxWidth: '62px',ddMaxHeight:'200px',containerClass:'day'});
-
-			// SAVE BUTTON CLICK - DATE PROVIDED
-			$('a.save_date_bttn.provided').click(function(ev){
-				ev.stopPropagation();
-				ev.preventDefault();
-
-				var year = $('select#project_date_provided_1i option:selected').val();
-				var month = $('select#project_date_provided_2i option:selected').val();
-				var day = $('select#project_date_provided_3i option:selected').val();
-				
-				dateProvided[0] = month;
-				dateProvided[1] = day;
-				dateProvided[2] = year;
-								
-				var dateValue = getStringDate(month,day,year);
-				
-				$('span#date_provided').children('p').text(dateValue);
-				$('span#date_provided').removeClass('clicked');				
-			});
-
-			// SAVE BUTTON CLICK - DATE UPDATED			
-			$('a.save_date_bttn.updated').click(function(ev){
-				ev.stopPropagation();
-				ev.preventDefault();
-
-				var year = $('select#project_date_updated_1i option:selected').val();
-				var month = $('select#project_date_updated_2i option:selected').val();
-				var day = $('select#project_date_updated_3i option:selected').val();
-				
-				dateUpdated[0] = month;
-				dateUpdated[1] = day;
-				dateUpdated[2] = year;
-				
-				var dateValue = getStringDate(month,day,year);
-				$('span#date_updated').children('p').text(dateValue);
-				$('span#date_updated').removeClass('clicked');
-			});
 			
-			// SAVE BUTTON CLICK - DATE START
-			$('a.save_date_bttn.start').click(function(ev){
-				ev.stopPropagation();
-				ev.preventDefault();
-
-				var year = $('select#project_start_date_1i option:selected').val();
-				var month = $('select#project_start_date_2i option:selected').val();
-				var day = $('select#project_start_date_3i option:selected').val();
-				
-				dateStart[0] = month;
-				dateStart[1] = day;
-				dateStart[2] = year;
-				
-				
-				var dateValue = getStringDate(month,day,year);
-				$('span#start_date').children('p').text(dateValue);
-				$('span#start_date').removeClass('clicked');				
-			});
-
-			// SAVE BUTTON CLICK - DATE END			
-			$('a.save_date_bttn.end').click(function(ev){
-				ev.stopPropagation();
-				ev.preventDefault();
-
-				var year = $('select#project_end_date_1i option:selected').val();
-				var month = $('select#project_end_date_2i option:selected').val();
-				var day = $('select#project_end_date_3i option:selected').val();
-				
-				dateEnd[0] = month;
-				dateEnd[1] = day;
-				dateEnd[2] = year;
-				
-				var dateValue = getStringDate(month,day,year);
-				$('span#end_date').children('p').text(dateValue);
-				$('span#end_date').removeClass('clicked');
-			});
+			// *********** DATE DONATION
+			// YEAR
+			$('select#donation_date_1i').sSelect({ddMaxWidth: '76px',ddMaxHeight:'200px',containerClass:'year'});
+			// MONTH
+			$('select#donation_date_2i').sSelect({ddMaxWidth: '131px',ddMaxHeight:'200px',containerClass:'month'});
+			// DAY
+			$('select#donation_date_3i').sSelect({ddMaxWidth: '62px',ddMaxHeight:'200px',containerClass:'day'});
 		}
 
   // **************************************************** COMBOS
@@ -157,11 +101,14 @@ $(document).ready(function(ev){
     }else {
       $('span.clicked').removeClass('clicked');
       $(this).removeClass('clicked');
+
+	  updateDateInfo();
     }
 
     $(document).click(function(event) {
       if (!$(event.target).closest('span#status_combo_search').length) {
         $('span#status_combo_search').removeClass('clicked');
+        updateDateInfo();        
       };
     });
   });
@@ -332,10 +279,30 @@ $(document).ready(function(ev){
     $(document).click(function(event) {
       if (!$(event.target).closest('span.combo_date').length) {
         $('span.combo_date.clicked').removeClass('clicked');
-		setDateValues();
+		updateDateInfo();
       };
     });
   });
+  
+  // COMBO DATE IN DONATIONS
+  $('span#donation_date').click(function(ev){
+    ev.stopPropagation();
+    ev.preventDefault();
+
+    if (!$(this).hasClass('clicked')){
+      $('span.combo_date.clicked').removeClass('clicked');
+      $(this).addClass('clicked');
+	  $(this).find('div.newListSelected').css('background-position','0 0');
+    }
+
+    $(document).click(function(event) {
+      if (!$(event.target).closest('span#donation_date').length) {
+        $('span#donation_date.clicked').removeClass('clicked');
+		updateDateInfoDonations();
+      };
+    });
+  });
+  
 
   /************** CLUSTERS ************************** */
   $('span.combo_cluster_options').click(function(ev){
@@ -660,22 +627,68 @@ $(document).ready(function(ev){
 	return dateValue;
 }
 
- function setDateValues(){
-	// To set initial values
-	
-	// $('select#project_date_provided_2i').val(dateProvided[0]).selected = 'selected';
-	// $('select#project_date_provided_3i').val(dateProvided[1]).selected = 'selected';
-	// $('select#project_date_provided_1i').val(dateProvided[2]).selected = 'selected';
-	// 
-	// $('select#project_date_updated_2i').val(dateUpdated[0]).selected = true;
-	// $('select#project_date_updated_3i').val(dateUpdated[1]).selected = true;
-	// $('select#project_date_updated_1i').val(dateUpdated[2]).selected = true;
-	// 
-	// $('select#project_start_date_2i').val(dateStart[0]).selected = true;
-	// $('select#project_start_date_3i').val(dateStart[1]).selected = true;
-	// $('select#project_start_date_1i').val(dateStart[2]).selected = true;
-	// 
-	// $('select#project_end_date_2i').val(dateEnd[0]).selected = true;
-	// $('select#project_end_date_3i').val(dateEnd[1]).selected = true;
-	// $('select#project_end_date_1i').val(dateEnd[2]).selected = true;
+function updateDateInfo(){
+        
+        // Updating dateProvided
+        var year = $('select#project_date_provided_1i option:selected').val();
+        var month = $('select#project_date_provided_2i option:selected').val();
+        var day = $('select#project_date_provided_3i option:selected').val();
+
+        dateProvided[0] = month;
+        dateProvided[1] = day;
+        dateProvided[2] = year;
+				
+        var dateValue = getStringDate(month,day,year);
+
+        $('span#date_provided').children('p').text(dateValue);
+
+        // Updating dateUpdated
+        year = $('select#project_date_updated_1i option:selected').val();
+        month = $('select#project_date_updated_2i option:selected').val();
+        day = $('select#project_date_updated_3i option:selected').val();
+
+        dateUpdated[0] = month;
+        dateUpdated[1] = day;
+        dateUpdated[2] = year;
+
+        dateValue = getStringDate(month,day,year);
+        $('span#date_updated').children('p').text(dateValue);
+
+        // Updating dateStart
+        year = $('select#project_start_date_1i option:selected').val();
+        month = $('select#project_start_date_2i option:selected').val();
+        day = $('select#project_start_date_3i option:selected').val();
+
+        dateStart[0] = month;
+        dateStart[1] = day;
+        dateStart[2] = year;
+
+
+        dateValue = getStringDate(month,day,year);
+        $('span#start_date').children('p').text(dateValue);	
+
+        year = $('select#project_end_date_1i option:selected').val();
+        month = $('select#project_end_date_2i option:selected').val();
+        day = $('select#project_end_date_3i option:selected').val();
+
+        dateEnd[0] = month;
+        dateEnd[1] = day;
+        dateEnd[2] = year;
+
+        dateValue = getStringDate(month,day,year);
+        $('span#end_date').children('p').text(dateValue);
+        $('span#end_date').removeClass('clicked');
   }
+  
+  function updateDateInfoDonations(){
+
+          // Updating dateProvided
+          var year = $('select#donation_date_1i option:selected').val();
+          var month = $('select#donation_date_2i option:selected').val();
+          var day = $('select#donation_date_3i option:selected').val();
+
+          var dateValue = getStringDate(month,day,year);
+
+          $('span#donation_date').children('p').text(dateValue);
+    }
+  
