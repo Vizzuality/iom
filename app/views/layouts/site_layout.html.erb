@@ -11,8 +11,8 @@
   <!-- <script type="text/javascript" src="http://use.typekit.com/loh6bqm.js"></script>
   <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
 </head>
-<body  onload="initialize()">
-  <div id="outer_header">
+<body>
+  <!-- <div id="outer_header">
     <div id="inner_header">
       <div id="header">
         <div class="left">
@@ -49,7 +49,6 @@
             <li><a href="<%= page_path(Page.about(@site)) %>" class="geneva">ABOUT</a></li>
           </ul>
         </div>
-        <!-- div left menu -->
 
         <div class="right">
           <%= form_tag(search_path, :method => :get, :class => 'search') do %>
@@ -59,32 +58,45 @@
             </span>
           <% end %>
         </div>
-        <!-- div right menu -->
       </div>
     </div>
-    <!-- inner header -->
-  </div>
-  <!-- div outer_header -->
+  </div> -->
 
   <div id="outer_layout">
-    <div id="map"></div>
+    <!-- <div id="map"></div> -->
 
     <div id="layout">
 
       <%= yield %>
-
-      <div id="footer">
-        <div class="left">
-          <a class="logo"></a>
-        </div>
-        <div class="right">
-          <p class="copy_info pt_sans_bold"><%= @site.name %></p>
-          <p class="all_rights pt_sans">A project by Interaction 2010. All rigths reserved.</p>
-          <div class="links">
-            <a class="pt_sans" href="<%= page_path(Page.contact(@site)) %>">contact us</a><p>/</p><a class="pt_sans" href="<%= page_path(Page.about(@site)) %>">About the project</a>
+      
+      
+      <!-- <% if controller_name != 'pages' %>
+        <div id="footer_pages">
+          <div class="left">
+            <p class="copy_info pt_sans_bold"><%= @site.name %></p>
+            <p class="all_rights pt_sans">A project by Interaction 2010. All rights reserved.</p>
+            <div class="links">
+              <a class="pt_sans" href="<%= page_path(Page.contact(@site)) %>">contact us</a><p>/</p><a class="pt_sans" href="<%= page_path(Page.about(@site)) %>">About the project</a>
+            </div>
+          </div>
+          <div class="right">
+            <a class="logo"></a>
           </div>
         </div>
-      </div>
+      <% else %>
+        <div id="footer">
+          <div class="left">
+            <a class="logo"></a>
+          </div>
+          <div class="right">
+            <p class="copy_info pt_sans_bold"><%= @site.name %></p>
+            <p class="all_rights pt_sans">A project by Interaction 2010. All rigths reserved.</p>
+            <div class="links">
+              <a class="pt_sans" href="<%= page_path(Page.contact(@site)) %>">contact us</a><p>/</p><a class="pt_sans" href="<%= page_path(Page.about(@site)) %>">About the project</a>
+            </div>
+          </div>
+        </div>
+      <% end %> -->
     </div>
     <!-- layout -->
   </div>
