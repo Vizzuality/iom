@@ -15,6 +15,9 @@ gem 'paperclip', :tag => 'v2.3.5'
 gem 'garb'
 gem 'csv-mapper'
 
+gem 'csv-mapper'
+gem 'fastercsv'
+
 group :development do
   gem 'capistrano'
   gem 'capistrano-ext'
