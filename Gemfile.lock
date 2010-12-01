@@ -113,6 +113,7 @@ GEM
       rack (>= 1.0.0)
     rack-test (0.5.6)
       rack (>= 1.0)
+    railroady (0.11.2)
     rails (3.0.1)
       actionmailer (= 3.0.1)
       actionpack (= 3.0.1)
@@ -179,6 +180,7 @@ DEPENDENCIES
   paperclip
   pg (= 0.9.0)
   ppe-postgis-adapter!
+  railroady
   rails (= 3.0.1)
   rr
   rspec (>= 2.0.0.beta.13)

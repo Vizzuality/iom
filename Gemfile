@@ -19,6 +19,7 @@ group :development do
   gem 'capistrano'
   gem 'capistrano-ext'
   gem 'wirble'
+  gem 'railroady'
 end
 
 group :test, :development do
