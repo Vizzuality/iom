@@ -511,7 +511,7 @@ div.block.project_info div.med div.left form ul.dates li.date span.combo_date {f
 div.block.project_info div.med div.left form ul.dates li.date span.combo_date:hover {cursor:pointer;}
 div.block.project_info div.med div.left form ul.dates li.date span.combo_date div.select_dates {display:none;}
 div.block.project_info div.med div.left form ul.dates li.date span.combo_date.clicked {background:url('/images/backoffice/projects/date/bkg_header_clicked_date.png') no-repeat 0 0;}
-div.block.project_info div.med div.left form ul.dates li.date span.combo_date.clicked div.select_dates {position:absolute; top:30px; left:0; background:url('/images/backoffice/projects/date/bkg_date_content.png') no-repeat 0 0; width:416px; height:68px; z-index:20; display:inline;}
+div.block.project_info div.med div.left form ul.dates li.date span.combo_date.clicked div.select_dates {position:absolute; top:30px; left:0; background:url('/images/backoffice/projects/date/bkg_date_content.png') no-repeat 0 0; width:335px; height:68px; z-index:20; display:inline;}
 div.block.project_info div.med div.left form ul.dates li.date span.combo_date.clicked div.select_dates.end_date {background:url('/images/backoffice/projects/date/bkg_date_content_right.png') no-repeat 0 0; position:absolute; top:30px; left:-142px;}
 
 div.block.project_info div.med div.left form ul.dates li.date span.combo_date.clicked div.select_dates span.month {float:left; width:124px; height:51px; margin:10px 9px 0 10px;}
