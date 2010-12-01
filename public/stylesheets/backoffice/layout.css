@@ -814,6 +814,8 @@ div.block.site_info div.med div.left p.by a {width:auto; font:normal 15px Arial;
 div.block.site_info div.med div.left p.by a:hover {text-decoration:underline;}
 div.block.site_info div.med div.left form {float:left; width:100%; height:auto; margin:5px 0 0 0; /*padding:0 0 15px 0;*/ position:relative;}
 
+
+
 div.block.site_info div.med div.left form input[type="checkbox"]{visibility:hidden;}
 div.block.site_info div.med div.left form label {float:left; margin:20px 0 0 3px; font:bold 11px Arial; color:#999999; width:100%; text-transform:uppercase;}
 
@@ -922,7 +924,8 @@ ul.pages li div.body span a.delete:hover {background-position:0 -14px;}
 ul.pages li div.down {float:left; width:565px; height:15px; background:url('/images/backoffice/resources/resources_bottom.png') no-repeat 0 bottom;}
 span.chars {float:left; width:100%;}
 span.chars label {width:auto!important;}
-span.chars p {float:right!important; margin:20px 10px 0 0; width:auto; font:normal 13px Arial!important; color:#999999!important;}
+span.chars p {float:right!important; margin:20px 10px 0 0; width:auto; font:normal 13px Arial!important; color:#999999;}
+span.chars p.few {color:#FF9900;}
 select#page_parent_id {display:none;}
 span#parent_page {float:left; margin:10px 0 0 0; background:url('/images/backoffice/projects/combos/combo_add_cluster.png') no-repeat 0 0; width:254px; height:24px; padding:8px 0 0 10px; position:relative;}
 span#parent_page p {font:normal 13px Arial; color:#999999;}

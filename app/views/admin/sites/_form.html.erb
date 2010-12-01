@@ -8,15 +8,22 @@
     </span>
   </div>
   <div class="field">
-    <label>SHORT DESCRIPTION <strong>*</strong></label>
+    <span class="chars">
+      <label>SHORT DESCRIPTION <strong>*</strong></label>
+      <p id="chars_left">330 chars left</p>
+    </span>
+
     <span class="textarea_short <%= 'error' if !@site.errors[:short_description].empty? && action_name != 'new' %>">
-      <%= f.text_area :short_description %>
+      <%= f.text_area :short_description , :onkeyup=>"limitChars('site_short_description', 330, 'chars_left')" %>
     </span>
   </div>
   <div class="field">
-    <label>LONG DESCRIPTION <strong>*</strong></label>
+    <span class="chars">
+      <label>LONG DESCRIPTION <strong>*</strong></label>
+      <p id="chars_left_long">730 chars left</p>
+    </span>
     <span class="textarea <%= 'error' if !@site.errors[:long_description].empty? && action_name != 'new' %>">
-      <%= f.text_area :long_description %>
+      <%= f.text_area :long_description , :onkeyup=>"limitChars('site_long_description', 730, 'chars_left_long')" %>
     </span>
   </div>
   <h3 class="section museo_sans">GEOGRAPHIC CONTEXT</h3>
@@ -299,4 +306,5 @@ $(function() {
 <%end%>
 
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+  <script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>
   <script src="/javascripts/backoffice/site_map.js" type="text/javascript" charset="utf-8"></script>

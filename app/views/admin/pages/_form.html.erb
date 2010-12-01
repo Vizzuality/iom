@@ -11,7 +11,7 @@
       <%= f.label :body, raw("BODY  <strong>*</strong>") %>
       <p id="chars_left">2500 chars left</p>
     </span>
-    <%= f.text_area :body, :class=>"huge #{'error' if !@page.errors[:body].empty? && action_name != 'new'}", :onkeyup=>"limitChars('page_body', 3000, 'chars_left')" %>
+    <%= f.text_area :body, :class=>"huge #{'error' if !@page.errors[:body].empty? && action_name != 'new'}", :onkeyup=>"limitChars('page_body', 2500, 'chars_left')" %>
   </div>
 
   <div class="field">
@@ -52,5 +52,5 @@
   <%= f.submit 'Save', :class => "#{'error' if @page.invalid? && action_name != 'new'}" %>
 
 <% end -%>
-
+<script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>
 <script src="/javascripts/backoffice/page.js" type="text/javascript" charset="utf-8"></script>
