@@ -12,20 +12,28 @@ body {background:#E1E5E7;}
 ul {list-style:none;}
 label strong {font:normal 14px Georgia; color:#E93E3F;}
 
+/*FONT FACE*/
+@font-face {
+    font-family: 'Museo Sans';
+    src: url('/fonts/museosans_500-webfont.eot');
+    src: local('☺'), url('/fonts/museosans_500-webfont.woff') format('woff'), url('/fonts/museosans_500-webfont.ttf') format('truetype'), url('/fonts/museosans_500-webfont.svg#webfontX97tj7j1') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
 
 /*ERROR MESSAGES*/
 span.field_error {position:absolute; bottom:10px; right:10px; margin:0; padding:0;}
-span.field_error a.error {float:right; width:14px; height:14px; background: url('../../images/backoffice/icons/error.png') no-repeat scroll top left;}
+span.field_error a.error {float:right; width:14px; height:14px; background: url('/images/backoffice/icons/error.png') no-repeat scroll top left;}
 span.field_error a.error:hover {cursor:pointer;}
 span.field_error div.error_msg {position:absolute; display:none; top:-9px; left:-9px;width:200px;}
-span.field_error div.error_msg p {position:relative; float:left; padding:0 0 0 27px; height:31px; background: url('../../images/backoffice/common/left_error.png') no-repeat scroll top left;}
+span.field_error div.error_msg p {position:relative; float:left; padding:0 0 0 27px; height:31px; background: url('/images/backoffice/common/left_error.png') no-repeat scroll top left;}
 span.field_error div.error_msg p span {position:relative; float:left!important; height:15px; padding:8px 15px 8px 2px; display:block; background:url('/images/backoffice/common/right_error.png') no-repeat right 0; font:normal 13px Arial; color:#333333;}
 
 span.simple_field_error {position:absolute; top:0; left:405px; margin:0; padding:0;}
-span.simple_field_error a.simple_error {float:right; width:34px; height:32px; background: url('../../images/backoffice/icons/simple_error.png') no-repeat scroll top left;}
+span.simple_field_error a.simple_error {float:right; width:34px; height:32px; background: url('/images/backoffice/icons/simple_error.png') no-repeat scroll top left;}
 span.simple_field_error a.simple_error:hover {cursor:pointer;}
 span.simple_field_error div.error_msg {position:absolute; display:none; top:0; left:1px; width:200px;}
-span.simple_field_error div.error_msg p {position:relative; float:left; padding:0 0 0 27px; height:31px; background: url('../../images/backoffice/common/left_error.png') no-repeat scroll top left;}
+span.simple_field_error div.error_msg p {position:relative; float:left; padding:0 0 0 27px; height:31px; background: url('/images/backoffice/common/left_error.png') no-repeat scroll top left;}
 span.simple_field_error div.error_msg p span {position:relative; float:left!important; height:15px; padding:8px 15px 8px 2px; display:block; background:url('/images/backoffice/common/right_error.png') no-repeat right 0; font:normal 13px Arial; color:#333333;}
 
 /* LAYOUT */
@@ -212,10 +220,10 @@ div.block.edit div.med div.left input[type="submit"].error {background:url('/ima
 div.block.edit div.med div.left input[type="submit"].error:hover {background:url('/images/backoffice/donors/save_changes.png') no-repeat 0 -96px; cursor:pointer;}
 div.block.edit div.med div.left div.field input.error {width:379px; padding:8px 32px 8px 8px; background-position:0 -34px;}
 div.block.edit div.med div.left span.field_error {position:absolute; bottom:10px; right:10px; margin:0; padding:0; width:auto;}
-div.block.edit div.med div.left span.field_error a.error {float:right; width:14px; height:14px; background: url('../../images/backoffice/icons/error.png') no-repeat scroll top left;}
+div.block.edit div.med div.left span.field_error a.error {float:right; width:14px; height:14px; background: url('/images/backoffice/icons/error.png') no-repeat scroll top left;}
 div.block.edit div.med div.left span.field_error a.error:hover {cursor:pointer;}
 div.block.edit div.med div.left span.field_error div.error_msg {position:absolute; display:none; top:-9px; left:-9px;width:200px;}
-div.block.edit div.med div.left span.field_error div.error_msg p {position:relative; float:left; width:auto; height:31px; padding:0 0 0 27px; background: url('../../images/backoffice/common/left_error.png') no-repeat scroll top left;}
+div.block.edit div.med div.left span.field_error div.error_msg p {position:relative; float:left; width:auto; height:31px; padding:0 0 0 27px; background: url('/images/backoffice/common/left_error.png') no-repeat scroll top left;}
 div.block.edit div.med div.left span.field_error div.error_msg p span {position:relative; float:left!important; height:15px; padding:8px 10px 8px 2px; margin:0!important; display:block; background:url('/images/backoffice/common/right_error.png') no-repeat right 0; font:normal 13px Arial; color:#333333;}
 div.block.edit div.bottom {float:left; height:15px; width:100%; background: url('/images/backoffice/backgrounds/bottom_two_columns.png') no-repeat scroll top left!important;}
 
