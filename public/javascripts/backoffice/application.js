@@ -109,14 +109,19 @@ $(document).ready(function(ev){
     
   function limitChars(textid, limit, infodiv) {
     var text = $('#'+textid).val(); 
+
     var textlength = text.length;
     if(textlength > limit) {
       $('#' + infodiv).html(limit+' chars written');
       $('#'+textid).val(text.substr(0,limit));
       return false;
-    } else {
-      $('#' + infodiv).html((limit - textlength) +' chars left.');
-      $('#' + infodiv).css('color','#999999');
+    }else {
+      if (limit - textlength <= 10){
+          $('#' + infodiv).addClass('few');
+      }else if ($('#' + infodiv).hasClass('few')){
+          $('#' + infodiv).removeClass('few');
+      }
+      $('#' + infodiv).html((limit - textlength) +' chars left');
       return true;
     }
   }

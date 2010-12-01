@@ -8,15 +8,22 @@
     </span>
   </div>
   <div class="field">
-    <label>SHORT DESCRIPTION <strong>*</strong></label>
+    <span class="chars">
+      <label>SHORT DESCRIPTION <strong>*</strong></label>
+      <p id="chars_left">330 chars left</p>
+    </span>
+
     <span class="textarea_short <%= 'error' if !@site.errors[:short_description].empty? && action_name != 'new' %>">
-      <%= f.text_area :short_description %>
+      <%= f.text_area :short_description , :onkeyup=>"limitChars('site_short_description', 330, 'chars_left')" %>
     </span>
   </div>
   <div class="field">
-    <label>LONG DESCRIPTION <strong>*</strong></label>
+    <span class="chars">
+      <label>LONG DESCRIPTION <strong>*</strong></label>
+      <p id="chars_left_long">730 chars left</p>
+    </span>
     <span class="textarea <%= 'error' if !@site.errors[:long_description].empty? && action_name != 'new' %>">
-      <%= f.text_area :long_description %>
+      <%= f.text_area :long_description , :onkeyup=>"limitChars('site_long_description', 730, 'chars_left_long')" %>
     </span>
   </div>
   <h3 class="section museo_sans">GEOGRAPHIC CONTEXT</h3>
@@ -24,9 +31,9 @@
   <div class="field">
   <label>SITE GEOGRAPHICAL CONTEXT</label>
   <ul class="geographic_options">
-  <li id="gc_worldwide" class="selected"><a class="limited">Worldwide, not limited</a></li>
+  <li id="gc_worldwide" class="selected"><a class="combo limited">Worldwide, not limited</a></li>
   <li id="gc_limited_country">
-    <a class="limited">Limited to a country</a>
+    <a class="combo limited">Limited to a country</a>
     <div class="content">
       <span class="select_country_combo"><p class="country">Select a country</p>
       <%= f.hidden_field :geographic_context_country_id %>
@@ -41,7 +48,7 @@
     </div>
   </li>
   <li id="gc_limited_region">
-    <a class="limited">Limited to a region</a>
+    <a class="limited combo">Limited to a region</a>
 
     <div class="content">
       <span class="select_country_combo"><p class="country">Select a country</p>
@@ -59,7 +66,7 @@
     </div>
   </li>
   <li id="gc_limited_bbox">
-    <a class="limited">Limited by a boundary box</a>
+    <a class="limited combo">Limited by a boundary box</a>
     <div class="content">
       <div id="map_bbox">
         <!-- TODO: ADD MAP  -->
@@ -75,7 +82,7 @@
 
   <ul class="project_tipo_options">
     <li id="include_sector_cluster">
-      <a>Include only projects from a particular cluster or sector</a>
+      <a class="check">Include only projects from a particular cluster or sector</a>
       <div class="content">
         <span class="select_combo_typology"><p class="cluster_sector">Select a cluster or a sector</p>
           <div class="values">
@@ -97,7 +104,7 @@
       </div>
     </li>
     <li id="include_ngo">
-      <a>Include only projects from a particular NGO</a>
+      <a class="check">Include only projects from a particular NGO</a>
       <div class="content">
         <span class="select_combo_typology"><p class="ngo">Select an NGO</p>
           <div class="values">
@@ -112,7 +119,7 @@
       </div>
     </li>
     <li id="include_tags">
-      <a>Include only matching some tags</a>
+      <a class="check">Include only matching some tags</a>
       <div class="content">
         <span class="tags_site">
           <%= f.text_field :project_context_tags, {:id => 'pc_tags_section'} %>
@@ -299,4 +306,5 @@ $(function() {
 <%end%>
 
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+  <script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>
   <script src="/javascripts/backoffice/site_map.js" type="text/javascript" charset="utf-8"></script>

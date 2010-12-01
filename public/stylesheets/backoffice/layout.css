@@ -486,14 +486,38 @@ div.block.project_info div.med div.left form p.title span.info {font:normal 13px
 div.block.project_info div.med div.left form span.input_large {float:left; margin:5px 0 0 0; background:url('/images/backoffice/projects/input_project_large.png') no-repeat 0 0; width:419px; height:34px; position:relative;}
 div.block.project_info div.med div.left form span.input_large.active {background:url('/images/backoffice/projects/large_combo_head_displayed.png') no-repeat 0 0;}
 div.block.project_info div.med div.left form span.error {background-position:0 -34px;}
-/*AUTOCOMPLETE - TAGS*/
-.ui-autocomplete {position:absolute; top:40px; width:419px; display:none; z-index:20;}
-.ui-menu-item {float:right; margin:7px 0 0 0; background:url('/images/backoffice/projects/repeat_content_tags.png') no-repeat 0 0; width:413px; height:22px; font:normal 15px Arial; color:#333333; padding:5px 0 0 12px; position:relative;}
-.ui-menu-item:hover {cursor:pointer; background:url('/images/backoffice/projects/repeat_content_tags_hover.png') no-repeat 0 0;}
-.ui-menu-item.last{float:right; width:425px; height:7px; margin:0; background:url('/images/backoffice/projects/bottom_content_tags.png') no-repeat 0 0; padding:0;}
-.ui-menu-item a {width:100%;}
-.ui-menu-item p.info_amount {position:absolute; right:20px; top:6px; font:normal 13px Arial; color:#666666; width:auto;}
+
+/*AUTOCOMPLETE - PROJECT TAGS*/
+ul.ui-autocomplete.project_tags {position:absolute; top:40px; width:419px; display:none; z-index:20;}
+ul.ui-autocomplete.project_tags li.ui-menu-item {float:right; margin:7px 0 0 0; background:url('/images/backoffice/projects/repeat_content_tags.png') no-repeat 0 0; width:413px; height:22px; font:normal 15px Arial; color:#333333; padding:5px 0 0 12px; position:relative;}
+ul.ui-autocomplete.project_tags li.ui-menu-item:hover {cursor:pointer; background:url('/images/backoffice/projects/repeat_content_tags_hover.png') no-repeat 0 0;}
+ul.ui-autocomplete.project_tags li.ui-menu-item.last{float:right; width:425px; height:7px; margin:0; background:url('/images/backoffice/projects/bottom_content_tags.png') no-repeat 0 0; padding:0;}
+ul.ui-autocomplete.project_tags li.ui-menu-item a {width:100%;}
+ul.ui-autocomplete.project_tags li.ui-menu-item p.info_amount {position:absolute; right:20px; top:6px; font:normal 13px Arial; color:#666666; width:auto;}
 /*END - AUTOCOMPLETE - TAGS*/
+
+
+/*AUTOCOMPLETE - DONOR NAME*/
+ul.ui-autocomplete.donor_names {position:absolute; top:40px; width:419px; display:none; z-index:20;}
+ul.ui-autocomplete.donor_names li.ui-menu-item {float:right; margin:7px 0 0 0; background:url('/images/backoffice/projects/repeat_content_tags.png') no-repeat 0 0; width:413px; height:22px; font:normal 15px Arial; color:#333333; padding:5px 0 0 12px; position:relative;}
+ul.ui-autocomplete.donor_names li.ui-menu-item:hover {cursor:pointer; background:url('/images/backoffice/projects/repeat_content_tags_hover.png') no-repeat 0 0;}
+ul.ui-autocomplete.donor_names li.ui-menu-item.last{float:right; width:425px; height:7px; margin:0; background:url('/images/backoffice/projects/bottom_content_tags.png') no-repeat 0 0; padding:0;}
+ul.ui-autocomplete.donor_names li.ui-menu-item a {width:100%;}
+ul.ui-autocomplete.donor_names li.ui-menu-item p.info_amount {position:absolute; right:20px; top:6px; font:normal 13px Arial; color:#666666; width:auto;}
+/*END - AUTOCOMPLETE - TAGS*/
+
+
+/*AUTOCOMPLETE - FILTERING TAGS*/
+ul.ui-autocomplete.site_filtering_tags {position:absolute; top:40px; width:419px; display:none; z-index:20;}
+ul.ui-autocomplete.site_filtering_tags li.ui-menu-item {float:right; margin:7px 0 0 0; background:url('/images/backoffice/projects/repeat_content_tags.png') no-repeat 0 0; width:413px; height:22px; font:normal 15px Arial; color:#333333; padding:5px 0 0 12px; position:relative;}
+ul.ui-autocomplete.site_filtering_tags li.ui-menu-item:hover {cursor:pointer; background:url('/images/backoffice/projects/repeat_content_tags_hover.png') no-repeat 0 0;}
+ul.ui-autocomplete.site_filtering_tags li.ui-menu-item.last{float:right; width:425px; height:7px; margin:0; background:url('/images/backoffice/projects/bottom_content_tags.png') no-repeat 0 0; padding:0;}
+ul.ui-autocomplete.site_filtering_tags li.ui-menu-item a {width:100%;}
+ul.ui-autocomplete.site_filtering_tags li.ui-menu-item p.info_amount {position:absolute; right:20px; top:6px; font:normal 13px Arial; color:#666666; width:auto;}
+/*END - AUTOCOMPLETE - TAGS*/
+
+
+
 div.block.project_info div.med div.left form input[type="text"]{position:absolute; top:6px; left:7px; width:400px; height:21px; font:normal 15px Arial; color:#333333; border:none; padding:0;}
 div.block.project_info div.bottom {float:left; height:15px; width:100%; background: url('/images/backoffice/backgrounds/bottom_two_columns.png') no-repeat scroll top left!important;}
 div.block.project_info div.med div.left form span.textarea.error {background-position:0 -214px;}
@@ -814,6 +838,8 @@ div.block.site_info div.med div.left p.by a {width:auto; font:normal 15px Arial;
 div.block.site_info div.med div.left p.by a:hover {text-decoration:underline;}
 div.block.site_info div.med div.left form {float:left; width:100%; height:auto; margin:5px 0 0 0; /*padding:0 0 15px 0;*/ position:relative;}
 
+
+
 div.block.site_info div.med div.left form input[type="checkbox"]{visibility:hidden;}
 div.block.site_info div.med div.left form label {float:left; margin:20px 0 0 3px; font:bold 11px Arial; color:#999999; width:100%; text-transform:uppercase;}
 
@@ -834,9 +860,9 @@ div.block.site_info div.med div.left form h3.section {float:left; margin:30px 0 
 div.block.site_info div.med div.left form ul.geographic_options {float:left; width:235px; height:auto; margin:10px 0 0 0px;}
 div.block.site_info div.med div.left form ul.geographic_options li {float:left; margin:7px 0 0 12px; width:215px;}
 div.block.site_info div.med div.left form ul.geographic_options li.selected {margin:10px 0 0 0;}
-div.block.site_info div.med div.left form ul.geographic_options li a {float:left; font:normal 15px Arial; color:#333333; text-decoration:none; background:url('/images/backoffice/sites/option_bkg.png') no-repeat 0 4px; padding:0 0 0 15px; height:14px;}
-div.block.site_info div.med div.left form ul.geographic_options li a:hover {cursor:pointer;}
-div.block.site_info div.med div.left form ul.geographic_options li.selected a {background:url('/images/backoffice/sites/option_bkg_selected.png') no-repeat 0 4px;}
+div.block.site_info div.med div.left form ul.geographic_options li a.combo {float:left; font:normal 15px Arial; color:#333333; text-decoration:none; background:url('/images/backoffice/sites/option_bkg.png') no-repeat 0 4px; padding:0 0 0 15px; height:14px;}
+div.block.site_info div.med div.left form ul.geographic_options li a.combo:hover {cursor:pointer;}
+div.block.site_info div.med div.left form ul.geographic_options li.selected a.combo {background:url('/images/backoffice/sites/option_bkg_selected.png') no-repeat 0 4px;}
 div.block.site_info div.med div.left form ul.geographic_options li div.content {display:none; width:100%;}
 div.block.site_info div.med div.left form ul.geographic_options li.selected div.content {float:left; display:inline; width:100%;}
 div.block.site_info div.med div.left form ul.geographic_options li.selected#gc_worldwide {margin:7px 0 0 12px;}
@@ -863,9 +889,9 @@ div.block.site_info div.med div.left form ul.project_tipo_options {float:left; w
 div.block.site_info div.med div.left form ul.project_tipo_options li {float:left; margin:7px 0 0 12px; width:600px;}
 div.block.site_info div.med div.left form ul.project_tipo_options li.selected {margin:10px 0 0 0; background:url('/images/backoffice/sites/bkg_limited_country.png') no-repeat 0 0; width:544px; height:65px; padding:10px 13px;}
 
-div.block.site_info div.med div.left form ul.project_tipo_options li a {float:left; font:normal 15px Arial; color:#333333; text-decoration:none; background:url('/images/backoffice/sites/project_tipo_check.png') no-repeat 0 4px; padding:0 0 0 15px; height:14px;}
-div.block.site_info div.med div.left form ul.project_tipo_options li a:hover {cursor:pointer;}
-div.block.site_info div.med div.left form ul.project_tipo_options li.selected a {background:url('/images/backoffice/sites/project_tipo_checked.png') no-repeat 0 4px;}
+div.block.site_info div.med div.left form ul.project_tipo_options li a.check {float:left; font:normal 15px Arial; color:#333333; text-decoration:none; background:url('/images/backoffice/sites/project_tipo_check.png') no-repeat 0 4px; padding:0 0 0 15px; height:14px;}
+div.block.site_info div.med div.left form ul.project_tipo_options li a.check:hover {cursor:pointer;}
+div.block.site_info div.med div.left form ul.project_tipo_options li.selected a.check {background:url('/images/backoffice/sites/project_tipo_checked.png') no-repeat 0 4px;}
 div.block.site_info div.med div.left form ul.project_tipo_options li.selected div.content {display:inline;}
 div.block.site_info div.med div.left form ul.project_tipo_options li div.content {display:none; width:100%;}
 div.block.site_info div.med div.left form ul.project_tipo_options li.selected span.select_combo_typology {float:left; background:url('/images/backoffice/sites/select_country_combo.png') no-repeat 0 0; width:240px; height:32px; margin:12px 0 0 12px;}
@@ -922,7 +948,8 @@ ul.pages li div.body span a.delete:hover {background-position:0 -14px;}
 ul.pages li div.down {float:left; width:565px; height:15px; background:url('/images/backoffice/resources/resources_bottom.png') no-repeat 0 bottom;}
 span.chars {float:left; width:100%;}
 span.chars label {width:auto!important;}
-span.chars p {float:right!important; margin:20px 10px 0 0; width:auto; font:normal 13px Arial!important; color:#999999!important;}
+span.chars p {float:right!important; margin:20px 10px 0 0; width:auto; font:normal 13px Arial!important; color:#999999;}
+span.chars p.few {color:#FF9900;}
 select#page_parent_id {display:none;}
 span#parent_page {float:left; margin:10px 0 0 0; background:url('/images/backoffice/projects/combos/combo_add_cluster.png') no-repeat 0 0; width:254px; height:24px; padding:8px 0 0 10px; position:relative;}
 span#parent_page p {font:normal 13px Arial; color:#999999;}
