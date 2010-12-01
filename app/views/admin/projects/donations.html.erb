@@ -28,10 +28,10 @@
             </li>
             <% end -%>
           </ul>
-      <h4 class="total">TOTAL DONATED:</h4><span class="total_account">$</span><p class="amount"><%= total_account %></p>
+      <h4 class="total museo_sans">TOTAL DONATED:</h4><span class="total_account">$</span><p class="amount"><%= total_account %></p>
         <% end -%>
     <%= form_for([:admin, @project, (@donation || @project.donations.new)]) do |f| %>
-      <h4>Add a new donation</h4>
+      <h4 class="museo_sans shadow_white">Add a new donation</h4>
 
         <div id="donor_name" class="field">
           <%= f.label :donor_id, 'DONOR NAME' %>
