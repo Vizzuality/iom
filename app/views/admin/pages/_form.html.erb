@@ -19,7 +19,19 @@
 
   <div class="field">
     <%= f.label :parent_id, 'Parent page' %>
-    <%= f.select :parent_id, (@site.pages.highlighted - [@page]).collect{ |p| [p.title, p.id] }, :prompt => 'Select a parent page' %>
+    
+    <span id="parent_page" class="parent_page">
+      <p id="0">Select a parent page</p>
+      <ul class="options">
+        <li><a id="0">Select a parent page</a></li>
+      <% (@site.pages.highlighted - [@page]).collect do |sector| %>
+        <li><a id="<%= sector.id %>"><%= sector.title %></a></li>
+      <% end %>
+        <li class="last"></li>
+      </ul>
+    </span>
+    
+    <%= f.select :parent_id,  (@site.pages.highlighted - [@page]).collect{ |p| [p.title, p.id] }, :prompt => 'Select a parent page' %>
   </div>
   
   <div class="field">
@@ -37,3 +49,5 @@
   <%= f.submit 'Save', :class => "#{'error' if @page.invalid? && action_name != 'new'}" %>
 
 <% end -%>
+
+<script src="/javascripts/backoffice/page.js" type="text/javascript" charset="utf-8"></script>
