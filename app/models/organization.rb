@@ -58,7 +58,7 @@ class Organization < ActiveRecord::Base
   before_validation :clean_html
 
   validates_presence_of :name
-  validates_presence_of :description
+  #validates_presence_of :description
 
   serialize :site_specific_information
 
