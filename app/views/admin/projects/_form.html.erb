@@ -1,5 +1,3 @@
-<link rel="Stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/ui-darkness/jquery-ui.css" type="text/css" />
-
 <%= form_for(@project, :url => (@project.new_record? ? admin_projects_path : admin_project_path(@project))) do |f| %>
 
   <div class="field">
@@ -269,7 +267,8 @@
       </div> <!-- field -->
     </div>
   </div>
-
+  <!--  TO GET CORRECT URL -->
+  <%= f.hidden_field :admin_tags_path , :value => admin_tags_path %>
   <%= f.submit '', :class => "#{'error' if @project.invalid? && action_name != 'new'}" %>
   <!-- END EDIT PAGE -->
 
@@ -289,83 +288,7 @@
     <a class="save">save position</a>
   </div>
 
-
-<script type="text/javascript">
-$(function() {
-  function split( val ) {
-    return val.split( /,\s*/ );
-  }
-  $("#project_tags").autocomplete({
-    source: function( request, response ) {
-    $('span#tags_combo').addClass('active');
-      var value = $("#project_tags").val();
-      if (value.indexOf(',') != -1 ) {
-        value = value.substring(value.indexOf(',')+1, value.length);
-      }
-      $.ajax({
-        url: '<%= admin_tags_path %>?term=' + value,
-        dataType: "json",
-        success: function( data ) {
-          if(data != null) {
-            response($.map(data, function(tag) {
-              return {
-                label: tag.name + ' ' + tag.count + ' projects',
-                value: tag.name
-              }
-            }));
-          }
-        }
-      });
-    },
-    minLength: 2,
-    focus: function() {
-      // prevent value inserted on focus
-      return false;
-    },
-    select: function( event, ui ) {
-      var terms = split( this.value );
-      // remove the current input
-      terms.pop();
-      // add the selected item
-      terms.push( ui.item.value );
-      // add placeholder to get the comma-and-space at the end
-      terms.push( "" );
-      this.value = terms.join( ", " );
-
-      return false;
-    },
-    refresh: function(){
-       this.element.children("li.ui-menu-item:odd a").addClass("ui-menu-item-alternate");
-    }
-  });
-
-  // X
-  // $('.remove_this').live('click',function(){
-  //   $($(this).attr('href')).children().each(function(){
-  //     $(this).remove();
-  //   });
-  //   $($(this).attr('href')).remove();
-  // });
-
-  // ADD CLUSTER
-  // $('#select_cluster').change(function(){
-  //    var str = ""
-  //    $("select#select_cluster option:selected").each(function () {
-  //          str += $(this).text() + " ";
-  //        });
-  //    $('#clusters').append('<span id="cluster_'+$(this).val()+'"><input type="checkbox" name="project[clusters_ids][]" value="' +$(this).val() +'" checked="checked"/>' + str + ' <a href="#cluster_'+$(this).val()+'" class="remove_this">x</a><br /></span>');
-  //  });
-  //
-  //
-  //  $('#select_sector').change(function(){
-  //    var str = ""
-  //    $("select#select_sector option:selected").each(function () {
-  //          str += $(this).text() + " ";
-  //        });
-  //    $('#sectors').append('<span id="sector_'+$(this).val()+'"><input type="checkbox" name="project[sectors_ids][]" value="' +$(this).val() +'" checked="checked"/>' + str + ' <a href="#sector_'+$(this).val()+'" class="remove_this">x</a><br /></span>');
-  //  });
-});
-</script>
+  
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
   <script src="/javascripts/backoffice/project_map.js" type="text/javascript" charset="utf-8"></script>
   <script src="/javascripts/plugins/jquery.stylish-select.js" type="text/javascript" charset="utf-8"></script>

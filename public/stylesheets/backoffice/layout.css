@@ -486,14 +486,38 @@ div.block.project_info div.med div.left form p.title span.info {font:normal 13px
 div.block.project_info div.med div.left form span.input_large {float:left; margin:5px 0 0 0; background:url('/images/backoffice/projects/input_project_large.png') no-repeat 0 0; width:419px; height:34px; position:relative;}
 div.block.project_info div.med div.left form span.input_large.active {background:url('/images/backoffice/projects/large_combo_head_displayed.png') no-repeat 0 0;}
 div.block.project_info div.med div.left form span.error {background-position:0 -34px;}
-/*AUTOCOMPLETE - TAGS*/
-.ui-autocomplete {position:absolute; top:40px; width:419px; display:none; z-index:20;}
-.ui-menu-item {float:right; margin:7px 0 0 0; background:url('/images/backoffice/projects/repeat_content_tags.png') no-repeat 0 0; width:413px; height:22px; font:normal 15px Arial; color:#333333; padding:5px 0 0 12px; position:relative;}
-.ui-menu-item:hover {cursor:pointer; background:url('/images/backoffice/projects/repeat_content_tags_hover.png') no-repeat 0 0;}
-.ui-menu-item.last{float:right; width:425px; height:7px; margin:0; background:url('/images/backoffice/projects/bottom_content_tags.png') no-repeat 0 0; padding:0;}
-.ui-menu-item a {width:100%;}
-.ui-menu-item p.info_amount {position:absolute; right:20px; top:6px; font:normal 13px Arial; color:#666666; width:auto;}
+
+/*AUTOCOMPLETE - PROJECT TAGS*/
+ul.ui-autocomplete.project_tags {position:absolute; top:40px; width:419px; display:none; z-index:20;}
+ul.ui-autocomplete.project_tags li.ui-menu-item {float:right; margin:7px 0 0 0; background:url('/images/backoffice/projects/repeat_content_tags.png') no-repeat 0 0; width:413px; height:22px; font:normal 15px Arial; color:#333333; padding:5px 0 0 12px; position:relative;}
+ul.ui-autocomplete.project_tags li.ui-menu-item:hover {cursor:pointer; background:url('/images/backoffice/projects/repeat_content_tags_hover.png') no-repeat 0 0;}
+ul.ui-autocomplete.project_tags li.ui-menu-item.last{float:right; width:425px; height:7px; margin:0; background:url('/images/backoffice/projects/bottom_content_tags.png') no-repeat 0 0; padding:0;}
+ul.ui-autocomplete.project_tags li.ui-menu-item a {width:100%;}
+ul.ui-autocomplete.project_tags li.ui-menu-item p.info_amount {position:absolute; right:20px; top:6px; font:normal 13px Arial; color:#666666; width:auto;}
 /*END - AUTOCOMPLETE - TAGS*/
+
+
+/*AUTOCOMPLETE - DONOR NAME*/
+ul.ui-autocomplete.donor_names {position:absolute; top:40px; width:419px; display:none; z-index:20;}
+ul.ui-autocomplete.donor_names li.ui-menu-item {float:right; margin:7px 0 0 0; background:url('/images/backoffice/projects/repeat_content_tags.png') no-repeat 0 0; width:413px; height:22px; font:normal 15px Arial; color:#333333; padding:5px 0 0 12px; position:relative;}
+ul.ui-autocomplete.donor_names li.ui-menu-item:hover {cursor:pointer; background:url('/images/backoffice/projects/repeat_content_tags_hover.png') no-repeat 0 0;}
+ul.ui-autocomplete.donor_names li.ui-menu-item.last{float:right; width:425px; height:7px; margin:0; background:url('/images/backoffice/projects/bottom_content_tags.png') no-repeat 0 0; padding:0;}
+ul.ui-autocomplete.donor_names li.ui-menu-item a {width:100%;}
+ul.ui-autocomplete.donor_names li.ui-menu-item p.info_amount {position:absolute; right:20px; top:6px; font:normal 13px Arial; color:#666666; width:auto;}
+/*END - AUTOCOMPLETE - TAGS*/
+
+
+/*AUTOCOMPLETE - FILTERING TAGS*/
+ul.ui-autocomplete.site_filtering_tags {position:absolute; top:40px; width:419px; display:none; z-index:20;}
+ul.ui-autocomplete.site_filtering_tags li.ui-menu-item {float:right; margin:7px 0 0 0; background:url('/images/backoffice/projects/repeat_content_tags.png') no-repeat 0 0; width:413px; height:22px; font:normal 15px Arial; color:#333333; padding:5px 0 0 12px; position:relative;}
+ul.ui-autocomplete.site_filtering_tags li.ui-menu-item:hover {cursor:pointer; background:url('/images/backoffice/projects/repeat_content_tags_hover.png') no-repeat 0 0;}
+ul.ui-autocomplete.site_filtering_tags li.ui-menu-item.last{float:right; width:425px; height:7px; margin:0; background:url('/images/backoffice/projects/bottom_content_tags.png') no-repeat 0 0; padding:0;}
+ul.ui-autocomplete.site_filtering_tags li.ui-menu-item a {width:100%;}
+ul.ui-autocomplete.site_filtering_tags li.ui-menu-item p.info_amount {position:absolute; right:20px; top:6px; font:normal 13px Arial; color:#666666; width:auto;}
+/*END - AUTOCOMPLETE - TAGS*/
+
+
+
 div.block.project_info div.med div.left form input[type="text"]{position:absolute; top:6px; left:7px; width:400px; height:21px; font:normal 15px Arial; color:#333333; border:none; padding:0;}
 div.block.project_info div.bottom {float:left; height:15px; width:100%; background: url('/images/backoffice/backgrounds/bottom_two_columns.png') no-repeat scroll top left!important;}
 div.block.project_info div.med div.left form span.textarea.error {background-position:0 -214px;}

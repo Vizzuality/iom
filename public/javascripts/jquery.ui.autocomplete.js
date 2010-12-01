@@ -12,6 +12,8 @@
  *	jquery.ui.widget.js
  *	jquery.ui.position.js
  */
+ 
+ // CUSTOMIZED BY VIZZUALITY
 (function( $, undefined ) {
 
 $.widget( "ui.autocomplete", {
@@ -24,13 +26,14 @@ $.widget( "ui.autocomplete", {
 			at: "left bottom",
 			collision: "none"
 		},
-		source: null
+		source: null,
+		class:null
 	},
 	_create: function() {
 		var self = this,
 			doc = this.element[ 0 ].ownerDocument;
 		this.element
-			.addClass( "ui-autocomplete-input" )
+			.addClass( "ui-autocomplete-input")
 			.attr( "autocomplete", "off" )
 			// TODO verify these actually work as intended
 			.attr({
@@ -117,6 +120,7 @@ $.widget( "ui.autocomplete", {
 		};
 		this.menu = $( "<ul></ul>" )
 			.addClass( "ui-autocomplete" )
+			.addClass( this.options.class )
 			.appendTo( $( this.options.appendTo || "body", doc )[0] )
 			// prevent the close-on-blur in case of a "slow" click on the menu (long mousedown)
 			.mousedown(function( event ) {
@@ -407,7 +411,7 @@ $.widget("ui.menu", {
 	_create: function() {
 		var self = this;
 		this.element
-			.addClass("ui-menu ui-widget ui-widget-content ui-corner-all")
+			.addClass("ui-menu ui-widget u  i-widget-content ui-corner-all")
 			.attr({
 				role: "listbox",
 				"aria-activedescendant": "ui-active-menuitem"
