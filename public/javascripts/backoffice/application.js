@@ -105,3 +105,19 @@ $(document).ready(function(ev){
        .appendTo('body');
    form.submit();
  }
+ 
+ 
+    
+  function limitChars(textid, limit, infodiv) {
+    var text = $('#'+textid).val(); 
+    var textlength = text.length;
+    if(textlength > limit) {
+      $('#' + infodiv).html(limit+' chars written');
+      $('#'+textid).val(text.substr(0,limit));
+      return false;
+    } else {
+      $('#' + infodiv).html((limit - textlength) +' chars left.');
+      $('#' + infodiv).css('color','#999999');
+      return true;
+    }
+  }
