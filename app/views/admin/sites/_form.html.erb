@@ -31,9 +31,9 @@
   <div class="field">
   <label>SITE GEOGRAPHICAL CONTEXT</label>
   <ul class="geographic_options">
-  <li id="gc_worldwide" class="selected"><a class="limited">Worldwide, not limited</a></li>
+  <li id="gc_worldwide" class="selected"><a class="combo limited">Worldwide, not limited</a></li>
   <li id="gc_limited_country">
-    <a class="limited">Limited to a country</a>
+    <a class="combo limited">Limited to a country</a>
     <div class="content">
       <span class="select_country_combo"><p class="country">Select a country</p>
       <%= f.hidden_field :geographic_context_country_id %>
@@ -48,7 +48,7 @@
     </div>
   </li>
   <li id="gc_limited_region">
-    <a class="limited">Limited to a region</a>
+    <a class="limited combo">Limited to a region</a>
 
     <div class="content">
       <span class="select_country_combo"><p class="country">Select a country</p>
@@ -66,7 +66,7 @@
     </div>
   </li>
   <li id="gc_limited_bbox">
-    <a class="limited">Limited by a boundary box</a>
+    <a class="limited combo">Limited by a boundary box</a>
     <div class="content">
       <div id="map_bbox">
         <!-- TODO: ADD MAP  -->
@@ -82,7 +82,7 @@
 
   <ul class="project_tipo_options">
     <li id="include_sector_cluster">
-      <a>Include only projects from a particular cluster or sector</a>
+      <a class="check">Include only projects from a particular cluster or sector</a>
       <div class="content">
         <span class="select_combo_typology"><p class="cluster_sector">Select a cluster or a sector</p>
           <div class="values">
@@ -104,7 +104,7 @@
       </div>
     </li>
     <li id="include_ngo">
-      <a>Include only projects from a particular NGO</a>
+      <a class="check">Include only projects from a particular NGO</a>
       <div class="content">
         <span class="select_combo_typology"><p class="ngo">Select an NGO</p>
           <div class="values">
@@ -119,7 +119,7 @@
       </div>
     </li>
     <li id="include_tags">
-      <a>Include only matching some tags</a>
+      <a class="check">Include only matching some tags</a>
       <div class="content">
         <span class="tags_site">
           <%= f.text_field :project_context_tags, {:id => 'pc_tags_section'} %>

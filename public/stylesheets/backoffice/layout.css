@@ -836,9 +836,9 @@ div.block.site_info div.med div.left form h3.section {float:left; margin:30px 0 
 div.block.site_info div.med div.left form ul.geographic_options {float:left; width:235px; height:auto; margin:10px 0 0 0px;}
 div.block.site_info div.med div.left form ul.geographic_options li {float:left; margin:7px 0 0 12px; width:215px;}
 div.block.site_info div.med div.left form ul.geographic_options li.selected {margin:10px 0 0 0;}
-div.block.site_info div.med div.left form ul.geographic_options li a {float:left; font:normal 15px Arial; color:#333333; text-decoration:none; background:url('/images/backoffice/sites/option_bkg.png') no-repeat 0 4px; padding:0 0 0 15px; height:14px;}
-div.block.site_info div.med div.left form ul.geographic_options li a:hover {cursor:pointer;}
-div.block.site_info div.med div.left form ul.geographic_options li.selected a {background:url('/images/backoffice/sites/option_bkg_selected.png') no-repeat 0 4px;}
+div.block.site_info div.med div.left form ul.geographic_options li a.combo {float:left; font:normal 15px Arial; color:#333333; text-decoration:none; background:url('/images/backoffice/sites/option_bkg.png') no-repeat 0 4px; padding:0 0 0 15px; height:14px;}
+div.block.site_info div.med div.left form ul.geographic_options li a.combo:hover {cursor:pointer;}
+div.block.site_info div.med div.left form ul.geographic_options li.selected a.combo {background:url('/images/backoffice/sites/option_bkg_selected.png') no-repeat 0 4px;}
 div.block.site_info div.med div.left form ul.geographic_options li div.content {display:none; width:100%;}
 div.block.site_info div.med div.left form ul.geographic_options li.selected div.content {float:left; display:inline; width:100%;}
 div.block.site_info div.med div.left form ul.geographic_options li.selected#gc_worldwide {margin:7px 0 0 12px;}
@@ -865,9 +865,9 @@ div.block.site_info div.med div.left form ul.project_tipo_options {float:left; w
 div.block.site_info div.med div.left form ul.project_tipo_options li {float:left; margin:7px 0 0 12px; width:600px;}
 div.block.site_info div.med div.left form ul.project_tipo_options li.selected {margin:10px 0 0 0; background:url('/images/backoffice/sites/bkg_limited_country.png') no-repeat 0 0; width:544px; height:65px; padding:10px 13px;}
 
-div.block.site_info div.med div.left form ul.project_tipo_options li a {float:left; font:normal 15px Arial; color:#333333; text-decoration:none; background:url('/images/backoffice/sites/project_tipo_check.png') no-repeat 0 4px; padding:0 0 0 15px; height:14px;}
-div.block.site_info div.med div.left form ul.project_tipo_options li a:hover {cursor:pointer;}
-div.block.site_info div.med div.left form ul.project_tipo_options li.selected a {background:url('/images/backoffice/sites/project_tipo_checked.png') no-repeat 0 4px;}
+div.block.site_info div.med div.left form ul.project_tipo_options li a.check {float:left; font:normal 15px Arial; color:#333333; text-decoration:none; background:url('/images/backoffice/sites/project_tipo_check.png') no-repeat 0 4px; padding:0 0 0 15px; height:14px;}
+div.block.site_info div.med div.left form ul.project_tipo_options li a.check:hover {cursor:pointer;}
+div.block.site_info div.med div.left form ul.project_tipo_options li.selected a.check {background:url('/images/backoffice/sites/project_tipo_checked.png') no-repeat 0 4px;}
 div.block.site_info div.med div.left form ul.project_tipo_options li.selected div.content {display:inline;}
 div.block.site_info div.med div.left form ul.project_tipo_options li div.content {display:none; width:100%;}
 div.block.site_info div.med div.left form ul.project_tipo_options li.selected span.select_combo_typology {float:left; background:url('/images/backoffice/sites/select_country_combo.png') no-repeat 0 0; width:240px; height:32px; margin:12px 0 0 12px;}
