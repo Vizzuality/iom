@@ -6,10 +6,10 @@
       <div class="top_data"></div>
       <div class="med_data">
         <p><%= label_tag 'email' %><br />
-        <%= text_field_tag 'email', @email, :class=>(flash[:alert] ? "error" : nil) %></p>
+        <%= text_field_tag 'email', @email, :class=>(flash[:alert] ? "error museo_sans" : "museo_sans") %></p>
 
         <p><%= label_tag 'password' %><br/>
-        <%= password_field_tag 'password', nil, :class=>(flash[:alert] ? "error" : nil)%></p>
+        <%= password_field_tag 'password', nil, :class=>(flash[:alert] ? "error museo_sans" : "museo_sans")%></p>
         <% if flash[:alert] %>
         <p class="error"><%= flash[:alert] %></p>
         <% end %>

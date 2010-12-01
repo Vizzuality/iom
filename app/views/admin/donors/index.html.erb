@@ -9,9 +9,9 @@
         <% end %>
       </div>
       <div class="one_donor">
-        <p><%= Donor.count %></p>
-        <label><%= Donor.count == 1 ? 'donor' : 'donors' %><br/>registered</label>
-        <a href="<%= new_admin_donor_path %>">Add new donor</a>
+        <p class="museo_sans"><%= Donor.count %></p>
+        <label class="museo_sans"><%= Donor.count == 1 ? 'donor' : 'donors' %><br/>registered</label>
+        <a class="museo_sans" href="<%= new_admin_donor_path %>">Add new donor</a>
       </div>
     </div>
 
@@ -58,7 +58,7 @@
     </div>
 
     <div class="add_new">
-      <a href="<%= new_admin_donor_path %>">
+      <a href="<%= new_admin_donor_path %>" class="museo_sans">
         Add a new donor<br/>
         <strong>There are already <%= pluralize(Donor.count, 'donor', 'donors') %> registered</strong>
       </a>

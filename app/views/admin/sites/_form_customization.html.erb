@@ -166,9 +166,9 @@
 <div id="manage_partners" style="<%= @partner ? 'display:block' : 'display:none' %>">
   <a class="close">Close</a>
   <% unless @partner %>
-  <h3>New partner</h3>
+  <h3 class="museo_sans">New partner</h3>
   <% else %>
-  <h3>Edit partner</h3>
+  <h3 class="museo_sans">Edit partner</h3>
   <% end -%>
 
   <%= form_for([:admin, @site, (@partner || @site.partners.new)], :html => { :multipart => true }) do |f| %>
