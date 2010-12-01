@@ -89,10 +89,10 @@
     <div class="one_project">
     <span class="top"></span>
     <div class="content">
-        <p><%= Project.count %></p>
-        <label><%= Project.count == 1 ? 'project' : 'projects' %><br/>registered</label>
-        <a class="add_project" href="<%= new_admin_project_path %>">Add new project</a>
-        <a class="import_csv" href="#">Import a .csv file</a>
+        <p class="museo_sans"><%= Project.count %></p>
+        <label class="museo_sans"><%= Project.count == 1 ? 'project' : 'projects' %><br/>registered</label>
+        <a class="add_project museo_sans shadow_green" href="<%= new_admin_project_path %>">Add new project</a>
+        <a class="import_csv museo_sans shadow_black" href="#">Import a .csv file</a>
     </div>
     <span class="bottom"></span>
     </div>
@@ -101,7 +101,7 @@
   <div class="block">
     <div class="top"></div>
     <div class="med projects_list">
-      <h2>
+      <h2 class="museo_sans">
         <%= pluralize(@projects.total_entries, 'project', 'projects') %>
         <% if @conditions.any? %>
           on
@@ -170,7 +170,7 @@
   </div>
 
   <div class="add_new">
-    <a href="<%= new_admin_project_path %>">
+    <a class="museo_sans" href="<%= new_admin_project_path %>">
       Create new project<br/>
       <strong>You already have <%= pluralize(Project.count, 'project', 'projects') %> created</strong>
     </a>

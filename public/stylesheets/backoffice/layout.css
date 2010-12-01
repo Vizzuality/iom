@@ -87,7 +87,7 @@ div.block div.med div.right ul li.sublist_selected:hover div.bottom_selected p a
 
 div.block div.med div.right ul li:hover div.bottom_selected p a {color:#E93E3F;}
 div.block div.med div.right div.delete {position:absolute; display:none; bottom:0; left:20px;}
-div.block div.med div.right div.delete h5 {float:left; font:normal 17px "Museo Sans"; color:#333333; letter-spacing:-1px;}
+div.block div.med div.right div.delete h5 {float:left; font:normal 17px "Museo Sans",Arial; color:#333333; letter-spacing:-1px;}
 div.block div.med div.right div.delete p {float:left; margin:5px 0 0 0; width:100%; font:normal 13px Arial; color:#666666;}
 div.block div.med div.right div.delete a {float:left; margin:17px 0 0 0; font:normal 15px Arial; color:#D8393D; text-decoration:none;}
 div.block div.med div.right div.delete a:hover {text-decoration:underline;}
@@ -281,7 +281,7 @@ div.bottom_grey div.pagination span.disabled {display:none;}
 /*specific NGO*/
 div.block.edit div.med div.left div.specific_edit {float:left; width:526px; height:312px; margin:30px 0 0 0; padding:20px; background:url('/images/backoffice/ngos/edit_specific_bkg.png') no-repeat 0 0;}
 div.block.edit div.med div.left div.specific_edit span {float:left; width:100%;}
-div.block.edit div.med div.left div.specific_edit h3 {float:left; font:normal 17px "Museo Sans"; color:#333333;}
+div.block.edit div.med div.left div.specific_edit h3 {float:left; font:normal 17px "Museo Sans",Arial; color:#333333;}
 div.block.edit div.med div.left div.specific_edit p.paylock {float:right; padding:2px 24px 0 0; font:normal 13px Arial; color:#333333; background:url('/images/backoffice/ngos/paylock.png') no-repeat right -21px;}
 div.block.edit div.med div.left div.specific_edit p.paylock.open {background-position:right -21px;}
 div.block.edit div.med div.left div.specific_edit p.paylock.close {background-position:right 0;}
@@ -505,7 +505,7 @@ div.block.project_info div.med div.left form span.combo_large a.organization:hov
 div.block.project_info div.med div.left form span.combo_large.displayed {background:url('/images/backoffice/projects/large_combo_head_displayed2.png') no-repeat 0 0;}
 
 div.block.project_info div.med div.left form span.combo_large:hover {cursor:pointer;}
-div.block.project_info div.med div.left form h3.section {float:left; margin:30px 0 0 2px; width:100%; font:500 17px "Museo Sans"; color:#333333;}
+div.block.project_info div.med div.left form h3.section {float:left; margin:30px 0 0 2px; width:100%; font:500 17px "Museo Sans",Arial; color:#333333;}
 div.block.project_info div.med div.left form ul.dates {float:left; width:400px; height:auto; margin:0 0 0 0;}
 div.block.project_info div.med div.left form ul.dates li.date {float:left; width:142px; height:auto;}
 div.block.project_info div.med div.left form ul.dates li.date span.combo_date {float:left; background:url('/images/backoffice/projects/date/bkg_calendar.png') no-repeat 0 0; width:121px; height:24px; font:normal 15px Arial; color:#333333; margin:5px 0 0 0; padding:8px 0 0 8px; position:relative;}
@@ -562,7 +562,7 @@ div.block.project_info div.med div.left form div.cluster_options span.combo_clus
 div.block.project_info div.med div.left form div.cluster_options span.combo_cluster_options.clicked ul.options li a {font:normal 13px Arial; color:#666666; text-decoration:none; }
 
 div.block.project_info div.med div.left form div.cluster_options span.combo_cluster_options:hover {cursor:pointer;}
-div.block.project_info div.med div.left form div.cluster_options a.add_cluster {float:left; margin:10px 0 0 9px; background:url('/images/backoffice/projects/add_cluster_bttn.png') no-repeat 0 0; width:118px; height:25px; font:500 15px "Museo Sans"; color:#FFFFFF; text-shadow:0 1px #6E8C30; text-align:center; padding:7px 0 0 0;}
+div.block.project_info div.med div.left form div.cluster_options a.add_cluster {float:left; margin:10px 0 0 9px; background:url('/images/backoffice/projects/add_cluster_bttn.png') no-repeat 0 0; width:118px; height:25px; font:500 15px "Museo Sans",Arial; color:#FFFFFF; text-shadow:0 1px #6E8C30; text-align:center; padding:7px 0 0 0;}
 div.block.project_info div.med div.left form div.cluster_options a.add_cluster:hover {cursor:pointer; background-position:0 -32px;}
 div.block.project_info div.bottom {float:left; height:15px; width:100%; background: url('/images/backoffice/backgrounds/bottom_two_columns.png') no-repeat scroll top left!important;}
 
@@ -584,12 +584,12 @@ div.block.project_info div.med div.left form div.sector_options span.combo_secto
 div.block.project_info div.med div.left form div.sector_options span.combo_sector_options:hover {cursor:pointer;}
 
 
-div.block.project_info div.med div.left form div.sector_options a.add_sector {float:left; margin:10px 0 0 9px; background:url('/images/backoffice/projects/add_cluster_bttn.png') no-repeat 0 0; width:118px; height:25px; font:500 15px "Museo Sans"; color:#FFFFFF; text-shadow:0 1px #6E8C30; text-align:center; padding:7px 0 0 0;}
+div.block.project_info div.med div.left form div.sector_options a.add_sector {float:left; margin:10px 0 0 9px; background:url('/images/backoffice/projects/add_cluster_bttn.png') no-repeat 0 0; width:118px; height:25px; font:500 15px "Museo Sans",Arial; color:#FFFFFF; text-shadow:0 1px #6E8C30; text-align:center; padding:7px 0 0 0;}
 div.block.project_info div.med div.left form div.sector_options a.add_sector:hover {cursor:pointer; background-position:0 -32px;}
 
 div.block.project_info div.med div.left form div.location_options.empty {float:left; margin:10px 0 0 0; background:url('/images/backoffice/projects/bkg_cluster_options.png') no-repeat 0 0; width:411px; height:50px; position:relative;}
 div.block.project_info div.med div.left form div.location_options.empty p.msg {float:left; margin:18px 0 0 12px; width:269px; font:normal 13px Arial; color:#616851;  }
-div.block.project_info div.med div.left form div.location_options.empty a.add_location {position:absolute; top:10px; right:10px; background:url('/images/backoffice/projects/add_cluster_bttn.png') no-repeat 0 0; width:118px; height:25px; font:500 15px "Museo Sans"; color:#FFFFFF; text-shadow:0 1px #6E8C30; text-align:center; padding:7px 0 0 0;}
+div.block.project_info div.med div.left form div.location_options.empty a.add_location {position:absolute; top:10px; right:10px; background:url('/images/backoffice/projects/add_cluster_bttn.png') no-repeat 0 0; width:118px; height:25px; font:500 15px "Museo Sans",Arial; color:#FFFFFF; text-shadow:0 1px #6E8C30; text-align:center; padding:7px 0 0 0;}
 div.block.project_info div.med div.left form div.location_options.empty a.add_location:hover {cursor:pointer; background-position:0 -32px;}
 div.block.project_info div.med div.left form span.input_short {float:left; margin:5px 0 0 0; width:272px; height:34px; background:url('/images/backoffice/projects/bkg_input_short.png') no-repeat 0 0; position:relative;}
 div.block.project_info div.med div.left form span.input_short p.msg {position:absolute; top:8px; right:10px; font:italic 15px Arial; color:#999999;}
@@ -601,7 +601,7 @@ div.block.project_info div.med div.left form span.input_short.coin input[type="t
 div.block.project_info div.med div.left form div.two_columns {float:left; width:100%; height:70px;}
 div.block.project_info div.med div.left form div.two_columns div.left_column {float:left; width:289px; height:90px;}
 div.block.project_info div.med div.left form div.two_columns div.right_column {float:left; width:280px; height:90px;}
-div.block.project_info div.med div.left form input[type="submit"]{background:url('/images/backoffice/projects/save_changes_bttn.png') no-repeat 0 0; font:500 19px "Museo Sans"; color:#FFFFFF; text-shadow:0 1px #6E8C30; border:none; text-align:center; width:157px; height:32px; float:right; margin:30px 10px 0 0; /*position:absolute; bottom:0; right:0;*/}
+div.block.project_info div.med div.left form input[type="submit"]{background:url('/images/backoffice/projects/save_changes_bttn.png') no-repeat 0 0; font:500 19px "Museo Sans",Arial; color:#FFFFFF; text-shadow:0 1px #6E8C30; border:none; text-align:center; width:157px; height:32px; float:right; margin:30px 10px 0 0; /*position:absolute; bottom:0; right:0;*/}
 div.block.project_info div.med div.left form input[type="submit"]:hover {background-position:0 -32px; cursor:pointer;}
 /*geolocate map*/
 div.map_window {position:absolute; display:none; top:0; bottom:0; width:386px; height:296px; padding:14px; background:url('/images/backoffice/projects/add_position_bkg.png') no-repeat 0 0;}
@@ -636,7 +636,7 @@ div.block.donations_project div.med div.left ul.donations li div.amount_box a.de
 div.block.donations_project div.med div.left ul.donations li div.name_box h3 {float:left; width:100%; margin:22px 0 0 0;}
 div.block.donations_project div.med div.left ul.donations li div.name_box h3 a {font:bold 17px Arial; color:#E93E3F;}
 div.block.donations_project div.med div.left ul.donations li p {float:left; padding:5px 0 0 0; font:normal 13px Arial; color:#666666; margin:22px 0 0 19px;}
-div.block.donations_project div.med div.left h4.total {float:left; margin:25px 0 0 268px; font:500 17px "Museo Sans"; color:#333333; width:150px;}
+div.block.donations_project div.med div.left h4.total {float:left; margin:25px 0 0 268px; font:500 17px "Museo Sans",Arial; color:#333333; width:150px;}
 div.block.donations_project div.med div.left span.total_account {float:left; width:auto; font:bold 15px Arial; color:#333333; margin:26px 0 0 36px;}
 div.block.donations_project div.med div.left p.amount {float:left; width:auto; font:bold 15px Arial; color:#333333; margin:26px 0 0 5px;}
 
@@ -790,11 +790,11 @@ div.block.media div.bottom {float:left; height:15px; width:100%; background: url
 div.steps_create_project {float:left; width:932px; height:auto; margin:10px 0 0 5px; padding:0 0 30px 0;}
 div.steps_create_project span.top {float:left; width:932px; height:7px; background:url('/images/backoffice/sites/bkg_top_msg.png') no-repeat 0 0; margin:0;}
 div.steps_create_project div.middle {float:left; width:932px; height:auto; background:url('/images/backoffice/sites/bkg_middle_msg.png') repeat-y 0; margin:0;}
-div.steps_create_project div.middle h1 {float:left; margin:20px 0 0 30px; font:500 21px "Museo Sans"; color:#333333; width:626px;}
+div.steps_create_project div.middle h1 {float:left; margin:20px 0 0 30px; font:500 21px "Museo Sans",Arial; color:#333333; width:626px;}
 div.steps_create_project div.middle ul.steps {float:left; margin:20px 0 0 30px; width:900px; height:auto;}
 div.steps_create_project div.middle ul.steps li {float:left; width:300px; height:90px;}
-div.steps_create_project div.middle ul.steps li span.circle {float:left; width:29px; height:24px; background:url('/images/backoffice/sites/circle_step.png') no-repeat 0 0; font:500 15px "Museo Sans"; color:white; text-align:center; padding:5px 0 0 0;}
-div.steps_create_project div.middle ul.steps li label {float:left; margin:5px 0 0 12px; font:500 13px "Museo Sans"; color:#333333; width:240px; text-transform:uppercase;}
+div.steps_create_project div.middle ul.steps li span.circle {float:left; width:29px; height:24px; background:url('/images/backoffice/sites/circle_step.png') no-repeat 0 0; font:500 15px "Museo Sans",Arial; color:white; text-align:center; padding:5px 0 0 0;}
+div.steps_create_project div.middle ul.steps li label {float:left; margin:5px 0 0 12px; font:500 13px "Museo Sans",Arial; color:#333333; width:240px; text-transform:uppercase;}
 div.steps_create_project div.middle ul.steps li p {float:left; font:normal 13px Arial; color:#849064; width:246px; margin:7px 0 0 12px;}
 div.steps_create_project span.bottom {float:left; width:932px; height:7px; background:url('/images/backoffice/sites/bkg_bottom_msg.png') no-repeat 0 0; margin:0;}
 
@@ -820,7 +820,7 @@ div.block.site_info div.med div.left form span.textarea textarea{position:absolu
 div.block.site_info div.med div.left form span.textarea_short {float:left; margin:5px 0 0 0; background:url('/images/backoffice/sites/short_descript.png') no-repeat 0 0; width:564px; height:114px; position:relative;}
 div.block.site_info div.med div.left form span.textarea_short.error {background-position:0 -114px;}
 div.block.site_info div.med div.left form span.textarea_short textarea{position:absolute; top:9px; left:9px; width:546px; height:97px; font:normal 15px Arial; color:#333333; border:none; line-height:17px;}
-div.block.site_info div.med div.left form h3.section {float:left; margin:30px 0 0 2px; width:100%; font:500 17px "Museo Sans"; color:#333333;}
+div.block.site_info div.med div.left form h3.section {float:left; margin:30px 0 0 2px; width:100%; font:500 17px "Museo Sans",Arial; color:#333333;}
 
 /* -------------- GEOGRAPHIC OPTIONS*/
 div.block.site_info div.med div.left form ul.geographic_options {float:left; width:235px; height:auto; margin:10px 0 0 0px;}
@@ -888,7 +888,7 @@ div.block.site_info div.med div.left form span.input_short input[type="text"]{po
 
 div.block.site_info div.med div.left form span.input_url {float:left; margin:5px 0 0 0; width:566px; height:34px; background:url('/images/backoffice/sites/site_url_input.png') no-repeat 0 0; position:relative;}
 div.block.site_info div.med div.left form span.input_url input[type="text"]{position:absolute; top:5px; left:7px; width:550px; height:28px; font:normal 15px Arial; color:#333333;}
-div.block.site_info div.med div.left form input[type="submit"]{background:url('/images/backoffice/projects/save_changes_bttn.png') no-repeat 0 0; font:500 19px "Museo Sans"; color:#FFFFFF; text-shadow:0 1px #6E8C30; border:none; text-align:center; width:157px; height:32px; float:right; margin:60px 10px 0 0; text-indent:-9999px; /*position:absolute; bottom:0; right:0;*/}
+div.block.site_info div.med div.left form input[type="submit"]{background:url('/images/backoffice/projects/save_changes_bttn.png') no-repeat 0 0; font:500 19px "Museo Sans",Arial; color:#FFFFFF; text-shadow:0 1px #6E8C30; border:none; text-align:center; width:157px; height:32px; float:right; margin:60px 10px 0 0; text-indent:-9999px; /*position:absolute; bottom:0; right:0;*/}
 div.block.site_info div.med div.left form input[type="submit"]:hover {background-position:0 -32px; cursor:pointer;}
 
 div.block.site_info div.bottom {float:left; height:15px; width:100%; background: url('/images/backoffice/backgrounds/bottom_two_columns.png') no-repeat scroll top left!important;}
@@ -957,19 +957,9 @@ div#footer div.inner_footer ul li a {font:normal 13px Arial; color:#999999; text
 div#footer div.inner_footer ul li a:hover {text-decoration:underline;}
 
 
-
-
-/*REMOVE THIS (IS ONLY TO TEST - SELECT MENU)*/
-/*----------------------------------*/
-/*==================================
-Hide lists on page load
-====================================*/
-
+/* STYLING DATE COMBOS */
 .stylish-select ul.newList {left:-9999px;}
 
-/*==================================
-red curvy example
-====================================*/
 ul.newList:focus {outline:none;}
 ul.newList {top:32px;}
 ul.newList * {margin:0; padding:0; border:none; overflow:hidden;}
@@ -1003,3 +993,4 @@ ul.newList li a:focus {-moz-outline-style: none;}
 .newListOptionTitle ul {margin:3px 0 0;}
 .newListOptionTitle li {font-weight:normal; border-left:1px solid #ccc;}
 .newListOptionTitle li a {text-transform:uppercase; font:normal 11px Arial; color:#333333;}
+/* END ------------------------------ STYLING DATE COMBOS */

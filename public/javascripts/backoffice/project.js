@@ -339,8 +339,11 @@ $(document).ready(function(ev){
 
     var id = $('span.combo_cluster_options').children('p').attr('id');
 
+    var notAdded = false;
+    notAdded = checkElementAdded($('ul.clusters'),id);
+
     // If we have some element (id=0 is a simple control to test it)
-    if (id != 0){
+    if ((id != 0)&&(!notAdded)){
       var text = $('span.combo_cluster_options').children('p').text();
 
       var htmlToAdd = '<li id="cluster_'+id+'">'+text+'<input id="'+id+'"type="checkbox" name="project[clusters_ids][]" value="'+id+'" checked="true"" /><a id="'+id+'" class="remove_this close"></a></li>';
@@ -393,8 +396,11 @@ $(document).ready(function(ev){
 
       var id = $('span#sector').children('p').attr('id');
 
+      var notAdded = false;
+      notAdded = checkElementAdded($('ul.sectors'),id);
+      
       // If we have some element (id=0 is a simple control to test it)
-      if (id != 0){
+    if ((id != 0)&&(!notAdded)){
         var text = $('span#sector').children('p').text();
         var htmlToAdd = '<li id="sector_'+id+'">'+text+'<input id="'+id+'"type="checkbox" name="project[sectors_ids][]" value="'+id+'" checked="true"" /><a id="'+id+'" class="remove_this close"></a></li>';
 
@@ -691,4 +697,17 @@ function updateDateInfo(){
 
           $('span#donation_date').children('p').text(dateValue);
     }
-  
+function checkElementAdded(list, id){
+    var elementAdded = false;
+    var id_li_element;
+
+    $(list).children('li').each(function(index) {
+        id_li_element = $(this).children('input').attr('id');
+        
+        if (id == id_li_element){
+            elementAdded = true;
+        }
+      });   
+      return elementAdded;
+    
+}
