@@ -912,26 +912,18 @@ ul.pages li div.body span a:hover {text-decoration:underline;}
 ul.pages li div.body span a.delete {float:left; width:14px; height:14px; margin:2px 0 0 7px; background:url('/images/backoffice/icons/tiny_close.png') no-repeat 0 0; text-indent:-9999px;}
 ul.pages li div.body span a.delete:hover {background-position:0 -14px;}
 ul.pages li div.down {float:left; width:565px; height:15px; background:url('/images/backoffice/resources/resources_bottom.png') no-repeat 0 bottom;}
-
-ul.subpages {}
-
-/*<li <%= selected_if_current_page(admin_site_pages_path(@site)) %>>
-  <%= link_to("Pages", admin_site_pages_path(@site)) %><% if !@site.pages.empty? %> <p><span><%=@site.pages.count%></span></p><% end %>
-  <% if controller_name == 'pages' %>
-  <ul class="subpages">
-    <% @site.pages.highlighted.each do |highlighted_page| %>
-      <li><%= link_to_unless_current(highlighted_page.title, edit_admin_site_page_path(@site, highlighted_page.id)) %></li>
-      <% unless highlighted_page.children.empty? %>
-      <ul>
-        <% highlighted_page.children.each do |child| %>
-        <li><%= link_to_unless_current(child.title, edit_admin_site_page_path(@site, child.id)) %></li>
-        <% end %>
-      </ul>
-      <% end %>
-    <% end %>
-  </ul>
-  <% end %>
-</li>*/
+select#page_parent_id {display:none;}
+span.parent_page {float:left; margin:10px 0 0 10px; background:url('/images/backoffice/projects/combos/combo_add_cluster.png') no-repeat 0 0; width:254px; height:24px; padding:8px 0 0 10px; position:relative;}
+span.parent_page p {font:normal 13px Arial; color:#999999;}
+span.parent_page ul.options {display:none;}
+span.parent_page.clicked {background:url('/images/backoffice/projects/combos/combo_add_cluster_clicked.png') no-repeat 0 0;}
+span.parent_page.clicked ul.options {position:absolute; top:32px; left:0; width:264px; height:auto; display:inline; z-index:20;}
+span.parent_page.clicked ul.options li {float:left; margin:0; background:url('/images/backoffice/projects/combos/combo_add_cluster_lielement.png') repeat-y 0; width:242px; height:auto; padding:4px 11px;}
+span.parent_page.clicked ul.options li.last {background:url('/images/backoffice/projects/combos/combo_add_cluster_lielement_last.png') no-repeat 0 0; height:6px;}
+span.parent_page.clicked ul.options li.last:hover {background:url('/images/backoffice/projects/combos/combo_add_cluster_lielement_last.png') no-repeat 0 0;}
+span.parent_page.clicked ul.options li:hover {background:url('/images/backoffice/projects/combos/combo_add_cluster_lielement_hover.png') repeat-y 0;}
+span.parent_page.clicked ul.options li a {font:normal 13px Arial; color:#666666; text-decoration:none; }
+span.parent_page:hover {cursor:pointer;}
 
 /*window alert*/
 div#modal_window {position:absolute; display:none; top:0; left:0; right:0; bottom:0; background:url('/images/backoffice/common/modal_bkg.png') repeat 0 0;}
