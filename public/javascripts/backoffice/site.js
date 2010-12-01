@@ -31,8 +31,7 @@ $(document).ready(function(ev){
       });
 
       // click on country combo (LIMITED TO A COUNTRY)
-      $('li#gc_limited_country').find('span.select_country_combo').click(function(ev){
-
+      $('li#gc_limited_country').find('span.select_country_combo').live('click',function(ev){
         ev.stopPropagation();
         ev.preventDefault();
 
@@ -59,7 +58,7 @@ $(document).ready(function(ev){
       });
 
       // click on country combo (LIMITED TO A REGION)
-      $('li#gc_limited_region').find('span.select_country_combo').click(function(ev){
+      $('li#gc_limited_region').find('span.select_country_combo').live('click',function(ev){
         ev.stopPropagation();
         ev.preventDefault();
 
@@ -75,7 +74,7 @@ $(document).ready(function(ev){
       });
 
       // SET VALUE IF CLICK ON REGION
-      $('div.values.region').find('li').click(function(ev){
+      $('div.values.region').find('li').live('click',function(ev){
         ev.stopPropagation();
         ev.preventDefault();
         var id = $(this).children('a').attr('id');
