@@ -60,7 +60,7 @@ namespace :iom do
       end
     
     end
-    task :  => :environment do
+    task :load_projects  => :environment do
       DB = ActiveRecord::Base.connection
       DB.execute 'DELETE FROM projects'
       DB.execute 'DELETE FROM countries_projects'
@@ -137,12 +137,39 @@ namespace :iom do
           end
           
           # -->Country
-          p.countries  << Country.find_or_create_by_name(:name=>row.country) unless (row.country.blank?)
+          if (!row.country.blank?)
+            country = Country.find_or_create_by_name(:name=>row.country)
+            p.countries  << country
+          end
+          
           
           #Geo data
-          
+          multi_point=""
+          if(!row._3rd_administrative_level_commune.blank?)
+            parsed_adm3 = row._3rd_administrative_level_commune.split(",").map{|e|e.strip}
+            locations = Array.new
+            parsed_adm3.each do |region_name|
+              reg = Region.find_or_create_by_name(:name=>region_name)
+              reg.country = country
+              p.regions  << reg
+              
+              #georef
+              loc = Geokit::Geocoders::GoogleGeocoder.geocode("#{region_name},Haiti")
+              if(loc.lng)
+                locations << "#{loc.lng} #{loc.lat}"
+              end
+            end
+            
+            multi_point = "ST_MPointFromText('MULTIPOINT(#{locations.join(',')})',4326)" unless (locations.length<1)
+          end
           
           p.save!
+          
+          #save the Geom that we created before
+          if(!multi_point.blank?)
+            sql="UPDATE projects SET the_geom=#{multi_point} WHERE id=#{p.id}"
+            DB.execute sql
+          end
           
         else
           puts "NOT FOUND #{row.organization}"
