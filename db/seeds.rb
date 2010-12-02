@@ -8,194 +8,40 @@ Theme.create :name => 'Pink',   :css_file => '/stylesheets/themes/pink.css',   :
 Theme.create :name => 'Blue',   :css_file => '/stylesheets/themes/blue.css',   :thumbnail_path => '/images/backoffice/sites/theme_3.png'
 
 # Env seeds (development)
-spain = Country.create :name => 'Spain', :code => 'ES'
-usa   = Country.create :name => 'United States', :code => 'US'
 
-valencia = Region.create :name => 'Valencia', :country => spain
-madrid   = Region.create :name => 'Madrid',   :country => spain
+Cluster.create :name => 'Camp Coordination and Management'
+Cluster.create :name => 'Early Recovery'
+Cluster.create :name => 'Education'
+Cluster.create :name => 'Emergency Telecommunications'
+Cluster.create :name => 'Food Security and Agriculture'
+Cluster.create :name => 'Health'
+Cluster.create :name => 'Logistics'
+Cluster.create :name => 'Nutrition'
+Cluster.create :name => 'Protection'
+Cluster.create :name => 'Shelter and Non-food Items'
+Cluster.create :name => 'Water, Sanitation and Hygiene'
 
-baltimore = Region.create :name => 'Baltimore', :country => usa
-alabama   = Region.create :name => 'Alabama',   :country => usa
-
-# Organizations
-o1 = Organization.create  :name => "Intermon Oxfam",
-                          :description => "Oxfam America is an international relief and development organization that creates lasting solutions to poverty, hunger, and injustice. Together with individuals and local groups in more than 90 countries, Oxfam saves lives, helps people overcome poverty, and fights for social justice. We are one of the 14 affiliates in the international confederation, Oxfam.",
-                          :budget => 250000000,
-                          :website => "http://www.oxfamamerica.org",
-                          :national_staff => 1432,
-                          :twitter => "oxfamamerica",
-                          :facebook => "http://www.facebook.com/oxfamamerica",
-                          :hq_address => "Oxfam St, 32, City Center",
-                          :contact_email => "contact_intermon_oxfam@example.com",
-                          :contact_phone_number => "+31 2321 2133",
-                          :donation_address => "Donation Address Intermon Oxfam, 232, City Center",
-                          :zip_code => "UA23",
-                          :city => "New York",
-                          :state => "New York",
-                          :donation_phone_number => "+32 231 11 11 11",
-                          :donation_website => "http://www.oxfamamerica.org/donations",
-                          :site_specific_information => nil,
-                          :international_staff => "international staff",
-                          :contact_name => "Steve Balmer",
-                          :contact_position => "Intermon contact CEO",
-                          :contact_zip => "123",
-                          :contact_city => "Atlanta",
-                          :contact_state => "Maryland",
-                          :contact_country => "United States",
-                          :donation_country => "United States"
-
-o2 = Organization.create  :name => "Caritas org",
-                          :description => "Description for caritas",
-                          :budget => 10000,
-                          :website => "http://www.caritas.es/",
-                          :national_staff => 500,
-                          :twitter => "caritas",
-                          :facebook => "www.facebook.com/caritas",
-                          :hq_address => "Caritas St, 32, City Center",
-                          :contact_email => "contact_caritas@example.com",
-                          :contact_phone_number => "+31 123 2133",
-                          :donation_address => "Donation Address Caritas, 232, City Center",
-                          :zip_code => "AB123",
-                          :city => "Madrid",
-                          :state => "Madrid",
-                          :donation_phone_number => "+32 231 11 11 11",
-                          :donation_website => "http://www.caritas.es/donations",
-                          :site_specific_information => nil,
-                          :international_staff => "international staff",
-                          :contact_name => "Steve Caritas",
-                          :contact_position => "Caritas contact CEO",
-                          :contact_zip => "28005",
-                          :contact_city => "Madrid",
-                          :contact_state => "Madrid",
-                          :contact_country => "Spain",
-                          :donation_country => "Spain"
-
-cluster_health = Cluster.create :name => 'Health'
-cluster_water = Cluster.create :name => 'Water'
-cluster_food_security = Cluster.create :name => 'Food Security'
-cluster_floods = Cluster.create :name => 'Floods'
-
-sector_food = Sector.create :name => 'food sector'
-sector_health = Sector.create :name => 'health sector'
+Sector.create :name => 'Agriculture'
+Sector.create :name => 'Communications'
+Sector.create :name => 'Disaster Management'
+Sector.create :name => 'Economic Recovery and Development'
+Sector.create :name => 'Education'
+Sector.create :name => 'Environment'
+Sector.create :name => 'Food Aid'
+Sector.create :name => 'Health'
+Sector.create :name => 'Human Rights, Democracy and Governance'
+Sector.create :name => 'Peace and Security'
+Sector.create :name => 'Protection'
+Sector.create :name => 'Shelter and Housing'
+Sector.create :name => 'Water, Sanitation and Hygiene'
+Sector.create :name => 'Other'
 
 Tag.create :name => 'asia'
 Tag.create :name => 'africa'
 Tag.create :name => 'childhood'
 Tag.create :name => 'earthquake'
 
-# Projects
 
-p1 = Project.create :name => "Food Conservation",
-                    :description => "Food Conservation is a project .....",
-                    :primary_organization => o1,
-                    :tags => "asia, childhood",
-                    :implementing_organization => o1.try(:name),
-                    :cross_cutting_issues => 'Issues defined',
-                    :start_date => Date.today.yesterday,
-                    :end_date => Date.today + 1.month,
-                    :budget => 250000,
-                    :target => 'Farmers',
-                    :estimated_people_reached => 12312,
-                    :contact_person => 'The Farmer',
-                    :contact_email => 'food_conservation@example.com',
-                    :contact_phone_number => '0031 345 03 23',
-                    :the_geom => MultiPoint.from_points([Point.from_lon_lat(-3.726489543914795, 40.453423411115494),  Point.from_lon_lat(-3.7259557843208313, 40.45303562320312), Point.from_lon_lat(3.726789951324463, 40.44353412028846)]),
-                    :intervention_id => 'i-12312312',
-                    :additional_information => "This is the extra information for this project...",
-                    :awardee_type => 'Type of awardee #1'
-
-p1.clusters << cluster_floods
-p1.clusters << cluster_water
-p1.regions  << valencia
-p1.regions  << madrid
-p1.sectors << sector_food
-
-p2 = Project.create :name => "Vegetable generation",
-                    :description => "Vegetable generation is a project ....",
-                    :primary_organization => o1,
-                    :tags => "childhood, earthquake",
-                    :implementing_organization => o1.try(:name),
-                    :cross_cutting_issues => 'Issues defined for vegetables',
-                    :start_date => Date.today.yesterday,
-                    :end_date => Date.today + 3.month,
-                    :budget => 100,
-                    :target => 'Fishers',
-                    :estimated_people_reached => 12312,
-                    :contact_person => 'The vegetable maker',
-                    :contact_email => 'vegetable_generation@example.com',
-                    :contact_phone_number => '0031 345 03 23',
-                    :the_geom => MultiPoint.from_points([Point.from_lon_lat(-3.726489543914795, 40.453423411115494),  Point.from_lon_lat(-3.7259557843208313, 40.45303562320312), Point.from_lon_lat(3.726789951324463, 40.44353412028846)]),
-                    :intervention_id => 'i-33333',
-                    :additional_information => "This is the extra information for this project...",
-                    :awardee_type => 'Type of awardee #2'
-
-p2.clusters << cluster_water
-p2.regions  << madrid
-p2.sectors << sector_food
-
-p3 = Project.create :name => "Fishing for the earthquake",
-                    :description => "Fishing generation is a project ....",
-                    :primary_organization => o2,
-                    :tags => "earthquake",
-                    :implementing_organization => o2.try(:name),
-                    :cross_cutting_issues => 'Issues defined for fishing',
-                    :start_date => Date.today.yesterday,
-                    :end_date => Date.today + 3.month,
-                    :budget => 100,
-                    :target => 'Fishers',
-                    :estimated_people_reached => 12312,
-                    :contact_person => 'The fishing maker',
-                    :contact_email => 'fishing_generation@example.com',
-                    :contact_phone_number => '0031 345 03 23',
-                    :the_geom => MultiPoint.from_points([Point.from_lon_lat(-3.726489543914795, 40.453423411115494),  Point.from_lon_lat(-3.7259557843208313, 40.45303562320312), Point.from_lon_lat(3.726789951324463, 40.44353412028846)]),
-                    :intervention_id => 'i-22222',
-                    :additional_information => "This is the extra information for this project...",
-                    :awardee_type => 'Type of awardee #3'
-
-p3.clusters << cluster_water
-p3.sectors << sector_food
-
-p4 = Project.create :name => "Pescando para el terremoto",
-                    :description => "Fishing project in spanish",
-                    :primary_organization => o2,
-                    :tags => "fishing",
-                    :implementing_organization => o2.try(:name),
-                    :cross_cutting_issues => 'Issues defined for fishing',
-                    :start_date => Date.today.yesterday,
-                    :end_date => Date.today + 3.month,
-                    :budget => 200,
-                    :target => 'Fishers',
-                    :estimated_people_reached => 12312,
-                    :contact_person => 'The fishing maker',
-                    :contact_email => 'fishing_generation@example.com',
-                    :contact_phone_number => '0031 345 03 23',
-                    :the_geom => MultiPoint.from_points([Point.from_lon_lat(-3.726489543914795, 40.453423411115494),  Point.from_lon_lat(-3.7259557843208313, 40.45303562320312), Point.from_lon_lat(3.726789951324463, 40.44353412028846)]),
-                    :intervention_id => 'i-22222',
-                    :additional_information => "This is the extra information for this project...",
-                    :awardee_type => 'Type of awardee #3'
-
-p4.regions  << madrid
-p4.clusters << cluster_water
-p4.sectors << sector_food
-
-# Donors & donations
-donor = Donor.create  :name => "Fernando Blat",
-                      :description => "Fernando Blat has decide to be a donor in this project.",
-                      :website => "http://www.blatsoft.org/donors",
-                      :twitter => "blatsoft",
-                      :facebook => "www.facebook.com/blatsfot",
-                      :contact_person_name => "Fernando Blat",
-                      :contact_company => "Blatsoft",
-                      :contact_person_position => "BlatSoft CTO",
-                      :contact_email => "blat@example.com",
-                      :contact_phone_number => "+31 2321 2133",
-                      :site_specific_information => nil
-
-donor.donations.create :project => p1, :amount => 1000
-donor.donations.create :project => p1, :amount => 2000
-donor.donations.create :project => p1, :amount => 3000
-donor.donations.create :project => p3, :amount =>  500
-donor.donations.create :project => p4, :amount =>  100
 
 # Sites
 #  sites for testing purposes. Add this line to your /etc/hosts:

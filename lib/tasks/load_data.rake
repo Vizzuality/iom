@@ -60,7 +60,7 @@ namespace :iom do
       end
     
     end
-    task :load_projects => :environment do
+    task :  => :environment do
       DB = ActiveRecord::Base.connection
       DB.execute 'DELETE FROM projects'
       DB.execute 'DELETE FROM countries_projects'
