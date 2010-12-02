@@ -17,6 +17,7 @@ gem 'csv-mapper'
 
 gem 'csv-mapper'
 gem 'fastercsv'
+gem 'money'
 
 group :development do
   gem 'capistrano'
