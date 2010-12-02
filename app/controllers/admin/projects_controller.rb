@@ -5,7 +5,6 @@ class Admin::ProjectsController < ApplicationController
   def index
 
     @conditions = {}
-    template = 'index'
 
     if params[:q]
       q = "%#{params[:q].sanitize_sql!}%"
@@ -43,7 +42,7 @@ class Admin::ProjectsController < ApplicationController
       end
       @projects = projects.paginate :per_page => 20, :order => 'created_at DESC', :page => params[:page]
     elsif params[:organization_id]
-      template = 'projects'
+      template = 'admin/organizations/projects'
       @organization = Organization.find(params[:organization_id])
       @projects = @organization.projects.paginate :per_page => 20, :order => 'created_at DESC', :page => params[:page]
     else
@@ -51,7 +50,9 @@ class Admin::ProjectsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html{ render :template => "admin/organizations/#{template}" }
+      format.html do
+        render :template => template if template.present?
+      end
       format.csv do
         send_data @projects.to_csv,
           :type => 'text/csv; charset=iso-8859-1; header=present',
