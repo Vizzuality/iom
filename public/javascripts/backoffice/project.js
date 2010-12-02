@@ -722,7 +722,7 @@ $(function() {
   $("#project_tags").autocomplete({
     class: 'project_tags',
     source: function( request, response ) {
-    $('span#tags_combo').addClass('active');
+      $('span#tags_combo').addClass('active');
       var value = $("#project_tags").val();
       if (value.indexOf(',') != -1 ) {
         value = value.substring(value.indexOf(',')+1, value.length);

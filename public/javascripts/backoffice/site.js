@@ -155,5 +155,61 @@ $(document).ready(function(ev){
         $('span.select_combo_typology.clicked').removeClass('clicked');
 
       });
+});
 
+// AUTOCOMPLETE TAGS
+
+$(function() {
+function split( val ) {
+  return val.split( /,\s*/ );
+}
+
+  $('.country_region_value').click(function(){
+    $.ajax({
+      url: $('input#site_admin_site_tags_path').val() + '?country_id=' + $(this).children('a').attr('id')
+    });
+  });
+
+  $("#pc_tags_section").autocomplete({
+    class: 'site_tags',
+    source: function( request, response ) {
+      var value = $("#pc_tags_section").val();
+      if (value.indexOf(',') != -1 ) {
+        value = value.substring(value.indexOf(',')+1, value.length);
+      }
+      $.ajax({
+        url: $('input#site_admin_site_tags_path').val() + '?term=' + value,
+        dataType: "json",
+        success: function( data ) {
+          if(data != null) {
+            response($.map(data, function(tag) {
+              return {
+                label: tag.name,
+                value: tag.name
+              }
+            }));
+          }
+        }
+      });
+    },
+    minLength: 2,
+    focus: function() {
+      // prevent value inserted on focus
+      return false;
+    },
+    select: function( event, ui ) {
+      var terms = split( this.value );
+      // remove the current input
+      terms.pop();
+      // add the selected item
+      terms.push( ui.item.value );
+      // add placeholder to get the comma-and-space at the end
+      terms.push( "" );
+      this.value = terms.join( ", " );
+      return false;
+    },
+    refresh: function(){
+       this.element.children("li.ui-menu-item:odd a").addClass("ui-menu-item-alternate");
+    }
+  });
 });

@@ -508,12 +508,11 @@ ul.ui-autocomplete.donor_names li.ui-menu-item p.info_amount {position:absolute;
 
 
 /*AUTOCOMPLETE - FILTERING TAGS*/
-ul.ui-autocomplete.site_filtering_tags {position:absolute; top:40px; width:419px; display:none; z-index:20;}
-ul.ui-autocomplete.site_filtering_tags li.ui-menu-item {float:right; margin:7px 0 0 0; background:url('/images/backoffice/projects/repeat_content_tags.png') no-repeat 0 0; width:413px; height:22px; font:normal 15px Arial; color:#333333; padding:5px 0 0 12px; position:relative;}
-ul.ui-autocomplete.site_filtering_tags li.ui-menu-item:hover {cursor:pointer; background:url('/images/backoffice/projects/repeat_content_tags_hover.png') no-repeat 0 0;}
-ul.ui-autocomplete.site_filtering_tags li.ui-menu-item.last{float:right; width:425px; height:7px; margin:0; background:url('/images/backoffice/projects/bottom_content_tags.png') no-repeat 0 0; padding:0;}
-ul.ui-autocomplete.site_filtering_tags li.ui-menu-item a {width:100%;}
-ul.ui-autocomplete.site_filtering_tags li.ui-menu-item p.info_amount {position:absolute; right:20px; top:6px; font:normal 13px Arial; color:#666666; width:auto;}
+ul.ui-autocomplete.site_tags {position:absolute; top:0; width:502px; display:none; z-index:20; left:0;}
+ul.ui-autocomplete.site_tags li.ui-menu-item {float:right; margin:0; background:url('/images/backoffice/sites/repeat_content_tags.png') no-repeat 0 0; width:497px; height:22px; font:normal 15px Arial; color:#333333; padding:5px 0 0 12px; position:relative;}
+ul.ui-autocomplete.site_tags li.ui-menu-item:hover {cursor:pointer; background:url('/images/backoffice/sites/repeat_content_tags_hover.png') no-repeat 0 0;}
+ul.ui-autocomplete.site_tags li.ui-menu-item.last{float:right; width:509px; height:7px; margin:0; background:url('/images/backoffice/sites/bottom_content_tags.png') no-repeat 0 0; padding:0;}
+ul.ui-autocomplete.site_tags li.ui-menu-item a {width:100%;}
 /*END - AUTOCOMPLETE - TAGS*/
 
 

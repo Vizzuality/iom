@@ -344,15 +344,24 @@ $.widget( "ui.autocomplete", {
 
 	_renderItem: function( ul, item) {
 		
-		// TODO: Add pluralize control relative to the concept
-		var count = item.label.split(" ")[1];
-		var concept = item.label.split(" ")[2];
+        if (this.options.class == 'project_tags'){
+    		var count = item.label.split(" ")[1];
+    		var concept = item.label.split(" ")[2];
 
-		return $( "<li></li>" )
-			.data( "item.autocomplete", item )
-			.append( $( "<a></a>" ).text( item.label.split(" ")[0]))
-			.append( $( "<p class='info_amount'></p>").text(count+' '+concept))
-			.appendTo( ul );
+    		return $( "<li></li>" )
+    			.data( "item.autocomplete", item )
+    			.append( $( "<a></a>" ).text( item.label.split(" ")[0]))
+    			.append( $( "<p class='info_amount'></p>").text(count+' '+concept))
+    			.appendTo( ul );
+        }else {
+
+    		return $( "<li></li>" )
+    			.data( "item.autocomplete", item )
+    			.append( $( "<a></a>" ).text( item.label ))
+    			.appendTo( ul );
+    		
+        }
+        
 	},
 
 	_move: function( direction, event ) {
