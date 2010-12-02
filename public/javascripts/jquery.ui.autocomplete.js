@@ -281,6 +281,15 @@ $.widget( "ui.autocomplete", {
 		if (($('span#tags_combo')[0] != null) && ($('span#tags_combo').hasClass('active'))){
 			$('span#tags_combo').removeClass('active');	
 		}
+
+		if (($('span#donor_name_input')[0] != null) && ($('span#donor_name_input').hasClass('active'))){
+			$('span#donor_name_input').removeClass('active');	
+		}
+		
+		if (($('span.tags_site')[0] != null) && ($('span.tags_site').hasClass('active'))){
+			$('span.tags_site').removeClass('active');	
+		}
+		
 		
 		clearTimeout( this.closing );
 		if ( this.menu.element.is(":visible") ) {
@@ -325,6 +334,7 @@ $.widget( "ui.autocomplete", {
 		// TODO refresh should check if the active item is still in the dom, removing the need for a manual deactivate
 		this.menu.deactivate();
 		this.menu.refresh();
+	
 		this.menu.element.show().position( $.extend({
 			of: this.element
 		}, this.options.position ));
@@ -458,6 +468,7 @@ $.widget("ui.menu", {
 
 	activate: function( event, item ) {
 		this.deactivate();
+		
 		if (this.hasScroll()) {
 			var offset = item.offset().top - this.element.offset().top,
 				scroll = this.element.attr("scrollTop"),
