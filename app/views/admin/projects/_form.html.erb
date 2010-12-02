@@ -61,6 +61,12 @@
       <%= f.text_area :activities %>
     </span>
   </div>
+  <div class="field">
+    <label>WEBSITE</label>
+    <span class="input_large">
+      <%= f.text_field :website %>
+    </span>
+  </div>  
   <!-- SECTION  -->
   <h3 class="section museo_sans">PROJECT MANAGEMENT</h3>
   <div class="field">
@@ -242,12 +248,27 @@
 
   <!-- SECTION  -->
   <h3 class="section museo_sans">CONTACT INFORMATION</h3>
-  <div class="field">
-    <label>CONTACT PERSON</label>
-    <span class="input_short">
-        <%= f.text_field :contact_person %>
-    </span>
-  </div>
+
+  <div class="two_columns">
+    <div class="left_column">
+      <div class="field">
+        <label>CONTACT NAME</label>
+        <span class="input_short">
+          <%= f.text_field :contact_person %>
+        </span>
+      </div>
+    </div>
+    <div class="right_column">
+      <div class="field">
+        <p class="title">CONTACT TITLE</p>
+        <span class="input_short">
+          <%= f.text_field :contact_position %>
+        </span>
+      </div> <!-- field -->
+    </div>
+  </div>  
+
+
 
   <div class="two_columns">
     <div class="left_column">
