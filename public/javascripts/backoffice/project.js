@@ -722,7 +722,7 @@ $(function() {
   $("#project_tags").autocomplete({
     class: 'project_tags',
     source: function( request, response ) {
-    $('span#tags_combo').addClass('active');
+      $('span#tags_combo').addClass('active');
       var value = $("#project_tags").val();
       if (value.indexOf(',') != -1 ) {
         value = value.substring(value.indexOf(',')+1, value.length);
@@ -763,4 +763,42 @@ $(function() {
        this.element.children("li.ui-menu-item:odd a").addClass("ui-menu-item-alternate");
     }
   });
+  
+  var custom_donors_url = $('input#donation_admin_project_donors_path').val() + '?q=';
+  
+  // AUTOCOMPLETE FOR DONORS IN PROJECT
+  $("#autocomplete_donor_name").autocomplete({
+   class:'donor_names',
+   source: function( request, response ) {
+    $('span#donor_name_input').addClass('active');
+     var value = $("#autocomplete_donor_name").val();
+     $.ajax({
+       url: custom_donors_url + value,
+       dataType: "json",
+       success: function( data ) {
+         if(data != null) {
+           response($.map(data, function(donor) {
+             return {
+               label: donor.name,
+               value: donor.name,
+               element_id: donor.id
+             }
+           }));
+         }
+       }
+     });
+   },
+   minLength: 2,
+   focus: function() {
+     // prevent value inserted on focus
+     return false;
+   },
+   select: function( event, ui ) {
+     $('#autocomplete_donor_name').val(ui.item.value);
+     $('#donation_donor_id').val(ui.item.element_id);
+   },
+   refresh: function(){
+      this.element.children("li.ui-menu-item:odd a").addClass("ui-menu-item-alternate");
+   }
+ });
 });

@@ -492,28 +492,26 @@ ul.ui-autocomplete.project_tags {position:absolute; top:40px; width:419px; displ
 ul.ui-autocomplete.project_tags li.ui-menu-item {float:right; margin:7px 0 0 0; background:url('/images/backoffice/projects/repeat_content_tags.png') no-repeat 0 0; width:413px; height:22px; font:normal 15px Arial; color:#333333; padding:5px 0 0 12px; position:relative;}
 ul.ui-autocomplete.project_tags li.ui-menu-item:hover {cursor:pointer; background:url('/images/backoffice/projects/repeat_content_tags_hover.png') no-repeat 0 0;}
 ul.ui-autocomplete.project_tags li.ui-menu-item.last{float:right; width:425px; height:7px; margin:0; background:url('/images/backoffice/projects/bottom_content_tags.png') no-repeat 0 0; padding:0;}
-ul.ui-autocomplete.project_tags li.ui-menu-item a {width:100%;}
+ul.ui-autocomplete.project_tags li.ui-menu-item a {font:normal 15px Arial; width:100%;}
 ul.ui-autocomplete.project_tags li.ui-menu-item p.info_amount {position:absolute; right:20px; top:6px; font:normal 13px Arial; color:#666666; width:auto;}
 /*END - AUTOCOMPLETE - TAGS*/
 
 
 /*AUTOCOMPLETE - DONOR NAME*/
-ul.ui-autocomplete.donor_names {position:absolute; top:40px; width:419px; display:none; z-index:20;}
-ul.ui-autocomplete.donor_names li.ui-menu-item {float:right; margin:7px 0 0 0; background:url('/images/backoffice/projects/repeat_content_tags.png') no-repeat 0 0; width:413px; height:22px; font:normal 15px Arial; color:#333333; padding:5px 0 0 12px; position:relative;}
-ul.ui-autocomplete.donor_names li.ui-menu-item:hover {cursor:pointer; background:url('/images/backoffice/projects/repeat_content_tags_hover.png') no-repeat 0 0;}
-ul.ui-autocomplete.donor_names li.ui-menu-item.last{float:right; width:425px; height:7px; margin:0; background:url('/images/backoffice/projects/bottom_content_tags.png') no-repeat 0 0; padding:0;}
-ul.ui-autocomplete.donor_names li.ui-menu-item a {width:100%;}
-ul.ui-autocomplete.donor_names li.ui-menu-item p.info_amount {position:absolute; right:20px; top:6px; font:normal 13px Arial; color:#666666; width:auto;}
+ul.ui-autocomplete.donor_names {position:absolute; top:40px; width:229px; display:none; z-index:20;}
+ul.ui-autocomplete.donor_names li.ui-menu-item {float:right; margin:0px 0 0 0; background:url('/images/backoffice/projects/donations/repeat_content_tags.png') no-repeat 0 0; width:226px; height:22px; font:normal 15px Arial; color:#333333; padding:5px 0 0 12px; position:relative;}
+ul.ui-autocomplete.donor_names li.ui-menu-item:hover {cursor:pointer; background:url('/images/backoffice/projects/donations/repeat_content_tags_hover.png') no-repeat 0 0;}
+ul.ui-autocomplete.donor_names li.ui-menu-item.last{float:right; width:238px; height:7px; margin:0; background:url('/images/backoffice/projects/donations/bottom_content_tags.png') no-repeat 0 0; padding:0;}
+ul.ui-autocomplete.donor_names li.ui-menu-item a {font:normal 13px Arial; width:100%;}
 /*END - AUTOCOMPLETE - TAGS*/
 
 
 /*AUTOCOMPLETE - FILTERING TAGS*/
-ul.ui-autocomplete.site_filtering_tags {position:absolute; top:40px; width:419px; display:none; z-index:20;}
-ul.ui-autocomplete.site_filtering_tags li.ui-menu-item {float:right; margin:7px 0 0 0; background:url('/images/backoffice/projects/repeat_content_tags.png') no-repeat 0 0; width:413px; height:22px; font:normal 15px Arial; color:#333333; padding:5px 0 0 12px; position:relative;}
-ul.ui-autocomplete.site_filtering_tags li.ui-menu-item:hover {cursor:pointer; background:url('/images/backoffice/projects/repeat_content_tags_hover.png') no-repeat 0 0;}
-ul.ui-autocomplete.site_filtering_tags li.ui-menu-item.last{float:right; width:425px; height:7px; margin:0; background:url('/images/backoffice/projects/bottom_content_tags.png') no-repeat 0 0; padding:0;}
-ul.ui-autocomplete.site_filtering_tags li.ui-menu-item a {width:100%;}
-ul.ui-autocomplete.site_filtering_tags li.ui-menu-item p.info_amount {position:absolute; right:20px; top:6px; font:normal 13px Arial; color:#666666; width:auto;}
+ul.ui-autocomplete.site_tags {position:absolute; top:0; width:502px; display:none; z-index:20; left:0;}
+ul.ui-autocomplete.site_tags li.ui-menu-item {float:right; margin:0; background:url('/images/backoffice/sites/repeat_content_tags.png') no-repeat 0 0; width:497px; height:22px; font:normal 15px Arial; color:#333333; padding:5px 0 0 12px; position:relative;}
+ul.ui-autocomplete.site_tags li.ui-menu-item:hover {cursor:pointer; background:url('/images/backoffice/sites/repeat_content_tags_hover.png') no-repeat 0 0;}
+ul.ui-autocomplete.site_tags li.ui-menu-item.last{float:right; width:509px; height:7px; margin:0; background:url('/images/backoffice/sites/bottom_content_tags.png') no-repeat 0 0; padding:0;}
+ul.ui-autocomplete.site_tags li.ui-menu-item a {font:normal 13px Arial; width:100%;}
 /*END - AUTOCOMPLETE - TAGS*/
 
 
@@ -677,6 +675,8 @@ div.block.donations_project div.med div.left p.amount {float:left; width:auto; f
 div.block.donations_project div.med div.left form {float:left; width:543px; height:143px; padding:21px; margin:20px 0 0 2px; background:url('/images/backoffice/projects/bkg_add_donation_form.png') no-repeat center center; position:relative;}
 div.block.donations_project div.med div.left form div#donor_name {float:left; width:234px; height:64px; margin:0 10px 0 0;}
 div.block.donations_project div.med div.left form div#donor_name span {float:left; background:url('/images/backoffice/projects/input_donation_name.png') no-repeat 0 0; width:226px; height:32px; position:relative; margin:3px 0 0 7px;}
+div.block.donations_project div.med div.left form div#donor_name span.active {background:url('/images/backoffice/projects/input_donation_name_active.png') no-repeat 0 0; height:33px;}
+
 div.block.donations_project div.med div.left form div#donor_name span input[type="text"] {border:none; font:normal 13px Arial; color:#999999; position:absolute; top:8px; left:10px; width:210px;}
 div.block.donations_project div.med div.left form div#donation_date {float:left; width:173px; height:64px; margin:0 7px 0 0;}
 
@@ -912,6 +912,7 @@ div.block.site_info div.med div.left form ul.project_tipo_options li.selected p.
 div.block.site_info div.med div.left form ul.project_tipo_options li.selected p.ngo {float:left; margin:9px 0 0 10px; font:normal 13px Arial; color:#999999;}
 
 div.block.site_info div.med div.left form ul.project_tipo_options li.selected span.tags_site {float:left; margin:10px 0 0 12px; width:509px; height:34px; background:url('/images/backoffice/sites/bkg_tags_site.png') no-repeat 0 0; position:relative;}
+div.block.site_info div.med div.left form ul.project_tipo_options li.selected span.tags_site.active {background:url('/images/backoffice/sites/bkg_tags_site_active.png') no-repeat 0 0; height:33px;}
 div.block.site_info div.med div.left form ul.project_tipo_options li.selected span.tags_site input[type="text"]{position:absolute; top:5px; left:8px; width:472px; height:25px; display:inline;}
 
 div.block.site_info div.med div.left form div.two_columns {float:left; width:100%; height:70px;}

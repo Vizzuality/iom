@@ -47,7 +47,7 @@ module Iom
             :description => "Description for caritas",
             :budget => 10000,
             :website => "http://www.caritas.es/",
-            :staff => 500,
+            :national_staff => 500,
             :twitter => "caritas",
             :facebook => "www.facebook.com/caritas",
             :hq_address => "Caritas St, 32, City Center",
