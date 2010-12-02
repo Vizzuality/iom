@@ -60,8 +60,10 @@
         <span>
             <%= f.text_field :amount  %>
         </span>
-
         </div>
+        <!--  TO GET CORRECT URL -->
+         <%= f.hidden_field :admin_project_donors_path , :value => admin_donors_path %>
+         
           <%= f.submit 'Add donation' %>
       <% end -%>
       </div>
@@ -76,45 +78,3 @@
 <script src="/javascripts/plugins/jquery.stylish-select.js" type="text/javascript" charset="utf-8"></script>
 <script src="/javascripts/backoffice/project.js" type="text/javascript" charset="utf-8"></script>
 <script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>
-
-
- <script type="text/javascript">
- $(function() {
-   function split( val ) {
-     return val.split( /,\s*/ );
-   }
-   $("#autocomplete_donor_name").autocomplete({
-     source: function( request, response ) {
-       var value = $("#autocomplete_donor_name").val();
-       $.ajax({
-         url: '<%= admin_donors_path %>?q=' + value,
-         dataType: "json",
-         success: function( data ) {
-           if(data != null) {
-             response($.map(data, function(donor) {
-               return {
-                 label: donor.name,
-                 value: donor.name,
-                 element_id: donor.id
-               }
-             }));
-           }
-         }
-       });
-     },
-     minLength: 2,
-     focus: function() {
-       // prevent value inserted on focus
-       return false;
-     },
-     select: function( event, ui ) {
-       $('#autocomplete_donor_name').val(ui.item.value);
-       $('#donation_donor_id').val(ui.item.element_id);
-     },
-     refresh: function(){
-        this.element.children("li.ui-menu-item:odd a").addClass("ui-menu-item-alternate");
-     }
-   });
-
- });
- </script>

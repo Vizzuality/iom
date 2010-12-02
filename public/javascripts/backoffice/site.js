@@ -173,6 +173,7 @@ function split( val ) {
   $("#pc_tags_section").autocomplete({
     class: 'site_tags',
     source: function( request, response ) {
+      $('span.tags_site').addClass('active');        
       var value = $("#pc_tags_section").val();
       if (value.indexOf(',') != -1 ) {
         value = value.substring(value.indexOf(',')+1, value.length);
