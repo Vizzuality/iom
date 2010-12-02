@@ -3,6 +3,7 @@ class Admin::ProjectsController < ApplicationController
   before_filter :login_required
 
   def index
+
     @conditions = {}
     if params[:q]
       q = "%#{params[:q].sanitize_sql!}%"
@@ -42,9 +43,17 @@ class Admin::ProjectsController < ApplicationController
     elsif params[:organization_id]
       @organization = Organization.find(params[:organization_id])
       @projects = @organization.projects.paginate :per_page => 20, :order => 'created_at DESC', :page => params[:page]
-      render :template => 'admin/organizations/projects'
     else
       @projects = Project.paginate :per_page => 20, :order => 'created_at DESC', :page => params[:page]
+    end
+
+    respond_to do |format|
+      format.html{ render :template => 'admin/organizations/projects' }
+      format.csv do
+        send_data @projects.to_csv,
+          :type => 'text/csv; charset=iso-8859-1; header=present',
+          :disposition => "attachment; filename=#{@organization.name}_projects.csv"
+      end
     end
   end
 

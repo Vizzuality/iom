@@ -46,9 +46,12 @@ class Project < ActiveRecord::Base
 
   before_validation :clean_html
 
-  validates_presence_of :name, :description, :primary_organization_id
+  validates_presence_of :primary_organization_id
 
-  validate :dates_consistency, :presence_of_clusters_and_sectors
+#  validate :dates_consistency, :presence_of_clusters_and_sectors
+
+  validate :dates_consistency
+  
 
   attr_accessor :sectors_ids, :clusters_ids
 
