@@ -2,6 +2,8 @@
 <html>
 <head>
   <title><%= title %></title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+  
   <%= javascript_include_tag '/javascripts/plugins/fonts/cufon_yui.js','/javascripts/plugins/fonts/PT_Sans.js','/javascripts/plugins/fonts/Geneva.js','/javascripts/plugins/fonts/Aller.js' %>
 
   <%= stylesheet_link_tag '/stylesheets/sites/layout.css' %>
@@ -12,93 +14,99 @@
   <script type="text/javascript">try{Typekit.load();}catch(e){}</script> -->
 </head>
 <body>
-  <!-- <div id="outer_header">
-    <div id="inner_header">
-      <div id="header">
-        <div class="left">
-          <h1 class="geneva"><%= link_to(@site.name,'/') %></h1>
-          <ul class="menu">
-            <% if @site.cluster %>
-              <li><a href="<%= cluster_path(@site.cluster) %>" class="geneva"><%= @site.word_for_clusters.upcase.singularize %></a></li>
-            <% elsif @site.sector %>
-              <li><a href="<%= sector_path(@site.sector) %>" class="geneva"><%= @site.word_for_sectors.upcase.singularize %></a></li>
-            <% else %>
-              <% if @site.navigate_by_cluster? %>
-              <li>
-                <a href="#" class="geneva"><%= @site.word_for_clusters.upcase %><span class="with_suboptions"></span></a>
-                <ul>
-                  <% @site.clusters.each do |cluster| %>
-                  <li><a href="<%= cluster_path(cluster) %>" class="geneva"><%= cluster.name %></a></li>
-                  <% end %>
-                </ul>
-              </li>
-              <% elsif @site.navigate_by_sector? %>
-              <li>
-                <a href="#" class="geneva"><%= @site.word_for_sectors.upcase %><span class="with_suboptions"></span></a>
-                <ul>
-                  <% @site.sectors.each do |sector| %>
-                  <li><a href="<%= sector_path(sector) %>" class="geneva"><%= sector.name %></a></li>
-                  <% end %>
-                </ul>
-              </li>
-              <% end %>
+  <div id="header">
+    <div class="inner_header">
+      <div class="left">
+        <h1><%= link_to(@site.name,'/') %></h1>
+        <ul class="menu">
+          <% if @site.cluster %>
+            <li><a href="<%= cluster_path(@site.cluster) %>" class="geneva"><%= @site.word_for_clusters.upcase.singularize %></a></li>
+          <% elsif @site.sector %>
+            <li><a href="<%= sector_path(@site.sector) %>" class="geneva"><%= @site.word_for_sectors.upcase.singularize %></a></li>
+          <% else %>
+            <% if @site.navigate_by_cluster? %>
+            <li>
+              <a href="#" class="geneva"><%= @site.word_for_clusters.upcase %><span class="with_suboptions"></span></a>
+              <ul>
+                <% @site.clusters.each do |cluster| %>
+                <li><a href="<%= cluster_path(cluster) %>" class="geneva"><%= cluster.name %></a></li>
+                <% end %>
+              </ul>
+            </li>
+            <% elsif @site.navigate_by_sector? %>
+            <li>
+              <a href="#" class="geneva"><%= @site.word_for_sectors.upcase %><span class="with_suboptions"></span></a>
+              <ul>
+                <% @site.sectors.each do |sector| %>
+                <li><a href="<%= sector_path(sector) %>" class="geneva"><%= sector.name %></a></li>
+                <% end %>
+              </ul>
+            </li>
             <% end %>
-            <li><a href="#" class="geneva">REGIONS<span class="with_suboptions"></span></a></li>
-            <li><a href="#" class="geneva">ORGANIZATIONS<span class="with_suboptions"></span></a></li>
-            <li><a href="<%= page_path(Page.analysis(@site)) %>" class="geneva">ANALYSIS</a></li>
-            <li><a href="<%= page_path(Page.about(@site)) %>" class="geneva">ABOUT</a></li>
-          </ul>
-        </div>
-
-        <div class="right">
-          <%= form_tag(search_path, :method => :get, :class => 'search') do %>
-            <span class="input_search">
-              <%= text_field_tag :q, params[:q] %>
-              <%= submit_tag '' %>
-            </span>
           <% end %>
-        </div>
+          <li><a href="#" class="geneva">REGIONS<span class="with_suboptions"></span></a></li>
+          <li><a href="#" class="geneva">ORGANIZATIONS<span class="with_suboptions"></span></a></li>
+          <li><a href="<%= page_path(Page.analysis(@site)) %>" class="geneva">ANALYSIS</a></li>
+          <li><a href="<%= page_path(Page.about(@site)) %>" class="geneva">ABOUT</a></li>
+        </ul>
+      </div>
+
+      <div class="right">
+        <%= form_tag(search_path, :method => :get, :class => 'search') do %>
+          <span class="input_search">
+            <%= text_field_tag :q, params[:q] %>
+            <%= submit_tag '' %>
+          </span>
+        <% end %>
       </div>
     </div>
-  </div> -->
+  </div>
 
   <div id="outer_layout">
-    <!-- <div id="map"></div> -->
-
-    <div id="layout">
-
-      <%= yield %>
+    
+    <%= yield %> <!-- Main layout has to content <div id="layout"> -->
       
-      
-      <!-- <% if controller_name != 'pages' %>
-        <div id="footer_pages">
-          <div class="left">
-            <p class="copy_info pt_sans_bold"><%= @site.name %></p>
-            <p class="all_rights pt_sans">A project by Interaction 2010. All rights reserved.</p>
-            <div class="links">
-              <a class="pt_sans" href="<%= page_path(Page.contact(@site)) %>">contact us</a><p>/</p><a class="pt_sans" href="<%= page_path(Page.about(@site)) %>">About the project</a>
-            </div>
+    <!-- FOOTERS -->
+    <% if controller_name == 'pages' || controller_name == 'search' || controller_name == 'donors' %>
+      <div id="footer_pages">
+        <div class="left">
+          <div class="project">
+            <h1><%= @site.name %></h1>
+            <p class="all_rights">A project by Interaction 2010. All rights reserved.</p>
           </div>
-          <div class="right">
-            <a class="logo"></a>
+          <div class="links">
+            <ul>
+              <li><a href="<%= page_path(Page.contact(@site)) %>">contact us</a></li>
+              <li>/</li>
+              <li><a href="<%= page_path(Page.about(@site)) %>">About the project</a></li>
+            </ul>
           </div>
         </div>
-      <% else %>
-        <div id="footer">
-          <div class="left">
-            <a class="logo"></a>
+        <div class="right">
+          <a class="logo"></a>
+        </div>
+      </div>
+    <% else %>
+      <div id="footer">
+        <div class="left">
+          <a class="logo"></a>
+        </div>
+        <div class="right">
+          <div class="project">
+            <h1><%= @site.name %></h1>
+            <p class="all_rights">A project by Interaction 2010. All rights reserved.</p>
           </div>
-          <div class="right">
-            <p class="copy_info pt_sans_bold"><%= @site.name %></p>
-            <p class="all_rights pt_sans">A project by Interaction 2010. All rigths reserved.</p>
-            <div class="links">
-              <a class="pt_sans" href="<%= page_path(Page.contact(@site)) %>">contact us</a><p>/</p><a class="pt_sans" href="<%= page_path(Page.about(@site)) %>">About the project</a>
-            </div>
+          <div class="links">
+            <ul>
+              <li><a href="<%= page_path(Page.contact(@site)) %>">contact us</a></li>
+              <li>/</li>
+              <li><a href="<%= page_path(Page.about(@site)) %>">About the project</a></li>
+            </ul>
           </div>
         </div>
-      <% end %> -->
+      </div>
+    <% end %>
     </div>
-    <!-- layout -->
   </div>
   <%=yield :js %>
 </body>
