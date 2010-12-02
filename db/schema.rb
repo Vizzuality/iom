@@ -14,15 +14,14 @@ ActiveRecord::Schema.define(:version => 20101201174750) do
 
   create_table "clusters", :force => true do |t|
     t.column "name", :string
+    t.column "created_at", :datetime
+    t.column "updated_at", :datetime
   end
 
   create_table "clusters_projects", :id => false, :force => true do |t|
     t.column "cluster_id", :integer
     t.column "project_id", :integer
   end
-
-  add_index "clusters_projects", ["cluster_id"], :name => "index_clusters_projects_on_cluster_id"
-  add_index "clusters_projects", ["project_id"], :name => "index_clusters_projects_on_project_id"
 
   create_table "countries", :force => true do |t|
     t.column "name", :string
@@ -34,18 +33,12 @@ ActiveRecord::Schema.define(:version => 20101201174750) do
     t.column "project_id", :integer
   end
 
-  add_index "countries_projects", ["country_id"], :name => "index_countries_projects_on_country_id"
-  add_index "countries_projects", ["project_id"], :name => "index_countries_projects_on_project_id"
-
   create_table "donations", :force => true do |t|
     t.column "donor_id", :integer
     t.column "project_id", :integer
     t.column "amount", :float
     t.column "date", :date
   end
-
-  add_index "donations", ["donor_id"], :name => "index_donations_on_donor_id"
-  add_index "donations", ["project_id"], :name => "index_donations_on_project_id"
 
   create_table "donors", :force => true do |t|
     t.column "name", :string
@@ -67,10 +60,8 @@ ActiveRecord::Schema.define(:version => 20101201174750) do
     t.column "updated_at", :datetime
   end
 
-  add_index "donors", ["name"], :name => "index_donors_on_name"
-
 # Could not dump table "geography_columns" because of following StandardError
-#   Unknown type 'name' for column 'f_table_catalog' /Users/fer/.rvm/gems/ruby-1.8.7-p302@iom/bundler/gems/postgis_adapter-31485fe86f12/lib/postgis_adapter/common_spatial_adapter.rb:52:in `table'/Users/fer/.rvm/gems/ruby-1.8.7-p302@iom/bundler/gems/postgis_adapter-31485fe86f12/lib/postgis_adapter/common_spatial_adapter.rb:50:in `each'/Users/fer/.rvm/gems/ruby-1.8.7-p302@iom/bundler/gems/postgis_adapter-31485fe86f12/lib/postgis_adapter/common_spatial_adapter.rb:50:in `table'/Users/fer/.rvm/gems/ruby-1.8.7-p302@iom/gems/activerecord-3.0.1/lib/active_record/schema_dumper.rb:75:in `tables'/Users/fer/.rvm/gems/ruby-1.8.7-p302@iom/gems/activerecord-3.0.1/lib/active_record/schema_dumper.rb:66:in `each'/Users/fer/.rvm/gems/ruby-1.8.7-p302@iom/gems/activerecord-3.0.1/lib/active_record/schema_dumper.rb:66:in `tables'/Users/fer/.rvm/gems/ruby-1.8.7-p302@iom/gems/activerecord-3.0.1/lib/active_record/schema_dumper.rb:27:in `dump'/Users/fer/.rvm/gems/ruby-1.8.7-p302@iom/gems/activerecord-3.0.1/lib/active_record/schema_dumper.rb:21:in `dump'/Users/fer/.rvm/gems/ruby-1.8.7-p302@iom/gems/activerecord-3.0.1/lib/active_record/railties/databases.rake:327/Users/fer/.rvm/gems/ruby-1.8.7-p302@iom/gems/activerecord-3.0.1/lib/active_record/railties/databases.rake:326:in `open'/Users/fer/.rvm/gems/ruby-1.8.7-p302@iom/gems/activerecord-3.0.1/lib/active_record/railties/databases.rake:326/Users/fer/.rvm/gems/ruby-1.8.7-p302@global/gems/rake-0.8.7/lib/rake.rb:636:in `call'/Users/fer/.rvm/gems/ruby-1.8.7-p302@global/gems/rake-0.8.7/lib/rake.rb:636:in `execute'/Users/fer/.rvm/gems/ruby-1.8.7-p302@global/gems/rake-0.8.7/lib/rake.rb:631:in `each'/Users/fer/.rvm/gems/ruby-1.8.7-p302@global/gems/rake-0.8.7/lib/rake.rb:631:in `execute'/Users/fer/.rvm/gems/ruby-1.8.7-p302@global/gems/rake-0.8.7/lib/rake.rb:597:in `invoke_with_call_chain'/Users/fer/.rvm/rubies/ruby-1.8.7-p302/lib/ruby/1.8/monitor.rb:242:in `synchronize'/Users/fer/.rvm/gems/ruby-1.8.7-p302@global/gems/rake-0.8.7/lib/rake.rb:590:in `invoke_with_call_chain'/Users/fer/.rvm/gems/ruby-1.8.7-p302@global/gems/rake-0.8.7/lib/rake.rb:583:in `invoke'/Users/fer/.rvm/gems/ruby-1.8.7-p302@iom/gems/activerecord-3.0.1/lib/active_record/railties/databases.rake:143/Users/fer/.rvm/gems/ruby-1.8.7-p302@global/gems/rake-0.8.7/lib/rake.rb:636:in `call'/Users/fer/.rvm/gems/ruby-1.8.7-p302@global/gems/rake-0.8.7/lib/rake.rb:636:in `execute'/Users/fer/.rvm/gems/ruby-1.8.7-p302@global/gems/rake-0.8.7/lib/rake.rb:631:in `each'/Users/fer/.rvm/gems/ruby-1.8.7-p302@global/gems/rake-0.8.7/lib/rake.rb:631:in `execute'/Users/fer/.rvm/gems/ruby-1.8.7-p302@global/gems/rake-0.8.7/lib/rake.rb:597:in `invoke_with_call_chain'/Users/fer/.rvm/rubies/ruby-1.8.7-p302/lib/ruby/1.8/monitor.rb:242:in `synchronize'/Users/fer/.rvm/gems/ruby-1.8.7-p302@global/gems/rake-0.8.7/lib/rake.rb:590:in `invoke_with_call_chain'/Users/fer/.rvm/gems/ruby-1.8.7-p302@global/gems/rake-0.8.7/lib/rake.rb:583:in `invoke'/Users/fer/.rvm/gems/ruby-1.8.7-p302@global/gems/rake-0.8.7/lib/rake.rb:2051:in `invoke_task'/Users/fer/.rvm/gems/ruby-1.8.7-p302@global/gems/rake-0.8.7/lib/rake.rb:2029:in `top_level_without_growl'/Users/fer/.rvm/gems/ruby-1.8.7-p302@global/gems/rake-0.8.7/lib/rake.rb:2029:in `each'/Users/fer/.rvm/gems/ruby-1.8.7-p302@global/gems/rake-0.8.7/lib/rake.rb:2029:in `top_level_without_growl'/Users/fer/.rvm/gems/ruby-1.8.7-p302@global/gems/rake-0.8.7/lib/rake.rb:2068:in `standard_exception_handling'/Users/fer/.rvm/gems/ruby-1.8.7-p302@global/gems/rake-0.8.7/lib/rake.rb:2023:in `top_level_without_growl'/Users/fer/.rvm/gems/ruby-1.8.7-p302@iom/gems/rakegrowl-0.2.0/lib/rakegrowl.rb:32:in `top_level'/Users/fer/.rvm/gems/ruby-1.8.7-p302@global/gems/rake-0.8.7/lib/rake.rb:2001:in `run'/Users/fer/.rvm/gems/ruby-1.8.7-p302@global/gems/rake-0.8.7/lib/rake.rb:2068:in `standard_exception_handling'/Users/fer/.rvm/gems/ruby-1.8.7-p302@global/gems/rake-0.8.7/lib/rake.rb:1998:in `run'/Users/fer/.rvm/gems/ruby-1.8.7-p302@global/gems/rake-0.8.7/bin/rake:31/Users/fer/.rvm/gems/ruby-1.8.7-p302@global/bin/rake:19:in `load'/Users/fer/.rvm/gems/ruby-1.8.7-p302@global/bin/rake:19
+#   Unknown type 'name' for column 'f_table_catalog' /Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/bundler/gems/postgis_adapter-31485fe86f12/lib/postgis_adapter/common_spatial_adapter.rb:52:in `table'/Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/bundler/gems/postgis_adapter-31485fe86f12/lib/postgis_adapter/common_spatial_adapter.rb:50:in `each'/Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/bundler/gems/postgis_adapter-31485fe86f12/lib/postgis_adapter/common_spatial_adapter.rb:50:in `table'/Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/gems/activerecord-3.0.1/lib/active_record/schema_dumper.rb:75:in `tables'/Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/gems/activerecord-3.0.1/lib/active_record/schema_dumper.rb:66:in `each'/Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/gems/activerecord-3.0.1/lib/active_record/schema_dumper.rb:66:in `tables'/Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/gems/activerecord-3.0.1/lib/active_record/schema_dumper.rb:27:in `dump'/Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/gems/activerecord-3.0.1/lib/active_record/schema_dumper.rb:21:in `dump'/Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/gems/activerecord-3.0.1/lib/active_record/railties/databases.rake:327/Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/gems/activerecord-3.0.1/lib/active_record/railties/databases.rake:326:in `open'/Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/gems/activerecord-3.0.1/lib/active_record/railties/databases.rake:326/Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/gems/rake-0.8.7/lib/rake.rb:636:in `call'/Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/gems/rake-0.8.7/lib/rake.rb:636:in `execute'/Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/gems/rake-0.8.7/lib/rake.rb:631:in `each'/Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/gems/rake-0.8.7/lib/rake.rb:631:in `execute'/Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/gems/rake-0.8.7/lib/rake.rb:597:in `invoke_with_call_chain'/Users/jatorre/.rvm/rubies/ruby-1.8.7-p302/lib/ruby/1.8/monitor.rb:242:in `synchronize'/Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/gems/rake-0.8.7/lib/rake.rb:590:in `invoke_with_call_chain'/Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/gems/rake-0.8.7/lib/rake.rb:583:in `invoke'/Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/gems/activerecord-3.0.1/lib/active_record/railties/databases.rake:143/Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/gems/rake-0.8.7/lib/rake.rb:636:in `call'/Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/gems/rake-0.8.7/lib/rake.rb:636:in `execute'/Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/gems/rake-0.8.7/lib/rake.rb:631:in `each'/Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/gems/rake-0.8.7/lib/rake.rb:631:in `execute'/Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/gems/rake-0.8.7/lib/rake.rb:597:in `invoke_with_call_chain'/Users/jatorre/.rvm/rubies/ruby-1.8.7-p302/lib/ruby/1.8/monitor.rb:242:in `synchronize'/Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/gems/rake-0.8.7/lib/rake.rb:590:in `invoke_with_call_chain'/Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/gems/rake-0.8.7/lib/rake.rb:583:in `invoke'/Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/gems/rake-0.8.7/lib/rake.rb:2051:in `invoke_task'/Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/gems/rake-0.8.7/lib/rake.rb:2029:in `top_level'/Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/gems/rake-0.8.7/lib/rake.rb:2029:in `each'/Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/gems/rake-0.8.7/lib/rake.rb:2029:in `top_level'/Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/gems/rake-0.8.7/lib/rake.rb:2068:in `standard_exception_handling'/Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/gems/rake-0.8.7/lib/rake.rb:2023:in `top_level'/Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/gems/rake-0.8.7/lib/rake.rb:2001:in `run'/Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/gems/rake-0.8.7/lib/rake.rb:2068:in `standard_exception_handling'/Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/gems/rake-0.8.7/lib/rake.rb:1998:in `run'/Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/gems/rake-0.8.7/bin/rake:31/Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/bin/rake:19:in `load'/Users/jatorre/.rvm/gems/ruby-1.8.7-p302@iom/bin/rake:19
 
   create_table "media_resources", :force => true do |t|
     t.column "position", :integer, :default => 0
@@ -86,8 +77,6 @@ ActiveRecord::Schema.define(:version => 20101201174750) do
     t.column "updated_at", :datetime
     t.column "caption", :string
   end
-
-  add_index "media_resources", ["element_id", "element_type"], :name => "index_media_resources_on_element_type_and_element_id"
 
   create_table "organizations", :force => true do |t|
     t.column "name", :string
@@ -138,21 +127,16 @@ ActiveRecord::Schema.define(:version => 20101201174750) do
     t.column "media_contact_email", :string
   end
 
-  add_index "organizations", ["name"], :name => "index_organizations_on_name"
-
   create_table "organizations_projects", :id => false, :force => true do |t|
     t.column "organization_id", :integer
     t.column "project_id", :integer
   end
 
-  add_index "organizations_projects", ["organization_id"], :name => "index_organizations_projects_on_organization_id"
-  add_index "organizations_projects", ["project_id"], :name => "index_organizations_projects_on_project_id"
-
   create_table "pages", :force => true do |t|
     t.column "title", :string
     t.column "body", :text
     t.column "site_id", :integer
-    t.column "published", :boolean, :default => false
+    t.column "highlighted", :boolean
     t.column "permalink", :string
     t.column "created_at", :datetime
     t.column "updated_at", :datetime
@@ -160,8 +144,6 @@ ActiveRecord::Schema.define(:version => 20101201174750) do
   end
 
   add_index "pages", ["parent_id"], :name => "index_pages_on_parent_id"
-  add_index "pages", ["permalink"], :name => "index_pages_on_permalink"
-  add_index "pages", ["site_id"], :name => "index_pages_on_site_id"
 
   create_table "partners", :force => true do |t|
     t.column "site_id", :integer
@@ -174,8 +156,6 @@ ActiveRecord::Schema.define(:version => 20101201174750) do
     t.column "created_at", :datetime
     t.column "updated_at", :datetime
   end
-
-  add_index "partners", ["site_id"], :name => "index_partners_on_site_id"
 
   create_table "projects", :force => true do |t|
     t.column "name", :text
@@ -195,48 +175,34 @@ ActiveRecord::Schema.define(:version => 20101201174750) do
     t.column "site_specific_information", :text
     t.column "created_at", :datetime
     t.column "updated_at", :datetime
+    t.column "the_geom", :geometry, :srid => 4326, :null => false
     t.column "activities", :text
     t.column "intervention_id", :string
     t.column "additional_information", :text
     t.column "awardee_type", :string
     t.column "date_provided", :date
     t.column "date_updated", :date
-    t.column "the_geom", :geometry, :srid => 4326, :null => false
   end
-
-  add_index "projects", ["name"], :name => "index_projects_on_name"
-  add_index "projects", ["primary_organization_id"], :name => "index_projects_on_primary_organization_id"
 
   create_table "projects_regions", :id => false, :force => true do |t|
     t.column "region_id", :integer
     t.column "project_id", :integer
   end
 
-  add_index "projects_regions", ["project_id"], :name => "index_projects_regions_on_project_id"
-  add_index "projects_regions", ["region_id"], :name => "index_projects_regions_on_region_id"
-
   create_table "projects_sectors", :id => false, :force => true do |t|
     t.column "sector_id", :integer
     t.column "project_id", :integer
   end
-
-  add_index "projects_sectors", ["project_id"], :name => "index_projects_sectors_on_project_id"
-  add_index "projects_sectors", ["sector_id"], :name => "index_projects_sectors_on_sector_id"
 
   create_table "projects_tags", :id => false, :force => true do |t|
     t.column "tag_id", :integer
     t.column "project_id", :integer
   end
 
-  add_index "projects_tags", ["project_id"], :name => "index_projects_tags_on_project_id"
-  add_index "projects_tags", ["tag_id"], :name => "index_projects_tags_on_tag_id"
-
   create_table "regions", :force => true do |t|
-    t.column "name", :string
     t.column "country_id", :integer
+    t.column "name", :string
   end
-
-  add_index "regions", ["country_id"], :name => "index_regions_on_country_id"
 
   create_table "resources", :force => true do |t|
     t.column "title", :string
@@ -248,10 +214,10 @@ ActiveRecord::Schema.define(:version => 20101201174750) do
     t.column "site_specific_information", :text
   end
 
-  add_index "resources", ["element_id", "element_type"], :name => "index_resources_on_element_type_and_element_id"
-
   create_table "sectors", :force => true do |t|
     t.column "name", :string
+    t.column "created_at", :datetime
+    t.column "updated_at", :datetime
   end
 
   create_table "settings", :force => true do |t|
@@ -291,15 +257,13 @@ ActiveRecord::Schema.define(:version => 20101201174750) do
     t.column "created_at", :datetime
     t.column "updated_at", :datetime
     t.column "project_context_tags_ids", :string
+    t.column "geographic_context_geometry", :geometry, :srid => 4326
     t.column "status", :boolean, :default => false
     t.column "visits", :float, :default => 0.0
     t.column "visits_last_week", :float, :default => 0.0
-    t.column "geographic_context_geometry", :geometry, :srid => 4326
   end
 
-  add_index "sites", ["name"], :name => "index_sites_on_name"
   add_index "sites", ["status"], :name => "index_sites_on_status"
-  add_index "sites", ["url"], :name => "index_sites_on_url"
 
   create_table "tags", :force => true do |t|
     t.column "name", :string
@@ -322,7 +286,5 @@ ActiveRecord::Schema.define(:version => 20101201174750) do
     t.column "remember_token", :string, :limit => 40
     t.column "remember_token_expires_at", :datetime
   end
-
-  add_index "users", ["email"], :name => "index_users_on_email"
 
 end
