@@ -87,7 +87,6 @@ $(document).ready(function(ev){
         $(this).parent().find('div.error_msg').show();
       }
     );
-     
 });
 
 
