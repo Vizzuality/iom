@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101202154700) do
+ActiveRecord::Schema.define(:version => 20101202175526) do
 
   create_table "clusters", :force => true do |t|
     t.column "name", :string
@@ -178,16 +178,16 @@ ActiveRecord::Schema.define(:version => 20101202154700) do
   add_index "partners", ["site_id"], :name => "index_partners_on_site_id"
 
   create_table "projects", :force => true do |t|
-    t.column "name", :text
+    t.column "name", :string, :limit => 2000
     t.column "description", :text
     t.column "primary_organization_id", :integer
-    t.column "implementing_organization", :string
-    t.column "partner_organizations", :string
-    t.column "cross_cutting_issues", :string
+    t.column "implementing_organization", :text
+    t.column "partner_organizations", :text
+    t.column "cross_cutting_issues", :text
     t.column "start_date", :date
     t.column "end_date", :date
     t.column "budget", :integer
-    t.column "target", :string
+    t.column "target", :text
     t.column "estimated_people_reached", :integer
     t.column "contact_person", :string
     t.column "contact_email", :string
@@ -201,9 +201,9 @@ ActiveRecord::Schema.define(:version => 20101202154700) do
     t.column "awardee_type", :string
     t.column "date_provided", :date
     t.column "date_updated", :date
-    t.column "the_geom", :geometry, :srid => 4326, :null => false
     t.column "contact_position", :string
     t.column "website", :string
+    t.column "the_geom", :geometry, :srid => 4326, :null => false
   end
 
   add_index "projects", ["name"], :name => "index_projects_on_name"
