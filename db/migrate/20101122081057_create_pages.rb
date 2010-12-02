@@ -4,7 +4,7 @@ class CreatePages < ActiveRecord::Migration
       t.string    :title
       t.text      :body
       t.integer   :site_id
-      t.boolean   :published, :default => false
+      t.boolean   :published
       t.string    :permalink
       t.timestamps
     end
