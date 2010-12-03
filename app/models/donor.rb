@@ -37,7 +37,14 @@ class Donor < ActiveRecord::Base
   validates_presence_of :name
 
   def donations_amount
-    donations.inject(0){ |result, donation| result + donation.amount }
+    donations.inject(0){ 
+      |result, donation|
+      if (!donation.amount.nil?)
+        result + donation.amount 
+      else
+        result + 0
+      end
+    }
   end
 
   # Array of arrays
