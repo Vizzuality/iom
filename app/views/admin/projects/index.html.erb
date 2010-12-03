@@ -122,7 +122,7 @@
         <% @projects.each do |project| %>
         <li>
           <div class="project_name">
-            <h3><a href="<%= edit_admin_project_path(project) %>"><%= project.name %></a></h3>
+            <h3><a href="<%= edit_admin_project_path(project) %>"><%= truncate(project.name,:length => 50) %></a></h3>
             <a class="project_status <%= project.finished? ? 'closed' : 'active' %>"><%= project.finished? ? 'Closed' : 'Active' %></a>
           </div>
           <div class="gray box single">
