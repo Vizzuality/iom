@@ -1,11 +1,148 @@
-<% content_for :js do%>
-<%= javascript_include_tag 'http://geocommons.com/javascripts/f1.api.js', '/javascripts/sites/map.js' %>
-<script>
-  $(document).ready( function() {
-    initialize();
-  });
-</script>
+<%if false%>
+  <% content_for :js do%>
+    <%= javascript_include_tag 'http://geocommons.com/javascripts/f1.api.js', '/javascripts/sites/map.js' %>
+    <script>
+      $(document).ready( function() {
+        initialize();
+      });
+    </script>
+  <%end%>
 <%end%>
+
+
+
+  <div id="map"></div>
+
+  <div id="layout">
+    <div id="left_column">
+    
+      <!-- LEFT PART -->
+      <div class="left"></div> <!-- H"J"ACK -->
+      <div class="float_left">
+        <div class="head">
+          <h1><%= @organization.name %></h1>
+          <p><%= pluralize(@organization.projects.site(@site).count, 'project', 'projects') %></p>
+        </div>
+    
+        <div class="block">
+          <% if @organization.description? %>
+            <p class="main_info"><%= @organization.description %></p>
+          <% end %>
+        
+          <p class="social">
+            <% if @organization.twitter? %>
+              <%= link_to("follow us", "http://twitter.com/#{@organization.twitter}", :class=>"twitter", :target=>"_blank") %>
+            <% end %>
+            <% if @organization.twitter? &&  @organization.facebook? %> / <% end %>
+            <% if @organization.facebook? %>
+              <%= link_to("visit our page", "http://facebook.com/#{@organization.facebook}", :class=>"facebook", :target=>"_blank") %>
+              <% end %>
+          </p>
+
+          <% if @organization.website? %>
+            <p class="website"><%= link_to(@organization.website, @organization.website, :rel => 'nofollow', :target => '_blank') %></p>
+          <% end %>
+        </div>
+      
+      
+        <div class="block">
+          <h3>BUDGET FOR FOOD SECURITY</h3>
+          <p><%= number_with_delimiter(@organization.donations.sum(:amount)) %></p>
+          <% donors_total = @organization.donors_count %>
+          <p><%= link_to(pluralize(donors_total, 'donor to this organization', 'donors to this organization'),'#') %> </p>
+        </div>
+    
+    
+        <div class="block statistics">
+          <h3>PROJECTS BY CLUSTER</h3>
+          <ul class="statistics_list">
+            <% @organization.projects_clusters(@site)[0...3].each do |cluster,count| %>
+              <li><a class="<%= cluster_class(cluster) %>"><span class="aller" style="width:<%= cluster_width(count) %>px"><%= count %></span></a></li>
+            <% end %>
+          </ul>
+          <% if @organization.projects_clusters(@site).size > 3 %>
+            <% total =  @organization.projects_clusters(@site).size - 3 %>
+            <%= link_to(pluralize(total, 'project more on other clusters', 'projects more on other clusters') ,'#') %>
+          <% end %>
+        </div>
+    
+        <div class="block statistics">
+          <h3>PROJECTS BY LOCATION</h3>
+            <ul class="chart">
+            <% index = 0%>
+            <% values = '' %>
+            <% max_value = 0 %>
+            <% @organization.projects_regions(@site).each do |organization, count| %>
+              <li class="pos<%= index %>"><a href="#"><%= truncate(organization.name,:length=>15, :omission=>"...") %></a> - <%= count %></li>
+              <% values += ((index=0) ? '' : ',') + count.to_s() %>
+              <% max_value<count ? max_value=count : nil %>
+              <% index = index + 1 %>
+            <% end %>
+          </ul>
+          <img class="pie_chart" src="http://chart.apis.google.com/chart?cht=p&chs=120x120&chd=t:<%= values %>&chds=0,<%= max_value %>&chco=565656|727272|ADADAD|EFEFEF|FFFFFF&chf=bg,s,FFFFFF00" />
+        </div>
+    
+        <div class="block">
+          <h3>ADDITIONAL RESOURCES</h3>
+          <ul>
+            <li><a href="#">Jeddah in wikipedia</a></li>
+            <li><a href="#">Jeddah in wikipedia</a></li>
+            <li><a href="#">Jeddah in wikipedia</a></li>
+            <li><a href="#">Jeddah in wikipedia</a></li>
+          </ul>
+        </div>
+      
+        <div class="block">
+          <h3>CONTACT INFORMATION</h3>
+          <p><strong><%= @organization.contact_name %></strong><br/><%= @organization.contact_position %><br/><%= @organization.hq_address %> <%= @organization.contact_zip %></p>
+          <p><%= @organization.contact_phone_number %><br/><%= link_to(@organization.contact_email, "mailto:#{@organization.contact_email}") %></p>
+        </div>
+
+        <div class="block green">
+          <h3>DONATION INFORMATION</h3>
+          <p><strong>Donations</strong><br/><%= @organization.donation_address %></p>
+          <p><%= @organization.donation_phone_number %><br/><%= link_to(@organization.donation_website, @organization.donation_website) %></p>
+        </div>
+      </div>
+
+      <!-- RIGHT PART -->
+      <div class="right">
+        <h3><%= pluralize(@organization.projects.site(@site).size, 'PROJECT', 'PROJECTS') %> AT <%= @organization.name.upcase %></h3>
+        <div id="projects">
+          <%= render :partial => 'projects/projects' %>
+        </div>
+        <div class="view_more">
+          <a id="view_more">More projects</a>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script> 
+    <script src="/javascripts/sites/location.js" type="text/javascript" charset="utf-8"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
+
+
+
+
+
+
+
 
 <div id="left_info_organization">
   <div class="content">
@@ -33,13 +170,11 @@
         </div>
       </div>
     </div>
-    <!-- BUDGET -->
     <div class="body_info short">
       <div class="content_info">
         <p class="title_section pt_sans_bold">BUDGET</p>
       </div>
     </div>
-    <!-- CONTINUE BUDGET - GRID -->
     <div class="body_info grid">
       <div class="real_content">
         <div class="content_info">
@@ -50,7 +185,6 @@
       </div>
     </div>
     <% unless @organization.projects_clusters(@site).empty? %>
-    <!-- CLUSTER -->
     <div class="body_info grid">
       <div class="real_content">
         <div class="content_info">
@@ -70,7 +204,6 @@
     </div>
     <% end %>
 
-    <!-- PROJECTS BY AREA -->
     <% unless @organization.projects_regions(@site).empty? %>
     <div class="body_info grid">
       <div class="real_content">
@@ -101,7 +234,6 @@
       </div>
     </div>
     <% end %>
-    <!-- CONTACT INFORMATION -->
     <div class="body_info grid">
       <div class="real_content contact">
         <div class="content_info">
@@ -117,7 +249,6 @@
         </div>
       </div>
     </div>
-    <!-- DONATIONS INFORMATION -->
     <div class="body_info grid">
       <div class="real_content donations">
         <div class="content_info">
@@ -133,20 +264,17 @@
         </div>
       </div>
     </div>
-    <!-- BOTTOM CONTENT BLANK -->
     <div class="body_info grid">
       <div class="real_content bottom">
       </div>
     </div>
-    <!-- BOTTOM IMG -->
     <div class="body_info_bottom"></div>
   </div>
 </div>
-<!-- left_info_organization -->
 
 <div id="right_info_projects">
   <h3 class="pt_sans_bold shadow_white"><%= @organization.name.upcase %> LIST OF PROJECTS</h3>
   <div id="projects">
     <%= render :partial => 'projects/projects' %>
   </div>
-</div>
+</div> -->

@@ -6,21 +6,19 @@
       <!-- LEFT PART -->
       <div class="left"></div> <!-- H"J"ACK -->
       <div class="float_left">
-      
         <div class="head">
           <h2>CONTINENT</h2>
           <h1><%= @country.name %></h2>
         </div>
-      
+    
         <div id="secondary_map"></div>
-      
+    
         <div class="block wikipedia">
           <p>Campeche (Spanish pronunciation: [kamˈpetʃe]) is one of the 31 states which, with the Federal District, comprise the 32 Federal Entities of Mexico. It is bordered by the states of Yucatán to the north east, Quintana Roo to the east, and Tabasco to the south west. To the south it is bordered by the Petén department of Guatemala and to the west by the Gulf of Mexico.</p>
           <p class="provided">Description provided by Wikipedia</p>
           <a href="#">Read full article</a>
         </div>
-      
-      
+    
         <div class="block statistics">
           <h3>PROJECTS BY CLUSTER</h3>
           <ul class="statistics_list">
@@ -33,7 +31,7 @@
             <%= link_to(pluralize(total, 'project more on other clusters', 'projects more on other clusters') ,'#') %>
           <% end %>
         </div>
-      
+    
         <div class="block">
           <h3>PROJECTS BY REGION</h3>
           <% unless @country.regions_projects(@site).empty? %>
@@ -44,7 +42,7 @@
           </ul>
           <% end %>
         </div>
-      
+    
         <div class="block">
           <h3>DONORS</h3>
           <% unless @country.donors(@site).empty? %>
@@ -58,7 +56,7 @@
             <% end %>
           <% end %>
         </div>
-        
+      
         <div class="block margin">
           <h3>PROJECTS IN NEIGHBORING COUNTRIES</h3>
           <ul>

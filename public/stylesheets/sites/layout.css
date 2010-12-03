@@ -38,16 +38,25 @@ div#map {width:100%; height:475px; background:#99B3CA; border-bottom:2px solid w
 div#left_column {position:relative; width:100%;}
 div#left_column div.left {width:300px; height:300px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#left_column div.float_left {position:absolute; top:0; left:-5px; width:302px; padding:5px; background:url('/images/sites/common/mesh.png') repeat 0 0; z-index:100;}
+div#left_column div.float_left div.inner_block {width:100%; background:white;}
 div#left_column div.float_left div.head {width:238px; height:auto; padding:30px 32px; background:url('/images/sites/search/head_mask.png') no-repeat 0 0 #C45A4B;} /*TODO: color*/
 div#left_column div.float_left div.head h2 {width:100%; font:bold 15px "PT Sans"; color:#78362F; text-shadow:none; text-transform:uppercase;} /*TODO: color*/
 div#left_column div.float_left div.head h1 {width:100%; font:bold 25px "PT Sans"; color:white; text-shadow:0 1px #A44B42;} /*TODO: text-shadow*/
 div#left_column div.float_left div#secondary_map {width:300px; height:189px; border:1px solid #999999; background:#99B3CA;}
 div#left_column div.float_left div.block {width:238px; padding:32px; background:white; border-bottom:1px solid #DEDEDE;}
+div#left_column div.float_left div.block.green {background:#D8E5C0;}
+div#left_column div.float_left div.block.green h3 {color:#333333;}
+div#left_column div.float_left div.block p {width:100%; padding:10px 0 0 0; font:normal 13px Arial; color:#666666; line-height:17px;}
+div#left_column div.float_left div.block p.social a {padding:0 5px 0 20px; color:#666666; text-decoration:underline;}
+div#left_column div.float_left div.block p.social a:hover {color:#333333;}
+div#left_column div.float_left div.block p.social a.twitter {background:url('/images/sites/icons/twitter.png') no-repeat 0 0;}
+div#left_column div.float_left div.block p.social a.facebook {margin:0 0 0 4px; background:url('/images/sites/icons/facebook.png') no-repeat 0 0;}
+div#left_column div.float_left div.block p.website {padding:5px 0 0 0;}
 div#left_column div.float_left div.block.wikipedia {background:url('/images/sites/regions/wikipedia.png') no-repeat right bottom #FFFFFF;}
 div#left_column div.float_left div.block.wikipedia p {line-height:17px;}
 div#left_column div.float_left div.block.wikipedia p.provided {margin:15px 0 0 0;}
 div#left_column div.float_left div.block.margin {margin:5px 0 0 0;}
-div#left_column div.float_left div.block h3 {width:100%; font:bold 13px "PT Sans"; color:#999999; text-shadow:0 1px white; text-transform:uppercase;}
+div#left_column div.float_left div.block h3 {width:100%; font:bold 13px "PT Sans"; color:#999999; text-shadow:none; text-transform:uppercase;}
 div#left_column div.float_left div.block a {} /*TODO: color*/
 div#left_column div.float_left div.block a:hover {text-decoration:underline;}
 div#left_column div.float_left div.block ul {width:100%; margin:7px 0 0 0; padding:0 0 6px; list-style:none;}
@@ -59,7 +68,7 @@ div#left_column div.float_left div.block ul li.selected a {color:#666666;}
 div#left_column div.float_left div.block ul li.selected a:hover {text-decoration:none; color:#666666;}
 div#left_column div.float_left div.block a.more {position:relative; margin:0 0 0 10px; padding:0 12px 0 0; background:url('/images/sites/icons/down_garnet.png') no-repeat right 6px;} 
 div#left_column div.float_left div.block a.more:hover {text-decoration:underline;}
-div#left_column div.right {width:632px; margin:0; padding:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#left_column div.right {width:632px; height:3000px; margin:0; padding:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#left_column div.right h3 {width:572px; padding:20px 26px 20px 34px; font:bold 13px "PT Sans"; color:#999999; text-shadow:0 1px white; text-transform:uppercase;}
 div#left_column div.right ul {width:100%; padding:0!important;}
 div#left_column div.right ul li {width:572px; height:74px; padding:20px 26px 20px 34px;}
