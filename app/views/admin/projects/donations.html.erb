@@ -21,10 +21,13 @@
           <%end%>
         </div>
         <div class="amount_box">
-                  <p>$ <%= donation.amount %></p>
+                  <p>$ <%= (donation.amount.nil?)? '0' : donation.amount %></p>
           <%= link_to('', admin_project_donation_path(@project, donation), :method => :delete, :confirm => 'Are your sure?', :class => 'delete') %>
         </div>
-        <%= total_account += donation.amount %>
+        
+            <%if (!donation.amount.nil?) %> 
+              <%= total_account += donation.amount %>
+            <%end%>
             </li>
             <% end -%>
           </ul>
@@ -50,7 +53,7 @@
                 <p id="day" class="title">DAY</p>
                 <p id="year" class="title">YEAR</p>
 
-                  <%= f.date_select :date, :start_year => Date.today.year, :order => [:month, :day, :year]  %>
+                  <%= f.date_select :date, :start_year => Date.today.year - 5, :order => [:month, :day, :year]  %>
               </div>
             </span>
 

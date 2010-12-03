@@ -102,7 +102,11 @@ class Project < ActiveRecord::Base
   end
 
   def finished?
-    end_date < Date.today
+    if (!end_date.nil?)
+      end_date < Date.today
+    else
+      false
+    end
   end
 
   def months_left

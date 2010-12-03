@@ -12,8 +12,8 @@
             <label>STATUS</label>
             <span id="status_combo_search" class="combo"><p>Select status</p>
             <input id="status_input" type="hidden" value="" name="status" />
-            <ul class="elements">
-              <li class="first"></li>
+            <ul class="elements short">
+              <li class="first"></li>              
               <li>
                 <a id="0" class="status">All</a>
               </li>
@@ -31,7 +31,7 @@
           <label>COUNTRY</label>
           <span id="country_combo_search" class="combo"><p>Select country</p>
           <input id="country_input" type="hidden" value="" name="country" />
-          <ul class="elements">
+          <ul class="elements short">
             <li class="first"></li>
             <li>
               <a id="0">All</a>
@@ -50,16 +50,14 @@
           <span id="cluster_combo_search" class="combo"><p>Select cluster</p>
           <input id="cluster_input" type="hidden" value="" name="cluster" />
           <ul class="elements">
-            <li class="first"></li>
             <li>
               <a id="0">All</a>
             </li>
              <% Cluster.all.each do |cluster| %>
             <li>
-              <a id="<%= cluster.id%>"><%= cluster.name %></a>
+              <a id="<%= cluster.id%>"><%= truncate(cluster.name,:length => 20)%></a>
             </li>
             <% end %>
-            <li class="last"></li>
           </ul>
           </span>
         </li>
@@ -68,16 +66,14 @@
           <span id="sector_combo_search" class="combo"><p>Select sector</p>
           <input id="sector_input" type="hidden" value="" name="sector" />
           <ul class="elements">
-            <li class="first"></li>
             <li>
               <a id="0">All</a>
             </li>
             <% Sector.all.each do |sector| %>
             <li>
-              <a id="<%= sector.id%>"><%= sector.name %></a>
+              <a id="<%= sector.id%>"><%= truncate(sector.name,:length => 20)%></a>
             </li>
             <% end %>
-            <li class="last"></li>
           </ul>
           </span>
         </li>
@@ -122,7 +118,7 @@
         <% @projects.each do |project| %>
         <li>
           <div class="project_name">
-            <h3><a href="<%= edit_admin_project_path(project) %>"><%= project.name %></a></h3>
+            <h3><a href="<%= edit_admin_project_path(project) %>"><%= truncate(project.name,:length => 50) %></a></h3>
             <a class="project_status <%= project.finished? ? 'closed' : 'active' %>"><%= project.finished? ? 'Closed' : 'Active' %></a>
           </div>
           <div class="gray box single">

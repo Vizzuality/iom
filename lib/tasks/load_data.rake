@@ -68,8 +68,10 @@ namespace :iom do
       DB.execute 'DELETE FROM clusters_projects'
       DB.execute 'DELETE FROM organizations_projects'
       DB.execute 'DELETE FROM donations'
-      DB.execute 'DELETE FROM donors'
-      #The haitiAidMap must be already created and it has ID=1      
+      DB.execute 'DELETE FROM donors'     
+      
+      #Cache geocoding
+      geo_cache={}
       
       csv_projs = CsvMapper.import("#{Rails.root}/db/data/projects_20_10_10.csv") do
         read_attributes_from_file
@@ -154,7 +156,12 @@ namespace :iom do
               p.regions  << reg
               
               #georef
-              loc = Geokit::Geocoders::GoogleGeocoder.geocode("#{region_name},Haiti")
+              if(geo_cache[region_name].blank?)
+                loc = Geokit::Geocoders::GoogleGeocoder.geocode("#{region_name},Haiti")
+                geo_cache[region_name] = loc              
+              else
+                loc = geo_cache[region_name]
+              end
               if(loc.lng)
                 locations << "#{loc.lng} #{loc.lat}"
               end

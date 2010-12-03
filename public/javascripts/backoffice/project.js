@@ -6,6 +6,7 @@ var dateStart = new Array(3);
 var dateEnd = new Array(3);
 var donationDate = new Array(3);
 
+var limitTextCombo = 12;
 $(document).ready(function(ev){
 
 		if ($('div.select_dates').length > 0){
@@ -154,6 +155,11 @@ $(document).ready(function(ev){
     var id = $(this).children('a').attr('id');
     var name = $(this).children('a').text();
     if ((id != undefined)&&(name != undefined)){
+
+        if (name.length > limitTextCombo) {
+            name = name.substring(0,limitTextCombo - 3)+'...';
+        }
+        
       $('span#country_combo_search').children('p').text(name);
       $('input#country_input').val(id);
       $('span#country_combo_search').removeClass('clicked');
@@ -188,7 +194,12 @@ $(document).ready(function(ev){
     var id = $(this).children('a').attr('id');
     var name = $(this).children('a').text();
     if ((id != undefined)&&(name != undefined)){
-      $('span#cluster_combo_search').children('p').text(name);
+
+        if (name.length > limitTextCombo) {
+            name = name.substring(0,limitTextCombo - 3)+'...';
+        }
+        $('span#cluster_combo_search').children('p').text(name);
+      
       $('input#cluster_input').val(id);
       $('span#cluster_combo_search').removeClass('clicked');
     }
@@ -221,6 +232,11 @@ $(document).ready(function(ev){
     ev.preventDefault();
     var id = $(this).children('a').attr('id');
     var name = $(this).children('a').text();
+    
+    if (name.length > limitTextCombo) {
+        name = name.substring(0,limitTextCombo - 3)+'...';
+    }
+    
     if ((id != undefined)&&(name != undefined)){
       $('span#sector_combo_search').children('p').text(name);
       $('input#sector_input').val(id);
@@ -253,6 +269,8 @@ $(document).ready(function(ev){
       };
     });
   });
+
+// substring(0,10)+'...'
 
   $('ul.list_combo_content').find('li.element').click(function(ev){
     var id = $(this).attr('id');
@@ -717,88 +735,97 @@ $(function() {
     return val.split( /,\s*/ );
   }
 
-  var custom_url =  admin_tags_path + '?term=';
+
+  if ($('#project_tags').length > 0){
+      var custom_url =  admin_tags_path + '?term=';    
  
-  $("#project_tags").autocomplete({
-    class: 'project_tags',
-    source: function( request, response ) {
-      $('span#tags_combo').addClass('active');
-      var value = $("#project_tags").val();
-      if (value.indexOf(',') != -1 ) {
-        value = value.substring(value.indexOf(',')+1, value.length);
-      }
-      $.ajax({
-        url: custom_url + value,
-        dataType: "json",
-        success: function( data ) {
-          if(data != null) {
-            response($.map(data, function(tag) {
-              return {
-                label: tag.name + ' ' + tag.count + ' projects',
-                value: tag.name
-              }
-            }));
+      $("#project_tags").autocomplete({
+        class: 'project_tags',
+        source: function( request, response ) {
+          $('span#tags_combo').addClass('active');
+          var value = $("#project_tags").val();
+          if (value.indexOf(',') != -1 ) {
+            value = value.substring(value.indexOf(',')+1, value.length);
           }
+          $.ajax({
+            url: custom_url + value,
+            dataType: "json",
+            success: function( data ) {
+              if(data != null) {
+                response($.map(data, function(tag) {
+                  return {
+                    label: tag.name + ' ' + tag.count + ' projects',
+                    value: tag.name
+                  }
+                }));
+              }
+            }
+          });
+        },
+        minLength: 2,
+        focus: function() {
+          // prevent value inserted on focus
+          return false;
+        },
+        select: function( event, ui ) {
+          var terms = split( this.value );
+          // remove the current input
+          terms.pop();
+          // add the selected item
+          terms.push( ui.item.value );
+          // add placeholder to get the comma-and-space at the end
+          terms.push( "" );
+          this.value = terms.join( ", " );
+
+          return false;
+        },
+        refresh: function(){
+           this.element.children("li.ui-menu-item:odd a").addClass("ui-menu-item-alternate");
         }
       });
-    },
-    minLength: 2,
-    focus: function() {
-      // prevent value inserted on focus
-      return false;
-    },
-    select: function( event, ui ) {
-      var terms = split( this.value );
-      // remove the current input
-      terms.pop();
-      // add the selected item
-      terms.push( ui.item.value );
-      // add placeholder to get the comma-and-space at the end
-      terms.push( "" );
-      this.value = terms.join( ", " );
-
-      return false;
-    },
-    refresh: function(){
-       this.element.children("li.ui-menu-item:odd a").addClass("ui-menu-item-alternate");
     }
-  });
   
-  var custom_donors_url = admin_tags_path + '?q=';
+
+     if ($('#autocomplete_donor_name').length > 0){
+          var custom_donors_url = admin_tags_path + '?q=';
   
-  // AUTOCOMPLETE FOR DONORS IN PROJECT
-  $("#autocomplete_donor_name").autocomplete({
-   class:'donor_names',
-   source: function( request, response ) {
-    $('span#donor_name_input').addClass('active');
-     var value = $("#autocomplete_donor_name").val();
-     $.ajax({
-       url: custom_donors_url + value,
-       dataType: "json",
-       success: function( data ) {
-         if(data != null) {
-           response($.map(data, function(donor) {
-             return {
-               label: donor.name,
-               value: donor.name,
-               element_id: donor.id
-             }
-           }));
-         }
-       }
-     });
-   },
-   minLength: 2,
-   focus: function() {
-     // prevent value inserted on focus
-     return false;
-   },
-   select: function( event, ui ) {
-     $('#autocomplete_donor_name').val(ui.item.value);
-     $('#donation_donor_id').val(ui.item.element_id);
-   },
-   refresh: function(){
-      this.element.children("li.ui-menu-item:odd a").addClass("ui-menu-item-alternate");
-   }
- });
+          // AUTOCOMPLETE FOR DONORS IN PROJECT
+          $("#autocomplete_donor_name").autocomplete({
+           class:'donor_names',
+           source: function( request, response ) {
+            $('span#donor_name_input').addClass('active');
+             var value = $("#autocomplete_donor_name").val();
+             $.ajax({
+               url: custom_donors_url + value,
+               dataType: "json",
+               success: function( data ) {
+                 if(data != null) {
+                   response($.map(data, function(donor) {
+                     return {
+                       label: donor.name,
+                       value: donor.name,
+                       element_id: donor.id
+                     }
+                   }));
+                 }
+               }
+             });
+           },
+           minLength: 2,
+           focus: function() {
+             // prevent value inserted on focus
+             return false;
+           },
+           select: function( event, ui ) {
+             $('#autocomplete_donor_name').val(ui.item.value);
+             $('#donation_donor_id').val(ui.item.element_id);
+           },
+           refresh: function(){
+              this.element.children("li.ui-menu-item:odd a").addClass("ui-menu-item-alternate");
+           }
+         });
+      }     
+        
+
 });
+    
