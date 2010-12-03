@@ -10,7 +10,7 @@
             <% @donor.donated_projects.each do |project| %>
             <li>
               <span class="first">
-                <h3><%= link_to(project.name, edit_admin_project_path(project)) %></h3>
+                <h3><%= link_to(truncate(project.name, :length => 47), edit_admin_project_path(project)) %></h3>
                 <p class="<%= project.finished? ? 'closed' : 'active' %>"><%= project.finished? ? 'Closed' : 'Active' %></p>
               </span>
               <p>$12,000</p>
