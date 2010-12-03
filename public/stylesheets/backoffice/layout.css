@@ -499,7 +499,7 @@ div.block.project_info div.med div.left form span.error {background-position:0 -
 
 /*AUTOCOMPLETE - PROJECT TAGS*/
 ul.ui-autocomplete.project_tags {position:absolute; top:40px; width:419px; display:none; z-index:20;}
-ul.ui-autocomplete.project_tags li.ui-menu-item {float:right; margin:7px 0 0 0; background:url('/images/backoffice/projects/repeat_content_tags.png') no-repeat 0 0; width:413px; height:22px; font:normal 15px Arial; color:#333333; padding:5px 0 0 12px; position:relative;}
+ul.ui-autocomplete.project_tags li.ui-menu-item {float:right; margin:0; background:url('/images/backoffice/projects/repeat_content_tags.png') no-repeat 0 0; width:413px; height:22px; font:normal 15px Arial; color:#333333; padding:5px 0 0 12px; position:relative;}
 ul.ui-autocomplete.project_tags li.ui-menu-item:hover {cursor:pointer; background:url('/images/backoffice/projects/repeat_content_tags_hover.png') no-repeat 0 0;}
 ul.ui-autocomplete.project_tags li.ui-menu-item.last{float:right; width:425px; height:7px; margin:0; background:url('/images/backoffice/projects/bottom_content_tags.png') no-repeat 0 0; padding:0;}
 ul.ui-autocomplete.project_tags li.ui-menu-item a {font:normal 15px Arial; width:100%;}
@@ -592,11 +592,9 @@ div.block.project_info div.med div.left form div.cluster_options span.combo_clus
 div.block.project_info div.med div.left form div.cluster_options span.combo_cluster_options p {font:normal 13px Arial; color:#999999;}
 div.block.project_info div.med div.left form div.cluster_options span.combo_cluster_options ul.options {display:none;}
 div.block.project_info div.med div.left form div.cluster_options span.combo_cluster_options.clicked {background:url('/images/backoffice/projects/combos/combo_add_cluster_clicked.png') no-repeat 0 0;}
-div.block.project_info div.med div.left form div.cluster_options span.combo_cluster_options.clicked ul.options {position:absolute; top:32px; left:0; width:264px; height:auto; display:inline; z-index:20;}
-div.block.project_info div.med div.left form div.cluster_options span.combo_cluster_options.clicked ul.options li {float:left; margin:0; background:url('/images/backoffice/projects/combos/combo_add_cluster_lielement.png') repeat-y 0; width:242px; height:auto; padding:4px 11px;}
-div.block.project_info div.med div.left form div.cluster_options span.combo_cluster_options.clicked ul.options li.last {background:url('/images/backoffice/projects/combos/combo_add_cluster_lielement_last.png') no-repeat 0 0; height:6px;}
-div.block.project_info div.med div.left form div.cluster_options span.combo_cluster_options.clicked ul.options li.last:hover {background:url('/images/backoffice/projects/combos/combo_add_cluster_lielement_last.png') no-repeat 0 0;}
-div.block.project_info div.med div.left form div.cluster_options span.combo_cluster_options.clicked ul.options li:hover {background:url('/images/backoffice/projects/combos/combo_add_cluster_lielement_hover.png') repeat-y 0;}
+div.block.project_info div.med div.left form div.cluster_options span.combo_cluster_options.clicked ul.options {position:absolute; top:32px; left:0; width:281px; height:197px; display:inline; z-index:20; background:url('/images/backoffice/projects/combos/body_combo_cluster.png') no-repeat 0 0; overflow-x:hidden; overflow-y:auto;}
+div.block.project_info div.med div.left form div.cluster_options span.combo_cluster_options.clicked ul.options li {float:left; margin:0 0 0 1px; width:240px; height:auto; padding:4px 11px;}
+div.block.project_info div.med div.left form div.cluster_options span.combo_cluster_options.clicked ul.options li:hover {background-color:#CCE599;}
 div.block.project_info div.med div.left form div.cluster_options span.combo_cluster_options.clicked ul.options li a {font:normal 13px Arial; color:#666666; text-decoration:none; }
 
 div.block.project_info div.med div.left form div.cluster_options span.combo_cluster_options:hover {cursor:pointer;}
