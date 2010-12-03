@@ -408,6 +408,7 @@ div.two_projects ul.combos {float:left; width:680px; height:60px; margin:20px 0 
 div.two_projects ul.combos li {float:left; width:147px; height:100%;}
 div.two_projects ul.combos li span.combo {float:left; margin:6px 0 0 0; background:url('/images/backoffice/projects/single_combo_head.png') no-repeat 0 0; font:normal 13px Arial; color:#333333; text-decoration:none; width:134px; height:24px; padding:8px 0 0 11px; position:relative;}
 div.two_projects ul.combos li span.combo:focus {outline:none;}
+div.two_projects ul.combos li span.combo p {width:130px;}
 div.two_projects ul.combos li span.combo ul.elements {display:none;}
 div.two_projects ul.combos li span.combo.clicked {background:url('/images/backoffice/projects/combos/index_search_head.png') no-repeat 0 0; width:135px; position:relative;}
 div.two_projects ul.combos li span.combo.clicked ul.elements {position:absolute; top:31px; left:0; display:inline;}

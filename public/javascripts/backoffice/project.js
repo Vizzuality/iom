@@ -6,6 +6,7 @@ var dateStart = new Array(3);
 var dateEnd = new Array(3);
 var donationDate = new Array(3);
 
+var limitTextCombo = 12;
 $(document).ready(function(ev){
 
 		if ($('div.select_dates').length > 0){
@@ -154,6 +155,11 @@ $(document).ready(function(ev){
     var id = $(this).children('a').attr('id');
     var name = $(this).children('a').text();
     if ((id != undefined)&&(name != undefined)){
+
+        if (name.length > limitTextCombo) {
+            name = name.substring(0,limitTextCombo - 3)+'...';
+        }
+        
       $('span#country_combo_search').children('p').text(name);
       $('input#country_input').val(id);
       $('span#country_combo_search').removeClass('clicked');
@@ -188,7 +194,11 @@ $(document).ready(function(ev){
     var id = $(this).children('a').attr('id');
     var name = $(this).children('a').text();
     if ((id != undefined)&&(name != undefined)){
-      $('span#cluster_combo_search').children('p').text(name);
+
+        if (name.length > limitTextCombo) {
+            name = name.substring(0,limitTextCombo - 3)+'...';
+        }
+        $('span#cluster_combo_search').children('p').text(name);
       
       $('input#cluster_input').val(id);
       $('span#cluster_combo_search').removeClass('clicked');
@@ -222,6 +232,11 @@ $(document).ready(function(ev){
     ev.preventDefault();
     var id = $(this).children('a').attr('id');
     var name = $(this).children('a').text();
+    
+    if (name.length > limitTextCombo) {
+        name = name.substring(0,limitTextCombo - 3)+'...';
+    }
+    
     if ((id != undefined)&&(name != undefined)){
       $('span#sector_combo_search').children('p').text(name);
       $('input#sector_input').val(id);
@@ -254,6 +269,8 @@ $(document).ready(function(ev){
       };
     });
   });
+
+// substring(0,10)+'...'
 
   $('ul.list_combo_content').find('li.element').click(function(ev){
     var id = $(this).attr('id');

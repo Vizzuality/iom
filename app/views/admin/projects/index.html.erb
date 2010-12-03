@@ -56,7 +56,7 @@
             </li>
              <% Cluster.all.each do |cluster| %>
             <li>
-              <a id="<%= cluster.id%>"><%= truncate(cluster.name,:length => 15) %></a>
+              <a id="<%= cluster.id%>"><%= cluster.name %></a>
             </li>
             <% end %>
             <li class="last"></li>
