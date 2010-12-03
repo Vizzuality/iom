@@ -1,7 +1,8 @@
     
   <div id="layout">
     <div id="pages">
-      <div class="left">
+      <div class="left"></div>
+      <div class="float_left">
         <div class="outer_head">
           <div class="head">
             <h1><%= @donor.name %></h1>
@@ -93,12 +94,12 @@
             <% max_value = 0 %>
             <% @donor.projects_regions(@site).each do |region, count| %>
               <li class="pos<%= index %>"><a href="#"><%= truncate(region.name,:length=>15, :omission=>"...") %></a> - <%= count %></li>
-              <% values += ((index=0) ? '' : ',') + count.to_s() %>
+              <% values += ((index==0) ? '' : ',') + count.to_s() %>
               <% max_value<count ? max_value=count : nil %>
               <% index = index + 1 %>
             <% end %>
           </ul>
-          <img class="pie_chart" src="http://chart.apis.google.com/chart?cht=p&chs=120x120&chd=t:<%= values %>&chds=0,<%= max_value %>&chco=565656|727272|ADADAD|EFEFEF|FFFFFF&chf=bg,s,FFFFFF00" />
+          <img class="pie_chart" src="http://chart.apis.google.com/chart?cht=p&chs=120x120&chd=t:<%= values %>&chds=0,<%= max_value %>&chco=333333|565656|727272|ADADAD|EFEFEF|FFFFFF&chf=bg,s,FFFFFF00" />
         </div>
         <% end %>
 
@@ -121,3 +122,8 @@
         </div>
       </div>
     </div>
+    
+    
+    <script src="/javascripts/sites/pages.js" type="text/javascript" charset="utf-8"></script>
+    
+    

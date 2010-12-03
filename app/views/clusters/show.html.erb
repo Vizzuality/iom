@@ -1,75 +1,75 @@
-<div id="left_info_organization">
-  <div class="content">
-    <div class="header">
-      <h2 class="pt_sans_bold shadow"><%= @cluster.name %></h2>
-      <p class="info_subtitle"><%= @site.word_for_clusters %></p>
-    </div>
-    <div class="body_info">
-      <div class="content_info">
-        <p class="main_info">Texto para el cluster. Esto no aparece en el back de administración porque no hay gestión de clusters, así que a ver de dónde lo sacamos.</p>
-      </div>
-    </div>
 
-    <!-- PROJECTS BY AREA -->
-    <% unless @cluster.projects_regions(@site).empty? %>
-    <div class="body_info grid">
-      <div class="real_content">
-        <div class="content_info">
-          <p class="title_section pt_sans_bold"><%= @cluster.name.upcase %> PROJECTS BY REGIONS</p>
-          <div class="pie_chart"></div>
-          <ul class="info_pie_chart">
+  <div id="map"></div>
+
+  <div id="layout">
+    <div id="left_column">
+  
+      <!-- LEFT PART -->
+      <div class="left"></div> <!-- H"J"ACK -->
+      <div class="float_left">
+        <div class="head">
+          <span class="water"></span>
+          <h2><%= @site.word_for_clusters %></h2>
+          <h1><%= @cluster.name %></h1>
+        </div>
+        
+        <div class="block">
+          <p>Texto para el cluster. Esto no aparece en el back de administración porque no hay gestión de clusters, así que a ver de dónde lo sacamos.</p>
+        </div>
+
+        <div class="block statistics">
+          <h3>PROJECTS BY LOCATION</h3>
+            <ul class="chart">
+            <% index = 0%>
+            <% values = '' %>
+            <% max_value = 0 %>
             <% @cluster.projects_regions(@site).each do |region, count| %>
-              <li class="category1"><p class="name_category"><%= region.name %></p> - <%= count %></li>
+              <li class="pos<%= index %>"><a href="#"><%= truncate(region.name,:length=>15, :omission=>"...") %></a> - <%= count %></li>
+              <% values += ((index==0) ? '' : ',') + count.to_s() %>
+              <% max_value<count ? max_value=count : nil %>
+              <% index = index + 1 %>
             <% end %>
           </ul>
+          <img class="pie_chart" src="http://chart.apis.google.com/chart?cht=p&chs=120x120&chd=t:<%= values %>&chds=0,<%= max_value %>&chco=333333|565656|727272|ADADAD|EFEFEF|FFFFFF&chf=bg,s,FFFFFF00" />
         </div>
-      </div>
-    </div>
-    <% end %>
-
-    <% unless @cluster.donors(@site).empty? %>
-    <div class="body_info grid">
-      <div class="real_content resources">
-        <div class="content_info">
-          <p class="title_section pt_sans_bold">DONORS</p>
-          <ul class="additional_resources">
+        
+        
+        <div class="block">
+          <h3>DONORS</h3>
+          <ul>
             <% @cluster.donors(@site).each do |donor| %>
-            <li><%= link_to(donor.name, donor_path(donor)) %></li>
+              <li><%= link_to(donor.name, donor_path(donor)) %></li>
             <% end %>
           </ul>
         </div>
-      </div>
-    </div>
-    <% end %>
-    <% unless (@site.clusters - @cluster.to_a).empty? %>
-    <!-- MORE  CLUSTERS -->
-    <div class="body_info grid">
-      <div class="real_content contact">
-        <div class="content_info">
-          <p class="title_section pt_sans_bold">MORE <%= @site.word_for_clusters.upcase %></p>
-          <ul class="additional_resources">
-            <% (@site.clusters - @cluster.to_a).each do |cluster| %>
-            <li><%= link_to(cluster.name, cluster_path(cluster)) %></li>
-            <% end %>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <% end %>
-    <!-- BOTTOM CONTENT BLANK -->
-    <div class="body_info grid">
-      <div class="real_content bottom">
-      </div>
-    </div>
-    <!-- BOTTOM IMG -->
-    <div class="body_info_bottom"></div>
-  </div>
-</div>
-<!-- left_info_organization -->
 
-<div id="right_info_projects">
-  <h3 class="pt_sans_bold shadow_white"><%= @cluster.name.upcase %> LIST OF PROJECTS</h3>
-  <div id="projects">
-    <%= render :partial => 'projects/projects' %>
-  </div>
-</div>
+  
+        <div class="block margin">
+          <h3>OTHER CLUSTERS</h3>
+          <ul class="clusters">
+          <% (@site.clusters - @cluster.to_a).each do |cluster| %>
+            <!-- TODO -> Choose kind of clusters -->
+            <li class="water">
+              <%= link_to(cluster.name, cluster_path(cluster)) %>
+              <p>X projects</p>
+            </li>
+          <% end %>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- RIGHT PART -->
+      <div class="right">
+        <h3><%= @cluster.name.upcase %> LIST OF PROJECTS</h3>
+        <div id="projects">
+          <%= render :partial => 'projects/projects' %>
+        </div>
+        <div class="view_more">
+          <a id="view_more">More projects</a>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script> 
+    <script src="/javascripts/sites/location.js" type="text/javascript" charset="utf-8"></script>

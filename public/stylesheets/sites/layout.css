@@ -31,22 +31,28 @@ div#header div.right form.search span.input_search {float:left; width:111px; hei
 div#header div.right form.search span.input_search input[type="text"]{position:absolute; top:2px; left:5px; width:83px; height:14px; font:normal 13px Arial; color:#999999; border:none;}
 div#header div.right form.search span.input_search input[type="submit"] {position:absolute; right:5px; top:3px; width:15px; height:14px; background:url('/images/sites/common/bttn_search.png') no-repeat 0 0; border:none;}
 
-
+div#map {width:100%; height:475px; background:#99B3CA; border-bottom:2px solid white;}
+div#small_map {width:100%; height:280px; background:#99B3CA; border-bottom:2px solid white;}
 
 /* LEFT COLUMN - RIGHT BIG BLOCK */
-div#map {width:100%; height:475px; background:#99B3CA; border-bottom:2px solid white;}
 div#left_column {position:relative; width:100%;}
 div#left_column div.left {width:300px; height:300px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#left_column div.float_left {position:absolute; top:0; left:-5px; width:302px; padding:5px; background:url('/images/sites/common/mesh.png') repeat 0 0; z-index:100;}
-div#left_column div.float_left div.inner_block {width:100%; background:white;}
-div#left_column div.float_left div.head {width:238px; height:auto; padding:30px 32px; background:url('/images/sites/search/head_mask.png') no-repeat 0 0 #C45A4B;} /*TODO: color*/
-div#left_column div.float_left div.head h2 {width:100%; font:bold 15px "PT Sans"; color:#78362F; text-shadow:none; text-transform:uppercase;} /*TODO: color*/
-div#left_column div.float_left div.head h1 {width:100%; font:bold 25px "PT Sans"; color:white; text-shadow:0 1px #A44B42;} /*TODO: text-shadow*/
+div#left_column div.float_left div.head {position:relative; width:238px; height:auto; padding:30px 32px; background:url('/images/sites/search/head_mask.png') no-repeat 0 0 #C45A4B;} /*TODO: color*/
+div#left_column div.float_left div.head h2 {width:100%; font:bold 15px "PT Sans"; color:#78362F; text-shadow:none; text-transform:uppercase; z-index:10;} /*TODO: color*/
+div#left_column div.float_left div.head h1 {width:100%; font:bold 25px "PT Sans"; color:white; text-shadow:0 1px #A44B42; z-index:10;} /*TODO: text-shadow*/
+div#left_column div.float_left div.head p {font:normal 13px Arial; color:#7B3932;} /*TODO: color*/
+div#left_column div.float_left div.head span {position:absolute; right:32px; top:50%; height:32px; width:32px; margin:-16px 0 0 0; opacity:.5; filter:Alpha(opacity=50);filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50); z-index:0;}
+div#left_column div.float_left div.head span.water {background:url('/images/sites/icons/water.png') no-repeat 0 0;}
+div#left_column div.float_left div.head span.health {background:url('/images/sites/icons/health.png') no-repeat 0 0;}
+div#left_column div.float_left div.head span.food {background:url('/images/sites/icons/food.png') no-repeat 0 0;}
+div#left_column div.float_left div.head span.flood {background:url('/images/sites/icons/flood.png') no-repeat 0 0;}
 div#left_column div.float_left div#secondary_map {width:300px; height:189px; border:1px solid #999999; background:#99B3CA;}
 div#left_column div.float_left div.block {width:238px; padding:32px; background:white; border-bottom:1px solid #DEDEDE;}
 div#left_column div.float_left div.block.green {background:#D8E5C0;}
 div#left_column div.float_left div.block.green h3 {color:#333333;}
 div#left_column div.float_left div.block p {width:100%; padding:10px 0 0 0; font:normal 13px Arial; color:#666666; line-height:17px;}
+div#left_column div.float_left div.block p.budget {padding:10px 0 0 10px; font:normal 25px "Aller"; color:#666666; background:url('/images/sites/icons/budget.jpg') no-repeat 0 16px;}
 div#left_column div.float_left div.block p.social a {padding:0 5px 0 20px; color:#666666; text-decoration:underline;}
 div#left_column div.float_left div.block p.social a:hover {color:#333333;}
 div#left_column div.float_left div.block p.social a.twitter {background:url('/images/sites/icons/twitter.png') no-repeat 0 0;}
@@ -56,6 +62,7 @@ div#left_column div.float_left div.block.wikipedia {background:url('/images/site
 div#left_column div.float_left div.block.wikipedia p {line-height:17px;}
 div#left_column div.float_left div.block.wikipedia p.provided {margin:15px 0 0 0;}
 div#left_column div.float_left div.block.margin {margin:5px 0 0 0;}
+div#left_column div.float_left div.block.resources {background:url('/images/sites/organization/bkg_resources.png') no-repeat right bottom white;}
 div#left_column div.float_left div.block h3 {width:100%; font:bold 13px "PT Sans"; color:#999999; text-shadow:none; text-transform:uppercase;}
 div#left_column div.float_left div.block a {} /*TODO: color*/
 div#left_column div.float_left div.block a:hover {text-decoration:underline;}
@@ -66,9 +73,18 @@ div#left_column div.float_left div.block ul li a:hover {text-decoration:underlin
 div#left_column div.float_left div.block ul li.selected {background:none;}
 div#left_column div.float_left div.block ul li.selected a {color:#666666;}
 div#left_column div.float_left div.block ul li.selected a:hover {text-decoration:none; color:#666666;}
+div#left_column div.float_left div.block ul.clusters {padding:5px 0 0 0;}
+div#left_column div.float_left div.block ul.clusters li {padding:0 0 17px 45px;}
+div#left_column div.float_left div.block ul.clusters li.last {padding:0 0 0 45px;}
+div#left_column div.float_left div.block ul.clusters li.water {background:url('/images/sites/icons/water.png') no-repeat 0 0;}
+div#left_column div.float_left div.block ul.clusters li.health {background:url('/images/sites/icons/health.png') no-repeat 0 0;}
+div#left_column div.float_left div.block ul.clusters li.food {background:url('/images/sites/icons/food.png') no-repeat 0 0;}
+div#left_column div.float_left div.block ul.clusters li.flood {background:url('/images/sites/icons/flood.png') no-repeat 0 0;}
+div#left_column div.float_left div.block ul.clusters li a {} /*TODO: color*/
+div#left_column div.float_left div.block ul.clusters li p {padding:1px 0 0 0;}
 div#left_column div.float_left div.block a.more {position:relative; margin:0 0 0 10px; padding:0 12px 0 0; background:url('/images/sites/icons/down_garnet.png') no-repeat right 6px;} 
 div#left_column div.float_left div.block a.more:hover {text-decoration:underline;}
-div#left_column div.right {width:632px; height:3000px; margin:0; padding:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#left_column div.right {width:632px; margin:0; padding:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#left_column div.right h3 {width:572px; padding:20px 26px 20px 34px; font:bold 13px "PT Sans"; color:#999999; text-shadow:0 1px white; text-transform:uppercase;}
 div#left_column div.right ul {width:100%; padding:0!important;}
 div#left_column div.right ul li {width:572px; height:74px; padding:20px 26px 20px 34px;}
@@ -89,49 +105,49 @@ div#left_column div.view_more a#view_more:hover {background-position:0 -26px; cu
 
 
 
-/*LEFT BIG COLUMN - RIGHT SIDEBAR -> SEARCH, SITE PAGES DONORS, */
-
-div#pages {width:100%;}
-div#pages div.left {width:670px; margin:65px 0 0 0; padding:0 0 5px; background:url('/images/sites/common/mesh.png') repeat 0 0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#pages div.left div.outer_head {width:660px; padding:5px 5px 0 5px;}
-div#pages div.left div.outer_head div.head {width:596px; height:auto; padding:32px; background:url('/images/sites/search/head_mask.png') no-repeat 0 0 #C45A4B;} /*TODO: color*/
-div#pages div.left div.outer_head div.head h1 {width:100%; font:bold 25px "PT Sans"; color:white; text-shadow:0 1px #A44B42;}
-div#pages div.left div.outer_head div.head p {width:100%; padding:2px 0 0 0; font:normal 13px Arial; color:#7C3831; text-shadow:none;} /*TODO: color*/
-div#pages div.left div.outer_head div.head input[type="text"] {width:467px; padding:10px; margin:10px 0 0 0; background:url('/images/sites/search/textinput_bkg.png') no-repeat 0 0; font:normal 17px Arial; color:#333333; border:none; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#pages div.left div.outer_head div.head input[type="submit"] {width:101px; height:38px; margin:10px 0 0 0; background:url('/images/sites/search/submit_bkg.png') no-repeat 0 0; border:none; text-indent:-9999px; font-size:0; line-height:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#pages div.left div.outer_head div.head input[type="submit"]:hover {background-position:0 -38px; cursor:pointer;}
-div#pages div.left div.body {width:596px; margin:0 0 0 5px; padding:32px; background:white; border-bottom:1px solid #CCCCCC;}
-div#pages div.left div.body.last {border:none;}
-div#pages div.left div.body h3 {font:bold 13px "PT Sans"; color:#666666;}
-div#pages div.left div.body p {font:normal 13px Arial; color:#666666;}
-div#pages div.left div.body p a {text-decoration:none;} /*TODO: color*/
-div#pages div.left div.body p a:hover {text-decoration:underline;}
-div#pages div.left div.body ul {width:100%; margin:7px 0 0 0; padding:0 0 6px; list-style:none;}
-div#pages div.left div.body ul li {padding:3px 0 3px 10px; background:url('/images/sites/icons/list_disc.png') no-repeat 0 10px; font:normal 13px Arial; color:#666666;}
-div#pages div.left div.results_list {width:660px; margin:0 5px 0 5px; background:white;}
-div#pages div.left div.results_list h3 {margin:0; padding:30px 0 30px 32px; font:bold 13px "PT Sans"; color:#666666; text-transform:uppercase;}
-div#pages div.left div.results_list h3 a {color:#666666; padding:0 8px 0 0; background:url('/images/sites/icons/remove.png') no-repeat right 0; border-bottom:1px dotted #C45A4B;} /*TODO: color*/
-div#pages div.left div.results_list h3 a:hover {border-bottom:1px solid #C45A4B;}
-div#pages div.left div.results_list ul {background:white;}
-div#pages div.left div.results_list ul li {width:100%; height:100px; padding:0;}
-div#pages div.left div.results_list ul li.odd {background:white;}
-div#pages div.left div.results_list ul li.even {background:#F5F5F5;}
-div#pages div.left div.results_list ul li p.no_results {padding:38px 32px 0 32px; font:bold 18px "PT Sans"; color:#666666;}
-div#pages div.left div.results_list ul li div.project_name {width:439px; height:100px; border-right:1px solid #E5E5E5; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#pages div.left div.results_list ul li div.project_name h3 {padding-bottom:0; color:none;}
-div#pages div.left div.results_list ul li div.project_name h3 a {padding:0; font:bold 17px "PT Sans"; text-transform:none; border:none; background:none; color:#C45A4B;} /*TODO: color*/
-div#pages div.left div.results_list ul li div.project_name h3 a:hover {text-decoration:underline;}
-div#pages div.left div.results_list ul li div.project_name p {margin:0; padding:0 0 0 32px; font:normal 13px Arial; color:#999999;}
-div#pages div.left div.results_list ul li div.project_name p a {color:#999999; text-decoration:underline;}
-div#pages div.left div.results_list ul li div.project_name p a:hover {color:#333333;}
-div#pages div.left div.results_list ul li div.project_places {width:170px; height:30px; padding:35px 20px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#pages div.left div.results_list ul li div.project_places p {margin:0; padding:0; font:normal 13px Arial; color:#999999; text-align:center;}
-div#pages div.left div.results_list ul li div.project_places p a {color:#999999; text-decoration:underline;}
-div#pages div.left div.results_list ul li div.project_places p a:hover {color:#333333;}
-div#pages div.right {width:240px; margin:225px 0 0 0; padding:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#pages div.right div.block {width:100%; margin:23px 0 0 0;}
-div#pages div.right div.block.border {border-bottom:1px solid #D4D4D4; padding:0 0 20px 0;}
-div#pages div.right div.block.border.last {border:none; padding:0;}
+/*LEFT BIG COLUMN - RIGHT SIDEBAR -> SEARCH, SITE PAGES, DONORS, */
+div#pages {position:relative; width:100%; margin:65px 0 0 0;}
+div#pages div.left {width:660px; height:300px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#pages div.float_left {position:absolute; top:0; left:-5px; width:670px; padding:0 0 5px; background:url('/images/sites/common/mesh.png') repeat 0 0;}
+div#pages div.float_left div.outer_head {width:660px; padding:5px 5px 0 5px;}
+div#pages div.float_left div.outer_head div.head {width:596px; height:auto; padding:32px; background:url('/images/sites/search/head_mask.png') no-repeat 0 0 #C45A4B;} /*TODO: color*/
+div#pages div.float_left div.outer_head div.head h1 {width:100%; font:bold 25px "PT Sans"; color:white; text-shadow:0 1px #A44B42;}
+div#pages div.float_left div.outer_head div.head p {width:100%; padding:2px 0 0 0; font:normal 13px Arial; color:#7C3831; text-shadow:none;} /*TODO: color*/
+div#pages div.float_left div.outer_head div.head input[type="text"] {width:467px; padding:10px; margin:10px 0 0 0; background:url('/images/sites/search/textinput_bkg.png') no-repeat 0 0; font:normal 17px Arial; color:#333333; border:none; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#pages div.float_left div.outer_head div.head input[type="submit"] {width:101px; height:38px; margin:10px 0 0 0; background:url('/images/sites/search/submit_bkg.png') no-repeat 0 0; border:none; text-indent:-9999px; font-size:0; line-height:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#pages div.float_left div.outer_head div.head input[type="submit"]:hover {background-position:0 -38px; cursor:pointer;}
+div#pages div.float_left div.body {width:596px; margin:0 0 0 5px; padding:32px; background:white; border-bottom:1px solid #CCCCCC;}
+div#pages div.float_left div.body.last {border:none;}
+div#pages div.float_left div.body h3 {font:bold 13px "PT Sans"; color:#666666;}
+div#pages div.float_left div.body p {font:normal 13px Arial; color:#666666;}
+div#pages div.float_left div.body p a {text-decoration:none;} /*TODO: color*/
+div#pages div.float_left div.body p a:hover {text-decoration:underline;}
+div#pages div.float_left div.body ul {width:100%; margin:7px 0 0 0; padding:0 0 6px; list-style:none;}
+div#pages div.float_left div.body ul li {padding:3px 0 3px 10px; background:url('/images/sites/icons/list_disc.png') no-repeat 0 10px; font:normal 13px Arial; color:#666666;}
+div#pages div.float_left div.results_list {width:660px; margin:0 5px 0 5px; background:white;}
+div#pages div.float_left div.results_list h3 {margin:0; padding:30px 0 30px 32px; font:bold 13px "PT Sans"; color:#666666; text-transform:uppercase;}
+div#pages div.float_left div.results_list h3 a {color:#666666; padding:0 8px 0 0; background:url('/images/sites/icons/remove.png') no-repeat right 0; border-bottom:1px dotted #C45A4B;} /*TODO: color*/
+div#pages div.float_left div.results_list h3 a:hover {border-bottom:1px solid #C45A4B;}
+div#pages div.float_left div.results_list ul {background:white;}
+div#pages div.float_left div.results_list ul li {width:100%; height:100px; padding:0;}
+div#pages div.float_left div.results_list ul li.odd {background:white;}
+div#pages div.float_left div.results_list ul li.even {background:#F5F5F5;}
+div#pages div.float_left div.results_list ul li p.no_results {padding:38px 32px 0 32px; font:bold 18px "PT Sans"; color:#666666;}
+div#pages div.float_left div.results_list ul li div.project_name {width:439px; height:100px; border-right:1px solid #E5E5E5; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#pages div.float_left div.results_list ul li div.project_name h3 {padding-bottom:0; color:none;}
+div#pages div.float_left div.results_list ul li div.project_name h3 a {padding:0; font:bold 17px "PT Sans"; text-transform:none; border:none; background:none; color:#C45A4B;} /*TODO: color*/
+div#pages div.float_left div.results_list ul li div.project_name h3 a:hover {text-decoration:underline;}
+div#pages div.float_left div.results_list ul li div.project_name p {margin:0; padding:0 0 0 32px; font:normal 13px Arial; color:#999999;}
+div#pages div.float_left div.results_list ul li div.project_name p a {color:#999999; text-decoration:underline;}
+div#pages div.float_left div.results_list ul li div.project_name p a:hover {color:#333333;}
+div#pages div.float_left div.results_list ul li div.project_places {width:170px; height:30px; padding:35px 20px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#pages div.float_left div.results_list ul li div.project_places p {margin:0; padding:0; font:normal 13px Arial; color:#999999; text-align:center;}
+div#pages div.float_left div.results_list ul li div.project_places p a {color:#999999; text-decoration:underline;}
+div#pages div.float_left div.results_list ul li div.project_places p a:hover {color:#333333;}
+div#pages div.right {width:272px; margin:160px 0 0 0; padding:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#pages div.right div.block {width:242px; margin:23px 0 0 0; padding:0 0 0 30px;}
+div#pages div.right div.block.border {border-bottom:1px solid #D4D4D4; padding:0 0 20px 30px;}
+div#pages div.right div.block.border.last {border:none; padding:0 0 0 30px;}
 div#pages div.right div.block h2 {width:100%; font:bold 13px "PT Sans"; color:#999999; text-shadow:0 1px white; text-transform:uppercase;}
 div#pages div.right div.block div.logo {padding:5px; background:#CFCFCF;}
 div#pages div.right div.block img {background:white;}
@@ -156,24 +172,81 @@ div#pages div.view_more {clear:both; width:100%; padding:30px 0 0 0;}
 div#pages div.view_more a#view_more {width:162px; height:14px; margin:0 0 0 230px; padding:5px 43px 5px; font:bold 13px "PT Sans"; background:url('/images/sites/search/view_more.png') no-repeat 0 0; text-align:center;} /*TODO: color*/
 div#pages div.view_more a#view_more:hover {background-position:0 -26px; cursor:pointer;}
 /*chart*/
-div.statistics img.pie_chart {background:none!important;}
+div.statistics img.pie_chart {background:none!important; margin:0 0 0 -10px; height:125px; /*hack for google maps chart api image*/}
 div.statistics ul.chart {float:right; width:115px!important; padding:6px 0 0 0!important; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div.statistics ul.chart li {padding:0 0 0 12px!important; margin:5px 0 0 0!important; background:url('/images/sites/icons/chart_colors.png') no-repeat 0 3px!important;}
+div.statistics ul.chart li {padding:0 0 0 12px!important; margin:5px 0 0 0!important; background:url('/images/sites/icons/chart_colors.png') no-repeat 0 4px!important;}
 div.statistics ul.chart li a {color:#666666; text-decoration:underline!important;}
 div.statistics ul.chart li a:hover {color:#333333;}
-div.statistics ul.chart li.pos1 {background-position:0 -15px!important;}
-div.statistics ul.chart li.pos2 {background-position:0 -33px!important;}
-div.statistics ul.chart li.pos3 {background-position:0 -51px!important;}
-div.statistics ul.chart li.pos4 {background-position:0 -69px!important;}
-div.statistics ul.chart li.pos5 {background-position:0 -86px!important;}
+div.statistics ul.chart li.pos1 {background-position:0 -12px!important;}
+div.statistics ul.chart li.pos2 {background-position:0 -31px!important;}
+div.statistics ul.chart li.pos3 {background-position:0 -50px!important;}
+div.statistics ul.chart li.pos4 {background-position:0 -67px!important;}
+div.statistics ul.chart li.pos5 {background-position:0 -84px!important;}
 /*cluster*/
 div.statistics ul.statistics_list {width:270px; height:auto; padding:0 0 25px 0!important; margin:10px 0 0 0;}
-div.statistics ul.statistics_list li {padding:0!important; margin:5px 0 0 0!important; height:auto; width:100%; }
+div.statistics ul.statistics_list li {display:inline-block; width:100%!important; padding:0!important; margin:5px 0 0 0!important; height:auto;}
 div.statistics ul.statistics_list li a.plus {float:left; width:auto; padding:0 0 0 20px; background:url('/images/sites/organization/left_plus.png') no-repeat left 0; height:20px;}
 div.statistics ul.statistics_list li a.drop {float:left; width:auto; padding:0 0 0 20px; background:url('/images/sites/organization/left_drop.png') no-repeat left 0;  height:20px;}
 div.statistics ul.statistics_list li a span {float:left; width:auto; height:18px; padding:2px 10px 0 0; background:url('/images/sites/organization/right_statistics.png') no-repeat right 0; font:normal 13px "Aller"; color:#FFFFFF; text-align:right;}
 div.statistics ul.statistics_list li a:hover {text-decoration:none;}
 div.statistics ul.statistics_list li a:hover span {text-decoration:none!important;}
+
+
+
+
+/*PROJECTS*/
+
+div#project {position:relative; width:100%;}
+div#project div.left {width:270px; height:auto; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#project div.right {width:662px; height:1000px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#project div.float_right {position:absolute; top:0; right:-5px; width:660px; padding:5px; background:url('/images/sites/common/mesh.png') repeat 0 0; z-index:100;}
+div#project div.float_right div.head {width:596px; height:auto; padding:32px; background:url('/images/sites/search/head_mask.png') no-repeat 0 0 #C45A4B;} /*TODO: color*/
+div#project div.float_right div.head h1 {width:100%; font:bold 25px "PT Sans"; color:white; text-shadow:0 1px #A44B42;}
+div#project div.float_right div.head p {width:100%; padding:2px 0 0 0; font:normal 13px Arial; color:#7C3831; text-shadow:none;} /*TODO: color*/
+div#project div.float_right div.head p a {text-decoration:underline; color:#7C3831;} /*TODO: color*/
+div#project div.float_right div.head p a:hover {color:#7C3831;}  /*TODO: color*/
+div#project div.float_right div.block {width:596px; padding:32px; background:white; border-bottom:1px solid #DEDEDE;}
+div#project div.float_right div.block.margin {margin:5px 0 0 0;}
+div#project div.float_right div.block p {font:normal 15px Arial; color:#666666;}
+div#project div.float_right div.block h3 {padding:0 0 10px 0; font:bold 13px "PT Sans"; color:#333333; text-transform:uppercase;}
+div#project div.float_right div.block ul {width:100%;}
+div#project div.float_right div.block ul li {width:290px; margin:0 10px 0 0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#project div.float_right div.block ul li.last {margin:0;}
+div#project div.float_right div.block ul li div.image {width:90px; height:70px; margin:0 10px 0 0; padding:5px; background:#E5E5E5; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#project div.float_right div.block ul li div.image img {width:90px; height:70px;}
+div#project div.float_right div.block ul li div.info {width:170px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+
+
+
+/*<div class="block margin">
+    <h3>RELATED PROJECTS</h3>
+    <ul>
+      <li>
+        <div class="image">
+          <img src="" title="related projects?" />
+        </div>
+        <div class="info">
+          <h4><a href="#">Blanket Rice Distribution</a></h4>
+          <p>by Action Against Hunger</p>
+          <p class="sub">in Khumrah</p>                
+        </div>
+      </li>
+      <li>
+        <div class="image">
+          <img src="" title="related projects?" />
+        </div>
+        <div class="info">
+          <h4><a href="#">Blanket Rice Distribution</a></h4>
+          <p>by Action Against Hunger</p>
+          <p class="sub">in Khumrah</p>                
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+</div>*/
+
+
 
 
 
@@ -191,7 +264,6 @@ div#footer_pages div.left div.links ul li a:hover {text-decoration:underline;}
 div#footer_pages div.right {width:auto; margin:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline; text-align:right;}
 div#footer_pages div.right a.logo {display:block; width:67px; height:43px; background:url('../../images/sites/common/logo_interaction.png') no-repeat 0 0;}
 div#footer_pages div.right a.logo:hover {cursor:pointer;}
-
 
 
 /* FOOTER OTHER */
