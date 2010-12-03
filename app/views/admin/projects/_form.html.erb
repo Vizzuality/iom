@@ -289,7 +289,10 @@
     </div>
   </div>
   <!--  TO GET CORRECT URL -->
-  <%= f.hidden_field :admin_tags_path , :value => admin_tags_path %>
+  <script>
+    var admin_tags_path = '<%= admin_tags_path %>';  
+  </script>
+  
   <%= f.submit '', :class => "#{'error' if @project.invalid? && action_name != 'new'}" %>
   <!-- END EDIT PAGE -->
 

@@ -716,8 +716,8 @@ $(function() {
   function split( val ) {
     return val.split( /,\s*/ );
   }
-  
-  var custom_url = $('input#project_admin_tags_path').val() + '?term=';
+
+  var custom_url =  admin_tags_path + '?term=';
  
   $("#project_tags").autocomplete({
     class: 'project_tags',
@@ -764,7 +764,7 @@ $(function() {
     }
   });
   
-  var custom_donors_url = $('input#donation_admin_project_donors_path').val() + '?q=';
+  var custom_donors_url = admin_tags_path + '?q=';
   
   // AUTOCOMPLETE FOR DONORS IN PROJECT
   $("#autocomplete_donor_name").autocomplete({
