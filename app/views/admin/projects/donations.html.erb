@@ -21,10 +21,13 @@
           <%end%>
         </div>
         <div class="amount_box">
-                  <p>$ <%= donation.amount %></p>
+                  <p>$ <%= (donation.amount.nil?)? '0' : donation.amount %></p>
           <%= link_to('', admin_project_donation_path(@project, donation), :method => :delete, :confirm => 'Are your sure?', :class => 'delete') %>
         </div>
-        <%= total_account += donation.amount %>
+        
+            <%if (!donation.amount.nil?) %> 
+              <%= total_account += donation.amount %>
+            <%end%>
             </li>
             <% end -%>
           </ul>
