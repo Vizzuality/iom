@@ -90,13 +90,13 @@
             <ul class="clusters_or_sectors">
               <li class="section"><p>CLUSTERS</p></li>
                   <% Cluster.all.collect.each do |cluster| %>
-                <li><a class="cluster_value" id="<%= cluster.id %>"><%= cluster.name %></a></li>
+                <li><a class="cluster_value" id="<%= cluster.id %>"><%= truncate(cluster.name, :length => 30)  %></a></li>
               <%end -%>
 
               <%= f.hidden_field :project_context_sector_id  %>
               <li class="section"><p>SECTORS</p></li>
                   <% Sector.all.collect.each do |sector| %>
-                <li><a class="sector_value" id="<%= sector.id %>"><%= sector.name %></a></li>
+                <li><a class="sector_value" id="<%= sector.id %>"><%= truncate(sector.name, :length => 30)  %></a></li>
               <%end -%>
             </ul>
           </div>
