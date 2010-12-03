@@ -49,32 +49,36 @@
           <label>CLUSTER</label>
           <span id="cluster_combo_search" class="combo"><p>Select cluster</p>
           <input id="cluster_input" type="hidden" value="" name="cluster" />
-          <ul class="elements">
-            <li>
-              <a id="0">All</a>
-            </li>
-             <% Cluster.all.each do |cluster| %>
-            <li>
-              <a id="<%= cluster.id%>"><%= truncate(cluster.name,:length => 20)%></a>
-            </li>
-            <% end %>
-          </ul>
+          <div class="wrapper">
+            <ul class="elements scroll_pane">
+              <li>
+                <a id="0">All</a>
+              </li>
+               <% Cluster.all.each do |cluster| %>
+              <li>
+                <a id="<%= cluster.id%>"><%= truncate(cluster.name,:length => 20)%></a>
+              </li>
+              <% end %>
+            </ul>
+          </div>
           </span>
         </li>
         <li>
           <label>SECTOR</label>
           <span id="sector_combo_search" class="combo"><p>Select sector</p>
           <input id="sector_input" type="hidden" value="" name="sector" />
-          <ul class="elements">
-            <li>
-              <a id="0">All</a>
-            </li>
-            <% Sector.all.each do |sector| %>
-            <li>
-              <a id="<%= sector.id%>"><%= truncate(sector.name,:length => 20)%></a>
-            </li>
-            <% end %>
-          </ul>
+          <div class="wrapper">
+            <ul class="elements scroll_pane">
+              <li>
+                <a id="0">All</a>
+              </li>
+              <% Sector.all.each do |sector| %>
+              <li>
+                <a id="<%= sector.id%>"><%= truncate(sector.name,:length => 20)%></a>
+              </li>
+              <% end %>
+            </ul>
+          </div>
           </span>
         </li>
       </ul>
@@ -172,5 +176,7 @@
     </a>
   </div>
 </div>
+<script src="/javascripts/plugins/jquery.mousewheel.js" type="text/javascript" charset="utf-8"></script>
+<script src="/javascripts/plugins/jquery.jscrollpane.js" type="text/javascript" charset="utf-8"></script>
 <script src="/javascripts/backoffice/project.js" type="text/javascript" charset="utf-8"></script>
 <script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>

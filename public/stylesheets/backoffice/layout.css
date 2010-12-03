@@ -21,6 +21,9 @@ label strong {font:normal 14px Georgia; color:#E93E3F;}
     font-style: normal;
 }
 
+/*The next is neccesary to fix properly the content scrollable*/
+div.wrapper {float:left; margin:0; padding:0;}
+
 /*ERROR MESSAGES*/
 span.field_error {position:absolute; bottom:10px; right:10px; margin:0; padding:0;}
 span.field_error a.error {float:right; width:14px; height:14px; background: url('/images/backoffice/icons/error.png') no-repeat scroll top left;}
@@ -414,7 +417,7 @@ div.two_projects ul.combos li span.combo.clicked {background:url('/images/backof
 div.two_projects ul.combos li span.combo.clicked ul.elements {position:absolute; top:31px; left:0; display:inline; background:url('/images/backoffice/projects/combos/body_combo_search.png') no-repeat 0 0; width:148px; height:198px; overflow-x:hidden; overflow-y:auto;}
 
 div.two_projects ul.combos li span.combo.clicked ul.elements li {float:left; width:88px; height:auto; padding:5px 30px 5px 12px; margin:0 0 0 1px; }
-div.two_projects ul.combos li span.combo.clicked ul.elements li:hover {background-color:#C7E097;}
+div.two_projects ul.combos li span.combo.clicked ul.elements li:hover {background-color:#E4F0CA;}
 
 div.two_projects ul.combos li span.combo ul.elements.short {display:none;}
 div.two_projects ul.combos li span.combo.clicked ul.elements.short {position:absolute; top:31px; left:-1px; display:inline; width:148px; height:auto; background:none;}
@@ -525,7 +528,6 @@ ul.ui-autocomplete.site_tags li.ui-menu-item a {font:normal 13px Arial; width:10
 /*END - AUTOCOMPLETE - TAGS*/
 
 
-
 div.block.project_info div.med div.left form input[type="text"]{position:absolute; top:6px; left:7px; width:400px; height:21px; font:normal 15px Arial; color:#333333; border:none; padding:0;}
 div.block.project_info div.bottom {float:left; height:15px; width:100%; background: url('/images/backoffice/backgrounds/bottom_two_columns.png') no-repeat scroll top left!important;}
 div.block.project_info div.med div.left form span.textarea.error {background-position:0 -214px;}
@@ -595,7 +597,7 @@ div.block.project_info div.med div.left form div.cluster_options span.combo_clus
 div.block.project_info div.med div.left form div.cluster_options span.combo_cluster_options.clicked {background:url('/images/backoffice/projects/combos/combo_add_cluster_clicked.png') no-repeat 0 0;}
 div.block.project_info div.med div.left form div.cluster_options span.combo_cluster_options.clicked ul.options {position:absolute; top:32px; left:0; width:281px; height:197px; display:inline; z-index:20; background:url('/images/backoffice/projects/combos/body_combo_cluster.png') no-repeat 0 0; overflow-x:hidden; overflow-y:auto;}
 div.block.project_info div.med div.left form div.cluster_options span.combo_cluster_options.clicked ul.options li {float:left; margin:0 0 0 1px; width:240px; height:auto; padding:4px 11px;}
-div.block.project_info div.med div.left form div.cluster_options span.combo_cluster_options.clicked ul.options li:hover {background-color:#CCE599;}
+div.block.project_info div.med div.left form div.cluster_options span.combo_cluster_options.clicked ul.options li:hover {background-color:#E4F0CA;}
 div.block.project_info div.med div.left form div.cluster_options span.combo_cluster_options.clicked ul.options li a {font:normal 13px Arial; color:#666666; text-decoration:none; }
 
 div.block.project_info div.med div.left form div.cluster_options span.combo_cluster_options:hover {cursor:pointer;}
@@ -612,7 +614,7 @@ div.block.project_info div.med div.left form div.sector_options span.combo_secto
 div.block.project_info div.med div.left form div.sector_options span.combo_sector_options.clicked {background:url('/images/backoffice/projects/combos/combo_add_cluster_clicked.png') no-repeat 0 0;}
 div.block.project_info div.med div.left form div.sector_options span.combo_sector_options.clicked ul.options {position:absolute; top:32px; left:0; width:281px; height:197px; display:inline; z-index:20; background:url('/images/backoffice/projects/combos/body_combo_cluster.png') no-repeat 0 0; overflow-x:hidden; overflow-y:auto;}
 div.block.project_info div.med div.left form div.sector_options span.combo_sector_options.clicked ul.options li {float:left; margin:0 0 0 1px; width:240px; height:auto; padding:4px 11px;}
-div.block.project_info div.med div.left form div.sector_options span.combo_sector_options.clicked ul.options li:hover {background-color:#CCE599;}
+div.block.project_info div.med div.left form div.sector_options span.combo_sector_options.clicked ul.options li:hover {background-color:#E4F0CA;}
 div.block.project_info div.med div.left form div.sector_options span.combo_sector_options.clicked ul.options li a {font:normal 13px Arial; color:#666666; text-decoration:none; }
 
 div.block.project_info div.med div.left form div.sector_options span.combo_sector_options:hover {cursor:pointer;}

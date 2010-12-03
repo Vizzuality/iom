@@ -54,7 +54,6 @@
 		// JScrollPane "class" - public methods are available through $('selector').data('jsp')
 		function JScrollPane(elem, s)
 		{
-
 			var settings, jsp = this, pane, paneWidth, paneHeight, container, contentWidth, contentHeight,
 				percentInViewH, percentInViewV, isScrollableV, isScrollableH, verticalDrag, dragMaxY,
 				verticalDragPosition, horizontalDrag, dragMaxX, horizontalDragPosition,
@@ -92,7 +91,7 @@
 					// TODO: Deal with where width/ height is 0 as it probably means the element is hidden and we should
 					// come back to it later and check once it is unhidden...
 					paneWidth = elem.innerWidth() + originalPaddingTotalWidth;
-					paneHeight = elem.innerHeight();
+					paneHeight = elem.innerHeight() - 10;
 
 					elem.width(paneWidth);
 					
@@ -133,7 +132,7 @@
 
 					if (hasContainingSpaceChanged) {
 						paneWidth = elem.innerWidth() + originalPaddingTotalWidth;
-						paneHeight = elem.innerHeight();
+						paneHeight = elem.innerHeight() - 10;
 						container.css({
 							'width': paneWidth + 'px',
 							'height': paneHeight + 'px'

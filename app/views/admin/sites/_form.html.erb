@@ -87,18 +87,20 @@
         <span class="select_combo_typology"><p class="cluster_sector">Select a cluster or a sector</p>
           <div class="values">
             <%= f.hidden_field :project_context_cluster_id  %>
-            <ul class="clusters_or_sectors">
-              <li class="section"><p>CLUSTERS</p></li>
-                  <% Cluster.all.collect.each do |cluster| %>
-                <li><a class="cluster_value" id="<%= cluster.id %>"><%= truncate(cluster.name, :length => 30)  %></a></li>
-              <%end -%>
+            <div class="wrapper">
+              <ul class="clusters_or_sectors scroll_pane">
+                <li class="section"><p>CLUSTERS</p></li>
+                    <% Cluster.all.collect.each do |cluster| %>
+                  <li><a class="cluster_value" id="<%= cluster.id %>"><%= truncate(cluster.name, :length => 30)  %></a></li>
+                <%end -%>
 
-              <%= f.hidden_field :project_context_sector_id  %>
-              <li class="section"><p>SECTORS</p></li>
-                  <% Sector.all.collect.each do |sector| %>
-                <li><a class="sector_value" id="<%= sector.id %>"><%= truncate(sector.name, :length => 30)  %></a></li>
-              <%end -%>
-            </ul>
+                <%= f.hidden_field :project_context_sector_id  %>
+                <li class="section"><p>SECTORS</p></li>
+                    <% Sector.all.collect.each do |sector| %>
+                  <li><a class="sector_value" id="<%= sector.id %>"><%= truncate(sector.name, :length => 30)  %></a></li>
+                <%end -%>
+              </ul>
+            </div>
           </div>
         </span>
       </div>
@@ -108,12 +110,14 @@
       <div class="content">
         <span class="select_combo_typology"><p class="ngo">Select an NGO</p>
           <div class="values">
-            <ul class="organizations">
-              <%= f.hidden_field :project_context_organization_id  %>
-              <% Organization.all.collect.each do |organization| %>
-                <li><a class="organization" id="<%= organization.id %>"><%= truncate(organization.name, :length => 35) %></a></li>
-              <%end -%>
-            </ul>
+            <div class="wrapper">
+              <ul class="organizations scroll_pane">
+                <%= f.hidden_field :project_context_organization_id  %>
+                <% Organization.all.collect.each do |organization| %>
+                  <li><a class="organization" id="<%= organization.id %>"><%= truncate(organization.name, :length => 31) %></a></li>
+                <%end -%>
+              </ul>
+            </div>
           </div>
         </span>
       </div>
@@ -172,84 +176,11 @@
       var admin_tags_path = '<%= admin_tags_path %>';  
     </script>
        
-
-   
   <%= f.submit 'Save changes', :class => "#{'error' if @site.invalid? && action_name != 'new'}" %>
-
-
-
-<!-- REMOVE THIS "COMMENTED CODE" WHEN BLAT SAYS "OK" -->
-<%if false %>
-
-  <div class="field">
-    <br />
-    <input type="radio" name="site[geographic_context]" class="choose_gc" value="worlwide" id="gc_worldwide" <%= 'checked="checked"' if @site.geographic_context_country_id.blank? && @site.geographic_context_region_id.blank? && @site.geographic_context_geometry.blank? %>/>
-    <label for="gc_worldwide">Worldwide, not limited</label><br />
-
-    <input type="radio" name="site[geographic_context]" class="choose_gc" value="country" id="gc_limited_country" <%= 'checked="checked"' if @site.geographic_context_country_id? %> />
-    <label for="gc_limited_country">Limited to a country</label><br />
-    <%= f.select :geographic_context_country_id, Country.all.collect{ |c| [c.name, c.id] }, {:prompt => 'Select a country'}, {:id => 'gc_limited_country_section', :style => (@site.geographic_context_country_id.blank? ? 'display:none' : 'display:block')} %>
-
-    <input type="radio" name="site[geographic_context]" class="choose_gc" value="region" id="gc_limited_region" <%= 'checked="checked"' if @site.geographic_context_region_id? %>/>
-    <label for="gc_limited_region">Limited to a region</label><br />
-    <%= f.select :geographic_context_region_id, Region.all.collect{ |r| [r.name, r.id] }, {:prompt => 'Select a region'}, {:id => 'gc_limited_region_section', :style => (@site.geographic_context_region_id.blank? ? 'display:none' : 'display:block')} %>
-
-    <input type="radio" name="site[geographic_context]" class="choose_gc" value="bbox" id="gc_limited_bbox" <%= 'checked="checked"' if @site.geographic_context_geometry? %>/>
-    <label for="gc_limited_bbox">Limited to a boundary box</label><br />
-    <div id="gc_limited_bbox_section" style="<%= (@site.geographic_context_geometry.blank? ? 'display:none' : 'display:block') %>">
-      Map
-    </div>
-  </div>
-
-  <div class="field">
-    <label>Project typology</label>
-    <br />
-
-    <input type="checkbox" name="site[project_context][]" class="choose_pc" value="cluster" id="pc_cluster" <%= 'checked="checked"' if @site.project_context_cluster_id? %>/>
-    <label for="pc_cluster">Include only projects from a particular cluster</label><br />
-    <%= f.select :project_context_cluster_id, Cluster.all.collect{ |c| [c.name, c.id] }, {:prompt => 'Select a cluster'}, {:id => 'pc_cluster_section', :style => (@site.project_context_cluster_id? ? 'display:block' : 'display:none')} %>
-
-    <input type="checkbox" name="site[project_context][]" class="choose_pc" value="organization" id="pc_organization" <%= 'checked="checked"' if @site.project_context_organization_id? %>/>
-    <label for="pc_organization">Include only projects from a particual Organization</label><br />
-    <%= f.select :project_context_organization_id, Organization.all.collect{ |o| [o.name, o.id] }, {:prompt => 'Select an organization'}, {:id => 'pc_organization_section', :style => (@site.project_context_organization_id? ? 'display:block' : 'display:none')} %>
-
-    <input type="checkbox" name="site[project_context][]" class="choose_pc" value="tags" id="pc_tags" <%= 'checked="checked"' if @site.project_context_tags? %>/>
-    <label for="pc_tags">Include only matching some tags</label><br />
-    <%= f.text_field :project_context_tags, {:id => 'pc_tags_section', :style => (@site.project_context_tags? ? 'display:block' : 'display:none')} %>
-  </div>
-
-  <h3>Contact information</h3>
-
-  <div class="field">
-    <%= f.label :contact_email %>
-    <%= f.text_field :contact_email %>
-  </div>
-
-  <div class="field">
-    <%= f.label :contact_person %>
-    <%= f.text_field :contact_person %>
-  </div>
-
-  <h3>Technichal configuration</h3>
-
-  <div class="field">
-    <%= f.label :url %>
-    <%= f.text_field :url, :class=>"long #{'error' if !@site.errors[:url].empty? && action_name != 'new'}" %>
-    <%= errors_for @site, :url %>
-  </div>
-
-  <div class="field">
-    <%= f.label :google_analytics_id %>
-    <%= f.text_field :google_analytics_id %>
-  </div>
-
-  <div class="field">
-    <%= f.submit 'Save', :class => "#{'error' if @site.invalid? && action_name != 'new'}" %>
-  </div>
-
-<% end -%> <!-- END *************** REMOVE THIS "COMMENTED CODE" WHEN BLAT SAYS "OK" -->
 
 <%end%>
 
+  <script src="/javascripts/plugins/jquery.mousewheel.js" type="text/javascript" charset="utf-8"></script>  
+  <script src="/javascripts/plugins/jquery.jscrollpane.js" type="text/javascript" charset="utf-8"></script>
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
   <script src="/javascripts/backoffice/site_map.js" type="text/javascript" charset="utf-8"></script>
