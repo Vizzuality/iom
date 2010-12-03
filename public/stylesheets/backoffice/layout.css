@@ -533,9 +533,10 @@ div.block.project_info div.med div.left form span.textarea {float:left; margin:5
 div.block.project_info div.med div.left form textarea{position:absolute; top:9px; left:9px; width:546px; height:197px; min-width:546px; max-width:546px; min-height:197px; max-height:197px; font:normal 15px Arial; color:#333333; border:none; line-height:17px;}
 div.block.project_info div.med div.left form div.list_combo {float:left; width:419px; height:auto; position:relative;}
 div.block.project_info div.med div.left form ul.list_combo_content {position:absolute; top:35px; width:434px; height:200px; display:none; left:0; z-index:10; background:url('/images/backoffice/projects/combos/body_combo_orgs.png') no-repeat 0 0; overflow-x:hidden; overflow-y:auto;}
-div.block.project_info div.med div.left form ul.list_combo_content li.element {float:left; margin:0; width:385px; height:22px; font:normal 15px Arial; color:#333333; padding:5px 0 0 12px; position:relative;}
-div.block.project_info div.med div.left form ul.list_combo_content li.element p.amount_projects {position:absolute; top:7px; right:10px; font:normal 13px Arial; color:#666666; width:auto;}
-div.block.project_info div.med div.left form ul.list_combo_content li.element:hover {cursor:pointer; background:url('/images/backoffice/projects/repeat_content_combo_large_hover.png') no-repeat 0 0;}
+div.block.project_info div.med div.left form ul.list_combo_content li.element {float:left; margin:0 0 0 1px; width:404px; height:22px; font:normal 15px Arial; color:#333333; padding:5px 0 0 12px; position:relative;}
+div.block.project_info div.med div.left form ul.list_combo_content li.element p.project_name {width:310px;}
+div.block.project_info div.med div.left form ul.list_combo_content li.element p.amount_projects {position:absolute; top:7px; right:30px; font:normal 13px Arial; color:#666666; width:auto;}
+div.block.project_info div.med div.left form ul.list_combo_content li.element:hover {cursor:pointer; background-color:#CCE599;}
 div.block.project_info div.med div.left form span.combo_large {float:left; margin:5px 0 0 0; background:url('/images/backoffice/projects/large_combo_head.png') no-repeat 0 0; width:410px; height:24px; font:normal 13px Arial; color:#999999; padding:9px 0 0 11px; position:relative;}
 div.block.project_info div.med div.left form span.combo_large a.organization {position:absolute; top:10px; left:12px; width:374px; height:19px; font:normal 13px Arial; color:#999999;}
 div.block.project_info div.med div.left form span.combo_large a.organization:hover {cursor:pointer;}
