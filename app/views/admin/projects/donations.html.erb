@@ -53,7 +53,7 @@
                 <p id="day" class="title">DAY</p>
                 <p id="year" class="title">YEAR</p>
 
-                  <%= f.date_select :date, :start_year => Date.today.year, :order => [:month, :day, :year]  %>
+                  <%= f.date_select :date, :start_year => Date.today.year - 5, :order => [:month, :day, :year]  %>
               </div>
             </span>
 

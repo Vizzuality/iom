@@ -111,7 +111,7 @@
             <ul class="organizations">
               <%= f.hidden_field :project_context_organization_id  %>
               <% Organization.all.collect.each do |organization| %>
-                <li><a class="organization" id="<%= organization.id %>"><%= organization.name %></a></li>
+                <li><a class="organization" id="<%= organization.id %>"><%= truncate(organization.name, :length => 35) %></a></li>
               <%end -%>
             </ul>
           </div>

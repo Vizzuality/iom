@@ -43,6 +43,7 @@ $(document).ready(function(ev){
       });
       var href_ = $(this).attr('destroy_url');
       var name_ = $(this).attr('att_name');
+      
       $('div#modal_window a.remove').attr('href','javascript: void removeAndGo("'+href_+'")');
       $('div#modal_window h4').text('You are about deleting this '+capitaliseFirstLetter(name_));
       $('div#modal_window p').text('If you delete this '+name_+', it will not appear in any site.');
@@ -92,7 +93,13 @@ $(document).ready(function(ev){
 
 
  function capitaliseFirstLetter(string) {
-     return string.charAt(0).toUpperCase() + string.slice(1);
+     if (string!=null){
+        return string.charAt(0).toUpperCase() + string.slice(1); 
+     }
+     else {
+         return ''
+     }
+     
  }
 
 

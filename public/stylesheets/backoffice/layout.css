@@ -509,7 +509,7 @@ ul.ui-autocomplete.project_tags li.ui-menu-item p.info_amount {position:absolute
 
 /*AUTOCOMPLETE - DONOR NAME*/
 ul.ui-autocomplete.donor_names {position:absolute; top:40px; width:228px; display:none; z-index:20;}
-ul.ui-autocomplete.donor_names li.ui-menu-item {float:right; margin:0px 0 0 0; background:url('/images/backoffice/projects/donations/repeat_content_tags.png') no-repeat 0 0; width:226px; height:22px; font:normal 15px Arial; color:#333333; padding:5px 0 0 12px; position:relative;}
+ul.ui-autocomplete.donor_names li.ui-menu-item {float:right; margin:0px 0 0 0; background:url('/images/backoffice/projects/donations/repeat_content_tags.png') no-repeat 0 0; width:206px; height:22px; font:normal 15px Arial; color:#333333; padding:5px 20px 0 12px; position:relative;}
 ul.ui-autocomplete.donor_names li.ui-menu-item:hover {cursor:pointer; background:url('/images/backoffice/projects/donations/repeat_content_tags_hover.png') no-repeat 0 0;}
 ul.ui-autocomplete.donor_names li.ui-menu-item.last{float:right; width:238px; height:7px; margin:0; background:url('/images/backoffice/projects/donations/bottom_content_tags.png') no-repeat 0 0; padding:0;}
 ul.ui-autocomplete.donor_names li.ui-menu-item a {font:normal 13px Arial; width:100%;}
@@ -678,8 +678,8 @@ div.block.donations_project div.med div.left p.amount {float:left; width:auto; f
 
 
 
-div.block.donations_project div.med div.left form {float:left; width:543px; height:143px; padding:21px; margin:20px 0 0 2px; background:url('/images/backoffice/projects/bkg_add_donation_form.png') no-repeat center center; position:relative;}
-div.block.donations_project div.med div.left form div#donor_name {float:left; width:234px; height:64px; margin:0 10px 0 0;}
+div.block.donations_project div.med div.left form {float:right; width:571px; height:185px; padding:0; margin:20px 0 0 2px; background:url('/images/backoffice/projects/bkg_add_donation_form.png') no-repeat center center; position:relative;}
+div.block.donations_project div.med div.left form div#donor_name {float:left; width:234px; height:64px; margin:0 10px 0 15px;}
 div.block.donations_project div.med div.left form div#donor_name span {float:left; background:url('/images/backoffice/projects/input_donation_name.png') no-repeat 0 0; width:226px; height:32px; position:relative; margin:3px 0 0 7px;}
 div.block.donations_project div.med div.left form div#donor_name span.active {background:url('/images/backoffice/projects/input_donation_name_active.png') no-repeat 0 0; height:33px;}
 
@@ -715,7 +715,7 @@ div.block.donations_project div.med div.left form div#donation_date span.combo_d
 div.block.donations_project div.med div.left form div#donation_amount {float:left; width:92px; height:32px; margin:0 0 0 10px;}
 div.block.donations_project div.med div.left form div#donation_amount span {float:left; width:92px; height:32px; background:url('/images/backoffice/projects/amount_donation_input.png') no-repeat 0 0; position:relative; margin:3px 0 0 8px;}
 div.block.donations_project div.med div.left form div#donation_amount span input[type="text"]{position:absolute; top:5px; left:22px; border:none; width:64px; height:21px; font:normal 15px Arial; color:#333333;}
-div.block.donations_project div.med div.left form h4 {font:normal 21px "Museo Sans",Arial; color:#333333; text-shadow:0 1px white; margin:0 0 0 8px;}
+div.block.donations_project div.med div.left form h4 {font:normal 21px "Museo Sans",Arial; color:#333333; text-shadow:0 1px white; margin:22px 0 0 22px;}
 div.block.donations_project div.med div.left form label {float:left; width:400px; margin:17px 0 0 9px; font:normal 11px Arial; color:#666666; text-shadow:none; text-transform:uppercase; width:100px; }
 
 
@@ -906,7 +906,7 @@ div.block.site_info div.med div.left form ul.project_tipo_options li.selected sp
 div.block.site_info div.med div.left form ul.project_tipo_options li.selected span.select_combo_typology.clicked {background:url('/images/backoffice/sites/select_country_combo_head.png') no-repeat 0 0; height:32px; position:relative; }
 div.block.site_info div.med div.left form ul.project_tipo_options li.selected span.select_combo_typology.clicked div.values {position:absolute; width:239px; height:202px; top:32px; left:0; background:url('/images/backoffice/sites/select_country_combo_body.png') no-repeat 0 0; z-index:30; display:inline;}
 div.block.site_info div.med div.left form ul.project_tipo_options li.selected span.select_combo_typology ul {display:none;}
-div.block.site_info div.med div.left form ul.project_tipo_options li.selected span.select_combo_typology.clicked div.values ul {float:left; width:234px; height:190px; margin:5px 0 0 1px; padding:0; overflow-y:auto; display:inline; overflow-x:hidden;}
+div.block.site_info div.med div.left form ul.project_tipo_options li.selected span.select_combo_typology.clicked div.values ul {float:left; width:252px; height:190px; margin:5px 0 0 1px; padding:0; overflow-y:auto; display:inline; overflow-x:hidden;}
 div.block.site_info div.med div.left form ul.project_tipo_options li.selected span.select_combo_typology.clicked div.values ul li {float:left; margin:0; width:233px; height:21px;}
 div.block.site_info div.med div.left form ul.project_tipo_options li.selected span.select_combo_typology.clicked div.values ul li.section {float:left; margin:2px 0 0 0; width:233px; height:25px;}
 div.block.site_info div.med div.left form ul.project_tipo_options li.selected span.select_combo_typology.clicked div.values ul li.section p {float:left; font:bold 11px Arial; color:#333333; margin:7px 9px;}
