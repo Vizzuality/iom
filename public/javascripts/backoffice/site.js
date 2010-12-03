@@ -165,8 +165,9 @@ function split( val ) {
 }
 
   $('.country_region_value').click(function(){
+      
     $.ajax({
-      url: $('input#site_admin_site_tags_path').val() + '?country_id=' + $(this).children('a').attr('id')
+      url: admin_tags_path + '?country_id=' + $(this).children('a').attr('id')
     });
   });
 
@@ -179,7 +180,7 @@ function split( val ) {
         value = value.substring(value.indexOf(',')+1, value.length);
       }
       $.ajax({
-        url: $('input#site_admin_site_tags_path').val() + '?term=' + value,
+        url: admin_tags_path + '?term=' + value,
         dataType: "json",
         success: function( data ) {
           if(data != null) {
