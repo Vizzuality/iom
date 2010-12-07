@@ -37,19 +37,19 @@
       </div>
     </div>
   </div>
-  <div class="field">
+  <div id="implement_org" class="field">
     <label>IMPLEMENTING ORGANIZATION</label>
     <span class="input_large">
       <%= f.text_field :implementing_organization %>
     </span>
   </div>
-  <div class="field">
+  <div id="partner_org" class="field">
     <label>PARTNER ORGANIZATIONS</label>
     <span class="input_large">
       <%= f.text_field :partner_organizations %>
     </span>
   </div> <!-- field -->
-  <div class="field">
+  <div id="cross_cutting" class="field">
     <label>CROSS-CUTTING ISSUES</label>
     <span class="input_large">
       <%= f.text_field :cross_cutting_issues %>
@@ -118,13 +118,13 @@
   <!-- SECTION  -->
   <h3 class="section museo_sans">CONTEXT</h3>
 
-  <div class="field">
+  <div id="clusters_content" class="field">
     <label>CLUSTERS  <strong>*</strong></label>
 
       <ul class="clusters">
         <% unless @project.clusters.empty? %>
               <% @project.clusters.each do |cluster| %>
-                <li id="cluster_<%= cluster.id %>"><%= cluster.name %><input id="<%= cluster.id %>" type="checkbox" name="project[clusters_ids][]" value="<%= cluster.id %>" checked="true"/><a href="#cluster_<%= cluster.id %>" class="remove_this close"></a>
+                <li id="cluster_<%= cluster.id %>"><p><%= cluster.name %></p><input id="<%= cluster.id %>" type="checkbox" name="project[clusters_ids][]" value="<%= cluster.id %>" checked="true"/><a href="#cluster_<%= cluster.id %>" class="remove_this close"></a>
             </li>
               <% end -%>
           <% end -%>
@@ -153,7 +153,7 @@
     <ul class="sectors">
       <% unless @project.sectors.empty? %>
             <% @project.sectors.each do |sector| %>
-          <li id="sector_<%= sector.id %>"><%= sector.name %><input id="<%= sector.id %>" type="checkbox" name="project[sectors_ids][]" value="<%= sector.id %>" checked="true"/><a href="#sector_<%= sector.id %>" class="remove_this close"></a>
+          <li id="sector_<%= sector.id %>"><p><%= sector.name %></p><input id="<%= sector.id %>" type="checkbox" name="project[sectors_ids][]" value="<%= sector.id %>" checked="true"/><a href="#sector_<%= sector.id %>" class="remove_this close"></a>
           </li>
       <% end -%>
         <% end -%>
@@ -180,8 +180,8 @@
   <!-- ************************ FALTA ************************ -->
   <label>GEOGRAPHIC UBICATION  <strong>*</strong></label>
   <ul class="ubications">
-    <li>Belladère, Haiti<a class="close"></a></li>
-    <li>Martinique, Haiti<a class="close"></a></li>
+    <li><p>Belladère, Haiti</p><a class="close"></a></li>
+    <li><p>Martinique, Haiti</p><a class="close"></a></li>
   </ul>
   <div class="location_options empty">
     <p class="msg">Add / edit the different locations of the project</p>
@@ -223,15 +223,16 @@
 
 
   <label>PROJECT BUDGET</label>
-  <div class="field">
+  <div id="project_budget" class="field">
     <span class="input_short coin">
+      <p class="coin">$</p>      
       <%= f.text_field :budget %>
-      <p class="coin">$</p>
+
     </span>
   </div>
   <div class="two_columns">
     <div class="left_column">
-      <div class="field">
+      <div id="target" class="field">
         <label>TARGET</label>
         <span class="input_short">
           <%= f.text_field :target %>
@@ -239,7 +240,7 @@
       </div>
     </div>
     <div class="right_column">
-       <div class="field">
+       <div id="estimated_people" class="field">
           <label>ESTIMATED PEOPLE REACHED</label>
           <span class="input_short">
             <%= f.text_field :estimated_people_reached %>

@@ -183,8 +183,10 @@ Dual licensed under the MIT and GPL licenses.
             }
 
             $containerDivText.bind('click.sSelect',function(event){
+                
                 event.stopPropagation();
-
+            
+                
 				//added by Justin Beasley
 				if($(this).data('ssReRender')) {
 					newUlHeight = $newUl.height('').height();
@@ -200,10 +202,20 @@ Dual licensed under the MIT and GPL licenses.
                         .removeClass('newListSelFocus');
 
                 //show/hide this menu
-                $newUl.toggle();
-
+                $newUl.toggle();                
+                
+                // To remove clicked style in others
+                $('div.newListSelected').each(function() {
+                		$(this).css('background-position','0 0');
+                		$(this).css('zIndex',200);
+                		
+                	});
+                	
 				if ($newUl.is(':visible')){
 					$newUl.parent().children('div.selectedTxt').parent('div.newListSelected').css('background-position','0 -32px');
+                    var element = $newUl.parent().children('div.selectedTxt').parent('div.newListSelected').find('.scroll_pane');
+                    var api = element.data('jsp');
+                    api.reinitialise();
 				}else {
 					$newUl.parent().children('div.selectedTxt').parent('div.newListSelected').css('background-position','0 0');
 				}
