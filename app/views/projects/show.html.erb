@@ -1,14 +1,18 @@
     
     <div id="small_map"></div>
     
-    <div id="layout">
+    <div id="project_layout">
       <div id="project">
         
-        <div clas="left"> <!--270px with shadow below-->
+        <div class="left"> <!--270px with shadow below-->
           <div class="block">
             <h3>A project by</h3>
-            <p><%= image_tag(@project.primary_organization.logo.url) %></p>
-            <p><%= link_to(@project.primary_organization.name, organization_path(@project.primary_organization)) %></p>
+            <div class="logo">
+              <div class="logo_bkg">
+                <%= image_tag(@project.primary_organization.logo.url) %>
+              </div>
+              <%= link_to(@project.primary_organization.name, organization_path(@project.primary_organization)) %>
+            </div>
 
             <% if @project.implementing_organization? %>
               <h3>Implementing organizations</h3>
@@ -16,27 +20,27 @@
             <% end %>
 
             <% if @project.partner_organizations? %>
-              <h3>Partner Organizations</h3>
+              <h3 class="margin">Partner Organizations</h3>
               <p><%= @project.partner_organizations %></p>
             <% end %>
           </div>  
           
           <div class="block">
             <h3>Project timeline</h3>
-            <p><%= @project.start_date.strftime("%d/%M/%Y") %></p>
-            <p><%= @project.end_date.strftime("%d/%M/%Y") %></p>
-            <p><%= pluralize(@project.months_left, 'month', 'months') %> left</p>
+            <div class="timeline"><span></span><p class="months_left"><%= pluralize(@project.months_left, 'month', 'months') %> left</p></div>
+            <p class="first_date"><%= @project.start_date.strftime("%d/%m/%Y") %></p><p class="second_date"><%= @project.end_date.strftime("%d/%m/%Y") %></p>
           </div>
           
           <div class="block">
             <h3>Project funding</h3>
-            <p>$ <%= number_with_delimiter(@project.donations.sum(:amount)) %></p>
+            <p class="budget"><%= number_with_delimiter(@project.donations.sum(:amount)) %></p>
           </div>
           
           <div class="block">
             <% if @project.estimated_people_reached? %>
               <h3>People reached</h3>
-              <p><%= @project.estimated_people_reached %></p>
+              <p class="estimate"><%= @project.estimated_people_reached %> <sup>(estimate)</sup></p>
+              <span estimate="<% @project.estimated_people_reached %>" class="people_amount"></span>
             <% end %>
             <% if @project.target? %>
               <h3>Target groups</h3>
@@ -58,10 +62,9 @@
             <% end %>
           </div>
           
-          <div class="block">
+          <div class="block last">
             <h3>Contact information</h3>
-            <p><%= @project.contact_person %></p>
-            <p><%= @project.contact_phone_number %></p>
+            <p><strong><%= @project.contact_person %></strong><br/><%= @project.contact_phone_number %></p>
             <p><%= link_to(@project.contact_email, "mailto:#{@project.contact_email}") %></p>
           </div>
         </div>
@@ -103,14 +106,15 @@
             </div>
           <% end %>  
           
-          
-          <div class="block">
-            <%= simple_format(@project.activities) %>
-            <br/><br/>
-            <%= simple_format(@project.additional_information) %>
-            <br/><br/>
-            <%= simple_format(@project.cross_cutting_issues) %>
-          </div>
+          <% if @project.activities || @project.additional_information || @project.cross_cutting_issues %>
+            <div class="block">
+              <%= simple_format(@project.activities) %>
+              <br/><br/>
+              <%= simple_format(@project.additional_information) %>
+              <br/><br/>
+              <%= simple_format(@project.cross_cutting_issues) %>
+            </div>
+          <% end %>
           
           
           <div class="block margin">

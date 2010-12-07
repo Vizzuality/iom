@@ -16,8 +16,9 @@
         $('div#left_column div.left').height($('div#left_column div.float_left').height());
       }
       
+
       
-      
+      //Google map
       var myOptions = {
             zoom: 4,
             center: new google.maps.LatLng(40.4166909, -3.7003454),
