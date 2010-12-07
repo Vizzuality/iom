@@ -336,15 +336,20 @@ $(document).ready(function(ev){
     ev.preventDefault();
 
     if (!$(this).hasClass('clicked')){
+        // THIS IS A IE HACK
+        $(this).css('position','relative');
+        
       $(this).addClass('clicked');
       resetCombo($('span.combo_cluster_options'));      
     }else {
       $(this).removeClass('clicked');
+      $(this).css('position','static');      
     }
 
     $(document).click(function(event) {
       if (!$(event.target).closest('span.combo_cluster_options').length) {
         $('span.combo_cluster_options.clicked').removeClass('clicked');
+        $('span.combo_cluster_options').css('position','static');              
       };
     });
   });
@@ -373,7 +378,7 @@ $(document).ready(function(ev){
     if ((id != 0)&&(!notAdded)){
       var text = $('span.combo_cluster_options').children('p').text();
 
-      var htmlToAdd = '<li id="cluster_'+id+'">'+text+'<input id="'+id+'"type="checkbox" name="project[clusters_ids][]" value="'+id+'" checked="true"" /><a id="'+id+'" class="remove_this close"></a></li>';
+      var htmlToAdd = '<li id="cluster_'+id+'"><p>'+text+'</p><input id="'+id+'"type="checkbox" name="project[clusters_ids][]" value="'+id+'" checked="true"" /><a id="'+id+'" class="remove_this close"></a></li>';
 
       $('ul.clusters').append(htmlToAdd);
       $('span.combo_cluster_options').children('p').text('Select more clusters');
@@ -394,15 +399,18 @@ $(document).ready(function(ev){
     ev.preventDefault();
 
     if (!$(this).hasClass('clicked')){
+      $(this).css('position','relative');
       $(this).addClass('clicked');
       resetCombo($('span#sector'));            
     }else {
       $(this).removeClass('clicked');
+      $(this).css('position','static');
     }
 
     $(document).click(function(event) {
       if (!$(event.target).closest('span.combo_sector_options').length) {
         $('span.combo_sector_options.clicked').removeClass('clicked');
+        $('span#sector').css('position','static');        
       };
     });
   });
@@ -430,7 +438,7 @@ $(document).ready(function(ev){
       // If we have some element (id=0 is a simple control to test it)
     if ((id != 0)&&(!notAdded)){
         var text = $('span#sector').children('p').text();
-        var htmlToAdd = '<li id="sector_'+id+'">'+text+'<input id="'+id+'"type="checkbox" name="project[sectors_ids][]" value="'+id+'" checked="true"" /><a id="'+id+'" class="remove_this close"></a></li>';
+        var htmlToAdd = '<li id="sector_'+id+'"><p>'+text+'</p><input id="'+id+'"type="checkbox" name="project[sectors_ids][]" value="'+id+'" checked="true"" /><a id="'+id+'" class="remove_this close"></a></li>';
 
         $('ul.sectors').append(htmlToAdd);
         $('span#sector').children('p').text('Select more sectors');
@@ -652,7 +660,22 @@ $(document).ready(function(ev){
         $('span.select_combo_typology.clicked').removeClass('clicked');
 
       });
+      
+      // TO FIX IE7 BUG WITH Z-INDEX WE HAVE TO RESTORE Z-INDEX VALUES
+      $('div.list_combo').css('zIndex', 200);
+      $('div#implement_org').css('zIndex', 199);
+      $('div#partner_org').css('zIndex', 198);
+      $('ul.newList').css('zIndex', 197);      
+            
+      $('div#cross_cutting').css('zIndex', 196);
 
+      $('div#clusters_content').css('zIndex', 195);
+      $('div.select_dates').css('zIndex', 200);
+      $('input#donation_submit').css('zIndex', 100);
+      
+     
+      
+      
 });
 
  // This is a function to set date value in correct format	

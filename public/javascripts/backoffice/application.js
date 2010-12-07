@@ -97,12 +97,11 @@ $(document).ready(function(ev){
       }
     );
     
-    // TO FIX IE7 BUG WITH Z-INDEX
-    // var zIndexNumber = 1000;
-    //      $('div').each(function() {
-    //          $(this).css('zIndex', zIndexNumber);
-    //          zIndexNumber -= 10;
-    //      });
+        
+         // $('div').each(function() {
+         //              $(this).css('zIndex', zIndexNumber);
+         //              zIndexNumber -= 10;
+         //          });
     	
 	
 });
