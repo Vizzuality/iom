@@ -21,6 +21,7 @@ class CreateProjects < ActiveRecord::Migration
     end
     add_index :projects, :name
     add_index :projects, :primary_organization_id
+    add_index :projects, :the_geom, :spatial=>true
   end
 
   def self.down

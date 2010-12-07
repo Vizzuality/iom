@@ -30,6 +30,7 @@ class CreateSites < ActiveRecord::Migration
     end
     add_index :sites, :name
     add_index :sites, :url
+    add_index :sites, :geographic_context_geometry, :spatial=>true
   end
 
   def self.down
