@@ -7,10 +7,13 @@ div.right{float:right; width:auto;}
 a{text-decoration:none;}
 ul:focus {outline:none;}
 input:focus{outline:none}
-
 body {background:#E1E5E7;}
 ul {list-style:none;}
 label strong {font:normal 14px Georgia; color:#E93E3F;}
+
+/*IE7 reset properties*/
+input[type="text"] {border:0px;}
+textarea {border:0px; overflow:hidden;}
 
 /*FONT FACE*/
 @font-face {
@@ -117,7 +120,7 @@ div#header div.inner_header div.bottom ul.main_menu li {float:left; width:auto; 
 div#header div.inner_header div.bottom ul.main_menu li a {float:left; height:42px; padding:0 0 0 4px; background:url('/images/backoffice/common/header_tab_left.png') no-repeat 0 0;}
 div#header div.inner_header div.bottom ul.main_menu li span {float:left; height:32px; width:auto; padding:10px 22px 0 18px; background:url('/images/backoffice/common/header_tab_right.png') no-repeat right 0;
   font:normal 17px "Museo Sans", Arial; color:#DEE1E4;}
-div#header div.inner_header div.bottom ul.main_menu li a:hover {background-position:0 -42px;}
+div#header div.inner_header div.bottom ul.main_menu li a:hover {background-position:0 -42px; cursor:pointer;}
 div#header div.inner_header div.bottom ul.main_menu li a:hover span {background-position:right -42px; color:#0A0A0A;}
 div#header div.inner_header div.bottom ul.main_menu li.selected a {background-position:0 -42px;}
 div#header div.inner_header div.bottom ul.main_menu li.selected a span {background-position:right -42px; color:#0A0A0A;}
@@ -211,7 +214,7 @@ div.block.edit div.med div.left div span input[type="radio"] {float:left; margin
 div.block.edit div.med div.left div span input[type="checkbox"] {float:left; margin:3px 5px 0 10px;}
 div.block.edit div.med div.left div span p {float:left; font:normal 15px Arial; color:#333333;}
 
-div.block.edit div.med div.left div span a.combo {float:left; font:normal 15px Arial; color:#333333; background:url('/images/backoffice/pages/option_bkg.png') no-repeat 0 4px; padding:0 0 0 15px;}
+div.block.edit div.med div.left div span a.combo {float:left; font:normal 15px Arial; color:#333333; background:url('/images/backoffice/pages/option_bkg.png') no-repeat 0 4px; padding:0 0 0 15px; margin:0 0 0 13px;}
 div.block.edit div.med div.left div span a.combo.clicked {background:url('/images/backoffice/pages/option_bkg_selected.png') no-repeat 0 4px;}
 div.block.edit div.med div.left div span a.combo:hover {cursor:pointer;}
 
@@ -390,6 +393,7 @@ div.block.edit div.med div.left form span.blog {float:left; height:auto; backgro
 div.block.edit div.med div.left form span.blog input[type="checkbox"] {margin:13px 0 0 10px; display:block!important; visibility:visible;}
 div.block.edit div.med div.left form span input[type="checkbox"] {visibility:visible;}
 div.block.edit div.med div.left form span.blog p {margin:10px 0 0 6px; width:200px;}
+
 div.block.edit div.med div.left form span.blog input[type="text"] {position:relative; margin:5px 0 0 23px!important;}
 div#manage_partners {position:absolute; display:none; top:0; left:0; width:372px; height:339px; padding:20px 25px; background:url('/images/backoffice/sites/add_partner_window.png') no-repeat 0 0; z-index:1000;}
 div#manage_partners a.close {position:absolute; right:20px; top:18px; width:12px; height:12px; background:url('/images/backoffice/icons/close_window.png') no-repeat 0 0; text-indent:-9999px;}
@@ -438,7 +442,7 @@ div.two_projects ul.combos li span.combo:hover {cursor:pointer;}
 
 div.two_projects label {float:left; margin:0 0 0 3px; font:bold 11px Arial; color:#999999;}
 div.two_projects form {float:left; position:relative; width:100%;}
-div.two_projects input[type="text"] {float:left; width:559px; height:27px; margin:5px 0 0 0; padding:5px 8px; font:normal 17px Arial; color:#CCCCCC; border:none; background:url('/images/backoffice/donors/input_bkg.jpg') no-repeat 0 0;}
+div.two_projects input[type="text"] {float:left; width:559px; height:27px; margin:5px 0 0 0; padding:5px 8px; font:normal 17px Arial; color:#CCCCCC; border:none; background:url('/images/backoffice/donors/input_bkg.jpg') no-repeat 0 0; line-height:27px;}
 div.two_projects input[type="submit"] {position:absolute; width:15px; height:15px; right:20px; top:28px; background:url('/images/backoffice/donors/lens.jpg') no-repeat 0 0; border:none;}
 div.two_projects input[type="submit"]:hover {background-position:0 -15px; cursor:pointer;}
 
@@ -494,14 +498,14 @@ div.block.project_info div.med div.left {float:left; width:572px; margin:0 0 0 2
 div.block.project_info div.med div.left p.by {float:left; width:100%; font:normal 15px Arial; color:#666666;}
 div.block.project_info div.med div.left p.by a {width:auto; font:normal 15px Arial; color:#E93E3F; text-decoration:none;}
 div.block.project_info div.med div.left p.by a:hover {text-decoration:underline;}
-div.block.project_info div.med div.left form {float:left; width:100%; height:auto; margin:5px 0 0 0; /*padding:0 0 15px 0;*/ position:relative;}
+div.block.project_info div.med div.left form {float:left; width:100%; height:auto; margin:5px 0 0 0; /*padding:0 0 15px 0;*/ position:relative; z-index:1;}
 
 div.block.project_info div.med div.left form input[type="checkbox"]{visibility:hidden;}
 div.block.project_info div.med div.left form label {float:left; margin:20px 0 0 3px; font:bold 11px Arial; color:#999999; width:100%; text-transform:uppercase;}
 
 div.block.project_info div.med div.left form p.title {float:left; margin:20px 0 0 3px; font:bold 11px Arial; color:#999999; width:100%;}
 div.block.project_info div.med div.left form p.title span.info {font:normal 13px Arial; color:#999999; width:auto; padding:0 5px;}
-div.block.project_info div.med div.left form span.input_large {float:left; margin:5px 0 0 0; background:url('/images/backoffice/projects/input_project_large.png') no-repeat 0 0; width:419px; height:34px; position:relative;}
+div.block.project_info div.med div.left form span.input_large {float:left; margin:5px 0 0 0; background:url('/images/backoffice/projects/input_project_large.png') no-repeat 0 0; width:419px; height:34px; position:relative; z-index:5;}
 div.block.project_info div.med div.left form span.input_large.active {background:url('/images/backoffice/projects/large_combo_head_displayed.png') no-repeat 0 0;}
 div.block.project_info div.med div.left form span.error {background-position:0 -34px;}
 
@@ -533,7 +537,7 @@ ul.ui-autocomplete.site_tags li.ui-menu-item a {font:normal 13px Arial; width:10
 /*END - AUTOCOMPLETE - TAGS*/
 
 
-div.block.project_info div.med div.left form input[type="text"]{position:absolute; top:6px; left:7px; width:400px; height:21px; font:normal 15px Arial; color:#333333; border:none; padding:0;}
+div.block.project_info div.med div.left form input[type="text"]{position:absolute; top:7px; left:7px; width:400px; height:21px; font:normal 15px Arial; color:#333333; border:none; padding:0; border:0px; z-index:20;}
 div.block.project_info div.bottom {float:left; height:15px; width:100%; background: url('/images/backoffice/backgrounds/bottom_two_columns.png') no-repeat scroll top left!important;}
 div.block.project_info div.med div.left form span.textarea.error {background-position:0 -214px;}
 div.block.project_info div.med div.left form span.textarea {float:left; margin:5px 0 0 0; background:url('/images/backoffice/projects/input_project_multiple.png') no-repeat 0 0; width:564px; height:214px; position:relative;}

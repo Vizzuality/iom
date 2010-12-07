@@ -177,6 +177,7 @@ $(document).ready(function(ev){
     if (!$(this).hasClass('clicked')){
       $('span.clicked').removeClass('clicked');
       $(this).addClass('clicked');
+      resetCombo($(this));
     }else {
       $('span.clicked').removeClass('clicked');
       $(this).removeClass('clicked');
@@ -187,6 +188,9 @@ $(document).ready(function(ev){
         $('span#cluster_combo_search').removeClass('clicked');
       };
     });
+    
+    
+    
   });
 
   $('span#cluster_combo_search').find('li').click(function(ev){
@@ -216,6 +220,7 @@ $(document).ready(function(ev){
     if (!$(this).hasClass('clicked')){
       $('span.clicked').removeClass('clicked');
       $(this).addClass('clicked');
+      resetCombo($(this));
     }else {
       $('span.clicked').removeClass('clicked');
       $(this).removeClass('clicked');
@@ -256,6 +261,8 @@ $(document).ready(function(ev){
       $('div.list_combo').find('ul.list_combo_content').css('display','inline');
       $(this).addClass('displayed');
       $(this).attr('id','visible');
+      
+      resetCombo($('div.list_combo'));
     }else{
       $('div.list_combo').find('ul.list_combo_content').css('display','none');
       $(this).attr('id','hidden');
@@ -330,6 +337,7 @@ $(document).ready(function(ev){
 
     if (!$(this).hasClass('clicked')){
       $(this).addClass('clicked');
+      resetCombo($('span.combo_cluster_options'));      
     }else {
       $(this).removeClass('clicked');
     }
@@ -387,6 +395,7 @@ $(document).ready(function(ev){
 
     if (!$(this).hasClass('clicked')){
       $(this).addClass('clicked');
+      resetCombo($('span#sector'));            
     }else {
       $(this).removeClass('clicked');
     }
@@ -741,7 +750,7 @@ $(function() {
       var custom_url =  admin_tags_path + '?term=';    
  
       $("#project_tags").autocomplete({
-        class: 'project_tags',
+        style: 'project_tags',
         source: function( request, response ) {
           $('span#tags_combo').addClass('active');
           var value = $("#project_tags").val();
@@ -792,7 +801,7 @@ $(function() {
   
           // AUTOCOMPLETE FOR DONORS IN PROJECT
           $("#autocomplete_donor_name").autocomplete({
-           class:'donor_names',
+           style:'donor_names',
            source: function( request, response ) {
             $('span#donor_name_input').addClass('active');
              var value = $("#autocomplete_donor_name").val();
