@@ -444,7 +444,7 @@ div.one_project span.bottom {float:left; width:288px; height:15px; background:ur
 
 div.one_project p {float:left; margin:12px 5px 0 0; width:158px; font:normal 43px "Museo Sans",Arial; color:#333333; text-align:right;}
 div.one_project label {float:left; font:normal 15px "Museo Sans",Arial; color:#666666; padding:17px 0 0 0;}
-div.one_project a.add_project {float:left; width:156px; height:29px; margin:5px 0 0 46px; padding:3px 0 0 36px; background:url('/images/backoffice/projects/add_donor_bttn.png') no-repeat 0 0; font:normal 19px "Museo Sans",Arial; color:white; text-shadow:0 1px #5C7C31;}
+div.one_project a.add_project {float:left; width:156px; height:26px; margin:5px 0 0 46px; padding:6px 0 0 36px; background:url('/images/backoffice/projects/add_donor_bttn.png') no-repeat 0 0; font:normal 19px "Museo Sans",Arial; color:white; text-shadow:0 1px #5C7C31;}
 div.one_project a.add_project:hover {background-position:0 -32px;}
 div.one_project a.import_csv {float:left; width:165px; height:29px; margin:3px 0 0 46px; padding:3px 0 0 27px; background:url('/images/backoffice/projects/import_csv_bttn.png') no-repeat 0 0; font:normal 19px "Museo Sans",Arial; color:white; text-shadow:0 1px #000000;}
 div.one_project a.import_csv:hover {background-position:0 -32px;}
@@ -461,7 +461,7 @@ div.med.projects_list ul li div.project_name h3 {float:left; width:100%; padding
 div.med.projects_list ul li div.project_name a.project_status {float:left; margin:2px 0 0 0; font:normal 13px Arial; color:#666666; padding:0 0 0 12px;}
 div.med.projects_list ul li div.project_name a.project_status.active {background:url('/images/backoffice/projects/active_icon.png') no-repeat 0 3px;}
 div.med.projects_list ul li div.project_name a.project_status.closed {background:url('/images/backoffice/projects/closed_icon.png') no-repeat 0 3px;}
-div.med.projects_list ul li div.box {float:left; height:53px; width:167px; padding:18px 0 0 0;}
+div.med.projects_list ul li div.box {float:left; height:50px; width:167px; padding:21px 0 0 0;}
 div.med.projects_list ul li div.box.little {width:135px;}
 div.med.projects_list ul li div.box.single {padding:28px 0 0 0; height:43px;}
 div.med.projects_list ul li div.box.red {background:#f7f7f7;}
@@ -473,7 +473,7 @@ div.med.projects_list div.no_results p a {color:#E93E3F; text-decoration:underli
 div.med.projects_list div.no_results p a:hover {color:#7F2023;}
 
 
-div.med.projects_list ul li p.red {color:#EB4142;}
+div.med.projects_list ul li p.red {color:#EB4142; width:147px; margin:0 0 0 9px;}
 div.med.projects_list ul li p.red a {padding:0; font:normal 13px Arial; color:#EB4142;}
 
 div.med.projects_list ul li p {float:left; width:100%; height:auto; padding:0; margin:0; font:normal 13px Arial; color:#666666; text-align:center;}
