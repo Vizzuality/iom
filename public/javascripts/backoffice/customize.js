@@ -192,6 +192,16 @@
         $('div.list_combo').children('span.combo_large').removeClass('displayed');
       });
       
+      if ($('a.combo').length > 0){
+          $('a.combo').click(function(ev){
+             if (!$(this).hasClass('clicked')){
+                 $('a.combo.clicked').removeClass('clicked');
+                 $(this).addClass('clicked');
+             }
+             $('input#site_project_classification').val($(this).attr('id'));
+          });
+      }
+      
     });
     
     function hideAllMapCombos(){

@@ -27,7 +27,7 @@ $.widget( "ui.autocomplete", {
 			collision: "none"
 		},
 		source: null,
-		class:null
+		style:null
 	},
 	_create: function() {
 		var self = this,
@@ -120,7 +120,7 @@ $.widget( "ui.autocomplete", {
 		};
 		this.menu = $( "<ul></ul>" )
 			.addClass( "ui-autocomplete" )
-			.addClass( this.options.class )
+			.addClass( this.options.style )
 			.appendTo( $( this.options.appendTo || "body", doc )[0] )
 			// prevent the close-on-blur in case of a "slow" click on the menu (long mousedown)
 			.mousedown(function( event ) {
@@ -354,7 +354,7 @@ $.widget( "ui.autocomplete", {
 
 	_renderItem: function( ul, item) {
 		
-        if (this.options.class == 'project_tags'){
+        if (this.options.style == 'project_tags'){
     		var count = item.label.split(" ")[1];
     		var concept = item.label.split(" ")[2];
 

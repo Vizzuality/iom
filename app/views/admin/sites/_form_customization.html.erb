@@ -115,14 +115,13 @@
   <div class="common">
     <h3>Site navigation</h3>
     <label>Projects classification</label>
+    <%= f.hidden_field :project_classification , :value => '0' %>        
     <div class="field">
       <span>
-        <%= f.radio_button :project_classification, '0' %>
-        <p>Cluster</p>
+        <a id="0" class="combo clicked">Cluster</a>        
       </span>
       <span>
-        <%= f.radio_button :project_classification, '1' %>
-        <p>Sector</p>
+      <a id="1" class="combo">Sector</a>
       </span>
     </div>
   </div>

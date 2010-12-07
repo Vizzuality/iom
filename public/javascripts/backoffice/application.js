@@ -6,33 +6,9 @@ $(document).ready(function(ev){
     // CUSTOM SCROLLBARS
     if ($('.scroll_pane').length > 0){
         
-        // When is initialised, remove event
-        // $('.scroll_pane')
-        //                     .bind(
-        //                         'jsp-initialised',
-        //                         function(event, isScrollable)
-        //                         {
-        // 
-        //                               // this.removeEventListener('jsp-initialised');
-        //                               // this.autoReinitialise = false;
-        //                         }
-        //                     )                   
-        //                     .jScrollPane({
-        //                           autoReinitialise:true// ,
-        //                           //                                   autoReinitialiseDelay:2000
-        //                     }
-        //                     );
-                            
-        
         // OTHER ATTEMP
-        //         $('.scroll_pane').jScrollPane({
-        //                            autoReinitialise:true
-        //                              });
-        //                              
-        //         var contentPane = $('.scroll_pane').data('jsp').getContentPane();        
-        // var api = $('.scroll_pane').data('jsp');
-        // setTimeout("$('.scroll_pane').data('jsp').reinitialise()",3000);
-
+        $('.scroll_pane').jScrollPane({
+                           autoReinitialise:false });
     }    
     
     if ($('div.right.menu').length>0) {
@@ -120,6 +96,14 @@ $(document).ready(function(ev){
         $(this).parent().find('div.error_msg').show();
       }
     );
+    
+    // TO FIX IE7 BUG WITH Z-INDEX
+    // var zIndexNumber = 1000;
+    //      $('div').each(function() {
+    //          $(this).css('zIndex', zIndexNumber);
+    //          zIndexNumber -= 10;
+    //      });
+    	
 	
 });
 
@@ -164,4 +148,10 @@ $(document).ready(function(ev){
       $('#' + infodiv).html((limit - textlength) +' chars left');
       return true;
     }
+  }
+  
+  function resetCombo(elementToUpdate){
+      var element = elementToUpdate.find('.scroll_pane');
+      var api = element.data('jsp');
+      api.reinitialise();
   }
