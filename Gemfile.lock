@@ -5,16 +5,10 @@ GIT
     steak (1.0.0.rc.2)
       rspec
 
-GIT
-  remote: git://github.com/ferblape/postgis_adapter.git
-  revision: 31485fe86f12dfc5dc0fb0b730ff0c3f76bcaea0
-  branch: load_geometry_optimization
-  specs:
-    ppe-postgis-adapter (0.7.8)
-
 GEM
   remote: http://rubygems.org/
   specs:
+    GeoRuby (1.3.4)
     abstract (1.0.0)
     actionmailer (3.0.1)
       actionpack (= 3.0.1)
@@ -154,6 +148,9 @@ GEM
       ffi (~> 0.6.3)
       json_pure
       rubyzip
+    spatial_adapter (1.1.2)
+      GeoRuby (>= 1.3.0)
+      activerecord (>= 2.2.2)
     thor (0.14.4)
     treetop (1.4.9)
       polyglot (>= 0.3.1)
@@ -184,7 +181,6 @@ DEPENDENCIES
   nofxx-georuby
   paperclip
   pg (= 0.9.0)
-  ppe-postgis-adapter!
   railroady
   rails (= 3.0.1)
   rr
@@ -192,6 +188,7 @@ DEPENDENCIES
   rspec-rails (>= 2.0.0.beta.8)
   ruby-debug
   sanitize
+  spatial_adapter
   steak!
   webrat
   will_paginate (~> 3.0.pre2)
