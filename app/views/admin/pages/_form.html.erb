@@ -39,13 +39,12 @@
   
   <div class="field">
     <%= f.label :published %>
+    <%= f.hidden_field :published , :value => '0' %>    
     <span>
-      <%= f.radio_button :published, '0' %>
-      <p>Draft</p>
+      <a id="0" class="combo clicked">Draft</a>
     </span>
     <span>
-      <%= f.radio_button :published, '1' %>
-      <p>Published (visible on the public site)</p>
+      <a id="1" class="combo">Published (visible on the public site)</a>
     </span>
   </div>
 

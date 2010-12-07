@@ -10,4 +10,5 @@
           $('div#pages div.float_left div.results_list').height(offset - $('div#pages div.float_left div.head').height());
           $('div#pages div.float_left div.body').height(offset - $('div#pages div.float_left div.head').height());
         } 
+
     });

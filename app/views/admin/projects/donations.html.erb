@@ -12,7 +12,7 @@
             <li>
         <div class="name_box">
                   <h3>
-            <%= link_to(donation.donor.name, edit_admin_donor_path(donation.donor)) %>
+            <%= link_to(truncate(donation.donor.name, :length => 31), edit_admin_donor_path(donation.donor)) %>
           </h3>
         </div>
         <div class="date_box">
@@ -81,5 +81,7 @@
 </div>
 
 <script src="/javascripts/plugins/jquery.stylish-select.js" type="text/javascript" charset="utf-8"></script>
+<script src="/javascripts/plugins/jquery.mousewheel.js" type="text/javascript" charset="utf-8"></script>  
+<script src="/javascripts/plugins/jquery.jscrollpane.js" type="text/javascript" charset="utf-8"></script>
 <script src="/javascripts/backoffice/project.js" type="text/javascript" charset="utf-8"></script>
 <script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>

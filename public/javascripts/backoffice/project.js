@@ -9,6 +9,7 @@ var donationDate = new Array(3);
 var limitTextCombo = 12;
 $(document).ready(function(ev){
 
+
 		if ($('div.select_dates').length > 0){
 
 			// To set initial values
@@ -825,7 +826,5 @@ $(function() {
            }
          });
       }     
-        
-
 });
     

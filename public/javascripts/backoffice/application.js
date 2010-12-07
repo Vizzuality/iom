@@ -5,10 +5,34 @@ $(document).ready(function(ev){
 
     // CUSTOM SCROLLBARS
     if ($('.scroll_pane').length > 0){
-        $('.scroll_pane').jScrollPane(
-		{
-			autoReinitialise: true
-		});
+        
+        // When is initialised, remove event
+        // $('.scroll_pane')
+        //                     .bind(
+        //                         'jsp-initialised',
+        //                         function(event, isScrollable)
+        //                         {
+        // 
+        //                               // this.removeEventListener('jsp-initialised');
+        //                               // this.autoReinitialise = false;
+        //                         }
+        //                     )                   
+        //                     .jScrollPane({
+        //                           autoReinitialise:true// ,
+        //                           //                                   autoReinitialiseDelay:2000
+        //                     }
+        //                     );
+                            
+        
+        // OTHER ATTEMP
+        //         $('.scroll_pane').jScrollPane({
+        //                            autoReinitialise:true
+        //                              });
+        //                              
+        //         var contentPane = $('.scroll_pane').data('jsp').getContentPane();        
+        // var api = $('.scroll_pane').data('jsp');
+        // setTimeout("$('.scroll_pane').data('jsp').reinitialise()",3000);
+
     }    
     
     if ($('div.right.menu').length>0) {
@@ -96,6 +120,7 @@ $(document).ready(function(ev){
         $(this).parent().find('div.error_msg').show();
       }
     );
+	
 });
 
 

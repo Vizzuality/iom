@@ -210,6 +210,11 @@ div.block.edit div.med div.left div span {float:left; width:100%; margin:10px 0 
 div.block.edit div.med div.left div span input[type="radio"] {float:left; margin:3px 5px 0 10px;}
 div.block.edit div.med div.left div span input[type="checkbox"] {float:left; margin:3px 5px 0 10px;}
 div.block.edit div.med div.left div span p {float:left; font:normal 15px Arial; color:#333333;}
+
+div.block.edit div.med div.left div span a.combo {float:left; font:normal 15px Arial; color:#333333; background:url('/images/backoffice/pages/option_bkg.png') no-repeat 0 4px; padding:0 0 0 15px;}
+div.block.edit div.med div.left div span a.combo.clicked {background:url('/images/backoffice/pages/option_bkg_selected.png') no-repeat 0 4px;}
+div.block.edit div.med div.left div span a.combo:hover {cursor:pointer;}
+
 div.block.edit div.med div.left div.field input[type="text"].short {float:left; width:256px; height:18px; margin:5px 0 0 0; padding:8px; font:normal 15px Arial; color:#333333; border:none; background:url('/images/backoffice/donors/short_input.png') no-repeat 0 0;}
 div.block.edit div.med div.left div input[type="password"].short {float:left; width:256px; height:18px; margin:5px 0 0 0; padding:8px; font:normal 15px Arial; color:#333333; border:none; background:url('/images/backoffice/donors/short_input.png') no-repeat 0 0;}
 div.block.edit div.med div.left div.long_field {float:left; width:100%;}
@@ -446,7 +451,7 @@ div.one_project p {float:left; margin:12px 5px 0 0; width:158px; font:normal 43p
 div.one_project label {float:left; font:normal 15px "Museo Sans",Arial; color:#666666; padding:17px 0 0 0;}
 div.one_project a.add_project {float:left; width:156px; height:26px; margin:5px 0 0 46px; padding:6px 0 0 36px; background:url('/images/backoffice/projects/add_donor_bttn.png') no-repeat 0 0; font:normal 19px "Museo Sans",Arial; color:white; text-shadow:0 1px #5C7C31;}
 div.one_project a.add_project:hover {background-position:0 -32px;}
-div.one_project a.import_csv {float:left; width:165px; height:29px; margin:3px 0 0 46px; padding:3px 0 0 27px; background:url('/images/backoffice/projects/import_csv_bttn.png') no-repeat 0 0; font:normal 19px "Museo Sans",Arial; color:white; text-shadow:0 1px #000000;}
+div.one_project a.import_csv {float:left; width:165px; height:26px; margin:3px 0 0 46px; padding:6px 0 0 27px; background:url('/images/backoffice/projects/import_csv_bttn.png') no-repeat 0 0; font:normal 19px "Museo Sans",Arial; color:white; text-shadow:0 1px #000000;}
 div.one_project a.import_csv:hover {background-position:0 -32px;}
 
 div.med.projects_list h2 a.remove {padding:0 10px 0 0; color:#333333; border-bottom:1px dotted #EB4142; background:url('/images/backoffice/icons/red_x.png') no-repeat right 17px;}

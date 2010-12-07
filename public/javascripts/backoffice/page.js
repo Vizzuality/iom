@@ -29,4 +29,14 @@
         });
       });
     
+      if ($('a.combo').length > 0){
+          $('a.combo').click(function(ev){
+             if (!$(this).hasClass('clicked')){
+                 $('a.combo.clicked').removeClass('clicked');
+                 $(this).addClass('clicked');
+             }
+             $('input#page_published').val($(this).attr('id'));
+          });
+      }
+    
     });
