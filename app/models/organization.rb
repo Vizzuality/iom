@@ -55,7 +55,9 @@ class Organization < ActiveRecord::Base
   has_many :sites, :foreign_key => :project_context_organization_id
   has_many :donations, :through => :projects
 
-  before_validation :clean_html
+  #We comment this because all data comes from trusted environments and this gets executed on places
+  #where it is not interesting... like on imports
+  #before_validation :clean_html
 
   validates_presence_of :name
   #validates_presence_of :description

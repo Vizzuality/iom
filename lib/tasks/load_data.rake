@@ -77,7 +77,7 @@ namespace :iom do
         read_attributes_from_file
       end
       csv_projs.each do |row|
-        p = Project.new
+        p = Project.new        
         o = Organization.find_by_name(row.organization)
         if o
           puts "PROJECT FOR: #{o.id}"
