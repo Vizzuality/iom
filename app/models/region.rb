@@ -9,7 +9,7 @@
 
 class Region < ActiveRecord::Base
 
-  acts_as_geom :the_geom => :multi_polygon
+  #acts_as_geom :the_geom => :multi_polygon
 
   belongs_to :country
   belongs_to :region, :foreign_key => :parent_region_id, :class_name => 'Region'

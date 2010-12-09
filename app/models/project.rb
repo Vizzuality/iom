@@ -31,7 +31,7 @@
 
 class Project < ActiveRecord::Base
 
-  acts_as_geom :the_geom => :multi_point
+  #acts_as_geom :the_geom => :multi_point
 
   belongs_to :primary_organization, :foreign_key => :primary_organization_id, :class_name => 'Organization'
   has_and_belongs_to_many :clusters

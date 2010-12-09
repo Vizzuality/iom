@@ -38,7 +38,7 @@
 
 class Site < ActiveRecord::Base
 
-  acts_as_geom :the_geom => :polygon
+  #acts_as_geom :the_geom => :polygon
 
   has_many :resources, :conditions => 'resources.element_type = #{Iom::ActsAsResource::SITE_TYPE}', :foreign_key => :element_id, :dependent => :destroy
   has_many :media_resources, :conditions => 'media_resources.element_type = #{Iom::ActsAsResource::SITE_TYPE}', :foreign_key => :element_id, :dependent => :destroy, :order => 'position ASC'
