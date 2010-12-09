@@ -22,8 +22,8 @@ div#layout {width:932px; margin:0 auto;}
     src: local('☺'), url('/fonts/myriadwebpro-webfont.woff') format('woff'), url('/fonts/myriadwebpro-webfont.ttf') format('truetype'), url('/fonts/myriadwebpro-webfont.svg#webfontYl3tjaAN') format('svg');
     font-weight: normal;
     font-style: normal;
-}
-*/
+}*/
+
 @font-face {
 	font-family: 'Geneva';
 	src: url('/fonts/geneva-webfont.eot');
@@ -89,22 +89,30 @@ div#header div.right form.search span.input_search {float:left; width:111px; hei
 div#header div.right form.search span.input_search input[type="text"]{position:absolute; top:2px; left:5px; width:83px; height:14px; font:normal 13px Arial; color:#999999; border:0px;}
 div#header div.right form.search span.input_search input[type="submit"] {position:absolute; right:5px; top:3px; width:15px; height:14px; background:url('/images/sites/common/bttn_search.png') no-repeat 0 0; border:none;}
 
-div#map {width:100%; height:475px; background:#99B3CA; border-bottom:2px solid white;}
+div#map {width:100%; height:475px; background:#99B3CA; border-bottom:2px solid white; border-top:2px solid white; display:inline-block; vertical-align:top; zoom:1; *display:inline;}
 div#small_map {width:100%; height:280px; background:#99B3CA; border-bottom:2px solid white;}
 
 /* LEFT COLUMN - RIGHT BIG BLOCK */
+div.main_head {display:inline-block; vertical-align:top; zoom:1; *display:inline; width:100%;}
+div.inner_main_head {position:relative; width:942px; margin:0 auto;}
+div.main_head div.left {width:248px; padding:30px 32px; background:url('/images/sites/common/mesh.png') repeat 0 0; display:inline-block; vertical-align:top; zoom:1; *display:inline;}
+div.main_head div.left h1 {width:100%; font:normal 25px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42; z-index:10;}
+div.main_head div.left h2 {width:100%; font:normal 15px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42; text-transform:uppercase;} 
+div.main_head div.left p {padding:5px 0 0 0; font:normal 13px Arial; color:#7B3932;}
+div.main_head div.float_head {position:absolute; top:0; left:5px; width:238px; padding:30px 32px 44px; background:url('/images/sites/search/head_mask.png') repeat 0 0 #C45A4B; z-index:100;}
+div.main_head div.float_head span {position:absolute; right:32px; top:50%; height:32px; width:32px; margin:-16px 0 0 0; opacity:.5; filter:Alpha(opacity=50);filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50); z-index:0;}
+div.main_head div.float_head span.water {background:url('/images/sites/icons/water.png') no-repeat 0 0;}
+div.main_head div.float_head span.health {background:url('/images/sites/icons/health.png') no-repeat 0 0;}
+div.main_head div.float_head span.food {background:url('/images/sites/icons/food.png') no-repeat 0 0;}
+div.main_head div.float_head span.flood {background:url('/images/sites/icons/flood.png') no-repeat 0 0;}
+div.main_head div.right {width:600px; padding:30px 0 0 0; display:inline-block; vertical-align:top; zoom:1; *display:inline;}
 div#left_column {position:relative; width:100%;}
 div#left_column div.left {width:300px; height:300px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#left_column div.float_left {position:absolute; top:0; left:-5px; width:302px; padding:5px; background:url('/images/sites/common/mesh.png') repeat 0 0; z-index:100;}
-div#left_column div.float_left div.head {position:relative; width:238px; height:auto; padding:30px 32px; background:url('/images/sites/search/head_mask.png') no-repeat 0 0 #C45A4B;} 
-div#left_column div.float_left div.head h2 {width:100%; font:normal 15px "PT Sans Bold"; color:#78362F; text-shadow:none; text-transform:uppercase; z-index:10;} 
-div#left_column div.float_left div.head h1 {width:100%; font:normal 25px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42; z-index:10;} /*TODO: text-shadow*/
-div#left_column div.float_left div.head p {font:normal 13px Arial; color:#7B3932;} 
-div#left_column div.float_left div.head span {position:absolute; right:32px; top:50%; height:32px; width:32px; margin:-16px 0 0 0; opacity:.5; filter:Alpha(opacity=50);filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50); z-index:0;}
-div#left_column div.float_left div.head span.water {background:url('/images/sites/icons/water.png') no-repeat 0 0;}
-div#left_column div.float_left div.head span.health {background:url('/images/sites/icons/health.png') no-repeat 0 0;}
-div#left_column div.float_left div.head span.food {background:url('/images/sites/icons/food.png') no-repeat 0 0;}
-div#left_column div.float_left div.head span.flood {background:url('/images/sites/icons/flood.png') no-repeat 0 0;}
+div#left_column div.outer_float {position:absolute; top:0; left:-5px; width:302px; padding:0 5px 5px 5px; background:url('/images/sites/common/mesh.png') repeat-y 0 0; z-index:100;}
+div#left_column div.float_left {position:absolute; top:-40px; left:5px;}
+div#left_column div.float_left div.head {position:relative; width:238px; height:auto; padding:30px 32px; background:url('/images/sites/search/head_mask.png') repeat 0 0 #C45A4B;} 
+div#left_column div.float_left div.head p {font:normal 13px Arial; color:#7B3932;}
+div#left_column div.float_left div.head h2 {width:100%; font:normal 15px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42; text-transform:uppercase;}  
 div#left_column div.float_left div#secondary_map {width:300px; height:189px; border:1px solid #999999; background:#99B3CA;}
 div#left_column div.float_left div.block {width:238px; padding:32px; background:white; border-bottom:1px solid #DEDEDE;}
 div#left_column div.float_left div.block.green {background:#D8E5C0;}
@@ -174,7 +182,7 @@ div#pages {position:relative; width:100%; margin:65px 0 0 0;}
 div#pages div.left {width:660px; height:300px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#pages div.float_left {position:absolute; top:0; left:-5px; width:670px; padding:0 0 5px; background:url('/images/sites/common/mesh.png') repeat 0 0;}
 div#pages div.float_left div.outer_head {width:660px; padding:5px 5px 0 5px;}
-div#pages div.float_left div.outer_head div.head {width:596px; height:auto; padding:32px; background:url('/images/sites/search/head_mask.png') no-repeat 0 0 #C45A4B;} 
+div#pages div.float_left div.outer_head div.head {width:596px; height:auto; padding:32px; background:url('/images/sites/search/head_mask.png') repeat 0 0 #C45A4B;} 
 div#pages div.float_left div.outer_head div.head h1 {width:100%; font:normal 25px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42;}
 div#pages div.float_left div.outer_head div.head p {width:100%; padding:2px 0 0 0; font:normal 13px Arial; color:#7C3831; text-shadow:none;} 
 div#pages div.float_left div.outer_head div.head input[type="text"] {width:467px; padding:10px; margin:10px 0 0 0; background:url('/images/sites/search/textinput_bkg.png') no-repeat 0 0; font:normal 17px Arial; color:#333333; border:none; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
@@ -292,7 +300,7 @@ div#project div.left div.block p.first_date {width:121px; margin:0!important; pa
 div#project div.left div.block p.second_date {width:121px; margin:0!important; padding:3px 0 0 0!important; font:normal 11px "Aller"; color:#999999; text-align:right; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#project div.right {width:660px; height:1000px; margin:0 30px 0 0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#project div.float_right {position:absolute; top:0; right:25px; width:660px; padding:5px; background:url('/images/sites/common/mesh.png') repeat 0 0; z-index:100;}
-div#project div.float_right div.head {width:596px; height:auto; padding:32px; background:url('/images/sites/search/head_mask.png') no-repeat 0 0 #CD5D4C; position:relative;} 
+div#project div.float_right div.head {width:596px; height:auto; padding:32px; background:url('/images/sites/search/head_mask.png') repeat 0 0 #CD5D4C;} 
 div#project div.float_right div.head div#completed {position:absolute; bottom:-22px; right:-15px; width:173px; height:41px; background:url('/images/sites/projects/completed_msg.png') no-repeat; display:none;}
 div#project div.float_right div.head div#completed p {float:left; font:normal 13px "PT Sans Bold"; color:white; text-transform:uppercase; margin:9px 0 0 15px; letter-spacing:-1.0px;}
 div#project div.float_right div.head h1 {width:100%; font:normal 25px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42;}

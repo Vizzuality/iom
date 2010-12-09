@@ -110,15 +110,13 @@
           
           <% unless @project.media_resources.empty? %>
             <div class="image_gallery">
-              <ul>
-                <% @project.media_resources.each do |media_resource| %>
-                  <% if media_resource.is_a_video? %>
-                    <li><%= media_resource.vimeo_embed_html %></li>
-                  <% else %>
-                    <li><%= image_tag(media_resource.picture.url(:small)) %></li>
-                  <% end %>
+              <% @project.media_resources.each do |media_resource| %>
+                <% if media_resource.is_a_video? %>
+                  <%= raw(CGI.unescapeHTML(media_resource.vimeo_embed_html)) %>
+                <% else %>
+                  <%= image_tag(media_resource.picture.url(:medium)) %>
                 <% end %>
-              </ul>
+              <% end %>
             </div>
           <% end %>  
           
@@ -167,4 +165,5 @@
       
       
       <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script> 
+      <script src="/javascripts/sites/galleria.js" type="text/javascript" charset="utf-8"></script>
       <script src="/javascripts/sites/project.js" type="text/javascript" charset="utf-8"></script>
