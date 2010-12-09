@@ -2,7 +2,7 @@
 <html>
 <head>
   <title><%= title %></title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+  <%= javascript_include_tag 'jquery.min', 'jquery.ui.core', 'jquery.ui.widget', 'jquery.ui.position', 'sites/application.js' %>
   
   <%= stylesheet_link_tag '/stylesheets/sites/layout.css' %>
   <%= stylesheet_link_tag @site.theme.css_file %>
@@ -13,35 +13,45 @@
       <div class="left">
         <h1><%= link_to(@site.name,'/') %></h1>
         <ul class="menu">
-          <% if @site.cluster %>
-            <li><a href="<%= cluster_path(@site.cluster) %>" class="geneva"><%= @site.word_for_clusters.upcase.singularize %></a></li>
-          <% elsif @site.sector %>
-            <li><a href="<%= sector_path(@site.sector) %>" class="geneva"><%= @site.word_for_sectors.upcase.singularize %></a></li>
-          <% else %>
-            <% if @site.navigate_by_cluster? %>
-            <li>
-              <a href="#" class="geneva"><%= @site.word_for_clusters.upcase %><span class="with_suboptions"></span></a>
-              <ul>
-                <% @site.clusters.each do |cluster| %>
-                <li><a href="<%= cluster_path(cluster) %>" class="geneva"><%= cluster.name %></a></li>
-                <% end %>
-              </ul>
-            </li>
-            <% elsif @site.navigate_by_sector? %>
-            <li>
-              <a href="#" class="geneva"><%= @site.word_for_sectors.upcase %><span class="with_suboptions"></span></a>
-              <ul>
-                <% @site.sectors.each do |sector| %>
-                <li><a href="<%= sector_path(sector) %>" class="geneva"><%= sector.name %></a></li>
-                <% end %>
-              </ul>
-            </li>
+            <% if @site.cluster %>
+              <li><a href="<%= cluster_path(@site.cluster) %>" class="geneva"><%= @site.word_for_clusters.upcase.singularize %></a></li>
+            <% elsif @site.sector %>
+              <li><a href="<%= sector_path(@site.sector) %>" class="geneva"><%= @site.word_for_sectors.upcase.singularize %></a></li>
+            <% else %>
+              <% if @site.navigate_by_cluster? %>
+              <li>
+                <a href="#" class="geneva"><%= @site.word_for_clusters.upcase %><span class="with_suboptions"></span></a>
+                <ul class="suboptions">
+                  <% @site.clusters.each do |cluster| %>
+                  <li><a href="<%= cluster_path(cluster) %>" class="geneva"><%= cluster.name %></a></li>
+                  <% end %>
+                </ul>
+              </li>
+              <% elsif @site.navigate_by_sector? %>
+              <li>
+                <a href="#" class="geneva"><%= @site.word_for_sectors.upcase %><span class="with_suboptions"></span></a>
+                <ul class="suboptions">
+                  <% @site.sectors.each do |sector| %>
+                  <li><a href="<%= sector_path(sector) %>" class="geneva"><%= sector.name %></a></li>
+                  <% end %>
+                </ul>
+              </li>
+              <% end %>
             <% end %>
-          <% end %>
-          <li><a href="#" class="geneva">REGIONS<span class="with_suboptions"></span></a></li>
-          <li><a href="#" class="geneva">ORGANIZATIONS<span class="with_suboptions"></span></a></li>
-          <li><a href="<%= page_path(Page.analysis(@site)) %>" class="geneva">ANALYSIS</a></li>
-          <li><a href="<%= page_path(Page.about(@site)) %>" class="geneva">ABOUT</a></li>
+            <li>
+              <a href="#" class="geneva">REGIONS<span class="with_suboptions"></span></a>
+            </li>
+            <li>
+              <a href="#" class="geneva">ORGANIZATIONS<span class="with_suboptions"></span></a>
+              <ul class="suboptions">
+                <% @site.organizations.each do |organization| %>
+                <li><a href="<%= organization_path(organization) %>" class="geneva"><%= organization.name %></a></li>
+                <% end %>
+              </ul>
+              
+            </li>
+            <li><a href="<%= page_path(Page.analysis(@site)) %>" class="geneva">ANALYSIS</a></li>
+            <li><a href="<%= page_path(Page.about(@site)) %>" class="geneva">ABOUT</a></li>
         </ul>
       </div>
 

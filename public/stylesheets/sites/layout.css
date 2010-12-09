@@ -6,6 +6,7 @@ span.clear{clear:both;}
 div.left{float:left; width:auto;}
 div.right{float:right; width:auto;}
 a{text-decoration:none;}
+a:focus{outline:none;}
 ul:focus {outline:none;}
 input:focus{outline:none}
 
@@ -63,11 +64,14 @@ div#header div.inner_header {margin:0 auto; width:932px; height:40px;}
 div#header div.left {width:700px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#header h1 {margin:0; font:normal 15px "PT Sans Bold"; color:white; text-transform:uppercase; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#header h1 a {color:white;}
-div#header ul.menu {float:right; margin:0 0 0 100px; width:auto;}
-div#header ul.menu li{float:left; width:auto; margin:0 20px 0 0;}
+div#header ul.menu {float:right; margin:1px 0 0 100px; width:auto;}
+div#header ul.menu li{float:left; width:auto; margin:0 20px 0 0; position:relative;}
 div#header ul.menu li a {float:left; font:normal 13px "Geneva"; color:#C2C1C1; text-transform:uppercase; text-decoration:none;}
 div#header ul.menu li a:hover {cursor:pointer; color:white;}
 div#header ul.menu li a span.with_suboptions {float:right; width:6px; height:3px; margin:8px 0 0 3px; background:url('/images/sites/common/arrow_menu.png') no-repeat 0 0;}
+div#header ul.menu li ul.suboptions {position:absolute; top:20px; left:-10px; background-color:#2F2E2C; z-index:110; display:none;}
+div#header ul.menu li ul.suboptions li {float:left; width:auto; padding:0 5px; margin:2px;}
+
 div#header div.right {width:auto; height:20px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#header div.right form.search {position:relative; float:right;}
 div#header div.right form.search span.input_search {float:left; width:111px; height:20px; background:url('/images/sites/common/input_search_bkg.png') no-repeat 0 0; position:relative;}
