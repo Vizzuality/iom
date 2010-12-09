@@ -1,1 +1,27 @@
 /*default layout color*/
+a {color:#CE5D4C;}
+
+div#left_column div.float_left div.head {background:url('/images/sites/search/head_mask.png') no-repeat 0 0 #CE5D4C;}
+div#left_column div.float_left div.head h2 {color:#8E4035;}
+div#left_column div.float_left div.head h1 {text-shadow:0 1px #8E4035;}
+div#left_column div.float_left div.head p {color:#8E4035;}
+div#left_column div.float_left div.block a {color:#CE5D4C;}
+div#left_column div.float_left div.block ul.clusters li a {color:#CE5D4C;}
+div#left_column div.right ul li h4 a {color:#CE5D4C;}
+div#left_column div.right ul li p.info a {color:#CE5D4C}
+
+div#pages div.float_left div.outer_head div.head {background:url('/images/sites/search/head_mask.png') no-repeat 0 0 #CE5D4C;}
+div#pages div.float_left div.outer_head div.head p {color:#8E4035;}
+div#pages div.float_left div.body p a {color:#CE5D4C; text-decoration:none;}
+div#pages div.float_left div.results_list ul li div.project_name h3 a {color:#CE5D4C;}
+div#pages div.right div.block p a {color:#CE5D4C;}
+div#pages div.right div.block ul li a {color:#CE5D4C;}
+
+div#project div.left div.block div.logo a {color:#CE5D4C;}
+div#project div.float_right div.head {background:url('/images/sites/search/head_mask.png') no-repeat 0 0 #D16150;}
+div#project div.float_right div.head p {color:#8E4035;}
+div#project div.float_right div.head p a {color:#8E4035;}
+div#project div.float_right div.head p a:hover {color:#6F322A;}
+div#project div.float_right div.block ul li div.info h4 a {color:#CE5D4C;}
+div#project div.left div.block ul li a {color:#CE5D4C;}
+div#project div.left div.block p a {color:#CE5D4C;}
