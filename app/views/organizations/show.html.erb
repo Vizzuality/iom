@@ -10,98 +10,110 @@
 <%end%>
 
 
+  <div class="main_head">
+    <div class="inner_main_head">
+      <div class="left">
+        <h1><%= @organization.name %></h1>
+        <p><%= pluralize(@organization.projects.site(@site).count, 'project', 'projects') %></p>
+        <div class="float_head">
+          <h1><%= @organization.name %></h1>
+          <p><%= pluralize(@organization.projects.site(@site).count, 'project', 'projects') %></p>
+        </div>
+      </div>
+      <div class="right">
+        <p><%= @organization.description %></p>
+      </div>
+    </div>
+  </div>
 
   <div id="map"></div>
+
 
   <div id="layout">
     <div id="left_column">
     
       <!-- LEFT PART -->
       <div class="left"></div> <!-- H"J"ACK -->
-      <div class="float_left">
-        <div class="head">
-          <h1><%= @organization.name %></h1>
-          <p><%= pluralize(@organization.projects.site(@site).count, 'project', 'projects') %></p>
-        </div>
+      <div class="outer_float">
+        <div class="float_left">
+          <div class="head">
+            <h2>FACTSHEET</h2>
+          </div>
+
+          <div class="block">
+            <h3>BUDGET FOR FOOD SECURITY</h3>
+            <p class="budget"><%= number_with_delimiter(@organization.donations.sum(:amount)) %></p>
+            <% donors_total = @organization.donors_count %>
+            <p><%= link_to(pluralize(donors_total, 'donor to this organization', 'donors to this organization'),'#') %> </p>
+          </div>
     
-        <div class="block">
-          <% if @organization.description? %>
-            <p class="main_info"><%= @organization.description %></p>
-          <% end %>
-        
-          <p class="social">
-            <% if @organization.twitter? %>
-              <%= link_to("follow us", "http://twitter.com/#{@organization.twitter}", :class=>"twitter", :target=>"_blank") %>
-            <% end %>
-            <% if @organization.twitter? &&  @organization.facebook? %> / <% end %>
-            <% if @organization.facebook? %>
-              <%= link_to("visit our page", "http://facebook.com/#{@organization.facebook}", :class=>"facebook", :target=>"_blank") %>
+    
+          <div class="block statistics">
+            <h3>PROJECTS BY CLUSTER</h3>
+            <ul class="statistics_list">
+              <% @organization.projects_clusters(@site)[0...3].each do |cluster,count| %>
+                <li><a class="<%= cluster_class(cluster) %>"><span class="aller" style="width:<%= cluster_width(count) %>px"><%= count %></span></a></li>
               <% end %>
-          </p>
-
-          <% if @organization.website? %>
-            <p class="website"><%= link_to(@organization.website, @organization.website, :rel => 'nofollow', :target => '_blank') %></p>
-          <% end %>
-        </div>
-      
-      
-        <div class="block">
-          <h3>BUDGET FOR FOOD SECURITY</h3>
-          <p class="budget"><%= number_with_delimiter(@organization.donations.sum(:amount)) %></p>
-          <% donors_total = @organization.donors_count %>
-          <p><%= link_to(pluralize(donors_total, 'donor to this organization', 'donors to this organization'),'#') %> </p>
-        </div>
-    
-    
-        <div class="block statistics">
-          <h3>PROJECTS BY CLUSTER</h3>
-          <ul class="statistics_list">
-            <% @organization.projects_clusters(@site)[0...3].each do |cluster,count| %>
-              <li><a class="<%= cluster_class(cluster) %>"><span class="aller" style="width:<%= cluster_width(count) %>px"><%= count %></span></a></li>
+            </ul>
+            <% if @organization.projects_clusters(@site).size > 3 %>
+              <% total =  @organization.projects_clusters(@site).size - 3 %>
+              <%= link_to(pluralize(total, 'project more on other clusters', 'projects more on other clusters') ,'#') %>
             <% end %>
-          </ul>
-          <% if @organization.projects_clusters(@site).size > 3 %>
-            <% total =  @organization.projects_clusters(@site).size - 3 %>
-            <%= link_to(pluralize(total, 'project more on other clusters', 'projects more on other clusters') ,'#') %>
-          <% end %>
-        </div>
+          </div>
     
-        <div class="block statistics">
-          <h3>PROJECTS BY LOCATION</h3>
-            <ul class="chart">
-            <% index = 0%>
-            <% values = '' %>
-            <% max_value = 0 %>
-            <% @organization.projects_regions(@site).each do |organization, count| %>
-              <li class="pos<%= index %>"><a href="#"><%= truncate(organization.name,:length=>15, :omission=>"...") %></a> - <%= count %></li>
-              <% values += ((index==0) ? '' : ',') + count.to_s() %>
-              <% max_value<count ? max_value=count : nil %>
-              <% index = index + 1 %>
-            <% end %>
-          </ul>
-          <img class="pie_chart" src="http://chart.apis.google.com/chart?cht=p&chs=120x120&chd=t:<%= values %>&chds=0,<%= max_value %>&chco=333333|565656|727272|ADADAD|EFEFEF|FFFFFF&chf=bg,s,FFFFFF00" />
-        </div>
+          <div class="block statistics">
+            <h3>PROJECTS BY LOCATION</h3>
+              <ul class="chart">
+              <% index = 0%>
+              <% values = '' %>
+              <% max_value = 0 %>
+              <% @organization.projects_regions(@site).each do |organization, count| %>
+                <li class="pos<%= index %>"><a href="#"><%= truncate(organization.name,:length=>15, :omission=>"...") %></a> - <%= count %></li>
+                <% values += ((index==0) ? '' : ',') + count.to_s() %>
+                <% max_value<count ? max_value=count : nil %>
+                <% index = index + 1 %>
+              <% end %>
+            </ul>
+            <img class="pie_chart" src="http://chart.apis.google.com/chart?cht=p&chs=120x120&chd=t:<%= values %>&chds=0,<%= max_value %>&chco=333333|565656|727272|ADADAD|EFEFEF|FFFFFF&chf=bg,s,FFFFFF00" />
+          </div>
     
-        <div class="block resources">
-          <h3>ADDITIONAL RESOURCES</h3>
-          <ul>
-            <li><a href="#">Jeddah in wikipedia</a></li>
-            <li><a href="#">Jeddah in wikipedia</a></li>
-            <li><a href="#">Jeddah in wikipedia</a></li>
-            <li><a href="#">Jeddah in wikipedia</a></li>
-          </ul>
-        </div>
+          <div class="block resources">
+            <h3>ADDITIONAL RESOURCES</h3>
+            <ul>
+              <li><a href="#">Jeddah in wikipedia</a></li>
+              <li><a href="#">Jeddah in wikipedia</a></li>
+              <li><a href="#">Jeddah in wikipedia</a></li>
+              <li><a href="#">Jeddah in wikipedia</a></li>
+            </ul>
+          </div>
       
-        <div class="block">
-          <h3>CONTACT INFORMATION</h3>
-          <p><strong><%= @organization.contact_name %></strong><br/><%= @organization.contact_position %><br/><%= @organization.hq_address %> <%= @organization.contact_zip %></p>
-          <p><%= @organization.contact_phone_number %><br/><%= link_to(@organization.contact_email, "mailto:#{@organization.contact_email}") %></p>
-        </div>
+          <div class="block">
+            <h3>CONTACT INFORMATION</h3>
+            <p><strong><%= @organization.contact_name %></strong><br/><%= @organization.contact_position %><br/><%= @organization.hq_address %> <%= @organization.contact_zip %></p>
+            <p><%= @organization.contact_phone_number %><br/><%= link_to(@organization.contact_email, "mailto:#{@organization.contact_email}") %></p>
+          </div>
 
-        <div class="block green">
-          <h3>DONATION INFORMATION</h3>
-          <p><strong>Donations</strong><br/><%= @organization.donation_address %></p>
-          <p><%= @organization.donation_phone_number %><br/><%= link_to(@organization.donation_website, @organization.donation_website) %></p>
+          <div class="block green">
+            <h3>DONATION INFORMATION</h3>
+            <p><strong>Donations</strong><br/><%= @organization.donation_address %></p>
+            <p><%= @organization.donation_phone_number %><br/><%= link_to(@organization.donation_website, @organization.donation_website) %></p>
+          </div>
+        
+          <div class="block">
+            <p class="social">
+              <% if @organization.twitter? %>
+                <%= link_to("follow us", "http://twitter.com/#{@organization.twitter}", :class=>"twitter", :target=>"_blank") %>
+              <% end %>
+              <% if @organization.twitter? &&  @organization.facebook? %> / <% end %>
+              <% if @organization.facebook? %>
+                <%= link_to("visit our page", "http://facebook.com/#{@organization.facebook}", :class=>"facebook", :target=>"_blank") %>
+                <% end %>
+            </p>
+
+            <% if @organization.website? %>
+              <p class="website"><%= link_to(@organization.website, @organization.website, :rel => 'nofollow', :target => '_blank') %></p>
+            <% end %>
+          </div>
         </div>
       </div>
 

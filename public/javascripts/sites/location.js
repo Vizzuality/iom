@@ -2,6 +2,8 @@
     $(document).ready( function() {
       
       //If right part is bigger than float left
+      $('div#left_column div.outer_float').height($('div#left_column div.float_left').height()-40);
+      
       if ($('div#left_column div.float_left').height() < $('div#left_column div.right').height()) {
         var offset =  $('div#left_column div.right').height() - $('div#left_column div.float_left').height() + 120;
         if ($('div.block.green').is(':visible')) {
