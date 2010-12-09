@@ -3,7 +3,7 @@
 User.create :email => 'admin@example.com', :password => 'admin', :password_confirmation => 'admin'
 Settings.create
 
-Theme.create :name => 'Yellow', :css_file => '/stylesheets/themes/yellow.css', :thumbnail_path => '/images/backoffice/sites/theme_1.png'
+Theme.create :name => 'Garnet', :css_file => '/stylesheets/themes/garnet.css', :thumbnail_path => '/images/backoffice/sites/theme_1.png'
 Theme.create :name => 'Pink',   :css_file => '/stylesheets/themes/pink.css',   :thumbnail_path => '/images/backoffice/sites/theme_2.png'
 Theme.create :name => 'Blue',   :css_file => '/stylesheets/themes/blue.css',   :thumbnail_path => '/images/backoffice/sites/theme_3.png'
 
@@ -47,7 +47,7 @@ Tag.create :name => 'earthquake'
 #  sites for testing purposes. Add this line to your /etc/hosts:
 #  127.0.0.1       iom-haiti.ipq.co
 site = Site.create :name => 'Haiti Aid Map', :url => 'iom-haiti.ipq.co', :status => true,
-                   :theme => Theme.find_by_name('Blue')
+                   :theme => Theme.find_by_name('Garnet')
 #  127.0.0.1       iom-food.ipq.co
 site = Site.create :name => 'Food Security', :url => 'iom-food.ipq.co', :status => true,
-                  :theme => Theme.find_by_name('Yellow')
+                  :theme => Theme.find_by_name('Garnet')
