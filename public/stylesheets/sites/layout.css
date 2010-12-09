@@ -59,23 +59,34 @@ div#layout {width:932px; margin:0 auto;}
 
 /* HEADER */
 
-div#header {width:100%; height:29px; padding:11px 0 0 0; background:url(/images/sites/common/bkg_header_repeatx.jpg) repeat-x 0 0;}
+div#header {width:100%; height:40px; padding:0; background:url(/images/sites/common/bkg_header_repeatx.jpg) repeat-x 0 0;}
 div#header div.inner_header {margin:0 auto; width:932px; height:40px;}
 div#header div.left {width:700px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#header h1 {margin:0; font:normal 15px "PT Sans Bold"; color:white; text-transform:uppercase; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#header h1 {margin:11px 0 0 0; font:normal 15px "PT Sans Bold"; color:white; text-transform:uppercase; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#header h1 a {color:white;}
-div#header ul.menu {float:right; margin:1px 0 0 100px; width:auto;}
-div#header ul.menu li{float:left; width:auto; margin:0 20px 0 0; position:relative;}
-div#header ul.menu li a {float:left; font:normal 13px "Geneva"; color:#C2C1C1; text-transform:uppercase; text-decoration:none;}
-div#header ul.menu li a:hover {cursor:pointer; color:white;}
-div#header ul.menu li a span.with_suboptions {float:right; width:6px; height:3px; margin:8px 0 0 3px; background:url('/images/sites/common/arrow_menu.png') no-repeat 0 0;}
-div#header ul.menu li ul.suboptions {position:absolute; top:20px; left:-10px; background-color:#2F2E2C; z-index:110; display:none;}
-div#header ul.menu li ul.suboptions li {float:left; width:auto; padding:0 5px; margin:2px;}
+div#header ul.menu {float:right; margin:4px 0 0 100px; width:auto; height:25px;}
+div#header ul.menu li {float:left; width:auto; margin:0 23px 0 0; position:relative;}
+div#header ul.menu li#cluster_option.clicked {background:url('/images/sites/common/menu/cluster_head_clicked.png') no-repeat 0 0; width:91px; height:35px; margin:0 14px 0 0;}
+div#header ul.menu li#cluster_option.clicked ul.suboptions {position:absolute; top:35px; left:0; z-index:110; background:url('/images/sites/common/menu/cluster_body_clicked.png') no-repeat 0 0; display:none; width:497px; height:177px; display:inline;}
 
-div#header div.right {width:auto; height:20px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#header ul.menu li.clicked a {margin:8px 0 0 10px;}
+div#header ul.menu li.clicked a span.with_suboptions {display:none;}
+div#header ul.menu li.clicked ul.suboptions {display:inline;}
+div#header ul.menu li a {float:left; font:normal 13px "Geneva"; color:#C2C1C1; text-decoration:none; margin:8px 0 0 0;}
+div#header ul.menu li a:hover {cursor:pointer; color:white;}
+div#header ul.menu li a span.with_suboptions {float:right; width:6px; height:3px; margin:7px 0 0 2px; background:url('/images/sites/common/arrow_menu.png') no-repeat 0 0;}
+div#header ul.menu li ul.suboptions {position:absolute; top:20px; left:-10px; background-color:#2F2E2C; z-index:110; display:none;}
+div#header ul.menu li ul.suboptions li {float:left; width:164px; padding:0 5px; margin:2px; height:15px;}
+div#header ul.menu li ul.suboptions li a {padding:2px 0 0 30px; height:20px;}
+div#header ul.menu li ul.suboptions li a.food {background:url('/images/sites/common/menu/icons/food.png')no-repeat 0 0;}
+div#header ul.menu li ul.suboptions li a.camp {background:url('/images/sites/common/menu/icons/camp.png')no-repeat 0 0;}
+div#header ul.menu li ul.suboptions li a.protection {background:url('/images/sites/common/menu/icons/protection.png') no-repeat 0 0;}
+div#header ul.menu li ul.suboptions li a:hover {background-position:0 -22px;}
+
+div#header div.right {margin:11px 0 0 0; width:auto; height:20px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#header div.right form.search {position:relative; float:right;}
 div#header div.right form.search span.input_search {float:left; width:111px; height:20px; background:url('/images/sites/common/input_search_bkg.png') no-repeat 0 0; position:relative;}
-div#header div.right form.search span.input_search input[type="text"]{position:absolute; top:2px; left:5px; width:83px; height:14px; font:normal 13px Arial; color:#999999; border:none;}
+div#header div.right form.search span.input_search input[type="text"]{position:absolute; top:2px; left:5px; width:83px; height:14px; font:normal 13px Arial; color:#999999; border:0px;}
 div#header div.right form.search span.input_search input[type="submit"] {position:absolute; right:5px; top:3px; width:15px; height:14px; background:url('/images/sites/common/bttn_search.png') no-repeat 0 0; border:none;}
 
 div#map {width:100%; height:475px; background:#99B3CA; border-bottom:2px solid white;}
@@ -240,7 +251,9 @@ div.statistics ul.statistics_list {width:270px; height:auto; padding:0 0 25px 0!
 div.statistics ul.statistics_list li {display:inline-block; width:100%!important; padding:0!important; margin:5px 0 0 0!important; height:auto;}
 div.statistics ul.statistics_list li a.plus {float:left; width:auto; padding:0 0 0 20px; background:url('/images/sites/organization/left_plus.png') no-repeat left 0; height:20px;}
 div.statistics ul.statistics_list li a.drop {float:left; width:auto; padding:0 0 0 20px; background:url('/images/sites/organization/left_drop.png') no-repeat left 0;  height:20px;}
-div.statistics ul.statistics_list li a span {float:left; width:auto; height:18px; padding:2px 10px 0 0; background:url('/images/sites/organization/right_statistics.png') no-repeat right 0; font:normal 13px "Aller"; color:#FFFFFF; text-align:right;}
+div.statistics ul.statistics_list li a span {float:left; width:auto; height:18px; padding:2px 10px 0 0; background:url('/images/sites/organization/right_statistics.png')
+ no-repeat right 0; font:normal 13px "Aller"; color:#FFFFFF; text-align:right;}
+div.statistics ul.statistics_list li a span:hover {text-decoration:none;}
 div.statistics ul.statistics_list li a:hover {text-decoration:none;}
 div.statistics ul.statistics_list li a:hover span {text-decoration:none!important;}
 
