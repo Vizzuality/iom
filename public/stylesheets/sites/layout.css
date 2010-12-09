@@ -316,11 +316,11 @@ div#project_layout div#footer {clear:both; width:932px; padding:100px 30px;}
 div#footer {clear:both; width:100%; padding:100px 0 100px 0;}
 div#footer div.right {width:600px; margin:0 0 0 60px; background:none; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#project_layout div#footer div.right {width:660px; margin:0; background:none; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#footer div.right div.project {width:400px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#footer div.right div.project h1 {font:normal 13px "PT Sans Bold"; color:#888888; text-transform:uppercase;}
+div#footer div.right div.project {float:left; width:350px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#footer div.right div.project h1 {font:normal 13px "PT Sans Bold"; color:#888888; text-transform:uppercase; display:inline-block;}
 div#footer div.right div.project p {padding:0; font:normal 13px "PT Sans"; color:#B3B3B3;}
-div#footer div.right div.links {float:right; width:auto; margin:20px 0 0 0;}
-div#footer div.right div.links ul {margin:0; padding:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#footer div.right div.links {float:right; width:auto; margin:15px 0 0 0;}
+div#footer div.right div.links ul {float:left; margin:0; padding:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#footer div.right div.links ul li {margin:0 0 0 6px; padding:0; font:normal 13px "PT Sans"; color:#B3B3B3; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#footer div.right div.links ul li a {color:#B3B3B3;}
 div#footer div.right div.links ul li a:hover {text-decoration:underline;}
