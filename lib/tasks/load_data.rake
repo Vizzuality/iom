@@ -68,7 +68,8 @@ namespace :iom do
       DB.execute 'DELETE FROM clusters_projects'
       DB.execute 'DELETE FROM organizations_projects'
       DB.execute 'DELETE FROM donations'
-      DB.execute 'DELETE FROM donors'     
+      DB.execute 'DELETE FROM donors'
+      DB.execute 'DELETE FROM regions' 
       
       #Cache geocoding
       geo_cache={}
@@ -144,17 +145,52 @@ namespace :iom do
             p.countries  << country
           end
           
-          
           #Geo data
+          reg1=nil
+          if(!row._1st_administrative_level_department.blank?)
+            parsed_adm1 = row._1st_administrative_level_department.split(",").map{|e|e.strip}
+            parsed_adm1.each do |region_name|
+              reg1 = Region.find_or_create_by_name_and_level(:name=>region_name,:level=>1)
+              reg1.level = 1
+              reg1.country = country
+              reg1.save!
+              p.regions  << reg1
+            end
+          end
+          
+          reg2=nil
+          if(!row._2nd_administrative_level_arrondissement.blank?)
+            parsed_adm2 = row._2nd_administrative_level_arrondissement.split(",").map{|e|e.strip}
+            parsed_adm2.each do |region_name|
+              reg2 = Region.find_or_create_by_name_and_level(:name=>region_name,:level=>2)
+              reg2.level = 2
+              reg2.country = country
+              if(reg1)
+                reg2.region = reg1
+              end
+              reg2.save!
+              p.regions  << reg2
+            end
+          end          
+          
+          
           multi_point=""
+          reg3=nil
           if(!row._3rd_administrative_level_commune.blank?)
             parsed_adm3 = row._3rd_administrative_level_commune.split(",").map{|e|e.strip}
             locations = Array.new
             parsed_adm3.each do |region_name|
-              reg = Region.find_or_create_by_name(:name=>region_name)
-              reg.country = country
-              reg.save!
-              p.regions  << reg
+              reg3 = Region.find_or_create_by_name_and_level(:name=>region_name,:level=>3)
+              reg3.country = country
+              reg3.level = 3
+              if(reg2)
+                reg3.region = reg2
+              elsif(reg1)
+                reg3.region = reg1
+              end              
+              
+              reg3.save!
+              p.regions  << reg3
               
               #georef
               if(geo_cache[region_name].blank?)
