@@ -8,10 +8,16 @@
           <div class="block">
             <h3>A project by</h3>
             <div class="logo">
-              <div class="logo_bkg">
-                <%= image_tag(@project.primary_organization.logo.url) %>
-              </div>
-              <%= link_to(@project.primary_organization.name, organization_path(@project.primary_organization)) %>
+              
+              <!-- Paperclip add the "missing" url if is not founded-->
+              <% if ((!@project.primary_organization.logo.url.empty?) && (!@project.primary_organization.logo.url.include? 'missing'))%>              
+                <div class="logo_bkg">
+                    <%= image_tag(@project.primary_organization.logo.url) %>
+                </div>
+                <%= link_to(@project.primary_organization.name, organization_path(@project.primary_organization)) %>
+              <%else%>
+                <%= link_to(@project.primary_organization.name, organization_path(@project.primary_organization), :class=>'long') %>              
+              <%end %>                            
             </div>
 
             <% if @project.implementing_organization? %>
@@ -62,17 +68,27 @@
             <% end %>
           </div>
           
-          <div class="block last">
+          <div class="block">
             <h3>Contact information</h3>
             <p><strong><%= @project.contact_person %></strong><br/><%= @project.contact_phone_number %></p>
             <p><%= link_to(@project.contact_email, "mailto:#{@project.contact_email}") %></p>
           </div>
+          <div class="block last">
+            <h3>EXPORT DATA</h3>            
+            <div class="import_data">
+                <a href="#">CSV</a><p>|</p><a href="#">KML</a>
+            </div>
+          </div>
+          
         </div>
         
         
         <div class="right"></div>
         <div class="float_right"> <!-- 670px with mest -->
           <div class="head">
+            <div id="completed">
+              <p>COMPLETED PROJECT</p>
+            </div>
             <h1><%= @project.name %></h1>
             <p>
               <% clusters_sectors = @project.clusters + @project.sectors %>
@@ -118,11 +134,13 @@
           
           
           <div class="block margin">
+            
+            <!-- TODO : IMPLEMENT -->
             <h3>RELATED PROJECTS</h3>
             <ul>
               <li>
                 <div class="image">
-                  <img src="" title="related projects?" />
+                  <img src="/images/sites/projects/default_img_project.png" title="related projects?" />
                 </div>
                 <div class="info">
                   <h4><a href="#">Blanket Rice Distribution</a></h4>
@@ -132,7 +150,8 @@
               </li>
               <li class="last">
                 <div class="image">
-                  <img src="" title="related projects?" />
+
+                  <img src="/images/sites/projects/default_img_project.png" title="related projects?" />
                 </div>
                 <div class="info">
                   <h4><a href="#">Blanket Rice Distribution</a></h4>
@@ -142,6 +161,7 @@
               </li>
             </ul>
           </div>
+          <!-- block margin -->
         </div>
       </div>
       

@@ -22,7 +22,11 @@
         var days_completed = daydiff(parseDate($('p.first_date').text()), parseDate((d.getDate())+'/'+(d.getMonth()+1)+'/'+(d.getFullYear())));
         if (days_completed<(total_days/2)) {
           $('div.timeline p').css('color','#999999');
+        }else if (days_completed >= total_days){
+            $('div.timeline p').text('COMPLETED');
+            $('div#completed').css('display','inline');
         }
+        
         $('div.timeline span').width((days_completed*237)/total_days);
 
         

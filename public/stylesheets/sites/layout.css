@@ -130,6 +130,12 @@ div#left_column div.float_left div.block ul.clusters li.flood {background:url('/
 div#left_column div.float_left div.block ul.clusters li a {color:#CD5D4C;} 
 div#left_column div.float_left div.block ul.clusters li p {padding:1px 0 0 0;}
 div#left_column div.float_left div.block a.more {position:relative; margin:0 0 0 10px; padding:0 12px 0 0; background:url('/images/sites/icons/down_garnet.png') no-repeat right 6px;} 
+div#project div.left div.block div.import_data {float:left; margin:10px 0 0 0;}
+div#project div.left div.block div.import_data p {float:left; font:normal 13px Arial; color:#666666; margin:0 10px; width:auto; padding:0;}
+div#project div.left div.block div.import_data a {float:left; font:normal 13px Arial; color:#666666; text-decoration:underline; margin:1px 0 0 0;}
+div#project div.left div.block div.import_data a:hover {color:#333333;} 
+
+
 div#left_column div.float_left div.block a.more:hover {text-decoration:underline;}
 div#left_column div.right {width:632px; margin:0; padding:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#left_column div.right h3 {width:572px; padding:20px 26px 20px 34px; font:normal 13px "PT Sans Bold"; color:#999999; text-shadow:0 1px white; text-transform:uppercase;}
@@ -250,9 +256,10 @@ div#project div.left div.block.last {border:none; padding:0 0 0 30px;}
 div#project div.left div.block h3 {width:100%; font:normal 13px "PT Sans Bold"; color:#999999; text-shadow:0 1px white; text-transform:uppercase;}
 div#project div.left div.block h3.margin {padding:20px 0 0 0;}
 div#project div.left div.block div.logo {width:100%; padding:7px 0 15px;}
-div#project div.left div.block div.logo div.logo_bkg {position:relative; width:86px; height:52px; background:url('/images/sites/projects/logo_bkg.png') no-repeat 0 0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#project div.left div.block div.logo img {position:absolute; top:15px; left:10px; max-width:70px;}
+div#project div.left div.block div.logo div.logo_bkg {position:relative; width:86px; height:52px; background:url('/images/sites/projects/logo_bkg.png') no-repeat 0 0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline; overflow:hidden;}
+div#project div.left div.block div.logo img {position:absolute; top:15px; left:10px; max-width:70px; width:auto; height:auto;}
 div#project div.left div.block div.logo a {width:130px; padding:10px 0 0 5px; font:normal 13px Arial; color:#CE5D4C; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;} /* TODO: color*/
+div#project div.left div.block div.logo a.long {width:100%; padding:0;}
 div#project div.left div.block div.logo a:hover {text-decoration:underline;}
 div#project div.left div.block ul {width:100%; margin:7px 0 0 0; padding:0 0 6px; list-style:none;}
 div#project div.left div.block ul li {padding:3px 0 3px 10px; background:url('/images/sites/icons/list_disc.png') no-repeat 0 10px; font:normal 13px Arial; color:#999999;}
@@ -272,21 +279,23 @@ div#project div.left div.block p.first_date {width:121px; margin:0!important; pa
 div#project div.left div.block p.second_date {width:121px; margin:0!important; padding:3px 0 0 0!important; font:normal 11px "Aller"; color:#999999; text-align:right; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#project div.right {width:660px; height:1000px; margin:0 30px 0 0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#project div.float_right {position:absolute; top:0; right:25px; width:660px; padding:5px; background:url('/images/sites/common/mesh.png') repeat 0 0; z-index:100;}
-div#project div.float_right div.head {width:596px; height:auto; padding:32px; background:url('/images/sites/search/head_mask.png') no-repeat 0 0 #CD5D4C;} 
+div#project div.float_right div.head {width:596px; height:auto; padding:32px; background:url('/images/sites/search/head_mask.png') no-repeat 0 0 #CD5D4C; position:relative;} 
+div#project div.float_right div.head div#completed {position:absolute; bottom:-22px; right:-15px; width:173px; height:41px; background:url('/images/sites/projects/completed_msg.png') no-repeat; display:none;}
+div#project div.float_right div.head div#completed p {float:left; font:normal 13px "PT Sans Bold"; color:white; text-transform:uppercase; margin:9px 0 0 15px; letter-spacing:-1.0px;}
 div#project div.float_right div.head h1 {width:100%; font:normal 25px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42;}
 div#project div.float_right div.head p {width:100%; padding:2px 0 0 0; font:normal 13px Arial; color:#7C3831; text-shadow:none;} 
 div#project div.float_right div.head p a {text-decoration:underline; color:#7C3831;} 
 div#project div.float_right div.head p a:hover {color:#7C3831;}  
-div#project div.float_right div.block {width:596px; padding:32px; background:white; border-bottom:1px solid #DEDEDE;}
-div#project div.float_right div.block.margin {margin:5px 0 0 0;}
+div#project div.float_right div.block {float:left; width:596px; padding:32px; background:white; border-bottom:1px solid #DEDEDE;}
+div#project div.float_right div.block.margin {float:left; margin:5px 0 0 0;}
 div#project div.float_right div.block p {font:normal 15px Arial; color:#666666;}
 div#project div.float_right div.block h3 {padding:0 0 10px 0; font:normal 13px "PT Sans Bold"; color:#333333; text-transform:uppercase;}
-div#project div.float_right div.block ul {width:100%;}
-div#project div.float_right div.block ul li {width:290px; margin:0 10px 0 0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#project div.float_right div.block ul {float:left; width:100%;}
+div#project div.float_right div.block ul li {float:left; width:290px; margin:0 10px 0 0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#project div.float_right div.block ul li.last {margin:0;}
-div#project div.float_right div.block ul li div.image {width:90px; height:70px; margin:0 10px 0 0; padding:5px; background:#E5E5E5; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#project div.float_right div.block ul li div.image img {width:90px; height:70px;}
-div#project div.float_right div.block ul li div.info {width:170px; padding:10px 0 0 0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#project div.float_right div.block ul li div.image {float:left; width:90px; height:70px; margin:0 10px 0 0; padding:5px; background:#E5E5E5; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#project div.float_right div.block ul li div.image img {float:left; width:90px; height:70px;}
+div#project div.float_right div.block ul li div.info {float:left;width:170px; padding:10px 0 0 0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#project div.float_right div.block ul li div.info h4 a {font:normal 15px Arial; color:#CD5D4C; text-decoration:none;} 
 div#project div.float_right div.block ul li div.info h4 a:hover {text-decoration:underline;}
 div#project div.float_right div.block ul li div.info p {padding:3px 0 0 0; font:normal 13px Arial; color:#999999;}

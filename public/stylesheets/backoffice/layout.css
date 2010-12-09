@@ -118,6 +118,7 @@ div#header div.inner_header div.bottom {float:left; width:100%; margin:24px 0 0 
 div#header div.inner_header div.bottom ul.main_menu {float:left; width:auto; height:42px;}
 div#header div.inner_header div.bottom ul.main_menu li {float:left; width:auto; margin:0 3px 0 0;}
 div#header div.inner_header div.bottom ul.main_menu li a {float:left; height:42px; padding:0 0 0 4px; background:url('/images/backoffice/common/header_tab_left.png') no-repeat 0 0;}
+div#header div.inner_header div.bottom ul.main_menu li a:focus {outline:none;}
 div#header div.inner_header div.bottom ul.main_menu li span {float:left; height:32px; width:auto; padding:10px 22px 0 18px; background:url('/images/backoffice/common/header_tab_right.png') no-repeat right 0;
   font:normal 17px "Museo Sans", Arial; color:#DEE1E4;}
 div#header div.inner_header div.bottom ul.main_menu li a:hover {background-position:0 -42px; cursor:pointer;}
