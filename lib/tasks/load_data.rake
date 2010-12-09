@@ -153,6 +153,7 @@ namespace :iom do
             parsed_adm3.each do |region_name|
               reg = Region.find_or_create_by_name(:name=>region_name)
               reg.country = country
+              reg.save!
               p.regions  << reg
               
               #georef
