@@ -207,4 +207,30 @@ feature "Organizations" do
 
   end
 
+  scenario "Import new projects from csv" do
+    reset_pk_sequence 'organizations'
+    reset_pk_sequence 'projects'
+    organization  = create_organization :name => 'Ferdev'
+    project1      = create_project :name => 'Project 1', :primary_organization => organization
+    project2      = create_project :name => 'Project 2', :primary_organization => organization
+    site          = create_site :project_context_organization_id => organization.id
+    settings      = create_setting
+
+    login_as_administrator
+
+    click_link_or_button 'organizations'
+
+    click_link_or_button 'Ferdev'
+
+    attach_file 'organization_projects_file', "#{Rails.root}/test/support/data/Intermon_Oxfam_projects.csv"
+
+    expect{ click_link_or_button 'Import projects'}.to change{Project.count}.by(1)
+
+    organization.projects.count.should == 3
+    organization.project_ids.sort.should == [1, 3, 4]
+    organization.projects.find(1).name.should == 'Ferdev project 1'
+    organization.projects.find(3).name.should == 'Ferdev project 3'
+    organization.projects.find(4).name.should == 'Ferdev project 4'
+  end
+
 end

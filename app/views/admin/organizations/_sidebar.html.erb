@@ -15,10 +15,15 @@
   <li <%= selected_if_current_page(admin_organization_media_resources_path(@organization)) %>><%= link_to("Media", admin_organization_media_resources_path(@organization)) %><% if !@organization.media_resources.empty? %> <p><span><%=@organization.media_resources.count%></span></p><% end %></li>
   <li <%= selected_if_current_page(admin_organization_resources_path(@organization)) %>><%= link_to("Resources", admin_organization_resources_path(@organization)) %><% if !@organization.resources.empty? %> <p><span><%=@organization.resources.count%></span></p><% end %></li>
 </ul>
-<ul>
-  <li><%= link_to 'Export data', admin_organization_projects_path(@organization, :csv) %></li>
-  <li>Import data</li>
-</ul>
+<div class="export">
+  <%= link_to 'Export data', admin_organization_projects_path(@organization, :csv) %>
+</div>
+<div class="import">
+  <%= form_for [:admin, @organization], :html => { :multipart => true } do |f| %>
+  <%= f.file_field :projects_file %>
+  <%= f.submit 'Import projects' %>
+  <% end %>
+</div>
 <div class="delete">
   <h5>DELETE THIS ORGANIZATION</h5>
   <p>Clicking the link below will permanently delete this organization and its references within the sites</p>

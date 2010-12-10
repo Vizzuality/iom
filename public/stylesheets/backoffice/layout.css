@@ -100,7 +100,10 @@ div.block div.med div.right ul li.sublist_selected div.bottom_selected span.list
 div.block div.med div.right ul li.sublist_selected:hover div.bottom_selected p a {color:#E93E3F;}
 
 div.block div.med div.right ul li:hover div.bottom_selected p a {color:#E93E3F;}
-div.block div.med div.right div.delete {position:absolute; display:none; bottom:0; left:20px;}
+div.block div.med div.right div.export, div.block div.med div.right div.import, div.block div.med div.right div.delete {position:absolute; display:none; left:20px;}
+div.block div.med div.right div.export {bottom: 200px;}
+div.block div.med div.right div.import {bottom: 125px;}
+div.block div.med div.right div.delete {bottom:0;}
 div.block div.med div.right div.delete h5 {float:left; font:normal 17px "Museo Sans",Arial; color:#333333; letter-spacing:-1px;}
 div.block div.med div.right div.delete p {float:left; margin:5px 0 0 0; width:100%; font:normal 13px Arial; color:#666666;}
 div.block div.med div.right div.delete a {float:left; margin:17px 0 0 0; font:normal 15px Arial; color:#D8393D; text-decoration:none;}
@@ -431,7 +434,7 @@ div.two_projects ul.combos li span.combo.clicked ul.elements li:hover {backgroun
 
 div.two_projects ul.combos li span.combo ul.elements.short {display:none;}
 div.two_projects ul.combos li span.combo.clicked ul.elements.short {position:absolute; top:31px; left:-1px; display:inline; width:148px; height:auto; background:none;}
-div.two_projects ul.combos li span.combo.clicked ul.elements.short li {float:left; width:120px; height:auto; background:url('/images/backoffice/projects/combos/index_search_content.png') 
+div.two_projects ul.combos li span.combo.clicked ul.elements.short li {float:left; width:120px; height:auto; background:url('/images/backoffice/projects/combos/index_search_content.png')
 repeat-y 0; padding:5px 5px 5px 12px; margin:0 0 0 1px;}
 div.two_projects ul.combos li span.combo.clicked ul.elements.short li:hover {float:left; width:264px; background:url('/images/backoffice/projects/combos/index_search_content_hover.png') repeat-y 0;}
 

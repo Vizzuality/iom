@@ -19,7 +19,7 @@ module Iom
             :description => "Oxfam America is an international relief and development organization that creates lasting solutions to poverty, hunger, and injustice. Together with individuals and local groups in more than 90 countries, Oxfam saves lives, helps people overcome poverty, and fights for social justice. We are one of the 14 affiliates in the international confederation, Oxfam.",
             :budget => 250000000,
             :website => "http://www.oxfamamerica.org",
-            :staff => 1432,
+            :national_staff => 1432,
             :twitter => "oxfamamerica",
             :facebook => "www.facebook.com/oxfamamerica",
             :hq_address => "Oxfam St, 32, City Center",

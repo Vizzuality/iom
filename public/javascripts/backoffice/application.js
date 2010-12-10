@@ -5,16 +5,16 @@ $(document).ready(function(ev){
 
     // CUSTOM SCROLLBARS
     if ($('.scroll_pane').length > 0){
-        
+
         // OTHER ATTEMP
         $('.scroll_pane').jScrollPane({
                            autoReinitialise:false });
-    }    
-    
+    }
+
     if ($('div.right.menu').length>0) {
       setTimeout(function(){
         $('div.right.menu').height($('div.block div.med div.left').height());
-        $('div.right.menu div.delete').show();
+        $('div.export,div.import,div.delete', $('div.right.menu')).show();
       },300);
     }
 
@@ -51,7 +51,7 @@ $(document).ready(function(ev){
       });
       var href_ = $(this).attr('destroy_url');
       var name_ = $(this).attr('att_name');
-      
+
       $('div#modal_window a.remove').attr('href','javascript: void removeAndGo("'+href_+'")');
       $('div#modal_window h4').text('You are about deleting this '+capitaliseFirstLetter(name_));
       $('div#modal_window p').text('If you delete this '+name_+', it will not appear in any site.');
@@ -96,26 +96,26 @@ $(document).ready(function(ev){
         $(this).parent().find('div.error_msg').show();
       }
     );
-    
+
         
          // $('div').each(function() {
          //              $(this).css('zIndex', zIndexNumber);
          //              zIndexNumber -= 10;
          //          });
-    	
-	
+
+
 });
 
 
 
  function capitaliseFirstLetter(string) {
      if (string!=null){
-        return string.charAt(0).toUpperCase() + string.slice(1); 
+        return string.charAt(0).toUpperCase() + string.slice(1);
      }
      else {
          return ''
      }
-     
+
  }
 
 
@@ -127,11 +127,11 @@ $(document).ready(function(ev){
        .appendTo('body');
    form.submit();
  }
- 
- 
-    
+
+
+
   function limitChars(textid, limit, infodiv) {
-    var text = $('#'+textid).val(); 
+    var text = $('#'+textid).val();
 
     var textlength = text.length;
     if(textlength > limit) {
@@ -148,7 +148,7 @@ $(document).ready(function(ev){
       return true;
     }
   }
-  
+
   function resetCombo(elementToUpdate){
       var element = elementToUpdate.find('.scroll_pane');
       var api = element.data('jsp');

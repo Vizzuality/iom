@@ -76,11 +76,19 @@ div#header ul.menu li a {float:left; font:normal 13px "Geneva"; color:#C2C1C1; t
 div#header ul.menu li a:hover {cursor:pointer; color:white;}
 div#header ul.menu li a span.with_suboptions {float:right; width:6px; height:3px; margin:7px 0 0 2px; background:url('/images/sites/common/arrow_menu.png') no-repeat 0 0;}
 div#header ul.menu li ul.suboptions {position:absolute; top:20px; left:-10px; background-color:#2F2E2C; z-index:110; display:none;}
-div#header ul.menu li ul.suboptions li {float:left; width:164px; padding:0 5px; margin:2px; height:15px;}
-div#header ul.menu li ul.suboptions li a {padding:2px 0 0 30px; height:20px;}
-div#header ul.menu li ul.suboptions li a.food {background:url('/images/sites/common/menu/icons/food.png')no-repeat 0 0;}
+div#header ul.menu li ul.suboptions li {float:left; width:155px; padding:0 5px; margin:5px 0 0 0; height:auto;}
+div#header ul.menu li ul.suboptions li a {padding:2px 0 0 30px; height:20px; font:normal 13px Arial;}
 div#header ul.menu li ul.suboptions li a.camp {background:url('/images/sites/common/menu/icons/camp.png')no-repeat 0 0;}
+div#header ul.menu li ul.suboptions li a.early_recovery {background:url('/images/sites/common/menu/icons/early_recovery.png')no-repeat 0 0;}
+div#header ul.menu li ul.suboptions li a.education {background:url('/images/sites/common/menu/icons/education.png')no-repeat 0 0;}
+div#header ul.menu li ul.suboptions li a.emergency {background:url('/images/sites/common/menu/icons/emergency.png')no-repeat 0 0;}
+div#header ul.menu li ul.suboptions li a.food {background:url('/images/sites/common/menu/icons/food.png')no-repeat 0 0;}
+div#header ul.menu li ul.suboptions li a.health {background:url('/images/sites/common/menu/icons/health.png') no-repeat 0 0;}
+div#header ul.menu li ul.suboptions li a.logistics {background:url('/images/sites/common/menu/icons/logistics.png') no-repeat 0 0;}
+div#header ul.menu li ul.suboptions li a.nutrition {background:url('/images/sites/common/menu/icons/nutrition.png') no-repeat 0 0;}
 div#header ul.menu li ul.suboptions li a.protection {background:url('/images/sites/common/menu/icons/protection.png') no-repeat 0 0;}
+div#header ul.menu li ul.suboptions li a.shelter {background:url('/images/sites/common/menu/icons/shelter.png') no-repeat 0 0;}
+div#header ul.menu li ul.suboptions li a.water {background:url('/images/sites/common/menu/icons/water.png') no-repeat 0 0;}
 div#header ul.menu li ul.suboptions li a:hover {background-position:0 -22px;}
 
 div#header div.right {margin:11px 0 0 0; width:auto; height:20px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
