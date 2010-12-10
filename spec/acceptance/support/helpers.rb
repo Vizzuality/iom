@@ -9,6 +9,10 @@ module HelperMethods
     end
     page.should have_css("a", :text => 'close session', :href => '/logout')
   end
+
+  def reset_pk_sequence(table_name)
+    ActiveRecord::Base.connection.reset_pk_sequence!(table_name)
+  end
 end
 
 RSpec.configuration.include HelperMethods, :type => :acceptance

@@ -1,14 +1,13 @@
 require File.dirname(__FILE__) + "/../spec_helper"
 require "steak"
 require 'capybara/rails'
-require "capybara/rails"
 require "capybara/dsl"
 require 'database_cleaner'
 require "selenium-webdriver"
 
 DatabaseCleaner.strategy = :transaction
 Capybara.default_driver = :rack_test
-Capybara.default_host = 'www.example.com'
+Capybara.default_host = 'example.com'
 Capybara.app_host = 'http://www.example.com:9887'
 Capybara.default_wait_time = 5
 
