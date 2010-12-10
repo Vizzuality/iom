@@ -1,6 +1,13 @@
 
     $(document).ready( function() {
       
+      //If description is bigger than main_head
+      if ($('div.inner_main_head div.right').height()>$('div.inner_main_head div.left').height()) {
+        $('div.inner_main_head div.left').height($('div.inner_main_head div.right').height());
+        $('div.inner_main_head div.float_head').height($('div.inner_main_head div.right').height());
+      }
+      
+      
       //If right part is bigger than float left
       $('div#left_column div.outer_float').height($('div#left_column div.float_left').height()-40);
       

@@ -29,10 +29,10 @@
         $('div.timeline span').width((days_completed*237)/total_days);
 
         //Gallery
-        // if ($('div.image_gallery').length>0) {
-        //           //Galleria.loadTheme('galleria/src/themes/galleria/galleria.classic.js');
-        //           $('div.image_gallery').galleria();
-        //         }
+  			if ($('div.galleryStyle').length>0){		
+  	      Galleria.loadTheme('/javascripts/plugins/galleria.classic.js');
+  			  $('div.galleryStyle').galleria({thumbnails:false, preload:2,autoplay:5000,transition:'fade',show_counter:'false'});
+  			}
         
         
         //Google map
