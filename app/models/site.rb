@@ -171,7 +171,7 @@ class Site < ActiveRecord::Base
 
     # (7)
     if geographic_context_geometry?
-      where << "ST_Contains(projects.the_geom, #{geographic_context_geometry})"
+      where << "ST_Contains(ST_GeomFromText('POLYGON(#{geographic_context_geometry.text_representation()})',4326),projects.the_geom)"
     end
 
     result = Project.select(select).from(from.join(',')).where(where.join(' AND '))
