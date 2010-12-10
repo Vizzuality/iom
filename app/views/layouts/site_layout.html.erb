@@ -23,9 +23,31 @@
                 <a href="#" class="geneva"><%= @site.word_for_clusters.upcase %><span class="with_suboptions"></span></a>
                 <ul class="suboptions">
                   <% @site.clusters.each do |cluster| %>
-                  <li><a href="<%= cluster_path(cluster) %>" class="geneva <% if (cluster.name.include? 'Food Security') %><%= 'food' %><%elsif (cluster.name.include? 'Protection') %><%= 'protection' %><%end%>"><%= cluster.name %></a></li>
-                  
-                  
+                      <% @cluster_element = '' %>
+                      <% if (cluster.name.include? 'Camp') %>
+                          <% @cluster_element = 'camp' %>
+                      <% elsif (cluster.name.include? 'Early') %>
+                          <% @cluster_element = 'early_recovery' %>
+                      <% elsif (cluster.name.include? 'Education') %>
+                          <% @cluster_element = 'education' %>
+                      <% elsif (cluster.name.include? 'Emergency') %>
+                          <% @cluster_element = 'emergency' %>
+                      <% elsif (cluster.name.include? 'Food Security') %>
+                          <% @cluster_element = 'food' %>
+                      <%elsif (cluster.name.include? 'Health') %>
+                          <% @cluster_element = 'health' %>
+                      <% elsif (cluster.name.include? 'Logistics') %>
+                          <% @cluster_element = 'logistics' %>
+                      <% elsif (cluster.name.include? 'Nutrition') %>
+                          <% @cluster_element = 'nutrition' %>
+                      <% elsif (cluster.name.include? 'Protection') %>
+                          <% @cluster_element = 'protection' %>                          
+                      <% elsif (cluster.name.include? 'Shelter') %>
+                          <% @cluster_element = 'shelter' %>
+                      <% elsif (cluster.name.include? 'Water') %>
+                          <% @cluster_element = 'water' %>
+                      <%end%>
+                  <li><a href="<%= cluster_path(cluster) %>" class="geneva <%= @cluster_element %>"><%= cluster.name %></a></li>
                   <% end %>
                 </ul>
               </li>

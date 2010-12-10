@@ -28,7 +28,9 @@
             mapTypeId: google.maps.MapTypeId.ROADMAP
           }
       var map = new google.maps.Map(document.getElementById("map"),myOptions);
-      var map2 = new google.maps.Map(document.getElementById("secondary_map"),myOptions);
-      map2.setCenter(new google.maps.LatLng(40.42245660632275, -3.699495792388916));
-      map2.setZoom(17);
+      if ($('secondary_map').length > 0){
+          var map2 = new google.maps.Map(document.getElementById("secondary_map"),myOptions);
+          map2.setCenter(new google.maps.LatLng(40.42245660632275, -3.699495792388916));
+          map2.setZoom(17);
+      }
     });
