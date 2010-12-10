@@ -184,7 +184,7 @@ $(document).ready(function(ev){
     }
 
     $(document).click(function(event) {
-      if (!$(event.target).closest('span#cluster_combo_search').length) {
+      if ((!$(event.target).closest('span#cluster_combo_search').length)&&(!$(event.target).closest('.scroll_pane').length)) {
         $('span#cluster_combo_search').removeClass('clicked');
       };
     });
@@ -227,7 +227,7 @@ $(document).ready(function(ev){
     }
 
     $(document).click(function(event) {
-      if (!$(event.target).closest('span#sector_combo_search').length) {
+      if ((!$(event.target).closest('span#sector_combo_search').length)&&(!$(event.target).closest('.scroll_pane').length)) {
         $('span#sector_combo_search').removeClass('clicked');
       };
     });
@@ -270,7 +270,7 @@ $(document).ready(function(ev){
     }
 
     $(document).click(function(event) {
-      if (!$(event.target).closest('ul.list_combo_content').length) {
+      if ((!$(event.target).closest('ul.list_combo_content').length)&&(!$(event.target).closest('.scroll_pane').length)) {
         $('div.list_combo').find('ul.list_combo_content').css('display','none');
         $('div.list_combo').children('span.combo_large').attr('id','hidden');
         $('div.list_combo').children('span.combo_large').removeClass('displayed');
@@ -347,7 +347,7 @@ $(document).ready(function(ev){
     }
 
     $(document).click(function(event) {
-      if (!$(event.target).closest('span.combo_cluster_options').length) {
+      if ((!$(event.target).closest('span.combo_cluster_options').length)&&(!$(event.target).closest('.scroll_pane').length)) {
         $('span.combo_cluster_options.clicked').removeClass('clicked');
         $('span.combo_cluster_options').css('position','static');              
       };
@@ -408,7 +408,7 @@ $(document).ready(function(ev){
     }
 
     $(document).click(function(event) {
-      if (!$(event.target).closest('span.combo_sector_options').length) {
+      if ((!$(event.target).closest('span.combo_sector_options').length)&&(!$(event.target).closest('.scroll_pane').length)) {
         $('span.combo_sector_options.clicked').removeClass('clicked');
         $('span#sector').css('position','static');        
       };

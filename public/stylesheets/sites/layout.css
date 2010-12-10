@@ -56,6 +56,8 @@ div#layout {width:932px; margin:0 auto;}
 	font-style: normal;
 }
 
+/*The next is neccesary to fix properly the content scrollable*/
+div.wrapper {float:left; margin:0; padding:0;}
 
 /* HEADER */
 
@@ -66,18 +68,37 @@ div#header h1 {margin:11px 0 0 0; font:normal 15px "PT Sans Bold"; color:white; 
 div#header h1 a {color:white;}
 div#header ul.menu {float:right; margin:4px 0 0 100px; width:auto; height:25px;}
 div#header ul.menu li {float:left; width:auto; margin:0 23px 0 0; position:relative;}
-div#header ul.menu li#cluster_option.clicked {background:url('/images/sites/common/menu/cluster_head_clicked.png') no-repeat 0 0; width:91px; height:35px; margin:0 14px 0 0;}
-div#header ul.menu li#cluster_option.clicked ul.suboptions {position:absolute; top:35px; left:0; z-index:110; background:url('/images/sites/common/menu/cluster_body_clicked.png') no-repeat 0 0; display:none; width:497px; height:177px; display:inline;}
 
-div#header ul.menu li.clicked a {margin:8px 0 0 10px;}
-div#header ul.menu li.clicked a span.with_suboptions {display:none;}
+div#header ul.menu li#cluster_option.clicked ul.suboptions {position:absolute; top:35px; left:-10px; z-index:110; background:url('/images/sites/common/menu/cluster_body_clicked.png') no-repeat 0 0; display:none; width:497px; height:177px; display:inline; padding:7px;}
+div#header ul.menu li div.header_title {display:none;}
+div#header ul.menu li div.header_title a {display:none;}
+div#header ul.menu li#cluster_option.clicked div.header_title {position:absolute; top:0; left:-10px; background:url('/images/sites/common/menu/cluster_head_clicked.png') no-repeat 0 0; width:94px; height:35px; display:inline;}
+div#header ul.menu li.clicked div.header_title a {float:left; margin:8px 0 0 10px; font:normal 13px "Geneva"; color:white; text-decoration:none; display:inline;}
+div#header ul.menu li#country_option.clicked div.header_title {position:absolute; top:0; left:-15px; background:url('/images/sites/common/menu/country_head_clicked.png') no-repeat 0 0; width:106px; height:35px; display:inline;}
+div#header ul.menu li#country_option.clicked div.suboptions_body {position:absolute; top:35px; left:-18px; z-index:110; background:url('/images/sites/common/menu/country_body_clicked.png') no-repeat 0 0; display:none; width:238px; height:234px; display:inline; padding:7px; display:inline;}
+div#header ul.menu li#country_option.clicked div.header_title a {margin:8px 0 0 15px;}
+div#header ul.menu li#country_option.clicked ul.content {float:left; width:204px; height:218px; overflow-x:hidden; overflow-y:auto; margin:0 0 0 13px;}
+div#header ul.menu li#country_option.clicked ul.content li {float:left; margin:3px 0 0 0; width:185px;}
+div#header ul.menu li#country_option.clicked ul.content li a {float:left; margin:0; font:normal 13px "PT Sans"; color:#C0C0BF; text-decoration:none;}
+div#header ul.menu li#country_option.clicked ul.content li a:hover {color:white;}
+
+/*div#header ul.menu li#organization_option.clicked div.suboptions_body {position:absolute; top:35px; left:-18px; z-index:110; background:url('/images/sites/common/menu/country_body_clicked.png') no-repeat 0 0; display:none; width:238px; height:234px; display:inline; padding:7px; display:inline;}
+div#header ul.menu li#organization_option.clicked div.header_title a {margin:8px 0 0 15px;}
+div#header ul.menu li#organization_option.clicked ul.content {float:left; width:204px; height:218px; overflow-x:hidden; overflow-y:auto; margin:0 0 0 13px;}
+div#header ul.menu li#organization_option.clicked ul.content li {float:left; margin:3px 0 0 0; width:185px;}
+div#header ul.menu li#organization_option.clicked ul.content li a {float:left; margin:0; font:normal 13px "PT Sans"; color:#C0C0BF; text-decoration:none;}
+div#header ul.menu li#organization_option.clicked ul.content li a:hover {color:white;}
+*/
+
+
 div#header ul.menu li.clicked ul.suboptions {display:inline;}
 div#header ul.menu li a {float:left; font:normal 13px "Geneva"; color:#C2C1C1; text-decoration:none; margin:8px 0 0 0;}
 div#header ul.menu li a:hover {cursor:pointer; color:white;}
 div#header ul.menu li a span.with_suboptions {float:right; width:6px; height:3px; margin:7px 0 0 2px; background:url('/images/sites/common/arrow_menu.png') no-repeat 0 0;}
-div#header ul.menu li ul.suboptions {position:absolute; top:20px; left:-10px; background-color:#2F2E2C; z-index:110; display:none;}
+div#header ul.menu li div.suboptions_body {display:none;}
+div#header ul.menu li ul.suboptions {position:absolute; top:20px; left:-13px; background-color:#2F2E2C; z-index:110; display:none;}
 div#header ul.menu li ul.suboptions li {float:left; width:155px; padding:0 5px; margin:5px 0 0 0; height:auto;}
-div#header ul.menu li ul.suboptions li a {padding:2px 0 0 30px; height:20px; font:normal 13px Arial;}
+div#header ul.menu li ul.suboptions li a {float:left; padding:2px 0 0 30px; height:20px; font:normal 13px Arial;}
 div#header ul.menu li ul.suboptions li a.camp {background:url('/images/sites/common/menu/icons/camp.png')no-repeat 0 0;}
 div#header ul.menu li ul.suboptions li a.early_recovery {background:url('/images/sites/common/menu/icons/early_recovery.png')no-repeat 0 0;}
 div#header ul.menu li ul.suboptions li a.education {background:url('/images/sites/common/menu/icons/education.png')no-repeat 0 0;}
@@ -89,7 +110,7 @@ div#header ul.menu li ul.suboptions li a.nutrition {background:url('/images/site
 div#header ul.menu li ul.suboptions li a.protection {background:url('/images/sites/common/menu/icons/protection.png') no-repeat 0 0;}
 div#header ul.menu li ul.suboptions li a.shelter {background:url('/images/sites/common/menu/icons/shelter.png') no-repeat 0 0;}
 div#header ul.menu li ul.suboptions li a.water {background:url('/images/sites/common/menu/icons/water.png') no-repeat 0 0;}
-div#header ul.menu li ul.suboptions li a:hover {background-position:0 -22px;}
+div#header ul.menu li ul.suboptions li a:hover {background-position:0 -22px; cursor:pointer;}
 
 div#header div.right {margin:11px 0 0 0; width:auto; height:20px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#header div.right form.search {position:relative; float:right;}
@@ -309,7 +330,7 @@ div#project div.left div.block p.second_date {width:121px; margin:0!important; p
 div#project div.right {width:660px; height:1000px; margin:0 30px 0 0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#project div.float_right {position:absolute; top:0; right:25px; width:660px; padding:5px; background:url('/images/sites/common/mesh.png') repeat 0 0; z-index:100;}
 div#project div.float_right div.head {width:596px; height:auto; padding:32px; background:url('/images/sites/search/head_mask.png') repeat 0 0 #CD5D4C;} 
-div#project div.float_right div.head div#completed {position:absolute; bottom:-22px; right:-15px; width:173px; height:41px; background:url('/images/sites/projects/completed_msg.png') no-repeat; display:none;}
+div#project div.float_right div.head div#completed {position:absolute; top:112px; right:-15px; width:173px; height:41px; background:url('/images/sites/projects/completed_msg.png') no-repeat; display:none;}
 div#project div.float_right div.head div#completed p {float:left; font:normal 13px "PT Sans Bold"; color:white; text-transform:uppercase; margin:9px 0 0 15px; letter-spacing:-1.0px;}
 div#project div.float_right div.head h1 {width:100%; font:normal 25px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42;}
 div#project div.float_right div.head p {width:100%; padding:2px 0 0 0; font:normal 13px Arial; color:#7C3831; text-shadow:none;} 
