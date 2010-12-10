@@ -10,7 +10,6 @@
           $('div#project div.float_right').append('<div class="block margin"></div>');
           $('div#project div.float_right div.block:last').height(offset);
         }
-
         if ($('div#project div.float_right').height() > $('div#project div.right').height()) {
           $('div#project div.right').height($('div#project div.float_right').height());
         }
@@ -29,6 +28,11 @@
         
         $('div.timeline span').width((days_completed*237)/total_days);
 
+        //Gallery
+        // if ($('div.image_gallery').length>0) {
+        //           //Galleria.loadTheme('galleria/src/themes/galleria/galleria.classic.js');
+        //           $('div.image_gallery').galleria();
+        //         }
         
         
         //Google map

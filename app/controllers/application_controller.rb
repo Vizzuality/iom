@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
     def main_site_host
       case Rails.env
       when 'development'
-        #'192.168.1.131'  # to test in ie
+        #'192.168.1.140'  # to test in ie
         'localhost'
       when 'test'
         'example.com'

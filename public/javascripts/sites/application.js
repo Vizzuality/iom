@@ -9,21 +9,19 @@ $(document).ready( function() {
       if (($(this).children('span.with_suboptions').length > 0)&&(!$(this).hasClass('displayed'))){
 
           // Close all tabs
-          $('ul.menu li a.displayed').parent().find('ul.suboptions').css('display','none');
           $('ul.menu li a.displayed').removeClass('displayed');          
+          $('ul.menu li.clicked').removeClass('clicked');
           
-          $(this).parent().children('ul.suboptions').fadeIn('fast');
           $(this).addClass('displayed');
-          
+          $(this).parent().addClass('clicked');
           $(document).click(function(event) {
             if (!$(event.target).closest('ul.menu li a').length) {
-              $('ul.menu li').find('ul.suboptions').css('display','none');
+              $('ul.menu li.clicked').removeClass('clicked');                
               $('ul.menu li a.displayed').removeClass('displayed');                        
             };
           });
       }
       else {
-          $('ul.menu li a.displayed').parent().find('ul.suboptions').css('display','none');
           $('ul.menu li a.displayed').removeClass('displayed'); 
       }
   });
