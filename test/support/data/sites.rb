@@ -24,7 +24,7 @@ module Iom
             :name => 'Haiti Aid Map', :short_description => 'Haiti Aid Map short desc',
             :long_description => 'Haiti Aid Map long desc',
             :contact_email => 'contact@example.com', :contact_person => 'Haiti Contact Person',
-            :url => 'http://haiti.aidmap.com', :google_analytics_id => 'GA-1234-321',
+            :url => 'http://haiti.example.com', :google_analytics_id => 'GA-1234-321',
             :blog_url => '', :word_for_clusters => 'clisters', :word_for_regions => 'rigions',
             :show_global_donations_raises => true, :geographic_context_country_id => nil, :geographic_context_region_id => nil,
             :project_context_cluster_id => cluster.id

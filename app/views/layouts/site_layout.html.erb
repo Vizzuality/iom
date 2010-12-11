@@ -6,7 +6,7 @@
   
   
   <%= stylesheet_link_tag '/stylesheets/sites/jscroll.css','/stylesheets/sites/layout.css' %>
-  <%= stylesheet_link_tag @site.theme.css_file %>
+  <%= stylesheet_link_tag @site.theme.css_file if @site.theme %>
 </head>
 <body>
   <div id="header">
