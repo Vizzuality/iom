@@ -2,13 +2,11 @@
   <li <%= selected_if_current_page(edit_admin_organization_path(@organization)) %>>
     <div class="bottom_selected">
       <%= link_to('Basic information', edit_admin_organization_path(@organization), :class=>"basic") %>
-      <% unless @organization.sites.empty? %>
-       <span class="list">
-         <% @organization.sites.each do |site| %>
-           <p><%= link_to(site.name, organization_site_specific_information_admin_organization_path(@organization, site)) %></p>
-         <% end %>
-       </span>
-      <% end %>
+      <span class="list">
+        <% Site.all.each do |site| %>
+          <p><%= link_to(site.name, organization_site_specific_information_admin_organization_path(@organization, site)) %></p>
+        <% end %>
+      </span>
     </div>
   </li>
   <li <%= selected_if_current_page(admin_organization_projects_path(@organization)) %>><%= link_to('Organization projects', admin_organization_projects_path(@organization)) %><% if !@organization.sites.empty? %> <p><span><%=@organization.projects.count%></span></p><% end %></li>

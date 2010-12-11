@@ -41,9 +41,19 @@ class Admin::DonorsController < ApplicationController
 
   def update
     @donor = Donor.find(params[:id])
-    @donor.attributes = params[:donor]
+    if params[:site_id]
+      if @site = Site.find(params[:site_id])
+        @donor.attributes_for_site = {:donor_values => params[:donor], :site_id => params[:site_id]}
+      end
+    else
+      @donor.attributes = params[:donor]
+    end
     if @donor.save
-      redirect_to edit_admin_donor_path(@donor), :flash => {:success => 'Donor has been updated successfully'}
+      if params[:site_id]
+        redirect_to donor_site_specific_information_admin_donor_path(@donor, @site), :flash => {:success => 'Donor has been updated successfully'}
+      else
+        redirect_to edit_admin_donor_path(@donor), :flash => {:success => 'Donor has been updated successfully'}
+      end
     else
       render :action => 'edit'
     end
@@ -53,6 +63,12 @@ class Admin::DonorsController < ApplicationController
     @donor = Donor.find(params[:id])
     @donor.destroy
     redirect_to admin_donors_path, :flash => {:success => 'Donor has been deleted successfully'}
+  end
+  
+  def specific_information
+    @donor = Donor.find(params[:id])
+    @site = Site.find(params[:site_id])
+    @donor.attributes = @donor.attributes_for_site(@site)
   end
 
 end

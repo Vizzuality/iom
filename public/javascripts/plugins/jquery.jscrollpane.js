@@ -91,7 +91,7 @@
 					// TODO: Deal with where width/ height is 0 as it probably means the element is hidden and we should
 					// come back to it later and check once it is unhidden...
 					paneWidth = elem.innerWidth() + originalPaddingTotalWidth;
-					paneHeight = elem.innerHeight() - 10;
+					paneHeight = elem.innerHeight();
 
 					elem.width(paneWidth);
 					
@@ -132,7 +132,7 @@
 
 					if (hasContainingSpaceChanged) {
 						paneWidth = elem.innerWidth() + originalPaddingTotalWidth;
-						paneHeight = elem.innerHeight() - 10;
+						paneHeight = elem.innerHeight();
 						container.css({
 							'width': paneWidth + 'px',
 							'height': paneHeight + 'px'
