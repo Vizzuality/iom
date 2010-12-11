@@ -7,6 +7,36 @@
     $(function(){
       var bbox_coords = $('input#site_geographic_boundary_box').val();
       if (bbox_coords) {
+        createMap(bbox_coords);
+      };
+
+      $('li#gc_limited_bbox a.limited').click(createMap);
+    });
+
+    var createMap = function(bbox_coords){
+      if (first) {
+        first = false;
+        var myOptions = {
+          zoom: 4,
+          center: new google.maps.LatLng(18.971187, -72.285215),
+          disableDefaultUI: true,
+          navigationControl: true,
+          navigationControlOptions: {
+           style: google.maps.NavigationControlStyle.SMALL
+          },
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(document.getElementById("map_bbox"),myOptions);
+
+        selection_polygon = new google.maps.Polygon({
+          strokeColor: "#FF6600",
+          strokeOpacity: 1,
+          strokeWeight: 1,
+          fillColor: "#FF6600",
+          fillOpacity: 0
+        });
+
+        if (bbox_coords && typeof bbox_coords == 'string') {
           bbox_coords = bbox_coords.split(',');
           for (var i=0; i < bbox_coords.length; i++) {
             polygon_path_coords.push(
@@ -16,53 +46,24 @@
               )
             );
           };
-          $(document).bind('site_js_loaded', function(){
-            $('li#gc_limited_bbox a.limited').click();
+
+          selection_polygon.setOptions({fillOpacity: 0.40});
+          selection_polygon.setPath(polygon_path_coords);
+          selection_polygon.setMap(map);
+
+          var bounds = new google.maps.LatLngBounds();
+          selection_polygon.getPath().forEach(function(item, index){
+            bounds.extend(item);
           });
-      };
-
-      $('li#gc_limited_bbox a.limited').click(function(evt){
-        if (first) {
-          first = false;
-          var myOptions = {
-            zoom: 4,
-            center: new google.maps.LatLng(18.971187, -72.285215),
-            disableDefaultUI: true,
-            navigationControl: true,
-            navigationControlOptions: {
-             style: google.maps.NavigationControlStyle.SMALL
-            },
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-          };
-          map = new google.maps.Map(document.getElementById("map_bbox"),myOptions);
-
-          selection_polygon = new google.maps.Polygon({
-            strokeColor: "#FF6600",
-            strokeOpacity: 1,
-            strokeWeight: 1,
-            fillColor: "#FF6600",
-            fillOpacity: 0
-          });
-
-          if (polygon_path_coords && polygon_path_coords.length > 0) {
-            selection_polygon.setOptions({fillOpacity: 0.40});
-            selection_polygon.setPath(polygon_path_coords);
-            selection_polygon.setMap(map);
-
-            var bounds = new google.maps.LatLngBounds();
-            selection_polygon.getPath().forEach(function(item, index){
-              bounds.extend(item);
-            });
-            map.setCenter(bounds.getCenter());
-            map.fitBounds(bounds);
-          };
-
-          google.maps.event.addListener(map,"click",function(event){
-            changeMapSelectionStatus(event.latLng);
-          });
+          map.setCenter(bounds.getCenter());
+          map.fitBounds(bounds);
         };
-      });
-    });
+
+        google.maps.event.addListener(map,"click",function(event){
+          changeMapSelectionStatus(event.latLng);
+        });
+      };
+    };
 
     var  changeMapSelectionStatus = function(latlng) {
       if (selection_polygon.getPath().getLength()==0 || !drawing) {

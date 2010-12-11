@@ -158,8 +158,6 @@ $(document).ready(function(ev){
         $('span.select_combo_typology.clicked').removeClass('clicked');
 
       });
-
-      $(document).trigger('site_js_loaded');
 });
 
 // AUTOCOMPLETE TAGS

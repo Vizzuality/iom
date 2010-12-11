@@ -31,8 +31,10 @@
   <div class="field">
   <label>SITE GEOGRAPHICAL CONTEXT</label>
   <ul class="geographic_options">
-  <li id="gc_worldwide" class="selected"><a class="combo limited">Worldwide, not limited</a></li>
-  <li id="gc_limited_country">
+  <li id="gc_worldwide" class="<%= selected_if_worldwide(@site) %>">
+    <a class="combo limited">Worldwide, not limited</a>
+  </li>
+  <li id="gc_limited_country" class="<%= selected_if_field_present(@site, :geographic_context_country_id) %>">
     <a class="combo limited">Limited to a country</a>
     <div class="content">
       <span class="select_country_combo"><p class="country">Select a country</p>
@@ -47,7 +49,7 @@
       </span>
     </div>
   </li>
-  <li id="gc_limited_region">
+  <li id="gc_limited_region" class="<%= selected_if_field_present(@site, :geographic_context_country_id) %>">
     <a class="limited combo">Limited to a region</a>
 
     <div class="content">
@@ -65,7 +67,7 @@
       </div>
     </div>
   </li>
-  <li id="gc_limited_bbox">
+  <li id="gc_limited_bbox" class="<%= selected_if_field_present(@site, :geographic_boundary_box) %>">
     <a class="limited combo">Limited by a boundary box</a>
     <%= f.hidden_field :geographic_boundary_box %>
     <div class="content">
