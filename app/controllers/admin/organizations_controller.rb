@@ -27,7 +27,7 @@ class Admin::OrganizationsController < ApplicationController
 
   def specific_information
     @organization = Organization.find(params[:id])
-    @site = @organization.sites.find(params[:site_id])
+    @site = Site.find(params[:site_id])
     @organization.attributes = @organization.attributes_for_site(@site)
   end
 

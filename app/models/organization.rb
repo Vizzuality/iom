@@ -55,10 +55,6 @@ class Organization < ActiveRecord::Base
   has_many :sites, :foreign_key => :project_context_organization_id
   has_many :donations, :through => :projects
 
-  #We comment this because all data comes from trusted environments and this gets executed on places
-  #where it is not interesting... like on imports
-  #before_validation :clean_html
-
   validates_presence_of :name
   #validates_presence_of :description
 
@@ -127,13 +123,4 @@ class Organization < ActiveRecord::Base
       end
     end
   end
-
-  private
-
-    def clean_html
-      %W{ name description website twitter facebook hq_address contact_phone_number contact_email donation_address zip_code city state donation_phone_number donation_website }.each do |att|
-        eval("self.#{att} = Sanitize.clean(self.#{att}.gsub(/\r/,'')) unless self.#{att}.blank?")
-      end
-    end
-
 end

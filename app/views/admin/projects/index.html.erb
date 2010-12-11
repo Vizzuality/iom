@@ -125,7 +125,7 @@
             <h3><a href="<%= edit_admin_project_path(project) %>"><%= truncate(project.name,:length => 50) %></a></h3>
             <a class="project_status <%= project.finished? ? 'closed' : 'active' %>"><%= project.finished? ? 'Closed' : 'Active' %></a>
           </div>
-          <div class="gray box <%= (project.primary_organization.name.length < 20)? 'single' : '' %>">
+          <div class="gray box <%= (project.primary_organization.name.length < 20) ? 'single' : '' %>">
             <p class="red"><a href="<%= edit_admin_organization_path(project.primary_organization) %>"><%= truncate(project.primary_organization.name, :length => 40)%></a></p>
           </div>
           <% unless project.clusters.empty? %>
@@ -143,7 +143,7 @@
             <div class="white box little">
             </div>
           <% end %>
-          <div class="gray box little <%= (project.countries.first.try(:name).length < 20)? 'single' : '' %>">
+          <div class="gray box little <%= (project.countries.first && project.countries.first.name.length < 20 ) ? 'single' : '' %>">
             <p><%= project.countries.first.try(:name) %></p>
           </div>
         </li>

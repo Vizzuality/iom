@@ -64,6 +64,21 @@ class Donor < ActiveRecord::Base
       [Region.find(row['region_id']), row['count'].to_i]
     end
   end
+  
+  serialize :site_specific_information
+
+  # Attributes for site getter
+  def attributes_for_site(site)
+    atts = site_specific_information || {}
+    atts[site.id.to_s]
+  end
+
+  # Attributes for site setter
+  def attributes_for_site=(value)
+    atts = site_specific_information || {}
+    atts[value[:site_id].to_s] = value[:donor_values]
+    update_attribute(:site_specific_information, atts)
+  end
 
   private
 

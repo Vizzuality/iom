@@ -1,6 +1,14 @@
 <ul>
   <li <%= selected_if_current_page(edit_admin_donor_path(@donor)) %>>
-    <%= link_to('Basic information', edit_admin_donor_path(@donor)) %>
+    <div class="bottom_selected">
+      <%= link_to('Basic information', edit_admin_donor_path(@donor), :class=>"basic") %>
+      <span class="list">
+        <% Site.all.each do |site| %>
+          <p><%= link_to(site.name, donor_site_specific_information_admin_donor_path(@donor, site)) %></p>
+        <% end %>
+      </span>
+    </div>
+  </li>
   <li <%= selected_if_current_page(projects_admin_donor_path(@donor)) %>>
     <%= link_to('Funded projects', projects_admin_donor_path(@donor)) %><% if !@donor.donated_projects.empty? %> <p><span><%=@donor.donated_projects.count%></span></p><% end %>
   </li>

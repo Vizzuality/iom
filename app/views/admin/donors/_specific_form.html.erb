@@ -1,0 +1,99 @@
+<%= form_for(@donor, :url => (@donor.new_record? ? admin_donors_path : admin_donor_path(@donor)), :html => { :multipart => true }) do |f| %>
+
+<div class="specific_edit closed">
+  <div class="top"></div>
+  <div class="med">
+    <span>
+      <h3 class="museo_sans">BASIC INFORMATION</h3>
+      <p class="paylock close"><a href="#">Click to edit the specific fields</a></p>
+    </span>
+
+    <div class="field">
+      <label>NAME   <strong>*</strong></label>
+      <%= f.text_field :name, :class=>"long #{'error' if !@donor.errors[:name].empty? && action_name != 'new'}" %>
+      <%= errors_for @donor, :name %>
+    </div>
+
+    <%= f.label :logo %>
+    <div class="image_container">
+      <% if @donor.logo_file_name? %>
+        <%= image_tag(@donor.logo.url(:small)) %>
+      <% end -%>
+      <div class="field">
+        <p>JPG, PNG and GIF supported</p>
+        <%= f.file_field :logo %>
+      </div>
+    </div>
+
+    <div class="field">
+      <%= f.label :description %>
+      <%= f.text_area :description %>
+    </div>
+
+    <div class="field">
+      <%= f.label :website %>
+      <%= f.text_field :website, :class=>"long" %>
+    </div>
+    <a href="<%= @donor.website %>" class="preview" target="_blank" id="website">preview the link</a>
+
+
+    <div class="short_field">
+      <%= f.label :twitter %>
+      <%= f.text_field :twitter, :class=>"short twitter" %>
+    </div>
+    <a href="<%= @donor.twitter %>" class="preview no_margin" target="_blank" id="twitter">preview the link</a>
+
+
+    <div class="field">
+      <%= f.label :facebook %>
+      <%= f.text_field :facebook, :class=>"long facebook" %>
+    </div>
+    <a href="<%= @donor.facebook %>" class="preview" target="_blank" id="facebook">preview the link</a>
+  </div>
+  <div class="bottom"></div>
+</div>
+
+<div class="specific_edit closed">
+  <div class="top"></div>
+  <div class="med">
+    <span>
+      <h3 class="museo_sans">CONTACT INFORMATION</h3>
+      <p class="paylock close"><a href="#">Click to edit the specific fields</a></p>
+    </span>
+
+    <div class="field">
+      <%= f.label :contact_person_name %>
+      <%= f.text_field :contact_person_name, :class=>"short" %>
+    </div>
+
+    <div class="short_field">
+      <%= f.label :contact_company %>
+      <%= f.text_field :contact_company, :class=>"short error" %>
+    </div>
+
+    <div class="short_field last">
+      <%= f.label :contact_person_position %>
+      <%= f.text_field :contact_person_position, :class=>"short" %>
+    </div>
+
+    <div class="short_field">
+      <%= f.label :contact_email %>
+      <%= f.text_field :contact_email, :class=>"short" %>
+    </div>
+
+    <div class="short_field last">
+      <%= f.label :contact_phone_number %>
+      <%= f.text_field :contact_phone_number, :class=>"short" %>
+    </div>
+  </div>
+</div>
+
+  <% if action_name == 'specific_information' %>
+    <%= hidden_field_tag :site_id, params[:site_id] %>
+  <% end %>
+
+  <%= f.submit 'Save', :class => "#{'error' if @donor.invalid? && action_name != 'new'}" %>
+
+<% end -%>
+
+<script src="/javascripts/backoffice/donors.js" type="text/javascript" charset="utf-8"></script>
