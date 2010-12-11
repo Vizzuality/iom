@@ -3,37 +3,37 @@
 # Table name: sites
 #
 #  id                              :integer         not null, primary key
-#  name                            :string(255)     
-#  short_description               :text            
-#  long_description                :text            
-#  contact_email                   :string(255)     
-#  contact_person                  :string(255)     
-#  url                             :string(255)     
-#  permalink                       :string(255)     
-#  google_analytics_id             :string(255)     
-#  logo_file_name                  :string(255)     
-#  logo_content_type               :string(255)     
-#  logo_file_size                  :integer         
-#  logo_updated_at                 :datetime        
-#  theme_id                        :integer         
-#  blog_url                        :string(255)     
-#  word_for_clusters               :string(255)     
-#  word_for_regions                :string(255)     
-#  show_global_donations_raises    :boolean         
+#  name                            :string(255)
+#  short_description               :text
+#  long_description                :text
+#  contact_email                   :string(255)
+#  contact_person                  :string(255)
+#  url                             :string(255)
+#  permalink                       :string(255)
+#  google_analytics_id             :string(255)
+#  logo_file_name                  :string(255)
+#  logo_content_type               :string(255)
+#  logo_file_size                  :integer
+#  logo_updated_at                 :datetime
+#  theme_id                        :integer
+#  blog_url                        :string(255)
+#  word_for_clusters               :string(255)
+#  word_for_regions                :string(255)
+#  show_global_donations_raises    :boolean
 #  project_classification          :integer         default(0)
-#  geographic_context_country_id   :integer         
-#  geographic_context_region_id    :integer         
-#  project_context_cluster_id      :integer         
-#  project_context_sector_id       :integer         
-#  project_context_organization_id :integer         
-#  project_context_tags            :string(255)     
-#  created_at                      :datetime        
-#  updated_at                      :datetime        
-#  project_context_tags_ids        :string(255)     
-#  status                          :boolean         
+#  geographic_context_country_id   :integer
+#  geographic_context_region_id    :integer
+#  project_context_cluster_id      :integer
+#  project_context_sector_id       :integer
+#  project_context_organization_id :integer
+#  project_context_tags            :string(255)
+#  created_at                      :datetime
+#  updated_at                      :datetime
+#  project_context_tags_ids        :string(255)
+#  status                          :boolean
 #  visits                          :float           default(0.0)
 #  visits_last_week                :float           default(0.0)
-#  geographic_context_geometry     :string          
+#  geographic_context_geometry     :string
 #
 
 class Site < ActiveRecord::Base
@@ -56,7 +56,7 @@ class Site < ActiveRecord::Base
 
   before_validation :clean_html
 
-  attr_accessor :geographic_context, :project_context, :show_blog
+  attr_accessor :geographic_context, :project_context, :show_blog, :geographic_boundary_box
 
   before_save :set_geographic_context, :set_project_context, :set_project_context_tags_ids
   after_create :create_pages
@@ -81,7 +81,7 @@ class Site < ActiveRecord::Base
   rescue ActiveRecord::RecordNotFound
     nil
   end
-  
+
   def published?
     status == true
   end
@@ -131,8 +131,8 @@ class Site < ActiveRecord::Base
     options = default_options.merge(options)
 
     select = "projects.*"
-    from = ["projects"]
-    where = []
+    from   = ["projects"]
+    where  = []
 
     # (1)
     if project_context_cluster_id?
@@ -171,10 +171,12 @@ class Site < ActiveRecord::Base
 
     # (7)
     if geographic_context_geometry?
-      where << "ST_Contains(ST_GeomFromText('POLYGON(#{geographic_context_geometry.text_representation()})',4326),projects.the_geom)"
+      from  << 'sites'
+      where << "ST_Contains(sites.geographic_context_geometry,projects.the_geom)"
     end
 
     result = Project.select(select).from(from.join(',')).where(where.join(' AND '))
+
     if options[:limit]
       result = result.limit(options[:limit])
       if options[:offset]
@@ -229,6 +231,20 @@ class Site < ActiveRecord::Base
     report.dimensions :date
     result = report.results.first
     update_attribute(:visits_last_week, result.pageviews.to_i)
+  end
+
+  def geographic_boundary_box
+    self.geographic_context_geometry.rings.collect{|line_string| line_string.text_representation }.join("|") if self.geographic_context_geometry
+  end
+
+  def geographic_boundary_box=(geometry)
+    return if geometry.blank?
+    coords         = geometry.split(',').map{|c| c.split(' ')}
+    polygon_points = []
+
+    coords.each {|c| polygon_points << Point.from_x_y(c.first.to_f, c.last.to_f)}
+
+    self.geographic_context_geometry = Polygon.from_points([polygon_points])
   end
 
   private

@@ -11,19 +11,22 @@ $(document).ready(function(ev){
           var id = $('ul.geographic_options').children('li.selected').attr('id');
 
           // IF "selected" - before was...
-          if (id == 'gc_limited_country'){
-            $('input#geographic_context_country_id').val(null);
-            $('li.selected').find('p.country').text('Select a country');
+          switch(id){
+            case 'gc_limited_country':
+              $('input#geographic_context_country_id').val(null);
+              $('li.selected').find('p.country').text('Select a country');
+              break;
+            case 'gc_limited_region':
+              $('input#geographic_context_country_id').val(null);
+              $('input#geographic_context_region_id').val(null);
+              $('li.selected').find('p.country').text('Select a country');
+              $('li.selected').find('p.region').text('Select a region');
+              break;
+            case 'gc_limited_bbox':
+              break;
+            default:
 
-          }else  if (id == 'gc_limited_region'){
-            $('input#geographic_context_country_id').val(null);
-            $('input#geographic_context_region_id').val(null);
-            $('li.selected').find('p.country').text('Select a country');
-            $('li.selected').find('p.region').text('Select a region');
-          }else if (id == 'gc_limited_bbox'){
-            // TODO
-
-          }
+          };
 
           $('ul.geographic_options').children('li.selected').removeClass('selected');
           $(this).parent().addClass('selected');
@@ -155,6 +158,8 @@ $(document).ready(function(ev){
         $('span.select_combo_typology.clicked').removeClass('clicked');
 
       });
+
+      $(document).trigger('site_js_loaded');
 });
 
 // AUTOCOMPLETE TAGS
@@ -165,7 +170,7 @@ function split( val ) {
 }
 
   $('.country_region_value').click(function(){
-      
+
     $.ajax({
       url: admin_tags_path + '?country_id=' + $(this).children('a').attr('id')
     });
@@ -174,7 +179,7 @@ function split( val ) {
   $("#pc_tags_section").autocomplete({
     style: 'site_tags',
     source: function( request, response ) {
-      $('span.tags_site').addClass('active');        
+      $('span.tags_site').addClass('active');
       var value = $("#pc_tags_section").val();
       if (value.indexOf(',') != -1 ) {
         value = value.substring(value.indexOf(',')+1, value.length);
