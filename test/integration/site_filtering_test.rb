@@ -8,7 +8,6 @@ class SiteFilteringTest < ActionController::IntegrationTest
     site2 = create_site :url => "site2.#{host}", :status => true
     donor = create_donor
 
-
     host!(host)
     get "/login"
     assert_response :success
@@ -24,5 +23,5 @@ class SiteFilteringTest < ActionController::IntegrationTest
     assert_response :success
     assert_equal site2, assigns(:site)
   end
+  
 end
-
