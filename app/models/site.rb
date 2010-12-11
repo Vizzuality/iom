@@ -33,7 +33,7 @@
 #  status                          :boolean         
 #  visits                          :float           default(0.0)
 #  visits_last_week                :float           default(0.0)
-#  geographic_context_geometry     :geometry        
+#  geographic_context_geometry     :string          
 #
 
 class Site < ActiveRecord::Base

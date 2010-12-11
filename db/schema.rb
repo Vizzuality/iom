@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101202175526) do
+ActiveRecord::Schema.define(:version => 20101211105820) do
 
   create_table "clusters", :force => true do |t|
     t.string "name"
@@ -254,12 +254,7 @@ ActiveRecord::Schema.define(:version => 20101202175526) do
   end
 
   create_table "settings", :force => true do |t|
-    t.string "default_email"
-    t.string "default_contact_name"
-    t.string "geoiq_parameter_1"
-    t.string "geoiq_parameter_2"
-    t.string "google_analytics_username"
-    t.string "google_analytics_password"
+    t.text "data"
   end
 
   create_table "sites", :force => true do |t|

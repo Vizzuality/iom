@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
         when 'test'
           'example.com'
         when 'production'
-          'iom-stage.ipq.co'
+          Settings.main_site_host
       end
     end
 
