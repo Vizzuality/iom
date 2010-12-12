@@ -82,18 +82,7 @@
                   <div class="suboptions_body">
                     <div class="wrapper">
                       <ul class="content scroll_pane">
-                        <% Country.all.each do |country| %>
-                        <li><a href="<%= country_path(country) %>" class="geneva"><%= country.name %></a></li>
-                        <li><a href="<%= country_path(country) %>" class="geneva"><%= country.name %></a></li>
-                        <li><a href="<%= country_path(country) %>" class="geneva"><%= country.name %></a></li>
-                        <li><a href="<%= country_path(country) %>" class="geneva"><%= country.name %></a></li>
-                        <li><a href="<%= country_path(country) %>" class="geneva"><%= country.name %></a></li>
-                        <li><a href="<%= country_path(country) %>" class="geneva"><%= country.name %></a></li>
-                        <li><a href="<%= country_path(country) %>" class="geneva"><%= country.name %></a></li>
-                        <li><a href="<%= country_path(country) %>" class="geneva"><%= country.name %></a></li>
-                        <li><a href="<%= country_path(country) %>" class="geneva"><%= country.name %></a></li>
-                        <li><a href="<%= country_path(country) %>" class="geneva"><%= country.name %></a></li>
-                        <li><a href="<%= country_path(country) %>" class="geneva"><%= country.name %></a></li>
+                        <% @site.countries.each do |country| %>
                         <li><a href="<%= country_path(country) %>" class="geneva"><%= country.name %></a></li>
                         <% end %>
                       </ul>

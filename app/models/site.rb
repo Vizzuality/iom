@@ -249,6 +249,44 @@ class Site < ActiveRecord::Base
 
     self.geographic_context_geometry = Polygon.from_points([polygon_points])
   end
+  
+  def countries
+    unless geographic_context.blank?
+      case geographic_context
+        when 'worlwide'
+          Country.all
+        when 'country'
+          Country.find(self.geographic_context_country_id)
+        when 'region'
+          Region.find(self.geographic_context_region_id).country
+        when 'bbox'
+          # TODO
+          []
+      end
+    else
+      # worlwide
+      Country.all
+    end
+  end
+  
+  def regions
+    unless geographic_context.blank?
+      case geographic_context
+        when 'worlwide'
+          Region.all
+        when 'country'
+          Country.find(self.geographic_context_country_id).regions
+        when 'region'
+          Region.find(self.geographic_context_region_id)
+        when 'bbox'
+          # TODO
+          []
+      end
+    else
+      # worlwide
+      Region.all
+    end
+  end
 
   private
 
