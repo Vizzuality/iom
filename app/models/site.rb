@@ -38,13 +38,14 @@
 
 class Site < ActiveRecord::Base
 
-  #acts_as_geom :the_geom => :polygon
+  # acts_as_geom :the_geom => :polygon
 
   has_many :resources, :conditions => 'resources.element_type = #{Iom::ActsAsResource::SITE_TYPE}', :foreign_key => :element_id, :dependent => :destroy
   has_many :media_resources, :conditions => 'media_resources.element_type = #{Iom::ActsAsResource::SITE_TYPE}', :foreign_key => :element_id, :dependent => :destroy, :order => 'position ASC'
   belongs_to  :theme
   has_many :partners, :dependent => :destroy
-  has_many :pages, :dependent => :destroy
+  has_many :pages, :dependent => :destroy  
+  has_many :cached_projects, :class_name => 'Project', :finder_sql => 'select projects.* from projects, projects_sites where projects_sites.site_id = #{id} and projects_sites.project_id = projects.id'
 
   has_attached_file :logo, :styles => { :small => "60x60#" }
 
@@ -59,7 +60,9 @@ class Site < ActiveRecord::Base
   attr_accessor :geographic_context, :project_context, :show_blog
 
   before_save :set_geographic_context, :set_project_context, :set_project_context_tags_ids
+  after_save :set_cached_projects
   after_create :create_pages
+  after_destroy :remove_cached_projects
 
   def show_blog
     !blog_url.blank?
@@ -186,7 +189,7 @@ class Site < ActiveRecord::Base
 
   # TODO: perform query with a count()
   def total_projects(options = {})
-    projects(options).size
+    projects(options.merge(:limit => nil, :offset => nil)).size
   end
 
   # TODO: performance, don't get all fields
@@ -230,7 +233,7 @@ class Site < ActiveRecord::Base
     result = report.results.first
     update_attribute(:visits_last_week, result.pageviews.to_i)
   end
-
+  
   private
 
     def clean_html
@@ -282,6 +285,17 @@ class Site < ActiveRecord::Base
       self.pages.create :title => 'About'
       self.pages.create :title => 'Contact'
       self.pages.create :title => 'Analysis'
+    end
+    
+    def set_cached_projects
+      self.cached_projects.clear
+      projects(:limit => nil, :offset => nil).each do |project|
+        ActiveRecord::Base.connection.execute("INSERT INTO projects_sites (project_id, site_id) VALUES (#{project.id},#{self.id})")
+      end
+    end
+    
+    def remove_cached_projects
+      ActiveRecord::Base.connection.execute("DELETE FROM projects_sites WHERE site_id = '#{self.id}'")
     end
 
 end

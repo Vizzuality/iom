@@ -33,7 +33,7 @@
 
 class Project < ActiveRecord::Base
 
-  #acts_as_geom :the_geom => :multi_point
+  # acts_as_geom :the_geom => :multi_point
 
   belongs_to :primary_organization, :foreign_key => :primary_organization_id, :class_name => 'Organization'
   has_and_belongs_to_many :clusters
@@ -45,16 +45,19 @@ class Project < ActiveRecord::Base
   has_many :media_resources, :conditions => 'media_resources.element_type = #{Iom::ActsAsResource::PROJECT_TYPE}', :foreign_key => :element_id, :dependent => :destroy, :order => 'position ASC'
   has_many :donations, :dependent => :destroy
   has_many :donors, :through => :donations
+  has_many :cached_sites, :class_name => 'Site', :finder_sql => 'select sites.* from sites, projects_sites where projects_sites.project_id = #{id} and projects_sites.site_id = sites.id'
 
   before_validation :clean_html
 
   validates_presence_of :primary_organization_id
 
-#  validate :dates_consistency, :presence_of_clusters_and_sectors
+  # validate :dates_consistency, :presence_of_clusters_and_sectors
 
   validate :dates_consistency
   
-
+  after_save :set_cached_sites
+  after_destroy :remove_cached_sites
+  
   attr_accessor :sectors_ids, :clusters_ids
 
   def sectors_ids=(value)
@@ -116,7 +119,7 @@ class Project < ActiveRecord::Base
       (end_date - Date.today).to_i / 30
     end
   end
-
+  
   private
 
     def clean_html
@@ -151,6 +154,19 @@ class Project < ActiveRecord::Base
       if clusters_ids.blank? && clusters.empty?
         errors.add(:clusters, "can't be blank")
       end
+    end
+    
+    def set_cached_sites
+      self.cached_sites.clear
+      Site.all.each do |site|
+        if site.projects(:limit => nil, :offset => nil).include?(self)
+          ActiveRecord::Base.connection.execute("INSERT INTO projects_sites (project_id, site_id) VALUES (#{self.id},#{site.id})")
+        end
+      end
+    end
+    
+    def remove_cached_sites
+      ActiveRecord::Base.connection.execute("DELETE FROM projects_sites WHERE project_id = '#{self.id}'")
     end
 
 end

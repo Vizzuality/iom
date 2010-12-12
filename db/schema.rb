@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101211105820) do
+ActiveRecord::Schema.define(:version => 20101211204623) do
 
   create_table "clusters", :force => true do |t|
     t.string "name"
@@ -221,6 +221,15 @@ ActiveRecord::Schema.define(:version => 20101211105820) do
 
   add_index "projects_sectors", ["project_id"], :name => "index_projects_sectors_on_project_id"
   add_index "projects_sectors", ["sector_id"], :name => "index_projects_sectors_on_sector_id"
+
+  create_table "projects_sites", :id => false, :force => true do |t|
+    t.integer "project_id"
+    t.integer "site_id"
+  end
+
+  add_index "projects_sites", ["project_id", "site_id"], :name => "index_projects_sites_on_project_id_and_site_id", :unique => true
+  add_index "projects_sites", ["project_id"], :name => "index_projects_sites_on_project_id"
+  add_index "projects_sites", ["site_id"], :name => "index_projects_sites_on_site_id"
 
   create_table "projects_tags", :id => false, :force => true do |t|
     t.integer "tag_id"

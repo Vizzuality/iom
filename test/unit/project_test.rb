@@ -79,5 +79,31 @@ class ProjectTest < ActiveSupport::TestCase
     assert project.countries.include?(spain)
     assert project.regions.include?(valencia)
   end
+  
+  
+  test "Given a project with matches in a site criteria should be a cached_project" do
+    organization = create_organization
+    site = create_site :name => 'Food for Haiti', :project_context_organization_id => organization.id, :project_context_cluster_id => nil
+    project = create_project :primary_organization_id => organization.id
 
+    project.reload
+    
+    assert_equal 1, project.cached_sites.size
+    assert project.cached_sites.include?(site)
+  end
+  
+  test "Destroy a site should remove it from projects_sites" do
+    organization = create_organization
+    site = create_site :name => 'Food for Haiti', :project_context_organization_id => organization.id, :project_context_cluster_id => nil
+    project = create_project :primary_organization_id => organization.id
+    
+    project.reload
+    
+    assert project.cached_sites.include?(site)
+    
+    site.destroy
+    project.reload
+    
+    assert project.cached_sites.empty?
+  end
 end
