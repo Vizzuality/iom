@@ -235,6 +235,9 @@ class Site < ActiveRecord::Base
     result = report.results.first
     update_attribute(:visits_last_week, result.pageviews.to_i)
   end
+<<<<<<< HEAD
+  
+=======
 
   def geographic_boundary_box
     self.geographic_context_geometry.rings.collect{|line_string| line_string.text_representation }.join("|") if self.geographic_context_geometry
@@ -250,6 +253,7 @@ class Site < ActiveRecord::Base
     self.geographic_context_geometry = Polygon.from_points([polygon_points])
   end
 
+>>>>>>> e2d07dfcb5ea83fd4869517df73964de0771861a
   private
 
     def clean_html
