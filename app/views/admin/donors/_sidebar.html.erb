@@ -3,9 +3,11 @@
     <div class="bottom_selected">
       <%= link_to('Basic information', edit_admin_donor_path(@donor), :class=>"basic") %>
       <span class="list">
-        <% Site.all.each do |site| %>
-          <p><%= link_to(site.name, donor_site_specific_information_admin_donor_path(@donor, site)) %></p>
-        <% end %>
+        <%if current_page?(edit_admin_donor_path(@donor)) %>
+          <% Site.all.each do |site| %>
+            <p><%= link_to(site.name, donor_site_specific_information_admin_donor_path(@donor, site)) %></p>
+          <% end %>
+        <%end%>
       </span>
     </div>
   </li>
@@ -13,10 +15,14 @@
     <%= link_to('Funded projects', projects_admin_donor_path(@donor)) %><% if !@donor.donated_projects.empty? %> <p><span><%=@donor.donated_projects.count%></span></p><% end %>
   </li>
   <li <%= selected_if_current_page(admin_donor_media_resources_path(@donor)) %>>
+    <div class="bottom_selected">
     <%= link_to("Media", admin_donor_media_resources_path(@donor)) %><% if !@donor.media_resources.empty? %> <p><span><%=@donor.media_resources.count%></span></p><% end %>
+    </div>
   </li>
   <li <%= selected_if_current_page(admin_donor_resources_path(@donor)) %>>
+    <div class="bottom_selected">
     <%= link_to("Resources", admin_donor_resources_path(@donor)) %><% if !@donor.resources.empty? %> <p><span><%=@donor.resources.count%></span></p><% end %>
+    </div>
   </li>
 </ul>
 
@@ -25,3 +31,4 @@
   <p>Clicking the link below will permanently delete this donor and its references within the sites</p>
   <%= link_to("Delete this donor", '#', :destroy_url=>admin_donor_path(@donor), :att_name=>"donor") %>
 </div>
+
