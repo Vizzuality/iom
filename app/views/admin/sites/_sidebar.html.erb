@@ -18,13 +18,13 @@
         <% if controller_name == 'pages' %>
          <span class="list">
            <% @site.pages.highlighted.each do |highlighted_page| %>
-            <p class="<%= 'no' if current_page?(edit_admin_site_page_path(@site, highlighted_page.id)) %>">
-              <%= link_to_unless_current(highlighted_page.title, edit_admin_site_page_path(@site, highlighted_page.id)) %>
+            <p class="<%= 'no' if current_page?(edit_admin_site_page_path(@site, highlighted_page)) %>">
+              <%= link_to_unless_current(highlighted_page.title, edit_admin_site_page_path(@site, highlighted_page)) %>
             </p>
-            <% if current_page?(edit_admin_site_page_path(@site, highlighted_page.id)) && highlighted_page.children.present? %>
+            <% if current_page?(edit_admin_site_page_path(@site, highlighted_page)) && highlighted_page.children.present? %>
               <% highlighted_page.children do |child_page| %>
-                <p class="sublist <%= 'no' if current_page?(edit_admin_site_page_path(@site, highlighted_page.id)) %>">
-                  <%= link_to_unless_current(child_page.title, edit_admin_site_page_path(@site, child_page.id)) %>
+                <p class="sublist <%= 'no' if current_page?(edit_admin_site_page_path(@site, highlighted_page)) %>">
+                  <%= link_to_unless_current(child_page.title, edit_admin_site_page_path(@site, child_page)) %>
                 </p>
               <% end %>
             <% end %>
