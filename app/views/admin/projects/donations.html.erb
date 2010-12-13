@@ -21,11 +21,11 @@
           <%end%>
         </div>
         <div class="amount_box">
-                  <p>$ <%= (donation.amount.nil?)? '0' : donation.amount %></p>
-          <%= link_to('', admin_project_donation_path(@project, donation), :method => :delete, :confirm => 'Are your sure?', :class => 'delete') %>
+          <p>$ <%= (donation.amount.nil?)? '0' : donation.amount %></p>
+          <%= link_to('', '#', :destroy_url => admin_project_donation_path(@project, donation), :att_name => 'donation', :class => 'delete') %>
         </div>
-        
-            <%if (!donation.amount.nil?) %> 
+
+            <%if (!donation.amount.nil?) %>
               <%= total_account += donation.amount %>
             <%end%>
             </li>
@@ -44,7 +44,7 @@
           </span>
         </div>
         <div id="donation_date" class="field">
-            
+
             <%= f.label :date, 'DONATION DATE' %>
 
             <span id="donation_date" class="combo_date"><p>09/10/2010</p>
@@ -66,7 +66,7 @@
         </div>
         <!--  TO GET CORRECT URL -->
         <script>
-          var admin_tags_path = '<%= admin_donors_path %>';  
+          var admin_tags_path = '<%= admin_donors_path %>';
         </script>
 
           <%= f.submit 'Add donation' %>
@@ -81,7 +81,7 @@
 </div>
 
 <script src="/javascripts/plugins/jquery.stylish-select.js" type="text/javascript" charset="utf-8"></script>
-<script src="/javascripts/plugins/jquery.mousewheel.js" type="text/javascript" charset="utf-8"></script>  
+<script src="/javascripts/plugins/jquery.mousewheel.js" type="text/javascript" charset="utf-8"></script>
 <script src="/javascripts/plugins/jquery.jscrollpane.js" type="text/javascript" charset="utf-8"></script>
 <script src="/javascripts/backoffice/project.js" type="text/javascript" charset="utf-8"></script>
 <script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>

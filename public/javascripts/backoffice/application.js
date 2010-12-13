@@ -52,7 +52,10 @@ $(document).ready(function(ev){
       var href_ = $(this).attr('destroy_url');
       var name_ = $(this).attr('att_name');
 
-      $('div#modal_window a.remove').attr('href','javascript: void removeAndGo("'+href_+'")');
+      $('div#modal_window a.remove').click(function(evt){
+        evt.preventDefault();
+        removeAndGo(href_);
+      });
       $('div#modal_window h4').text('You are about deleting this '+capitaliseFirstLetter(name_));
       $('div#modal_window p').text('If you delete this '+name_+', it will not appear in any site.');
       $('div#modal_window').fadeIn();
@@ -97,7 +100,7 @@ $(document).ready(function(ev){
       }
     );
 
-        
+
          // $('div').each(function() {
          //              $(this).css('zIndex', zIndexNumber);
          //              zIndexNumber -= 10;
@@ -120,6 +123,7 @@ $(document).ready(function(ev){
 
 
  function removeAndGo(location) {
+console.debug(location);
    var form = $('<form method="post" action="'+location+'"></form>');
    var metadata_input = '<input name="_method" value="delete" type="hidden" />';
    form.hide()
