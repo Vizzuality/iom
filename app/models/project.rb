@@ -3,32 +3,32 @@
 # Table name: projects
 #
 #  id                        :integer         not null, primary key
-#  name                      :string(2000)    
-#  description               :text            
-#  primary_organization_id   :integer         
-#  implementing_organization :text            
-#  partner_organizations     :text            
-#  cross_cutting_issues      :text            
-#  start_date                :date            
-#  end_date                  :date            
-#  budget                    :integer         
-#  target                    :text            
-#  estimated_people_reached  :integer         
-#  contact_person            :string(255)     
-#  contact_email             :string(255)     
-#  contact_phone_number      :string(255)     
-#  site_specific_information :text            
-#  created_at                :datetime        
-#  updated_at                :datetime        
-#  activities                :text            
-#  intervention_id           :string(255)     
-#  additional_information    :text            
-#  awardee_type              :string(255)     
+#  name                      :string(2000)
+#  description               :text
+#  primary_organization_id   :integer
+#  implementing_organization :text
+#  partner_organizations     :text
+#  cross_cutting_issues      :text
+#  start_date                :date
+#  end_date                  :date
+#  budget                    :integer
+#  target                    :text
+#  estimated_people_reached  :integer
+#  contact_person            :string(255)
+#  contact_email             :string(255)
+#  contact_phone_number      :string(255)
+#  site_specific_information :text
+#  created_at                :datetime
+#  updated_at                :datetime
+#  activities                :text
+#  intervention_id           :string(255)
+#  additional_information    :text
+#  awardee_type              :string(255)
 #  the_geom                  :string          not null
-#  date_provided             :date            
-#  date_updated              :date            
-#  contact_position          :string(255)     
-#  website                   :string(255)     
+#  date_provided             :date
+#  date_updated              :date
+#  contact_position          :string(255)
+#  website                   :string(255)
 #
 
 class Project < ActiveRecord::Base
@@ -54,10 +54,10 @@ class Project < ActiveRecord::Base
   # validate :dates_consistency, :presence_of_clusters_and_sectors
 
   validate :dates_consistency
-  
+
   after_save :set_cached_sites
   after_destroy :remove_cached_sites
-  
+
   attr_accessor :sectors_ids, :clusters_ids
 
   def sectors_ids=(value)
@@ -119,7 +119,11 @@ class Project < ActiveRecord::Base
       (end_date - Date.today).to_i / 30
     end
   end
-  
+
+  def to_kml
+    the_geom.as_kml if the_geom.present?
+  end
+
   private
 
     def clean_html
@@ -155,7 +159,7 @@ class Project < ActiveRecord::Base
         errors.add(:clusters, "can't be blank")
       end
     end
-    
+
     def set_cached_sites
       self.cached_sites.clear
       Site.all.each do |site|
@@ -164,7 +168,7 @@ class Project < ActiveRecord::Base
         end
       end
     end
-    
+
     def remove_cached_sites
       ActiveRecord::Base.connection.execute("DELETE FROM projects_sites WHERE project_id = '#{self.id}'")
     end
