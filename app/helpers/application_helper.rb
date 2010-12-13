@@ -13,13 +13,13 @@ module ApplicationHelper
       end
     elsif @page
       if action_name == 'edit' && controller_name == 'pages'
-        raw("class=\"sublist_selected\"") if request.path == url_path
+        raw("class=\"sublist_selected\"") if request.path.match(url_path)
       end
     else
       raw("class=\"selected\"") if request.path == url_path
     end
   end
-  
+
 
 
   def errors_for(obj, attribute)
