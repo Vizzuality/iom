@@ -1,23 +1,22 @@
-    
+
     <div id="small_map"></div>
-    
+
     <div id="project_layout">
       <div id="project">
-        
+
         <div class="left"> <!--270px with shadow below-->
           <div class="block">
             <h3>A project by</h3>
             <div class="logo">
-              
-              <!-- Paperclip add the "missing" url if is not founded-->
-              <% if ((!@project.primary_organization.logo.url.empty?) && (!@project.primary_organization.logo.url.include? 'missing'))%>              
+
+              <% if @project.primary_organization.logo.file? %>
                 <div class="logo_bkg">
                     <%= image_tag(@project.primary_organization.logo.url) %>
                 </div>
                 <%= link_to(@project.primary_organization.name, organization_path(@project.primary_organization)) %>
-              <%else%>
-                <%= link_to(@project.primary_organization.name, organization_path(@project.primary_organization), :class=>'long') %>              
-              <%end %>                            
+              <% else %>
+                <%= link_to(@project.primary_organization.name, organization_path(@project.primary_organization), :class=>'long') %>
+              <% end %>
             </div>
 
             <% if @project.implementing_organization? %>
@@ -29,19 +28,19 @@
               <h3 class="margin">Partner Organizations</h3>
               <p><%= @project.partner_organizations %></p>
             <% end %>
-          </div>  
-          
+          </div>
+
           <div class="block">
             <h3>Project timeline</h3>
             <div class="timeline"><span></span><p class="months_left"><%= pluralize(@project.months_left, 'month', 'months') %> left</p></div>
             <p class="first_date"><%= @project.start_date.strftime("%d/%m/%Y") %></p><p class="second_date"><%= @project.end_date.strftime("%d/%m/%Y") %></p>
           </div>
-          
+
           <div class="block">
             <h3>Project funding</h3>
             <p class="budget"><%= number_with_delimiter(@project.donations.sum(:amount)) %></p>
           </div>
-          
+
           <div class="block">
             <% if @project.estimated_people_reached? %>
               <h3>People reached</h3>
@@ -53,7 +52,7 @@
               <p><%= @project.target %></p>
             <% end %>
           </div>
-          
+
           <div class="block">
             <% unless @project.donors.empty? %>
               <h3>Donors</h3>
@@ -67,22 +66,22 @@
               <% end %>
             <% end %>
           </div>
-          
+
           <div class="block">
             <h3>Contact information</h3>
             <p><strong><%= @project.contact_person %></strong><br/><%= @project.contact_phone_number %></p>
             <p><%= link_to(@project.contact_email, "mailto:#{@project.contact_email}") %></p>
           </div>
           <div class="block last">
-            <h3>EXPORT DATA</h3>            
+            <h3>EXPORT DATA</h3>
             <div class="import_data">
                 <a href="#">CSV</a><p>|</p><a href="#">KML</a>
             </div>
           </div>
-          
+
         </div>
-        
-        
+
+
         <div class="right"></div>
         <div class="float_right"> <!-- 670px with mest -->
           <div class="head">
@@ -101,13 +100,13 @@
               by <%= link_to(@project.primary_organization.name, organization_path(@project.primary_organization)) %>
             </p>
           </div>
-          
+
           <% unless @project.description.empty? %>
             <div class="block">
               <%= simple_format(@project.description) %>
             </div>
           <% end %>
-          
+
           <% unless @project.media_resources.empty? %>
             <div class="galleryStyle">
               <% @project.media_resources.each do |media_resource| %>
@@ -119,8 +118,8 @@
                 <% end %>
               <% end %>
             </div>
-          <% end %>  
-          
+          <% end %>
+
           <% if @project.activities || @project.additional_information || @project.cross_cutting_issues %>
             <div class="block">
               <%= simple_format(@project.activities) %>
@@ -130,10 +129,10 @@
               <%= simple_format(@project.cross_cutting_issues) %>
             </div>
           <% end %>
-          
-          
+
+
           <div class="block margin">
-            
+
             <!-- TODO : IMPLEMENT -->
             <h3>RELATED PROJECTS</h3>
             <ul>
@@ -144,7 +143,7 @@
                 <div class="info">
                   <h4><a href="#">Blanket Rice Distribution</a></h4>
                   <p>by Action Against Hunger</p>
-                  <p class="sub">in Khumrah</p>                
+                  <p class="sub">in Khumrah</p>
                 </div>
               </li>
               <li class="last">
@@ -155,7 +154,7 @@
                 <div class="info">
                   <h4><a href="#">Blanket Rice Distribution</a></h4>
                   <p>by Action Against Hunger</p>
-                  <p class="sub">in Khumrah</p>                
+                  <p class="sub">in Khumrah</p>
                 </div>
               </li>
             </ul>
@@ -163,9 +162,9 @@
           <!-- block margin -->
         </div>
       </div>
-      
-      
-      <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script> 
+
+
+      <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
       <script src="/javascripts/plugins/galleria.js" type="text/javascript" charset="utf-8"></script>
       <script src="/javascripts/plugins/galleria.classic.js" type="text/javascript" charset="utf-8"></script>
       <script src="/javascripts/sites/project.js" type="text/javascript" charset="utf-8"></script>
