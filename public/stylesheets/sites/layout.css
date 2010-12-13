@@ -82,10 +82,11 @@ div#header ul.menu li#country_option.clicked ul.content li {float:left; margin:3
 div#header ul.menu li#country_option.clicked ul.content li a {float:left; margin:0; font:normal 13px "PT Sans"; color:#C0C0BF; text-decoration:none;}
 div#header ul.menu li#country_option.clicked ul.content li a:hover {color:white;}
 
-div#header ul.menu li#organization_option.clicked div.header_title {position:absolute; top:0; left:-15px; background:url('/images/sites/common/menu/org_head_clicked.png') no-repeat 0 0; width:106px; height:35px; display:inline;}
-div#header ul.menu li#organization_option.clicked div.suboptions_body {position:absolute; top:35px; left:-18px; z-index:110; background:url('/images/sites/common/menu/org_body_clicked.png') no-repeat 0 0; display:none; width:238px; height:234px; display:inline; padding:7px; display:inline;}
+div#header ul.menu li#organization_option.clicked div.header_title {position:absolute; top:0; left:-15px; background:url('/images/sites/common/menu/org_head_clicked.png') no-repeat 0 0; width:138px; height:35px; display:inline;}
+div#header ul.menu li#organization_option.clicked div.suboptions_body {position:absolute; top:35px; left:-15px; z-index:110; background:url('/images/sites/common/menu/org_body_clicked.png') no-repeat 0 0; display:none; width:238px; height:234px; display:inline; padding:7px; display:inline;}
+div#header ul.menu li#organization_option.clicked div.suboptions_body input[type="text"]#ngos_search{float:left; margin:3px 0 0 7px; background:url('/images/sites/common/menu/input_ngos.png') no-repeat 0 0; width:191px; height:22px; padding:0 7px; font:normal 13px Arial; color:#B7B7B7; border:0px;}
 div#header ul.menu li#organization_option.clicked div.header_title a {margin:8px 0 0 15px;}
-div#header ul.menu li#organization_option.clicked ul.content {float:left; width:204px; height:218px; overflow-x:hidden; overflow-y:auto; margin:0 0 0 13px;}
+div#header ul.menu li#organization_option.clicked ul.content {float:left; width:204px; height:218px; overflow-x:hidden; overflow-y:auto; margin:17px 0 0 13px;}
 div#header ul.menu li#organization_option.clicked ul.content li {float:left; margin:3px 0 0 0; width:185px;}
 div#header ul.menu li#organization_option.clicked ul.content li a {float:left; margin:0; font:normal 13px "PT Sans"; color:#C0C0BF; text-decoration:none;}
 div#header ul.menu li#organization_option.clicked ul.content li a:hover {color:white;}

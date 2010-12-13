@@ -28,11 +28,11 @@ $(document).ready( function() {
           }
           
           $(document).click(function(event) {
-            if ((!$(event.target).closest('ul.suboptions li a').length)&&(!$(event.target).closest('ul.scroll_pane').length)) {
-              $('ul.menu li.clicked').removeClass('clicked');                
-              $('ul.menu li a.displayed').removeClass('displayed');                        
-            };
-          });
+                if ((!$(event.target).closest('ul.suboptions li a').length)&&(!$(event.target).closest('ul.scroll_pane').length)&&(!$(event.target).closest('input#ngos_search').length)) {
+                  $('ul.menu li.clicked').removeClass('clicked');                
+                  $('ul.menu li a.displayed').removeClass('displayed');                        
+                };
+              });
       }
       else {
           $('ul.menu li a.displayed').removeClass('displayed'); 
