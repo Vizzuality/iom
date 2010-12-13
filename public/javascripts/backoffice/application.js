@@ -13,8 +13,8 @@ $(document).ready(function(ev){
 
     if ($('div.right.menu').length>0) {
       setTimeout(function(){
-        $('div.right.menu').height($('div.block div.med div.left').height());
-        $('div.export,div.import,div.delete', $('div.right.menu')).show();
+        $('div.right.menu').height($('div.block div.med div.left').height() + 160);
+        $('div.export_import,div.delete', $('div.right.menu')).show();
       },300);
     }
 

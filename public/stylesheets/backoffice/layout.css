@@ -100,9 +100,18 @@ div.block div.med div.right ul li.sublist_selected div.bottom_selected span.list
 div.block div.med div.right ul li.sublist_selected:hover div.bottom_selected p a {color:#E93E3F;}
 
 div.block div.med div.right ul li:hover div.bottom_selected p a {color:#E93E3F;}
-div.block div.med div.right div.export, div.block div.med div.right div.import, div.block div.med div.right div.delete {position:absolute; display:none; left:20px;}
-div.block div.med div.right div.export {bottom: 200px;}
-div.block div.med div.right div.import {bottom: 125px;}
+div.block div.med div.right div.export_import, div.block div.med div.right div.delete {position:absolute; display:none; left:20px;}
+div.block div.med div.right div.export_import {bottom: 145px;}
+div.block div.med div.right div.export_import h5 {float:left; font:normal 17px "Museo Sans",Arial; color:#333333; letter-spacing:-1px;}
+div.block div.med div.right div.export_import p {float:left; margin:5px 0 0 0; width:100%; font:normal 13px Arial; color:#666666;}
+div.block div.med div.right div.export_import p.split {width:auto; margin:15px 5px 0; font:normal 15px Arial; color:#333333;}
+div.block div.med div.right div.export_import a {float:left; margin:17px 0 0 0; font:normal 15px Arial; color:#D8393D; text-decoration:underline;}
+div.block div.med div.right div.export_import a:hover {text-decoration:underline; cursor:pointer;}
+div.block div.med div.right div.export_import a.link_hidden {position:relative;}
+div.block div.med div.right div.export_import form {opacity:0.0; width:80px; position:absolute; top:0; left:0;}
+div.block div.med div.right div.export_import input[type="file"]{width:80px;}
+div.block div.med div.right div.export_import input[type="file"]:hover {cursor:pointer;}
+div.block div.med div.right div.export_import input[type="submit"] {width:100px; position:absolute; top:10px; left:0;}
 div.block div.med div.right div.delete {bottom:0;}
 div.block div.med div.right div.delete h5 {float:left; font:normal 17px "Museo Sans",Arial; color:#333333; letter-spacing:-1px;}
 div.block div.med div.right div.delete p {float:left; margin:5px 0 0 0; width:100%; font:normal 13px Arial; color:#666666;}

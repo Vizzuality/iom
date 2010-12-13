@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(:version => 20101211204623) do
   add_index "donations", ["project_id"], :name => "index_donations_on_project_id"
 
   create_table "donors", :force => true do |t|
-    t.string   "name",                      :limit => 2000
+    t.string   "name"
     t.text     "description"
     t.string   "website"
     t.string   "twitter"
@@ -196,11 +196,11 @@ ActiveRecord::Schema.define(:version => 20101211204623) do
     t.string   "intervention_id"
     t.text     "additional_information"
     t.string   "awardee_type"
-    t.geometry "the_geom",                  :limit => nil,  :null => false, :srid => 4326
     t.date     "date_provided"
     t.date     "date_updated"
     t.string   "contact_position"
     t.string   "website"
+    t.geometry "the_geom",                  :limit => nil,  :null => false, :srid => 4326
   end
 
   add_index "projects", ["name"], :name => "index_projects_on_name"
