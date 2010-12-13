@@ -18,7 +18,7 @@ module Iom
           {
             :name => "Food Conservation",
             :description => "Food Conservation is a project.....",
-            :primary_organization => organization,
+            :primary_organization_id => organization.id,
             :tags => "food, conservation, ",
             :implementing_organization => organization.try(:name),
             :cross_cutting_issues => 'Issues defined',
@@ -40,7 +40,7 @@ module Iom
           {
             :name => "Vegetable generation",
             :description => "Vegetable generation....",
-            :primary_organization => organization,
+            :primary_organization_id => organization.id,
             :tags => "childhood, earthquake",
             :implementing_organization => organization.try(:name),
             :cross_cutting_issues => 'Issues defined for vegetables',

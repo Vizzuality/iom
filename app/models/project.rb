@@ -3,35 +3,37 @@
 # Table name: projects
 #
 #  id                        :integer         not null, primary key
-#  name                      :string(255)
-#  description               :text
-#  primary_organization_id   :integer
-#  implementing_organization :string(255)
-#  partner_organizations     :string(255)
-#  cross_cutting_issues      :string(255)
-#  start_date                :date
-#  end_date                  :date
-#  budget                    :integer
-#  target                    :string(255)
-#  estimated_people_reached  :integer
-#  contact_person            :string(255)
-#  contact_email             :string(255)
-#  contact_phone_number      :string(255)
-#  site_specific_information :text
-#  created_at                :datetime
-#  updated_at                :datetime
-#  activities                :text
-#  intervention_id           :string(255)
-#  additional_information    :text
-#  awardee_type              :string(255)
-#  the_geom                  :geometry        not null
-#  date_provided             :date
-#  date_updated              :date
+#  name                      :string(2000)    
+#  description               :text            
+#  primary_organization_id   :integer         
+#  implementing_organization :text            
+#  partner_organizations     :text            
+#  cross_cutting_issues      :text            
+#  start_date                :date            
+#  end_date                  :date            
+#  budget                    :integer         
+#  target                    :text            
+#  estimated_people_reached  :integer         
+#  contact_person            :string(255)     
+#  contact_email             :string(255)     
+#  contact_phone_number      :string(255)     
+#  site_specific_information :text            
+#  created_at                :datetime        
+#  updated_at                :datetime        
+#  activities                :text            
+#  intervention_id           :string(255)     
+#  additional_information    :text            
+#  awardee_type              :string(255)     
+#  the_geom                  :string          not null
+#  date_provided             :date            
+#  date_updated              :date            
+#  contact_position          :string(255)     
+#  website                   :string(255)     
 #
 
 class Project < ActiveRecord::Base
 
-  #acts_as_geom :the_geom => :multi_point
+  # acts_as_geom :the_geom => :multi_point
 
   belongs_to :primary_organization, :foreign_key => :primary_organization_id, :class_name => 'Organization'
   has_and_belongs_to_many :clusters
@@ -43,16 +45,19 @@ class Project < ActiveRecord::Base
   has_many :media_resources, :conditions => 'media_resources.element_type = #{Iom::ActsAsResource::PROJECT_TYPE}', :foreign_key => :element_id, :dependent => :destroy, :order => 'position ASC'
   has_many :donations, :dependent => :destroy
   has_many :donors, :through => :donations
+  has_many :cached_sites, :class_name => 'Site', :finder_sql => 'select sites.* from sites, projects_sites where projects_sites.project_id = #{id} and projects_sites.site_id = sites.id'
 
   before_validation :clean_html
 
   validates_presence_of :primary_organization_id
 
-#  validate :dates_consistency, :presence_of_clusters_and_sectors
+  # validate :dates_consistency, :presence_of_clusters_and_sectors
 
   validate :dates_consistency
   
-
+  after_save :set_cached_sites
+  after_destroy :remove_cached_sites
+  
   attr_accessor :sectors_ids, :clusters_ids
 
   def sectors_ids=(value)
@@ -114,7 +119,7 @@ class Project < ActiveRecord::Base
       (end_date - Date.today).to_i / 30
     end
   end
-
+  
   private
 
     def clean_html
@@ -149,6 +154,19 @@ class Project < ActiveRecord::Base
       if clusters_ids.blank? && clusters.empty?
         errors.add(:clusters, "can't be blank")
       end
+    end
+    
+    def set_cached_sites
+      self.cached_sites.clear
+      Site.all.each do |site|
+        if site.projects(:limit => nil, :offset => nil).include?(self)
+          ActiveRecord::Base.connection.execute("INSERT INTO projects_sites (project_id, site_id) VALUES (#{self.id},#{site.id})")
+        end
+      end
+    end
+    
+    def remove_cached_sites
+      ActiveRecord::Base.connection.execute("DELETE FROM projects_sites WHERE project_id = '#{self.id}'")
     end
 
 end

@@ -235,6 +235,9 @@ class Site < ActiveRecord::Base
     result = report.results.first
     update_attribute(:visits_last_week, result.pageviews.to_i)
   end
+<<<<<<< HEAD
+  
+=======
 
   def geographic_boundary_box
     self.geographic_context_geometry.rings.collect{|line_string| line_string.text_representation }.join("|") if self.geographic_context_geometry
@@ -249,45 +252,8 @@ class Site < ActiveRecord::Base
 
     self.geographic_context_geometry = Polygon.from_points([polygon_points])
   end
-  
-  def countries
-    unless geographic_context.blank?
-      case geographic_context
-        when 'worlwide'
-          Country.all
-        when 'country'
-          Country.find(self.geographic_context_country_id)
-        when 'region'
-          Region.find(self.geographic_context_region_id).country
-        when 'bbox'
-          # TODO
-          []
-      end
-    else
-      # worlwide
-      Country.all
-    end
-  end
-  
-  def regions
-    unless geographic_context.blank?
-      case geographic_context
-        when 'worlwide'
-          Region.all
-        when 'country'
-          Country.find(self.geographic_context_country_id).regions
-        when 'region'
-          Region.find(self.geographic_context_region_id)
-        when 'bbox'
-          # TODO
-          []
-      end
-    else
-      # worlwide
-      Region.all
-    end
-  end
 
+>>>>>>> e2d07dfcb5ea83fd4869517df73964de0771861a
   private
 
     def clean_html

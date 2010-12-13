@@ -15,12 +15,14 @@ module Iom
       default_attributes = case fixture
         when :haiti_aid_map
           {
-            :default_email             => 'admin@example.com',
-            :default_contact_name      => 'Admin',
-            :geoiq_parameter_1         => '',
-            :geoiq_parameter_2         => '',
-            :google_analytics_username => '',
-            :google_analytics_password => ''
+            :data => {
+              :default_email             => 'admin@example.com',
+              :default_contact_name      => 'Admin',
+              :geoiq_parameter_1         => '',
+              :geoiq_parameter_2         => '',
+              :google_analytics_username => '',
+              :google_analytics_password => ''
+            }
           }
         else
           raise "Invalid fixture name"

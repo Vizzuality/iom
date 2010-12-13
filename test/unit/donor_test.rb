@@ -14,4 +14,19 @@ class DonorTest < ActiveSupport::TestCase
     assert donor.valid?
     assert !donor.new_record?
   end
+  
+  test "Donor specific_information" do
+    donor = create_donor
+    site = create_site 
+
+    assert_nil donor.attributes_for_site(site)
+
+    atts = {:name => "Donor name fro site #{site.id}"}
+    donor.attributes_for_site = {:donor_values => atts, :site_id => site.id}
+
+    assert donor.valid?
+
+    assert_equal "Donor name fro site #{site.id}", donor.attributes_for_site(site)[:name]
+  end
+  
 end

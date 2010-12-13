@@ -40,6 +40,7 @@ Iom::Application.routes.draw do
       resources :media_resources, :only => [:index, :create, :update, :destroy]
       resources :resources, :only => [:index, :create, :destroy]
       get 'projects', :on => :member
+      get 'specific_information/:site_id', :on => :member, :action => 'specific_information', :as => 'donor_site_specific_information'
     end
     resources :projects do
       resources :media_resources, :only => [:index, :create, :destroy]

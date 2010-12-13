@@ -6,7 +6,7 @@
   
   
   <%= stylesheet_link_tag '/stylesheets/sites/jscroll.css','/stylesheets/sites/layout.css' %>
-  <%= stylesheet_link_tag @site.theme.css_file %>
+  <%= stylesheet_link_tag @site.theme.css_file if @site.theme %>
 </head>
 <body>
   <div id="header">
@@ -82,18 +82,7 @@
                   <div class="suboptions_body">
                     <div class="wrapper">
                       <ul class="content scroll_pane">
-                        <% Country.all.each do |country| %>
-                        <li><a href="<%= country_path(country) %>" class="geneva"><%= country.name %></a></li>
-                        <li><a href="<%= country_path(country) %>" class="geneva"><%= country.name %></a></li>
-                        <li><a href="<%= country_path(country) %>" class="geneva"><%= country.name %></a></li>
-                        <li><a href="<%= country_path(country) %>" class="geneva"><%= country.name %></a></li>
-                        <li><a href="<%= country_path(country) %>" class="geneva"><%= country.name %></a></li>
-                        <li><a href="<%= country_path(country) %>" class="geneva"><%= country.name %></a></li>
-                        <li><a href="<%= country_path(country) %>" class="geneva"><%= country.name %></a></li>
-                        <li><a href="<%= country_path(country) %>" class="geneva"><%= country.name %></a></li>
-                        <li><a href="<%= country_path(country) %>" class="geneva"><%= country.name %></a></li>
-                        <li><a href="<%= country_path(country) %>" class="geneva"><%= country.name %></a></li>
-                        <li><a href="<%= country_path(country) %>" class="geneva"><%= country.name %></a></li>
+                        <% @site.countries.each do |country| %>
                         <li><a href="<%= country_path(country) %>" class="geneva"><%= country.name %></a></li>
                         <% end %>
                       </ul>
