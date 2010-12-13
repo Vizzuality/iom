@@ -10,13 +10,13 @@
               <% @pages.each do |page| %>
                 <li>
                   <div class="head <%= page.children.empty? ? 'one' :'more' %>">
-                    <h3><%= link_to(page.title, edit_admin_site_page_path(@site, page.id)) %></h3>
-                    <%= link_to("Delete", '#delete' ,:class=>"delete", :destroy_url=>admin_site_page_path(@site, page.id), :att_name=>"page") %>
+                    <h3><%= link_to(page.title, edit_admin_site_page_path(@site, page)) %></h3>
+                    <%= link_to("Delete", '#delete' ,:class=>"delete", :destroy_url=>admin_site_page_path(@site, page), :att_name=>"page") %>
                   </div>
                   <% if !page.children.empty? %>
                     <div class="body">
                       <% page.children.each do |children| %>
-                        <span><%= link_to(children.title, edit_admin_site_page_path(@site, children.id)) %> - <%= link_to("Delete", '#delete', :destroy_url=>admin_site_page_path(@site, children.id), :att_name=>"subpage") %></span>
+                        <span><%= link_to(children.title, edit_admin_site_page_path(@site, children)) %> - <%= link_to("Delete", '#delete', :destroy_url=>admin_site_page_path(@site, children), :att_name=>"subpage") %></span>
                       <% end %>
                     </div>
                   <div class="down"></bottom>
@@ -31,7 +31,7 @@
         </div>
         <div class="bottom"></div>
       </div>
-      
+
       <div class="add_new">
         <a href="<%= new_admin_site_page_path(@site) %>">Create new page on this site</a>
       </div>

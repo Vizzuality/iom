@@ -3,14 +3,14 @@
 # Table name: pages
 #
 #  id         :integer         not null, primary key
-#  title      :string(255)     
-#  body       :text            
-#  site_id    :integer         
-#  published  :boolean         
-#  permalink  :string(255)     
-#  created_at :datetime        
-#  updated_at :datetime        
-#  parent_id  :integer         
+#  title      :string(255)
+#  body       :text
+#  site_id    :integer
+#  published  :boolean
+#  permalink  :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#  parent_id  :integer
 #
 
 class Page < ActiveRecord::Base
@@ -32,6 +32,10 @@ class Page < ActiveRecord::Base
 
   def to_param
     permalink
+  end
+
+  def self.from_param(param)
+    scoped.where(:permalink => param).first
   end
 
   def self.about(site)

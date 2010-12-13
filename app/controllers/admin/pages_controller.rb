@@ -20,13 +20,13 @@ class Admin::PagesController < ApplicationController
   end
 
   def edit
-    @page = @site.pages.find(params[:id])
+    @page = @site.pages.from_param(params[:id])
   end
 
   def update
-    @page = @site.pages.find(params[:id])
-    @page.attributes = params[:page]
-    if @page.save
+    @page = @site.pages.from_param(params[:id])
+
+    if @page.update_attributes(params[:page])
       redirect_to edit_admin_site_page_path(@site, @page), :flash => {:success => 'Page has been updated successfully'}
     else
       render :action => 'edit'
