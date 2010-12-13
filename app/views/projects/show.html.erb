@@ -71,7 +71,9 @@
           <div class="block">
             <h3>Contact information</h3>
             <p><strong><%= @project.contact_person %></strong><br/><%= @project.contact_phone_number %></p>
-            <p><%= link_to(@project.contact_email, "mailto:#{@project.contact_email}") %></p>
+            <% unless (@project.contact_email.nil?)||(@project.contact_email.empty?) %>
+              <p><%= link_to(@project.contact_email, "mailto:#{@project.contact_email}") %></p>
+            <%end%>
           </div>
           <div class="block last">
             <h3>EXPORT DATA</h3>            

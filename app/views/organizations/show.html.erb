@@ -57,7 +57,7 @@
             </ul>
             <% if @organization.projects_clusters(@site).size > 3 %>
               <% total =  @organization.projects_clusters(@site).size - 3 %>
-              <%= link_to(pluralize(total, 'project more on other clusters', 'projects more on other clusters') ,'#') %>
+              <!-- <%= link_to(pluralize(total, 'project more on other clusters', 'projects more on other clusters') ,'#') %> -->
             <% end %>
           </div>
     
@@ -76,21 +76,21 @@
             </ul>
             <img class="pie_chart" src="http://chart.apis.google.com/chart?cht=p&chs=120x120&chd=t:<%= values %>&chds=0,<%= max_value %>&chco=333333|565656|727272|ADADAD|EFEFEF|FFFFFF&chf=bg,s,FFFFFF00" />
           </div>
-    
-          <div class="block resources">
-            <h3>ADDITIONAL RESOURCES</h3>
-            <ul>
-              <li><a href="#">Jeddah in wikipedia</a></li>
-              <li><a href="#">Jeddah in wikipedia</a></li>
-              <li><a href="#">Jeddah in wikipedia</a></li>
-              <li><a href="#">Jeddah in wikipedia</a></li>
-            </ul>
-          </div>
-      
+          <% unless @organization.resources(@site).empty? %>
+            <div class="block resources">
+              <h3>ADDITIONAL RESOURCES</h3>
+              
+              <% @organization.resources(@site).each do |resource| %>
+                <ul>
+                  <li><a href="<%= resource.url %>" target="_blank"><%= resource.title %></a></li>
+                </ul>
+              <%end%>
+            </div>
+          <%end%>
           <div class="block">
             <h3>CONTACT INFORMATION</h3>
             <p><strong><%= @organization.contact_name %></strong><br/><%= @organization.contact_position %><br/><%= @organization.hq_address %> <%= @organization.contact_zip %></p>
-            <p><%= @organization.contact_phone_number %><br/><%= link_to(@organization.contact_email, "mailto:#{@organization.contact_email}") %></p>
+            <p><%= @organization.contact_phone_number %><br/><% unless (@organization.contact_email.nil?)||(@organization.contact_email.empty?) %><%= link_to(@organization.contact_email, "mailto:#{@organization.contact_email}") %><%end%></p>
           </div>
 
           <div class="block green">

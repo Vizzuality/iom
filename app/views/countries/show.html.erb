@@ -39,7 +39,7 @@
             </ul>
             <% if @country.projects_clusters(@site).size > 3 %>
               <% total =  @country.projects_clusters(@site).size - 3 %>
-              <%= link_to(pluralize(total, 'project more on other clusters', 'projects more on other clusters') ,'#') %>
+              <!-- <%= link_to(pluralize(total, 'project more on other clusters', 'projects more on other clusters') ,'#') %> -->
             <% end %>
           </div>
     

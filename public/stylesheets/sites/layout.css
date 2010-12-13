@@ -139,7 +139,7 @@ div.main_head div.float_head span.health {background:url('/images/sites/icons/he
 div.main_head div.float_head span.food {background:url('/images/sites/icons/food.png') no-repeat 0 0;}
 div.main_head div.float_head span.flood {background:url('/images/sites/icons/flood.png') no-repeat 0 0;}
 div.main_head div.right {width:600px; padding:30px 0; display:inline-block; vertical-align:top; zoom:1; *display:inline; position:relative;}
-div.main_head div.right span.wikipedia {position:absolute; bottom:0; right:0; background:url('/images/sites/regions/wikipedia_head.png') no-repeat 0 0; width:169px; height:49px;}
+div.main_head div.right span.wikipedia {position:absolute; bottom:0; right:0; background:url('/images/sites/regions/wikipedia_head.png') no-repeat 0 0; width:141px; height:49px;}
 div.main_head div.right p.provided {margin:15px 0 0 0;}
 
 div#left_column {position:relative; width:100%;}
@@ -291,7 +291,7 @@ div.statistics ul.chart li.pos3 {background-position:0 -50px!important;}
 div.statistics ul.chart li.pos4 {background-position:0 -67px!important;}
 div.statistics ul.chart li.pos5 {background-position:0 -84px!important;}
 /*cluster*/
-div.statistics ul.statistics_list {width:270px; height:auto; padding:0 0 25px 0!important; margin:10px 0 0 0;}
+div.statistics ul.statistics_list {width:270px; height:auto; padding:0; margin:10px 0 0 0;}
 div.statistics ul.statistics_list li {display:inline-block; width:100%!important; padding:0!important; margin:5px 0 0 0!important; height:auto;}
 div.statistics ul.statistics_list li a.plus {float:left; width:auto; padding:0 0 0 20px; background:url('/images/sites/organization/left_plus.png') no-repeat left 0; height:20px;}
 div.statistics ul.statistics_list li a.drop {float:left; width:auto; padding:0 0 0 20px; background:url('/images/sites/organization/left_drop.png') no-repeat left 0;  height:20px;}
