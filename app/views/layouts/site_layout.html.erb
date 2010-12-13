@@ -4,9 +4,10 @@
   <title><%= title %></title>
   <%= javascript_include_tag 'jquery.min', 'jquery.ui.core', 'jquery.ui.widget', 'jquery.ui.position', 'plugins/jquery.mousewheel.js','plugins/jquery.jscrollpane.js','sites/application.js' %>
   
-  
   <%= stylesheet_link_tag '/stylesheets/sites/jscroll.css','/stylesheets/sites/layout.css' %>
   <%= stylesheet_link_tag @site.theme.css_file if @site.theme %>
+
+  <link rel="shortcut icon" href="/images/favicon.ico"/>    
 </head>
 <body>
   <div id="header">

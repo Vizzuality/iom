@@ -1,3 +1,20 @@
+    <div class="main_head">
+      <div class="inner_main_head">
+        <div class="left">
+          <div class="float_head">
+            <h2><%= @region.country.try(:name) %></h2>
+            <h1><%= @region.name %></h2>
+          </div>
+        </div>
+        <div class="right">
+          <p>Campeche (Spanish pronunciation: [kamˈpetʃe]) is one of the 31 states which, with the Federal District, comprise the 32 Federal Entities of Mexico. It is bordered by the states of Yucatán to the north east, Quintana Roo to the east, and Tabasco to the south west. To the south it is bordered by the Petén department of Guatemala and to the west by the Gulf of Mexico.</p>
+          <p class="provided">Description provided by Wikipedia <a href="#">Read full article</a></p>
+          <span class="wikipedia"/>
+        </div>
+      </div>
+    </div>
+
+
     <div id="map"></div>
     
     <div id="layout">
@@ -5,60 +22,53 @@
         
         <!-- LEFT PART -->
         <div class="left"></div> <!-- H"J"ACK -->
-        <div class="float_left">
-          
-          <div class="head">
-            <h2><%= @region.country.try(:name) %></h2>
-            <h1><%= @region.name %></h2>
-          </div>
-          
-          <div id="secondary_map"></div>
-          
-          <div class="block wikipedia">
-            <p>Campeche (Spanish pronunciation: [kamˈpetʃe]) is one of the 31 states which, with the Federal District, comprise the 32 Federal Entities of Mexico. It is bordered by the states of Yucatán to the north east, Quintana Roo to the east, and Tabasco to the south west. To the south it is bordered by the Petén department of Guatemala and to the west by the Gulf of Mexico.</p>
-            <p class="provided">Description provided by Wikipedia</p>
-            <a href="#">Read full article</a>
-          </div>
-          
-          
-          <div class="block statistics">
-            <h3>PROJECTS BY CLUSTER</h3>
-            <ul class="statistics_list">
-              <% @region.projects_clusters(@site)[0...3].each do |cluster,count| %>
-                <li><a class="<%= cluster_class(cluster) %>"><span class="aller" style="width:<%= cluster_width(count) %>px"><%= count %></span></a></li>
-              <% end %>
-            </ul>
-            <% if @region.projects_clusters(@site).size > 3 %>
-              <% total =  @region.projects_clusters(@site).size - 3 %>
-              <%= link_to(pluralize(total, 'project more on other clusters', 'projects more on other clusters') ,'#') %>
-            <% end %>
-          </div>
-          
-          <div class="block">
-            <h3>DONORS</h3>
-            <% unless @region.donors(@site).empty? %>
-              <ul>
-                <% @region.donors(@site)[0...10].each do |donor| %>
-                <li><%= link_to(donor.name, donor_path(donor)) %></li>
+        <div class="outer_float">        
+          <div class="float_left">
+            <div class="head">
+              <h2>FACTSHEET</h2>
+            </div>
+            
+            <div id="secondary_map"></div>
+            <div class="block statistics">
+              <h3>PROJECTS BY CLUSTER</h3>
+              <ul class="statistics_list">
+                <% @region.projects_clusters(@site)[0...3].each do |cluster,count| %>
+                  <li><a class="<%= cluster_class(cluster) %>"><span class="aller" style="width:<%= cluster_width(count) %>px"><%= count %></span></a></li>
                 <% end %>
               </ul>
-              <% if @region.donors(@site).size > 10 %>
-                <p>and <%= pluralize(@region.donors(@site).size - 10, 'more donor', 'more donors') %></p>
+              <% if @region.projects_clusters(@site).size > 3 %>
+                <% total =  @region.projects_clusters(@site).size - 3 %>
+                <%= link_to(pluralize(total, 'project more on other clusters', 'projects more on other clusters') ,'#') %>
               <% end %>
-            <% end %>
-          </div>
+            </div>
           
-          <div class="block margin">
-            <h3>PROJECTS IN OTHER REGIONS</h3>
-            <ul>
-              <li><a href="#">Jeddah</a> - 12 projects</li>
-              <li><a href="#">Jeddah</a> - 12 projects</li>
-              <li><a href="#">Jeddah</a> - 12 projects</li>
-              <li><a href="#">Jeddah</a> - 12 projects</li>
-            </ul>
+            <div class="block">
+              <h3>DONORS</h3>
+              <% unless @region.donors(@site).empty? %>
+                <ul>
+                  <% @region.donors(@site)[0...10].each do |donor| %>
+                  <li><%= link_to(donor.name, donor_path(donor)) %></li>
+                  <% end %>
+                </ul>
+                <% if @region.donors(@site).size > 10 %>
+                  <p>and <%= pluralize(@region.donors(@site).size - 10, 'more donor', 'more donors') %></p>
+                <% end %>
+              <% end %>
+            </div>
+          
+            <div class="block margin">
+              <h3>PROJECTS IN OTHER REGIONS</h3>
+              <ul>
+                <li><a href="#">Jeddah</a> - 12 projects</li>
+                <li><a href="#">Jeddah</a> - 12 projects</li>
+                <li><a href="#">Jeddah</a> - 12 projects</li>
+                <li><a href="#">Jeddah</a> - 12 projects</li>
+              </ul>
+            </div>
           </div>
+          <!-- float_left -->
         </div>
-
+        <!-- outer_float -->
         <!-- RIGHT PART -->
         <div class="right">
           <h3><%= pluralize(@region.projects.site(@site).size, 'PROJECT', 'PROJECTS') %> AT <%= @region.name.upcase %></h3>
