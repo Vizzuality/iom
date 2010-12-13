@@ -2,7 +2,8 @@
 <html>
 <head>
   <title><%= title %></title>
-  <%= javascript_include_tag 'jquery.min', 'jquery.ui.core', 'jquery.ui.widget', 'jquery.ui.position', 'plugins/jquery.mousewheel.js','plugins/jquery.jscrollpane.js','sites/application.js' %>
+
+  <%= javascript_include_tag 'jquery.min', 'jquery.ui.core', 'jquery.ui.widget', 'jquery.ui.position', 'plugins/jquery.mousewheel.js','plugins/jquery.jscrollpane.js','plugins/quicksilver.js','plugins/jquery.livesearch.js','sites/application.js' %>
   
   <%= stylesheet_link_tag '/stylesheets/sites/jscroll.css','/stylesheets/sites/layout.css' %>
   <%= stylesheet_link_tag @site.theme.css_file if @site.theme %>
@@ -95,9 +96,12 @@
               <a href="#" class="geneva main_option">ORGANIZATIONS<span class="with_suboptions"></span></a>
               <div class="header_title"><a>ORGANIZATIONS<span class="with_suboptions"></span></a></div>
               <div class="suboptions_body">
-                <input id="ngos_search" type="text" value="Type NGO name..." onclick="this.value=''"/>
+                <form method="get"> 
+                  <input id="ngos_search" type="text" value="" name="ngos_search"/>
+                </form>
                 <div class="wrapper">
-                  <ul class="content scroll_pane">
+                  <ul id="orgs_list" class="content scroll_pane_auto">
+
                     <% @site.organizations.each do |organization| %>
                       <li><a href="<%= organization_path(organization) %>" class="geneva"><%= organization.name %></a></li>
                     <% end %>

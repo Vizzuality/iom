@@ -13,7 +13,7 @@ label strong {font:normal 14px Georgia; color:#E93E3F;}
 
 /*IE7 reset properties*/
 input[type="text"] {border:0px;}
-textarea {border:0px; overflow:hidden;}
+textarea {border:0px;}
 
 /*FONT FACE*/
 @font-face {
@@ -658,7 +658,7 @@ div.block.project_info div.med div.left form div.two_columns div.right_column {f
 div.block.project_info div.med div.left form input[type="submit"]{background:url('/images/backoffice/projects/save_changes_bttn.png') no-repeat 0 0; font:500 19px "Museo Sans",Arial; color:#FFFFFF; text-shadow:0 1px #6E8C30; border:none; text-align:center; width:157px; height:32px; float:right; margin:30px 10px 0 0; /*position:absolute; bottom:0; right:0;*/}
 div.block.project_info div.med div.left form input[type="submit"]:hover {background-position:0 -32px; cursor:pointer;}
 /*geolocate map*/
-div.map_window {position:absolute; display:none; top:0; bottom:0; width:386px; height:296px; padding:14px; background:url('/images/backoffice/projects/add_position_bkg.png') no-repeat 0 0;}
+div.map_window {position:absolute; display:none; top:0; bottom:0; z-index:200; width:386px; height:296px; padding:14px; background:url('/images/backoffice/projects/add_position_bkg.png') no-repeat 0 0;}
 div.map_window h3 {float:left; width:100%; font:normal 21px "Museo Sans",Arial; color:#333333;}
 div.map_window a.close {position:absolute; right:20px; top:18px; width:12px; height:12px; background:url('/images/backoffice/icons/close_window.png') no-repeat 0 0; text-indent:-9999px;}
 div.map_window a.close:hover {cursor:pointer; background-position:0 -12px;}

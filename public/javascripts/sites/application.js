@@ -1,13 +1,16 @@
 $(document).ready( function() {
+
+    // LIVE SEARCH IN ORGANIZATIONS
+    $('#ngos_search').val('');
+    $('#ngos_search').liveUpdate('orgs_list');
     
     // CUSTOM SCROLLBARS
     if ($('.scroll_pane').length > 0){
     
-        // OTHER ATTEMP
         $('.scroll_pane').jScrollPane({
                            autoReinitialise:false });
-    }    
-
+    }
+    
   // MENU CLICKS
   $('ul.menu li a.main_option').click(function(ev){
       ev.stopPropagation();
