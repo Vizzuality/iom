@@ -45,6 +45,7 @@
 			var self = this;
 			this.list.children('li').hide();
 			$.each(scores, function(i, score) { self.rows[score[1]].show(); });
+			
 		},
 		getScores: function(term) {
 			var scores = [];
@@ -59,6 +60,6 @@
                 // if (score > 0) { scores.push([score, i]); }
 			}
 			return scores.sort(function(a, b) { return b[0] - a[0]; });
-		}	
+		}
 	}
 })(jQuery);
