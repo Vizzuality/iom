@@ -1,3 +1,9 @@
+namespace :db do
+  desc 'Remove,Create,Seed and load data'
+  task :reset => %w(db:drop db:create db:migrate db:seed load_orgs load_projects)
+end
+
+
 namespace :iom do
   namespace :data do
     desc "Load organizations and projects data"
