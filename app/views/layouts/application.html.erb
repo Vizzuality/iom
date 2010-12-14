@@ -4,7 +4,7 @@
   <title>IOM - Administrator</title>
   <%= stylesheet_link_tag 'backoffice/jscroll.css','backoffice/layout.css' %>
 
-  <%= javascript_include_tag 'jquery.min', 'jquery.ui.core', 'jquery.ui.widget', 'jquery.ui.position', 'jquery.ui.autocomplete', 'rails','application.js' %>
+  <%= javascript_include_tag 'jquery.min', 'jquery.ui.core', 'jquery.ui.widget', 'jquery.ui.position', 'jquery.ui.autocomplete', 'rails','plugins/jquery.mousewheel.js','plugins/jquery.jscrollpane.js','application.js' %>
   <%= csrf_meta_tag %>
   <link rel="shortcut icon" href="/images/favicon.ico"/>  
 </head>
@@ -50,10 +50,26 @@
     <div id="modal_window">
       <div class="alert">
         <h4>You are about deleting this Donor</h4>
-        <p>If you delete this donor, it will not appear in any site.</p>
-        <span><a class="cancel" href="#">cancel</a><a href="#" class="remove">delete</a></span>
+
+        <ul id="errors_csv"> 
+          
+          <li>Organization name is mandatory on line 150.</li>
+          <li>Organization name is mandatory on line 150.</li>
+          <li>Organization name is mandatory on line 150.</li>
+          <li>Organization name is mandatory on line 150.</li>
+          <li>Organization name is mandatory on line 150.</li>
+          <li>Organization name is mandatory on line 150.</li>
+          <li>Organization name is mandatory on line 150.</li>
+          <li>Organization name is mandatory on line 150.</li>
+          <li>Organization name is mandatory on line 150.</li>
+                              
+        </ul>
+        
+        <p>If you delete this donor, it will not appear in any site.</p>        
+        <span><a class="cancel">cancel</a><a href="#" class="button remove">delete</a></span>
       </div>
     </div>
+    
   <% end %>
 
 

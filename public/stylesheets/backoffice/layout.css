@@ -106,19 +106,18 @@ div.block div.med div.right div.export_import h5 {float:left; font:normal 17px "
 div.block div.med div.right div.export_import p {float:left; margin:5px 0 0 0; width:100%; font:normal 13px Arial; color:#666666;}
 div.block div.med div.right div.export_import p.split {width:auto; margin:15px 5px 0; font:normal 15px Arial; color:#333333;}
 div.block div.med div.right div.export_import a {float:left; margin:17px 0 0 0; font:normal 15px Arial; color:#D8393D; text-decoration:underline;}
-div.block div.med div.right div.export_import a:hover {text-decoration:underline; cursor:pointer;}
+/*div.block div.med div.right div.export_import a:hover {text-decoration:underline; cursor:pointer;}*/
 div.block div.med div.right div.export_import a.link_hidden {position:relative;}
-div.block div.med div.right div.export_import form {opacity:0.0; width:80px; position:absolute; top:0; left:0;}
-div.block div.med div.right div.export_import input[type="file"]{width:80px;}
-div.block div.med div.right div.export_import input[type="file"]:hover {cursor:pointer;}
-div.block div.med div.right div.export_import input[type="submit"] {width:100px; position:absolute; top:10px; left:0;}
+div.block div.med div.right div.export_import form {float:left; display:inline; width:80px; }
+div.block div.med div.right div.export_import div#links {position:relative; float:left;}
+div.block div.med div.right div.export_import div#links div#wrapper_form {position:absolute; width:80px; height:17px; background-color:red; top:17px; left:0; overflow:hidden; opacity:0.0; -moz-opacity:0; filter:alpha(opacity: 0); z-index:2; }
+div.block div.med div.right div.export_import input[type="file"]{width:80px; cursor:pointer;}
+div.block div.med div.right div.export_import input[type="submit"] {width:100px; position:absolute; top:15px; left:0;}
 div.block div.med div.right div.delete {bottom:0;}
 div.block div.med div.right div.delete h5 {float:left; font:normal 17px "Museo Sans",Arial; color:#333333; letter-spacing:-1px;}
 div.block div.med div.right div.delete p {float:left; margin:5px 0 0 0; width:100%; font:normal 13px Arial; color:#666666;}
-div.block div.med div.right div.delete a {float:left; margin:17px 0 0 0; font:normal 15px Arial; color:#D8393D; text-decoration:none;}
-div.block div.med div.right div.delete a:hover {text-decoration:underline;}
-
-
+div.block div.med div.right div.delete a {float:left; margin:17px 0 0 0; font:normal 15px Arial; color:#D8393D; text-decoration:underline;}
+div.block div.med div.right div.delete a:hover {text-decoration:none;}
 
 /*header*/
 div#header {float:left; width:100%; height:120px; background:url('/images/backoffice/common/header_bkg.jpg') repeat-x 0 0;}
@@ -1004,11 +1003,28 @@ div#modal_window div.alert h4 {float:left; width:100%; font:bold 17px Arial; col
 div#modal_window div.alert p {float:left; width:100%; margin:5px 0 0 0; font:normal 15px Arial; color:#666666;}
 div#modal_window div.alert span {float:right; margin:20px 0 0 0;}
 div#modal_window div.alert span a.cancel {float:left; margin:5px 12px 0 0; font:normal 15px Arial; color:#E93E3F; text-decoration:underline;}
-div#modal_window div.alert span a.cancel:hover {color:#7F2023;}
-div#modal_window div.alert span a.remove {float:left; width:63px; height:26px; background:url('/images/backoffice/common/delete_button.png') no-repeat 0 0; text-indent:-9999px; font-size:0; display:block; line-height:0;}
-div#modal_window div.alert span a.remove:hover {background-position:0 -26px;}
+div#modal_window div.alert span a.cancel:hover {color:#7F2023; cursor:pointer;}
+div#modal_window div.alert span a.button {float:left; text-indent:-9999px; font-size:0; display:block; line-height:0;}
+div#modal_window div.alert span a.button:hover {background-position:0 -26px;}
+div#modal_window div.alert ul#errors_csv {display:none;}
+div#modal_window div.alert span a.button.remove {background:url('/images/backoffice/common/delete_button.png') no-repeat 0 0; width:63px; height:26px;}
 
+div#modal_window div.alert.import_csv {background:url('/images/backoffice/common/alert_csv_bkg.png') no-repeat 0 0!important; width:450px; height:46px;}
+div#modal_window div.alert.import_csv.ok p {margin:15px 0 0 0;}
+div#modal_window div.alert.import_csv.error p {margin:19px 0 0 0;}
+div#modal_window div.alert.import_csv.ok span {margin:5px 0 0 0;}
 
+div#modal_window div.alert.import_csv span a.cancel {display:none;}
+div#modal_window div.alert.import_csv span a.remove {display:none;}
+div#modal_window div.alert.import_csv span a.cancel.ok {float:left; width:63px; height:26px; background:url('/images/backoffice/common/ok_button.png') no-repeat 0 0; text-indent:-9999px; font-size:0; display:block; line-height:0; margin:5px 5px 0 0;}
+div#modal_window div.alert.import_csv span a.cancel.ok:hover {background-position:0 -26px;}
+div#modal_window div.alert.import_csv span a.cancel.ok.error {background-position:0 -52px}
+div#modal_window div.alert.import_csv span a.cancel.ok.error:hover {background-position:0 -78px}
+
+div#modal_window div.alert.import_csv.ok {background:url('/images/backoffice/common/alert_csv_ok_bkg.png') no-repeat 0 0!important; width:450px; height:96px;}
+div#modal_window div.alert.import_csv.error {background:url('/images/backoffice/common/alert_csv_error_bkg.png') no-repeat 0 0!important; width:450px; height:340px; top:30%; left:50%;}
+div#modal_window div.alert.import_csv.error ul#errors_csv {float:left; margin:15px 0 0 15px; display:inline; width:425px; height:190px; overflow-x:hidden; overflow-y:auto;}
+div#modal_window div.alert.import_csv.error ul#errors_csv li {float:left; margin:7px 0 0 0; background:url('/images/backoffice/common/li_style.png') no-repeat 0 7px; padding:0 0 0 7px; font:normal 15px Arial; color:#666666; width:418px;}
 
 /*footer*/
 div#footer {float:left; width:100%; height:120px; margin:40px 0 0 0 ; background:url('/images/backoffice/common/header_bkg.jpg') repeat-x 0 0;}

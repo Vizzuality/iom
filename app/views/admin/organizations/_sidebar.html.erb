@@ -31,11 +31,17 @@
 <div class="export_import">
   <h5>PROJECTS SYNCHRONIZATION </h5>
   <p>Imported data will override current organization information.</p>
-  <a class="link_hidden">Import CSV <%= form_for [:admin, @organization], :html => { :multipart => true } do |f| %>
-    <%= f.file_field :projects_file %>
-    <%= f.submit 'Import projects' %>
-  <% end %></a><p class="split">|</p><%= link_to 'Export CSV', admin_organization_projects_path(@organization, :csv) %>
-
+  <div id="links">
+    <a class="link_hidden">Import CSV</a>
+    <div id="wrapper_form">
+      <%= form_for [:admin, @organization], :html => { :multipart => true } do |f| %>
+            <%= f.file_field :projects_file, :onchange => 'importCSV();' %>
+            <%= f.submit 'Import projects' %>
+          <% end %>
+    </div>
+    <p class="split">|</p>
+    <%= link_to 'Export CSV', admin_organization_projects_path(@organization, :csv) %>
+    </div>
   
 </div>
 <div class="delete">

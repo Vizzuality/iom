@@ -1,6 +1,7 @@
 
 
     $(document).ready( function() {
+
       $('p.paylock a').click(function(ev){
         ev.stopPropagation();
         ev.preventDefault();
@@ -22,4 +23,5 @@
           $(this).parent().parent().parent().find('textarea').attr('disabled','true');
         }
       });
+      
     });
