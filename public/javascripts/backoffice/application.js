@@ -42,12 +42,15 @@ $(document).ready(function(ev){
       ev.stopPropagation();
       ev.preventDefault();
     
-      // We are using the same modal window with other buttons        
-      if ($('div#modal_window a.cancel').hasClass('ok')){
-          $('div#modal_window a.cancel').removeClass('ok');
-          if ($('div#modal_window a.cancel').hasClass('error')){
-              $('div#modal_window a.cancel').removeClass('error');              
-          }
+      // We are using the same modal window with other options        
+      if ($('div#modal_window').children('div.alert').hasClass('import_csv')){
+          $('div#modal_window').children('div.alert').removeClass('import_csv');
+      }  
+      if ($('div#modal_window').children('div.alert').hasClass('ok')){
+          $('div#modal_window').children('div.alert').removeClass('ok');
+      }
+      if ($('div#modal_window').children('div.alert').hasClass('error')){
+          $('div#modal_window').children('div.alert').removeClass('error');              
       }
             
       var scroll_position = window.pageYOffset;
