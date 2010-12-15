@@ -770,7 +770,7 @@ $(function() {
 
 
   if ($('#project_tags').length > 0){
-      var custom_url =  admin_tags_path + '?term=';    
+      var custom_url =  '/admin/tags?term=';    
  
       $("#project_tags").autocomplete({
         style: 'project_tags',

@@ -1,6 +1,6 @@
 namespace :db do
   desc 'Remove,Create,Seed and load data'
-  task :reset => %w(db:drop db:create db:migrate db:seed load_adm_levels load_orgs load_projects)
+  task :reset => %w(db:drop db:create db:migrate db:seed load_countries load_adm_levels load_orgs load_projects)
 end
 
 
@@ -9,6 +9,24 @@ namespace :iom do
     desc "Load organizations and projects data"
     task :all => %w(load_adm_levels load_orgs load_projects)
 
+    desc "load country data"
+    task :load_countries => :environment do
+      DB = ActiveRecord::Base.connection
+      DB.execute 'DELETE FROM countries'
+      system("unzip -o #{Rails.root}/db/data/countries/TM_WORLD_BORDERS-0.3.zip -d #{Rails.root}/db/data/countries/")
+      system("/usr/local/pgsql/bin/shp2pgsql -d -s 4326 -gthe_geom -i -WLATIN1 #{Rails.root}/db/data/countries/TM_WORLD_BORDERS-0.3.shp public.tmp_countries | /usr/local/pgsql/bin/psql -Upostgres -diom_#{RAILS_ENV}")
+      
+      #Insert the country and get the value
+      sql="INSERT INTO countries(\"name\",code,the_geom)
+      SELECT name,iso3,the_geom from tmp_countries"
+      DB.execute sql
+      
+      DB.execute 'DROP TABLE tmp_countries'
+      system("rm -rf #{Rails.root}/db/data/countries/TM_WORLD_BORDERS-0.3.shp #{Rails.root}/db/data/countries/TM_WORLD_BORDERS-0.3.shx #{Rails.root}/db/data/countries/TM_WORLD_BORDERS-0.3.dbf #{Rails.root}/db/data/countries/TM_WORLD_BORDERS-0.3.prj #{Rails.root}/db/data/countries/Readme.txt")
+      
+    end
+    
+
     desc "load 3th administrative level Haiti geo data. (Communes)"
     task :load_adm_levels => :environment do
       DB = ActiveRecord::Base.connection
@@ -16,19 +34,15 @@ namespace :iom do
       DB.execute 'DELETE FROM regions'
       
       #Import data from GADM (http://www.gadm.org/country)
-      system("/usr/local/pgsql/bin/shp2pgsql -d -s 4326 -gthe_geom -i -WLATIN1 #{Rails.root}/db/data/regions/HTI_adm0.shp public.tmp_haiti_adm0 | /usr/local/pgsql/bin/psql -Upostgres -diom_#{RAILS_ENV}")
 
       system("/usr/local/pgsql/bin/shp2pgsql -d -s 4326 -gthe_geom -i -WLATIN1 #{Rails.root}/db/data/regions/HTI_adm1.shp public.tmp_haiti_adm1 | /usr/local/pgsql/bin/psql -Upostgres -diom_#{RAILS_ENV}")
       
       system("/usr/local/pgsql/bin/shp2pgsql -d -s 4326 -gthe_geom -i -WLATIN1 #{Rails.root}/db/data/regions/HTI_adm2.shp public.tmp_haiti_adm2 | /usr/local/pgsql/bin/psql -Upostgres -diom_#{RAILS_ENV}")          
       
-      system("/usr/local/pgsql/bin/shp2pgsql -d -s 4326 -gthe_geom -i -WLATIN1 #{Rails.root}/db/data/regions/HTI_adm3.shp public.tmp_haiti_adm3 | /usr/local/pgsql/bin/psql -Upostgres -diom_#{RAILS_ENV}")       
+      system("/usr/local/pgsql/bin/shp2pgsql -d -s 4326 -gthe_geom -i -WLATIN1 #{Rails.root}/db/data/regions/HTI_adm3.shp public.tmp_haiti_adm3 | /usr/local/pgsql/bin/psql -Upostgres -diom_#{RAILS_ENV}")
       
-      #Insert the country and get the value
-      sql="INSERT INTO countries(\"name\",code,the_geom)
-      SELECT name_engli,iso,the_geom from tmp_haiti_adm0"
-      DB.execute sql
-      country_id = Country.scoped.order("id DESC").first.id
+      country_id = Country.where("code=?","HTI").first.id
+      
       
       #Level1
       sql="insert into regions(\"name\",\"level\",country_id,the_geom,gadm_id) 
@@ -49,8 +63,6 @@ namespace :iom do
       ,the_geom,id_3 from tmp_haiti_adm3 as adm3"
       DB.execute sql
       
-      
-      DB.execute 'DROP TABLE tmp_haiti_adm0'
       DB.execute 'DROP TABLE tmp_haiti_adm1'
       DB.execute 'DROP TABLE tmp_haiti_adm2'
       DB.execute 'DROP TABLE tmp_haiti_adm3'
