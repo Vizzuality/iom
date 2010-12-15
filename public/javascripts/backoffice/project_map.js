@@ -29,8 +29,8 @@
           if (first) {
             first = false;
             var myOptions = {
-              zoom: 4,
-              center: new google.maps.LatLng(18.971187, -72.285215),
+              zoom: 1,
+              center: new google.maps.LatLng(30, 0),
               disableDefaultUI: true,
               mapTypeId: google.maps.MapTypeId.ROADMAP
             }
