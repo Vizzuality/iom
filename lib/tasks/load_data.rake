@@ -1,13 +1,63 @@
 namespace :db do
   desc 'Remove,Create,Seed and load data'
-  task :reset => %w(db:drop db:create db:migrate db:seed load_orgs load_projects)
+  task :reset => %w(db:drop db:create db:migrate db:seed load_adm_levels load_orgs load_projects)
 end
 
 
 namespace :iom do
   namespace :data do
     desc "Load organizations and projects data"
-    task :all => %w(load_orgs load_projects)
+    task :all => %w(load_adm_levels load_orgs load_projects)
+
+    desc "load 3th administrative level Haiti geo data. (Communes)"
+    task :load_adm_levels => :environment do
+      DB = ActiveRecord::Base.connection
+      
+      DB.execute 'DELETE FROM regions'
+      
+      #Import data from GADM (http://www.gadm.org/country)
+      system("/usr/local/pgsql/bin/shp2pgsql -d -s 4326 -gthe_geom -i -WLATIN1 #{Rails.root}/db/data/regions/HTI_adm0.shp public.tmp_haiti_adm0 | /usr/local/pgsql/bin/psql -Upostgres -diom_#{RAILS_ENV}")
+
+      system("/usr/local/pgsql/bin/shp2pgsql -d -s 4326 -gthe_geom -i -WLATIN1 #{Rails.root}/db/data/regions/HTI_adm1.shp public.tmp_haiti_adm1 | /usr/local/pgsql/bin/psql -Upostgres -diom_#{RAILS_ENV}")
+      
+      system("/usr/local/pgsql/bin/shp2pgsql -d -s 4326 -gthe_geom -i -WLATIN1 #{Rails.root}/db/data/regions/HTI_adm2.shp public.tmp_haiti_adm2 | /usr/local/pgsql/bin/psql -Upostgres -diom_#{RAILS_ENV}")          
+      
+      system("/usr/local/pgsql/bin/shp2pgsql -d -s 4326 -gthe_geom -i -WLATIN1 #{Rails.root}/db/data/regions/HTI_adm3.shp public.tmp_haiti_adm3 | /usr/local/pgsql/bin/psql -Upostgres -diom_#{RAILS_ENV}")       
+      
+      #Insert the country and get the value
+      sql="INSERT INTO countries(\"name\",code,the_geom)
+      SELECT name_engli,iso,the_geom from tmp_haiti_adm0"
+      DB.execute sql
+      country_id = Country.scoped.order("id DESC").first.id
+      
+      #Level1
+      sql="insert into regions(\"name\",\"level\",country_id,the_geom,gadm_id) 
+      select name_1 as \"name\",1 as \"level\",#{country_id} as country_id,the_geom,id_1 from tmp_haiti_adm1"
+      DB.execute sql
+      
+      #Level2
+      sql="insert into regions(\"name\",\"level\",country_id,parent_region_id,the_geom,gadm_id) 
+      select name_2 as \"name\",2 as \"level\",#{country_id} as country_id,
+      (select id from regions where gadm_id=adm2.id_1 and \"level\"=1 limit 1) as parent_id
+      ,the_geom,id_2 from tmp_haiti_adm2 as adm2"
+      DB.execute sql
+      
+      #Level3
+      sql="insert into regions(\"name\",\"level\",country_id,parent_region_id,the_geom,gadm_id) 
+      select name_3 as \"name\",3 as \"level\",#{country_id} as country_id,
+      (select id from regions where gadm_id=adm3.id_2 and \"level\"=2 limit 1) as parent_id
+      ,the_geom,id_3 from tmp_haiti_adm3 as adm3"
+      DB.execute sql
+      
+      
+      DB.execute 'DROP TABLE tmp_haiti_adm0'
+      DB.execute 'DROP TABLE tmp_haiti_adm1'
+      DB.execute 'DROP TABLE tmp_haiti_adm2'
+      DB.execute 'DROP TABLE tmp_haiti_adm3'
+      
+      
+      
+    end
 
     desc 'Load organizations data'
     task :load_orgs => :environment do
@@ -73,13 +123,11 @@ namespace :iom do
     task :load_projects  => :environment do
       DB = ActiveRecord::Base.connection
       DB.execute 'DELETE FROM projects'
-      DB.execute 'DELETE FROM countries_projects'
       DB.execute 'DELETE FROM projects_sectors'
       DB.execute 'DELETE FROM clusters_projects'
       DB.execute 'DELETE FROM organizations_projects'
       DB.execute 'DELETE FROM donations'
       DB.execute 'DELETE FROM donors'
-      DB.execute 'DELETE FROM regions' 
       
       #Cache geocoding
       geo_cache={}
@@ -141,7 +189,13 @@ namespace :iom do
           if(!row.donors.blank?)
             parsed_donors = row.donors.split(",").map{|e|e.strip}
             parsed_donors.each do |don|
-              donor = Donor.find_or_create_by_name(:name=>don)
+              
+              donor= Donor.where("name ilike ?",don).first
+              if(!donor)
+                donor = Donor.new
+                donor.name =don
+                donor.save!
+              end
               donation = Donation.new
               donation.project = p
               donation.donor = donor
@@ -151,38 +205,45 @@ namespace :iom do
 
           # -->Country
           if (!row.country.blank?)
-            country = Country.find_or_create_by_name(:name=>row.country)
-            p.countries  << country
+            country= Country.where("name ilike ?",row.country).first
+            if(country)
+              p.countries  << country
+            else
+              puts "ALERT: COUNTRY NOT FOUND #{row.country}"
+            end
           end
-
+          puts "."
 
           #Geo data
           reg1=nil
           if(!row._1st_administrative_level_department.blank?)
             parsed_adm1 = row._1st_administrative_level_department.split(",").map{|e|e.strip}
             parsed_adm1.each do |region_name|
-              reg1 = Region.find_or_create_by_name_and_level(:name=>region_name,:level=>1)
-              reg1.level = 1
-              reg1.country = country
-              reg1.save!
-              p.regions  << reg1
+              reg1 = Region.where("name ilike ? and level=?",region_name,1).first
+              if(reg1)
+                p.regions  << reg1
+              else
+                puts "ALERT: REGION LEVEL 1 NOT FOUND #{region_name}"
+              end
             end
           end
+          puts "."
+          
           
           reg2=nil
           if(!row._2nd_administrative_level_arrondissement.blank?)
             parsed_adm2 = row._2nd_administrative_level_arrondissement.split(",").map{|e|e.strip}
             parsed_adm2.each do |region_name|
-              reg2 = Region.find_or_create_by_name_and_level(:name=>region_name,:level=>2)
-              reg2.level = 2
-              reg2.country = country
-              if(reg1)
-                reg2.region = reg1
+              reg2 = Region.where("name ilike ? and level=?",region_name,2).first
+              if(reg2)
+                p.regions  << reg2
+              else
+                puts "ALERT: REGION LEVEL 2 NOT FOUND #{region_name}"
               end
-              reg2.save!
-              p.regions  << reg2
+              
             end
           end          
+          puts "."
           
           multi_point=""
           reg3=nil
@@ -190,32 +251,20 @@ namespace :iom do
             parsed_adm3 = row._3rd_administrative_level_commune.split(",").map{|e|e.strip}
             locations = Array.new
             parsed_adm3.each do |region_name|
-              reg3 = Region.find_or_create_by_name_and_level(:name=>region_name,:level=>3)
-              reg3.country = country
-              reg3.level = 3
-              if(reg2)
-                reg3.region = reg2
-              elsif(reg1)
-                reg3.region = reg1
-              end              
-              
-              reg3.save!
-              p.regions  << reg3
-
-              #georef
-              if(geo_cache[region_name].blank?)
-                loc = Geokit::Geocoders::GoogleGeocoder.geocode("#{region_name},Haiti")
-                geo_cache[region_name] = loc
+              reg3 = Region.where("name ilike ? and level=?",region_name,3).first
+              if(reg3)
+                p.regions  << reg3
+                sql="select ST_AsText(ST_PointOnSurface(the_geom)) as point from regions where id=#{reg3.id}"
+                res = DB.execute(sql).first["point"].delete("POINT(").delete(")")
+                locations << res                
               else
-                loc = geo_cache[region_name]
-              end
-              if(loc.lng)
-                locations << "#{loc.lng} #{loc.lat}"
-              end
+                puts "ALERT: REGION LEVEL 3 NOT FOUND #{region_name}"
+              end              
             end
 
             multi_point = "ST_MPointFromText('MULTIPOINT(#{locations.join(',')})',4326)" unless (locations.length<1)
           end
+          puts "."
 
           p.save!
 
