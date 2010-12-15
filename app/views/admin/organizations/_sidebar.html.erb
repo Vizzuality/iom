@@ -3,24 +3,46 @@
     <div class="bottom_selected">
       <%= link_to('Basic information', edit_admin_organization_path(@organization), :class=>"basic") %>
       <span class="list">
-        <% Site.all.each do |site| %>
-          <p><%= link_to(site.name, organization_site_specific_information_admin_organization_path(@organization, site)) %></p>
-        <% end %>
+        <%if current_page?(edit_admin_organization_path(@organization)) %>        
+          <% Site.all.each do |site| %>
+            <p><%= link_to(site.name, organization_site_specific_information_admin_organization_path(@organization, site)) %></p>
+          <% end %>
+        <%end%>
       </span>
     </div>
   </li>
-  <li <%= selected_if_current_page(admin_organization_projects_path(@organization)) %>><%= link_to('Organization projects', admin_organization_projects_path(@organization)) %><% if !@organization.sites.empty? %> <p><span><%=@organization.projects.count%></span></p><% end %></li>
-  <li <%= selected_if_current_page(admin_organization_media_resources_path(@organization)) %>><%= link_to("Media", admin_organization_media_resources_path(@organization)) %><% if !@organization.media_resources.empty? %> <p><span><%=@organization.media_resources.count%></span></p><% end %></li>
-  <li <%= selected_if_current_page(admin_organization_resources_path(@organization)) %>><%= link_to("Resources", admin_organization_resources_path(@organization)) %><% if !@organization.resources.empty? %> <p><span><%=@organization.resources.count%></span></p><% end %></li>
+  <li <%= selected_if_current_page(admin_organization_projects_path(@organization)) %>>
+    <div class="bottom_selected">
+      <%= link_to('Organization projects', admin_organization_projects_path(@organization)) %><% if !@organization.sites.empty? %> <p><span><%=@organization.projects.count%></span></p><% end %>
+    </div>
+    </li>
+  <li <%= selected_if_current_page(admin_organization_media_resources_path(@organization)) %>>
+    <div class="bottom_selected">
+    <%= link_to("Media", admin_organization_media_resources_path(@organization)) %><% if !@organization.media_resources.empty? %> <p><span><%=@organization.media_resources.count%></span></p><% end %>
+    </div>
+  </li>
+  <li <%= selected_if_current_page(admin_organization_resources_path(@organization)) %>>
+        <div class="bottom_selected">
+          <%= link_to("Resources", admin_organization_resources_path(@organization)) %><% if !@organization.resources.empty? %> <p><span><%=@organization.resources.count%></span></p><% end %>
+          </div>
+  </li>
 </ul>
-<div class="export">
-  <%= link_to 'Export data', admin_organization_projects_path(@organization, :csv) %>
-</div>
-<div class="import">
-  <%= form_for [:admin, @organization], :html => { :multipart => true } do |f| %>
-  <%= f.file_field :projects_file %>
-  <%= f.submit 'Import projects' %>
-  <% end %>
+
+<div class="export_import">
+  <h5>PROJECTS SYNCHRONIZATION </h5>
+  <p>Imported data will override current organization information.</p>
+  <div id="links">
+    <a class="link_hidden">Import CSV</a>
+    <div id="wrapper_form">
+      <%= form_for [:admin, @organization], :html => { :multipart => true } do |f| %>
+            <%= f.file_field :projects_file, :onchange => 'importCSV();' %>
+            <%= f.submit 'Import projects' %>
+          <% end %>
+    </div>
+    <p class="split">|</p>
+    <%= link_to 'Export CSV', admin_organization_projects_path(@organization, :csv) %>
+    </div>
+  
 </div>
 <div class="delete">
   <h5>DELETE THIS ORGANIZATION</h5>

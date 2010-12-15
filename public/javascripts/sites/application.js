@@ -1,5 +1,13 @@
 $(document).ready( function() {
 
+    // TODO: update scrollbar to content
+    // if ($('.scroll_pane_auto').length > 0){
+    // 
+    //     $('.scroll_pane_auto').jScrollPane({
+    //                        autoReinitialise:true });
+    // }
+
+
     // LIVE SEARCH IN ORGANIZATIONS
     $('#ngos_search').val('');
     $('#ngos_search').liveUpdate('orgs_list');
@@ -10,6 +18,7 @@ $(document).ready( function() {
         $('.scroll_pane').jScrollPane({
                            autoReinitialise:false });
     }
+
     
   // MENU CLICKS
   $('ul.menu li a.main_option').click(function(ev){
