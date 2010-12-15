@@ -36,7 +36,7 @@
             <li>
               <a id="0">All</a>
             </li>
-             <% Country.all.each do |country| %>
+             <% Country.get_select_values.each do |country| %>
             <li>
               <a id="<%= country.id%>"><%= country.name %></a>
             </li>
