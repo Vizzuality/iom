@@ -1,6 +1,10 @@
 $(document).ready(function(ev){
 
       /************** SITE PAGE  ************************** */
+      
+		// COUNTRY COMBO
+	  $('select#gc_limited_country_section').sSelect({ddMaxWidth: '245px',ddMaxHeight:'231px',containerClass:'country'});
+
 
       // click on limited options
       $('ul.geographic_options').children('li').children('a.limited').click(function(ev){
@@ -33,42 +37,51 @@ $(document).ready(function(ev){
         }
       });
 
-      // click on country combo (LIMITED TO A COUNTRY)
-      $('li#gc_limited_country').find('span.select_country_combo').live('click',function(ev){
-        ev.stopPropagation();
-        ev.preventDefault();
-
-        if (!$(this).hasClass('clicked')){
-          $(this).addClass('clicked');
-        }
-
-        $(document).click(function(event) {
-          if (!$(event.target).closest('span.select_country_combo').length) {
-            $('li#gc_limited_country').find('span.select_country_combo').removeClass('clicked');
+       $(document).click(function(event) {
+          // To change clicked style on country combo
+          if (!$(event.target).closest('ul.newListSelected.country').length) {
+              $('li#gc_limited_region').find('div.newListSelFocus').removeClass('newListSelFocus');
+              $('li#gc_limited_region').find('div.newListSelected').css('background-position','0 0');              
           };
         });
-      });
+        
+      // click on country combo (LIMITED TO A COUNTRY)
+      // $('li#gc_limited_country').find('span.select_country_combo').live('click',function(ev){
+      //     
+      //   ev.stopPropagation();
+      //   ev.preventDefault();
+      // 
+      //   if (!$(this).hasClass('clicked')){
+      //     $(this).addClass('clicked');
+      //   }
+      // 
+      //   $(document).click(function(event) {
+      //     if (!$(event.target).closest('span.select_country_combo').length) {
+      //       $('li#gc_limited_country').find('span.select_country_combo').removeClass('clicked');
+      //     };
+      //   });
+      // });
 
       // SET VALUE IF CLICK ON COUNTRY
-      $('div.values.country').find('li').click(function(ev){
-        ev.stopPropagation();
-        ev.preventDefault();
-        var id = $(this).children('a').attr('id');
-        var name = $(this).children('a').text();
-        $('input#site_geographic_context_country_id').val(id);
-        $('span.select_country_combo.clicked').children('p.country').text(name);
-        $('span.select_country_combo.clicked').removeClass('clicked');
-      });
+      // $('div.values.country').find('li').click(function(ev){
+      //        ev.stopPropagation();
+      //        ev.preventDefault();
+      //        var id = $(this).children('a').attr('id');
+      //        var name = $(this).children('a').text();
+      //        $('input#site_geographic_context_country_id').val(id);
+      //        $('span.select_country_combo.clicked').children('p.country').text(name);
+      //        $('span.select_country_combo.clicked').removeClass('clicked');
+      //      });
 
       // click on country combo (LIMITED TO A REGION)
       $('li#gc_limited_region').find('span.select_country_combo').live('click',function(ev){
         ev.stopPropagation();
         ev.preventDefault();
-
+      
         if (!$(this).hasClass('clicked')){
           $(this).addClass('clicked');
         }
-
+      
         $(document).click(function(event) {
           if (!$(event.target).closest('span.select_country_combo').length) {
             $('li#gc_limited_region').find('span.select_country_combo').removeClass('clicked');
@@ -169,6 +182,14 @@ $(function() {
 function split( val ) {
   return val.split( /,\s*/ );
 }
+
+    $('#gc_limited_country_section').change(function(){
+
+      $.ajax({
+        url: '/admin/regions?country_id=' + $(this).val()
+      });
+    });
+
 
   $('.country_region_value').click(function(){
 

@@ -6,12 +6,11 @@ var data_info = new Object();
 $(document).ready(function(ev){
 
     // CUSTOM SCROLLBARS
-    if ($('.scroll_pane').length > 0){
-
-        // OTHER ATTEMP
-        $('.scroll_pane').jScrollPane({
-                           autoReinitialise:false });
-    }
+    // if ($('.scroll_pane').length > 0){
+    // 
+    //     $('.scroll_pane').jScrollPane({
+    //                        autoReinitialise:false });
+    // }
 
     if ($('div.right.menu').length>0) {
       setTimeout(function(){
@@ -201,7 +200,6 @@ $(document).ready(function(ev){
 
 
  function removeAndGo(location) {
-console.debug(location);
    var form = $('<form method="post" action="'+location+'"></form>');
    var metadata_input = '<input name="_method" value="delete" type="hidden" />';
    form.hide()
