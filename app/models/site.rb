@@ -358,7 +358,7 @@ class Site < ActiveRecord::Base
       
       #Insert into the relation all the sites that belong to the site.
       sql="insert into projects_sites
-      select subsql.id as project_id, 1 as site_id from (#{s.projects_sql({ :limit => nil, :offset => nil }).to_sql}) as subsql"
+      select subsql.id as project_id, 1 as site_id from (#{projects_sql({ :limit => nil, :offset => nil }).to_sql}) as subsql"
       ActiveRecord::Base.connection.execute(sql)
       
     end
