@@ -30,8 +30,7 @@
       <%= f.hidden_field :primary_organization_id , :value => Organization.first.id %>
       <div class="wrapper">
         <ul class="list_combo_content scroll_pane">
-            <li class="element"><p class="project_name">None</p></li>
-            <% Organization.all.each do |organization| %>
+            <% Organization.get_select_values.each do |organization| %>
               <li class="element" id="<%= organization.id %>"><p class="project_name"><%= truncate(organization.name, :length=> 40) %></p><p class="amount_projects"><%= pluralize(organization.projects.count, 'project', 'projects')%></p></li>
             <% end -%>
         </ul>
@@ -137,7 +136,7 @@
         <p id="0">Select more clusters</p>
         <div class="wrapper">
           <ul class="options scroll_pane">
-          <% Cluster.all.collect do |cluster| %>
+          <% Cluster.get_select_values.collect do |cluster| %>
             <li><a id="<%= cluster.id %>"><%= cluster.name %></a></li>
           <% end %>
             <li class="last"></li>
@@ -167,7 +166,7 @@
       <p id="0">Select more sectors</p>
      <div class="wrapper">
         <ul class="options scroll_pane">
-        <% Sector.all.collect do |sector| %>
+        <% Sector.get_select_values.collect do |sector| %>
           <li><a id="<%= sector.id %>"><%= sector.name %></a></li>
         <% end %>
           <li class="last"></li>

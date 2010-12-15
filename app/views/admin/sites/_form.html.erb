@@ -76,13 +76,13 @@
             <div class="wrapper">
               <ul class="clusters_or_sectors scroll_pane">
                 <li class="section"><p>CLUSTERS</p></li>
-                    <% Cluster.all.collect.each do |cluster| %>
+                    <% Cluster.get_select_values.each do |cluster| %>
                   <li><a class="cluster_value" id="<%= cluster.id %>"><%= truncate(cluster.name, :length => 30)  %></a></li>
                 <%end -%>
 
                 <%= f.hidden_field :project_context_sector_id  %>
                 <li class="section"><p>SECTORS</p></li>
-                    <% Sector.all.collect.each do |sector| %>
+                    <% Sector.get_select_values.each do |sector| %>
                   <li><a class="sector_value" id="<%= sector.id %>"><%= truncate(sector.name, :length => 30)  %></a></li>
                 <%end -%>
               </ul>
@@ -155,10 +155,6 @@
           <%= f.text_field :google_analytics_id %>
       </span>
    </div>
-
-   <script>
-      var admin_tags_path = '<%= admin_tags_path %>';
-    </script>
 
   <%= f.submit 'Save changes', :class => "#{'error' if @site.invalid? && action_name != 'new'}" %>
 

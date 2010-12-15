@@ -117,7 +117,7 @@ $(document).ready(function(ev){
       $('span.select_combo_typology').click(function(ev){
         ev.stopPropagation();
         ev.preventDefault();
-
+        $('span.select_combo_typology.clicked').removeClass('clicked');
         $(this).addClass('clicked');
 
         resetCombo($(this));

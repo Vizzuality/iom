@@ -54,7 +54,7 @@
               <li>
                 <a id="0">All</a>
               </li>
-               <% Cluster.all.each do |cluster| %>
+               <% Cluster.get_select_values.each do |cluster| %>
               <li>
                 <a id="<%= cluster.id%>"><%= truncate(cluster.name,:length => 20)%></a>
               </li>
@@ -72,7 +72,7 @@
               <li>
                 <a id="0">All</a>
               </li>
-              <% Sector.all.each do |sector| %>
+              <% Sector.get_select_values.each do |sector| %>
               <li>
                 <a id="<%= sector.id%>"><%= truncate(sector.name,:length => 20)%></a>
               </li>

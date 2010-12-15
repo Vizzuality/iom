@@ -138,4 +138,10 @@ class Organization < ActiveRecord::Base
       end
     end
   end
+  
+  # to get only id and name
+  def self.get_select_values
+    scoped.select(:id,:name).order("name ASC")
+  end
+  
 end
