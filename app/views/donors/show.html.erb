@@ -44,14 +44,13 @@
   
   
       <div class="right">
-        <div class="block border">
+        <div class="block <%unless @donor.logo.url.empty? && @donor.description.empty? && @donor.twitter.empty? && @donor.facebook.empty? %>border<%end%>">
           <% if @donor.logo_file_name? %>
             <div class="logo">
               <%= image_tag(@donor.logo.url) %>
             </div>
           <% end %>
-          <%= simple_format(@donor.description) %>
-        
+          <%unless @donor.description.nil?%> <%= simple_format(@donor.description) %><%end%>      
           <p class="social">
             <% if @donor.twitter? %>
               <%= link_to("follow us", "http://twitter.com/#{@donor.twitter}", :class=>"twitter", :target=>"_blank") %>
@@ -66,7 +65,6 @@
             <p class="website"><%= link_to(@donor.website, @donor.website, :rel => 'nofollow', :target => '_blank') %></p>
           <% end %>
         </div>
-      
 
         <!-- CLUSTER -->
         <% unless @donor.projects_clusters(@site).empty? %>

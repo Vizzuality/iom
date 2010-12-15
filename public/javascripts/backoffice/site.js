@@ -130,7 +130,8 @@ $(document).ready(function(ev){
       });
 
       // CLICK ON SECTORS OR CLUSTER
-      $('span.select_combo_typology').children('div.values').children('ul.clusters_or_sectors').children('li').click(function(ev){
+      $('span.select_combo_typology').find('div.values').find('ul.clusters_or_sectors').find('li').click(function(ev){
+
         ev.stopPropagation();
         ev.preventDefault();
 
@@ -147,7 +148,7 @@ $(document).ready(function(ev){
       });
 
       // CLICK ON ORGANIZATION
-      $('span.select_combo_typology').find('ul.organizations').children('li').click(function(ev){
+      $('span.select_combo_typology').find('ul.organizations').find('li').click(function(ev){
 
         ev.stopPropagation();
         ev.preventDefault();
