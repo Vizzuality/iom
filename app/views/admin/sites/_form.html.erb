@@ -31,28 +31,31 @@
   <div class="field">
   <label>SITE GEOGRAPHICAL CONTEXT</label>
   <ul class="geographic_options">
-  <li id="gc_worldwide" class="<%= selected_if_worldwide(@site) %>">
+  <li id="gc_worldwide" class="<%= selected_if_worldwide(@site) %> option">
     <a class="combo limited">Worldwide, not limited</a>
   </li>
-  <li id="gc_limited_region" class="<%= selected_if_field_present(@site, :geographic_context_country_id) %>">
+  <li id="gc_limited_region" class="<%= selected_if_field_present(@site, :geographic_context_country_id) %> option">
     <a class="limited combo">Limited to a country and region</a>
 
     <div class="content">
-      <span class="select_country_combo"><p class="country">Select a country</p>
+      <%= f.select :geographic_context_country_id, Country.get_select_values.collect{ |c| [c.name, c.id] }, {:prompt => 'Select a country'}, {:id => 'gc_limited_country_section'}%>
+      
+      <!-- <span class="select_country_combo"><p class="country">Select a country</p>
         <%= f.hidden_field :geographic_context_country_id %>
         <div class="values country">
+        
           <ul>
             <% Country.get_select_values.each do |country| %>
               <li class="country_region_value"><a class="country_value" id="<%= country.id %>"><%= truncate(country.name, :length => 40) %></a></li>
             <% end -%>
           </ul>
         </div>
-      </span>
+      </span> -->
       <div id="regions">
       </div>
     </div>
   </li>
-  <li id="gc_limited_bbox" class="<%= selected_if_field_present(@site, :geographic_boundary_box) %>">
+  <li id="gc_limited_bbox" class="<%= selected_if_field_present(@site, :geographic_boundary_box) %> option">
     <a class="limited combo">Limited by a boundary box</a>
     <%= f.hidden_field :geographic_boundary_box %>
     <div class="content">
@@ -99,7 +102,7 @@
             <div class="wrapper">
               <ul class="organizations scroll_pane">
                 <%= f.hidden_field :project_context_organization_id  %>
-                <% Organization.all.collect.each do |organization| %>
+                <% Organization.get_select_values.each do |organization| %>
                   <li><a class="organization" id="<%= organization.id %>"><%= truncate(organization.name, :length => 31) %></a></li>
                 <%end -%>
               </ul>
@@ -120,7 +123,6 @@
   </ul>
   </div> <!-- field -->
   <h3 class="section museo_sans">CONTACT INFORMATION</h3>
-
     <div class="two_columns">
       <div class="left_column">
         <div class="field">
@@ -162,5 +164,6 @@
 
   <script src="/javascripts/plugins/jquery.mousewheel.js" type="text/javascript" charset="utf-8"></script>
   <script src="/javascripts/plugins/jquery.jscrollpane.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/javascripts/plugins/jquery.stylish-select.js" type="text/javascript" charset="utf-8"></script>  
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
   <script src="/javascripts/backoffice/site_map.js" type="text/javascript" charset="utf-8"></script>

@@ -213,9 +213,9 @@ Dual licensed under the MIT and GPL licenses.
                 	
 				if ($newUl.is(':visible')){
 					$newUl.parent().children('div.selectedTxt').parent('div.newListSelected').css('background-position','0 -32px');
-                    var element = $newUl.parent().children('div.selectedTxt').parent('div.newListSelected').find('.scroll_pane');
-                    var api = element.data('jsp');
-                    api.reinitialise();
+                    // var element = $newUl.parent().children('div.selectedTxt').parent('div.newListSelected').find('.scroll_pane');
+                    // var api = element.data('jsp');
+                    // api.reinitialise();
 				}else {
 					$newUl.parent().children('div.selectedTxt').parent('div.newListSelected').css('background-position','0 0');
 				}
