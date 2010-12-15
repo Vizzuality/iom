@@ -30,6 +30,7 @@
       <%= f.hidden_field :primary_organization_id , :value => Organization.first.id %>
       <div class="wrapper">
         <ul class="list_combo_content scroll_pane">
+            <li class="element"><p class="project_name">None</p></li>
             <% Organization.all.each do |organization| %>
               <li class="element" id="<%= organization.id %>"><p class="project_name"><%= truncate(organization.name, :length=> 40) %></p><p class="amount_projects"><%= pluralize(organization.projects.count, 'project', 'projects')%></p></li>
             <% end -%>

@@ -210,7 +210,7 @@ div.block.edit div.med div.left div.image_container div.field input {float:left;
 div.block.edit div.med div.left textarea {float:left; min-width:548px; max-width:548px; max-height:204px; min-height:204px; margin:5px 0 0 0; padding:5px 8px; background:url('/images/backoffice/donors/textarea_bkg.png') no-repeat 0 0; border:none; font:normal 15px Arial; color:#333333;}
 div.block.edit div.med div.left textarea.error {background-position:0 -214px;}
 div.block.edit div.med div.left textarea:focus {outline:none;}
-div.block.edit div.med div.left label {float:left; width:100%; margin:18px 0 0 0; font:bold 11px Arial; color:#999999; text-transform:uppercase;}
+div.block.edit div.med div.left label {float:left; width:100%; margin:18px 0 0 1px; font:bold 11px Arial; color:#999999; text-transform:uppercase;}
 div.block.edit div.med div.left div.common {float:left; width:100%; margin:35px 0 0 0;}
 div.block.edit div.med div.left div.common h3 {float:left; width:100%; padding:0 0 5px 0; font:normal 17px "Museo Sans","Arial"; color:#333333; text-transform:uppercase;}
 div.block.edit div.med div.left div.short_field {float:left; width:272px; margin:0px 20px 0 0;}

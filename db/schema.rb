@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(:version => 20101211204623) do
   add_index "donations", ["project_id"], :name => "index_donations_on_project_id"
 
   create_table "donors", :force => true do |t|
-    t.string   "name"
+    t.string   "name",                      :limit => 2000
     t.text     "description"
     t.string   "website"
     t.string   "twitter"
@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(:version => 20101211204623) do
     t.string   "caption"
   end
 
-  add_index "media_resources", ["element_id", "element_type"], :name => "index_media_resources_on_element_type_and_element_id"
+  add_index "media_resources", ["element_type", "element_id"], :name => "index_media_resources_on_element_type_and_element_id"
 
   create_table "organizations", :force => true do |t|
     t.string   "name"
@@ -149,7 +149,7 @@ ActiveRecord::Schema.define(:version => 20101211204623) do
     t.string   "title"
     t.text     "body"
     t.integer  "site_id"
-    t.boolean  "published",  :default => false
+    t.boolean  "published"
     t.string   "permalink"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -192,6 +192,7 @@ ActiveRecord::Schema.define(:version => 20101211204623) do
     t.text     "site_specific_information"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.geometry "the_geom",                  :limit => nil,  :null => false, :srid => 4326
     t.text     "activities"
     t.string   "intervention_id"
     t.text     "additional_information"
@@ -200,11 +201,11 @@ ActiveRecord::Schema.define(:version => 20101211204623) do
     t.date     "date_updated"
     t.string   "contact_position"
     t.string   "website"
-    t.geometry "the_geom",                  :limit => nil,  :null => false, :srid => 4326
   end
 
   add_index "projects", ["name"], :name => "index_projects_on_name"
   add_index "projects", ["primary_organization_id"], :name => "index_projects_on_primary_organization_id"
+  add_index "projects", ["the_geom"], :name => "index_projects_on_the_geom", :spatial => true
 
   create_table "projects_regions", :id => false, :force => true do |t|
     t.integer "region_id"
@@ -240,11 +241,17 @@ ActiveRecord::Schema.define(:version => 20101211204623) do
   add_index "projects_tags", ["tag_id"], :name => "index_projects_tags_on_tag_id"
 
   create_table "regions", :force => true do |t|
-    t.string  "name"
-    t.integer "country_id"
+    t.string   "name"
+    t.integer  "level"
+    t.integer  "country_id"
+    t.integer  "parent_region_id"
+    t.geometry "the_geom",         :limit => nil, :srid => 4326
   end
 
   add_index "regions", ["country_id"], :name => "index_regions_on_country_id"
+  add_index "regions", ["level"], :name => "index_regions_on_level"
+  add_index "regions", ["parent_region_id"], :name => "index_regions_on_parent_region_id"
+  add_index "regions", ["the_geom"], :name => "index_regions_on_the_geom", :spatial => true
 
   create_table "resources", :force => true do |t|
     t.string   "title"
@@ -256,7 +263,7 @@ ActiveRecord::Schema.define(:version => 20101211204623) do
     t.text     "site_specific_information"
   end
 
-  add_index "resources", ["element_id", "element_type"], :name => "index_resources_on_element_type_and_element_id"
+  add_index "resources", ["element_type", "element_id"], :name => "index_resources_on_element_type_and_element_id"
 
   create_table "sectors", :force => true do |t|
     t.string "name"
@@ -293,13 +300,14 @@ ActiveRecord::Schema.define(:version => 20101211204623) do
     t.string   "project_context_tags"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.geometry "geographic_context_geometry",     :limit => nil,                    :srid => 4326
     t.string   "project_context_tags_ids"
     t.boolean  "status",                                         :default => false
     t.float    "visits",                                         :default => 0.0
     t.float    "visits_last_week",                               :default => 0.0
-    t.geometry "geographic_context_geometry",     :limit => nil,                    :srid => 4326
   end
 
+  add_index "sites", ["geographic_context_geometry"], :name => "index_sites_on_geographic_context_geometry", :spatial => true
   add_index "sites", ["name"], :name => "index_sites_on_name"
   add_index "sites", ["status"], :name => "index_sites_on_status"
   add_index "sites", ["url"], :name => "index_sites_on_url"

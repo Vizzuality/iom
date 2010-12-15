@@ -21,7 +21,7 @@
           <% unless @organizations.empty? %>
             <h2><%= pluralize(@organizations.total_entries, 'Organization', 'Organizations') %> implementing projects
               <% if params[:q]%>
-              on <a class="button" href="<%= admin_organizations_path %>"><%= params[:q] %></a>
+              on <a class="remove" href="<%= admin_organizations_path %>"><%= params[:q] %></a>
               <% end %>
             </h2>
             <ul>

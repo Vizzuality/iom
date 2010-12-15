@@ -120,6 +120,8 @@ $(document).ready(function(ev){
 
         $(this).addClass('clicked');
 
+        resetCombo($(this));
+
         $(document).click(function(event) {
           if (!$(event.target).closest('span.select_combo_typology').length) {
             $('span.select_combo_typology').removeClass('clicked');

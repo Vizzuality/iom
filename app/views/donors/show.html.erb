@@ -114,13 +114,14 @@
           </ul>
         </div>
         <% end %>
-
+        <%unless (@donor.contact_person_name.blank?)&&(@donor.contact_person_position.blank?)&&(@donor.contact_company.blank?)&&(@donor.contact_phone_number.blank?)&&(@donor.contact_email.blank?) %>
         <div class="block border last">
           <h2>Contact information</h2>
           <p><strong><%= @donor.contact_person_name %></strong><br/><%= @donor.contact_person_position %><br/><%= @donor.contact_company %></p>
           <p><%= @donor.contact_phone_number %><br/><%= link_to(@donor.contact_email, "mailto:#{@donor.contact_email}") %></p>
         </div>
       </div>
+      <%end%>
     </div>
     
     
