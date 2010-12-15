@@ -14,7 +14,7 @@ namespace :iom do
       DB = ActiveRecord::Base.connection
       DB.execute 'DELETE FROM countries'
       system("unzip -o #{Rails.root}/db/data/countries/TM_WORLD_BORDERS-0.3.zip -d #{Rails.root}/db/data/countries/")
-      system("/usr/local/pgsql/bin/shp2pgsql -d -s 4326 -gthe_geom -i -WLATIN1 #{Rails.root}/db/data/countries/TM_WORLD_BORDERS-0.3.shp public.tmp_countries | /usr/local/pgsql/bin/psql -Upostgres -diom_#{RAILS_ENV}")
+      system("shp2pgsql -d -s 4326 -gthe_geom -i -WLATIN1 #{Rails.root}/db/data/countries/TM_WORLD_BORDERS-0.3.shp public.tmp_countries | psql -Upostgres -diom_#{RAILS_ENV}")
       
       #Insert the country and get the value
       sql="INSERT INTO countries(\"name\",code,the_geom)
@@ -35,11 +35,11 @@ namespace :iom do
       
       #Import data from GADM (http://www.gadm.org/country)
 
-      system("/usr/local/pgsql/bin/shp2pgsql -d -s 4326 -gthe_geom -i -WLATIN1 #{Rails.root}/db/data/regions/HTI_adm1.shp public.tmp_haiti_adm1 | /usr/local/pgsql/bin/psql -Upostgres -diom_#{RAILS_ENV}")
+      system("shp2pgsql -d -s 4326 -gthe_geom -i -WLATIN1 #{Rails.root}/db/data/regions/HTI_adm1.shp public.tmp_haiti_adm1 | psql -Upostgres -diom_#{RAILS_ENV}")
       
-      system("/usr/local/pgsql/bin/shp2pgsql -d -s 4326 -gthe_geom -i -WLATIN1 #{Rails.root}/db/data/regions/HTI_adm2.shp public.tmp_haiti_adm2 | /usr/local/pgsql/bin/psql -Upostgres -diom_#{RAILS_ENV}")          
+      system("shp2pgsql -d -s 4326 -gthe_geom -i -WLATIN1 #{Rails.root}/db/data/regions/HTI_adm2.shp public.tmp_haiti_adm2 | psql -Upostgres -diom_#{RAILS_ENV}")          
       
-      system("/usr/local/pgsql/bin/shp2pgsql -d -s 4326 -gthe_geom -i -WLATIN1 #{Rails.root}/db/data/regions/HTI_adm3.shp public.tmp_haiti_adm3 | /usr/local/pgsql/bin/psql -Upostgres -diom_#{RAILS_ENV}")
+      system("shp2pgsql -d -s 4326 -gthe_geom -i -WLATIN1 #{Rails.root}/db/data/regions/HTI_adm3.shp public.tmp_haiti_adm3 | psql -Upostgres -diom_#{RAILS_ENV}")
       
       country_id = Country.where("code=?","HTI").first.id
       
