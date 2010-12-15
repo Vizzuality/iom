@@ -41,7 +41,7 @@
       <%= f.hidden_field :geographic_context_country_id %>
         <div class="values country">
           <ul>
-            <% Country.all.each do |country| %>
+            <% Country.get_select_values.each do |country| %>
               <li><a class="country_value" id="<%= country.id %>"><%= country.name %></a></li>
             <%end -%>
           </ul>
@@ -57,7 +57,7 @@
         <%= f.hidden_field :geographic_context_country_id %>
         <div class="values country">
           <ul>
-            <% Country.all.each do |country| %>
+            <% Country.get_select_values.each do |country| %>
               <li class="country_region_value"><a class="country_value" id="<%= country.id %>"><%= country.name %></a></li>
             <% end -%>
           </ul>

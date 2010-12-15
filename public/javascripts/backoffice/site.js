@@ -172,7 +172,7 @@ function split( val ) {
   $('.country_region_value').click(function(){
 
     $.ajax({
-      url: admin_tags_path + '?country_id=' + $(this).children('a').attr('id')
+      url: '/admin/regions?country_id=' + $(this).children('a').attr('id')
     });
   });
 
@@ -185,7 +185,7 @@ function split( val ) {
         value = value.substring(value.indexOf(',')+1, value.length);
       }
       $.ajax({
-        url: admin_tags_path + '?term=' + value,
+        url: '/admin/tags?term=' + value,
         dataType: "json",
         success: function( data ) {
           if(data != null) {
