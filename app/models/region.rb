@@ -50,4 +50,8 @@ class Region < ActiveRecord::Base
     return amount
   end
 
+  def self.get_select_values
+    scoped.select(:id,:name).order("name ASC")
+  end
+
 end

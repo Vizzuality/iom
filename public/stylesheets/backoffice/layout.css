@@ -887,7 +887,7 @@ div.block.site_info div.med div.left form h3.section {float:left; margin:30px 0 
 
 /* -------------- GEOGRAPHIC OPTIONS*/
 div.block.site_info div.med div.left form ul.geographic_options {float:left; width:235px; height:auto; margin:10px 0 0 0px;}
-div.block.site_info div.med div.left form ul.geographic_options li {float:left; margin:7px 0 0 12px; width:215px;}
+div.block.site_info div.med div.left form ul.geographic_options li {float:left; margin:7px 0 0 12px; width:230px;}
 div.block.site_info div.med div.left form ul.geographic_options li.selected {margin:10px 0 0 0;}
 div.block.site_info div.med div.left form ul.geographic_options li a.combo {float:left; font:normal 15px Arial; color:#333333; text-decoration:none; background:url('/images/backoffice/sites/option_bkg.png') no-repeat 0 4px; padding:0 0 0 15px; height:14px;}
 div.block.site_info div.med div.left form ul.geographic_options li a.combo:hover {cursor:pointer;}
@@ -902,7 +902,7 @@ div.block.site_info div.med div.left form ul.geographic_options li.selected span
 div.block.site_info div.med div.left form ul.geographic_options li.selected span.select_country_combo.clicked {background:url('/images/backoffice/sites/select_country_combo_head.png') no-repeat 0 0; height:32px; position:relative; }
 div.block.site_info div.med div.left form ul.geographic_options li.selected span.select_country_combo.clicked div.values {position:absolute; width:239px; height:202px; top:32px; left:0; background:url('/images/backoffice/sites/select_country_combo_body.png') no-repeat 0 0; z-index:30; display:inline;}
 div.block.site_info div.med div.left form ul.geographic_options li.selected span.select_country_combo ul {display:none;}
-div.block.site_info div.med div.left form ul.geographic_options li.selected span.select_country_combo.clicked div.values ul {float:left; width:234px; height:180px; margin:4px 0 0 1px; padding:0; overflow-y:auto; display:inline;}
+div.block.site_info div.med div.left form ul.geographic_options li.selected span.select_country_combo.clicked div.values ul {float:left; width:234px; height:180px; margin:4px 0 0 1px; padding:0; overflow-y:auto; display:inline; overflow-x:hidden;}
 div.block.site_info div.med div.left form ul.geographic_options li.selected span.select_country_combo.clicked div.values ul li {float:left; margin:0; width:233px; height:25px;}
 div.block.site_info div.med div.left form ul.geographic_options li.selected span.select_country_combo.clicked div.values ul li:hover {background-color:#E4F0CA;}
 div.block.site_info div.med div.left form ul.geographic_options li.selected span.select_country_combo.clicked div.values ul li a {float:left; font:normal 15px Arial; color:#666666; background:none; padding:0; margin:4px 9px;}

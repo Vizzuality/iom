@@ -820,7 +820,7 @@ $(function() {
   
 
      if ($('#autocomplete_donor_name').length > 0){
-          var custom_donors_url = admin_tags_path + '?q=';
+          var custom_donors_url = '/admin/donors?q=';
   
           // AUTOCOMPLETE FOR DONORS IN PROJECT
           $("#autocomplete_donor_name").autocomplete({
