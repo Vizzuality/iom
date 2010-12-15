@@ -129,7 +129,7 @@ class Site < ActiveRecord::Base
   #  - bbox filtering (7)
   #    query : select projects.* from projects where ST_Contains(projects.the_geom, #{geographic_context_geometry})
   #
-  def projects(options = {})
+  def projects_sql(options = {})
     default_options = { :limit => 10, :offset => 0 }
     options = default_options.merge(options)
 
@@ -177,7 +177,7 @@ class Site < ActiveRecord::Base
       from  << 'sites'
       where << "ST_Contains(sites.geographic_context_geometry,projects.the_geom)"
     end
-
+    
     result = Project.select(select).from(from.join(',')).where(where.join(' AND '))
 
     if options[:limit]
@@ -186,8 +186,19 @@ class Site < ActiveRecord::Base
         result = result.offset(options[:offset])
       end
     end
-    result.all
+    result
   end
+  
+  #Return All the projects within the Site (already executed)
+  def projects(options = {})
+    projects_sql(options).all
+  end
+  
+  #Tells me if a project is included in a site or not
+  def is_project_included?(project_id,options={})
+    result = projects_sql(options).where("projects.id=?",project_id).present?
+  end
+  
 
   # TODO: perform query with a count()
   def total_projects(options = {})
@@ -342,10 +353,14 @@ class Site < ActiveRecord::Base
     end
     
     def set_cached_projects
-      self.cached_projects.clear
-      projects(:limit => nil, :offset => nil).each do |project|
-        ActiveRecord::Base.connection.execute("INSERT INTO projects_sites (project_id, site_id) VALUES (#{project.id},#{self.id})")
-      end
+      sql="DELETE FROM projects_sites WHERE site_id=#{self.id}"
+      ActiveRecord::Base.connection.execute(sql)
+      
+      #Insert into the relation all the sites that belong to the site.
+      sql="insert into projects_sites
+      select subsql.id as project_id, 1 as site_id from (#{s.projects_sql({ :limit => nil, :offset => nil }).to_sql}) as subsql"
+      ActiveRecord::Base.connection.execute(sql)
+      
     end
     
     def remove_cached_projects
