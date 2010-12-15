@@ -1,6 +1,6 @@
 namespace :db do
   desc 'Remove,Create,Seed and load data'
-  task :reset => %w(db:drop db:create db:migrate db:seed load_adm_levels load_orgs load_projects)
+  task :reset => %w(db:drop db:create db:migrate db:seed load_countries load_adm_levels load_orgs load_projects)
 end
 
 
