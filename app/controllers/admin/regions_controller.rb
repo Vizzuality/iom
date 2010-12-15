@@ -10,5 +10,4 @@ class Admin::RegionsController < ApplicationController
       end
     end
   end
-
 end
