@@ -3,8 +3,8 @@
 # Table name: countries
 #
 #  id   :integer         not null, primary key
-#  name :string(255)     
-#  code :string(255)     
+#  name :string(255)
+#  code :string(255)
 #
 
 class Country < ActiveRecord::Base
@@ -15,6 +15,8 @@ class Country < ActiveRecord::Base
       self.where("projects.id IN (#{site.projects_ids.join(',')})")
     end
   end
+
+  before_save :update_wikipedia_description
 
   # Array of arrays
   # [[cluster, count], [cluster, count]]
@@ -41,9 +43,25 @@ class Country < ActiveRecord::Base
     end.flatten.uniq
   end
 
-  # to get only id and name  
+  # to get only id and name
   def self.get_select_values
     scoped.select(:id,:name).order("name ASC")
   end
 
+  def update_wikipedia_description
+    if wiki_url.present?
+      require 'open-uri'
+      doc = Nokogiri::HTML(open(URI.encode(wiki_url), 'User-Agent' => 'NgoAidMap.net'))
+
+      #SUCK OUT ALL THE PARAGRAPHS INTO AN ARRAY
+      #CLEANING UP TEXT REMOVING THE '[\d+]'s
+      paragraphs = doc.css('#bodyContent p').inject([]) {|a,p|
+        a << p.content.gsub(/\[\d+\]/,"")
+        a
+      }
+
+      self.wiki_description = paragraphs.first if paragraphs.present?
+    end
+  end
+  private :update_wikipedia_description
 end

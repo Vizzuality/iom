@@ -8,18 +8,15 @@ gem 'nofxx-georuby',                          :require => 'geo_ruby'
 #gem 'ppe-postgis-adapter',                    :require => 'postgis_adapter', :git => 'git://github.com/ferblape/postgis_adapter.git', :branch => 'load_geometry_optimization'
 gem 'spatial_adapter'
 
-gem 'ruby-debug'
-
 gem "will_paginate", "~> 3.0.pre2"
 gem 'sanitize'
 gem 'paperclip', :tag => 'v2.3.5'
 gem 'garb'
 gem 'csv-mapper'
-
-gem 'csv-mapper'
 gem 'fastercsv'
 gem 'money'
 gem 'geokit'
+gem 'nokogiri'
 
 group :development do
   gem 'capistrano'
@@ -37,4 +34,5 @@ group :test, :development do
   gem 'capybara', '~> 0.4.0'
   gem 'webrat'
   gem 'database_cleaner', :tag => 'v0.5.2'
+  gem 'ruby-debug'
 end

@@ -179,6 +179,7 @@ DEPENDENCIES
   launchy
   money
   nofxx-georuby
+  nokogiri
   paperclip
   pg (= 0.9.0)
   railroady

@@ -3,8 +3,8 @@
 # Table name: regions
 #
 #  id         :integer         not null, primary key
-#  name       :string(255)     
-#  country_id :integer         
+#  name       :string(255)
+#  country_id :integer
 #
 
 class Region < ActiveRecord::Base
@@ -13,12 +13,14 @@ class Region < ActiveRecord::Base
 
   belongs_to :country
   belongs_to :region, :foreign_key => :parent_region_id, :class_name => 'Region'
-  
+
   has_and_belongs_to_many :projects do
     def site(site)
       self.where("projects.id IN (#{site.projects_ids.join(',')})")
     end
   end
+
+  before_save :update_wikipedia_description
 
   # Array of arrays
   # [[cluster, count], [cluster, count]]
@@ -53,5 +55,22 @@ class Region < ActiveRecord::Base
   def self.get_select_values
     scoped.select(:id,:name).order("name ASC")
   end
+
+  def update_wikipedia_description
+    if wiki_url.present?
+      require 'open-uri'
+      doc = Nokogiri::HTML(open(URI.encode(wiki_url), 'User-Agent' => 'NgoAidMap.net'))
+
+      #SUCK OUT ALL THE PARAGRAPHS INTO AN ARRAY
+      #CLEANING UP TEXT REMOVING THE '[\d+]'s
+      paragraphs = doc.css('#bodyContent p').inject([]) {|a,p|
+        a << p.content.gsub(/\[\d+\]/,"")
+        a
+      }
+
+      self.wiki_description = paragraphs.first if paragraphs.present?
+    end
+  end
+  private :update_wikipedia_description
 
 end
