@@ -211,19 +211,23 @@ class Site < ActiveRecord::Base
   end
 
   def donors
-    Donor.find_by_sql("select donors.* from donors, donations where donations.project_id IN (#{projects_ids.join(',')}) AND donations.donor_id = donors.id")
+    Donor.find_by_sql("select d.* from donors as d where id in (
+    select don.donor_id from (donations as don inner join projects as p on don.project_id=p.id) inner join projects_sites as ps on p.id=ps.project_id and site_id=#{self.id})")
   end
 
   def organizations
-    Organization.find_by_sql("select organizations.* from organizations, projects where projects.id IN (#{projects_ids.join(',')}) AND projects.primary_organization_id = organizations.id").uniq
+    Organization.find_by_sql("select o.* from organizations as o where id in (
+    select p.primary_organization_id from projects as p inner join projects_sites as ps on p.id=ps.project_id and site_id=#{self.id})")
   end
 
   def clusters
-    Cluster.find_by_sql("select clusters.* from clusters, clusters_projects where clusters_projects.project_id in (#{projects_ids.join(',')}) AND clusters.id = clusters_projects.cluster_id").uniq
+    Cluster.find_by_sql("select c.* from clusters as c where id in (
+        select cp.cluster_id from (clusters_projects as cp inner join projects as p on cp.project_id=p.id) inner join projects_sites as ps on p.id=ps.project_id and site_id=#{self.id})")
   end
 
   def sectors
-    Sector.find_by_sql("select sectors.* from sectors, projects_sectors where projects_sectors.project_id in (#{projects_ids.join(',')}) AND sectors.id = projects_sectors.sector_id").uniq
+    Sector.find_by_sql("select s.* from sectors as s where id in (
+        select pse.project_id from (projects_sectors as pse inner join projects as p on pse.project_id=p.id) inner join projects_sites as ps on p.id=ps.project_id and site_id=#{self.id})")
   end
 
   def set_visits!
@@ -261,6 +265,25 @@ class Site < ActiveRecord::Base
     self.geographic_context_geometry = Polygon.from_points([polygon_points])
   end
   
+  def countries_select
+    unless geographic_context.blank?
+      case geographic_context
+        when 'worlwide'
+          Country.get_select_values
+        when 'country'
+          Country.find(self.geographic_context_country_id)
+        when 'region'
+          Region.find(self.geographic_context_region_id).country
+        when 'bbox'
+          # TODO
+          []
+      end
+    else
+      # worlwide
+      Country.get_select_values
+    end
+  end
+  
   def countries
     unless geographic_context.blank?
       case geographic_context
@@ -279,6 +302,25 @@ class Site < ActiveRecord::Base
       Country.all
     end
   end
+  
+  def regions_select
+    unless geographic_context.blank?
+      case geographic_context
+        when 'worlwide'
+          Region.get_select_values
+        when 'country'
+          Country.find(self.geographic_context_country_id)
+        when 'region'
+          Region.find(self.geographic_context_region_id).country
+        when 'bbox'
+          # TODO
+          []
+      end
+    else
+      # worlwide
+      Region.get_select_values
+    end
+  end  
   
   def regions
     unless geographic_context.blank?
