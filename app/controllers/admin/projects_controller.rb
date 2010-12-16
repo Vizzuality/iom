@@ -3,7 +3,6 @@ class Admin::ProjectsController < ApplicationController
   before_filter :login_required
 
   def index
-
     @conditions = {}
 
     if params[:q]
@@ -19,7 +18,7 @@ class Admin::ProjectsController < ApplicationController
           projects = projects.where("end_date < ?", Date.today.to_s(:db))
         end
       end
-      unless params[:country].blank?
+      unless ((params[:country].blank?)||(params[:country] == "0"))
         if country = Country.find(params[:country])
           @conditions[country.name] = {'country' => params[:country]}
           from << 'countries_projects'

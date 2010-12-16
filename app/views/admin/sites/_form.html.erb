@@ -39,18 +39,6 @@
 
     <div class="content">
       <%= f.select :geographic_context_country_id, Country.get_select_values.collect{ |c| [c.name, c.id] }, {:prompt => 'Select a country'}, {:id => 'gc_limited_country_section'}%>
-      
-      <!-- <span class="select_country_combo"><p class="country">Select a country</p>
-        <%= f.hidden_field :geographic_context_country_id %>
-        <div class="values country">
-        
-          <ul>
-            <% Country.get_select_values.each do |country| %>
-              <li class="country_region_value"><a class="country_value" id="<%= country.id %>"><%= truncate(country.name, :length => 40) %></a></li>
-            <% end -%>
-          </ul>
-        </div>
-      </span> -->
       <div id="regions">
       </div>
     </div>

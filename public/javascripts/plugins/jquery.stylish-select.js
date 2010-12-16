@@ -59,7 +59,7 @@ Dual licensed under the MIT and GPL licenses.
 		$input = $(this),
 		$containerDivText = $('<div class="selectedTxt"></div>'),
 		$containerDiv = $('<div class="newListSelected ' + opts.containerClass + '"></div>'),   
-		$newUl = $('<ul class="newList scroll_pane ' + opts.containerClass + '" style="visibility:hidden;"></ul>'),
+        $newUl = $('<div class="newList_content ' + opts.containerClass + '"><div class="wrapper"><ul class="newList ' + opts.containerClass + '" style="visibility:hidden;"></ul></div></div>'),
 		itemIndex = -1,
 		currentIndex = -1,
 		keys = [],
@@ -92,11 +92,11 @@ Dual licensed under the MIT and GPL licenses.
                         opts.defaultText = option;
                         currentIndex = i;
                     }
-                    $newUl.append($('<li><a href="JavaScript:void(0);">'+option+'</a></li>').data('key', key));
+                    $newUl.find('ul.newList').append($('<li><a href="JavaScript:void(0);">'+option+'</a></li>').data('key', key));
 
                 });
                 //cache list items object
-                $newLi = $newUl.children().children();
+                $newLi = $newUl.find('ul.newList').children().children();
 
             } else { //optgroup
                 $input.children('optgroup').each(function(){
@@ -104,7 +104,7 @@ Dual licensed under the MIT and GPL licenses.
                     var optionTitle = $(this).attr('label'),
                     $optGroup = $('<li class="newListOptionTitle">'+optionTitle+'</li>');
 
-                    $optGroup.appendTo($newUl);
+                    $optGroup.appendTo($newUl.find('ul.newList'));
 
                     var $optGroupList = $('<ul></ul>');
 
@@ -128,7 +128,7 @@ Dual licensed under the MIT and GPL licenses.
             }
 
             //get heights of new elements for use later
-            var newUlHeight = $newUl.height(),
+            var newUlHeight = $newUl.find('ul.newList').height(),
             containerHeight = $containerDiv.height(),
             newLiLength = $newLi.length;
 
@@ -153,13 +153,13 @@ Dual licensed under the MIT and GPL licenses.
 
                 containerPosY = containerPosY-scrollTop;
                 if (containerPosY+newUlHeight >= docHeight){
-                    $newUl.css({
+                    $newUl.find('ul.newList').css({
                         top: containerHeight+'px',
                         height: newUlHeight
                     });
                     $input.onTop = true;
                 } else {
-                    $newUl.css({
+                    $newUl.find('ul.newList').css({
                         top: '32px',
                         height: newUlHeight
                     });
@@ -186,10 +186,9 @@ Dual licensed under the MIT and GPL licenses.
                 
                 event.stopPropagation();
             
-                
 				//added by Justin Beasley
 				if($(this).data('ssReRender')) {
-					newUlHeight = $newUl.height('').height();
+					newUlHeight = $newUl.find('ul.newList').height('').height();
 					containerHeight = $containerDiv.height();
 					$(this).data('ssReRender',false);
 					newUlPos();
@@ -202,8 +201,8 @@ Dual licensed under the MIT and GPL licenses.
                         .removeClass('newListSelFocus');
 
                 //show/hide this menu
-                $newUl.toggle();                
-                
+                $newUl.toggle();
+
                 // To remove clicked style in others
                 $('div.newListSelected').each(function() {
                 		$(this).css('background-position','0 0');
@@ -213,11 +212,22 @@ Dual licensed under the MIT and GPL licenses.
                 	
 				if ($newUl.is(':visible')){
 					$newUl.parent().children('div.selectedTxt').parent('div.newListSelected').css('background-position','0 -32px');
-                    // var element = $newUl.parent().children('div.selectedTxt').parent('div.newListSelected').find('.scroll_pane');
-                    // var api = element.data('jsp');
-                    // api.reinitialise();
+
+					$newUl.find('ul').css('display','inline');
+					$newUl.find('ul').css('visibility','visible');
+
+    				// To reset api jscrollPane
+                    var element = $('div.newListSelected').find('.scroll_pane');
+                    console.log(element);
+                    if ((element != undefined) && (element.length > 0)){
+                        var api = element.data('jsp');
+                        api.reinitialise();                
+                    }
+					
 				}else {
 					$newUl.parent().children('div.selectedTxt').parent('div.newListSelected').css('background-position','0 0');
+					$newUl.find('ul').css('display','none');
+					$newUl.find('ul').css('visibility','hidden');
 				}
 
                 positionFix();
@@ -385,7 +395,7 @@ Dual licensed under the MIT and GPL licenses.
             });
 
             $containerDiv.bind('focus.sSelect',function(){
-                $(this).addClass('newListSelFocus');
+                $(this).addClass('newListSelFocus');              
                 keyPress(this);
             });
 

@@ -9,6 +9,9 @@ var donationDate = new Array(3);
 var limitTextCombo = 12;
 $(document).ready(function(ev){
 
+        // COUNTRY COMBO
+	    $('select#country').sSelect({ddMaxWidth: '134px',ddMaxHeight:'220px',containerClass:'country_index'});
+    
 
 		if ($('div.select_dates').length > 0){
 
@@ -131,41 +134,41 @@ $(document).ready(function(ev){
 
 
   //  COMBO COUNTRY
-  $('span#country_combo_search').click(function(ev){
-    ev.stopPropagation();
-    ev.preventDefault();
-
-    if (!$(this).hasClass('clicked')){
-      $('span.clicked').removeClass('clicked');
-      $(this).addClass('clicked');
-    }else {
-      $('span.clicked').removeClass('clicked');
-      $(this).removeClass('clicked');
-    }
-
-    $(document).click(function(event) {
-      if (!$(event.target).closest('span#country_combo_search').length) {
-        $('span#country_combo_search').removeClass('clicked');
-      };
-    });
-  });
-
-  $('span#country_combo_search').find('li').click(function(ev){
-    ev.stopPropagation();
-    ev.preventDefault();
-    var id = $(this).children('a').attr('id');
-    var name = $(this).children('a').text();
-    if ((id != undefined)&&(name != undefined)){
-
-        if (name.length > limitTextCombo) {
-            name = name.substring(0,limitTextCombo - 3)+'...';
-        }
-        
-      $('span#country_combo_search').children('p').text(name);
-      $('input#country_input').val(id);
-      $('span#country_combo_search').removeClass('clicked');
-    }
-  });
+  // $('span#country_combo_search').click(function(ev){
+  //   ev.stopPropagation();
+  //   ev.preventDefault();
+  // 
+  //   if (!$(this).hasClass('clicked')){
+  //     $('span.clicked').removeClass('clicked');
+  //     $(this).addClass('clicked');
+  //   }else {
+  //     $('span.clicked').removeClass('clicked');
+  //     $(this).removeClass('clicked');
+  //   }
+  // 
+  //   $(document).click(function(event) {
+  //     if (!$(event.target).closest('span#country_combo_search').length) {
+  //       $('span#country_combo_search').removeClass('clicked');
+  //     };
+  //   });
+  // });
+  // 
+  // $('span#country_combo_search').find('li').click(function(ev){
+  //   ev.stopPropagation();
+  //   ev.preventDefault();
+  //   var id = $(this).children('a').attr('id');
+  //   var name = $(this).children('a').text();
+  //   if ((id != undefined)&&(name != undefined)){
+  // 
+  //       if (name.length > limitTextCombo) {
+  //           name = name.substring(0,limitTextCombo - 3)+'...';
+  //       }
+  //       
+  //     $('span#country_combo_search').children('p').text(name);
+  //     $('input#country_input').val(id);
+  //     $('span#country_combo_search').removeClass('clicked');
+  //   }
+  // });
 
   // END COUNTRY
 

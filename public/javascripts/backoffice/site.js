@@ -190,14 +190,6 @@ function split( val ) {
       });
     });
 
-
-  $('.country_region_value').click(function(){
-
-    $.ajax({
-      url: '/admin/regions?country_id=' + $(this).children('a').attr('id')
-    });
-  });
-
   $("#pc_tags_section").autocomplete({
     style: 'site_tags',
     source: function( request, response ) {

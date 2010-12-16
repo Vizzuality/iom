@@ -1,11 +1,13 @@
+<%if !(@regions.empty?)&&!(Region.get_select_values.empty?) %>
 <%= image_tag("backoffice/sites/arrow.png", :class=>'arrow') %>
 <span class="select_country_combo region"><p class="region">Select a region</p>
   <input type="hidden" name="site[geographic_context_region_id]" id="site_geographic_context_region_id" value="" />
   <div class="values region">
     <ul>
-      <% (@regions || Region.all).each do |region| %>
+      <% (@regions || Region.get_select_values).each do |region| %>
         <li><a class="region_value" id="<%= region.id %>"><%= region.name %></a></li>
       <%end -%>
     </ul>
   </div>
 </span>
+<%end%>

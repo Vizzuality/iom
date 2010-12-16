@@ -10,12 +10,12 @@
         <ul class="combos">
           <li>
             <label>STATUS</label>
-            <span id="status_combo_search" class="combo"><p>Select status</p>
+            <span id="status_combo_search" class="combo"><p>All status</p>
             <input id="status_input" type="hidden" value="" name="status" />
             <ul class="elements short">
               <li class="first"></li>              
               <li>
-                <a id="0" class="status">All</a>
+                <a id="0" class="status">All status</a>
               </li>
               <li>
                 <a id="active" class="status">Active</a>
@@ -29,55 +29,48 @@
         </li>
         <li>
           <label>COUNTRY</label>
-          <span id="country_combo_search" class="combo"><p>Select country</p>
-          <input id="country_input" type="hidden" value="" name="country" />
-          <ul class="elements short">
-            <li class="first"></li>
-            <li>
-              <a id="0">All</a>
-            </li>
-             <% Country.get_select_values.each do |country| %>
-            <li>
-              <a id="<%= country.id%>"><%= country.name %></a>
-            </li>
-             <% end %>
-            <li class="last"></li>
-          </ul>
-          </span>
+          
+          <%= select_tag :country, 
+                         options_for_select([['All countries',0]] + Country.get_select_values.collect{ |c| [c.name, c.id] }) %>
+                    
         </li>
         <li>
           <label>CLUSTER</label>
-          <span id="cluster_combo_search" class="combo"><p>Select cluster</p>
+          <span id="cluster_combo_search" class="combo"><p>All clusters</p>
           <input id="cluster_input" type="hidden" value="" name="cluster" />
-          <div class="wrapper">
-            <ul class="elements scroll_pane">
-              <li>
-                <a id="0">All</a>
-              </li>
-               <% Cluster.get_select_values.each do |cluster| %>
-              <li>
-                <a id="<%= cluster.id%>"><%= truncate(cluster.name,:length => 20)%></a>
-              </li>
-              <% end %>
-            </ul>
+          <div class="elements_content">
+            <div class="wrapper">
+              <ul class="elements scroll_pane">
+                <li>
+                  <a id="0">All clusters</a>
+                </li>
+                 <% Cluster.get_select_values.each do |cluster| %>
+                <li>
+                  <a id="<%= cluster.id%>"><%= truncate(cluster.name,:length => 20)%></a>
+                </li>
+                <% end %>
+              </ul>
+            </div>
           </div>
           </span>
         </li>
         <li>
           <label>SECTOR</label>
-          <span id="sector_combo_search" class="combo"><p>Select sector</p>
+          <span id="sector_combo_search" class="combo"><p>All sectors</p>
           <input id="sector_input" type="hidden" value="" name="sector" />
-          <div class="wrapper">
-            <ul class="elements scroll_pane">
-              <li>
-                <a id="0">All</a>
-              </li>
-              <% Sector.get_select_values.each do |sector| %>
-              <li>
-                <a id="<%= sector.id%>"><%= truncate(sector.name,:length => 20)%></a>
-              </li>
-              <% end %>
-            </ul>
+          <div class="elements_content">          
+            <div class="wrapper">
+              <ul class="elements scroll_pane">
+                <li>
+                  <a id="0">All sectors</a>
+                </li>
+                <% Sector.get_select_values.each do |sector| %>
+                <li>
+                  <a id="<%= sector.id%>"><%= truncate(sector.name,:length => 20)%></a>
+                </li>
+                <% end %>
+              </ul>
+            </div>
           </div>
           </span>
         </li>
@@ -179,5 +172,6 @@
 </div>
 <script src="/javascripts/plugins/jquery.mousewheel.js" type="text/javascript" charset="utf-8"></script>
 <script src="/javascripts/plugins/jquery.jscrollpane.js" type="text/javascript" charset="utf-8"></script>
+<script src="/javascripts/plugins/jquery.stylish-select.js" type="text/javascript" charset="utf-8"></script>  
 <script src="/javascripts/backoffice/project.js" type="text/javascript" charset="utf-8"></script>
 <script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>

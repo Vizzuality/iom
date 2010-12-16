@@ -4,13 +4,13 @@ var old_value;
 var data_info = new Object();
 
 $(document).ready(function(ev){
-
+    
     // CUSTOM SCROLLBARS
-    // if ($('.scroll_pane').length > 0){
-    // 
-    //     $('.scroll_pane').jScrollPane({
-    //                        autoReinitialise:false });
-    // }
+    if ($('.scroll_pane').length > 0){
+    
+        $('.scroll_pane').jScrollPane({
+                           autoReinitialise:false });
+    }
 
     if ($('div.right.menu').length>0) {
       setTimeout(function(){
@@ -117,6 +117,7 @@ $(document).ready(function(ev){
         
     });
     
+  
 });
 
     // CLICK ON IMPORT LINK TO SIMULATE CLICK ON INPUT FILE (HIDDEN)
@@ -231,6 +232,8 @@ $(document).ready(function(ev){
 
   function resetCombo(elementToUpdate){
       var element = elementToUpdate.find('.scroll_pane');
-      var api = element.data('jsp');
-      api.reinitialise();
+      if (element.length >0){
+          var api = element.data('jsp');
+          api.reinitialise();
+      }
   }
