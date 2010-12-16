@@ -55,32 +55,45 @@
             <% end %>
           <% end %>
 
-            <% if @site.geographic_context_region_id? %>
-            <li>              
-              <a href="#" class="geneva main_option with_suboptions">REGIONS<span class="with_suboptions"></span></a>
-              <div class="header_title"><a>REGIONS<span class="with_suboptions"></span></a></div>                
-            <%elsif @site.geographic_context_country_id? %>  
+          <% 
+            #If there is a region context then we display nothing on the header for location
+            if @site.geographic_context_region_id? %>
+            <!--Nothing to present here -->
+          <%
+            #if the site defines a country then display the regions
+            elsif @site.geographic_context_country_id? %>  
+            <li id="country_option">
+              <a href="#" class="geneva main_option">REGIONS<span class="with_suboptions"></span></a>
+              <div class="header_title"><a>REGIONS<span class="with_suboptions"></span></a></div>
+              <div class="suboptions_body">
+                <div class="wrapper">
+                  <ul class="content scroll_pane">
+                    <% @site.regions_select.each do |region| %>
+                    
+                    <li><a href="<%= region_path(region) %>" class="geneva"><%= region.name %></a></li>
+                    <% end %>
+                  </ul>
+                </div>          
+          <%
+           #if the site does not define a geo context, then is worldwide,display the countries
+            else %>  
+          
+            <!-- ONLY TO TEST -->
             <li id="country_option">
               <a href="#" class="geneva main_option">COUNTRIES<span class="with_suboptions"></span></a>
               <div class="header_title"><a>COUNTRIES<span class="with_suboptions"></span></a></div>
-            <%else %>  
-            
-              <!-- ONLY TO TEST -->
-              <li id="country_option">
-                <a href="#" class="geneva main_option with_suboptions">COUNTRIES<span class="with_suboptions"></span></a>
-                <div class="header_title"><a>COUNTRIES<span class="with_suboptions"></span></a></div>
-                <div class="suboptions_body">
-                  <div class="wrapper">
-                    <ul class="content scroll_pane">
-                      <% @site.countries.each do |country| %>
-                      <li><a href="<%= country_path(country) %>" class="geneva"><%= country.name %></a></li>
-                      <% end %>
-                    </ul>
-                  </div>
+              <div class="suboptions_body">
+                <div class="wrapper">
+                  <ul class="content scroll_pane">
+                    <% @site.countries_select.each do |country| %>
+                    
+                    <li><a href="<%= country_path(country) %>" class="geneva"><%= country.name %></a></li>
+                    <% end %>
+                  </ul>
                 </div>
-            <% end %>
-          </li>
-          <li id="organization_option">
+              </div>
+          <% end %>
+        <li id="organization_option">
             <a href="#" class="geneva main_option with_suboptions">ORGANIZATIONS<span class="with_suboptions"></span></a>
             <div class="header_title"><a>ORGANIZATIONS<span class="with_suboptions"></span></a></div>
             <div class="suboptions_body">
