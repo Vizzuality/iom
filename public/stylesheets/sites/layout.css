@@ -92,6 +92,10 @@ div#header ul.menu li#organization_option.clicked ul.content li a {float:left; m
 div#header ul.menu li#organization_option.clicked ul.content li a:hover {color:white;}
 
 
+div#header ul.menu li#organization_option.clicked ul#orgs_list {float:left; }
+div#header ul.menu li#organization_option.clicked ul#orgs_list li {float:left; margin:7px 0 0 0;}
+div#header ul.menu li#organization_option.clicked ul#orgs_list li a {float:left; font:normal 13px Arial; color:#C1C1C0;}
+div#header ul.menu li#organization_option.clicked ul#orgs_list li a:hover {color:white;}
 
 div#header ul.menu li.clicked ul.suboptions {display:inline;}
 div#header ul.menu li a {float:left; font:normal 13px "Geneva"; color:#C2C1C1; text-decoration:none; margin:8px 0 0 0;}
@@ -150,7 +154,7 @@ div#left_column div.float_left div.head {position:relative; width:238px; height:
 div#left_column div.float_left div.head p {font:normal 13px Arial; color:#7B3932;}
 div#left_column div.float_left div.head h2 {width:100%; font:normal 15px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42; text-transform:uppercase;}  
 div#left_column div.float_left div#secondary_map {width:300px; height:189px; border:1px solid #999999; background:#99B3CA;}
-div#left_column div.float_left div.block {width:238px; padding:32px; background:white; border-bottom:1px solid #DEDEDE;}
+div#left_column div.float_left div.block {float:left; width:238px; padding:32px; background:white; border-bottom:1px solid #DEDEDE;}
 div#left_column div.float_left div.block.green {background:#D8E5C0;}
 div#left_column div.float_left div.block.green h3 {color:#333333;}
 div#left_column div.float_left div.block p {width:100%; padding:10px 0 0 0; font:normal 13px Arial; color:#666666; line-height:17px;}
