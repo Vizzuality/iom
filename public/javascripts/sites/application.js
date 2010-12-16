@@ -21,7 +21,7 @@ $(document).ready( function() {
 
     
   // MENU CLICKS
-  $('ul.menu li a.main_option').click(function(ev){
+  $('ul.menu li a.main_option.with_suboptions').click(function(ev){
       ev.stopPropagation();
       ev.preventDefault();
       
