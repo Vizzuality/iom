@@ -64,6 +64,9 @@ div.wrapper {float:left; margin:0; padding:0;}
 div#header {width:100%; height:40px; padding:0; background:url(/images/sites/common/bkg_header_repeatx.jpg) repeat-x 0 0;}
 div#header div.inner_header {margin:0 auto; width:932px; height:40px;}
 div#header div.left {width:700px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#header div.left.home {width:820px;}
+
+
 div#header h1 {margin:11px 0 0 0; font:normal 15px "PT Sans Bold"; color:white; text-transform:uppercase; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#header h1 a {color:white;}
 div#header ul.menu {float:right; margin:4px 0 0 100px; width:auto; height:25px;}
@@ -125,6 +128,8 @@ div#header div.right form.search span.input_search input[type="text"]{position:a
 div#header div.right form.search span.input_search input[type="submit"] {position:absolute; right:5px; top:3px; width:15px; height:14px; background:url('/images/sites/common/bttn_search.png') no-repeat 0 0; border:none;}
 
 div#map {width:100%; height:475px; background:#99B3CA; border-bottom:2px solid white; border-top:2px solid white; display:inline-block; vertical-align:top; zoom:1; *display:inline;}
+
+div#map.home {border-top:none;}
 div#small_map {width:100%; height:280px; background:#99B3CA; border-bottom:2px solid white;}
 
 /* LEFT COLUMN - RIGHT BIG BLOCK */
@@ -137,6 +142,11 @@ div.main_head div.left h3 {width:100%; font:normal 15px "PT Sans Bold"; color:#7
  
 div.main_head div.left p {padding:5px 0 0 0; font:normal 13px Arial; color:#7B3932;}
 div.main_head div.float_head {position:absolute; top:0; left:5px; width:238px; padding:30px 32px 44px; background:url('/images/sites/search/head_mask.png') repeat 0 0 #C45A4B; z-index:100;}
+div.main_head div.float_head.home {min-height:79px;}
+div.main_head div.float_head.home h1 {font-size:32px; text-transform:uppercase;} 
+div.main_head div.float_head.home h3 {width:100%; font:normal 15px "PT Sans Bold"; color:#7B3C32; text-transform:uppercase; margin:30px 0 0 0;} 
+
+
 div.main_head div.float_head span {position:absolute; right:32px; top:50%; height:32px; width:32px; margin:-16px 0 0 0; opacity:.5; filter:Alpha(opacity=50);filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50); z-index:0;}
 div.main_head div.float_head span.water {background:url('/images/sites/icons/water.png') no-repeat 0 0;}
 div.main_head div.float_head span.health {background:url('/images/sites/icons/health.png') no-repeat 0 0;}
@@ -144,6 +154,10 @@ div.main_head div.float_head span.food {background:url('/images/sites/icons/food
 div.main_head div.float_head span.flood {background:url('/images/sites/icons/flood.png') no-repeat 0 0;}
 div.main_head div.right {width:600px; padding:30px 0; display:inline-block; vertical-align:top; zoom:1; *display:inline; position:relative;}
 div.main_head div.right span.wikipedia {position:absolute; bottom:0; right:0; background:url('/images/sites/regions/wikipedia_head.png') no-repeat 0 0; width:141px; height:49px;}
+/*div.main_head div.right.home p {font:normal 15px Arial; color:#9F9F9F;}
+div.main_head div.right.home a {font:normal 15px Arial; color:#D16050; text-decoration:underline;}
+*/div.main_head div.right.home a:hover {cursor:pointer;}
+
 div.main_head div.right p.provided {margin:15px 0 0 0;}
 
 div#left_column {position:relative; width:100%;}
@@ -155,6 +169,12 @@ div#left_column div.float_left div.head p {font:normal 13px Arial; color:#7B3932
 div#left_column div.float_left div.head h2 {width:100%; font:normal 15px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42; text-transform:uppercase;}  
 div#left_column div.float_left div#secondary_map {width:300px; height:189px; border:1px solid #999999; background:#99B3CA;}
 div#left_column div.float_left div.block {float:left; width:238px; padding:32px; background:white; border-bottom:1px solid #DEDEDE;}
+div#left_column div.float_left div.block.box_info {float:left; width:238px; border-bottom:1px solid #DEDEDE; padding:22px 32px 0; }
+div#left_column div.float_left div.block.box_info label {float:left; margin:15px 0 0 0; font:normal 13px "PT Sans Bold"; color:#666666; width:98px;}
+div#left_column div.float_left div.block.box_info h2 {float:left; font:normal 36px "Aller"; color:#666666; width:98px;}
+div#left_column div.float_left div.block.box_info div.projects_account {float:left; width:119px; height:109px; border-right:1px solid #DEDEDE; }
+div#left_column div.float_left div.block.box_info div.orgs_account {float:left; width:90px; height:109px; margin:0 0 0 23px;}
+
 div#left_column div.float_left div.block.green {background:#D8E5C0;}
 div#left_column div.float_left div.block.green h3 {color:#333333;}
 div#left_column div.float_left div.block p {width:100%; padding:10px 0 0 0; font:normal 13px Arial; color:#666666; line-height:17px;}
