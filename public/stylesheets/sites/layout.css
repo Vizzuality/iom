@@ -154,9 +154,7 @@ div.main_head div.float_head span.food {background:url('/images/sites/icons/food
 div.main_head div.float_head span.flood {background:url('/images/sites/icons/flood.png') no-repeat 0 0;}
 div.main_head div.right {width:600px; padding:30px 0; display:inline-block; vertical-align:top; zoom:1; *display:inline; position:relative;}
 div.main_head div.right span.wikipedia {position:absolute; bottom:0; right:0; background:url('/images/sites/regions/wikipedia_head.png') no-repeat 0 0; width:141px; height:49px;}
-/*div.main_head div.right.home p {font:normal 15px Arial; color:#9F9F9F;}
-div.main_head div.right.home a {font:normal 15px Arial; color:#D16050; text-decoration:underline;}
-*/div.main_head div.right.home a:hover {cursor:pointer;}
+div.main_head div.right.home a:hover {cursor:pointer;}
 
 div.main_head div.right p.provided {margin:15px 0 0 0;}
 

@@ -1,0 +1,114 @@
+
+<div id="header">
+  <div class="inner_header">
+    <div class="left <%= (action_name == 'home')? 'home':''%>">
+      <h1><%= link_to(@site.name,'/') %></h1>
+      <ul class="menu">
+          <% if @site.cluster %>
+            <li><a class="main_option" href="<%= cluster_path(@site.cluster) %>" class="geneva"><%= @site.word_for_clusters.upcase.singularize %></a></li>
+          <% elsif @site.sector %>
+            <li><a class="main_option" href="<%= sector_path(@site.sector) %>" class="geneva"><%= @site.word_for_sectors.upcase.singularize %></a></li>
+          <% else %>
+            <% if @site.navigate_by_cluster? %>
+            <li id="cluster_option">
+              <a href="#" class="geneva main_option with_suboptions"><%= @site.word_for_clusters.upcase %><span class="with_suboptions"></span></a>
+              <div class="header_title"><a><%= @site.word_for_clusters.upcase %><span class="with_suboptions"></span></a></div>
+              <ul class="suboptions">
+                <% @site.clusters.each do |cluster| %>
+                    <% @cluster_element = '' %>
+                    <% if (cluster.name.include? 'Camp') %>
+                        <% @cluster_element = 'camp' %>
+                    <% elsif (cluster.name.include? 'Early') %>
+                        <% @cluster_element = 'early_recovery' %>
+                    <% elsif (cluster.name.include? 'Education') %>
+                        <% @cluster_element = 'education' %>
+                    <% elsif (cluster.name.include? 'Emergency') %>
+                        <% @cluster_element = 'emergency' %>
+                    <% elsif (cluster.name.include? 'Food Security') %>
+                        <% @cluster_element = 'food' %>
+                    <%elsif (cluster.name.include? 'Health') %>
+                        <% @cluster_element = 'health' %>
+                    <% elsif (cluster.name.include? 'Logistics') %>
+                        <% @cluster_element = 'logistics' %>
+                    <% elsif (cluster.name.include? 'Nutrition') %>
+                        <% @cluster_element = 'nutrition' %>
+                    <% elsif (cluster.name.include? 'Protection') %>
+                        <% @cluster_element = 'protection' %>                          
+                    <% elsif (cluster.name.include? 'Shelter') %>
+                        <% @cluster_element = 'shelter' %>
+                    <% elsif (cluster.name.include? 'Water') %>
+                        <% @cluster_element = 'water' %>
+                    <%end%>
+                <li><a href="<%= cluster_path(cluster) %>" class="geneva <%= @cluster_element %>"><%= cluster.name %></a></li>
+                <% end %>
+              </ul>
+            </li>
+            <% elsif @site.navigate_by_sector? %>
+            <li id="sector_option">
+              <a href="#" class="geneva main_option with_suboptions"><%= @site.word_for_sectors.upcase %><span class="with_suboptions"></span></a>
+              <ul class="suboptions">
+                <% @site.sectors.each do |sector| %>
+                <li><a href="<%= sector_path(sector) %>" class="geneva"><%= sector.name %></a></li>
+                <% end %>
+              </ul>
+            </li>
+            <% end %>
+          <% end %>
+
+            <% if @site.geographic_context_region_id? %>
+            <li>              
+              <a href="#" class="geneva main_option with_suboptions">REGIONS<span class="with_suboptions"></span></a>
+              <div class="header_title"><a>REGIONS<span class="with_suboptions"></span></a></div>                
+            <%elsif @site.geographic_context_country_id? %>  
+            <li id="country_option">
+              <a href="#" class="geneva main_option">COUNTRIES<span class="with_suboptions"></span></a>
+              <div class="header_title"><a>COUNTRIES<span class="with_suboptions"></span></a></div>
+            <%else %>  
+            
+              <!-- ONLY TO TEST -->
+              <li id="country_option">
+                <a href="#" class="geneva main_option with_suboptions">COUNTRIES<span class="with_suboptions"></span></a>
+                <div class="header_title"><a>COUNTRIES<span class="with_suboptions"></span></a></div>
+                <div class="suboptions_body">
+                  <div class="wrapper">
+                    <ul class="content scroll_pane">
+                      <% @site.countries.each do |country| %>
+                      <li><a href="<%= country_path(country) %>" class="geneva"><%= country.name %></a></li>
+                      <% end %>
+                    </ul>
+                  </div>
+                </div>
+            <% end %>
+          </li>
+          <li id="organization_option">
+            <a href="#" class="geneva main_option with_suboptions">ORGANIZATIONS<span class="with_suboptions"></span></a>
+            <div class="header_title"><a>ORGANIZATIONS<span class="with_suboptions"></span></a></div>
+            <div class="suboptions_body">
+              <form method="get"> 
+                <input id="ngos_search" type="text" value="" name="ngos_search"/>
+              </form>
+              <div class="wrapper">
+                <ul id="orgs_list" class="content scroll_pane_auto">
+
+                  <% @site.organizations.each do |organization| %>
+                    <li><a href="<%= organization_path(organization) %>"><%= organization.name %></a></li>                    
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+          </li>
+          <li><a href="<%= page_path(Page.analysis(@site)) %>" class="geneva main_option">ANALYSIS</a></li>
+          <li><a href="<%= page_path(Page.about(@site)) %>" class="geneva main_option">ABOUT</a></li>
+      </ul>
+    </div>
+
+    <div class="right">
+      <%= form_tag(search_path, :method => :get, :class => 'search') do %>
+        <span class="input_search">
+          <%= text_field_tag :q, params[:q] %>
+          <%= submit_tag '' %>
+        </span>
+      <% end %>
+    </div>
+  </div>
+</div>
