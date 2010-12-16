@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101214185843) do
+ActiveRecord::Schema.define(:version => 20101216152205) do
 
   create_table "clusters", :force => true do |t|
     t.string "name"
@@ -27,7 +27,9 @@ ActiveRecord::Schema.define(:version => 20101214185843) do
   create_table "countries", :force => true do |t|
     t.string        "name"
     t.string        "code"
-    t.multi_polygon "the_geom", :limit => nil, :srid => 4326
+    t.multi_polygon "the_geom",         :limit => nil, :srid => 4326
+    t.string        "wiki_url"
+    t.text          "wiki_description"
   end
 
   add_index "countries", ["the_geom"], :name => "index_countries_on_the_geom", :spatial => true
@@ -248,8 +250,10 @@ ActiveRecord::Schema.define(:version => 20101214185843) do
     t.integer  "level"
     t.integer  "country_id"
     t.integer  "parent_region_id"
-    t.integer  "gadm_id"
     t.geometry "the_geom",         :limit => nil, :srid => 4326
+    t.integer  "gadm_id"
+    t.string   "wiki_url"
+    t.text     "wiki_description"
   end
 
   add_index "regions", ["country_id"], :name => "index_regions_on_country_id"
@@ -325,145 +329,6 @@ ActiveRecord::Schema.define(:version => 20101214185843) do
     t.string "name"
     t.string "css_file"
     t.string "thumbnail_path"
-  end
-
-  create_table "tmp_haiti_adm0", :primary_key => "gid", :force => true do |t|
-    t.integer       "gadmid"
-    t.string        "iso",        :limit => 5
-    t.string        "name_engli", :limit => 50
-    t.string        "name_iso",   :limit => 54
-    t.string        "name_fao",   :limit => 50
-    t.string        "name_local", :limit => 54
-    t.string        "name_obsol", :limit => 150
-    t.string        "name_varia", :limit => 160
-    t.string        "name_nonla", :limit => 50
-    t.string        "name_frenc", :limit => 50
-    t.string        "name_spani", :limit => 50
-    t.string        "name_russi", :limit => 50
-    t.string        "name_arabi", :limit => 50
-    t.string        "name_chine", :limit => 50
-    t.string        "waspartof",  :limit => 100
-    t.string        "contains",   :limit => 50
-    t.string        "sovereign",  :limit => 40
-    t.string        "iso2",       :limit => 4
-    t.string        "www",        :limit => 2
-    t.string        "fips",       :limit => 6
-    t.decimal       "ison"
-    t.string        "validfr",    :limit => 12
-    t.string        "validto",    :limit => 10
-    t.decimal       "andyid"
-    t.decimal       "pop2000"
-    t.decimal       "sqkm"
-    t.decimal       "popsqkm"
-    t.string        "unregion1",  :limit => 254
-    t.string        "unregion2",  :limit => 254
-    t.decimal       "developing"
-    t.decimal       "cis"
-    t.decimal       "transition"
-    t.decimal       "oecd"
-    t.string        "wbregion",   :limit => 254
-    t.string        "wbincome",   :limit => 254
-    t.string        "wbdebt",     :limit => 254
-    t.string        "wbother",    :limit => 254
-    t.decimal       "ceeac"
-    t.decimal       "cemac"
-    t.decimal       "ceplg"
-    t.decimal       "comesa"
-    t.decimal       "eac"
-    t.decimal       "ecowas"
-    t.decimal       "igad"
-    t.decimal       "ioc"
-    t.decimal       "mru"
-    t.decimal       "sacu"
-    t.decimal       "uemoa"
-    t.decimal       "uma"
-    t.decimal       "palop"
-    t.decimal       "parta"
-    t.decimal       "cacm"
-    t.decimal       "eurasec"
-    t.decimal       "agadir"
-    t.decimal       "saarc"
-    t.decimal       "asean"
-    t.decimal       "nafta"
-    t.decimal       "gcc"
-    t.decimal       "csn"
-    t.decimal       "caricom"
-    t.decimal       "eu"
-    t.decimal       "can"
-    t.decimal       "acp"
-    t.decimal       "landlocked"
-    t.decimal       "aosis"
-    t.decimal       "sids"
-    t.decimal       "islands"
-    t.decimal       "ldc"
-    t.decimal       "shape_leng"
-    t.decimal       "shape_area"
-    t.multi_polygon "the_geom",   :limit => nil, :srid => 4326
-  end
-
-  create_table "tmp_haiti_adm1", :primary_key => "gid", :force => true do |t|
-    t.integer       "id_0"
-    t.string        "iso",        :limit => 3
-    t.string        "name_0",     :limit => 75
-    t.integer       "id_1"
-    t.string        "name_1",     :limit => 75
-    t.string        "varname_1",  :limit => 150
-    t.string        "nl_name_1",  :limit => 50
-    t.string        "hasc_1",     :limit => 15
-    t.string        "cc_1",       :limit => 15
-    t.string        "type_1",     :limit => 50
-    t.string        "engtype_1",  :limit => 50
-    t.string        "validfr_1",  :limit => 25
-    t.string        "validto_1",  :limit => 25
-    t.string        "remarks_1",  :limit => 125
-    t.decimal       "shape_leng"
-    t.decimal       "shape_area"
-    t.multi_polygon "the_geom",   :limit => nil, :srid => 4326
-  end
-
-  create_table "tmp_haiti_adm2", :primary_key => "gid", :force => true do |t|
-    t.integer       "id_0"
-    t.string        "iso",        :limit => 3
-    t.string        "name_0",     :limit => 75
-    t.integer       "id_1"
-    t.string        "name_1",     :limit => 75
-    t.integer       "id_2"
-    t.string        "name_2",     :limit => 75
-    t.string        "varname_2",  :limit => 150
-    t.string        "nl_name_2",  :limit => 75
-    t.string        "hasc_2",     :limit => 15
-    t.string        "cc_2",       :limit => 15
-    t.string        "type_2",     :limit => 50
-    t.string        "engtype_2",  :limit => 50
-    t.string        "validfr_2",  :limit => 25
-    t.string        "validto_2",  :limit => 25
-    t.string        "remarks_2",  :limit => 100
-    t.decimal       "shape_leng"
-    t.decimal       "shape_area"
-    t.multi_polygon "the_geom",   :limit => nil, :srid => 4326
-  end
-
-  create_table "tmp_haiti_adm3", :primary_key => "gid", :force => true do |t|
-    t.integer       "id_0"
-    t.string        "iso",        :limit => 3
-    t.string        "name_0",     :limit => 75
-    t.integer       "id_1"
-    t.string        "name_1",     :limit => 75
-    t.integer       "id_2"
-    t.string        "name_2",     :limit => 75
-    t.integer       "id_3"
-    t.string        "name_3",     :limit => 75
-    t.string        "varname_3",  :limit => 100
-    t.string        "nl_name_3",  :limit => 75
-    t.string        "hasc_3",     :limit => 25
-    t.string        "type_3",     :limit => 50
-    t.string        "engtype_3",  :limit => 50
-    t.string        "validfr_3",  :limit => 25
-    t.string        "validto_3",  :limit => 25
-    t.string        "remarks_3",  :limit => 50
-    t.decimal       "shape_leng"
-    t.decimal       "shape_area"
-    t.multi_polygon "the_geom",   :limit => nil, :srid => 4326
   end
 
   create_table "users", :force => true do |t|
