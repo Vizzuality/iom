@@ -30,6 +30,16 @@ class ApplicationController < ActionController::Base
 
     # Filter to set the variable @site, available and used in all the application
     def set_site
+      # For development purposes, override all site checks below
+      # and loads the specified site
+      if params[:force_site_id] || params[:force_site_name]
+        @site = Site.find(params[:force_site_id]) if params[:force_site_id]
+        @site = Site.where(:name => params[:force_site_name]).first if params[:force_site_name]
+
+        self.default_url_options = {:force_site_id => @site.id}
+        return
+      end
+
       # If the request host isn't the main_site_host, it should be the host from a site
       if request.host != main_site_host
         unless @site = Site.published.where(:url => request.host).first
@@ -39,7 +49,7 @@ class ApplicationController < ActionController::Base
         # Sessions controller doesn't depend on the host
         return true if controller_name == 'sessions' || controller_name == 'dashboard'
         # If root path, redirect to the dashboard of projects
-        redirect_to dashboard_path and return false if controller_name == 'sites' && action_name == 'home'
+        redirect_to dashboard_path and return false if controller_name == 'sites' && action_name == 'home' && params[:site_id].blank?
         # If the controller is not in the namespace /admin,
         # and the host is the main_site_host, it should be a Site
         # in draft mode.

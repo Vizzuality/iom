@@ -44,7 +44,7 @@ class Site < ActiveRecord::Base
   has_many :media_resources, :conditions => 'media_resources.element_type = #{Iom::ActsAsResource::SITE_TYPE}', :foreign_key => :element_id, :dependent => :destroy, :order => 'position ASC'
   belongs_to  :theme
   has_many :partners, :dependent => :destroy
-  has_many :pages, :dependent => :destroy  
+  has_many :pages, :dependent => :destroy
   has_many :cached_projects, :class_name => 'Project', :finder_sql => 'select projects.* from projects, projects_sites where projects_sites.site_id = #{id} and projects_sites.project_id = projects.id'
 
   has_attached_file :logo, :styles => { :small => "60x60#" }
@@ -177,7 +177,7 @@ class Site < ActiveRecord::Base
       from  << 'sites'
       where << "ST_Contains(sites.geographic_context_geometry,projects.the_geom)"
     end
-    
+
     result = Project.select(select).from(from.join(',')).where(where.join(' AND '))
 
     if options[:limit]
@@ -188,17 +188,17 @@ class Site < ActiveRecord::Base
     end
     result
   end
-  
+
   #Return All the projects within the Site (already executed)
   def projects(options = {})
     projects_sql(options).all
   end
-  
+
   #Tells me if a project is included in a site or not
   def is_project_included?(project_id,options={})
     result = projects_sql(options).where("projects.id=?",project_id).present?
   end
-  
+
 
   # TODO: perform query with a count()
   def total_projects(options = {})
@@ -264,7 +264,7 @@ class Site < ActiveRecord::Base
 
     self.geographic_context_geometry = Polygon.from_points([polygon_points])
   end
-  
+
   def countries_select
     unless geographic_context.blank?
       case geographic_context
@@ -283,7 +283,7 @@ class Site < ActiveRecord::Base
       Country.get_select_values
     end
   end
-  
+
   def countries
     unless geographic_context.blank?
       case geographic_context
@@ -302,7 +302,7 @@ class Site < ActiveRecord::Base
       Country.all
     end
   end
-  
+
   def regions_select
     unless geographic_context.blank?
       case geographic_context
@@ -320,8 +320,8 @@ class Site < ActiveRecord::Base
       # worlwide
       Region.get_select_values
     end
-  end  
-  
+  end
+
   def regions
     unless geographic_context.blank?
       case geographic_context
@@ -393,18 +393,16 @@ class Site < ActiveRecord::Base
       self.pages.create :title => 'Contact'
       self.pages.create :title => 'Analysis'
     end
-    
+
     def set_cached_projects
-      sql="DELETE FROM projects_sites WHERE site_id=#{self.id}"
-      ActiveRecord::Base.connection.execute(sql)
-      
+      remove_cached_projects
+
       #Insert into the relation all the sites that belong to the site.
       sql="insert into projects_sites
-      select subsql.id as project_id, 1 as site_id from (#{projects_sql({ :limit => nil, :offset => nil }).to_sql}) as subsql"
+      select subsql.id as project_id, #{self.id} as site_id from (#{projects_sql({ :limit => nil, :offset => nil }).to_sql}) as subsql"
       ActiveRecord::Base.connection.execute(sql)
-      
     end
-    
+
     def remove_cached_projects
       ActiveRecord::Base.connection.execute("DELETE FROM projects_sites WHERE site_id = '#{self.id}'")
     end
