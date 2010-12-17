@@ -33,7 +33,16 @@
             <h3>PROJECTS BY CLUSTER</h3>
             <ul class="statistics_list">
               <% @country.projects_clusters(@site)[0...3].each do |cluster,count| %>
-                <li><a class="<%= cluster_class(cluster) %>"><span class="aller" style="width:<%= cluster_width(count) %>px"><%= count %></span></a></li>
+                <li>
+                  <!-- <div id="tooltip">
+                    <span class="body_tooltip">
+                      <label><%= cluster.name %></label>
+                    </span>
+                    <span class="bottom_tooltip"></span>
+                  </div> -->
+                  
+                  <a class="<%= cluster_class(cluster) %>"><span class="aller" style="width:<%= cluster_width(count) %>px"><%= count %></span></a>
+                </li>
               <% end %>
             </ul>
             <% if @country.projects_clusters(@site).size > 3 %>

@@ -20,6 +20,17 @@ $(document).ready( function() {
     }
 
     
+    // TO SHOW CLUSTER'S TOOLTIPS
+    $('ul.statistics_list li a').hover(function(){
+
+        $(this).parent().children('div#tooltip').css('display','inline');
+    },
+      function() {
+        $(this).parent().children('div#tooltip').css('display','none');
+      }
+    );
+    
+    
   // MENU CLICKS
   $('ul.menu li a.main_option.with_suboptions').click(function(ev){
       ev.stopPropagation();

@@ -11,6 +11,7 @@ body {background:#E1E5E7;}
 ul {list-style:none;}
 label strong {font:normal 14px Georgia; color:#E93E3F;}
 
+
 /*IE7 reset properties*/
 input[type="text"] {border:0px;}
 textarea {border:0px;}
@@ -874,6 +875,7 @@ div.block.site_info div.med div.left form input[type="checkbox"]{visibility:hidd
 div.block.site_info div.med div.left form label {float:left; margin:20px 0 0 3px; font:bold 11px Arial; color:#999999; width:100%; text-transform:uppercase;}
 
 div.block.site_info div.med div.left form p.title {float:left; margin:20px 0 0 3px; font:bold 11px Arial; color:#999999; width:100%;}
+div.block.site_info div.med div.left form p.title strong {font:normal 14px Georgia; color:#E93E3F;}
 div.block.site_info div.med div.left form p.title span.info {font:normal 13px Arial; color:#999999; width:auto; padding:0 5px;}
 div.block.site_info div.med div.left form span.input_large {float:left; margin:5px 0 0 0; background:url('/images/backoffice/projects/input_project_large.png') no-repeat 0 0; width:419px; height:34px; position:relative;}
 div.block.site_info div.med div.left form span.input_large.active {background:url('/images/backoffice/projects/large_combo_head_displayed.png') no-repeat 0 0;}
@@ -951,8 +953,9 @@ div.block.site_info div.med div.left form div.two_columns div.right_column {floa
 div.block.site_info div.med div.left form span.input_short {float:left; margin:5px 0 0 0; width:272px; height:34px; background:url('/images/backoffice/projects/bkg_input_short.png') no-repeat 0 0; position:relative;}
 div.block.site_info div.med div.left form span.input_short input[type="text"]{position:absolute; top:7px; left:7px; width:257px; height:20px; border:none;}
 
-div.block.site_info div.med div.left form span.input_url {float:left; margin:5px 0 0 0; width:566px; height:34px; background:url('/images/backoffice/sites/site_url_input.png') no-repeat 0 0; position:relative;}
-div.block.site_info div.med div.left form span.input_url input[type="text"]{position:absolute; top:5px; left:7px; width:550px; height:28px; font:normal 15px Arial; color:#333333;}
+div.block.site_info div.med div.left form span.input_url {float:left; margin:5px 0 0 0; width:273px; height:34px; background:url('/images/backoffice/sites/site_url_input.png') no-repeat 0 0; position:relative;}
+div.block.site_info div.med div.left form span.input_url input[type="text"]{position:absolute; top:5px; left:7px; width:259px; height:23px; font:normal 15px Arial; color:#333333;}
+div.block.site_info div.med div.left form span.input_url p.url {position:absolute; top:7px; left:279px; font:normal 15px Arial; color:#333333;}
 div.block.site_info div.med div.left form input[type="submit"]{background:url('/images/backoffice/projects/save_changes_bttn.png') no-repeat 0 0; font:500 19px "Museo Sans",Arial; color:#FFFFFF; text-shadow:0 1px #6E8C30; border:none; text-align:center; width:157px; height:32px; float:right; margin:60px 10px 0 0; text-indent:-9999px; /*position:absolute; bottom:0; right:0;*/}
 div.block.site_info div.med div.left form input[type="submit"]:hover {background-position:0 -32px; cursor:pointer;}
 
