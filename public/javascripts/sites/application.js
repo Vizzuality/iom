@@ -18,7 +18,22 @@ $(document).ready( function() {
         $('.scroll_pane').jScrollPane({
                            autoReinitialise:false });
     }
-
+    
+    
+    $('span.input_search input').focusin(function(ev){
+      var value = $(this).attr('value');
+      if (value == "Search...") {
+        old_value = value;
+        $(this).attr('value','');
+      }
+    });
+    $('span.input_search input').focusout(function(ev){
+      var value = $(this).attr('value');
+      if (value == "") {
+        $(this).attr('value',old_value);
+      }
+    });
+    
     
     // TO SHOW CLUSTER'S TOOLTIPS
     $('ul.statistics_list li a').hover(function(){

@@ -60,6 +60,31 @@ div#layout {width:932px; margin:0 auto;}
 div.wrapper {float:left; margin:0; padding:0;}
 
 
+/*HOME SITES*/
+div#header_sites {width:100%; height:34px; padding:70px 0 0 0; margin:0 0 0 10px;}
+div#header_sites h1 {float:left; position:relative; font:normal 24px "PT Sans Bold"; color:#4A4A4A; width:auto; text-shadow:0 -1px white; margin:0 5px 0 0;}
+div#header_sites h1 span {position:absolute; top:-13px; right:0; font:normal 11px "PT Sans Bold"; color:#8B8B8B;}
+div#header_sites h2 {float:left; font:normal 24px Arial; color:#D06654; text-shadow:0 -1px white;}
+div#header_sites ul.menu {float:left; width:247px; margin:6px 0 0 0;}
+div#header_sites ul.menu li {float:left; margin:0 32px 0 0;}
+div#header_sites ul.menu li.last {margin:0;}
+div#header_sites ul.menu li a {float:left; font:normal 13px "PT Sans Bold"; color:#666666;}
+div#header_sites ul.menu li a:hover {cursor:pointer; }
+
+div#gallery {float:left; width:958px; height:548px; background:url('/images/sites/home/bkg_gallery.png') no-repeat 0 0; margin:45px 0 0;}
+div#gallery img {float:left; width:927px; height:524px; margin:10px 0 0 10px;}
+
+ul#gallery_thumbails {float:left; width:100%; margin:30px 0 0 0;}
+ul#gallery_thumbails li {float:left; width:220px; margin:0 20px 0 0;}
+ul#gallery_thumbails li div#image {float:left; width:218px; height:131px; background:url('/images/sites/home/bkg_thumbnail.png') no-repeat 0 0;}
+ul#gallery_thumbails li div#image img {float:left; width:203px; height:114px; margin:7px;}
+ul#gallery_thumbails li a.site_name {float:left; width:100%; margin:5px 0 0 9px; font:normal 15px "PT Sans Bold"; color:#666666; text-shadow:0 -1px white; text-transform:uppercase;}
+ul#gallery_thumbails li.last {margin:0;}
+
+
+
+/* ***************** END HOME SITES*/
+
 /*CLUSTER AND SECTORS TOOLTIPS*/
 div#tooltip {position:absolute; bottom:17px; left:-75px; display:none;}
 div#tooltip span.bottom_tooltip {float:left; background:url('/images/sites/common/tooltips/bottom_tooltip.png') no-repeat 0 0; width:175px; height:16px;}
@@ -165,6 +190,7 @@ div.main_head div.float_head span.food {background:url('/images/sites/icons/food
 div.main_head div.float_head span.flood {background:url('/images/sites/icons/flood.png') no-repeat 0 0;}
 div.main_head div.right {width:600px; padding:30px 0; display:inline-block; vertical-align:top; zoom:1; *display:inline; position:relative;}
 div.main_head div.right span.wikipedia {position:absolute; bottom:0; right:0; background:url('/images/sites/regions/wikipedia_head.png') no-repeat 0 0; width:141px; height:49px;}
+div.main_head div.right.home {min-height:50px;}
 div.main_head div.right.home a:hover {cursor:pointer;}
 
 div.main_head div.right p.provided {margin:15px 0 0 0;}
@@ -392,8 +418,14 @@ div#project div.float_right div.block ul li div.info h4 a:hover {text-decoration
 div#project div.float_right div.block ul li div.info p {padding:3px 0 0 0; font:normal 13px Arial; color:#999999;}
 div#project div.float_right div.block ul li div.info p.sub {padding:10px 0 0 0; color:#666666;}
 
-
-
+/* FOOTER SITES */
+div#footer_sites {clear:both; width:100%; padding:100px 0 100px 0;}
+div#footer_sites div.left {width:800px; margin:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline; text-align:right;}
+div#footer_sites a.logo {float:left; display:block; width:67px; height:43px; background:url('/images/sites/common/logo_interaction.png') no-repeat 0 0; margin:0 20px 0 0;}
+div#footer_sites a.logo:hover {cursor:pointer;}
+div#footer_sites div.project {float:left; width:600px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline; margin:5px 0 0 0;}
+div#footer_sites div.project h1 {float:left; font:normal 13px "PT Sans Bold"; color:#878787; text-transform:uppercase; display:inline-block;}
+div#footer_sites div.project p {float:left; padding:0; font:normal 13px "PT Sans"; color:#B3B3B3;}
 
 /* FOOTER PAGES */
 div#footer_pages {clear:both; width:100%; padding:100px 0 100px 0;}
@@ -407,7 +439,7 @@ div#footer_pages div.left div.links ul li {margin:0 0 0 6px; padding:0; font:nor
 div#footer_pages div.left div.links ul li a {color:#B3B3B3;}
 div#footer_pages div.left div.links ul li a:hover {text-decoration:underline;}
 div#footer_pages div.right {width:auto; margin:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline; text-align:right;}
-div#footer_pages div.right a.logo {display:block; width:67px; height:43px; background:url('../../images/sites/common/logo_interaction.png') no-repeat 0 0;}
+div#footer_pages div.right a.logo {display:block; width:67px; height:43px; background:url('/images/sites/common/logo_interaction.png') no-repeat 0 0;}
 div#footer_pages div.right a.logo:hover {cursor:pointer;}
 
 
@@ -425,5 +457,5 @@ div#footer div.right div.links ul li {margin:0 0 0 6px; padding:0; font:normal 1
 div#footer div.right div.links ul li a {color:#B3B3B3;}
 div#footer div.right div.links ul li a:hover {text-decoration:underline;}
 div#footer div.left {width:272px; margin:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline; text-align:right;}
-div#footer div.left a.logo {display:block; width:67px; height:43px; background:url('../../images/sites/common/logo_interaction.png') no-repeat 0 0;}
+div#footer div.left a.logo {display:block; width:67px; height:43px; background:url('/images/sites/common/logo_interaction.png') no-repeat 0 0;}
 div#footer div.left a.logo:hover {cursor:pointer;}

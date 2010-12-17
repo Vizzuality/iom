@@ -118,7 +118,7 @@
     <div class="right">
       <%= form_tag(search_path, :method => :get, :class => 'search') do %>
         <span class="input_search">
-          <%= text_field_tag :q, params[:q] %>
+          <%= text_field_tag :q, params[:q], :value=>'Search...' %>
           <%= submit_tag '' %>
         </span>
       <% end %>

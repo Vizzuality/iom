@@ -6,7 +6,8 @@ var data_info = new Object();
 $(document).ready(function(ev){
     
     // TO SET COMBO OPTIONS CHECKED
-    if ($('div#published_status').length > 0){        
+    if ($('div#published_status').length > 0){
+        console.log('entra');
         var id = $('input#page_published').val();
         $('div#published_status').find('a#'+id).addClass('clicked');
     }
