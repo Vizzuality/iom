@@ -27,7 +27,7 @@
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         map = new google.maps.Map(document.getElementById("map_bbox"),myOptions);
-
+        
         selection_polygon = new google.maps.Polygon({
           strokeColor: "#FF6600",
           strokeOpacity: 1,
