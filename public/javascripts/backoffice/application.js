@@ -5,6 +5,13 @@ var data_info = new Object();
 
 $(document).ready(function(ev){
     
+    // TO SET COMBO OPTIONS CHECKED
+    if ($('div#published_status').length > 0){        
+        var id = $('input#page_published').val();
+        $('div#published_status').find('a#'+id).addClass('clicked');
+    }
+    
+    
     // CUSTOM SCROLLBARS
     if ($('.scroll_pane').length > 0){
     

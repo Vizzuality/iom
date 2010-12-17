@@ -37,11 +37,11 @@
     <%= f.select :parent_id, (@site.pages.highlighted - [@page]).collect{ |p| [p.title, p.id] }, :prompt => 'Select a parent page' %>
   </div>
   
-  <div class="field">
+  <div id="published_status" class="field">
     <%= f.label :published %>
     <%= f.hidden_field :published , :value => '0' %>    
     <span>
-      <a id="0" class="combo clicked">Draft</a>
+      <a id="0" class="combo">Draft</a>
     </span>
     <span>
       <a id="1" class="combo">Published (visible on the public site)</a>

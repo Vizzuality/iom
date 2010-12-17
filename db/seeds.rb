@@ -48,6 +48,11 @@ Tag.create :name => 'earthquake'
 #  127.0.0.1       iom-haiti.ipq.co
 site = Site.create :name => 'Haiti Aid Map', :url => 'iom-haiti.ipq.co', :status => true,
                    :theme => Theme.find_by_name('Garnet')
+                   
+                   
+# site.pages.find_by_title("About").body="dsfsdf sdf sdf sdf fsd"
+               
+                   
 #  127.0.0.1       iom-food.ipq.co
 site = Site.create :name => 'Food Security', :url => 'iom-food.ipq.co', :status => true,
                   :theme => Theme.find_by_name('Garnet')

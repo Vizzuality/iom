@@ -32,7 +32,8 @@
             zoom: 4,
             center: new google.maps.LatLng(40.4166909, -3.7003454),
             disableDefaultUI: true,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            scrollwheel:false
           }
       var map = new google.maps.Map(document.getElementById("map"),myOptions);
 

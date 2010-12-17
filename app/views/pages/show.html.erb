@@ -3,7 +3,7 @@
       <div class="left"></div>
       <div class="float_left">
         <div class="outer_head">
-          <div class="head">
+          <div class="head">        
             <h1><%= @page.title %></h1>
           </div>
         </div>
@@ -14,7 +14,7 @@
       <div class="right">
         <div class="block">
           <% unless @page.children.empty? %>
-            <h2><%= @page.title %> IN THIS SITE</h2>
+            <h2><%= @page.title %>IN THIS SITE</h2>
             <ul>
               <% @page.children.each do |page| %>
               <li><%= link_to(page.title, page_path(page)) %></li>
