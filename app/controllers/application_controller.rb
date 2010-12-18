@@ -34,9 +34,9 @@ class ApplicationController < ActionController::Base
       # and loads the specified site
       if params[:force_site_id] || params[:force_site_name]
         @site = Site.find(params[:force_site_id]) if params[:force_site_id]
-        @site = Site.where(:name => params[:force_site_name]).first if params[:force_site_name]
+        @site = Site.where('LOWER(name) = ?', params[:force_site_name].downcase).first if params[:force_site_name]
 
-        self.default_url_options = {:force_site_id => @site.id}
+        self.default_url_options = {:force_site_id => @site.id} if @site
         return
       end
 
