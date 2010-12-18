@@ -29,7 +29,7 @@
         <% elsif site.geographic_context_region_id? %>
           <p>Limited to <strong><%= site.region.name %> region</strong></p>
         <% end %>
-        <p>Available at <%= link_to(site.url, site.url) %></p>
+        <p>Available at <%= link_to(site.complete_url, site.complete_url) %></p>
       </div>
       <div class="right_graph">
         <img src="/images/backoffice/dashboard/graph.jpg" width="590" height="60" alt="Graph">

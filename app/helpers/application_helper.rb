@@ -106,5 +106,10 @@ HTML
     %W{ drop plus }[rand(2)-1]
   end
 
+  def url(site)
+    port = Rails.env == 'development' ? ":#{request.port}" : nil
+    "#{site.complete_url}#{port}"
+  end
+
 end
 

@@ -38,6 +38,8 @@
 
 class Site < ActiveRecord::Base
 
+  @@main_domain = 'ngoaidmap.org'
+
   # acts_as_geom :the_geom => :polygon
 
   has_many :resources, :conditions => 'resources.element_type = #{Iom::ActsAsResource::SITE_TYPE}', :foreign_key => :element_id, :dependent => :destroy
@@ -52,11 +54,10 @@ class Site < ActiveRecord::Base
   scope :published, where(:status => true)
   scope :draft,     where(:status => false)
 
-  validates_presence_of :name, :url
+  validates_presence_of   :name, :url
   validates_uniqueness_of :url
 
   before_validation :clean_html
-
   attr_accessor :geographic_context, :project_context, :show_blog, :geographic_boundary_box
 
   before_save :set_geographic_context, :set_project_context, :set_project_context_tags_ids
@@ -341,6 +342,10 @@ class Site < ActiveRecord::Base
     end
   end
 
+  def complete_url
+    "#{url}.#{@@main_domain}"
+  end
+
   private
 
     def clean_html
@@ -407,4 +412,7 @@ class Site < ActiveRecord::Base
       ActiveRecord::Base.connection.execute("DELETE FROM projects_sites WHERE site_id = '#{self.id}'")
     end
 
+    def concat_domain_to_url
+      self.url = "#{self.url}.#{@@main_domain}"
+    end
 end

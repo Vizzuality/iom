@@ -51,7 +51,7 @@
 <% if false %>
 <ul>
   <% @sites.each do |site| %>
-    <li><%= link_to(site.name, "http://" + site.url, :target => '_blank') %></li>
+    <li><%= link_to(site.name, "http://#{url(site)}", :target => '_blank') %></li>
   <% end %>
 </ul>
 
