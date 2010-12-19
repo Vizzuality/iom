@@ -1,7 +1,7 @@
 Iom::Application.routes.draw do
 
   # Home
-  root :to => "dashboard#index"
+  root :to => "sites#home"
 
   # Session
   resource :session, :only => [:new, :create, :destroy]
@@ -16,10 +16,14 @@ Iom::Application.routes.draw do
   resources :donors,        :only => [:index, :show]
   resources :projects,      :only => [:index, :show]
   resources :organizations, :only => [:index, :show]
+
   # pages
   match '/p/:id' => 'pages#show', :as => :page
   # search
   match '/search' => 'search#index', :as => :search
+
+  # Dashboard
+  match '/dashboard' => 'dashboard#index', :as => :dashboard
 
   # Administration
   namespace :admin do

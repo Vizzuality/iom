@@ -58,7 +58,7 @@ class Site < ActiveRecord::Base
   validates_uniqueness_of :url
 
   before_validation :clean_html
-  attr_accessor :geographic_context, :project_context, :show_blog, :geographic_boundary_box
+  attr_accessor :geographic_context, :project_context, :show_blog, :geographic_boundary_box, :subdomain
 
   before_save :set_geographic_context, :set_project_context, :set_project_context_tags_ids
   after_save :set_cached_projects
@@ -266,6 +266,10 @@ class Site < ActiveRecord::Base
     self.geographic_context_geometry = Polygon.from_points([polygon_points])
   end
 
+  def subdomain=(subdomain)
+    self.url = "#{subdomain}.#{@@main_domain}" if subdomain.present?
+  end
+
   def countries_select
     unless geographic_context.blank?
       case geographic_context
@@ -342,10 +346,6 @@ class Site < ActiveRecord::Base
     end
   end
 
-  def complete_url
-    "#{url}.#{@@main_domain}"
-  end
-
   private
 
     def clean_html
@@ -410,9 +410,5 @@ class Site < ActiveRecord::Base
 
     def remove_cached_projects
       ActiveRecord::Base.connection.execute("DELETE FROM projects_sites WHERE site_id = '#{self.id}'")
-    end
-
-    def concat_domain_to_url
-      self.url = "#{self.url}.#{@@main_domain}"
     end
 end

@@ -5,10 +5,11 @@ require "capybara/dsl"
 require 'database_cleaner'
 require "selenium-webdriver"
 
-DatabaseCleaner.strategy = :transaction
-Capybara.default_driver = :rack_test
-Capybara.default_host = 'example.com'
-Capybara.app_host = 'http://www.example.com:9887'
+DatabaseCleaner.strategy   = :truncation
+Capybara.default_driver    = :rack_test
+Capybara.default_host      = 'example.com'
+Capybara.server_port       = 9887
+Capybara.app_host          = "http://#{Capybara.default_host}:#{Capybara.server_port}"
 Capybara.default_wait_time = 5
 
 RSpec.configuration.include Capybara, :type => :acceptance
@@ -24,7 +25,7 @@ RSpec.configure do |config|
 
   config.before(:each) do
     Rails.cache.clear
-    DatabaseCleaner.start
+    DatabaseCleaner.clean
     RR::Space.instance.reset
     Capybara.reset_sessions!
     # any_instance_of(Action, :save_attached_files => true)
@@ -46,7 +47,6 @@ RSpec.configure do |config|
       page.driver.cleanup!
     end
     Capybara.use_default_driver
-    DatabaseCleaner.clean
   end
 
 end

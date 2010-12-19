@@ -13,6 +13,10 @@ module HelperMethods
   def reset_pk_sequence(table_name)
     ActiveRecord::Base.connection.reset_pk_sequence!(table_name)
   end
+
+  def peich
+    save_and_open_page
+  end
 end
 
 RSpec.configuration.include HelperMethods, :type => :acceptance

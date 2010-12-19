@@ -108,7 +108,7 @@ HTML
 
   def url(site)
     port = Rails.env == 'development' ? ":#{request.port}" : nil
-    "#{site.complete_url}#{port}"
+    "#{site.url}#{port}"
   end
 
 end

@@ -117,9 +117,9 @@ class SiteTest < ActiveSupport::TestCase
   end
 
   test "should concatenate the defaut domain to the site url" do
-    site = create_site :url => 'test'
+    site = create_site :subdomain => 'test'
     assert site.valid?
-    assert_equal site.complete_url, 'test.ngoaidmap.org'
+    assert_equal site.url, 'test.ngoaidmap.org'
   end
 
 end
