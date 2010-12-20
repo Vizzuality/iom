@@ -190,7 +190,8 @@ div.main_head div.float_head span.flood {background:url('/images/sites/icons/flo
 div.main_head div.right {width:600px; padding:30px 0; display:inline-block; vertical-align:top; zoom:1; *display:inline; position:relative; min-height:40px;}
 div.main_head div.right span.wikipedia {position:absolute; bottom:0; right:0; background:url('/images/sites/regions/wikipedia_head.png') no-repeat 0 0; width:141px; height:49px;}
 div.main_head div.right.home {min-height:50px;}
-div.main_head div.right.home a:hover {cursor:pointer;}
+div.main_head div.right.home a {text-decoration:underline!important;}
+div.main_head div.right.home a:hover {cursor:pointer; text-decoration:none!important;}
 
 div.main_head div.right p.provided {margin:15px 0 0 0;}
 
@@ -263,8 +264,8 @@ div#left_column div.right ul li p.author {padding:0!important; margin:0;}
 div#left_column div.right ul li p.author a {color:#666666; text-decoration:underline;}
 div#left_column div.right ul li p.author a:hover {color:#333333;}
 div#left_column div.right ul li p.info {padding:10px 0 0 0;}
-div#left_column div.right ul li p.info a {text-decoration:none; color:#D05F4E;}
-div#left_column div.right ul li p.info a:hover {text-decoration:underline;}
+div#left_column div.right ul li p.info a {text-decoration:underline; color:#D05F4E;}
+div#left_column div.right ul li p.info a:hover {text-decoration:none;}
 div#left_column div.view_more {clear:both; width:100%; padding:20px 0 0 0;}
 div#left_column div.view_more a#view_more {width:162px; height:14px; margin:0 0 0 245px; padding:5px 43px 5px; font:normal 13px "PT Sans Bold"; background:url('/images/sites/search/view_more.png') no-repeat 0 0; text-align:center;}
 div#left_column div.view_more a#view_more:hover {background-position:0 -26px; cursor:pointer;}

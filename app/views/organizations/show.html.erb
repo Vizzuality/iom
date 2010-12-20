@@ -19,7 +19,7 @@
         </div>
       </div>
       <div class="right">
-        <p><%= @organization.description %></p>
+        <p><%= truncate (@organization.description, :length => 800) %></p>
       </div>
     </div>
   </div>
