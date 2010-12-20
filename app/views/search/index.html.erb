@@ -15,10 +15,10 @@
         <div class="results_list">
           <h3><p>Results for '<%= params[:q] %>'
             <% if @cluster %>
-            in <%= link_to(@site.word_for_clusters,"#") %> CLUSTER
+            in <%= link_to(@site.word_for_clusters,search_path(:q => params[:q])) %> CLUSTER
             <% end %>
             <% if @region %>
-            in region <%= link_to(@region.name,'#') %>
+            in region <%= link_to(@region.name,search_path(:q => params[:q])) %>
             <% end %>
           </p></h3>
           <% if @projects && @projects.any? %>
@@ -51,32 +51,48 @@
         <div class="block">
           <% if @regions && @regions.any? %>
             <h2>Filter by region</h2>
-            <ul>
+            <ul class="filter_list">
+            <% index = 0 %>
             <% @regions.each do |region, count| %>
-              <% if params[:region_id] && params[:region_id].to_i == region.id %>
-                <li><%= region.name %></li>
+              <% if index<9 %>
+                <% if params[:region_id] && params[:region_id].to_i == region.id %>
+                  <li><%= region.name %></li>
+                <% else %>
+                  <li><%= link_to(region.name, search_path(:q => params[:q], :region_id => region.id)) %> (<%= count %>)</li>
+                <% end %>
               <% else %>
-                <li><%= link_to(region.name, search_path(:q => params[:q], :region_id => region.id)) %> (<%= count %>)</li>
+                  <li class="out"><%= link_to(region.name, search_path(:q => params[:q], :region_id => region.id)) %> (<%= count %>)</li>
               <% end %>
+              <% index = index + 1 %>
             <% end %>
             </ul>
-            <a href="#" class="more">More results</a>
+            <% if @regions.size>10 %>
+              <a href="#more_results" class="more">More results</a>
+            <% end %>
           <% end %>
         </div>
     
         <div class="block">
           <% if @clusters && @clusters.any? %>
             <h2>Filter by TOP <%= @site.word_for_clusters %></h2>
-            <ul>
+            <ul class="filter_list">
+            <% index = 0 %>
             <% @clusters.each do |cluster, count| %>
-              <% if params[:cluster_id] && params[:cluster_id].to_i == cluster.id %>
-                <li><%= cluster.name %></li>
+              <% if index<9 %>
+                <% if params[:cluster_id] && params[:cluster_id].to_i == cluster.id %>
+                  <li><%= cluster.name %></li>
+                <% else %>
+                  <li><%= link_to(cluster.name, search_path(:q => params[:q], :cluster_id => cluster.id)) %> (<%= count %>)</li>
+                <% end %>
               <% else %>
-                <li><%= link_to(cluster.name, search_path(:q => params[:q], :cluster_id => cluster.id)) %> (<%= count %>)</li>
+                <li class="out"><%= link_to(region.name, search_path(:q => params[:q], :region_id => region.id)) %> (<%= count %>)</li>
               <% end %>
+              <% index = index + 1 %>
             <% end %>
             </ul>
-            <a href="#" class="more">More results</a>
+            <% if @clusters.size>10 %>
+              <a href="#more_results" class="more">More results</a>
+            <% end %>
           <% end %>
         </div>
       </div>
