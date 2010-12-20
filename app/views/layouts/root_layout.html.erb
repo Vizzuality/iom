@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-  
+
   <!-- TODO: GET ORIGIN PATH-->
   <title>NGO AID MAP</title>
- 
+
   <%= javascript_include_tag 'jquery.min', 'jquery.ui.core', 'jquery.ui.widget', 'jquery.ui.position'%>
 
   <%= stylesheet_link_tag '/stylesheets/sites/layout.css' %>
 
-  <link rel="shortcut icon" href="/images/favicon.ico"/>    
+  <link rel="shortcut icon" href="/images/favicon.ico"/>
 </head>
 <body>
 
@@ -24,7 +24,7 @@
             <a href="/explore">EXPLORE</a>
           </li>
           <li>
-            <a href="/explore">ABOUT</a>
+            <a href="/about">ABOUT</a>
           </li>
           <li class="last">
             <a href="mailto:contact_mail@mail.com">CONTACT US</a>
@@ -32,10 +32,10 @@
         </ul>
       </div>
     </div>
-    
-  <div id="outer_layout">    
+
+  <div id="outer_layout">
     <%= yield %> <!-- Main layout has to content <div id="layout"> -->
-      
+
       <div id="footer_sites">
         <div class="left">
           <a class="logo"></a>
@@ -45,7 +45,7 @@
             <h1>NGO AID MAP</h1>
             <p class="all_rights">A project by Interaction 2010. Copyrighted by InterAction ©2006-2012. All rigths reserved.</p>
           </div>
-          
+
         </div>
       </div>
     </div>

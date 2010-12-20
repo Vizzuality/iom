@@ -1,16 +1,17 @@
 class SitesController < ApplicationController
 
-  layout 'root_layout'
+  layout :sites_layout
 
   def home
-    @root_page = @site.blank?
-    @home = @root_page ? 'root' : 'site'
-    @sites = Site.paginate :per_page => 20, :page => params[:page], :order => 'created_at DESC' if @root_page
-
-    render :layout => "#{@home}_layout"
+    @sites = Site.paginate :per_page => 20, :page => params[:page], :order => 'created_at DESC' unless @sites
   end
 
   def about
 
   end
+
+  def sites_layout
+    @site ? 'site_layout' : 'root_layout'
+  end
+  private :sites_layout
 end
