@@ -2,13 +2,13 @@
   <div class="inner_main_head">
     <div class="left">
       <div class="float_head">
-        <h2><%= @region.country.try(:name) %></h2>
-        <h1><%= @region.name %></h2>
+        <h2><%= @area_parent %></h2>
+        <h1><%= @area.name %></h2>
       </div>
     </div>
     <div class="right">
-      <%= content_tag :p, @region.wiki_description if @region.wiki_description %>
-      <%= content_tag :p, raw("Description provided by Wikipedia #{content_tag(:a, 'Read full article', :href => @region.wiki_url)}"), :class => 'provided' if @region.wiki_url %>
+      <%= content_tag :p, @area.wiki_description if @area.wiki_description %>
+      <%= content_tag :p, raw("Description provided by Wikipedia #{content_tag(:a, 'Read full article', :href => @area.wiki_url)}"), :class => 'provided' if @area.wiki_url %>
       <span class="wikipedia"/>
     </div>
   </div>
@@ -32,26 +32,26 @@
         <div class="block statistics">
           <h3>PROJECTS BY CLUSTER</h3>
           <ul class="statistics_list">
-            <% @region.projects_clusters(@site)[0...3].each do |cluster,count| %>
+            <% @area.projects_clusters(@site)[0...3].each do |cluster,count| %>
               <li><a class="<%= cluster_class(cluster) %>"><span class="aller" style="width:<%= cluster_width(count) %>px"><%= count %></span></a></li>
             <% end %>
           </ul>
-          <% if @region.projects_clusters(@site).size > 3 %>
-            <% total =  @region.projects_clusters(@site).size - 3 %>
+          <% if @area.projects_clusters(@site).size > 3 %>
+            <% total =  @area.projects_clusters(@site).size - 3 %>
             <%= link_to(pluralize(total, 'project more on other clusters', 'projects more on other clusters') ,'#') %>
           <% end %>
         </div>
 
         <div class="block">
           <h3>DONORS</h3>
-          <% unless @region.donors(@site).empty? %>
+          <% unless @area.donors(@site).empty? %>
             <ul>
-              <% @region.donors(@site)[0...10].each do |donor| %>
+              <% @area.donors(@site)[0...10].each do |donor| %>
               <li><%= link_to(donor.name, donor_path(donor)) %></li>
               <% end %>
             </ul>
-            <% if @region.donors(@site).size > 10 %>
-              <p>and <%= pluralize(@region.donors(@site).size - 10, 'more donor', 'more donors') %></p>
+            <% if @area.donors(@site).size > 10 %>
+              <p>and <%= pluralize(@area.donors(@site).size - 10, 'more donor', 'more donors') %></p>
             <% end %>
           <% end %>
         </div>
@@ -71,7 +71,7 @@
     <!-- outer_float -->
     <!-- RIGHT PART -->
     <div class="right">
-      <h3><%= pluralize(@region.projects.site(@site).size, 'PROJECT', 'PROJECTS') %> AT <%= @region.name.upcase %></h3>
+      <h3><%= pluralize(@area.projects.site(@site).size, 'PROJECT', 'PROJECTS') %> AT <%= @area.name.upcase %></h3>
       <div id="projects">
         <%= render :partial => 'projects/projects' %>
       </div>
