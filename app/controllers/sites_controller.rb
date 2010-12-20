@@ -3,7 +3,8 @@ class SitesController < ApplicationController
   layout :sites_layout
 
   def home
-    @sites = Site.paginate :per_page => 20, :page => params[:page], :order => 'created_at DESC' unless @sites
+    # If there is no @site, the main home is loaded (see ApplicationController#set_site)
+    @sites = Site.paginate :per_page => 20, :page => params[:page], :order => 'created_at DESC' unless @site
   end
 
   def about
