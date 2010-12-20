@@ -2,6 +2,18 @@ class GeoregionController < ApplicationController
 
   layout 'site_layout'
 
+  def show
+    if(request.url.match(/countries/))
+      puts "COUNTRIES"
+      
+    else
+      puts "REGIONS"
+      
+    end
+    
+    
+  end
+
   def region
     @region = Region.find(params[:id])
     @projects = @region.projects.site(@site).where("id IN (#{@site.projects_ids.join(',')})").paginate :per_page => 10, :page => params[:page], :order => 'created_at DESC'

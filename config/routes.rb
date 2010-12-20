@@ -3,6 +3,7 @@ Iom::Application.routes.draw do
   # Home
   root :to => "sites#home"
   match 'about' => 'sites#about'
+  match 'contact' => 'sites#contact'
   match 'explore' => 'sites#explore'
 
   # Session
@@ -18,8 +19,8 @@ Iom::Application.routes.draw do
   resources :organizations, :only => [:index, :show]
   
   #countries and regions work through the same controller and view
-  match 'countries/:id' => 'georegion#country'
-  match 'regions/:id' => 'georegion#region'
+  match 'countries/:id' => 'georegion#show'
+  match 'regions/:id' => 'georegion#show'
 
   # pages
   match '/p/:id' => 'pages#show', :as => :page
