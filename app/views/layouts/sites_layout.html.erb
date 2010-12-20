@@ -13,9 +13,27 @@
 </head>
 <body>
 
-
-  <div id="outer_layout">
+  <div id="layout">
+    <div id="header_sites">
+      <div class="left">
+        <h1>NGO AID MAP <span class="beta">BETA</span></h1><h2>An <b>InterAction</b> initiative</h2>
+      </div>
+      <div class="right">
+        <ul class="menu">
+          <li>
+            <a href="/explore">EXPLORE</a>
+          </li>
+          <li>
+            <a href="/explore">ABOUT</a>
+          </li>
+          <li class="last">
+            <a href="mailto:contact_mail@mail.com">CONTACT US</a>
+          </li>
+        </ul>
+      </div>
+    </div>
     
+  <div id="outer_layout">    
     <%= yield %> <!-- Main layout has to content <div id="layout"> -->
       
       <div id="footer_sites">

@@ -143,15 +143,15 @@ class Project < ActiveRecord::Base
     end
 
     def add_to_country(region)
-      
+
       #TODO: Check whay this is slow.
       #countries << region.country unless countries.include?(region.country)
 
       # sql="SELECT count(*) as num from countries_projects where country_id=#{region.country.id} and project_id=#{id}"
       # if (ActiveRecord::Base.connection.execute(sql).first["num"].to_i < 1)
       #   countries << region.country
-      # end      
-      
+      # end
+
     end
 
     def remove_from_country(region)
@@ -171,7 +171,7 @@ class Project < ActiveRecord::Base
     def set_cached_sites
       sql="DELETE FROM projects_sites WHERE project_id=#{self.id}"
       ActiveRecord::Base.connection.execute(sql)
-      Site.all.each do |site|        
+      Site.all.each do |site|
         if site.is_project_included?(self.id)
           ActiveRecord::Base.connection.execute("INSERT INTO projects_sites (project_id, site_id) VALUES (#{self.id},#{site.id})")
         end

@@ -526,7 +526,7 @@ Galleria = function() {
 
     // add some elements
     var divs =  'container stage images image-nav image-nav-left image-nav-right ' +
-                'info info-text info-title info-description info-author ' +
+                'info info-text info-title info-description info-shortdescription info-explore info-author ' +
                 'thumbnails thumbnails-list thumbnails-container thumb-nav-left thumb-nav-right ' +
                 'loader counter tooltip',
         spans = 'current total';
@@ -610,6 +610,7 @@ Galleria = function() {
     var carousel = this._carousel = {
 
         // shortcuts
+        explore: self.$('info-explore'),
         next: self.$('thumb-nav-right'),
         prev: self.$('thumb-nav-left'),
 
@@ -692,6 +693,7 @@ Galleria = function() {
                     carousel.set( carousel.current - self._options.carousel_steps );
                 }
             });
+            
         },
 
         // calculate and set positions
@@ -1194,7 +1196,7 @@ Galleria = function() {
                 self.addElement( 'lightbox-' + elemId );
                 el[ elemId ] = lightbox.elems[ elemId ] = self.get( 'lightbox-' + elemId );
             });
-
+            
             // initiate the image
             lightbox.image = new Galleria.Picture();
 
@@ -1573,6 +1575,12 @@ Galleria.prototype = {
                     self.next();
                 });
             }
+            
+            // BIND CLICK ACTION ON EXPLORE BUTTON
+            this.$( 'info-explore' ).bind( CLICK(), function(e) {
+                window.location.href = self._data[self._active].link;
+            });
+            
 
             // bind carousel nav
             if ( this._options.carousel ) {
@@ -1643,7 +1651,7 @@ Galleria.prototype = {
         // build the gallery frame
         this.append({
             'info-text' :
-                ['info-title', 'info-description', 'info-author'],
+                ['info-title', 'info-shortdescription', 'info-description', 'info-explore', 'info-author'],
             'info' :
                 ['info-text'],
             'image-nav' :
@@ -2020,7 +2028,9 @@ Galleria.prototype = {
                 title:       img.attr('title'),
                 thumb:       img.attr('src'),
                 image:       img.attr('src'),
-                description: img.attr('alt'),
+                shortdescription: img.attr('desc'),
+                explore:     img.attr('longdesc'),
+                description: img.attr('alt'),                
                 link:        img.attr('longdesc'),
                 original:    img.get(0) // saved as a reference
 
@@ -2437,7 +2447,7 @@ $(document).mousemove(function(e) {
     addElement : function( id ) {
 
         var dom = this._dom;
-
+        
         $.each( Utils.array(arguments), function( i, blueprint ) {
            dom[ blueprint ] = Utils.create( 'galleria-' + blueprint );
         });
@@ -3150,7 +3160,7 @@ this.prependChild( 'info', 'myElement' );
         var self = this,
             data = this.getData( index );
 
-        $.each( ['title','description','author'], function( i, type ) {
+        $.each( ['title','shortdescription','description','author'], function( i, type ) {
 
             var elem = self.$( 'info-' + type );
 
@@ -3176,7 +3186,7 @@ this.prependChild( 'info', 'myElement' );
     hasInfo : function( index ) {
 
         var d = this.getData( index );
-        var check = 'title description'.split(' ');
+        var check = 'title shortdescription description explore'.split(' ');
         for ( var i = 0; check[i]; i++ ) {
             if ( !!this.getData( index )[ check[i] ] ) {
                 return true;

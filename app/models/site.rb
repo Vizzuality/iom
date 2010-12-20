@@ -45,9 +45,13 @@ class Site < ActiveRecord::Base
   has_many :resources, :conditions => 'resources.element_type = #{Iom::ActsAsResource::SITE_TYPE}', :foreign_key => :element_id, :dependent => :destroy
   has_many :media_resources, :conditions => 'media_resources.element_type = #{Iom::ActsAsResource::SITE_TYPE}', :foreign_key => :element_id, :dependent => :destroy, :order => 'position ASC'
   belongs_to  :theme
+  belongs_to  :geographic_context_country, :class_name => 'Country'
+  belongs_to :geographic_context_region, :class_name => 'Region'
   has_many :partners, :dependent => :destroy
   has_many :pages, :dependent => :destroy
   has_many :cached_projects, :class_name => 'Project', :finder_sql => 'select projects.* from projects, projects_sites where projects_sites.site_id = #{id} and projects_sites.project_id = projects.id'
+  belongs_to :geographic_context_country, :class_name => 'Country'
+  belongs_to :geographic_context_region, :class_name => 'Region'
 
   has_attached_file :logo, :styles => { :small => "60x60#" }
 
