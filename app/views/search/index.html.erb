@@ -1,4 +1,4 @@
-  
+
   <div id="layout">
     <div id="pages">
       <div class="left"></div>
@@ -13,18 +13,15 @@
           </div>
         </div>
         <div class="results_list">
-          <h3><p>Results for '<%= params[:q] %>'
-            <% if @cluster %>
-            in <%= link_to(@site.word_for_clusters,"#") %> CLUSTER
-            <% end %>
-            <% if @region %>
-            in region <%= link_to(@region.name,'#') %>
-            <% end %>
+          <h3><p>
+            <%= pluralize(@projects.count, 'project') %> for '<%= params[:q] %>'
+            <%= raw("in #{link_to(@cluster.name, remove_filter_url(:cluster_id))} CLUSTER") if @cluster %>
+            <%= raw("in region #{link_to(@region.name, remove_filter_url(:region_id))}") if @region %>
           </p></h3>
           <% if @projects && @projects.any? %>
             <ul>
               <% @projects.each_with_index do |project,index| %>
-                <li class="<%= (index%2==0) ? 'even' : 'odd' %>">
+                <li class="<%= cycle('even', 'odd') %>">
                   <div class="project_name">
                     <h3><%= link_to(truncate(project.name,:length=>43,:omission=>"..."), project_path(project)) %></h3>
                     <p>by <%= link_to(project.primary_organization.name, organization_path(project.primary_organization)) %></p>
@@ -56,14 +53,14 @@
               <% if params[:region_id] && params[:region_id].to_i == region.id %>
                 <li><%= region.name %></li>
               <% else %>
-                <li><%= link_to(region.name, search_path(:q => params[:q], :region_id => region.id)) %> (<%= count %>)</li>
+                <li><%= link_to(region.name, filter_url(region)) %> (<%= count %>)</li>
               <% end %>
             <% end %>
             </ul>
             <a href="#" class="more">More results</a>
           <% end %>
         </div>
-    
+
         <div class="block">
           <% if @clusters && @clusters.any? %>
             <h2>Filter by TOP <%= @site.word_for_clusters %></h2>
@@ -72,7 +69,7 @@
               <% if params[:cluster_id] && params[:cluster_id].to_i == cluster.id %>
                 <li><%= cluster.name %></li>
               <% else %>
-                <li><%= link_to(cluster.name, search_path(:q => params[:q], :cluster_id => cluster.id)) %> (<%= count %>)</li>
+                <li><%= link_to(cluster.name, filter_url(cluster)) %> (<%= count %>)</li>
               <% end %>
             <% end %>
             </ul>
@@ -81,7 +78,7 @@
         </div>
       </div>
     </div>
-    
-    
+
+
     <script src="/javascripts/sites/pages.js" type="text/javascript" charset="utf-8"></script>
-    
+
