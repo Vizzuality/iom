@@ -2,7 +2,7 @@ require File.dirname(__FILE__) + '/acceptance_helper'
 
 feature "Sites" do
 
-  scenario "Create and update a site" do
+  scenario "Create and update a site", :js => true do
     spain = create_country :name => 'Spain'
     food = create_cluster :name => 'food'
     africa = create_cluster :name => 'africa'
@@ -11,37 +11,45 @@ feature "Sites" do
     project.clusters << food
     project.countries << spain
 
+    Settings.create
+
     login_as_administrator
 
-    click_link_or_button 'Manage Sites'
+    click_link_or_button 'Add a new site'
 
-    click_link_or_button '+ new site'
-
-    page.should have_css("h2", :text => 'New site')
+    page.should have_css("h2", :text => 'Create a new site')
 
     within(:xpath, "//form[@action='/admin/sites']") do
       fill_in 'site_name', :with => 'Haiti Aid Map'
       fill_in 'site_short_description', :with => 'Haiti Aid Map short desc'
       fill_in 'site_long_description', :with => 'Haiti Aid Map long desc'
-      choose  'gc_limited_country'
-      select  'Spain', :from => 'gc_limited_country_section'
-      check   'pc_cluster'
-      select  'food', :from => 'pc_cluster_section'
+      find('#gc_limited_region a').click
+      within '#gc_limited_region' do
+        find('.country .selectedTxt', :text => 'Select a country').click
+        click_link 'Spain'
+      end
+      find('#include_sector_cluster a').click
+      within '#include_sector_cluster' do
+        find('p.cluster_sector', :text => 'Select a cluster or a sector').click
+        find('a.cluster_value', :text => 'food').click
+      end
+
       fill_in 'site_contact_email', :with => 'contact@example.com'
       fill_in 'site_contact_person', :with => 'Haiti contact'
-      fill_in 'site_url', :with => 'www.haitimap.com'
+      fill_in 'site_subdomain', :with => 'test-iom-haiti'
       fill_in 'site_google_analytics_id', :with => 'GA-123'
+
       click_link_or_button 'Save'
     end
 
     site = Site.last
     assert_equal 'Haiti Aid Map', site.name
-    assert_equal 'www.haitimap.com', site.url
+    assert_equal 'test-iom-haiti.ngoaidmap.org', site.url
     assert_equal spain.id, site.geographic_context_country_id
     assert_equal food.id, site.project_context_cluster_id
     assert_nil site.geographic_context_region_id
     assert_nil site.project_context_organization_id
-    assert_nil site.project_context_tags
+    assert site.project_context_tags.blank?
 
     page.should have_css("h2", :text => 'Edit site Haiti Aid Map')
 

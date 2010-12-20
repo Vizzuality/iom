@@ -95,25 +95,31 @@ class SiteTest < ActiveSupport::TestCase
 
     site = create_site :name => 'Food for Haiti', :project_context_organization_id => organization.id, :project_context_cluster_id => nil
     site.reload
-    
+
     assert_equal 1, site.cached_projects.size
     assert site.cached_projects.include?(project)
   end
-  
+
   test "Destroy a project should remove it from projects_sites" do
     organization = create_organization
     project = create_project :primary_organization_id => organization.id
     site = create_site :name => 'Food for Haiti', :project_context_organization_id => organization.id, :project_context_cluster_id => nil
-    
+
     site.reload
-    
+
     assert site.cached_projects.include?(project)
-    
+
     project.destroy
-    
+
     site.reload
-    
+
     assert site.cached_projects.empty?
+  end
+
+  test "should concatenate the defaut domain to the site url" do
+    site = create_site :subdomain => 'test'
+    assert site.valid?
+    assert_equal site.url, 'test.ngoaidmap.org'
   end
 
 end

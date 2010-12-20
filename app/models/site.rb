@@ -38,6 +38,8 @@
 
 class Site < ActiveRecord::Base
 
+  @@main_domain = 'ngoaidmap.org'
+
   # acts_as_geom :the_geom => :polygon
 
   has_many :resources, :conditions => 'resources.element_type = #{Iom::ActsAsResource::SITE_TYPE}', :foreign_key => :element_id, :dependent => :destroy
@@ -48,18 +50,19 @@ class Site < ActiveRecord::Base
   has_many :partners, :dependent => :destroy
   has_many :pages, :dependent => :destroy
   has_many :cached_projects, :class_name => 'Project', :finder_sql => 'select projects.* from projects, projects_sites where projects_sites.site_id = #{id} and projects_sites.project_id = projects.id'
+  belongs_to :geographic_context_country, :class_name => 'Country'
+  belongs_to :geographic_context_region, :class_name => 'Region'
 
   has_attached_file :logo, :styles => { :small => "60x60#" }
 
   scope :published, where(:status => true)
   scope :draft,     where(:status => false)
 
-  validates_presence_of :name, :url
+  validates_presence_of   :name, :url
   validates_uniqueness_of :url
 
   before_validation :clean_html
-
-  attr_accessor :geographic_context, :project_context, :show_blog, :geographic_boundary_box
+  attr_accessor :geographic_context, :project_context, :show_blog, :geographic_boundary_box, :subdomain
 
   before_save :set_geographic_context, :set_project_context, :set_project_context_tags_ids
   after_save :set_cached_projects
@@ -267,6 +270,10 @@ class Site < ActiveRecord::Base
     self.geographic_context_geometry = Polygon.from_points([polygon_points])
   end
 
+  def subdomain=(subdomain)
+    self.url = "#{subdomain}.#{@@main_domain}" if subdomain.present?
+  end
+
   def countries_select
     unless geographic_context.blank?
       case geographic_context
@@ -408,5 +415,4 @@ class Site < ActiveRecord::Base
     def remove_cached_projects
       ActiveRecord::Base.connection.execute("DELETE FROM projects_sites WHERE site_id = '#{self.id}'")
     end
-
 end

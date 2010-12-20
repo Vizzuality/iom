@@ -135,8 +135,8 @@
   <div class="field">
     <label>SITE URL <strong>*</strong></label>
     <span class="input_url">
-      <%= f.text_field :url, :class=>"long #{'error' if !@site.errors[:url].empty? && action_name != 'new'}" %>      
-      <%= errors_for @site, :url %>
+      <%= f.text_field :subdomain, :class=>"long #{'error' if !@site.errors[:subdomain].empty? && action_name != 'new'}" %>
+      <%= errors_for @site, :subdomain %>
       <p class="url">.ngoaidmap.org</p>
     </span>
   </div>
@@ -153,6 +153,6 @@
 
   <script src="/javascripts/plugins/jquery.mousewheel.js" type="text/javascript" charset="utf-8"></script>
   <script src="/javascripts/plugins/jquery.jscrollpane.js" type="text/javascript" charset="utf-8"></script>
-  <script src="/javascripts/plugins/jquery.stylish-select.js" type="text/javascript" charset="utf-8"></script>  
+  <script src="/javascripts/plugins/jquery.stylish-select.js" type="text/javascript" charset="utf-8"></script>
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
   <script src="/javascripts/backoffice/site_map.js" type="text/javascript" charset="utf-8"></script>

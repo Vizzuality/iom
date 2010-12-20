@@ -16,6 +16,7 @@ Iom::Application.routes.draw do
   resources :donors,        :only => [:index, :show]
   resources :projects,      :only => [:index, :show]
   resources :organizations, :only => [:index, :show]
+
   # pages
   match '/p/:id' => 'pages#show', :as => :page
   # search

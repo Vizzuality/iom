@@ -1,6 +1,6 @@
 <div id="layout">
   <div id="header_sites">
-    <div class="left">      
+    <div class="left">
       <h1>NGO AID MAP <span class="beta">BETA</span></h1><h2>An <b>InterAction</b> initiative</h2>
     </div>
     <div class="right">
@@ -13,27 +13,27 @@
         </li>
         <li class="last">
           <a href="mailto:contact_mail@mail.com">CONTACT US</a>
-        </li>        
+        </li>
       </ul>
     </div>
   </div>
   <!-- div id="header_sites" -->
   <div id="gallery">
     <a href="/"><img src="/images/sites/home/big_image_example.jpg" alt="big image"/></a>
-      
+
   </div>
   <!-- <div id="gallery"> -->
   <ul id="gallery_thumbails">
     <% @sites.each_with_index do |site, i| %>
     <li>
         <div id="image">
-          <a href="<%= "http://" + site.url %>" target="_blank"><img src="/images/sites/home/thumbnail_example.jpg" alt="<%= site.name %>"/></a>
+          <a href="<%= "http://#{url(site)}" %>" target="_blank"><img src="/images/sites/home/thumbnail_example.jpg" alt="<%= site.name %>"/></a>
         </div>
-        <a class="site_name" href="<%= "http://" + site.url %>"><%= site.name %></a>
+        <a class="site_name" href="<%= "http://#{url(site)}" %>"><%= site.name %></a>
     </li>
-    
+
     <% end %>
-    
+
     <li class="<%= ((@sites.size+1)%3==0) ? 'last' : '' %>">
         <div id="image">
           <img src="/images/sites/home/more_project.jpg" alt="More projects soon"/>
@@ -42,7 +42,7 @@
     </li>
   </ul>
   <!-- <ul id="gallery_thumbails"> -->
-    
+
 <script src="/javascripts/sites/home_sites.js" type="text/javascript" charset="utf-8"></script>
 
 
@@ -51,7 +51,7 @@
 <% if false %>
 <ul>
   <% @sites.each do |site| %>
-    <li><%= link_to(site.name, "http://" + site.url, :target => '_blank') %></li>
+    <li><%= link_to(site.name, "http://#{url(site)}", :target => '_blank') %></li>
   <% end %>
 </ul>
 
