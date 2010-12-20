@@ -13,11 +13,9 @@
   <div class="main_head">
     <div class="inner_main_head">
       <div class="left">
-        <h1><%= @organization.name %></h1>
-        <p><%= pluralize(@organization.projects.site(@site).count, 'project', 'projects') %></p>
         <div class="float_head">
           <h1><%= @organization.name %></h1>
-          <p><%= pluralize(@organization.projects.site(@site).count, 'project', 'projects') %></p>
+          <%unless @organization.projects.site(@site).count.eql?(0) %><p><%= pluralize(@organization.projects.site(@site).count, 'project', 'projects') %></p><%end%>
         </div>
       </div>
       <div class="right">
@@ -27,7 +25,6 @@
   </div>
 
   <div id="map"></div>
-
 
   <div id="layout">
     <div id="left_column">
@@ -40,14 +37,16 @@
             <h2>FACTSHEET</h2>
           </div>
 
+          <% unless @organization.donations.nil? || @organization.donations.sum(:amount).eql?(0.0) %>
           <div class="block">
             <h3>BUDGET FOR FOOD SECURITY</h3>
             <p class="budget"><%= number_with_delimiter(@organization.donations.sum(:amount)) %></p>
             <% donors_total = @organization.donors_count %>
             <p><%= link_to(pluralize(donors_total, 'donor to this organization', 'donors to this organization'),'#') %> </p>
           </div>
-    
-    
+          <%end%>
+          
+          <% unless @site.nil? || @organization.projects_clusters(@site).empty? %>
           <div class="block statistics">
             <h3>PROJECTS BY CLUSTER</h3>
             <ul class="statistics_list">
@@ -60,7 +59,8 @@
               <!-- <%= link_to(pluralize(total, 'project more on other clusters', 'projects more on other clusters') ,'#') %> -->
             <% end %>
           </div>
-    
+          <%end%>
+          <%unless @organization.projects_regions(@site).empty? %>
           <div class="block statistics">
             <h3>PROJECTS BY LOCATION</h3>
               <ul class="chart">
@@ -76,6 +76,7 @@
             </ul>
             <img class="pie_chart" src="http://chart.apis.google.com/chart?cht=p&chs=120x120&chd=t:<%= values %>&chds=0,<%= max_value %>&chco=333333|565656|727272|ADADAD|EFEFEF|FFFFFF&chf=bg,s,FFFFFF00" />
           </div>
+          <%end%>
           <% unless @organization.resources(@site).empty? %>
             <div class="block resources">
               <h3>ADDITIONAL RESOURCES</h3>
@@ -87,19 +88,23 @@
               <%end%>
             </div>
           <%end%>
+          <%unless @organization.contact_name.nil? &&  @organization.contact_position.nil? && @organization.hq_address.nil? && @organization.contact_zip.nil? && @organization.contact_phone_number.nil? %>
           <div class="block">
             <h3>CONTACT INFORMATION</h3>
             <p><strong><%= @organization.contact_name %></strong><br/><%= @organization.contact_position %><br/><%= @organization.hq_address %> <%= @organization.contact_zip %></p>
             <p><%= @organization.contact_phone_number %><br/><% unless (@organization.contact_email.nil?)||(@organization.contact_email.empty?) %><%= link_to(@organization.contact_email, "mailto:#{@organization.contact_email}") %><%end%></p>
           </div>
-
+          <%end%>
+          <% unless @organization.donation_phone_number.nil? && @organization.donation_website.nil? %>
           <div class="block green">
             <h3>DONATION INFORMATION</h3>
             <p><strong>Donations</strong><br/><%= @organization.donation_address %></p>
             <p><%= @organization.donation_phone_number %><br/><%= link_to(@organization.donation_website, @organization.donation_website) %></p>
           </div>
-        
+          <%end%>
+          <% unless @organization.twitter.nil? &&  @organization.facebook.nil? && @organization.website.nil? %>
           <div class="block">
+             <h3>OFFICIAL SITE</h3>
             <% if @organization.twitter? || @organization.facebook? %>
             <p class="social">
               <% if @organization.twitter? %>
@@ -115,6 +120,7 @@
               <p class="website"><%= link_to(@organization.website, @organization.website, :rel => 'nofollow', :target => '_blank') %></p>
             <% end %>
           </div>
+          <%end%>
         </div>
       </div>
 
@@ -124,9 +130,11 @@
         <div id="projects">
           <%= render :partial => 'projects/projects' %>
         </div>
+        <% unless @organization.projects.site(@site).size.eql?(0)%>
         <div class="view_more">
           <a id="view_more">More projects</a>
         </div>
+        <%end%>
       </div>
     </div>
 
