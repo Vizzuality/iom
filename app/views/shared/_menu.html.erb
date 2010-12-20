@@ -70,7 +70,7 @@
                   <ul class="content scroll_pane">
                     <% @site.regions_select.each do |region| %>
                     
-                    <li><a href="<%= region_path(region) %>" class="geneva"><%= region.name %></a></li>
+                    <li><a href="/regions/<%= region.id %>" class="geneva"><%= region.name %></a></li>
                     <% end %>
                   </ul>
                 </div>          
@@ -87,7 +87,7 @@
                   <ul class="content scroll_pane">
                     <% @site.countries_select.each do |country| %>
                     
-                    <li><a href="<%= country_path(country) %>" class="geneva"><%= country.name %></a></li>
+                    <li><a href="/countries/<%= country.id %>" class="geneva"><%= country.name %></a></li>
                     <% end %>
                   </ul>
                 </div>
