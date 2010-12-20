@@ -11,24 +11,20 @@ Iom::Application.routes.draw do
   match 'logout' => 'sessions#destroy', :as => :logout
 
   # Front urls
-  resources :regions,       :only => [:show]
-  resources :countries,     :only => [:show]
   resources :sectors,       :only => [:show]
   resources :clusters,      :only => [:show]
   resources :donors,        :only => [:index, :show]
   resources :projects,      :only => [:index, :show]
   resources :organizations, :only => [:index, :show]
+  
+  #countries and regions work through the same controller and view
+  match 'countries/:id' => 'georegion#country'
+  match 'regions/:id' => 'georegion#region'
 
   # pages
   match '/p/:id' => 'pages#show', :as => :page
   # search
   match '/search' => 'search#index', :as => :search
-
-  # API
-  namespace :api do
-    get "countries" => "geodata#countries"
-    get "regions" => "geodata#regions"
-  end
 
   # Administration
   namespace :admin do
