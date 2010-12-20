@@ -6,7 +6,7 @@
     var map;
     var baseUrl="http://chart.apis.google.com/chart?chs=256x256";
 
-    var chco = "CCCCCC,666666,000000";
+    var chco = "F7F7F7,8BC856,336600";
     var chf = "bg,s,2F84A3";
     var chld = "HT-AR|HT-CE|HT-GR|HT-NI|HT-ND|HT-NE|HT-OU|HT-SD|HT-SE";
     var chd = "t:0,10,20,30,40,50,60,70,80";    
@@ -132,7 +132,7 @@
         bounds.extend(new google.maps.LatLng(map_data._data[i].lat,map_data._data[i].lon));
       }
       
-      //map.fitBounds(bounds);
+      map.fitBounds(bounds);
       
       
 
