@@ -2,6 +2,8 @@ Iom::Application.routes.draw do
 
   # Home
   root :to => "sites#home"
+  match 'about' => 'sites#about'
+  match 'explore' => 'sites#explore'
 
   # Session
   resource :session, :only => [:new, :create, :destroy]
@@ -22,9 +24,6 @@ Iom::Application.routes.draw do
   # search
   match '/search' => 'search#index', :as => :search
 
-  # Dashboard
-  match '/dashboard' => 'dashboard#index', :as => :dashboard
-  
   # API
   namespace :api do
     get "countries" => "geodata#countries"

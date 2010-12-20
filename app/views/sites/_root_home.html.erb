@@ -1,6 +1,22 @@
-<!-- HOME -->
-
-
+<div id="layout">
+  <div id="header_sites">
+    <div class="left">
+      <h1>NGO AID MAP <span class="beta">BETA</span></h1><h2>An <b>InterAction</b> initiative</h2>
+    </div>
+    <div class="right">
+      <ul class="menu">
+        <li>
+          <a href="/explore">EXPLORE</a>
+        </li>
+        <li>
+          <a href="/about">ABOUT</a>
+        </li>
+        <li class="last">
+          <a href="mailto:contact_mail@mail.com">CONTACT US</a>
+        </li>
+      </ul>
+    </div>
+  </div>
   <!-- div id="header_sites" -->
   <div id="gallery">
     <div class="content_gallery">
@@ -17,10 +33,10 @@
           <a href="<%= "http://#{url(site)}" %>"><img src="/images/sites/home/thumbnail_example.jpg" alt="<%= site.name %>"/></a>
         </div>
         <a class="site_name" href="<%= "http://#{url(site)}" %>"><%= site.name %></a>
-      </li>    
+      </li>
     <% end %>
-    
-    
+
+
     <li class="<%= ((@sites.size+1)%4==0) ? 'last' : '' %>">
         <div id="image">
           <img src="/images/sites/home/more_project.jpg" alt="More projects soon"/>
