@@ -25,7 +25,7 @@
     <div class="info">
       <div class="left">
         <% if site.geographic_context_country_id? %>
-          <p>Limited to <strong><%= site.country.name %> country</strong></p>
+          <p>Limited to <strong><%= site.geographic_context_country.name %> country</strong></p>
         <% elsif site.geographic_context_region_id? %>
           <p>Limited to <strong><%= site.region.name %> region</strong></p>
         <% end %>

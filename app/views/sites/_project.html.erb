@@ -1,0 +1,7 @@
+<% projects.each do |project| %>
+<div class="project <%= cycle('light', '') -%>">
+  <h3><%= project.name %></h3>
+  <p class="subtitle"><%= subtitle(project) %></p>
+  <p class="description"><%= project.description %></p>
+</div>
+<% end %>
