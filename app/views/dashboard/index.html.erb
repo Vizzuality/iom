@@ -19,29 +19,31 @@
   </div>
   <!-- div id="header_sites" -->
   <div id="gallery">
-    <a href="/"><img src="/images/sites/home/big_image_example.jpg" alt="big image"/></a>
-
+    <div class="content_gallery">
+      <% @sites.each do |site| %>
+        <a href="<%= "http://#{url(site)}" %>"><img src="/images/sites/home/big_image_example.jpg" title="<% unless (site.name.nil?)%><%= site.name %><%end%>" desc="<%unless (site.short_description.nil?)%> <%= truncate (site.short_description, :length => 72) %><%end%>" alt="<%unless (site.long_description.nil?)%> <%= truncate (site.long_description, :length => 278) %><%end%>"/></a>
+      <%end%>
+    </div>
   </div>
   <!-- <div id="gallery"> -->
   <ul id="gallery_thumbails">
     <% @sites.each_with_index do |site, i| %>
-    <li>
+    <li class="<%= ((i + 1)%4==0) ? 'last' : '' %>">
         <div id="image">
-          <a href="<%= "http://#{url(site)}" %>" target="_blank"><img src="/images/sites/home/thumbnail_example.jpg" alt="<%= site.name %>"/></a>
+          <a href="<%= "http://#{url(site)}" %>"><img src="/images/sites/home/thumbnail_example.jpg" alt="<%= site.name %>"/></a>
         </div>
         <a class="site_name" href="<%= "http://#{url(site)}" %>"><%= site.name %></a>
-    </li>
-
+      </li>    
     <% end %>
-
-    <li class="<%= ((@sites.size+1)%3==0) ? 'last' : '' %>">
+    
+    
+    <li class="<%= ((@sites.size+1)%4==0) ? 'last' : '' %>">
         <div id="image">
           <img src="/images/sites/home/more_project.jpg" alt="More projects soon"/>
         </div>
         <a class="site_name">MORE PROJECTS SOON!</a>
     </li>
   </ul>
-  <!-- <ul id="gallery_thumbails"> -->
 
 <script src="/javascripts/sites/home_sites.js" type="text/javascript" charset="utf-8"></script>
 
@@ -57,3 +59,6 @@
 
 <%= will_paginate(@sites) %>
 <%end%>
+
+<script src="/javascripts/plugins/galleria.js" type="text/javascript" charset="utf-8"></script>
+<script src="/javascripts/plugins/galleria.classic.js" type="text/javascript" charset="utf-8"></script>
