@@ -100,10 +100,8 @@ div#tooltip a:hover {cursor:pointer!important; text-decoration:none!important;}
 
 div#header {width:100%; height:40px; padding:0; background:url(/images/sites/common/bkg_header_repeatx.jpg) repeat-x 0 0;}
 div#header div.inner_header {margin:0 auto; width:932px; height:40px;}
-div#header div.left {width:700px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#header div.left {width:710px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#header div.left.home {width:820px;}
-
-
 div#header h1 {margin:11px 0 0 0; font:normal 15px "PT Sans Bold"; color:white; text-transform:uppercase; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#header h1 a {color:white;}
 div#header ul.menu {float:right; margin:4px 0 0 100px; width:auto; height:25px;}
@@ -298,8 +296,8 @@ div#pages div.float_left div.results_list h3 a {color:#666666; padding:0 8px 0 0
 div#pages div.float_left div.results_list h3 a:hover {border-bottom:1px solid #C45A4B;}
 div#pages div.float_left div.results_list ul {background:white;}
 div#pages div.float_left div.results_list ul li {width:100%; height:auto; padding:0 0 25px;}
-div#pages div.float_left div.results_list ul li.odd {background:white;}
-div#pages div.float_left div.results_list ul li.even {background:#F5F5F5;}
+div#pages div.float_left div.results_list ul li.odd {background:white; padding:0;}
+div#pages div.float_left div.results_list ul li.even {background:#F5F5F5; padding:0;}
 div#pages div.float_left div.results_list ul li p.no_results {padding:38px 32px 0 32px; font:normal 18px "PT Sans Bold"; color:#666666;}
 div#pages div.float_left div.results_list ul li div.project_name {float:left; width:439px; height:100px; border-right:1px solid #E5E5E5; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#pages div.float_left div.results_list ul li div.project_name h3 {padding-bottom:0; color:none;}
@@ -395,7 +393,7 @@ div#project div.left div.block div.timeline p {position:absolute; left:90px; top
 div#project div.left div.block p.first_date {width:121px; margin:0!important; padding:3px 0 0 0!important; font:normal 11px "Aller"; color:#999999; text-align:left; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#project div.left div.block p.second_date {width:121px; margin:0!important; padding:3px 0 0 0!important; font:normal 11px "Aller"; color:#999999; text-align:right; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#project div.right {width:660px; height:1000px; margin:0 30px 0 0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#project div.float_right {position:absolute; top:0; right:25px; width:660px; padding:5px; background:url('/images/sites/common/mesh.png') repeat 0 0; z-index:100;}
+div#project div.float_right {position:absolute; top:-206px; right:25px; width:660px; padding:5px; background:url('/images/sites/common/mesh.png') repeat 0 0; z-index:100;}
 div#project div.float_right div.head {width:596px; height:auto; padding:32px; background:url('/images/sites/search/head_mask.png') repeat 0 0 #CD5D4C;} 
 div#project div.float_right div.head div#completed {position:absolute; top:112px; right:-15px; width:173px; height:41px; background:url('/images/sites/projects/completed_msg.png') no-repeat; display:none;}
 div#project div.float_right div.head div#completed p {float:left; font:normal 13px "PT Sans Bold"; color:white; text-transform:uppercase; margin:9px 0 0 15px; letter-spacing:-1.0px;}
@@ -434,7 +432,7 @@ div#footer_pages div.left {width:660px; margin:0 0 0 5px; background:none; displ
 div#footer_pages div.left div.project {float:left; width:450px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#footer_pages div.left div.project h1 a{float:left; font:normal 13px "PT Sans Bold"; color:#888888; text-transform:uppercase; width:100%;}
 div#footer_pages div.left div.project p {float:left; padding:0; font:normal 13px "PT Sans"; color:#B3B3B3;}
-div#footer_pages div.left div.links {float:right; width:auto; margin:20px 0 0 0;}
+div#footer_pages div.left div.links {float:right; width:auto; margin:15px 0 0 0;}
 div#footer_pages div.left div.links ul {float:left; margin:0; padding:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#footer_pages div.left div.links ul li {margin:0 0 0 6px; padding:0; font:normal 13px "PT Sans"; color:#B3B3B3; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#footer_pages div.left div.links ul li a {color:#B3B3B3;}

@@ -87,17 +87,27 @@
         <div class="block border statistics">
           <h2>FUNDING BY LOCATION</h2>
           <ul class="chart">
-            <% index = 0%>
+            <% index = 0 %>
             <% values = '' %>
+            <% others = 0%>
             <% max_value = 0 %>
             <% @donor.projects_regions(@site).each do |region, count| %>
-              <li class="pos<%= index %>"><a href="#"><%= truncate(region.name,:length=>15, :omission=>"...") %></a> - <%= count %></li>
-              <% values += ((index==0) ? '' : ',') + count.to_s() %>
-              <% max_value<count ? max_value=count : nil %>
+              <% if index < 3 %>
+                <li class="pos<%= index %>"><a href="#"><%= truncate(region.name,:length=>15, :omission=>"...") %></a> - <%= count %></li>
+                <% values += ((index==0) ? '' : ',') + count.to_s() %>
+                <% max_value<count ? max_value=count : nil %>
+              <% else %>
+                <% others = others + 1%>
+                <% max_value<others ? max_value=others : nil %>
+              <% end %>
               <% index = index + 1 %>
             <% end %>
+            
+            <% if @donor.projects_regions(@site).size>3 %>
+              <li class="pos3">Others - <%= others %></li>
+            <% end %>
           </ul>
-          <img class="pie_chart" src="http://chart.apis.google.com/chart?cht=p&chs=120x120&chd=t:<%= values %>&chds=0,<%= max_value %>&chco=333333|565656|727272|ADADAD|EFEFEF|FFFFFF&chf=bg,s,FFFFFF00" />
+          <img class="pie_chart" src="http://chart.apis.google.com/chart?cht=p&chs=120x120&chd=t:<%= values %><% if others>0 %>,<%= others %><% end %>&chds=0,<%= max_value %>&chco=333333|565656|727272|ADADAD|EFEFEF|FFFFFF&chf=bg,s,FFFFFF00" />
         </div>
         <% end %>
 
