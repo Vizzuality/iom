@@ -23,6 +23,12 @@ Iom::Application.routes.draw do
 
   # Dashboard
   match '/dashboard' => 'dashboard#index', :as => :dashboard
+  
+  # API
+  namespace :api do
+    get "countries" => "geodata#countries"
+    get "regions" => "geodata#regions"
+  end
 
   # Administration
   namespace :admin do
