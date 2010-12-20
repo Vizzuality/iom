@@ -278,20 +278,20 @@ div#pages {position:relative; width:100%; margin:65px 0 0 0;}
 div#pages div.left {width:660px; height:300px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#pages div.float_left {position:absolute; top:0; left:-5px; width:670px; padding:0 0 5px; background:url('/images/sites/common/mesh.png') repeat 0 0;}
 div#pages div.float_left div.outer_head {width:660px; padding:5px 5px 0 5px;}
-div#pages div.float_left div.outer_head div.head {width:596px; height:auto; padding:32px; background:url('/images/sites/search/head_mask.png') repeat 0 0 #C45A4B;} 
+div#pages div.float_left div.outer_head div.head {width:596px; height:auto; padding:32px; background:url('/images/sites/search/head_mask.png') repeat 0 0 #C45A4B; border-bottom:1px solid #814941;} 
 div#pages div.float_left div.outer_head div.head h1 {width:100%; font:normal 25px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42;}
 div#pages div.float_left div.outer_head div.head p {width:100%; padding:2px 0 0 0; font:normal 13px Arial; color:#7C3831; text-shadow:none;} 
 div#pages div.float_left div.outer_head div.head input[type="text"] {width:467px; padding:10px; margin:10px 0 0 0; background:url('/images/sites/search/textinput_bkg.png') no-repeat 0 0; font:normal 17px Arial; color:#333333; border:none; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#pages div.float_left div.outer_head div.head input[type="submit"] {width:101px; height:38px; margin:10px 0 0 0; background:url('/images/sites/search/submit_bkg.png') no-repeat 0 0; border:none; text-indent:-9999px; font-size:0; line-height:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#pages div.float_left div.outer_head div.head input[type="submit"]:hover {background-position:0 -38px; cursor:pointer;}
-div#pages div.float_left div.body {width:596px; margin:0 0 0 5px; padding:32px; background:white; border-bottom:1px solid #CCCCCC;}
+div#pages div.float_left div.body {width:600px; margin:0 0 0 5px; padding:22px 30px 50px; background:white; border-bottom:1px solid #CCCCCC;}
 div#pages div.float_left div.body.last {border:none;}
-div#pages div.float_left div.body h3 {font:normal 13px "PT Sans Bold"; color:#666666;}
-div#pages div.float_left div.body p {font:normal 13px Arial; color:#666666;}
-div#pages div.float_left div.body p a {text-decoration:none;} 
-div#pages div.float_left div.body p a:hover {text-decoration:underline;}
-div#pages div.float_left div.body ul {width:100%; margin:7px 0 0 0; padding:0 0 6px; list-style:none;}
-div#pages div.float_left div.body ul li {padding:3px 0 3px 10px; background:url('/images/sites/icons/list_disc.png') no-repeat 0 10px; font:normal 13px Arial; color:#666666;}
+div#pages div.float_left div.body h3 {font:normal 13px "PT Sans Bold"; color:#666666; margin:10px 0 0 0;}
+div#pages div.float_left div.body p {font:normal 13px Arial; color:#666666; margin:10px 0 0 0;}
+div#pages div.float_left div.body p a {color:#D05F4C; text-decoration:none;}  
+div#pages div.float_left div.body p a:hover {text-decoration:underline; cursor:pointer;}
+div#pages div.float_left div.body ul {width:100%; margin:10px 0 0 0; padding:0 0 6px; list-style:none;}
+div#pages div.float_left div.body ul li {padding:3px 0 3px 13px; background:url('/images/sites/icons/list_disc.png') no-repeat 0 10px; font:normal 13px Arial; color:#666666;}
 div#pages div.float_left div.results_list {width:660px; margin:0 5px 0 5px; background:white;}
 div#pages div.float_left div.results_list h3 {margin:0; padding:30px 0 30px 32px; font:normal 13px "PT Sans Bold"; color:#666666; text-transform:uppercase;}
 div#pages div.float_left div.results_list h3 a {color:#666666; padding:0 8px 0 0; background:url('/images/sites/icons/remove.png') no-repeat right 0; border-bottom:1px dotted #C45A4B;} 
@@ -312,7 +312,7 @@ div#pages div.float_left div.results_list ul li div.project_places {width:170px;
 div#pages div.float_left div.results_list ul li div.project_places p {margin:0; padding:0; font:normal 13px Arial; color:#999999; text-align:center;}
 div#pages div.float_left div.results_list ul li div.project_places p a {color:#999999; text-decoration:underline;}
 div#pages div.float_left div.results_list ul li div.project_places p a:hover {color:#333333;}
-div#pages div.right {width:272px; margin:160px 0 0 0; padding:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#pages div.right {width:272px; margin:100px 0 0 0; padding:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#pages div.right div.block {float:left; width:242px; margin:23px 0 0 0; padding:0 0 0 30px;}
 div#pages div.right div.block.border {border-bottom:1px solid #D4D4D4; padding:0 0 20px 30px;}
 div#pages div.right div.block.border.last {border:none; padding:0 0 0 30px;}
@@ -329,8 +329,8 @@ div#pages div.right div.block p a {color:#CD5D4C;}
 div#pages div.right div.block p a:hover {text-decoration:underline;}
 div#pages div.right div.block ul {width:100%; margin:7px 0 0 0; padding:0 0 6px; list-style:none;}
 div#pages div.right div.block ul li {padding:3px 0 3px 10px; background:url('/images/sites/icons/list_disc.png') no-repeat 0 10px; font:normal 13px Arial; color:#999999;}
-div#pages div.right div.block ul li a {text-decoration:none;}  
-div#pages div.right div.block ul li a:hover {text-decoration:underline;}
+div#pages div.right div.block ul li a {color:#D05F4C; text-decoration:none;}  
+div#pages div.right div.block ul li a:hover {text-decoration:underline; cursor:pointer;}
 div#pages div.right div.block ul li.selected {background:none;}
 div#pages div.right div.block ul li.selected a {color:#666666;}
 div#pages div.right div.block ul li.selected a:hover {text-decoration:none; color:#666666;}
