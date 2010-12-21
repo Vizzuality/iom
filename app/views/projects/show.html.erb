@@ -141,12 +141,19 @@
           <% end %>
 
           <% if @project.activities || @project.additional_information || @project.cross_cutting_issues %>
-            <div class="block">
-              <%= simple_format(@project.activities) %>
-              <br/><br/>
-              <%= simple_format(@project.additional_information) %>
-              <br/><br/>
-              <%= simple_format(@project.cross_cutting_issues) %>
+            <div class="block info">
+              <%unless @project.activities.nil? || @project.activities.empty? %>
+                <h3 class="first">ACTIVITIES</h3>
+                  <%= raw(@project.activities) %>
+              <%end%>
+              <%unless @project.additional_information.nil? || @project.additional_information.empty?%>
+                <h3 class="<%= (@project.activities.empty?)? 'first':''%>">ADDITIONAL INFORMATION</h3>
+                <%= raw(@project.additional_information) %>
+              <%end%>
+              <%unless @project.cross_cutting_issues.nil? || @project.additional_information.empty?%>
+                  <h3 class="<%= (@project.activities.empty? && @project.additional_information.empty?)? 'first':''%>">CROSS-CUTTING ISSUES</h3>
+                  <%= raw(@project.cross_cutting_issues) %>
+              <%end%>
             </div>
           <% end %>
 
@@ -155,7 +162,7 @@
 
             <!-- TODO : IMPLEMENT -->
             <h3>RELATED PROJECTS</h3>
-            <ul>
+            <ul class="related_projects">
               <li>
                 <div class="image">
                   <img src="/images/sites/projects/default_img_project.png" title="related projects?" />
