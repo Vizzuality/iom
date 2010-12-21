@@ -1,23 +1,51 @@
+  <div class="main_head projects">
+    <div class="inner_main_head">
+      <div class="left">
+        <div class="block">
+          <h3>A project by</h3>
+          <div class="logo">
 
+            <% if @project.primary_organization.logo.file? %>
+              <div class="logo_bkg">
+                  <a href="<%= organization_path(@project.primary_organization) %>"><%= image_tag(@project.primary_organization.logo.url) %></a>
+              </div>
+              <%= link_to(@project.primary_organization.name, organization_path(@project.primary_organization)) %>
+            <% else %>
+              <%= link_to(@project.primary_organization.name, organization_path(@project.primary_organization), :class=>'long') %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="right">
+        <div class="head">
+          <div id="completed">
+            <p>COMPLETED PROJECT</p>
+          </div>
+          <h1><%= @project.name %></h1>
+          <p>
+            <% clusters_sectors = @project.clusters + @project.sectors %>
+            <% unless clusters_sectors.empty? %>
+              on <%= raw(clusters_sectors.map{ |e| link_to(e.name, e.is_a?(Cluster) ? cluster_path(e) : sector_path(e)) }.to_sentence) %>
+            <% end %>
+            <% unless @project.countries.empty? %>
+              in <%= @project.countries.first.name %>
+            <% end %>
+            by <%= link_to(@project.primary_organization.name, organization_path(@project.primary_organization)) %>
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </div>
     <div id="small_map"></div>
 
     <div id="project_layout">
-      <div id="project">
+      <div id="project" class="projects">
 
         <div class="left"> <!--270px with shadow below-->
           <div class="block">
             <h3>A project by</h3>
-            <div class="logo">
-
-              <% if @project.primary_organization.logo.file? %>
-                <div class="logo_bkg">
-                    <a href="<%= organization_path(@project.primary_organization) %>"><%= image_tag(@project.primary_organization.logo.url) %></a>
-                </div>
-                <%= link_to(@project.primary_organization.name, organization_path(@project.primary_organization)) %>
-              <% else %>
-                <%= link_to(@project.primary_organization.name, organization_path(@project.primary_organization), :class=>'long') %>
-              <% end %>
-            </div>
 
             <% if @project.implementing_organization? %>
               <h3>Implementing organizations</h3>
@@ -88,25 +116,9 @@
 
         </div>
 
-
-        <div class="right"></div>
+        <!-- TO SHOW THE MESH -->
+        <div id="mash" class="right"></div>
         <div class="float_right"> <!-- 670px with mest -->
-          <div class="head">
-            <div id="completed">
-              <p>COMPLETED PROJECT</p>
-            </div>
-            <h1><%= @project.name %></h1>
-            <p>
-              <% clusters_sectors = @project.clusters + @project.sectors %>
-              <% unless clusters_sectors.empty? %>
-                on <%= raw(clusters_sectors.map{ |e| link_to(e.name, e.is_a?(Cluster) ? cluster_path(e) : sector_path(e)) }.to_sentence) %>
-              <% end %>
-              <% unless @project.countries.empty? %>
-                in <%= @project.countries.first.name %>
-              <% end %>
-              by <%= link_to(@project.primary_organization.name, organization_path(@project.primary_organization)) %>
-            </p>
-          </div>
 
           <% unless @project.description.empty? %>
             <div class="block">
@@ -128,12 +140,19 @@
           <% end %>
 
           <% if @project.activities || @project.additional_information || @project.cross_cutting_issues %>
-            <div class="block">
-              <%= simple_format(@project.activities) %>
-              <br/><br/>
-              <%= simple_format(@project.additional_information) %>
-              <br/><br/>
-              <%= simple_format(@project.cross_cutting_issues) %>
+            <div class="block info">
+              <%unless @project.activities.nil? || @project.activities.empty? %>
+                <h3 class="first">ACTIVITIES</h3>
+                  <%= raw(@project.activities) %>
+              <%end%>
+              <%unless @project.additional_information.nil? || @project.additional_information.empty?%>
+                <h3 class="<%= (@project.activities.empty?)? 'first':''%>">ADDITIONAL INFORMATION</h3>
+                <%= raw(@project.additional_information) %>
+              <%end%>
+              <%unless @project.cross_cutting_issues.nil? || @project.cross_cutting_issues.empty?%>
+                  <h3 class="<%= (@project.activities.empty? && @project.additional_information.empty?)? 'first':''%>">CROSS-CUTTING ISSUES</h3>
+                  <%= raw(@project.cross_cutting_issues) %>
+              <%end%>
             </div>
           <% end %>
 
@@ -142,8 +161,8 @@
 
             <% related_projects = @project.related(@site) %>
             <% unless related_projects.empty? %>
-            <h3>RELATED PROJECTS</h3>
-            <ul>
+            <h3 class="first">RELATED PROJECTS</h3>
+            <ul class="related_projects">
               <% related_projects.each_with_index do |project,i| %>
               <li <%= raw('class="last"') if i > 0 %>>
                 <div class="image">

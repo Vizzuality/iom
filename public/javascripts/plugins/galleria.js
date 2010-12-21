@@ -1733,6 +1733,7 @@ Galleria.prototype = {
             if ( self._options[ 'show_' + el.replace(/-/, '') ] === false ) {
                 Utils.moveOut( self.get( el ) );
             }
+            
         });
 
         // load up target content
@@ -1934,7 +1935,6 @@ Galleria.prototype = {
         // make sure we have a stageHeight && stageWidth
 
         Utils.wait({
-
             until: function() {
                 self._stageWidth  = self.$( 'stage' ).width();
                 self._stageHeight = self.$( 'stage' ).height();
@@ -1944,6 +1944,11 @@ Galleria.prototype = {
 
             success: function() {
                 self.trigger( Galleria.READY );
+                
+                // TO SHOW ONLY ARROWS IF GALLERY HAS MORE THAN 1 IMAGE
+                if (self._data.length > 1){
+                    self.$( 'image-nav' ).css('display','inline');
+                }
             },
 
             error: function() {

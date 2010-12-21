@@ -15,7 +15,9 @@
               <div class="header_title"><a><%= @site.word_for_clusters.upcase %><span class="with_suboptions"></span></a></div>
               <ul class="suboptions">
                 <% @site.clusters.each do |cluster| %>
+                <%unless cluster.name.eql?('N/A')%>
                 <li><a href="<%= cluster_path(cluster) %>" class="geneva <%= cluster.css_class %>"><%= cluster.name %></a></li>
+                <%end%>
                 <% end %>
               </ul>
             </li>
