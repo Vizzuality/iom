@@ -367,6 +367,28 @@ class Site < ActiveRecord::Base
       Region.all
     end
   end
+  
+  def get_iso_code_regions
+    if(self.geographic_context_country_id)
+      #The site is a for a specific country,get the regions
+      return ["",""]
+    else
+      #The site does not define a country,therefore get all countries
+      sql="select c.iso2_code, count(ps.*) as value
+      from (projects_sites as ps inner join countries_projects as cp on cp.project_id=ps.project_id and site_id=#{self.id}) 
+      inner join countries as c on cp.country_id=c.id
+      group by c.iso2_code"
+      
+      country_codes= []
+      country_values = []
+      ActiveRecord::Base.connection.execute(sql).each  do |c|
+        country_codes << c["iso2_code"]
+        country_values << c["value"]
+      end
+      return [country_codes.join("|"),country_values.join(",")]
+
+    end
+  end
 
   private
 
@@ -431,7 +453,7 @@ class Site < ActiveRecord::Base
     end
 
     def remove_cached_projects
-      ActiveRecord::Base.connection.execute("DELETE FROM projects_sites WHERE site_id = '#{self.id}'")
+      ActiveRecord::Base.connection.execute("DELETE FROM projects_sites WHERE site_id = #{self.id}")
     end
 
     def sanitize_image_name
@@ -439,4 +461,5 @@ class Site < ActiveRecord::Base
       extension = File.extname(aid_map_image_file_name)
       self.aid_map_image_file_name = "#{aid_map_image_file_name.sanitize}#{extension}"
     end
+  
 end

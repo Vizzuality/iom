@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101221102641) do
+ActiveRecord::Schema.define(:version => 20101221124611) do
 
   create_table "clusters", :force => true do |t|
     t.string "name"
@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(:version => 20101221102641) do
     t.string        "code"
     t.string        "wiki_url"
     t.text          "wiki_description"
+    t.string        "iso2_code"
+    t.string        "iso3_code"
     t.multi_polygon "the_geom",         :limit => nil, :srid => 4326
   end
 
@@ -253,6 +255,7 @@ ActiveRecord::Schema.define(:version => 20101221102641) do
     t.integer  "gadm_id"
     t.string   "wiki_url"
     t.text     "wiki_description"
+    t.string   "code"
     t.geometry "the_geom",         :limit => nil, :srid => 4326
   end
 
@@ -312,11 +315,11 @@ ActiveRecord::Schema.define(:version => 20101221102641) do
     t.boolean  "status",                                         :default => false
     t.float    "visits",                                         :default => 0.0
     t.float    "visits_last_week",                               :default => 0.0
-    t.geometry "geographic_context_geometry",     :limit => nil,                    :srid => 4326
     t.string   "aid_map_image_file_name"
     t.string   "aid_map_image_content_type"
     t.integer  "aid_map_image_file_size"
     t.datetime "aid_map_image_updated_at"
+    t.geometry "geographic_context_geometry",     :limit => nil,                    :srid => 4326
   end
 
   add_index "sites", ["geographic_context_geometry"], :name => "index_sites_on_geographic_context_geometry", :spatial => true
@@ -333,6 +336,21 @@ ActiveRecord::Schema.define(:version => 20101221102641) do
     t.string "name"
     t.string "css_file"
     t.string "thumbnail_path"
+  end
+
+  create_table "tmp_countries", :primary_key => "gid", :force => true do |t|
+    t.string        "fips",      :limit => 2
+    t.string        "iso2",      :limit => 2
+    t.string        "iso3",      :limit => 3
+    t.integer       "un"
+    t.string        "name",      :limit => 50
+    t.integer       "area"
+    t.integer       "pop2005"
+    t.integer       "region"
+    t.integer       "subregion"
+    t.float         "lon"
+    t.float         "lat"
+    t.multi_polygon "the_geom",  :limit => nil, :srid => 4326
   end
 
   create_table "users", :force => true do |t|

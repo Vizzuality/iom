@@ -121,8 +121,8 @@
       var bbox = <%=raw(@overview_map_bbox.to_json)%>;
       var chco = "<%=@overview_map_chco%>";
       var chf = "<%=@overview_map_chf%>";
-      var chld = "HT-AR|HT-CE|HT-GR|HT-NI|HT-ND|HT-NE|HT-OU|HT-SD|HT-SE";
-      var chd = "t:0,10,20,30,40,50,60,70,80";
+      var chld = "<%=@chld%>";
+      var chd = "<%=@chd%>";
       var marker_source = "<%=@overview_map_marker_source%>";
       var map_data = <%=raw(@map_data)%>;
       var total_count = <%=@map_data_total_count%>;
