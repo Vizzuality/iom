@@ -59,11 +59,7 @@
                   <li><%= link_to(region.name, search_path(:q => params[:q], :region_id => region.id)) %> (<%= count %>)</li>
                 <% end %>
               <% else %>
-<<<<<<< HEAD
-                  <li class="out"><%= link_to(region.name, search_path(:q => params[:q], :region_id => region.id)) %> (<%= count %>)</li>
-=======
                 <li><%= link_to(region.name, filter_url(region)) %> (<%= count %>)</li>
->>>>>>> 196ba115c91bab468a67206ded04045041166692
               <% end %>
               <% index = index + 1 %>
             <% end %>
@@ -87,11 +83,7 @@
                   <li><%= link_to(cluster.name, search_path(:q => params[:q], :cluster_id => cluster.id)) %> (<%= count %>)</li>
                 <% end %>
               <% else %>
-<<<<<<< HEAD
-                <li class="out"><%= link_to(region.name, search_path(:q => params[:q], :region_id => region.id)) %> (<%= count %>)</li>
-=======
                 <li><%= link_to(cluster.name, filter_url(cluster)) %> (<%= count %>)</li>
->>>>>>> 196ba115c91bab468a67206ded04045041166692
               <% end %>
               <% index = index + 1 %>
             <% end %>
