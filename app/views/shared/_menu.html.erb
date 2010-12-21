@@ -15,31 +15,7 @@
               <div class="header_title"><a><%= @site.word_for_clusters.upcase %><span class="with_suboptions"></span></a></div>
               <ul class="suboptions">
                 <% @site.clusters.each do |cluster| %>
-                    <% @cluster_element = '' %>
-                    <% if (cluster.name.include? 'Camp') %>
-                        <% @cluster_element = 'camp' %>
-                    <% elsif (cluster.name.include? 'Early') %>
-                        <% @cluster_element = 'early_recovery' %>
-                    <% elsif (cluster.name.include? 'Education') %>
-                        <% @cluster_element = 'education' %>
-                    <% elsif (cluster.name.include? 'Emergency') %>
-                        <% @cluster_element = 'emergency' %>
-                    <% elsif (cluster.name.include? 'Food Security') %>
-                        <% @cluster_element = 'food' %>
-                    <%elsif (cluster.name.include? 'Health') %>
-                        <% @cluster_element = 'health' %>
-                    <% elsif (cluster.name.include? 'Logistics') %>
-                        <% @cluster_element = 'logistics' %>
-                    <% elsif (cluster.name.include? 'Nutrition') %>
-                        <% @cluster_element = 'nutrition' %>
-                    <% elsif (cluster.name.include? 'Protection') %>
-                        <% @cluster_element = 'protection' %>                          
-                    <% elsif (cluster.name.include? 'Shelter') %>
-                        <% @cluster_element = 'shelter' %>
-                    <% elsif (cluster.name.include? 'Water') %>
-                        <% @cluster_element = 'water' %>
-                    <%end%>
-                <li><a href="<%= cluster_path(cluster) %>" class="geneva <%= @cluster_element %>"><%= cluster.name %></a></li>
+                <li><a href="<%= cluster_path(cluster) %>" class="geneva <%= cluster.css_class %>"><%= cluster.name %></a></li>
                 <% end %>
               </ul>
             </li>
@@ -55,13 +31,13 @@
             <% end %>
           <% end %>
 
-          <% 
+          <%
             #If there is a region context then we display nothing on the header for location
             if @site.geographic_context_region_id? %>
             <!--Nothing to present here -->
           <%
             #if the site defines a country then display the regions
-            elsif @site.geographic_context_country_id? %>  
+            elsif @site.geographic_context_country_id? %>
             <li id="country_option">
               <a href="#" class="geneva main_option">REGIONS<span class="with_suboptions"></span></a>
               <div class="header_title"><a>REGIONS<span class="with_suboptions"></span></a></div>
@@ -69,15 +45,15 @@
                 <div class="wrapper">
                   <ul class="content scroll_pane">
                     <% @site.regions_select.each do |region| %>
-                    
+
                     <li><a href="/regions/<%= region.id %>" class="geneva"><%= region.name %></a></li>
                     <% end %>
                   </ul>
-                </div>          
+                </div>
           <%
            #if the site does not define a geo context, then is worldwide,display the countries
-            else %>  
-          
+            else %>
+
             <!-- ONLY TO TEST -->
             <li id="country_option">
               <a href="#" class="geneva main_option with_suboptions">COUNTRIES<span class="with_suboptions"></span></a>
@@ -86,7 +62,7 @@
                 <div class="wrapper">
                   <ul class="content scroll_pane">
                     <% @site.countries_select.each do |country| %>
-                    
+
                     <li><a href="/countries/<%= country.id %>" class="geneva"><%= country.name %></a></li>
                     <% end %>
                   </ul>
@@ -97,14 +73,14 @@
             <a href="#" class="geneva main_option with_suboptions">ORGANIZATIONS<span class="with_suboptions"></span></a>
             <div class="header_title"><a>ORGANIZATIONS<span class="with_suboptions"></span></a></div>
             <div class="suboptions_body">
-              <form method="get"> 
+              <form method="get">
                 <input id="ngos_search" type="text" value="" name="ngos_search"/>
               </form>
               <div class="wrapper">
                 <ul id="orgs_list" class="content scroll_pane_auto">
 
                   <% @site.organizations.each do |organization| %>
-                    <li><a href="<%= organization_path(organization) %>"><%= organization.name %></a></li>                    
+                    <li><a href="<%= organization_path(organization) %>"><%= organization.name %></a></li>
                   <% end %>
                 </ul>
               </div>
