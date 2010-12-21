@@ -1,9 +1,9 @@
 $(document).ready(function(ev){
 
       /************** SITE PAGE  ************************** */
-      
-		// COUNTRY COMBO
-	  $('select#gc_limited_country_section').sSelect({ddMaxWidth: '245px',ddMaxHeight:'231px',containerClass:'country'});
+
+    // COUNTRY COMBO
+    $('select#gc_limited_country_section').select({ddMaxWidth: '245px',ddMaxHeight:'231px',containerClass:'country'});
 
 
       // click on limited options
@@ -41,20 +41,20 @@ $(document).ready(function(ev){
           // To change clicked style on country combo
           if (!$(event.target).closest('ul.newListSelected.country').length) {
               $('li#gc_limited_region').find('div.newListSelFocus').removeClass('newListSelFocus');
-              $('li#gc_limited_region').find('div.newListSelected').css('background-position','0 0');              
+              $('li#gc_limited_region').find('div.newListSelected').css('background-position','0 0');
           };
         });
-        
+
       // click on country combo (LIMITED TO A COUNTRY)
       // $('li#gc_limited_country').find('span.select_country_combo').live('click',function(ev){
-      //     
+      //
       //   ev.stopPropagation();
       //   ev.preventDefault();
-      // 
+      //
       //   if (!$(this).hasClass('clicked')){
       //     $(this).addClass('clicked');
       //   }
-      // 
+      //
       //   $(document).click(function(event) {
       //     if (!$(event.target).closest('span.select_country_combo').length) {
       //       $('li#gc_limited_country').find('span.select_country_combo').removeClass('clicked');
@@ -77,11 +77,11 @@ $(document).ready(function(ev){
       $('li#gc_limited_region').find('span.select_country_combo').live('click',function(ev){
         ev.stopPropagation();
         ev.preventDefault();
-      
+
         if (!$(this).hasClass('clicked')){
           $(this).addClass('clicked');
         }
-      
+
         $(document).click(function(event) {
           if (!$(event.target).closest('span.select_country_combo').length) {
             $('li#gc_limited_region').find('span.select_country_combo').removeClass('clicked');

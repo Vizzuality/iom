@@ -2,9 +2,12 @@
 #
 # Table name: countries
 #
-#  id   :integer         not null, primary key
-#  name :string(255)
-#  code :string(255)
+#  id               :integer         not null, primary key
+#  name             :string(255)     
+#  code             :string(255)     
+#  wiki_url         :string(255)     
+#  wiki_description :text            
+#  the_geom         :string          
 #
 
 class Country < ActiveRecord::Base

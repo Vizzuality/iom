@@ -34,6 +34,10 @@
 #  visits                          :float           default(0.0)
 #  visits_last_week                :float           default(0.0)
 #  geographic_context_geometry     :string
+#  aid_map_image_file_name         :string(255)
+#  aid_map_image_content_type      :string(255)
+#  aid_map_image_file_size         :integer
+#  aid_map_image_updated_at        :datetime
 #
 
 class Site < ActiveRecord::Base
@@ -54,6 +58,20 @@ class Site < ActiveRecord::Base
   belongs_to :geographic_context_region, :class_name => 'Region'
 
   has_attached_file :logo, :styles => { :small => "60x60#" }
+  has_attached_file :aid_map_image, :styles => {
+                                      :small => {
+                                        :geometry => "203×115#",
+                                        :quality => 80,
+                                        :format => 'jpg'
+                                      },
+                                      :huge => {
+                                        :geometry => "927×524#",
+                                        :quality => 80,
+                                        :format => 'jpg'
+                                      }
+                                    },
+                                    :url => "/system/:attachment/:id/:style.:extension",
+                                    :default_url => "/images/no_aid_map_image_huge.png"
 
   scope :published, where(:status => true)
   scope :draft,     where(:status => false)
@@ -64,7 +82,7 @@ class Site < ActiveRecord::Base
   before_validation :clean_html
   attr_accessor :geographic_context, :project_context, :show_blog, :geographic_boundary_box, :subdomain
 
-  before_save :set_geographic_context, :set_project_context, :set_project_context_tags_ids
+  before_save :set_geographic_context, :set_project_context, :set_project_context_tags_ids#, :sanitize_image_name
   after_save :set_cached_projects
   after_create :create_pages
   after_destroy :remove_cached_projects
@@ -414,5 +432,11 @@ class Site < ActiveRecord::Base
 
     def remove_cached_projects
       ActiveRecord::Base.connection.execute("DELETE FROM projects_sites WHERE site_id = '#{self.id}'")
+    end
+
+    def sanitize_image_name
+      return if aid_map_image_file_name.blank?
+      extension = File.extname(aid_map_image_file_name)
+      self.aid_map_image_file_name = "#{aid_map_image_file_name.sanitize}#{extension}"
     end
 end
