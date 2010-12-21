@@ -48,12 +48,12 @@ Tag.create :name => 'earthquake'
 #  127.0.0.1       iom-haiti.ipq.co
 site = Site.create :name => 'Haiti Aid Map', :url => 'iom-haiti.ipq.co', :status => true,
                    :theme => Theme.find_by_name('Garnet')
-                   
-                   
+
+
 site.pages.find_by_title("About").body=
-               <<-EOF 
-                    <p><a href="/">InterAction</a> is developing a web-based mapping platform and database that will ultimately map all of our members’ 
-                    work worldwide. In 2010, InterAction will pilot the mapping platform with a focus on the NGO community’s response to the earthquake 
+               <<-EOF
+                    <p><a href="/">InterAction</a> is developing a web-based mapping platform and database that will ultimately map all of our members’
+                    work worldwide. In 2010, InterAction will pilot the mapping platform with a focus on the NGO community’s response to the earthquake
                     in Haiti, as well as its efforts to improve food security in various countries around the world.</p>
                     <p>The mapping platform will be an effective, flexible and sustainable means of capturing information on NGO activities that will:</p>
                     <ul>
@@ -73,11 +73,10 @@ site.pages.find_by_title("About").body=
                       <li>Analyze large amounts of data</li>
                     </ul>
                EOF
-               
-site.pages.find_by_title("Analysis").body=
-              <<-EOF 
-                   <p>On October 21, the Government of Haiti confirmed an outbreak of cholera, an acute and highly contagious diarrheal disease caused 
-                   by eating or drinking contaminated food or water. Unless immediately treated, cholera can be fatal. As of November 16 Haiti’s Ministry of 
+
+site.pages.find_by_title("Analysis").body = <<-EOF
+                   <p>On October 21, the Government of Haiti confirmed an outbreak of cholera, an acute and highly contagious diarrheal disease caused
+                   by eating or drinking contaminated food or water. Unless immediately treated, cholera can be fatal. As of November 16 Haiti’s Ministry of
                    Health has confirmed 1,039 deaths and 16,799 hospitalized cases.</p>
 
                    <p>The Haitian Government, UN and NGOs have responded quickly to the epidemic. We have provided treatment to those affected, strengthened health
@@ -91,10 +90,10 @@ site.pages.find_by_title("Analysis").body=
                   List on InterAction’s website. For specific examples of members’ response please visit the Member Response to Cholera in Haiti map.</p>
 
                    <p>Source: Ministere de la Sante Publique et de la Population (MSPP) - November 16, 2010</p>
-              EOF               
-               
-               
-                   
+              EOF
+
+
 #  127.0.0.1       iom-food.ipq.co
 site = Site.create :name => 'Food Security', :url => 'iom-food.ipq.co', :status => true,
-                  :theme => Theme.find_by_name('Garnet')
+                   :theme => Theme.find_by_name('Garnet')
+
