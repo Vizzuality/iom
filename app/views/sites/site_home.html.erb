@@ -118,10 +118,21 @@
     </div>
 
     <script type="text/javascript">
-      var map_data = <%=raw(@map_features_json)%>;
+      var bbox = [{"lat":18.93205126204314, "lon":-72.6361083984375},{"lat":18.7, "lon":-72.6361083984375}];
+      var chco = "F7F7F7,8BC856,336600";
+      var chf = "bg,s,2F84A3";
+      var chld = "HT-AR|HT-CE|HT-GR|HT-NI|HT-ND|HT-NE|HT-OU|HT-SD|HT-SE";
+      var chd = "t:0,10,20,30,40,50,60,70,80";
+      var marker_source = '';
+      //var map_data = <%=raw(@map_features_json)%>;
+      var map_data = [{"id":1, "lat":18.93205126204314, "lon":-72.6361083984375, "count":10, "url":"/organizations/10", "name":"Madrid"},{"id":3, "lat":18.7, "lon":-72.6361083984375, "count":5, "url":"/region/10", "name":"Haiti"}];
     </script>
 
+
+    <script src="/javascripts/sites/home.js" type="text/javascript" charset="utf-8"></script>
+    
     <script src="/javascripts/sites/mercatorProjection.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
     <script src="/javascripts/sites/IOMMarker.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/javascripts/sites/home.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/javascripts/sites/labels_style.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/javascripts/sites/overview_map.js" type="text/javascript" charset="utf-8"></script>
