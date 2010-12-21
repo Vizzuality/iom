@@ -117,7 +117,7 @@
     
     
     function zoomIn() {
-      map.setZoom(zoom+1);
+      map.setZoom(map.getZoom() + 1);
     }
 
     function zoomOut() {
