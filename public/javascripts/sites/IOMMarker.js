@@ -11,8 +11,8 @@
     	
     	this.diameter = (60*parseInt(this.count))/total;
     	
-    	if (this.diameter<5) {
-    	  this.diameter = 5;
+    	if (this.diameter<15) {
+    	  this.diameter = 15;
     	}
 
       this.offsetVertical_ = -(this.diameter/2);
