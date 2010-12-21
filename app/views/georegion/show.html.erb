@@ -58,15 +58,16 @@
           <% end %>
         </div>
 
+        <% unless @area.near_countries.empty? %>
         <div class="block margin">
           <h3>PROJECTS IN OTHER REGIONS</h3>
           <ul>
-            <li><a href="#">Jeddah</a> - 12 projects</li>
-            <li><a href="#">Jeddah</a> - 12 projects</li>
-            <li><a href="#">Jeddah</a> - 12 projects</li>
-            <li><a href="#">Jeddah</a> - 12 projects</li>
+            <% @area.near_countries.each do |country| %>
+            <li><%= link_to(country.name, country_path(country)) %> - <%= pluralize(country.projects.site(@site).count, 'project', 'projects') %></li>
+            <% end %>
           </ul>
         </div>
+        <% end %>
       </div>
       <!-- float_left -->
     </div>
@@ -81,7 +82,7 @@
   </div>
 
   <script src="/javascripts/sites/location.js" type="text/javascript" charset="utf-8"></script>
-  
+
   <script type="text/javascript">
     var chco = "<%=@georegion_map_chco%>";
     var chf = "<%=@georegion_map_chf%>";
@@ -93,7 +94,7 @@
     var area_stroke_color = "<%=@georegion_map_stroke_color%>";
     var area_fill_color = "<%=@georegion_map_fill_color%>";
   </script>
-  
+
   <script src="/javascripts/sites/mercatorProjection.js" type="text/javascript" charset="utf-8"></script>
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
   <script src="/javascripts/sites/IOMMarker.js" type="text/javascript" charset="utf-8"></script>

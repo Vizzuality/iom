@@ -27,9 +27,13 @@ ActiveRecord::Schema.define(:version => 20101221151517) do
   create_table "countries", :force => true do |t|
     t.string        "name"
     t.string        "code"
+    t.multi_polygon "the_geom",         :limit => nil, :srid => 4326
     t.string        "wiki_url"
     t.text          "wiki_description"
+<<<<<<< HEAD
     t.multi_polygon "the_geom",         :limit => nil, :srid => 4326
+=======
+>>>>>>> d3f132c3f61588e8f2396a0b1da585392f8ced55
     t.string        "iso2_code"
     t.string        "iso3_code"
   end
@@ -252,10 +256,14 @@ ActiveRecord::Schema.define(:version => 20101221151517) do
     t.integer  "level"
     t.integer  "country_id"
     t.integer  "parent_region_id"
+    t.geometry "the_geom",         :limit => nil, :srid => 4326
     t.integer  "gadm_id"
     t.string   "wiki_url"
     t.text     "wiki_description"
+<<<<<<< HEAD
     t.geometry "the_geom",         :limit => nil, :srid => 4326
+=======
+>>>>>>> d3f132c3f61588e8f2396a0b1da585392f8ced55
     t.string   "code"
   end
 
@@ -343,6 +351,7 @@ ActiveRecord::Schema.define(:version => 20101221151517) do
     t.text   "data"
   end
 
+<<<<<<< HEAD
   create_table "tmp_haiti_adm0", :primary_key => "gid", :force => true do |t|
     t.integer       "gadmid"
     t.string        "iso",        :limit => 5
@@ -417,6 +426,8 @@ ActiveRecord::Schema.define(:version => 20101221151517) do
     t.multi_polygon "the_geom",   :limit => nil, :srid => 4326
   end
 
+=======
+>>>>>>> d3f132c3f61588e8f2396a0b1da585392f8ced55
   create_table "users", :force => true do |t|
     t.string   "name",                      :limit => 100, :default => ""
     t.string   "email",                     :limit => 100
