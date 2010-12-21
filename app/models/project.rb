@@ -98,12 +98,6 @@ class Project < ActiveRecord::Base
     tag.update_tag_counter
   end
 
-  # TODO: remove this when reverse geocoding
-  #  - reverse geocoding
-  def before_save
-    self.the_geom = MultiPoint.from_points([Point.from_x_y(0, -77)])
-  end
-
   def finished?
     if (!end_date.nil?)
       end_date < Date.today
