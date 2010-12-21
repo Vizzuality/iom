@@ -30,6 +30,7 @@
       mapTypeControl: false,
       streetViewControl: false,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
+      disableDefaultUI: true,
       zoom: 8,
       center: new google.maps.LatLng(18.93205126204314, -72.6361083984375)
     }
@@ -37,14 +38,60 @@
     map.overlayMapTypes.insertAt(2, mapChartType);
     map.mapTypes.set('labels', styleMapType);
     map.setMapTypeId('labels');
+    
+    google.maps.event.addListener(map, "zoom_changed", function() {
+        if (map.getZoom() > 12) map.setZoom(12);
+    });
+    
 
-
+    var total_count = 15;
 
     for (var i = 0; i<map_data.length; i++) {
-      var marker_ = new IOMMarker(map_data[i],'#000000',map);
-      bounds.extend(new google.maps.LatLng(map_data[i].lat,map_data[i].lon));
+      var marker_ = new IOMMarker(map_data[i],total_count, '/images/sites/maps/marker_image.png',map);
     }
-    map.setCenter(bounds.getCenter());
-    map.setZoom(8);
+    
+    for (var j = 0; j<bbox.length; j++) {
+      bounds.extend(new google.maps.LatLng(bbox[j].lat,bbox[j].lon));
+    }
+
+    map.fitBounds(bounds);
+    
+    
+    //Positionate zoom controls
+    positionZoomControls();
+    $('#zoomIn').fadeIn();
+    $('#zoomOut').fadeIn();
+    window.onResize = positionZoomControls;
     
   });
+  
+  
+  function positionZoomControls() {
+    var column_position = $('#layout').offset().left;
+    var map_position = $('#map').position().top + 40;
+    
+    $('#zoomIn').css('left',column_position+'px');
+    $('#zoomIn').css('top',map_position+'px');
+    
+    $('#zoomOut').css('left',column_position+32+'px');
+    $('#zoomOut').css('top',map_position+'px');
+  }
+  
+  
+  function zoomIn() {
+    var zoom = map.getZoom();
+    if (zoom<12) {
+      map.setZoom(zoom+1);
+    }
+  }
+  
+  function zoomOut() {
+    map.setZoom(map.getZoom() - 1);
+  }
+  
+  
+  
+  
+  
+  
+  

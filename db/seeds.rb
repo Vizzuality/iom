@@ -3,9 +3,47 @@
 User.create :email => 'admin@example.com', :password => 'admin', :password_confirmation => 'admin'
 Settings.create
 
-Theme.create :name => 'Garnet', :css_file => '/stylesheets/themes/garnet.css', :thumbnail_path => '/images/backoffice/sites/theme_1.png'
-Theme.create :name => 'Pink',   :css_file => '/stylesheets/themes/pink.css',   :thumbnail_path => '/images/backoffice/sites/theme_2.png'
-Theme.create :name => 'Blue',   :css_file => '/stylesheets/themes/blue.css',   :thumbnail_path => '/images/backoffice/sites/theme_3.png'
+Theme.create :name => 'Garnet',
+             :css_file => '/stylesheets/themes/garnet.css',
+             :thumbnail_path => '/images/backoffice/sites/theme_1.png',
+             :data => {
+               :overview_map_chco => nil,
+               :overview_map_chf => nil,
+               :overview_map_marker_source => nil,
+               :georegion_map_chco => nil,
+               :georegion_map_chf => nil,
+               :georegion_map_marker_source => nil,
+               :georegion_map_stroke_color => nil,
+               :georegion_map_fill_color => nil
+             }
+
+Theme.create :name => 'Pink',
+             :css_file => '/stylesheets/themes/pink.css',
+             :thumbnail_path => '/images/backoffice/sites/theme_2.png',
+             :data => {
+               :overview_map_chco => nil,
+               :overview_map_chf => nil,
+               :overview_map_marker_source => nil,
+               :georegion_map_chco => nil,
+               :georegion_map_chf => nil,
+               :georegion_map_marker_source => nil,
+               :georegion_map_stroke_color => nil,
+               :georegion_map_fill_color => nil
+             }
+
+Theme.create :name => 'Blue',
+             :css_file => '/stylesheets/themes/blue.css',
+             :thumbnail_path => '/images/backoffice/sites/theme_3.png',
+             :data => {
+               :overview_map_chco => nil,
+               :overview_map_chf => nil,
+               :overview_map_marker_source => nil,
+               :georegion_map_chco => nil,
+               :georegion_map_chf => nil,
+               :georegion_map_marker_source => nil,
+               :georegion_map_stroke_color => nil,
+               :georegion_map_fill_color => nil
+             }
 
 # Env seeds (development)
 

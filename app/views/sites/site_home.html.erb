@@ -18,6 +18,8 @@
 <%= render :partial => 'shared/menu'  %>
 
   <div id="map" class="home"></div>
+  <a href="#zoom_in" id="zoomIn" onclick="zoomIn()"></a>
+  <a href="#zoom_out" id="zoomOut" onclick="zoomOut()"></a>
 
   <div id="layout">
     <div id="left_column">
@@ -40,46 +42,31 @@
           <div class="block statistics">
             <h3>PROJECTS BY CLUSTER</h3>
             <ul class="statistics_list">
-                <!-- TODO: We need projects_clusters by site         -->
-                <li>
-                  <div id="tooltip">
-                    <span class="body_tooltip">
-                      <label>Camp Coordination and Management</label>
-                    </span>
-                    <span class="bottom_tooltip"></span>
-                  </div>
-                  <a class="plus"><span class="aller" style="width:20px">20</span></a>
-                </li>
-                <li>
-                  <div id="tooltip">
-                    <span class="body_tooltip">
-                      <label>Camp Coordination and Management</label>
-                    </span>
-                    <span class="bottom_tooltip"></span>
-                  </div>
-                  <a class="plus"><span class="aller" style="width:20px">20</span></a>
-                </li>
-                <li>
-                  <div id="tooltip">
-                    <span class="body_tooltip">
-                      <label>Camp Coordination and Management</label>
-                    </span>
-                    <span class="bottom_tooltip"></span>
-                  </div>
-
-                  <a class="plus"><span class="aller" style="width:20px">20</span></a>
-                </li>
+                <% @site.projects_clusters.each do |cluster, count| %>
+                  <li>
+                    <div id="tooltip">
+                      <span class="body_tooltip">
+                        <label><%= cluster.name %></label>
+                      </span>
+                      <span class="bottom_tooltip"></span>
+                    </div>
+                    <a class="plus"><span class="aller" style="width:<%= cluster_width(count) %>px"><%= count %></span></a>
+                  </li>
+                <% end %>
             </ul>
+          </div>
 
+          <div class="block statistics">
+            <h3>PROJECTS BY LOCATION</h3>
+            <%= raw(projects_by_location(@site.projects_regions)) %>
           </div>
 
           <div class="block margin">
             <h3>MOST ACTIVE ORGANIZATIONS</h3>
             <ul>
-              <li><a href="#">USAid</a> - 12 projects</li>
-              <li><a href="#">Compassion Fund</a> - 12 projects</li>
-              <li><a href="#">Oxfam America</a> - 12 projects</li>
-              <li><a href="#">Food For Haiti</a> - 12 projects</li>
+              <% @site.projects_organizations.each do |organization, count| %>
+              <li><%= link_to organization.name, organization_path(organization) %> - <%= pluralize(count, 'project') %></li>
+              <% end  -%>
             </ul>
           </div>
 
@@ -130,7 +117,7 @@
 
 
     <script src="/javascripts/sites/home.js" type="text/javascript" charset="utf-8"></script>
-    
+
     <script src="/javascripts/sites/mercatorProjection.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
     <script src="/javascripts/sites/IOMMarker.js" type="text/javascript" charset="utf-8"></script>

@@ -389,6 +389,13 @@ div.block.edit div.med div.left span.add_partner {float:left; width:565px; heigh
 div.block.edit div.med div.left span.add_partner p {float:left; margin:17px 0 0 15px; font:normal 15px Arial; color:#333333;}
 div.block.edit div.med div.left span.add_partner a {float:right; width:132px; height:32px; margin:11px 15px 0 0; padding:0; text-indent:-9999px; background:url('/images/backoffice/sites/add_partner_button.png') no-repeat 0 0;}
 div.block.edit div.med div.left span.add_partner a:hover {background-position:0 -32px; cursor:pointer;}
+div.block.edit div.med div.left p.map {font:normal 13px Arial; color:#999999;}
+div.block.edit div.med div.left div.outer_map {position:relative; width:558px; height:293px; margin:10px 0 0 0; padding:2px!important; background:url('/images/backoffice/sites/back_map.jpg') no-repeat 0 0;}
+div.block.edit div.med div.left div.outer_map div#map {float:left; width:100%; height:100%;}
+div.block.edit div.med div.left div.outer_map a#zoomIn {position:absolute; width:26px; height:25px; left:10px; top:10px; background:url('/images/sites/maps/zoom_in.png') no-repeat 0 0; z-index:100;}
+div.block.edit div.med div.left div.outer_map a#zoomIn:hover {background-position:0 -25px;}
+div.block.edit div.med div.left div.outer_map a#zoomOut {position:absolute; width:26px; height:25px; left:40px; top:10px; background:url('/images/sites/maps/zoom_out.png') no-repeat 0 0; z-index:100;}
+div.block.edit div.med div.left div.outer_map a#zoomOut:hover {background-position:0 -25px;}
 div.block.edit div.med div.left form div.list_combo {float:left; width:419px; height:auto; position:relative;}
 div.block.edit div.med div.left form ul.list_combo_content {position:absolute; top:35px; width:419px; display:none; left:0; z-index:10;}
 div.block.edit div.med div.left form ul.list_combo_content li.first {float:left; width:419px; height:4px; margin:0; background:url('/images/backoffice/projects/top_content_combo_large.png') no-repeat 0 0; padding:0;}

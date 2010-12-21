@@ -163,9 +163,12 @@ div#header div.right form.search span.input_search input[type="text"]{position:a
 div#header div.right form.search span.input_search input[type="submit"] {position:absolute; right:5px; top:3px; width:15px; height:14px; background:url('/images/sites/common/bttn_search.png') no-repeat 0 0; border:none;}
 
 div#map {width:100%; height:475px; background:#99B3CA; border-bottom:2px solid white; border-top:2px solid white; display:inline-block; vertical-align:top; zoom:1; *display:inline;}
-
 div#map.home {border-top:none;}
 div#small_map {width:100%; height:280px; background:#99B3CA; border-bottom:2px solid white;}
+a#zoomIn {position:absolute; display:none; width:26px; height:25px; background:url('/images/sites/maps/zoom_in.png') no-repeat 0 0; z-index:100;}
+a#zoomIn:hover {background-position:0 -25px;}
+a#zoomOut {position:absolute; display:none; width:26px; height:25px; background:url('/images/sites/maps/zoom_out.png') no-repeat 0 0; z-index:100;}
+a#zoomOut:hover {background-position:0 -25px;}
 
 /* LEFT COLUMN - RIGHT BIG BLOCK */
 div.main_head {display:inline-block; vertical-align:top; zoom:1; *display:inline; width:100%;}

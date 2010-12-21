@@ -60,18 +60,18 @@ class Site < ActiveRecord::Base
   has_attached_file :logo, :styles => { :small => "60x60#" }
   has_attached_file :aid_map_image, :styles => {
                                       :small => {
-                                        :geometry => "203×115#",
+                                        :geometry => "203x115#",
                                         :quality => 80,
                                         :format => 'jpg'
                                       },
                                       :huge => {
-                                        :geometry => "927×524#",
+                                        :geometry => "927x524#",
                                         :quality => 80,
                                         :format => 'jpg'
                                       }
                                     },
                                     :url => "/system/:attachment/:id/:style.:extension",
-                                    :default_url => "/images/no_aid_map_image_huge.png"
+                                    :default_url => "/images/no_aid_map_image_huge.jpg"
 
   scope :published, where(:status => true)
   scope :draft,     where(:status => false)
@@ -215,6 +215,45 @@ class Site < ActiveRecord::Base
   #Return All the projects within the Site (already executed)
   def projects(options = {})
     projects_sql(options).all
+  end
+
+  def projects_ids_string
+    # projects_ids seems to return a -1 id. #BUG?
+    (self.projects_ids - [-1]).join(',')
+  end
+
+  # Array of arrays
+  # [[cluster, count], [cluster, count]]
+  def projects_clusters
+    result = ActiveRecord::Base.connection.execute("select cluster_id, count(cluster_id) as count from clusters_projects where project_id IN (select id from projects where project_id IN (#{projects_ids_string})) group by cluster_id order by count desc")
+    result.map do |row|
+      [Cluster.find(row['cluster_id']), row['count'].to_i]
+    end
+  end
+
+  # Array of arrays
+  # [[region, count], [region, count]]
+  def projects_regions
+    result = ActiveRecord::Base.connection.execute("select region_id, count(region_id) as count from projects_regions where project_id IN (select id from projects where project_id IN (#{projects_ids_string})) group by region_id order by count desc")
+    result.map do |row|
+      [Region.find(row['region_id']), row['count'].to_i]
+    end
+  end
+
+  # Array of arrays
+  # [[organization, count], [organization, count]]
+  def projects_organizations
+    result = ActiveRecord::Base.connection.execute(<<-EOF
+      select organizations.id as organization_id, count(organizations.id) as count
+      from organizations
+      INNER JOIN projects ON projects.primary_organization_id = organizations.id
+      WHERE projects.id IN (#{projects_ids_string})
+      GROUP BY organizations.id ORDER BY count DESC
+    EOF
+    )
+    result.map do |row|
+      [Organization.find(row['organization_id']), row['count'].to_i]
+    end
   end
 
   #Tells me if a project is included in a site or not

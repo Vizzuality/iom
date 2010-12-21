@@ -54,73 +54,22 @@
       <% end -%>
     <% end -%>
 
-
     <span class="add_partner"><p>Add / edit the partners of the site</p><%= link_to('Add a partner', '#', :class => 'manage_partners') %></span>
   </div>
 
 
   <div class="common">
     <h3>Map configuration</h3>
-
-    <label>HOME MAP</label>
-    <div id="home_map_combo" class="list_combo">
-      <span id="hidden" class="combo_large">
-        <a class="organization">Default</a>
-      </span>
-      <ul class="list_combo_content">
-        <li class="first"></li>
-        <li class="element" id="16">Default<p class="amount_projects">Default</p></li>
-        <li class="last"></li>
-      </ul>
+    <p class="map">SITE VIEW PORT  Pan and zoom the map for selecting the preferred position</p>
+    <div class="outer_map">
+      <div id="map"></div>
+      <a href="#zoom_in" id="zoomIn" onclick="zoomIn()"></a>
+      <a href="#zoom_out" id="zoomOut" onclick="zoomOut()"></a>
     </div>
-
-    <label>PROJECT PAGE MAP</label>
-    <div id="project_map_combo" class="list_combo">
-      <span id="hidden" class="combo_large">
-        <a class="organization">Default</a>
-      </span>
-      <ul class="list_combo_content">
-        <li class="first"></li>
-        <li class="element" id="15">Default<p class="amount_projects">Default</p></li>
-        <li class="last"></li>
-      </ul>
-    </div>
-
-    <label>REGION PAGE MAP</label>
-    <div id="region_map_combo" class="list_combo">
-      <span id="hidden" class="combo_large">
-        <a class="organization">Default</a>
-      </span>
-      <ul class="list_combo_content">
-        <li class="first"></li>
-        <li class="element" id="14">Default<p class="amount_projects">Default</p></li>
-        <li class="last"></li>
-      </ul>
-    </div>
-
-    <label>CLUSTER/SECTOR PAGE MAP</label>
-    <div id="cluster_map" class="list_combo">
-      <span id="hidden" class="combo_large">
-        <a class="organization">Default</a>
-      </span>
-      <ul class="list_combo_content">
-        <li class="first"></li>
-        <li class="element" id="13">Default<p class="amount_projects">Default</p></li>
-        <li class="last"></li>
-      </ul>
-    </div>
-
-    <label>NGO PAGE MAP</label>
-    <div id="ngo_map_combo" class="list_combo">
-      <span id="hidden" class="combo_large">
-        <a class="organization">Default</a>
-      </span>
-      <ul class="list_combo_content">
-        <li class="first"></li>
-        <li class="element" id="12">Default<p class="amount_projects">Default</p></li>
-        <li class="last"></li>
-      </ul>
-    </div>
+    <input type="text" style="display:none" name="minx" value="" />
+    <input type="text" style="display:none" name="maxx" value=""/>
+    <input type="text" style="display:none" name="miny" value=""/>
+    <input type="text" style="display:none" name="maxy" value=""/>
   </div>
 
 
@@ -211,5 +160,5 @@
   <% end -%>
 </div>
 
-
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
 <script src="/javascripts/backoffice/customize.js" type="text/javascript" charset="utf-8"></script>

@@ -1,9 +1,10 @@
 $(document).ready(function(ev){
 
-      /************** SITE PAGE  ************************** */
+    /************** SITE PAGE  ************************** */
+		if ($('select').length) {
+  	  $('select#gc_limited_country_section').sSelect({ddMaxWidth: '245px',ddMaxHeight:'231px',containerClass:'country'});
+		}
 
-    // COUNTRY COMBO
-    $('select#gc_limited_country_section').select({ddMaxWidth: '245px',ddMaxHeight:'231px',containerClass:'country'});
 
 
       // click on limited options
