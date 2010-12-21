@@ -10,9 +10,13 @@
           $('div#project div.float_right').append('<div class="block margin"></div>');
           $('div#project div.float_right div.block:last').height(offset);
         }
-        if ($('div#project div.float_right').height() > $('div#project div.right').height()) {
-          $('div#project div.right').height($('div#project div.float_right').height());
+        
+        
+        if ($('div.inner_main_head div.right').height() > $('div.inner_main_head div.left').height()) {
+          $('div.inner_main_head div.right').height($('div.inner_main_head div.left').height());
         }
+        
+        $('div.projects div#mash.right').height($('div#project div.left').height()+ 39);
         
               
         //Days left effect

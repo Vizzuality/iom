@@ -165,12 +165,12 @@ div#header div.right form.search span.input_search input[type="submit"] {positio
 div#map {width:100%; height:475px; background:#99B3CA; border-bottom:2px solid white; border-top:2px solid white; display:inline-block; vertical-align:top; zoom:1; *display:inline;}
 
 div#map.home {border-top:none;}
-div#small_map {width:100%; height:280px; background:#99B3CA; border-bottom:2px solid white;}
+div#small_map {width:100%; height:280px; background:#99B3CA; border-top:2px solid white; border-bottom:2px solid white;}
 
 /* LEFT COLUMN - RIGHT BIG BLOCK */
 div.main_head {display:inline-block; vertical-align:top; zoom:1; *display:inline; width:100%;}
 div.inner_main_head {position:relative; width:942px; margin:0 auto;}
-div.main_head#projects div.left {background:none;}
+div.main_head.projects div.left {background:none; padding:0; width:260px;}
 div.main_head div.left {width:248px; padding:30px 32px; background:url('/images/sites/common/mesh.png') repeat 0 0; display:inline-block; vertical-align:top; zoom:1; *display:inline;}
 div.main_head div.left h1 {width:100%; font:normal 25px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42; z-index:10;}
 div.main_head div.left h2 {width:100%; font:normal 15px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42; text-transform:uppercase;} 
@@ -205,6 +205,7 @@ div#left_column div.float_left div.head p {font:normal 13px Arial; color:#7B3932
 div#left_column div.float_left div.head h2 {width:100%; font:normal 15px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42; text-transform:uppercase;}  
 div#left_column div.float_left div#secondary_map {width:300px; height:189px; border:1px solid #999999; background:#99B3CA;}
 div#left_column div.float_left div.block {float:left; width:238px; padding:32px; background:white; border-bottom:1px solid #DEDEDE;}
+div.inner_main_head div.block {border-bottom:none!important;}
 div#left_column div.float_left div.block.box_info {float:left; width:238px; border-bottom:1px solid #DEDEDE; padding:22px 32px 0; }
 div#left_column div.float_left div.block.box_info label {float:left; margin:15px 0 0 0; font:normal 13px "PT Sans Bold"; color:#666666; width:98px;}
 div#left_column div.float_left div.block.box_info h2 {float:left; font:normal 36px "Aller"; color:#666666; width:98px;}
@@ -245,10 +246,11 @@ div#left_column div.float_left div.block ul.clusters li.flood {background:url('/
 div#left_column div.float_left div.block ul.clusters li a {color:#CD5D4C;} 
 div#left_column div.float_left div.block ul.clusters li p {padding:1px 0 0 0;}
 div#left_column div.float_left div.block a.more {position:relative; margin:0 0 0 10px; padding:0 12px 0 0; background:url('/images/sites/icons/down_garnet.png') no-repeat right 6px;} 
-div#project div.left div.block div.import_data {float:left; margin:10px 0 0 0;}
-div#project div.left div.block div.import_data p {float:left; font:normal 13px Arial; color:#666666; margin:0 10px; width:auto; padding:0;}
-div#project div.left div.block div.import_data a {float:left; font:normal 13px Arial; color:#666666; text-decoration:underline; margin:1px 0 0 0;}
-div#project div.left div.block div.import_data a:hover {color:#333333;} 
+div.projects div.inner_main_head div.left div.block {padding:18px 0 20px 5px!important;}
+div.projects div.left div.block div.import_data {float:left; margin:10px 0 0 0;}
+div.projects div.left div.block div.import_data p {float:left; font:normal 13px Arial; color:#666666; margin:0 10px; width:auto; padding:0;}
+div.projects div.left div.block div.import_data a {float:left; font:normal 13px Arial; color:#666666; text-decoration:underline; margin:1px 0 0 0;}
+div.projects div.left div.block div.import_data a:hover {color:#333333;} 
 
 
 div#left_column div.float_left div.block a.more:hover {text-decoration:underline;}
@@ -364,58 +366,61 @@ div.statistics ul.statistics_list li a:hover span {text-decoration:none!importan
 
 /*PROJECTS*/
 div#project_layout {width:992px; margin:0 auto;}
-div#project {position:relative; width:100%;}
-div#project div.left {width:302px; height:auto; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#project div.left div.block {width:272px; margin:23px 0 0 0; border-bottom:1px solid #D4D4D4; padding:0 0 20px 30px;}
-div#project div.left div.block.last {border:none; padding:0 0 0 30px;}
-div#project div.left div.block h3 {width:100%; font:normal 13px "PT Sans Bold"; color:#999999; text-shadow:0 1px white; text-transform:uppercase;}
-div#project div.left div.block h3.margin {padding:20px 0 0 0;}
-div#project div.left div.block div.logo {width:100%; padding:7px 0 15px;}
-div#project div.left div.block div.logo div.logo_bkg {float:left; position:relative; width:86px; height:52px; background:url('/images/sites/projects/logo_bkg.png') no-repeat 0 0; vertical-align:top; overflow:hidden;}
-div#project div.left div.block div.logo img {position:absolute; top:3px; left:3px; width:80px; height:46px;}
-div#project div.left div.block div.logo a {width:130px; padding:10px 0 0 5px; font:normal 13px Arial; color:#CE5D4C; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;} /* TODO: color*/
-div#project div.left div.block div.logo a.long {width:100%; padding:0;}
-div#project div.left div.block div.logo a:hover {text-decoration:underline;}
-div#project div.left div.block ul {width:100%; margin:7px 0 0 0; padding:0 0 6px; list-style:none;}
-div#project div.left div.block ul li {padding:3px 0 3px 10px; background:url('/images/sites/icons/list_disc.png') no-repeat 0 10px; font:normal 13px Arial; color:#999999;}
-div#project div.left div.block ul li a {color:#CE5D4C; text-decoration:none;}  
-div#project div.left div.block ul li a:hover {text-decoration:underline;}
-div#project div.left div.block p {width:252px; padding:10px 0 0 0; font:normal 13px Arial; color:#666666; line-height:17px;}
-div#project div.left div.block p.budget {padding:10px 0 0 10px; font:normal 25px "Aller"; color:#666666; background:url('/images/sites/icons/budget.png') no-repeat 0 16px;}
-div#project div.left div.block p a {color:#CE5D4C; text-decoration:none;} /* TODO: color*/
-div#project div.left div.block p a:hover {text-decoration:underline;}
-div#project div.left div.block span.people_amount {display:block; height:20px; padding:3px 0; background:url('/images/sites/projects/man.png') no-repeat 0 0;}
-div#project div.left div.block p.estimate {font:normal 25px "Aller"; color:#666666;}
-div#project div.left div.block p.estimate sup {font:normal 13px "Aller"; color:#666666;}
-div#project div.left div.block div.timeline {position:relative; width:237px; height:23px; padding:3px; margin:6px 0 0 0; background:url('/images/sites/projects/days_left_bkg.png') no-repeat 0 0;}
-div#project div.left div.block div.timeline span {display:block; width:100px; height:23px; background:url('/images/sites/projects/days_left_bar.png') no-repeat 0 0;}
-div#project div.left div.block div.timeline p {position:absolute; left:90px; top:8px; width:auto!important; margin:0!important; padding:0!important; font:normal 11px "PT Sans"; color:white;}
-div#project div.left div.block p.first_date {width:121px; margin:0!important; padding:3px 0 0 0!important; font:normal 11px "Aller"; color:#999999; text-align:left; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#project div.left div.block p.second_date {width:121px; margin:0!important; padding:3px 0 0 0!important; font:normal 11px "Aller"; color:#999999; text-align:right; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#project div.right {width:660px; height:auto; margin:0 30px 0 0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#project div.float_right {position:absolute; top:-206px; right:25px; width:660px; padding:5px; background:url('/images/sites/common/mesh.png') repeat 0 0; z-index:100;}
-div#project div.float_right div.head {width:596px; height:auto; padding:32px; background:url('/images/sites/search/head_mask.png') repeat 0 0 #CD5D4C;} 
-div#project div.float_right div.head div#completed {position:absolute; top:112px; right:-15px; width:173px; height:41px; background:url('/images/sites/projects/completed_msg.png') no-repeat; display:none;}
-div#project div.float_right div.head div#completed p {float:left; font:normal 13px "PT Sans Bold"; color:white; text-transform:uppercase; margin:9px 0 0 15px; letter-spacing:-1.0px;}
-div#project div.float_right div.head h1 {width:100%; font:normal 25px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42;}
-div#project div.float_right div.head p {width:100%; padding:2px 0 0 0; font:normal 13px Arial; color:#7C3831; text-shadow:none;} 
-div#project div.float_right div.head p a {text-decoration:underline; color:#7C3831;} 
-div#project div.float_right div.head p a:hover {color:#7C3831;}  
-div#project div.float_right div.galleryStyle {float:left; width:100%; height:400px; border-top:1px solid #666666; border-bottom:1px solid #666666; background:white;}
-div#project div.float_right div.block {float:left; width:596px; padding:32px; background:white; border-bottom:1px solid #DEDEDE;}
-div#project div.float_right div.block.margin {float:left; margin:5px 0 0 0;}
-div#project div.float_right div.block p {font:normal 15px Arial; color:#666666;}
-div#project div.float_right div.block h3 {padding:0 0 10px 0; font:normal 13px "PT Sans Bold"; color:#333333; text-transform:uppercase;}
-div#project div.float_right div.block ul {float:left; width:100%;}
-div#project div.float_right div.block ul li {float:left; width:290px; margin:0 10px 0 0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#project div.float_right div.block ul li.last {margin:0;}
-div#project div.float_right div.block ul li div.image {float:left; width:90px; height:70px; margin:0 10px 0 0; padding:5px; background:#E5E5E5; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#project div.float_right div.block ul li div.image img {float:left; width:90px; height:70px;}
-div#project div.float_right div.block ul li div.info {float:left;width:170px; padding:10px 0 0 0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#project div.float_right div.block ul li div.info h4 a {font:normal 15px Arial; color:#CD5D4C; text-decoration:none;} 
-div#project div.float_right div.block ul li div.info h4 a:hover {text-decoration:underline;}
-div#project div.float_right div.block ul li div.info p {padding:3px 0 0 0; font:normal 13px Arial; color:#999999;}
-div#project div.float_right div.block ul li div.info p.sub {padding:10px 0 0 0; color:#666666;}
+div.projects {position:relative; width:100%;}
+div.projects div.left {width:296px; height:auto; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div.projects div.left div.block {width:272px; margin:23px 0 0 0; border-bottom:1px solid #D4D4D4; padding:0 0 20px 30px;}
+div.projects div.left div.block.last {border:none; padding:0 0 0 30px;}
+div.projects div.left div.block h3 {width:100%; font:normal 13px "PT Sans Bold"; color:#999999; text-shadow:0 1px white; text-transform:uppercase;}
+div.projects div.left div.block h3.margin {padding:20px 0 0 0;}
+div.projects div.left div.block div.logo {width:100%; padding:7px 0 15px;}
+div.projects div.left div.block div.logo div.logo_bkg {float:left; position:relative; width:86px; height:52px; background:url('/images/sites/projects/logo_bkg.png') no-repeat 0 0; vertical-align:top; overflow:hidden;}
+div.projects div.left div.block div.logo img {position:absolute; top:3px; left:3px; width:80px; height:46px;}
+div.projects div.left div.block div.logo a {width:130px; padding:10px 0 0 5px; font:normal 13px Arial; color:#CE5D4C; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;} /* TODO: color*/
+div.projects div.left div.block div.logo a.long {width:100%; padding:0;}
+div.projects div.left div.block div.logo a:hover {text-decoration:underline;}
+div.projects div.left div.block ul {width:100%; margin:7px 0 0 0; padding:0 0 6px; list-style:none;}
+div.projects div.left div.block ul li {padding:3px 0 3px 10px; background:url('/images/sites/icons/list_disc.png') no-repeat 0 10px; font:normal 13px Arial; color:#999999;}
+div.projects div.left div.block ul li a {color:#CE5D4C; text-decoration:none;}  
+div.projects div.left div.block ul li a:hover {text-decoration:underline;}
+div.projects div.left div.block p {width:252px; padding:10px 0 0 0; font:normal 13px Arial; color:#666666; line-height:17px;}
+div.projects div.left div.block p.budget {padding:10px 0 0 10px; font:normal 25px "Aller"; color:#666666; background:url('/images/sites/icons/budget.png') no-repeat 0 16px;}
+div.projects div.left div.block p a {color:#CE5D4C; text-decoration:none;} /* TODO: color*/
+div.projects div.left div.block p a:hover {text-decoration:underline;}
+div.projects div.left div.block span.people_amount {display:block; height:20px; padding:3px 0; background:url('/images/sites/projects/man.png') no-repeat 0 0;}
+div.projects div.left div.block p.estimate {font:normal 25px "Aller"; color:#666666;}
+div.projects div.left div.block p.estimate sup {font:normal 13px "Aller"; color:#666666;}
+div.projects div.left div.block div.timeline {position:relative; width:237px; height:23px; padding:3px; margin:6px 0 0 0; background:url('/images/sites/projects/days_left_bkg.png') no-repeat 0 0;}
+div.projects div.left div.block div.timeline span {display:block; width:100px; height:23px; background:url('/images/sites/projects/days_left_bar.png') no-repeat 0 0;}
+div.projects div.left div.block div.timeline p {position:absolute; left:90px; top:8px; width:auto!important; margin:0!important; padding:0!important; font:normal 11px "PT Sans"; color:white;}
+div.projects div.left div.block p.first_date {width:121px; margin:0!important; padding:3px 0 0 0!important; font:normal 11px "Aller"; color:#999999; text-align:left; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div.projects div.left div.block p.second_date {width:121px; margin:0!important; padding:3px 0 0 0!important; font:normal 11px "Aller"; color:#999999; text-align:right; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div.projects div.inner_main_head div.right {background:url('/images/sites/common/mesh.png') repeat 0 0; position:absolute; top:0; right:0; z-index:100; margin:0!important; padding:0 5px!important;}
+div.projects div.right {width:660px; height:auto; margin:0 25px 0 0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline; background:url('/images/sites/common/mesh.png') repeat 0 0; padding:0 5px;}
+
+div.projects div.float_right {position:absolute; top:-40px; right:25px; width:660px; padding:5px; /*background:url('/images/sites/common/mesh.png') repeat 0 0;*/ z-index:100;}
+
+div.projects div.head {width:596px; height:auto; padding:32px; background:url('/images/sites/search/head_mask.png') repeat 0 0 #CD5D4C;} 
+div.projects div.head div#completed {position:absolute; top:112px; right:-15px; width:173px; height:41px; background:url('/images/sites/projects/completed_msg.png') no-repeat; display:none;}
+div.projects div.head div#completed p {float:left; font:normal 13px "PT Sans Bold"; color:white; text-transform:uppercase; margin:9px 0 0 15px; letter-spacing:-1.0px;}
+div.projects div.head h1 {width:100%; font:normal 25px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42;}
+div.projects div.head p {width:100%; padding:2px 0 0 0; font:normal 13px Arial; color:#7C3831; text-shadow:none;} 
+div.projects div.head p a {text-decoration:underline; color:#7C3831;} 
+div.projects div.head p a:hover {color:#7C3831;}  
+div.projects div.float_right div.galleryStyle {float:left; width:100%; height:400px; border-top:1px solid #666666; border-bottom:1px solid #666666; background:white;}
+div.projects div.float_right div.block {float:left; width:596px; padding:32px; background:white; border-bottom:1px solid #DEDEDE;}
+div.projects div.float_right div.block.margin {float:left; margin:5px 0 0 0;}
+div.projects div.float_right div.block p {font:normal 15px Arial; color:#666666;}
+div.projects div.float_right div.block h3 {padding:0 0 10px 0; font:normal 13px "PT Sans Bold"; color:#333333; text-transform:uppercase;}
+div.projects div.float_right div.block ul {float:left; width:100%;}
+div.projects div.float_right div.block ul li {float:left; width:290px; margin:0 10px 0 0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div.projects div.float_right div.block ul li.last {margin:0;}
+div.projects div.float_right div.block ul li div.image {float:left; width:90px; height:70px; margin:0 10px 0 0; padding:5px; background:#E5E5E5; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div.projects div.float_right div.block ul li div.image img {float:left; width:90px; height:70px;}
+div.projects div.float_right div.block ul li div.info {float:left;width:170px; padding:10px 0 0 0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div.projects div.float_right div.block ul li div.info h4 a {font:normal 15px Arial; color:#CD5D4C; text-decoration:none;} 
+div.projects div.float_right div.block ul li div.info h4 a:hover {text-decoration:underline;}
+div.projects div.float_right div.block ul li div.info p {padding:3px 0 0 0; font:normal 13px Arial; color:#999999;}
+div.projects div.float_right div.block ul li div.info p.sub {padding:10px 0 0 0; color:#666666;}
 
 /* FOOTER SITES */
 div#footer_sites {clear:both; width:100%; padding:100px 0 100px 0;}

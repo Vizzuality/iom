@@ -19,7 +19,23 @@
       </div>
 
       <div class="right">
-        <h1>TEST RIGHT</h1>        
+        <div class="head">
+          <div id="completed">
+            <p>COMPLETED PROJECT</p>
+          </div>
+          <h1><%= @project.name %></h1>
+          <p>
+            <% clusters_sectors = @project.clusters + @project.sectors %>
+            <% unless clusters_sectors.empty? %>
+              on <%= raw(clusters_sectors.map{ |e| link_to(e.name, e.is_a?(Cluster) ? cluster_path(e) : sector_path(e)) }.to_sentence) %>
+            <% end %>
+            <% unless @project.countries.empty? %>
+              in <%= @project.countries.first.name %>
+            <% end %>
+            by <%= link_to(@project.primary_organization.name, organization_path(@project.primary_organization)) %>
+          </p>
+        </div>
+
       </div>
     </div>
   </div>
@@ -31,17 +47,6 @@
         <div class="left"> <!--270px with shadow below-->
           <div class="block">
             <h3>A project by</h3>
-            <div class="logo">
-
-              <% if @project.primary_organization.logo.file? %>
-                <div class="logo_bkg">
-                    <a href="<%= organization_path(@project.primary_organization) %>"><%= image_tag(@project.primary_organization.logo.url) %></a>
-                </div>
-                <%= link_to(@project.primary_organization.name, organization_path(@project.primary_organization)) %>
-              <% else %>
-                <%= link_to(@project.primary_organization.name, organization_path(@project.primary_organization), :class=>'long') %>
-              <% end %>
-            </div>
 
             <% if @project.implementing_organization? %>
               <h3>Implementing organizations</h3>
@@ -112,25 +117,9 @@
 
         </div>
 
-
-        <div class="right"></div>
+        <!-- TO SHOW THE MESH -->
+        <div id="mash" class="right"></div>
         <div class="float_right"> <!-- 670px with mest -->
-          <div class="head">
-            <div id="completed">
-              <p>COMPLETED PROJECT</p>
-            </div>
-            <h1><%= @project.name %></h1>
-            <p>
-              <% clusters_sectors = @project.clusters + @project.sectors %>
-              <% unless clusters_sectors.empty? %>
-                on <%= raw(clusters_sectors.map{ |e| link_to(e.name, e.is_a?(Cluster) ? cluster_path(e) : sector_path(e)) }.to_sentence) %>
-              <% end %>
-              <% unless @project.countries.empty? %>
-                in <%= @project.countries.first.name %>
-              <% end %>
-              by <%= link_to(@project.primary_organization.name, organization_path(@project.primary_organization)) %>
-            </p>
-          </div>
 
           <% unless @project.description.empty? %>
             <div class="block">
