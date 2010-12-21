@@ -36,11 +36,14 @@ class SitesController < ApplicationController
 
     result=ActiveRecord::Base.connection.execute(sql)
     @map_data=result.to_json
-    @map_data_total_count=23323
-    @overview_map_bbox = [{:lat => 17.78605726800591,:lon => -76.94549560546851}, {:lat => 20.262938421364236,:lon => -69.66705322265601}]
+    @overview_map_bbox = [{
+              :lat => @site.overview_map_bbox_miny,
+              :lon => @site.overview_map_bbox_minx}, {
+              :lat => @site.overview_map_bbox_maxy,
+              :lon => @site.overview_map_bbox_maxx}]
     @overview_map_chco = @site.theme.data[:overview_map_chco]
     @overview_map_chf = @site.theme.data[:overview_map_chf]
-    @overview_map_marker_source = ""
+    @overview_map_marker_source = @site.theme.data[:overview_map_marker_source]
     
     areas= []
     data = []

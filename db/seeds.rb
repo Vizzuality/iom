@@ -5,44 +5,44 @@ Settings.create
 
 Theme.create :name => 'Garnet',
              :css_file => '/stylesheets/themes/garnet.css',
-             :thumbnail_path => '/images/backoffice/sites/theme_1.png',
+             :thumbnail_path => '/images/themes/1/thumbnail.png',
              :data => {
                :overview_map_chco => "F7F7F7,8BC856,336600",
                :overview_map_chf => "bg,s,2F84A3",
-               :overview_map_marker_source => nil,
+               :overview_map_marker_source => "/images/themes/1/marker_image.png",
                :georegion_map_chco => "F7F7F7,8BC856,336600",
                :georegion_map_chf => "bg,s,2F84A3",
-               :georegion_map_marker_source => nil,
-               :georegion_map_stroke_color => nil,
-               :georegion_map_fill_color => nil
+               :georegion_map_marker_source => "/images/themes/1/marker_image.png",
+               :georegion_map_stroke_color => "#000000",
+               :georegion_map_fill_color => "#000000"
              }
 
 Theme.create :name => 'Pink',
              :css_file => '/stylesheets/themes/pink.css',
-             :thumbnail_path => '/images/backoffice/sites/theme_2.png',
+             :thumbnail_path => '/images/themes/2/thumbnail.png',
              :data => {
                :overview_map_chco => "F7F7F7,8BC856,336600",
                :overview_map_chf => "bg,s,2F84A3",
-               :overview_map_marker_source => nil,
+               :overview_map_marker_source => "/images/themes/2/marker_image.png",
                :georegion_map_chco => "F7F7F7,8BC856,336600",
                :georegion_map_chf => "bg,s,2F84A3",
-               :georegion_map_marker_source => nil,
-               :georegion_map_stroke_color => nil,
-               :georegion_map_fill_color => nil
+               :georegion_map_marker_source => "/images/themes/2/marker_image.png",
+               :georegion_map_stroke_color => "#000000",
+               :georegion_map_fill_color => "#000000"
              }
 
 Theme.create :name => 'Blue',
              :css_file => '/stylesheets/themes/blue.css',
-             :thumbnail_path => '/images/backoffice/sites/theme_3.png',
+             :thumbnail_path => '/images/themes/3/thumbnail.png',
              :data => {
                :overview_map_chco => "F7F7F7,8BC856,336600",
                :overview_map_chf => "bg,s,2F84A3",
-               :overview_map_marker_source => nil,
+               :overview_map_marker_source => "/images/themes/3/marker_image.png",
                :georegion_map_chco => "F7F7F7,8BC856,336600",
                :georegion_map_chf => "bg,s,2F84A3",
-               :georegion_map_marker_source => nil,
-               :georegion_map_stroke_color => nil,
-               :georegion_map_fill_color => nil
+               :georegion_map_marker_source => "/images/themes/3/marker_image.png",
+               :georegion_map_stroke_color => "#000000",
+               :georegion_map_fill_color => "#000000"
              }
 
 # Env seeds (development)
@@ -87,6 +87,10 @@ Tag.create :name => 'earthquake'
 site = Site.create :name => 'Haiti Aid Map', :url => 'iom-haiti.ipq.co', :status => true,
                    :theme => Theme.find_by_name('Garnet')
 site.geographic_context_country = Country.find_by_name('Haiti')
+site.overview_map_bbox_miny=17.78605726800591;
+site.overview_map_bbox_minx=-76.94549560546851;
+site.overview_map_bbox_maxy=20.262938421364236;
+site.overview_map_bbox_maxx=-69.66705322265601;
 
 
 site.pages.find_by_title("About").body=
@@ -135,4 +139,9 @@ site.pages.find_by_title("Analysis").body = <<-EOF
 #  127.0.0.1       iom-food.ipq.co
 site = Site.create :name => 'Food Security', :url => 'iom-food.ipq.co', :status => true,
                    :theme => Theme.find_by_name('Garnet')
+                              
+site.overview_map_bbox_miny=-65;
+site.overview_map_bbox_minx=-180;
+site.overview_map_bbox_maxy=70;
+site.overview_map_bbox_maxx=180;                   
 
