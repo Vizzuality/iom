@@ -159,19 +159,12 @@
 
           <div class="block margin">
 
-<<<<<<< HEAD
-            <!-- TODO : IMPLEMENT -->
-            <h3 class="first">RELATED PROJECTS</h3>
-            <ul class="related_projects">
-              <li>
-=======
             <% related_projects = @project.related(@site) %>
             <% unless related_projects.empty? %>
-            <h3>RELATED PROJECTS</h3>
-            <ul>
+            <h3 class="first">RELATED PROJECTS</h3>
+            <ul class="related_projects">
               <% related_projects.each_with_index do |project,i| %>
               <li <%= raw('class="last"') if i > 0 %>>
->>>>>>> b2f667a7f7e8483aa0eab1a736bbaae9312c07dc
                 <div class="image">
                   <img src="/images/sites/projects/default_img_project.png" title="related projects?" />
                 </div>

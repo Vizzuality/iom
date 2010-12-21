@@ -147,7 +147,7 @@ div#header ul.menu li a:hover {cursor:pointer; color:white;}
 div#header ul.menu li a span.with_suboptions {float:right; width:6px; height:3px; margin:7px 0 0 2px; background:url('/images/sites/common/arrow_menu.png') no-repeat 0 0;}
 div#header ul.menu li div.suboptions_body {display:none;}
 div#header ul.menu li ul.suboptions {position:absolute; top:20px; left:-13px; background-color:#2F2E2C; z-index:110; display:none;}
-div#header ul.menu li ul.suboptions li {float:left; width:145px; padding:0 5px; margin:5px 7px 0 0; height:auto;}
+div#header ul.menu li ul.suboptions li {float:left; width:145px; padding:0 5px; margin:6px 7px 0 0; height:auto;}
 div#header ul.menu li ul.suboptions li a {float:left; padding:2px 0 0 30px; height:20px; font:normal 13px Arial;}
 div#header ul.menu li ul.suboptions li a.camp {background:url('/images/sites/common/menu/icons/camp.png')no-repeat 0 0;}
 div#header ul.menu li ul.suboptions li a.early_recovery {background:url('/images/sites/common/menu/icons/early_recovery.png')no-repeat 0 0;}
@@ -400,7 +400,7 @@ div.projects div.left div.block span.people_amount {display:block; height:20px; 
 div.projects div.left div.block p.estimate {font:normal 25px "Aller"; color:#666666;}
 div.projects div.left div.block p.estimate sup {font:normal 13px "Aller"; color:#666666;}
 div.projects div.left div.block div.timeline {position:relative; width:237px; height:23px; padding:3px; margin:6px 0 0 0; background:url('/images/sites/projects/days_left_bkg.png') no-repeat 0 0;}
-div.projects div.left div.block div.timeline span {display:block; width:100px; height:23px; background:url('/images/sites/projects/days_left_bar.png') no-repeat 0 0;}
+div.projects div.left div.block div.timeline span {display:block; width:100px; height:23px; background:url('/images/sites/projects/days_left_bar.png') no-repeat 0 0; width:245px;}
 div.projects div.left div.block div.timeline p {position:absolute; left:90px; top:8px; width:auto!important; margin:0!important; padding:0!important; font:normal 11px "PT Sans"; color:white;}
 div.projects div.left div.block p.first_date {width:121px; margin:0!important; padding:3px 0 0 0!important; font:normal 11px "Aller"; color:#999999; text-align:left; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div.projects div.left div.block p.second_date {width:121px; margin:0!important; padding:3px 0 0 0!important; font:normal 11px "Aller"; color:#999999; text-align:right; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}

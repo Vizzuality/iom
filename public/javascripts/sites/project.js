@@ -13,11 +13,17 @@
         
         
         if ($('div.inner_main_head div.right').height() > $('div.inner_main_head div.left').height()) {
-          $('div.inner_main_head div.right').height($('div.inner_main_head div.left').height());
+          $('div.inner_main_head div.left').height($('div.inner_main_head div.right').height());
+
+        }else {
+          $('div.inner_main_head div.right').height($('div.inner_main_head div.left').height());    
         }
         
+        $('div.inner_main_head div.head').height($('div.inner_main_head div.left').height()-39);
+        $('div.inner_main_head div.right').height($('div.inner_main_head div.head').height()+39);
         $('div.projects div#mash.right').height($('div#project div.left').height()+ 39);
         
+        $('div#completed').css('bottom','0px');
               
         //Days left effect
         var d = new Date();       
