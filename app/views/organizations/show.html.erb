@@ -28,7 +28,7 @@
 
   <div id="layout">
     <div id="left_column">
-    
+
       <!-- LEFT PART -->
       <div class="left"></div> <!-- H"J"ACK -->
       <div class="outer_float">
@@ -45,7 +45,7 @@
             <p><%= link_to(pluralize(donors_total, 'donor to this organization', 'donors to this organization'),'#') %> </p>
           </div>
           <%end%>
-          
+
           <% unless @site.nil? || @organization.projects_clusters(@site).empty? %>
           <div class="block statistics">
             <h3>PROJECTS BY CLUSTER</h3>
@@ -63,34 +63,13 @@
           <%unless @organization.projects_regions(@site).empty? %>
           <div class="block statistics">
             <h3>PROJECTS BY LOCATION</h3>
-              <ul class="chart">
-                <% index = 0 %>
-                <% values = '' %>
-                <% others = 0%>
-                <% max_value = 0 %>
-                <% @organization.projects_regions(@site).each do |region, count| %>
-                  <% if index < 3 %>
-                    <li class="pos<%= index %>"><a href="#"><%= truncate(region.name,:length=>15, :omission=>"...") %></a> - <%= count %></li>
-                    <% values += ((index==0) ? '' : ',') + count.to_s() %>
-                    <% max_value<count ? max_value=count : nil %>
-                  <% else %>
-                    <% others = others + 1%>
-                    <% max_value<others ? max_value=others : nil %>
-                  <% end %>
-                  <% index = index + 1 %>
-                <% end %>
-
-                <% if @organization.projects_regions(@site).size>3 %>
-                  <li class="pos3">Others - <%= others %></li>
-                <% end %>
-              </ul>
-              <img class="pie_chart" src="http://chart.apis.google.com/chart?cht=p&chs=120x120&chd=t:<%= values %><% if others>0 %>,<%= others %><% end %>&chds=0,<%= max_value %>&chco=333333|565656|727272|ADADAD|EFEFEF|FFFFFF&chf=bg,s,FFFFFF00" />
+            <%= raw(projects_by_location(@organization.projects_regions(@site))) %>
           </div>
           <%end%>
           <% unless @organization.resources(@site).empty? %>
             <div class="block resources">
               <h3>ADDITIONAL RESOURCES</h3>
-              
+
               <% @organization.resources(@site).each do |resource| %>
                 <ul>
                   <li><a href="<%= resource.url %>" target="_blank"><%= resource.title %></a></li>

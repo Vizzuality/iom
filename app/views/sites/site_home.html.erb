@@ -42,37 +42,23 @@
           <div class="block statistics">
             <h3>PROJECTS BY CLUSTER</h3>
             <ul class="statistics_list">
-                <!-- TODO: We need projects_clusters by site         -->
-                <li>
-                  <div id="tooltip">
-                    <span class="body_tooltip">
-                      <label>Camp Coordination and Management</label>
-                    </span>
-                    <span class="bottom_tooltip"></span>
-                  </div>
-                  <a class="plus"><span class="aller" style="width:20px">20</span></a>
-                </li>
-                <li>
-                  <div id="tooltip">
-                    <span class="body_tooltip">
-                      <label>Camp Coordination and Management</label>
-                    </span>
-                    <span class="bottom_tooltip"></span>
-                  </div>
-                  <a class="plus"><span class="aller" style="width:20px">20</span></a>
-                </li>
-                <li>
-                  <div id="tooltip">
-                    <span class="body_tooltip">
-                      <label>Camp Coordination and Management</label>
-                    </span>
-                    <span class="bottom_tooltip"></span>
-                  </div>
-
-                  <a class="plus"><span class="aller" style="width:20px">20</span></a>
-                </li>
+                <% @site.projects_clusters.each do |cluster, count| %>
+                  <li>
+                    <div id="tooltip">
+                      <span class="body_tooltip">
+                        <label><%= cluster.name %></label>
+                      </span>
+                      <span class="bottom_tooltip"></span>
+                    </div>
+                    <a class="plus"><span class="aller" style="width:<%= cluster_width(count) %>px"><%= count %></span></a>
+                  </li>
+                <% end %>
             </ul>
+          </div>
 
+          <div class="block statistics">
+            <h3>PROJECTS BY LOCATION</h3>
+            <%= raw(projects_by_location(@site.projects_regions)) %>
           </div>
 
           <div class="block margin">
@@ -120,14 +106,14 @@
     </div>
 
     <script type="text/javascript">
-      var bbox = [{"lat":18.93205126204314, "lon":-72.6361083984375},{"lat":18.7, "lon":-72.6361083984375}];
-      var chco = "F7F7F7,8BC856,336600";
-      var chf = "bg,s,2F84A3";
+      var bbox = <%=raw(@overview_map_bbox.to_json)%>;
+      var chco = "<%=@overview_map_chco%>";
+      var chf = "<%=@overview_map_chf%>";
       var chld = "HT-AR|HT-CE|HT-GR|HT-NI|HT-ND|HT-NE|HT-OU|HT-SD|HT-SE";
       var chd = "t:0,10,20,30,40,50,60,70,80";
-      var marker_source = '';
-      //var map_data = <%=raw(@map_features_json)%>;
-      var map_data = [{"id":1, "lat":18.93205126204314, "lon":-72.6361083984375, "count":10, "url":"/organizations/10", "name":"Madrid"},{"id":3, "lat":18.7, "lon":-72.6361083984375, "count":5, "url":"/region/10", "name":"Haiti"}];
+      var marker_source = "<%=@overview_map_marker_source%>";
+      var map_data = <%=raw(@map_data)%>;
+      var total_count = <%=@map_data_total_count%>;
     </script>
 
 

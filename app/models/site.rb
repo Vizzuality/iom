@@ -34,6 +34,10 @@
 #  visits                          :float           default(0.0)
 #  visits_last_week                :float           default(0.0)
 #  geographic_context_geometry     :string
+#  aid_map_image_file_name         :string(255)
+#  aid_map_image_content_type      :string(255)
+#  aid_map_image_file_size         :integer
+#  aid_map_image_updated_at        :datetime
 #
 
 class Site < ActiveRecord::Base
@@ -54,6 +58,20 @@ class Site < ActiveRecord::Base
   belongs_to :geographic_context_region, :class_name => 'Region'
 
   has_attached_file :logo, :styles => { :small => "60x60#" }
+  has_attached_file :aid_map_image, :styles => {
+                                      :small => {
+                                        :geometry => "203x115#",
+                                        :quality => 80,
+                                        :format => 'jpg'
+                                      },
+                                      :huge => {
+                                        :geometry => "927x524#",
+                                        :quality => 80,
+                                        :format => 'jpg'
+                                      }
+                                    },
+                                    :url => "/system/:attachment/:id/:style.:extension",
+                                    :default_url => "/images/no_aid_map_image_huge.jpg"
 
   scope :published, where(:status => true)
   scope :draft,     where(:status => false)
@@ -64,7 +82,7 @@ class Site < ActiveRecord::Base
   before_validation :clean_html
   attr_accessor :geographic_context, :project_context, :show_blog, :geographic_boundary_box, :subdomain
 
-  before_save :set_geographic_context, :set_project_context, :set_project_context_tags_ids
+  before_save :set_geographic_context, :set_project_context, :set_project_context_tags_ids#, :sanitize_image_name
   after_save :set_cached_projects
   after_create :create_pages
   after_destroy :remove_cached_projects
@@ -198,6 +216,30 @@ class Site < ActiveRecord::Base
   def projects(options = {})
     projects_sql(options).all
   end
+
+  def projects_ids_string
+    # projects_ids seems to return a -1 id. #BUG?
+    (self.projects_ids - [-1]).join(',')
+  end
+
+  # Array of arrays
+  # [[cluster, count], [cluster, count]]
+  def projects_clusters
+    result = ActiveRecord::Base.connection.execute("select cluster_id, count(cluster_id) as count from clusters_projects where project_id IN (select id from projects where project_id IN (#{projects_ids_string})) group by cluster_id order by count desc")
+    result.map do |row|
+      [Cluster.find(row['cluster_id']), row['count'].to_i]
+    end
+  end
+
+  # Array of arrays
+  # [[region, count], [region, count]]
+  def projects_regions
+    result = ActiveRecord::Base.connection.execute("select region_id, count(region_id) as count from projects_regions where project_id IN (select id from projects where project_id IN (#{projects_ids_string})) group by region_id order by count desc")
+    result.map do |row|
+      [Region.find(row['region_id']), row['count'].to_i]
+    end
+  end
+
 
   #Tells me if a project is included in a site or not
   def is_project_included?(project_id,options={})
@@ -414,5 +456,11 @@ class Site < ActiveRecord::Base
 
     def remove_cached_projects
       ActiveRecord::Base.connection.execute("DELETE FROM projects_sites WHERE site_id = '#{self.id}'")
+    end
+
+    def sanitize_image_name
+      return if aid_map_image_file_name.blank?
+      extension = File.extname(aid_map_image_file_name)
+      self.aid_map_image_file_name = "#{aid_map_image_file_name.sanitize}#{extension}"
     end
 end

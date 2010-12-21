@@ -2,8 +2,8 @@
   <div id="gallery">
     <div class="content_gallery">
       <% @sites.each do |site| %>
-        <a href="<%= "http://#{url(site)}" %>"><img src="/images/sites/home/big_image_example.jpg" title="<% unless (site.name.nil?)%><%= site.name %><%end%>" desc="<%unless (site.short_description.nil?)%> <%= truncate (site.short_description, :length => 72) %><%end%>" alt="<%unless (site.long_description.nil?)%> <%= truncate (site.long_description, :length => 278) %><%end%>"/></a>
-      <%end%>
+        <%= link_to(image_tag(site.aid_map_image.url(:huge), :title => site.try(:name), :desc => truncate(site.short_description, :length => 72), :alt => truncate(site.long_description, :length => 278)), "http://#{url(site)}") %>
+      <% end %>
     </div>
   </div>
   <!-- <div id="gallery"> -->
@@ -11,7 +11,7 @@
     <% @sites.each_with_index do |site, i| %>
     <li class="<%= ((i + 1)%4==0) ? 'last' : '' %>">
         <div id="image">
-          <a href="<%= "http://#{url(site)}" %>"><img src="/images/sites/home/thumbnail_example.jpg" alt="<%= site.name %>"/></a>
+          <%= link_to(image_tag(site.aid_map_image.url(:small), :alt => site.name), "http://#{url(site)}") %>
         </div>
         <a class="site_name" href="<%= "http://#{url(site)}" %>"><%= site.name %></a>
       </li>
@@ -27,6 +27,5 @@
   </ul>
 
 <script src="/javascripts/sites/home_sites.js" type="text/javascript" charset="utf-8"></script>
-
 <script src="/javascripts/plugins/galleria.js" type="text/javascript" charset="utf-8"></script>
 <script src="/javascripts/plugins/galleria.classic.js" type="text/javascript" charset="utf-8"></script>

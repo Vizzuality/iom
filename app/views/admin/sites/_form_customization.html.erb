@@ -26,18 +26,18 @@
       </li>
       <% end %>
     </ul>
-        
+
     <%= f.label "SITE IMAGE FOR NGO AID MAP SITE" %>
     <div class="image_container">
-      <% if @site.logo_file_name? %>
-        <%= image_tag(@site.logo.url(:small)) %>
+      <% if @site.aid_map_image_file_name? %>
+        <%= image_tag(@site.aid_map_image.url(:small)) %>
       <% end -%>
       <div class="field">
         <p>JPG, PNG and GIF supported</p>
-        <%= f.file_field :logo %>
+        <%= f.file_field :aid_map_image %>
       </div>
     </div>
-    
+
   </div>
 
   <div class="common">
