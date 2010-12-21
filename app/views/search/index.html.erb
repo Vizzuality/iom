@@ -59,7 +59,7 @@
                   <li><%= link_to(region.name, search_path(:q => params[:q], :region_id => region.id)) %> (<%= count %>)</li>
                 <% end %>
               <% else %>
-                <li><%= link_to(region.name, filter_url(region)) %> (<%= count %>)</li>
+                <li class="out"><%= link_to(region.name, filter_url(region)) %> (<%= count %>)</li>
               <% end %>
               <% index = index + 1 %>
             <% end %>

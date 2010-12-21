@@ -4,7 +4,7 @@
       //If description is bigger than main_head
       if ($('div.inner_main_head div.right').height()>$('div.inner_main_head div.left').height()) {
         $('div.inner_main_head div.left').height($('div.inner_main_head div.right').height());
-        $('div.inner_main_head div.float_head').height($('div.inner_main_head div.right').height() + 54);
+        $('div.inner_main_head div.float_head').height($('div.inner_main_head div.right').height() + 40);
       }
       
             

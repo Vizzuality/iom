@@ -24,11 +24,8 @@
           isPng: true
       };
       var mapChartType = new google.maps.ImageMapType(mapChartOptions);      
-  
-      bounds =new google.maps.LatLngBounds(
-        new google.maps.LatLng(bbox[0].lat,bbox[0].lon),
-        new google.maps.LatLng(bbox[1].lat,bbox[1].lon)
-        ); 
+    
+      console.log(map_data);
 
       var myOptions = {
         scrollwheel: false,
@@ -36,19 +33,14 @@
         streetViewControl: false,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         disableDefaultUI: true,
-        zoom: 2,
-        center: bounds.getCenter()
+        zoom: 10,
+        center: new google.maps.LatLng(map_data[0].lat, map_data[0].lon)
       }
       map = new google.maps.Map(document.getElementById("map"), myOptions);
       map.overlayMapTypes.insertAt(2, mapChartType);
       map.mapTypes.set('labels', styleMapType);
       map.setMapTypeId('labels');
   
-      google.maps.event.addListener(map, "zoom_changed", function() {
-          if (map.getZoom() > 12) map.setZoom(12);
-      });
-  
-
   
       for (var i = 0; i<map_data.length; i++) {
         diameter = 58;
@@ -59,9 +51,6 @@
       var polygon = createGeoJsonPolygon(area_geojson);
       polygon.setMap(map)
 
-
-      map.fitBounds(bounds);
-      setTimeout(function(){zoomIn()},200);
   
   
       //Positionate zoom controls
@@ -75,7 +64,7 @@
 
     function positionZoomControls() {
       var column_position = $('#layout').offset().left;
-      var map_position = $('#map').position().top + 40;
+      var map_position = $('#map').position().top + 25;
   
       $('#zoomIn').css('left',column_position+'px');
       $('#zoomIn').css('top',map_position+'px');
@@ -86,10 +75,7 @@
 
 
     function zoomIn() {
-      var zoom = map.getZoom();
-      if (zoom<12) {
-        map.setZoom(zoom+1);
-      }
+      map.setZoom(map.getZoom()+1);
     }
 
     function zoomOut() {

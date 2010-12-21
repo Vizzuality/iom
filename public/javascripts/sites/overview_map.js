@@ -93,7 +93,7 @@
   
   function positionZoomControls() {
     var column_position = $('#layout').offset().left;
-    var map_position = $('#map').position().top + 40;
+    var map_position = $('#map').position().top + 25;
     
     $('#zoomIn').css('left',column_position+'px');
     $('#zoomIn').css('top',map_position+'px');
