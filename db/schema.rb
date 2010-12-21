@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101221102641) do
+ActiveRecord::Schema.define(:version => 20101221122740) do
 
   create_table "clusters", :force => true do |t|
     t.string "name"
@@ -333,6 +333,7 @@ ActiveRecord::Schema.define(:version => 20101221102641) do
     t.string "name"
     t.string "css_file"
     t.string "thumbnail_path"
+    t.text   "data"
   end
 
   create_table "users", :force => true do |t|
