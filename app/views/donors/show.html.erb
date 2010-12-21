@@ -1,4 +1,4 @@
-    
+
   <div id="layout">
     <div id="pages">
       <div class="left"></div>
@@ -41,8 +41,8 @@
           <% end %>
         </div>
       </div>
-  
-  
+
+
       <div class="right">
         <div class="block <%unless @donor.logo.url.empty? && @donor.description.empty? && @donor.twitter.empty? && @donor.facebook.empty? %>border<%end%>">
           <% if @donor.logo_file_name? %>
@@ -50,7 +50,7 @@
               <%= image_tag(@donor.logo.url) %>
             </div>
           <% end %>
-          <%unless @donor.description.nil?%> <%= simple_format(@donor.description) %><%end%>      
+          <%unless @donor.description.nil?%> <%= simple_format(@donor.description) %><%end%>
           <p class="social">
             <% if @donor.twitter? %>
               <%= link_to("follow us", "http://twitter.com/#{@donor.twitter}", :class=>"twitter", :target=>"_blank") %>
@@ -93,7 +93,9 @@
             <% max_value = 0 %>
             <% @donor.projects_regions(@site).each do |region, count| %>
               <% if index < 3 %>
-                <li class="pos<%= index %>"><a href="#"><%= truncate(region.name,:length=>15, :omission=>"...") %></a> - <%= count %></li>
+                <li class="pos<%= index %>">
+                  <%= link_to(truncate(region.name,:length=>15, :omission=>"..."), region_path(region)) %> - <%= count %>
+                </li>
                 <% values += ((index==0) ? '' : ',') + count.to_s() %>
                 <% max_value<count ? max_value=count : nil %>
               <% else %>
@@ -102,7 +104,7 @@
               <% end %>
               <% index = index + 1 %>
             <% end %>
-            
+
             <% if @donor.projects_regions(@site).size>3 %>
               <li class="pos3">Others - <%= others %></li>
             <% end %>
@@ -131,8 +133,7 @@
       </div>
       <%end%>
     </div>
-    
-    
+
+
     <script src="/javascripts/sites/pages.js" type="text/javascript" charset="utf-8"></script>
-    
-    
+
