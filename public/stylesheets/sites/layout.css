@@ -356,8 +356,8 @@ div.statistics ul.statistics_list li a.plus {float:left; width:auto; padding:0 0
 div.statistics ul.statistics_list li a.drop {float:left; width:auto; padding:0 0 0 20px; background:url('/images/sites/organization/left_drop.png') no-repeat left 0;  height:20px;}
 div.statistics ul.statistics_list li a span {float:left; width:auto; height:18px; padding:2px 15px 0 0; background:url('/images/sites/organization/right_statistics.png')
  no-repeat right 0; font:normal 13px "Aller"; color:#FFFFFF; text-align:right;}
-div.statistics ul.statistics_list li a span:hover {text-decoration:none;}
-div.statistics ul.statistics_list li a:hover {text-decoration:none; cursor:pointer;}
+div.statistics ul.statistics_list li a span:hover {text-decoration:none!important;}
+div.statistics ul.statistics_list li a:hover {text-decoration:none!important; cursor:pointer;}
 div.statistics ul.statistics_list li a:hover span {text-decoration:none!important;}
 
 
