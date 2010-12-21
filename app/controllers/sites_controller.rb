@@ -21,30 +21,38 @@ class SitesController < ApplicationController
     # Get the data for the map depending on the region definition of the site (country or region)
     if(@site.geographic_context_country_id)
       sql="select r.id,count(ps.project_id) as count,r.name,x(ST_Centroid(r.the_geom)) as lon,
-          y(ST_Centroid(r.the_geom)) as lat,r.name,'/regions/'||r.id as url
-          from ((projects_regions as pr inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{@site.id})
-          inner join regions as r on pr.region_id=r.id and r.level=3)
-          inner join countries as c on r.country_id=c.id
-          group by r.id,r.name,lon,lat,c.name,url"
+                y(ST_Centroid(r.the_geom)) as lat,r.name,'/regions/'||r.id as url,r.code
+                from ((projects_regions as pr inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{@site.id})
+                inner join regions as r on pr.region_id=r.id and r.level=1)
+                inner join countries as c on r.country_id=c.id
+                group by r.id,r.name,lon,lat,c.name,url,r.code"
     else
       sql="select c.id,count(ps.project_id) as count,c.name,x(ST_Centroid(c.the_geom)) as lon,y(ST_Centroid(c.the_geom)) as lat,
-          '/countries/'||c.id as url
-          from (countries_projects as cp inner join projects_sites as ps on cp.project_id=ps.project_id and site_id=#{@site.id})
-          inner join countries as c on cp.country_id=c.id
-          group by c.id,c.name,lon,lat"
+                '/countries/'||c.id as url,iso2_code as code
+                from (countries_projects as cp inner join projects_sites as ps on cp.project_id=ps.project_id and site_id=#{@site.id})
+                inner join countries as c on cp.country_id=c.id
+                group by c.id,c.name,lon,lat,iso2_code"
     end
 
-    @map_data=ActiveRecord::Base.connection.execute(sql).to_json
+    result=ActiveRecord::Base.connection.execute(sql)
+    @map_data=result.to_json
     @map_data_total_count=23323
     @overview_map_bbox = [{:lat => 18.93205126204314,:lon => -72.6361083984375}, {:lat => 18.7,:lon => -72.636108398437}]
     @overview_map_chco = "F7F7F7,8BC856,336600"
     @overview_map_chf = "bg,s,2F84A3"
     @overview_map_marker_source = ""
     
-    @chld,@chd = @site.get_iso_code_regions
+    areas= []
+    data = []
+    @map_data_total_count=0
+    result.each do |c|
+      areas << c["code"]
+      data  << c["count"]
+      @map_data_total_count=@map_data_total_count+c["count"].to_i
+    end
+    @chld = areas.join("|")
+    @chd  = data.join(",")
     
-    
-
 
     @projects = @site.projects.paginate :per_page => 10, :page => params[:page], :order => 'created_at DESC'
 
