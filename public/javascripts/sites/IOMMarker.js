@@ -11,8 +11,8 @@
     	
     	this.diameter = (60*parseInt(this.count))/total;
     	
-    	if (this.diameter<15) {
-    	  this.diameter = 15;
+    	if (this.diameter<25) {
+    	  this.diameter = 20;
     	}
 
       this.offsetVertical_ = -(this.diameter/2);
@@ -48,8 +48,14 @@
         marker_image.src = this.image;
         div.appendChild(marker_image);
     		
+    	var fontSize="9";
+    	if(this.diameter>40) {
+    	    fontSize="15";
+    	}
+    	if(this.diameter>30 && this.diameter<= 40) {
+    	    fontSize="13";
+    	} 
         //Marker address
-        if (this.height_>20) {
           var count = document.createElement('p');
           count.style.position = "absolute";
           count.style.top = "50%";
@@ -57,12 +63,11 @@
           count.style.height = "15px";
           count.style.margin ="-9px 0 0 0px";
           count.style.textAlign = "center";
-          count.style.font = "normal 15px Arial";
+          count.style.font = "normal "+fontSize+"px Arial";
           count.style.color = "white";
           $(count).css('text-shadow',"0 1px #204E2D");
           $(count).text(this.count);
           div.appendChild(count);
-        }
 
 
 
