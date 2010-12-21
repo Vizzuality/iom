@@ -1,4 +1,3 @@
-
   <div class="main_head projects">
     <div class="inner_main_head">
       <div class="left">
@@ -150,7 +149,7 @@
                 <h3 class="<%= (@project.activities.empty?)? 'first':''%>">ADDITIONAL INFORMATION</h3>
                 <%= raw(@project.additional_information) %>
               <%end%>
-              <%unless @project.cross_cutting_issues.nil? || @project.additional_information.empty?%>
+              <%unless @project.cross_cutting_issues.nil? || @project.cross_cutting_issues.empty?%>
                   <h3 class="<%= (@project.activities.empty? && @project.additional_information.empty?)? 'first':''%>">CROSS-CUTTING ISSUES</h3>
                   <%= raw(@project.cross_cutting_issues) %>
               <%end%>
@@ -161,7 +160,7 @@
           <div class="block margin">
 
             <!-- TODO : IMPLEMENT -->
-            <h3>RELATED PROJECTS</h3>
+            <h3 class="first">RELATED PROJECTS</h3>
             <ul class="related_projects">
               <li>
                 <div class="image">
