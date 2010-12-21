@@ -142,8 +142,8 @@
           var marker_ = new IOMMarker(map_data._data[i],map_data.theme,map);
           bounds.extend(new google.maps.LatLng(map_data._data[i].lat,map_data._data[i].lon));
         }
-
-        map.fitBounds(bounds);
+        map.setCenter(bounds.getCenter());
+        map.setZoom(8);
       } catch (e) {}
 
 

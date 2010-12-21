@@ -48,6 +48,10 @@ class SitesController < ApplicationController
   def about
 
   end
+  
+  def contact
+
+  end  
 
   def sites_layout
     @site ? 'site_layout' : 'root_layout'
