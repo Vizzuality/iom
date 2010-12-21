@@ -1,17 +1,24 @@
 
 
-    function IOMMarker(info, style, map) {
+    function IOMMarker(info, total, image, map) {
       this.latlng_ = new google.maps.LatLng(info.lat,info.lon);
       this.url = info.url;
       this.count = info.count;
-      this.color = style;
+      this.image = image;
     	this.map_ = map;
     	this.name = info.name;
+    
+    	
+    	this.diameter = (60*parseInt(this.count))/total;
+    	
+    	if (this.diameter<5) {
+    	  this.diameter = 5;
+    	}
 
-      this.offsetVertical_ = -18;
-      this.offsetHorizontal_ = -18;
-      this.height_ = 36;
-      this.width_ = 36;
+      this.offsetVertical_ = -(this.diameter/2);
+      this.offsetHorizontal_ = -(this.diameter/2);
+      this.height_ = this.diameter;
+      this.width_ = this.diameter;
 
       this.setMap(map);
     }
@@ -25,24 +32,38 @@
 
       var div = this.div_;
       if (!div) {
-        div = this.div_ = document.createElement('DIV');
+        div = this.div_ = document.createElement('div');
         div.style.border = "none";
         div.style.position = "absolute";
-    		div.style.width = '36px';
-    		div.style.height = '36px';
-    		$(div).css('-webkit-border-radius','20px');
-    		div.style.background = this.color;
+    		div.style.width = this.diameter + 'px';
+    		div.style.height = this.diameter + 'px';
+    		
+    		//Marker image
+        var marker_image = document.createElement('img');
+        marker_image.style.position = "relative";
+        marker_image.style.width = "100%";
+        marker_image.style.height = "100%";
+        marker_image.src = this.image;
+        div.appendChild(marker_image);
     		
         //Marker address
-        var count = document.createElement('p');
-        count.style.position = "relative";
-        count.style.width = "100%";
-        count.style.textAlign = "center";
-        count.style.margin = "10px 0 0 0";
-        count.style.font = "normal 15px 'PT Sans Bold'";
-        count.style.color = "white";
-        $(count).text(this.count);
-        div.appendChild(count);
+        if (this.height_>20) {
+          var count = document.createElement('p');
+          count.style.position = "absolute";
+          count.style.top = "50%";
+          count.style.left = "50%";
+          count.style.height = "15px";
+          count.style.margin ="-9px 0 0 0px";
+          count.style.textAlign = "center";
+          count.style.font = "normal 15px Arial";
+          count.style.color = "white";
+          $(count).css('text-shadow',"0 1px #204E2D");
+          $(count).text(this.count);
+          div.appendChild(count);
+          
+
+        }
+
 
 
         //         var hidden_div = document.createElement('DIV');
@@ -69,17 +90,9 @@
         // stadium.style.color = "#666666";
         // $(stadium).text(this.name);
         // hidden_div.appendChild(stadium);
-        // 
-        // 
-        // //Marker address
-        // var address = document.createElement('p');
-        //        address.style.position = "relative";
-        //        address.style.width = "155px";
-        // address.style.margin = "5px 0 0 25px";
-        // address.style.font = "normal 13px Arial";
-        // address.style.color = "#666666";
-        // $(address).text(this.name);
-        // hidden_div.appendChild(address);
+
+        //div.appendChild(hidden_div);
+
 
 
         google.maps.event.addDomListener(div,'click',function(ev){ 
@@ -105,7 +118,13 @@
         var panes = this.getPanes();
         panes.floatPane.appendChild(div);
 
-
+        
+        if ($(this.div_).children('p').width()>this.width_) {
+          $(this.div_).children('p').css('display','none');
+        } else {
+          $(this.div_).children('p').css('margin-left',-($(this.div_).children('p').width()/2) + "px");
+        }
+        
       }
 
     	var pixPosition = me.getProjection().fromLatLngToDivPixel(me.latlng_);

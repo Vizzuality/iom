@@ -3,7 +3,9 @@ $(document).ready(function(ev){
       /************** SITE PAGE  ************************** */
       
 		// COUNTRY COMBO
-	  $('select#gc_limited_country_section').sSelect({ddMaxWidth: '245px',ddMaxHeight:'231px',containerClass:'country'});
+		if ($('select').length) {
+  	  $('select#gc_limited_country_section').sSelect({ddMaxWidth: '245px',ddMaxHeight:'231px',containerClass:'country'});
+		}
 
 
       // click on limited options
