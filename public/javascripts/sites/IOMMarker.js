@@ -1,7 +1,7 @@
 
 
     function IOMMarker(info, total, image, map) {
-      this.latlng_ = new google.maps.LatLng(info.lat,info.lon);
+      this.latlng_ = new google.maps.LatLng(parseFloat(info.lat),parseFloat(info.lon));
       this.url = info.url;
       this.count = info.count;
       this.image = image;
@@ -11,8 +11,8 @@
     	
     	this.diameter = (60*parseInt(this.count))/total;
     	
-    	if (this.diameter<5) {
-    	  this.diameter = 5;
+    	if (this.diameter<15) {
+    	  this.diameter = 15;
     	}
 
       this.offsetVertical_ = -(this.diameter/2);
@@ -37,6 +37,8 @@
         div.style.position = "absolute";
     		div.style.width = this.diameter + 'px';
     		div.style.height = this.diameter + 'px';
+    		div.style.zIndex = 1;
+        div.style.cursor = "pointer";
     		
     		//Marker image
         var marker_image = document.createElement('img');
@@ -60,38 +62,44 @@
           $(count).css('text-shadow',"0 1px #204E2D");
           $(count).text(this.count);
           div.appendChild(count);
-          
-
         }
 
 
 
-        //         var hidden_div = document.createElement('DIV');
-        //         hidden_div.style.border = "none";
-        //         hidden_div.style.position = "absolute";
-        //        hidden_div.style.margin = "0px";
-        //        hidden_div.style.padding = "0px";
-        //        hidden_div.style.display = "none";
-        //        hidden_div.style.top = "-118px";
-        //        hidden_div.style.left = "-92px";
-        //        hidden_div.style.width = '205px';
-        //        hidden_div.style.height = '124px';
-        //        hidden_div.style.background = 'url("/wp-content/themes/CDBetisSanIsidro/images/common/infowindow.png") no-repeat 0 0';
-        // 
-        //         
-        //         
-        //         //Marker stadium
-        // var stadium = document.createElement('p');
-        // $(stadium).addClass('accuracy');
-        // stadium.style.position = "relative";
-        //        stadium.style.width = "150px";
-        // stadium.style.margin = "25px 0 0 25px";
-        // stadium.style.font = "bold 18px Arial";
-        // stadium.style.color = "#666666";
-        // $(stadium).text(this.name);
-        // hidden_div.appendChild(stadium);
+        var hidden_div = document.createElement('div');
+        hidden_div.style.border = "none";
+        hidden_div.style.position = "absolute";
+        hidden_div.style.margin = "0px";
+        hidden_div.style.padding = "0px";
+        hidden_div.style.display = "none";
+        hidden_div.style.bottom = this.diameter +"px";
+        hidden_div.style.left = (this.diameter/2)-(175/2)+"px";
+        hidden_div.style.width = '175px';
 
-        //div.appendChild(hidden_div);
+        var top_hidden = document.createElement('div');
+        top_hidden.style.border = "none";
+        top_hidden.style.position = "relative";
+        top_hidden.style.float = "left";
+        top_hidden.style.padding = "9px 15px 3px 11px";
+        top_hidden.style.width = '149px';
+        top_hidden.style.height = 'auto';
+        top_hidden.style.background = "url('/images/sites/common/tooltips/body_tooltip.png') no-repeat center top";
+        top_hidden.style.font = "normal 13px 'PT Sans Bold'";
+        top_hidden.style.textAlign = "center";
+        top_hidden.style.color = "white";
+        $(top_hidden).text(this.name);
+        hidden_div.appendChild(top_hidden);
+        
+        var bottom_hidden = document.createElement('div');
+        bottom_hidden.style.border = "none";
+        bottom_hidden.style.position = "relative";
+        bottom_hidden.style.float = "left";
+        bottom_hidden.style.background = "url('/images/sites/common/tooltips/bottom_tooltip.png') no-repeat 0 0";
+        bottom_hidden.style.width = '175px';
+        bottom_hidden.style.height = '16px';
+        hidden_div.appendChild(bottom_hidden);
+
+        div.appendChild(hidden_div);
 
 
 
@@ -112,6 +120,15 @@
     				event.cancelBubble=true;
     			};
     	  });
+    	  
+        google.maps.event.addDomListener(div,'mouseover',function(ev){ 
+          $(this).css('zIndex',global_index++);
+          $(this).children('div').stop(true).fadeTo(200,1);
+        });
+        
+        google.maps.event.addDomListener(div,'mouseout',function(ev){ 
+          $(this).children('div').stop(true).fadeTo(200,0);
+        });
     	  
     	  
 

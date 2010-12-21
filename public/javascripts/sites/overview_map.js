@@ -4,7 +4,7 @@
   var overlay; 
   var map;
   var baseUrl="http://chart.apis.google.com/chart?chs=256x256";
-
+  var global_index = 10;
 
   $(document).ready( function() {
     var styleMapType = new google.maps.StyledMapType(stylez, styledMapOptions);    
@@ -43,8 +43,6 @@
         if (map.getZoom() > 12) map.setZoom(12);
     });
     
-
-    var total_count = 15;
 
     for (var i = 0; i<map_data.length; i++) {
       var marker_ = new IOMMarker(map_data[i],total_count, '/images/sites/maps/marker_image.png',map);

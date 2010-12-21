@@ -29,8 +29,6 @@ ActiveRecord::Schema.define(:version => 20101221125338) do
     t.string        "code"
     t.string        "wiki_url"
     t.text          "wiki_description"
-    t.string        "iso2_code"
-    t.string        "iso3_code"
     t.multi_polygon "the_geom",         :limit => nil, :srid => 4326
   end
 
@@ -255,7 +253,6 @@ ActiveRecord::Schema.define(:version => 20101221125338) do
     t.integer  "gadm_id"
     t.string   "wiki_url"
     t.text     "wiki_description"
-    t.string   "code"
     t.geometry "the_geom",         :limit => nil, :srid => 4326
   end
 
@@ -315,6 +312,7 @@ ActiveRecord::Schema.define(:version => 20101221125338) do
     t.boolean  "status",                                         :default => false
     t.float    "visits",                                         :default => 0.0
     t.float    "visits_last_week",                               :default => 0.0
+    t.geometry "geographic_context_geometry",     :limit => nil,                    :srid => 4326
     t.string   "aid_map_image_file_name"
     t.string   "aid_map_image_content_type"
     t.integer  "aid_map_image_file_size"
