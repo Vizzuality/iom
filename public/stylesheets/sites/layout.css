@@ -170,6 +170,7 @@ div#small_map {width:100%; height:280px; background:#99B3CA; border-bottom:2px s
 /* LEFT COLUMN - RIGHT BIG BLOCK */
 div.main_head {display:inline-block; vertical-align:top; zoom:1; *display:inline; width:100%;}
 div.inner_main_head {position:relative; width:942px; margin:0 auto;}
+div.main_head#projects div.left {background:none;}
 div.main_head div.left {width:248px; padding:30px 32px; background:url('/images/sites/common/mesh.png') repeat 0 0; display:inline-block; vertical-align:top; zoom:1; *display:inline;}
 div.main_head div.left h1 {width:100%; font:normal 25px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42; z-index:10;}
 div.main_head div.left h2 {width:100%; font:normal 15px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42; text-transform:uppercase;} 
@@ -359,8 +360,6 @@ div.statistics ul.statistics_list li a span {float:left; width:auto; height:18px
 div.statistics ul.statistics_list li a span:hover {text-decoration:none!important;}
 div.statistics ul.statistics_list li a:hover {text-decoration:none!important; cursor:pointer;}
 div.statistics ul.statistics_list li a:hover span {text-decoration:none!important;}
-
-
 
 
 /*PROJECTS*/

@@ -1,8 +1,32 @@
 
+  <div class="main_head projects">
+    <div class="inner_main_head">
+      <div class="left">
+        <div class="block">
+          <h3>A project by</h3>
+          <div class="logo">
+
+            <% if @project.primary_organization.logo.file? %>
+              <div class="logo_bkg">
+                  <a href="<%= organization_path(@project.primary_organization) %>"><%= image_tag(@project.primary_organization.logo.url) %></a>
+              </div>
+              <%= link_to(@project.primary_organization.name, organization_path(@project.primary_organization)) %>
+            <% else %>
+              <%= link_to(@project.primary_organization.name, organization_path(@project.primary_organization), :class=>'long') %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="right">
+        <h1>TEST RIGHT</h1>        
+      </div>
+    </div>
+  </div>
     <div id="small_map"></div>
 
     <div id="project_layout">
-      <div id="project">
+      <div id="project" class="projects">
 
         <div class="left"> <!--270px with shadow below-->
           <div class="block">
