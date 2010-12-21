@@ -115,7 +115,7 @@ class Organization < ActiveRecord::Base
   def projects_regions(site)
     result = ActiveRecord::Base.connection.execute("select region_id, count(region_id) as count from projects_regions where project_id IN (select id from projects where primary_organization_id=#{self.id}) AND project_id IN (#{site.projects_ids.join(',')}) group by region_id order by count desc")
     result.map do |row|
-      [Region.find(row['region_id']), row['count'].to_i]
+      [Region.find(row['region_id'], :select => Region.custom_fields), row['count'].to_i]
     end
   end
 

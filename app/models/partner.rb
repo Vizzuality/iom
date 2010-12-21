@@ -17,6 +17,7 @@
 class Partner < ActiveRecord::Base
 
   belongs_to :site
+
   has_attached_file :logo, :styles => {
                                       :small => {
                                         :geometry => "80x46#",

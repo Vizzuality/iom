@@ -124,7 +124,6 @@ class Site < ActiveRecord::Base
     status == true
   end
 
-
   def sector
     Sector.find(self.project_context_sector_id)
   rescue ActiveRecord::RecordNotFound
@@ -224,9 +223,9 @@ class Site < ActiveRecord::Base
     result
   end
 
-  #Return All the projects within the Site (already executed)
+  # Return All the projects within the Site (already executed)
   def projects(options = {})
-    projects_sql(options).all
+    projects_sql(options.merge(:limit => nil, :offset => nil)).all
   end
 
   def projects_ids_string
@@ -248,7 +247,7 @@ class Site < ActiveRecord::Base
   def projects_regions
     result = ActiveRecord::Base.connection.execute("select region_id, count(region_id) as count from projects_regions where project_id IN (select id from projects where project_id IN (#{projects_ids_string})) group by region_id order by count desc")
     result.map do |row|
-      [Region.find(row['region_id']), row['count'].to_i]
+      [Region.find(row['region_id'], :select => Region.custom_fields), row['count'].to_i]
     end
   end
 
@@ -349,9 +348,9 @@ class Site < ActiveRecord::Base
         when 'worlwide'
           Country.get_select_values
         when 'country'
-          Country.find(self.geographic_context_country_id)
+          Country.find(self.geographic_context_country_id, :select => Country.custom_fields)
         when 'region'
-          Region.find(self.geographic_context_region_id).country
+          Country.find_by_sql("select #{Country.custom_fields.join(',')} from countries where id = (select country_id from regions where id = #{self.geographic_context_region_id})")
         when 'bbox'
           # TODO
           []
@@ -368,9 +367,9 @@ class Site < ActiveRecord::Base
         when 'worlwide'
           Country.all
         when 'country'
-          Country.find(self.geographic_context_country_id)
+          Country.find(self.geographic_context_country_id, :select => Country.custom_fields)
         when 'region'
-          Region.find(self.geographic_context_region_id).country
+          Country.find_by_sql("select #{Country.custom_fields.join(',')} from countries where id = (select country_id from regions where id = #{self.geographic_context_region_id})")
         when 'bbox'
           # TODO
           []
@@ -387,9 +386,9 @@ class Site < ActiveRecord::Base
         when 'worlwide'
           Region.get_select_values
         when 'country'
-          Country.find(self.geographic_context_country_id)
+          Country.find(self.geographic_context_country_id, :select => Country.custom_fields)
         when 'region'
-          Region.find(self.geographic_context_region_id).country
+          Country.find_by_sql("select * from countries where id = (select country_id from regions where id = #{self.geographic_context_region_id})")
         when 'bbox'
           # TODO
           []

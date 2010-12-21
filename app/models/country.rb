@@ -21,6 +21,10 @@ class Country < ActiveRecord::Base
 
   before_save :update_wikipedia_description
 
+  def self.custom_fields
+    columns.map{ |c| c.name } - ['the_geom']
+  end
+
   # Array of arrays
   # [[cluster, count], [cluster, count]]
   def projects_clusters(site)
@@ -33,7 +37,7 @@ class Country < ActiveRecord::Base
   # Array of arrays
   # [[region, count], [region, count]]
   def regions_projects(site)
-    regions.map do |region|
+    regions.select(Region.custom_fields).map do |region|
       count = (region.projects & site.projects).size
       next if count == 0
       [region, count]
@@ -70,7 +74,7 @@ class Country < ActiveRecord::Base
 
   def near(limit = 5)
     Country.find_by_sql(<<-SQL
-      select countries.*,
+      select #{Country.custom_fields.join(',')},
             ST_Distance((select ST_Centroid(the_geom) from countries where id=#{self.id}), ST_Centroid(the_geom)) as dist
             from countries
             where id!=#{self.id}
