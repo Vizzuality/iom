@@ -106,31 +106,6 @@
     	});
     	return polygon;
     }
-    
-    
-    function createGeoJsonPolygon_nojquery(geojson){
-    	var coords = geojson.coordinates;
-    	var paths = [];
-    	for (i=0;i<coords.length;i++){
-    		for (j=0;j<coords[i].length;j++){
-    			var path=[];
-    			for (k=0;k<coords[i][j].length;k++){
-    				var ll = new google.maps.LatLng(coords[i][j][k][1],coords[i][j][k][0]);
-    				path.push(ll);
-    			}
-    			paths.push(path);
-    		}
-    	}
-    	var polygon = new google.maps.Polygon({
-    		paths: paths,
-    		strokeColor: area_stroke_color,
-    		strokeOpacity: 1,
-    		strokeWeight: 2,
-    		fillColor: area_fill_color,
-    		fillOpacity: 0.25
-    	});
-    	return polygon;
-    }
 
 
 
