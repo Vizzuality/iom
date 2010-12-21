@@ -217,6 +217,30 @@ class Site < ActiveRecord::Base
     projects_sql(options).all
   end
 
+  def projects_ids_string
+    # projects_ids seems to return a -1 id. #BUG?
+    (self.projects_ids - [-1]).join(',')
+  end
+
+  # Array of arrays
+  # [[cluster, count], [cluster, count]]
+  def projects_clusters
+    result = ActiveRecord::Base.connection.execute("select cluster_id, count(cluster_id) as count from clusters_projects where project_id IN (select id from projects where project_id IN (#{projects_ids_string})) group by cluster_id order by count desc")
+    result.map do |row|
+      [Cluster.find(row['cluster_id']), row['count'].to_i]
+    end
+  end
+
+  # Array of arrays
+  # [[region, count], [region, count]]
+  def projects_regions
+    result = ActiveRecord::Base.connection.execute("select region_id, count(region_id) as count from projects_regions where project_id IN (select id from projects where project_id IN (#{projects_ids_string})) group by region_id order by count desc")
+    result.map do |row|
+      [Region.find(row['region_id']), row['count'].to_i]
+    end
+  end
+
+
   #Tells me if a project is included in a site or not
   def is_project_included?(project_id,options={})
     result = projects_sql(options).where("projects.id=?",project_id).present?

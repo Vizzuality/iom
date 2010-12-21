@@ -40,37 +40,23 @@
           <div class="block statistics">
             <h3>PROJECTS BY CLUSTER</h3>
             <ul class="statistics_list">
-                <!-- TODO: We need projects_clusters by site         -->
-                <li>
-                  <div id="tooltip">
-                    <span class="body_tooltip">
-                      <label>Camp Coordination and Management</label>
-                    </span>
-                    <span class="bottom_tooltip"></span>
-                  </div>
-                  <a class="plus"><span class="aller" style="width:20px">20</span></a>
-                </li>
-                <li>
-                  <div id="tooltip">
-                    <span class="body_tooltip">
-                      <label>Camp Coordination and Management</label>
-                    </span>
-                    <span class="bottom_tooltip"></span>
-                  </div>
-                  <a class="plus"><span class="aller" style="width:20px">20</span></a>
-                </li>
-                <li>
-                  <div id="tooltip">
-                    <span class="body_tooltip">
-                      <label>Camp Coordination and Management</label>
-                    </span>
-                    <span class="bottom_tooltip"></span>
-                  </div>
-
-                  <a class="plus"><span class="aller" style="width:20px">20</span></a>
-                </li>
+                <% @site.projects_clusters.each do |cluster, count| %>
+                  <li>
+                    <div id="tooltip">
+                      <span class="body_tooltip">
+                        <label><%= cluster.name %></label>
+                      </span>
+                      <span class="bottom_tooltip"></span>
+                    </div>
+                    <a class="plus"><span class="aller" style="width:<%= cluster_width(count) %>px"><%= count %></span></a>
+                  </li>
+                <% end %>
             </ul>
+          </div>
 
+          <div class="block statistics">
+            <h3>PROJECTS BY LOCATION</h3>
+            <%= raw(projects_by_location(@site.projects_regions)) %>
           </div>
 
           <div class="block margin">
