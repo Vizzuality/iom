@@ -388,7 +388,7 @@ class Site < ActiveRecord::Base
         when 'country'
           Country.find(self.geographic_context_country_id, :select => Country.custom_fields)
         when 'region'
-          Country.find_by_sql("select * from countries where id = (select country_id from regions where id = #{self.geographic_context_region_id})")
+          Country.find_by_sql("select #{Country.custom_fields.join(',')} from countries where id = (select country_id from regions where id = #{self.geographic_context_region_id})")
         when 'bbox'
           # TODO
           []
