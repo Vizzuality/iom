@@ -1,3 +1,6 @@
+  var map;
+  var bounds = new google.maps.LatLngBounds();
+
 
     $(document).ready( function() {
       $('#site_show_blog').click(function(){
@@ -49,138 +52,9 @@
           $('#site_theme_id').val($(this).attr('rel'));
         }
       });
-      
-      //  HOME_MAP_COMBO
-      $('div#home_map_combo').children('span.combo_large').click(function(ev){
-        ev.stopPropagation();
-        ev.preventDefault();
 
-        hideAllMapCombos();
-        
-        if ($(this).attr('id') == 'hidden'){
-          $('div#home_map_combo').find('ul.list_combo_content').css('display','inline');
-          $(this).addClass('displayed');
-          $(this).attr('id','visible');
-        }else{
-          $('div#home_map_combo').find('ul.list_combo_content').css('display','none');
-          $(this).attr('id','hidden');
-          $(this).removeClass('displayed');
-        }
 
-        $(document).click(function(event) {
-          if (!$(event.target).closest('ul.list_combo_content').length) {
-            $('div#home_map_combo').find('ul.list_combo_content').css('display','none');
-            $('div#home_map_combo').children('span.combo_large').attr('id','hidden');
-            $('div#home_map_combo').children('span.combo_large').removeClass('displayed');
-          };
-        });
-      });
-      
-      
-      //  project_map_combo
-      $('div#project_map_combo').children('span.combo_large').click(function(ev){
-        ev.stopPropagation();
-        ev.preventDefault();
-        
-        hideAllMapCombos();
-        
-        if ($(this).attr('id') == 'hidden'){
-          $('div#project_map_combo').find('ul.list_combo_content').css('display','inline');
-          $(this).addClass('displayed');
-          $(this).attr('id','visible');
-        }else{
-          $('div#project_map_combo').find('ul.list_combo_content').css('display','none');
-          $(this).attr('id','hidden');
-          $(this).removeClass('displayed');
-        }
-
-        $(document).click(function(event) {
-          if (!$(event.target).closest('ul.list_combo_content').length) {
-            $('div#project_map_combo').find('ul.list_combo_content').css('display','none');
-            $('div#project_map_combo').children('span.combo_large').attr('id','hidden');
-            $('div#project_map_combo').children('span.combo_large').removeClass('displayed');
-          };
-        });
-      });
-      
-       //  region_map_combo
-        $('div#region_map_combo').children('span.combo_large').click(function(ev){
-          ev.stopPropagation();
-          ev.preventDefault();
-          
-          hideAllMapCombos();
-          
-          if ($(this).attr('id') == 'hidden'){
-            $('div#region_map_combo').find('ul.list_combo_content').css('display','inline');
-            $(this).addClass('displayed');
-            $(this).attr('id','visible');
-          }else{
-            $('div#region_map_combo').find('ul.list_combo_content').css('display','none');
-            $(this).attr('id','hidden');
-            $(this).removeClass('displayed');
-          }
-
-          $(document).click(function(event) {
-            if (!$(event.target).closest('ul.list_combo_content').length) {
-              $('div#region_map_combo').find('ul.list_combo_content').css('display','none');
-              $('div#region_map_combo').children('span.combo_large').attr('id','hidden');
-              $('div#region_map_combo').children('span.combo_large').removeClass('displayed');
-            };
-          });
-        });
-
-        //  cluster_map
-        $('div#cluster_map').children('span.combo_large').click(function(ev){
-          ev.stopPropagation();
-          ev.preventDefault();
-        
-          hideAllMapCombos();
-          
-          if ($(this).attr('id') == 'hidden'){
-            $('div#cluster_map').find('ul.list_combo_content').css('display','inline');
-            $(this).addClass('displayed');
-            $(this).attr('id','visible');
-          }else{
-            $('div#cluster_map').find('ul.list_combo_content').css('display','none');
-            $(this).attr('id','hidden');
-            $(this).removeClass('displayed');
-          }
-
-          $(document).click(function(event) {
-            if (!$(event.target).closest('ul.list_combo_content').length) {
-              $('div#cluster_map').find('ul.list_combo_content').css('display','none');
-              $('div#cluster_map').children('span.combo_large').attr('id','hidden');
-              $('div#cluster_map').children('span.combo_large').removeClass('displayed');
-            };
-          });
-        });
-        
-         //  ngo_map_combo
-            $('div#ngo_map_combo').children('span.combo_large').click(function(ev){
-              ev.stopPropagation();
-              ev.preventDefault();
-              
-              hideAllMapCombos();
-              
-              if ($(this).attr('id') == 'hidden'){
-                $('div#ngo_map_combo').find('ul.list_combo_content').css('display','inline');
-                $(this).addClass('displayed');
-                $(this).attr('id','visible');
-              }else{
-                $('div#ngo_map_combo').find('ul.list_combo_content').css('display','none');
-                $(this).attr('id','hidden');
-                $(this).removeClass('displayed');
-              }
-
-              $(document).click(function(event) {
-                if (!$(event.target).closest('ul.list_combo_content').length) {
-                  $('div#ngo_map_combo').find('ul.list_combo_content').css('display','none');
-                  $('div#ngo_map_combo').children('span.combo_large').attr('id','hidden');
-                  $('div#ngo_map_combo').children('span.combo_large').removeClass('displayed');
-                };
-              });
-            });        
-        // CHANGE EACH LIST
+      // CHANGE EACH LIST
       $('ul.list_combo_content').find('li.element').click(function(ev){
         var id = $(this).attr('id');
         var name = $(this).children('p.project_name').text();
@@ -191,7 +65,7 @@
         $('div.list_combo').children('span.combo_large').attr('id','hidden');
         $('div.list_combo').children('span.combo_large').removeClass('displayed');
       });
-      
+
       if ($('a.combo').length > 0){
           $('a.combo').click(function(ev){
              if (!$(this).hasClass('clicked')){
@@ -201,11 +75,51 @@
              $('input#site_project_classification').val($(this).attr('id'));
           });
       }
-      
+
+
+
+      //Map customization
+      if ($('input[name="site[overview_map_bbox_miny]"]').attr('value')!='') {
+        bounds.extend(new google.maps.LatLng($('input[name="site[overview_map_bbox_miny]"]').attr('value'),$('input[name="site[overview_map_bbox_minx]"]').attr('value')));
+        bounds.extend(new google.maps.LatLng($('input[name="site[overview_map_bbox_maxy]"]').attr('value'),$('input[name="site[overview_map_bbox_maxx]"]').attr('value')));
+      } else {
+        bounds.extend(new google.maps.LatLng(0,0));
+      }
+
+     var myOptions = {
+        scrollwheel: false,
+        mapTypeControl: false,
+        streetViewControl: false,
+        mapTypeId: google.maps.MapTypeId.TERRAIN,
+        disableDefaultUI: true,
+        zoom: 1,
+        center: bounds.getCenter()
+      }
+      map = new google.maps.Map(document.getElementById("map"), myOptions);
+      map.fitBounds(bounds);
+      google.maps.event.addListener(map, "bounds_changed", function(ev) {
+          var map_bounds = map.getBounds();
+
+          $('input[name="site[overview_map_bbox_maxy]"]').attr('value',map_bounds.getNorthEast().lat());
+          $('input[name="site[overview_map_bbox_maxx]"]').attr('value',map_bounds.getNorthEast().lng());
+
+          $('input[name="site[overview_map_bbox_miny]"]').attr('value',map_bounds.getSouthWest().lat());
+          $('input[name="site[overview_map_bbox_minx]"]').attr('value',map_bounds.getSouthWest().lng());
+      });
+
     });
-    
+
     function hideAllMapCombos(){
          $('div.list_combo').find('ul.list_combo_content').css('display','none');
          $('div.list_combo').children('span.combo_large').attr('id','hidden');
          $('div.list_combo').children('span.combo_large').removeClass('displayed');
+    }
+    
+    
+    function zoomIn() {
+      map.setZoom(map.getZoom() + 1);
+    }
+
+    function zoomOut() {
+      map.setZoom(map.getZoom() - 1);
     }

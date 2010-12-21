@@ -3,9 +3,47 @@
 User.create :email => 'admin@example.com', :password => 'admin', :password_confirmation => 'admin'
 Settings.create
 
-Theme.create :name => 'Garnet', :css_file => '/stylesheets/themes/garnet.css', :thumbnail_path => '/images/backoffice/sites/theme_1.png'
-Theme.create :name => 'Pink',   :css_file => '/stylesheets/themes/pink.css',   :thumbnail_path => '/images/backoffice/sites/theme_2.png'
-Theme.create :name => 'Blue',   :css_file => '/stylesheets/themes/blue.css',   :thumbnail_path => '/images/backoffice/sites/theme_3.png'
+Theme.create :name => 'Garnet',
+             :css_file => '/stylesheets/themes/garnet.css',
+             :thumbnail_path => '/images/backoffice/sites/theme_1.png',
+             :data => {
+               :overview_map_chco => nil,
+               :overview_map_chf => nil,
+               :overview_map_marker_source => nil,
+               :georegion_map_chco => nil,
+               :georegion_map_chf => nil,
+               :georegion_map_marker_source => nil,
+               :georegion_map_stroke_color => nil,
+               :georegion_map_fill_color => nil
+             }
+
+Theme.create :name => 'Pink',
+             :css_file => '/stylesheets/themes/pink.css',
+             :thumbnail_path => '/images/backoffice/sites/theme_2.png',
+             :data => {
+               :overview_map_chco => nil,
+               :overview_map_chf => nil,
+               :overview_map_marker_source => nil,
+               :georegion_map_chco => nil,
+               :georegion_map_chf => nil,
+               :georegion_map_marker_source => nil,
+               :georegion_map_stroke_color => nil,
+               :georegion_map_fill_color => nil
+             }
+
+Theme.create :name => 'Blue',
+             :css_file => '/stylesheets/themes/blue.css',
+             :thumbnail_path => '/images/backoffice/sites/theme_3.png',
+             :data => {
+               :overview_map_chco => nil,
+               :overview_map_chf => nil,
+               :overview_map_marker_source => nil,
+               :georegion_map_chco => nil,
+               :georegion_map_chf => nil,
+               :georegion_map_marker_source => nil,
+               :georegion_map_stroke_color => nil,
+               :georegion_map_fill_color => nil
+             }
 
 # Env seeds (development)
 
@@ -48,6 +86,7 @@ Tag.create :name => 'earthquake'
 #  127.0.0.1       iom-haiti.ipq.co
 site = Site.create :name => 'Haiti Aid Map', :url => 'iom-haiti.ipq.co', :status => true,
                    :theme => Theme.find_by_name('Garnet')
+site.geographic_context_country= Coutry.find_by_name('Haiti')
 
 
 site.pages.find_by_title("About").body=

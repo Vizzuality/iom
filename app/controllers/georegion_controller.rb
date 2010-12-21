@@ -30,6 +30,10 @@ class GeoregionController < ApplicationController
     @georegion_map_stroke_color = "#FFFFFF"    
     @georegion_map_fill_color = "#FFFFFF"    
     
+    #Generate the code Ids for the cloropeth background of the map
+    
+    
+    
     @projects = @area.projects.site(@site).where("id IN (#{@site.projects_ids.join(',')})").paginate :per_page => 10, :page => params[:page], :order => 'created_at DESC'    
 
     respond_to do |format|

@@ -111,5 +111,26 @@ HTML
     "#{site.url}#{port}"
   end
 
+  def projects_by_location(projects)
+    counts    = projects.map{|region| region.last}
+    values    = counts.slice!(0, 3) + [counts.inject( nil ) { |sum,x| sum ? sum + x : x }]
+    max_value = values.sort.last
+    lis       = []
+
+    projects[0..2].each_with_index do |project_region, index|
+      region = project_region.first
+      count  = project_region.last
+      lis << (content_tag :li,  :class => "pos#{index}" do
+        "#{link_to truncate(region.name, :length => 15, :omission => '...'), '#'} - #{count}"
+      end)
+    end
+
+    lis << content_tag(:li, "Others - #{values.last}", :class => 'pos3') if projects.count > 3
+
+    ul    = content_tag :ul, raw(lis), :class => 'chart'
+    chart = image_tag "http://chart.apis.google.com/chart?cht=p&chs=120x120&chd=t:#{values.join(',')}&chds=0,#{max_value}&chco=333333|565656|727272|ADADAD|EFEFEF|FFFFFF&chf=bg,s,FFFFFF00", :class => 'pie_chart'
+    [ul, chart]
+  end
+
 end
 
