@@ -3,7 +3,7 @@
 # Table name: clusters
 #
 #  id   :integer         not null, primary key
-#  name :string(255)     
+#  name :string(255)
 #
 
 class Cluster < ActiveRecord::Base
@@ -28,6 +28,32 @@ class Cluster < ActiveRecord::Base
   # to get only id and name
   def self.get_select_values
     scoped.select(:id,:name).order("name ASC")
+  end
+
+  def css_class
+    if (name.include? 'Camp')
+       'camp'
+    elsif (name.include? 'Early')
+       'early_recovery'
+    elsif (name.include? 'Education')
+       'education'
+    elsif (name.include? 'Emergency')
+       'emergency'
+    elsif (name.include? 'Food Security')
+       'food'
+    elsif (name.include? 'Health')
+       'health'
+    elsif (name.include? 'Logistics')
+       'logistics'
+    elsif (name.include? 'Nutrition')
+       'nutrition'
+    elsif (name.include? 'Protection')
+       'protection'
+    elsif (name.include? 'Shelter')
+       'shelter'
+    elsif (name.include? 'Water')
+       'water'
+    end
   end
 
 end

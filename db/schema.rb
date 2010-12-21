@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(:version => 20101221151517) do
     t.multi_polygon "the_geom",         :limit => nil, :srid => 4326
     t.string        "iso2_code"
     t.string        "iso3_code"
+    t.multi_polygon "the_geom",         :limit => nil, :srid => 4326
   end
 
   add_index "countries", ["the_geom"], :name => "index_countries_on_the_geom", :spatial => true
@@ -257,6 +258,7 @@ ActiveRecord::Schema.define(:version => 20101221151517) do
     t.text     "wiki_description"
     t.geometry "the_geom",         :limit => nil, :srid => 4326
     t.string   "code"
+    t.geometry "the_geom",         :limit => nil, :srid => 4326
   end
 
   add_index "regions", ["country_id"], :name => "index_regions_on_country_id"
@@ -315,7 +317,6 @@ ActiveRecord::Schema.define(:version => 20101221151517) do
     t.boolean  "status",                                         :default => false
     t.float    "visits",                                         :default => 0.0
     t.float    "visits_last_week",                               :default => 0.0
-    t.geometry "geographic_context_geometry",     :limit => nil,                    :srid => 4326
     t.string   "aid_map_image_file_name"
     t.string   "aid_map_image_content_type"
     t.integer  "aid_map_image_file_size"
@@ -324,6 +325,7 @@ ActiveRecord::Schema.define(:version => 20101221151517) do
     t.float    "overview_map_bbox_minx"
     t.float    "overview_map_bbox_maxy"
     t.float    "overview_map_bbox_maxx"
+    t.geometry "geographic_context_geometry",     :limit => nil,                    :srid => 4326
   end
 
   add_index "sites", ["geographic_context_geometry"], :name => "index_sites_on_geographic_context_geometry", :spatial => true

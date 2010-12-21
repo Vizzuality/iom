@@ -1,19 +1,14 @@
 
 
-    function IOMMarker(info, total, image, map) {
+    function IOMMarker(info, diameter, image, map) {
       this.latlng_ = new google.maps.LatLng(parseFloat(info.lat),parseFloat(info.lon));
       this.url = info.url;
       this.count = info.count;
       this.image = image;
     	this.map_ = map;
     	this.name = info.name;
-    
-    	
-    	this.diameter = (60*parseInt(this.count))/total;
-    	
-    	if (this.diameter<25) {
-    	  this.diameter = 20;
-    	}
+    	this.diameter = diameter;
+
 
       this.offsetVertical_ = -(this.diameter/2);
       this.offsetHorizontal_ = -(this.diameter/2);
@@ -48,14 +43,10 @@
         marker_image.src = this.image;
         div.appendChild(marker_image);
     		
-    	var fontSize="9";
-    	if(this.diameter>40) {
-    	    fontSize="15";
-    	}
-    	if(this.diameter>30 && this.diameter<= 40) {
-    	    fontSize="13";
-    	} 
+
+
         //Marker address
+        if (this.diameter<24) {
           var count = document.createElement('p');
           count.style.position = "absolute";
           count.style.top = "50%";
@@ -63,11 +54,12 @@
           count.style.height = "15px";
           count.style.margin ="-9px 0 0 0px";
           count.style.textAlign = "center";
-          count.style.font = "normal "+fontSize+"px Arial";
+          count.style.font = "normal 15px Arial";
           count.style.color = "white";
           $(count).css('text-shadow',"0 1px #204E2D");
           $(count).text(this.count);
           div.appendChild(count);
+        }
 
 
 
@@ -77,7 +69,7 @@
         hidden_div.style.margin = "0px";
         hidden_div.style.padding = "0px";
         hidden_div.style.display = "none";
-        hidden_div.style.bottom = this.diameter +"px";
+        hidden_div.style.bottom = this.diameter + 4 +"px";
         hidden_div.style.left = (this.diameter/2)-(175/2)+"px";
         hidden_div.style.width = '175px';
 
@@ -89,10 +81,10 @@
         top_hidden.style.width = '149px';
         top_hidden.style.height = 'auto';
         top_hidden.style.background = "url('/images/sites/common/tooltips/body_tooltip.png') no-repeat center top";
-        top_hidden.style.font = "normal 13px 'PT Sans Bold'";
+        top_hidden.style.font = "normal 17px 'PT Sans Bold'";
         top_hidden.style.textAlign = "center";
         top_hidden.style.color = "white";
-        $(top_hidden).text(this.name);
+        $(top_hidden).html(this.name+'<br/><strong></strong>');
         hidden_div.appendChild(top_hidden);
         
         var bottom_hidden = document.createElement('div');
@@ -101,7 +93,7 @@
         bottom_hidden.style.float = "left";
         bottom_hidden.style.background = "url('/images/sites/common/tooltips/bottom_tooltip.png') no-repeat 0 0";
         bottom_hidden.style.width = '175px';
-        bottom_hidden.style.height = '16px';
+        bottom_hidden.style.height = '15px';
         hidden_div.appendChild(bottom_hidden);
 
         div.appendChild(hidden_div);
@@ -128,11 +120,11 @@
     	  
         google.maps.event.addDomListener(div,'mouseover',function(ev){ 
           $(this).css('zIndex',global_index++);
-          $(this).children('div').stop(true).fadeTo(200,1);
+          $(this).children('div').show();
         });
         
         google.maps.event.addDomListener(div,'mouseout',function(ev){ 
-          $(this).children('div').stop(true).fadeTo(200,0);
+          $(this).children('div').hide();
         });
     	  
     	  

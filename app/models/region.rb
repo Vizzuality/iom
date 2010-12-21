@@ -3,14 +3,14 @@
 # Table name: regions
 #
 #  id               :integer         not null, primary key
-#  name             :string(255)     
-#  level            :integer         
-#  country_id       :integer         
-#  parent_region_id :integer         
-#  gadm_id          :integer         
-#  wiki_url         :string(255)     
-#  wiki_description :text            
-#  the_geom         :string          
+#  name             :string(255)
+#  level            :integer
+#  country_id       :integer
+#  parent_region_id :integer
+#  gadm_id          :integer
+#  wiki_url         :string(255)
+#  wiki_description :text
+#  the_geom         :string
 #
 
 class Region < ActiveRecord::Base
@@ -78,5 +78,19 @@ class Region < ActiveRecord::Base
     end
   end
   private :update_wikipedia_description
+
+  def near(limit = 5)
+    Region.find_by_sql(<<-SQL
+      select regions.*,
+            ST_Distance((select ST_Centroid(the_geom) from regions where id=#{self.id}), ST_Centroid(the_geom)) as dist
+            from regions
+            where id!=#{self.id}
+            and the_geom is not null
+            order by dist
+            limit #{limit}
+SQL
+    )
+  end
+
 
 end
