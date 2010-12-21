@@ -60,12 +60,12 @@ class Site < ActiveRecord::Base
   has_attached_file :logo, :styles => { :small => "60x60#" }
   has_attached_file :aid_map_image, :styles => {
                                       :small => {
-                                        :geometry => "203×115#",
+                                        :geometry => "203x115#",
                                         :quality => 80,
                                         :format => 'jpg'
                                       },
                                       :huge => {
-                                        :geometry => "927×524#",
+                                        :geometry => "927x524#",
                                         :quality => 80,
                                         :format => 'jpg'
                                       }
