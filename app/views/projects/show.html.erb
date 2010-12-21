@@ -35,14 +35,14 @@
             <div class="timeline"><span></span><p class="months_left"><%= pluralize(@project.months_left, 'month', 'months') %> left</p></div>
             <p class="first_date"><%= @project.start_date.strftime("%d/%m/%Y") %></p><p class="second_date"><%= @project.end_date.strftime("%d/%m/%Y") %></p>
           </div>
-          
+
           <% unless @project.donations.nil? || @project.donations.sum(:amount).eql?(0.0) %>
           <div class="block">
             <h3>Project funding</h3>
             <p class="budget"><%= number_with_delimiter(@project.donations.sum(:amount)) %></p>
           </div>
           <%end%>
-          
+
           <% unless !@project.estimated_people_reached? && !@project.target?%>
           <div class="block">
             <% if @project.estimated_people_reached? %>
@@ -78,7 +78,7 @@
                 <p><%= link_to(@project.contact_email, "mailto:#{@project.contact_email}") %></p>
               <%end%>
           </div>
-          <%end%>          
+          <%end%>
           <div class="block last">
             <h3>EXPORT DATA</h3>
             <div class="import_data">
@@ -140,36 +140,33 @@
 
           <div class="block margin">
 
-            <!-- TODO : IMPLEMENT -->
+            <% related_projects = @project.related(@site) %>
+            <% unless related_projects.empty? %>
             <h3>RELATED PROJECTS</h3>
             <ul>
-              <li>
+              <% related_projects.each_with_index do |project,i| %>
+              <li <%= raw('class="last"') if i > 0 %>>
                 <div class="image">
                   <img src="/images/sites/projects/default_img_project.png" title="related projects?" />
                 </div>
                 <div class="info">
-                  <h4><a href="#">Blanket Rice Distribution</a></h4>
-                  <p>by Action Against Hunger</p>
-                  <p class="sub">in Khumrah</p>
+                  <h4><%= link_to(truncate(project.name, :length => 40), project_path(project)) %></h4>
+                  <p>by <%= truncate(project.primary_organization.name, :length => 20) %></p>
+                  <% if project.countries.any? %>
+                    <p class="sub">in <%= project.countries.first.name %></p>
+                  <% elsif project.regions.any? %>
+                    <p class="sub">in <%= project.regions.first.name %></p>
+                  <% end %>
                 </div>
               </li>
-              <li class="last">
-                <div class="image">
-
-                  <img src="/images/sites/projects/default_img_project.png" title="related projects?" />
-                </div>
-                <div class="info">
-                  <h4><a href="#">Blanket Rice Distribution</a></h4>
-                  <p>by Action Against Hunger</p>
-                  <p class="sub">in Khumrah</p>
-                </div>
-              </li>
+              <% end %>
             </ul>
+            <% end %>
           </div>
           <!-- block margin -->
         </div>
       </div>
-    
+
 
       <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
       <script src="/javascripts/plugins/galleria.js" type="text/javascript" charset="utf-8"></script>

@@ -3,37 +3,35 @@
 # Table name: projects
 #
 #  id                        :integer         not null, primary key
-#  name                      :string(2000)    
-#  description               :text            
-#  primary_organization_id   :integer         
-#  implementing_organization :text            
-#  partner_organizations     :text            
-#  cross_cutting_issues      :text            
-#  start_date                :date            
-#  end_date                  :date            
-#  budget                    :integer         
-#  target                    :text            
-#  estimated_people_reached  :integer         
-#  contact_person            :string(255)     
-#  contact_email             :string(255)     
-#  contact_phone_number      :string(255)     
-#  site_specific_information :text            
-#  created_at                :datetime        
-#  updated_at                :datetime        
-#  activities                :text            
-#  intervention_id           :string(255)     
-#  additional_information    :text            
-#  awardee_type              :string(255)     
-#  date_provided             :date            
-#  date_updated              :date            
-#  contact_position          :string(255)     
-#  website                   :string(255)     
+#  name                      :string(2000)
+#  description               :text
+#  primary_organization_id   :integer
+#  implementing_organization :text
+#  partner_organizations     :text
+#  cross_cutting_issues      :text
+#  start_date                :date
+#  end_date                  :date
+#  budget                    :integer
+#  target                    :text
+#  estimated_people_reached  :integer
+#  contact_person            :string(255)
+#  contact_email             :string(255)
+#  contact_phone_number      :string(255)
+#  site_specific_information :text
+#  created_at                :datetime
+#  updated_at                :datetime
+#  activities                :text
+#  intervention_id           :string(255)
+#  additional_information    :text
+#  awardee_type              :string(255)
+#  date_provided             :date
+#  date_updated              :date
+#  contact_position          :string(255)
+#  website                   :string(255)
 #  the_geom                  :string          not null
 #
 
 class Project < ActiveRecord::Base
-
-  # acts_as_geom :the_geom => :multi_point
 
   belongs_to :primary_organization, :foreign_key => :primary_organization_id, :class_name => 'Organization'
   has_and_belongs_to_many :clusters
@@ -122,6 +120,22 @@ class Project < ActiveRecord::Base
 
   def to_kml
     the_geom.as_kml if the_geom.present?
+  end
+
+  def related(site, limit = 2)
+    return [] unless the_geom?
+    Project.find_by_sql(<<-SQL
+      select projects.*,
+            ST_Distance((select ST_Centroid(the_geom) from projects where id=#{self.id}), ST_Centroid(the_geom)) as dist
+            from projects
+            where id!=#{self.id}
+            and id in (#{site.projects_ids.join(',')})
+            and the_geom is not null
+            order by dist
+            limit #{limit}
+SQL
+    )
+
   end
 
   private
