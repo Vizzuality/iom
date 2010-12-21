@@ -37,21 +37,21 @@ class SitesController < ApplicationController
     result=ActiveRecord::Base.connection.execute(sql)
     @map_data=result.to_json
     @map_data_total_count=23323
-    @overview_map_bbox = [{:lat => 18.93205126204314,:lon => -72.6361083984375}, {:lat => 18.7,:lon => -72.636108398437}]
+    @overview_map_bbox = [{:lat => 17.78605726800591,:lon => -76.94549560546851}, {:lat => 20.262938421364236,:lon => -69.66705322265601}]
     @overview_map_chco = "F7F7F7,8BC856,336600"
     @overview_map_chf = "bg,s,2F84A3"
     @overview_map_marker_source = ""
     
     areas= []
     data = []
-    @map_data_total_count=0
+    @map_data_max_count=0
     result.each do |c|
       areas << c["code"]
       data  << c["count"]
-      @map_data_total_count=@map_data_total_count+c["count"].to_i
+      @map_data_max_count=@map_data_max_count+c["count"].to_i
     end
     @chld = areas.join("|")
-    @chd  = data.join(",")
+    @chd  = "t:"+data.join(",")
     
 
     @projects = @site.projects.paginate :per_page => 10, :page => params[:page], :order => 'created_at DESC'
