@@ -114,3 +114,12 @@
          $('div.list_combo').children('span.combo_large').attr('id','hidden');
          $('div.list_combo').children('span.combo_large').removeClass('displayed');
     }
+    
+    
+    function zoomIn() {
+      map.setZoom(map.getZoom() + 1);
+    }
+
+    function zoomOut() {
+      map.setZoom(map.getZoom() - 1);
+    }

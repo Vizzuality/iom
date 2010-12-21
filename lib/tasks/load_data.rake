@@ -17,8 +17,8 @@ namespace :iom do
       system("shp2pgsql -d -s 4326 -gthe_geom -i -WLATIN1 #{Rails.root}/db/data/countries/TM_WORLD_BORDERS-0.3.shp public.tmp_countries | psql -Upostgres -diom_#{RAILS_ENV}")
       
       #Insert the country and get the value
-      sql="INSERT INTO countries(\"name\",code,the_geom)
-      SELECT name,iso3,the_geom from tmp_countries"
+      sql="INSERT INTO countries(\"name\",code,the_geom,iso2_code,iso3_code)
+      SELECT name,iso3,the_geom,iso2,iso3 from tmp_countries"
       DB.execute sql
       
       DB.execute 'DROP TABLE tmp_countries'
@@ -66,6 +66,19 @@ namespace :iom do
       DB.execute 'DROP TABLE tmp_haiti_adm1'
       DB.execute 'DROP TABLE tmp_haiti_adm2'
       DB.execute 'DROP TABLE tmp_haiti_adm3'
+      
+      
+      #Temporary matching for Google Map Charts
+      DB.execute "UPDATE regions set code='HT-GR' WHERE name like 'Grand%' and level=1"
+      DB.execute "UPDATE regions set code='HT-AR' WHERE name like '%Artibonite' and level=1"
+      DB.execute "UPDATE regions set code='HT-NI' WHERE name='Nippes' and level=1"
+      DB.execute "UPDATE regions set code='HT-ND' WHERE name='Nord' and level=1"
+      DB.execute "UPDATE regions set code='HT-NE' WHERE name='Nord-Est' and level=1"
+      DB.execute "UPDATE regions set code='HT-NO' WHERE name='Nord-Ouest' and level=1"
+      DB.execute "UPDATE regions set code='HT-OU' WHERE name='Ouest' and level=1"
+      DB.execute "UPDATE regions set code='HT-SD' WHERE name='Sud' and level=1"
+      DB.execute "UPDATE regions set code='HT-SE' WHERE name='Sud-Est' and level=1"
+      DB.execute "UPDATE regions set code='HT-CE' WHERE name='Centre' and level=1"
       
       
       
