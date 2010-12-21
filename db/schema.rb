@@ -321,6 +321,7 @@ ActiveRecord::Schema.define(:version => 20101221125338) do
     t.float    "overview_map_bbox_minx"
     t.float    "overview_map_bbox_maxy"
     t.float    "overview_map_bbox_maxx"
+    t.geometry "geographic_context_geometry",     :limit => nil,                    :srid => 4326
   end
 
   add_index "sites", ["geographic_context_geometry"], :name => "index_sites_on_geographic_context_geometry", :spatial => true
@@ -338,6 +339,21 @@ ActiveRecord::Schema.define(:version => 20101221125338) do
     t.string "css_file"
     t.string "thumbnail_path"
     t.text   "data"
+  end
+
+  create_table "tmp_countries", :primary_key => "gid", :force => true do |t|
+    t.string        "fips",      :limit => 2
+    t.string        "iso2",      :limit => 2
+    t.string        "iso3",      :limit => 3
+    t.integer       "un"
+    t.string        "name",      :limit => 50
+    t.integer       "area"
+    t.integer       "pop2005"
+    t.integer       "region"
+    t.integer       "subregion"
+    t.float         "lon"
+    t.float         "lat"
+    t.multi_polygon "the_geom",  :limit => nil, :srid => 4326
   end
 
   create_table "tmp_haiti_adm0", :primary_key => "gid", :force => true do |t|
