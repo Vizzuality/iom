@@ -19,8 +19,8 @@ Iom::Application.routes.draw do
   resources :organizations, :only => [:index, :show]
 
   #countries and regions work through the same controller and view
-  match 'countries/:id' => 'georegion#show'
-  match 'regions/:id' => 'georegion#show'
+  match 'countries/:id' => 'georegion#show', :as => 'country'
+  match 'regions/:id'   => 'georegion#show', :as => 'region'
 
   # pages
   match '/p/:id' => 'pages#show', :as => :page
