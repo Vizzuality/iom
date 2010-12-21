@@ -58,7 +58,18 @@ class Site < ActiveRecord::Base
   belongs_to :geographic_context_region, :class_name => 'Region'
 
   has_attached_file :logo, :styles => { :small => "60x60#" }
-  has_attached_file :aid_map_image, :styles => { :small => "203×115>", :huge => "927×524>" },
+  has_attached_file :aid_map_image, :styles => {
+                                      :small => {
+                                        :geometry => "203×115#",
+                                        :quality => 80,
+                                        :format => 'jpg'
+                                      },
+                                      :huge => {
+                                        :geometry => "927×524#",
+                                        :quality => 80,
+                                        :format => 'jpg'
+                                      }
+                                    },
                                     :url => "/system/:attachment/:id/:style.:extension",
                                     :default_url => "/images/no_aid_map_image_huge.png"
 
