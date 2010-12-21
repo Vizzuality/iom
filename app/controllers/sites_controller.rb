@@ -38,8 +38,8 @@ class SitesController < ApplicationController
     @map_data=result.to_json
     @map_data_total_count=23323
     @overview_map_bbox = [{:lat => 17.78605726800591,:lon => -76.94549560546851}, {:lat => 20.262938421364236,:lon => -69.66705322265601}]
-    @overview_map_chco = "F7F7F7,8BC856,336600"
-    @overview_map_chf = "bg,s,2F84A3"
+    @overview_map_chco = @site.theme.data[:overview_map_chco]
+    @overview_map_chf = @site.theme.data[:overview_map_chf]
     @overview_map_marker_source = ""
     
     areas= []
@@ -48,7 +48,9 @@ class SitesController < ApplicationController
     result.each do |c|
       areas << c["code"]
       data  << c["count"]
-      @map_data_max_count=@map_data_max_count+c["count"].to_i
+      if(@map_data_max_count < c["count"].to_i)
+        @map_data_max_count=c["count"].to_i
+      end
     end
     @chld = areas.join("|")
     @chd  = "t:"+data.join(",")
