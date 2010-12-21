@@ -17,7 +17,7 @@ module ProjectsHelper
 
   def countries_to_sentence(countries)
     if countries.count == 1
-      "in #{link_to countries.first.name, "/country/#{countries.first.id}", :title => countries.first.name}"
+      "in #{link_to countries.first.name, country_path(countries.first), :title => countries.first.name}"
     else
       "in #{pluralize(countries.count, 'different countries')}"
     end
