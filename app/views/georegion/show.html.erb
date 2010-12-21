@@ -58,11 +58,11 @@
           <% end %>
         </div>
 
-        <% unless @area.near_countries.empty? %>
+        <% unless @area.near(5).empty? %>
         <div class="block margin">
           <h3>PROJECTS IN OTHER REGIONS</h3>
           <ul>
-            <% @area.near_countries.each do |country| %>
+            <% @area.near(5).each do |country| %>
             <li><%= link_to(country.name, country_path(country)) %> - <%= pluralize(country.projects.site(@site).count, 'project', 'projects') %></li>
             <% end %>
           </ul>

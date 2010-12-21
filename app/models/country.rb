@@ -68,7 +68,7 @@ class Country < ActiveRecord::Base
   end
   private :update_wikipedia_description
 
-  def near_countries
+  def near(limit = 5)
     Country.find_by_sql(<<-SQL
       select countries.*,
             ST_Distance((select ST_Centroid(the_geom) from countries where id=#{self.id}), ST_Centroid(the_geom)) as dist
@@ -76,7 +76,7 @@ class Country < ActiveRecord::Base
             where id!=#{self.id}
             and the_geom is not null
             order by dist
-            limit 5
+            limit #{limit}
 SQL
     )
   end
