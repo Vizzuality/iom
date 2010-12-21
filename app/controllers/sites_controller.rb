@@ -34,11 +34,12 @@ class SitesController < ApplicationController
           group by c.id,c.name,lon,lat"
     end
 
-    #Attach the theme style and so on
-    @map_features_json ={
-      :_data => ActiveRecord::Base.connection.execute(sql),
-      :theme => "#CF6054"
-    }.to_json
+    @map_data=ActiveRecord::Base.connection.execute(sql).to_json
+    @map_data_total_count=23323
+    @overview_map_bbox = [{:lat => 18.93205126204314,:lon => -72.6361083984375}, {:lat => 18.7,:lon => -72.636108398437}]
+    @overview_map_chco = "F7F7F7,8BC856,336600"
+    @overview_map_chf = "bg,s,2F84A3"
+    @overview_map_marker_source = ""
 
     @projects = @site.projects.paginate :per_page => 10, :page => params[:page], :order => 'created_at DESC'
 

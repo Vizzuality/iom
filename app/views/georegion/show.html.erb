@@ -81,17 +81,15 @@
   <script src="/javascripts/sites/location.js" type="text/javascript" charset="utf-8"></script>
   
   <script type="text/javascript">
-    var bbox = [{"lat":18.93205126204314, "lon":-72.6361083984375},{"lat":18.7, "lon":-72.6361083984375}];
-    var chco = "F7F7F7,8BC856,336600";
-    var chf = "bg,s,2F84A3";
+    var chco = "<%=@georegion_map_chco%>";
+    var chf = "<%=@georegion_map_chf%>";
     var chld = "HT-AR|HT-CE|HT-GR|HT-NI|HT-ND|HT-NE|HT-OU|HT-SD|HT-SE";
     var chd = "t:0,10,20,30,40,50,60,70,80";
-    var marker_source = '';
-    //var map_data = <%=raw(@map_features_json)%>;
-    var map_data = [{"id":1, "lat":18.93205126204314, "lon":-72.6361083984375, "count":10, "url":"/organizations/10", "name":"Madrid"},{"id":3, "lat":18.7, "lon":-72.6361083984375, "count":5, "url":"/region/10", "name":"Haiti"}];
-    var area_geojson = [];
-    var area_stroke_color = '#000000';
-    var area_fill_color = '#000000';
+    var marker_source = "<%=@georegion_map_marker_source%>";
+    var map_data = [{"id":<%=@map_data["id"]%>, "lat":<%=@map_data["lat"]%>, "lon":<%=@map_data["lon"]%>, "count":<%=@map_data["count"]%>, "name":"<%=@map_data["name"]%>"}];
+    var area_geojson = <%=raw(@map_data["geojson"])%>;
+    var area_stroke_color = "<%=@georegion_map_stroke_color%>";
+    var area_fill_color = "<%=@georegion_map_fill_color%>";
   </script>
   
   <script src="/javascripts/sites/mercatorProjection.js" type="text/javascript" charset="utf-8"></script>
