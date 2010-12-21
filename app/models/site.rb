@@ -240,6 +240,21 @@ class Site < ActiveRecord::Base
     end
   end
 
+  # Array of arrays
+  # [[organization, count], [organization, count]]
+  def projects_organizations
+    result = ActiveRecord::Base.connection.execute(<<-EOF
+      select organizations.id as organization_id, count(organizations.id) as count
+      from organizations
+      INNER JOIN projects ON projects.primary_organization_id = organizations.id
+      WHERE projects.id IN (#{projects_ids_string})
+      GROUP BY organizations.id ORDER BY count DESC
+    EOF
+    )
+    result.map do |row|
+      [Organization.find(row['organization_id']), row['count'].to_i]
+    end
+  end
 
   #Tells me if a project is included in a site or not
   def is_project_included?(project_id,options={})
