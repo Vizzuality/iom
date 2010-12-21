@@ -44,8 +44,22 @@
     });
     
 
+    var range = max_count/map_data.length;
+    var diameter = 0;
+    
     for (var i = 0; i<map_data.length; i++) {
-      var marker_ = new IOMMarker(map_data[i],total_count, '/images/sites/maps/marker_image.png',map);
+      if (map_data[i].count <range) {
+        diameter = 12;
+      } else if ((map_data[i].count>=(range)) && (map_data[i].count<(range*2))) {
+        diamter = 24;
+      } else if ((map_data[i].count>=(range*2)) && (map_data[i].count<(range*3))) {
+        diameter = 36;
+      } else if ((map_data[i].count>=(range*3)) && (map_data[i].count<(range*4))) {
+        diameter = 48;
+      } else {
+        diameter = 60;
+      }
+      var marker_ = new IOMMarker(map_data[i],diameter, '/images/sites/maps/marker_image.png',map);
     }
     
     for (var j = 0; j<bbox.length; j++) {
@@ -53,6 +67,8 @@
     }
 
     map.fitBounds(bounds);
+    setTimeout(function(){zoomIn()},200);
+    
     
     
     //Positionate zoom controls
