@@ -299,7 +299,7 @@ div#pages div.float_left div.results_list ul {background:white;}
 div#pages div.float_left div.results_list ul li {width:100%; height:auto; padding:0 0 25px;}
 div#pages div.float_left div.results_list ul li.odd {background:white; padding:0;}
 div#pages div.float_left div.results_list ul li.even {background:#F5F5F5; padding:0;}
-div#pages div.float_left div.results_list ul li p.no_results {padding:38px 32px 0 32px; font:normal 18px "PT Sans Bold"; color:#666666;}
+div#pages div.float_left div.results_list ul li p.no_results {padding:38px 32px; font:normal 18px "PT Sans Bold"; color:#666666;}
 div#pages div.float_left div.results_list ul li div.project_name {float:left; width:439px; height:100px; border-right:1px solid #E5E5E5; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#pages div.float_left div.results_list ul li div.project_name h3 {padding-bottom:0; color:none;}
 div#pages div.float_left div.results_list ul li div.project_name h3 a {padding:0; font:normal 17px "PT Sans Bold"; text-transform:none; border:none; background:none; color:#C45A4B;} 
@@ -356,8 +356,8 @@ div.statistics ul.statistics_list li a.plus {float:left; width:auto; padding:0 0
 div.statistics ul.statistics_list li a.drop {float:left; width:auto; padding:0 0 0 20px; background:url('/images/sites/organization/left_drop.png') no-repeat left 0;  height:20px;}
 div.statistics ul.statistics_list li a span {float:left; width:auto; height:18px; padding:2px 15px 0 0; background:url('/images/sites/organization/right_statistics.png')
  no-repeat right 0; font:normal 13px "Aller"; color:#FFFFFF; text-align:right;}
-div.statistics ul.statistics_list li a span:hover {text-decoration:none;}
-div.statistics ul.statistics_list li a:hover {text-decoration:none; cursor:pointer;}
+div.statistics ul.statistics_list li a span:hover {text-decoration:none!important;}
+div.statistics ul.statistics_list li a:hover {text-decoration:none!important; cursor:pointer;}
 div.statistics ul.statistics_list li a:hover span {text-decoration:none!important;}
 
 
@@ -372,8 +372,8 @@ div#project div.left div.block.last {border:none; padding:0 0 0 30px;}
 div#project div.left div.block h3 {width:100%; font:normal 13px "PT Sans Bold"; color:#999999; text-shadow:0 1px white; text-transform:uppercase;}
 div#project div.left div.block h3.margin {padding:20px 0 0 0;}
 div#project div.left div.block div.logo {width:100%; padding:7px 0 15px;}
-div#project div.left div.block div.logo div.logo_bkg {position:relative; width:86px; height:52px; background:url('/images/sites/projects/logo_bkg.png') no-repeat 0 0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline; overflow:hidden;}
-div#project div.left div.block div.logo img {position:absolute; top:15px; left:10px; max-width:70px; width:auto; height:auto;}
+div#project div.left div.block div.logo div.logo_bkg {float:left; position:relative; width:86px; height:52px; background:url('/images/sites/projects/logo_bkg.png') no-repeat 0 0; vertical-align:top; overflow:hidden;}
+div#project div.left div.block div.logo img {position:absolute; top:3px; left:3px; width:80px; height:46px;}
 div#project div.left div.block div.logo a {width:130px; padding:10px 0 0 5px; font:normal 13px Arial; color:#CE5D4C; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;} /* TODO: color*/
 div#project div.left div.block div.logo a.long {width:100%; padding:0;}
 div#project div.left div.block div.logo a:hover {text-decoration:underline;}

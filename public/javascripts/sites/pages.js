@@ -12,6 +12,22 @@
         }
         
         
+        //remove text from input
+        $('input#q').focusin(function(ev){
+          var value = $(this).attr('value');
+          if (value == "Search...") {
+            old_value = value;
+            $(this).attr('value','');
+          }
+        });
+        $('input#q').focusout(function(ev){
+          var value = $(this).attr('value');
+          if (value == "") {
+            $(this).attr('value',old_value);
+          }
+        });
+        
+        
         // $('ul.filter_list').each(function(element){
         //   if ($(element).children('li').size()>10) {
         //     var compress_list = $(element);

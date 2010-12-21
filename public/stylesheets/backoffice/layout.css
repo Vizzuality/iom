@@ -72,6 +72,7 @@ div.block div.med div.right ul li.selected div.bottom_selected ul li {float:left
 div.block div.med div.right ul li.selected div.bottom_selected ul li a {float:left; width:auto!important; margin:0; padding:0;}
 div.block div.med div.right ul li.selected span {background-position:right -14px;}
 div.block div.med div.right ul li:hover a {color:#333333;}
+div.block div.med div.right ul li:hover a:focus {outline:none;}
 div.block div.med div.right ul li:hover p {background-position:0 -14px;}
 div.block div.med div.right ul li:hover span {background-position:right -14px;}
 div.block div.med div.right ul li.disabled:hover a {color:#cccccc; cursor:default;}
