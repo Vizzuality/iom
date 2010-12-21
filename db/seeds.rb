@@ -135,6 +135,7 @@ site.pages.find_by_title("Analysis").body = <<-EOF
                    <p>Source: Ministere de la Sante Publique et de la Population (MSPP) - November 16, 2010</p>
               EOF
 
+site.save!
 
 #  127.0.0.1       iom-food.ipq.co
 site = Site.create :name => 'Food Security', :url => 'iom-food.ipq.co', :status => true,
@@ -143,5 +144,8 @@ site = Site.create :name => 'Food Security', :url => 'iom-food.ipq.co', :status 
 site.overview_map_bbox_miny=-65;
 site.overview_map_bbox_minx=-180;
 site.overview_map_bbox_maxy=70;
-site.overview_map_bbox_maxx=180;                   
+site.overview_map_bbox_maxx=180;     
+
+
+site.save!              
 

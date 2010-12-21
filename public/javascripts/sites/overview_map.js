@@ -1,6 +1,6 @@
 
   var map;
-  var bounds = new google.maps.LatLngBounds();
+  var bounds;
   var overlay; 
   var map;
   var baseUrl="http://chart.apis.google.com/chart?chs=256x256";
@@ -24,6 +24,11 @@
         isPng: true
     };
     var mapChartType = new google.maps.ImageMapType(mapChartOptions);      
+    
+    bounds =new google.maps.LatLngBounds(
+      new google.maps.LatLng(bbox[0].lat,bbox[0].lon),
+      new google.maps.LatLng(bbox[1].lat,bbox[1].lon)
+      ); 
 
     var myOptions = {
       scrollwheel: false,
@@ -31,8 +36,8 @@
       streetViewControl: false,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       disableDefaultUI: true,
-      zoom: 8,
-      center: new google.maps.LatLng(18.93205126204314, -72.6361083984375)
+      zoom: 2,
+      center: bounds.getCenter()
     }
     map = new google.maps.Map(document.getElementById("map"), myOptions);
     map.overlayMapTypes.insertAt(2, mapChartType);
@@ -59,12 +64,10 @@
       } else {
         diameter = 60;
       }
-      var marker_ = new IOMMarker(map_data[i],diameter, '/images/sites/maps/marker_image.png',map);
+      var marker_ = new IOMMarker(map_data[i],diameter, marker_source,map);
     }
     
-    for (var j = 0; j<bbox.length; j++) {
-      bounds.extend(new google.maps.LatLng(bbox[j].lat,bbox[j].lon));
-    }
+
 
     map.fitBounds(bounds);
     setTimeout(function(){zoomIn()},200);
