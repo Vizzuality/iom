@@ -46,7 +46,7 @@
 
 
         //Marker address
-        if (this.diameter<24) {
+        if (this.diameter>34) {
           var count = document.createElement('p');
           count.style.position = "absolute";
           count.style.top = "50%";
@@ -54,9 +54,14 @@
           count.style.height = "15px";
           count.style.margin ="-9px 0 0 0px";
           count.style.textAlign = "center";
-          count.style.font = "normal 15px Arial";
+          if (this.diameter==34) {
+            count.style.font = "normal 11px Arial";
+          } else if (this.diameter==42) {
+            count.style.font = "normal 15px Arial";
+          } else {
+            count.style.font = "normal 18px Arial";
+          }
           count.style.color = "white";
-          $(count).css('text-shadow',"0 1px #204E2D");
           $(count).text(this.count);
           div.appendChild(count);
         }
@@ -84,7 +89,7 @@
         top_hidden.style.font = "normal 17px 'PT Sans Bold'";
         top_hidden.style.textAlign = "center";
         top_hidden.style.color = "white";
-        $(top_hidden).html(this.name+'<br/><strong></strong>');
+        $(top_hidden).html(this.name+'<br/><strong style="font:normal 13px Arial; color:#999999">'+this.count+' projects</strong>');
         hidden_div.appendChild(top_hidden);
         
         var bottom_hidden = document.createElement('div');
@@ -133,7 +138,7 @@
         panes.floatPane.appendChild(div);
 
         
-        if ($(this.div_).children('p').width()>this.width_) {
+        if (($(this.div_).children('p').width()+6)>this.width_) {
           $(this.div_).children('p').css('display','none');
         } else {
           $(this.div_).children('p').css('margin-left',-($(this.div_).children('p').width()/2) + "px");

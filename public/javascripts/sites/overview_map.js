@@ -49,22 +49,30 @@
     });
     
 
-    var range = max_count/map_data.length;
+    var range = max_count/6;
     var diameter = 0;
     
     for (var i = 0; i<map_data.length; i++) {
       if (map_data[i].count <range) {
-        diameter = 12;
+        diameter = 16;
+        marker_image = marker_source+'marker_1.png';
       } else if ((map_data[i].count>=(range)) && (map_data[i].count<(range*2))) {
-        diamter = 24;
+        diamter = 20;
+        marker_image = marker_source+'marker_2.png';
       } else if ((map_data[i].count>=(range*2)) && (map_data[i].count<(range*3))) {
-        diameter = 36;
+        diameter = 26;
+        marker_image = marker_source+'marker_3.png';
       } else if ((map_data[i].count>=(range*3)) && (map_data[i].count<(range*4))) {
-        diameter = 48;
+        diameter = 34;
+        marker_image = marker_source+'marker_4.png';
+      } else if ((map_data[i].count>=(range*4)) && (map_data[i].count<(range*5))) {
+        diameter = 42;
+        marker_image = marker_source+'marker_5.png';
       } else {
-        diameter = 60;
+        diameter = 58;
+        marker_image = marker_source+'marker_6.png';
       }
-      var marker_ = new IOMMarker(map_data[i],diameter, marker_source,map);
+      var marker_ = new IOMMarker(map_data[i],diameter, marker_image,map);
     }
     
 
@@ -85,7 +93,7 @@
   
   function positionZoomControls() {
     var column_position = $('#layout').offset().left;
-    var map_position = $('#map').position().top + 40;
+    var map_position = $('#map').position().top + 25;
     
     $('#zoomIn').css('left',column_position+'px');
     $('#zoomIn').css('top',map_position+'px');

@@ -15,8 +15,6 @@
 
 class Region < ActiveRecord::Base
 
-  #acts_as_geom :the_geom => :multi_polygon
-
   belongs_to :country
   belongs_to :region, :foreign_key => :parent_region_id, :class_name => 'Region'
 
@@ -27,6 +25,10 @@ class Region < ActiveRecord::Base
   end
 
   before_save :update_wikipedia_description
+
+  def self.custom_fields
+    columns.map{ |c| c.name } - ['the_geom']
+  end
 
   # Array of arrays
   # [[cluster, count], [cluster, count]]
@@ -81,7 +83,7 @@ class Region < ActiveRecord::Base
 
   def near(limit = 5)
     Region.find_by_sql(<<-SQL
-      select regions.*,
+      select #{Region.custom_fields.join(',')},
             ST_Distance((select ST_Centroid(the_geom) from regions where id=#{self.id}), ST_Centroid(the_geom)) as dist
             from regions
             where id!=#{self.id}
@@ -91,6 +93,5 @@ class Region < ActiveRecord::Base
 SQL
     )
   end
-
 
 end

@@ -1,7 +1,7 @@
 class Admin::RegionsController < ApplicationController
 
   def index
-    @regions = Region.where(:country_id => params[:country_id]).order("name ASC")
+    @regions = Region.where(:country_id => params[:country_id]).order("name ASC").select(Region.custom_fields)
     respond_to do |format|
       format.js do
         render :update do |page|

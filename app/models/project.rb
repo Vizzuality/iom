@@ -45,8 +45,6 @@ class Project < ActiveRecord::Base
   has_many :donors, :through => :donations
   has_many :cached_sites, :class_name => 'Site', :finder_sql => 'select sites.* from sites, projects_sites where projects_sites.project_id = #{id} and projects_sites.site_id = sites.id'
 
-  before_validation :clean_html
-
   validates_presence_of :primary_organization_id
 
   # validate :dates_consistency, :presence_of_clusters_and_sectors
@@ -57,6 +55,10 @@ class Project < ActiveRecord::Base
   after_destroy :remove_cached_sites
 
   attr_accessor :sectors_ids, :clusters_ids
+
+   def before_save
+     self.the_geom ||= MultiPoint.from_points([Point.from_x_y(0, -77)])
+   end
 
   def sectors_ids=(value)
     value.each do |sector_id|
@@ -98,12 +100,6 @@ class Project < ActiveRecord::Base
     tag.update_tag_counter
   end
 
-  # TODO: remove this when reverse geocoding
-  #  - reverse geocoding
-  def before_save
-    self.the_geom = MultiPoint.from_points([Point.from_x_y(0, -77)])
-  end
-
   def finished?
     if (!end_date.nil?)
       end_date < Date.today
@@ -139,12 +135,6 @@ SQL
   end
 
   private
-
-    def clean_html
-      %W{ name description implementing_organization partner_organizations cross_cutting_issues target contact_person contact_email contact_phone_number }.each do |att|
-        eval("self.#{att} = Sanitize.clean(self.#{att}.gsub(/\r/,'')) unless self.#{att}.blank?")
-      end
-    end
 
     def dates_consistency
       return true if end_date.nil? || start_date.nil?

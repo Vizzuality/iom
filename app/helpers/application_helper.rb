@@ -114,7 +114,7 @@ HTML
   def projects_by_location(projects)
     counts    = projects.map{|region| region.last}
     values    = counts.slice!(0, 3) + [counts.inject( nil ) { |sum,x| sum ? sum + x : x }]
-    max_value = values.sort.last
+    max_value = values.compact.sort.last
     lis       = []
 
     projects[0..2].each_with_index do |project_region, index|
