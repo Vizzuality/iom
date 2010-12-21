@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101221122740) do
+ActiveRecord::Schema.define(:version => 20101221125338) do
 
   create_table "clusters", :force => true do |t|
     t.string "name"
@@ -320,6 +320,10 @@ ActiveRecord::Schema.define(:version => 20101221122740) do
     t.integer  "aid_map_image_file_size"
     t.datetime "aid_map_image_updated_at"
     t.geometry "geographic_context_geometry",     :limit => nil,                    :srid => 4326
+    t.float    "overview_map_bbox_miny"
+    t.float    "overview_map_bbox_minx"
+    t.float    "overview_map_bbox_maxy"
+    t.float    "overview_map_bbox_maxx"
   end
 
   add_index "sites", ["geographic_context_geometry"], :name => "index_sites_on_geographic_context_geometry", :spatial => true
