@@ -40,6 +40,10 @@ class SitesController < ApplicationController
     @overview_map_chco = "F7F7F7,8BC856,336600"
     @overview_map_chf = "bg,s,2F84A3"
     @overview_map_marker_source = ""
+    
+    @chld,@chd = @site.get_iso_code_regions
+    
+    
 
 
     @projects = @site.projects.paginate :per_page => 10, :page => params[:page], :order => 'created_at DESC'

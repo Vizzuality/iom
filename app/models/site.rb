@@ -3,41 +3,45 @@
 # Table name: sites
 #
 #  id                              :integer         not null, primary key
-#  name                            :string(255)
-#  short_description               :text
-#  long_description                :text
-#  contact_email                   :string(255)
-#  contact_person                  :string(255)
-#  url                             :string(255)
-#  permalink                       :string(255)
-#  google_analytics_id             :string(255)
-#  logo_file_name                  :string(255)
-#  logo_content_type               :string(255)
-#  logo_file_size                  :integer
-#  logo_updated_at                 :datetime
-#  theme_id                        :integer
-#  blog_url                        :string(255)
-#  word_for_clusters               :string(255)
-#  word_for_regions                :string(255)
-#  show_global_donations_raises    :boolean
+#  name                            :string(255)     
+#  short_description               :text            
+#  long_description                :text            
+#  contact_email                   :string(255)     
+#  contact_person                  :string(255)     
+#  url                             :string(255)     
+#  permalink                       :string(255)     
+#  google_analytics_id             :string(255)     
+#  logo_file_name                  :string(255)     
+#  logo_content_type               :string(255)     
+#  logo_file_size                  :integer         
+#  logo_updated_at                 :datetime        
+#  theme_id                        :integer         
+#  blog_url                        :string(255)     
+#  word_for_clusters               :string(255)     
+#  word_for_regions                :string(255)     
+#  show_global_donations_raises    :boolean         
 #  project_classification          :integer         default(0)
-#  geographic_context_country_id   :integer
-#  geographic_context_region_id    :integer
-#  project_context_cluster_id      :integer
-#  project_context_sector_id       :integer
-#  project_context_organization_id :integer
-#  project_context_tags            :string(255)
-#  created_at                      :datetime
-#  updated_at                      :datetime
-#  project_context_tags_ids        :string(255)
-#  status                          :boolean
+#  geographic_context_country_id   :integer         
+#  geographic_context_region_id    :integer         
+#  project_context_cluster_id      :integer         
+#  project_context_sector_id       :integer         
+#  project_context_organization_id :integer         
+#  project_context_tags            :string(255)     
+#  created_at                      :datetime        
+#  updated_at                      :datetime        
+#  project_context_tags_ids        :string(255)     
+#  status                          :boolean         
 #  visits                          :float           default(0.0)
 #  visits_last_week                :float           default(0.0)
-#  geographic_context_geometry     :string
-#  aid_map_image_file_name         :string(255)
-#  aid_map_image_content_type      :string(255)
-#  aid_map_image_file_size         :integer
-#  aid_map_image_updated_at        :datetime
+#  aid_map_image_file_name         :string(255)     
+#  aid_map_image_content_type      :string(255)     
+#  aid_map_image_file_size         :integer         
+#  aid_map_image_updated_at        :datetime        
+#  geographic_context_geometry     :string          
+#  overview_map_bbox_miny          :float           
+#  overview_map_bbox_minx          :float           
+#  overview_map_bbox_maxy          :float           
+#  overview_map_bbox_maxx          :float           
 #
 
 class Site < ActiveRecord::Base
@@ -240,6 +244,21 @@ class Site < ActiveRecord::Base
     end
   end
 
+  # Array of arrays
+  # [[organization, count], [organization, count]]
+  def projects_organizations
+    result = ActiveRecord::Base.connection.execute(<<-EOF
+      select organizations.id as organization_id, count(organizations.id) as count
+      from organizations
+      INNER JOIN projects ON projects.primary_organization_id = organizations.id
+      WHERE projects.id IN (#{projects_ids_string})
+      GROUP BY organizations.id ORDER BY count DESC
+    EOF
+    )
+    result.map do |row|
+      [Organization.find(row['organization_id']), row['count'].to_i]
+    end
+  end
 
   #Tells me if a project is included in a site or not
   def is_project_included?(project_id,options={})
@@ -391,6 +410,28 @@ class Site < ActiveRecord::Base
       Region.all
     end
   end
+  
+  def get_iso_code_regions
+    if(self.geographic_context_country_id)
+      #The site is a for a specific country,get the regions
+      return ["",""]
+    else
+      #The site does not define a country,therefore get all countries
+      sql="select c.iso2_code, count(ps.*) as value
+      from (projects_sites as ps inner join countries_projects as cp on cp.project_id=ps.project_id and site_id=#{self.id}) 
+      inner join countries as c on cp.country_id=c.id
+      group by c.iso2_code"
+      
+      country_codes= []
+      country_values = []
+      ActiveRecord::Base.connection.execute(sql).each  do |c|
+        country_codes << c["iso2_code"]
+        country_values << c["value"]
+      end
+      return [country_codes.join("|"),country_values.join(",")]
+
+    end
+  end
 
   private
 
@@ -455,7 +496,7 @@ class Site < ActiveRecord::Base
     end
 
     def remove_cached_projects
-      ActiveRecord::Base.connection.execute("DELETE FROM projects_sites WHERE site_id = '#{self.id}'")
+      ActiveRecord::Base.connection.execute("DELETE FROM projects_sites WHERE site_id = #{self.id}")
     end
 
     def sanitize_image_name
@@ -463,4 +504,5 @@ class Site < ActiveRecord::Base
       extension = File.extname(aid_map_image_file_name)
       self.aid_map_image_file_name = "#{aid_map_image_file_name.sanitize}#{extension}"
     end
+  
 end
