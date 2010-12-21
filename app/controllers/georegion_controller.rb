@@ -17,21 +17,32 @@ class GeoregionController < ApplicationController
       @area_parent = @area.country.try(:name)
       sql="select r.id,count(ps.project_id) as count,r.name,x(ST_Centroid(r.the_geom)) as lon,y(ST_Centroid(r.the_geom)) as lat,
         ST_AsGeoJSON(r.the_geom,6) as geojson
-        x(ST_PointN(ST_ExteriorRing(ST_Envelope(r.the_geom)),2)) as maxx
         from (projects_regions as pr inner join projects_sites as ps on pr.project_id=ps.project_id and site_id=#{@site.id}) 
         inner join regions as r on pr.region_id=r.id and r.id=#{params[:id].gsub(/\\/, '\&\&').gsub(/'/, "''")}
         group by r.id,r.name,lon,lat,geojson"
     end
     
-    @map_data = ActiveRecord::Base.connection.execute(sql).first
-    @georegion_map_chco = "F7F7F7,8BC856,336600"
-    @georegion_map_chf = "bg,s,2F84A3"
-    @georegion_map_marker_source = ""
-    @georegion_map_stroke_color = "#FFFFFF"    
-    @georegion_map_fill_color = "#FFFFFF"    
+    result=ActiveRecord::Base.connection.execute(sql)
+    @map_data = result.first
+    @georegion_map_chco = @site.theme.data[:georegion_map_chco]
+    @georegion_map_chf = @site.theme.data[:georegion_map_chf]
+    @georegion_map_marker_source = @site.theme.data[:georegion_map_marker_source]
+    @georegion_map_stroke_color = @site.theme.data[:georegion_map_stroke_color]
+    @georegion_map_fill_color = @site.theme.data[:georegion_map_fill_color]
     
-    #Generate the code Ids for the cloropeth background of the map
     
+    areas= []
+    data = []
+    @map_data_max_count=0
+    result.each do |c|
+      areas << c["code"]
+      data  << c["count"]
+      if(@map_data_max_count < c["count"].to_i)
+        @map_data_max_count=c["count"].to_i
+      end
+    end
+    @chld = areas.join("|")
+    @chd  = "t:"+data.join(",")
     
     
     @projects = @area.projects.site(@site).where("id IN (#{@site.projects_ids.join(',')})").paginate :per_page => 10, :page => params[:page], :order => 'created_at DESC'    
