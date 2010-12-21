@@ -53,7 +53,7 @@
         }
       });
 
-            
+
       // CHANGE EACH LIST
       $('ul.list_combo_content').find('li.element').click(function(ev){
         var id = $(this).attr('id');
@@ -65,7 +65,7 @@
         $('div.list_combo').children('span.combo_large').attr('id','hidden');
         $('div.list_combo').children('span.combo_large').removeClass('displayed');
       });
-      
+
       if ($('a.combo').length > 0){
           $('a.combo').click(function(ev){
              if (!$(this).hasClass('clicked')){
@@ -75,17 +75,17 @@
              $('input#site_project_classification').val($(this).attr('id'));
           });
       }
-      
-      
-      
+
+
+
       //Map customization
-      if ($('input[name="minx"]').attr('value')!='') {
-        bounds.extend(new google.maps.LatLng($('input[name="miny"]').attr('value'),$('input[name="minx"]').attr('value')));
-        bounds.extend(new google.maps.LatLng($('input[name="maxy"]').attr('value'),$('input[name="maxx"]').attr('value')));
+      if ($('input[name="site[overview_map_bbox_miny]"]').attr('value')!='') {
+        bounds.extend(new google.maps.LatLng($('input[name="site[overview_map_bbox_miny]"]').attr('value'),$('input[name="site[overview_map_bbox_minx]"]').attr('value')));
+        bounds.extend(new google.maps.LatLng($('input[name="site[overview_map_bbox_maxy]"]').attr('value'),$('input[name="site[overview_map_bbox_maxx]"]').attr('value')));
       } else {
         bounds.extend(new google.maps.LatLng(0,0));
       }
-      
+
      var myOptions = {
         scrollwheel: false,
         mapTypeControl: false,
@@ -96,19 +96,19 @@
         center: bounds.getCenter()
       }
       map = new google.maps.Map(document.getElementById("map"), myOptions);
-
+      map.fitBounds(bounds);
       google.maps.event.addListener(map, "bounds_changed", function(ev) {
           var map_bounds = map.getBounds();
 
-          $('input[name="maxy"]').attr('value',map_bounds.getNorthEast().lat());
-          $('input[name="maxx"]').attr('value',map_bounds.getNorthEast().lng());
-          
-          $('input[name="miny"]').attr('value',map_bounds.getSouthWest().lat());
-          $('input[name="minx"]').attr('value',map_bounds.getSouthWest().lng());
+          $('input[name="site[overview_map_bbox_maxy]"]').attr('value',map_bounds.getNorthEast().lat());
+          $('input[name="site[overview_map_bbox_maxx]"]').attr('value',map_bounds.getNorthEast().lng());
+
+          $('input[name="site[overview_map_bbox_miny]"]').attr('value',map_bounds.getSouthWest().lat());
+          $('input[name="site[overview_map_bbox_minx]"]').attr('value',map_bounds.getSouthWest().lng());
       });
-      
+
     });
-    
+
     function hideAllMapCombos(){
          $('div.list_combo').find('ul.list_combo_content').css('display','none');
          $('div.list_combo').children('span.combo_large').attr('id','hidden');
