@@ -17,10 +17,10 @@ Iom::Application.routes.draw do
   resources :donors,        :only => [:index, :show]
   resources :projects,      :only => [:index, :show]
   resources :organizations, :only => [:index, :show]
-  
+
   #countries and regions work through the same controller and view
-  match 'countries/:id' => 'georegion#show'
-  match 'regions/:id' => 'georegion#show'
+  match 'countries/:id' => 'georegion#show', :as => 'country'
+  match 'regions/:id'   => 'georegion#show', :as => 'region'
 
   # pages
   match '/p/:id' => 'pages#show', :as => :page
@@ -46,7 +46,7 @@ Iom::Application.routes.draw do
       get 'specific_information/:site_id', :on => :member, :action => 'specific_information', :as => 'donor_site_specific_information'
     end
     resources :projects do
-      resources :media_resources, :only => [:index, :create, :destroy]
+      resources :media_resources, :only => [:index, :create, :update, :destroy]
       resources :resources, :only => [:index, :create, :destroy, :update]
       get 'donations', :on => :member
       resources :donations, :only => [:create, :destroy]
