@@ -59,8 +59,8 @@ class SitesController < ApplicationController
     @chd  = "t:"+data.join(",")
 
 
-    @projects = @site.projects.paginate :per_page => 10, :page => params[:page], :order => 'created_at DESC'
-
+    # @projects = @site.projects.paginate :per_page => 10, :page => params[:page], :order => 'created_at DESC'
+    @projects = Project.custom_find(@site, :per_page => 10, :page => params[:page], :order => 'created_at DESC')
     respond_to do |format|
       format.html { render :site_home }
       format.js do
