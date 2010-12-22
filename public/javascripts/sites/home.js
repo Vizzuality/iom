@@ -7,15 +7,15 @@
         $('div.inner_main_head div.float_head').height($('div.inner_main_head div.right').height() + 40);
       }
       
-            
+      //If right part is bigger than float left
+      resizeColumn();
+    });
+    
+    
+    function resizeColumn() {
       if ($('div#left_column div.float_left').height() < $('div#left_column div.right').height()) {
-        var offset =  $('div#left_column div.right').height() - $('div#left_column div.float_left').height() + 120;
-        if ($('div.block.green').is(':visible')) {
-          $('div#left_column div.float_left').append('<div class="block"></div>');
-          $('div#left_column div.float_left div.block:last').height(offset);
-        } else {
-          $('div#left_column div.float_left div.block:last').height(offset);
-        }
+        var offset =  $('div#left_column div.right').height() - $('div#left_column div.float_left').height() + 100;
+        $('div#left_column div.float_left div.block:last').height(offset);
       }
       
       if ($('div#left_column div.float_left').height() > $('div#left_column div.left').height()) {
@@ -34,5 +34,4 @@
         var dif = $('div#left_column div.outer_float').height() - ($('div#left_column div.float_left').height());
         $('div#most_active_orgs').height($('div#most_active_orgs').height() + dif + 41);
       }
-
-    });
+    }

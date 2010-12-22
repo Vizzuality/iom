@@ -52,8 +52,9 @@
         if (map.getZoom() > 12) map.setZoom(12);
     });
     
-
-    var range = max_count/3;
+    if (map_type == "overview_map") {
+      var range = max_count/3;
+    }
     var diameter = 0;
     
     for (var i = 0; i<map_data.length; i++) {
@@ -70,8 +71,10 @@
           diameter = 58;
           image_source = "/images/themes/"+ theme + '/marker_6.png';
         }
+      } else {
+        diameter = 72;
+        image_source = "/images/themes/"+ theme + '/project_marker.png';
       }
-
       var marker_ = new IOMMarker(map_data[i],diameter, image_source,map);
     }
     
@@ -99,7 +102,7 @@
       var column_position = $('#layout').offset().left;
       var map_position = $('#map').position().top + 25;
     } else {
-      var column_position = $('#project_layout').offset().left;
+      var column_position = $('#mesh').offset().left + 5;
       var map_position = $('#small_map').position().top + 25;
     }
     
@@ -121,10 +124,3 @@
   function zoomOut() {
     map.setZoom(map.getZoom() - 1);
   }
-  
-  
-  
-  
-  
-  
-  

@@ -30,11 +30,9 @@
               </li>
             </ul>
           <% end %>
-          <div class="view_more"  id="search_view_more">
-            <%= link_to('More projects', params.merge(:page => @current_page + 1), :id =>'view_more', :class => 'ajax') %>
-          </div>
         </div>
       </div>
+
       <div class="right">
         <div class="block">
           <% if @regions && @regions.any? %>
@@ -83,6 +81,9 @@
             <% end %>
           <% end %>
         </div>
+      </div>
+      <div class="view_more"  id="search_view_more">
+        <%= link_to('More projects', params.merge(:page => @current_page + 1), :id =>'view_more', :class => 'ajax') %>
       </div>
     </div>
 

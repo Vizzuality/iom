@@ -92,13 +92,15 @@ class Region < ActiveRecord::Base
   end
   private :update_wikipedia_description
 
-  def near(limit = 5)
+  def near(site, limit = 5)
     Region.find_by_sql(<<-SQL
-      select #{Region.custom_fields.join(',')},
-            ST_Distance((select ST_Centroid(the_geom) from regions where id=#{self.id}), ST_Centroid(the_geom)) as dist
+      select regions.*,
+            ST_Distance((select ST_Centroid(the_geom) from regions where id=#{self.id}), ST_Centroid(the_geom)) as dist,
+            (select count(*) from projects_regions as pr where region_id=regions.id) as count
             from regions
-            where id!=#{self.id}
-            and the_geom is not null
+            where id!=#{self.id} AND
+            regions.level = #{site.level_for_region} AND
+            the_geom is not null
             order by dist
             limit #{limit}
 SQL

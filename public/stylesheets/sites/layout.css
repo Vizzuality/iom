@@ -179,7 +179,6 @@ a#zoomOut:hover {background-position:0 -25px;}
 /* LEFT COLUMN - RIGHT BIG BLOCK */
 div.main_head {display:inline-block; vertical-align:top; zoom:1; *display:inline; width:100%;}
 div.inner_main_head {position:relative; width:942px; margin:0 auto;}
-div.main_head.projects div.left {background:none; padding:0; width:260px;}
 div.main_head div.left {width:248px; padding:30px 32px; background:url('/images/sites/common/mesh.png') repeat 0 0; display:inline-block; vertical-align:top; zoom:1; *display:inline;}
 div.main_head div.left h1 {width:237px; font:normal 25px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42; z-index:10;}
 div.main_head div.left h1.cluster_sector_name {width:190px; z-index:50;}
@@ -216,7 +215,6 @@ div#left_column div.float_left div.block.box_info label {float:left; margin:15px
 div#left_column div.float_left div.block.box_info h2 {float:left; font:normal 36px "Aller"; color:#666666; width:98px;}
 div#left_column div.float_left div.block.box_info div.projects_account {float:left; width:119px; height:109px; border-right:1px solid #DEDEDE; }
 div#left_column div.float_left div.block.box_info div.orgs_account {float:left; width:90px; height:109px; margin:0 0 0 23px;}
-
 div#left_column div.float_left div.block.green {background:#D8E5C0;}
 div#left_column div.float_left div.block.green h3 {color:#333333;}
 div#left_column div.float_left div.block p {width:100%; padding:10px 0 0 0; font:normal 13px Arial; color:#666666; line-height:17px;}
@@ -347,7 +345,7 @@ div#pages div.view_more a#view_more {width:162px; height:14px; margin:0 0 0 230p
 div#pages div.view_more a#view_more:hover {background-position:0 -26px; cursor:pointer;}
 /*chart*/
 div.statistics img.pie_chart {background:none!important; margin:0 0 0 -10px; height:125px; /*hack for google maps chart api image*/}
-div.statistics ul.chart {float:right; width:115px!important; padding:6px 0 0 0!important; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div.statistics ul.chart {float:right; width:120px!important; padding:6px 0 0 0!important; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div.statistics ul.chart li {padding:0 0 0 12px!important; margin:5px 0 0 0!important; background:url('/images/sites/icons/chart_colors.png') no-repeat 0 4px!important;}
 div.statistics ul.chart li a {color:#666666; text-decoration:underline!important;}
 div.statistics ul.chart li a:hover {color:#333333;}
@@ -487,63 +485,62 @@ div.statistics ul.statistics_list li a:hover span {text-decoration:none!importan
 
 /*PROJECTS*/
 div#project_layout {width:992px; margin:0 auto;}
+div.main_head.projects div#completed {position:absolute; top:112px; right:-15px; width:173px; height:41px; background:url('/images/sites/projects/completed_msg.png') no-repeat; display:block; z-index:200;}
+div.main_head.projects div#completed p {margin:5px 0 0 10px; font:normal 13px 'PT Sans Bold'; color:white;}
+div.main_head.projects div.left {width:606px; height:auto; padding:30px 32px; margin:0; background:url('/images/sites/common/mesh.png') repeat 0 0; display:inline-block; vertical-align:top; zoom:1; *display:inline;}
+div.main_head.projects div.float_head {position:absolute; top:0; left:5px; width:596px; height:auto; padding:32px 32px 40px; background:url('/images/sites/search/head_mask.png') repeat 0 0 #CD5D4C; z-index:100;}
+div.main_head.projects div.float_head h1, div.main_head.projects div.left h1 {font-size:32px; position:relative; width:100%;} 
+div.main_head.projects div.float_head p, div.main_head.projects div.left p {font-size:13px; position:relative; width:100%;} 
+div.main_head.projects div.float_head p a {color:#7A372D; text-decoration:underline;} 
+div.main_head.projects div.float_head p a:hover {color:black;} 
 div.projects {position:relative; width:100%;}
-div.projects div.left {width:296px; height:auto; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div.projects div.left div.block {width:272px; margin:23px 0 0 0; border-bottom:1px solid #D4D4D4; padding:0 0 20px 30px;}
-div.projects div.left div.block.last {border:none; padding:0 0 0 30px;}
-div.projects div.left div.block h3 {width:100%; font:normal 13px "PT Sans Bold"; color:#999999; text-shadow:0 1px white; text-transform:uppercase;}
-div.projects div.left div.block h3.margin {padding:20px 0 0 0;}
-div.projects div.left div.block div.logo {width:100%; padding:7px 0 15px;}
-div.projects div.left div.block div.logo div.logo_bkg {float:left; position:relative; width:86px; height:52px; background:url('/images/sites/projects/logo_bkg.png') no-repeat 0 0; vertical-align:top; overflow:hidden;}
-div.projects div.left div.block div.logo img {position:absolute; top:3px; left:3px; width:80px; height:46px;}
-div.projects div.left div.block div.logo a {width:130px; padding:10px 0 0 5px; font:normal 13px Arial; color:#CE5D4C; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;} /* TODO: color*/
-div.projects div.left div.block div.logo a.long {width:100%; padding:0;}
-div.projects div.left div.block div.logo a:hover {text-decoration:underline;}
-div.projects div.left div.block ul {width:100%; margin:7px 0 0 0; padding:0 0 6px; list-style:none;}
-div.projects div.left div.block ul li {padding:3px 0 3px 10px; background:url('/images/sites/icons/list_disc.png') no-repeat 0 10px; font:normal 13px Arial; color:#999999;}
-div.projects div.left div.block ul li a {color:#CE5D4C; text-decoration:none;}
-div.projects div.left div.block ul li a:hover {text-decoration:underline;}
-div.projects div.left div.block p {width:252px; padding:10px 0 0 0; font:normal 13px Arial; color:#666666; line-height:17px;}
-div.projects div.left div.block p.budget {padding:10px 0 0 10px; font:normal 25px "Aller"; color:#666666; background:url('/images/sites/icons/budget.png') no-repeat 0 16px;}
-div.projects div.left div.block p a {color:#CE5D4C; text-decoration:none;} /* TODO: color*/
-div.projects div.left div.block p a:hover {text-decoration:underline;}
-div.projects div.left div.block span.people_amount {display:block; height:20px; padding:3px 0; background:url('/images/sites/projects/man.png') no-repeat 0 0;}
-div.projects div.left div.block p.estimate {font:normal 25px "Aller"; color:#666666;}
-div.projects div.left div.block p.estimate sup {font:normal 13px "Aller"; color:#666666;}
-div.projects div.left div.block div.timeline {position:relative; width:237px; height:23px; padding:3px; margin:6px 0 0 0; background:url('/images/sites/projects/days_left_bkg.png') no-repeat 0 0;}
-div.projects div.left div.block div.timeline span {display:block; width:100px; height:23px; background:url('/images/sites/projects/days_left_bar.png') no-repeat 0 0; width:245px;}
-div.projects div.left div.block div.timeline p {position:absolute; left:90px; top:8px; width:auto!important; margin:0!important; padding:0!important; font:normal 11px "PT Sans"; color:white;}
-div.projects div.left div.block p.first_date {width:121px; margin:0!important; padding:3px 0 0 0!important; font:normal 11px "Aller"; color:#999999; text-align:left; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div.projects div.left div.block p.second_date {width:121px; margin:0!important; padding:3px 0 0 0!important; font:normal 11px "Aller"; color:#999999; text-align:right; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div.projects div.inner_main_head div.right {background:url('/images/sites/common/mesh.png') repeat 0 0; position:absolute; top:0; right:0; z-index:100; margin:0!important; padding:0 5px!important;}
-div.projects div.right {width:660px; height:auto; margin:0 25px 0 0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline; background:url('/images/sites/common/mesh.png') repeat 0 0; padding:0 5px;}
+div.projects div.left {float:left; width:650px; height:400px; margin:0 0 0 25px; padding:0 5px;}
+div.projects div.outer_float {position:absolute; top:0; left:25px; width:660px; padding:0 5px 5px 5px; background:url('/images/sites/common/mesh.png') repeat-y 0 0; z-index:100;}
+div.projects div.float_left {position:absolute; top:-40px; left:5px; width:660px; z-index:100;}
+div.projects div.float_left div.galleryStyle {float:left; width:100%; height:400px; border-top:1px solid #666666; border-bottom:1px solid #666666; background:white;}
+div.projects div.float_left div.block {float:left; width:596px; padding:32px; background:white; border-bottom:1px solid #DEDEDE; font:normal 15px Arial;}
+div.projects div.float_left div.block.margin {float:left; margin:5px 0 0 0;}
+div.projects div.float_left div.block p {font:normal 15px Arial; color:#666666;}
+div.projects div.float_left div.block h3 {padding:0 0 10px 0; font:normal 13px "PT Sans Bold"; color:#333333; text-transform:uppercase; margin:25px 0 0 0;}
+div.projects div.float_left div.block h3.first {margin:0;}
+div.projects div.float_left div.block ul.related_projects {float:left; width:100%;}
+div.projects div.float_left div.block ul.related_projects li {float:left; width:290px; margin:0 10px 0 0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div.projects div.float_left div.block ul.related_projects li.last {margin:0;}
+div.projects div.float_left div.block ul.related_projects li div.image {float:left; width:90px; height:70px; margin:0 10px 0 0; padding:5px; background:#E5E5E5; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div.projects div.float_left div.block ul.related_projects li div.image img {float:left; width:90px; height:70px;}
+div.projects div.float_left div.block ul.related_projects li div.info {float:left;width:170px; padding:10px 0 0 0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div.projects div.float_left div.block ul.related_projects li div.info h4 a {font:normal 15px Arial; color:#CD5D4C; text-decoration:none;} 
+div.projects div.float_left div.block ul.related_projects li div.info h4 a:hover {text-decoration:underline;}
+div.projects div.float_left div.block ul.related_projects li div.info p {padding:3px 0 0 0; font:normal 13px Arial; color:#999999;}
+div.projects div.float_left div.block ul.related_projects li div.info p.sub {padding:10px 0 0 0; color:#666666;}
+div.projects div.right {float:left; width:300px; height:auto; margin:0; padding:0;}
+div.projects div.right div.block {width:265px; margin:23px 0 0 0; border-bottom:1px solid #D4D4D4; padding:0 0 20px 35px;}
+div.projects div.right div.block.last {border:none; padding:0 0 0 30px;}
+div.projects div.right div.block h3 {width:100%; font:normal 13px "PT Sans Bold"; color:#999999; text-shadow:0 1px white; text-transform:uppercase;}
+div.projects div.right div.block h3.margin {padding:20px 0 0 0;}
+div.projects div.right div.block div.logo {width:100%; padding:7px 0 15px;}
+div.projects div.right div.block div.logo div.logo_bkg {float:left; position:relative; width:86px; height:52px; background:url('/images/sites/projects/logo_bkg.png') no-repeat 0 0; vertical-align:top; overflow:hidden;}
+div.projects div.right div.block div.logo img {position:absolute; top:3px; left:3px; width:80px; height:46px;}
+div.projects div.right div.block div.logo a {width:130px; padding:10px 0 0 5px; font:normal 13px Arial; color:#CE5D4C; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;} /* TODO: color*/
+div.projects div.right div.block div.logo a.long {width:100%; padding:0;}
+div.projects div.right div.block div.logo a:hover {text-decoration:underline;}
+div.projects div.right div.block ul {width:100%; margin:7px 0 0 0; padding:0 0 6px; list-style:none;}
+div.projects div.right div.block ul li {padding:3px 0 3px 10px; background:url('/images/sites/icons/list_disc.png') no-repeat 0 10px; font:normal 13px Arial; color:#999999;}
+div.projects div.right div.block ul li a {color:#CE5D4C; text-decoration:none;}  
+div.projects div.right div.block ul li a:hover {text-decoration:underline;}
+div.projects div.right div.block p {width:252px; padding:10px 0 0 0; font:normal 13px Arial; color:#666666; line-height:17px;}
+div.projects div.right div.block p.budget {padding:10px 0 0 10px; font:normal 25px "Aller"; color:#666666; background:url('/images/sites/icons/budget.png') no-repeat 0 16px;}
+div.projects div.right div.block p a {color:#CE5D4C; text-decoration:none;} /* TODO: color*/
+div.projects div.right div.block p a:hover {text-decoration:underline;}
+div.projects div.right div.block span.people_amount {display:block; height:20px; padding:3px 0; background:url('/images/sites/projects/man.png') no-repeat 0 0;}
+div.projects div.right div.block p.estimate {font:normal 25px "Aller"; color:#666666;}
+div.projects div.right div.block p.estimate sup {font:normal 13px "Aller"; color:#666666;}
+div.projects div.right div.block div.timeline {position:relative; width:237px; height:23px; padding:3px; margin:6px 0 0 0; background:url('/images/sites/projects/days_left_bkg.png') no-repeat 0 0;}
+div.projects div.right div.block div.timeline span {display:block; width:100px; height:23px; background:url('/images/sites/projects/days_left_bar.png') no-repeat 0 0; width:245px;}
+div.projects div.right div.block div.timeline p {position:absolute; left:90px; top:8px; width:auto!important; margin:0!important; padding:0!important; font:normal 11px "PT Sans"; color:white;}
+div.projects div.right div.block p.first_date {width:121px; margin:0!important; padding:3px 0 0 0!important; font:normal 11px "Aller"; color:#999999; text-align:left; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div.projects div.right div.block p.second_date {width:121px; margin:0!important; padding:3px 0 0 0!important; font:normal 11px "Aller"; color:#999999; text-align:right; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 
-div.projects div.float_right {position:absolute; top:-40px; right:25px; width:660px; padding:5px; /*background:url('/images/sites/common/mesh.png') repeat 0 0;*/ z-index:100;}
-
-div.projects div.head {width:596px; height:auto; padding:32px; background:url('/images/sites/search/head_mask.png') repeat 0 0 #CD5D4C;}
-div.projects div.head div#completed {position:absolute; top:112px; right:-15px; width:173px; height:41px; background:url('/images/sites/projects/completed_msg.png') no-repeat; display:none;}
-div.projects div.head div#completed p {float:left; font:normal 13px "PT Sans Bold"; color:white; text-transform:uppercase; margin:9px 0 0 15px; letter-spacing:-1.0px;}
-div.projects div.head h1 {width:100%; font:normal 25px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42;}
-div.projects div.head p {width:100%; padding:2px 0 0 0; font:normal 13px Arial; color:#7C3831; text-shadow:none;}
-div.projects div.head p a {text-decoration:underline; color:#7C3831;}
-div.projects div.head p a:hover {color:#7C3831;}
-div.projects div.float_right div.galleryStyle {float:left; width:100%; height:400px; border-top:1px solid #666666; border-bottom:1px solid #666666; background:white;}
-div.projects div.float_right div.block {float:left; width:596px; padding:32px; background:white; border-bottom:1px solid #DEDEDE; font:normal 15px Arial;}
-div.projects div.float_right div.block.margin {float:left; margin:5px 0 0 0;}
-div.projects div.float_right div.block p {font:normal 15px Arial; color:#666666;}
-div.projects div.float_right div.block h3 {padding:0 0 10px 0; font:normal 13px "PT Sans Bold"; color:#333333; text-transform:uppercase; margin:25px 0 0 0;}
-div.projects div.float_right div.block h3.first {margin:0;}
-
-div.projects div.float_right div.block ul.related_projects {float:left; width:100%;}
-div.projects div.float_right div.block ul.related_projects li {float:left; width:290px; margin:0 10px 0 0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div.projects div.float_right div.block ul.related_projects li.last {margin:0;}
-div.projects div.float_right div.block ul.related_projects li div.image {float:left; width:90px; height:70px; margin:0 10px 0 0; padding:5px; background:#E5E5E5; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div.projects div.float_right div.block ul.related_projects li div.image img {float:left; width:90px; height:70px;}
-div.projects div.float_right div.block ul.related_projects li div.info {float:left;width:170px; padding:10px 0 0 0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div.projects div.float_right div.block ul.related_projects li div.info h4 a {font:normal 15px Arial; color:#CD5D4C; text-decoration:none;}
-div.projects div.float_right div.block ul.related_projects li div.info h4 a:hover {text-decoration:underline;}
-div.projects div.float_right div.block ul.related_projects li div.info p {padding:3px 0 0 0; font:normal 13px Arial; color:#999999;}
-div.projects div.float_right div.block ul.related_projects li div.info p.sub {padding:10px 0 0 0; color:#666666;}
 
 /* FOOTER SITES */
 div#footer_sites {clear:both; width:100%; padding:100px 0 100px 0;}
@@ -568,13 +565,12 @@ div#footer_pages div.left div.links ul li a:hover {text-decoration:underline;}
 div#footer_pages div.right {width:auto; margin:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline; text-align:right;}
 div#footer_pages div.right a.logo {display:block; width:67px; height:43px; background:url('/images/sites/common/logo_interaction.png') no-repeat 0 0;}
 div#footer_pages div.right a.logo:hover {cursor:pointer;}
-
+div#project_layout div#footer_pages div.left {width:660px; margin:0 0 0 30px; background:none; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#project_layout div#footer_pages div.right {margin:0 25px 0 0;}
 
 /* FOOTER OTHER */
-div#project_layout div#footer {clear:both; width:932px; padding:100px 30px;}
 div#footer {clear:both; width:100%; padding:100px 0 100px 0;}
 div#footer div.right {width:600px; margin:0 0 0 60px; background:none; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#project_layout div#footer div.right {width:660px; margin:0; background:none; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#footer div.right div.project {float:left; width:350px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#footer div.right div.project h1 {font:normal 13px "PT Sans Bold"; color:#888888; text-transform:uppercase; display:inline-block;}
 div#footer div.right div.project p {padding:0; font:normal 13px "PT Sans"; color:#B3B3B3;}
