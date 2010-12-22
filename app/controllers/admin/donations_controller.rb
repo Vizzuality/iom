@@ -8,7 +8,7 @@ class Admin::DonationsController < ApplicationController
     if @donation.save
       redirect_to donations_admin_project_path(@project), :flash => {:success => 'Donation has been created successfully'}
     else
-      render :action => 'new'
+      render :template => 'admin/projects/donations'
     end
   end
 
