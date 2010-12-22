@@ -78,7 +78,6 @@
       // }
       var image_source = '';
       
-      
       if (map_type == "overview_map") {
         if (map_data[i].count <range) {
           diameter = 34;
@@ -97,6 +96,10 @@
     
 
     map.fitBounds(bounds);
+    
+    if (map_type=="overview_map") {
+      setTimeout(function(){zoomIn()},200);
+    }
     
     //Positionate zoom controls
     positionZoomControls();
