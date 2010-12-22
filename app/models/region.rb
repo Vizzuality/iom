@@ -94,7 +94,7 @@ class Region < ActiveRecord::Base
 
   def near(site, limit = 5)
     Region.find_by_sql(<<-SQL
-      select #{Region.custom_fields.join(',')},
+      select regions.*,
             ST_Distance((select ST_Centroid(the_geom) from regions where id=#{self.id}), ST_Centroid(the_geom)) as dist,
             (select count(*) from projects_regions as pr where region_id=regions.id) as count
             from regions
