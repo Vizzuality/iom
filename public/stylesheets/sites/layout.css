@@ -313,7 +313,7 @@ div#pages div.float_left div.results_list ul li div.project_places {width:170px;
 div#pages div.float_left div.results_list ul li div.project_places p {margin:0; padding:0; font:normal 13px Arial; color:#999999; text-align:center;}
 div#pages div.float_left div.results_list ul li div.project_places ul {margin:0; padding:0; font:normal 13px Arial;background-color: transparent; color:#999999; text-align:center;}
 div#pages div.float_left div.results_list ul li div.project_places ul li {margin: 0; padding: 2px; background-color: transparent;}
-
+div#pages div.float_left div.results_list ul li div.project_places ul li span{text-decoration: underline;}
 div#pages div.float_left div.results_list ul li div.project_places p a {color:#999999; text-decoration:underline;}
 div#pages div.float_left div.results_list ul li div.project_places p a:hover {color:#333333;}
 div#pages div.right {width:272px; margin:100px 0 0 0; padding:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
@@ -489,10 +489,10 @@ div.main_head.projects div#completed {position:absolute; top:112px; right:-15px;
 div.main_head.projects div#completed p {margin:5px 0 0 10px; font:normal 13px 'PT Sans Bold'; color:white;}
 div.main_head.projects div.left {width:606px; height:auto; padding:30px 32px; margin:0; background:url('/images/sites/common/mesh.png') repeat 0 0; display:inline-block; vertical-align:top; zoom:1; *display:inline;}
 div.main_head.projects div.float_head {position:absolute; top:0; left:5px; width:596px; height:auto; padding:32px 32px 40px; background:url('/images/sites/search/head_mask.png') repeat 0 0 #CD5D4C; z-index:100;}
-div.main_head.projects div.float_head h1, div.main_head.projects div.left h1 {font-size:32px; position:relative; width:100%;} 
-div.main_head.projects div.float_head p, div.main_head.projects div.left p {font-size:13px; position:relative; width:100%;} 
-div.main_head.projects div.float_head p a {color:#7A372D; text-decoration:underline;} 
-div.main_head.projects div.float_head p a:hover {color:black;} 
+div.main_head.projects div.float_head h1, div.main_head.projects div.left h1 {font-size:32px; position:relative; width:100%;}
+div.main_head.projects div.float_head p, div.main_head.projects div.left p {font-size:13px; position:relative; width:100%;}
+div.main_head.projects div.float_head p a {color:#7A372D; text-decoration:underline;}
+div.main_head.projects div.float_head p a:hover {color:black;}
 div.projects {position:relative; width:100%;}
 div.projects div.left {float:left; width:650px; height:400px; margin:0 0 0 25px; padding:0 5px;}
 div.projects div.outer_float {position:absolute; top:0; left:25px; width:660px; padding:0 5px 5px 5px; background:url('/images/sites/common/mesh.png') repeat-y 0 0; z-index:100;}
@@ -509,7 +509,7 @@ div.projects div.float_left div.block ul.related_projects li.last {margin:0;}
 div.projects div.float_left div.block ul.related_projects li div.image {float:left; width:90px; height:70px; margin:0 10px 0 0; padding:5px; background:#E5E5E5; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div.projects div.float_left div.block ul.related_projects li div.image img {float:left; width:90px; height:70px;}
 div.projects div.float_left div.block ul.related_projects li div.info {float:left;width:170px; padding:10px 0 0 0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div.projects div.float_left div.block ul.related_projects li div.info h4 a {font:normal 15px Arial; color:#CD5D4C; text-decoration:none;} 
+div.projects div.float_left div.block ul.related_projects li div.info h4 a {font:normal 15px Arial; color:#CD5D4C; text-decoration:none;}
 div.projects div.float_left div.block ul.related_projects li div.info h4 a:hover {text-decoration:underline;}
 div.projects div.float_left div.block ul.related_projects li div.info p {padding:3px 0 0 0; font:normal 13px Arial; color:#999999;}
 div.projects div.float_left div.block ul.related_projects li div.info p.sub {padding:10px 0 0 0; color:#666666;}
@@ -526,7 +526,7 @@ div.projects div.right div.block div.logo a.long {width:100%; padding:0;}
 div.projects div.right div.block div.logo a:hover {text-decoration:underline;}
 div.projects div.right div.block ul {width:100%; margin:7px 0 0 0; padding:0 0 6px; list-style:none;}
 div.projects div.right div.block ul li {padding:3px 0 3px 10px; background:url('/images/sites/icons/list_disc.png') no-repeat 0 10px; font:normal 13px Arial; color:#999999;}
-div.projects div.right div.block ul li a {color:#CE5D4C; text-decoration:none;}  
+div.projects div.right div.block ul li a {color:#CE5D4C; text-decoration:none;}
 div.projects div.right div.block ul li a:hover {text-decoration:underline;}
 div.projects div.right div.block p {width:252px; padding:10px 0 0 0; font:normal 13px Arial; color:#666666; line-height:17px;}
 div.projects div.right div.block p.budget {padding:10px 0 0 10px; font:normal 25px "Aller"; color:#666666; background:url('/images/sites/icons/budget.png') no-repeat 0 16px;}
