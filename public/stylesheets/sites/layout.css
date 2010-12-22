@@ -485,7 +485,7 @@ div.statistics ul.statistics_list li a:hover span {text-decoration:none!importan
 
 /*PROJECTS*/
 div#project_layout {width:992px; margin:0 auto;}
-div.main_head.projects div#completed {position:absolute; top:112px; right:-15px; width:173px; height:41px; background:url('/images/sites/projects/completed_msg.png') no-repeat; display:block; z-index:200;}
+div.main_head.projects div#completed {position:absolute; bottom:-20px; right:-15px; width:173px; height:41px; background:url('/images/sites/projects/completed_msg.png') no-repeat; display:block; z-index:200;}
 div.main_head.projects div#completed p {margin:5px 0 0 10px; font:normal 13px 'PT Sans Bold'; color:white;}
 div.main_head.projects div.left {width:606px; height:auto; padding:30px 32px; margin:0; background:url('/images/sites/common/mesh.png') repeat 0 0; display:inline-block; vertical-align:top; zoom:1; *display:inline;}
 div.main_head.projects div.float_head {position:absolute; top:0; left:5px; width:596px; height:auto; padding:32px 32px 40px; background:url('/images/sites/search/head_mask.png') repeat 0 0 #CD5D4C; z-index:100;}

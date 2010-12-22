@@ -36,7 +36,7 @@
           <% if @area.projects_clusters(@site).size > 0 %>
             <ul class="statistics_list">
               <% @area.projects_clusters(@site)[0...3].each do |cluster,count| %>
-                <li><a class="<%= cluster.css_class %> icon"><span class="aller" style="width:<%= cluster_width(count) %>px"><%= count %></span></a></li>
+                <li><a class="<%= cluster.css_class %> icon_statistics"><span class="aller" style="width:<%= cluster_width(count) %>px"><%= count %></span></a></li>
               <% end %>
             </ul>
             <% if @area.projects_clusters(@site).size > 3 %>
