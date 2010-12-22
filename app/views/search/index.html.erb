@@ -19,30 +19,20 @@
             <%= raw("in #{link_to(@cluster.name, remove_filter_url(:cluster_id))} CLUSTER") if @cluster %>
             <%= raw("in region #{link_to(@region.name, remove_filter_url(:region_id))}") if @region %>
           </p></h3>
-          <% if @projects && @projects.any? %>
-            <ul>
-              <% @projects.each_with_index do |project,index| %>
-                <li class="<%= cycle('even', 'odd') %>">
-                  <div class="project_name">
-                    <h3><%= link_to(truncate(project.name,:length=>43,:omission=>"..."), project_path(project)) %></h3>
-                    <p>by <%= link_to(project.primary_organization.name, organization_path(project.primary_organization)) %></p>
-                  </div>
-                  <div class="project_places">
-                    <p>Mexico, Spain, United Kingdom and 3 more</p>
-                  </div>
-                </li>
-              <% end %>
+          <% if @projects.present? %>
+            <ul id="search_results">
+              <%= render :partial => 'search/projects' %>
             </ul>
-            <%= will_paginate(@projects) %>
           <% else %>
-            <% unless params[:q].blank? %>
-              <ul>
-                <li class="even">
-                  <p class="no_results">No projects were found for '<%= params[:q] %>'</p>
-                </li>
-              </ul>
-            <% end %>
+            <ul>
+              <li class="even">
+                <p class="no_results">No projects were found for '<%= params[:q] %>'</p>
+              </li>
+            </ul>
           <% end %>
+          <div class="view_more"  id="search_view_more">
+            <%= link_to('More projects', params.merge(:page => @current_page + 1), :id =>'view_more', :class => 'ajax') %>
+          </div>
         </div>
       </div>
       <div class="right">
