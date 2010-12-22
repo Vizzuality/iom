@@ -5,8 +5,9 @@ class DonorsController < ApplicationController
   def show
     @donor = Donor.find(params[:id])
     @donor.attributes = @donor.attributes_for_site(@site)
-    
-    @projects = @donor.donated_projects.where("projects.id IN (#{@site.projects_ids.join(',')})").paginate :per_page => 10, :page => params[:page], :order => 'created_at DESC'
+
+    @projects = Project.custom_find(@site, :donor_id => @donor.id, :per_page => 10, :page => params[:page], :order => 'created_at DESC')
+    # @projects = @donor.donated_projects.where("projects.id IN (#{@site.projects_ids.join(',')})").paginate :per_page => 10, :page => params[:page], :order => 'created_at DESC'
   end
 
 end

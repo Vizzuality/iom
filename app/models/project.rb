@@ -160,7 +160,7 @@ SQL
     LEFT JOIN clusters as clus           ON clus.id=cpro.cluster_id
     GROUP BY p.id,p.name,o.id,o.name,c.name,p.created_at,p.description) as subq
 SQL
-    if options[:sector] || options[:cluster]
+    if options[:sector] || options[:cluster] || options[:donor_id]
       sql << " WHERE "
       conditions = []
       if options[:sector]
@@ -168,6 +168,9 @@ SQL
       end
       if options[:cluster]
         conditions << "clusters like '%#{options[:cluster]}%'"
+      end
+      if options[:donor_id]
+        conditions << "project_id IN (SELECT project_id from donations WHERE donor_id=#{options[:donor_id]})"
       end
       sql << conditions.join(' and ')
     end

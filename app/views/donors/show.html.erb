@@ -15,17 +15,14 @@
             <% @projects.each_with_index do |project,index| %>
               <li class="<%= (index%2==0) ? 'even' : 'odd' %>">
                 <div class="project_name">
-                  <h3><%= link_to(project.name, project_path(project)) %></h3>
+                  <h3><%= link_to(project['project_name'], project_path(project['project_id'])) %></h3>
                   <p>
-                    by <%= link_to(project.primary_organization.name, organization_path(project.primary_organization)) %>
-                    <% clusters_sectors = project.clusters + project.sectors %>
-                    <% unless clusters_sectors.empty? %>
-                      in <%= raw(clusters_sectors.map{ |e| link_to(e.name, e.is_a?(Cluster) ? cluster_path(e) : sector_path(e)) }.to_sentence) %>
-                    <% end %></p>
+                    <%= subtitle(project) %>
                 </div>
                 <div class="project_places">
-                  <p><% unless project.regions.empty? %>
-                    <%= project.regions.first.name %>
+                  <p>
+                  <% unless project['regions'].blank? %>
+                    <%= project['regions'].split('|').to_sentence(:last_word_connector => ' and ') %>
                   <% end %></p>
                 </div>
               </li>
