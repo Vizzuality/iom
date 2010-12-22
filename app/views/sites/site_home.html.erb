@@ -107,9 +107,10 @@
       var chf = "<%=@overview_map_chf%>";
       var chld = "<%=@chld%>";
       var chd = "<%=@chd%>";
-      var marker_source = "<%=@overview_map_marker_source%>";
       var map_data = <%=raw(@map_data)%>;
       var max_count = <%=@map_data_max_count%>;
+      var map_type = 'overview_map';
+      var theme = "<%=@site.theme_id%>";
     </script>
 
     <script src="/javascripts/sites/home.js" type="text/javascript" charset="utf-8"></script>
