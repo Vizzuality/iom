@@ -5,6 +5,9 @@ class GeoregionController < ApplicationController
   def show
     if(request.url.match(/countries/))
       @area = Country.find(params[:id], :select => Country.custom_fields)
+
+      @projects = Project.custom_find(@site, :country => @area.name, :per_page => 10, :page => params[:page], :order => 'created_at DESC')
+
       @area_parent = "America"
 
       sql="select c.id,count(ps.project_id) as count,c.name,x(ST_Centroid(c.the_geom)) as lon,y(ST_Centroid(c.the_geom)) as lat,
@@ -13,7 +16,10 @@ class GeoregionController < ApplicationController
         inner join countries as c on cp.country_id=c.id and c.id=#{params[:id].gsub(/\\/, '\&\&').gsub(/'/, "''")}
         group by c.id,c.name,lon,lat,geojson"
     else
-      @area = Region.find(params[:id])
+      @area = Region.find(params[:id], :select => Region.custom_fields)
+
+      @projects = Project.custom_find(@site, :region => @area.name, :per_page => 10, :page => params[:page], :order => 'created_at DESC')
+
       @area_parent = Country.find_by_id(@area.country_id, :select => "id, name").try(:name)
       sql="select r.id,count(ps.project_id) as count,r.name,x(ST_Centroid(r.the_geom)) as lon,y(ST_Centroid(r.the_geom)) as lat,
         ST_AsGeoJSON(r.the_geom,6) as geojson
@@ -22,34 +28,32 @@ class GeoregionController < ApplicationController
         group by r.id,r.name,lon,lat,geojson"
     end
 
-    result=ActiveRecord::Base.connection.execute(sql)
-    @map_data = result.first
-    @georegion_map_chco = @site.theme.data[:georegion_map_chco]
-    @georegion_map_chf = @site.theme.data[:georegion_map_chf]
-    @georegion_map_marker_source = @site.theme.data[:georegion_map_marker_source]
-    @georegion_map_stroke_color = @site.theme.data[:georegion_map_stroke_color]
-    @georegion_map_fill_color = @site.theme.data[:georegion_map_fill_color]
-
-    areas= []
-    data = []
-    @map_data_max_count=0
-    result.each do |c|
-      areas << c["code"]
-      data  << c["count"]
-      if(@map_data_max_count < c["count"].to_i)
-        @map_data_max_count=c["count"].to_i
-      end
-    end
-    @chld = areas.join("|")
-    @chd  = "t:"+data.join(",")
-
-    @projects = @area.projects.site(@site).where("id IN (#{@site.projects_ids.join(',')})").paginate :per_page => 10, :page => params[:page], :order => 'created_at DESC'
-
-    @first_three = @area.projects_clusters(@site)[0...3]
-    @first_three_max = @first_three.map{|g, c| c}.sort.last
-
     respond_to do |format|
-      format.html {render :show}
+      format.html do
+        result=ActiveRecord::Base.connection.execute(sql)
+        @map_data = result.first
+        @georegion_map_chco = @site.theme.data[:georegion_map_chco]
+        @georegion_map_chf = @site.theme.data[:georegion_map_chf]
+        @georegion_map_marker_source = @site.theme.data[:georegion_map_marker_source]
+        @georegion_map_stroke_color = @site.theme.data[:georegion_map_stroke_color]
+        @georegion_map_fill_color = @site.theme.data[:georegion_map_fill_color]
+
+        areas= []
+        data = []
+        @map_data_max_count=0
+        result.each do |c|
+          areas << c["code"]
+          data  << c["count"]
+          if(@map_data_max_count < c["count"].to_i)
+            @map_data_max_count=c["count"].to_i
+          end
+        end
+        @chld = areas.join("|")
+        @chd  = "t:"+data.join(",")
+
+        @first_three = @area.projects_clusters(@site)[0...3]
+        @first_three_max = @first_three.map{|g, c| c}.sort.last
+      end
       format.js do
         render :update do |page|
           page << "$('#projects_view_more').remove();"
