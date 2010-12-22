@@ -1,13 +1,13 @@
 <ul>
-  <li <%= selected_if_current_page(edit_admin_organization_path(@organization)) %>>
+  <li <%= selected_if_current_page(edit_admin_organization_path(@organization), !params[:site_id].nil?) %>>
     <div class="bottom_selected">
       <%= link_to('Basic information', edit_admin_organization_path(@organization), :class=>"basic") %>
       <span class="list">
-        <%if current_page?(edit_admin_organization_path(@organization)) %>        
+        <% if show_sites? %>
           <% Site.all.each do |site| %>
             <p><%= link_to(site.name, organization_site_specific_information_admin_organization_path(@organization, site)) %></p>
           <% end %>
-        <%end%>
+        <% end %>
       </span>
     </div>
   </li>
@@ -24,7 +24,7 @@
   <li <%= selected_if_current_page(admin_organization_resources_path(@organization)) %>>
         <div class="bottom_selected">
           <%= link_to("Resources", admin_organization_resources_path(@organization)) %><% if !@organization.resources.empty? %> <p><span><%=@organization.resources.count%></span></p><% end %>
-          </div>
+        </div>
   </li>
 </ul>
 
@@ -42,8 +42,8 @@
     <p class="split">|</p>
     <%= link_to 'Export CSV', admin_organization_projects_path(@organization, :csv) %>
     </div>
-  
 </div>
+
 <div class="delete">
   <h5>DELETE THIS ORGANIZATION</h5>
   <p>Clicking the link below will permanently delete this organization and its references within the sites</p>

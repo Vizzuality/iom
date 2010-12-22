@@ -1,9 +1,9 @@
 module ApplicationHelper
 
-  def selected_if_current_page(url_path)
+  def selected_if_current_page(url_path, extra_condition = false)
     if @organization || @pages || @donor
       if (action_name == "specific_information" || action_name == 'new' || action_name == 'edit' || action_name == 'create' || action_name == 'update' || action_name == "index")
-        if request.path == url_path
+        if request.path == url_path || extra_condition
           raw("class=\"list_selected\"")
         else
           raw("class=\"list_unselected\"")
@@ -20,7 +20,9 @@ module ApplicationHelper
     end
   end
 
-
+  def show_sites?
+    (@organization || @donor) && ((controller_name == 'organizations' || controller_name == 'donors') && (action_name == "specific_information" || action_name == 'edit' || action_name == 'create' || action_name == 'update'))
+  end
 
   def errors_for(obj, attribute)
     return if action_name == 'new'
@@ -99,11 +101,6 @@ HTML
     else
       count
     end
-  end
-
-  # TODO: get real classes
-  def cluster_class(cluster)
-    %W{ drop plus }[rand(2)-1]
   end
 
   def url(site)

@@ -1,13 +1,13 @@
 <ul>
-  <li <%= selected_if_current_page(edit_admin_donor_path(@donor)) %>>
+  <li <%= selected_if_current_page(edit_admin_donor_path(@donor), !params[:site_id].nil?) %>>
     <div class="bottom_selected">
       <%= link_to('Basic information', edit_admin_donor_path(@donor), :class=>"basic") %>
       <span class="list">
-        <%if current_page?(edit_admin_donor_path(@donor)) %>
+        <% if show_sites? %>
           <% Site.all.each do |site| %>
             <p><%= link_to(site.name, donor_site_specific_information_admin_donor_path(@donor, site)) %></p>
           <% end %>
-        <%end%>
+        <% end %>
       </span>
     </div>
   </li>
