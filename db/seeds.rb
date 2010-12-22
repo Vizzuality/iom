@@ -139,7 +139,7 @@ site.pages.find_by_title("Analysis").body = <<-EOF
 site.save!
 
 #  127.0.0.1       iom-food.ipq.co
-site = Site.create :name => 'Food Security', :url => 'iom-food.ipq.co', :status => true, :short_description => 'Food security refers to the availability of food and one’s access to it'
+site = Site.create :name => 'Food Security', :url => 'iom-food.ipq.co', :status => true, :short_description => 'Food security refers to the availability of food and one’s access to it',
                    :long_description => 'The Special Programme for Food Security (SPFS) helps governments replicate successful food security practices on a national scale. The SPFS also encourages investment in rural infrastructure, off-farm income generation, urban agriculture and safety nets',
                    :theme => Theme.find_by_name('Garnet')
                               
