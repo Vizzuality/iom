@@ -3,31 +3,31 @@
 # Table name: projects
 #
 #  id                        :integer         not null, primary key
-#  name                      :string(2000)    
-#  description               :text            
-#  primary_organization_id   :integer         
-#  implementing_organization :text            
-#  partner_organizations     :text            
-#  cross_cutting_issues      :text            
-#  start_date                :date            
-#  end_date                  :date            
-#  budget                    :integer         
-#  target                    :text            
-#  estimated_people_reached  :integer         
-#  contact_person            :string(255)     
-#  contact_email             :string(255)     
-#  contact_phone_number      :string(255)     
-#  site_specific_information :text            
-#  created_at                :datetime        
-#  updated_at                :datetime        
-#  activities                :text            
-#  intervention_id           :string(255)     
-#  additional_information    :text            
-#  awardee_type              :string(255)     
-#  date_provided             :date            
-#  date_updated              :date            
-#  contact_position          :string(255)     
-#  website                   :string(255)     
+#  name                      :string(2000)
+#  description               :text
+#  primary_organization_id   :integer
+#  implementing_organization :text
+#  partner_organizations     :text
+#  cross_cutting_issues      :text
+#  start_date                :date
+#  end_date                  :date
+#  budget                    :integer
+#  target                    :text
+#  estimated_people_reached  :integer
+#  contact_person            :string(255)
+#  contact_email             :string(255)
+#  contact_phone_number      :string(255)
+#  site_specific_information :text
+#  created_at                :datetime
+#  updated_at                :datetime
+#  activities                :text
+#  intervention_id           :string(255)
+#  additional_information    :text
+#  awardee_type              :string(255)
+#  date_provided             :date
+#  date_updated              :date
+#  contact_position          :string(255)
+#  website                   :string(255)
 #  the_geom                  :string          not null
 #
 
@@ -131,7 +131,72 @@ class Project < ActiveRecord::Base
             limit #{limit}
 SQL
     )
+  end
 
+  def self.custom_find(site, options = {})
+    # options: :per_page => 10, :page => params[:page], :order => 'created_at DESC'
+    sql = <<-SQL
+    select * from
+    (SELECT p.id as project_id, p.name as project_name, p.description as project_description, p.created_at, o.id as organization_id, o.name as organization_name,
+    array_to_string(array_agg(distinct r.name),'|') as regions,
+    array_to_string(array_agg(distinct r.id),'|') as region_ids,
+    array_to_string(array_agg(distinct c.name),'|') as countries,
+    array_to_string(array_agg(distinct c.id),'|') as countries_ids,
+    array_to_string(array_agg(distinct sec.name),'|') as sectors,
+    array_to_string(array_agg(distinct sec.id),'|') as sector_ids,
+    array_to_string(array_agg(distinct clus.name),'|') as clusters,
+    array_to_string(array_agg(distinct clus.id),'|') as cluster_ids
+
+    FROM projects as p
+    INNER JOIN organizations as o       ON p.primary_organization_id=o.id
+    INNER JOIN projects_sites as ps     ON p.id=ps.project_id and ps.site_id=#{site.id}
+    INNER JOIN projects_regions as pr   ON pr.project_id=p.id
+    INNER JOIN regions as r             ON pr.region_id=r.id and r.level=#{site.level_for_region}
+    INNER JOIN countries_projects as cp ON cp.project_id=p.id
+    INNER JOIN countries as c           ON c.id=cp.country_id
+    LEFT JOIN projects_sectors as psec  ON psec.project_id=p.id
+    LEFT JOIN sectors as sec             ON sec.id=psec.sector_id
+    LEFT JOIN clusters_projects as cpro ON cpro.project_id=p.id
+    LEFT JOIN clusters as clus           ON clus.id=cpro.cluster_id
+    GROUP BY p.id,p.name,o.id,o.name,c.name,p.created_at,p.description) as subq
+SQL
+    if options[:sector] || options[:cluster] || options[:donor_id] || options[:region] || options[:country] || options[:organization]
+      sql << " WHERE "
+      conditions = []
+      if options[:sector]
+        conditions << "sectors like '%#{options[:sector]}%'"
+      end
+      if options[:cluster]
+        conditions << "clusters like '%#{options[:cluster]}%'"
+      end
+      if options[:donor_id]
+        conditions << "project_id IN (SELECT project_id from donations WHERE donor_id=#{options[:donor_id]})"
+      end
+      if options[:region]
+        conditions << "regions like '%#{options[:region]}%'"
+      end
+      if options[:country]
+        conditions << "countries like '%#{options[:country]}%'"
+      end
+      if options[:organization]
+        conditions << "organization_id=#{options[:organization]}"
+      end
+      sql << conditions.join(' and ')
+    end
+    total_results = ActiveRecord::Base.connection.execute("select count(*) from (#{sql}) as subselect").first['count'].to_i
+    if options[:order]
+      sql << " ORDER BY #{options[:order]}"
+    end
+    if options[:per_page]
+      sql << " LIMIT #{options[:per_page]}"
+    end
+    if options[:page] && options[:per_page]
+      sql << " OFFSET #{options[:per_page].to_i * options[:page].to_i}"
+    end
+    result = ActiveRecord::Base.connection.execute(sql).map{ |r| r }
+    WillPaginate::Collection.create(options[:page] ? options[:page].to_i : 1, options[:per_page], total_results) do |pager|
+      pager.replace(result)
+    end
   end
 
   private
