@@ -59,13 +59,18 @@
               <p><%= @project.partner_organizations %></p>
             <% end %>
           </div>
-
+          
           <div class="block">
             <h3>Project timeline</h3>
-            <div class="timeline"><span></span><p class="months_left"><%= pluralize(@project.months_left, 'month', 'months') %> left</p></div>
-            <p class="first_date"><%= @project.start_date.strftime("%d/%m/%Y") %></p><p class="second_date"><%= @project.end_date.strftime("%d/%m/%Y") %></p>
+            <%if !@project.end_date.nil?%>
+              <div class="timeline"><span></span><p class="months_left"><%= pluralize(@project.months_left, 'month', 'months') %> left</p></div>
+              <p class="first_date"><%= @project.start_date.strftime("%d/%m/%Y") %></p>
+              <p class="second_date"><%= @project.end_date.strftime("%d/%m/%Y") %></p>            
+            <%else%>
+              <p>Active since <%= @project.start_date.strftime("%d/%m/%Y") %></p>
+            <%end%>
           </div>
-
+          
           <% unless @project.donations.nil? || @project.donations.sum(:amount).eql?(0.0) %>
           <div class="block">
             <h3>Project funding</h3>

@@ -107,8 +107,10 @@ class Project < ActiveRecord::Base
   end
 
   def months_left
-    unless finished?
+    if finished? && !end_date.nil?
       (end_date - Date.today).to_i / 30
+    else
+      false
     end
   end
 
