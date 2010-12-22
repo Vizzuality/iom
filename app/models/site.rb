@@ -1,3 +1,4 @@
+
 # == Schema Information
 #
 # Table name: sites
@@ -259,80 +260,51 @@ class Site < ActiveRecord::Base
   # Array of arrays
   # [[cluster, count], [cluster, count]]
   def projects_clusters
-    result = ActiveRecord::Base.connection.execute(
-    <<-EOF
-      SELECT cluster_id, count(cluster_id) AS count
-      FROM clusters_projects
-      WHERE project_id IN (
-        SELECT id
-        FROM projects
-        WHERE project_id IN (#{projects_ids_string})
-      )
-      GROUP BY cluster_id
-      ORDER BY count DESC
-    EOF
-    )
-    result.map do |row|
-      [Cluster.find(row['cluster_id']), row['count'].to_i]
+    sql="select c.id,c.name,count(ps.*) as count from clusters as c
+    inner join clusters_projects as cp on c.id=cp.cluster_id
+    inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=#{self.id}
+    group by c.id,c.name"
+    
+    Cluster.find_by_sql(sql).map do |c|
+      [c,c.count.to_i]
     end
   end
 
   # Array of arrays
   # [[sector, count], [sector, count]]
   def projects_sectors
-    result = ActiveRecord::Base.connection.execute(
-    <<-EOF
-      SELECT sector_id, count(sector_id) AS count
-      FROM projects_sectors
-      WHERE project_id IN (
-        SELECT id
-        FROM projects
-        WHERE project_id IN (#{projects_ids_string})
-      )
-      GROUP BY sector_id
-      ORDER BY count DESC
-    EOF
-    )
-    result.map do |row|
-      [Sector.find(row['sector_id']), row['count'].to_i]
-    end
+    sql="select c.id,c.name,count(ps.*) as count from clusters as c
+    inner join projects_sectors as cp on c.id=cp.sector_id
+    inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=#{self.id}
+    group by c.id,c.name"
+    
+    Sector.find_by_sql(sql).map do |s|
+      [s,s.count.to_i]
+    end    
   end
 
   # Array of arrays
   # [[region, count], [region, count]]
   def projects_regions
-    result = ActiveRecord::Base.connection.execute(
-    <<-EOF
-      SELECT region_id, count(region_id) AS count
-      FROM projects_regions
-      WHERE project_id IN (
-        SELECT id
-        FROM projects
-        WHERE project_id IN (#{projects_ids_string})
-      )
-      GROUP BY region_id
-      ORDER BY count DESC
-    EOF
-    )
-    result.map do |row|
-      [Region.find(row['region_id'], :select => Region.custom_fields), row['count'].to_i]
-    end
+    sql="select #{Region.custom_fields.join(',')},count(ps.*) as count from regions as regions
+      inner join projects_regions as pr on regions.id=pr.region_id and regions.level=#{self.level_for_region}
+      inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{self.id}
+      group by #{Region.custom_fields.join(',')}"
+      
+      Region.find_by_sql(sql).map do |r|
+        [r,r.count.to_i]
+      end  
   end
 
   # Array of arrays
   # [[organization, count], [organization, count]]
   def projects_organizations
-    result = ActiveRecord::Base.connection.execute(
-    <<-EOF
-      SELECT organizations.id AS organization_id, count(organizations.id) AS count
-      FROM organizations
-      INNER JOIN projects ON projects.primary_organization_id = organizations.id
-      WHERE projects.id IN (#{projects_ids_string})
-      GROUP BY organizations.id ORDER BY count DESC
-    EOF
-    )
-    result.map do |row|
-      [Organization.find(row['organization_id']), row['count'].to_i]
+    sql="select o.id,o.name,count(ps.*) as count from organizations as o
+      inner join projects as p on o.id=p.primary_organization_id
+      inner join projects_sites as ps on p.id=ps.project_id and ps.site_id=#{self.id}
+      group by o.id,o.name"
+    Organization.find_by_sql(sql).map do |o|
+        [o,o.count.to_i]
     end
   end
 

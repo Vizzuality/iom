@@ -10,10 +10,13 @@ class Cluster < ActiveRecord::Base
 
   has_and_belongs_to_many :projects
 
+
   def donors(site)
-    (projects & site.projects).map do |project|
-      project.donors
-    end.flatten.uniq
+    sql="select distinct d.* from donors as d 
+    inner join donations as don on d.id=donor_id 
+    inner join clusters_projects as cp on don.project_id=cp.project_id and cp.cluster_id=#{self.id}
+    inner join projects_sites as ps on ps.project_id=don.project_id and ps.site_id=#{site.id}"
+    Donor.find_by_sql(sql)
   end
 
   def self.custom_fields
@@ -25,13 +28,11 @@ class Cluster < ActiveRecord::Base
   def projects_regions(site)
     Region.find_by_sql(
 <<-SQL
-  select #{Region.custom_fields.join(',')}, count(regions.id) as count
-    from regions, projects_regions, clusters_projects where clusters_projects.cluster_id = #{self.id} AND
-    clusters_projects.project_id IN (#{site.projects_ids.join(',')}) AND
-    clusters_projects.project_id = projects_regions.project_id AND
-    projects_regions.region_id = regions.id AND
-    regions.level = #{site.level_for_region}
-    group by #{Region.custom_fields.join(',')}
+  select r.id,r.name,count(ps.*) as count from regions as r
+  inner join projects_regions as pr on r.id=pr.region_id and r.level=#{site.level_for_region}
+  inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{site.id}
+  inner join clusters_projects as cp on cp.project_id=ps.project_id and cp.cluster_id=#{self.id}
+  group by r.id,r.name
 SQL
     ).map do |r|
       [r, r.count.to_i]
