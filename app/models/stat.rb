@@ -12,6 +12,6 @@ class Stat < ActiveRecord::Base
 
   belongs_to :site
 
-  validates_uniqueness_of :date
+  validates_uniqueness_of :date, :scope => :site_id
 
 end
