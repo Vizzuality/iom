@@ -148,7 +148,6 @@
 
           <% if @project.activities || @project.additional_information || @project.cross_cutting_issues %>
             <div class="block info">
-<<<<<<< HEAD
               <%unless @project.activities.blank? %>
                 <h3 class="first">ACTIVITIES</h3>
                   <%= raw(@project.activities) %>
@@ -159,18 +158,6 @@
               <%end%>
               <%unless @project.cross_cutting_issues.blank? %>
                   <h3 class="<%= (@project.activities.blank? && @project.additional_information.blank?)? 'first':''%>">CROSS-CUTTING ISSUES</h3>
-=======
-              <%unless @project.activities.blank?%>
-                <h3 class="first">ACTIVITIES</h3>
-                  <%= raw(@project.activities) %>
-              <%end%>
-              <%unless @project.additional_information.blank?%>
-                <h3 class="<%= (@project.additional_information.empty?)? 'first':''%>">ADDITIONAL INFORMATION</h3>
-                <%= raw(@project.additional_information) %>
-              <%end%>
-              <%unless @project.cross_cutting_issues.blank?%>
-                  <h3 class="<%= (@project.activities.empty? && @project.additional_information.empty?)? 'first':''%>">CROSS-CUTTING ISSUES</h3>
->>>>>>> 9d4111238817433fc5233acc213adbc6fe132912
                   <%= raw(@project.cross_cutting_issues) %>
               <%end%>
             </div>
