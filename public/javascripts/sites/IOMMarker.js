@@ -98,7 +98,7 @@
         bottom_hidden.style.float = "left";
         bottom_hidden.style.background = "url('/images/sites/common/tooltips/bottom_tooltip.png') no-repeat 0 0";
         bottom_hidden.style.width = '175px';
-        bottom_hidden.style.height = '15px';
+        bottom_hidden.style.height = '14px';
         hidden_div.appendChild(bottom_hidden);
 
         div.appendChild(hidden_div);
