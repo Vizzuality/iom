@@ -25,7 +25,6 @@
       };
       var mapChartType = new google.maps.ImageMapType(mapChartOptions);      
     
-      console.log(map_data);
 
       var myOptions = {
         scrollwheel: false,
