@@ -86,11 +86,16 @@
     positionZoomControls();
     $('#zoomIn').fadeIn();
     $('#zoomOut').fadeIn();
-    window.onResize = positionZoomControls;
+    
+    $(window).resize(function() {
+      positionZoomControls();
+    });
+    
   });
   
   
   function positionZoomControls() {
+    console.log('jamon');
     if ($('#layout').length>0) {
       var column_position = $('#layout').offset().left;
       var map_position = $('#map').position().top + 25;
