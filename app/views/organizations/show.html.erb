@@ -1,13 +1,14 @@
-<%if false%>
-  <% content_for :js do%>
-    <%= javascript_include_tag 'http://geocommons.com/javascripts/f1.api.js', '/javascripts/sites/map.js' %>
-    <script>
-      $(document).ready( function() {
-        initialize();
-      });
-    </script>
+  
+  <%if false%>
+    <% content_for :js do%>
+      <%= javascript_include_tag 'http://geocommons.com/javascripts/f1.api.js', '/javascripts/sites/map.js' %>
+      <script>
+        $(document).ready( function() {
+          initialize();
+        });
+      </script>
+    <%end%>
   <%end%>
-<%end%>
 
 
   <div class="main_head">
@@ -26,9 +27,11 @@
     </div>
   </div>
 
+
   <div id="map"></div>
   <a href="#zoom_in" id="zoomIn" onclick="zoomIn()"></a>
   <a href="#zoom_out" id="zoomOut" onclick="zoomOut()"></a>
+
 
   <div id="layout">
     <div id="left_column">

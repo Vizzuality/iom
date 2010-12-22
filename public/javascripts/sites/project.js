@@ -4,24 +4,19 @@
         //Number of men for painting
         $('span.people_amount').width($('span.people_amount').attr('estimate')/1000);
         
-        //If right part is bigger than float left
-        if ($('div#project div.float_right').height() < $('div#project div.left').height()) {
-          var offset =  $('div#project div.left').height() - $('div#project div.float_right').height();
-          $('div#project div.float_right').append('<div class="block margin"></div>');
-          $('div#project div.float_right div.block:last').height(offset);
+        //If left part is bigger than float right
+        if ($('div#project div.float_left').height() < $('div#project div.right').height()) {
+          var offset =  $('div#project div.right').height() - $('div#project div.float_left').height();
+          $('div#project div.float_left').append('<div class="block margin"></div>');
+          $('div#project div.float_left div.block:last').height(offset);
+          $('div#project div.outer_float').height($('div#project div.float_left').height()-40);
+          $('div#project div.left').height($('div#project div.float_left').height()-30);
         }
-        
-        
-        if ($('div.inner_main_head div.right').height() > $('div.inner_main_head div.left').height()) {
-          $('div.inner_main_head div.left').height($('div.inner_main_head div.right').height());
 
-        }else {
-          $('div.inner_main_head div.right').height($('div.inner_main_head div.left').height());    
-        }
         
-        $('div.inner_main_head div.head').height($('div.inner_main_head div.left').height()-39);
-        $('div.inner_main_head div.right').height($('div.inner_main_head div.head').height()+39);
-        $('div.projects div#mash.right').height($('div#project div.left').height()+ 39);
+        
+        
+        
         
         $('div#completed').css('bottom','0px');
               
