@@ -128,15 +128,14 @@
 
     <!-- MAP -->
     <script type="text/javascript">
-      var bbox = [{"lat":18.93205126204314, "lon":-72.6361083984375},{"lat":18.7, "lon":-72.6361083984375}];
-      var chco = "F7F7F7,8BC856,336600";
-      var chf = "bg,s,2F84A3";
-      var chld = "HT-AR|HT-CE|HT-GR|HT-NI|HT-ND|HT-NE|HT-OU|HT-SD|HT-SE";
-      var chd = "t:0,10,20,30,40,50,60,70,80";
-      var marker_source = '';
+      var bbox = <%=raw(@overview_map_bbox.to_json)%>;
+      var chco = "<%=@overview_map_chco%>";
+      var chf = "<%=@overview_map_chf%>";
+      var chld = "<%=@chld%>";
+      var chd = "<%=@chd%>";
+      var marker_source = "<%=@overview_map_marker_source%>";
+      var map_data = '<%=raw(@map_data)%>';
       var max_count = '<%=@map_data_max_count%>';
-      //var map_data = <%=raw(@map_features_json)%>;
-      var map_data = [{"id":1, "lat":18.93205126204314, "lon":-72.6361083984375, "count":10, "url":"/organizations/10", "name":"Madrid"},{"id":3, "lat":18.7, "lon":-72.6361083984375, "count":5, "url":"/region/10", "name":"Haiti"}];
     </script>
 
     <script src="/javascripts/sites/mercatorProjection.js" type="text/javascript" charset="utf-8"></script>
