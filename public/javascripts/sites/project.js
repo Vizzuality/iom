@@ -43,17 +43,7 @@
   	      Galleria.loadTheme('/javascripts/plugins/galleria.classic.js');
   			  $('div.galleryStyle').galleria({thumbnails:false, preload:2,autoplay:5000,transition:'fade',show_counter:'false'});
   			}
-        
-        
-        //Google map
-        var myOptions = {
-              zoom: 4,
-              center: new google.maps.LatLng(40.4166909, -3.7003454),
-              disableDefaultUI: true,
-              scrollwheel:false,              
-              mapTypeId: google.maps.MapTypeId.ROADMAP
-            }
-        var map = new google.maps.Map(document.getElementById("small_map"),myOptions);
+
       });
       
       

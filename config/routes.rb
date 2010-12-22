@@ -12,8 +12,6 @@ Iom::Application.routes.draw do
   match 'logout' => 'sessions#destroy', :as => :logout
 
   # Front urls
-  resources :sectors,       :only => [:show]
-  resources :clusters,      :only => [:show]
   resources :donors,        :only => [:index, :show]
   resources :projects,      :only => [:index, :show]
   resources :organizations, :only => [:index, :show]
@@ -21,6 +19,10 @@ Iom::Application.routes.draw do
   #countries and regions work through the same controller and view
   match 'countries/:id' => 'georegion#show', :as => 'country'
   match 'regions/:id'   => 'georegion#show', :as => 'region'
+  
+  #clusters and sector work through the same controller and view
+  match 'sectors/:id' => 'clusters_sectors#show', :as => 'sector'
+  match 'clusters/:id'   => 'clusters_sectors#show', :as => 'cluster'  
 
   # pages
   match '/p/:id' => 'pages#show', :as => :page
