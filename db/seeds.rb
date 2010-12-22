@@ -86,7 +86,7 @@ Tag.create :name => 'earthquake'
 #  127.0.0.1       iom-haiti.ipq.co
 site = Site.create :name => 'Haiti Aid Map', :url => 'iom-haiti.ipq.co', :status => true,
                    :theme => Theme.find_by_name('Garnet')
-site.geographic_context_country = Country.find_by_name('Haiti')
+site.geographic_context_country_id = Country.find_by_name('Haiti').id
 site.overview_map_bbox_miny=17.78605726800591;
 site.overview_map_bbox_minx=-76.94549560546851;
 site.overview_map_bbox_maxy=20.262938421364236;
