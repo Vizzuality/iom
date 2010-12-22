@@ -160,7 +160,7 @@ SQL
     LEFT JOIN clusters as clus           ON clus.id=cpro.cluster_id
     GROUP BY p.id,p.name,o.id,o.name,c.name,p.created_at,p.description) as subq
 SQL
-    if options[:sector] || options[:cluster] || options[:donor_id] || options[:region] || options[:country]
+    if options[:sector] || options[:cluster] || options[:donor_id] || options[:region] || options[:country] || options[:organization]
       sql << " WHERE "
       conditions = []
       if options[:sector]
@@ -178,8 +178,12 @@ SQL
       if options[:country]
         conditions << "countries like '%#{options[:country]}%'"
       end
+      if options[:organization]
+        conditions << "organization_id=#{options[:organization]}"
+      end
       sql << conditions.join(' and ')
     end
+    total_results = ActiveRecord::Base.connection.execute("select count(*) from (#{sql}) as subselect").first['count'].to_i
     if options[:order]
       sql << " ORDER BY #{options[:order]}"
     end
@@ -190,7 +194,7 @@ SQL
       sql << " OFFSET #{options[:per_page].to_i * options[:page].to_i}"
     end
     result = ActiveRecord::Base.connection.execute(sql).map{ |r| r }
-    WillPaginate::Collection.create(options[:page] ? options[:page].to_i : 1, options[:per_page], 400) do |pager|
+    WillPaginate::Collection.create(options[:page] ? options[:page].to_i : 1, options[:per_page], total_results) do |pager|
       pager.replace(result)
     end
   end
