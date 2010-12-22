@@ -91,8 +91,9 @@
             <% end %>
           </div>
           <% end %>
+          <% unless @project.donors.empty? %>
           <div class="block">
-            <% unless @project.donors.empty? %>
+            
               <h3>Donors</h3>
               <ul>
               <% @project.donors.limit(5).each do |donor| %>
@@ -102,9 +103,8 @@
               <% if @project.donors.count > 5 %>
                 <p>and <%= pluralize(@project.donors.count - 5, 'more donor', 'more donors') %></p>
               <% end %>
-            <% end %>
           </div>
-
+          <% end %>
           <% unless ((@project.contact_email.nil?)||(@project.contact_email.empty?))&&(@project.contact_person.nil?)&&(@project.contact_phone_number.nil?) %>
           <div class="block">
             <h3>Contact information</h3>

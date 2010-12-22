@@ -11,7 +11,7 @@
           <% else %>
             <% if @site.navigate_by_cluster? %>
             <li id="cluster_option">
-              <a href="#" class="geneva main_option with_suboptions"><%= @site.word_for_clusters.upcase %><span class="with_suboptions"></span></a>
+              <a class="geneva main_option with_suboptions"><%= @site.word_for_clusters.upcase %><span class="with_suboptions"></span></a>
               <div class="header_title"><a><%= @site.word_for_clusters.upcase %><span class="with_suboptions"></span></a></div>
               <ul class="suboptions">
                 <% @site.clusters.each do |cluster| %>
@@ -23,7 +23,7 @@
             </li>
             <% elsif @site.navigate_by_sector? %>
             <li id="sector_option">
-              <a href="#" class="geneva main_option with_suboptions"><%= @site.word_for_sectors.upcase %><span class="with_suboptions"></span></a>
+              <a class="geneva main_option with_suboptions"><%= @site.word_for_sectors.upcase %><span class="with_suboptions"></span></a>
               <ul class="suboptions">
                 <% @site.sectors.each do |sector| %>
                 <li><a href="<%= sector_path(sector) %>" class="geneva"><%= sector.name %></a></li>
@@ -40,25 +40,23 @@
           <%
             #if the site defines a country then display the regions
             elsif @site.geographic_context_country_id? %>
-            <li id="country_option">
-              <a href="#" class="geneva main_option">REGIONS<span class="with_suboptions"></span></a>
+            <li id="region_option">
+              <a class="geneva main_option with_suboptions">REGIONS<span class="with_suboptions"></span></a>
               <div class="header_title"><a>REGIONS<span class="with_suboptions"></span></a></div>
               <div class="suboptions_body">
                 <div class="wrapper">
                   <ul class="content scroll_pane">
                     <% @site.regions_select.each do |region| %>
-
                     <li><a href="/regions/<%= region.id %>" class="geneva"><%= region.name %></a></li>
                     <% end %>
                   </ul>
                 </div>
+              </li>
           <%
            #if the site does not define a geo context, then is worldwide,display the countries
             else %>
-
-            <!-- ONLY TO TEST -->
             <li id="country_option">
-              <a href="#" class="geneva main_option with_suboptions">COUNTRIES<span class="with_suboptions"></span></a>
+              <a class="geneva main_option with_suboptions">COUNTRIES<span class="with_suboptions"></span></a>
               <div class="header_title"><a>COUNTRIES<span class="with_suboptions"></span></a></div>
               <div class="suboptions_body">
                 <div class="wrapper">
@@ -70,26 +68,28 @@
                   </ul>
                 </div>
               </div>
+            </li>
           <% end %>
-        <li id="organization_option">
-            <a href="#" class="geneva main_option with_suboptions">ORGANIZATIONS<span class="with_suboptions"></span></a>
-            <div class="header_title"><a>ORGANIZATIONS<span class="with_suboptions"></span></a></div>
-            <div class="suboptions_body">
-              <form method="get">
-                <input id="ngos_search" type="text" value="" name="ngos_search"/>
-              </form>
-              <div class="wrapper">
-                <ul id="orgs_list" class="content scroll_pane_auto">
+          
+          <li id="organization_option">
+              <a class="geneva main_option with_suboptions">ORGANIZATIONS<span class="with_suboptions"></span></a>
+              <div class="header_title"><a>ORGANIZATIONS<span class="with_suboptions"></span></a></div>
+              <div class="suboptions_body">
+                <form method="get">
+                  <input id="ngos_search" type="text" value="" name="ngos_search"/>
+                </form>
+                <div class="wrapper">
+                  <ul id="orgs_list" class="content scroll_pane_auto">
 
-                  <% @site.organizations.each do |organization| %>
-                    <li><a href="<%= organization_path(organization) %>"><%= organization.name %></a></li>
-                  <% end %>
-                </ul>
+                    <% @site.organizations.each do |organization| %>
+                      <li><a href="<%= organization_path(organization) %>"><%= organization.name %></a></li>
+                    <% end %>
+                  </ul>
+                </div>
               </div>
-            </div>
-          </li>
-          <li><a href="<%= page_path(Page.analysis(@site)) %>" class="geneva main_option">ANALYSIS</a></li>
-          <li><a href="<%= page_path(Page.about(@site)) %>" class="geneva main_option">ABOUT</a></li>
+            </li>
+            <li><a href="<%= page_path(Page.analysis(@site)) %>" class="geneva main_option">ANALYSIS</a></li>
+            <li><a href="<%= page_path(Page.about(@site)) %>" class="geneva main_option">ABOUT</a></li>
       </ul>
     </div>
 

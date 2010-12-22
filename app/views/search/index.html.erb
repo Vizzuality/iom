@@ -64,7 +64,7 @@
               <% index = index + 1 %>
             <% end %>
             </ul>
-            <% if @regions.size>10 %>
+            <% if index>11 %>
               <a href="#more_results" class="more">More results</a>
             <% end %>
           <% end %>
@@ -88,7 +88,7 @@
               <% index = index + 1 %>
             <% end %>
             </ul>
-            <% if @clusters.size>10 %>
+            <% if index>11 %>
               <a href="#more_results" class="more">More results</a>
             <% end %>
           <% end %>
