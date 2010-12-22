@@ -4,7 +4,7 @@ class GeoregionController < ApplicationController
 
   def show
     if(request.url.match(/countries/))
-      @area = Country.find(params[:id])
+      @area = Country.find(params[:id], :select => Country.custom_fields)
       @area_parent = "America"
 
       sql="select c.id,count(ps.project_id) as count,c.name,x(ST_Centroid(c.the_geom)) as lon,y(ST_Centroid(c.the_geom)) as lat,
@@ -14,7 +14,7 @@ class GeoregionController < ApplicationController
         group by c.id,c.name,lon,lat,geojson"
     else
       @area = Region.find(params[:id])
-      @area_parent = @area.country.try(:name)
+      @area_parent = Country.find_by_id(@area.country_id, :select => "id, name").try(:name)
       sql="select r.id,count(ps.project_id) as count,r.name,x(ST_Centroid(r.the_geom)) as lon,y(ST_Centroid(r.the_geom)) as lat,
         ST_AsGeoJSON(r.the_geom,6) as geojson
         from (projects_regions as pr inner join projects_sites as ps on pr.project_id=ps.project_id and site_id=#{@site.id})

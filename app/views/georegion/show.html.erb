@@ -48,16 +48,17 @@
           <% end %>
         </div>
 
+        <% donors = @area.donors(@site, 11) %>
         <div class="block">
           <h3>DONORS</h3>
-          <% unless @area.donors(@site).empty? %>
+          <% unless donors.empty? %>
             <ul>
-              <% @area.donors(@site)[0...10].each do |donor| %>
+              <% donors[0...10].each do |donor| %>
               <li><%= link_to(donor.name, donor_path(donor)) %></li>
               <% end %>
             </ul>
-            <% if @area.donors(@site).size > 10 %>
-              <p>and <%= pluralize(@area.donors(@site).size - 10, 'more donor', 'more donors') %></p>
+            <% if donors.size > 10 %>
+              <p>and <%= pluralize(@area.donors_count(@site) - 10, 'more donor', 'more donors') %></p>
             <% end %>
           <% else %>
             <p>The are no donors</p>
