@@ -69,8 +69,10 @@
         <div class="block margin">
           <h3>PROJECTS IN OTHER REGIONS</h3>
           <ul>
-            <% @area.near(5).each do |country| %>
-            <li><%= link_to(country.name, country_path(country)) %> - <%= pluralize(country.projects.site(@site).count, 'project', 'projects') %></li>
+            <% @area.near(5).each do |area| %>
+            <li>
+              <%= link_to(area.name, (area.is_a?(Region) ? region_path(area) : country_path(country))) %>
+              - <%= pluralize(area.count, 'project', 'projects') %></li>
             <% end %>
           </ul>
         </div>
