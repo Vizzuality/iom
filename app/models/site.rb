@@ -115,6 +115,14 @@ class Site < ActiveRecord::Base
     w.blank? ? 'sectors' : w
   end
 
+  def word_for_cluster_sector
+    if cluster
+      word_for_clusters
+    elsif sector
+      word_for_sectors
+    end
+  end
+
   def cluster
     Cluster.find(self.project_context_cluster_id)
   rescue ActiveRecord::RecordNotFound
@@ -229,17 +237,35 @@ class Site < ActiveRecord::Base
     projects_sql(options.merge(:limit => nil, :offset => nil)).all
   end
 
+  def projects_sectors_or_clusters
+    categories = projects_sectors + projects_clusters
+    categories.sort!{|x, y| x.first.class.name <=> y.first.class.name}
+    categories
+  end
+
   def projects_ids_string
     # projects_ids seems to return a -1 id. #BUG?
     # no, feature!
-    # this way never is empty
+    # this way never is empty => Nice! Thanks for clarification
     (self.projects_ids - [-1]).join(',')
   end
 
   # Array of arrays
   # [[cluster, count], [cluster, count]]
   def projects_clusters
-    result = ActiveRecord::Base.connection.execute("select cluster_id, count(cluster_id) as count from clusters_projects where project_id IN (select id from projects where project_id IN (#{projects_ids_string})) group by cluster_id order by count desc")
+    result = ActiveRecord::Base.connection.execute(
+    <<-EOF
+      SELECT cluster_id, count(cluster_id) AS count
+      FROM clusters_projects
+      WHERE project_id IN (
+        SELECT id
+        FROM projects
+        WHERE project_id IN (#{projects_ids_string})
+      )
+      GROUP BY cluster_id
+      ORDER BY count DESC
+    EOF
+    )
     result.map do |row|
       [Cluster.find(row['cluster_id']), row['count'].to_i]
     end
@@ -248,7 +274,19 @@ class Site < ActiveRecord::Base
   # Array of arrays
   # [[sector, count], [sector, count]]
   def projects_sectors
-    result = ActiveRecord::Base.connection.execute("select sector_id, count(sector_id) as count from projects_sectors where project_id IN (select id from projects where project_id IN (#{projects_ids_string})) group by sector_id order by count desc")
+    result = ActiveRecord::Base.connection.execute(
+    <<-EOF
+      SELECT sector_id, count(sector_id) AS count
+      FROM projects_sectors
+      WHERE project_id IN (
+        SELECT id
+        FROM projects
+        WHERE project_id IN (#{projects_ids_string})
+      )
+      GROUP BY sector_id
+      ORDER BY count DESC
+    EOF
+    )
     result.map do |row|
       [Sector.find(row['sector_id']), row['count'].to_i]
     end
@@ -257,7 +295,19 @@ class Site < ActiveRecord::Base
   # Array of arrays
   # [[region, count], [region, count]]
   def projects_regions
-    result = ActiveRecord::Base.connection.execute("select region_id, count(region_id) as count from projects_regions where project_id IN (select id from projects where project_id IN (#{projects_ids_string})) group by region_id order by count desc")
+    result = ActiveRecord::Base.connection.execute(
+    <<-EOF
+      SELECT region_id, count(region_id) AS count
+      FROM projects_regions
+      WHERE project_id IN (
+        SELECT id
+        FROM projects
+        WHERE project_id IN (#{projects_ids_string})
+      )
+      GROUP BY region_id
+      ORDER BY count DESC
+    EOF
+    )
     result.map do |row|
       [Region.find(row['region_id'], :select => Region.custom_fields), row['count'].to_i]
     end
@@ -266,9 +316,10 @@ class Site < ActiveRecord::Base
   # Array of arrays
   # [[organization, count], [organization, count]]
   def projects_organizations
-    result = ActiveRecord::Base.connection.execute(<<-EOF
-      select organizations.id as organization_id, count(organizations.id) as count
-      from organizations
+    result = ActiveRecord::Base.connection.execute(
+    <<-EOF
+      SELECT organizations.id AS organization_id, count(organizations.id) AS count
+      FROM organizations
       INNER JOIN projects ON projects.primary_organization_id = organizations.id
       WHERE projects.id IN (#{projects_ids_string})
       GROUP BY organizations.id ORDER BY count DESC
