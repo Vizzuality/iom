@@ -58,7 +58,7 @@ $(document).ready( function() {
       ev.preventDefault();
 
       if (($(this).children('span.with_suboptions').length > 0)&&(!$(this).hasClass('displayed'))){
-
+          console.log('entra');
           // Close all tabs
           $('ul.menu li a.displayed').removeClass('displayed');
           $('ul.menu li.clicked').removeClass('clicked');
@@ -72,7 +72,8 @@ $(document).ready( function() {
           }
 
           $(document).click(function(event) {
-                if ((!$(event.target).closest('ul.suboptions li a').length)&&(!$(event.target).closest('ul.scroll_pane').length)&&(!$(event.target).closest('input#ngos_search').length)) {
+                if ((!$(event.target).closest('ul.suboptions li a').length)&&(!$(event.target).closest('ul.scroll_pane').length)&&(!$(event.target).closest('input#ngos_search').length))               
+                {
                   $('ul.menu li.clicked').removeClass('clicked');
                   $('ul.menu li a.displayed').removeClass('displayed');
                 };
