@@ -4,17 +4,17 @@
 #
 #  id                   :integer         not null, primary key
 #  position             :integer         default(0)
-#  element_id           :integer         
-#  element_type         :integer         
-#  picture_file_name    :string(255)     
-#  picture_content_type :string(255)     
-#  picture_filesize     :integer         
-#  picture_updated_at   :datetime        
-#  vimeo_url            :string(255)     
-#  vimeo_embed_html     :text            
-#  created_at           :datetime        
-#  updated_at           :datetime        
-#  caption              :string(255)     
+#  element_id           :integer
+#  element_type         :integer
+#  picture_file_name    :string(255)
+#  picture_content_type :string(255)
+#  picture_filesize     :integer
+#  picture_updated_at   :datetime
+#  vimeo_url            :string(255)
+#  vimeo_embed_html     :text
+#  created_at           :datetime
+#  updated_at           :datetime
+#  caption              :string(255)
 #
 
 class MediaResource < ActiveRecord::Base
@@ -37,6 +37,8 @@ class MediaResource < ActiveRecord::Base
 
   before_create :set_position
 
+  validate :presence_of_picture_or_attachment
+
   def is_a_video?
     vimeo_url?
   end
@@ -50,6 +52,8 @@ class MediaResource < ActiveRecord::Base
     html = html.gsub(/height=&quot;(\d+)&quot;/, 'height=&quot;300&quot;')
     write_attribute(:vimeo_url, value)
     write_attribute(:vimeo_embed_html, html)
+  rescue URI::InvalidURIError
+    errors[:base] << "You have upload a picture or indicate a Vimeo URL"
   end
 
   # decrement position
@@ -82,6 +86,12 @@ class MediaResource < ActiveRecord::Base
         self.position = last_resource_from_element + 1
       else
         self.position = 0
+      end
+    end
+
+    def presence_of_picture_or_attachment
+      if vimeo_url.blank? && picture_file_name.blank?
+        errors[:base] << "You have upload a picture or indicate a Vimeo URL"
       end
     end
 
