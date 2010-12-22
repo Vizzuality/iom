@@ -2,7 +2,7 @@
   <div class="inner_main_head">
     <div class="left">
       <div class="float_head home">
-        <h1><%= @site.name %></h1>
+        <h1><%= @site.name %><sup class="beta">BETA</sup></h1>
         <% unless @site.short_description.nil? %><h3><%= @site.short_description %></h3><%end%>
       </div>
     </div>
@@ -61,10 +61,10 @@
             <%= raw(projects_by_location(@site.projects_regions)) %>
           </div>
 
-          <div class="block margin">
+          <div id="most_active_orgs" class="block margin">
             <h3>MOST ACTIVE ORGANIZATIONS</h3>
             <ul>
-              <% @site.projects_organizations.each do |organization, count| %>
+              <% @site.projects_organizations[0...9].each do |organization, count| %>
               <li><%= link_to organization.name, organization_path(organization) %> - <%= pluralize(count, 'project') %></li>
               <% end  -%>
             </ul>

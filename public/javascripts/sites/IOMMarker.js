@@ -46,25 +46,25 @@
 
 
         //Marker address
-        if (this.diameter>34) {
           var count = document.createElement('p');
           count.style.position = "absolute";
           count.style.top = "50%";
           count.style.left = "50%";
           count.style.height = "15px";
-          count.style.margin ="-9px 0 0 0px";
           count.style.textAlign = "center";
           if (this.diameter==34) {
-            count.style.font = "normal 11px Arial";
+            count.style.margin ="-6px 0 0 0px";
+            count.style.font = "normal 12px Arial";
           } else if (this.diameter==42) {
+            count.style.margin ="-8px 0 0 0px";
             count.style.font = "normal 15px Arial";
           } else {
+            count.style.margin ="-9px 0 0 0px";
             count.style.font = "normal 18px Arial";
           }
           count.style.color = "white";
           $(count).text(this.count);
           div.appendChild(count);
-        }
 
 
 
