@@ -431,26 +431,26 @@ a.icon_watermark:hover {background-position:0 -22px; cursor:pointer;}
 
 
 /* TO OTHER LIST */
-li.icon_other.agriculture {background:url('/images/sites/common/icons/li_others/agriculture.png') no-repeat left 0!important;}
-li.icon_other.camp_coordination {background:url('/images/sites/common/li_others/menu/camp.png') no-repeat left 0!important;}
-li.icon_other.communications {background:url('/images/sites/common/icons/li_others/communication.png') no-repeat left 0!important;}
-li.icon_other.disaster_management {background:url('/images/sites/common/icons/li_others/disaster_management.png') no-repeat left 0!important;}
-li.icon_other.early_recovery {background:url('/images/sites/common/icons/li_others/early_recovery.png') no-repeat left 0!important;}
-li.icon_other.economic_recovery {background:url('/images/sites/common/icons/li_others/economic_recovery.png') no-repeat left 0!important;}
-li.icon_other.education {background:url('/images/sites/common/icons/li_others/education.png') no-repeat left 0!important;}
-li.icon_other.emergency {background:url('/images/sites/common/icons/li_others/emergency.png') no-repeat left 0!important;}
-li.icon_other.environment {background:url('/images/sites/common/icons/li_others/environment.png') no-repeat left 0!important;}
-li.icon_other.food_aid {background:url('/images/sites/common/icons/li_others/food_aid.png') no-repeat left 0!important;}
-li.icon_other.food_security {background:url('/images/sites/common/icons/li_others/food_security.png') no-repeat left 0!important;}
-li.icon_other.health {background:url('/images/sites/common/icons/li_others/health.png') no-repeat left 0!important;}
-li.icon_other.human_rights {background:url('/images/sites/common/icons/li_others/human_rights.png') no-repeat left 0!important;}
-li.icon_other.logistics {background:url('/images/sites/common/icons/li_others/logistics.png') no-repeat left 0!important!important;}
-li.icon_other.nutrition {background:url('/images/sites/common/icons/li_others/nutrition.png') no-repeat left 0!important;}
-li.icon_other.other {background:url('/images/sites/common/icons/li_others/other.png') no-repeat left 0!important;}
-li.icon_other.peace_security {background:url('/images/sites/common/icons/li_others/peace_security.png') no-repeat left 0!important;}
-li.icon_other.protection {background:url('/images/sites/common/icons/li_others/protection.png') no-repeat left 0!important;}
-li.icon_other.shelter {background:url('/images/sites/common/icons/li_others/shelter.png') no-repeat left 0!important;}
-li.icon_other.water_sanitation {background:url('/images/sites/common/icons/li_others/water.png') no-repeat left 0!important;}
+li.icon_other.agriculture {background:url('/images/sites/common/icons/li_others/agriculture.png') no-repeat 0 0!important;}
+li.icon_other.camp_coordination {background:url('/images/sites/common/icons/li_others/camp.png') no-repeat 0 0!important;}
+li.icon_other.communications {background:url('/images/sites/common/icons/li_others/communication.png') no-repeat 0 0!important;}
+li.icon_other.disaster_management {background:url('/images/sites/common/icons/li_others/disaster_management.png') no-repeat 0 0!important;}
+li.icon_other.early_recovery {background:url('/images/sites/common/icons/li_others/early_recovery.png') no-repeat 0 0!important;}
+li.icon_other.economic_recovery {background:url('/images/sites/common/icons/li_others/economic_recovery.png') no-repeat 0 0!important;}
+li.icon_other.education {background:url('/images/sites/common/icons/li_others/education.png') no-repeat 0 0!important;}
+li.icon_other.emergency {background:url('/images/sites/common/icons/li_others/emergency.png') no-repeat 0 0!important;}
+li.icon_other.environment {background:url('/images/sites/common/icons/li_others/environment.png') no-repeat 0 0!important;}
+li.icon_other.food_aid {background:url('/images/sites/common/icons/li_others/food_aid.png') no-repeat 0 0!important;}
+li.icon_other.food_security {background:url('/images/sites/common/icons/li_others/food_security.png') no-repeat 0 0!important;}
+li.icon_other.health {background:url('/images/sites/common/icons/li_others/health.png') no-repeat 0 0!important;}
+li.icon_other.human_rights {background:url('/images/sites/common/icons/li_others/human_rights.png') no-repeat 0 0!important;}
+li.icon_other.logistics {background:url('/images/sites/common/icons/li_others/logistics.png') no-repeat 0 0!important}
+li.icon_other.nutrition {background:url('/images/sites/common/icons/li_others/nutrition.png') no-repeat 0 0!important;}
+li.icon_other.other {background:url('/images/sites/common/icons/li_others/other.png') no-repeat 0 0!important;}
+li.icon_other.peace_security {background:url('/images/sites/common/icons/li_others/peace_security.png') no-repeat 0 0!important;}
+li.icon_other.protection {background:url('/images/sites/common/icons/li_others/protection.png') no-repeat 0 0!important;}
+li.icon_other.shelter {background:url('/images/sites/common/icons/li_others/shelter.png') no-repeat 0 0!important;}
+li.icon_other.water_sanitation {background:url('/images/sites/common/icons/li_others/water.png') no-repeat 0 0!important;}
 
 
 

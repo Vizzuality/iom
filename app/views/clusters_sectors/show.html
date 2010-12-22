@@ -53,10 +53,12 @@
             <ul class="clusters">
             <% @site.projects_sectors_or_clusters.each do |category, count| %>
               <% next if category == @data %>
+              <%unless category.name.eql?('N/A') %>
               <li class="<%= category.css_class %> icon_other">
                 <%= link_to(category.name, url_for(category)) %>
                 <p><%= pluralize(count, 'project', 'projects') %></p>
               </li>
+              <%end%>
             <% end %>
             </ul>
           </div>
