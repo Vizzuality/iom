@@ -21,7 +21,7 @@
         </div>
       </div>
       <div class="right">
-        <p><%= truncate (@organization.description, :length => 800) %></p>
+        <%= simple_format(truncate(@organization.description, :length => 800)) %></p>
       </div>
     </div>
   </div>
