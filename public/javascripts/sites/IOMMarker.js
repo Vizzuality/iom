@@ -104,15 +104,16 @@
         div.appendChild(hidden_div);
 
 
-
-        google.maps.event.addDomListener(div,'click',function(ev){ 
-    	    try{
-    				ev.stopPropagation();
-    			}catch(e){
-    				event.cancelBubble=true;
-    			};
-    			window.location.href=me.url;
-    	  });
+        if (this.url!=undefined) {
+          google.maps.event.addDomListener(div,'click',function(ev){ 
+      	    try{
+      				ev.stopPropagation();
+      			}catch(e){
+      				event.cancelBubble=true;
+      			};
+      			window.location.href=me.url;
+      	  });
+        }
 
     		
     		google.maps.event.addDomListener(div,'mousedown',function(ev){ 
