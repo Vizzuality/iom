@@ -409,28 +409,27 @@ a.icon_menu:hover {background-position:0 -22px; cursor:pointer;}
 
 /* TO WATER_MARK */
 
-a.icon_watermark {position:absolute; right:32px; top:50%; height:32px; width:32px; margin:-16px 0 0 0; opacity:.5; filter:Alpha(opacity=50);filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50); z-index:0;}
-a.icon_watermark.agriculture {background:url('/images/sites/common/icons/watermark/agriculture.png') no-repeat left 0;}
-a.icon_watermark.camp_coordination {background:url('/images/sites/common/watermark/menu/camp.png') no-repeat left 0;}
-a.icon_watermark.communications {background:url('/images/sites/common/icons/watermark/communication.png') no-repeat left 0;}
-a.icon_watermark.disaster_management {background:url('/images/sites/common/icons/watermark/disaster_management.png') no-repeat left 0;}
-a.icon_watermark.early_recovery {background:url('/images/sites/common/icons/watermark/early_recovery.png') no-repeat left 0;}
-a.icon_watermark.economic_recovery {background:url('/images/sites/common/icons/watermark/economic_recovery.png') no-repeat left 0;}
-a.icon_watermark.education {background:url('/images/sites/common/icons/watermark/education.png') no-repeat left 0;}
-a.icon_watermark.emergency {background:url('/images/sites/common/icons/watermark/emergency.png') no-repeat left 0;}
-a.icon_watermark.environment {background:url('/images/sites/common/icons/watermark/environment.png') no-repeat left 0;}
-a.icon_watermark.food_aid {background:url('/images/sites/common/icons/watermark/food_aid.png') no-repeat left 0;}
-a.icon_watermark.food_security {background:url('/images/sites/common/icons/watermark/food_security.png') no-repeat left 0;}
-a.icon_watermark.health {background:url('/images/sites/common/icons/watermark/health.png') no-repeat left 0;}
-a.icon_watermark.human_rights {background:url('/images/sites/common/icons/watermark/human_rights.png') no-repeat left 0;}
-a.icon_watermark.logistics {background:url('/images/sites/common/icons/watermark/logistics.png') no-repeat left 0;}
-a.icon_watermark.nutrition {background:url('/images/sites/common/icons/watermark/nutrition.png') no-repeat left 0;}
-a.icon_watermark.other {background:url('/images/sites/common/icons/watermark/other.png') no-repeat left 0;}
-a.icon_watermark.peace_security {background:url('/images/sites/common/icons/watermark/peace_security.png') no-repeat left 0;}
-a.icon_watermark.protection {background:url('/images/sites/common/icons/watermark/protection.png') no-repeat left 0;}
-a.icon_watermark.shelter {background:url('/images/sites/common/icons/watermark/shelter.png') no-repeat left 0;}
-a.icon_watermark.water_sanitation {background:url('/images/sites/common/icons/watermark/water.png') no-repeat left 0;}
-a.icon_watermark:hover {background-position:0 -22px; cursor:pointer;}
+span.icon_watermark {position:absolute; right:32px; top:50%; height:32px; width:32px; margin:-16px 0 0 0; opacity:.5; filter:Alpha(opacity=50);filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50); z-index:0;}
+span.icon_watermark.agriculture {background:url('/images/sites/common/icons/watermark/agriculture.png') no-repeat left 0;}
+span.icon_watermark.camp_coordination {background:url('/images/sites/common/watermark/menu/camp.png') no-repeat left 0;}
+span.icon_watermark.communications {background:url('/images/sites/common/icons/watermark/communication.png') no-repeat left 0;}
+span.icon_watermark.disaster_management {background:url('/images/sites/common/icons/watermark/disaster_management.png') no-repeat left 0;}
+span.icon_watermark.early_recovery {background:url('/images/sites/common/icons/watermark/early_recovery.png') no-repeat left 0;}
+span.icon_watermark.economic_recovery {background:url('/images/sites/common/icons/watermark/economic_recovery.png') no-repeat left 0;}
+span.icon_watermark.education {background:url('/images/sites/common/icons/watermark/education.png') no-repeat left 0;}
+span.icon_watermark.emergency {background:url('/images/sites/common/icons/watermark/emergency.png') no-repeat left 0;}
+span.icon_watermark.environment {background:url('/images/sites/common/icons/watermark/environment.png') no-repeat left 0;}
+span.icon_watermark.food_aid {background:url('/images/sites/common/icons/watermark/food_aid.png') no-repeat left 0;}
+span.icon_watermark.food_security {background:url('/images/sites/common/icons/watermark/food_security.png') no-repeat left 0;}
+span.icon_watermark.health {background:url('/images/sites/common/icons/watermark/health.png') no-repeat left 0;}
+span.icon_watermark.human_rights {background:url('/images/sites/common/icons/watermark/human_rights.png') no-repeat left 0;}
+span.icon_watermark.logistics {background:url('/images/sites/common/icons/watermark/logistics.png') no-repeat left 0;}
+span.icon_watermark.nutrition {background:url('/images/sites/common/icons/watermark/nutrition.png') no-repeat left 0;}
+span.icon_watermark.other {background:url('/images/sites/common/icons/watermark/other.png') no-repeat left 0;}
+span.icon_watermark.peace_security {background:url('/images/sites/common/icons/watermark/peace_security.png') no-repeat left 0;}
+span.icon_watermark.protection {background:url('/images/sites/common/icons/watermark/protection.png') no-repeat left 0;}
+span.icon_watermark.shelter {background:url('/images/sites/common/icons/watermark/shelter.png') no-repeat left 0;}
+span.icon_watermark.water_sanitation {background:url('/images/sites/common/icons/watermark/water.png') no-repeat left 0;}
 
 
 /* TO OTHER LIST */
