@@ -25,35 +25,35 @@ div#layout {width:932px; margin:0 auto;}
 }*/
 
 @font-face {
-	font-family: 'Geneva';
-	src: url('/fonts/geneva-webfont.eot');
-	src: local('☺'), url('/fonts/geneva-webfont.woff') format('woff'), url('/fonts/geneva-webfont.ttf') format('truetype'), url('/fonts/geneva-webfont.svg#webfontJVzkRI7c') format('svg');
-	font-weight: normal;
-	font-style: normal;
+  font-family: 'Geneva';
+  src: url('/fonts/geneva-webfont.eot');
+  src: local('☺'), url('/fonts/geneva-webfont.woff') format('woff'), url('/fonts/geneva-webfont.ttf') format('truetype'), url('/fonts/geneva-webfont.svg#webfontJVzkRI7c') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-	font-family: 'PT Sans';
-	src: url('/fonts/regular-webfont.eot');
-	src: local('☺'), url('/fonts/regular-webfont.woff') format('woff'), url('/fonts/regular-webfont.ttf') format('truetype'), url('/fonts/regular-webfont.svg#webfontOmy4YPRL') format('svg');
-	font-weight: normal;
-	font-style: normal;
+  font-family: 'PT Sans';
+  src: url('/fonts/regular-webfont.eot');
+  src: local('☺'), url('/fonts/regular-webfont.woff') format('woff'), url('/fonts/regular-webfont.ttf') format('truetype'), url('/fonts/regular-webfont.svg#webfontOmy4YPRL') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-	font-family: 'PT Sans Bold';
-	src: url('/fonts/bold-webfont.eot');
-	src: local('☺'), url('/fonts/bold-webfont.woff') format('woff'), url('/fonts/bold-webfont.ttf') format('truetype'), url('/fonts/bold-webfont.svg#webfontsAYHMuxi') format('svg');
-	font-weight: normal;
-	font-style: normal;
+  font-family: 'PT Sans Bold';
+  src: url('/fonts/bold-webfont.eot');
+  src: local('☺'), url('/fonts/bold-webfont.woff') format('woff'), url('/fonts/bold-webfont.ttf') format('truetype'), url('/fonts/bold-webfont.svg#webfontsAYHMuxi') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-	font-family: 'Aller';
-	src: url('/fonts/aller_rg-webfont.eot');
-	src: local('☺'), url('/fonts/aller_rg-webfont.woff') format('woff'), url('/fonts/aller_rg-webfont.ttf') format('truetype'), url('/fonts/aller_rg-webfont.svg#webfont0SDR2pSu') format('svg');
-	font-weight: normal;
-	font-style: normal;
+  font-family: 'Aller';
+  src: url('/fonts/aller_rg-webfont.eot');
+  src: local('☺'), url('/fonts/aller_rg-webfont.woff') format('woff'), url('/fonts/aller_rg-webfont.ttf') format('truetype'), url('/fonts/aller_rg-webfont.svg#webfont0SDR2pSu') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
 
 /*The next is neccesary to fix properly the content scrollable*/
@@ -91,8 +91,8 @@ div#tooltip {position:absolute; bottom:17px; left:-75px; display:none;}
 div#tooltip span.bottom_tooltip {float:left; background:url('/images/sites/common/tooltips/bottom_tooltip.png') no-repeat 0 0; width:175px; height:16px;}
 div#tooltip span.body_tooltip {float:left; background:url('/images/sites/common/tooltips/body_tooltip.png') repeat-y top; width:149px; height:auto; padding:9px 15px 0 11px;}
 div#tooltip label {float:left; font:normal 13px "PT Sans Bold"; color:white; text-align:center; width:152px;}
-div#tooltip p {float:left; font:normal 13px Arial; color:#999999; margin:5px 0 0 3px; padding:0 0 5px!important;} 
-div#tooltip a {font:normal 13px Arial; color:white!important; text-decoration:underline!important;} 
+div#tooltip p {float:left; font:normal 13px Arial; color:#999999; margin:5px 0 0 3px; padding:0 0 5px!important;}
+div#tooltip a {font:normal 13px Arial; color:white!important; text-decoration:underline!important;}
 div#tooltip a:hover {cursor:pointer!important; text-decoration:none!important;}
 
 
@@ -182,15 +182,15 @@ div.inner_main_head {position:relative; width:942px; margin:0 auto;}
 div.main_head.projects div.left {background:none; padding:0; width:260px;}
 div.main_head div.left {width:248px; padding:30px 32px; background:url('/images/sites/common/mesh.png') repeat 0 0; display:inline-block; vertical-align:top; zoom:1; *display:inline;}
 div.main_head div.left h1 {width:237px; font:normal 25px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42; z-index:10;}
-div.main_head div.left h2 {width:100%; font:normal 15px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42; text-transform:uppercase;} 
-div.main_head div.left h3 {width:100%; font:normal 15px "PT Sans Bold"; color:#7B3C32; text-transform:uppercase;} 
- 
+div.main_head div.left h2 {width:100%; font:normal 15px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42; text-transform:uppercase;}
+div.main_head div.left h3 {width:100%; font:normal 15px "PT Sans Bold"; color:#7B3C32; text-transform:uppercase;}
+
 div.main_head div.left p {padding:5px 0 0 0; font:normal 13px Arial; color:#7B3932;}
 div.main_head div.float_head {position:absolute; top:0; left:5px; width:238px; padding:30px 32px 44px; background:url('/images/sites/search/head_mask.png') repeat 0 0 #C45A4B; z-index:100;}
 div.main_head div.float_head.home {padding-bottom:23px;}
-div.main_head div.float_head.home h1 {font-size:32px; text-transform:uppercase; position:relative; width:200px;} 
+div.main_head div.float_head.home h1 {font-size:32px; text-transform:uppercase; position:relative; width:200px;}
 div.main_head div.float_head.home sup.beta {font:normal 11px "PT Sans"; color:#73352B; padding:3px;}
-div.main_head div.float_head.home h3 {width:100%; font:normal 15px "PT Sans Bold"; color:#7B3C32; text-transform:uppercase; margin:20px 0 0 0;} 
+div.main_head div.float_head.home h3 {width:100%; font:normal 15px "PT Sans Bold"; color:#7B3C32; text-transform:uppercase; margin:20px 0 0 0;}
 
 div.main_head div.right {width:600px; padding:30px 0; display:inline-block; vertical-align:top; zoom:1; *display:inline; position:relative; min-height:40px;}
 div.main_head div.right span.wikipedia {position:absolute; bottom:0; right:0; background:url('/images/sites/regions/wikipedia_head.png') no-repeat 0 0; width:141px; height:49px;}
@@ -204,9 +204,9 @@ div#left_column {position:relative; width:100%;}
 div#left_column div.left {width:300px; height:300px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#left_column div.outer_float {position:absolute; top:0; left:-5px; width:302px; padding:0 5px 5px 5px; background:url('/images/sites/common/mesh.png') repeat-y 0 0; z-index:100;}
 div#left_column div.float_left {position:absolute; top:-40px; left:5px;}
-div#left_column div.float_left div.head {position:relative; width:238px; height:auto; padding:30px 32px; background:url('/images/sites/search/head_mask.png') repeat 0 0 #C45A4B;} 
+div#left_column div.float_left div.head {position:relative; width:238px; height:auto; padding:30px 32px; background:url('/images/sites/search/head_mask.png') repeat 0 0 #C45A4B;}
 div#left_column div.float_left div.head p {font:normal 13px Arial; color:#7B3932;}
-div#left_column div.float_left div.head h2 {width:100%; font:normal 15px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42; text-transform:uppercase;}  
+div#left_column div.float_left div.head h2 {width:100%; font:normal 15px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42; text-transform:uppercase;}
 div#left_column div.float_left div#secondary_map {width:300px; height:189px; border:1px solid #999999; background:#99B3CA;}
 div#left_column div.float_left div.block {float:left; width:238px; padding:32px; background:white; border-bottom:1px solid #DEDEDE;}
 div.inner_main_head div.block {border-bottom:none!important;}
@@ -243,14 +243,14 @@ div#left_column div.float_left div.block ul li.selected a:hover {text-decoration
 div#left_column div.float_left div.block ul.clusters {padding:5px 0 0 0;}
 div#left_column div.float_left div.block ul.clusters li {padding:0 0 17px 45px;}
 div#left_column div.float_left div.block ul.clusters li.last {padding:0 0 0 45px;}
-div#left_column div.float_left div.block ul.clusters li a {color:#CD5D4C;} 
+div#left_column div.float_left div.block ul.clusters li a {color:#CD5D4C;}
 div#left_column div.float_left div.block ul.clusters li p {padding:1px 0 0 0;}
-div#left_column div.float_left div.block a.more {position:relative; margin:0 0 0 10px; padding:0 12px 0 0; background:url('/images/sites/icons/down_garnet.png') no-repeat right 6px;} 
+div#left_column div.float_left div.block a.more {position:relative; margin:0 0 0 10px; padding:0 12px 0 0; background:url('/images/sites/icons/down_garnet.png') no-repeat right 6px;}
 div.projects div.inner_main_head div.left div.block {padding:18px 0 20px 5px!important;}
 div.projects div.left div.block div.import_data {float:left; margin:10px 0 0 0;}
 div.projects div.left div.block div.import_data p {float:left; font:normal 13px Arial; color:#666666; margin:0 10px; width:auto; padding:0;}
 div.projects div.left div.block div.import_data a {float:left; font:normal 13px Arial; color:#666666; text-decoration:underline; margin:1px 0 0 0;}
-div.projects div.left div.block div.import_data a:hover {color:#333333;} 
+div.projects div.left div.block div.import_data a:hover {color:#333333;}
 
 
 div#left_column div.float_left div.block a.more:hover {text-decoration:underline;}
@@ -280,9 +280,9 @@ div#pages {position:relative; width:100%; margin:65px 0 0 0;}
 div#pages div.left {width:660px; height:300px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#pages div.float_left {position:absolute; top:0; left:-5px; width:670px; padding:0 0 5px; background:url('/images/sites/common/mesh.png') repeat 0 0;}
 div#pages div.float_left div.outer_head {width:660px; padding:5px 5px 0 5px;}
-div#pages div.float_left div.outer_head div.head {width:596px; height:auto; padding:32px; background:url('/images/sites/search/head_mask.png') repeat 0 0 #C45A4B; border-bottom:1px solid #814941;} 
+div#pages div.float_left div.outer_head div.head {width:596px; height:auto; padding:32px; background:url('/images/sites/search/head_mask.png') repeat 0 0 #C45A4B; border-bottom:1px solid #814941;}
 div#pages div.float_left div.outer_head div.head h1 {width:100%; font:normal 25px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42;}
-div#pages div.float_left div.outer_head div.head p {width:100%; padding:2px 0 0 0; font:normal 13px Arial; color:#7C3831; text-shadow:none;} 
+div#pages div.float_left div.outer_head div.head p {width:100%; padding:2px 0 0 0; font:normal 13px Arial; color:#7C3831; text-shadow:none;}
 div#pages div.float_left div.outer_head div.head input[type="text"] {width:467px; padding:10px; margin:10px 0 0 0; background:url('/images/sites/search/textinput_bkg.png') no-repeat 0 0; font:normal 17px Arial; color:#333333; border:none; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#pages div.float_left div.outer_head div.head input[type="submit"] {width:101px; height:38px; margin:10px 0 0 0; background:url('/images/sites/search/submit_bkg.png') no-repeat 0 0; border:none; text-indent:-9999px; font-size:0; line-height:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#pages div.float_left div.outer_head div.head input[type="submit"]:hover {background-position:0 -38px; cursor:pointer;}
@@ -290,13 +290,13 @@ div#pages div.float_left div.body {width:600px; margin:0 0 0 5px; padding:22px 3
 div#pages div.float_left div.body.last {border:none;}
 div#pages div.float_left div.body h3 {font:normal 13px "PT Sans Bold"; color:#666666; margin:10px 0 0 0;}
 div#pages div.float_left div.body p {font:normal 13px Arial; color:#666666; margin:10px 0 0 0;}
-div#pages div.float_left div.body p a {color:#D05F4C; text-decoration:none;}  
+div#pages div.float_left div.body p a {color:#D05F4C; text-decoration:none;}
 div#pages div.float_left div.body p a:hover {text-decoration:underline; cursor:pointer;}
 div#pages div.float_left div.body ul {width:100%; margin:10px 0 0 0; padding:0 0 6px; list-style:none;}
 div#pages div.float_left div.body ul li {padding:3px 0 3px 13px; background:url('/images/sites/icons/list_disc.png') no-repeat 0 10px; font:normal 13px Arial; color:#666666;}
 div#pages div.float_left div.results_list {width:660px; margin:0 5px 0 5px; background:white;}
 div#pages div.float_left div.results_list h3 {margin:0; padding:30px 0 30px 32px; font:normal 13px "PT Sans Bold"; color:#666666; text-transform:uppercase;}
-div#pages div.float_left div.results_list h3 a {color:#666666; padding:0 8px 0 0; background:url('/images/sites/icons/remove.png') no-repeat right 0; border-bottom:1px dotted #C45A4B;} 
+div#pages div.float_left div.results_list h3 a {color:#666666; padding:0 8px 0 0; background:url('/images/sites/icons/remove.png') no-repeat right 0; border-bottom:1px dotted #C45A4B;}
 div#pages div.float_left div.results_list h3 a:hover {border-bottom:1px solid #C45A4B;}
 div#pages div.float_left div.results_list ul {background:white;}
 div#pages div.float_left div.results_list ul li {width:100%; height:auto; padding:0 0 25px;}
@@ -305,13 +305,16 @@ div#pages div.float_left div.results_list ul li.even {background:#F5F5F5; paddin
 div#pages div.float_left div.results_list ul li p.no_results {padding:38px 32px; font:normal 18px "PT Sans Bold"; color:#666666;}
 div#pages div.float_left div.results_list ul li div.project_name {float:left; width:439px; height:100px; border-right:1px solid #E5E5E5; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#pages div.float_left div.results_list ul li div.project_name h3 {padding-bottom:0; color:none;}
-div#pages div.float_left div.results_list ul li div.project_name h3 a {padding:0; font:normal 17px "PT Sans Bold"; text-transform:none; border:none; background:none; color:#C45A4B;} 
+div#pages div.float_left div.results_list ul li div.project_name h3 a {padding:0; font:normal 17px "PT Sans Bold"; text-transform:none; border:none; background:none; color:#C45A4B;}
 div#pages div.float_left div.results_list ul li div.project_name h3 a:hover {text-decoration:underline;}
 div#pages div.float_left div.results_list ul li div.project_name p {margin:0; padding:0 0 0 32px; font:normal 13px Arial; color:#999999;}
 div#pages div.float_left div.results_list ul li div.project_name p a {color:#999999; text-decoration:underline;}
 div#pages div.float_left div.results_list ul li div.project_name p a:hover {color:#333333;}
 div#pages div.float_left div.results_list ul li div.project_places {width:170px; height:30px; padding:35px 20px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#pages div.float_left div.results_list ul li div.project_places p {margin:0; padding:0; font:normal 13px Arial; color:#999999; text-align:center;}
+div#pages div.float_left div.results_list ul li div.project_places ul {margin:0; padding:0; font:normal 13px Arial;background-color: transparent; color:#999999; text-align:center;}
+div#pages div.float_left div.results_list ul li div.project_places ul li {margin: 0; padding: 2px; background-color: transparent;}
+
 div#pages div.float_left div.results_list ul li div.project_places p a {color:#999999; text-decoration:underline;}
 div#pages div.float_left div.results_list ul li div.project_places p a:hover {color:#333333;}
 div#pages div.right {width:272px; margin:100px 0 0 0; padding:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
@@ -327,19 +330,19 @@ div#pages div.right div.block p.social a:hover {color:#333333;}
 div#pages div.right div.block p.social a.twitter {background:url('/images/sites/icons/twitter.png') no-repeat 0 0;}
 div#pages div.right div.block p.social a.facebook {margin:0 0 0 4px; background:url('/images/sites/icons/facebook.png') no-repeat 0 0;}
 div#pages div.right div.block p.website {padding:5px 0 0 0;}
-div#pages div.right div.block p a {color:#CD5D4C;} 
+div#pages div.right div.block p a {color:#CD5D4C;}
 div#pages div.right div.block p a:hover {text-decoration:underline;}
 div#pages div.right div.block ul {width:100%; margin:7px 0 0 0; padding:0 0 6px; list-style:none;}
 div#pages div.right div.block ul li {padding:3px 0 3px 10px; background:url('/images/sites/icons/list_disc.png') no-repeat 0 10px; font:normal 13px Arial; color:#999999;}
-div#pages div.right div.block ul li a {color:#D05F4C; text-decoration:none;}  
+div#pages div.right div.block ul li a {color:#D05F4C; text-decoration:none;}
 div#pages div.right div.block ul li a:hover {text-decoration:underline; cursor:pointer;}
 div#pages div.right div.block ul li.selected {background:none;}
 div#pages div.right div.block ul li.selected a {color:#666666;}
 div#pages div.right div.block ul li.selected a:hover {text-decoration:none; color:#666666;}
-div#pages div.right div.block a.more {position:relative; margin:0 0 0 10px; padding:0 12px 0 0; background:url('/images/sites/icons/down_garnet.png') no-repeat right 6px;} 
+div#pages div.right div.block a.more {position:relative; margin:0 0 0 10px; padding:0 12px 0 0; background:url('/images/sites/icons/down_garnet.png') no-repeat right 6px;}
 div#pages div.right div.block a.more:hover {text-decoration:underline;}
 div#pages div.view_more {clear:both; width:100%; padding:30px 0 0 0;}
-div#pages div.view_more a#view_more {width:162px; height:14px; margin:0 0 0 230px; padding:5px 43px 5px; font:normal 13px "PT Sans Bold"; background:url('/images/sites/search/view_more.png') no-repeat 0 0; text-align:center;} 
+div#pages div.view_more a#view_more {width:162px; height:14px; margin:0 0 0 230px; padding:5px 43px 5px; font:normal 13px "PT Sans Bold"; background:url('/images/sites/search/view_more.png') no-repeat 0 0; text-align:center;}
 div#pages div.view_more a#view_more:hover {background-position:0 -26px; cursor:pointer;}
 /*chart*/
 div.statistics img.pie_chart {background:none!important; margin:0 0 0 -10px; height:125px; /*hack for google maps chart api image*/}
@@ -498,7 +501,7 @@ div.projects div.left div.block div.logo a.long {width:100%; padding:0;}
 div.projects div.left div.block div.logo a:hover {text-decoration:underline;}
 div.projects div.left div.block ul {width:100%; margin:7px 0 0 0; padding:0 0 6px; list-style:none;}
 div.projects div.left div.block ul li {padding:3px 0 3px 10px; background:url('/images/sites/icons/list_disc.png') no-repeat 0 10px; font:normal 13px Arial; color:#999999;}
-div.projects div.left div.block ul li a {color:#CE5D4C; text-decoration:none;}  
+div.projects div.left div.block ul li a {color:#CE5D4C; text-decoration:none;}
 div.projects div.left div.block ul li a:hover {text-decoration:underline;}
 div.projects div.left div.block p {width:252px; padding:10px 0 0 0; font:normal 13px Arial; color:#666666; line-height:17px;}
 div.projects div.left div.block p.budget {padding:10px 0 0 10px; font:normal 25px "Aller"; color:#666666; background:url('/images/sites/icons/budget.png') no-repeat 0 16px;}
@@ -517,13 +520,13 @@ div.projects div.right {width:660px; height:auto; margin:0 25px 0 0; display:inl
 
 div.projects div.float_right {position:absolute; top:-40px; right:25px; width:660px; padding:5px; /*background:url('/images/sites/common/mesh.png') repeat 0 0;*/ z-index:100;}
 
-div.projects div.head {width:596px; height:auto; padding:32px; background:url('/images/sites/search/head_mask.png') repeat 0 0 #CD5D4C;} 
+div.projects div.head {width:596px; height:auto; padding:32px; background:url('/images/sites/search/head_mask.png') repeat 0 0 #CD5D4C;}
 div.projects div.head div#completed {position:absolute; top:112px; right:-15px; width:173px; height:41px; background:url('/images/sites/projects/completed_msg.png') no-repeat; display:none;}
 div.projects div.head div#completed p {float:left; font:normal 13px "PT Sans Bold"; color:white; text-transform:uppercase; margin:9px 0 0 15px; letter-spacing:-1.0px;}
 div.projects div.head h1 {width:100%; font:normal 25px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42;}
-div.projects div.head p {width:100%; padding:2px 0 0 0; font:normal 13px Arial; color:#7C3831; text-shadow:none;} 
-div.projects div.head p a {text-decoration:underline; color:#7C3831;} 
-div.projects div.head p a:hover {color:#7C3831;}  
+div.projects div.head p {width:100%; padding:2px 0 0 0; font:normal 13px Arial; color:#7C3831; text-shadow:none;}
+div.projects div.head p a {text-decoration:underline; color:#7C3831;}
+div.projects div.head p a:hover {color:#7C3831;}
 div.projects div.float_right div.galleryStyle {float:left; width:100%; height:400px; border-top:1px solid #666666; border-bottom:1px solid #666666; background:white;}
 div.projects div.float_right div.block {float:left; width:596px; padding:32px; background:white; border-bottom:1px solid #DEDEDE; font:normal 15px Arial;}
 div.projects div.float_right div.block.margin {float:left; margin:5px 0 0 0;}
@@ -537,7 +540,7 @@ div.projects div.float_right div.block ul.related_projects li.last {margin:0;}
 div.projects div.float_right div.block ul.related_projects li div.image {float:left; width:90px; height:70px; margin:0 10px 0 0; padding:5px; background:#E5E5E5; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div.projects div.float_right div.block ul.related_projects li div.image img {float:left; width:90px; height:70px;}
 div.projects div.float_right div.block ul.related_projects li div.info {float:left;width:170px; padding:10px 0 0 0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div.projects div.float_right div.block ul.related_projects li div.info h4 a {font:normal 15px Arial; color:#CD5D4C; text-decoration:none;} 
+div.projects div.float_right div.block ul.related_projects li div.info h4 a {font:normal 15px Arial; color:#CD5D4C; text-decoration:none;}
 div.projects div.float_right div.block ul.related_projects li div.info h4 a:hover {text-decoration:underline;}
 div.projects div.float_right div.block ul.related_projects li div.info p {padding:3px 0 0 0; font:normal 13px Arial; color:#999999;}
 div.projects div.float_right div.block ul.related_projects li div.info p.sub {padding:10px 0 0 0; color:#666666;}
