@@ -3,15 +3,15 @@
 # Table name: regions
 #
 #  id               :integer         not null, primary key
-#  name             :string(255)     
-#  level            :integer         
-#  country_id       :integer         
-#  parent_region_id :integer         
-#  gadm_id          :integer         
-#  wiki_url         :string(255)     
-#  wiki_description :text            
-#  code             :string(255)     
-#  the_geom         :string          
+#  name             :string(255)
+#  level            :integer
+#  country_id       :integer
+#  parent_region_id :integer
+#  gadm_id          :integer
+#  wiki_url         :string(255)
+#  wiki_description :text
+#  code             :string(255)
+#  the_geom         :string
 #
 
 class Region < ActiveRecord::Base
@@ -49,10 +49,20 @@ class Region < ActiveRecord::Base
     end
   end
 
-  def donors(site)
+  def donors_count(site)
+    ActiveRecord::Base.connection.execute(<<-SQL
+      select count(distinct(donations.donor_id)) as count from donations where donations.project_id IN (#{(projects.site(site).map{ |s| s.id } + [-1]).join(',')})
+    SQL
+    ).first['count'].to_i
+  end
+
+  def donors(site, limit = 11)
+    result = []
     projects.site(site).map do |project|
-      project.donors
-    end.flatten.uniq
+      result += project.donors.flatten.uniq
+      break if result.size > limit
+    end
+    result[0...limit]
   end
 
   def donors_budget(site)

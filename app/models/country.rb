@@ -3,13 +3,13 @@
 # Table name: countries
 #
 #  id               :integer         not null, primary key
-#  name             :string(255)     
-#  code             :string(255)     
-#  wiki_url         :string(255)     
-#  wiki_description :text            
-#  iso2_code        :string(255)     
-#  iso3_code        :string(255)     
-#  the_geom         :string          
+#  name             :string(255)
+#  code             :string(255)
+#  wiki_url         :string(255)
+#  wiki_description :text
+#  iso2_code        :string(255)
+#  iso3_code        :string(255)
+#  the_geom         :string
 #
 
 class Country < ActiveRecord::Base
@@ -46,10 +46,20 @@ class Country < ActiveRecord::Base
     end.compact
   end
 
-  def donors(site)
+  def donors_count(site)
+    ActiveRecord::Base.connection.execute(<<-SQL
+      select count(distinct(donations.donor_id)) as count from donations where donations.project_id IN (#{(projects.site(site).map{ |s| s.id } + [-1]).join(',')})
+    SQL
+    ).first['count'].to_i
+  end
+
+  def donors(site, limit = 11)
+    result = []
     projects.site(site).map do |project|
-      project.donors
-    end.flatten.uniq
+      result += project.donors.flatten.uniq
+      break if result.size > limit
+    end
+    result[0...limit]
   end
 
   # to get only id and name

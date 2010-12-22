@@ -2,7 +2,7 @@ module ProjectsHelper
   def subtitle(project)
     clusters, countries, organization = ''
     clusters     = clusters_to_sentence(project.clusters) unless @cluster
-    countries    = countries_to_sentence(project.countries) unless @country
+    countries    = countries_to_sentence(project.countries.select(Country.custom_fields).all) unless @country
     organization = organizations_to_sentence(project.primary_organization) unless @organization
     raw("#{clusters} #{countries} #{organization}")
   end
