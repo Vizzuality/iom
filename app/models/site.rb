@@ -415,6 +415,10 @@ class Site < ActiveRecord::Base
     self.url = "#{subdomain}.#{@@main_domain}" if subdomain.present?
   end
 
+  def last_visits(limit = 30)
+    stats.order("date DESC").limit(limit).map{ |s| s.visits }.join(',')
+  end
+
   def countries_select
     unless geographic_context.blank?
       case geographic_context
