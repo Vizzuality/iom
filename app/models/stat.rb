@@ -3,9 +3,9 @@
 # Table name: stats
 #
 #  id      :integer         not null, primary key
-#  site_id :integer
-#  visits  :integer
-#  date    :date
+#  site_id :integer         
+#  visits  :integer         
+#  date    :date            
 #
 
 class Stat < ActiveRecord::Base

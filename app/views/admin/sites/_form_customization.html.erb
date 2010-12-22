@@ -115,7 +115,17 @@
       <%= f.text_field :word_for_regions, :class=>"short" %>
     </div>
   </div>
+
+  <div class="common">
+    <h3>LEVEL FOR REGIONS</h3>
+    <div class="field">
+      <%= f.label :level_for_region %>
+      <%= f.text_field :level_for_region, :class=>"short" %>
+    </div>
+  </div>
+
   <%= f.hidden_field :theme_id, :value => Theme.first.id %>
+
   <%= f.submit 'Save' %>
 
 <% end -%>
