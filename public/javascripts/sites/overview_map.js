@@ -76,19 +76,23 @@
       //   diameter = 58;
       //   marker_image = marker_source+'marker_6.png';
       // }
+      var image_source = '';
       
-      if (map_data[i].count <range) {
-        diameter = 34;
-        marker_image = marker_source+'marker_4.png';
-      } else if ((map_data[i].count>=(range)) && (map_data[i].count<(range*2))) {
-        diameter = 42;
-        marker_image = marker_source+'marker_5.png';
-      } else {
-        diameter = 58;
-        marker_image = marker_source+'marker_6.png';
+      
+      if (map_type == "overview_map") {
+        if (map_data[i].count <range) {
+          diameter = 34;
+          image_source = "/images/themes/"+ theme + '/marker_4.png';
+        } else if ((map_data[i].count>=(range)) && (map_data[i].count<(range*2))) {
+          diameter = 42;
+          image_source = "/images/themes/"+ theme + '/marker_5.png';
+        } else {
+          diameter = 58;
+          image_source = "/images/themes/"+ theme + '/marker_6.png';
+        }
       }
-      
-      var marker_ = new IOMMarker(map_data[i],diameter, marker_image,map);
+
+      var marker_ = new IOMMarker(map_data[i],diameter, image_source,map);
     }
     
 
@@ -107,7 +111,6 @@
   
   
   function positionZoomControls() {
-    console.log('jamon');
     if ($('#layout').length>0) {
       var column_position = $('#layout').offset().left;
       var map_position = $('#map').position().top + 25;
