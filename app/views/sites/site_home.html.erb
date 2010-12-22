@@ -61,10 +61,10 @@
             <%= raw(projects_by_location(@site.projects_regions)) %>
           </div>
 
-          <div class="block margin">
+          <div id="most_active_orgs" class="block margin">
             <h3>MOST ACTIVE ORGANIZATIONS</h3>
             <ul>
-              <% @site.projects_organizations.each do |organization, count| %>
+              <% @site.projects_organizations[0...9].each do |organization, count| %>
               <li><%= link_to organization.name, organization_path(organization) %> - <%= pluralize(count, 'project') %></li>
               <% end  -%>
             </ul>
