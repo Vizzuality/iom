@@ -377,8 +377,53 @@ div.statistics ul.chart li.pos5 {background-position:0 -84px!important;}
 /*cluster*/
 div.statistics ul.statistics_list {width:270px; height:auto; padding:0; margin:10px 0 0 0;}
 div.statistics ul.statistics_list li {display:inline-block; width:100%!important; padding:0!important; margin:5px 0 0 0!important; height:auto; position:relative;}
-div.statistics ul.statistics_list li a.plus {float:left; width:auto; padding:0 0 0 20px; background:url('/images/sites/organization/left_plus.png') no-repeat left 0; height:20px;}
-div.statistics ul.statistics_list li a.drop {float:left; width:auto; padding:0 0 0 20px; background:url('/images/sites/organization/left_drop.png') no-repeat left 0;  height:20px;}
+div.statistics ul.statistics_list li a.icon {float:left; width:auto; padding:0 0 0 20px; height:20px;}
+div.statistics ul.statistics_list li a.agriculture {background:url('/images/sites/common/icons/bar/left_drop.png') no-repeat left 0;}
+div.statistics ul.statistics_list li a.camp_coordination {background:url('/images/sites/common/icons/bar/left_drop.png') no-repeat left 0;}
+div.statistics ul.statistics_list li a.communications {background:url('/images/sites/common/icons/bar/left_drop.png') no-repeat left 0;}
+div.statistics ul.statistics_list li a.disaster_management {background:url('/images/sites/common/icons/bar/left_drop.png') no-repeat left 0;}
+div.statistics ul.statistics_list li a.early_recovery {background:url('/images/sites/common/icons/bar/left_drop.png') no-repeat left 0;}
+div.statistics ul.statistics_list li a.economic_recovery {background:url('/images/sites/common/icons/bar/left_drop.png') no-repeat left 0;}
+div.statistics ul.statistics_list li a.education {background:url('/images/sites/common/icons/bar/left_drop.png') no-repeat left 0;}
+div.statistics ul.statistics_list li a.emergency {background:url('/images/sites/common/icons/bar/left_drop.png') no-repeat left 0;}
+div.statistics ul.statistics_list li a.environment {background:url('/images/sites/common/icons/bar/left_drop.png') no-repeat left 0;}
+div.statistics ul.statistics_list li a.food_aid {background:url('/images/sites/common/icons/bar/left_drop.png') no-repeat left 0;}
+div.statistics ul.statistics_list li a.food_security {background:url('/images/sites/organization/left_drop.png') no-repeat left 0;}
+div.statistics ul.statistics_list li a.health {background:url('/images/sites/common/icons/bar/left_drop.png') no-repeat left 0;}
+div.statistics ul.statistics_list li a.human_rights {background:url('/images/sites/common/icons/bar/left_drop.png') no-repeat left 0;}
+div.statistics ul.statistics_list li a.logistics {background:url('/images/sites/common/icons/bar/left_drop.png') no-repeat left 0;}
+div.statistics ul.statistics_list li a.other {background:url('/images/sites/common/icons/bar/left_drop.png') no-repeat left 0;}
+div.statistics ul.statistics_list li a.nutrition {background:url('/images/sites/common/icons/bar/left_drop.png') no-repeat left 0;}
+div.statistics ul.statistics_list li a.peace_security {background:url('/images/sites/common/icons/bar/left_drop.png') no-repeat left 0;}
+div.statistics ul.statistics_list li a.protection {background:url('/images/sites/common/icons/bar/left_drop.png') no-repeat left 0;}
+div.statistics ul.statistics_list li a.shelter {background:url('/images/sites/common/icons/bar/left_drop.png') no-repeat left 0;}
+div.statistics ul.statistics_list li a.water_sanitation {background:url('/images/sites/common/icons/bar/left_drop.png') no-repeat left 0;}
+
+/*Agriculture - agriculture
+Camp Coordination & Management - camp_coordination
+Communications - communications
+Disaster Management - disaster_management
+Early Recovery - early_recovery
+Economic Recovery & Development - economic_recovery
+Education - education
+Emergency Telecommunications - emergency
+Environment - environment
+Food Aid - food_aid
+Food Security & Agriculture - food_security
+Health - health
+Human Rights, Democracy & Gov. - human_rights
+Logistics - logistics
+Other - other
+Nutrition - nutrition
+Peace & Security - peace_security
+Protection - protection
+Shelter & Housing - shelter
+Water, Sanitation & Hygiene - water_sanitation*/
+
+
+
+
+
 div.statistics ul.statistics_list li a span {float:left; width:auto; height:18px; padding:2px 10px 0 0; background:url('/images/sites/organization/right_statistics.png')
  no-repeat right 0; font:normal 13px "Aller"; color:#FFFFFF; text-align:right;}
 div.statistics ul.statistics_list li a span:hover {text-decoration:none!important;}

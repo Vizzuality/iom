@@ -30,29 +30,41 @@ class Cluster < ActiveRecord::Base
     scoped.select(:id,:name).order("name ASC")
   end
 
+  # Agriculture - agriculture
+  #   Camp Coordination & Management - camp_coordination
+  #   Communications - communications
+  #   Disaster Management - disaster_management
+  #   Early Recovery - early_recovery
+  #   Economic Recovery & Development - economic_recovery
+  #   Education - education
+  #   Emergency Telecommunications - emergency
+  #   Environment - environment
+  #   Food Aid - food_aid
+  #   Food Security & Agriculture - food_security
+  #   Health - health
+  #   Human Rights, Democracy & Gov. - human_rights
+  #   Logistics - logistics
+  #   Other - other
+  #   Nutrition - nutrition
+  #   Peace & Security - peace_security
+  #   Protection - protection
+  #   Shelter & Housing - shelter
+  #   Water, Sanitation & Hygiene - water_sanitation
+  
   def css_class
-    if (name.include? 'Camp')
-       'camp'
-    elsif (name.include? 'Early')
+    if (name.include? 'Agriculture')
+       'agriculture'
+    elsif (name.include? 'Camp Coordination')
+       'camp_coordination'
+    elsif (name.include? 'Disaster')
+       'disaster_management'
+    elsif (name.include? 'Early Recovery')
        'early_recovery'
-    elsif (name.include? 'Education')
-       'education'
-    elsif (name.include? 'Emergency')
-       'emergency'
-    elsif (name.include? 'Food Security')
-       'food'
-    elsif (name.include? 'Health')
-       'health'
-    elsif (name.include? 'Logistics')
-       'logistics'
-    elsif (name.include? 'Nutrition')
-       'nutrition'
-    elsif (name.include? 'Protection')
-       'protection'
-    elsif (name.include? 'Shelter')
-       'shelter'
-    elsif (name.include? 'Water')
-       'water'
+     elsif (name.include? 'Early Recovery')
+        'early_recovery'
+
+   else
+       'other'
     end
   end
 
