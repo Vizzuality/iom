@@ -31,7 +31,7 @@ class SearchController < ApplicationController
 
     where = where.present? ? "WHERE #{where.join(' AND ')}" : ''
 
-    sql = <<-EOF
+    sql = <<-SQL
       SELECT p.id as project_id,p.name,o.id as organization_id, o.name as organization_name,
       array_to_string(array_agg(distinct r.name),'|') as regions, c.name as country_name
       FROM projects as p
@@ -45,7 +45,7 @@ class SearchController < ApplicationController
       GROUP BY p.id,p.name,o.id,o.name,c.name,p.created_at
       ORDER BY p.created_at DESC
       LIMIT #{limit} OFFSET #{limit * (@current_page - 1)}
-    EOF
+    SQL
 
     @projects = ActiveRecord::Base.connection.execute(sql)
 
