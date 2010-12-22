@@ -121,7 +121,7 @@ HTML
       region = project_region.first
       count  = project_region.last
       lis << (content_tag :li,  :class => "pos#{index}" do
-        "#{link_to truncate(region.name, :length => 15, :omission => '...'), region_path(region)} - #{count}"
+        "#{link_to truncate(region.name, :length => 13, :omission => '...'), region_path(region)} - #{count}"
       end)
     end
 

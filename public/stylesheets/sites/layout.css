@@ -344,7 +344,7 @@ div#pages div.view_more a#view_more {width:162px; height:14px; margin:0 0 0 230p
 div#pages div.view_more a#view_more:hover {background-position:0 -26px; cursor:pointer;}
 /*chart*/
 div.statistics img.pie_chart {background:none!important; margin:0 0 0 -10px; height:125px; /*hack for google maps chart api image*/}
-div.statistics ul.chart {float:right; width:115px!important; padding:6px 0 0 0!important; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div.statistics ul.chart {float:right; width:120px!important; padding:6px 0 0 0!important; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div.statistics ul.chart li {padding:0 0 0 12px!important; margin:5px 0 0 0!important; background:url('/images/sites/icons/chart_colors.png') no-repeat 0 4px!important;}
 div.statistics ul.chart li a {color:#666666; text-decoration:underline!important;}
 div.statistics ul.chart li a:hover {color:#333333;}

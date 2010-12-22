@@ -20,11 +20,10 @@
       
      
       // If right part is bigger than float left
-      $('div#left_column div.outer_float').height($('div#left_column div.float_left').height()-40);
-      
       if ($('div#left_column div.float_left').height() < $('div#left_column div.right').height()) {
         var offset =  $('div#left_column div.right').height() - $('div#left_column div.float_left').height() + 100;
-        if ($('div.block.green').is(':visible')) {
+        console.log(offset);
+        if ($('div.block:last').hasClass('green')) {
           $('div#left_column div.float_left').append('<div class="block"></div>');
           $('div#left_column div.float_left div.block:last').height(offset);
         } else {
@@ -33,6 +32,8 @@
           $('div#left_column div.left').height($('div#left_column div.float_left').height()-10);
         }
       }
+      
+      $('div#left_column div.outer_float').height($('div#left_column div.float_left').height()-40);
       
       if ($('div#left_column div.float_left').height() > $('div#left_column div.left').height()) {
         $('div#left_column div.left').height($('div#left_column div.float_left').height());
