@@ -35,8 +35,8 @@
           <h3>PROJECTS BY CLUSTER</h3>
           <% if @area.projects_clusters(@site).size > 0 %>
             <ul class="statistics_list">
-              <% @area.projects_clusters(@site)[0...3].each do |cluster,count| %>
-                <li><a class="<%= cluster.css_class %> icon"><span class="aller" style="width:<%= cluster_width(count) %>px"><%= count %></span></a></li>
+              <% @first_three.each do |cluster,count| %>
+                <li><a class="<%= cluster.css_class %> icon"><span class="aller" style="width:<%= cluster_width(count, @first_three_max) %>px"><%= count %></span></a></li>
               <% end %>
             </ul>
             <% if @area.projects_clusters(@site).size > 3 %>
@@ -72,7 +72,7 @@
             <% @area.near(@site, 5).each do |area| %>
             <li>
               <%= link_to(area.name, (area.is_a?(Region) ? region_path(area) : country_path(area))) %>
-              - <%= pluralize(area.count, 'project', 'projects') %></li>
+              - <%= pluralize(area.is_a?(Array) ? area.count : 1, 'project', 'projects') %></li>
             <% end %>
           </ul>
         </div>
