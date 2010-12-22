@@ -159,19 +159,7 @@ div#header ul.menu li a span.with_suboptions {float:right; width:6px; height:3px
 div#header ul.menu li div.suboptions_body {display:none;}
 div#header ul.menu li ul.suboptions {position:absolute; top:20px; left:-13px; background-color:#2F2E2C; z-index:110; display:none;}
 div#header ul.menu li ul.suboptions li {float:left; width:145px; padding:0 5px; margin:6px 7px 0 0; height:auto;}
-div#header ul.menu li ul.suboptions li a {float:left; padding:2px 0 0 30px; height:20px; font:normal 13px Arial;}
-div#header ul.menu li ul.suboptions li a.camp {background:url('/images/sites/common/menu/icons/camp.png')no-repeat 0 0;}
-div#header ul.menu li ul.suboptions li a.early_recovery {background:url('/images/sites/common/menu/icons/early_recovery.png')no-repeat 0 0;}
-div#header ul.menu li ul.suboptions li a.education {background:url('/images/sites/common/menu/icons/education.png')no-repeat 0 0;}
-div#header ul.menu li ul.suboptions li a.emergency {background:url('/images/sites/common/menu/icons/emergency.png')no-repeat 0 0;}
-div#header ul.menu li ul.suboptions li a.food {background:url('/images/sites/common/menu/icons/food.png')no-repeat 0 0;}
-div#header ul.menu li ul.suboptions li a.health {background:url('/images/sites/common/menu/icons/health.png') no-repeat 0 0;}
-div#header ul.menu li ul.suboptions li a.logistics {background:url('/images/sites/common/menu/icons/logistics.png') no-repeat 0 0;}
-div#header ul.menu li ul.suboptions li a.nutrition {background:url('/images/sites/common/menu/icons/nutrition.png') no-repeat 0 0;}
-div#header ul.menu li ul.suboptions li a.protection {background:url('/images/sites/common/menu/icons/protection.png') no-repeat 0 0;}
-div#header ul.menu li ul.suboptions li a.shelter {background:url('/images/sites/common/menu/icons/shelter.png') no-repeat 0 0;}
-div#header ul.menu li ul.suboptions li a.water {background:url('/images/sites/common/menu/icons/water.png') no-repeat 0 0;}
-div#header ul.menu li ul.suboptions li a:hover {background-position:0 -22px; cursor:pointer;}
+
 
 div#header div.right {margin:11px 0 0 0; width:auto; height:20px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#header div.right form.search {position:relative; float:right;}
@@ -203,7 +191,6 @@ div.main_head div.float_head.home {padding-bottom:23px;}
 div.main_head div.float_head.home h1 {font-size:32px; text-transform:uppercase; position:relative; width:200px;} 
 div.main_head div.float_head.home sup.beta {font:normal 11px "PT Sans"; color:#73352B; padding:3px;}
 div.main_head div.float_head.home h3 {width:100%; font:normal 15px "PT Sans Bold"; color:#7B3C32; text-transform:uppercase; margin:20px 0 0 0;} 
-
 
 div.main_head div.float_head span {position:absolute; right:32px; top:50%; height:32px; width:32px; margin:-16px 0 0 0; opacity:.5; filter:Alpha(opacity=50);filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50); z-index:0;}
 div.main_head div.float_head span.water {background:url('/images/sites/icons/water.png') no-repeat 0 0;}
@@ -377,8 +364,74 @@ div.statistics ul.chart li.pos5 {background-position:0 -84px!important;}
 /*cluster*/
 div.statistics ul.statistics_list {width:270px; height:auto; padding:0; margin:10px 0 0 0;}
 div.statistics ul.statistics_list li {display:inline-block; width:100%!important; padding:0!important; margin:5px 0 0 0!important; height:auto; position:relative;}
-div.statistics ul.statistics_list li a.plus {float:left; width:auto; padding:0 0 0 20px; background:url('/images/sites/organization/left_plus.png') no-repeat left 0; height:20px;}
-div.statistics ul.statistics_list li a.drop {float:left; width:auto; padding:0 0 0 20px; background:url('/images/sites/organization/left_drop.png') no-repeat left 0;  height:20px;}
+
+/*ICONS*/
+a.icon_statistics {float:left; width:auto; padding:0 0 0 20px; height:20px;}
+a.icon_statistics.agriculture {background:url('/images/sites/common/icons/bar/left_agriculture.png') no-repeat left 0;}
+a.icon_statistics.camp_coordination {background:url('/images/sites/common/icons/bar/left_camp_coordination.png') no-repeat left 0;}
+a.icon_statistics.communications {background:url('/images/sites/common/icons/bar/left_communication.png') no-repeat left 0;}
+a.icon_statistics.disaster_management {background:url('/images/sites/common/icons/bar/left_disaster.png') no-repeat left 0;}
+a.icon_statistics.early_recovery {background:url('/images/sites/common/icons/bar/left_early_recovery.png') no-repeat left 0;}
+a.icon_statistics.economic_recovery {background:url('/images/sites/common/icons/bar/left_economic.png') no-repeat left 0;}
+a.icon_statistics.education {background:url('/images/sites/common/icons/bar/left_education.png') no-repeat left 0;}
+a.icon_statistics.emergency {background:url('/images/sites/common/icons/bar/left_emergency.png') no-repeat left 0;}
+a.icon_statistics.environment {background:url('/images/sites/common/icons/bar/left_environment.png') no-repeat left 0;}
+a.icon_statistics.food_aid {background:url('/images/sites/common/icons/bar/left_food_aid.png') no-repeat left 0;}
+a.icon_statistics.food_security {background:url('/images/sites/common/icons/bar/left_food_security.png') no-repeat left 0;}
+a.icon_statistics.health {background:url('/images/sites/common/icons/bar/left_health.png') no-repeat left 0;}
+a.icon_statistics.human_rights {background:url('/images/sites/common/icons/bar/left_human_rights.png') no-repeat left 0;}
+a.icon_statistics.logistics {background:url('/images/sites/common/icons/bar/left_logistics.png') no-repeat left 0;}
+a.icon_statistics.nutrition {background:url('/images/sites/common/icons/bar/left_nutrition.png') no-repeat left 0;}
+a.icon_statistics.other {background:url('/images/sites/common/icons/bar/left_other.png') no-repeat left 0;}
+a.icon_statistics.peace_security {background:url('/images/sites/common/icons/bar/left_peace_security.png') no-repeat left 0;}
+a.icon_statistics.protection {background:url('/images/sites/common/icons/bar/left_protection.png') no-repeat left 0;}
+a.icon_statistics.shelter {background:url('/images/sites/common/icons/bar/left_shelter.png') no-repeat left 0;}
+a.icon_statistics.water_sanitation {background:url('/images/sites/common/icons/bar/left_water_sanitation.png') no-repeat left 0;}
+
+a.icon_menu {float:left; padding:2px 0 0 30px; height:20px; font:normal 13px Arial;}
+a.icon_menu.agriculture {background:url('/images/sites/common/icons/menu/agriculture.png') no-repeat left 0;}
+a.icon_menu.camp_coordination {background:url('/images/sites/common/icons/menu/camp.png') no-repeat left 0;}
+a.icon_menu.communications {background:url('/images/sites/common/icons/menu/communication.png') no-repeat left 0;}
+a.icon_menu.disaster_management {background:url('/images/sites/common/icons/menu/disaster_management.png') no-repeat left 0;}
+a.icon_menu.early_recovery {background:url('/images/sites/common/icons/menu/early_recovery.png') no-repeat left 0;}
+a.icon_menu.economic_recovery {background:url('/images/sites/common/icons/menu/economic_recovery.png') no-repeat left 0;}
+a.icon_menu.education {background:url('/images/sites/common/icons/menu/education.png') no-repeat left 0;}
+a.icon_menu.emergency {background:url('/images/sites/common/icons/menu/emergency.png') no-repeat left 0;}
+a.icon_menu.environment {background:url('/images/sites/common/icons/menu/environment.png') no-repeat left 0;}
+a.icon_menu.food_aid {background:url('/images/sites/common/icons/menu/food_aid.png') no-repeat left 0;}
+a.icon_menu.food_security {background:url('/images/sites/common/icons/menu/food_security.png') no-repeat left 0;}
+a.icon_menu.health {background:url('/images/sites/common/icons/menu/health.png') no-repeat left 0;}
+a.icon_menu.human_rights {background:url('/images/sites/common/icons/menu/human_rights.png') no-repeat left 0;}
+a.icon_menu.logistics {background:url('/images/sites/common/icons/menu/logistics.png') no-repeat left 0;}
+a.icon_menu.nutrition {background:url('/images/sites/common/icons/menu/nutrition.png') no-repeat left 0;}
+a.icon_menu.other {background:url('/images/sites/common/icons/menu/other.png') no-repeat left 0;}
+a.icon_menu.peace_security {background:url('/images/sites/common/icons/menu/peace_security.png') no-repeat left 0;}
+a.icon_menu.protection {background:url('/images/sites/common/icons/menu/protection.png') no-repeat left 0;}
+a.icon_menu.shelter {background:url('/images/sites/common/icons/menu/shelter.png') no-repeat left 0;}
+a.icon_menu.water_sanitation {background:url('/images/sites/common/icons/menu/water.png') no-repeat left 0;}
+a.icon_menu:hover {background-position:0 -22px; cursor:pointer;}
+
+/*Agriculture - agriculture
+Camp Coordination & Management - camp_coordination
+Communications - communications
+Disaster Management - disaster_management
+Early Recovery - early_recovery
+Economic Recovery & Development - economic_recovery
+Education - education
+Emergency Telecommunications - emergency
+Environment - environment
+Food Aid - food_aid
+Food Security & Agriculture - food_security
+Health - health
+Human Rights, Democracy & Gov. - human_rights
+Logistics - logistics
+Other - other
+Nutrition - nutrition
+Peace & Security - peace_security
+Protection - protection
+Shelter & Housing - shelter
+Water, Sanitation & Hygiene - water_sanitation*/
+
 div.statistics ul.statistics_list li a span {float:left; width:auto; height:18px; padding:2px 10px 0 0; background:url('/images/sites/organization/right_statistics.png')
  no-repeat right 0; font:normal 13px "Aller"; color:#FFFFFF; text-align:right;}
 div.statistics ul.statistics_list li a span:hover {text-decoration:none!important;}

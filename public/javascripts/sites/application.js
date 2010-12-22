@@ -58,7 +58,6 @@ $(document).ready( function() {
       ev.preventDefault();
 
       if (($(this).children('span.with_suboptions').length > 0)&&(!$(this).hasClass('displayed'))){
-          console.log('entra');
           // Close all tabs
           $('ul.menu li a.displayed').removeClass('displayed');
           $('ul.menu li.clicked').removeClass('clicked');

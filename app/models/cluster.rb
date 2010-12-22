@@ -34,29 +34,64 @@ class Cluster < ActiveRecord::Base
     scoped.select(:id,:name).order("name ASC")
   end
 
+  # Agriculture - agriculture
+  #   Camp Coordination & Management - camp_coordination
+  #   Communications - communications
+  #   Disaster Management - disaster_management
+  #   Early Recovery - early_recovery
+  #   Economic Recovery & Development - economic_recovery
+  #   Education - education
+  #   Emergency Telecommunications - emergency
+  #   Environment - environment
+  #   Food Aid - food_aid
+  #   Food Security & Agriculture - food_security
+  #   Health - health
+  #   Human Rights, Democracy & Gov. - human_rights
+  #   Logistics - logistics
+  #   Other - other
+  #   Nutrition - nutrition
+  #   Peace & Security - peace_security
+  #   Protection - protection
+  #   Shelter & Housing - shelter
+  #   Water, Sanitation & Hygiene - water_sanitation
+  
   def css_class
-    if (name.include? 'Camp')
-       'camp'
-    elsif (name.include? 'Early')
-       'early_recovery'
-    elsif (name.include? 'Education')
-       'education'
-    elsif (name.include? 'Emergency')
-       'emergency'
+    if (name.include? 'Agriculture')
+       'agriculture'
+    elsif (name.include? 'Camp Coordination')
+    'camp_coordination'
+    elsif (name.include? 'Disaster')
+    'disaster_management'
+    elsif (name.include? 'Early Recovery')
+    'early_recovery'
+    elsif (name.include? 'Economic Recovery')
+    'economic_recovery'
+    elsif (name.include? 'Emergency Telecommunications')
+    'emergency'
+    elsif (name.include? 'Environment')
+    'environment'
+    elsif (name.include? 'Food Aid')
+    'food_aid'
     elsif (name.include? 'Food Security')
-       'food'
+    'food_security'
     elsif (name.include? 'Health')
-       'health'
+    'health'
+    elsif (name.include? 'Human Rights')
+    'human_rights'
     elsif (name.include? 'Logistics')
-       'logistics'
+    'logistics'
     elsif (name.include? 'Nutrition')
-       'nutrition'
+    'nutrition'
+    elsif (name.include? 'Peace & Security')
+     'peace_security'
     elsif (name.include? 'Protection')
-       'protection'
-    elsif (name.include? 'Shelter')
+      'protection'
+    elsif (name.include? 'Shelter & Housing')
        'shelter'
-    elsif (name.include? 'Water')
-       'water'
+    elsif (name.include? 'Water, Sanitation')
+       'water_sanitation'
+    else
+       'other'
     end
   end
 
