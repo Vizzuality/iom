@@ -189,7 +189,8 @@ div.main_head div.left h3 {width:100%; font:normal 15px "PT Sans Bold"; color:#7
 div.main_head div.left p {padding:5px 0 0 0; font:normal 13px Arial; color:#7B3932;}
 div.main_head div.float_head {position:absolute; top:0; left:5px; width:238px; padding:30px 32px 44px; background:url('/images/sites/search/head_mask.png') repeat 0 0 #C45A4B; z-index:100;}
 div.main_head div.float_head.home {min-height:79px;}
-div.main_head div.float_head.home h1 {font-size:32px; text-transform:uppercase;} 
+div.main_head div.float_head.home h1 {font-size:32px; text-transform:uppercase; position:relative; width:200px;} 
+div.main_head div.float_head.home sup.beta {font:normal 11px "PT Sans"; color:#73352B; padding:3px;}
 div.main_head div.float_head.home h3 {width:100%; font:normal 15px "PT Sans Bold"; color:#7B3C32; text-transform:uppercase; margin:20px 0 0 0;} 
 
 
