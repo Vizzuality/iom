@@ -160,6 +160,17 @@ SQL
     LEFT JOIN clusters as clus           ON clus.id=cpro.cluster_id
     GROUP BY p.id,p.name,o.id,o.name,c.name,p.created_at,p.description) as subq
 SQL
+    if options[:sector] || options[:cluster]
+      sql << " WHERE "
+      conditions = []
+      if options[:sector]
+        conditions << "sectors like '%#{options[:sector]}%'"
+      end
+      if options[:cluster]
+        conditions << "clusters like '%#{options[:cluster]}%'"
+      end
+      sql << conditions.join(' and ')
+    end
     if options[:order]
       sql << " ORDER BY #{options[:order]}"
     end

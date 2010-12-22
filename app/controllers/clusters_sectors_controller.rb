@@ -3,17 +3,16 @@ class ClustersSectorsController < ApplicationController
   layout 'site_layout'
 
   def show
-
     if(request.url.match(/clusters/))
+      # clusters
       render_404 and return unless @site.navigate_by_cluster?
-      #CLUSTERS
       @data = Cluster.find(params[:id])
-      @projects = @data.projects.where("projects.id IN (#{@site.projects_ids.join(',')})").paginate :per_page => 10, :page => params[:page], :order => 'created_at DESC'
+      @projects = Project.custom_find(@site, :cluster => @data.name, :per_page => 10, :page => params[:page], :order => 'created_at DESC')
     else
-      #SECTORS
+      # sectors
       render_404 and return unless @site.navigate_by_sector?
       @data = Sector.find(params[:id])
-      @projects = @data.projects.where("projects.id IN (#{@site.projects_ids.join(',')})").paginate :per_page => 10, :page => params[:page], :order => 'created_at DESC'
+      @projects = Project.custom_find(@site, :sector => @data.name, :per_page => 10, :page => params[:page], :order => 'created_at DESC')
     end
 
     respond_to do |format|
