@@ -5,7 +5,11 @@ $(document).ready(function(ev){
   	  $('select#gc_limited_country_section').sSelect({ddMaxWidth: '245px',ddMaxHeight:'231px',containerClass:'country'});
 		}
 
-
+        if ($('input#site_project_classification').length > 0){
+            var id_option = $('input#site_project_classification').val();
+            $('div#classification_option').find('span a.clicked').removeClass('clicked');
+            $('div#classification_option').find('span a#'+id_option+'').addClass('clicked');
+        }
 
       // click on limited options
       $('ul.geographic_options').children('li').children('a.limited').click(function(ev){
