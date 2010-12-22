@@ -23,11 +23,11 @@
     <label>ORGANIZATION  <strong>*</strong></label>
 
     <div class="list_combo">
-        <span id="hidden" class="combo_large">
-          <%= errors_for_span(@project, :primary_organization) %>
-        <a class="organization"><%= Organization.first.name %></a>
+      <span id="hidden" class="combo_large">
+        <%= errors_for_span(@project, :primary_organization) %>
+        <a class="organization"><%= @project.primary_organization.try(:name) || Organization.first.name %></a>
       </span>
-      <%= f.hidden_field :primary_organization_id , :value => Organization.first.id %>
+      <%= f.hidden_field :primary_organization_id , :value => @project.primary_organization_id || Organization.first.id %>
       <div class="wrapper">
         <ul class="list_combo_content scroll_pane">
             <% Organization.get_select_values.each do |organization| %>
@@ -66,7 +66,7 @@
     <span class="input_large">
       <%= f.text_field :website %>
     </span>
-  </div>  
+  </div>
   <!-- SECTION  -->
   <h3 class="section museo_sans">PROJECT MANAGEMENT</h3>
   <div class="field">
@@ -102,7 +102,7 @@
       </li>
       <li class="date">
         <label>DATE UPDATED</label>
-        
+
         <span id="date_updated" class="combo_date"><p>09/10/2010</p>
         <div class="select_dates end_date">
           <p id="month" class="title">MONTH</p>
@@ -205,7 +205,7 @@
       </li>
       <li class="date">
         <label>END DATE</label>
-        
+
         <span id="end_date" class="combo_date"><p>09/10/2010</p>
           <div class="select_dates end_date">
             <p id="month" class="title">MONTH</p>
@@ -225,7 +225,7 @@
   <label>PROJECT BUDGET</label>
   <div id="project_budget" class="field">
     <span class="input_short coin">
-      <p class="coin">$</p>      
+      <p class="coin">$</p>
       <%= f.text_field :budget %>
 
     </span>
@@ -270,7 +270,7 @@
         </span>
       </div> <!-- field -->
     </div>
-  </div>  
+  </div>
 
 
 
@@ -292,7 +292,7 @@
       </div> <!-- field -->
     </div>
   </div>
-  
+
   <%= f.submit '', :class => "#{'error' if @project.invalid? && action_name != 'new'}" %>
   <!-- END EDIT PAGE -->
 
@@ -313,12 +313,12 @@
   </div>
 
   <!-- COMMON IN EDIT AND NEW FORM -->
-  
-  
+
+
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
   <script src="/javascripts/backoffice/project_map.js" type="text/javascript" charset="utf-8"></script>
-  <script src="/javascripts/plugins/jquery.mousewheel.js" type="text/javascript" charset="utf-8"></script>  
+  <script src="/javascripts/plugins/jquery.mousewheel.js" type="text/javascript" charset="utf-8"></script>
   <script src="/javascripts/plugins/jquery.jscrollpane.js" type="text/javascript" charset="utf-8"></script>
   <script src="/javascripts/plugins/jquery.stylish-select.js" type="text/javascript" charset="utf-8"></script>
   <script src="/javascripts/backoffice/project.js" type="text/javascript" charset="utf-8"></script>
-  
+
