@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101222162225) do
+ActiveRecord::Schema.define(:version => 20101222153232) do
 
   create_table "clusters", :force => true do |t|
     t.string "name"
@@ -27,11 +27,11 @@ ActiveRecord::Schema.define(:version => 20101222162225) do
   create_table "countries", :force => true do |t|
     t.string        "name"
     t.string        "code"
-    t.multi_polygon "the_geom",         :limit => nil, :srid => 4326
     t.string        "wiki_url"
     t.text          "wiki_description"
     t.string        "iso2_code"
     t.string        "iso3_code"
+    t.multi_polygon "the_geom",         :limit => nil, :srid => 4326
   end
 
   add_index "countries", ["the_geom"], :name => "index_countries_on_the_geom", :spatial => true
@@ -199,7 +199,6 @@ ActiveRecord::Schema.define(:version => 20101222162225) do
     t.text     "site_specific_information"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.geometry "the_geom",                  :limit => nil,  :null => false, :srid => 4326
     t.text     "activities"
     t.string   "intervention_id"
     t.text     "additional_information"
@@ -208,6 +207,7 @@ ActiveRecord::Schema.define(:version => 20101222162225) do
     t.date     "date_updated"
     t.string   "contact_position"
     t.string   "website"
+    t.geometry "the_geom",                  :limit => nil,  :null => false, :srid => 4326
   end
 
   add_index "projects", ["name"], :name => "index_projects_on_name"
@@ -252,11 +252,11 @@ ActiveRecord::Schema.define(:version => 20101222162225) do
     t.integer  "level"
     t.integer  "country_id"
     t.integer  "parent_region_id"
-    t.geometry "the_geom",         :limit => nil, :srid => 4326
     t.integer  "gadm_id"
     t.string   "wiki_url"
     t.text     "wiki_description"
     t.string   "code"
+    t.geometry "the_geom",         :limit => nil, :srid => 4326
   end
 
   add_index "regions", ["country_id"], :name => "index_regions_on_country_id"
@@ -311,7 +311,6 @@ ActiveRecord::Schema.define(:version => 20101222162225) do
     t.string   "project_context_tags"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.geometry "geographic_context_geometry",     :limit => nil,                    :srid => 4326
     t.string   "project_context_tags_ids"
     t.boolean  "status",                                         :default => false
     t.float    "visits",                                         :default => 0.0

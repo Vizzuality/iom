@@ -22,9 +22,18 @@ class Sector < ActiveRecord::Base
   # Array of arrays
   # [[region, count], [region, count]]
   def projects_regions(site)
-    result = ActiveRecord::Base.connection.execute("select region_id, count(region_id) as count from projects_regions where project_id IN (select project_id from projects_sectors where sector_id=#{self.id}) AND project_id IN (#{site.projects_ids.join(',')}) group by region_id order by count desc")
-    result.map do |row|
-      [Region.find(row['region_id'], :select => Region.custom_fields), row['count'].to_i]
+    Region.find_by_sql(
+<<-SQL
+  select #{Region.custom_fields.join(',')}, count(regions.id) as count
+    from regions, projects_regions, projects_sectors where projects_sectors.sector_id = #{self.id} AND
+    projects_sectors.project_id IN (#{site.projects_ids.join(',')}) AND
+    projects_sectors.project_id = projects_regions.project_id AND
+    projects_regions.region_id = regions.id AND
+    regions.level = #{site.level_for_region}
+    group by #{Region.custom_fields.join(',')}
+SQL
+    ).map do |r|
+      [r, r.count.to_i]
     end
   end
 
