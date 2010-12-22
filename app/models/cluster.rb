@@ -59,15 +59,38 @@ class Cluster < ActiveRecord::Base
     if (name.include? 'Agriculture')
        'agriculture'
     elsif (name.include? 'Camp Coordination')
-       'camp_coordination'
+    'camp_coordination'
     elsif (name.include? 'Disaster')
-       'disaster_management'
+    'disaster_management'
     elsif (name.include? 'Early Recovery')
-       'early_recovery'
-     elsif (name.include? 'Early Recovery')
-        'early_recovery'
-
-   else
+    'early_recovery'
+    elsif (name.include? 'Economic Recovery')
+    'economic_recovery'
+    elsif (name.include? 'Emergency Telecommunications')
+    'emergency'
+    elsif (name.include? 'Environment')
+    'environment'
+    elsif (name.include? 'Food Aid')
+    'food_aid'
+    elsif (name.include? 'Food Security')
+    'food_security'
+    elsif (name.include? 'Health')
+    'health'
+    elsif (name.include? 'Human Rights')
+    'human_rights'
+    elsif (name.include? 'Logistics')
+    'logistics'
+    elsif (name.include? 'Nutrition')
+    'nutrition'
+    elsif (name.include? 'Peace & Security')
+     'peace_security'
+    elsif (name.include? 'Protection')
+      'protection'
+    elsif (name.include? 'Shelter & Housing')
+       'shelter'
+    elsif (name.include? 'Water, Sanitation')
+       'water_sanitation'
+    else
        'other'
     end
   end
