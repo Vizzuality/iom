@@ -53,7 +53,7 @@ class SearchController < ApplicationController
       [Cluster.find(c_id.cluster_id), c_id.count]
     end
     @regions = Region.find_by_sql("select projects_regions.region_id, count(projects_regions.region_id) as count from projects_regions where projects_regions.project_id IN (#{(@projects.map{|p| p['project_id']} + [-1]).join(',')})  group by projects_regions.region_id order by count DESC").map do |r_id|
-      [Region.find(r_id.region_id), r_id.count]
+      [Region.find(r_id.region_id, :select => Region.custom_fields), r_id.count]
     end
 
     respond_to do |format|
