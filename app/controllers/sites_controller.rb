@@ -68,6 +68,7 @@ class SitesController < ApplicationController
           page << "$('#projects_view_more').remove();"
           page << "$('#projects').append('#{escape_javascript(render(:partial => 'projects/projects'))}');"
           page << "IOM.ajax_pagination();"
+          page << "resizeColumn();"
         end
       end
     end
