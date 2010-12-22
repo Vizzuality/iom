@@ -14,7 +14,7 @@
     <div id="header">
       <div class="inner_header">
         <div class="top">
-          <a href="/">InterAction<sup class="museo_sans">SiteManager</sup></a>
+          <a href="<%= admin_admin_path %>">InterAction<sup class="museo_sans">SiteManager</sup></a>
         </div>
         <div class="bottom">
           <ul class="main_menu">
@@ -39,7 +39,7 @@
   <% if logged_in? %>
     <div id="footer">
       <div class="inner_footer">
-        <a class="logo" href="/" target="_blank"><img src="/images/backoffice/common/footer_logo.png" width="75" height="49" alt="Interaction"></a>
+        <a class="logo" href="<%= admin_admin_path %>" target="_blank"><img src="/images/backoffice/common/footer_logo.png" width="75" height="49" alt="Interaction"></a>
         <ul>
           <li><a href="/">Organization Aid Map</a></li>
           <li class="last"><a href="#">Contact</a></li>
