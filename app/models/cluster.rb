@@ -40,7 +40,7 @@ class Cluster < ActiveRecord::Base
     elsif (name.include? 'Camp Coordination')
     'camp_coordination'
     elsif (name.include? 'Disaster')
-    'disastermanagement'
+    'disaster_management'
     elsif (name.include? 'Early Recovery')
     'early_recovery'
     elsif (name.include? 'Economic Recovery')

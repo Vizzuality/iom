@@ -34,46 +34,42 @@ class Sector < ActiveRecord::Base
   end
 
   def css_class
-    if name.include?('Agriculture')
-      'agriculture'
-    elsif name.include?('Communications')
-      'communications'
-    elsif name.include?('Disaster')
-      'disaster'
-    elsif name.include?('Economic')
-      'economic'
-    elsif name.include?('Education')
-      'education'
-    elsif name.include?('Environment')
-      'environment'
-    elsif name.include?('Food')
-      'food'
-    elsif name.include?('Health')
-      'health'
-    elsif name.include?('Human')
-      'human'
-    elsif name.include?('Democracy')
-      'democracy'
-    elsif name.include?('Peace')
-      'peace'
-    elsif name.include?('Protection')
-      'protection'
-    elsif name.include?('Shelter')
-      'shelter'
-    elsif name.include?('Water')
-      'water'
-    elsif name.include?('Sanitation')
-      'sanitation'
-    elsif name.include?('Other')
-      'other'
-    elsif name.include?('Water')
-      'water'
-    elsif name.include?('Human')
-      'human'
-    elsif name.include?('Nutrition')
-      'nutrition'
-    else
-      ''
-    end
-  end
+     if (name.include? 'Agriculture')
+        'agriculture'
+     elsif (name.include? 'Camp Coordination')
+     'camp_coordination'
+     elsif (name.include? 'Disaster')
+     'disaster_management'
+     elsif (name.include? 'Early Recovery')
+     'early_recovery'
+     elsif (name.include? 'Economic Recovery')
+     'economic_recovery'
+     elsif (name.include? 'Emergency Telecommunications')
+     'emergency'
+     elsif (name.include? 'Environment')
+     'environment'
+     elsif (name.include? 'Food Aid')
+     'food_aid'
+     elsif (name.include? 'Food Security')
+     'food_security'
+     elsif (name.include? 'Health')
+     'health'
+     elsif (name.include? 'Human')
+     'human_rights'
+     elsif (name.include? 'Logistics')
+     'logistics'
+     elsif (name.include? 'Nutrition')
+     'nutrition'
+     elsif (name.include? 'Peace & Security')
+      'peace_security'
+     elsif (name.include? 'Protection')
+       'protection'
+     elsif (name.include? 'Shelter & Housing')
+        'shelter'
+     elsif (name.include? 'Water, Sanitation')
+        'water_sanitation'
+     else
+        'other'
+     end
+   end
 end

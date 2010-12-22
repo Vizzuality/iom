@@ -116,9 +116,9 @@ class Site < ActiveRecord::Base
   end
 
   def word_for_cluster_sector
-    if cluster
+    if navigate_by_cluster?
       word_for_clusters
-    elsif sector
+    elsif navigate_by_sector?
       word_for_sectors
     end
   end
@@ -238,7 +238,12 @@ class Site < ActiveRecord::Base
   end
 
   def projects_sectors_or_clusters
-    categories = projects_sectors + projects_clusters
+    if navigate_by_sector? 
+      categories = projects_sectors 
+    elsif navigate_by_cluster?
+      categories = projects_clusters 
+    end
+      
     categories.sort!{|x, y| x.first.class.name <=> y.first.class.name}
     categories
   end

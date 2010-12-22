@@ -49,7 +49,7 @@
           <%end%>
           <% unless @site.projects_sectors_or_clusters.empty? %>
           <div class="block margin">
-            <h3>OTHER CLUSTERS</h3>
+            <h3>OTHER <%= @site.word_for_cluster_sector.upcase %></h3>
             <ul class="clusters">
             <% @site.projects_sectors_or_clusters.each do |category, count| %>
               <% next if category == @data %>
