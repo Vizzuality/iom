@@ -14,17 +14,6 @@
       <%= errors_for @donor, :name %>
     </div>
 
-    <%= f.label :logo %>
-    <div class="image_container">
-      <% if @donor.logo_file_name? %>
-        <%= image_tag(@donor.logo.url(:small)) %>
-      <% end -%>
-      <div class="field">
-        <p>JPG, PNG and GIF supported</p>
-        <%= f.file_field :logo %>
-      </div>
-    </div>
-
     <div class="field">
       <%= f.label :description %>
       <%= f.text_area :description %>
