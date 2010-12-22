@@ -3,31 +3,31 @@
 # Table name: projects
 #
 #  id                        :integer         not null, primary key
-#  name                      :string(2000)    
-#  description               :text            
-#  primary_organization_id   :integer         
-#  implementing_organization :text            
-#  partner_organizations     :text            
-#  cross_cutting_issues      :text            
-#  start_date                :date            
-#  end_date                  :date            
-#  budget                    :integer         
-#  target                    :text            
-#  estimated_people_reached  :integer         
-#  contact_person            :string(255)     
-#  contact_email             :string(255)     
-#  contact_phone_number      :string(255)     
-#  site_specific_information :text            
-#  created_at                :datetime        
-#  updated_at                :datetime        
-#  activities                :text            
-#  intervention_id           :string(255)     
-#  additional_information    :text            
-#  awardee_type              :string(255)     
-#  date_provided             :date            
-#  date_updated              :date            
-#  contact_position          :string(255)     
-#  website                   :string(255)     
+#  name                      :string(2000)
+#  description               :text
+#  primary_organization_id   :integer
+#  implementing_organization :text
+#  partner_organizations     :text
+#  cross_cutting_issues      :text
+#  start_date                :date
+#  end_date                  :date
+#  budget                    :integer
+#  target                    :text
+#  estimated_people_reached  :integer
+#  contact_person            :string(255)
+#  contact_email             :string(255)
+#  contact_phone_number      :string(255)
+#  site_specific_information :text
+#  created_at                :datetime
+#  updated_at                :datetime
+#  activities                :text
+#  intervention_id           :string(255)
+#  additional_information    :text
+#  awardee_type              :string(255)
+#  date_provided             :date
+#  date_updated              :date
+#  contact_position          :string(255)
+#  website                   :string(255)
 #  the_geom                  :string          not null
 #
 
@@ -45,11 +45,9 @@ class Project < ActiveRecord::Base
   has_many :donors, :through => :donations
   has_many :cached_sites, :class_name => 'Site', :finder_sql => 'select sites.* from sites, projects_sites where projects_sites.project_id = #{id} and projects_sites.site_id = sites.id'
 
-  validates_presence_of :primary_organization_id
+  validates_presence_of :primary_organization_id, :name
 
-  # validate :dates_consistency, :presence_of_clusters_and_sectors
-
-  validate :dates_consistency
+  validate :dates_consistency#, :presence_of_clusters_and_sectors
 
   after_save :set_cached_sites
   after_destroy :remove_cached_sites
