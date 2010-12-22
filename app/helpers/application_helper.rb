@@ -104,8 +104,11 @@ HTML
   end
 
   def url(site)
-    port = Rails.env == 'development' ? ":#{request.port}" : nil
-    "#{site.url}#{port}"
+    if site.url =~ /^http/
+      site.url
+    else
+      "http://#{site.url}"
+    end + (Rails.env == 'development' ? ":#{request.port}" : '')
   end
 
   def projects_by_location(projects)
