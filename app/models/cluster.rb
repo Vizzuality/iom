@@ -16,6 +16,10 @@ class Cluster < ActiveRecord::Base
     end.flatten.uniq
   end
 
+  def self.custom_fields
+    columns.map{ |c| c.name }
+  end
+
   # Array of arrays
   # [[region, count], [region, count]]
   def projects_regions(site)

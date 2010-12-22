@@ -13,6 +13,8 @@
   <div class="main_head">
     <div class="inner_main_head">
       <div class="left">
+        <h1><%= @organization.name %></h1>
+        <%unless @organization.projects.site(@site).count.eql?(0) %><p><%= pluralize(@organization.projects.site(@site).count, 'project', 'projects') %></p><%end%>
         <div class="float_head">
           <h1><%= @organization.name %></h1>
           <%unless @organization.projects.site(@site).count.eql?(0) %><p><%= pluralize(@organization.projects.site(@site).count, 'project', 'projects') %></p><%end%>

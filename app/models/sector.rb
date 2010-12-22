@@ -3,7 +3,7 @@
 # Table name: sectors
 #
 #  id   :integer         not null, primary key
-#  name :string(255)     
+#  name :string(255)
 #
 
 class Sector < ActiveRecord::Base
@@ -16,6 +16,9 @@ class Sector < ActiveRecord::Base
     end.flatten.uniq
   end
 
+  def self.custom_fields
+    columns.map{ |c| c.name }
+  end
   # Array of arrays
   # [[region, count], [region, count]]
   def projects_regions(site)
@@ -30,4 +33,47 @@ class Sector < ActiveRecord::Base
     scoped.select(:id,:name).order("name ASC")
   end
 
+  def css_class
+    if name.include?('Agriculture')
+      'agriculture'
+    elsif name.include?('Communications')
+      'communications'
+    elsif name.include?('Disaster')
+      'disaster'
+    elsif name.include?('Economic')
+      'economic'
+    elsif name.include?('Education')
+      'education'
+    elsif name.include?('Environment')
+      'environment'
+    elsif name.include?('Food')
+      'food'
+    elsif name.include?('Health')
+      'health'
+    elsif name.include?('Human')
+      'human'
+    elsif name.include?('Democracy')
+      'democracy'
+    elsif name.include?('Peace')
+      'peace'
+    elsif name.include?('Protection')
+      'protection'
+    elsif name.include?('Shelter')
+      'shelter'
+    elsif name.include?('Water')
+      'water'
+    elsif name.include?('Sanitation')
+      'sanitation'
+    elsif name.include?('Other')
+      'other'
+    elsif name.include?('Water')
+      'water'
+    elsif name.include?('Human')
+      'human'
+    elsif name.include?('Nutrition')
+      'nutrition'
+    else
+      ''
+    end
+  end
 end
