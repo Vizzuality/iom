@@ -72,7 +72,7 @@
           <h2>FUNDING BY CLUSTER</h2>
           <ul class="statistics_list">
             <% @donor.projects_clusters(@site)[0...3].each do |cluster,count| %>
-              <li><a class="<%= cluster_class(cluster) %>"><span class="aller" style="width:<%= cluster_width(count)-10 %>px"><%= count %></span></a></li>
+              <li><a class="<%= cluster.css_class %>"><span class="aller" style="width:<%= cluster_width(count)-10 %>px"><%= count %></span></a></li>
             <% end %>
           </ul>
           <% if @donor.projects_clusters(@site).size > 3 %>
