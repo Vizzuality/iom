@@ -69,6 +69,11 @@ $(document).ready( function() {
           if ($(this).parent().find('.scroll_pane').length > 0){
             resetCombo($(this).parent());
           }
+          
+          // if there are some input text
+          if ($(this).parent().find('input#ngos_search').length > 0){
+              $(this).parent().find('input#ngos_search').focus();
+          }
 
           $(document).click(function(event) {
                 if ((!$(event.target).closest('ul.suboptions li a').length)&&(!$(event.target).closest('ul.scroll_pane').length)&&(!$(event.target).closest('input#ngos_search').length))               
