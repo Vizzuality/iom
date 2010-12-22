@@ -35,8 +35,9 @@
           <h3>PROJECTS BY CLUSTER</h3>
           <% if @area.projects_clusters(@site).size > 0 %>
             <ul class="statistics_list">
-              <% @area.projects_clusters(@site)[0...3].each do |cluster,count| %>
-                <li><a class="<%= cluster.css_class %> icon_statistics"><span class="aller" style="width:<%= cluster_width(count) %>px"><%= count %></span></a></li>
+              <% @first_three.each do |cluster,count| %>
+                <li><a class="<%= cluster.css_class %> icon_statistics"><span class="aller" style="width:<%= cluster_width(count, @first_three_max) %>px"><%= count %></span></a></li>
+
               <% end %>
             </ul>
             <% if @area.projects_clusters(@site).size > 3 %>
@@ -72,7 +73,7 @@
             <% @area.near(@site, 5).each do |area| %>
             <li>
               <%= link_to(area.name, (area.is_a?(Region) ? region_path(area) : country_path(area))) %>
-              - <%= pluralize(area.count, 'project', 'projects') %></li>
+              - <%= pluralize(area.is_a?(Array) ? area.count : 1, 'project', 'projects') %></li>
             <% end %>
           </ul>
         </div>
@@ -98,7 +99,7 @@
     var chld = "<%=@chld%>";
     var chd = "<%=@chd%>";
     var marker_source = "<%=@georegion_map_marker_source%>";
-    //var map_data = [{"id":1, "lat":18.93205126204314, "lon":-72.6361083984375, "count":10, "url":"/organizations/10"}];
+    var map_type = "georegion";
     var map_data = [{"id":<%=@map_data["id"]%>, "lat":<%=@map_data["lat"]%>, "lon":<%=@map_data["lon"]%>, "count":<%=@map_data["count"]%>, "name":"<%=@map_data["name"]%>"}];
     var area_geojson = <%=raw(@map_data["geojson"])%>;
     var area_stroke_color = "<%=@georegion_map_stroke_color%>";
