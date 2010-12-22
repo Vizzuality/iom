@@ -37,11 +37,11 @@
 #  aid_map_image_content_type      :string(255)
 #  aid_map_image_file_size         :integer
 #  aid_map_image_updated_at        :datetime
-#  geographic_context_geometry     :string
 #  overview_map_bbox_miny          :float
 #  overview_map_bbox_minx          :float
 #  overview_map_bbox_maxy          :float
 #  overview_map_bbox_maxx          :float
+#  geographic_context_geometry     :string
 #
 
 class Site < ActiveRecord::Base
@@ -60,6 +60,7 @@ class Site < ActiveRecord::Base
   has_many :cached_projects, :class_name => 'Project', :finder_sql => 'select projects.* from projects, projects_sites where projects_sites.site_id = #{id} and projects_sites.project_id = projects.id'
   belongs_to :geographic_context_country, :class_name => 'Country'
   belongs_to :geographic_context_region, :class_name => 'Region'
+  has_many :stats, :dependent => :destroy
 
   has_attached_file :logo, :styles => {
                                       :small => {
@@ -301,6 +302,16 @@ class Site < ActiveRecord::Base
   def sectors
     Sector.find_by_sql("select s.* from sectors as s where id in (
         select pse.project_id from (projects_sectors as pse inner join projects as p on pse.project_id=p.id) inner join projects_sites as ps on p.id=ps.project_id and site_id=#{self.id})")
+  end
+
+  def set_yesterday_visits!
+    return if self.google_analytics_id.blank? || Settings.first.google_analytics_username.blank? || Settings.first.google_analytics_password.blank?
+    Garb::Session.login(Settings.first.google_analytics_username, Settings.first.google_analytics_password)
+    profile = Garb::Profile.all.detect{|p| p.web_property_id == self.google_analytics_id}
+    report = Garb::Report.new(profile, :start_date => (Date.today - 1.day).beginning_of_day, :end_date => (Date.today - 1.day).end_of_day)
+    report.metrics :pageviews
+    result = report.results.first
+    stats.create(:visits => result.pageviews.to_i, :date => Date.yesterday)
   end
 
   def set_visits!

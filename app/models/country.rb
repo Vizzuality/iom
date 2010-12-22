@@ -3,11 +3,13 @@
 # Table name: countries
 #
 #  id               :integer         not null, primary key
-#  name             :string(255)
-#  code             :string(255)
-#  wiki_url         :string(255)
-#  wiki_description :text
-#  the_geom         :string
+#  name             :string(255)     
+#  code             :string(255)     
+#  wiki_url         :string(255)     
+#  wiki_description :text            
+#  iso2_code        :string(255)     
+#  iso3_code        :string(255)     
+#  the_geom         :string          
 #
 
 class Country < ActiveRecord::Base

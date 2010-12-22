@@ -3,14 +3,15 @@
 # Table name: regions
 #
 #  id               :integer         not null, primary key
-#  name             :string(255)
-#  level            :integer
-#  country_id       :integer
-#  parent_region_id :integer
-#  gadm_id          :integer
-#  wiki_url         :string(255)
-#  wiki_description :text
-#  the_geom         :string
+#  name             :string(255)     
+#  level            :integer         
+#  country_id       :integer         
+#  parent_region_id :integer         
+#  gadm_id          :integer         
+#  wiki_url         :string(255)     
+#  wiki_description :text            
+#  code             :string(255)     
+#  the_geom         :string          
 #
 
 class Region < ActiveRecord::Base

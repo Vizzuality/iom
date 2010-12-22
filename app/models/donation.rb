@@ -3,10 +3,10 @@
 # Table name: donations
 #
 #  id         :integer         not null, primary key
-#  donor_id   :integer
-#  project_id :integer
-#  amount     :float
-#  date       :date
+#  donor_id   :integer         
+#  project_id :integer         
+#  amount     :float           
+#  date       :date            
 #
 
 class Donation < ActiveRecord::Base

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101221151517) do
+ActiveRecord::Schema.define(:version => 20101222065522) do
 
   create_table "clusters", :force => true do |t|
     t.string "name"
@@ -330,6 +330,14 @@ ActiveRecord::Schema.define(:version => 20101221151517) do
   add_index "sites", ["name"], :name => "index_sites_on_name"
   add_index "sites", ["status"], :name => "index_sites_on_status"
   add_index "sites", ["url"], :name => "index_sites_on_url"
+
+  create_table "stats", :force => true do |t|
+    t.integer "site_id"
+    t.integer "visits"
+    t.date    "date"
+  end
+
+  add_index "stats", ["site_id"], :name => "index_stats_on_site_id"
 
   create_table "tags", :force => true do |t|
     t.string  "name"
