@@ -54,6 +54,8 @@ SQL
     'early_recovery'
     elsif (name.include? 'Economic Recovery')
     'economic_recovery'
+    elsif (name.include? 'Education')
+    'education'
     elsif (name.include? 'Emergency Telecommunications')
     'emergency'
     elsif (name.include? 'Environment')
