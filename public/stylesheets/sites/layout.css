@@ -537,7 +537,7 @@ div.projects div.right div.block p.estimate {font:normal 25px "Aller"; color:#66
 div.projects div.right div.block p.estimate sup {font:normal 13px "Aller"; color:#666666;}
 div.projects div.right div.block div.timeline {position:relative; width:237px; height:23px; padding:3px; margin:6px 0 0 0; background:url('/images/sites/projects/days_left_bkg.png') no-repeat 0 0;}
 div.projects div.right div.block div.timeline span {display:block; width:100px; height:23px; background:url('/images/sites/projects/days_left_bar.png') no-repeat 0 0; width:245px;}
-div.projects div.right div.block div.timeline p {position:absolute; left:90px; top:8px; width:auto!important; margin:0!important; padding:0!important; font:normal 11px "PT Sans"; color:white;}
+div.projects div.right div.block div.timeline p {position:absolute; left:90px; top:8px; width:auto!important; margin:0!important; padding:0!important; font:normal 11px "PT Sans"; color:white; text-shadow:0 1px white;}
 div.projects div.right div.block p.first_date {width:121px; margin:0!important; padding:3px 0 0 0!important; font:normal 11px "Aller"; color:#999999; text-align:left; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div.projects div.right div.block p.second_date {width:121px; margin:0!important; padding:3px 0 0 0!important; font:normal 11px "Aller"; color:#999999; text-align:right; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 
