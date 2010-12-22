@@ -113,7 +113,7 @@ div#header h1 a {color:white;}
 div#header ul.menu {float:right; margin:4px 0 0 100px; width:auto; height:25px;}
 div#header ul.menu li {float:left; width:auto; margin:0 23px 0 0; position:relative;}
 
-div#header ul.menu li#cluster_option.clicked ul.suboptions {position:absolute; top:35px; left:-10px; z-index:110; background:url('/images/sites/common/menu/cluster_body_clicked.png') no-repeat 0 0; display:none; width:497px; height:177px; display:inline; padding:7px 13px 0 23px;}
+div#header ul.menu li#cluster_option.clicked ul.suboptions {position:absolute; top:35px; left:-10px; z-index:110; background:url('/images/sites/common/menu/cluster_body_clicked.png') no-repeat 0 0; display:none; width:497px; height:177px; display:inline; padding:0 13px 0 23px;}
 div#header ul.menu li div.header_title {display:none;}
 div#header ul.menu li div.header_title a {display:none;}
 div#header ul.menu li#cluster_option.clicked div.header_title {position:absolute; top:0; left:-10px; background:url('/images/sites/common/menu/cluster_head_clicked.png') no-repeat 0 0; width:94px; height:35px; display:inline;}
@@ -153,12 +153,12 @@ div#header ul.menu li#organization_option.clicked ul#orgs_list li a {float:left;
 div#header ul.menu li#organization_option.clicked ul#orgs_list li a:hover {color:white;}
 
 div#header ul.menu li.clicked ul.suboptions {display:inline;}
-div#header ul.menu li a {float:left; font:normal 13px "Geneva"; color:#C2C1C1; text-decoration:none; margin:8px 0 0 0;}
+div#header ul.menu li a {float:left; font:normal 13px "Geneva"; color:#C2C1C1; text-decoration:none; margin:8px 0 0 0; line-height:15px;}
 div#header ul.menu li a:hover {cursor:pointer; color:white;}
 div#header ul.menu li a span.with_suboptions {float:right; width:6px; height:3px; margin:7px 0 0 2px; background:url('/images/sites/common/arrow_menu.png') no-repeat 0 0;}
 div#header ul.menu li div.suboptions_body {display:none;}
 div#header ul.menu li ul.suboptions {position:absolute; top:20px; left:-13px; background-color:#2F2E2C; z-index:110; display:none;}
-div#header ul.menu li ul.suboptions li {float:left; width:145px; padding:0 5px; margin:6px 7px 0 0; height:auto;}
+div#header ul.menu li ul.suboptions li {float:left; width:149px; padding:0 5px; margin:10px 6px 0 0; height:auto;}
 
 
 div#header div.right {margin:11px 0 0 0; width:auto; height:20px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
@@ -360,7 +360,7 @@ div.statistics ul.statistics_list li {display:inline-block; width:100%!important
 
 /*ICONS*/
 /* TO PROGRESS BAR */
-a.icon_statistics {float:left; width:auto; padding:0 0 0 20px; height:20px;}
+a.icon_statistics {float:left; width:auto; padding:0 0 0 22px; height:20px;}
 a.icon_statistics.agriculture {background:url('/images/sites/common/icons/bar/left_agriculture.png') no-repeat left 0;}
 a.icon_statistics.camp_coordination {background:url('/images/sites/common/icons/bar/left_camp_coordination.png') no-repeat left 0;}
 a.icon_statistics.communications {background:url('/images/sites/common/icons/bar/left_communication.png') no-repeat left 0;}
@@ -374,7 +374,7 @@ a.icon_statistics.food_aid {background:url('/images/sites/common/icons/bar/left_
 a.icon_statistics.food_security {background:url('/images/sites/common/icons/bar/left_food_security.png') no-repeat left 0;}
 a.icon_statistics.health {background:url('/images/sites/common/icons/bar/left_health.png') no-repeat left 0;}
 a.icon_statistics.human_rights {background:url('/images/sites/common/icons/bar/left_human_rights.png') no-repeat left 0;}
-a.icon_statistics.logistics {background:url('/images/sites/common/icons/bar/left_logistics.png') no-repeat left 0;}
+a.icon_statistics.logistics {background:url('/images/sites/common/icons/bar/left_logistics.png') no-repeat left 0; width:25px; padding:0 0 0 25px;}
 a.icon_statistics.nutrition {background:url('/images/sites/common/icons/bar/left_nutrition.png') no-repeat left 0;}
 a.icon_statistics.other {background:url('/images/sites/common/icons/bar/left_other.png') no-repeat left 0;}
 a.icon_statistics.peace_security {background:url('/images/sites/common/icons/bar/left_peace_security.png') no-repeat left 0;}
@@ -383,7 +383,7 @@ a.icon_statistics.shelter {background:url('/images/sites/common/icons/bar/left_s
 a.icon_statistics.water_sanitation {background:url('/images/sites/common/icons/bar/left_water_sanitation.png') no-repeat left 0;}
 
 /* TO MENU */
-a.icon_menu {float:left; padding:2px 0 0 30px; height:20px; font:normal 13px Arial;}
+a.icon_menu {float:left; padding:0 0 0 30px; height:22px; font:normal 13px Arial;}
 a.icon_menu.agriculture {background:url('/images/sites/common/icons/menu/agriculture.png') no-repeat left 0;}
 a.icon_menu.camp_coordination {background:url('/images/sites/common/icons/menu/camp.png') no-repeat left 0;}
 a.icon_menu.communications {background:url('/images/sites/common/icons/menu/communication.png') no-repeat left 0;}
@@ -485,7 +485,9 @@ div.statistics ul.statistics_list li a:hover span {text-decoration:none!importan
 
 /*PROJECTS*/
 div#project_layout {width:992px; margin:0 auto;}
-div.main_head.projects div#completed {position:absolute; top:112px; right:-15px; width:173px; height:41px; background:url('/images/sites/projects/completed_msg.png') no-repeat; display:none; z-index:200;}
+
+
+div.main_head.projects div#completed {position:absolute; bottom:-20px; right:-15px; width:173px; height:41px; background:url('/images/sites/projects/completed_msg.png') no-repeat; display:block; z-index:200;}
 div.main_head.projects div#completed p {margin:5px 0 0 10px; font:normal 13px 'PT Sans Bold'; color:white;}
 div.main_head.projects div.left {width:606px; height:auto; padding:30px 32px; margin:0; background:url('/images/sites/common/mesh.png') repeat 0 0; display:inline-block; vertical-align:top; zoom:1; *display:inline;}
 div.main_head.projects div.float_head {position:absolute; top:0; left:5px; width:596px; height:auto; padding:32px 32px 40px; background:url('/images/sites/search/head_mask.png') repeat 0 0 #CD5D4C; z-index:100;}
@@ -537,7 +539,7 @@ div.projects div.right div.block p.estimate {font:normal 25px "Aller"; color:#66
 div.projects div.right div.block p.estimate sup {font:normal 13px "Aller"; color:#666666;}
 div.projects div.right div.block div.timeline {position:relative; width:237px; height:23px; padding:3px; margin:6px 0 0 0; background:url('/images/sites/projects/days_left_bkg.png') no-repeat 0 0;}
 div.projects div.right div.block div.timeline span {display:block; width:100px; height:23px; background:url('/images/sites/projects/days_left_bar.png') no-repeat 0 0; width:245px;}
-div.projects div.right div.block div.timeline p {position:absolute; left:90px; top:8px; width:auto!important; margin:0!important; padding:0!important; font:normal 11px "PT Sans"; color:white; text-shadow:0 1px white;}
+div.projects div.right div.block div.timeline p {position:absolute; left:90px; top:8px; width:auto!important; margin:0!important; padding:0!important; font:normal 11px "PT Sans"; color:white;}
 div.projects div.right div.block p.first_date {width:121px; margin:0!important; padding:3px 0 0 0!important; font:normal 11px "Aller"; color:#999999; text-align:left; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div.projects div.right div.block p.second_date {width:121px; margin:0!important; padding:3px 0 0 0!important; font:normal 11px "Aller"; color:#999999; text-align:right; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 

@@ -16,7 +16,7 @@
               <ul class="suboptions">
                 <% @site.clusters.each do |cluster| %>
                 <%unless cluster.name.eql?('N/A')%>
-                <li><a href="<%= cluster_path(cluster) %>" class="geneva <%= cluster.css_class %> icon_menu"><%= truncate(cluster.name, :length=>21) %></a></li>
+                <li><a href="<%= cluster_path(cluster) %>" class="geneva <%= cluster.css_class %> icon_menu"><%= cluster.name %></a></li>
                 <%end%>
                 <% end %>
               </ul>

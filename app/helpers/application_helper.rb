@@ -92,14 +92,13 @@ HTML
     return result.reverse.join(" - ")
   end
 
-  def cluster_width(count)
-    count = count*10
-    if count > 203
+  def cluster_width(count, max = 203)
+    if count >= max
       203
     elsif count < 0
       0
     else
-      count
+      count * 203 / max
     end
   end
 

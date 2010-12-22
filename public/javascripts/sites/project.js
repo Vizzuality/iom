@@ -12,13 +12,8 @@
           $('div#project div.outer_float').height($('div#project div.float_left').height()-40);
           $('div#project div.left').height($('div#project div.float_left').height()-30);
         }
-
         
-        
-        
-        
-        
-        $('div#completed').css('bottom','0px');
+        $('div#completed').css('bottom','-10px');
               
         //Days left effect
         var d = new Date();       

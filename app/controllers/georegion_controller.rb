@@ -45,6 +45,9 @@ class GeoregionController < ApplicationController
 
     @projects = @area.projects.site(@site).where("id IN (#{@site.projects_ids.join(',')})").paginate :per_page => 10, :page => params[:page], :order => 'created_at DESC'
 
+    @first_three = @area.projects_clusters(@site)[0...3]
+    @first_three_max = @first_three.map{|g, c| c}.sort.last
+
     respond_to do |format|
       format.html {render :show}
       format.js do

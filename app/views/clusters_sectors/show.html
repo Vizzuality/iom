@@ -41,7 +41,7 @@
           <div class="block">
             <h3>DONORS</h3>
             <ul>
-              <% @data.donors(@site).each do |donor| %>
+              <% @data.donors(@site)[0..9].each do |donor| %>
                 <li><%= link_to(donor.name, donor_path(donor)) %></li>
               <% end %>
             </ul>
@@ -50,8 +50,8 @@
           <% unless @site.projects_sectors_or_clusters.empty? %>
           <div class="block margin">
             <h3>OTHER <%= @site.word_for_cluster_sector.upcase %></h3>
-            <ul class="clusters">
-            <% @site.projects_sectors_or_clusters.each do |category, count| %>
+            <ul class="clusters"> 
+            <% @site.projects_sectors_or_clusters[0..9].each do |category, count| %>
               <% next if category == @data %>
               <%unless category.name.eql?('N/A') %>
               <li class="<%= category.css_class %> icon_other">

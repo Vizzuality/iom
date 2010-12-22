@@ -133,7 +133,7 @@
                <p><%= @project.implementing_organization %></p>
              <% end %>
 
-             <% if @project.partner_organizations? %>
+             <% if @project.partner_organizations? && !@project.partner_organizations.eql?('N/A') %>
                <h3 class="margin">Partner Organizations</h3>
                <p><%= @project.partner_organizations %></p>
              <% end %>
