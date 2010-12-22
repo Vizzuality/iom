@@ -53,29 +53,41 @@
     });
     
 
-    var range = max_count/6;
+    var range = max_count/3;
     var diameter = 0;
     
     for (var i = 0; i<map_data.length; i++) {
+      // if (map_data[i].count <range) {
+      //   diameter = 16;
+      //   marker_image = marker_source+'marker_1.png';
+      // } else if ((map_data[i].count>=(range)) && (map_data[i].count<(range*2))) {
+      //   diamter = 20;
+      //   marker_image = marker_source+'marker_2.png';
+      // } else if ((map_data[i].count>=(range*2)) && (map_data[i].count<(range*3))) {
+      //   diameter = 26;
+      //   marker_image = marker_source+'marker_3.png';
+      // } else if ((map_data[i].count>=(range*3)) && (map_data[i].count<(range*4))) {
+      //   diameter = 34;
+      //   marker_image = marker_source+'marker_4.png';
+      // } else if ((map_data[i].count>=(range*4)) && (map_data[i].count<(range*5))) {
+      //   diameter = 42;
+      //   marker_image = marker_source+'marker_5.png';
+      // } else {
+      //   diameter = 58;
+      //   marker_image = marker_source+'marker_6.png';
+      // }
+      
       if (map_data[i].count <range) {
-        diameter = 16;
-        marker_image = marker_source+'marker_1.png';
-      } else if ((map_data[i].count>=(range)) && (map_data[i].count<(range*2))) {
-        diamter = 20;
-        marker_image = marker_source+'marker_2.png';
-      } else if ((map_data[i].count>=(range*2)) && (map_data[i].count<(range*3))) {
-        diameter = 26;
-        marker_image = marker_source+'marker_3.png';
-      } else if ((map_data[i].count>=(range*3)) && (map_data[i].count<(range*4))) {
         diameter = 34;
         marker_image = marker_source+'marker_4.png';
-      } else if ((map_data[i].count>=(range*4)) && (map_data[i].count<(range*5))) {
+      } else if ((map_data[i].count>=(range)) && (map_data[i].count<(range*2))) {
         diameter = 42;
         marker_image = marker_source+'marker_5.png';
       } else {
         diameter = 58;
         marker_image = marker_source+'marker_6.png';
       }
+      
       var marker_ = new IOMMarker(map_data[i],diameter, marker_image,map);
     }
     
