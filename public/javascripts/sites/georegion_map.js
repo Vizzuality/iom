@@ -33,7 +33,7 @@
         streetViewControl: false,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         disableDefaultUI: true,
-        zoom: 10,
+        zoom: 15,
         center: new google.maps.LatLng(map_data[0].lat, map_data[0].lon)
       }
       map = new google.maps.Map(document.getElementById("map"), myOptions);
@@ -86,11 +86,13 @@
     function createGeoJsonPolygon(geojson){
     	var coords = geojson.coordinates;
     	var paths = [];
+    	var bounds = new google.maps.LatLngBounds();
     	$.each(coords,function(i,n){
     		$.each(n,function(j,o){
     			var path=[];
     			$.each(o,function(k,p){
     				var ll = new google.maps.LatLng(p[1],p[0]);
+    				bounds.extend(ll);
     				path.push(ll);
     			});
     			paths.push(path);
@@ -104,6 +106,7 @@
     		fillColor: area_fill_color,
     		fillOpacity: 0.25
     	});
+    	map.fitBounds(bounds);
     	return polygon;
     }
 

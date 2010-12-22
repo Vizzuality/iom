@@ -39,7 +39,11 @@
       zoom: 2,
       center: bounds.getCenter()
     }
-    map = new google.maps.Map(document.getElementById("map"), myOptions);
+    if ($('#map').length>0) {
+      map = new google.maps.Map(document.getElementById("map"), myOptions);
+    } else {
+      map = new google.maps.Map(document.getElementById("small_map"), myOptions);
+    }
     map.overlayMapTypes.insertAt(2, mapChartType);
     map.mapTypes.set('labels', styleMapType);
     map.setMapTypeId('labels');
@@ -76,24 +80,24 @@
     }
     
 
-
     map.fitBounds(bounds);
-    setTimeout(function(){zoomIn()},200);
-    
-    
     
     //Positionate zoom controls
     positionZoomControls();
     $('#zoomIn').fadeIn();
     $('#zoomOut').fadeIn();
     window.onResize = positionZoomControls;
-    
   });
   
   
   function positionZoomControls() {
-    var column_position = $('#layout').offset().left;
-    var map_position = $('#map').position().top + 25;
+    if ($('#layout').length>0) {
+      var column_position = $('#layout').offset().left;
+      var map_position = $('#map').position().top + 25;
+    } else {
+      var column_position = $('#project_layout').offset().left;
+      var map_position = $('#small_map').position().top + 25;
+    }
     
     $('#zoomIn').css('left',column_position+'px');
     $('#zoomIn').css('top',map_position+'px');

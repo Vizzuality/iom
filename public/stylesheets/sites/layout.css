@@ -182,7 +182,7 @@ div.main_head {display:inline-block; vertical-align:top; zoom:1; *display:inline
 div.inner_main_head {position:relative; width:942px; margin:0 auto;}
 div.main_head.projects div.left {background:none; padding:0; width:260px;}
 div.main_head div.left {width:248px; padding:30px 32px; background:url('/images/sites/common/mesh.png') repeat 0 0; display:inline-block; vertical-align:top; zoom:1; *display:inline;}
-div.main_head div.left h1 {width:100%; font:normal 25px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42; z-index:10;}
+div.main_head div.left h1 {width:237px; font:normal 25px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42; z-index:10;}
 div.main_head div.left h2 {width:100%; font:normal 15px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42; text-transform:uppercase;} 
 div.main_head div.left h3 {width:100%; font:normal 15px "PT Sans Bold"; color:#7B3C32; text-transform:uppercase;} 
  
