@@ -28,12 +28,11 @@
       
       // TO ADAPT LEFT AND RIGHT COLUMN PROPERLY
       if ($('div#left_column div.outer_float').height() > $('div#left_column div.right').height()){
-          $('div#left_column div.right').height($('div#left_column div.outer_float').height());
-      }else {
-          $('div#left_column div.outer_float').height($('div#left_column div.right').height());
-          var dif = $('div#left_column div.outer_float').height() - ($('div#left_column div.float_left').height());
-          $('div#most_active_orgs').height($('div#most_active_orgs').height() + dif + 41);
-          
+        $('div#left_column div.right').height($('div#left_column div.outer_float').height());
+      } else {
+        $('div#left_column div.outer_float').height($('div#left_column div.right').height());
+        var dif = $('div#left_column div.outer_float').height() - ($('div#left_column div.float_left').height());
+        $('div#most_active_orgs').height($('div#most_active_orgs').height() + dif + 41);
       }
 
     });
