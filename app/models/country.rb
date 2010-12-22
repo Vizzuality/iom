@@ -24,7 +24,7 @@ class Country < ActiveRecord::Base
   before_save :update_wikipedia_description
 
   def self.custom_fields
-    columns.map{ |c| c.name } - ['the_geom']
+    (columns.map{ |c| c.name } - ['the_geom']).map{ |c| "#{self.table_name}.#{c}" }
   end
 
   # Array of arrays

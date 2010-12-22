@@ -66,19 +66,19 @@
                  <% end %>
                </div>
              <% end %>
-
+             
              <% if @project.activities || @project.additional_information || @project.cross_cutting_issues %>
                <div class="block info">
-                 <%unless @project.activities.nil? || @project.activities.empty? %>
+                 <%unless @project.activities.blank? %>
                    <h3 class="first">ACTIVITIES</h3>
                      <%= raw(@project.activities) %>
                  <%end%>
-                 <%unless @project.additional_information.nil? || @project.additional_information.empty?%>
-                   <h3 class="<%= (@project.activities.empty?)? 'first':''%>">ADDITIONAL INFORMATION</h3>
+                 <%unless @project.additional_information.blank? %>
+                   <h3 class="<%= (@project.activities.blank?)? 'first':''%>">ADDITIONAL INFORMATION</h3>
                    <%= raw(@project.additional_information) %>
                  <%end%>
-                 <%unless @project.cross_cutting_issues.nil? || @project.cross_cutting_issues.empty?%>
-                     <h3 class="<%= (@project.activities.empty? && @project.additional_information.empty?)? 'first':''%>">CROSS-CUTTING ISSUES</h3>
+                 <%unless @project.cross_cutting_issues.blank? %>
+                     <h3 class="<%= (@project.activities.blank? && @project.additional_information.blank?)? 'first':''%>">CROSS-CUTTING ISSUES</h3>
                      <%= raw(@project.cross_cutting_issues) %>
                  <%end%>
                </div>

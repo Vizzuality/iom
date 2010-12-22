@@ -3,45 +3,46 @@
 # Table name: sites
 #
 #  id                              :integer         not null, primary key
-#  name                            :string(255)
-#  short_description               :text
-#  long_description                :text
-#  contact_email                   :string(255)
-#  contact_person                  :string(255)
-#  url                             :string(255)
-#  permalink                       :string(255)
-#  google_analytics_id             :string(255)
-#  logo_file_name                  :string(255)
-#  logo_content_type               :string(255)
-#  logo_file_size                  :integer
-#  logo_updated_at                 :datetime
-#  theme_id                        :integer
-#  blog_url                        :string(255)
-#  word_for_clusters               :string(255)
-#  word_for_regions                :string(255)
-#  show_global_donations_raises    :boolean
+#  name                            :string(255)     
+#  short_description               :text            
+#  long_description                :text            
+#  contact_email                   :string(255)     
+#  contact_person                  :string(255)     
+#  url                             :string(255)     
+#  permalink                       :string(255)     
+#  google_analytics_id             :string(255)     
+#  logo_file_name                  :string(255)     
+#  logo_content_type               :string(255)     
+#  logo_file_size                  :integer         
+#  logo_updated_at                 :datetime        
+#  theme_id                        :integer         
+#  blog_url                        :string(255)     
+#  word_for_clusters               :string(255)     
+#  word_for_regions                :string(255)     
+#  show_global_donations_raises    :boolean         
 #  project_classification          :integer         default(0)
-#  geographic_context_country_id   :integer
-#  geographic_context_region_id    :integer
-#  project_context_cluster_id      :integer
-#  project_context_sector_id       :integer
-#  project_context_organization_id :integer
-#  project_context_tags            :string(255)
-#  created_at                      :datetime
-#  updated_at                      :datetime
-#  project_context_tags_ids        :string(255)
-#  status                          :boolean
+#  geographic_context_country_id   :integer         
+#  geographic_context_region_id    :integer         
+#  project_context_cluster_id      :integer         
+#  project_context_sector_id       :integer         
+#  project_context_organization_id :integer         
+#  project_context_tags            :string(255)     
+#  created_at                      :datetime        
+#  updated_at                      :datetime        
+#  project_context_tags_ids        :string(255)     
+#  status                          :boolean         
 #  visits                          :float           default(0.0)
 #  visits_last_week                :float           default(0.0)
-#  aid_map_image_file_name         :string(255)
-#  aid_map_image_content_type      :string(255)
-#  aid_map_image_file_size         :integer
-#  aid_map_image_updated_at        :datetime
-#  overview_map_bbox_miny          :float
-#  overview_map_bbox_minx          :float
-#  overview_map_bbox_maxy          :float
-#  overview_map_bbox_maxx          :float
-#  geographic_context_geometry     :string
+#  aid_map_image_file_name         :string(255)     
+#  aid_map_image_content_type      :string(255)     
+#  aid_map_image_file_size         :integer         
+#  aid_map_image_updated_at        :datetime        
+#  overview_map_bbox_miny          :float           
+#  overview_map_bbox_minx          :float           
+#  overview_map_bbox_maxy          :float           
+#  overview_map_bbox_maxx          :float           
+#  geographic_context_geometry     :string          
+#  level_for_region                :integer         default(1)
 #
 
 class Site < ActiveRecord::Base
@@ -116,9 +117,9 @@ class Site < ActiveRecord::Base
   end
 
   def word_for_cluster_sector
-    if cluster
+    if navigate_by_cluster?
       word_for_clusters
-    elsif sector
+    elsif navigate_by_sector?
       word_for_sectors
     end
   end
@@ -238,7 +239,12 @@ class Site < ActiveRecord::Base
   end
 
   def projects_sectors_or_clusters
-    categories = projects_sectors + projects_clusters
+    if navigate_by_sector? 
+      categories = projects_sectors 
+    elsif navigate_by_cluster?
+      categories = projects_clusters 
+    end
+      
     categories.sort!{|x, y| x.first.class.name <=> y.first.class.name}
     categories
   end
@@ -413,6 +419,10 @@ class Site < ActiveRecord::Base
 
   def subdomain=(subdomain)
     self.url = "#{subdomain}.#{@@main_domain}" if subdomain.present?
+  end
+
+  def last_visits(limit = 30)
+    stats.order("date DESC").limit(limit).map{ |s| s.visits }.join(',')
   end
 
   def countries_select

@@ -3,7 +3,7 @@
       <ul class="projects">
         <% @projects.each do |project| %>
         <li <%= cycle('class=even', 'class=odd') %>>
-          <h4><a href="<%= project_path(project) %>"><%= project.name %></a></h4>
+          <h4><a href="<%= project_path(project) %>"><%= truncate(project.name, :length=>65) %></a></h4>
           <p class="author"><%= subtitle(project) %></p>
           <p class="info"><%= truncate(project.description, :length => 80) %> <a href="<%= project_path(project) %>" class="learn_more">Learn more</a></p>
         </li>

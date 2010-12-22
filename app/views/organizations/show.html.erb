@@ -22,7 +22,7 @@
         </div>
       </div>
       <div class="right">
-        <p><%= truncate (@organization.description, :length => 800) %></p>
+        <%= simple_format(truncate(@organization.description, :length => 800)) %></p>
       </div>
     </div>
   </div>
@@ -58,7 +58,7 @@
             <h3>PROJECTS BY CLUSTER</h3>
             <ul class="statistics_list">
               <% @organization.projects_clusters(@site)[0...3].each do |cluster,count| %>
-                <li><a class="<%= cluster.css_class %>"><span class="aller" style="width:<%= cluster_width(count) %>px"><%= count %></span></a></li>
+                <li><a class="<%= cluster.css_class %> icon_statistics"><span class="aller" style="width:<%= cluster_width(count) %>px"><%= count %></span></a></li>
               <% end %>
             </ul>
             <% if @organization.projects_clusters(@site).size > 3 %>
