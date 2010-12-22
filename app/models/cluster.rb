@@ -34,34 +34,13 @@ class Cluster < ActiveRecord::Base
     scoped.select(:id,:name).order("name ASC")
   end
 
-  # Agriculture - agriculture
-  #   Camp Coordination & Management - camp_coordination
-  #   Communications - communications
-  #   Disaster Management - disaster_management
-  #   Early Recovery - early_recovery
-  #   Economic Recovery & Development - economic_recovery
-  #   Education - education
-  #   Emergency Telecommunications - emergency
-  #   Environment - environment
-  #   Food Aid - food_aid
-  #   Food Security & Agriculture - food_security
-  #   Health - health
-  #   Human Rights, Democracy & Gov. - human_rights
-  #   Logistics - logistics
-  #   Other - other
-  #   Nutrition - nutrition
-  #   Peace & Security - peace_security
-  #   Protection - protection
-  #   Shelter & Housing - shelter
-  #   Water, Sanitation & Hygiene - water_sanitation
-  
   def css_class
     if (name.include? 'Agriculture')
        'agriculture'
     elsif (name.include? 'Camp Coordination')
     'camp_coordination'
     elsif (name.include? 'Disaster')
-    'disaster_management'
+    'disastermanagement'
     elsif (name.include? 'Early Recovery')
     'early_recovery'
     elsif (name.include? 'Economic Recovery')
@@ -76,7 +55,7 @@ class Cluster < ActiveRecord::Base
     'food_security'
     elsif (name.include? 'Health')
     'health'
-    elsif (name.include? 'Human Rights')
+    elsif (name.include? 'Human')
     'human_rights'
     elsif (name.include? 'Logistics')
     'logistics'
