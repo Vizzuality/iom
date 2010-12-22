@@ -231,6 +231,8 @@ class Site < ActiveRecord::Base
 
   def projects_ids_string
     # projects_ids seems to return a -1 id. #BUG?
+    # no, feature!
+    # this way never is empty
     (self.projects_ids - [-1]).join(',')
   end
 
@@ -240,6 +242,15 @@ class Site < ActiveRecord::Base
     result = ActiveRecord::Base.connection.execute("select cluster_id, count(cluster_id) as count from clusters_projects where project_id IN (select id from projects where project_id IN (#{projects_ids_string})) group by cluster_id order by count desc")
     result.map do |row|
       [Cluster.find(row['cluster_id']), row['count'].to_i]
+    end
+  end
+
+  # Array of arrays
+  # [[sector, count], [sector, count]]
+  def projects_sectors
+    result = ActiveRecord::Base.connection.execute("select sector_id, count(sector_id) as count from projects_sectors where project_id IN (select id from projects where project_id IN (#{projects_ids_string})) group by sector_id order by count desc")
+    result.map do |row|
+      [Sector.find(row['sector_id']), row['count'].to_i]
     end
   end
 
