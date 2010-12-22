@@ -3,12 +3,12 @@
 <head>
   <title><%= title %></title>
 
-  <%= javascript_include_tag 'jquery.min', 'jquery.ui.core', 'jquery.ui.widget', 'jquery.ui.position', 'plugins/jquery.mousewheel.js','plugins/jquery.jscrollpane.js','plugins/quicksilver.js','plugins/jquery.livesearch.js','sites/application.js' %>
-  
+  <%= javascript_include_tag 'jquery.min', 'jquery.ui.core', 'jquery.ui.widget', 'jquery.ui.position', 'plugins/jquery.mousewheel.js','plugins/jquery.jscrollpane.js','plugins/quicksilver.js','plugins/jquery.livesearch.js', 'rails.js','sites/application.js' %>
+
   <%= stylesheet_link_tag '/stylesheets/sites/jscroll.css','/stylesheets/sites/layout.css' %>
   <%= stylesheet_link_tag @site.theme.css_file if @site.theme %>
 
-  <link rel="shortcut icon" href="/images/favicon.ico"/>    
+  <link rel="shortcut icon" href="/images/favicon.ico"/>
 </head>
 <body>
 
@@ -18,9 +18,9 @@
     <%= render :partial => 'shared/menu' %>
   <%end%>
   <div id="outer_layout">
-    
+
     <%= yield %> <!-- Main layout has to content <div id="layout"> -->
-      
+
     <!-- FOOTERS -->
     <% if controller_name == 'pages' || controller_name == 'search' || controller_name == 'donors' %>
       <div id="footer_pages">

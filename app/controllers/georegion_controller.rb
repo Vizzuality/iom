@@ -6,10 +6,10 @@ class GeoregionController < ApplicationController
     if(request.url.match(/countries/))
       @area = Country.find(params[:id])
       @area_parent = "America"
-      
+
       sql="select c.id,count(ps.project_id) as count,c.name,x(ST_Centroid(c.the_geom)) as lon,y(ST_Centroid(c.the_geom)) as lat,
         ST_AsGeoJSON(c.the_geom,6) as geojson
-        from (countries_projects as cp inner join projects_sites as ps on cp.project_id=ps.project_id and site_id=#{@site.id}) 
+        from (countries_projects as cp inner join projects_sites as ps on cp.project_id=ps.project_id and site_id=#{@site.id})
         inner join countries as c on cp.country_id=c.id and c.id=#{params[:id].gsub(/\\/, '\&\&').gsub(/'/, "''")}
         group by c.id,c.name,lon,lat,geojson"
     else
@@ -17,11 +17,11 @@ class GeoregionController < ApplicationController
       @area_parent = @area.country.try(:name)
       sql="select r.id,count(ps.project_id) as count,r.name,x(ST_Centroid(r.the_geom)) as lon,y(ST_Centroid(r.the_geom)) as lat,
         ST_AsGeoJSON(r.the_geom,6) as geojson
-        from (projects_regions as pr inner join projects_sites as ps on pr.project_id=ps.project_id and site_id=#{@site.id}) 
+        from (projects_regions as pr inner join projects_sites as ps on pr.project_id=ps.project_id and site_id=#{@site.id})
         inner join regions as r on pr.region_id=r.id and r.id=#{params[:id].gsub(/\\/, '\&\&').gsub(/'/, "''")}
         group by r.id,r.name,lon,lat,geojson"
     end
-    
+
     result=ActiveRecord::Base.connection.execute(sql)
     @map_data = result.first
     @georegion_map_chco = @site.theme.data[:georegion_map_chco]
@@ -29,8 +29,7 @@ class GeoregionController < ApplicationController
     @georegion_map_marker_source = @site.theme.data[:georegion_map_marker_source]
     @georegion_map_stroke_color = @site.theme.data[:georegion_map_stroke_color]
     @georegion_map_fill_color = @site.theme.data[:georegion_map_fill_color]
-    
-    
+
     areas= []
     data = []
     @map_data_max_count=0
@@ -43,9 +42,8 @@ class GeoregionController < ApplicationController
     end
     @chld = areas.join("|")
     @chd  = "t:"+data.join(",")
-    
-    
-    @projects = @area.projects.site(@site).where("id IN (#{@site.projects_ids.join(',')})").paginate :per_page => 10, :page => params[:page], :order => 'created_at DESC'    
+
+    @projects = @area.projects.site(@site).where("id IN (#{@site.projects_ids.join(',')})").paginate :per_page => 10, :page => params[:page], :order => 'created_at DESC'
 
     respond_to do |format|
       format.html {render :show}
@@ -57,7 +55,7 @@ class GeoregionController < ApplicationController
         end
       end
     end
-    
+
   end
 
 end

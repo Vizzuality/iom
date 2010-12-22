@@ -11,8 +11,16 @@
       </ul>
     <% end %>
 
-    <div class="view_more">
+    <div class="view_more" id="projects_view_more">
       <% if @projects.total_pages > 1 && @projects.current_page < @projects.total_pages %>
-        <%= link_to('More projects', params.merge(:page => @projects.current_page + 1), :id =>'view_more') %>
+        <% if @area %>
+          <% if @area.is_a?(Region) %>
+            <%= link_to('More projects', region_path(params.merge(:page => @projects.current_page + 1)), :id =>'view_more', :class => 'ajax') %>
+          <% else %>
+            <%= link_to('More projects', country_path(params.merge(:page => @projects.current_page + 1)), :id =>'view_more', :class => 'ajax') %>
+          <% end %>
+        <% else %>
+          <%= link_to('More projects', params.merge(:page => @projects.current_page + 1), :id =>'view_more', :class => 'ajax') %>
+        <% end %>
       <% end %>
     </div>

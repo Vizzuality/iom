@@ -44,7 +44,7 @@ class SitesController < ApplicationController
     @overview_map_chco = @site.theme.data[:overview_map_chco]
     @overview_map_chf = @site.theme.data[:overview_map_chf]
     @overview_map_marker_source = @site.theme.data[:overview_map_marker_source]
-    
+
     areas= []
     data = []
     @map_data_max_count=0
@@ -57,11 +57,21 @@ class SitesController < ApplicationController
     end
     @chld = areas.join("|")
     @chd  = "t:"+data.join(",")
-    
+
 
     @projects = @site.projects.paginate :per_page => 10, :page => params[:page], :order => 'created_at DESC'
 
-    render :site_home
+    respond_to do |format|
+      format.html { render :site_home }
+      format.js do
+        render :update do |page|
+          page << "$('#projects_view_more').remove();"
+          page << "$('#projects').append('#{escape_javascript(render(:partial => 'projects/projects'))}');"
+          page << "IOM.ajax_pagination();"
+        end
+      end
+    end
+
   end
 
   def about

@@ -5,6 +5,5 @@ IOM = {
 }
 
 $(document).ready( function() {
-  IOM.ajax_pagination(); 
-  
+  IOM.ajax_pagination();
 });
