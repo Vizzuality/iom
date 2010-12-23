@@ -54,6 +54,12 @@
   
       //Positionate controls
       positionControls();
+      
+      $('#zoomIn,#zoomOut').click(function(ev){
+        ev.preventDefault();
+        ev.stopPropagation();
+      });
+      
       $('#zoomIn').fadeIn();
       $('#zoomOut').fadeIn();
       

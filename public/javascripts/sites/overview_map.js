@@ -87,6 +87,12 @@
     
     //Positionate zoom controls
     positionControls();
+    
+    $('#zoomIn,#zoomOut').click(function(ev){
+      ev.preventDefault();
+      ev.stopPropagation();
+    });
+    
     $('#zoomIn').fadeIn();
     $('#zoomOut').fadeIn();
     
@@ -115,7 +121,7 @@
     $('div.map_style').fadeIn();
     
     $(window).resize(function() {
-      positionZoomControls();
+      positionControls();
     });
     
   });
