@@ -118,6 +118,17 @@ class Project < ActiveRecord::Base
     the_geom.as_kml if the_geom.present?
   end
 
+  def to_csv(site_id)
+    sql = <<-SQL
+      SELECT *
+      FROM v_projects_denormalized
+      WHERE id = #{self.id}
+    SQL
+
+    result = ActiveRecord::Base.connection.execute(sql)
+    result.serialize_to_csv
+  end
+
   def related(site, limit = 2)
     return [] unless the_geom?
     Project.find_by_sql(<<-SQL

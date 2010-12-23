@@ -44,7 +44,6 @@
     </ul>
   </div>
 
-  
   <div id="project_layout">
      <div id="project" class="projects">
 
@@ -69,6 +68,7 @@
                  <% else %>
                    <%= image_tag(media_resource.picture.url(:medium)) %>
                  <% end %>
+
                <% end %>
                <div class="mamufas"></div>
              </div>
@@ -213,7 +213,7 @@
          <div class="block last">
            <h3>EXPORT DATA</h3>
            <div class="import_data">
-             <p> <a href="#">CSV</a> | <%= link_to 'KML', project_path(@project, :kml) %></p>
+             <p><%= link_to 'CSV', project_path(@project, :csv) %> | <%= link_to 'KML', project_path(@project, :kml) %></p>
            </div>
          </div>
 
