@@ -437,7 +437,7 @@ class Site < ActiveRecord::Base
     if geographic_context_country_id.blank? && geographic_context_region_id.blank?
       []
     else
-      Region.where(:country_id => geographic_context_country_id).get_select_values
+      Region.where(:country_id => geographic_context_country_id, :level => level_for_region).get_select_values
     end
   end
 
@@ -445,7 +445,7 @@ class Site < ActiveRecord::Base
     if geographic_context_country_id.blank? && geographic_context_region_id.blank?
       []
     else
-      Region.where(:country_id => geographic_context_country_id).select(Region.custom_fields)
+      Region.where(:country_id => geographic_context_country_id, :level => level_for_region).select(Region.custom_fields)
     end
   end
 
