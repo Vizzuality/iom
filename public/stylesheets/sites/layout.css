@@ -113,10 +113,15 @@ div#header h1 a {color:white;}
 div#header ul.menu {float:right; margin:4px 0 0 100px; width:auto; height:25px;}
 div#header ul.menu li {float:left; width:auto; margin:0 23px 0 0; position:relative;}
 
-div#header ul.menu li#cluster_option,div#header ul.menu li#sector_option.clicked ul.suboptions {position:absolute; top:35px; left:-10px; z-index:110; background:url('/images/sites/common/menu/cluster_body_clicked.png') no-repeat 0 0; display:none; width:497px; height:177px; display:inline; padding:7px 13px 0 23px;}
+div#header ul.menu li#cluster_option.clicked ul.suboptions {position:absolute; top:35px; left:-10px; z-index:110; background:url('/images/sites/common/menu/cluster_body_clicked.png') no-repeat 0 0; display:none; width:497px; height:177px; display:inline; padding:0 13px 0 23px;}
+div#header ul.menu li#cluster_option.clicked ul.suboptions.longer {background:url('/images/sites/common/menu/cluster_body_clicked_long.png') no-repeat 0 0; height:290px;}
+div#header ul.menu li#sector_option.clicked ul.suboptions {position:absolute; top:35px; left:-10px; z-index:110; background:url('/images/sites/common/menu/cluster_body_clicked.png') no-repeat 0 0; display:none; width:497px; height:177px; display:inline; padding:7px 13px 0 23px;}
+div#header ul.menu li#sector_option.clicked ul.suboptions.longer {background:url('/images/sites/common/menu/cluster_body_clicked_long.png') no-repeat 0 0; height:290px;}
+
 div#header ul.menu li div.header_title {display:none;}
 div#header ul.menu li div.header_title a {display:none;}
-div#header ul.menu li#cluster_option.clicked,div#header ul.menu li#sector_option.clicked div.header_title {position:absolute; top:0; left:-10px; background:url('/images/sites/common/menu/cluster_head_clicked.png') no-repeat 0 0; width:94px; height:35px; display:inline;}
+div#header ul.menu li#cluster_option.clicked div.header_title {position:absolute; top:0; left:-10px; background:url('/images/sites/common/menu/cluster_head_clicked.png') no-repeat 0 0; width:94px; height:35px; display:inline;}
+div#header ul.menu li#sector_option.clicked div.header_title {position:absolute; top:0; left:-10px; background:url('/images/sites/common/menu/cluster_head_clicked.png') no-repeat 0 0; width:94px; height:35px; display:inline;}
 div#header ul.menu li.clicked div.header_title a {float:left; margin:8px 0 0 10px; font:normal 13px "Geneva"; color:white; text-decoration:none; display:inline;}
 
 /*COUNTRY*/
@@ -158,7 +163,7 @@ div#header ul.menu li a:hover {cursor:pointer; color:white;}
 div#header ul.menu li a span.with_suboptions {float:right; width:6px; height:3px; margin:7px 0 0 2px; background:url('/images/sites/common/arrow_menu.png') no-repeat 0 0;}
 div#header ul.menu li div.suboptions_body {display:none;}
 div#header ul.menu li ul.suboptions {position:absolute; top:20px; left:-13px; background-color:#2F2E2C; z-index:110; display:none;}
-div#header ul.menu li ul.suboptions li {float:left; width:149px; padding:0 5px; margin:10px 6px 0 0; height:auto;}
+div#header ul.menu li ul.suboptions li {float:left; width:152px; padding:0 5px; margin:10px 0 0 0; height:auto;}
 
 
 div#header div.right {margin:11px 0 0 0; width:auto; height:20px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}

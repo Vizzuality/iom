@@ -9,15 +9,14 @@
           <% elsif @site.sector %>
             <li><a class="main_option" href="<%= sector_path(@site.sector) %>" class="geneva"><%= @site.word_for_sectors.upcase.singularize %></a></li>
           <% else %>
-
             <li id="<%= @site.navigate_by_cluster? ? 'cluster' : 'sector' %>_option">
               <a class="geneva main_option with_suboptions"><%= @site.word_for_cluster_sector.upcase %><span class="with_suboptions"></span></a>
               <div class="header_title"><a><%= @site.word_for_cluster_sector.upcase %><span class="with_suboptions"></span></a></div>
-              <ul class="suboptions">
+              <ul class="suboptions <%= (@site.clusters_or_sectors.size > 16)? 'longer':'' %>">
                 <% @site.clusters_or_sectors.reject{|c| c.name.eql?('N/A') }.each do |category| %>
                 <li>
                   <a href="<%= category.is_a?(Cluster) ? cluster_path(category) : sector_path(category) %>" class="geneva <%= category.css_class %> icon_menu">
-                    <%= truncate(category.name, :length => 21) %>
+                    <%= truncate (category.name, :length => 27) %>
                   </a>
                 </li>
                 <% end %>
@@ -55,7 +54,6 @@
                 <div class="wrapper">
                   <ul class="content scroll_pane">
                     <% @site.countries_select.each do |country| %>
-
                     <li><a href="/countries/<%= country.id %>" class="geneva"><%= country.name %></a></li>
                     <% end %>
                   </ul>

@@ -10,7 +10,7 @@ class GeoregionController < ApplicationController
 
       @area_parent = "America"
 
-      sql="select c.id,count(ps.project_id) as count,c.name,x(ST_Centroid(c.the_geom)) as lon,y(ST_Centroid(c.the_geom)) as lat,
+      sql="select c.id,count(ps.project_id) as count,c.name,c.center_lon as lon,c.center_lat as lat,
         ST_AsGeoJSON(c.the_geom,6) as geojson
         from (countries_projects as cp inner join projects_sites as ps on cp.project_id=ps.project_id and site_id=#{@site.id})
         inner join countries as c on cp.country_id=c.id and c.id=#{params[:id].gsub(/\\/, '\&\&').gsub(/'/, "''")}
@@ -21,7 +21,7 @@ class GeoregionController < ApplicationController
       @projects = Project.custom_find(@site, :region => @area.name, :per_page => 10, :page => params[:page], :order => 'created_at DESC')
 
       @area_parent = Country.find_by_id(@area.country_id, :select => "id, name").try(:name)
-      sql="select r.id,count(ps.project_id) as count,r.name,x(ST_Centroid(r.the_geom)) as lon,y(ST_Centroid(r.the_geom)) as lat,
+      sql="select r.id,count(ps.project_id) as count,r.name,r.center_lon as lon,r.center_lat as lat,
         ST_AsGeoJSON(r.the_geom,6) as geojson
         from (projects_regions as pr inner join projects_sites as ps on pr.project_id=ps.project_id and site_id=#{@site.id})
         inner join regions as r on pr.region_id=r.id and r.id=#{params[:id].gsub(/\\/, '\&\&').gsub(/'/, "''")}

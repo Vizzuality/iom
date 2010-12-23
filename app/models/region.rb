@@ -34,35 +34,51 @@ class Region < ActiveRecord::Base
   # Array of arrays
   # [[cluster, count], [cluster, count]]
   def projects_clusters(site)
-    result = ActiveRecord::Base.connection.execute("select cluster_id, count(cluster_id) as count from clusters_projects where project_id IN (select project_id from projects_regions where region_id=#{self.id}) AND project_id IN (#{site.projects_ids.join(',')}) group by cluster_id order by count desc")
-    result.map do |row|
-      [Cluster.find(row['cluster_id']), row['count'].to_i]
+    sql="select c.id,c.name,count(c.id) as count from clusters_projects as cp
+        inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=#{site.id}
+        inner join clusters as c on cp.cluster_id=c.id
+        inner join projects_regions as pr on ps.project_id=pr.project_id and region_id=#{self.id}
+        group by c.id,c.name"
+
+    Cluster.find_by_sql(sql).map do |c|
+        [c,c.count.to_i]
     end
   end
 
   # Array of arrays
   # [[organization, count], [organization, count]]
   def projects_organizations(site)
-    result = ActiveRecord::Base.connection.execute("select primary_organization_id, count(primary_organization_id) as count from projects where id IN (select project_id from projects_regions where region_id=#{self.id}) AND id IN (#{site.projects_ids.join(',')}) group by primary_organization_id order by count desc")
-    result.map do |row|
-      [Organization.find(row['primary_organization_id']), row['count'].to_i]
+    sql="select o.id,o.name,count(o.id) as count from projects_sites as ps
+    inner join projects as p on ps.project_id=p.id and ps.site_id=#{site.id}
+    inner join organizations as o on p.primary_organization_id=o.id
+    inner join projects_regions as pr on ps.project_id=pr.project_id and region_id=#{self.id}
+    group by o.id,o.name"
+
+    Organization.find_by_sql(sql).map do |o|
+        [o,o.count.to_i]
     end
   end
 
   def donors_count(site)
     ActiveRecord::Base.connection.execute(<<-SQL
-      select count(distinct(donations.donor_id)) as count from donations where donations.project_id IN (#{(projects.site(site).map{ |s| s.id } + [-1]).join(',')})
+      select count(*) from (
+        select distinct don.* from projects_sites as ps
+        inner join donations as d on ps.project_id=d.project_id and ps.site_id=#{site.id}
+        inner join donors as don on don.id=d.donor_id
+        inner join projects_regions as pr on ps.project_id=pr.project_id and region_id=#{self.id}
+      ) as count
     SQL
     ).first['count'].to_i
   end
 
   def donors(site, limit = 11)
-    result = []
-    projects.site(site).map do |project|
-      result += project.donors.flatten.uniq
-      break if result.size > limit
-    end
-    result[0...limit]
+    sql="select distinct don.* from projects_sites as ps
+    inner join donations as d on ps.project_id=d.project_id and ps.site_id=#{site.id}
+    inner join donors as don on don.id=d.donor_id
+    inner join projects_regions as pr on ps.project_id=pr.project_id and region_id=#{self.id}
+    limit #{limit}
+    "
+    Donor.find_by_sql(sql)
   end
 
   def donors_budget(site)
