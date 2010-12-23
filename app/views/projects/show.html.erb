@@ -120,7 +120,7 @@
              <div class="logo">
                <% if @project.primary_organization.logo.file? %>
                  <div class="logo_bkg">
-                   <a href="<%= organization_path(@project.primary_organization) %>"><%= image_tag(@project.primary_organization.logo.url) %></a>
+                   <a href="<%= organization_path(@project.primary_organization) %>"><%= image_tag(@project.primary_organization.logo.url(:small)) %></a>
                  </div>
                  <%= link_to(@project.primary_organization.name, organization_path(@project.primary_organization)) %>
                <% else %>

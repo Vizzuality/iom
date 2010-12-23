@@ -44,7 +44,7 @@
         <div class="block <%unless @donor.logo.url.empty? && @donor.description.empty? && @donor.twitter.empty? && @donor.facebook.empty? %>border<%end%>">
           <% if @donor.logo_file_name? %>
             <div class="logo">
-              <%= image_tag(@donor.logo.url) %>
+                <%= image_tag(@donor.logo.url(:small), :id=>'image_logo') %>
             </div>
           <% end %>
           <%unless @donor.description.nil?%> <%= simple_format(@donor.description) %><%end%>
@@ -69,7 +69,15 @@
           <h2>FUNDING BY CLUSTER</h2>
           <ul class="statistics_list">
             <% @donor.projects_clusters(@site)[0...3].each do |cluster,count| %>
-              <li><a class="<%= cluster.css_class %> icon_statistics"><span class="aller" style="width:<%= cluster_width(count)-10 %>px"><%= count %></span></a></li>
+              <li>
+                <div id="tooltip">
+                  <span class="body_tooltip">
+                    <label><%= cluster.name %></label>
+                  </span>
+                  <span class="bottom_tooltip"></span>
+                </div>
+                <a class="<%= cluster.css_class %> icon_statistics"><span class="aller" style="width:<%= cluster_width(count)-10 %>px"><%= count %></span></a>
+              </li>
             <% end %>
           </ul>
           <% if @donor.projects_clusters(@site).size > 3 %>
