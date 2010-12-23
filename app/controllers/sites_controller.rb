@@ -20,14 +20,15 @@ class SitesController < ApplicationController
   def site_home
     # Get the data for the map depending on the region definition of the site (country or region)
     if @site.geographic_context_country_id
-      sql="select r.id,count(ps.project_id) as count,r.name,x(ST_Centroid(r.the_geom)) as lon,
-                y(ST_Centroid(r.the_geom)) as lat,r.name,'/regions/'||r.id as url,r.code
+      sql="select r.id,count(ps.project_id) as count,r.name,r.center_lon as lon,
+                r.center_lat as lat,r.name,'/regions/'||r.id as url,r.code
                 from ((projects_regions as pr inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{@site.id})
                 inner join regions as r on pr.region_id=r.id and r.level=#{@site.level_for_region})
                 inner join countries as c on r.country_id=c.id
                 group by r.id,r.name,lon,lat,c.name,url,r.code"
     else
-      sql="select c.id,count(ps.project_id) as count,c.name,x(ST_Centroid(c.the_geom)) as lon,y(ST_Centroid(c.the_geom)) as lat,
+      sql="select c.id,count(ps.project_id) as count,c.name,c.center_lon as lon,
+                c.center_lat as lat,
                 '/countries/'||c.id as url,iso2_code as code
                 from (countries_projects as cp inner join projects_sites as ps on cp.project_id=ps.project_id and site_id=#{@site.id})
                 inner join countries as c on cp.country_id=c.id
