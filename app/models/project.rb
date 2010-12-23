@@ -121,14 +121,15 @@ class Project < ActiveRecord::Base
   def related(site, limit = 2)
     return [] unless the_geom?
     Project.find_by_sql(<<-SQL
-      select projects.*,
-            ST_Distance((select ST_Centroid(the_geom) from projects where id=#{self.id}), ST_Centroid(the_geom)) as dist
-            from projects
-            where id!=#{self.id}
-            and id in (#{site.projects_ids.join(',')})
-            and the_geom is not null
-            order by dist
-            limit #{limit}
+      select * from
+      (select p.id, p.name, p.primary_organization_id,
+           ST_Distance((select ST_Centroid(the_geom) from projects where id=#{self.id}), ST_Centroid(the_geom)) as dist
+           from projects as p
+           inner join projects_sites as ps on p.id=ps.project_id and ps.site_id=#{site.id}
+           where p.id!=#{self.id}
+           order by dist
+      ) as subq
+      limit  #{limit}
 SQL
     )
   end
