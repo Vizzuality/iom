@@ -67,7 +67,7 @@
                    <% if media_resource.is_a_video? %>
                      <!-- <%= raw(CGI.unescapeHTML(media_resource.vimeo_embed_html)) %> -->
                    <% else %>
-                     <%= image_tag(media_resource.picture.url(:medium), :video=>"true") %>
+                     <%= image_tag(media_resource.picture.url(:medium), :title=>"video") %>
                      <%= image_tag(media_resource.picture.url(:medium)) %>
                    <% end %>
                  <% end %>

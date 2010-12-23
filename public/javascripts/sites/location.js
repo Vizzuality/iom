@@ -18,10 +18,8 @@
         }
       }
       
-     
       // If right part is bigger than float left
-      resizeColumn();
-
+      setTimeout(function(){resizeColumn()},50);
     });
     
     
@@ -42,5 +40,4 @@
         $('div#left_column div.outer_float').height($('div#left_column div.float_left').height()-40);
         $('div#left_column div.left').height($('div#left_column div.outer_float').height());
       }
-
     }
