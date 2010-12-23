@@ -11,14 +11,11 @@
     <%= f.text_area :description, :class => "#{'error' if !@organization.errors[:description].empty? && action_name != 'new'}" %>
   </div>
 
-  <% if @organization.logo_file_name? %>
-    <%= image_tag(@organization.logo.url(:small)) %>
-  <% end -%>
-
   <%= f.label :logo %>
   <div class="image_container">
     <% if @organization.logo_file_name? %>
-      <%= image_tag(@organization.logo.url(:small)) %>
+      <%= image_tag(@organization.logo.url(:small)) %>      
+      <!-- TODO - add link to remove -->
     <% end -%>
     <div class="field">
       <p>JPG, PNG and GIF supported</p>
