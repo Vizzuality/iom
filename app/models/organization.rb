@@ -104,9 +104,14 @@ class Organization < ActiveRecord::Base
   # Array of arrays
   # [[cluster, count], [cluster, count]]
   def projects_clusters(site)
-    result = ActiveRecord::Base.connection.execute("select cluster_id, count(cluster_id) as count from clusters_projects where project_id IN (select id from projects where primary_organization_id=#{self.id}) AND project_id IN (#{site.projects_ids.join(',')}) group by cluster_id order by count desc")
-    result.map do |row|
-      [Cluster.find(row['cluster_id']), row['count'].to_i]
+    sql="select c.id,c.name,count(ps.*) as count from clusters as c
+    inner join clusters_projects as cp on c.id=cp.cluster_id
+    inner join projects as p on p.id=cp.project_id
+    inner join projects_sites as ps on p.id=ps.project_id and ps.site_id=#{site.id}
+    where p.primary_organization_id=#{self.id}
+    group by c.id,c.name"
+    Cluster.find_by_sql(sql).map do |c|
+      [c,c.count.to_i]
     end
   end
 
