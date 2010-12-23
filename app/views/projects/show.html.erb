@@ -32,22 +32,25 @@
         </div>
       </div>
     </div>
+  </div>
+  <div id="small_map"></div>
+  <a href="#zoom_in" id="zoomIn" onclick="zoomIn()"></a>
+  <a href="#zoom_out" id="zoomOut" onclick="zoomOut()"></a>
+  <div class="map_style">
+    <p>PLAIN</p>
+    <ul>
+      <li><a id="plain_map" href="#plain">PLAIN</a></li>
+      <li><a id="satellite_map" href="#satellite">SATELLITE</a></li>
+    </ul>
+  </div>
 
+  <div id="project_layout">
+     <div id="project" class="projects">
 
-    <div id="small_map"></div>
-    <a href="#zoom_in" id="zoomIn" onclick="zoomIn()"></a>
-    <a href="#zoom_out" id="zoomOut" onclick="zoomOut()"></a>
-    <div class="map_style">
-      <p>PLAIN</p>
-      <ul>
-        <li><a id="plain_map" href="#plain">PLAIN</a></li>
-        <li><a id="satellite_map" href="#satellite">SATELLITE</a></li>
-      </ul>
-    </div>
-
-
-    <div id="project_layout">
-       <div id="project" class="projects">
+       <!-- TO SHOW THE MESH -->
+       <div id="mesh" class="left"></div>
+       <div class="outer_float">
+         <div class="float_left"> <!-- 670px with mest -->
 
            <% unless @project.description.blank? %>
              <div class="block">
@@ -65,31 +68,10 @@
                  <% else %>
                    <%= image_tag(media_resource.picture.url(:medium)) %>
                  <% end %>
-                 <div class="mamufas"></div>
-               </div>
 
-                <div class="loader_gallery">
-                  <p>Loading videos and images</p>
-                  <img src="/images/sites/projects/ajax-loader.gif" title="loader" alt="loader" />
-                </div>
-             <% end %>
-
-             <% if @project.activities || @project.additional_information || @project.cross_cutting_issues %>
-               <div class="block info">
-                 <%unless @project.activities.blank? %>
-                   <h3 class="first">ACTIVITIES</h3>
-                     <%= raw(@project.activities) %>
-                 <%end%>
-                 <%unless @project.additional_information.blank? %>
-                   <h3 class="<%= (@project.activities.blank?)? 'first':''%>">ADDITIONAL INFORMATION</h3>
-                   <%= raw(@project.additional_information) %>
-                 <%end%>
-                 <%unless @project.cross_cutting_issues.blank? %>
-                     <h3 class="<%= (@project.activities.blank? && @project.additional_information.blank?)? 'first':''%>">CROSS-CUTTING ISSUES</h3>
-                     <%= raw(@project.cross_cutting_issues) %>
-                 <%end%>
-               </div>
-             <% end %>
+               <% end %>
+               <div class="mamufas"></div>
+             </div>
 
              <a href="#view_video" class="video"></a>
 
@@ -101,7 +83,7 @@
                 </div>
               </div>
            <% end %>
-           
+
            <% if @project.activities || @project.additional_information || @project.cross_cutting_issues %>
              <div class="block info">
                <%unless @project.activities.blank? %>
@@ -163,16 +145,10 @@
              <% end %>
            </div>
 
-           <div class="block">
-             <h3>Project timeline</h3>
-             <% if @project.end_date? %>
-               <div class="timeline"><span></span><p class="months_left"><%= pluralize(@project.months_left, 'month', 'months') %> left</p></div>
-               <p class="first_date"><%= @project.start_date.strftime("%d/%m/%Y") %></p>
-               <p class="second_date"><%= @project.end_date.strftime("%d/%m/%Y") %></p>
-             <% elsif @project.start_date? %>
-               <p>Active since <%= @project.start_date.strftime("%d/%m/%Y") %></p>
-             <%end%>
-           </div>
+           <% if @project.implementing_organization? %>
+             <h3>Implementing organizations</h3>
+             <p><%= @project.implementing_organization %></p>
+           <% end %>
 
            <% if @project.partner_organizations? && !@project.partner_organizations.eql?('N/A') %>
              <h3 class="margin">Partner Organizations</h3>
@@ -185,8 +161,8 @@
            <%if !@project.end_date.nil?%>
              <div class="timeline"><span></span><p class="months_left"><%= pluralize(@project.months_left, 'month', 'months') %> left</p></div>
              <p class="first_date"><%= @project.start_date.strftime("%d/%m/%Y") %></p>
-             <p class="second_date"><%= @project.end_date.strftime("%d/%m/%Y") %></p>            
-           <%else%>
+             <p class="second_date"><%= @project.end_date.strftime("%d/%m/%Y") %></p>
+           <%elsif @project.start_date?%>
              <p>Active since <%= @project.start_date.strftime("%d/%m/%Y") %></p>
            <%end%>
          </div>
@@ -237,29 +213,18 @@
          <div class="block last">
            <h3>EXPORT DATA</h3>
            <div class="import_data">
-             <p> <a href="#">CSV</a> | <%= link_to 'KML', project_path(@project, :kml) %></p>
+             <p><%= link_to 'CSV', project_path(@project, :csv) %> | <%= link_to 'KML', project_path(@project, :kml) %></p>
            </div>
          </div>
 
        </div>
+     </div>
 
 
-  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-  <script src="/javascripts/plugins/galleria.js" type="text/javascript" charset="utf-8"></script>
-  <script src="/javascripts/plugins/galleria.classic.js" type="text/javascript" charset="utf-8"></script>
-  <script src="/javascripts/sites/project.js" type="text/javascript" charset="utf-8"></script>
-
-  <!-- MAP -->
-  <script type="text/javascript">
-    var bbox = <%=raw(@overview_map_bbox.to_json)%>;
-    var chco = "<%=@overview_map_chco%>";
-    var chf = "<%=@overview_map_chf%>";
-    var chld = "<%=@chld%>";
-    var chd = "<%=@chd%>";
-    var map_data = <%=raw(@map_data)%>;
-    var map_type = 'project_map';
-    var theme = "<%=@site.theme_id%>";
-  </script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+<script src="/javascripts/plugins/galleria.js" type="text/javascript" charset="utf-8"></script>
+<script src="/javascripts/plugins/galleria.classic.js" type="text/javascript" charset="utf-8"></script>
+<script src="/javascripts/sites/project.js" type="text/javascript" charset="utf-8"></script>
 
 <!-- MAP -->
 <script type="text/javascript">
