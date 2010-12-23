@@ -263,7 +263,8 @@ class Site < ActiveRecord::Base
     sql="select c.id,c.name,count(ps.*) as count from clusters as c
     inner join clusters_projects as cp on c.id=cp.cluster_id
     inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=#{self.id}
-    group by c.id,c.name"
+    group by c.id,c.name
+    order by count desc"
 
     Cluster.find_by_sql(sql).map do |c|
       [c,c.count.to_i]
