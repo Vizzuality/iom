@@ -57,9 +57,13 @@ class Donor < ActiveRecord::Base
   # Array of arrays
   # [[cluster, count], [cluster, count]]
   def projects_clusters(site)
-    result = ActiveRecord::Base.connection.execute("select cluster_id, count(cluster_id) as count from clusters_projects where project_id IN (select project_id from donations where donor_id=#{self.id}) AND project_id IN (#{site.projects_ids.join(',')}) group by cluster_id order by count desc")
-    result.map do |row|
-      [Cluster.find(row['cluster_id']), row['count'].to_i]
+    sql="select c.id,c.name,count(ps.*) as count from clusters as c
+    inner join clusters_projects as cp on c.id=cp.cluster_id
+    inner join donations as d on d.project_id=cp.project_id
+    inner join projects_sites as ps on d.project_id=ps.project_id and ps.site_id=#{site.id}
+    group by c.id,c.name"
+    Cluster.find_by_sql(sql).map do |c|
+      [c,c.count.to_i]
     end
   end
 
@@ -68,13 +72,10 @@ class Donor < ActiveRecord::Base
   def projects_regions(site)
     Region.find_by_sql(
 <<-SQL
-  select #{Region.custom_fields.join(',')}, count(regions.id) as count
-    from regions, projects_regions, donations where donations.donor_id = #{self.id} AND
-    donations.project_id IN (#{site.projects_ids.join(',')}) AND
-    donations.project_id = projects_regions.project_id AND
-    projects_regions.region_id = regions.id AND
-    regions.level = #{site.level_for_region}
-    group by #{Region.custom_fields.join(',')}
+  select r.id,r.name,count(ps.*) as count from regions as r
+    inner join projects_regions as pr on r.id=pr.region_id
+    inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{site.id}
+    group by r.id,r.name
 SQL
     ).map do |r|
       [r, r.count.to_i]

@@ -94,15 +94,17 @@ class Region < ActiveRecord::Base
 
   def near(site, limit = 5)
     Region.find_by_sql(<<-SQL
-      select regions.*,
-            ST_Distance((select ST_Centroid(the_geom) from regions where id=#{self.id}), ST_Centroid(the_geom)) as dist,
-            (select count(*) from projects_regions as pr where region_id=regions.id) as count
-            from regions
-            where id!=#{self.id} AND
-            regions.level = #{site.level_for_region} AND
-            the_geom is not null
-            order by dist
-            limit #{limit}
+      select * from
+      (select re.id, re.name,
+           ST_Distance((select ST_Centroid(the_geom) from regions where id=#{self.id}), ST_Centroid(the_geom)) as dist,
+           (select count(*) from projects_regions as pr where region_id=re.id) as count
+           from regions as re
+           where id!=#{self.id} and
+           level=#{site.level_for_region}
+           order by dist
+      ) as subq
+      where count>0
+      limit  #{limit}
 SQL
     )
   end

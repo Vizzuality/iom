@@ -111,7 +111,11 @@
           google.maps.event.addDomListener(div,'mouseout',function(ev){ 
             $(this).children('div').hide();
           });
-        } 
+        } else {
+          google.maps.event.addDomListener(div,'mouseover',function(ev){ 
+            $(this).css('zIndex',global_index++);
+          });
+        }
 
 
 

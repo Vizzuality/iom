@@ -38,6 +38,9 @@
           $('div#left_column div.outer_float').height($('div#left_column div.float_left').height()-40);
           $('div#left_column div.left').height($('div#left_column div.outer_float').height());
         }
+      } else {
+        $('div#left_column div.outer_float').height($('div#left_column div.float_left').height()-40);
+        $('div#left_column div.left').height($('div#left_column div.outer_float').height());
       }
 
     }
