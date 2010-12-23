@@ -38,10 +38,10 @@ class Region < ActiveRecord::Base
         inner join clusters as c on cp.cluster_id=c.id
         inner join projects_regions as pr on ps.project_id=pr.project_id and region_id=#{self.id}
         group by c.id,c.name"
-        
+
     Cluster.find_by_sql(sql).map do |c|
         [c,c.count.to_i]
-    end 
+    end
   end
 
   # Array of arrays
@@ -52,7 +52,7 @@ class Region < ActiveRecord::Base
     inner join organizations as o on p.primary_organization_id=o.id
     inner join projects_regions as pr on ps.project_id=pr.project_id and region_id=#{self.id}
     group by o.id,o.name"
-    
+
     Organization.find_by_sql(sql).map do |o|
         [o,o.count.to_i]
     end
@@ -60,19 +60,24 @@ class Region < ActiveRecord::Base
 
   def donors_count(site)
     ActiveRecord::Base.connection.execute(<<-SQL
-      select count(distinct(donations.donor_id)) as count from donations where donations.project_id IN (#{(projects.site(site).map{ |s| s.id } + [-1]).join(',')})
+      select count(*) from (
+        select distinct don.* from projects_sites as ps
+        inner join donations as d on ps.project_id=d.project_id and ps.site_id=#{site.id}
+        inner join donors as don on don.id=d.donor_id
+        inner join projects_regions as pr on ps.project_id=pr.project_id and region_id=#{self.id}
+      ) as count
     SQL
     ).first['count'].to_i
   end
 
   def donors(site, limit = 11)
-    sql="select distinct don.*as count from projects_sites as ps
+    sql="select distinct don.* from projects_sites as ps
     inner join donations as d on ps.project_id=d.project_id and ps.site_id=#{site.id}
     inner join donors as don on don.id=d.donor_id
     inner join projects_regions as pr on ps.project_id=pr.project_id and region_id=#{self.id}
     limit #{limit}
     "
-    Donor.find_by_sql(sql)  
+    Donor.find_by_sql(sql)
   end
 
   def donors_budget(site)
