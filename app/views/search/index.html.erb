@@ -64,13 +64,17 @@
             <% index = 0 %>
             <% @clusters.each do |cluster, count| %>
               <% if index<9 %>
-                <% if params[:cluster_id] && params[:cluster_id].to_i == cluster.id %>
+                <% if params[:cluster_id] && params[:cluster_id].to_i == cluster.id && !cluster.name.eql?('N/A')%>
                   <li><%= cluster.name %></li>
                 <% else %>
+                <% unless cluster.name.eql?('N/A') %>
                   <li><%= link_to(cluster.name, filter_url(cluster)) %> (<%= count %>)</li>
                 <% end %>
+                <% end %>
               <% else %>
-                <li><%= link_to(cluster.name, filter_url(cluster)) %> (<%= count %>)</li>
+                <% unless cluster.name.eql?('N/A') %>
+                  <li><%= link_to(cluster.name, filter_url(cluster)) %> (<%= count %>)</li>
+                <%end%>
               <% end %>
               <% index = index + 1 %>
             <% end %>
