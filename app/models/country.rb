@@ -30,36 +30,45 @@ class Country < ActiveRecord::Base
   # Array of arrays
   # [[cluster, count], [cluster, count]]
   def projects_clusters(site)
-    result = ActiveRecord::Base.connection.execute("select cluster_id, count(cluster_id) as count from clusters_projects where project_id IN (select project_id from projects_regions where region_id=#{self.id}) AND project_id IN (#{site.projects_ids.join(',')}) group by cluster_id order by count desc")
-    result.map do |row|
-      [Cluster.find(row['cluster_id']), row['count'].to_i]
+    sql="select c.id,c.name,count(ps.*) as count from clusters as c
+    inner join clusters_projects as cp on c.id=cp.cluster_id
+    inner join countries_projects as cop on cp.project_id=cop.project_id
+    inner join projects_sites as ps on cop.project_id=ps.project_id and ps.site_id=#{site.id}
+    group by c.id,c.name"
+    Cluster.find_by_sql(sql).map do |c|
+      [c,c.count.to_i]
     end
   end
 
   # Array of arrays
   # [[region, count], [region, count]]
   def regions_projects(site)
-    regions.select(Region.custom_fields).map do |region|
-      count = (region.projects & site.projects).size
-      next if count == 0
-      [region, count]
-    end.compact
+    sql="select c.id,c.name,count(ps.*) as count from clusters as c
+    inner join clusters_projects as cp on c.id=cp.cluster_id
+    inner join projects_regions as pr on cp.project_id=pr.project_id
+    inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{site.id}
+    group by c.id,c.name"
+    Cluster.find_by_sql(sql).map do |c|
+      [c,c.count.to_i]
+    end
   end
 
   def donors_count(site)
     ActiveRecord::Base.connection.execute(<<-SQL
-      select count(distinct(donations.donor_id)) as count from donations where donations.project_id IN (#{(projects.site(site).map{ |s| s.id } + [-1]).join(',')})
+      select count(distinct(donor_id)) as count from donations as d
+      inner join projects_sites as ps on d.project_id=ps.project_id and ps.site_id=#{site.id}
+      inner join countries_projects as cp on ps.project_id=cp.project_id and cp.country_id=#{self.id}
     SQL
     ).first['count'].to_i
   end
 
-  def donors(site, limit = 11)
-    result = []
-    projects.site(site).map do |project|
-      result += project.donors.flatten.uniq
-      break if result.size > limit
-    end
-    result[0...limit]
+  def donors(site, limit = 10)
+    sql="select donors.* from donors
+    inner join donations as d on donors.id=d.donor_id
+    inner join projects_sites as ps on d.project_id=ps.project_id and ps.site_id=#{site.id}
+    inner join countries_projects as cp on ps.project_id=cp.project_id and cp.country_id=#{self.id}
+    LIMIT #{limit}"
+    Donor.find_by_sql(sql)
   end
 
   # to get only id and name
