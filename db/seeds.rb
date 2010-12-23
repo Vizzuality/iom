@@ -84,7 +84,7 @@ Tag.create :name => 'earthquake'
 # Sites
 #  sites for testing purposes. Add this line to your /etc/hosts:
 #  127.0.0.1       iom-haiti.ipq.co
-site = Site.create :name => 'Haiti Aid Map', :url => 'iom-haiti.ipq.co', :status => true, :short_description=>'Taking care of availability and access to food worldwide', 
+site = Site.create :name => 'Haiti Aid Map', :url => 'haiti.ngoaidmap.org', :status => true, :short_description=>'Taking care of availability and access to food worldwide', 
                    :long_description=>'On January 12th 2010, a catastrophic earthquake occured at Haiti, leaving more than 250.000 deaths and more than 1.000.000 homeless people. It was one of the biggest disasters in the century. Since then and until now, a huge effort has been made by some of the interaction members',
                    :theme => Theme.find_by_name('Garnet')
 site.geographic_context_country_id = Country.find_by_name('Haiti').id
@@ -95,7 +95,7 @@ site.overview_map_bbox_maxx=-69.66705322265601;
 
 
 site.pages.find_by_title("About").body=
-               <<-EOF
+               <<-HTML
                     <p><a href="/">InterAction</a> is developing a web-based mapping platform and database that will ultimately map all of our members’
                     work worldwide. In 2010, InterAction will pilot the mapping platform with a focus on the NGO community’s response to the earthquake
                     in Haiti, as well as its efforts to improve food security in various countries around the world.</p>
@@ -116,9 +116,9 @@ site.pages.find_by_title("About").body=
                       <li>Overlay project information with relevant statistical information, such as child malnutrition rates</li>
                       <li>Analyze large amounts of data</li>
                     </ul>
-               EOF
+               HTML
 
-site.pages.find_by_title("Analysis").body = <<-EOF
+site.pages.find_by_title("Analysis").body = <<-HTML
                    <p>On October 21, the Government of Haiti confirmed an outbreak of cholera, an acute and highly contagious diarrheal disease caused
                    by eating or drinking contaminated food or water. Unless immediately treated, cholera can be fatal. As of November 16 Haiti’s Ministry of
                    Health has confirmed 1,039 deaths and 16,799 hospitalized cases.</p>
@@ -134,12 +134,12 @@ site.pages.find_by_title("Analysis").body = <<-EOF
                   List on InterAction’s website. For specific examples of members’ response please visit the Member Response to Cholera in Haiti map.</p>
 
                    <p>Source: Ministere de la Sante Publique et de la Population (MSPP) - November 16, 2010</p>
-              EOF
+              HTML
 
 site.save!
 
 #  127.0.0.1       iom-food.ipq.co
-site = Site.create :name => 'Food Security', :url => 'iom-food.ipq.co', :status => true, :short_description => 'Food security refers to the availability of food and one’s access to it',
+site = Site.create :name => 'Food Security', :url => 'food.ngoaidmap.org', :status => true, :short_description => 'Food security refers to the availability of food and one’s access to it',
                    :long_description => 'The Special Programme for Food Security (SPFS) helps governments replicate successful food security practices on a national scale. The SPFS also encourages investment in rural infrastructure, off-farm income generation, urban agriculture and safety nets',
                    :theme => Theme.find_by_name('Garnet')
 
@@ -188,8 +188,8 @@ site.pages.find_by_title("Analysis").body = <<-EOF
 site.overview_map_bbox_miny=-65;
 site.overview_map_bbox_minx=-170;
 site.overview_map_bbox_maxy=70;
-site.overview_map_bbox_maxx=170;     
+site.overview_map_bbox_maxx=170;
 
 
-site.save!              
+site.save!
 
