@@ -30,7 +30,7 @@ class SiteTest < ActiveSupport::TestCase
     assert !site.new_record?
     assert_equal "#{tag1.id},#{tag2.id}", site.project_context_tags_ids
     assert_nil site.project_context_organization_id
-    assert_nil site.geographic_context_country_id
+    assert_equal 3, site.geographic_context_country_id
   end
 
 

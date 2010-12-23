@@ -5,7 +5,7 @@ require 'rails/test_help'
 Dir["#{File.dirname(__FILE__)}/support/data/*.rb"].each {|f| require f}
 
 require 'database_cleaner'
-DatabaseCleaner.strategy = :transaction
+DatabaseCleaner.strategy = :truncation
 
 require 'authenticated_test_helper'
 include AuthenticatedTestHelper

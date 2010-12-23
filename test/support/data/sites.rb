@@ -27,7 +27,8 @@ module Iom
             :url => 'http://haiti.example.com', :google_analytics_id => 'GA-1234-321',
             :blog_url => '', :word_for_clusters => 'clisters', :word_for_regions => 'rigions',
             :show_global_donations_raises => true, :geographic_context_country_id => nil, :geographic_context_region_id => nil,
-            :project_context_cluster_id => cluster.id
+            :project_context_cluster_id => cluster.id,
+            :level_for_region => 1
           }
         else
           raise "Invalid fixture name"
