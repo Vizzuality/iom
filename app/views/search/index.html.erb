@@ -1,7 +1,7 @@
 
   <div id="layout">
     <div id="pages">
-      <div class="left" id="relative_content"></div>
+      <div class="left"></div>
       <div class="float_left">
         <div class="outer_head">
           <div class="head">
@@ -13,6 +13,7 @@
           </div>
         </div>
         <div class="results_list">
+
           <h3><p>
             <%= pluralize(@projects.count, 'project') %> for '<%= params[:q] %>'
             <%= active_facets %>
