@@ -1,4 +1,4 @@
-
+  var mapChartType;
   var map;
   var bounds;
   var overlay; 
@@ -23,7 +23,7 @@
         opacity:parseFloat(0.4),
         isPng: true
     };
-    var mapChartType = new google.maps.ImageMapType(mapChartOptions);      
+    mapChartType = new google.maps.ImageMapType(mapChartOptions);      
     
     bounds =new google.maps.LatLngBounds(
       new google.maps.LatLng(bbox[0].lat,bbox[0].lon),
@@ -86,9 +86,33 @@
     }
     
     //Positionate zoom controls
-    positionZoomControls();
+    positionControls();
     $('#zoomIn').fadeIn();
     $('#zoomOut').fadeIn();
+    
+    $('div.map_style').hover(function(){
+      $('div.map_style').css('background-position','0 -26px');
+      $('div.map_style').height(76);
+    },function(){
+      $('div.map_style').css('background-position','0 0');
+      $('div.map_style').height(26);
+    });
+    
+    $('div.map_style ul li a').click(function(ev){
+      ev.preventDefault();
+      ev.stopPropagation();
+      if ($(this).text()!=$('div.map_style').text()) {
+        if ($(this).text()=="PLAIN") {
+          map.setMapTypeId('labels');
+        } else {
+          map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
+        }
+        $('div.map_style p').text($(this).text());
+      }
+    });
+    
+    
+    $('div.map_style').fadeIn();
     
     $(window).resize(function() {
       positionZoomControls();
@@ -97,7 +121,7 @@
   });
   
   
-  function positionZoomControls() {
+  function positionControls() {
     if ($('#layout').length>0) {
       var column_position = $('#layout').offset().left;
       var map_position = $('#map').position().top + 25;
@@ -111,6 +135,9 @@
     
     $('#zoomOut').css('left',column_position+32+'px');
     $('#zoomOut').css('top',map_position+'px');
+    
+    $('div.map_style').css('left',column_position+820+'px');
+    $('div.map_style').css('top',map_position+'px');
   }
   
   

@@ -10,7 +10,7 @@
           $('div#project div.float_left').append('<div class="block margin"></div>');
           $('div#project div.float_left div.block:last').height(offset);
           $('div#project div.outer_float').height($('div#project div.float_left').height()-40);
-          $('div#project div.left').height($('div#project div.float_left').height()-30);
+          $('div#project div.left').height($('div#project div.float_left').height()-40);
         }
         
         $('div#completed').css('bottom','-10px');
