@@ -34,7 +34,8 @@ class Region < ActiveRecord::Base
   # Array of arrays
   # [[cluster, count], [cluster, count]]
   def projects_clusters(site)
-    sql="inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=#{site.id}
+    sql="select c.id,c.name,count(c.id) as count from clusters_projects as cp
+        inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=#{site.id}
         inner join clusters as c on cp.cluster_id=c.id
         inner join projects_regions as pr on ps.project_id=pr.project_id and region_id=#{self.id}
         group by c.id,c.name"
