@@ -83,7 +83,7 @@
                 </div>
               </div>
            <% end %>
-           
+
            <% if @project.activities || @project.additional_information || @project.cross_cutting_issues %>
              <div class="block info">
                <%unless @project.activities.blank? %>
@@ -161,8 +161,8 @@
            <%if !@project.end_date.nil?%>
              <div class="timeline"><span></span><p class="months_left"><%= pluralize(@project.months_left, 'month', 'months') %> left</p></div>
              <p class="first_date"><%= @project.start_date.strftime("%d/%m/%Y") %></p>
-             <p class="second_date"><%= @project.end_date.strftime("%d/%m/%Y") %></p>            
-           <%else%>
+             <p class="second_date"><%= @project.end_date.strftime("%d/%m/%Y") %></p>
+           <%elsif @project.start_date?%>
              <p>Active since <%= @project.start_date.strftime("%d/%m/%Y") %></p>
            <%end%>
          </div>
@@ -219,7 +219,7 @@
 
        </div>
      </div>
- 
+
 
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
 <script src="/javascripts/plugins/galleria.js" type="text/javascript" charset="utf-8"></script>
