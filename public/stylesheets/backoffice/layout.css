@@ -55,7 +55,7 @@ div.add_new a {float:left; width:922px; height:70px; padding:28px 0 0 0; margin:
 div.add_new a:hover {background-position:0 -98px;}
 div.add_new a strong {float:left; width:100%; font:normal 15px Arial; color:#C3DB9F; text-align:center;}
 /*common right column*/
-div.block div.med div.right {position:relative; float:right; width:284px; min-height:350px;}
+div.block div.med div.right {position:relative; float:right; width:284px; min-height:420px;}
 div.block div.med div.right ul {float:left; width:230px; margin:10px 0 0 0;}
 div.block div.med div.right ul li {float:left; width:205px; padding:6px 12px 6px 0;}
 div.block div.med div.right ul li.selected {float:left; width:auto; padding:15px 14px 15px 0; background:url('/images/backoffice/common/selected_li.png') no-repeat right 0; font:bold 15px Arial; color:#333333;}
@@ -309,7 +309,7 @@ div.bottom_grey div.pagination em {float:left; padding:20px 10px 7px; background
 div.bottom_grey div.pagination a {float:left; margin:0; padding:20px 10px 7px 10px; font:normal 15px "Museo Sans",Arial; color:#E93E3F; line-height:15px; text-transform:uppercase;}
 div.bottom_grey div.pagination a:hover {color:#333333; text-decoration:none;}
 div.bottom_grey div.pagination span.disabled {display:none;}
-
+div.bottom_grey div.pagination span.gap {float:left; height:34px; border-bottom:1px dotted #EA3C44; padding:0;}
 
 /*specific NGO*/
 div.block.edit div.med div.left div.specific_edit {float:left; width:526px; height:312px; margin:30px 0 0 0; padding:20px; background:url('/images/backoffice/ngos/edit_specific_bkg.png') no-repeat 0 0;}
