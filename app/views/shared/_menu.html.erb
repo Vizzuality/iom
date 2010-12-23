@@ -16,7 +16,7 @@
                 <% @site.clusters_or_sectors.reject{|c| c.name.eql?('N/A') }.each do |category| %>
                 <li>
                   <a href="<%= category.is_a?(Cluster) ? cluster_path(category) : sector_path(category) %>" class="geneva <%= category.css_class %> icon_menu">
-                    <%= category.name %>
+                    <%= truncate (category.name, :length => 27) %>
                   </a>
                 </li>
                 <% end %>
@@ -54,7 +54,6 @@
                 <div class="wrapper">
                   <ul class="content scroll_pane">
                     <% @site.countries_select.each do |country| %>
-
                     <li><a href="/countries/<%= country.id %>" class="geneva"><%= country.name %></a></li>
                     <% end %>
                   </ul>

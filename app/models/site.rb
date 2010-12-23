@@ -410,78 +410,42 @@ class Site < ActiveRecord::Base
   end
 
   def countries_select
-    unless geographic_context.blank?
-      case geographic_context
-        when 'worlwide'
-          Country.get_select_values
-        when 'country'
-          Country.find(self.geographic_context_country_id, :select => Country.custom_fields)
-        when 'region'
-          Country.find_by_sql("select #{Country.custom_fields.join(',')} from countries where id = (select country_id from regions where id = #{self.geographic_context_region_id})")
-        when 'bbox'
-          # TODO
-          []
-      end
-    else
-      # worlwide
+    if geographic_context_country_id.blank? && geographic_context_region_id.blank?
       Country.get_select_values
+    else
+      if geographic_context_region_id.blank?
+        Country.find(self.geographic_context_country_id, :select => Country.custom_fields)
+      else
+        nil
+      end
     end
   end
 
   def countries
-    unless geographic_context.blank?
-      case geographic_context
-        when 'worlwide'
-          Country.all
-        when 'country'
-          Country.find(self.geographic_context_country_id, :select => Country.custom_fields)
-        when 'region'
-          Country.find_by_sql("select #{Country.custom_fields.join(',')} from countries where id = (select country_id from regions where id = #{self.geographic_context_region_id})")
-        when 'bbox'
-          # TODO
-          []
-      end
+    if geographic_context_country_id.blank? && geographic_context_region_id.blank?
+      Country.select(Country.custom_fields).all
     else
-      # worlwide
-      Country.all
+      if geographic_context_region_id.blank?
+        Country.find(self.geographic_context_country_id, :select => Country.custom_fields)
+      else
+        nil
+      end
     end
   end
 
   def regions_select
-    unless geographic_context.blank?
-      case geographic_context
-        when 'worlwide'
-          Region.get_select_values
-        when 'country'
-          Country.find(self.geographic_context_country_id, :select => Country.custom_fields)
-        when 'region'
-          Country.find_by_sql("select #{Country.custom_fields.join(',')} from countries where id = (select country_id from regions where id = #{self.geographic_context_region_id})")
-        when 'bbox'
-          # TODO
-          []
-      end
+    if geographic_context_country_id.blank? && geographic_context_region_id.blank?
+      []
     else
-      # worlwide
-      Region.get_select_values
+      Region.where(:country_id => geographic_context_country_id).get_select_values
     end
   end
 
   def regions
-    unless geographic_context.blank?
-      case geographic_context
-        when 'worlwide'
-          Region.all
-        when 'country'
-          Country.find(self.geographic_context_country_id).regions
-        when 'region'
-          Region.find(self.geographic_context_region_id)
-        when 'bbox'
-          # TODO
-          []
-      end
+    if geographic_context_country_id.blank? && geographic_context_region_id.blank?
+      []
     else
-      # worlwide
-      Region.all
+      Region.where(:country_id => geographic_context_country_id).select(Region.custom_fields)
     end
   end
 
