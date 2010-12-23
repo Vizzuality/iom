@@ -344,6 +344,14 @@ class Site < ActiveRecord::Base
         select pse.project_id from (projects_sectors as pse inner join projects as p on pse.project_id=p.id) inner join projects_sites as ps on p.id=ps.project_id and site_id=#{self.id})")
   end
 
+  def clusters_or_sectors
+    if self.navigate_by_cluster?
+      self.clusters
+    elsif self.navigate_by_sector?
+      self.sectors
+    end
+  end
+
   def set_yesterday_visits!
     return if self.google_analytics_id.blank? || Settings.first.google_analytics_username.blank? || Settings.first.google_analytics_password.blank?
     Garb::Session.login(Settings.first.google_analytics_username, Settings.first.google_analytics_password)
