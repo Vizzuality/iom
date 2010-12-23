@@ -54,7 +54,6 @@
                 <div class="wrapper">
                   <ul class="content scroll_pane">
                     <% @site.countries_select.each do |country| %>
-
                     <li><a href="/countries/<%= country.id %>" class="geneva"><%= country.name %></a></li>
                     <% end %>
                   </ul>
