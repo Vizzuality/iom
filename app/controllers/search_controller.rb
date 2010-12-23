@@ -14,7 +14,7 @@ class SearchController < ApplicationController
         where_facet << "region_id = #{params[:region_id].sanitize_sql!}"
       end
       if params[:cluster_id]
-        where << "p.id IN (select project_id from clusters_projects where cluster_id=#{params[:cluster_id].gsub(/\\/, '\&\&').gsub(/'/, "''")})"
+        where << "p.id IN (select project_id from clusters_projects where cluster_id=#{params[:cluster_id].sanitize_sql!})"
         where_facet << "cp.cluster_id= #{params[:cluster_id].sanitize_sql!}"
       end
     end
