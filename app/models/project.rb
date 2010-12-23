@@ -121,14 +121,15 @@ class Project < ActiveRecord::Base
   def related(site, limit = 2)
     return [] unless the_geom?
     Project.find_by_sql(<<-SQL
-      select projects.*,
-            ST_Distance((select ST_Centroid(the_geom) from projects where id=#{self.id}), ST_Centroid(the_geom)) as dist
-            from projects
-            where id!=#{self.id}
-            and id in (#{site.projects_ids.join(',')})
-            and the_geom is not null
-            order by dist
-            limit #{limit}
+      select * from
+      (select p.id, p.name, p.primary_organization_id,
+           ST_Distance((select ST_Centroid(the_geom) from projects where id=#{self.id}), ST_Centroid(the_geom)) as dist
+           from projects as p
+           inner join projects_sites as ps on p.id=ps.project_id and ps.site_id=#{site.id}
+           where p.id!=#{self.id}
+           order by dist
+      ) as subq
+      limit  #{limit}
 SQL
     )
   end
@@ -183,18 +184,20 @@ SQL
       end
       sql << conditions.join(' and ')
     end
-    total_results = ActiveRecord::Base.connection.execute("select count(*) from (#{sql}) as subselect").first['count'].to_i
     if options[:order]
       sql << " ORDER BY #{options[:order]}"
     end
+    # Let's query an extra result: if it exists, whe have to show the paginator link "More projects"
     if options[:per_page]
-      sql << " LIMIT #{options[:per_page]}"
+      sql << " LIMIT #{options[:per_page].to_i + 1}"
     end
     if options[:page] && options[:per_page]
       sql << " OFFSET #{options[:per_page].to_i * options[:page].to_i}"
     end
     result = ActiveRecord::Base.connection.execute(sql).map{ |r| r }
+    total_results = result.size + (options[:per_page].to_i * options[:page].to_i)
     WillPaginate::Collection.create(options[:page] ? options[:page].to_i : 1, options[:per_page], total_results) do |pager|
+      result = result[0..-2] if result.size > options[:per_page].to_i
       pager.replace(result)
     end
   end
@@ -212,7 +215,6 @@ SQL
     end
 
     def add_to_country(region)
-
       #TODO: Check whay this is slow.
       #countries << region.country unless countries.include?(region.country)
 
@@ -220,7 +222,6 @@ SQL
       # if (ActiveRecord::Base.connection.execute(sql).first["num"].to_i < 1)
       #   countries << region.country
       # end
-
     end
 
     def remove_from_country(region)

@@ -86,13 +86,16 @@ class Country < ActiveRecord::Base
 
   def near(site, limit = 5)
     Country.find_by_sql(<<-SQL
-      select countries.*,
-            ST_Distance((select ST_Centroid(the_geom) from countries where id=#{self.id}), ST_Centroid(the_geom)) as dist,
-            (select count(*) from countries_projects as pr where country_id=countries.id) as count
-            from countries
-            where id!=#{self.id}
-            order by dist
-            limit #{limit}
+      select * from
+      (select co.id, co.name,
+           ST_Distance((select ST_Centroid(the_geom) from countries where id=#{self.id}), ST_Centroid(the_geom)) as dist,
+           (select count(*) from countries_projects as cp where country_id=co.id) as count
+           from countries as co
+           where id!=#{self.id}
+           order by dist
+      ) as subq
+      where count>0
+      limit  #{limit}
 SQL
     )
   end
