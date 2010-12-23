@@ -72,13 +72,10 @@ class Donor < ActiveRecord::Base
   def projects_regions(site)
     Region.find_by_sql(
 <<-SQL
-  select #{Region.custom_fields.join(',')}, count(regions.id) as count
-    from regions, projects_regions, donations where donations.donor_id = #{self.id} AND
-    donations.project_id IN (#{site.projects_ids.join(',')}) AND
-    donations.project_id = projects_regions.project_id AND
-    projects_regions.region_id = regions.id AND
-    regions.level = #{site.level_for_region}
-    group by #{Region.custom_fields.join(',')}
+  select r.id,r.name,count(ps.*) as count from regions as r
+    inner join projects_regions as pr on r.id=pr.region_id
+    inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{site.id}
+    group by r.id,r.name
 SQL
     ).map do |r|
       [r, r.count.to_i]
