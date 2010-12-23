@@ -16,8 +16,7 @@
 
           <h3><p>
             <%= pluralize(@projects.count, 'project') %> for '<%= params[:q] %>'
-            <%= raw("in #{link_to(@cluster.name, remove_filter_url(:cluster_id))} CLUSTER") if @cluster %>
-            <%= raw("in region #{link_to(@region.name, remove_filter_url(:region_id))}") if @region %>
+            <%= active_facets %>
           </p></h3>
           <% if @projects.present? %>
             <ul id="search_results">
@@ -44,7 +43,7 @@
                 <% if params[:region_id] && params[:region_id].to_i == region.id %>
                   <li><%= region.name %></li>
                 <% else %>
-                  <li><%= link_to(region.name, search_path(:q => params[:q], :region_id => region.id)) %> (<%= count %>)</li>
+                  <li><%= link_to(region.name, filter_url(region)) %> (<%= count %>)</li>
                 <% end %>
               <% else %>
                 <li class="out"><%= link_to(region.name, filter_url(region)) %> (<%= count %>)</li>
@@ -68,7 +67,7 @@
                 <% if params[:cluster_id] && params[:cluster_id].to_i == cluster.id %>
                   <li><%= cluster.name %></li>
                 <% else %>
-                  <li><%= link_to(cluster.name, search_path(:q => params[:q], :cluster_id => cluster.id)) %> (<%= count %>)</li>
+                  <li><%= link_to(cluster.name, filter_url(cluster)) %> (<%= count %>)</li>
                 <% end %>
               <% else %>
                 <li><%= link_to(cluster.name, filter_url(cluster)) %> (<%= count %>)</li>

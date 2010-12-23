@@ -15,14 +15,14 @@ class SearchController < ApplicationController
       end
       if params[:cluster_id]
         where << "p.id IN (select project_id from clusters_projects where cluster_id=#{params[:cluster_id].gsub(/\\/, '\&\&').gsub(/'/, "''")})"
-        where_facet << "cp.cluster_id= = #{params[:cluster_id].gsub(/\\/, '\&\&').gsub(/'/, "''")})"
+        where_facet << "cp.cluster_id= #{params[:cluster_id].gsub(/\\/, '\&\&').gsub(/'/, "''")}"
       end
     end
 
     if params[:q].present?
       q = "%#{params[:q].sanitize_sql!.gsub(/\\/, '\&\&').gsub(/'/, "''")}%"
       where << "p.name ilike '#{q}' OR p.description ilike '#{q}'"
-      where_facet << "p.name ilike '#{q}' OR p.description ilike '#{q}'"
+      where_facet << "(p.name ilike '#{q}' OR p.description ilike '#{q}')"
     end
 
     where = where.present? ? "WHERE #{where.join(' AND ')}" : ''
@@ -55,24 +55,26 @@ class SearchController < ApplicationController
                 inner join clusters as c on cp.cluster_id=c.id
                 inner join projects_regions as pr on ps.project_id=pr.project_id
                 inner join projects as p on ps.project_id=p.id
-                #{where}
+                #{where_facet}
                 group by c.id,c.name order by count DESC"
 
         @clusters = Cluster.find_by_sql(sql).map do |c|
           [c, c.count]
         end
-
+puts '@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'
         sql="select r.id,r.name,count(r.id) as count from clusters_projects as cp
                 inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=1
-                inner join projects_regions as pr on ps.project_id=pr.project_id        
+                inner join projects_regions as pr on ps.project_id=pr.project_id
                 inner join regions as r on pr.region_id=r.id and r.level=1
                 inner join projects as p on ps.project_id=p.id
-                #{where}
+                #{where_facet}
                 group by r.id,r.name order by count DESC"
 
         @regions = Region.find_by_sql(sql).map do |r|
           [r, r.count]
-        end        
+        end
+puts sql
+puts '@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'
       end
       format.js do
         render :update do |page|
