@@ -33,8 +33,6 @@
       </div>
     </div>
   </div>
-
-
   <div id="small_map"></div>
   <a href="#zoom_in" id="zoomIn" onclick="zoomIn()"></a>
   <a href="#zoom_out" id="zoomOut" onclick="zoomOut()"></a>
@@ -55,7 +53,7 @@
        <div class="outer_float">
          <div class="float_left"> <!-- 670px with mest -->
 
-           <% unless @project.description.empty? %>
+           <% unless @project.description.blank? %>
              <div class="block">
                <%= simple_format(@project.description) %>
              </div>
@@ -65,10 +63,7 @@
              <div class="galleryStyle">
                <% @project.media_resources.each do |media_resource| %>
                  <% if media_resource.is_a_video? %>
-                 
-                  <% vimeo_parts = media_resource.vimeo_url.split('/') %>
-                  <% vimeo_id = vimeo_parts[vimeo_parts.size - 1] %>
-                  <%= image_tag(media_resource.vimeo_url, :title=>"video", :desc=>vimeo_id) %>
+                  <%= image_tag(media_resource.vimeo_url, :title=>"video") %>
                  <% else %>
                    <%= image_tag(media_resource.picture.url(:medium)) %>
                  <% end %>
@@ -76,19 +71,11 @@
                <div class="mamufas"></div>
              </div>
              
-             <a href="#view_video" class="video"></a>
-             
               <div class="loader_gallery">
                 <p>Loading videos and images</p>
                 <img src="/images/sites/projects/ajax-loader.gif" title="loader" alt="loader" />
-                <div class="video_player">
-                  <a id="back_gallery" href="#back_gallery">Back to gallery</a>
-                </div>
               </div>
            <% end %>
-           
-           
-           
            
            <% if @project.activities || @project.additional_information || @project.cross_cutting_issues %>
              <div class="block info">
@@ -184,11 +171,11 @@
          <div class="block">
            <% if @project.estimated_people_reached? %>
              <h3>People reached</h3>
-             <p class="estimate"><%= @project.estimated_people_reached %> <sup>(estimate)</sup></p>
-             <span estimate="<% @project.estimated_people_reached %>" class="people_amount"></span>
+             <p class="estimate"><%= @project.estimated_people_reached %><sup>(estimate)</sup></p>
+             <span estimate="<%= @project.estimated_people_reached %>" class="people_amount"></span>
            <%end%>
            <% if @project.target? %>
-             <h3>Target groups</h3>
+             <h3 class="<%= (@project.estimated_people_reached?)? 'margin':'' %>">Target groups</h3>
              <p><%= @project.target %></p>
            <% end %>
          </div>

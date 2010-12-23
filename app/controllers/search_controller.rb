@@ -4,29 +4,25 @@ class SearchController < ApplicationController
 
   def index
     where  = []
+    where_facet = []
     limit = 20
     @current_page   = params[:page] ? params[:page].to_i : 1
 
     if params[:region_id] || params[:cluster_id]
       if params[:region_id]
-        if @region = Region.find(params[:region_id])
-          where << "pr.region_id = #{params[:region_id].gsub(/\\/, '\&\&').gsub(/'/, "''")}"
-        else
-          render_404 and return
-        end
+        where << "pr.region_id = #{params[:region_id].sanitize_sql!}"
+        where_facet << "region_id = #{params[:region_id].sanitize_sql!}"
       end
       if params[:cluster_id]
-        if @cluster = Cluster.find(params[:cluster_id])
-          where << "id IN (select project_id from clusters_projects where cluster_id=#{params[:cluster_id].gsub(/\\/, '\&\&').gsub(/'/, "''")})"
-        else
-          render_404 and return
-        end
+        where << "p.id IN (select project_id from clusters_projects where cluster_id=#{params[:cluster_id].gsub(/\\/, '\&\&').gsub(/'/, "''")})"
+        where_facet << "cp.cluster_id= #{params[:cluster_id].sanitize_sql!}"
       end
     end
 
     if params[:q].present?
-      q = "%#{params[:q].sanitize_sql!.gsub(/\\/, '\&\&').gsub(/'/, "''")}%"
+      q = "%#{params[:q].sanitize_sql!}%"
       where << "p.name ilike '#{q}' OR p.description ilike '#{q}'"
+      where_facet << "(p.name ilike '#{q}' OR p.description ilike '#{q}')"
     end
 
     where = where.present? ? "WHERE #{where.join(' AND ')}" : ''
@@ -49,15 +45,37 @@ class SearchController < ApplicationController
 
     @projects = ActiveRecord::Base.connection.execute(sql)
 
-    @clusters = Cluster.find_by_sql("select clusters_projects.cluster_id, count(clusters_projects.cluster_id) as count from clusters_projects where clusters_projects.project_id IN (#{(@projects.map{|p| p['project_id']} + [-1]).join(',')}) group by clusters_projects.cluster_id order by count DESC").map do |c_id|
-      [Cluster.find(c_id.cluster_id), c_id.count]
-    end
-    @regions = Region.find_by_sql("select projects_regions.region_id, count(projects_regions.region_id) as count from projects_regions where projects_regions.project_id IN (#{(@projects.map{|p| p['project_id']} + [-1]).join(',')})  group by projects_regions.region_id order by count DESC").map do |r_id|
-      [Region.find(r_id.region_id, :select => Region.custom_fields), r_id.count]
-    end
 
     respond_to do |format|
-      format.html
+      format.html do
+        where_facet = where_facet.present? ? "WHERE #{where_facet.join(' AND ')}" : ''
+        #cluster Facet
+        sql="select c.id,c.name,count(c.id) as count from clusters_projects as cp
+                inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=#{@site.id}
+                inner join clusters as c on cp.cluster_id=c.id
+                inner join projects_regions as pr on ps.project_id=pr.project_id
+                inner join projects as p on ps.project_id=p.id
+                #{where_facet}
+                group by c.id,c.name order by count DESC"
+
+        @clusters = Cluster.find_by_sql(sql).map do |c|
+          [c, c.count]
+        end
+puts '@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'
+        sql="select r.id,r.name,count(r.id) as count from clusters_projects as cp
+                inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=1
+                inner join projects_regions as pr on ps.project_id=pr.project_id
+                inner join regions as r on pr.region_id=r.id and r.level=1
+                inner join projects as p on ps.project_id=p.id
+                #{where_facet}
+                group by r.id,r.name order by count DESC"
+
+        @regions = Region.find_by_sql(sql).map do |r|
+          [r, r.count]
+        end
+puts sql
+puts '@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'
+      end
       format.js do
         render :update do |page|
           page << "$('#search_results').append('#{escape_javascript(render(:partial => 'search/projects'))}');"

@@ -100,7 +100,7 @@
     <!-- outer_float -->
     <!-- RIGHT PART -->
     <div class="right">
-      <h3><%= pluralize(@area.projects.site(@site).size, 'PROJECT', 'PROJECTS') %> AT <%= @area.name.upcase %></h3>
+      <h3><%= pluralize(@area.projects_count(@site), 'PROJECT', 'PROJECTS') %> AT <%= @area.name.upcase %></h3>
       <div id="projects">
         <%= render :partial => 'projects/projects' %>
       </div>

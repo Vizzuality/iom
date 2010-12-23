@@ -97,7 +97,7 @@ class Site < ActiveRecord::Base
   before_validation :clean_html
   attr_accessor :geographic_context, :project_context, :show_blog, :geographic_boundary_box
 
-  before_save :set_geographic_context, :set_project_context, :set_project_context_tags_ids#, :sanitize_image_name
+  before_save :set_project_context, :set_project_context_tags_ids
   after_save :set_cached_projects
   after_create :create_pages
   after_destroy :remove_cached_projects
@@ -263,7 +263,8 @@ class Site < ActiveRecord::Base
     sql="select c.id,c.name,count(ps.*) as count from clusters as c
     inner join clusters_projects as cp on c.id=cp.cluster_id
     inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=#{self.id}
-    group by c.id,c.name"
+    group by c.id,c.name
+    order by count desc"
 
     Cluster.find_by_sql(sql).map do |c|
       [c,c.count.to_i]
@@ -310,7 +311,7 @@ class Site < ActiveRecord::Base
 
   #Tells me if a project is included in a site or not
   def is_project_included?(project_id,options={})
-    result = projects_sql(options).where("projects.id=?",project_id).present?
+    projects_sql(options).where("projects.id=?",project_id).present?
   end
 
 
@@ -457,25 +458,6 @@ class Site < ActiveRecord::Base
       end
     end
 
-    def set_geographic_context
-      unless geographic_context.blank?
-        case geographic_context
-        when 'worlwide'
-          self.geographic_context_country_id = nil
-          self.geographic_context_region_id  = nil
-          self.geographic_context_geometry   = nil
-        when 'country'
-          self.geographic_context_region_id  = nil
-          self.geographic_context_geometry   = nil
-        when 'region'
-          self.geographic_context_country_id = nil
-          self.geographic_context_geometry   = nil
-        when 'bbox'
-          self.geographic_context_geometry   = nil
-        end
-      end
-    end
-
     def set_project_context
       return if project_context.blank?
       unless project_context.include?('tags')
@@ -513,12 +495,6 @@ class Site < ActiveRecord::Base
 
     def remove_cached_projects
       ActiveRecord::Base.connection.execute("DELETE FROM projects_sites WHERE site_id = #{self.id}")
-    end
-
-    def sanitize_image_name
-      return if aid_map_image_file_name.blank?
-      extension = File.extname(aid_map_image_file_name)
-      self.aid_map_image_file_name = "#{aid_map_image_file_name.sanitize}#{extension}"
     end
 
 end

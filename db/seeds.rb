@@ -86,7 +86,8 @@ Tag.create :name => 'earthquake'
 #  127.0.0.1       iom-haiti.ipq.co
 site = Site.create :name => 'Haiti Aid Map', :url => 'haiti.ngoaidmap.org', :status => true, :short_description=>'Taking care of availability and access to food worldwide', 
                    :long_description=>'On January 12th 2010, a catastrophic earthquake occured at Haiti, leaving more than 250.000 deaths and more than 1.000.000 homeless people. It was one of the biggest disasters in the century. Since then and until now, a huge effort has been made by some of the interaction members',
-                   :theme => Theme.find_by_name('Garnet')
+                   :theme => Theme.find_by_name('Garnet'), :aid_map_image => File.open(File.join(Rails.root, '/public/images/sites/haiti_img_example.jpg'))
+
 site.geographic_context_country_id = Country.find_by_name('Haiti').id
 site.overview_map_bbox_miny=17.78605726800591;
 site.overview_map_bbox_minx=-76.94549560546851;
@@ -141,7 +142,7 @@ site.save!
 #  127.0.0.1       iom-food.ipq.co
 site = Site.create :name => 'Food Security', :url => 'food.ngoaidmap.org', :status => true, :short_description => 'Food security refers to the availability of food and one’s access to it',
                    :long_description => 'The Special Programme for Food Security (SPFS) helps governments replicate successful food security practices on a national scale. The SPFS also encourages investment in rural infrastructure, off-farm income generation, urban agriculture and safety nets',
-                   :theme => Theme.find_by_name('Garnet')
+                   :theme => Theme.find_by_name('Garnet'), :aid_map_image => File.open(File.join(Rails.root, '/public/images/sites/food_img_example.jpg'))
 
 site.pages.find_by_title("About").body=
               <<-EOF

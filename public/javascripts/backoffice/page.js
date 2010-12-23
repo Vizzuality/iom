@@ -1,5 +1,6 @@
 
     $(document).ready( function() {
+        
       //Parent page combo
       $('span#parent_page').click(function(ev){
         ev.stopPropagation();
@@ -38,5 +39,7 @@
              $('input#page_published').val($(this).attr('id'));
           });
       }
+      
+      
     
     });

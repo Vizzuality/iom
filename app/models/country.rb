@@ -15,11 +15,7 @@
 class Country < ActiveRecord::Base
 
   has_many :regions
-  has_and_belongs_to_many :projects do
-    def site(site)
-      self.where("projects.id IN (#{site.projects_ids.join(',')})")
-    end
-  end
+  has_and_belongs_to_many :projects
 
   before_save :update_wikipedia_description
 
@@ -107,6 +103,13 @@ class Country < ActiveRecord::Base
       limit  #{limit}
 SQL
     )
+  end
+
+  def projects_count(site)
+    sql = "select count(distinct(cp.project_id)) as count from countries_projects as cp
+    inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=#{site.id}
+    where cp.country_id=#{self.id}"
+    ActiveRecord::Base.connection.execute(sql).first['count'].to_i
   end
 
 end

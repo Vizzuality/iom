@@ -165,19 +165,19 @@ SQL
       sql << " WHERE "
       conditions = []
       if options[:sector]
-        conditions << "sectors like '%#{options[:sector]}%'"
+        conditions << "sectors like '%#{options[:sector].sanitize_sql!}%'"
       end
       if options[:cluster]
-        conditions << "clusters like '%#{options[:cluster]}%'"
+        conditions << "clusters like '%#{options[:cluster].sanitize_sql!}%'"
       end
       if options[:donor_id]
         conditions << "project_id IN (SELECT project_id from donations WHERE donor_id=#{options[:donor_id]})"
       end
       if options[:region]
-        conditions << "regions like '%#{options[:region]}%'"
+        conditions << "regions like '%#{options[:region].sanitize_sql!}%'"
       end
       if options[:country]
-        conditions << "countries like '%#{options[:country]}%'"
+        conditions << "countries like '%#{options[:country].sanitize_sql!}%'"
       end
       if options[:organization]
         conditions << "organization_id=#{options[:organization]}"
@@ -192,10 +192,14 @@ SQL
       sql << " LIMIT #{options[:per_page].to_i + 1}"
     end
     if options[:page] && options[:per_page]
-      sql << " OFFSET #{options[:per_page].to_i * options[:page].to_i}"
+      sql << " OFFSET #{options[:per_page].to_i * (options[:page].to_i - 1)}"
     end
     result = ActiveRecord::Base.connection.execute(sql).map{ |r| r }
-    total_results = result.size + (options[:per_page].to_i * options[:page].to_i)
+    total_results = if options[:page].to_i < 2
+      result.size + (options[:per_page].to_i * options[:page].to_i)
+    else
+      result.size + (options[:per_page].to_i * (options[:page].to_i - 1))
+    end
     WillPaginate::Collection.create(options[:page] ? options[:page].to_i : 1, options[:per_page], total_results) do |pager|
       result = result[0..-2] if result.size > options[:per_page].to_i
       pager.replace(result)

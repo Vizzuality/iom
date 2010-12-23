@@ -11,9 +11,11 @@ class Sector < ActiveRecord::Base
   has_and_belongs_to_many :projects
 
   def donors(site)
-    (projects & site.projects).map do |project|
-      project.donors
-    end.flatten.uniq
+    sql="select distinct d.* from donors as d
+    inner join donations as don on d.id=donor_id
+    inner join projects_sectors as ps on don.project_id=ps.project_id and ps.sector_id=#{self.id}
+    inner join projects_sites as ps on ps.project_id=don.project_id and ps.site_id=#{site.id}"
+    Donor.find_by_sql(sql)
   end
 
   def self.custom_fields

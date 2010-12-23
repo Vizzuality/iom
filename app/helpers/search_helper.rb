@@ -21,4 +21,17 @@ module SearchHelper
 
     search_path(url_options)
   end
+
+  def active_facets
+    active_facets = ''
+    if params[:cluster_id]
+      cluster = @clusters.map{|c| c.first}.select{|c| c.id == params[:cluster_id].to_i}.first
+      active_facets << "in #{link_to(cluster.name, remove_filter_url(:cluster_id))} CLUSTER"
+    end
+    if params[:region_id]
+      region = @regions.map{|r| r.first}.select{|r| r.id == params[:region_id].to_i}.first
+      active_facets << "in region #{link_to(region.name, remove_filter_url(:region_id))}"
+    end
+    raw(active_facets)
+  end
 end
