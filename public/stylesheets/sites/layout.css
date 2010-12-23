@@ -175,6 +175,14 @@ a#zoomIn {position:absolute; display:none; width:26px; height:25px; background:u
 a#zoomIn:hover {background-position:0 -25px;}
 a#zoomOut {position:absolute; display:none; width:26px; height:25px; background:url('/images/sites/maps/zoom_out.png') no-repeat 0 0; z-index:100;}
 a#zoomOut:hover {background-position:0 -25px;}
+div.map_style {position:absolute; display:none; top:10px; left:50px; width:113px; height:26px; background:url('/images/sites/maps/map_style.png') no-repeat 0 0; overflow:hidden; z-index:100;}
+div.map_style:hover {cursor:default;}
+div.map_style p {margin:7px 0 0 10px; font:normal 13px 'PT Sans'; color:white;}
+div.map_style ul {width:93px; margin:10px 10px 0 10px;}
+div.map_style ul li {padding:3px 0 3px;}
+div.map_style ul li a {color:white; text-decoration:none;}
+div.map_style ul li a:hover {cursor:pointer;}
+
 
 /* LEFT COLUMN - RIGHT BIG BLOCK */
 div.main_head {display:inline-block; vertical-align:top; zoom:1; *display:inline; width:100%;}

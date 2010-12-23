@@ -52,24 +52,59 @@
 
   
   
-      //Positionate zoom controls
-      positionZoomControls();
+      //Positionate controls
+      positionControls();
       $('#zoomIn').fadeIn();
       $('#zoomOut').fadeIn();
-      window.onResize = positionZoomControls;
+      
+      $('div.map_style').hover(function(){
+        $('div.map_style').css('background-position','0 -26px');
+        $('div.map_style').height(76);
+      },function(){
+        $('div.map_style').css('background-position','0 0');
+        $('div.map_style').height(26);
+      });
+
+      $('div.map_style ul li a').click(function(ev){
+        ev.preventDefault();
+        ev.stopPropagation();
+        if ($(this).text()!=$('div.map_style').text()) {
+          if ($(this).text()=="PLAIN") {
+            map.setMapTypeId('labels');
+          } else {
+            map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
+          }
+          $('div.map_style p').text($(this).text());
+        }
+      });
+
+      $('div.map_style').fadeIn();
+      
+      
+      $(window).resize(function(){
+        positionControls();
+      });
   
     });
 
 
-    function positionZoomControls() {
-      var column_position = $('#layout').offset().left;
-      var map_position = $('#map').position().top + 25;
-  
+    function positionControls() {
+      if ($('#layout').length>0) {
+        var column_position = $('#layout').offset().left;
+        var map_position = $('#map').position().top + 25;
+      } else {
+        var column_position = $('#mesh').offset().left + 5;
+        var map_position = $('#small_map').position().top + 25;
+      }
+
       $('#zoomIn').css('left',column_position+'px');
       $('#zoomIn').css('top',map_position+'px');
-  
+
       $('#zoomOut').css('left',column_position+32+'px');
       $('#zoomOut').css('top',map_position+'px');
+
+      $('div.map_style').css('left',column_position+820+'px');
+      $('div.map_style').css('top',map_position+'px');
     }
 
 
