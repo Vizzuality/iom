@@ -184,18 +184,20 @@ SQL
       end
       sql << conditions.join(' and ')
     end
-    total_results = ActiveRecord::Base.connection.execute("select count(*) from (#{sql}) as subselect").first['count'].to_i
     if options[:order]
       sql << " ORDER BY #{options[:order]}"
     end
+    # Let's query an extra result: if it exists, whe have to show the paginator link "More projects"
     if options[:per_page]
-      sql << " LIMIT #{options[:per_page]}"
+      sql << " LIMIT #{options[:per_page].to_i + 1}"
     end
     if options[:page] && options[:per_page]
       sql << " OFFSET #{options[:per_page].to_i * options[:page].to_i}"
     end
     result = ActiveRecord::Base.connection.execute(sql).map{ |r| r }
+    total_results = result.size + (options[:per_page].to_i * options[:page].to_i)
     WillPaginate::Collection.create(options[:page] ? options[:page].to_i : 1, options[:per_page], total_results) do |pager|
+      result = result[0..-2] if result.size > options[:per_page].to_i
       pager.replace(result)
     end
   end
@@ -213,7 +215,6 @@ SQL
     end
 
     def add_to_country(region)
-
       #TODO: Check whay this is slow.
       #countries << region.country unless countries.include?(region.country)
 
@@ -221,7 +222,6 @@ SQL
       # if (ActiveRecord::Base.connection.execute(sql).first["num"].to_i < 1)
       #   countries << region.country
       # end
-
     end
 
     def remove_from_country(region)
