@@ -4,7 +4,7 @@
 .galleria-counter{position:absolute;top:29px;left:33px;text-align:right;color:#fff;font:normal 11px/1 arial,sans-serif;z-index:2;}
 .galleria-loader{background:#000;width:32px;height:32px;position:absolute;top:260px;left:463px;z-index:2;display:inline;background:url('/images/sites/galleria/loading_white.gif') no-repeat 2px 2px;}
 .galleria-info{background:url('/images/sites/home/gallery_info.png') no-repeat 0 0;height:117px;width:897px;padding:15px!important;z-index:89;z-index:2;position:absolute; bottom:0px; left:0px;}
-.galleria-info-text{display:none; margin:0px 7px; width:640px;}
+.galleria-info-text{display:none; margin:0px 7px; width:640px!important;}
 .galleria-info-title{font:normal 24px "PT Sans Bold"; color:white; margin:0;text-decoration:none; text-transform:uppercase;}
 .galleria-info-shortdescription {font:normal 18px "PT Sans Bold"; color:#D15F50; margin:4px 0 0 0;}
 .galleria-info-description {font:normal 15px "Arial"; color:white; margin:9px 0 0;}
