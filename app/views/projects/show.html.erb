@@ -63,17 +63,24 @@
              <div class="galleryStyle">
                <% @project.media_resources.each do |media_resource| %>
                  <% if media_resource.is_a_video? %>
-                  <%= image_tag(media_resource.vimeo_url, :title=>"video") %>
+                  <% vimeo_parts = media_resource.vimeo_url.split('/') %>
+                  <% vimeo_id = vimeo_parts[vimeo_parts.size - 1] %>
+                  <%= image_tag(media_resource.vimeo_url, :title=>"video", :desc=>vimeo_id) %>
                  <% else %>
                    <%= image_tag(media_resource.picture.url(:medium)) %>
                  <% end %>
                <% end %>
                <div class="mamufas"></div>
              </div>
-             
+
+             <a href="#view_video" class="video"></a>
+
               <div class="loader_gallery">
                 <p>Loading videos and images</p>
                 <img src="/images/sites/projects/ajax-loader.gif" title="loader" alt="loader" />
+                <div class="video_player">
+                  <a id="back_gallery" href="#back_gallery">Back to gallery</a>
+                </div>
               </div>
            <% end %>
            
