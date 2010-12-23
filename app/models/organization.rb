@@ -53,19 +53,9 @@
 
 class Organization < ActiveRecord::Base
 
-  has_many :resources, :conditions => 'resources.element_type = #{Iom::ActsAsResource::ORGANIZATION_TYPE}', :foreign_key => :element_id, :dependent => :destroy do
-    # Filter specific resources from a site
-    def site(site)
-      self.select{ |r| r.sites_ids.include?(site.id.to_s) }
-    end
-  end
+  has_many :resources, :conditions => 'resources.element_type = #{Iom::ActsAsResource::ORGANIZATION_TYPE}', :foreign_key => :element_id, :dependent => :destroy
   has_many :media_resources, :conditions => 'media_resources.element_type = #{Iom::ActsAsResource::ORGANIZATION_TYPE}', :foreign_key => :element_id, :dependent => :destroy, :order => 'position ASC'
-  has_many :projects, :foreign_key => :primary_organization_id do
-    # Filter specific projects from a site
-    def site(site)
-      self.where("projects.id IN (#{site.projects_ids.join(',')})")
-    end
-  end
+  has_many :projects, :foreign_key => :primary_organization_id
 
   has_attached_file :logo, :styles => {
                                       :small => {
@@ -80,7 +70,6 @@ class Organization < ActiveRecord::Base
   has_many :donations, :through => :projects
 
   validates_presence_of :name
-  #validates_presence_of :description
 
   serialize :site_specific_information
 
@@ -165,6 +154,13 @@ SQL
   # to get only id and name
   def self.get_select_values
     scoped.select(:id,:name).order("name ASC")
+  end
+
+  def projects_count(site)
+    sql = "select count(p.id) as count from projects as p
+    inner join projects_sites as ps on p.id=ps.project_id and ps.site_id=#{site.id}
+    where p.primary_organization_id=#{self.id}"
+    ActiveRecord::Base.connection.execute(sql).first['count'].to_i
   end
 
 end
