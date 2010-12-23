@@ -45,10 +45,14 @@ $(document).ready( function() {
     $('ul.statistics_list li a').hover(function(ev){
         ev.stopPropagation();
         ev.preventDefault();        
+
+        $('div#tooltip').css('display','none');
         $(this).parent().children('div#tooltip').fadeIn('fast');
+
     },
       function() {
         $(this).parent().children('div#tooltip').css('display','none');
+
       }
     );
 
