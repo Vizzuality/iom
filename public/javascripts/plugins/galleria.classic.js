@@ -49,6 +49,8 @@ Galleria.addTheme({
           $(e.thumbTarget).parent(':not(.active)').children().css('opacity',.6)
         });
 
+        
+
         this.bind(Galleria.LOADSTART, function(e) {
           if (!e.cached) {
             this.$('loader').show().fadeTo(200, .8);
@@ -60,9 +62,27 @@ Galleria.addTheme({
         this.bind(Galleria.LOADFINISH, function(e) {
       	  this.$('thumbnails-container').animate({opacity:1},1000);		
 	        this.$('loader').fadeOut('fast');
-          //console.log(this);
+	        
+	        var me = this;
+	        $('a.video').click(function(ev){
+	          ev.stopPropagation();
+	          ev.preventDefault();
+	          me.pause();
+            playVideo($(this).attr('vimeo-id'));
+	        });
+	        
+	        $('a#back_gallery').click(function(ev){
+	          ev.stopPropagation();
+	          ev.preventDefault();
+            $('div.loader_gallery').fadeOut(function(){
+  	          $("#vimeo_frame").remove();
+              me.play();
+            });
+	        });
+	        
           if (this._data[0].title=="video") {
-            //console.log(info);
+            $('a.video').attr('vimeo-id',this._data[0].description);
+            $('a.video').show();
           } else {
             this.$('galleria-info').show().css('opacity',.8);
   	        info.show().fadeTo(200, .8);

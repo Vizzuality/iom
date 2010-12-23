@@ -1381,6 +1381,7 @@ Galleria.prototype = {
              Galleria.raise('Target not found.');
              return;
         }
+        
 
         // apply options
         this._options = {
@@ -1663,7 +1664,9 @@ Galleria.prototype = {
             'thumbnails-container' :
                 ['thumb-nav-left', 'thumbnails-list', 'thumb-nav-right'],
             'container' :
-                ['stage', 'thumbnails-container', 'info', 'tooltip']
+                ['stage', 'thumbnails-container', 'info', 'tooltip'],
+            'video':
+                ['info-video']
         });
 
         Utils.hide( this.$( 'counter' ).append(
@@ -1726,16 +1729,6 @@ Galleria.prototype = {
             // navigate
             var fn = /right/.test( this.className ) ? 'next' : 'prev';
             self[ fn ]();
-            var nextIndex = (fn=='next')?(self.getIndex()):(self.getIndex());
-            
-            if (self._data[nextIndex].title=="video") {
-              self.$('galleria-info').hide();
-              self.$('info-text').hide();
-            } else {
-              self.$('galleria-info').show().css('opacity',.8);
-    	        self.$('info-text').show().fadeTo(200, .8);
-            }
-            
 
         });
 
@@ -1746,6 +1739,8 @@ Galleria.prototype = {
             }
             
         });
+        
+        
 
         // load up target content
         this.load();
@@ -2040,7 +2035,6 @@ Galleria.prototype = {
             // mix default extractions with the hrefs and config
             // and push it into the data array
             self._data.push( $.extend({
-
                 title:       img.attr('title'),
                 thumb:       img.attr('src'),
                 image:       img.attr('src'),
@@ -2917,9 +2911,23 @@ this.prependChild( 'info', 'myElement' );
     */
 
     next : function() {
+
+        if (this._data[this.getNext()].title=="video") {
+          this.$('galleria-info').hide();
+          this.$('info-text').hide();
+          $('a.video').attr('vimeo-id',this._data[this.getNext()].description);
+          $('a.video').fadeIn();
+        } else {
+          $('a.video').fadeOut();
+          this.$('galleria-info').fadeIn().css('opacity',.8);
+	        this.$('info-text').fadeIn().fadeTo(200, .8);
+        }
+            
         if ( this.getDataLength() > 1 ) {
             this.show( this.getNext(), false );
         }
+        
+        
         return this;
     },
 
@@ -2930,6 +2938,18 @@ this.prependChild( 'info', 'myElement' );
     */
 
     prev : function() {
+        
+        if (this._data[this.getPrev()].title=="video") {
+           this.$('galleria-info').hide();
+           this.$('info-text').hide();
+           $('a.video').attr('vimeo-id',this._data[this.getPrev()].description);
+           $('a.video').fadeIn();
+         } else {
+           this.$('galleria-info').fadeIn().css('opacity',.8);
+ 	         this.$('info-text').fadeIn().fadeTo(200, .8);
+           $('a.video').fadeOut();
+         }
+        
         if ( this.getDataLength() > 1 ) {
             this.show( this.getPrev(), true );
         }

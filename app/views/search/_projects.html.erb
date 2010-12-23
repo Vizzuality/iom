@@ -5,15 +5,11 @@
       <p>by <%= link_to(project['organization_name'], organization_path(project['organization_id'])) %></p>
     </div>
     <div class="project_places">
-      <ul>
+      <p>
         <% regions = project['regions'].split('|') %>
-        <% regions.slice!(0, 2).each do |region| %>
-          <li><%= "#{region}, #{project['country_name']}"%></li>
-        <% end %>
-        <% if regions.count > 0 %>
-          <li>and <%= content_tag :span, "#{regions.count} more" %></li>
-        <% end %>
-      </ul>
+        <% regions.slice!(0, 2).each do |region| %><%= "#{region}, #{project['country_name']}"%> <% end %>
+        <% if regions.count > 0 %>and <%= content_tag :span, "#{regions.count} more" %><% end %>
+      </p>
     </div>
   </li>
 <% end %>
