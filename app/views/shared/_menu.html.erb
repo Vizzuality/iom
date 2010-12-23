@@ -9,28 +9,21 @@
           <% elsif @site.sector %>
             <li><a class="main_option" href="<%= sector_path(@site.sector) %>" class="geneva"><%= @site.word_for_sectors.upcase.singularize %></a></li>
           <% else %>
-            <% if @site.navigate_by_cluster? %>
-            <li id="cluster_option">
-              <a class="geneva main_option with_suboptions"><%= @site.word_for_clusters.upcase %><span class="with_suboptions"></span></a>
-              <div class="header_title"><a><%= @site.word_for_clusters.upcase %><span class="with_suboptions"></span></a></div>
+
+            <li id="<%= @site.navigate_by_cluster? ? 'cluster' : 'sector' %>_option">
+              <a class="geneva main_option with_suboptions"><%= @site.word_for_cluster_sector.upcase %><span class="with_suboptions"></span></a>
+              <div class="header_title"><a><%= @site.word_for_cluster_sector.upcase %><span class="with_suboptions"></span></a></div>
               <ul class="suboptions">
-                <% @site.clusters.each do |cluster| %>
-                <%unless cluster.name.eql?('N/A')%>
-                <li><a href="<%= cluster_path(cluster) %>" class="geneva <%= cluster.css_class %> icon_menu"><%= cluster.name %></a></li>
-                <%end%>
+                <% @site.clusters_or_sectors.reject{|c| c.name.eql?('N/A') }.each do |category| %>
+                <li>
+                  <a href="<%= category.is_a?(Cluster) ? cluster_path(category) : sector_path(category) %>" class="geneva <%= category.css_class %> icon_menu">
+                    <%= truncate(category.name, :length => 21) %>
+                  </a>
+                </li>
                 <% end %>
               </ul>
             </li>
-            <% elsif @site.navigate_by_sector? %>
-            <li id="sector_option">
-              <a class="geneva main_option with_suboptions"><%= @site.word_for_sectors.upcase %><span class="with_suboptions"></span></a>
-              <ul class="suboptions">
-                <% @site.sectors.each do |sector| %>
-                <li><a href="<%= sector_path(sector) %>" class="geneva"><%= sector.name %></a></li>
-                <% end %>
-              </ul>
-            </li>
-            <% end %>
+
           <% end %>
 
           <%
@@ -70,7 +63,7 @@
               </div>
             </li>
           <% end %>
-          
+
           <li id="organization_option">
               <a class="geneva main_option with_suboptions">ORGANIZATIONS<span class="with_suboptions"></span></a>
               <div class="header_title"><a>ORGANIZATIONS<span class="with_suboptions"></span></a></div>

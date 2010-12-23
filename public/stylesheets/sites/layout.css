@@ -87,7 +87,7 @@ ul#gallery_thumbails li.last {margin:30px 0 0 0;}
 /* ***************** END HOME SITES*/
 
 /*CLUSTER AND SECTORS TOOLTIPS*/
-div#tooltip {position:absolute; bottom:17px; left:-75px; display:none;}
+div#tooltip {position:absolute; bottom:17px; left:-71px; display:none;}
 div#tooltip span.bottom_tooltip {float:left; background:url('/images/sites/common/tooltips/bottom_tooltip.png') no-repeat 0 0; width:175px; height:16px;}
 div#tooltip span.body_tooltip {float:left; background:url('/images/sites/common/tooltips/body_tooltip.png') repeat-y top; width:149px; height:auto; padding:9px 15px 0 11px;}
 div#tooltip label {float:left; font:normal 13px "PT Sans Bold"; color:white; text-align:center; width:152px;}
@@ -113,10 +113,10 @@ div#header h1 a {color:white;}
 div#header ul.menu {float:right; margin:4px 0 0 100px; width:auto; height:25px;}
 div#header ul.menu li {float:left; width:auto; margin:0 23px 0 0; position:relative;}
 
-div#header ul.menu li#cluster_option.clicked ul.suboptions {position:absolute; top:35px; left:-10px; z-index:110; background:url('/images/sites/common/menu/cluster_body_clicked.png') no-repeat 0 0; display:none; width:497px; height:177px; display:inline; padding:0 13px 0 23px;}
+div#header ul.menu li#cluster_option,div#header ul.menu li#sector_option.clicked ul.suboptions {position:absolute; top:35px; left:-10px; z-index:110; background:url('/images/sites/common/menu/cluster_body_clicked.png') no-repeat 0 0; display:none; width:497px; height:177px; display:inline; padding:7px 13px 0 23px;}
 div#header ul.menu li div.header_title {display:none;}
 div#header ul.menu li div.header_title a {display:none;}
-div#header ul.menu li#cluster_option.clicked div.header_title {position:absolute; top:0; left:-10px; background:url('/images/sites/common/menu/cluster_head_clicked.png') no-repeat 0 0; width:94px; height:35px; display:inline;}
+div#header ul.menu li#cluster_option.clicked,div#header ul.menu li#sector_option.clicked div.header_title {position:absolute; top:0; left:-10px; background:url('/images/sites/common/menu/cluster_head_clicked.png') no-repeat 0 0; width:94px; height:35px; display:inline;}
 div#header ul.menu li.clicked div.header_title a {float:left; margin:8px 0 0 10px; font:normal 13px "Geneva"; color:white; text-decoration:none; display:inline;}
 
 /*COUNTRY*/
@@ -188,7 +188,7 @@ div.map_style ul li a:hover {cursor:pointer;}
 div.main_head {display:inline-block; vertical-align:top; zoom:1; *display:inline; width:100%;}
 div.inner_main_head {position:relative; width:942px; margin:0 auto;}
 div.main_head div.left {width:248px; padding:30px 32px; background:url('/images/sites/common/mesh.png') repeat 0 0; display:inline-block; vertical-align:top; zoom:1; *display:inline;}
-div.main_head div.left h1 {width:237px; font:normal 25px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42; z-index:10;}
+div.main_head div.left h1 {width:237px; font:normal 25px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42; z-index:50;}
 div.main_head div.left h1.cluster_sector_name {width:190px; z-index:50;}
 div.main_head div.left h2 {width:100%; font:normal 15px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42; text-transform:uppercase;}
 div.main_head div.left h3 {width:100%; font:normal 15px "PT Sans Bold"; color:#7B3C32; text-transform:uppercase;}
@@ -329,8 +329,9 @@ div#pages div.right div.block {float:left; width:242px; margin:23px 0 0 0; paddi
 div#pages div.right div.block.border {border-bottom:1px solid #D4D4D4; padding:0 0 20px 30px;}
 div#pages div.right div.block.border.last {border:none; padding:0 0 0 30px;}
 div#pages div.right div.block h2 {width:100%; font:normal 13px "PT Sans Bold"; color:#999999; text-shadow:0 1px white; text-transform:uppercase;}
-div#pages div.right div.block div.logo {padding:5px; background:#CFCFCF;}
+div#pages div.right div.block div.logo {float:left; padding:0 0 5px; width:100%;}
 div#pages div.right div.block img {background:white;}
+div#pages div.right div.block img#image_logo {border:5px solid #CFCFCF;}
 div#pages div.right div.block p {width:100%; padding:10px 0 0 0; font:normal 13px Arial; color:#666666; line-height:17px;}
 div#pages div.right div.block p.social a {padding:0 5px 0 20px; color:#666666; text-decoration:underline;}
 div#pages div.right div.block p.social a:hover {color:#333333;}
@@ -418,7 +419,7 @@ a.icon_menu:hover {background-position:0 -22px; cursor:pointer;}
 
 span.icon_watermark {position:absolute; right:32px; top:50%; height:37px; width:37px; margin:-16px 0 0 0; opacity:.5; filter:Alpha(opacity=50);filter:progid:DXImageTransform.Microsoft.Alpha(opacity=50); z-index:0;}
 span.icon_watermark.agriculture {background:url('/images/sites/common/icons/watermark/agriculture.png') no-repeat left 0;}
-span.icon_watermark.camp_coordination {background:url('/images/sites/common/watermark/menu/camp.png') no-repeat left 0;}
+span.icon_watermark.camp_coordination {background:url('/images/sites/common/icons/watermark/camp.png') no-repeat left 0;}
 span.icon_watermark.communications {background:url('/images/sites/common/icons/watermark/communication.png') no-repeat left 0;}
 span.icon_watermark.disaster_management {background:url('/images/sites/common/icons/watermark/disaster_management.png') no-repeat left 0;}
 span.icon_watermark.early_recovery {background:url('/images/sites/common/icons/watermark/early_recovery.png') no-repeat left 0;}
@@ -461,7 +462,7 @@ li.icon_other.protection {background:url('/images/sites/common/icons/li_others/p
 li.icon_other.shelter {background:url('/images/sites/common/icons/li_others/shelter.png') no-repeat 0 0!important;}
 li.icon_other.water_sanitation {background:url('/images/sites/common/icons/li_others/water.png') no-repeat 0 0!important;}
 
-div.statistics ul.statistics_list li a span {float:left; width:auto; height:18px; padding:2px 10px 0 5px; background:url('/images/sites/organization/right_statistics.png')
+div.statistics ul.statistics_list li a span {float:left; width:auto; height:18px; padding:1px 12px 1px 5px; background:url('/images/sites/organization/right_statistics.png')
  no-repeat right 0; font:normal 13px "Aller"; color:#FFFFFF; text-align:right;}
 div.statistics ul.statistics_list li a span:hover {text-decoration:none!important;}
 div.statistics ul.statistics_list li a:hover {text-decoration:none!important; cursor:pointer;}
@@ -505,7 +506,7 @@ div.projects div.right div.block {width:265px; margin:23px 0 0 0; border-bottom:
 div.projects div.right div.block.last {border:none; padding:0 0 0 30px;}
 div.projects div.right div.block h3 {width:100%; font:normal 13px "PT Sans Bold"; color:#999999; text-shadow:0 1px white; text-transform:uppercase;}
 div.projects div.right div.block h3.margin {padding:20px 0 0 0;}
-div.projects div.right div.block div.logo {width:100%; padding:7px 0 15px;}
+div.projects div.right div.block div.logo {float:left; width:100%; padding:7px 0 15px;}
 div.projects div.right div.block div.logo div.logo_bkg {float:left; position:relative; width:86px; height:52px; background:url('/images/sites/projects/logo_bkg.png') no-repeat 0 0; vertical-align:top; overflow:hidden;}
 div.projects div.right div.block div.logo img {position:absolute; top:3px; left:3px; width:80px; height:46px;}
 div.projects div.right div.block div.logo a {width:130px; padding:10px 0 0 5px; font:normal 13px Arial; color:#CE5D4C; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;} /* TODO: color*/

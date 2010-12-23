@@ -42,9 +42,10 @@ $(document).ready( function() {
 
 
     // TO SHOW CLUSTER'S TOOLTIPS
-    $('ul.statistics_list li a').hover(function(){
-
-        $(this).parent().children('div#tooltip').css('display','inline');
+    $('ul.statistics_list li a').hover(function(ev){
+        ev.stopPropagation();
+        ev.preventDefault();        
+        $(this).parent().children('div#tooltip').fadeIn('fast');
     },
       function() {
         $(this).parent().children('div#tooltip').css('display','none');
