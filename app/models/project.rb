@@ -192,10 +192,14 @@ SQL
       sql << " LIMIT #{options[:per_page].to_i + 1}"
     end
     if options[:page] && options[:per_page]
-      sql << " OFFSET #{options[:per_page].to_i * options[:page].to_i}"
+      sql << " OFFSET #{options[:per_page].to_i * (options[:page].to_i - 1)}"
     end
     result = ActiveRecord::Base.connection.execute(sql).map{ |r| r }
-    total_results = result.size + (options[:per_page].to_i * options[:page].to_i)
+    total_results = if options[:page].to_i < 2
+      result.size + (options[:per_page].to_i * options[:page].to_i)
+    else
+      result.size + (options[:per_page].to_i * (options[:page].to_i - 1))
+    end
     WillPaginate::Collection.create(options[:page] ? options[:page].to_i : 1, options[:per_page], total_results) do |pager|
       result = result[0..-2] if result.size > options[:per_page].to_i
       pager.replace(result)
