@@ -13,7 +13,7 @@
             <li id="cluster_option">
               <a class="geneva main_option with_suboptions"><%= @site.word_for_clusters.upcase %><span class="with_suboptions"></span></a>
               <div class="header_title"><a><%= @site.word_for_clusters.upcase %><span class="with_suboptions"></span></a></div>
-              <ul class="suboptions">
+              <ul class="suboptions <%= (@site.clusters.size > 16)? 'longer':'' %>">
                 <% @site.clusters.each do |cluster| %>
                 <%unless cluster.name.eql?('N/A')%>
                 <li><a href="<%= cluster_path(cluster) %>" class="geneva <%= cluster.css_class %> icon_menu"><%= cluster.name %></a></li>
@@ -24,9 +24,11 @@
             <% elsif @site.navigate_by_sector? %>
             <li id="sector_option">
               <a class="geneva main_option with_suboptions"><%= @site.word_for_sectors.upcase %><span class="with_suboptions"></span></a>
-              <ul class="suboptions">
+              <ul class="suboptions <%= (@site.sectors.size > 16)? 'longer':'' %>">
                 <% @site.sectors.each do |sector| %>
-                <li><a href="<%= sector_path(sector) %>" class="geneva"><%= sector.name %></a></li>
+                  <%unless cluster.name.eql?('N/A')%>
+                  <li><a href="<%= sector_path(sector) %>" class="geneva"><%= sector.name %></a></li>
+                  <%end%>
                 <% end %>
               </ul>
             </li>
