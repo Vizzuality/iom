@@ -16,7 +16,7 @@
                 <% @site.clusters_or_sectors.reject{|c| c.name.eql?('N/A') }.each do |category| %>
                 <li>
                   <a href="<%= category.is_a?(Cluster) ? cluster_path(category) : sector_path(category) %>" class="geneva <%= category.css_class %> icon_menu">
-                    <%= truncate (category.name, :length => 27) %>
+                    <%= category.name %>
                   </a>
                 </li>
                 <% end %>
