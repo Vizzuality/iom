@@ -115,10 +115,14 @@ div#header ul.menu li {float:left; width:auto; margin:0 23px 0 0; position:relat
 
 div#header ul.menu li#cluster_option.clicked ul.suboptions {position:absolute; top:35px; left:-10px; z-index:110; background:url('/images/sites/common/menu/cluster_body_clicked.png') no-repeat 0 0; display:none; width:497px; height:177px; display:inline; padding:0 13px 0 23px;}
 div#header ul.menu li#cluster_option.clicked ul.suboptions.longer {background:url('/images/sites/common/menu/cluster_body_clicked_long.png') no-repeat 0 0;}
+/*=======
 div#header ul.menu li#cluster_option,div#header ul.menu li#sector_option.clicked ul.suboptions {position:absolute; top:35px; left:-10px; z-index:110; background:url('/images/sites/common/menu/cluster_body_clicked.png') no-repeat 0 0; display:none; width:497px; height:177px; display:inline; padding:7px 13px 0 23px;}
+>>>>>>> 48cc9e1d183423c8c899d01aec246007dae107e0
+*/
 div#header ul.menu li div.header_title {display:none;}
 div#header ul.menu li div.header_title a {display:none;}
-div#header ul.menu li#cluster_option.clicked,div#header ul.menu li#sector_option.clicked div.header_title {position:absolute; top:0; left:-10px; background:url('/images/sites/common/menu/cluster_head_clicked.png') no-repeat 0 0; width:94px; height:35px; display:inline;}
+div#header ul.menu li#cluster_option.clicked div.header_title {position:absolute; top:0; left:-10px; background:url('/images/sites/common/menu/cluster_head_clicked.png') no-repeat 0 0; width:94px; height:35px; display:inline;}
+div#header ul.menu li#sector_option.clicked div.header_title {position:absolute; top:0; left:-10px; background:url('/images/sites/common/menu/cluster_head_clicked.png') no-repeat 0 0; width:94px; height:35px; display:inline;}
 div#header ul.menu li.clicked div.header_title a {float:left; margin:8px 0 0 10px; font:normal 13px "Geneva"; color:white; text-decoration:none; display:inline;}
 
 /*COUNTRY*/
