@@ -10,12 +10,12 @@ class SearchController < ApplicationController
 
     if params[:region_id] || params[:cluster_id]
       if params[:region_id]
-        where << "pr.region_id = #{params[:region_id].gsub(/\\/, '\&\&').gsub(/'/, "''")}"
-        where_facet << "region_id = #{params[:region_id].gsub(/\\/, '\&\&').gsub(/'/, "''")}"
+        where << "pr.region_id = #{params[:region_id].sanitize_sql!}"
+        where_facet << "region_id = #{params[:region_id].sanitize_sql!}"
       end
       if params[:cluster_id]
         where << "p.id IN (select project_id from clusters_projects where cluster_id=#{params[:cluster_id].gsub(/\\/, '\&\&').gsub(/'/, "''")})"
-        where_facet << "cp.cluster_id= #{params[:cluster_id].gsub(/\\/, '\&\&').gsub(/'/, "''")}"
+        where_facet << "cp.cluster_id= #{params[:cluster_id].sanitize_sql!}"
       end
     end
 
