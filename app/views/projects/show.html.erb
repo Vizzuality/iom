@@ -33,8 +33,6 @@
         </div>
       </div>
     </div>
-  
-  
     <div id="small_map"></div>
     <a href="#zoom_in" id="zoomIn" onclick="zoomIn()"></a>
     <a href="#zoom_out" id="zoomOut" onclick="zoomOut()"></a>
@@ -55,7 +53,7 @@
          <div class="outer_float">
            <div class="float_left"> <!-- 670px with mest -->
 
-             <% unless @project.description.empty? %>
+             <% unless @project.description.blank? %>
                <div class="block">
                  <%= simple_format(@project.description) %>
                </div>
@@ -173,11 +171,11 @@
            <div class="block">
              <% if @project.estimated_people_reached? %>
                <h3>People reached</h3>
-               <p class="estimate"><%= @project.estimated_people_reached %> <sup>(estimate)</sup></p>
-               <span estimate="<% @project.estimated_people_reached %>" class="people_amount"></span>
+               <p class="estimate"><%= @project.estimated_people_reached %><sup>(estimate)</sup></p>
+               <span estimate="<%= @project.estimated_people_reached %>" class="people_amount"></span>
              <%end%>
              <% if @project.target? %>
-               <h3>Target groups</h3>
+               <h3 class="<%= (@project.estimated_people_reached?)? 'margin':'' %>">Target groups</h3>
                <p><%= @project.target %></p>
              <% end %>
            </div>

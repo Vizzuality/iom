@@ -527,8 +527,8 @@ div.projects div.right div.block p {width:252px; padding:10px 0 0 0; font:normal
 div.projects div.right div.block p.budget {padding:10px 0 0 10px; font:normal 25px "Aller"; color:#666666; background:url('/images/sites/icons/budget.png') no-repeat 0 16px;}
 div.projects div.right div.block p a {color:#CE5D4C; text-decoration:none;} /* TODO: color*/
 div.projects div.right div.block p a:hover {text-decoration:underline;}
-div.projects div.right div.block span.people_amount {display:block; height:20px; padding:3px 0; background:url('/images/sites/projects/man.png') no-repeat 0 0;}
-div.projects div.right div.block p.estimate {font:normal 25px "Aller"; color:#666666;}
+div.projects div.right div.block span.people_amount {display:none; height:20px; padding:0; background:url('/images/sites/projects/man.png') repeat 0 0; max-width:255px;}
+div.projects div.right div.block p.estimate {font:normal 25px "Aller"; color:#666666; width:auto;}
 div.projects div.right div.block p.estimate sup {font:normal 13px "Aller"; color:#666666;}
 div.projects div.right div.block div.timeline {position:relative; width:237px; height:23px; padding:3px; margin:6px 0 0 0; background:url('/images/sites/projects/days_left_bkg.png') no-repeat 0 0;}
 div.projects div.right div.block div.timeline span {display:block; width:100px; height:23px; background:url('/images/sites/projects/days_left_bar.png') no-repeat 0 0; width:245px;}

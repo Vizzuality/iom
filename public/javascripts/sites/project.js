@@ -11,7 +11,8 @@
       $(document).ready( function() {
         
         //Number of men for painting
-        $('span.people_amount').width($('span.people_amount').attr('estimate')/1000);
+        $('span.people_amount').width($('span.people_amount').attr('estimate')/5);
+        $('span.people_amount').css('display','block');
         
         //If left part is bigger than float right
         if ($('div#project div.float_left').height() < $('div#project div.right').height()) {
