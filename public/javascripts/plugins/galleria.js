@@ -1716,6 +1716,7 @@ Galleria.prototype = {
             if ( self._options.clicknext ) {
                 e.stopPropagation();
             }
+            
 
             // pause if options is set
             if ( self._options.pause_on_interaction ) {
@@ -1725,6 +1726,16 @@ Galleria.prototype = {
             // navigate
             var fn = /right/.test( this.className ) ? 'next' : 'prev';
             self[ fn ]();
+            var nextIndex = (fn=='next')?(self.getIndex()):(self.getIndex());
+            
+            if (self._data[nextIndex].title=="video") {
+              self.$('galleria-info').hide();
+              self.$('info-text').hide();
+            } else {
+              self.$('galleria-info').show().css('opacity',.8);
+    	        self.$('info-text').show().fadeTo(200, .8);
+            }
+            
 
         });
 

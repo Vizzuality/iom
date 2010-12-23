@@ -60,9 +60,14 @@ Galleria.addTheme({
         this.bind(Galleria.LOADFINISH, function(e) {
       	  this.$('thumbnails-container').animate({opacity:1},1000);		
 	        this.$('loader').fadeOut('fast');
-          console.log(this);
-	        this.$('galleria-info').show().css('opacity',.8);
-	        info.show().fadeTo(200, .8);
+          //console.log(this);
+          if (this._data[0].title=="video") {
+            //console.log(info);
+          } else {
+            this.$('galleria-info').show().css('opacity',.8);
+  	        info.show().fadeTo(200, .8);
+          }
+
         });
     }
 });

@@ -1,4 +1,13 @@
 
+      var vimeo_total = 0;
+      var vimeo_count = 0;
+      
+      if ($('div.galleryStyle img').size()>0) {
+        $('div.loader_gallery').css('top',$('div.galleryStyle').position().top+1+'px');
+        $('div.loader_gallery').show();
+        $('div.mamufas').remove();
+      }
+
       $(document).ready( function() {
         
         //Number of men for painting
@@ -27,13 +36,41 @@
         }
         
         $('div.timeline span').width((days_completed*237)/total_days);
+        
+        if ($('div.galleryStyle img').size()>0) {
+          
+          var vimeo_total = $('div.galleryStyle img[title="video"]').size();
 
-        //Gallery
-  			if ($('div.galleryStyle').length>0){		
-  	      Galleria.loadTheme('/javascripts/plugins/galleria.classic.js');
-  			  $('div.galleryStyle').galleria({thumbnails:false, preload:2,autoplay:5000,transition:'fade',show_counter:'false'});
-  			}
+          $('div.galleryStyle img[title="video"]').each(function(index,element){
+            var vimeo_parts = $(element).attr('src').split('/');
+            var vimeo_id = vimeo_parts[vimeo_parts.length-1];
 
+            $.ajax({
+              url: 'http://vimeo.com/api/v2/video/'+vimeo_id+'.json?format=jsonp',
+              jsonpCallback: "dostuff",
+              dataType: "jsonp",
+              type: "GET",
+              cache: true,
+              success: function(result) {
+                // console.log(result);
+                
+
+                $('img[src="'+result[0].url+'"]').attr('src',result[0].thumbnail_large);
+                vimeo_count++;
+                if (vimeo_count==vimeo_total) {
+                  startGalleria();
+                }
+
+              }
+            });
+
+            if (vimeo_count == vimeo_total) {
+              startGalleria();
+            }
+
+          });
+        }
+        
       });
       
       
@@ -44,5 +81,13 @@
 
       function daydiff(first, second) {
           return (second-first)/(1000*60*60*24)
+      }
+      
+      function startGalleria() {
+        if ($('div.galleryStyle').length>0){   
+          Galleria.loadTheme('/javascripts/plugins/galleria.classic.js');
+          $('div.galleryStyle').galleria({thumbnails:false, preload:2,autoplay:5000,transition:'fade',show_counter:'false'});
+          $('div.loader_gallery').fadeOut();
+        }
       }
 
