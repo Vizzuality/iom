@@ -41,10 +41,12 @@ class Admin::ProjectsController < ApplicationController
       end
       @projects = projects.paginate :per_page => 20, :order => 'created_at DESC', :page => params[:page]
     elsif params[:organization_id]
-      template = 'admin/organizations/projects'
+      template      = 'admin/organizations/projects'
       @organization = Organization.find(params[:organization_id])
-      @projects = @organization.projects.paginate :per_page => 20, :order => 'created_at DESC', :page => params[:page]
+      projects      = @organization.projects
+      @projects     = projects.paginate :per_page => 20, :order => 'created_at DESC', :page => params[:page]
     else
+      projects  = Project.all
       @projects = Project.paginate :per_page => 20, :order => 'created_at DESC', :page => params[:page]
     end
 
@@ -53,9 +55,11 @@ class Admin::ProjectsController < ApplicationController
         render :template => template if template.present?
       end
       format.csv do
-        send_data @projects.to_csv,
-          :type => 'text/csv; charset=iso-8859-1; header=present',
-          :disposition => "attachment; filename=#{@organization.name}_projects.csv"
+        if projects.present?
+          send_data projects.serialize_to_csv,
+            :type => 'text/csv; charset=iso-8859-1; header=present',
+            :disposition => "attachment; filename=#{@organization.name}_projects.csv"
+        end
       end
     end
   end
