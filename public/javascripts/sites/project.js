@@ -80,8 +80,7 @@
       
       function startGalleria() {
         if ($('div.galleryStyle').length>0){   
-            console.log('entra');
-          Galleria.loadTheme('/javascripts/plugins/galleria.sites.js');
+          Galleria.loadTheme('/javascripts/plugins/galleria.classic.js');
           $('div.galleryStyle').galleria({thumbnails:false, preload:2,autoplay:5000,transition:'fade',show_counter:'false'});
           $('div.loader_gallery').delay(300).fadeOut();
         }
