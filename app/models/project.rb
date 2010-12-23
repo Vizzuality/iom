@@ -165,19 +165,19 @@ SQL
       sql << " WHERE "
       conditions = []
       if options[:sector]
-        conditions << "sectors like '%#{options[:sector]}%'"
+        conditions << "sectors like '%#{options[:sector].sanitize_sql!}%'"
       end
       if options[:cluster]
-        conditions << "clusters like '%#{options[:cluster]}%'"
+        conditions << "clusters like '%#{options[:cluster].sanitize_sql!}%'"
       end
       if options[:donor_id]
         conditions << "project_id IN (SELECT project_id from donations WHERE donor_id=#{options[:donor_id]})"
       end
       if options[:region]
-        conditions << "regions like '%#{options[:region]}%'"
+        conditions << "regions like '%#{options[:region].sanitize_sql!}%'"
       end
       if options[:country]
-        conditions << "countries like '%#{options[:country]}%'"
+        conditions << "countries like '%#{options[:country].sanitize_sql!}%'"
       end
       if options[:organization]
         conditions << "organization_id=#{options[:organization]}"

@@ -20,7 +20,7 @@ class SearchController < ApplicationController
     end
 
     if params[:q].present?
-      q = "%#{params[:q].sanitize_sql!.gsub(/\\/, '\&\&').gsub(/'/, "''")}%"
+      q = "%#{params[:q].sanitize_sql!}%"
       where << "p.name ilike '#{q}' OR p.description ilike '#{q}'"
       where_facet << "(p.name ilike '#{q}' OR p.description ilike '#{q}')"
     end
