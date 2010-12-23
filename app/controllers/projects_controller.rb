@@ -1,5 +1,4 @@
 class ProjectsController < ApplicationController
-  respond_to :html, :kml, :csv
 
   layout 'site_layout'
 
@@ -7,13 +6,13 @@ class ProjectsController < ApplicationController
     unless @project = @site.projects.select{ |p| p.id == params[:id].to_i}.first
       raise ActiveRecord::RecordNotFound
     end
-    
+
     #Map data
     sql="select r.id,x(ST_Centroid(r.the_geom)) as lon,y(ST_Centroid(r.the_geom)) as lat,r.name,r.code
-    from (projects as p inner join projects_regions as pr on pr.project_id=p.id and p.id=1) 
+    from (projects as p inner join projects_regions as pr on pr.project_id=p.id and p.id=1)
     inner join regions as r on pr.region_id=r.id and r.level=1"
-    
-    result=ActiveRecord::Base.connection.execute(sql)
+
+    result = ActiveRecord::Base.connection.execute(sql)
     @map_data=result.to_json
     @overview_map_bbox = [{
               :lat => @site.overview_map_bbox_miny,
@@ -32,11 +31,17 @@ class ProjectsController < ApplicationController
       data  << 1
     end
     @chld = areas.join("|")
-    @chd  = "t:"+data.join(",")    
-    
-    
-    
-    respond_with(@project)
+    @chd  = "t:"+data.join(",")
+
+    respond_to do |format|
+      format.html
+      format.kml
+      format.csv do
+        send_data @project.to_csv(@site.id),
+          :type => 'text/csv; charset=iso-8859-1; header=present',
+          :disposition => "attachment; filename=#{@project.name}.csv"
+      end
+    end
   end
 
 end
