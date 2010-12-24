@@ -15,6 +15,9 @@
           $('div#project div.float_left div.block:last').height(offset);
           $('div#project div.outer_float').height($('div#project div.float_left').height()-40);
           $('div#project div.left').height($('div#project div.float_left').height()-40);
+        } else {
+          $('div#project div.outer_float').height($('div#project div.float_left').height()-40);
+          $('div#project div.left').height($('div#project div.outer_float').height());
         }
         
         $('div#completed').css('bottom','-10px');
@@ -92,6 +95,11 @@
         $('div.loader_gallery p').remove();
         $('div.loader_gallery div.video_player').show();
         $('div.loader_gallery div.video_player').append('<iframe id="vimeo_frame" src="http://player.vimeo.com/video/'+vimeo_id+'" width="660" height="370" frameborder="0"></iframe>');
+        $('div.loader_gallery div.video_player').each(function(index,element){
+          if (index!=0) {
+            $(element).remove();
+          }
+        });
         $('div.loader_gallery').fadeIn();
       }
       

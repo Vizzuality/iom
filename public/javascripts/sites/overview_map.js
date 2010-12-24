@@ -24,11 +24,14 @@
         isPng: true
     };
     mapChartType = new google.maps.ImageMapType(mapChartOptions);      
-    
-    bounds =new google.maps.LatLngBounds(
-      new google.maps.LatLng(bbox[0].lat,bbox[0].lon),
-      new google.maps.LatLng(bbox[1].lat,bbox[1].lon)
-      ); 
+    if (map_type=="overview_map") {
+      bounds =new google.maps.LatLngBounds(
+        new google.maps.LatLng(bbox[0].lat,bbox[0].lon),
+        new google.maps.LatLng(bbox[1].lat,bbox[1].lon)
+        );
+    } else {
+      bounds = new google.maps.LatLngBounds();
+    }
 
     var myOptions = {
       scrollwheel: false,
@@ -76,6 +79,10 @@
         image_source = "/images/themes/"+ theme + '/project_marker.png';
       }
       var marker_ = new IOMMarker(map_data[i],diameter, image_source,map);
+      
+      if (map_type!="overview_map") {
+        bounds.extend(new google.maps.LatLng(map_data[i].lat, map_data[i].lon));
+      }
     }
     
 
