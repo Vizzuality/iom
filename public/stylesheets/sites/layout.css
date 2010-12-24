@@ -513,7 +513,7 @@ div.projects div.float_left div.block ul.related_projects li div.info h4 a:hover
 div.projects div.float_left div.block ul.related_projects li div.info p {padding:3px 0 0 0; font:normal 13px Arial; color:#999999;}
 div.projects div.float_left div.block ul.related_projects li div.info p.sub {padding:10px 0 0 0; color:#666666;}
 div.projects div.right {float:left; width:300px; height:auto; margin:0; padding:0;}
-div.projects div.right div.block {width:265px; margin:23px 0 0 0; border-bottom:1px solid #D4D4D4; padding:0 0 20px 35px;}
+div.projects div.right div.block {float:left; width:265px; margin:23px 0 0 0; border-bottom:1px solid #D4D4D4; padding:0 0 20px 35px;}
 div.projects div.right div.block.last {border:none; padding:0 0 0 30px;}
 div.projects div.right div.block h3 {width:100%; font:normal 13px "PT Sans Bold"; color:#999999; text-shadow:0 1px white; text-transform:uppercase;}
 div.projects div.right div.block h3.margin {padding:20px 0 0 0;}
