@@ -73,7 +73,7 @@ SQL
     'logistics'
     elsif (name.include? 'Nutrition')
     'nutrition'
-    elsif (name.include? 'Peace & Security')
+    elsif (name.include? 'Peace')
      'peace_security'
     elsif (name.include? 'Protection')
       'protection'

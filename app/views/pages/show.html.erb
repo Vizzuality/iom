@@ -3,12 +3,12 @@
       <div id="relative_content" class="left"></div>
       <div class="float_left">
         <div class="outer_head">
-          <div class="head">        
+          <div class="head">
             <h1><%= @page.title %> <%= @site.name %></h1>
           </div>
         </div>
         <div class="body">
-          <%= @page.body %>
+          <%= raw(@page.body) %>
         </div>
       </div>
       <div class="right">
@@ -23,6 +23,5 @@
           <% end %>
         </div>
     </div>
-    
+
     <script src="/javascripts/sites/pages.js" type="text/javascript" charset="utf-8"></script>
-    
