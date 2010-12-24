@@ -5,30 +5,18 @@
       <div class="left">
         <h1><%= @project.name %></h1>
         <p>
-          <% clusters_sectors = @project.clusters + @project.sectors %>
-          <% unless clusters_sectors.empty? %>
-            on <%= raw(clusters_sectors.map{ |e| link_to(e.name, e.is_a?(Cluster) ? cluster_path(e) : sector_path(e)) }.to_sentence) %>
-          <% end %>
-          <% unless @project.countries.empty? %>
-            in <%= @project.countries.first.name %>
-          <% end %>
-          by <%= link_to(@project.primary_organization.name, organization_path(@project.primary_organization)) %>
+          <%= metainformation(@project, @site) %>
         </p>
         <div class="float_head">
           <h1><%= @project.name %></h1>
           <p>
-            <% clusters_sectors = @project.clusters + @project.sectors %>
-            <% unless clusters_sectors.empty? %>
-              on <%= raw(clusters_sectors.map{ |e| link_to(e.name, e.is_a?(Cluster) ? cluster_path(e) : sector_path(e)) }.to_sentence) %>
-            <% end %>
-            <% unless @project.countries.empty? %>
-              in <%= @project.countries.first.name %>
-            <% end %>
-            by <%= link_to(@project.primary_organization.name, organization_path(@project.primary_organization)) %>
+            <%= metainformation(@project, @site) %>
           </p>
+          <% if @project.finished? %>
           <div id="completed">
             <p>COMPLETED PROJECT</p>
           </div>
+          <% end %>
         </div>
       </div>
     </div>
@@ -114,12 +102,8 @@
                  </div>
                  <div class="info">
                    <h4><%= link_to(truncate(project.name, :length => 40), project_path(project)) %></h4>
-                   <p>by <%= truncate(project.primary_organization.name, :length => 20) %></p>
-                   <% if project.countries.any? %>
-                     <p class="sub">in <%= project.countries.first.name %></p>
-                   <% elsif project.regions.any? %>
-                     <p class="sub">in <%= project.regions.first.name %></p>
-                   <% end %>
+                   <p>by <%= truncate(project.primary_organization_name, :length => 20) %></p>
+                   <p class="sub">in <%= project.country_name %></p>
                  </div>
                </li>
                <% end %>

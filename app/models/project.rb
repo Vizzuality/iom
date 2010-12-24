@@ -133,11 +133,13 @@ class Project < ActiveRecord::Base
     return [] unless the_geom?
     Project.find_by_sql(<<-SQL
       select * from
-      (select p.id, p.name, p.primary_organization_id,
-           ST_Distance((select ST_Centroid(the_geom) from projects where id=#{self.id}), ST_Centroid(the_geom)) as dist
-           from projects as p
+      (select p.id, p.name, p.primary_organization_id, o.name as primary_organization_name, c.name as country_name,
+           ST_Distance((select ST_Centroid(p.the_geom) from projects where id=#{self.id}), ST_Centroid(p.the_geom)) as dist
+           from organizations o, projects as p
            inner join projects_sites as ps on p.id=ps.project_id and ps.site_id=#{site.id}
-           where p.id!=#{self.id}
+           inner join countries_projects as cp on ps.project_id=cp.project_id
+           inner join countries as c on cp.country_id=c.id
+           where p.id!=#{self.id} and o.id=p.primary_organization_id
            order by dist
       ) as subq
       limit  #{limit}
