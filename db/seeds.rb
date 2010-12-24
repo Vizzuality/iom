@@ -1,7 +1,16 @@
 # Mandatory seeds
 
 User.create :email => 'admin@example.com', :password => 'admin', :password_confirmation => 'admin'
-Settings.create
+
+
+
+settings = Settings.find_or_create_by_id(1)
+data = HashWithIndifferentAccess.new
+data[:main_site_host] = 'ngoaidmap.org'
+settings.data = data
+settings.save!
+
+
 
 Theme.create :name => 'Garnet',
              :css_file => '/stylesheets/themes/garnet.css',
@@ -83,20 +92,24 @@ Tag.create :name => 'earthquake'
 
 # Sites
 #  sites for testing purposes. Add this line to your /etc/hosts:
-#  127.0.0.1       iom-haiti.ipq.co
-site = Site.create :name => 'Haiti Aid Map', :url => 'haiti.ngoaidmap.org', :status => true, :short_description=>'Taking care of availability and access to food worldwide', 
-                   :long_description=>'On January 12th 2010, a catastrophic earthquake occured at Haiti, leaving more than 250.000 deaths and more than 1.000.000 homeless people. It was one of the biggest disasters in the century. Since then and until now, a huge effort has been made by some of the interaction members',
-                   :theme => Theme.find_by_name('Garnet'), :aid_map_image => File.open(File.join(Rails.root, '/public/images/sites/haiti_img_example.jpg'))
+#  127.0.0.1       dev-haiti.ngoaidmap.org
+site = Site.new :name              => 'Haiti Aid Map',
+                :url               => "#{Rails.env.eql?('development') ? 'dev-' : ''}haiti.ngoaidmap.org",
+                :status            => true,
+                :short_description =>'Taking care of availability and access to food worldwide',
+                :long_description  =>'On January 12th 2010, a catastrophic earthquake occured at Haiti, leaving more than 250.000 deaths and more than 1.000.000 homeless people. It was one of the biggest disasters in the century. Since then and until now, a huge effort has been made by some of the interaction members',
+                :theme             => Theme.find_by_name('Garnet'),
+                :aid_map_image     => File.open(File.join(Rails.root, '/public/images/sites/haiti_img_example.jpg'))
 
 site.geographic_context_country_id = Country.find_by_name('Haiti').id
-site.overview_map_bbox_miny=17.78605726800591;
-site.overview_map_bbox_minx=-76.94549560546851;
-site.overview_map_bbox_maxy=20.262938421364236;
-site.overview_map_bbox_maxx=-69.66705322265601;
+site.overview_map_bbox_miny        = 17.78605726800591
+site.overview_map_bbox_minx        = -76.94549560546851
+site.overview_map_bbox_maxy        = 20.262938421364236
+site.overview_map_bbox_maxx        = -69.66705322265601
 
+site.save!
 
-site.pages.find_by_title("About").body=
-               <<-HTML
+site.pages.find_by_title('About').update_attribute(:body, <<-HTML
                     <p><a href="/">InterAction</a> is developing a web-based mapping platform and database that will ultimately map all of our members’
                     work worldwide. In 2010, InterAction will pilot the mapping platform with a focus on the NGO community’s response to the earthquake
                     in Haiti, as well as its efforts to improve food security in various countries around the world.</p>
@@ -118,8 +131,8 @@ site.pages.find_by_title("About").body=
                       <li>Analyze large amounts of data</li>
                     </ul>
                HTML
-
-site.pages.find_by_title("Analysis").body = <<-HTML
+)
+site.pages.find_by_title('Analysis').update_attribute(:body, <<-HTML
                    <p>On October 21, the Government of Haiti confirmed an outbreak of cholera, an acute and highly contagious diarrheal disease caused
                    by eating or drinking contaminated food or water. Unless immediately treated, cholera can be fatal. As of November 16 Haiti’s Ministry of
                    Health has confirmed 1,039 deaths and 16,799 hospitalized cases.</p>
@@ -136,16 +149,25 @@ site.pages.find_by_title("Analysis").body = <<-HTML
 
                    <p>Source: Ministere de la Sante Publique et de la Population (MSPP) - November 16, 2010</p>
               HTML
+)
+
+#  127.0.0.1       dev-food.ngoaidmap.org
+site = Site.new :name => 'Food Security',
+                :url => "#{Rails.env.eql?('development') ? 'dev-' : ''}food.ngoaidmap.org",
+                :status => true,
+                :short_description => 'Food security refers to the availability of food and one’s access to it',
+                :long_description => 'The Special Programme for Food Security (SPFS) helps governments replicate successful food security practices on a national scale. The SPFS also encourages investment in rural infrastructure, off-farm income generation, urban agriculture and safety nets',
+                :theme => Theme.find_by_name('Garnet'),
+                :aid_map_image => File.open(File.join(Rails.root, '/public/images/sites/food_img_example.jpg'))
+
+site.overview_map_bbox_miny = -65
+site.overview_map_bbox_minx = -170
+site.overview_map_bbox_maxy = 70
+site.overview_map_bbox_maxx = 170
 
 site.save!
 
-#  127.0.0.1       iom-food.ipq.co
-site = Site.create :name => 'Food Security', :url => 'food.ngoaidmap.org', :status => true, :short_description => 'Food security refers to the availability of food and one’s access to it',
-                   :long_description => 'The Special Programme for Food Security (SPFS) helps governments replicate successful food security practices on a national scale. The SPFS also encourages investment in rural infrastructure, off-farm income generation, urban agriculture and safety nets',
-                   :theme => Theme.find_by_name('Garnet'), :aid_map_image => File.open(File.join(Rails.root, '/public/images/sites/food_img_example.jpg'))
-
-site.pages.find_by_title("About").body=
-              <<-EOF
+site.pages.find_by_title('About').update_attribute(:body, <<-EOF
                    <p><a href="/">InterAction</a> is developing a web-based mapping platform and database that will ultimately map all of our members’
                    work worldwide. In 2010, InterAction will pilot the mapping platform with a focus on the NGO community’s response to the earthquake
                    in Haiti, as well as its efforts to improve food security in various countries around the world.</p>
@@ -167,8 +189,8 @@ site.pages.find_by_title("About").body=
                      <li>Analyze large amounts of data</li>
                    </ul>
               EOF
-
-site.pages.find_by_title("Analysis").body = <<-EOF
+)
+site.pages.find_by_title('Analysis').update_attribute(:body, <<-EOF
                   <p>On October 21, the Government of Haiti confirmed an outbreak of cholera, an acute and highly contagious diarrheal disease caused
                   by eating or drinking contaminated food or water. Unless immediately treated, cholera can be fatal. As of November 16 Haiti’s Ministry of
                   Health has confirmed 1,039 deaths and 16,799 hospitalized cases.</p>
@@ -185,12 +207,4 @@ site.pages.find_by_title("Analysis").body = <<-EOF
 
                   <p>Source: Ministere de la Sante Publique et de la Population (MSPP) - November 16, 2010</p>
              EOF
-                                                               
-site.overview_map_bbox_miny=-65;
-site.overview_map_bbox_minx=-170;
-site.overview_map_bbox_maxy=70;
-site.overview_map_bbox_maxx=170;
-
-
-site.save!
-
+)
