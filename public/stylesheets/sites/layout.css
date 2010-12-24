@@ -87,7 +87,7 @@ ul#gallery_thumbails li.last {margin:30px 0 0 0;}
 /* ***************** END HOME SITES*/
 
 /*CLUSTER AND SECTORS TOOLTIPS*/
-div.tooltip {position:absolute; bottom:17px; left:-71px; display:none;}
+div.tooltip {position:absolute; bottom:21px; left:-71px; display:none;}
 div.tooltip span.bottom_tooltip {float:left; background:url('/images/sites/common/tooltips/bottom_tooltip.png') no-repeat 0 0; width:175px; height:16px;}
 div.tooltip span.body_tooltip {float:left; background:url('/images/sites/common/tooltips/body_tooltip.png') repeat-y top; width:149px; height:auto; padding:9px 15px 0 11px;}
 div.tooltip label {float:left; font:normal 13px "PT Sans Bold"; color:white; text-align:center; width:152px;}
