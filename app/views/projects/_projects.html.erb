@@ -20,7 +20,15 @@
             <%= link_to('More projects', country_path(params.merge(:page => @projects.current_page + 1)), :id =>'view_more', :class => 'ajax') %>
           <% end %>
         <% else %>
-          <%= link_to('More projects', params.merge(:page => @projects.current_page + 1), :id =>'view_more', :class => 'ajax') %>
+          <% if @data %>
+            <% if @data.is_a?(Cluster) %>
+              <%= link_to('More projects', cluster_path(params.merge(:page => @projects.current_page + 1)), :id =>'view_more', :class => 'ajax') %>
+            <% else %>
+              <%= link_to('More projects', sector_path(params.merge(:page => @projects.current_page + 1)), :id =>'view_more', :class => 'ajax') %>
+            <% end %>
+          <% else %>
+            <%= link_to('More projects', params.merge(:page => @projects.current_page + 1), :id =>'view_more', :class => 'ajax') %>
+          <% end %>
         <% end %>
       <% end %>
     </div>
