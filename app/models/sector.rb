@@ -32,6 +32,7 @@ class Sector < ActiveRecord::Base
     projects_sectors.project_id = projects_regions.project_id AND
     projects_regions.region_id = regions.id AND
     regions.level = #{site.level_for_region}
+    where regions.level=#{site.level_for_region}
     group by #{Region.custom_fields.join(',')}
 SQL
     ).map do |r|

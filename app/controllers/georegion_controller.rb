@@ -8,6 +8,7 @@ class GeoregionController < ApplicationController
 
       @projects = Project.custom_find(@site, :country => @area.name, :per_page => 10, :page => params[:page], :order => 'created_at DESC')
 
+      # TODO
       @area_parent = "America"
 
       sql="select c.id,count(ps.project_id) as count,c.name,c.center_lon as lon,c.center_lat as lat,
@@ -16,7 +17,8 @@ class GeoregionController < ApplicationController
         inner join countries as c on cp.country_id=c.id and c.id=#{params[:id].gsub(/\\/, '\&\&').gsub(/'/, "''")}
         group by c.id,c.name,lon,lat,geojson"
     else
-      @area = Region.find(params[:id], :select => Region.custom_fields)
+      @area = Region.where(:id => params[:id], :level => @site.level_for_region).select(Region.custom_fields).first
+      raise ActiveRecord::RecordNotFound unless @area
 
       @projects = Project.custom_find(@site, :region => @area.name, :per_page => 10, :page => params[:page], :order => 'created_at DESC')
 

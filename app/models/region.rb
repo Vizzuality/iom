@@ -34,8 +34,7 @@ class Region < ActiveRecord::Base
         inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=#{site.id}
         inner join clusters as c on cp.cluster_id=c.id
         inner join projects_regions as pr on ps.project_id=pr.project_id and region_id=#{self.id}
-        group by c.id,c.name"
-
+        group by c.id,c.name order by count DESC"
     Cluster.find_by_sql(sql).map do |c|
         [c,c.count.to_i]
     end
@@ -48,8 +47,7 @@ class Region < ActiveRecord::Base
     inner join projects as p on ps.project_id=p.id and ps.site_id=#{site.id}
     inner join organizations as o on p.primary_organization_id=o.id
     inner join projects_regions as pr on ps.project_id=pr.project_id and region_id=#{self.id}
-    group by o.id,o.name"
-
+    group by o.id,o.name order by count DESC"
     Organization.find_by_sql(sql).map do |o|
         [o,o.count.to_i]
     end
@@ -72,8 +70,7 @@ class Region < ActiveRecord::Base
     inner join donations as d on ps.project_id=d.project_id and ps.site_id=#{site.id}
     inner join donors as don on don.id=d.donor_id
     inner join projects_regions as pr on ps.project_id=pr.project_id and region_id=#{self.id}
-    limit #{limit}
-    "
+    limit #{limit}"
     Donor.find_by_sql(sql)
   end
 
@@ -116,6 +113,7 @@ class Region < ActiveRecord::Base
            order by dist
       ) as subq
       where count>0
+      order by count DESC
       limit  #{limit}
 SQL
     )

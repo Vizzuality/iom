@@ -31,6 +31,7 @@ class Cluster < ActiveRecord::Base
   inner join projects_regions as pr on r.id=pr.region_id and r.level=#{site.level_for_region}
   inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{site.id}
   inner join clusters_projects as cp on cp.project_id=ps.project_id and cp.cluster_id=#{self.id}
+  where r.level = #{site.level_for_region}
   group by r.id,r.name
 SQL
     ).map do |r|

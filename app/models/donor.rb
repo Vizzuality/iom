@@ -74,6 +74,7 @@ class Donor < ActiveRecord::Base
   select r.id,r.name,count(ps.*) as count from regions as r
     inner join projects_regions as pr on r.id=pr.region_id
     inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{site.id}
+    where r.level=#{site.level_for_region}
     group by r.id,r.name
 SQL
     ).map do |r|

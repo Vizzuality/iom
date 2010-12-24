@@ -114,8 +114,8 @@ select r.id,r.name,count(ps.*) as count from regions as r
   inner join projects as p on p.id=pr.project_id
   inner join projects_sites as ps on p.id=ps.project_id and ps.site_id=#{site.id}
   where p.primary_organization_id=#{self.id}
+        and r.level=#{site.level_for_region}
   group by r.id,r.name
-
 SQL
     ).map do |r|
       [r, r.count.to_i]

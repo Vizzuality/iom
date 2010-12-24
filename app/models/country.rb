@@ -39,13 +39,13 @@ class Country < ActiveRecord::Base
   # Array of arrays
   # [[region, count], [region, count]]
   def regions_projects(site)
-    sql="select c.id,c.name,count(ps.*) as count from clusters as c
-    inner join clusters_projects as cp on c.id=cp.cluster_id
-    inner join projects_regions as pr on cp.project_id=pr.project_id
+    sql="select r.id,r.name,count(ps.*) as count from regions as r
+    inner join projects_regions as pr on r.id=pr.region_id
     inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{site.id}
-    group by c.id,c.name"
-    Cluster.find_by_sql(sql).map do |c|
-      [c,c.count.to_i]
+    where r.level=#{site.level_for_region} and r.country_id=#{self.id}
+    group by r.id,r.name"
+    Region.find_by_sql(sql).map do |r|
+      [r,r.count.to_i]
     end
   end
 
@@ -100,6 +100,7 @@ class Country < ActiveRecord::Base
            order by dist
       ) as subq
       where count>0
+      order by count desc
       limit  #{limit}
 SQL
     )
