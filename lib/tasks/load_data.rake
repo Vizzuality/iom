@@ -26,6 +26,9 @@ namespace :iom do
       sql="INSERT INTO countries(\"name\",code,the_geom,iso2_code,iso3_code)
       SELECT name,iso3,the_geom,iso2,iso3 from tmp_countries"
       DB.execute sql
+      
+      DB.execute "UPDATE countries SET center_lat=y(ST_Centroid(the_geom)),center_lon=x(ST_Centroid(the_geom))"
+      DB.execute "UPDATE countries SET the_geom_geojson=ST_AsGeoJSON(the_geom,6)"
 
       DB.execute 'DROP TABLE tmp_countries'
       system("rm -rf #{Rails.root}/db/data/countries/TM_WORLD_BORDERS-0.3.shp #{Rails.root}/db/data/countries/TM_WORLD_BORDERS-0.3.shx #{Rails.root}/db/data/countries/TM_WORLD_BORDERS-0.3.dbf #{Rails.root}/db/data/countries/TM_WORLD_BORDERS-0.3.prj #{Rails.root}/db/data/countries/Readme.txt")
@@ -72,6 +75,9 @@ namespace :iom do
       DB.execute 'DROP TABLE tmp_haiti_adm1'
       DB.execute 'DROP TABLE tmp_haiti_adm2'
       DB.execute 'DROP TABLE tmp_haiti_adm3'
+
+      DB.execute "UPDATE regions SET center_lat=y(ST_Centroid(the_geom)),center_lon=x(ST_Centroid(the_geom))"
+      DB.execute "UPDATE regions SET the_geom_geojson=ST_AsGeoJSON(the_geom,6)"
 
 
       #Temporary matching for Google Map Charts
