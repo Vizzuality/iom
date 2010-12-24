@@ -61,7 +61,7 @@ class SearchController < ApplicationController
         @clusters = Cluster.find_by_sql(sql).map do |c|
           [c, c.count]
         end
-puts '@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'
+
         sql="select r.id,r.name,count(r.id) as count from clusters_projects as cp
                 inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=1
                 inner join projects_regions as pr on ps.project_id=pr.project_id
@@ -73,8 +73,7 @@ puts '@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'
         @regions = Region.find_by_sql(sql).map do |r|
           [r, r.count]
         end
-puts sql
-puts '@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@'
+
       end
       format.js do
         render :update do |page|
