@@ -79,7 +79,6 @@ Galleria.addTheme({
               me.play();
             });
 	        });
-	        
           if (this._data[0].title=="video") {
             $('a.video').attr('vimeo-id',this._data[0].description);
             $('a.video').show();

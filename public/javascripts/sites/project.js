@@ -48,6 +48,7 @@
           $('div.galleryStyle img[title="video"]').each(function(index,element){
             var vimeo_parts = $(element).attr('src').split('/');
             var vimeo_id = vimeo_parts[vimeo_parts.length-1];
+                        
             $.ajax({
               url: 'http://vimeo.com/api/v2/video/'+vimeo_id+'.json?format=jsonp',
               jsonpCallback: "onGetVimeoData",
@@ -55,6 +56,7 @@
               type: "GET",
               cache: true,
               success: function(result) {
+                $('img[src="'+result[0].url+'"]').attr('alt',result[0].id);
                 $('img[src="'+result[0].url+'"]').attr('src',result[0].thumbnail_large);
                 vimeo_count++;
                 if (vimeo_count==vimeo_total) {
