@@ -14,7 +14,6 @@
         </div>
       </div>
 
-
       <div class="right">
         <div class="block <%unless @donor.logo.url.empty? && @donor.description.empty? && @donor.twitter.empty? && @donor.facebook.empty? %>border<%end%>">
           <% if @donor.logo_file_name? %>
@@ -108,11 +107,11 @@
         </div>
       </div>
       <%end%>
-      
+
     </div>
 
     <div class="view_more" id="projects_view_more">
-      <%= link_to('More projects', params.merge(:page => @projects.current_page + 1), :id =>'view_more', :class => 'ajax') %>
+      <%= render :partial => "donors/pagination" %>
     </div>
 
     <script src="/javascripts/sites/pages.js" type="text/javascript" charset="utf-8"></script>
