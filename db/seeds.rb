@@ -11,7 +11,6 @@ settings.data = data
 settings.save!
 
 
-
 Theme.create :name => 'Garnet',
              :css_file => '/stylesheets/themes/garnet.css',
              :thumbnail_path => '/images/themes/1/thumbnail.png',
@@ -120,7 +119,7 @@ site.pages.find_by_title('About').update_attribute(:body, <<-HTML
                       <li>Help NGOs and other actors make more informed decisions about where to direct resources</li>
                       <li>Highlight the global reach of NGOs to donors, the media and public</li>
                     </ul>
-                    <h2>BENEFITS OF PARTICIPATING</h2>
+                    <h3>BENEFITS OF PARTICIPATING</h3>
                     <p>InterAction members who participate in the mapping initiative will have access to a powerful, user-friendly mapping software, GeoIQ, at no cost. With this tool, members will be able to:</p>
                     <ul>
                       <li>Create maps and easily share them with others</li>
@@ -178,7 +177,7 @@ site.pages.find_by_title('About').update_attribute(:body, <<-EOF
                      <li>Help NGOs and other actors make more informed decisions about where to direct resources</li>
                      <li>Highlight the global reach of NGOs to donors, the media and public</li>
                    </ul>
-                   <h2>BENEFITS OF PARTICIPATING</h2>
+                   <h3>BENEFITS OF PARTICIPATING</h3>
                    <p>InterAction members who participate in the mapping initiative will have access to a powerful, user-friendly mapping software, GeoIQ, at no cost. With this tool, members will be able to:</p>
                    <ul>
                      <li>Create maps and easily share them with others</li>

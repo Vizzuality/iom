@@ -77,9 +77,9 @@ SQL
      'peace_security'
     elsif (name.include? 'Protection')
       'protection'
-    elsif (name.include? 'Shelter & Housing')
+    elsif (name.include? 'Shelter')
        'shelter'
-    elsif (name.include? 'Water, Sanitation')
+    elsif (name.include? 'Water')
        'water_sanitation'
     else
        'other'
