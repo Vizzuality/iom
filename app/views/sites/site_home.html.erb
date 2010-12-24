@@ -45,7 +45,7 @@
                 <% @site.projects_clusters.each do |cluster, count| %>
                   <%unless cluster.name.eql?('N/A')%>
                     <li>
-                      <div id="tooltip">
+                      <div class="tooltip">
                         <span class="body_tooltip">
                           <label><%= cluster.name %></label>
                         </span>

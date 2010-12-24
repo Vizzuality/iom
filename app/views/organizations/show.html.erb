@@ -66,7 +66,7 @@
             <ul class="statistics_list">
               <% @organization.projects_clusters(@site)[0...3].each do |cluster,count| %>
                 <li>
-                  <div id="tooltip">
+                  <div class="tooltip">
                     <span class="body_tooltip">
                       <label><%= cluster.name %></label>
                     </span>
