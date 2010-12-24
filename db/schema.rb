@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101223110143) do
+ActiveRecord::Schema.define(:version => 20101224091820) do
 
   create_table "clusters", :force => true do |t|
     t.string "name"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20101223110143) do
     t.string        "iso3_code"
     t.float         "center_lat"
     t.float         "center_lon"
+    t.text          "the_geom_geojson"
   end
 
   add_index "countries", ["the_geom"], :name => "index_countries_on_the_geom", :spatial => true
@@ -261,6 +262,7 @@ ActiveRecord::Schema.define(:version => 20101223110143) do
     t.string   "code"
     t.float    "center_lat"
     t.float    "center_lon"
+    t.text     "the_geom_geojson"
   end
 
   add_index "regions", ["country_id"], :name => "index_regions_on_country_id"
