@@ -2,7 +2,7 @@ module ProjectsHelper
 
   def subtitle(project, site)
     # TODO: take into account the sectors
-    clusters_sectos = if site.navigate_by_sector?
+    clusters_sectors = if site.navigate_by_sector?
       sectors_to_sentence(project)
     else
       clusters_to_sentence(project)
