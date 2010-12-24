@@ -76,7 +76,7 @@ div#gallery div.content_gallery {float:left; margin:10px 0 0 10px; width:927px; 
 div#gallery img {float:left; width:927px; height:524px; margin:0;}
 
 ul#gallery_thumbails {float:left; width:100%; margin:0;}
-ul#gallery_thumbails li {float:left; width:220px; margin:30px 20px 0 0;}
+ul#gallery_thumbails li {float:left; width:220px; margin:30px 17px 0 0;}
 ul#gallery_thumbails li div#image {float:left; width:218px; height:131px; background:url('/images/sites/home/bkg_thumbnail.png') no-repeat 0 0;}
 ul#gallery_thumbails li div#image img {float:left; width:203px; height:114px; margin:7px;}
 ul#gallery_thumbails li a.site_name {float:left; width:100%; margin:5px 0 0 9px; font:normal 15px "PT Sans Bold"; color:#666666; text-shadow:0 -1px white; text-transform:uppercase;}
