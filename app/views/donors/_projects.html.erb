@@ -1,0 +1,29 @@
+<% unless @projects.empty? %>
+  <ul>
+  <% @projects.each_with_index do |project,index| %>
+    <li class="<%= (index%2==0) ? 'even' : 'odd' %>">
+      <div class="project_name">
+        <h3><%= link_to(truncate(project['project_name'], :length=>65), project_path(project['project_id'])) %></h3>
+        <p>
+          <%= subtitle(project, @site) %>
+      </div>
+      <div class="project_places">
+        <p>
+        <% unless project['regions'].blank? %>
+          <%= project['regions'].split('|').to_sentence(:last_word_connector => ' and ') %>
+        <% end %></p>
+      </div>
+    </li>
+  <% end %>
+  </ul>
+<% else %>
+  <ul>
+    <li class="even">
+      <p class="no_results">No projects were found for this donor</p>
+    </li>
+  </ul>
+<% end %>
+
+<div class="view_more" id="projects_view_more">
+  <%= link_to('More projects', params.merge(:page => @projects.current_page + 1), :id =>'view_more', :class => 'ajax') %>
+</div>
