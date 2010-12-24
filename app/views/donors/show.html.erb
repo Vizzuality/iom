@@ -17,7 +17,7 @@
                 <div class="project_name">
                   <h3><%= link_to(project['project_name'], project_path(project['project_id'])) %></h3>
                   <p>
-                    <%= subtitle(project) %>
+                    <%= subtitle(project, @site) %>
                 </div>
                 <div class="project_places">
                   <p>

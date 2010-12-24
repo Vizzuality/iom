@@ -1,11 +1,15 @@
 module ProjectsHelper
 
-  def subtitle(project)
+  def subtitle(project, site)
     # TODO: take into account the sectors
-    clusters     = clusters_to_sentence(project)
+    clusters_sectos = if site.navigate_by_sector?
+      sectors_to_sentence(project)
+    else
+      clusters_to_sentence(project)
+    end
     countries    = "in #{link_to project['countries'], country_path(project['countries_ids']), :title => project['countries']}"
     organization = "implemented by #{link_to project['organization_name'], organization_path(project['organization_id'])}"
-    raw("#{clusters} #{countries} #{organization}")
+    raw("#{clusters_sectors} #{countries} #{organization}")
   end
 
   def clusters_to_sentence(project)
@@ -16,6 +20,17 @@ module ProjectsHelper
       "A #{link_to clusters.first, cluster_path(clusters_ids.first), :title => clusters.first} project"
     else
       "A project from #{pluralize(clusters.size, 'different clusters')}"
+    end
+  end
+
+  def sectors_to_sentence(project)
+    return "" if project['sectors'].nil? || project['sector_ids'].nil?
+    sectors = project['sectors']
+    sectors_ids = project['sector_ids']
+    if sectors.size == 1
+      "A #{link_to sectors.first, sector_path(sectors_ids.first), :title => sectors.first} project"
+    else
+      "A project from #{pluralize(sectors.size, 'different sectors')}"
     end
   end
 
