@@ -58,7 +58,7 @@
   <label>PROJECT TYPOLOGY</label>
 
   <ul class="project_tipo_options">
-    <li id="include_sector_cluster">
+    <li id="include_sector_cluster" class="<%= 'selected' if @site.project_context_cluster_id? %>">
       <a class="check">Include only projects from a particular cluster or sector</a>
       <div class="content">
         <span class="select_combo_typology"><p class="cluster_sector">Select a cluster or a sector</p>
@@ -67,13 +67,12 @@
             <div class="wrapper">
               <ul class="clusters_or_sectors scroll_pane">
                 <li class="section"><p>CLUSTERS</p></li>
-                    <% Cluster.get_select_values.each do |cluster| %>
+                <% Cluster.get_select_values.each do |cluster| %>
                   <li><a class="cluster_value" id="<%= cluster.id %>"><%= truncate(cluster.name, :length => 30)  %></a></li>
                 <%end -%>
-
                 <%= f.hidden_field :project_context_sector_id  %>
                 <li class="section"><p>SECTORS</p></li>
-                    <% Sector.get_select_values.each do |sector| %>
+                <% Sector.get_select_values.each do |sector| %>
                   <li><a class="sector_value" id="<%= sector.id %>"><%= truncate(sector.name, :length => 30)  %></a></li>
                 <%end -%>
               </ul>
@@ -82,7 +81,7 @@
         </span>
       </div>
     </li>
-    <li id="include_ngo">
+    <li id="include_ngo" class="<%= 'selected' if @site.project_context_organization_id? %>">
       <a class="check">Include only projects from a particular NGO</a>
       <div class="content">
         <span class="select_combo_typology"><p class="ngo">Select an NGO</p>
@@ -99,7 +98,7 @@
         </span>
       </div>
     </li>
-    <li id="include_tags">
+    <li id="include_tags" class="<%= 'selected' if @site.project_context_tags? %>">
       <a class="check">Include only matching some tags</a>
       <div class="content">
         <span class="tags_site">
