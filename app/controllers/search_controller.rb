@@ -39,11 +39,6 @@ class SearchController < ApplicationController
       INNER JOIN countries as c           ON c.id=cp.country_id
       #{where}
       GROUP BY p.id,p.name,o.id,o.name,c.name,p.created_at
-    SQL
-
-    @total_projects = ActiveRecord::Base.connection.execute(sql)
-
-    sql << <<-SQL
       ORDER BY p.created_at DESC
       LIMIT #{limit} OFFSET #{limit * (@current_page - 1)}
     SQL
@@ -52,6 +47,22 @@ class SearchController < ApplicationController
 
     respond_to do |format|
       format.html do
+        sql_count = <<-SQL
+          SELECT p.id as project_id,p.name,o.id as organization_id, o.name as organization_name,
+          array_to_string(array_agg(distinct r.name),'|') as regions, c.name as country_name
+          FROM projects as p
+          INNER JOIN organizations as o       ON p.primary_organization_id=o.id
+          INNER JOIN projects_sites as ps     ON p.id=ps.project_id and ps.site_id=#{@site.id}
+          INNER JOIN projects_regions as pr   ON pr.project_id=p.id
+          INNER JOIN regions as r             ON pr.region_id=r.id and r.level=1
+          INNER JOIN countries_projects as cp ON cp.project_id=p.id
+          INNER JOIN countries as c           ON c.id=cp.country_id
+          #{where}
+          GROUP BY p.id,p.name,o.id,o.name,c.name,p.created_at
+        SQL
+
+        @total_projects = ActiveRecord::Base.connection.execute(sql_count)
+
         where_facet = where_facet.present? ? "WHERE #{where_facet.join(' AND ')}" : ''
         #cluster Facet
         sql="select c.id,c.name,count(c.id) as count from clusters_projects as cp
