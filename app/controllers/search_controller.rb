@@ -39,12 +39,16 @@ class SearchController < ApplicationController
       INNER JOIN countries as c           ON c.id=cp.country_id
       #{where}
       GROUP BY p.id,p.name,o.id,o.name,c.name,p.created_at
+    SQL
+
+    @total_projects = ActiveRecord::Base.connection.execute(sql)
+
+    sql << <<-SQL
       ORDER BY p.created_at DESC
       LIMIT #{limit} OFFSET #{limit * (@current_page - 1)}
     SQL
 
     @projects = ActiveRecord::Base.connection.execute(sql)
-
 
     respond_to do |format|
       format.html do

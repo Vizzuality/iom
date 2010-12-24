@@ -15,7 +15,7 @@
         <div class="results_list">
 
           <h3><p>
-            <%= pluralize(@projects.count, 'project') %> for '<%= params[:q] %>'
+            <%= pluralize(@total_projects.count, 'project') %> for '<%= params[:q] %>'
             <%= active_facets %>
           </p></h3>
           <% if @projects.present? %>
