@@ -23,7 +23,3 @@
     </li>
   </ul>
 <% end %>
-
-<div class="view_more" id="projects_view_more">
-  <%= link_to('More projects', params.merge(:page => @projects.current_page + 1), :id =>'view_more', :class => 'ajax') %>
-</div>
