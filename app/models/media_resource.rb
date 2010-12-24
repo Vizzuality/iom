@@ -4,17 +4,17 @@
 #
 #  id                   :integer         not null, primary key
 #  position             :integer         default(0)
-#  element_id           :integer         
-#  element_type         :integer         
-#  picture_file_name    :string(255)     
-#  picture_content_type :string(255)     
-#  picture_filesize     :integer         
-#  picture_updated_at   :datetime        
-#  vimeo_url            :string(255)     
-#  vimeo_embed_html     :text            
-#  created_at           :datetime        
-#  updated_at           :datetime        
-#  caption              :string(255)     
+#  element_id           :integer
+#  element_type         :integer
+#  picture_file_name    :string(255)
+#  picture_content_type :string(255)
+#  picture_filesize     :integer
+#  picture_updated_at   :datetime
+#  vimeo_url            :string(255)
+#  vimeo_embed_html     :text
+#  created_at           :datetime
+#  updated_at           :datetime
+#  caption              :string(255)
 #
 
 class MediaResource < ActiveRecord::Base
@@ -28,7 +28,7 @@ class MediaResource < ActiveRecord::Base
                                         :format => 'jpg'
                                       },
                                       :medium => {
-                                        :geometry => "660x480#",
+                                        :geometry => "660x400#",
                                         :quality => 90,
                                         :format => 'jpg'
                                       }
