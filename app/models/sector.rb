@@ -14,7 +14,7 @@ class Sector < ActiveRecord::Base
     sql="select distinct d.* from donors as d
     inner join donations as don on d.id=donor_id
     inner join projects_sectors as ps on don.project_id=ps.project_id and ps.sector_id=#{self.id}
-    inner join projects_sites as ps on ps.project_id=don.project_id and ps.site_id=#{site.id}"
+    inner join projects_sites as psi on psi.project_id=ps.project_id and psi.site_id=#{site.id}"
     Donor.find_by_sql(sql)
   end
 
@@ -26,14 +26,12 @@ class Sector < ActiveRecord::Base
   def projects_regions(site)
     Region.find_by_sql(
 <<-SQL
-  select #{Region.custom_fields.join(',')}, count(regions.id) as count
-    from regions, projects_regions, projects_sectors where projects_sectors.sector_id = #{self.id} AND
-    projects_sectors.project_id IN (#{site.projects_ids.join(',')}) AND
-    projects_sectors.project_id = projects_regions.project_id AND
-    projects_regions.region_id = regions.id AND
-    regions.level = #{site.level_for_region}
-    where regions.level=#{site.level_for_region}
-    group by #{Region.custom_fields.join(',')}  order by count DESC
+select r.id,r.name,count(ps.*) as count from regions as r
+  inner join projects_regions as pr on r.id=pr.region_id and r.level=#{site.level_for_region}
+  inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{site.id}
+  inner join projects_sectors as pse on pse.project_id=ps.project_id and pse.sector_id=#{self.id}
+  where r.level = #{site.level_for_region}
+  group by r.id,r.name  order by count DESC
 SQL
     ).map do |r|
       [r, r.count.to_i]
