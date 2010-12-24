@@ -4,7 +4,7 @@
     <div class="med">
       <div class="left">
         <h2 class="museo_sans"><%= @project.name %></h2>
-        <p class="by">by <%= link_to(@project.primary_organization.name, organization_path(@project.primary_organization)) %> /
+        <p class="by">by <%= link_to(@project.primary_organization.name, edit_admin_organization_path(@project.primary_organization)) %> /
           <%= @project.countries.first.name %>
         </p>
         <%= render :partial => 'form' %>
