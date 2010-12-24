@@ -9,7 +9,9 @@
     <div class="right">
       <%= content_tag :p, @area.wiki_description if @area.wiki_description %>
       <%= content_tag :p, raw("Description provided by Wikipedia #{content_tag(:a, 'Read full article', :href => @area.wiki_url)}"), :class => 'provided' if @area.wiki_url %>
+      <% if @area.wiki_description %>
       <span class="wikipedia"/>
+      <%end%>
     </div>
   </div>
 </div>
