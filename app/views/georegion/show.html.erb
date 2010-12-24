@@ -42,7 +42,7 @@
 
         <div id="secondary_map"><img src="http://chart.apis.google.com/chart?cht=map:fixed=0,-100,40,0&amp;chs=300x189&amp;chld=HT&amp;chco=676767|FF0000|0000BB&amp;chf=bg,s,c6eff7" alt="Secondary map"/></div>
         <div class="block statistics">
-          <h3>PROJECTS BY CLUSTER</h3>
+          <h3>PROJECTS BY <%= @site.word_for_cluster_sector.upcase %></h3>
           <% if @area.projects_clusters(@site).size > 0 %>
             <ul class="statistics_list">
               <% @first_three.each do |cluster,count| %>
@@ -59,7 +59,7 @@
               <% end %>
             </ul>
           <% else %>
-            <p>The are no clusters</p>
+            <p>The are no <%= @site.word_for_cluster_sector %>s</p>
           <% end %>
         </div>
 

@@ -40,7 +40,7 @@
           </div>
 
           <div class="block statistics">
-            <h3>PROJECTS BY CLUSTER</h3>
+            <h3>PROJECTS BY <%= @site.word_for_cluster_sector.upcase %></h3>
             <ul class="statistics_list">
                 <% @site.projects_clusters.each do |cluster, count| %>
                   <%unless cluster.name.eql?('N/A')%>
