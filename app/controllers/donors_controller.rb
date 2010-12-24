@@ -12,7 +12,7 @@ class DonorsController < ApplicationController
       format.html
       format.js do
         render :update do |page|
-          page << "$('#projects_view_more').remove();"
+          page << "$('#projects_view_more').html('#{escape_javascript(render(:partial => 'donors/pagination'))}');"
           page << "$('#projects').append('#{escape_javascript(render(:partial => 'donors/projects'))}');"
           page << "IOM.ajax_pagination();"
           page << "resizeColumn();"
