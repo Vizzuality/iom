@@ -30,7 +30,7 @@ class Country < ActiveRecord::Base
     inner join clusters_projects as cp on c.id=cp.cluster_id
     inner join countries_projects as cop on cp.project_id=cop.project_id
     inner join projects_sites as ps on cop.project_id=ps.project_id and ps.site_id=#{site.id}
-    group by c.id,c.name"
+    group by c.id,c.name order by count DESC"
     Cluster.find_by_sql(sql).map do |c|
       [c,c.count.to_i]
     end
@@ -43,7 +43,7 @@ class Country < ActiveRecord::Base
     inner join projects_regions as pr on r.id=pr.region_id
     inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{site.id}
     where r.level=#{site.level_for_region} and r.country_id=#{self.id}
-    group by r.id,r.name"
+    group by r.id,r.name order by count DESC"
     Region.find_by_sql(sql).map do |r|
       [r,r.count.to_i]
     end
@@ -109,7 +109,7 @@ SQL
   def projects_count(site)
     sql = "select count(distinct(cp.project_id)) as count from countries_projects as cp
     inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=#{site.id}
-    where cp.country_id=#{self.id}"
+    where cp.country_id=#{self.id} order by count DESC"
     ActiveRecord::Base.connection.execute(sql).first['count'].to_i
   end
 

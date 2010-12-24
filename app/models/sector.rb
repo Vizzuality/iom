@@ -33,7 +33,7 @@ class Sector < ActiveRecord::Base
     projects_regions.region_id = regions.id AND
     regions.level = #{site.level_for_region}
     where regions.level=#{site.level_for_region}
-    group by #{Region.custom_fields.join(',')}
+    group by #{Region.custom_fields.join(',')}  order by count DESC
 SQL
     ).map do |r|
       [r, r.count.to_i]
