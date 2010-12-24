@@ -40,7 +40,9 @@
           <h2>FACTSHEET</h2>
         </div>
 
-        <div id="secondary_map"><img src="http://chart.apis.google.com/chart?cht=map:fixed=0,-100,40,0&amp;chs=300x189&amp;chld=HT&amp;chco=676767|FF0000|0000BB&amp;chf=bg,s,c6eff7" alt="Secondary map"/></div>
+        <div id="secondary_map">
+          <img src="http://chart.apis.google.com/chart?cht=map:auto=85,70,50,5&chs=300x189&chd=t:0&chco=676767,CF6150,0000BB&chld=HT|DR|CU|PR|VE&chf=bg,s,EAF7FE"/>
+          </div>
         <div class="block statistics">
           <h3>PROJECTS BY <%= @site.word_for_cluster_sector.upcase %></h3>
           <% if @area.projects_clusters(@site).size > 0 %>
