@@ -13,10 +13,14 @@
           </div>
         </div>
         <div class="results_list">
-
           <h3><p>
-            <%= pluralize(@total_projects.count, 'project') %> for '<%= params[:q] %>'
-            <%= active_facets %>
+            <% if params[:q]!='' %>
+              <%= pluralize(@total_projects.count, 'project') %> for '<%= params[:q] %>'
+              <%= active_facets %>
+            <% else %>
+              <%= pluralize(@total_projects.count, 'project') %> in total
+              <%= active_facets %>
+            <% end %>
           </p></h3>
           <% if @projects.present? %>
             <ul id="search_results">

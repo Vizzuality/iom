@@ -82,10 +82,9 @@ Galleria.addTheme({
           if (this._data[0].title=="video") {
             $('a.video').attr('vimeo-id',this._data[0].description);
             $('a.video').show();
-          } else {
-            this.$('galleria-info').show().css('opacity',.8);
-  	        info.show().fadeTo(200, .8);
           }
+          this.$('galleria-info').show().css('opacity',.8);
+	        info.show().fadeTo(200, .8);
 
         });
     }
