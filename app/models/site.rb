@@ -65,23 +65,26 @@ class Site < ActiveRecord::Base
   has_attached_file :logo, :styles => {
                                       :small => {
                                         :geometry => "80x46#",
-                                        :quality => 90,
                                         :format => 'jpg'
                                       }
                                     },
+                            :convert_options => {
+                              :all => "-quality 90"
+                            },
                             :url => "/system/:attachment/:id/:style.:extension"
 
   has_attached_file :aid_map_image, :styles => {
                                       :small => {
                                         :geometry => "203x115#",
-                                        :quality => 80,
                                         :format => 'jpg'
                                       },
                                       :huge => {
                                         :geometry => "927x524#",
-                                        :quality => 80,
                                         :format => 'jpg'
                                       }
+                                    },
+                                    :convert_options => {
+                                      :all => "-quality 90"
                                     },
                                     :url => "/system/:attachment/:id/:style.:extension",
                                     :default_url => "/images/no_aid_map_image_huge.jpg"

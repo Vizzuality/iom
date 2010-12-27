@@ -24,15 +24,16 @@ class MediaResource < ActiveRecord::Base
   has_attached_file :picture, :styles => {
                                       :small => {
                                         :geometry => "80x46#",
-                                        :quality => 90,
                                         :format => 'jpg'
                                       },
                                       :medium => {
                                         :geometry => "660x400#",
-                                        :quality => 90,
                                         :format => 'jpg'
                                       }
                                     },
+                            :convert_options => {
+                              :all => "-quality 90"
+                            },
                             :url => "/system/:attachment/:id/:style.:extension"
 
   before_create :set_position

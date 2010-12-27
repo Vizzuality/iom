@@ -60,10 +60,12 @@ class Organization < ActiveRecord::Base
   has_attached_file :logo, :styles => {
                                       :small => {
                                         :geometry => "80x46#",
-                                        :quality => 90,
                                         :format => 'jpg'
                                       }
                                     },
+                            :convert_options => {
+                              :all => "-quality 90"
+                            },
                             :url => "/system/:attachment/:id/:style.:extension"
 
   has_many :sites, :foreign_key => :project_context_organization_id

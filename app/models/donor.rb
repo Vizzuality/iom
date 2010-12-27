@@ -32,10 +32,12 @@ class Donor < ActiveRecord::Base
   has_attached_file :logo, :styles => {
                                       :small => {
                                         :geometry => "80x46#",
-                                        :quality => 90,
                                         :format => 'jpg'
                                       }
                                     },
+                            :convert_options => {
+                              :all => "-quality 90"
+                            },
                             :url => "/system/:attachment/:id/:style.:extension"
 
   before_validation :clean_html
