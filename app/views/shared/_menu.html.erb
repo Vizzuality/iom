@@ -15,7 +15,7 @@
               <ul class="suboptions <%= (@site.clusters_or_sectors.size > 16)? 'longer':'' %>">
                 <% @site.clusters_or_sectors.reject{|c| c.name.eql?('N/A') }.each do |category| %>
                 <li>
-                  <a href="<%= category.is_a?(Cluster) ? cluster_path(category) : sector_path(category) %>" class="geneva <%= category.css_class %> icon_menu">
+                  <a href="<%= category.is_a?(Cluster) ? cluster_path(category) : sector_path(category) %>" class="geneva <%= category.css_class %> <%= (category.name.size > 17)? 'double_line':''%> icon_menu">
                     <%= category.name %>
                   </a>
                 </li>
@@ -46,7 +46,7 @@
               </div>  
               </li>
           <%
-           #if the site does not define a geo context, then is worldwide,display the countries
+           # if the site does not define a geo context, then is worldwide,display the countries
             else %>
             <li id="country_option">
               <a class="geneva main_option with_suboptions">COUNTRIES<span class="with_suboptions"></span></a>

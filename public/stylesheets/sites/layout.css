@@ -113,7 +113,7 @@ div#header h1 a {color:white;}
 div#header ul.menu {float:right; margin:4px 0 0 100px; width:auto; height:25px;}
 div#header ul.menu li {float:left; width:auto; margin:0 23px 0 0; position:relative;}
 
-div#header ul.menu li#cluster_option.clicked ul.suboptions {position:absolute; top:35px; left:-10px; z-index:110; background:url('/images/sites/common/menu/cluster_body_clicked.png') no-repeat 0 0; display:none; width:497px; height:177px; display:inline; padding:0 13px 0 23px;}
+div#header ul.menu li#cluster_option.clicked ul.suboptions {position:absolute; top:35px; left:-10px; z-index:110; background:url('/images/sites/common/menu/cluster_body_clicked.png') no-repeat 0 0; display:none; width:505px; height:177px; display:inline; padding:0 13px 0 15px;}
 div#header ul.menu li#cluster_option.clicked ul.suboptions.longer {background:url('/images/sites/common/menu/cluster_body_clicked_long.png') no-repeat 0 0; height:290px;}
 div#header ul.menu li#sector_option.clicked ul.suboptions {position:absolute; top:35px; left:-10px; z-index:110; background:url('/images/sites/common/menu/cluster_body_clicked.png') no-repeat 0 0; display:none; width:497px; height:177px; display:inline; padding:7px 13px 0 23px;}
 div#header ul.menu li#sector_option.clicked ul.suboptions.longer {background:url('/images/sites/common/menu/cluster_body_clicked_long.png') no-repeat 0 0; height:290px;}
@@ -165,7 +165,7 @@ div#header ul.menu li a:hover {cursor:pointer; color:white;}
 div#header ul.menu li a span.with_suboptions {float:right; width:6px; height:3px; margin:7px 0 0 2px; background:url('/images/sites/common/arrow_menu.png') no-repeat 0 0;}
 div#header ul.menu li div.suboptions_body {display:none;}
 div#header ul.menu li ul.suboptions {position:absolute; top:20px; left:-13px; background-color:#2F2E2C; z-index:110; display:none;}
-div#header ul.menu li ul.suboptions li {float:left; width:152px; padding:0 5px; margin:10px 0 0 0; height:auto;}
+div#header ul.menu li ul.suboptions li {float:left; width:155px; padding:0 5px; margin:9px 0 0 0; height:auto;}
 
 
 div#header div.right {margin:11px 0 0 0; width:auto; height:20px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
@@ -238,7 +238,8 @@ div#left_column div.float_left div.block p.social a {padding:0 5px 0 20px; color
 div#left_column div.float_left div.block p.social a:hover {color:#333333;}
 div#left_column div.float_left div.block p.social a.twitter {background:url('/images/sites/icons/twitter.png') no-repeat 0 0;}
 div#left_column div.float_left div.block p.social a.facebook {margin:0 0 0 4px; background:url('/images/sites/icons/facebook.png') no-repeat 0 0;}
-div#left_column div.float_left div.block p.website {padding:5px 0 0 0;}
+div#left_column div.float_left div.block img.logo {padding:0 0 10px 0;}
+div#left_column div.float_left div.block p.website {padding:0;}
 div#left_column div.float_left div.block.wikipedia {background:url('/images/sites/regions/wikipedia.png') no-repeat right bottom #FFFFFF;}
 div#left_column div.float_left div.block.wikipedia p {line-height:17px;}
 div#left_column div.float_left div.block.wikipedia p.provided {margin:15px 0 0 0;}
@@ -399,7 +400,8 @@ a.icon_statistics.shelter {background:url('/images/sites/common/icons/bar/left_s
 a.icon_statistics.water_sanitation {background:url('/images/sites/common/icons/bar/left_water_sanitation.png') no-repeat left 0;}
 
 /* TO MENU */
-a.icon_menu {float:left; padding:0 0 0 30px; height:22px; font:normal 13px Arial;}
+a.icon_menu {float:left; padding:4px 0 0 30px; height:18px; font:normal 13px Arial;}
+a.icon_menu.double_line {padding:0 0 0 30px; height:22px;}
 a.icon_menu.agriculture {background:url('/images/sites/common/icons/menu/agriculture.png') no-repeat left 0;}
 a.icon_menu.camp_coordination {background:url('/images/sites/common/icons/menu/camp.png') no-repeat left 0;}
 a.icon_menu.communications {background:url('/images/sites/common/icons/menu/communication.png') no-repeat left 0;}
