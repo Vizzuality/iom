@@ -36,35 +36,11 @@
         $('div.timeline span').width((days_completed*237)/total_days);
 
         if ($('div.galleryStyle img').size()>0) {
-
           $('div.loader_gallery').css('top',$('div.galleryStyle').position().top+1+'px');
           $('a.video').css('top',$('div.galleryStyle').position().top+150+'px');
           $('div.loader_gallery').show();
           $('div.mamufas').remove();
-
-
-          var vimeo_total = $('div.galleryStyle img[title="video"]').size();
-
-          $('div.galleryStyle img[title="video"]').each(function(index,element){
-            var vimeo_id = $(element).attr('desc');
-
-            $.ajax({
-              url: 'http://vimeo.com/api/v2/video/'+vimeo_id+'.json?format=jsonp',
-              jsonpCallback: "onGetVimeoData",
-              dataType: "jsonp",
-              type: "GET",
-              cache: true,
-              success: function(result) {
-                vimeo_count++;
-                if (vimeo_count==vimeo_total) {
-                  startGalleria();
-                }
-              }
-            });
-            if (vimeo_count == vimeo_total) {
-              startGalleria();
-            }
-          });
+          startGalleria();
         }
 
       });
