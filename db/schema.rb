@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101224091820) do
+ActiveRecord::Schema.define(:version => 20101227103614) do
 
   create_table "clusters", :force => true do |t|
     t.string "name"
@@ -80,7 +80,7 @@ ActiveRecord::Schema.define(:version => 20101224091820) do
   add_index "donors", ["name"], :name => "index_donors_on_name"
 
   create_table "media_resources", :force => true do |t|
-    t.integer  "position",             :default => 0
+    t.integer  "position",                 :default => 0
     t.integer  "element_id"
     t.integer  "element_type"
     t.string   "picture_file_name"
@@ -92,6 +92,10 @@ ActiveRecord::Schema.define(:version => 20101224091820) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "caption"
+    t.string   "vimeo_thumb_file_name"
+    t.string   "vimeo_thumb_content_type"
+    t.integer  "vimeo_thumb_file_size"
+    t.datetime "vimeo_thumb_updated_at"
   end
 
   add_index "media_resources", ["element_type", "element_id"], :name => "index_media_resources_on_element_type_and_element_id"

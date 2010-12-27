@@ -17,6 +17,7 @@ gem 'fastercsv'
 gem 'money'
 gem 'geokit'
 gem 'nokogiri'
+gem 'vimeo'
 
 group :development do
   gem 'capistrano'
