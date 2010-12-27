@@ -52,7 +52,7 @@
                  <% if media_resource.is_a_video? %>
                   <% vimeo_parts = media_resource.vimeo_url.split('/') %>
                   <% vimeo_id = vimeo_parts[vimeo_parts.size - 1] %>
-                  <%= image_tag(media_resource.vimeo_url, :title=>"video", :desc=>vimeo_id) %>
+                  <%= image_tag(media_resource.vimeo_thumb.url(:medium), :title=>"video", :desc=>vimeo_id) %>
                  <% else %>
                    <%= image_tag(media_resource.picture.url(:medium), :title => media_resource.caption, :alt=>'New Haiti alt') %>
                  <% end %>
