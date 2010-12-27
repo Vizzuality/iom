@@ -553,7 +553,7 @@ div#footer_sites div.project p {float:left; padding:0; font:normal 13px "PT Sans
 
 /* FOOTER PAGES */
 div#footer_pages {clear:both; width:100%; padding:100px 0 100px 0;}
-div#footer_pages div.left {width:660px; margin:0 0 0 5px; background:none; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#footer_pages div.left {width:660px; height:auto!important; margin:0 0 0 5px; background:none; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#footer_pages div.left div.project {float:left; width:450px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#footer_pages div.left div.project h1 a{float:left; font:normal 13px "PT Sans Bold"; color:#888888; text-transform:uppercase; width:100%;}
 div#footer_pages div.left div.project p {float:left; padding:0; font:normal 13px "PT Sans"; color:#B3B3B3;}
