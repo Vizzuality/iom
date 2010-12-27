@@ -275,10 +275,10 @@ class Site < ActiveRecord::Base
   # Array of arrays
   # [[sector, count], [sector, count]]
   def projects_sectors
-    sql="select c.id,c.name,count(ps.*) as count from clusters as c
-    inner join projects_sectors as cp on c.id=cp.sector_id
+    sql="select s.id,s.name,count(ps.*) as count from sectors as s
+    inner join projects_sectors as cp on s.id=cp.sector_id
     inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=#{self.id}
-    group by c.id,c.name order by count DESC"
+    group by s.id,s.name order by count DESC"
     Sector.find_by_sql(sql).map do |s|
       [s,s.count.to_i]
     end
@@ -312,7 +312,6 @@ class Site < ActiveRecord::Base
   def is_project_included?(project_id,options={})
     projects_sql(options).where("projects.id=?",project_id).present?
   end
-
 
   # TODO: perform query with a count()
   def total_projects(options = {})
