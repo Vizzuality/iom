@@ -87,7 +87,7 @@ class GeoregionController < ApplicationController
     respond_to do |format|
       format.html do
         result = ActiveRecord::Base.connection.execute(sql)
-        @map_data = result.first
+        @map_data = result.first || {'id' => nil, 'lat' => nil, 'lon' => nil, 'count' => nil, 'geojson' => nil}
         @georegion_map_chco = @site.theme.data[:georegion_map_chco]
         @georegion_map_chf = @site.theme.data[:georegion_map_chf]
         @georegion_map_marker_source = @site.theme.data[:georegion_map_marker_source]
