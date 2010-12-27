@@ -4,7 +4,12 @@
     <div class="med">
       <div class="left">
         <h2 class="museo_sans"><%= @element.name %></h2>
-        <p><%= pluralize(@element.resources.count, 'resource', 'resources') %></p>
+        <% unless @project.nil?  %>
+        <p class="by">by <%= link_to(@project.primary_organization.name, edit_admin_organization_path(@project.primary_organization)) %> /
+          <%= @project.countries.first.name %>
+        </p>
+        <%end%>
+        <p class="resources_account"><%= pluralize(@element.resources.count, 'resource', 'resources') %></p>
 
         <% unless @element.is_a?(Organization) %>
           <ul>

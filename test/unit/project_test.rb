@@ -79,31 +79,78 @@ class ProjectTest < ActiveSupport::TestCase
     assert project.countries.include?(spain)
     assert project.regions.include?(valencia)
   end
-  
-  
+
+
   test "Given a project with matches in a site criteria should be a cached_project" do
     organization = create_organization
     site = create_site :name => 'Food for Haiti', :project_context_organization_id => organization.id, :project_context_cluster_id => nil
     project = create_project :primary_organization_id => organization.id
 
     project.reload
-    
+
     assert_equal 1, project.cached_sites.size
     assert project.cached_sites.include?(site)
   end
-  
+
   test "Destroy a site should remove it from projects_sites" do
     organization = create_organization
     site = create_site :name => 'Food for Haiti', :project_context_organization_id => organization.id, :project_context_cluster_id => nil
     project = create_project :primary_organization_id => organization.id
-    
+
     project.reload
-    
+
     assert project.cached_sites.include?(site)
-    
+
     site.destroy
     project.reload
-    
+
     assert project.cached_sites.empty?
   end
+
+  test "months left" do
+    project = create_project :food_conservation
+    project.update_attribute(:end_date, Date.today + 2.months)
+    project.reload
+    assert_equal 2, project.months_left
+  end
+
+  test "Project.custom_find method" do
+    spain    = create_country :name => 'Spain'
+    valencia = create_region :name => 'Valencia', :country => spain
+    madrid   = create_region :name => 'Madrid', :country => spain
+
+    c1 = create_cluster :name => 'C1'
+    c2 = create_cluster :name => 'C2'
+    c3 = create_cluster :name => 'C3'
+
+    organization1 = create_organization
+    organization2 = create_organization
+
+    p1 = create_project :name => 'P1', :primary_organization => organization1
+    p2 = create_project :name => 'P2', :primary_organization => organization2
+    p3 = create_project :name => 'P3', :primary_organization => organization1
+
+    p1.clusters << c1
+    p2.clusters << c2
+    p3.clusters << c3
+    p3.clusters << c1
+
+    donor1 = create_donor
+    donor2 = create_donor
+    donor3 = create_donor
+
+    p1.donations.create! :donor => donor1, :amount => 100
+    p2.donations.create! :donor => donor2, :amount => 100
+    p3.donations.create! :donor => donor3, :amount => 100
+
+    site1 = create_site :name => 'Food for Haiti 1', :project_context_organization_id => organization1.id, :project_context_cluster_id => nil, :url => 'http://site1.com'
+    site2 = create_site :name => 'Food for Haiti 2', :project_context_organization_id => organization2.id, :project_context_cluster_id => nil, :url => 'http://site2.com'
+
+    site1.reload
+    site2.reload
+    p1.reload
+    p2.reload
+    p3.reload
+  end
+
 end

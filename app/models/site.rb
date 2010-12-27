@@ -3,45 +3,45 @@
 # Table name: sites
 #
 #  id                              :integer         not null, primary key
-#  name                            :string(255)     
-#  short_description               :text            
-#  long_description                :text            
-#  contact_email                   :string(255)     
-#  contact_person                  :string(255)     
-#  url                             :string(255)     
-#  permalink                       :string(255)     
-#  google_analytics_id             :string(255)     
-#  logo_file_name                  :string(255)     
-#  logo_content_type               :string(255)     
-#  logo_file_size                  :integer         
-#  logo_updated_at                 :datetime        
-#  theme_id                        :integer         
-#  blog_url                        :string(255)     
-#  word_for_clusters               :string(255)     
-#  word_for_regions                :string(255)     
-#  show_global_donations_raises    :boolean         
+#  name                            :string(255)
+#  short_description               :text
+#  long_description                :text
+#  contact_email                   :string(255)
+#  contact_person                  :string(255)
+#  url                             :string(255)
+#  permalink                       :string(255)
+#  google_analytics_id             :string(255)
+#  logo_file_name                  :string(255)
+#  logo_content_type               :string(255)
+#  logo_file_size                  :integer
+#  logo_updated_at                 :datetime
+#  theme_id                        :integer
+#  blog_url                        :string(255)
+#  word_for_clusters               :string(255)
+#  word_for_regions                :string(255)
+#  show_global_donations_raises    :boolean
 #  project_classification          :integer         default(0)
-#  geographic_context_country_id   :integer         
-#  geographic_context_region_id    :integer         
-#  project_context_cluster_id      :integer         
-#  project_context_sector_id       :integer         
-#  project_context_organization_id :integer         
-#  project_context_tags            :string(255)     
-#  created_at                      :datetime        
-#  updated_at                      :datetime        
-#  geographic_context_geometry     :string          
-#  project_context_tags_ids        :string(255)     
-#  status                          :boolean         
+#  geographic_context_country_id   :integer
+#  geographic_context_region_id    :integer
+#  project_context_cluster_id      :integer
+#  project_context_sector_id       :integer
+#  project_context_organization_id :integer
+#  project_context_tags            :string(255)
+#  created_at                      :datetime
+#  updated_at                      :datetime
+#  geographic_context_geometry     :string
+#  project_context_tags_ids        :string(255)
+#  status                          :boolean
 #  visits                          :float           default(0.0)
 #  visits_last_week                :float           default(0.0)
-#  aid_map_image_file_name         :string(255)     
-#  aid_map_image_content_type      :string(255)     
-#  aid_map_image_file_size         :integer         
-#  aid_map_image_updated_at        :datetime        
-#  overview_map_bbox_miny          :float           
-#  overview_map_bbox_minx          :float           
-#  overview_map_bbox_maxy          :float           
-#  overview_map_bbox_maxx          :float           
+#  aid_map_image_file_name         :string(255)
+#  aid_map_image_content_type      :string(255)
+#  aid_map_image_file_size         :integer
+#  aid_map_image_updated_at        :datetime
+#  overview_map_bbox_miny          :float
+#  overview_map_bbox_minx          :float
+#  overview_map_bbox_maxy          :float
+#  overview_map_bbox_maxx          :float
 #  level_for_region                :integer         default(1)
 #
 
@@ -64,13 +64,10 @@ class Site < ActiveRecord::Base
 
   has_attached_file :logo, :styles => {
                                       :small => {
-                                        :geometry => "80x46#",
+                                        :geometry => "80x46>",
                                         :format => 'jpg'
                                       }
                                     },
-                            :convert_options => {
-                              :all => "-quality 90"
-                            },
                             :url => "/system/:attachment/:id/:style.:extension"
 
   has_attached_file :aid_map_image, :styles => {
@@ -275,10 +272,10 @@ class Site < ActiveRecord::Base
   # Array of arrays
   # [[sector, count], [sector, count]]
   def projects_sectors
-    sql="select c.id,c.name,count(ps.*) as count from clusters as c
-    inner join projects_sectors as cp on c.id=cp.sector_id
+    sql="select s.id,s.name,count(ps.*) as count from sectors as s
+    inner join projects_sectors as cp on s.id=cp.sector_id
     inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=#{self.id}
-    group by c.id,c.name order by count DESC"
+    group by s.id,s.name order by count DESC"
     Sector.find_by_sql(sql).map do |s|
       [s,s.count.to_i]
     end
@@ -312,7 +309,6 @@ class Site < ActiveRecord::Base
   def is_project_included?(project_id,options={})
     projects_sql(options).where("projects.id=?",project_id).present?
   end
-
 
   # TODO: perform query with a count()
   def total_projects(options = {})

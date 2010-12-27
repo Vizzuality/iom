@@ -1,7 +1,9 @@
 
   <div class="main_layout">
     <div class="block first edit">
-      <div class="top"></div>
+      <div class="top">
+        <p class="link_to_back"><%= link_to('back to pages', admin_site_pages_path(@site)) %></p>
+      </div>
       <div class="med">
         <div class="left">
           <h2 class="museo_sans">New page</h2>
@@ -11,7 +13,6 @@
           <ul>
             <li class="selected"><a>Basic information</a></li>
           </ul>
-          <p><%= link_to('⟵ back to pages', admin_site_pages_path(@site)) %></p>
         </div>
       </div>
       <div class="bottom"></div>

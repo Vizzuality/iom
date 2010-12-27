@@ -4,7 +4,10 @@
     <div class="med">
       <div class="left">
         <h2><%= @project.name %></h2>
-        <p>by <%= @project.primary_organization.name %></p>
+        <p class="by">by <%= link_to(@project.primary_organization.name, edit_admin_organization_path(@project.primary_organization)) %> /
+          <%= @project.countries.first.name %>
+        </p>
+
         <% unless @project.donations.empty? %>
         <ul class="donations">
           <% total_account = 0 %>

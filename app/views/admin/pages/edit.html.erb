@@ -4,7 +4,8 @@
       <div class="top"></div>
       <div class="med">
         <div class="left">
-          <h2 class="museo_sans"><%= @site.name %>: Edit <%= @page.title %></h2>
+          <h2 class="museo_sans">Edit <%= @page.title %></h2>
+          <h5>A page from <%= @site.name %><h5>
           <%= render :partial => 'form' %>
         </div>
         <div class="right menu">

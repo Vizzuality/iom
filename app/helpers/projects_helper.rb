@@ -14,8 +14,8 @@ module ProjectsHelper
 
   def clusters_to_sentence(project)
     return "" if project['clusters'].nil? || project['cluster_ids'].nil?
-    clusters = project['clusters']
-    clusters_ids = project['cluster_ids']
+    clusters = project['clusters'].split('|')
+    clusters_ids = project['cluster_ids'].split('|')
     if clusters.size == 1
       "A #{link_to clusters.first, cluster_path(clusters_ids.first), :title => clusters.first} project"
     else
@@ -25,8 +25,8 @@ module ProjectsHelper
 
   def sectors_to_sentence(project)
     return "" if project['sectors'].nil? || project['sector_ids'].nil?
-    sectors = project['sectors']
-    sectors_ids = project['sector_ids']
+    sectors = project['sectors'].split('|')
+    sectors_ids = project['sector_ids'].split('|')
     if sectors.size == 1
       "A #{link_to sectors.first, sector_path(sectors_ids.first), :title => sectors.first} project"
     else
