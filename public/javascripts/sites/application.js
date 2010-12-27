@@ -19,10 +19,9 @@ $(document).ready( function() {
     $('#ngos_search').liveUpdate('orgs_list');
 
     // CUSTOM SCROLLBARS
-    if ($('.scroll_pane').length > 0){
-
+    if ($('.scroll_pane').length > 0){    
         $('.scroll_pane').jScrollPane({
-                           autoReinitialise:false });
+                           autoReinitialise:true });
     }
 
 
@@ -96,6 +95,8 @@ $(document).ready( function() {
 
 function resetCombo(elementToUpdate){
     var element = elementToUpdate.find('.scroll_pane');
-    var api = element.data('jsp');
-    api.reinitialise();
+    if (element.length > 0){
+        var api = element.data('jsp');    
+        if (api != undefined) api.reinitialise();
+    }
 }

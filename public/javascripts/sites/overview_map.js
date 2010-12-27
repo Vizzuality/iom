@@ -136,7 +136,6 @@
   
   function positionControls() {
     if ($('#layout').length>0) {
-      console.log('jamon');
       var column_position = $('#layout').offset().left;
       var map_position = $('#map').position().top + 25;
     } else {
