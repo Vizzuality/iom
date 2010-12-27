@@ -70,6 +70,9 @@ HTML
     if @cluster
       result << @cluster.name
     end
+    if @data
+      result << @data.name
+    end
     if @donor
       result << @donor.name
     end
@@ -81,6 +84,9 @@ HTML
     end
     if @country
       result << @country.name
+    end
+    if @area
+      result << @area.name
     end
     if controller_name == 'search' && action_name == 'index'
       if params[:q].blank?
