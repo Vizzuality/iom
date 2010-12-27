@@ -1,5 +1,20 @@
 $(document).ready(function(ev){
+    
+    /************** ADMIN PAGE - INIT (GET PARAMETERS)  ************************** */
 
+    if ($('span.select_combo_typology').length > 0){
+        var text = '';
+        var id = '';
+        if ($('input#site_project_context_cluster_id').val()){
+            id = $('input#site_project_context_cluster_id').val();
+            text = $('ul.clusters_or_sectors').find('a#'+ id+ '.cluster_value').text();
+    
+        }else if ($('input#site_project_context_sector_id').val()){
+            id = $('input#site_project_context_sector_id').val();
+            text = $('ul.clusters_or_sectors').find('a#'+ id+ '.sector_value').text();
+        }
+        $('p.cluster_sector').text(text);
+    }
     /************** SITE PAGE  ************************** */
 		if ($('select').length) {
   	  $('select#gc_limited_country_section').sSelect({ddMaxWidth: '245px',ddMaxHeight:'231px',containerClass:'country'});
@@ -158,8 +173,10 @@ $(document).ready(function(ev){
 
         if ($(this).children('a').hasClass('cluster_value')){
           $('input#site_project_context_cluster_id').val(id);
+          $('input#site_project_context_sector_id').val('');
         }else if ($(this).children('a').hasClass('sector_value')){
           $('input#site_project_context_sector_id').val(id);
+          $('input#site_project_context_cluster_id').val('');          
         }
         $('span.select_combo_typology.clicked').removeClass('clicked');
         $('span.select_combo_typology').find('p.cluster_sector').text(name);
