@@ -2,19 +2,23 @@
 #
 # Table name: media_resources
 #
-#  id                   :integer         not null, primary key
-#  position             :integer         default(0)
-#  element_id           :integer
-#  element_type         :integer
-#  picture_file_name    :string(255)
-#  picture_content_type :string(255)
-#  picture_filesize     :integer
-#  picture_updated_at   :datetime
-#  vimeo_url            :string(255)
-#  vimeo_embed_html     :text
-#  created_at           :datetime
-#  updated_at           :datetime
-#  caption              :string(255)
+#  id                       :integer         not null, primary key
+#  position                 :integer         default(0)
+#  element_id               :integer
+#  element_type             :integer
+#  picture_file_name        :string(255)
+#  picture_content_type     :string(255)
+#  picture_filesize         :integer
+#  picture_updated_at       :datetime
+#  vimeo_url                :string(255)
+#  vimeo_embed_html         :text
+#  created_at               :datetime
+#  updated_at               :datetime
+#  caption                  :string(255)
+#  vimeo_thumb_file_name    :string(255)
+#  vimeo_thumb_content_type :string(255)
+#  vimeo_thumb_file_size    :integer
+#  vimeo_thumb_updated_at   :datetime
 #
 
 class MediaResource < ActiveRecord::Base
@@ -36,6 +40,17 @@ class MediaResource < ActiveRecord::Base
                             },
                             :url => "/system/:attachment/:id/:style.:extension"
 
+  has_attached_file :vimeo_thumb, :styles => {
+                                      :medium => {
+                                        :geometry => "660x400#",
+                                        :format => 'jpg'
+                                      }
+                                    },
+                            :convert_options => {
+                              :all => "-quality 90"
+                            },
+                            :url => "/system/:attachment/:id/:style.:extension"
+
   before_create :set_position
 
   validate :presence_of_picture_or_attachment
@@ -44,15 +59,39 @@ class MediaResource < ActiveRecord::Base
     vimeo_url?
   end
 
-  # http://vimeo.com/api/oembed.xml?url=http://vimeo.com/7100569
   def vimeo_url=(value)
-    response = open("http://vimeo.com/api/oembed.xml?url=#{value}").read
-    match = response.match(/<html>([^<]+)<\/html>/)
-    html = match[1]
-    html = html.gsub(/width=&quot;(\d+)&quot;/, 'width=&quot;549&quot;')
-    html = html.gsub(/height=&quot;(\d+)&quot;/, 'height=&quot;300&quot;')
+    value =~ /\Ahttp:\/\/vimeo\.com\/(\d+)\z/
+    vimeo_video_id = $1
+    return unless vimeo_video_id.present? && vimeo_video_id.match(/\d+/)
+
+    vimeo_video_data = Vimeo::Simple::Video.info(vimeo_video_id)
+    vimeo_video_data = vimeo_video_data.first if vimeo_video_data.present?
+
+    html = <<-XML
+      <?xml version=\"1.0\" encoding=\"utf-8\"?>
+      <oembed>
+        <type>video</type>
+        <version>1.0</version>
+        <provider_name>Vimeo</provider_name>
+        <provider_url>http://vimeo.com/</provider_url>
+        <title>#{vimeo_video_data['title']}</title>
+        <author_name>#{vimeo_video_data['user_name']}</author_name>
+        <author_url>#{vimeo_video_data['user_url']}</author_url>
+        <is_plus>0</is_plus>
+        <html>&lt;iframe src=&quot;http://player.vimeo.com/video/#{vimeo_video_data['id']}&quot; width=&quot;#{vimeo_video_data['width']}&quot; height=&quot;#{vimeo_video_data['height']}&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;</html>
+        <width>#{vimeo_video_data['width']}</width>
+        <height>#{vimeo_video_data['height']}</height>
+        <duration>#{vimeo_video_data['duration']}</duration>
+        <description>#{vimeo_video_data['description']}</description>
+        <thumbnail_url>#{vimeo_video_data['thumbnail_large']}</thumbnail_url>
+        <thumbnail_width>#{vimeo_video_data['width']}</thumbnail_width>
+        <thumbnail_height>#{vimeo_video_data['height']}</thumbnail_height>
+        <video_id>#{vimeo_video_data['id']}</video_id>
+      </oembed>
+    XML
     write_attribute(:vimeo_url, value)
     write_attribute(:vimeo_embed_html, html)
+    self.vimeo_thumb = open(vimeo_video_data['thumbnail_large'])
   rescue URI::InvalidURIError
     errors[:base] << "You have upload a picture or indicate a Vimeo URL"
   end
