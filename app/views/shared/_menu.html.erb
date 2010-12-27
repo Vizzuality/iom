@@ -34,14 +34,16 @@
             <li id="region_option">
               <a class="geneva main_option with_suboptions">REGIONS<span class="with_suboptions"></span></a>
               <div class="header_title"><a>REGIONS<span class="with_suboptions"></span></a></div>
-              <div class="suboptions_body">
+              <div class="suboptions_body">                
                 <div class="wrapper">
-                  <ul class="content scroll_pane">
+                  <!-- We have to ask for numbers of elements to show (or not) custom scroll bar -->
+                  <ul class="content <%= (@site.regions_select.length > 11)? 'scroll_pane' : ''%>">
                     <% @site.regions_select.each do |region| %>
                     <li><a href="/regions/<%= region.id %>" class="geneva"><%= region.name %></a></li>
                     <% end %>
                   </ul>
                 </div>
+              </div>  
               </li>
           <%
            #if the site does not define a geo context, then is worldwide,display the countries
