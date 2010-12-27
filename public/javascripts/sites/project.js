@@ -96,7 +96,7 @@
         $('div.loader_gallery img').remove();
         $('div.loader_gallery p').remove();
         $('div.loader_gallery div.video_player').show();
-        $('div.loader_gallery div.video_player').append('<iframe id="vimeo_frame" src="http://player.vimeo.com/video/'+vimeo_id+'" width="660" height="370" frameborder="0"></iframe>');
+        $('div.loader_gallery div.video_player').append('<iframe id="vimeo_frame" src="http://player.vimeo.com/video/'+vimeo_id+'?autoplay=1" width="660" height="370" frameborder="0"></iframe>');
         $('div.loader_gallery div.video_player').each(function(index,element){
           if (index!=0) {
             $(element).remove();

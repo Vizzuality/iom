@@ -2913,8 +2913,6 @@ this.prependChild( 'info', 'myElement' );
     next : function() {
 
         if (this._data[this.getNext()].title=="video") {
-          this.$('galleria-info').fadeOut();
-          this.$('info-text').fadeOut();
           $('a.video').attr('vimeo-id',this._data[this.getNext()].description);
           $('a.video').fadeIn();
         } else {
@@ -2940,8 +2938,6 @@ this.prependChild( 'info', 'myElement' );
     prev : function() {
         
         if (this._data[this.getPrev()].title=="video") {
-           this.$('galleria-info').fadeOut();
-           this.$('info-text').fadeOut();
            $('a.video').attr('vimeo-id',this._data[this.getPrev()].description);
            $('a.video').fadeIn();
          } else {
