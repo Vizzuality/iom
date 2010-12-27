@@ -232,13 +232,8 @@ SQL
     end
 
     def add_to_country(region)
-      #TODO: Check whay this is slow.
-      #countries << region.country unless countries.include?(region.country)
-
-      # sql="SELECT count(*) as num from countries_projects where country_id=#{region.country.id} and project_id=#{id}"
-      # if (ActiveRecord::Base.connection.execute(sql).first["num"].to_i < 1)
-      #   countries << region.country
-      # end
+      # TODO: Check whay this is slow.
+      countries << region.country unless countries.include?(region.country)
     end
 
     def remove_from_country(region)

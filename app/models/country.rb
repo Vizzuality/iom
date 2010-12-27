@@ -31,8 +31,8 @@ class Country < ActiveRecord::Base
   def projects_clusters(site)
     sql="select c.id,c.name,count(ps.*) as count from clusters as c
     inner join clusters_projects as cp on c.id=cp.cluster_id
-    inner join countries_projects as cop on cp.project_id=cop.project_id
-    inner join projects_sites as ps on cop.project_id=ps.project_id and ps.site_id=#{site.id}
+    inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=#{site.id}
+    inner join countries_projects as cop on ps.project_id=cop.project_id and cop.country_id=#{self.id}
     group by c.id,c.name order by count DESC"
     Cluster.find_by_sql(sql).map do |c|
       [c,c.count.to_i]
