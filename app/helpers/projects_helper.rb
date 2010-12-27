@@ -9,7 +9,7 @@ module ProjectsHelper
     end
     countries    = "in #{link_to project['countries'], country_path(project['countries_ids']), :title => project['countries']}"
     organization = "implemented by #{link_to project['organization_name'], organization_path(project['organization_id'])}"
-    raw("#{clusters_sectors} #{countries} #{organization}")
+    raw("#{clusters_sectors} #{countries}")
   end
 
   def clusters_to_sentence(project)

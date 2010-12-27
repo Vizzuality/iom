@@ -62,7 +62,7 @@
 
           <% unless @site.nil? || @organization.projects_clusters(@site).empty? %>
           <div class="block statistics">
-            <h3>PROJECTS BY <%= @site.word_for_cluster_sector.upcase %></h3>
+            <h3>PROJECTS BY <%= @site.word_for_cluster_sector.upcase.chop %></h3>
             <ul class="statistics_list">
               <% @organization.projects_clusters(@site)[0...3].each do |cluster,count| %>
                 <li>
@@ -79,7 +79,7 @@
           </div>
           <%end%>
           <%unless @organization.projects_regions(@site).empty? %>
-          <div class="block statistics">
+          <div class="block statistics less">
             <h3>PROJECTS BY LOCATION</h3>
             <%= raw(projects_by_location(@organization.projects_regions(@site))) %>
           </div>

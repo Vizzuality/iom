@@ -139,16 +139,20 @@
            <% end %>
          </div>
 
-         <div class="block">
-           <h3>Project timeline</h3>
+         
            <%if !@project.end_date.nil?%>
+           <div class="block">
+              <h3>Project timeline</h3>
              <div class="timeline"><span></span><p class="months_left"><%= pluralize(@project.months_left, 'month', 'months') %> left</p></div>
              <p class="first_date"><%= @project.start_date.strftime("%d/%m/%Y") %></p>
              <p class="second_date"><%= @project.end_date.strftime("%d/%m/%Y") %></p>
-           <%elsif @project.start_date?%>
-             <p>Active since <%= @project.start_date.strftime("%d/%m/%Y") %></p>
+            </div>
+           <% elsif @project.start_date?%>
+            <div class="block">
+              <h3>Project timeline</h3>
+              <p>Active since <%= @project.start_date.strftime("%d/%m/%Y") %></p>
+             </div>
            <%end%>
-         </div>
 
          <% unless @project.donations.nil? || @project.donations.sum(:amount).eql?(0.0) %>
          <div class="block">
@@ -172,7 +176,6 @@
          <% end %>
          <% unless @project.donors.empty? %>
          <div class="block">
-
              <h3>Donors</h3>
              <ul>
              <% @project.donors.limit(5).each do |donor| %>
@@ -188,9 +191,9 @@
          <div class="block">
            <h3>Contact information</h3>
            <p><strong><%= @project.contact_person %></strong><br/><%= @project.contact_phone_number %></p>
-             <% unless (@project.contact_email.nil?)||(@project.contact_email.empty?) %>
-               <p><%= link_to(@project.contact_email, "mailto:#{@project.contact_email}") %></p>
-             <%end%>
+           <% unless (@project.contact_email.nil?)||(@project.contact_email.empty?) %>
+             <p class="no_margin"><%= link_to(@project.contact_email, "mailto:#{@project.contact_email}") %></p>
+           <%end%>
          </div>
          <%end%>
          <div class="block last">
