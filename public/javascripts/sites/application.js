@@ -6,6 +6,24 @@ IOM = {
 
 $(document).ready( function() {
 
+    //Z-index IE
+    
+    var zIndexNumber = 1000;  
+    $('div,ul').each(function() {  
+      $(this).css('zIndex', zIndexNumber);  
+      zIndexNumber -= 10;  
+    });
+    
+    $('div#header').css('zIndex',1000);
+    $('div#float_head').css('zIndex',100);
+    $('div#map').css('zIndex',0);
+    $('div#small_map').css('zIndex',0);
+    $('div.inner_header').css('zIndex',1000);
+    $('ul.menu').css('zIndex',1000);
+    $('ul.suboptions').css('zIndex',1000);
+
+
+
     // TODO: update scrollbar to content
     // if ($('.scroll_pane_auto').length > 0){
     //
