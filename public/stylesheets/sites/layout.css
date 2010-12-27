@@ -108,7 +108,7 @@ div#header {width:100%; height:40px; padding:0; background:url(/images/sites/com
 div#header div.inner_header {margin:0 auto; width:932px; height:40px;}
 div#header div.left {width:710px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#header div.left.home {width:820px;}
-div#header h1 {margin:11px 0 0 0; font:normal 15px "PT Sans Bold"; color:white; text-transform:uppercase; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#header h1 {float:left; margin:11px 0 0 0; font:normal 15px "PT Sans Bold"; color:white; text-transform:uppercase; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#header h1 a {color:white;}
 div#header ul.menu {float:right; margin:4px 0 0 100px; width:auto; height:25px;}
 div#header ul.menu li {float:left; width:auto; margin:0 23px 0 0; position:relative;}
