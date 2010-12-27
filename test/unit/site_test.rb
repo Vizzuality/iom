@@ -122,4 +122,165 @@ class SiteTest < ActiveSupport::TestCase
     assert_equal site.url, 'test.ngoaidmap.org'
   end
 
+  test "projects_clusters of a site" do
+    spain    = create_country :name => 'Spain'
+    valencia = create_region :name => 'Valencia', :country => spain
+    madrid   = create_region :name => 'Madrid', :country => spain
+
+    c1 = create_cluster
+    c2 = create_cluster
+    c3 = create_cluster
+
+    organization1 = create_organization
+    organization2 = create_organization
+
+    p1 = create_project :name => 'P1', :primary_organization => organization1
+    p2 = create_project :name => 'P2', :primary_organization => organization2
+    p3 = create_project :name => 'P3', :primary_organization => organization1
+
+    p1.clusters << c1
+    p2.clusters << c2
+    p3.clusters << c3
+    p3.clusters << c1
+
+    site1 = create_site :name => 'Food for Haiti 1', :project_context_organization_id => organization1.id, :project_context_cluster_id => nil, :url => 'http://site1.com'
+    site2 = create_site :name => 'Food for Haiti 2', :project_context_organization_id => organization2.id, :project_context_cluster_id => nil, :url => 'http://site2.com'
+
+    site1.reload
+    site2.reload
+    p1.reload
+    p2.reload
+    p3.reload
+
+    assert_equal 2, site1.projects_clusters.size
+    assert site1.projects_clusters.flatten.include?(c1)
+    assert site1.projects_clusters.flatten.include?(c3)
+    assert_equal 1, site2.projects_clusters.size
+    assert site2.projects_clusters.flatten.include?(c2)
+  end
+
+  test "projects_sectors of a site" do
+    spain    = create_country :name => 'Spain'
+    valencia = create_region :name => 'Valencia', :country => spain
+    madrid   = create_region :name => 'Madrid', :country => spain
+
+    c1 = create_sector
+    c2 = create_sector
+    c3 = create_sector
+
+    organization1 = create_organization
+    organization2 = create_organization
+
+    p1 = create_project :name => 'P1', :primary_organization => organization1
+    p2 = create_project :name => 'P2', :primary_organization => organization2
+    p3 = create_project :name => 'P3', :primary_organization => organization1
+
+    p1.sectors << c1
+    p2.sectors << c2
+    p3.sectors << c3
+    p3.sectors << c1
+
+    site1 = create_site :name => 'Food for Haiti 1', :project_context_organization_id => organization1.id, :project_context_cluster_id => nil, :url => 'http://site1.com'
+    site2 = create_site :name => 'Food for Haiti 2', :project_context_organization_id => organization2.id, :project_context_cluster_id => nil, :url => 'http://site2.com'
+
+    site1.reload
+    site2.reload
+    p1.reload
+    p2.reload
+    p3.reload
+
+    assert_equal 2, site1.projects_sectors.size
+    assert site1.projects_sectors.flatten.include?(c1)
+    assert site1.projects_sectors.flatten.include?(c3)
+    assert_equal 1, site2.projects_sectors.size
+    assert site2.projects_sectors.flatten.include?(c2)
+  end
+
+  test "site projects_regions method" do
+    spain    = create_country :name => 'Spain'
+    valencia = create_region :name => 'Valencia', :country => spain, :level => 1
+    madrid   = create_region :name => 'Madrid', :country => spain,   :level => 1
+    lerida   = create_region :name => 'Lerida', :country => spain,   :level => 2
+
+    c1 = create_cluster
+    c2 = create_cluster
+    c3 = create_cluster
+
+    organization1 = create_organization
+    organization2 = create_organization
+
+    p1 = create_project :name => 'P1', :primary_organization => organization1
+    p2 = create_project :name => 'P2', :primary_organization => organization2
+    p3 = create_project :name => 'P3', :primary_organization => organization1
+
+    p1.clusters << c1
+    p2.clusters << c2
+    p3.clusters << c3
+    p3.clusters << c1
+
+    p1.regions << valencia
+    p1.regions << madrid
+    p2.regions << madrid
+    p1.regions << lerida
+
+    site1 = create_site :name => 'Food for Haiti 1', :project_context_organization_id => organization1.id, :project_context_cluster_id => nil, :url => 'http://site1.com'
+    site2 = create_site :name => 'Food for Haiti 2', :project_context_organization_id => organization2.id, :project_context_cluster_id => nil, :url => 'http://site2.com'
+
+    site1.reload
+    site2.reload
+    p1.reload
+    p2.reload
+    p3.reload
+
+    assert_equal 2, site1.projects_regions.size
+    assert site1.projects_regions.flatten.include?(valencia)
+    assert site1.projects_regions.flatten.include?(madrid)
+    assert_equal 1, site2.projects_regions.size
+    assert site2.projects_regions.flatten.include?(madrid)
+  end
+
+  test "site projects_organizations method" do
+    organization1 = create_organization
+    organization2 = create_organization
+
+    p1 = create_project :name => 'P1', :primary_organization => organization1
+    p2 = create_project :name => 'P2', :primary_organization => organization2
+    p3 = create_project :name => 'P3', :primary_organization => organization1
+
+    site1 = create_site :name => 'Food for Haiti 1', :project_context_organization_id => organization1.id, :project_context_cluster_id => nil, :url => 'http://site1.com'
+    site2 = create_site :name => 'Food for Haiti 2', :project_context_organization_id => organization2.id, :project_context_cluster_id => nil, :url => 'http://site2.com'
+
+    site1.reload
+    site2.reload
+    p1.reload
+    p2.reload
+    p3.reload
+
+    assert_equal 1, site1.projects_organizations.size
+    assert site1.projects_organizations.flatten.include?(organization1)
+    assert_equal 1, site2.projects_organizations.size
+    assert site2.projects_organizations.flatten.include?(organization2)
+  end
+
+  test "is_project_included? method" do
+    organization1 = create_organization
+    organization2 = create_organization
+
+    p1 = create_project :name => 'P1', :primary_organization => organization1
+    p2 = create_project :name => 'P2', :primary_organization => organization2
+    p3 = create_project :name => 'P3', :primary_organization => organization1
+
+    site1 = create_site :name => 'Food for Haiti 1', :project_context_organization_id => organization1.id, :project_context_cluster_id => nil, :url => 'http://site1.com'
+    site2 = create_site :name => 'Food for Haiti 2', :project_context_organization_id => organization2.id, :project_context_cluster_id => nil, :url => 'http://site2.com'
+
+    site1.reload
+    site2.reload
+    p1.reload
+    p2.reload
+    p3.reload
+
+    assert site1.is_project_included?(p1.id)
+    assert !site2.is_project_included?(p1.id)
+  end
+
 end

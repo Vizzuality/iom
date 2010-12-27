@@ -70,23 +70,7 @@ class MediaResource < ActiveRecord::Base
     html = <<-XML
       <?xml version=\"1.0\" encoding=\"utf-8\"?>
       <oembed>
-        <type>video</type>
-        <version>1.0</version>
-        <provider_name>Vimeo</provider_name>
-        <provider_url>http://vimeo.com/</provider_url>
-        <title>#{vimeo_video_data['title']}</title>
-        <author_name>#{vimeo_video_data['user_name']}</author_name>
-        <author_url>#{vimeo_video_data['user_url']}</author_url>
-        <is_plus>0</is_plus>
-        <html>&lt;iframe src=&quot;http://player.vimeo.com/video/#{vimeo_video_data['id']}&quot; width=&quot;#{vimeo_video_data['width']}&quot; height=&quot;#{vimeo_video_data['height']}&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;</html>
-        <width>#{vimeo_video_data['width']}</width>
-        <height>#{vimeo_video_data['height']}</height>
-        <duration>#{vimeo_video_data['duration']}</duration>
-        <description>#{vimeo_video_data['description']}</description>
-        <thumbnail_url>#{vimeo_video_data['thumbnail_large']}</thumbnail_url>
-        <thumbnail_width>#{vimeo_video_data['width']}</thumbnail_width>
-        <thumbnail_height>#{vimeo_video_data['height']}</thumbnail_height>
-        <video_id>#{vimeo_video_data['id']}</video_id>
+        <html>&lt;iframe src=&quot;http://player.vimeo.com/video/#{vimeo_video_data['id']}&quot; width=&quot;550&quot; height=&quot;350&quot; frameborder=&quot;0&quot;&gt;&lt;/iframe&gt;</html>
       </oembed>
     XML
     write_attribute(:vimeo_url, value)

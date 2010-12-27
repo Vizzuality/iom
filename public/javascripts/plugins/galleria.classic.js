@@ -79,8 +79,9 @@ Galleria.addTheme({
               me.play();
             });
 	        });
-          if (this._data[0].title=="video") {
-            $('a.video').attr('vimeo-id',this._data[0].description);
+	        
+          if (this._data[0].vimeo_id!=undefined) {
+            $('a.video').attr('vimeo-id',this._data[0].vimeo_id);
             $('a.video').show();
           }
           this.$('galleria-info').show().css('opacity',.8);

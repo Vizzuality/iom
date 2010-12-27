@@ -38,7 +38,7 @@
             <h2>FACTSHEET</h2>
           </div>
           <% unless @data.projects_regions(@site).empty?%>
-          <div class="block statistics">
+          <div class="block statistics less">
             <h3>PROJECTS BY LOCATION</h3>
             <%= raw(projects_by_location(@data.projects_regions(@site))) %>
           </div>

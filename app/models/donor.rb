@@ -3,23 +3,23 @@
 # Table name: donors
 #
 #  id                        :integer         not null, primary key
-#  name                      :string(2000)    
-#  description               :text            
-#  website                   :string(255)     
-#  twitter                   :string(255)     
-#  facebook                  :string(255)     
-#  contact_person_name       :string(255)     
-#  contact_company           :string(255)     
-#  contact_person_position   :string(255)     
-#  contact_email             :string(255)     
-#  contact_phone_number      :string(255)     
-#  logo_file_name            :string(255)     
-#  logo_content_type         :string(255)     
-#  logo_file_size            :integer         
-#  logo_updated_at           :datetime        
-#  site_specific_information :text            
-#  created_at                :datetime        
-#  updated_at                :datetime        
+#  name                      :string(2000)
+#  description               :text
+#  website                   :string(255)
+#  twitter                   :string(255)
+#  facebook                  :string(255)
+#  contact_person_name       :string(255)
+#  contact_company           :string(255)
+#  contact_person_position   :string(255)
+#  contact_email             :string(255)
+#  contact_phone_number      :string(255)
+#  logo_file_name            :string(255)
+#  logo_content_type         :string(255)
+#  logo_file_size            :integer
+#  logo_updated_at           :datetime
+#  site_specific_information :text
+#  created_at                :datetime
+#  updated_at                :datetime
 #
 
 class Donor < ActiveRecord::Base
@@ -31,13 +31,10 @@ class Donor < ActiveRecord::Base
 
   has_attached_file :logo, :styles => {
                                       :small => {
-                                        :geometry => "80x46#",
+                                        :geometry => "80x46>",
                                         :format => 'jpg'
                                       }
                                     },
-                            :convert_options => {
-                              :all => "-quality 90"
-                            },
                             :url => "/system/:attachment/:id/:style.:extension"
 
   before_validation :clean_html
@@ -60,8 +57,8 @@ class Donor < ActiveRecord::Base
   def projects_clusters(site)
     sql="select c.id,c.name,count(ps.*) as count from clusters as c
     inner join clusters_projects as cp on c.id=cp.cluster_id
-    inner join donations as d on d.project_id=cp.project_id
-    inner join projects_sites as ps on d.project_id=ps.project_id and ps.site_id=#{site.id}
+    inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=#{site.id}
+    inner join donations as d on ps.project_id=d.project_id and d.donor_id=#{self.id}
     group by c.id,c.name order by count DESC"
     Cluster.find_by_sql(sql).map do |c|
       [c,c.count.to_i]
@@ -76,6 +73,7 @@ class Donor < ActiveRecord::Base
   select r.id,r.name,count(ps.*) as count from regions as r
     inner join projects_regions as pr on r.id=pr.region_id
     inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{site.id}
+    inner join donations as d on ps.project_id=d.project_id and d.donor_id=#{self.id}
     where r.level=#{site.level_for_region}
     group by r.id,r.name order by count DESC
 SQL
