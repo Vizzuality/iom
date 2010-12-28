@@ -19,10 +19,10 @@ Iom::Application.routes.draw do
   #countries and regions work through the same controller and view
   match 'countries/:id' => 'georegion#show', :as => 'country'
   match 'regions/:id'   => 'georegion#show', :as => 'region'
-  
+
   #clusters and sector work through the same controller and view
   match 'sectors/:id' => 'clusters_sectors#show', :as => 'sector'
-  match 'clusters/:id'   => 'clusters_sectors#show', :as => 'cluster'  
+  match 'clusters/:id'   => 'clusters_sectors#show', :as => 'cluster'
 
   # pages
   match '/p/:id' => 'pages#show', :as => :page
@@ -57,6 +57,8 @@ Iom::Application.routes.draw do
       get 'customization', :on => :member
       get 'projects', :on => :member
       post 'toggle_status', :on => :member
+      put 'destroy_aid_map_image', :on => :member
+      put 'destroy_logo', :on => :member
       resources :partners, :only => [:create, :destroy]
       resources :media_resources, :only => [:index, :create, :update, :destroy]
       resources :resources, :only => [:index, :create, :destroy, :update]

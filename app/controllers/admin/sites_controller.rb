@@ -59,6 +59,28 @@ class Admin::SitesController < ApplicationController
     end
   end
 
+  def destroy_aid_map_image
+    @site = Site.find(params[:id])
+    @site.aid_map_image.clear
+    @site.save
+    respond_to do |format|
+      format.html do
+        redirect_to customization_admin_site_path(@site), :flash => {:success => 'Site aid map image has been removed successfully'}
+      end
+    end
+  end
+
+  def destroy_logo
+    @site = Site.find(params[:id])
+    @site.logo.clear
+    @site.save
+    respond_to do |format|
+      format.html do
+        redirect_to customization_admin_site_path(@site), :flash => {:success => 'Site logo has been removed successfully'}
+      end
+    end
+  end
+
   def destroy
     @site = Site.find(params[:id])
     @site.destroy
