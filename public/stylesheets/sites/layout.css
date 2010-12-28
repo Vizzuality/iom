@@ -154,7 +154,7 @@ div#header ul.menu li#organization_option.clicked ul.content li a {float:left; m
 div#header ul.menu li#organization_option.clicked ul.content li a:hover {color:white;}
 
 
-div#header ul.menu li#organization_option.clicked ul#orgs_list {float:left; }
+div#header ul.menu li#organization_option.clicked ul#orgs_list {position:relative; float:left; overflow-y:scroll; overflow-x:hidden;}
 div#header ul.menu li#organization_option.clicked ul#orgs_list li {float:left; margin:7px 0 0 0;}
 div#header ul.menu li#organization_option.clicked ul#orgs_list li a {float:left; font:normal 13px Arial; color:#C1C1C0;}
 div#header ul.menu li#organization_option.clicked ul#orgs_list li a:hover {color:white;}
@@ -320,7 +320,7 @@ div#pages div.float_left div.results_list ul li.odd {background:white; padding:0
 div#pages div.float_left div.results_list ul li.even {background:#F5F5F5; padding:0;}
 div#pages div.float_left div.results_list ul li p.no_results {padding:38px 32px; font:normal 18px "PT Sans Bold"; color:#666666;}
 div#pages div.float_left div.results_list ul li div.project_name {float:left; width:439px; height:110px; border-right:1px solid #E5E5E5; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#pages div.float_left div.results_list ul li div.project_name h3 {padding-bottom:0; color:none;}
+div#pages div.float_left div.results_list ul li div.project_name h3 {width:400px; padding-bottom:0; color:none;}
 div#pages div.float_left div.results_list ul li div.project_name h3 a {padding:0; font:normal 17px "PT Sans Bold"; text-transform:none; border:none; background:none; color:#C45A4B;}
 div#pages div.float_left div.results_list ul li div.project_name h3 a:hover {text-decoration:underline;}
 div#pages div.float_left div.results_list ul li div.project_name p {margin:0; padding:0 0 0 32px; font:normal 13px Arial; color:#999999;}
