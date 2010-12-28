@@ -58,7 +58,8 @@
 
       function startGalleria() {
         if ($('div.galleryStyle').length>0) {
-          Galleria.loadTheme('/javascripts/plugins/galleria.classic.js');
+          var r = ($.browser.msie)? "?r=" + Math.random(10000) : "";
+          Galleria.loadTheme('/javascripts/plugins/galleria.classic.js' + r);
           $('div.galleryStyle').galleria({thumbnails:false, preload:2,autoplay:5000,transition:'fade',show_counter:'false'});
           $('div.loader_gallery').delay(300).fadeOut();
         }
