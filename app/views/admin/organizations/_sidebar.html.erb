@@ -1,5 +1,5 @@
 <ul>
-  <li <%= selected_if_current_page(edit_admin_organization_path(@organization), !params[:site_id].nil?) %>>
+  <li <%= selected_if_current_page(edit_admin_organization_path(@organization), (!params[:site_id].nil? || action_name == 'update')) %>>
     <div class="bottom_selected">
       <%= link_to('Basic information', edit_admin_organization_path(@organization), :class=>"basic") %>
       <span class="list">
