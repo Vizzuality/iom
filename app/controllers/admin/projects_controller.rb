@@ -18,26 +18,20 @@ class Admin::ProjectsController < ApplicationController
           projects = projects.where("end_date < ?", Date.today.to_s(:db))
         end
       end
-      unless ((params[:country].blank?)||(params[:country] == "0"))
-        if country = Country.find(params[:country])
-          @conditions[country.name] = {'country' => params[:country]}
-          from << 'countries_projects'
-          projects = projects.from(from.join(',')).where("countries_projects.country_id = #{country.id} AND countries_projects.project_id = projects.id")
-        end
+      unless params[:country].blank? || params[:country] == "0"
+        @conditions[country.name] = {'country' => params[:country]}
+        from << 'countries_projects'
+        projects = projects.from(from.join(',')).where("countries_projects.country_id = #{country.id} AND countries_projects.project_id = projects.id")
       end
-      unless params[:cluster].blank?
-        if cluster = Cluster.find(params[:cluster])
-          @conditions[cluster.name] = {'cluster' => params[:cluster]}
-          from << 'clusters_projects'
-          projects = projects.from(from.join(',')).where("clusters_projects.cluster_id = #{cluster.id} AND clusters_projects.project_id = projects.id")
-        end
+      unless params[:cluster].blank? || params[:cluster] == '0'
+        @conditions[cluster.name] = {'cluster' => params[:cluster]}
+        from << 'clusters_projects'
+        projects = projects.from(from.join(',')).where("clusters_projects.cluster_id = #{cluster.id} AND clusters_projects.project_id = projects.id")
       end
-      unless params[:sector].blank?
-        if sector = Sector.find(params[:sector])
-          @conditions[sector.name] = {'sector' => params[:sector]}
-          from << 'projects_sectors'
-          projects = projects.from(from.join(',')).where("projects_sectors.sector_id = #{sector.id} AND projects_sectors.project_id = projects.id")
-        end
+      unless params[:sector].blank? || params[:sector] == '0'
+        @conditions[sector.name] = {'sector' => params[:sector]}
+        from << 'projects_sectors'
+        projects = projects.from(from.join(',')).where("projects_sectors.sector_id = #{sector.id} AND projects_sectors.project_id = projects.id")
       end
       @projects = projects.paginate :per_page => 20, :order => 'created_at DESC', :page => params[:page]
     elsif params[:organization_id]
