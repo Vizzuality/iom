@@ -209,8 +209,13 @@ div.block.edit div.top {float:left; width:100%; background:url('/images/backoffi
 div.block.edit div.med {float:left; width:874px; padding:16px 33px 28px; background:url('/images/backoffice/backgrounds/middle_two_columns.png') repeat-y center 0!important;}
 div.block.edit div.med div.left {float:left; width:572px; margin:0 0 0 2px;}
 div.block.edit div.med div.left div.image_container {float:left; width:544px; height:60px; margin:5px 0 0 0; padding:10px; background:url('/images/backoffice/donors/image_bkg.png') no-repeat 0 0;}
+div.block.edit div.med div.left div.image_container p.message {font-style:italic; color:#999999;}
+div.block.edit div.med div.left div.image_container p {float:left; font:normal 15px Arial; color:#666666;  width:auto; margin:26px 0 0 0;}
+div.block.edit div.med div.left div.image_container p a.remove {font:normal 15px Arial; color:#D8393D; text-decoration:underline;}
+div.block.edit div.med div.left div.image_container p a.remove:hover {cursor:pointer;}
+
 div.block.edit div.med div.left div.image_container img {float:left; max-height:60px; margin:0 15px 0 0;}
-div.block.edit div.med div.left div.image_container div.field {float:left; width:300px;}
+div.block.edit div.med div.left div.image_container div.field {float:left; width:240px;}
 div.block.edit div.med div.left div.image_container div.field p {float:left; width:300px; margin:5px 0 0 0; font:normal 13px Arial; color:#666666;}
 div.block.edit div.med div.left div.image_container div.field input {float:left; width:300px; margin:5px 0 0 0;}
 div.block.edit div.med div.left textarea {float:left; min-width:548px; max-width:548px; max-height:204px; min-height:204px; margin:5px 0 0 0; padding:5px 8px; background:url('/images/backoffice/donors/textarea_bkg.png') no-repeat 0 0; border:none; font:normal 15px Arial; color:#333333;}

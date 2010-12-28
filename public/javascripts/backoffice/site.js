@@ -66,8 +66,7 @@ $(document).ready(function(ev){
           // IF "selected" - before was...
           switch(id){
             case 'gc_limited_region':
-                $('#gc_limited_country_section').find('option:first').attr('selected', 'selected').parent('select');
-                $('select#gc_limited_country_section').val(null);
+                $('select#gc_limited_country_section option:selected').val(null);
                 $('li.selected').find('.selectedTxt').text('Select a country');
               break;
             case 'gc_limited_bbox':

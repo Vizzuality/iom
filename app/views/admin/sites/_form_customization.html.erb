@@ -14,6 +14,11 @@
         <p>JPG, PNG and GIF supported</p>
         <%= f.file_field :logo %>
       </div>
+      <% if @site.logo_file_name? %>
+        <p> or <a class="remove">remove</a></p>
+      <%else%>
+        <p class="message">Select a file from your computer</p>
+      <% end -%>
     </div>
 
     <%= f.label :theme %>
@@ -36,6 +41,11 @@
         <p>JPG, PNG and GIF supported</p>
         <%= f.file_field :aid_map_image %>
       </div>
+      <% if @site.aid_map_image_file_name? %>
+          <p> or <a class="remove">remove</a></p>
+        <%else%>
+          <p class="message">Select a file from your computer</p>
+      <% end -%>
     </div>
 
   </div>
