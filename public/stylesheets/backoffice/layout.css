@@ -849,6 +849,7 @@ div.block.media div.med div.left div.add_media form {position:relative; float:le
 div.block.media div.med div.left div.add_media form input {margin:10px 0 0 0;}
 div.block.media div.med div.left div.add_media form input[type="file"] {float:left; width:250px;}
 div.block.media div.med div.left div.add_media form input[type="text"] {float:left; width:452px; height:16px; margin:0; padding:8px 65px 8px 8px; font:normal 15px Arial; color:#333333; border:none; background:url('/images/backoffice/media/video_input.png') no-repeat 0 0;}
+div.block.media div.med div.left div.add_media form input[type="text"].error {background-position:0 -32px;}
 div.block.media div.med div.left div.add_media form input[type="submit"] {float:right; width:56px; height:26px; margin:3px 0 0 0; background:url('/images/backoffice/media/save.png') no-repeat 0 0; border:none; text-indent:-9999px; font-size:0; display:block; line-height:0;}
 div.block.media div.med div.left div.add_media form input[type="submit"]:hover {background-position:0 -26px; cursor:pointer;}
 div.block.media div.med div.left div#new_video form input[type="submit"] {position:absolute; right:4px; top:0; width:56px; height:26px; margin:3px 0 0 0; background:url('/images/backoffice/media/save.png') no-repeat 0 0; border:none; text-indent:-9999px; font-size:0; display:block; line-height:0;}
