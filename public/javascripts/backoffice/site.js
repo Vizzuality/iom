@@ -147,16 +147,20 @@ $(document).ready(function(ev){
       $('span.select_combo_typology').click(function(ev){
         ev.stopPropagation();
         ev.preventDefault();
-        $('span.select_combo_typology.clicked').removeClass('clicked');
-        $(this).addClass('clicked');
+        if ($(this).hasClass('clicked')) {
+            $(this).removeClass('clicked');
+        }else {
+            $('span.select_combo_typology.clicked').removeClass('clicked');
+            $(this).addClass('clicked');
 
-        resetCombo($(this));
+            resetCombo($(this));
 
-        $(document).click(function(event) {
-          if (!$(event.target).closest('span.select_combo_typology').length) {
-            $('span.select_combo_typology').removeClass('clicked');
-          };
-        });
+            $(document).click(function(event) {
+              if (!$(event.target).closest('span.select_combo_typology').length) {
+                $('span.select_combo_typology').removeClass('clicked');
+              };
+            });
+        }
       });
 
       // CLICK ON SECTORS OR CLUSTER

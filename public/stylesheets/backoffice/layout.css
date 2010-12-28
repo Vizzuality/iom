@@ -453,7 +453,7 @@ div.two_projects ul.combos li span.combo:focus {outline:none;}
 div.two_projects ul.combos li span.combo p {width:130px;}
 div.two_projects ul.combos li span.combo ul.elements {display:none;}
 div.two_projects ul.combos li span.combo.clicked {background:url('/images/backoffice/projects/combos/index_search_head.png') no-repeat 0 0; width:135px; position:relative;}
-div.two_projects ul.combos li span.combo.clicked div.elements_content {position:absolute; top:31px; left:0; display:inline; background:url('/images/backoffice/projects/combos/body_combo_search.png') no-repeat 0 0; width:148px; height:198px;}
+div.two_projects ul.combos li span.combo.clicked div.elements_content {position:absolute; top:31px; left:0; display:inline; background:url('/images/backoffice/projects/combos/body_combo_search.png') no-repeat 0 0; width:148px; height:198px; z-index:50;}
 div.two_projects ul.combos li span.combo.clicked ul.elements {float:left; width:148px; height:194px; overflow-x:hidden; overflow-y:auto; display:inline;}
 
 div.two_projects ul.combos li span.combo.clicked ul.elements li {float:left; width:88px; height:auto; padding:5px 30px 5px 12px; margin:0 0 0 1px; }
