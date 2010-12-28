@@ -10,10 +10,6 @@ if ($.browser.msie) {
   $('div#header ul.menu li#country_option a:eq(0)').css('width','70px');
   $('div#header ul.menu li#region_option a:eq(0)').css('width','65px');
   $('div#header ul.menu li#organization_option a:eq(0)').css('width','110px');
-  $('span.with_suboptions').css('background','red');
-  // $('div#header ul.menu li a span.with_suboptions').css('position','absolute!important');
-  // $('div#header ul.menu li a span.with_suboptions').css('right','0!important');
-  // $('div#header ul.menu li a span.with_suboptions').css('top','3px!important');
 }
 
 
