@@ -134,7 +134,8 @@ div#header ul.menu li#country_option.clicked ul.content li a {float:left; margin
 div#header ul.menu li#country_option.clicked ul.content li a:hover {color:white;}
 /*REGION*/
 div#header ul.menu li#region_option.clicked div.header_title {position:absolute; top:0; left:-15px; background:url('/images/sites/common/menu/region_head_clicked.png') no-repeat 0 0; width:106px; height:35px; display:inline;}
-div#header ul.menu li#region_option.clicked div.suboptions_body {position:absolute; top:35px; left:-19px; z-index:110; background:url('/images/sites/common/menu/region_body_clicked.png') repeat-y 0 bottom; display:none; width:238px; max-height:238px; height:auto; display:inline; padding:7px; display:inline;}
+div#header ul.menu li#region_option.clicked span.suboptions_body_top {position:absolute; top:-2px; left:0; z-index:110; background:url('/images/sites/common/menu/region_body_clicked_top.png') no-repeat 0 0; width:238px; height:2px;}
+div#header ul.menu li#region_option.clicked div.suboptions_body {position:absolute; top:37px; left:-19px; z-index:110; background:url('/images/sites/common/menu/region_body_clicked.png') repeat-y 0 bottom; display:none; width:238px; max-height:238px; height:auto; display:inline; padding:7px; display:inline;}
 div#header ul.menu li#region_option.clicked div.suboptions_body div.content_float {float:left; width:238px; height:auto; background:url('/images/sites/common/menu/region_body_clicked.png') repeat-y 0 bottom;}
 
 div#header ul.menu li#region_option.clicked div.header_title a {margin:8px 0 0 15px;}
