@@ -438,9 +438,6 @@ div#manage_partners div.image_container input[type="file"] {margin:5px 0 0 15px;
 div#manage_partners input[type="submit"] {width:132px; height:32px; margin:25px 0 0 0; text-indent:-9999px; background:url('/images/backoffice/sites/add_partner_button.png') no-repeat 0 0;}
 div#manage_partners input[type="submit"]:hover {background-position:0 -32px;}
 
-
-
-
 /*projects search*/
 div.two_projects {float:left; width:643px; height:auto; margin:20px 10px 0 0; }
 div.two_projects span.top {float:left; width:643px; height:9px; background:url('/images/backoffice/backgrounds/two_top.png') no-repeat 0 0;}
@@ -455,33 +452,26 @@ div.two_projects ul.combos li span.combo ul.elements {display:none;}
 div.two_projects ul.combos li span.combo.clicked {background:url('/images/backoffice/projects/combos/index_search_head.png') no-repeat 0 0; width:135px; position:relative;}
 div.two_projects ul.combos li span.combo.clicked div.elements_content {position:absolute; top:31px; left:0; display:inline; background:url('/images/backoffice/projects/combos/body_combo_search.png') no-repeat 0 0; width:148px; height:198px; z-index:50;}
 div.two_projects ul.combos li span.combo.clicked ul.elements {float:left; width:148px; height:194px; overflow-x:hidden; overflow-y:auto; display:inline;}
-
 div.two_projects ul.combos li span.combo.clicked ul.elements li {float:left; width:88px; height:auto; padding:5px 30px 5px 12px; margin:0 0 0 1px; }
 div.two_projects ul.combos li span.combo.clicked ul.elements li:hover {background-color:#E4F0CA;}
-
 div.two_projects ul.combos li span.combo ul.elements.short {display:none;}
-div.two_projects ul.combos li span.combo.clicked ul.elements.short {position:absolute; top:31px; left:-1px; display:inline; width:148px; height:auto; background:none;}
+div.two_projects ul.combos li span.combo.clicked ul.elements.short {position:absolute; top:31px; left:-1px; display:inline; width:148px; height:auto; background:none; z-index:50;}
 div.two_projects ul.combos li span.combo.clicked ul.elements.short li {float:left; width:120px; height:auto; background:url('/images/backoffice/projects/combos/index_search_content.png')
 repeat-y 0; padding:5px 5px 5px 12px; margin:0 0 0 1px;}
 div.two_projects ul.combos li span.combo.clicked ul.elements.short li:hover {float:left; width:264px; background:url('/images/backoffice/projects/combos/index_search_content_hover.png') repeat-y 0;}
-
 div.two_projects ul.combos li span.combo.clicked ul.elements.short li.first {float:left; width:135px; height:6px; background:url('/images/backoffice/projects/combos/index_search_content_first.png') no-repeat 0 0; margin:0 0 0 0 1px; padding:0;}
 div.two_projects ul.combos li span.combo.clicked ul.elements.short li.last {float:left; width:135px; height:6px; background:url('/images/backoffice/projects/combos/index_search_bottom.png') no-repeat 0 0;}
 div.two_projects ul.combos li span.combo.clicked ul.elements.short li.last:hover {background:url('/images/backoffice/projects/combos/index_search_bottom.png') no-repeat 0 0;}
-
 div.two_projects ul.combos li span.combo:hover {cursor:pointer;}
-
 div.two_projects label {float:left; margin:0 0 0 3px; font:bold 11px Arial; color:#999999;}
 div.two_projects form {float:left; position:relative; width:100%;}
 div.two_projects input[type="text"] {float:left; width:559px; height:27px; margin:5px 0 0 0; padding:5px 8px; font:normal 17px Arial; color:#CCCCCC; border:none; background:url('/images/backoffice/donors/input_bkg.jpg') no-repeat 0 0; line-height:27px;}
 div.two_projects input[type="submit"] {position:absolute; width:15px; height:15px; right:20px; top:28px; background:url('/images/backoffice/donors/lens.jpg') no-repeat 0 0; border:none;}
 div.two_projects input[type="submit"]:hover {background-position:0 -15px; cursor:pointer;}
-
 div.one_project {float:left; width:288px; height:140px; margin:20px 0 0 0; padding:0;}
 div.one_project span.top {float:left; width:288px; height:8px; background:url('/images/backoffice/backgrounds/one_box_top.png') no-repeat 0 0;}
 div.one_project div.content {float:left; width:288px; height:auto; padding:0 0 26px; background:url('/images/backoffice/backgrounds/one_box_content.png') repeat-y 0;}
 div.one_project span.bottom {float:left; width:288px; height:15px; background:url('/images/backoffice/backgrounds/one_box_bottom.png') no-repeat 0 0;}
-
 div.one_project p {float:left; margin:12px 5px 0 0; width:158px; font:normal 43px "Museo Sans",Arial; color:#333333; text-align:right;}
 div.one_project label {float:left; font:normal 15px "Museo Sans",Arial; color:#666666; padding:17px 0 0 0;}
 div.one_project a.add_project {float:left; width:156px; height:26px; margin:5px 0 0 46px; padding:6px 0 0 36px; background:url('/images/backoffice/projects/add_donor_bttn.png') no-repeat 0 0; font:normal 19px "Museo Sans",Arial; color:white; text-shadow:0 1px #5C7C31;}
@@ -1098,10 +1088,11 @@ ul.newList.country li a {font:normal 15px Arial; color:#666666;}
 div.newList_content.country_index {background:url('/images/backoffice/projects/combos/country_body.png') no-repeat 0 0; height:201px; width:134px; top:32px!important; left:0; position:absolute;}
 ul.newList.country_index {float:left; height:194px; overflow-x:hidden; width:147px; margin:0 0 0 1px; overflow-y:auto;}
 ul.newList.country_index li {width:233px; margin:0; height:auto !important;}
-ul.newList.country_index li a {font:normal 13px Arial; color:#333333;}
+ul.newList.country_index li:focus {outline:none;}
+ul.newList.country_index li a {font:normal 13px Arial; color:#333333; width:114px;}
 
 ul.newList li a {padding:3px 8px; display: block;}
-ul.newList li a:focus {-moz-outline-style: none;}
+ul.newList li a:focus {-moz-outline-style: none; outline:none;}
 .selectedTxt {width:auto; overflow:hidden; height:16px; margin:4px 0 0 3px; font:normal 13px Arial; color:#333333; line-height:21px;}
 .hiLite {background:#CBE499!important; color:#333333!important;}
 .hiLite a {background:#CBE499!important; color:#333333!important;}

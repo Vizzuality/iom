@@ -138,6 +138,7 @@ Dual licensed under the MIT and GPL licenses.
             } else {
                 //set placeholder text
                 $containerDivText.text(opts.defaultText);
+                
             }
 
             //decide if to place the new list above or below the drop-down
@@ -218,7 +219,6 @@ Dual licensed under the MIT and GPL licenses.
 
     				// To reset api jscrollPane
                     var element = $('div.newListSelected').find('.scroll_pane');
-                    console.log(element);
                     if ((element != undefined) && (element.length > 0)){
                         var api = element.data('jsp');
                         api.reinitialise();                
@@ -278,6 +278,9 @@ Dual licensed under the MIT and GPL licenses.
                 //page load
                 if (init == true){
                     $input.val(val);
+                    if ($containerDiv.hasClass('country_index')){
+                        text = text.substring(0,10) + '...';                         
+                    }
                     $containerDivText.text(text);
                     return false;
                 }
@@ -290,6 +293,10 @@ Dual licensed under the MIT and GPL licenses.
 		}
 
                 $input.change();
+                
+                if ($containerDiv.hasClass('country_index')){
+                    text = text.substring(0,10) + '...';                         
+                }
                 $containerDivText.text(text);
             }
 
@@ -408,6 +415,11 @@ Dual licensed under the MIT and GPL licenses.
                 $containerDiv.removeClass('newListSelFocus');
                 $newUl.hide();
                 positionHideFix();
+                
+                $newUl.parent().children('div.selectedTxt').parent('div.newListSelected').css('background-position','0 0');
+				$newUl.find('ul').css('display','none');
+				$newUl.find('ul').css('visibility','hidden');
+				
             });
 
             //add classes on hover
