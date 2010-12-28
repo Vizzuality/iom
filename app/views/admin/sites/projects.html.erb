@@ -6,15 +6,15 @@
         <div class="left">
           <h2 class="museo_sans"><%= @site.name %></h2>
           <p><%= pluralize(@site.total_projects, 'project', 'projects') %> within this site</p>
-          <% unless @site.projects.empty? %>
+          <% unless @projects.empty? %>
             <ul>
-              <% @site.projects.each do |project| %>
+              <% @projects.each do |project| %>
               <li>
                 <span class="first">
-                  <h3><%= link_to( truncate(project.name,:length=>47), edit_admin_project_path(project)) %></h3>                  
+                  <h3><%= link_to( truncate(project.name,:length=>47), edit_admin_project_path(project)) %></h3>
                   <p class="<%= project.finished? ? 'closed' : 'active' %>"><%= project.finished? ? 'Closed' : 'Active' %></p>
                 </span>
-                <p class="<%= !project.finished? ? 'more' : '' %>"><a href="#">Action against hunger</a> and <a href="#">Food for Haiti</a></p>
+                <p class="<%= !project.finished? ? 'more' : '' %>"><%= link_to(project.primary_organization.name, edit_admin_organization_path(project.primary_organization)) %></p>
               </li>
               <% end -%>
             </ul>
@@ -24,7 +24,9 @@
           <%= render 'admin/sites/sidebar' %>
         </div>
       </div>
-      <div class="bottom"></div>
+      <div class="bottom_grey paginate">
+        <%= will_paginate(@projects) %>
+      </div>
     </div>
 
     <div class="add_new">

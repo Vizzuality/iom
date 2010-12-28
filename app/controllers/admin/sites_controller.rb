@@ -21,6 +21,7 @@ class Admin::SitesController < ApplicationController
 
   def projects
     @site = Site.find(params[:id])
+    @projects = Project.select("projects.*").from("projects, projects_sites").where("projects_sites.site_id = #{@site.id} and projects_sites.project_id = projects.id").paginate :per_page => 10, :order => 'created_at DESC', :page => params[:page]
   end
 
   def edit
