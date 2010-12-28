@@ -5,7 +5,7 @@
     <div class="med">
       <div class="left">
         <h2 class="museo_sans"><%= @element.name %></h2>
-        
+
         <% unless @project.nil? %>
         <p class="by">by <%= link_to(@project.primary_organization.name, edit_admin_organization_path(@project.primary_organization)) %> /
           <%= @project.countries.first.name %>
@@ -76,7 +76,7 @@
           <p>or <a href="javascript:void(null)" class="toggle_image_video">add a video</a></p>
           <%= form_for([:admin, @element, @resource], :html => { :multipart => true }) do |f| %>
             <div class="field">
-              <%= f.file_field :picture %>
+              <%= f.file_field :picture, :class => "#{'error' if !@resource.valid? && action_name != 'index'}" %>
             </div>
             <div class="field">
               <%= f.submit 'save' %>
@@ -89,7 +89,7 @@
           <p>or <a href="javascript:void(null)" class="toggle_image_video">add an image</a></p>
           <%= form_for([:admin, @element, @resource]) do |f| %>
             <div class="field">
-              <%= f.text_field :vimeo_url, :value=>"Enter a Vimeo URL", :class=>"vimeo" %>
+              <%= f.text_field :vimeo_url, :value => "Enter a Vimeo URL", :class => "vimeo #{'error' if !@resource.valid? && action_name != 'index'}" %>
             </div>
             <div class="field">
               <%= f.submit 'save' %>
