@@ -234,6 +234,8 @@ namespace :iom do
             end
           end
 
+          p.save!
+
           # -->Country
           if (!row.country.blank?)
             country= Country.where("name ilike ?",row.country).select(Country.custom_fields).first
@@ -300,8 +302,6 @@ namespace :iom do
             multi_point = "ST_MPointFromText('MULTIPOINT(#{locations.join(',')})',4326)" unless (locations.length<1)
           end
           puts "."
-
-          p.save!
 
           #save the Geom that we created before
           if(!multi_point.blank?)

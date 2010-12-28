@@ -232,6 +232,7 @@ SQL
     end
 
     def add_to_country(region)
+      return if self.new_record?
       count = ActiveRecord::Base.connection.execute("select count(*) as count from countries_projects where project_id=#{self.id} AND country_id=#{region.country_id}").first['count'].to_i
       if count == 0
         ActiveRecord::Base.connection.execute("INSERT INTO countries_projects (project_id, country_id) VALUES (#{self.id},#{region.country_id})")
