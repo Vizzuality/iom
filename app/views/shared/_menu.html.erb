@@ -71,11 +71,10 @@
                   <input id="ngos_search" type="text" value="" name="ngos_search"/>
                 </form>
                 <div class="wrapper">
-                  <ul id="orgs_list" class="content scroll_pane_auto">
-
-                    <% @site.organizations.each do |organization| %>
-                      <li><a href="<%= organization_path(organization) %>"><%= organization.name %></a></li>
-                    <% end %>
+                  <ul id="orgs_list" class="content scroll_pane">
+                      <% @site.organizations.each do |organization| %>
+                        <li><a href="<%= organization_path(organization) %>"><%= organization.name %></a></li>
+                      <% end %>
                   </ul>
                 </div>
               </div>

@@ -37,15 +37,12 @@ $(document).ready( function() {
       $('ul.menu').css('zIndex',1000);
       $('ul.suboptions').css('zIndex',1000);
     }
-  
-
 
     // TODO: update scrollbar to content
-    // if ($('.scroll_pane_auto').length > 0){
-    //
-    //     $('.scroll_pane_auto').jScrollPane({
-    //                        autoReinitialise:true });
-    // }
+    if ($('.scroll_pane_auto').length > 0){    
+        $('.scroll_pane_auto').jScrollPane({
+                           autoReinitialise:true });
+    }
 
 
     // LIVE SEARCH IN ORGANIZATIONS
@@ -55,7 +52,7 @@ $(document).ready( function() {
     // CUSTOM SCROLLBARS
     if ($('.scroll_pane').length > 0){    
         $('.scroll_pane').jScrollPane({
-                           autoReinitialise:true });
+                           autoReinitialise:false });
     }
 
 

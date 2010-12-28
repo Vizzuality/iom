@@ -26,7 +26,7 @@
 		},
 		
 		filter: function() {
-			if ($.trim(this.field.val()) == '') { this.list.children('li').children('a').show(); return; }
+			if ($.trim(this.field.val()) == '') { this.list.find('li').children('a').show(); return; }
 			this.displayResults(this.getScores(this.field.val().toLowerCase()));
 		},
 		
@@ -34,7 +34,7 @@
 			var self = this;
 			this.cache = [];
 			this.rows = [];
-			this.list.children('li').each(function() {
+			this.list.find('li').each(function() {
 				self.cache.push(this.innerHTML.toLowerCase());
 				self.rows.push($(this));
 			});
@@ -43,8 +43,17 @@
 		
 		displayResults: function(scores) {
 			var self = this;
-			this.list.children('li').hide();
+			this.list.find('li').hide();
 			$.each(scores, function(i, score) { self.rows[score[1]].show(); });
+			
+			var element = this.list;
+
+			if (element.length >0){
+                var api = element.data('jsp');
+                api.reinitialise();
+            }
+            
+			
 			
 		},
 		getScores: function(term) {

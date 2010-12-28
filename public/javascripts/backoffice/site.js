@@ -70,7 +70,7 @@ $(document).ready(function(ev){
                 $('li.selected').find('.selectedTxt').text('Select a country');
               break;
             case 'gc_limited_bbox':
-              $('input#site_geographic_boundary_box').val('');
+              $('input#site_geographic_boundary_box').val(null);
               break;
             default:
 
