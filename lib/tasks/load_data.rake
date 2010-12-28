@@ -4,11 +4,10 @@ namespace :db do
 
   desc 'reset 1'
   task :reset_1 => %w(db:drop db:create db:migrate iom:data:load_countries)
-  
-  desc 'reset 2'
-  task :reset_2 => %w(db:seed iom:data:load_adm_levels iom:data:load_orgs iom:data:load_projects)  
-end
 
+  desc 'reset 2'
+  task :reset_2 => %w(db:seed iom:data:load_adm_levels iom:data:load_orgs iom:data:load_projects)
+end
 
 namespace :iom do
   namespace :data do
@@ -26,15 +25,13 @@ namespace :iom do
       sql="INSERT INTO countries(\"name\",code,the_geom,iso2_code,iso3_code)
       SELECT name,iso3,the_geom,iso2,iso3 from tmp_countries"
       DB.execute sql
-      
+
       DB.execute "UPDATE countries SET center_lat=y(ST_Centroid(the_geom)),center_lon=x(ST_Centroid(the_geom))"
       DB.execute "UPDATE countries SET the_geom_geojson=ST_AsGeoJSON(the_geom,6)"
 
       DB.execute 'DROP TABLE tmp_countries'
       system("rm -rf #{Rails.root}/db/data/countries/TM_WORLD_BORDERS-0.3.shp #{Rails.root}/db/data/countries/TM_WORLD_BORDERS-0.3.shx #{Rails.root}/db/data/countries/TM_WORLD_BORDERS-0.3.dbf #{Rails.root}/db/data/countries/TM_WORLD_BORDERS-0.3.prj #{Rails.root}/db/data/countries/Readme.txt")
-
     end
-
 
     desc "load 3th administrative level Haiti geo data. (Communes)"
     task :load_adm_levels => :environment do
@@ -91,9 +88,6 @@ namespace :iom do
       DB.execute "UPDATE regions set code='HT-SD' WHERE name='Sud' and level=1"
       DB.execute "UPDATE regions set code='HT-SE' WHERE name='Sud-Est' and level=1"
       DB.execute "UPDATE regions set code='HT-CE' WHERE name='Centre' and level=1"
-
-
-
     end
 
     desc 'Load organizations data'
@@ -153,8 +147,8 @@ namespace :iom do
         o.attributes_for_site = {:organization_values => {:description=>row.organizations_work_in_haiti}, :site_id => 1}
         o.save!
       end
-
     end
+
     desc 'Load projects data'
     task :load_projects  => :environment do
       DB = ActiveRecord::Base.connection
@@ -202,8 +196,9 @@ namespace :iom do
           p.date_provided             = Date.strptime(row.date_provided_mmddyyyy, '%m/%d/%Y') unless (row.date_provided_mmddyyyy.blank?)
           p.date_updated              = Date.strptime(row.date_updated_mmddyyyy, '%m/%d/%Y') unless (row.date_updated_mmddyyyy.blank?)
 
+          # Relations
+          #########################
 
-          #Relations
           # -->Clusters
           if(!row.clusters.blank?)
             parsed_clusters = row.clusters.split(",").map{|e|e.strip}
@@ -262,6 +257,10 @@ namespace :iom do
                 puts "ALERT: REGION LEVEL 1 NOT FOUND #{region_name}"
               end
             end
+          end
+          if p.regions.empty?
+            puts "[error] empty regions"
+            next
           end
           puts "."
 
