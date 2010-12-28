@@ -4,9 +4,23 @@ IOM = {
   }
 }
 
+//IE Problems (DONT TOUCH)
+if ($.browser.msie) {
+  $('div#header ul.menu li#cluster_option a:eq(0)').css('width','70px');
+  $('div#header ul.menu li#country_option a:eq(0)').css('width','70px');
+  $('div#header ul.menu li#region_option a:eq(0)').css('width','65px');
+  $('div#header ul.menu li#organization_option a:eq(0)').css('width','110px');
+  $('span.with_suboptions').css('background','red');
+  // $('div#header ul.menu li a span.with_suboptions').css('position','absolute!important');
+  // $('div#header ul.menu li a span.with_suboptions').css('right','0!important');
+  // $('div#header ul.menu li a span.with_suboptions').css('top','3px!important');
+}
+
+
+
 $(document).ready( function() {
 
-    //Z-index IE
+
     if ($.browser.msie) {
       var zIndexNumber = 1000;  
       $('div,ul').each(function() {  
@@ -23,8 +37,7 @@ $(document).ready( function() {
       $('ul.menu').css('zIndex',1000);
       $('ul.suboptions').css('zIndex',1000);
     }
-
-
+  
 
 
     // TODO: update scrollbar to content
