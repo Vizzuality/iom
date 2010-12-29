@@ -34,7 +34,7 @@ class SearchController < ApplicationController
       INNER JOIN organizations as o       ON p.primary_organization_id=o.id
       INNER JOIN projects_sites as ps     ON p.id=ps.project_id and ps.site_id=#{@site.id}
       INNER JOIN projects_regions as pr   ON pr.project_id=p.id
-      INNER JOIN regions as r             ON pr.region_id=r.id and r.level=1
+      INNER JOIN regions as r             ON pr.region_id=r.id and r.level=#{@site.level_for_region}
       INNER JOIN countries_projects as cp ON cp.project_id=p.id
       INNER JOIN countries as c           ON c.id=cp.country_id
       #{where}
@@ -54,7 +54,7 @@ class SearchController < ApplicationController
           INNER JOIN organizations as o       ON p.primary_organization_id=o.id
           INNER JOIN projects_sites as ps     ON p.id=ps.project_id and ps.site_id=#{@site.id}
           INNER JOIN projects_regions as pr   ON pr.project_id=p.id
-          INNER JOIN regions as r             ON pr.region_id=r.id and r.level=1
+          INNER JOIN regions as r             ON pr.region_id=r.id and r.level=#{@site.level_for_region}
           INNER JOIN countries_projects as cp ON cp.project_id=p.id
           INNER JOIN countries as c           ON c.id=cp.country_id
           #{where}
@@ -80,7 +80,7 @@ class SearchController < ApplicationController
         sql="select r.id,r.name,count(r.id) as count from clusters_projects as cp
                 inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=1
                 inner join projects_regions as pr on ps.project_id=pr.project_id
-                inner join regions as r on pr.region_id=r.id and r.level=1
+                inner join regions as r on pr.region_id=r.id and r.level=#{@site.level_for_region}
                 inner join projects as p on ps.project_id=p.id
                 #{where_facet}
                 group by r.id,r.name order by count DESC"

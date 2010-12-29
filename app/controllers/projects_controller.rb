@@ -31,8 +31,8 @@ SQL
 
     #Map data
     sql="select r.id,x(ST_Centroid(r.the_geom)) as lon,y(ST_Centroid(r.the_geom)) as lat,r.name,r.code
-    from (projects as p inner join projects_regions as pr on pr.project_id=p.id and p.id=1)
-    inner join regions as r on pr.region_id=r.id and r.level=1"
+    from (projects as p inner join projects_regions as pr on pr.project_id=p.id and p.id=#{@project.id})
+    inner join regions as r on pr.region_id=r.id and r.level=#{@site.level_for_region}"
 
     result = ActiveRecord::Base.connection.execute(sql)
     @map_data=result.to_json

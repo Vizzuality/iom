@@ -24,7 +24,7 @@ class OrganizationsController < ApplicationController
                 o.id=#{params[:id].gsub(/\\/, '\&\&').gsub(/'/, "''")})
                 inner join projects_sites as ps on p.id=ps.project_id and ps.site_id=#{@site.id})
                 inner join projects_regions as pr on pr.project_id=p.id)
-                inner join regions as r on pr.region_id=r.id and r.level=1)
+                inner join regions as r on pr.region_id=r.id and r.level=#{@site.level_for_region})
                 inner join countries as c on r.country_id=c.id
                 group by r.id,r.name,lon,lat,c.name,url,r.code"
         else

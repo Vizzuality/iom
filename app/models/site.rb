@@ -310,9 +310,9 @@ class Site < ActiveRecord::Base
     projects_sql(options).where("projects.id=?",project_id).present?
   end
 
-  # TODO: perform query with a count()
   def total_projects(options = {})
-    projects(options.merge(:limit => nil, :offset => nil)).size
+    sql = "select count(projects_sites.project_id) as count from projects_sites where projects_sites.site_id = #{self.id}"
+    ActiveRecord::Base.connection.execute(sql).first['count'].to_i
   end
 
   # TODO: performance, don't get all fields
