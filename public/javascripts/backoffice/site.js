@@ -40,9 +40,6 @@ $(document).ready(function(ev){
             text = 'Select a cluster or a sector';
         }
         $('p.cluster_sector').text(text);
-        
-        
-        
     }
     /************** SITE PAGE  ************************** */
 		if ($('select').length) {
@@ -79,6 +76,8 @@ $(document).ready(function(ev){
           $('ul.geographic_options').children('li.selected').removeClass('selected');
           $(this).parent().addClass('selected');
         }
+        $('div.block div.med div.left').resize();
+        
       });
 
        $(document).click(function(event) {
@@ -140,7 +139,7 @@ $(document).ready(function(ev){
         }else {
           $(this).parent().addClass('selected');
         }
-
+        $('div.block div.med div.left').resize();
       });
 
       // CLICK ON SELECT CLUSTER OR SECTOR

@@ -87,7 +87,7 @@ ul#gallery_thumbails li.last {margin:30px 0 0 0;}
 /* ***************** END HOME SITES*/
 
 /*CLUSTER AND SECTORS TOOLTIPS*/
-div.tooltip {position:absolute; bottom:21px; left:-71px; display:none;}
+div.tooltip {position:absolute; bottom:18px; left:-71px; display:none;}
 div.tooltip span.bottom_tooltip {float:left; background:url('/images/sites/common/tooltips/bottom_tooltip.png') no-repeat 0 0; width:175px; height:16px;}
 div.tooltip span.body_tooltip {float:left; background:url('/images/sites/common/tooltips/body_tooltip.png') repeat-y top; width:149px; height:auto; padding:9px 15px 0 11px;}
 div.tooltip label {float:left; font:normal 13px "PT Sans Bold"; color:white; text-align:center; width:152px;}
@@ -249,7 +249,7 @@ div#left_column div.float_left div.block.resources {background:url('/images/site
 div#left_column div.float_left div.block h3 {width:100%; font:normal 13px "PT Sans Bold"; color:#999999; text-shadow:none; text-transform:uppercase;}
 div#left_column div.float_left div.block a {color:#CD5D4C;}
 div#left_column div.float_left div.block a:hover {text-decoration:underline;}
-div#left_column div.float_left div.block ul {width:100%; margin:7px 0 0 0; padding:0 0 6px; list-style:none;}
+div#left_column div.float_left div.block ul {width:100%; margin:10px 0 0 0; padding:0 0 6px; list-style:none;}
 div#left_column div.float_left div.block ul li {padding:3px 0 3px 10px; background:url('/images/sites/icons/list_disc.png') no-repeat 0 10px; font:normal 13px Arial; color:#999999;}
 div#left_column div.float_left div.block ul li a {text-decoration:none;}
 div#left_column div.float_left div.block ul li a:hover {text-decoration:underline;}
@@ -376,7 +376,7 @@ div.statistics ul.chart li.pos4 {background-position:0 -67px!important;}
 div.statistics ul.chart li.pos5 {background-position:0 -84px!important;}
 /*cluster*/
 div.statistics ul.statistics_list {width:270px; height:auto; padding:0; margin:10px 0 0 0;}
-div.statistics ul.statistics_list li {display:inline-block; width:100%!important; padding:0!important; margin:3px 0 0 0!important; height:auto; position:relative;}
+div.statistics ul.statistics_list li {float:left; width:100%!important; padding:0!important; margin:3px 0 0 0!important; height:auto; position:relative;}
 
 /*ICONS*/
 /* TO PROGRESS BAR */
@@ -429,7 +429,7 @@ a.icon_menu:hover {background-position:0 -22px; cursor:pointer;}
 
 /* TO WATER_MARK */
 
-span.icon_watermark {position:absolute; right:32px; top:17px; height:37px; width:37px; z-index:0;}
+span.icon_watermark {position:absolute; right:32px; top:47px; height:37px; width:37px; z-index:0;}
 span.icon_watermark.agriculture {background:url('/images/sites/common/icons/watermark/agriculture.png') no-repeat left 0;}
 span.icon_watermark.camp_coordination {background:url('/images/sites/common/icons/watermark/camp.png') no-repeat left 0;}
 span.icon_watermark.communications {background:url('/images/sites/common/icons/watermark/communication.png') no-repeat left 0;}
@@ -474,7 +474,7 @@ li.icon_other.protection {background:url('/images/sites/common/icons/li_others/p
 li.icon_other.shelter {background:url('/images/sites/common/icons/li_others/shelter.png') no-repeat 0 0!important;}
 li.icon_other.water_sanitation {background:url('/images/sites/common/icons/li_others/water.png') no-repeat 0 0!important;}
 
-div.statistics ul.statistics_list li a span {float:left; width:auto; height:13px; padding:2px 12px 5px 5px; background:url('/images/sites/organization/right_statistics.png') no-repeat right 0; font:normal 13px "Aller"; color:#FFFFFF; text-align:right;}
+div.statistics ul.statistics_list li a span {float:left; width:auto; height:13px; padding:2px 11px 5px 5px; background:url('/images/sites/organization/right_statistics.png') no-repeat right 0; font:normal 13px "Aller"; color:#FFFFFF; text-align:right;}
 div.statistics ul.statistics_list li a span:hover {text-decoration:none!important;}
 div.statistics ul.statistics_list li a:hover {text-decoration:none!important; cursor:pointer;}
 div.statistics ul.statistics_list li a:hover span {text-decoration:none!important;}

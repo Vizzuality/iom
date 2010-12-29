@@ -387,12 +387,14 @@ $(document).ready(function(ev){
       $('span.combo_cluster_options').children('p').text('Select more clusters');
       $('span.combo_cluster_options').children('p').attr('id','0');
     }
+    $('div.block div.med div.left').resize();
     });
 
   // CLICK ON REMOVE CLUSTER
   $('ul.clusters').find('a.remove_this').live('click',function(ev){
     $(this).parent().children('input#' + $(this).attr('id') +'').attr('checked',false);
     $(this).parent().remove();
+    $('div.block div.med div.left').resize();
   });
 
 
@@ -447,12 +449,14 @@ $(document).ready(function(ev){
         $('span#sector').children('p').text('Select more sectors');
         $('span#sector').children('p').attr('id','0');
       }
+      $('div.block div.med div.left').resize();
       });
 
     // CLICK ON REMOVE SECTOR
     $('ul.sectors').find('a.remove_this').live('click',function(ev){
       $(this).parent().children('input#' + $(this).attr('id') +'').attr('checked',false);
       $(this).parent().remove();
+      $('div.block div.med div.left').resize();
     });
 
     /************** SUBSECTORS ************************** */
@@ -480,6 +484,7 @@ $(document).ready(function(ev){
         $('span#subsector').children('p').text($(this).children('a').text());
         $('span#subsector').children('p').attr('id',$(this).children('a').attr('id'));
         $('span#subsector.clicked').removeClass('clicked');
+        $('div.block div.med div.left').resize();        
       });
 
       // CLICK ON ADD SECTOR
@@ -552,6 +557,7 @@ $(document).ready(function(ev){
             $('li#gc_limited_country').find('span.select_country_combo').removeClass('clicked');
           };
         });
+        $('div.block div.med div.left').resize();
       });
 
       // SET VALUE IF CLICK ON COUNTRY

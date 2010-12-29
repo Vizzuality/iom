@@ -10,11 +10,11 @@
   <div class="field">
     <span class="chars">
       <label>SHORT DESCRIPTION <strong>*</strong></label>
-      <p id="chars_left">330 chars left</p>
+      <p id="chars_left">56 chars left</p>
     </span>
 
-    <span class="textarea_short <%= 'error' if !@site.errors[:short_description].empty? && action_name != 'new' %>">
-      <%= f.text_area :short_description , :onkeyup=>"limitChars('site_short_description', 330, 'chars_left')" %>
+    <span class="textarea_little <%= 'error' if !@site.errors[:short_description].empty? && action_name != 'new' %>">
+      <%= f.text_area :short_description , :onkeyup=>"limitChars('site_short_description', 56, 'chars_left')" %>
     </span>
   </div>
   <div class="field">

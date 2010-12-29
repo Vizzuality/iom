@@ -83,7 +83,7 @@
             <div class="field">
               <%= f.file_field :picture, :class => "#{'error' if !@resource.valid? && action_name != 'index'}" %>
             </div>
-            <div class="field">
+            <div class="field save">
               <%= f.submit 'save' %>
             </div>
           <% end -%>
