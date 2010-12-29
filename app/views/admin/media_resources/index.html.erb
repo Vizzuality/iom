@@ -74,6 +74,11 @@
         <div id="new_image" class="add_media">
           <h3 class="museo_sans">Add a new image</h3>
           <p>or <a href="javascript:void(null)" class="toggle_image_video">add a video</a></p>
+
+          <% if !@resource.valid? && action_name != 'index' %>
+            <p class="resource_error"><%= @resource.errors[:base] %></p>
+          <% end %>
+
           <%= form_for([:admin, @element, @resource], :html => { :multipart => true }) do |f| %>
             <div class="field">
               <%= f.file_field :picture, :class => "#{'error' if !@resource.valid? && action_name != 'index'}" %>
@@ -87,6 +92,11 @@
         <div id="new_video" class="add_media" style="display:none">
           <h3>Add a new video from <img src="/images/backoffice/media/vimeo.jpg" width="64" height="19" alt="Vimeo"></h3>
           <p>or <a href="javascript:void(null)" class="toggle_image_video">add an image</a></p>
+
+          <% if !@resource.valid? && action_name != 'index' %>
+            <p class="resource_error"><%= @resource.errors[:base] %></p>
+          <% end %>
+
           <%= form_for([:admin, @element, @resource]) do |f| %>
             <div class="field">
               <%= f.text_field :vimeo_url, :value => "Enter a Vimeo URL", :class => "vimeo #{'error' if !@resource.valid? && action_name != 'index'}" %>
