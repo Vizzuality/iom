@@ -3,17 +3,17 @@
   <div class="block">
     <div class="one">
       <p class="museo_sans"><%= number_with_delimiter(Project.count) %></p>
-      <label class="museo_sans"><%= pluralize(Project.count, 'project', 'projects') %> published</label>
+      <a href="<%= admin_projects_path %>" class="museo_sans"><%= pluralize(Project.count, 'project', 'projects') %> published</a>
       <p class="info museo_sans"><strong><%= Project.where("created_at > '#{Date.today.beginning_of_month.to_s(:db)}'").count %> new</strong> this month</p>
     </div>
     <div class="one">
       <p class="museo_sans"><%= number_with_delimiter(Organization.count) %></p>
-      <label class="museo_sans"><%= pluralize(Organization.count, 'organization', 'organizations') %> in our database</label>
+      <a href="<%= admin_organizations_path %>" class="museo_sans"><%= pluralize(Organization.count, 'organization', 'organizations') %> in our database</a>
       <p class="info museo_sans"><strong><%= Organization.where("created_at > '#{Date.today.beginning_of_month.to_s(:db)}'").count %> new</strong> this month</p>
     </div>
     <div class="one last">
       <p class="museo_sans"><%= number_with_delimiter(Donor.count) %></p>
-      <label class="museo_sans"><%= pluralize(Donor.count, 'organization donor', 'organization donors') %></label>
+      <a href="<%= admin_donors_path %>" class="museo_sans"><%= pluralize(Donor.count, 'organization donor', 'organization donors') %></a>
       <p class="info museo_sans"><strong><%= Donor.where("created_at > '#{Date.today.beginning_of_month.to_s(:db)}'").count %> new</strong> this month</p>
     </div>
   </div>

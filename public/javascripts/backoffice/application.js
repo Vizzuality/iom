@@ -4,7 +4,27 @@ var heightLeft;
 var data_info = new Object();
 
 $(document).ready(function(ev){
-  
+    
+    // To center information projects box
+    if ($('div#information_projects').length > 0){
+        var account = $('div#information_projects').children('p').text().length;
+        var element = $('div#information_projects').children('p');
+        
+        var margin_left = 90 - ((account - 1) * 10);
+        var margin = '12px 5px 0 '+margin_left+'px'; 
+        element.css('margin',margin);
+    }
+    
+    // To center information donors box
+    if ($('div.one_donor').length > 0){
+        var account = $('div.one_donor').children('div.center').children('p').text().length;
+        var element = $('div.one_donor').children('div.center').children('p');
+        var margin_left = 90 - ((account - 1) * 10);
+        var margin = '20px 5px 0 '+margin_left+'px'; 
+        element.css('margin',margin);
+    }
+    
+
     //Media - resources error
     if ($('p.resource_error').length>0) {
       $('p.resource_error').insertBefore('div#new_image');

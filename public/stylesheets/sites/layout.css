@@ -147,6 +147,7 @@ div#header ul.menu li#region_option.clicked ul.content li a:hover {color:white;}
 
 div#header ul.menu li#organization_option.clicked div.header_title {position:absolute; top:0; left:-15px; background:url('/images/sites/common/menu/org_head_clicked.png') no-repeat 0 0; width:138px; height:35px; display:inline;}
 div#header ul.menu li#organization_option.clicked div.suboptions_body {position:absolute; top:35px; left:-15px; z-index:110; background:url('/images/sites/common/menu/org_body_clicked.png') no-repeat 0 0; display:none; width:238px; height:234px; display:inline; padding:7px; display:inline;}
+div#header ul.menu li#organization_option.clicked div.suboptions_body.short {position:absolute; width:238px; height:auto; background:url('/images/sites/common/menu/org_body_clicked.png') repeat 0 bottom;  }
 div#header ul.menu li#organization_option.clicked div.suboptions_body input[type="text"]#ngos_search{float:left; margin:3px 0 0 7px; background:url('/images/sites/common/menu/input_ngos.png') no-repeat 0 0; width:191px; height:22px; padding:0 7px; font:normal 13px Arial; color:#B7B7B7; border:0px;}
 div#header ul.menu li#organization_option.clicked div.header_title a {margin:8px 0 0 15px; padding:0 8px 0 0; background:url('/images/sites/common/arrow_menu.png') no-repeat right 6px;}
 div#header ul.menu li#organization_option.clicked ul.content {float:left; width:204px; height:189px; overflow-x:hidden; overflow-y:auto; margin:17px 0 0 13px;}
@@ -199,6 +200,7 @@ div.main_head div.left {width:248px; padding:30px 32px; background:url('/images/
 div.main_head div.left h1 {width:237px; font:normal 25px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42; z-index:50;}
 div.main_head div.left h1.cluster_sector_name {width:190px; z-index:50;}
 div.main_head div.left h2 {width:100%; font:normal 15px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42; text-transform:uppercase;}
+div.main_head div.left h2.cluster_sector_name {width:100%; font:normal 15px "PT Sans Bold"; color:#7C3B32; text-transform:uppercase; text-shadow:none;}
 div.main_head div.left h3 {width:100%; font:normal 15px "PT Sans Bold"; color:#7B3C32; text-transform:uppercase;}
 
 div.main_head div.left p {padding:5px 0 0 0; font:normal 13px Arial; color:#7B3932;}

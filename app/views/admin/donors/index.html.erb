@@ -9,8 +9,10 @@
         <% end %>
       </div>
       <div class="one_donor">
-        <p class="museo_sans"><%= Donor.count %></p>
-        <label class="museo_sans"><%= Donor.count == 1 ? 'donor' : 'donors' %><br/>registered</label>
+        <div id="information_donors" class="center">
+          <p class="museo_sans"><%= Donor.count %></p>
+          <label class="museo_sans"><%= Donor.count == 1 ? 'donor' : 'donors' %><br/>registered</label>
+        </div>
         <a class="museo_sans" href="<%= new_admin_donor_path %>">Add new donor</a>
       </div>
     </div>

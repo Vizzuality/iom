@@ -1,6 +1,7 @@
 
 
 $(document).ready( function() {
+    
   $('p.paylock a').click(function(ev){
     ev.stopPropagation();
     ev.preventDefault();
