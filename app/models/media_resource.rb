@@ -77,7 +77,7 @@ class MediaResource < ActiveRecord::Base
     write_attribute(:vimeo_embed_html, html)
     self.vimeo_thumb = open(vimeo_video_data['thumbnail_large'])
   rescue URI::InvalidURIError
-    errors[:base] << "You have upload a picture or indicate a Vimeo URL"
+    errors[:base] << "You have to upload a picture or indicate a Vimeo URL"
   end
 
   # decrement position
@@ -115,7 +115,7 @@ class MediaResource < ActiveRecord::Base
 
     def presence_of_picture_or_attachment
       if vimeo_url.blank? && picture_file_name.blank?
-        errors[:base] << "You have upload a picture or indicate a Vimeo URL"
+        errors[:base] << "You have to upload a picture or indicate a Vimeo URL"
       end
     end
 
