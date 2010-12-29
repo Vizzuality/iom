@@ -821,6 +821,7 @@ div.block.media div.top {float:left; width:100%; background:url('/images/backoff
 div.block.media div.med {float:left; width:880px; padding:16px 31px 28px; background:url('/images/backoffice/backgrounds/middle_two_columns.png') repeat-y center 0!important;}
 div.block.media div.med div.left {float:left; width:572px;}
 div.block.media div.med div.left p {float:left; width:100%; font:normal 15px Arial; color:#666666;}
+div.block.media div.med div.left p.resource_error {display:none; float:left; width:531px; height:14px; margin:30px 0 0 0; padding:9px 0 11px 35px; background:url('/images/backoffice/media/error_bkg.png') no-repeat 0 0; font:normal 14px Arial; color:white;}
 div.block.media div.med div.left ul {float:left; width:100%; margin:0;}
 div.block.media div.med div.left ul li {position:relative; float:left; width:100%; height:auto; margin:28px 0 0;}
 div.block.media div.med div.left ul li div.top_media {float:left; width:566px; height:10px; background:url('/images/backoffice/backgrounds/top_media.png') no-repeat 0 0;}
@@ -852,7 +853,6 @@ div.block.media div.med div.left div.add_media form {position:relative; float:le
 div.block.media div.med div.left div.add_media form input {margin:10px 0 0 0;}
 div.block.media div.med div.left div.add_media form input[type="file"] {float:left; width:250px;}
 div.block.media div.med div.left div.add_media form input[type="text"] {float:left; width:452px; height:16px; margin:0; padding:8px 65px 8px 8px; font:normal 15px Arial; color:#333333; border:none; background:url('/images/backoffice/media/video_input.png') no-repeat 0 0;}
-div.block.media div.med div.left div.add_media form input[type="text"].error {background-position:0 -32px;}
 div.block.media div.med div.left div.add_media form input[type="submit"] {float:right; width:56px; height:26px; margin:3px 0 0 0; background:url('/images/backoffice/media/save.png') no-repeat 0 0; border:none; text-indent:-9999px; font-size:0; display:block; line-height:0;}
 div.block.media div.med div.left div.add_media form input[type="submit"]:hover {background-position:0 -26px; cursor:pointer;}
 div.block.media div.med div.left div#new_video form input[type="submit"] {position:absolute; right:4px; top:0; width:56px; height:26px; margin:3px 0 0 0; background:url('/images/backoffice/media/save.png') no-repeat 0 0; border:none; text-indent:-9999px; font-size:0; display:block; line-height:0;}

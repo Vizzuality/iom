@@ -4,6 +4,14 @@ var heightLeft;
 var data_info = new Object();
 
 $(document).ready(function(ev){
+  
+    //Media - resources error
+    if ($('p.resource_error').length>0) {
+      $('p.resource_error').insertBefore('div#new_image');
+      $('p.resource_error:eq(0)').remove();
+      $('p.resource_error').show();
+    }
+  
     
     // TO SET COMBO OPTIONS CHECKED
     if ($('div#published_status').length > 0){
