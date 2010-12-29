@@ -2,21 +2,18 @@
 <html>
 <head>
   <title><%= title %></title>
-
-  <%= javascript_include_tag 'jquery.min', 'jquery.ui.core', 'jquery.ui.widget', 'jquery.ui.position', 'plugins/jquery.mousewheel.js','plugins/jquery.jscrollpane.js','plugins/quicksilver.js','plugins/jquery.livesearch.js', 'rails.js','sites/application.js' %>
-
-  <%= stylesheet_link_tag '/stylesheets/sites/jscroll.css','/stylesheets/sites/layout.css' %>
-  <%= stylesheet_link_tag @site.theme.css_file if @site.theme %>
-
+  <%=raw(javascript_include_merged(:base)) %>
+  <%=raw(stylesheet_link_merged(:base)) %>
+  <%=stylesheet_link_tag @site.theme.css_file if @site.theme %>
   <link rel="shortcut icon" href="/images/favicon.ico"/>
 </head>
 <body>
 
-
-  <%unless action_name == 'home' && controller_name == 'sites' %>
+  <% unless action_name == 'home' && controller_name == 'sites' %>
     <!-- div id="header" -->
     <%= render :partial => 'shared/menu' %>
-  <%end%>
+  <% end %>
+
   <div id="outer_layout">
 
     <%= yield %> <!-- Main layout has to content <div id="layout"> -->
@@ -61,6 +58,6 @@
     <% end %>
     </div>
   </div>
-  <%=yield :js %>
+  <%= yield :js %>
 </body>
 </html>

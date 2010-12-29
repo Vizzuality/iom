@@ -1,14 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-
   <!-- TODO: GET ORIGIN PATH-->
   <title>NGO AID MAP</title>
-
-  <%= javascript_include_tag 'jquery.min', 'jquery.ui.core', 'jquery.ui.widget', 'jquery.ui.position'%>
-
-  <%= stylesheet_link_tag '/stylesheets/sites/layout.css' %>
-
+  <%=raw(javascript_include_merged(:root_layout)) %>
+  <%=raw(stylesheet_link_merged(:base)) %>
   <link rel="shortcut icon" href="/images/favicon.ico"/>
 </head>
 <body>

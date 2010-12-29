@@ -19,12 +19,13 @@
     <% end %>
     <li class="<%= ((@sites.size+1)%3==0) ? 'last' : '' %>">
         <div id="image">
-          <img src="/images/sites/home/more_project.jpg" alt="More projects soon"/>
+          <%= image_tag("sites/home/more_project.jpg", :alt => 'More projects coming soon') %>
         </div>
         <a class="site_name">MORE PROJECTS SOON!</a>
     </li>
   </ul>
 
+  <%=raw(javascript_include_merged(:sites_general_home)) %>
 <script src="/javascripts/plugins/galleria.js" type="text/javascript" charset="utf-8"></script>
 <script src="/javascripts/sites/home_sites.js" type="text/javascript" charset="utf-8"></script>
 

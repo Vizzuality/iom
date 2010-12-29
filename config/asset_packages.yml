@@ -1,0 +1,33 @@
+---
+javascripts:
+- base:
+  - jquery.min.js
+  - jquery.ui.core.js
+  - jquery.ui.widget.js
+  - jquery.ui.position.js
+  - plugins/jquery.mousewheel.js
+  - plugins/jquery.jscrollpane.js
+  - plugins/quicksilver.js
+  - plugins/jquery.livesearch.js
+  - rails.js
+  - sites/application.js
+- root_layout:
+  - jquery.min.js
+  - jquery.ui.core.js
+  - jquery.ui.widget.js
+  - jquery.ui.position
+- sites_general_home:
+  - sites/home_sites.js
+  - plugins/galleria.js
+  - plugins/galleria.home.js
+- sites_home:
+  - sites/home.js
+  - sites/mercatorProjection.js
+  - sites/IOMMarker.js
+  - sites/labels_style.js
+  - sites/overview_map.js
+stylesheets:
+- base:
+  - sites/jscroll.css
+  - sites/layout.css
+
