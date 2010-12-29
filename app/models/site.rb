@@ -330,6 +330,12 @@ class Site < ActiveRecord::Base
     select p.primary_organization_id from projects as p inner join projects_sites as ps on p.id=ps.project_id and site_id=#{self.id}) order by o.name")
   end
 
+  def organizations_count
+    sql = "select count(o.id) as count from organizations as o where id in (
+    select p.primary_organization_id from projects as p inner join projects_sites as ps on p.id=ps.project_id and site_id=#{self.id})"
+    ActiveRecord::Base.connection.execute(sql).first['count'].to_i
+  end
+
   def clusters
     Cluster.find_by_sql("select c.* from clusters as c where id in (
         select cp.cluster_id from (clusters_projects as cp inner join projects as p on cp.project_id=p.id) inner join projects_sites as ps on p.id=ps.project_id and site_id=#{self.id}) order by c.name")
