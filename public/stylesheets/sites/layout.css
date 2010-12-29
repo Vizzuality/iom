@@ -175,7 +175,7 @@ div#header div.right form.search span.input_search {float:left; width:111px; hei
 div#header div.right form.search span.input_search input[type="text"]{position:absolute; top:2px; left:5px; width:83px; height:14px; font:normal 13px Arial; color:#999999; border:0px;}
 div#header div.right form.search span.input_search input[type="submit"] {position:absolute; right:5px; top:3px; width:15px; height:14px; background:url('/images/sites/common/bttn_search.png') no-repeat 0 0; border:none;}
 
-div#map {display:block; width:100%; height:435px; background:#99B3CA; border-bottom:2px solid white; border-top:2px solid white;}
+div#map {display:block; width:100%; height:465px; background:#99B3CA; border-bottom:2px solid white; border-top:2px solid white;}
 div#map.home {border-top:none;}
 
 div#small_map {width:100%; height:335px; background:#99B3CA; border-top:2px solid white; border-bottom:2px solid white;}
@@ -183,7 +183,7 @@ a#zoomIn {position:absolute; display:none; width:26px; height:25px; background:u
 a#zoomIn:hover {background-position:0 -25px;}
 a#zoomOut {position:absolute; display:none; width:26px; height:25px; background:url('/images/sites/maps/zoom_out.png') no-repeat 0 0; z-index:100;}
 a#zoomOut:hover {background-position:0 -25px;}
-div.map_style {position:absolute; display:none; top:10px; left:50px; width:113px; height:26px; background:url('/images/sites/maps/map_style.png') no-repeat 0 0; overflow:hidden; z-index:100;}
+div.map_style {position:absolute; display:none; top:10px; left:50px; width:111px; height:26px; background:url('/images/sites/maps/map_style.png') no-repeat 0 0; overflow:hidden; z-index:100;}
 div.map_style:hover {cursor:default;}
 div.map_style p {margin:7px 0 0 10px; font:normal 13px 'PT Sans'; color:white;}
 div.map_style ul {width:93px; margin:10px 10px 0 10px;}
@@ -256,8 +256,9 @@ div#left_column div.float_left div.block ul li a:hover {text-decoration:underlin
 div#left_column div.float_left div.block ul li.selected {background:none;}
 div#left_column div.float_left div.block ul li.selected a {color:#666666;}
 div#left_column div.float_left div.block ul li.selected a:hover {text-decoration:none; color:#666666;}
-div#left_column div.float_left div.block ul.clusters {padding:5px 0 0 0;}
-div#left_column div.float_left div.block ul.clusters li {padding:0 0 17px 45px;}
+div#left_column div.float_left div.block a#show_donor_list {float:left; margin:15px 0 0 0;}
+div#left_column div.float_left div.block ul.clusters {padding:5px 0 0 0; overflow:hidden;}
+div#left_column div.float_left div.block ul.clusters li {padding:0 0 17px 42px;}
 div#left_column div.float_left div.block ul.clusters li.last {padding:0 0 0 45px;}
 div#left_column div.float_left div.block ul.clusters li a {color:#CD5D4C;}
 div#left_column div.float_left div.block ul.clusters li p {padding:1px 0 0 0;}

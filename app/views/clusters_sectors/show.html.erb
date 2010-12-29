@@ -31,11 +31,11 @@
   <div id="layout">
     <div id="left_column">
       <!-- LEFT PART -->
-      <div class="left"></div> <!-- H"J"ACK -->
+      <div class="left"></div>
       <div class="outer_float">
         <div class="float_left">
           <div class="head">
-            <h2>FACTSHEET</h2>
+            <h2>OVERVIEW</h2>
           </div>
           <% unless @data.projects_regions(@site).empty?%>
           <div class="block statistics less">
@@ -45,12 +45,17 @@
           <%end%>
           <% unless @data.donors(@site).empty? %>
           <div class="block">
-            <h3>DONORS</h3>
-            <ul>
+            <h3>DONORS IN THIS <%= @site.word_for_clusters.chop %></h3>
+            <ul id="donors_list">
+              <% index = 1 %>
               <% @data.donors(@site).each do |donor| %>
-                <li><%= link_to(donor.name, donor_path(donor)) %></li>
+                <li class="<%= (index>10)? "out" : "" %>"><%= link_to(donor.name, donor_path(donor)) %></li>
+                <% index = index + 1 %>
               <% end %>
             </ul>
+            <% if index>11 %>
+              <a id="show_donor_list">See more donors</a>
+            <% end %>
           </div>
           <%end%>
           <% unless @site.projects_sectors_or_clusters.empty? %>
@@ -74,7 +79,7 @@
 
       <!-- RIGHT PART -->
       <div class="right">
-        <h3><%= @data.name.upcase %> LIST OF PROJECTS</h3>
+        <h3><%= @data.name.upcase %> PROJECTS</h3>
         <div id="projects">
           <%= render :partial => 'projects/projects' %>
         </div>

@@ -48,7 +48,7 @@
       <div class="outer_float">
         <div class="float_left">
           <div class="head">
-            <h2>FACTSHEET</h2>
+            <h2>OVERVIEW</h2>
           </div>
 
           <% unless @organization.donations.nil? || @organization.donations.sum(:amount).eql?(0.0) %>
@@ -135,7 +135,7 @@
 
       <!-- RIGHT PART -->
       <div class="right">
-        <h3><%= pluralize(@organization.projects_count(@site), 'PROJECT', 'PROJECTS') %> AT <%= @organization.name.upcase %></h3>
+        <h3><%= pluralize(@organization.projects_count(@site), 'PROJECT', 'PROJECTS') %> BY <%= @organization.name.upcase %></h3>
         <div id="projects">
           <%= render :partial => 'projects/projects' %>
         </div>

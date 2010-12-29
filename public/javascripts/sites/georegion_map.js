@@ -109,7 +109,7 @@
       $('#zoomOut').css('left',column_position+32+'px');
       $('#zoomOut').css('top',map_position+'px');
 
-      $('div.map_style').css('left',column_position+820+'px');
+      $('div.map_style').css('left',column_position+821+'px');
       $('div.map_style').css('top',map_position+'px');
     }
 

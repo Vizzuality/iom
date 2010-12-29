@@ -37,7 +37,7 @@
     <div class="outer_float">
       <div class="float_left">
         <div class="head">
-          <h2>FACTSHEET</h2>
+          <h2>OVERVIEW</h2>
         </div>
 
         <div id="secondary_map">
@@ -67,7 +67,7 @@
 
         <% donors = @area.donors(@site, 11) %>
         <div class="block">
-          <h3>DONORS</h3>
+          <h3>DONORS IN THIS REGION</h3>
           <% unless donors.empty? %>
             <ul>
               <% donors[0...10].each do |donor| %>

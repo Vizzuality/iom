@@ -72,7 +72,7 @@
           </div>
 
           <div id="most_active_orgs" class="block margin">
-            <h3>MOST ACTIVE ORGANIZATIONS</h3>
+            <h3>Some Organizations in Haiti</h3>
             <ul>
               <% @site.projects_organizations[0...9].each do |organization, count| %>
               <li><%= link_to organization.name, organization_path(organization) %> - <%= pluralize(count, 'project') %></li>

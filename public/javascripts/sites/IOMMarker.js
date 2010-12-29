@@ -89,7 +89,7 @@
           top_hidden.style.font = "normal 17px 'PT Sans Bold'";
           top_hidden.style.textAlign = "center";
           top_hidden.style.color = "white";
-          $(top_hidden).html(this.name+'<br/><strong style="font:normal 13px Arial; color:#999999">'+this.count+' projects</strong>');
+          $(top_hidden).html(this.name+'<br/><strong style="font:normal 13px Arial; color:#999999">'+this.count+ ((this.count>1)?' projects':'project')+'</strong>');
           hidden_div.appendChild(top_hidden);
 
           var bottom_hidden = document.createElement('div');
