@@ -1,5 +1,5 @@
 var old_value;
-
+var heightLeft;
 // TO IMPORT CSV
 var data_info = new Object();
 
@@ -13,18 +13,30 @@ $(document).ready(function(ev){
     
     
     // CUSTOM SCROLLBARS
-    if ($('.scroll_pane').length > 0){
-    
+    if ($('.scroll_pane').length > 0){    
         $('.scroll_pane').jScrollPane({
                            autoReinitialise:false });
     }
 
     if ($('div.right.menu').length>0) {
       setTimeout(function(){
-        $('div.right.menu').height($('div.block div.med div.left').height());
+        heightLeft = $('div.block div.med div.left').height();
+        $('div.right.menu').height(heightLeft);
         $('div.export_import,div.delete', $('div.right.menu')).show();
       },300);
     }
+    
+    // $('div.block div.med div.left').bind("resize", function(){ 
+    //                                    console.log('resized');
+    //                                      } 
+    //                 );
+    // 
+    // 
+    // $('div.block div.med div.left').resize(function() {
+    //    
+    //     console.log('resized');
+    // });
+    
 
     //remove text from input
     $('input.main_search').focusin(function(ev){
