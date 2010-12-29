@@ -86,7 +86,7 @@ class SiteTest < ActiveSupport::TestCase
     assert !site.pages.empty?
     assert site.pages.map(&:title).include?('About')
     assert site.pages.map(&:title).include?('Contact')
-    assert site.pages.map(&:title).include?('Analysis')
+    assert site.pages.map(&:title).include?('Highlights')
   end
 
   test "Given a project with matches in a site criteria should be a cached_project" do

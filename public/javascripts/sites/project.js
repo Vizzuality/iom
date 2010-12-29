@@ -1,4 +1,8 @@
 
+
+      /* MENU HACK POSITIONING*/
+      $('div#header div.left').width(680);
+  
       var vimeo_total = 0;
       var vimeo_count = 0;
 

@@ -1,4 +1,14 @@
-
+  
+    /* MENU HACK POSITIONING*/
+    $('div#header div.left').width(810);
+    /* MENU HACK DESCRIPTION*/
+    // if ($('div.inner_main_head div.right p').length>0) {
+    //   $('div.inner_main_head div.right p').hide();
+    //   var max_height = $('div.inner_main_head div.left').height()-12;
+    //   $('div.inner_main_head div.right').height(max_height);
+    //   $('div.inner_main_head div.right').css('overflow','hidden');
+    //   $('div.inner_main_head div.right p').show();
+    // }
 
     $(document).ready( function() {
       

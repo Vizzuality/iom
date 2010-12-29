@@ -151,7 +151,9 @@ SQL
     # options: :per_page => 10, :page => params[:page], :order => 'created_at DESC'
     sql = <<-SQL
     select * from
-    (SELECT p.id as project_id, p.name as project_name, p.description as project_description, p.created_at, o.id as organization_id, o.name as organization_name,
+    (SELECT p.id as project_id, p.name as project_name, p.description as project_description,
+    p.created_at, o.id as organization_id, o.name as organization_name,
+    p.end_date as end_date,
     array_to_string(array_agg(distinct r.name),'|') as regions,
     array_to_string(array_agg(distinct r.id),'|') as region_ids,
     array_to_string(array_agg(distinct c.name),'|') as countries,
@@ -172,9 +174,9 @@ SQL
     LEFT JOIN sectors as sec             ON sec.id=psec.sector_id
     LEFT JOIN clusters_projects as cpro ON cpro.project_id=p.id
     LEFT JOIN clusters as clus           ON clus.id=cpro.cluster_id
-    GROUP BY p.id,p.name,o.id,o.name,c.name,p.created_at,p.description) as subq
+    GROUP BY p.id,p.name,o.id,o.name,c.name,p.created_at,p.description,p.end_date) as subq
 SQL
-    if options[:sector] || options[:cluster] || options[:donor_id] || options[:region] || options[:country] || options[:organization]
+    if options[:sector] || options[:cluster] || options[:donor_id] || options[:region] || options[:country] || options[:organization] || options[:active]
       sql << " WHERE "
       conditions = []
       if options[:sector]
@@ -194,6 +196,9 @@ SQL
       end
       if options[:organization]
         conditions << "organization_id=#{options[:organization]}"
+      end
+      if options[:active]
+        conditions << "end_date is not null AND end_date > '#{Date.today.to_s(:db)}'"
       end
       sql << conditions.join(' and ')
     end

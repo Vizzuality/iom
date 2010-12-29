@@ -22,7 +22,7 @@
         </div>
       </div>
       <div class="right">
-        <%= simple_format(truncate(@organization.description, :length => 800)) %></p>
+        <%= anglo(simple_format(truncate(@organization.description, :length => 800))) %></p>
       </div>
     </div>
   </div>
@@ -135,7 +135,7 @@
 
       <!-- RIGHT PART -->
       <div class="right">
-        <h3><%= pluralize(@organization.projects_count(@site), 'PROJECT', 'PROJECTS') %> BY <%= @organization.name.upcase %></h3>
+        <h3><%= pluralize(@organization.projects_count(@site), 'PROJECT', 'PROJECTS') %> BY <%= @organization.name.upcase %><br/><strong>(One project may take place in multiple locations)</strong></h3>
         <div id="projects">
           <%= render :partial => 'projects/projects' %>
         </div>
