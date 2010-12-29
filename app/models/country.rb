@@ -3,16 +3,16 @@
 # Table name: countries
 #
 #  id               :integer         not null, primary key
-#  name             :string(255)     
-#  code             :string(255)     
-#  the_geom         :string          
-#  wiki_url         :string(255)     
-#  wiki_description :text            
-#  iso2_code        :string(255)     
-#  iso3_code        :string(255)     
-#  center_lat       :float           
-#  center_lon       :float           
-#  the_geom_geojson :text            
+#  name             :string(255)
+#  code             :string(255)
+#  the_geom         :string
+#  wiki_url         :string(255)
+#  wiki_description :text
+#  iso2_code        :string(255)
+#  iso3_code        :string(255)
+#  center_lat       :float
+#  center_lon       :float
+#  the_geom_geojson :text
 #
 
 class Country < ActiveRecord::Base
@@ -72,7 +72,7 @@ class Country < ActiveRecord::Base
 
   # to get only id and name
   def self.get_select_values
-    scoped.select(:id,:name).order("name ASC")
+    scoped.select("id,name").order("name ASC")
   end
 
   def update_wikipedia_description

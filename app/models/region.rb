@@ -3,18 +3,18 @@
 # Table name: regions
 #
 #  id               :integer         not null, primary key
-#  name             :string(255)     
-#  level            :integer         
-#  country_id       :integer         
-#  parent_region_id :integer         
-#  the_geom         :string          
-#  gadm_id          :integer         
-#  wiki_url         :string(255)     
-#  wiki_description :text            
-#  code             :string(255)     
-#  center_lat       :float           
-#  center_lon       :float           
-#  the_geom_geojson :text            
+#  name             :string(255)
+#  level            :integer
+#  country_id       :integer
+#  parent_region_id :integer
+#  the_geom         :string
+#  gadm_id          :integer
+#  wiki_url         :string(255)
+#  wiki_description :text
+#  code             :string(255)
+#  center_lat       :float
+#  center_lon       :float
+#  the_geom_geojson :text
 #
 
 class Region < ActiveRecord::Base
@@ -84,7 +84,7 @@ class Region < ActiveRecord::Base
   end
 
   def self.get_select_values
-    scoped.select(:id,:name).order("name ASC")
+    scoped.select("id,name").order("name ASC")
   end
 
   def update_wikipedia_description

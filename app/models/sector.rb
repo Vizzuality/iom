@@ -3,7 +3,7 @@
 # Table name: sectors
 #
 #  id   :integer         not null, primary key
-#  name :string(255)     
+#  name :string(255)
 #
 
 class Sector < ActiveRecord::Base
@@ -40,7 +40,7 @@ SQL
 
   # to get only id and name
   def self.get_select_values
-    scoped.select(:id,:name).order("name ASC")
+    scoped.select("id,name").order("name ASC")
   end
 
   def css_class
