@@ -16,7 +16,7 @@ class GeoregionController < ApplicationController
         from(
         select c.id,count(ps.project_id) as count,c.name,c.center_lon as lon,c.center_lat as lat
         from (countries_projects as cp inner join projects_sites as ps on cp.project_id=ps.project_id and site_id=#{@site.id})
-        inner join countries as c on cp.country_id=c.id and c.id=#{params[:id].gsub(/\\/, '\&\&').gsub(/'/, "''")}
+        inner join countries as c on cp.country_id=c.id and c.id=#{params[:id].sanitize_sql!}
         group by c.id,c.name,lon,lat) as subq"
     else
       @area = Region.where(:id => params[:id], :level => @site.level_for_region).select(Region.custom_fields).first
@@ -25,13 +25,13 @@ class GeoregionController < ApplicationController
       @projects = Project.custom_find(@site, :region => @area.name, :per_page => 10, :page => params[:page], :order => 'created_at DESC')
 
       @area_parent = Country.find_by_id(@area.country_id, :select => "id, name").try(:name)
-      sql="select *,(select the_geom_geojson from regions where id=subq.id) as geojson 
+      sql="select *,(select the_geom_geojson from regions where id=subq.id) as geojson
         from(
         select r.id,count(ps.project_id) as count,r.name,r.center_lon as lon,r.center_lat as lat
         from (projects_regions as pr inner join projects_sites as ps on pr.project_id=ps.project_id and site_id=#{@site.id})
-        inner join regions as r on pr.region_id=r.id and r.id=#{params[:id].gsub(/\\/, '\&\&').gsub(/'/, "''")}
+        inner join regions as r on pr.region_id=r.id and r.id=#{params[:id].sanitize_sql!}
         group by r.id,r.name,lon,lat) as subq"
-        
+
     end
 
     respond_to do |format|
