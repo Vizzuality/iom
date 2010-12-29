@@ -315,9 +315,9 @@ class Site < ActiveRecord::Base
     ActiveRecord::Base.connection.execute(sql).first['count'].to_i
   end
 
-  # TODO: performance, don't get all fields
   def projects_ids
-    projects.map{ |p| p.id } + [-1]
+    sql = "select projects_sites.project_id as project_id from projects_sites where projects_sites.site_id = #{self.id}"
+    ActiveRecord::Base.connection.execute(sql).map{ |r| r['project_id'] }
   end
 
   def donors
