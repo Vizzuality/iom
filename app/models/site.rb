@@ -327,17 +327,17 @@ class Site < ActiveRecord::Base
 
   def organizations
     Organization.find_by_sql("select o.* from organizations as o where id in (
-    select p.primary_organization_id from projects as p inner join projects_sites as ps on p.id=ps.project_id and site_id=#{self.id})")
+    select p.primary_organization_id from projects as p inner join projects_sites as ps on p.id=ps.project_id and site_id=#{self.id}) order by o.name")
   end
 
   def clusters
     Cluster.find_by_sql("select c.* from clusters as c where id in (
-        select cp.cluster_id from (clusters_projects as cp inner join projects as p on cp.project_id=p.id) inner join projects_sites as ps on p.id=ps.project_id and site_id=#{self.id})")
+        select cp.cluster_id from (clusters_projects as cp inner join projects as p on cp.project_id=p.id) inner join projects_sites as ps on p.id=ps.project_id and site_id=#{self.id}) order by c.name")
   end
 
   def sectors
     Sector.find_by_sql("select s.* from sectors as s where id in (
-        select pse.project_id from (projects_sectors as pse inner join projects as p on pse.project_id=p.id) inner join projects_sites as ps on p.id=ps.project_id and site_id=#{self.id})")
+        select pse.project_id from (projects_sectors as pse inner join projects as p on pse.project_id=p.id) inner join projects_sites as ps on p.id=ps.project_id and site_id=#{self.id}) order by s.name")
   end
 
   def clusters_or_sectors

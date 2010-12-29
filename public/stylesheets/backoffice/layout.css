@@ -30,6 +30,7 @@ div.wrapper {float:left; margin:0; padding:0;}
 
 /*Necessary to float all content*/
 div.field {float:left;}
+div.field.save {float:right;}
 
 /*ERROR MESSAGES*/
 span.field_error {position:absolute; bottom:10px; right:10px; margin:0; padding:0;}
@@ -716,7 +717,7 @@ div.block.donations_project div.med div.left p.amount {float:left; width:auto; f
 
 
 
-div.block.donations_project div.med div.left form {float:right; width:571px; height:185px; padding:0; margin:20px 0 0 2px; background:url('/images/backoffice/projects/bkg_add_donation_form.png') no-repeat center center; position:relative;}
+div.block.donations_project div.med div.left form {float:right; width:571px; height:185px; padding:0; margin:50px 0 0 2px; background:url('/images/backoffice/projects/bkg_add_donation_form.png') no-repeat center center; position:relative;}
 div.block.donations_project div.med div.left form div#donor_name {float:left; width:234px; height:64px; margin:0 10px 0 15px;}
 div.block.donations_project div.med div.left form div#donor_name span {float:left; background:url('/images/backoffice/projects/input_donation_name.png') no-repeat 0 0; width:226px; height:32px; position:relative; margin:3px 0 0 7px;}
 div.block.donations_project div.med div.left form div#donor_name span.active {background:url('/images/backoffice/projects/input_donation_name_active.png') no-repeat 0 0; height:33px;}
@@ -894,6 +895,10 @@ div.block.site_info div.med div.left form span.input_large.active {background:ur
 div.block.site_info div.med div.left form input[type="text"]{position:absolute; top:6px; left:7px; width:400px; height:21px; font:normal 15px Arial; color:#333333; border:none; padding:0;}
 div.block.site_info div.med div.left form span.textarea {float:left; margin:5px 0 0 0; background:url('/images/backoffice/projects/input_project_multiple.png') no-repeat 0 0; width:564px; height:214px; position:relative;}
 div.block.site_info div.med div.left form span.textarea textarea{position:absolute; top:9px; left:9px; width:546px; height:197px; font:normal 15px Arial; color:#333333; border:none; line-height:17px;}
+
+div.block.site_info div.med div.left form span.textarea_little {float:left; margin:5px 0 0 0; background:url('/images/backoffice/sites/little_descript.png') no-repeat 0 0; width:564px; height:34px; position:relative;}
+div.block.site_info div.med div.left form span.textarea_little textarea{position:absolute; top:9px; left:9px; width:546px; height:17px; font:normal 15px Arial; color:#333333; border:none; line-height:17px;}
+div.block.site_info div.med div.left form span.textarea_little.error {background-position:0 -34px;}
 
 div.block.site_info div.med div.left form span.textarea_short {float:left; margin:5px 0 0 0; background:url('/images/backoffice/sites/short_descript.png') no-repeat 0 0; width:564px; height:114px; position:relative;}
 div.block.site_info div.med div.left form span.textarea_short.error {background-position:0 -114px;}
