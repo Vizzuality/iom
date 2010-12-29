@@ -21,7 +21,7 @@
                 <%= image_tag(@donor.logo.url(:small), :id=>'image_logo') %>
             </div>
           <% end %>
-          <%unless @donor.description.nil?%> <%= simple_format(@donor.description) %><%end%>
+          <%= anglo(simple_format(@donor.description)) unless @donor.description.blank? %>
           <p class="social">
             <% if @donor.twitter? %>
               <%= link_to("follow us", "http://twitter.com/#{@donor.twitter}", :class=>"twitter", :target=>"_blank") %>

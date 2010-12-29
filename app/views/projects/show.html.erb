@@ -1,4 +1,4 @@
-  
+
 
   <div class="main_head projects">
     <div class="inner_main_head">
@@ -43,7 +43,7 @@
            <% unless @project.description.blank? %>
              <div class="block">
                <h3 class="first">PROJECT DESCRIPTION</h3>
-               <%= simple_format(@project.description) %>
+               <%= anglo(simple_format(@project.description)) %>
              </div>
            <% end %>
 
@@ -140,7 +140,7 @@
            <% end %>
          </div>
 
-         
+
            <%if !@project.end_date.nil?%>
            <div class="block">
               <h3>Project timeline</h3>

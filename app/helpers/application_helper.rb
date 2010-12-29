@@ -138,5 +138,11 @@ HTML
     [ul, chart]
   end
 
-end
+  def anglo(text)
+    return "" if text.blank?
+    text.gsub(/(\d+\.[\d+\.?\d+]+)/) do |n|
+      n.gsub(/\./,",")
+    end
+  end
 
+end

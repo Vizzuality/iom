@@ -9,7 +9,7 @@
       </div>
     </div>
     <div class="right home">
-      <% unless @site.short_description.nil? %><p><%= @site.long_description %> <a href="<%= page_path(Page.about(@site)) %>">Learn more</a></p><%end%>
+      <% unless @site.short_description.nil? %><p><%= anglo(@site.long_description) %> <a href="<%= page_path(Page.about(@site)) %>">Learn more</a></p><%end%>
     </div>
   </div>
 </div>
