@@ -312,6 +312,9 @@ namespace :iom do
         else
           puts "NOT FOUND #{row.organization}"
         end
+
+        Site.all.each{ |site| site.save! }
+
       end
 
     end
