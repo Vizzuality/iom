@@ -107,10 +107,10 @@ div.block.info ul li a:hover {text-decoration:none;}
 div#header {width:100%; height:40px; padding:0; background:url(/images/sites/common/bkg_header_repeatx.jpg) repeat-x 0 0;}
 div#header div.inner_header {margin:0 auto; width:932px; height:40px;}
 div#header div.left {width:710px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#header div.left.home {width:820px;}
+div#header div.left.home {width:810px;}
 div#header h1 {float:left; margin:11px 0 0 0; font:normal 15px "PT Sans Bold"; color:white; text-transform:uppercase; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#header h1 a {color:white;}
-div#header ul.menu {position:relative; float:right; margin:4px 0 0 100px; width:auto; height:25px;}
+div#header ul.menu {position:relative; float:right; margin:4px 0 0; width:auto; height:25px;}
 div#header ul.menu li {float:left; width:auto; margin:0 23px 0 0; position:relative;}
 
 div#header ul.menu li#cluster_option.clicked ul.suboptions {position:absolute; top:35px; left:-10px; z-index:110; background:url('/images/sites/common/menu/cluster_body_clicked.png') no-repeat 0 0; display:none; width:505px; height:177px; display:inline; padding:0 13px 0 15px;}
@@ -208,7 +208,7 @@ div.main_head div.float_head.home h1 {font-size:32px; text-transform:uppercase; 
 div.main_head div.float_head.home sup.beta {font:normal 11px "PT Sans"; color:#73352B; padding:3px;}
 div.main_head div.float_head.home h3 {width:100%; font:normal 15px "PT Sans Bold"; color:#7B3C32; text-transform:uppercase; margin:20px 0 0 0;}
 
-div.main_head div.right {width:600px; padding:30px 0; display:inline-block; vertical-align:top; zoom:1; *display:inline; position:relative; min-height:40px;}
+div.main_head div.right {width:604px; padding:28px 0; display:inline-block; vertical-align:top; zoom:1; *display:inline; position:relative; min-height:40px;}
 div.main_head div.right span.wikipedia {position:absolute; bottom:0; right:0; background:url('/images/sites/regions/wikipedia_head.png') no-repeat 0 0; width:141px; height:49px;}
 div.main_head div.right.home {min-height:50px;}
 div.main_head div.right.home a {text-decoration:underline!important;}
@@ -269,10 +269,10 @@ div.projects div.block div.import_data p {float:left; font:normal 13px Arial; co
 div.projects div.block div.import_data a {font:normal 13px Arial; text-decoration:none!important; margin:1px 0 0 0;}
 div.projects div.block div.import_data a:hover {text-decoration:underline!important;}
 
-
 div#left_column div.float_left div.block a.more:hover {text-decoration:underline;}
 div#left_column div.right {width:632px; margin:0; padding:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#left_column div.right h3 {width:572px; padding:20px 26px 20px 34px; font:normal 13px "PT Sans Bold"; color:#999999; text-shadow:0 1px white; text-transform:uppercase;}
+div#left_column div.right h3 strong {padding:10px 0 0; font:normal 12px Arial; color:#777777; text-transform:none; text-shadow:none; line-height:20px;}
 div#left_column div.right ul {width:100%; padding:0!important;}
 div#left_column div.right ul li {width:572px; height:74px; padding:20px 26px 20px 34px;}
 div#left_column div.right ul li.even {background:url('/images/sites/regions/even_bkg.png') repeat-x 0 0;}
@@ -567,24 +567,22 @@ div#footer_sites div.project {float:left; width:600px; display:inline-block; ver
 div#footer_sites div.project h1 {float:left; font:normal 13px "PT Sans Bold"; color:#878787; text-transform:uppercase; display:inline-block;}
 div#footer_sites div.project p {float:left; padding:0; font:normal 13px "PT Sans"; color:#B3B3B3;}
 
-
 /* FOOTER PAGES */
 div#footer_pages {clear:both; width:100%; padding:100px 0 100px 0;}
-div#footer_pages div.left {width:660px; height:auto!important; margin:0 0 0 5px; background:none; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#footer_pages div.left {width:630px; height:auto!important; margin:0 0 0 5px; background:none; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#project_layout div#footer_pages div.left {width:630px; height:auto!important; margin:0 0 0 30px; background:none; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#footer_pages div.left a.logo {float:left; display:block; width:67px; height:43px; margin:0 15px 0 0; background:url('/images/sites/common/logo_interaction.png') no-repeat 0 0;}
+div#footer_pages div.left a.logo:hover {cursor:pointer;}
 div#footer_pages div.left div.project {float:left; width:450px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#footer_pages div.left div.project h1 a{float:left; font:normal 13px "PT Sans Bold"; color:#888888; text-transform:uppercase; width:100%;}
-div#footer_pages div.left div.project p {float:left; padding:0; font:normal 13px "PT Sans"; color:#B3B3B3;}
-div#footer_pages div.left div.links {float:right; width:auto; margin:15px 0 0 0;}
-div#footer_pages div.left div.links ul {float:left; margin:0; padding:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#footer_pages div.left div.links ul li {margin:0 0 0 6px; padding:0; font:normal 13px "PT Sans"; color:#B3B3B3; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#footer_pages div.left div.links ul li a {color:#B3B3B3;}
-div#footer_pages div.left div.links ul li a:hover {text-decoration:underline;}
-div#footer_pages div.right {width:auto; margin:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline; text-align:right;}
-div#footer_pages div.right a.logo {display:block; width:67px; height:43px; background:url('/images/sites/common/logo_interaction.png') no-repeat 0 0;}
-div#footer_pages div.right a.logo:hover {cursor:pointer;}
-div#project_layout div#footer_pages div.left {width:660px; margin:0 0 0 30px; background:none; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#project_layout div#footer_pages div.right {margin:0 25px 0 0;}
-
+div#footer_pages div.left div.project h1 {float:left; width:100%; margin:0; padding:0;}
+div#footer_pages div.left div.project h1 a{float:left; padding:0; margin:0; font:normal 13px "PT Sans Bold"; color:#888888; text-transform:uppercase; width:100%;}
+div#footer_pages div.left div.project p {float:left; padding:0; margin:5px 0 0 0 ; font:normal 13px "PT Sans"; color:#B3B3B3;}
+div#footer_pages div.right {width:245px; margin:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline; text-align:right;}
+div#project_layout div#footer_pages div.right {width:280px; margin:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline; text-align:right;}
+div#footer_pages div.right ul {float:left; margin:19px 0 0 0; padding:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#footer_pages div.right ul li {margin:0 0 0 6px; padding:0; font:normal 13px "PT Sans"; color:#B3B3B3; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#footer_pages div.right ul li a {color:#B3B3B3;}
+div#footer_pages div.right ul li a:hover {text-decoration:underline;}
 
 /*FOOTER ERRORS*/
 div#footer_errors {clear:both; width:100%; padding:100px 0 100px 0;}

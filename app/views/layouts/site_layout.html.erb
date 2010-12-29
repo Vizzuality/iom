@@ -23,23 +23,21 @@
 
     <!-- FOOTERS -->
     <% if controller_name == 'pages' || controller_name == 'search' || controller_name == 'donors' || controller_name == 'projects' %>
-      <div id="footer_pages">
-        <div class="left">
-          <div class="project">
-            <h1><a href="<%= @site %>"><%= @site.name %></a></h1>
-            <p class="all_rights">Copyrighted by InterAction ©2011. All rights reserved.</p>
+      <div id="footer_pages"> 
+        <div class="left"> 
+          <a class="logo"></a> 
+          <div class="project"> 
+            <h1><a href="/">NGOAIDMAP</a></h1> 
+            <p class="all_rights">Copyrighted by InterAction ©2011. All rights reserved.</p> 
           </div>
-          <div class="links">
-            <ul>
-              <li><a href="<%= page_path(Page.contact(@site)) %>">contact us</a></li>
-              <li>/</li>
-              <li><a href="<%= page_path(Page.about(@site)) %>">About the project</a></li>
-            </ul>
-          </div>
-        </div>
+        </div> 
         <div class="right">
-          <a class="logo"></a>
-        </div>
+          <ul> 
+            <li><a href="/p/contact">contact us</a></li> 
+            <li>/</li> 
+            <li><a href="/p/about">About the project</a></li> 
+          </ul>
+        </div> 
       </div>
     <% else %>
       <div id="footer">

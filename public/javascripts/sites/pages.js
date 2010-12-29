@@ -1,4 +1,6 @@
 
+    /* MENU HACK POSITIONING*/
+    $('div#header div.left').width(685);
 
     $(document).ready( function() {
         
