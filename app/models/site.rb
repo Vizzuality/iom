@@ -476,7 +476,7 @@ class Site < ActiveRecord::Base
     def create_pages
       self.pages.create :title => 'About'
       self.pages.create :title => 'Contact'
-      self.pages.create :title => 'Analysis'
+      self.pages.create :title => 'Highlights'
     end
 
     def set_cached_projects

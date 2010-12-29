@@ -131,7 +131,7 @@ site.pages.find_by_title('About').update_attribute(:body, <<-HTML
                     </ul>
                HTML
 )
-site.pages.find_by_title('Analysis').update_attribute(:body, <<-HTML
+site.pages.find_by_title('Highlights').update_attribute(:body, <<-HTML
                    <p>On October 21, the Government of Haiti confirmed an outbreak of cholera, an acute and highly contagious diarrheal disease caused
                    by eating or drinking contaminated food or water. Unless immediately treated, cholera can be fatal. As of November 16 Haiti’s Ministry of
                    Health has confirmed 1,039 deaths and 16,799 hospitalized cases.</p>
@@ -189,7 +189,7 @@ site.pages.find_by_title('About').update_attribute(:body, <<-EOF
                    </ul>
               EOF
 )
-site.pages.find_by_title('Analysis').update_attribute(:body, <<-EOF
+site.pages.find_by_title('Highlights').update_attribute(:body, <<-EOF
                   <p>On October 21, the Government of Haiti confirmed an outbreak of cholera, an acute and highly contagious diarrheal disease caused
                   by eating or drinking contaminated food or water. Unless immediately treated, cholera can be fatal. As of November 16 Haiti’s Ministry of
                   Health has confirmed 1,039 deaths and 16,799 hospitalized cases.</p>

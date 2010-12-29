@@ -3,14 +3,14 @@
 # Table name: pages
 #
 #  id         :integer         not null, primary key
-#  title      :string(255)     
-#  body       :text            
-#  site_id    :integer         
-#  published  :boolean         
-#  permalink  :string(255)     
-#  created_at :datetime        
-#  updated_at :datetime        
-#  parent_id  :integer         
+#  title      :string(255)
+#  body       :text
+#  site_id    :integer
+#  published  :boolean
+#  permalink  :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#  parent_id  :integer
 #
 
 class Page < ActiveRecord::Base
@@ -46,8 +46,8 @@ class Page < ActiveRecord::Base
     site.pages.find_by_title('Contact')
   end
 
-  def self.analysis(site)
-    site.pages.find_by_title('Analysis')
+  def self.highlights(site)
+    site.pages.find_by_title('Highlights')
   end
 
   def set_status

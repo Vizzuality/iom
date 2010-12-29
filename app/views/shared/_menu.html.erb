@@ -34,7 +34,7 @@
             <li id="region_option">
               <a class="geneva main_option with_suboptions">REGIONS<span class="with_suboptions"></span></a>
               <div class="header_title"><a>REGIONS<span class="with_suboptions"></span></a></div>
-              <div class="suboptions_body">                
+              <div class="suboptions_body">
                 <span class="suboptions_body_top"></span>
                 <div class="wrapper">
                   <!-- We have to ask for numbers of elements to show (or not) custom scroll bar -->
@@ -44,7 +44,7 @@
                     <% end %>
                   </ul>
                 </div>
-              </div>  
+              </div>
               </li>
           <%
            # if the site does not define a geo context, then is worldwide,display the countries
@@ -80,7 +80,7 @@
                 </div>
               </div>
             </li>
-            <li><a href="<%= page_path(Page.analysis(@site)) %>" class="geneva main_option">HIGHLIGHTS</a></li>
+            <li><a href="<%= page_path(Page.highlights(@site)) %>" class="geneva main_option">HIGHLIGHTS</a></li>
             <li><a href="<%= page_path(Page.about(@site)) %>" class="geneva main_option">ABOUT</a></li>
       </ul>
     </div>
