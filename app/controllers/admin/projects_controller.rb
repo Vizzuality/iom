@@ -19,9 +19,11 @@ class Admin::ProjectsController < ApplicationController
         end
       end
       unless params[:country].blank? || params[:country] == "0"
-        @conditions[country.name] = {'country' => params[:country]}
-        from << 'countries_projects'
-        projects = projects.from(from.join(',')).where("countries_projects.country_id = #{country.id} AND countries_projects.project_id = projects.id")
+        if country = Country.find_by_id(params[:country])
+          @conditions[country.name] = {'country' => params[:country]}
+          from << 'countries_projects'
+          projects = projects.from(from.join(',')).where("countries_projects.country_id = #{country.id} AND countries_projects.project_id = projects.id")
+        end
       end
       unless params[:cluster].blank? || params[:cluster] == '0'
         if cluster = Cluster.find_by_id(params[:cluster])
