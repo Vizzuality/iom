@@ -7,11 +7,11 @@
   </li>
 
   <li <%= selected_if_current_page(donations_admin_project_path(@project)) %>>
-    	<%= link_to('Donations', donations_admin_project_path(@project)) %><% if !@project.donations.empty? %> <p><span><%=@project.donations.count%></span></p><% end %>
+      <%= link_to('Donations', donations_admin_project_path(@project)) %><% if !@project.donations.empty? %> <p><span><%=@project.donations.count%></span></p><% end %>
   </li>
 
   <li <%= selected_if_current_page(admin_project_resources_path(@project)) %>>
-    <%= link_to("Resources", admin_project_resources_path(@project)) %><% if !@project.resources.empty? %> <p><span><%=@@project.resources.count%></span></p><% end %>
+    <%= link_to("Resources", admin_project_resources_path(@project)) %><% if !@project.resources.empty? %> <p><span><%=@project.resources.count%></span></p><% end %>
   </li>
 </ul>
 
