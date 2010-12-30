@@ -15,19 +15,19 @@
       <% if @projects.total_pages > 1 && @projects.current_page < @projects.total_pages %>
         <% if @area %>
           <% if @area.is_a?(Region) %>
-            <%= link_to('More projects', region_path(params.merge(:page => @projects.current_page + 1)), :id =>'view_more', :class => 'ajax') %>
+            <%= link_to('More projects', region_path(pagination_params), :id =>'view_more', :class => 'ajax') %>
           <% else %>
-            <%= link_to('More projects', country_path(params.merge(:page => @projects.current_page + 1)), :id =>'view_more', :class => 'ajax') %>
+            <%= link_to('More projects', country_path(pagination_params), :id =>'view_more', :class => 'ajax') %>
           <% end %>
         <% else %>
           <% if @data %>
             <% if @data.is_a?(Cluster) %>
-              <%= link_to('More projects', cluster_path(params.merge(:page => @projects.current_page + 1)), :id =>'view_more', :class => 'ajax') %>
+              <%= link_to('More projects', cluster_path(pagination_params), :id =>'view_more', :class => 'ajax') %>
             <% else %>
-              <%= link_to('More projects', sector_path(params.merge(:page => @projects.current_page + 1)), :id =>'view_more', :class => 'ajax') %>
+              <%= link_to('More projects', sector_path(pagination_params), :id =>'view_more', :class => 'ajax') %>
             <% end %>
           <% else %>
-            <%= link_to('More projects', params.merge(:page => @projects.current_page + 1), :id =>'view_more', :class => 'ajax') %>
+            <%= link_to('More projects', pagination_params, :id =>'view_more', :class => 'ajax') %>
           <% end %>
         <% end %>
       <% end %>

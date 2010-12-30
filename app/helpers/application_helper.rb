@@ -145,4 +145,8 @@ HTML
     end
   end
 
+  def pagination_params
+    params.merge(:page => @projects.current_page + 1, :start_in_page => @projects.start_in_page)
+  end
+
 end

@@ -6,7 +6,11 @@ class DonorsController < ApplicationController
     @donor = Donor.find(params[:id])
     @donor.attributes = @donor.attributes_for_site(@site)
 
-    @projects = Project.custom_find(@site, :donor_id => @donor.id, :per_page => 10, :page => params[:page], :order => 'created_at DESC')
+    @projects = Project.custom_find @site, :donor_id => @donor.id,
+                                           :per_page => 10,
+                                           :page => params[:page],
+                                           :order => 'created_at DESC',
+                                           :start_in_page => params[:start_in_page]
 
     respond_to do |format|
       format.html

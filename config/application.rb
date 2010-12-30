@@ -19,3 +19,4 @@ end
 require 'open-uri'
 require 'authenticated_system'
 require 'acts_as_resource'
+require 'will_paginate_random_collection'

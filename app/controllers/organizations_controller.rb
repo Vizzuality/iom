@@ -12,8 +12,11 @@ class OrganizationsController < ApplicationController
     end
     @organization.attributes = @organization.attributes_for_site(@site)
 
-    @projects = Project.custom_find(@site, :organization => @organization.id, :per_page => 10, :page => params[:page], :order => 'created_at DESC')
-
+    @projects = Project.custom_find @site, :organization => @organization.id,
+                                           :per_page => 10,
+                                           :page => params[:page],
+                                           :order => 'created_at DESC',
+                                           :start_in_page => params[:start_in_page]
     respond_to do |format|
       format.html do
         #Map data

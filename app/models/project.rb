@@ -148,7 +148,12 @@ SQL
   end
 
   def self.custom_find(site, options = {})
-    # options: :per_page => 10, :page => params[:page], :order => 'created_at DESC'
+    default_options = {
+      :order => 'created_at DESC',
+      :random => true,
+    }
+    options = default_options.merge(options)
+    options[:page] ||= 1
     sql = <<-SQL
     select * from
     (SELECT p.id as project_id, p.name as project_name, p.description as project_description,
@@ -202,25 +207,57 @@ SQL
       end
       sql << conditions.join(' and ')
     end
+
+    total_entries = if options[:random]
+      ActiveRecord::Base.connection.execute("select count(*) as count from (#{sql}) as q").first['count'].to_i
+    else
+      nil
+    end
+
+    total_pages = if options[:random] && options[:per_page]
+      (total_entries.to_f / options[:per_page].to_f).ceil
+    else
+      nil
+    end
+
+    start_in_page = if options[:start_in_page]
+      options[:start_in_page].to_i
+    else
+      if total_pages
+        rand(total_pages)
+      else
+        nil
+      end
+    end
+
     if options[:order]
       sql << " ORDER BY #{options[:order]}"
     end
     # Let's query an extra result: if it exists, whe have to show the paginator link "More projects"
     if options[:per_page]
-      sql << " LIMIT #{options[:per_page].to_i + 1}"
+      sql << " LIMIT #{options[:per_page].to_i}"
     end
     if options[:page] && options[:per_page]
-      sql << " OFFSET #{options[:per_page].to_i * (options[:page].to_i - 1)}"
+      #####
+      # start_in_page =  4
+      # total_pages   =  7
+      # per_page      = 10
+      #
+      # page = 1 > real page = 5 > offset = 40
+      # page = 2 > real page = 6 > offset = 50
+      # page = 3 > real page = 7 > offset = 60
+      # page = 4 > real page = 1 > offset = 0
+      # page = 5 > real page = 2 > offset = 10
+      offset = if (options[:page].to_i + start_in_page - 1) <= total_pages
+        options[:per_page].to_i * (options[:page].to_i + start_in_page - 1)
+      else
+        options[:per_page].to_i * (options[:page].to_i - start_in_page)
+      end
+      sql << " OFFSET #{offset}"
     end
     result = ActiveRecord::Base.connection.execute(sql).map{ |r| r }
-    total_results = if options[:page].to_i < 2
-      result.size + (options[:per_page].to_i * options[:page].to_i)
-    else
-      result.size + (options[:per_page].to_i * (options[:page].to_i - 1))
-    end
-    WillPaginate::Collection.create(options[:page] ? options[:page].to_i : 1, options[:per_page], total_results) do |pager|
-      result = result[0..-2] if result.size > options[:per_page].to_i
-      pager.replace(result)
+    WillPaginate::RandomCollection.create(options[:page] ? options[:page].to_i : 1, options[:per_page], total_entries, start_in_page) do |pager|
+      pager.replace(result.sort_by{rand})
     end
   end
 

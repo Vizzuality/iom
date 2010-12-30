@@ -6,7 +6,11 @@ class GeoregionController < ApplicationController
     if(request.url.match(/countries/))
       @area = Country.find(params[:id], :select => Country.custom_fields)
 
-      @projects = Project.custom_find(@site, :country => @area.name, :per_page => 10, :page => params[:page], :order => 'created_at DESC')
+      @projects = Project.custom_find @site, :country => @area.name,
+                                             :per_page => 10,
+                                             :page => params[:page],
+                                             :order => 'created_at DESC',
+                                             :start_in_page => params[:start_in_page]
 
       # TODO
       @area_parent = "America"
@@ -22,7 +26,11 @@ class GeoregionController < ApplicationController
       @area = Region.where(:id => params[:id], :level => @site.level_for_region).select(Region.custom_fields).first
       raise ActiveRecord::RecordNotFound unless @area
 
-      @projects = Project.custom_find(@site, :region => @area.name, :per_page => 10, :page => params[:page], :order => 'created_at DESC')
+      @projects = Project.custom_find @site, :region => @area.name,
+                                             :per_page => 10,
+                                             :page => params[:page],
+                                             :order => 'created_at DESC',
+                                             :start_in_page => params[:start_in_page]
 
       @area_parent = Country.find_by_id(@area.country_id, :select => "id, name").try(:name)
       sql="select *,(select the_geom_geojson from regions where id=subq.id) as geojson
