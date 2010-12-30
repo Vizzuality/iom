@@ -10,7 +10,11 @@
       <div class="project_places">
         <p>
         <% unless project['regions'].blank? %>
-          <%= project['regions'].split('|').to_sentence(:last_word_connector => ' and ') %>
+          <% if project['regions'].split('|').size > 3 %>
+            <%= project['regions'].split('|')[0..3].join(', ') %> and <%= project['regions'].size - 3 %> more
+          <% else %>
+            <%= project['regions'].split('|').to_sentence(:last_word_connector => ' and ') %>
+          <% end %>
         <% end %></p>
       </div>
     </li>
