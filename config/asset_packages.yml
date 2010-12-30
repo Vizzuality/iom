@@ -17,15 +17,41 @@ javascripts:
   - jquery.ui.widget.js
   - jquery.ui.position
 - sites_general_home:
-  - sites/home_sites.js
   - plugins/galleria.js
-  - plugins/galleria.home.js
+  - sites/home_sites.js
 - sites_home:
   - sites/home.js
   - sites/mercatorProjection.js
   - sites/IOMMarker.js
   - sites/labels_style.js
   - sites/overview_map.js
+- clusters_sectors_show:
+  - sites/mercatorProjection.js
+  - sites/IOMMarker.js
+  - sites/labels_style.js
+  - sites/overview_map.js
+  - sites/location.js
+- georegion_show:
+  - sites/location.js
+  - sites/mercatorProjection.js
+  - sites/IOMMarker.js
+  - sites/labels_style.js
+  - sites/georegion_map.js
+- organizations_show:
+  - sites/location.js
+  - sites/mercatorProjection.js
+  - sites/IOMMarker.js
+  - sites/labels_style.js
+  - sites/overview_map.js
+- projects_show:
+  - plugins/galleria.js
+  - plugins/galleria.classic.js
+  - sites/project.js
+  - sites/mercatorProjection.js
+  - sites/IOMMarker.js
+  - sites/labels_style.js
+  - sites/overview_map.js
+
 stylesheets:
 - base:
   - sites/jscroll.css
