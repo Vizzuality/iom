@@ -310,8 +310,8 @@ class Site < ActiveRecord::Base
   end
 
   #Tells me if a project is included in a site or not
-  def is_project_included?(project_id,options={})
-    projects_sql(options).where("projects.id=?",project_id).present?
+  def is_project_included?(project_id)
+    projects.map(&:id).include?(project_id)
   end
 
   def total_projects(options = {})

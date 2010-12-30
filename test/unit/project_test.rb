@@ -95,8 +95,8 @@ class ProjectTest < ActiveSupport::TestCase
   test "Destroy a site should remove it from projects_sites" do
     organization = create_organization
     site = create_site :name => 'Food for Haiti', :project_context_organization_id => organization.id, :project_context_cluster_id => nil
-    project = create_project :primary_organization_id => organization.id
 
+    project = create_project :primary_organization_id => organization.id
     project.reload
 
     assert project.cached_sites.include?(site)
