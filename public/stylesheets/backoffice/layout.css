@@ -1108,9 +1108,9 @@ ul.newList.country_index li a {font:normal 13px Arial; color:#333333; width:114p
 ul.newList li a {padding:3px 8px; display: block;}
 ul.newList li a:focus {-moz-outline-style: none; outline:none;}
 .selectedTxt {width:auto; overflow:hidden; height:16px; margin:4px 0 0 3px; font:normal 13px Arial; color:#333333; line-height:21px;}
-.hiLite {background:#CBE499!important; color:#333333!important;}
-.hiLite a {background:#CBE499!important; color:#333333!important;}
-.newListHover {background:#CBE499; color:#333333!important; cursor:pointer;}
+.hiLite {background:#E4F0CA!important; color:#333333!important;}
+.hiLite a {background:#E4F0CA!important; color:#333333!important;}
+.newListHover {background:#E4F0CA; color:#333333!important; cursor:pointer;}
 /*.newListSelHover {background-position:0 -32px; cursor:default;}*/
 .newListSelFocus {background-position:0 -32px; cursor:pointer;}
 .newListSelFocus.country {background-position:0 -32px; cursor:pointer;}
