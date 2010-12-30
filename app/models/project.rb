@@ -265,6 +265,10 @@ SQL
     end
   end
 
+  def self.custom_fields
+    (columns.map{ |c| c.name }).map{ |c| "#{self.table_name}.#{c}" }
+  end
+
   private
 
     def dates_consistency
