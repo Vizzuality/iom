@@ -4,7 +4,11 @@
         <% @projects.each do |project| %>
         <li <%= cycle('class=even', 'class=odd') %>>
           <h4><a href="<%= project_path(project['project_id']) %>"><%= truncate(project['project_name'], :length=>65) %></a></h4>
-          <p class="author"><%= subtitle(project, @site) %></p>
+           <% if controller_name == 'clusters_sectors' %>
+           <p class="author">in <%= link_to(project['countries'], country_path(project['countries_ids']), :title => project['countries']) %></p>
+           <% else %>
+           <p class="author"><%= subtitle(project, @site) %></p>
+           <% end %>
           <p class="info"><%= anglo(truncate(project['project_description'], :length => 175)) %> <a href="<%= project_path(project['project_id']) %>" class="learn_more">Learn more</a></p>
         </li>
         <% end %>

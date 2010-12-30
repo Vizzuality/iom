@@ -205,8 +205,12 @@ class Site < ActiveRecord::Base
 
     # (5)
     if geographic_context_country_id?
-      from << "countries_projects"
-      where << "(countries_projects.project_id = projects.id AND countries_projects.country_id = #{geographic_context_country_id})"
+      # from << "countries_projects"
+      # where << "(countries_projects.project_id = projects.id AND countries_projects.country_id = #{geographic_context_country_id})"
+      # Instead on looking in the countries, we look in the regions of the level configured in the site
+      # to get the valid projects
+      from << "projects_regions, regions"
+      where << "(projects_regions.project_id = projects.id AND regions.id=projects_regions.region_id AND regions.level=#{self.level_for_region} AND regions.country_id=#{self.geographic_context_country_id})"
     end
 
     # (6)
@@ -221,7 +225,7 @@ class Site < ActiveRecord::Base
       where << "ST_Contains(sites.geographic_context_geometry,projects.the_geom)"
     end
 
-    result = Project.select(select).from(from.join(',')).where(where.join(' AND '))
+    result = Project.select(select).from(from.join(',')).where(where.join(' AND ')).group(Project.custom_fields.join(','))
 
     if options[:limit]
       result = result.limit(options[:limit])

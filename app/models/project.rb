@@ -224,7 +224,11 @@ SQL
       options[:start_in_page].to_i
     else
       if total_pages
-        rand(total_pages)
+        if total_pages > 2
+          rand(total_pages - 1)
+        else
+          0
+        end
       else
         nil
       end
@@ -259,6 +263,10 @@ SQL
     WillPaginate::RandomCollection.create(options[:page] ? options[:page].to_i : 1, options[:per_page], total_entries, start_in_page) do |pager|
       pager.replace(result.sort_by{rand})
     end
+  end
+
+  def self.custom_fields
+    (columns.map{ |c| c.name }).map{ |c| "#{self.table_name}.#{c}" }
   end
 
   private
