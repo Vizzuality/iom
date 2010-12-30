@@ -224,7 +224,11 @@ SQL
       options[:start_in_page].to_i
     else
       if total_pages
-        rand(total_pages)
+        if total_pages > 2
+          rand(total_pages - 1)
+        else
+          0
+        end
       else
         nil
       end
