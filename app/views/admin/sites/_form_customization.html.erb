@@ -1,8 +1,5 @@
 <%= form_for(@site, :url => admin_site_path(@site), :html => { :multipart => true }) do |f| %>
 
-  <%= f.error_messages %>
-
-
   <div class="common">
     <h3>SITE CUSTOMIZATION</h3>
     <%= f.label :logo %>
@@ -17,11 +14,11 @@
           <div id="wrapper_input">
             <%= f.file_field :logo %>
           </div>
-        </div>    
+        </div>
         <% if @site.logo_file_name? %>
           <p class="remove_link"> or <%= link_to('remove', destroy_logo_admin_site_path(@site), :method => :put, :class => 'remove') %></p>
          <% else %>
-            <p class="message remove_link">Select a file from your computer</p>          
+            <p class="message remove_link">Select a file from your computer</p>
         <%end%>
       </div>
     </div>
@@ -49,11 +46,11 @@
           <div id="wrapper_input">
             <%= f.file_field :aid_map_image %>
           </div>
-        </div>    
+        </div>
         <% if @site.aid_map_image_file_name? %>
           <p class="remove_link"> or <%= link_to('remove', destroy_aid_map_image_admin_site_path(@site), :method => :put, :class => 'remove') %></p>
          <% else %>
-            <p class="message remove_link">Select a file from your computer</p>          
+            <p class="message remove_link">Select a file from your computer</p>
         <%end%>
       </div>
     </div>
