@@ -1,14 +1,27 @@
   
     /* MENU HACK POSITIONING*/
     $('div#header div.left').width(810);
+    
     /* MENU HACK DESCRIPTION*/
-    // if ($('div.inner_main_head div.right p').length>0) {
-    //   $('div.inner_main_head div.right p').hide();
-    //   var max_height = $('div.inner_main_head div.left').height()-12;
-    //   $('div.inner_main_head div.right').height(max_height);
-    //   $('div.inner_main_head div.right').css('overflow','hidden');
-    //   $('div.inner_main_head div.right p').show();
-    // }
+    if ($('div.inner_main_head div.right p').length>0) {
+      $('div.inner_main_head div.right p').each(function(index,element){
+        if (index!=0) {
+          $('div.inner_main_head div.right p').append('<br/>'+$(element).html());
+          $(element).remove();
+        }
+      });
+      var max_height = $('div.inner_main_head div.left').height();
+      $('div.inner_main_head div.right').height(max_height);
+      $('div.inner_main_head div.right p').height(max_height);
+      $('div.inner_main_head div.right').css('overflow','hidden!important');
+      $('div.inner_main_head div.right p').css('overflow','hidden!important');
+
+      var max_characters = ((max_height*6)/76) * 90;
+      if ($('div.inner_main_head div.right p').text().length>max_characters) {
+        $('div.inner_main_head div.right p').text($('div.inner_main_head div.right p').text().substr(0,max_characters)+'...');
+      }
+    }
+    
 
     $(document).ready( function() {
       
@@ -22,23 +35,6 @@
         $('ul#donors_list li.out').css('display','none');
         $('ul#donors_list').css('overflow','hidden');
         $('ul#donors_list').height($('ul#donors_list').height());
-      }
-      
-      
-      //If description is bigger than main_head
-      if ($('div.inner_main_head div.right').height()>$('div.inner_main_head div.left').height()) {
-        $('div.inner_main_head div.left').height($('div.inner_main_head div.right').height());
-        
-        if ($('div.inner_main_head div.float_head').height() < $('div.inner_main_head div.right').height()) {
-          $('div.inner_main_head div.float_head').height($('div.inner_main_head div.right').height());
-        } else {
-          var left_height = $('div.inner_main_head div.float_head').height();
-          var right_height = $('div.inner_main_head div.right').height();
-          var actual_height = $('div.inner_main_head div.right').height();
-          var height_to_add = (left_height - right_height) + parseInt(actual_height);
-          $('div.inner_main_head div.right').height(height_to_add);
-          $('div.inner_main_head div.left').height($('div.inner_main_head div.right').height());        
-        }
       }
       
       // If right part is bigger than float left
