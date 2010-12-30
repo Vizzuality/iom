@@ -1,59 +1,58 @@
 ---
 javascripts:
 - base:
-  - jquery.min.js
-  - jquery.ui.core.js
-  - jquery.ui.widget.js
-  - jquery.ui.position.js
-  - plugins/jquery.mousewheel.js
-  - plugins/jquery.jscrollpane.js
-  - plugins/quicksilver.js
-  - plugins/jquery.livesearch.js
-  - rails.js
-  - sites/application.js
+  - jquery.min
+  - jquery.ui.core
+  - jquery.ui.widget
+  - jquery.ui.position
+  - plugins/jquery.mousewheel
+  - plugins/jquery.jscrollpane
+  - plugins/quicksilver
+  - plugins/jquery.livesearch
+  - rails
+  - sites/application
 - root_layout:
-  - jquery.min.js
-  - jquery.ui.core.js
-  - jquery.ui.widget.js
+  - jquery.min
+  - jquery.ui.core
+  - jquery.ui.widget
   - jquery.ui.position
 - sites_general_home:
-  - plugins/galleria.js
-  - sites/home_sites.js
+  - plugins/galleria
+  - sites/home_sites
 - sites_home:
-  - sites/home.js
-  - sites/mercatorProjection.js
-  - sites/IOMMarker.js
-  - sites/labels_style.js
-  - sites/overview_map.js
+  - sites/home
+  - sites/mercatorProjection
+  - sites/IOMMarker
+  - sites/labels_style
+  - sites/overview_map
 - clusters_sectors_show:
-  - sites/mercatorProjection.js
-  - sites/IOMMarker.js
-  - sites/labels_style.js
-  - sites/overview_map.js
-  - sites/location.js
+  - sites/mercatorProjection
+  - sites/IOMMarker
+  - sites/labels_style
+  - sites/overview_map
+  - sites/location
 - georegion_show:
-  - sites/location.js
-  - sites/mercatorProjection.js
-  - sites/IOMMarker.js
-  - sites/labels_style.js
-  - sites/georegion_map.js
+  - sites/location
+  - sites/mercatorProjection
+  - sites/IOMMarker
+  - sites/labels_style
+  - sites/georegion_map
 - organizations_show:
-  - sites/location.js
-  - sites/mercatorProjection.js
-  - sites/IOMMarker.js
-  - sites/labels_style.js
-  - sites/overview_map.js
+  - sites/location
+  - sites/mercatorProjection
+  - sites/IOMMarker
+  - sites/labels_style
+  - sites/overview_map
 - projects_show:
-  - plugins/galleria.js
-  - plugins/galleria.classic.js
-  - sites/project.js
-  - sites/mercatorProjection.js
-  - sites/IOMMarker.js
-  - sites/labels_style.js
-  - sites/overview_map.js
+  - plugins/galleria
+  - plugins/galleria.classic
+  - sites/project
+  - sites/mercatorProjection
+  - sites/IOMMarker
+  - sites/labels_style
+  - sites/overview_map
 
 stylesheets:
 - base:
-  - sites/jscroll.css
-  - sites/layout.css
-
+  - sites/jscroll
+  - sites/layout
