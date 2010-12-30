@@ -123,6 +123,12 @@ $(document).ready( function() {
 function resetCombo(elementToUpdate){
     var element = elementToUpdate.find('.scroll_pane');
     if (element.length > 0){
+
+        // TO region option menu (it's liquid - height "auto") I have to specify a height for the plugin 
+        if (element.attr('id') == $('ul#regions').attr('id')){
+            var maxHeight = element.css('max-height');
+            element.css('height',maxHeight);
+        }
         var api = element.data('jsp');    
         if (api != undefined) api.reinitialise();
     }
