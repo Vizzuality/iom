@@ -199,8 +199,8 @@ module ActionView
 
         objects.compact!
         count = objects.inject(0) {|sum, object| sum + object.errors.count }
-
-        unless count.zero?
+        
+        if count.zero?
           html = {}
           [:id, :class].each do |key|
             if options.include?(key)

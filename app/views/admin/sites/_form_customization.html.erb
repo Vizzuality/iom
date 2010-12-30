@@ -12,13 +12,18 @@
       <% end -%>
       <div class="field">
         <p>JPG, PNG and GIF supported</p>
-        <%= f.file_field :logo %>
+        <div id="bttn_upload">
+          <a class="upload_bttn"></a>
+          <div id="wrapper_input">
+            <%= f.file_field :logo %>
+          </div>
+        </div>    
+        <% if @site.logo_file_name? %>
+          <p class="remove_link"> or <%= link_to('remove', destroy_logo_admin_site_path(@site), :method => :put, :class => 'remove') %></p>
+         <% else %>
+            <p class="message remove_link">Select a file from your computer</p>          
+        <%end%>
       </div>
-      <% if @site.logo_file_name? %>
-        <p> or <%= link_to('remove', destroy_logo_admin_site_path(@site), :method => :put, :class => 'remove') %></p>
-      <%else%>
-        <p class="message">Select a file from your computer</p>
-      <% end -%>
     </div>
 
     <%= f.label :theme %>
@@ -39,13 +44,18 @@
       <% end -%>
       <div class="field">
         <p>JPG, PNG and GIF supported</p>
-        <%= f.file_field :aid_map_image %>
+        <div id="bttn_upload">
+          <a class="upload_bttn"></a>
+          <div id="wrapper_input">
+            <%= f.file_field :aid_map_image %>
+          </div>
+        </div>    
+        <% if @site.aid_map_image_file_name? %>
+          <p class="remove_link"> or <%= link_to('remove', destroy_aid_map_image_admin_site_path(@site), :method => :put, :class => 'remove') %></p>
+         <% else %>
+            <p class="message remove_link">Select a file from your computer</p>          
+        <%end%>
       </div>
-      <% if @site.aid_map_image_file_name? %>
-        <p> or <%= link_to('remove', destroy_aid_map_image_admin_site_path(@site), :method => :put, :class => 'remove') %></p>
-      <% else %>
-        <p class="message">Select a file from your computer</p>
-      <% end -%>
     </div>
 
   </div>

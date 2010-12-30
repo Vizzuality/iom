@@ -1,7 +1,7 @@
 <%= form_for(@site, :url => (@site.new_record? ? admin_sites_path : admin_site_path(@site))) do |f| %>
 
   <div class="field">
-    <label>SITE NAME <strong>*</strong></label>
+    <label class="first">SITE NAME <strong>*</strong></label>
     <span class="input_large <%= 'error' if !@site.errors[:name].empty? && action_name != 'new' %>">
       <%= f.text_field :name, :class=>"long #{'error' if !@site.errors[:name].empty? && action_name != 'new'}" %>
       <%= errors_for @site, :name %>

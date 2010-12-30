@@ -47,8 +47,6 @@ $(document).ready(function(ev){
     }
 
     if ($('div.right.menu').length > 0) {
-        console.log($('div.block div.med div.left').height());
-        console.log($('div.right.menu').height());
         if ($('div.block div.med div.left').height() > $('div.right.menu').height()){
             setTimeout(function(){
               heightLeft = $('div.block div.med div.left').height();

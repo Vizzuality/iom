@@ -15,11 +15,19 @@
   <div class="image_container">
     <% if @organization.logo_file_name? %>
       <%= image_tag(@organization.logo.url(:small)) %>      
-      <!-- TODO - add link to remove -->
     <% end -%>
     <div class="field">
       <p>JPG, PNG and GIF supported</p>
-      <%= f.file_field :logo %>
+      <div id="bttn_upload">
+        <a class="upload_bttn"></a>
+        <div id="wrapper_input">
+          <%= f.file_field :logo %>
+        </div>
+      </div>    
+      <% if @organization.logo_file_name? %>
+      <!-- TODO: IMPLEMENT DESTROY ORGANIZATION LOGO -->
+        <p class="remove_link"> or <a class="remove">remove</a></p>
+      <%end%>
     </div>
   </div>
 
