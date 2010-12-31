@@ -61,4 +61,15 @@ class Admin::OrganizationsController < ApplicationController
     redirect_to admin_organizations_path, :flash => {:success => 'Organization has been deleted successfully'}
   end
 
+  def destroy_logo
+    @organization = Organization.find(params[:id])
+    @organization.logo.clear
+    @organization.save
+    respond_to do |format|
+      format.html do
+        redirect_to edit_admin_organization_path(@organization), :flash => {:success => 'Organization logo has been removed successfully'}
+      end
+    end
+  end
+
 end

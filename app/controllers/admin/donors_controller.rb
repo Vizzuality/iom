@@ -64,11 +64,22 @@ class Admin::DonorsController < ApplicationController
     @donor.destroy
     redirect_to admin_donors_path, :flash => {:success => 'Donor has been deleted successfully'}
   end
-  
+
   def specific_information
     @donor = Donor.find(params[:id])
     @site = Site.find(params[:site_id])
     @donor.attributes = @donor.attributes_for_site(@site)
+  end
+
+  def destroy_logo
+    @donor = Donor.find(params[:id])
+    @donor.logo.clear
+    @donor.save
+    respond_to do |format|
+      format.html do
+        redirect_to edit_admin_donor_path(@donor), :flash => {:success => 'Donor logo has been removed successfully'}
+      end
+    end
   end
 
 end

@@ -18,12 +18,11 @@
         <div id="wrapper_input">
           <%= f.file_field :logo %>
         </div>
-      </div>    
+      </div>
       <% if @donor.logo_file_name? %>
-      <!-- TODO: IMPLEMENT DESTROY ORGANIZATION LOGO -->
-        <p class="remove_link"> or <a class="remove">remove</a></p>
+        <p class="remove_link"> or <%= link_to('remove', destroy_logo_admin_donor_path(@donor), :method => :put, :class => 'remove') %></p>
       <%end%>
-    </div>        
+    </div>
   </div>
 
   <div class="field">
