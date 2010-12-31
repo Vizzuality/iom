@@ -3,6 +3,7 @@
 <head>
   <title><%= title %></title>
   <%=raw(javascript_include_merged(:base)) %>
+  <%=raw(javascript_include_merged(:base_2)) %>
   <%=raw(stylesheet_link_merged(:base)) %>
   <%=stylesheet_link_tag @site.theme.css_file if @site.theme %>
   <link rel="shortcut icon" href="/images/favicon.ico"/>
@@ -20,21 +21,21 @@
 
     <!-- FOOTERS -->
     <% if controller_name == 'pages' || controller_name == 'search' || controller_name == 'donors' || controller_name == 'projects' %>
-      <div id="footer_pages"> 
-        <div class="left"> 
-          <a class="logo"></a> 
-          <div class="project"> 
-            <h1><a href="/">NGOAIDMAP</a></h1> 
-            <p class="all_rights">Copyrighted by InterAction ©2011. All rights reserved.</p> 
+      <div id="footer_pages">
+        <div class="left">
+          <a class="logo"></a>
+          <div class="project">
+            <h1><a href="/">NGOAIDMAP</a></h1>
+            <p class="all_rights">Copyrighted by InterAction ©2011. All rights reserved.</p>
           </div>
-        </div> 
+        </div>
         <div class="right">
-          <ul> 
-            <li><a href="/p/contact">contact us</a></li> 
-            <li>/</li> 
-            <li><a href="/p/about">About the project</a></li> 
+          <ul>
+            <li><a href="/p/contact">contact us</a></li>
+            <li>/</li>
+            <li><a href="/p/about">About the project</a></li>
           </ul>
-        </div> 
+        </div>
       </div>
     <% else %>
       <div id="footer">

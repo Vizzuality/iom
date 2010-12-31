@@ -8,6 +8,7 @@ javascripts:
   - plugins/jquery.mousewheel
   - plugins/jquery.jscrollpane
   - plugins/quicksilver
+- base_2:
   - plugins/jquery.livesearch
   - rails
   - sites/application
