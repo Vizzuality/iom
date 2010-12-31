@@ -206,24 +206,27 @@ Dual licensed under the MIT and GPL licenses.
     	                    $newUl.find('ul').css('display','none');
                             $newUl.find('ul').css('visibility','hidden');
                     	});
-                            	
-                //show/hide this menu
-                 $newUl.show();
- 	
+ 	        
+				if ($newUl.is(':hidden')){
+				    $newUl.show();
+					$newUl.parent().children('div.selectedTxt').parent('div.newListSelected').css('background-position','0 -32px');
 
-                // console.log('esta visible');
-				$newUl.parent().children('div.selectedTxt').parent('div.newListSelected').css('background-position','0 -32px');
+					$newUl.find('ul').css('display','inline');
+					$newUl.find('ul').css('visibility','visible');
 
-				$newUl.find('ul').css('display','inline');
-				$newUl.find('ul').css('visibility','visible');
-
-				// To reset api jscrollPane
-                var element = $newUl.parent().children('div.selectedTxt').parent('div.newListSelected').find('.scroll_pane');
-                if ((element != undefined) && (element.length > 0)){
-                    var api = element.data('jsp');
-                    api.reinitialise();                
-                }
-                    
+    				// To reset api jscrollPane
+                    var element = $newUl.parent().children('div.selectedTxt').parent('div.newListSelected').find('.scroll_pane');
+                    // console.log(element);
+                    if ((element != undefined) && (element.length > 0)){
+                        var api = element.data('jsp');
+                        api.reinitialise();                
+                    }
+					
+				}else {
+				    //show/hide this menu 
+                    $newUl.hide();                    
+				}
+				
                 positionFix();
                 //scroll list to selected item
                 $newLi.eq(currentIndex).focus();

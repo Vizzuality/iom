@@ -69,7 +69,7 @@
             <% @donor.projects_regions(@site).each do |region, count| %>
               <% if index < 3 %>
                 <li class="pos<%= index %>">
-                  <%= link_to(truncate(region.name,:length=>15, :omission=>"..."), region_path(region)) %> - <%= count %>
+                  <%= link_to(truncate(region.name,:length=>10, :omission=>"..."), region_path(region)) %> - <%= count %>
                 </li>
                 <% values += ((index==0) ? '' : ',') + count.to_s() %>
                 <% max_value<count ? max_value=count : nil %>
