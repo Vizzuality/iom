@@ -194,7 +194,6 @@ Dual licensed under the MIT and GPL licenses.
 					newUlPos();
 				}
                 
-                console.log('ocultamos todos');
                 //hide all menus apart from this one
 				$('.newList').not($(this).next()).hide()
                     .parent()
