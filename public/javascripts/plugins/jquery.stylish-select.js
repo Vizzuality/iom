@@ -59,7 +59,7 @@ Dual licensed under the MIT and GPL licenses.
 		$input = $(this),
 		$containerDivText = $('<div class="selectedTxt"></div>'),
 		$containerDiv = $('<div class="newListSelected ' + opts.containerClass + '"></div>'),   
-        $newUl = $('<div class="newList_content ' + opts.containerClass + '"><div class="wrapper"><ul class="newList ' + opts.containerClass + '" style="visibility:hidden;"></ul></div></div>'),
+        $newUl = $('<div class="newList_content ' + opts.containerClass + '"><div class="wrapper"><ul class="newList scroll_pane ' + opts.containerClass + '" style="visibility:hidden;"></ul></div></div>'),
 		itemIndex = -1,
 		currentIndex = -1,
 		keys = [],
@@ -184,7 +184,6 @@ Dual licensed under the MIT and GPL licenses.
             }
 
             $containerDivText.bind('click.sSelect',function(event){
-                
                 event.stopPropagation();
             
 				//added by Justin Beasley
@@ -194,42 +193,38 @@ Dual licensed under the MIT and GPL licenses.
 					$(this).data('ssReRender',false);
 					newUlPos();
 				}
-
+                
+                console.log('ocultamos todos');
                 //hide all menus apart from this one
 				$('.newList').not($(this).next()).hide()
                     .parent()
                         .css('position', 'static')
                         .removeClass('newListSelFocus');
-
+                 // To remove clicked style in others
+                    $('div.newListSelected').each(function() {
+                    		$(this).css('background-position','0 0');
+                    		$(this).css('zIndex',200);
+    	                    $newUl.find('ul').css('display','none');
+                            $newUl.find('ul').css('visibility','hidden');
+                    	});
+                            	
                 //show/hide this menu
-                $newUl.toggle();
+                 $newUl.show();
+ 	
 
-                // To remove clicked style in others
-                $('div.newListSelected').each(function() {
-                		$(this).css('background-position','0 0');
-                		$(this).css('zIndex',200);
-                		
-                	});
-                	
-				if ($newUl.is(':visible')){
-					$newUl.parent().children('div.selectedTxt').parent('div.newListSelected').css('background-position','0 -32px');
+                // console.log('esta visible');
+				$newUl.parent().children('div.selectedTxt').parent('div.newListSelected').css('background-position','0 -32px');
 
-					$newUl.find('ul').css('display','inline');
-					$newUl.find('ul').css('visibility','visible');
+				$newUl.find('ul').css('display','inline');
+				$newUl.find('ul').css('visibility','visible');
 
-    				// To reset api jscrollPane
-                    var element = $('div.newListSelected').find('.scroll_pane');
-                    if ((element != undefined) && (element.length > 0)){
-                        var api = element.data('jsp');
-                        api.reinitialise();                
-                    }
-					
-				}else {
-					$newUl.parent().children('div.selectedTxt').parent('div.newListSelected').css('background-position','0 0');
-					$newUl.find('ul').css('display','none');
-					$newUl.find('ul').css('visibility','hidden');
-				}
-
+				// To reset api jscrollPane
+                var element = $newUl.parent().children('div.selectedTxt').parent('div.newListSelected').find('.scroll_pane');
+                if ((element != undefined) && (element.length > 0)){
+                    var api = element.data('jsp');
+                    api.reinitialise();                
+                }
+                    
                 positionFix();
                 //scroll list to selected item
                 $newLi.eq(currentIndex).focus();

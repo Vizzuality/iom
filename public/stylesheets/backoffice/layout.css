@@ -1108,7 +1108,7 @@ div.newList_content.country_index {background:url('/images/backoffice/projects/c
 ul.newList.country_index {float:left; height:194px; overflow-x:hidden; width:147px; margin:0 0 0 1px; overflow-y:auto;}
 ul.newList.country_index li {width:233px; margin:0; height:auto !important;}
 ul.newList.country_index li:focus {outline:none;}
-ul.newList.country_index li a {font:normal 13px Arial; color:#333333; width:114px;}
+ul.newList.country_index li a {font:normal 13px Arial; color:#333333; width:113px;}
 
 ul.newList li a {padding:3px 8px; display: block;}
 ul.newList li a:focus {-moz-outline-style: none; outline:none;}
