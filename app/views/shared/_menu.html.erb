@@ -12,7 +12,7 @@
             <li id="<%= @site.navigate_by_cluster? ? 'cluster' : 'sector' %>_option">
               <a class="geneva main_option with_suboptions"><%= @site.word_for_cluster_sector.upcase %><span class="with_suboptions"></span></a>
               <div class="header_title"><a><%= @site.word_for_cluster_sector.upcase %><span class="with_suboptions"></span></a></div>
-              <ul class="suboptions <%= (@site.clusters_or_sectors.size > 16)? 'longer':'' %>">
+              <ul class="suboptions <%= (@site.clusters_or_sectors.size > 16) ? 'longer': '' %>">
                 <% @site.clusters_or_sectors.reject{|c| c.name.eql?('N/A') }.each do |category| %>
                 <li>
                   <a href="<%= category.is_a?(Cluster) ? cluster_path(category) : sector_path(category) %>" class="geneva <%= category.css_class %> <%= (category.name.size > 17)? 'double_line':''%> icon_menu">
@@ -38,7 +38,7 @@
                 <span class="suboptions_body_top"></span>
                 <div class="wrapper">
                   <!-- We have to ask for numbers of elements to show (or not) custom scroll bar -->
-                  <ul id="regions" class="content <%= (@site.regions_select.length > 11)? 'scroll_pane' : ''%>">
+                  <ul id="regions" class="content <%= (@site.regions_select.length > 11) ? 'scroll_pane' : ''%>">
                     <% @site.regions_select.each do |region| %>
                     <li><%= link_to(region.name, region_path(region), :class => 'geneva') %></li>
                     <% end %>
@@ -56,7 +56,7 @@
                 <div class="wrapper">
                   <ul class="content scroll_pane">
                     <% @site.countries_select.each do |country| %>
-                    <li><a href="/countries/<%= country.id %>" class="geneva"><%= country.name %></a></li>
+                    <li><%= link_to(country.name, country_path(country), :class => 'geneva') %></li>
                     <% end %>
                   </ul>
                 </div>
@@ -68,7 +68,7 @@
               <a class="geneva main_option with_suboptions">ORGANIZATIONS<span class="with_suboptions"></span></a>
               <div class="header_title"><a>ORGANIZATIONS<span class="with_suboptions"></span></a></div>
               <div class="suboptions_body <%= (@site.organizations.length < 20)? 'short' : ''%>">
-                <span class="suboptions_body_top"></span>                
+                <span class="suboptions_body_top"></span>
                 <form method="get">
                   <input id="ngos_search" type="text" value="" name="ngos_search"/>
                 </form>
