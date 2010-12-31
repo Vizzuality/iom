@@ -100,6 +100,39 @@ class SiteTest < ActiveSupport::TestCase
     assert site.cached_projects.include?(project)
   end
 
+  test "Given a site contextualized in a country and some projects in some regions the projects in the site should those in the same level of the site" do
+    spain    = create_country :name => 'Spain'
+    catalonia = create_region :name => 'Catalonia', :country => spain, :level => 1
+    barcelona = create_region :name => 'Barcelona', :country => spain, :level => 3
+
+    p1 = create_project :name => 'P1'
+    p1.regions << catalonia
+    p2 = create_project :name => 'P2'
+    p2.regions << barcelona
+    p3 = create_project :name => 'P3'
+    p3.regions << barcelona
+
+    site = create_site :name => 'Food for Spain', :geographic_context_country_id => spain.id,
+                       :project_context_cluster_id => nil, :level_for_region => 3
+
+    site.reload
+    p1.reload
+    p2.reload
+    p3.reload
+
+    assert_equal 2, site.cached_projects.size
+    assert site.cached_projects.include?(p2)
+    assert site.cached_projects.include?(p3)
+
+    site.level_for_region = 1
+    site.save
+    site.reload
+
+    assert_equal 1, site.cached_projects.size
+    assert site.cached_projects.include?(p1)
+
+  end
+
   test "Destroy a project should remove it from projects_sites" do
     organization = create_organization
     project = create_project :primary_organization_id => organization.id
