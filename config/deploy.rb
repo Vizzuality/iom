@@ -1,5 +1,6 @@
 require 'capistrano/ext/multistage'
 require 'config/boot'
+require 'hoptoad_notifier/capistrano'
 
 set :stages, %w(staging production)
 set :default_stage, "production"

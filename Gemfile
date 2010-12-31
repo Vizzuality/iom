@@ -17,6 +17,7 @@ gem 'money'
 gem 'geokit'
 gem 'nokogiri'
 gem 'vimeo'
+gem 'hoptoad_notifier'
 
 group :development do
   gem 'capistrano'

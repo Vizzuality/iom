@@ -76,6 +76,9 @@ GEM
       crack (>= 0.1.6)
     geokit (1.5.0)
     highline (1.6.1)
+    hoptoad_notifier (2.3.12)
+      activesupport
+      builder
     httparty (0.6.1)
       crack (= 0.1.8)
     httpclient (2.1.6)
@@ -191,6 +194,7 @@ DEPENDENCIES
   fastercsv
   garb
   geokit
+  hoptoad_notifier
   launchy
   money
   nofxx-georuby
