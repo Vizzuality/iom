@@ -154,4 +154,8 @@ HTML
     params.merge(:page => @projects.current_page + 1, :start_in_page => @projects.start_in_page)
   end
 
+  def word_for_geo_context(area)
+    area.is_a?(Region) ? 'Region' : 'Country'
+  end
+
 end

@@ -67,7 +67,7 @@ class Country < ActiveRecord::Base
     inner join projects_sites as ps on d.project_id=ps.project_id and ps.site_id=#{site.id}
     inner join countries_projects as cp on ps.project_id=cp.project_id and cp.country_id=#{self.id}
     LIMIT #{limit}"
-    Donor.find_by_sql(sql)
+    Donor.find_by_sql(sql).uniq
   end
 
   # to get only id and name

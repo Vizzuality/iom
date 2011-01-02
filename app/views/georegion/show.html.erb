@@ -68,7 +68,7 @@
 
         <% donors = @area.donors(@site, 11) %>
         <div class="block">
-          <h3>DONORS IN THIS REGION</h3>
+          <h3>DONORS IN THIS <%= word_for_geo_context(@area) %></h3>
           <% unless donors.empty? %>
             <ul>
               <% donors[0...10].each do |donor| %>
@@ -84,7 +84,7 @@
         </div>
 
         <div class="block margin">
-          <h3>PROJECTS IN OTHER REGIONS</h3>
+          <h3>PROJECTS IN OTHER <%= word_for_geo_context(@area).pluralize %></h3>
           <ul>
             <% @area.near(@site, 5).each do |area| %>
             <li>
