@@ -17,111 +17,94 @@
 <!-- div id="header" -->
 <%= render :partial => 'shared/menu'  %>
 
-  <div id="map" class="home"></div>
-  <a href="#zoom_in" id="zoomIn" onclick="zoomIn()"></a>
-  <a href="#zoom_out" id="zoomOut" onclick="zoomOut()"></a>
-  <div class="map_style">
-    <p>PLAIN</p>
-    <ul>
-      <li><a id="plain_map" href="#plain">PLAIN</a></li>
-      <li><a id="satellite_map" href="#satellite">SATELLITE</a></li>
-    </ul>
-  </div>
+<div id="map" class="home"></div>
+<a href="#zoom_in" id="zoomIn" onclick="zoomIn()"></a>
+<a href="#zoom_out" id="zoomOut" onclick="zoomOut()"></a>
+<div class="map_style">
+  <p>PLAIN</p>
+  <ul>
+    <li><a id="plain_map" href="#plain">PLAIN</a></li>
+    <li><a id="satellite_map" href="#satellite">SATELLITE</a></li>
+  </ul>
+</div>
 
 
-  <div id="layout">
-    <div id="left_column">
+<div id="layout">
+<div id="left_column">
 
-      <!-- LEFT PART -->
-      <div class="left"></div> <!-- H"J"ACK -->
-      <div class="outer_float">
-        <div class="float_left">
-          <div class="block box_info">
-            <div class="projects_account">
-              <label>PROJECTS</label>
-              <h2><%= @site.total_projects %></h2>
-            </div>
-            <div class="orgs_account">
-              <label>ORGANIZATIONS</label>
-              <h2><%= @site.organizations_count %></h2>
-            </div>
-          </div>
+  <!-- LEFT PART -->
+  <div class="left"></div> <!-- H"J"ACK -->
+  <div class="outer_float">
+    <div class="float_left">
+      <div class="block box_info">
+        <div class="projects_account">
+          <label>PROJECTS</label>
+          <h2><%= @site.total_projects %></h2>
+        </div>
+        <div class="orgs_account">
+          <label>ORGANIZATIONS</label>
+          <h2><%= @site.organizations_count %></h2>
+        </div>
+      </div>
 
-          <div class="block statistics">
-            <h3>PROJECTS BY <%= @site.word_for_cluster_sector.upcase.chop %></h3>
-            <ul class="statistics_list">
-                <% @site.projects_clusters.each do |cluster, count| %>
-                  <%unless cluster.name.eql?('N/A')%>
-                    <li>
-                      <div class="tooltip">
-                        <span class="body_tooltip">
-                          <label><%= cluster.name %></label>
-                        </span>
-                        <span class="bottom_tooltip"></span>
-                      </div>
-                      <a class="<%= cluster.css_class %> icon_statistics" href="/clusters/<%=cluster.id%>"><span class="aller" style="width:<%= cluster_width(count) %>px"><%= count %></span></a>
-                    </li>
-                  <%end%>
-                <% end %>
-            </ul>
-          </div>
-
-          <div class="block statistics less">
-            <h3>PROJECTS BY LOCATION</h3>
-            <%= raw(projects_by_location(@site.projects_regions)) %>
-          </div>
-
-          <div id="most_active_orgs" class="block margin">
-            <h3>Some Organizations in Haiti</h3>
-            <ul>
-              <% @site.projects_organizations[0...9].each do |organization, count| %>
-              <li><%= link_to organization.name, organization_path(organization) %> - <%= pluralize(count, 'project') %></li>
-              <% end  -%>
-            </ul>
-          </div>
-
-          <% if false %>
-          <% unless @country.donors(@site).empty? %>
-          <div class="block">
-            <h3>DONORS</h3>
-              <ul>
-                <% @country.donors(@site)[0...10].each do |donor| %>
-                <li><%= link_to(donor.name, donor_path(donor)) %></li>
-                <% end %>
-              </ul>
-              <% if @country.donors(@site).size > 10 %>
-                <p>and <%= pluralize(@country.donors(@site).size - 10, 'more donor', 'more donors') %></p>
-              <% end %>
-          </div>
+      <div class="block statistics">
+        <h3>PROJECTS BY <%= @site.word_for_cluster_sector.upcase.chop %></h3>
+        <ul class="statistics_list">
+        <% @site.projects_sectors_or_clusters.each do |category, count| %>
+          <% unless category.name.eql?('N/A') %>
+            <li>
+              <div class="tooltip">
+                <span class="body_tooltip">
+                  <label><%= category.name %></label>
+                </span>
+                <span class="bottom_tooltip"></span>
+              </div>
+              <a class="<%= category.css_class %> icon_statistics" href="<%= category.is_a?(Cluster) ? cluster_path(category) : sector_path(category) %>"><span class="aller" style="width:<%= cluster_sector_width(count) %>px"><%= count %></span></a>
+            </li>
           <% end %>
-
-          <%end%>
-        </div>
-        <!-- div.float_left -->
+        <% end %>
+        </ul>
       </div>
-      <!-- <div class="outer_float"> -->
 
-      <!-- RIGHT PART -->
-
-      <div class="right">
-        <h3>LIST OF ACTIVE PROJECTS</h3>
-        <div id="projects">
-          <%= render 'projects/projects' %>
-        </div>
+      <div class="block statistics less">
+        <h3>PROJECTS BY LOCATION</h3>
+        <%= raw(projects_by_location(@site)) %>
       </div>
+
+      <div id="most_active_orgs" class="block margin">
+        <h3>Some Organizations</h3>
+        <ul>
+          <% @site.projects_organizations[0...9].each do |organization, count| %>
+          <li><%= link_to organization.name, organization_path(organization) %> - <%= pluralize(count, 'project') %></li>
+          <% end  -%>
+        </ul>
+      </div>
+
     </div>
+    <!-- div.float_left -->
+  </div>
+  <!-- <div class="outer_float"> -->
 
-    <script type="text/javascript">
-      var bbox = <%=raw(@overview_map_bbox.to_json)%>;
-      var chco = "<%=@overview_map_chco%>";
-      var chf = "<%=@overview_map_chf%>";
-      var chld = "<%=@chld%>";
-      var chd = "<%=@chd%>";
-      var map_data = <%=raw(@map_data)%>;
-      var max_count = <%=@map_data_max_count%>;
-      var map_type = 'overview_map';
-      var theme = "<%=@site.theme_id%>";
-    </script>
+  <!-- RIGHT PART -->
+  <div class="right">
+    <h3>LIST OF ACTIVE PROJECTS</h3>
+    <div id="projects">
+      <%= render 'projects/projects' %>
+    </div>
+  </div>
+</div>
 
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-    <%=raw(javascript_include_merged(:sites_home)) %>
+<script type="text/javascript">
+  var bbox = <%=raw(@overview_map_bbox.to_json)%>;
+  var chco = "<%=@overview_map_chco%>";
+  var chf = "<%=@overview_map_chf%>";
+  var chld = "<%=@chld%>";
+  var chd = "<%=@chd%>";
+  var map_data = <%=raw(@map_data)%>;
+  var max_count = <%=@map_data_max_count%>;
+  var map_type = 'overview_map';
+  var theme = "<%=@site.theme_id%>";
+</script>
+
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+<%=raw(javascript_include_merged(:sites_home)) %>

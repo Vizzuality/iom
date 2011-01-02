@@ -292,11 +292,23 @@ class Site < ActiveRecord::Base
       inner join projects_regions as pr on regions.id=pr.region_id and regions.level=#{self.level_for_region}
       inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{self.id}
       group by #{Region.custom_fields.join(',')} order by count DESC"
-      Region.find_by_sql(sql).map do |r|
-        [r,r.count.to_i]
-      end
+    Region.find_by_sql(sql).map do |r|
+      [r,r.count.to_i]
+    end
   end
 
+  # Array of arrays
+  # [[country, count], [country, count]]
+  def projects_countries
+    sql="select #{Country.custom_fields.join(',')},count(ps.*) as count from countries
+      inner join regions on regions.country_id = countries.id and regions.level=#{self.level_for_region}
+      inner join projects_regions as pr on regions.id=pr.region_id
+      inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{self.id}
+      group by #{Country.custom_fields.join(',')} order by count DESC"
+    Country.find_by_sql(sql).map do |c|
+      [c,c.count.to_i]
+    end
+  end
   # Array of arrays
   # [[organization, count], [organization, count]]
   def projects_organizations
@@ -425,6 +437,10 @@ class Site < ActiveRecord::Base
         nil
       end
     end
+  end
+
+  def world_wide_context?
+    geographic_context_country_id.nil? && geographic_context_region_id.nil?
   end
 
   def countries

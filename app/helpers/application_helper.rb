@@ -98,7 +98,7 @@ HTML
     return result.reverse.join(" - ")
   end
 
-  def cluster_width(count, max = 203)
+  def cluster_sector_width(count, max = 203)
     if count >= max
       203
     elsif count < 0
@@ -116,18 +116,23 @@ HTML
     end + (Rails.env == 'development' ? ":#{request.port}" : '')
   end
 
-  def projects_by_location(projects)
-    counts    = projects.map{|region| region.last}
+  def projects_by_location(site)
+    projects = if site.world_wide_context?
+      site.projects_countries
+    else
+      site.projects_regions
+    end
+    counts    = projects.map{ |geo| geo.last}
     values    = counts.slice!(0, 3) + [counts.inject( nil ) { |sum,x| sum ? sum + x : x }]
     values.compact!
     max_value = values.max
     lis       = []
 
-    projects[0..2].each_with_index do |project_region, index|
-      region = project_region.first
-      count  = project_region.last
+    projects[0..2].each_with_index do |geo_entries, index|
+      geo = geo_entries.first
+      count  = geo_entries.last
       lis << (content_tag :li,  :class => "pos#{index}" do
-        raw("#{link_to truncate(region.name, :length => 13, :omission => '...'), region_path(region)} - #{count}")
+        raw("#{link_to truncate(geo.name, :length => 13, :omission => '...'), (geo.is_a?(Region) ? region_path(geo) : country_path(geo))} - #{count}")
       end)
     end
 
