@@ -123,11 +123,12 @@
 
       <ul class="clusters">
         <% unless @project.clusters.empty? %>
-              <% @project.clusters.each do |cluster| %>
-                <li id="cluster_<%= cluster.id %>"><p><%= cluster.name %></p><input id="<%= cluster.id %>" type="checkbox" name="project[clusters_ids][]" value="<%= cluster.id %>" checked="true"/><a href="#cluster_<%= cluster.id %>" class="remove_this close"></a>
-            </li>
-              <% end -%>
+          <% @project.clusters.each do |cluster| %>
+          <li id="cluster_<%= cluster.id %>">
+            <p><%= cluster.name %></p><input id="<%= cluster.id %>" type="checkbox" name="project[clusters_ids][]" value="<%= cluster.id %>" checked="true"/><a href="#cluster_<%= cluster.id %>" class="remove_this close"></a>
+          </li>
           <% end -%>
+        <% end -%>
       </ul>
     <div class="cluster_options">
       <span class="combo_cluster_options">
@@ -152,42 +153,41 @@
 
     <ul class="sectors">
       <% unless @project.sectors.empty? %>
-            <% @project.sectors.each do |sector| %>
+        <% @project.sectors.each do |sector| %>
           <li id="sector_<%= sector.id %>"><p><%= sector.name %></p><input id="<%= sector.id %>" type="checkbox" name="project[sectors_ids][]" value="<%= sector.id %>" checked="true"/><a href="#sector_<%= sector.id %>" class="remove_this close"></a>
           </li>
-      <% end -%>
         <% end -%>
+      <% end -%>
     </ul>
 
     <div class="sector_options">
       <span id="sector" class="combo_sector_options">
         <%= errors_for_span(@project, :sectors) %>
 
-      <p id="0">Select more sectors</p>
-     <div class="wrapper">
-        <ul class="options scroll_pane">
-        <% Sector.get_select_values.collect do |sector| %>
-          <li><a id="<%= sector.id %>"><%= sector.name %></a></li>
-        <% end %>
-          <li class="last"></li>
-        </ul>
-    </div>
-    </span>
+        <p id="0">Select more sectors</p>
+        <div class="wrapper">
+          <ul class="options scroll_pane">
+          <% Sector.get_select_values.collect do |sector| %>
+            <li><a id="<%= sector.id %>"><%= sector.name %></a></li>
+          <% end %>
+            <li class="last"></li>
+          </ul>
+        </div>
+      </span>
       <a class="add_sector museo_sans shadow_green">add sector</a>
     </div>
   </div>
 
-  <!-- ************************ FALTA ************************ -->
   <label>GEOGRAPHIC LOCATION  <strong>*</strong></label>
   <ul class="ubications">
-    <li><p>Belladère, Haiti</p><a class="close"></a></li>
-    <li><p>Martinique, Haiti</p><a class="close"></a></li>
+    <% @project.regions.select(Region.custom_fields).each do |region| %>
+    <li><p><%= region.name %>, <%= region.country.name %></p><a class="close"></a></li>
+    <% end %>
   </ul>
   <div class="location_options empty">
     <p class="msg">Add / edit the different locations of the project</p>
     <a class="add_location museo_sans shadow_green" id="add_location_map">add location</a>
   </div>
-  <!-- ************************ FIN FALTA ************************ -->
 
   <div class="field">
     <ul class="dates">
@@ -272,8 +272,6 @@
     </div>
   </div>
 
-
-
   <div class="two_columns">
     <div class="left_column">
       <div class="field">
@@ -314,11 +312,9 @@
 
   <!-- COMMON IN EDIT AND NEW FORM -->
 
-
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
   <script src="/javascripts/backoffice/project_map.js" type="text/javascript" charset="utf-8"></script>
   <script src="/javascripts/plugins/jquery.mousewheel.js" type="text/javascript" charset="utf-8"></script>
   <script src="/javascripts/plugins/jquery.jscrollpane.js" type="text/javascript" charset="utf-8"></script>
   <script src="/javascripts/plugins/jquery.stylish-select.js" type="text/javascript" charset="utf-8"></script>
   <script src="/javascripts/backoffice/project.js" type="text/javascript" charset="utf-8"></script>
-
