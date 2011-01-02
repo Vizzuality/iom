@@ -394,7 +394,6 @@ namespace :iom do
 
           unless (row.end_date_mmddyyyy.blank? or row.end_date_mmddyyyy=="Ongoing")
             end_date = row.end_date_mmddyyyy.strip
-            puts "end_date: #{end_date} (#{p.name})"
             if end_date =~ /^(\d{2})\/(\d{2})\/(\d{2})$/
               end_date = "#{$1}/#{$2}/20#{$3}"
             end

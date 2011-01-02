@@ -69,8 +69,12 @@ class DonorTest < ActiveSupport::TestCase
     p2.donations.create! :donor => donor2, :amount => 100
     p3.donations.create! :donor => donor3, :amount => 100
 
-    site1 = create_site :name => 'Food for Haiti 1', :project_context_organization_id => organization1.id, :project_context_cluster_id => nil, :url => 'http://site1.com'
-    site2 = create_site :name => 'Food for Haiti 2', :project_context_organization_id => organization2.id, :project_context_cluster_id => nil, :url => 'http://site2.com'
+    site1 = create_site :name => 'Food for Haiti 1', :project_context_organization_id => organization1.id,
+                        :project_context_cluster_id => nil, :url => 'http://site1.com',
+                        :project_classification => 0
+    site2 = create_site :name => 'Food for Haiti 2', :project_context_organization_id => organization2.id,
+                        :project_context_cluster_id => nil, :url => 'http://site2.com',
+                        :project_classification => 0
 
     site1.reload
     site2.reload
@@ -78,19 +82,19 @@ class DonorTest < ActiveSupport::TestCase
     p2.reload
     p3.reload
 
-    assert_equal 1, donor1.projects_clusters(site1).size
-    assert donor1.projects_clusters(site1).flatten.include?(c1)
+    assert_equal 1, donor1.projects_sectors_or_clusters(site1).size
+    assert donor1.projects_sectors_or_clusters(site1).flatten.include?(c1)
 
-    assert_equal 0, donor1.projects_clusters(site2).size
+    assert_equal 0, donor1.projects_sectors_or_clusters(site2).size
 
-    assert_equal 0, donor2.projects_clusters(site1).size
-    assert_equal 1, donor2.projects_clusters(site2).size
-    assert donor2.projects_clusters(site2).flatten.include?(c2)
+    assert_equal 0, donor2.projects_sectors_or_clusters(site1).size
+    assert_equal 1, donor2.projects_sectors_or_clusters(site2).size
+    assert donor2.projects_sectors_or_clusters(site2).flatten.include?(c2)
 
-    assert_equal 2, donor3.projects_clusters(site1).size
-    assert donor3.projects_clusters(site1).flatten.include?(c3)
-    assert donor3.projects_clusters(site1).flatten.include?(c1)
-    assert_equal 0, donor3.projects_clusters(site2).size
+    assert_equal 2, donor3.projects_sectors_or_clusters(site1).size
+    assert donor3.projects_sectors_or_clusters(site1).flatten.include?(c3)
+    assert donor3.projects_sectors_or_clusters(site1).flatten.include?(c1)
+    assert_equal 0, donor3.projects_sectors_or_clusters(site2).size
   end
 
   test "projects_regions of a site" do
