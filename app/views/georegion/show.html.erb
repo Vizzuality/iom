@@ -76,7 +76,7 @@
               <li><%= link_to(donor.name, donor_path(donor)) %></li>
               <% end %>
             </ul>
-            <% if donors.size > 10 %>
+            <% if @area.donors_count(@site) > 10 %>
               <p>and <%= pluralize(@area.donors_count(@site) - 10, 'more donor', 'more donors') %></p>
             <% end %>
           <% else %>
