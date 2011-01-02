@@ -155,6 +155,7 @@ site.pages.find_by_title('Highlights').update_attribute(:body, <<-HTML
 site = Site.new :name => 'Food Security',
                 :url => "#{Rails.env.eql?('development') ? 'dev-' : ''}food.ngoaidmap.org",
                 :status => true,
+                :project_classification => 1,
                 :short_description => 'Food security refers to the availability of food and one’s access to it',
                 :long_description => 'The Special Programme for Food Security (SPFS) helps governments replicate successful food security practices on a national scale. The SPFS also encourages investment in rural infrastructure, off-farm income generation, urban agriculture and safety nets',
                 :theme => Theme.find_by_name('Garnet'),
