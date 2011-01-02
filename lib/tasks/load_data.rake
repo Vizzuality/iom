@@ -387,7 +387,8 @@ namespace :iom do
           if row.end_date_mmddyyyy=="2/29/2010"
             row.end_date_mmddyyyy="3/1/2010"
           end
-          if row.end_date_mmddyyyy == '1/1'
+
+          if row.end_date_mmddyyyy == '1/1/'
             row.end_date_mmddyyyy = nil
           end
 
