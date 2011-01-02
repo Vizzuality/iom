@@ -53,15 +53,26 @@ class Donor < ActiveRecord::Base
   end
 
   # Array of arrays
-  # [[cluster, count], [cluster, count]]
-  def projects_clusters(site)
-    sql="select c.id,c.name,count(ps.*) as count from clusters as c
-    inner join clusters_projects as cp on c.id=cp.cluster_id
-    inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=#{site.id}
-    inner join donations as d on ps.project_id=d.project_id and d.donor_id=#{self.id}
-    group by c.id,c.name order by count DESC"
-    Cluster.find_by_sql(sql).map do |c|
-      [c,c.count.to_i]
+  # [[category, count], [category, count]]
+  def projects_sectors_or_clusters(site)
+    if site.navigate_by_sector?
+      sql="select s.id,s.name,count(ps.*) as count from sectors as s
+      inner join projects_sectors as ps on s.id=ps.sector_id
+      inner join projects_sites as psi on ps.project_id=psi.project_id and psi.site_id=#{site.id}
+      inner join donations as d on psi.project_id=d.project_id and d.donor_id=#{self.id}
+      group by s.id,s.name order by count DESC"
+      Sector.find_by_sql(sql).map do |s|
+        [s,s.count.to_i]
+      end
+    else
+      sql="select c.id,c.name,count(ps.*) as count from clusters as c
+      inner join clusters_projects as cp on c.id=cp.cluster_id
+      inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=#{site.id}
+      inner join donations as d on ps.project_id=d.project_id and d.donor_id=#{self.id}
+      group by c.id,c.name order by count DESC"
+      Cluster.find_by_sql(sql).map do |c|
+        [c,c.count.to_i]
+      end
     end
   end
 

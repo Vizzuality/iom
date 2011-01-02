@@ -38,56 +38,28 @@
         </div>
 
         <!-- CLUSTER -->
-        <% unless @donor.projects_clusters(@site).empty? %>
         <div class="block border statistics">
-          <h2>FUNDING BY CLUSTER</h2>
+          <h2>FUNDING BY <%= @site.word_for_cluster_sector.chop %></h2>
           <ul class="statistics_list">
-            <% @donor.projects_clusters(@site)[0...3].each do |cluster,count| %>
+            <% @donor.projects_sectors_or_clusters(@site)[0...3].each do |category,count| %>
               <li>
                 <div class="tooltip">
                   <span class="body_tooltip">
-                    <label><%= cluster.name %></label>
+                    <label><%= category.name %></label>
                   </span>
                   <span class="bottom_tooltip"></span>
                 </div>
-                <a class="<%= cluster.css_class %> icon_statistics" href="<%= cluster_path(cluster) %>"><span class="aller" style="width:<%= cluster_sector_width(count)-10 %>px"><%= count %></span></a>
+                <a class="<%= category.css_class %> icon_statistics" href="<%= category.is_a?(Cluster) ? cluster_path(category) : sector_path(category) %>"><span class="aller" style="width:<%= cluster_sector_width(count)-10 %>px"><%= count %></span></a>
               </li>
             <% end %>
           </ul>
         </div>
-        <% end %>
 
         <!-- PROJECTS BY AREA -->
-        <% unless @donor.projects_regions(@site).empty? %>
         <div class="block border statistics">
           <h2>FUNDING BY LOCATION</h2>
-          <ul class="chart">
-            <% index = 0 %>
-            <% values = '' %>
-            <% others = 0%>
-            <% max_value = 0 %>
-            <% @donor.projects_regions(@site).each do |region, count| %>
-              <% if index < 3 %>
-                <li class="pos<%= index %>">
-                  <%= link_to(truncate(region.name,:length=>10, :omission=>"..."), region_path(region)) %> - <%= count %>
-                </li>
-                <% values += ((index==0) ? '' : ',') + count.to_s() %>
-                <% max_value<count ? max_value=count : nil %>
-              <% else %>
-                <% others = others + 1%>
-                <% max_value<others ? max_value=others : nil %>
-              <% end %>
-              <% index = index + 1 %>
-            <% end %>
-
-            <% if @donor.projects_regions(@site).size>3 %>
-              <li class="pos3">Others - <%= others %></li>
-            <% end %>
-          </ul>
-          <img class="pie_chart" src="http://chart.apis.google.com/chart?cht=p&chs=120x120&chd=t:<%= values %><% if others>0 %>,<%= others %><% end %>&chds=0,<%= max_value %>&chco=333333|565656|727272|ADADAD|EFEFEF|FFFFFF&chf=bg,s,FFFFFF00" />
+          <%= raw(projects_by_location(@site)) %>
         </div>
-        <% end %>
-
 
         <% unless @donor.resources.empty? %>
         <div class="block border">
@@ -99,14 +71,16 @@
           </ul>
         </div>
         <% end %>
-        <%unless (@donor.contact_person_name.blank?)&&(@donor.contact_person_position.blank?)&&(@donor.contact_company.blank?)&&(@donor.contact_phone_number.blank?)&&(@donor.contact_email.blank?) %>
+
+        <% unless (@donor.contact_person_name.blank?)&&(@donor.contact_person_position.blank?)&&(@donor.contact_company.blank?)&&(@donor.contact_phone_number.blank?)&&(@donor.contact_email.blank?) %>
         <div class="block border last">
           <h2>Contact information</h2>
           <p><strong><%= @donor.contact_person_name %></strong><br/><%= @donor.contact_person_position %><br/><%= @donor.contact_company %></p>
           <p><%= @donor.contact_phone_number %><br/><%= link_to(@donor.contact_email, "mailto:#{@donor.contact_email}") %></p>
         </div>
+        <% end %>
+
       </div>
-      <%end%>
 
     </div>
 
@@ -115,4 +89,3 @@
     </div>
 
     <script src="/javascripts/sites/pages.js" type="text/javascript" charset="utf-8"></script>
-

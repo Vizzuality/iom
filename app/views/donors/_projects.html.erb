@@ -6,16 +6,28 @@
         <h3><%= link_to(truncate(project['project_name'], :length=>65), project_path(project['project_id'])) %></h3>
         <p>
           <%= subtitle(project, @site) %>
+        </p>
       </div>
       <div class="project_places">
         <p>
-        <% unless project['regions'].blank? %>
-          <% if project['regions'].split('|').size > 3 %>
-            <%= project['regions'].split('|')[0..3].join(', ') %> and <%= project['regions'].size - 3 %> more
-          <% else %>
-            <%= project['regions'].split('|').to_sentence(:last_word_connector => ' and ') %>
+        <% if @site.world_wide_context? %>
+          <% unless project['countries'].blank? %>
+            <% if project['countries'].split('|').size > 3 %>
+              <%= project['countries'].split('|')[0..3].join(', ') %> and <%= project['countries'].size - 3 %> more
+            <% else %>
+              <%= project['countries'].split('|').to_sentence(:last_word_connector => ' and ') %>
+            <% end %>
           <% end %>
-        <% end %></p>
+        <% else %>
+          <% unless project['regions'].blank? %>
+            <% if project['regions'].split('|').size > 3 %>
+              <%= project['regions'].split('|')[0..3].join(', ') %> and <%= project['regions'].size - 3 %> more
+            <% else %>
+              <%= project['regions'].split('|').to_sentence(:last_word_connector => ' and ') %>
+            <% end %>
+          <% end %>
+        <% end %>
+        </p>
       </div>
     </li>
   <% end %>
