@@ -527,6 +527,8 @@ namespace :iom do
 
       puts
       puts "Importing finished"
+
+      Site.all.each{ |site| site.save! }
     end
 
   end
