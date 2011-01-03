@@ -3,8 +3,8 @@ require File.dirname(__FILE__) + '/acceptance_helper'
 feature "Sites" do
 
   scenario "Create and update a site", :js => true do
-    spain = create_country :name => 'Spain'
-    food = create_cluster :name => 'food'
+    spain  = create_country :name => 'Spain'
+    food   = create_cluster :name => 'food'
     africa = create_cluster :name => 'africa'
 
     project = create_project

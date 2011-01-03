@@ -16,8 +16,8 @@ class ActiveSupport::TestCase
   include RR::Adapters::TestUnit
 
   def setup
-    DatabaseCleaner.start
     RR::Space.instance.reset
+    DatabaseCleaner.clean
   end
 
   def teardown

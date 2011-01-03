@@ -204,7 +204,7 @@ class Site < ActiveRecord::Base
     end
 
     # (5)
-    if geographic_context_country_id?
+    if geographic_context_country_id? && geographic_context_region_id.blank?
       # from << "countries_projects"
       # where << "(countries_projects.project_id = projects.id AND countries_projects.country_id = #{geographic_context_country_id})"
       # Instead on looking in the countries, we look in the regions of the level configured in the site
@@ -368,6 +368,11 @@ class Site < ActiveRecord::Base
     elsif self.navigate_by_sector?
       self.sectors
     end
+  end
+
+  def geographic_context_region_id=(value)
+    value = nil if value.to_i == 0
+    write_attribute(:geographic_context_region_id, value)
   end
 
   def set_yesterday_visits!

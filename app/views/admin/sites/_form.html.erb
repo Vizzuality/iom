@@ -36,7 +36,6 @@
   </li>
   <li id="gc_limited_region" class="<%= selected_if_field_present(@site, :geographic_context_country_id) %> option">
     <a class="limited combo">Limited to a country and region</a>
-
     <div class="content">
       <%= f.select :geographic_context_country_id, Country.get_select_values.collect{ |c| [c.name, c.id] }, {:prompt => 'Select a country'}, {:id => 'gc_limited_country_section'}%>
       <div id="regions">

@@ -316,4 +316,15 @@ class SiteTest < ActiveSupport::TestCase
     assert !site2.is_project_included?(p1.id)
   end
 
+  test "setter of geographic_context_region_id" do
+    organization1 = create_organization
+    site = create_site :name => 'Food for Haiti 1', :project_context_organization_id => organization1.id, :project_context_cluster_id => nil, :url => 'http://site1.com'
+    site.geographic_context_region_id = 0
+    site.save
+    assert site.geographic_context_region_id.nil?
+    site.geographic_context_region_id = 33
+    site.save
+    assert_equal 33, site.geographic_context_region_id
+  end
+
 end
