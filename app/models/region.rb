@@ -84,7 +84,7 @@ class Region < ActiveRecord::Base
   end
 
   def self.get_select_values
-    scoped.select("id,name").order("name ASC")
+    scoped.select("id,name,level,parent_region_id,country_id").order("name ASC")
   end
 
   def update_wikipedia_description
@@ -107,7 +107,7 @@ class Region < ActiveRecord::Base
   def near(site, limit = 5)
     Region.find_by_sql(<<-SQL
       select * from
-      (select re.id, re.name,
+      (select re.id, re.name, re.level, re.country_id, re.parent_region_id,
            ST_Distance((select ST_Centroid(the_geom) from regions where id=#{self.id}), ST_Centroid(the_geom)) as dist,
            (select count(*) from projects_regions as pr where region_id=re.id) as count
            from regions as re
@@ -127,6 +127,18 @@ SQL
     inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{site.id}
     where pr.region_id=#{self.id}"
     ActiveRecord::Base.connection.execute(sql).first['count'].to_i
+  end
+
+  def to_param
+    case level.to_i
+      when 1
+        [self.country_id, self.id].join('/')
+      when 2
+        [self.country_id, self.parent_region_id, self.id].join('/')
+      when 3
+        parent_region = Region.find(self.parent_region_id, :select => "id, parent_region_id")
+        [self.country_id, parent_region.parent_region_id, self.parent_region_id, self.id].join('/')
+    end
   end
 
 end

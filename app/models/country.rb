@@ -116,4 +116,8 @@ SQL
     ActiveRecord::Base.connection.execute(sql).first['count'].to_i
   end
 
+  def to_param
+    self.id.to_a
+  end
+
 end

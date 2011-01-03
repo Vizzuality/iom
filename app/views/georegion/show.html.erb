@@ -88,7 +88,7 @@
           <ul>
             <% @area.near(@site, 5).each do |area| %>
             <li>
-              <%= link_to(area.name, (area.is_a?(Region) ? region_path(area) : country_path(area))) %>
+              <%= link_to(area.name, location_path(area)) %>
               - <%= pluralize(area.count, 'project', 'projects') %></li>
             <% end %>
           </ul>
