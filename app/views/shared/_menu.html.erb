@@ -5,9 +5,9 @@
       <h1><%= link_to(@site.name,'/') %></h1>
       <ul class="menu">
           <% if @site.cluster %>
-            <li><a class="main_option" href="<%= cluster_path(@site.cluster) %>" class="geneva"><%= @site.word_for_clusters.upcase.singularize %></a></li>
+            <li><a class="main_option" href="<%= cluster_path(@site.cluster) %>" class="geneva"><%= @site.word_for_cluster_sector.upcase.singularize %></a></li>
           <% elsif @site.sector %>
-            <li><a class="main_option" href="<%= sector_path(@site.sector) %>" class="geneva"><%= @site.word_for_sectors.upcase.singularize %></a></li>
+            <li><a class="main_option" href="<%= sector_path(@site.sector) %>" class="geneva"><%= @site.word_for_cluster_sector.upcase.singularize %></a></li>
           <% else %>
             <li id="<%= @site.navigate_by_cluster? ? 'cluster' : 'sector' %>_option">
               <a class="geneva main_option with_suboptions"><%= @site.word_for_cluster_sector.upcase %><span class="with_suboptions"></span></a>

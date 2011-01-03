@@ -110,18 +110,7 @@ class Site < ActiveRecord::Base
     w.blank? ? 'clusters' : w
   end
 
-  def word_for_sectors
-    w = read_attribute(:word_for_sectors)
-    w.blank? ? 'sectors' : w
-  end
-
-  def word_for_cluster_sector
-    if navigate_by_cluster?
-      word_for_clusters
-    elsif navigate_by_sector?
-      word_for_sectors
-    end
-  end
+  alias :word_for_cluster_sector :word_for_clusters
 
   def cluster
     Cluster.find(self.project_context_cluster_id)
