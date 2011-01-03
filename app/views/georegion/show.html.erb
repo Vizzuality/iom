@@ -1,6 +1,13 @@
 <div class="main_head">
   <div class="inner_main_head">
     <div class="left">
+      
+      <ul class="breadcrumb">
+        <li><a href="#">Land</a></li>
+        <li><a href="#">Land</a></li>
+        <li class="last"><a href="#">Land</a></li>
+      </ul>
+      
       <% if @area.is_a?(Region) && @site.navigate_by_country? %>
       <p>
         <%= link_to(@country.name, location_path(@country)) %>
@@ -10,6 +17,16 @@
       <% end %>
       <h1><%= @area.name %></h2>
       <div class="float_head">
+        
+        <!-- BREADCRUMB = Don't forget to put the same before this div -->
+        <ul class="breadcrumb">
+          <li><a href="#">Land</a></li>
+          <li><a href="#">Land</a></li>
+          <li class="last"><a href="#">Land</a></li>
+        </ul>
+        <!-- end -->
+        
+        
         <% if @area.is_a?(Region) && @site.navigate_by_country? %>
           <h2><%= link_to(@country.name, location_path(@country)) %></h2>
         <% else %>

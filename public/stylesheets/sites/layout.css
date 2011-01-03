@@ -208,20 +208,22 @@ div.main_head div.left h1.cluster_sector_name {width:190px; z-index:50;}
 div.main_head div.left h2 {width:100%; font:normal 15px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42; text-transform:uppercase;}
 div.main_head div.left h2.cluster_sector_name {width:100%; font:normal 15px "PT Sans Bold"; color:#7C3B32; text-transform:uppercase; text-shadow:none;}
 div.main_head div.left h3 {width:100%; font:normal 15px "PT Sans Bold"; color:#7B3C32; text-transform:uppercase;}
-
 div.main_head div.left p {padding:5px 0 0 0; font:normal 13px Arial; color:#7B3932;}
 div.main_head div.float_head {position:absolute; top:0; left:5px; width:238px; padding:30px 32px 44px; background:url('/images/sites/search/head_mask.png') repeat 0 0 #C45A4B; z-index:100;}
 div.main_head div.float_head.home {padding-bottom:23px;}
 div.main_head div.float_head.home h1 {font-size:32px; text-transform:uppercase; position:relative; width:200px;}
 div.main_head div.float_head.home sup.beta {font:normal 11px "PT Sans"; color:#73352B; padding:3px;}
 div.main_head div.float_head.home h3 {width:100%; font:normal 15px "PT Sans Bold"; color:#7B3C32; text-transform:uppercase; margin:20px 0 0 0;}
-
+div.main_head div ul.breadcrumb {width:100%; padding:0 0 13px;}
+div.main_head div ul.breadcrumb li {display:inline; width:auto; margin:0 5px 0 0; background:url('/images/sites/icons/breadcrumb.png') no-repeat right 6px;}
+div.main_head div ul.breadcrumb li a {width:auto; color:#75362D; text-decoration:underline; padding:0 12px 0 0; font:normal 13px Arial;}
+div.main_head div ul.breadcrumb li a:hover {color:#522822;}
+div.main_head div ul.breadcrumb li.last {padding:0; background:none;}
 div.main_head div.right {position:relative; width:604px; padding:28px 0; display:inline-block; vertical-align:top; zoom:1; *display:inline; min-height:40px; overflow:hidden!important;}
 div.main_head div.right span.wikipedia {position:absolute; bottom:0; right:0; background:url('/images/sites/regions/wikipedia_head.png') no-repeat 0 0; width:141px; height:49px;}
 div.main_head div.right.home {min-height:50px;}
 div.main_head div.right.home a {text-decoration:underline!important;}
 div.main_head div.right.home a:hover {cursor:pointer; text-decoration:none!important;}
-
 div.main_head div.right p.provided {margin:15px 0 0 0;}
 
 div#left_column {position:relative; width:100%;}
