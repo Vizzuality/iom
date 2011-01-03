@@ -11,7 +11,8 @@ feature "Sites" do
     project.clusters << food
     project.countries << spain
 
-    Settings.create
+    create_settings
+    create_theme
 
     login_as_administrator
 
@@ -51,7 +52,7 @@ feature "Sites" do
     assert_nil site.project_context_organization_id
     assert site.project_context_tags.blank?
 
-    page.should have_css("h2", :text => 'Edit site Haiti Aid Map')
+    page.should have_css("h2", :text => 'Haiti Aid Map')
 
     within(:xpath, "//form[@action='/admin/sites/#{site.id}']") do
       attach_file('site_logo', "#{Rails.root}/test/support/images/caritas.jpg")
@@ -60,6 +61,7 @@ feature "Sites" do
       check 'site_show_global_donations_raises'
       fill_in 'site_word_for_clusters', :with => 'grupos'
       fill_in 'site_word_for_regions', :with => 'campos'
+      fill_in 'site_level_for_regions', :with => 2
       click_link_or_button 'Save'
     end
 
@@ -69,6 +71,7 @@ feature "Sites" do
     assert_equal 'campos', site.word_for_regions
     assert_equal 'tumblr_username', site.blog_url
     assert_equal 1, site.project_classification
+    assert_equal 2, site.level_for_regions
 
     click_link_or_button "Media (0)"
 

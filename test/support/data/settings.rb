@@ -30,12 +30,12 @@ module Iom
       default_attributes.merge(attributes)
     end
 
-    def new_setting(attributes_or_fixture = {})
+    def new_settings(attributes_or_fixture = {})
       Settings.new(attributes_for_setting(attributes_or_fixture))
     end
 
-    def create_setting(attributes_or_fixture = {})
-      s = new_setting(attributes_or_fixture)
+    def create_settings(attributes_or_fixture = {})
+      s = new_settings(attributes_or_fixture)
       s.save
       s.reload
     end
