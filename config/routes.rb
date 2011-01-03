@@ -16,6 +16,7 @@ Iom::Application.routes.draw do
   resources :projects,      :only => [:index, :show]
   resources :organizations, :only => [:index, :show]
 
+  match 'regions/:id' => 'georegion#old_regions'
   match 'location/*ids' => 'georegion#show', :as => 'location'
 
   # clusters and sector work through the same controller and view

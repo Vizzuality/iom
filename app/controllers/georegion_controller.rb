@@ -121,4 +121,10 @@ class GeoregionController < ApplicationController
 
   end
 
+  def old_regions
+    region = Region.find(params[:id], :select => Region.custom_fields)
+    render_404 and return unless region
+    redirect_to location_path(region), :status => 301
+  end
+
 end
