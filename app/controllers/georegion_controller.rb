@@ -77,6 +77,8 @@ class GeoregionController < ApplicationController
         group by r.id,r.name,lon,lat) as subq"
     end
 
+    render_404 and return if sql.nil?
+
     respond_to do |format|
       format.html do
         result = ActiveRecord::Base.connection.execute(sql)
