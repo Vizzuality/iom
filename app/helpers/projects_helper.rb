@@ -7,7 +7,7 @@ module ProjectsHelper
     else
       clusters_to_sentence(project)
     end
-    countries    = "in #{link_to project['countries'], country_path(project['countries_ids']), :title => project['countries']}"
+    countries    = "in #{link_to project['countries'], location_path(project['countries_ids'].to_a), :title => project['countries']}"
     organization = "implemented by #{link_to project['organization_name'], organization_path(project['organization_id'])}"
     raw("#{clusters_sectors} #{countries}")
   end
@@ -50,7 +50,7 @@ module ProjectsHelper
       result << " on #{clusters_sectors.to_sentence}"
     end
     unless @project.country_name.blank?
-      result << " in #{link_to(@project.country_name, country_path(@project.country_id))}"
+      result << " in #{link_to(@project.country_name, location_path(@project.country_id.to_a))}"
     end
     result << " by #{link_to(@project.primary_organization_name, organization_path(@project.primary_organization_id))}"
     raw(result)

@@ -132,7 +132,7 @@ HTML
       geo = geo_entries.first
       count  = geo_entries.last
       lis << (content_tag :li,  :class => "pos#{index}" do
-        raw("#{link_to truncate(geo.name, :length => 13, :omission => '...'), (geo.is_a?(Region) ? region_path(geo) : country_path(geo))} - #{count}")
+        raw("#{link_to truncate(geo.name, :length => 13, :omission => '...'), location_path(geo)} - #{count}")
       end)
     end
 
@@ -155,7 +155,7 @@ HTML
   end
 
   def word_for_geo_context(area)
-    area.is_a?(Region) ? 'Region' : 'Country'
+    area.is_a?(Region) ? @site.word_for_regions.singularize : 'Country'
   end
 
 end

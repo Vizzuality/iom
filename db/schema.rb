@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101227103614) do
+ActiveRecord::Schema.define(:version => 20110103105358) do
 
   create_table "clusters", :force => true do |t|
     t.string "name"
@@ -356,6 +356,10 @@ ActiveRecord::Schema.define(:version => 20101227103614) do
     t.float    "overview_map_bbox_maxy"
     t.float    "overview_map_bbox_maxx"
     t.integer  "level_for_region",                               :default => 1
+    t.boolean  "navigate_by_country",                            :default => false
+    t.boolean  "navigate_by_level1",                             :default => false
+    t.boolean  "navigate_by_level2",                             :default => false
+    t.boolean  "navigate_by_level3",                             :default => false
   end
 
   add_index "sites", ["geographic_context_geometry"], :name => "index_sites_on_geographic_context_geometry", :spatial => true

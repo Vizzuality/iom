@@ -43,6 +43,10 @@
 #  overview_map_bbox_maxy          :float
 #  overview_map_bbox_maxx          :float
 #  level_for_region                :integer         default(1)
+#  navigate_by_country             :boolean
+#  navigate_by_level1              :boolean
+#  navigate_by_level2              :boolean
+#  navigate_by_level3              :boolean
 #
 
 
@@ -110,17 +114,11 @@ class Site < ActiveRecord::Base
     w.blank? ? 'clusters' : w
   end
 
-  def word_for_sectors
-    w = read_attribute(:word_for_sectors)
-    w.blank? ? 'sectors' : w
-  end
+  alias :word_for_cluster_sector :word_for_clusters
 
-  def word_for_cluster_sector
-    if navigate_by_cluster?
-      word_for_clusters
-    elsif navigate_by_sector?
-      word_for_sectors
-    end
+  def word_for_regions
+    w = read_attribute(:word_for_regions)
+    w.blank? ? 'regions' : w
   end
 
   def cluster
@@ -473,6 +471,20 @@ class Site < ActiveRecord::Base
       []
     else
       Region.where(:country_id => geographic_context_country_id, :level => level_for_region).select(Region.custom_fields)
+    end
+  end
+
+  def navigate_by
+    if navigate_by_country?
+      :country
+    else
+      if navigate_by_level1?
+        :level1
+      elsif navigate_by_level2?
+        :level2
+      elsif navigate_by_level3?
+        :level3
+      end
     end
   end
 

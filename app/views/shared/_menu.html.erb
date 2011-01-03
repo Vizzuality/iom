@@ -5,9 +5,9 @@
       <h1><%= link_to(@site.name,'/') %></h1>
       <ul class="menu">
           <% if @site.cluster %>
-            <li><a class="main_option" href="<%= cluster_path(@site.cluster) %>" class="geneva"><%= @site.word_for_clusters.upcase.singularize %></a></li>
+            <li><a class="main_option" href="<%= cluster_path(@site.cluster) %>" class="geneva"><%= @site.word_for_cluster_sector.upcase.singularize %></a></li>
           <% elsif @site.sector %>
-            <li><a class="main_option" href="<%= sector_path(@site.sector) %>" class="geneva"><%= @site.word_for_sectors.upcase.singularize %></a></li>
+            <li><a class="main_option" href="<%= sector_path(@site.sector) %>" class="geneva"><%= @site.word_for_cluster_sector.upcase.singularize %></a></li>
           <% else %>
             <li id="<%= @site.navigate_by_cluster? ? 'cluster' : 'sector' %>_option">
               <a class="geneva main_option with_suboptions"><%= @site.word_for_cluster_sector.upcase %><span class="with_suboptions"></span></a>
@@ -24,31 +24,7 @@
             </li>
           <% end %>
 
-          <%
-            #If there is a region context then we display nothing on the header for location
-            if @site.geographic_context_region_id? %>
-            <!--Nothing to present here -->
-          <%
-            #if the site defines a country then display the regions
-            elsif @site.geographic_context_country_id? %>
-            <li id="region_option">
-              <a class="geneva main_option with_suboptions">REGIONS<span class="with_suboptions"></span></a>
-              <div class="header_title"><a>REGIONS<span class="with_suboptions"></span></a></div>
-              <div class="suboptions_body">
-                <span class="suboptions_body_top"></span>
-                <div class="wrapper">
-                  <!-- We have to ask for numbers of elements to show (or not) custom scroll bar -->
-                  <ul id="regions" class="content <%= (@site.regions_select.length > 11) ? 'scroll_pane' : ''%>">
-                    <% @site.regions_select.each do |region| %>
-                    <li><%= link_to(region.name, region_path(region), :class => 'geneva') %></li>
-                    <% end %>
-                  </ul>
-                </div>
-              </div>
-              </li>
-          <%
-           # if the site does not define a geo context, then is worldwide,display the countries
-            else %>
+          <% if @site.navigate_by == :country %>
             <li id="country_option">
               <a class="geneva main_option with_suboptions">COUNTRIES<span class="with_suboptions"></span></a>
               <div class="header_title"><a>COUNTRIES<span class="with_suboptions"></span></a></div>
@@ -56,12 +32,28 @@
                 <div class="wrapper">
                   <ul class="content scroll_pane">
                     <% @site.countries_select.each do |country| %>
-                    <li><%= link_to(country.name, country_path(country), :class => 'geneva') %></li>
+                    <li><%= link_to(country.name, location_path(country), :class => 'geneva') %></li>
                     <% end %>
                   </ul>
                 </div>
               </div>
             </li>
+          <% else %>
+            <li id="region_option">
+              <a class="geneva main_option with_suboptions"><%= @site.word_for_regions.upcase %><span class="with_suboptions"></span></a>
+              <div class="header_title"><a><%= @site.word_for_regions.upcase %><span class="with_suboptions"></span></a></div>
+              <div class="suboptions_body">
+                <span class="suboptions_body_top"></span>
+                <div class="wrapper">
+                  <!-- We have to ask for numbers of elements to show (or not) custom scroll bar -->
+                  <ul id="regions" class="content <%= (@site.regions_select.length > 11) ? 'scroll_pane' : ''%>">
+                    <% @site.regions_select.each do |region| %>
+                    <li><%= link_to(region.name, location_path(region), :class => 'geneva') %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              </div>
+              </li>
           <% end %>
 
           <li id="organization_option">

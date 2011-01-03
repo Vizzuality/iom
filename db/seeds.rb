@@ -99,7 +99,8 @@ site = Site.new :name              => 'Haiti Aid Map',
                 :long_description  =>'On January 12th 2010, a catastrophic earthquake occured at Haiti, leaving more than 250.000 deaths and more than 1.000.000 homeless people. It was one of the biggest disasters in the century. Since then and until now, a huge effort has been made by some of the interaction members',
                 :theme             => Theme.find_by_name('Garnet'),
                 :aid_map_image     => File.open(File.join(Rails.root, '/public/images/sites/haiti_img_example.jpg')),
-                :level_for_region  => 3
+                :level_for_region  => 3,
+                :navigate_by_level3 => true
 
 site.geographic_context_country_id = Country.find_by_name('Haiti').id
 site.overview_map_bbox_miny        = 17.78605726800591
@@ -160,7 +161,9 @@ site = Site.new :name => 'Food Security',
                 :long_description => 'The Special Programme for Food Security (SPFS) helps governments replicate successful food security practices on a national scale. The SPFS also encourages investment in rural infrastructure, off-farm income generation, urban agriculture and safety nets',
                 :theme => Theme.find_by_name('Garnet'),
                 :aid_map_image => File.open(File.join(Rails.root, '/public/images/sites/food_img_example.jpg')),
-                :level_for_region => 1
+                :level_for_region => 1,
+                :navigate_by_country => true,
+                :navigate_by_level1 => true
 
 site.overview_map_bbox_miny = -65
 site.overview_map_bbox_minx = -170
