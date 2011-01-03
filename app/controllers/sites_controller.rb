@@ -34,8 +34,10 @@ class SitesController < ApplicationController
         else
           sql="select c.id,count(ps.project_id) as count,c.name,c.center_lon as lon,
                     c.center_lat as lat,
-                    '/countries/'||c.id as url,iso2_code as code
-                    from (countries_projects as cp inner join projects_sites as ps on cp.project_id=ps.project_id and site_id=#{@site.id})
+                    '/location/'||c.id as url,iso2_code as code
+                    from countries_projects as cp
+                    inner join projects_sites as ps on cp.project_id=ps.project_id and site_id=#{@site.id}
+                    inner join projects as p on ps.project_id=p.id and p.end_date > now()
                     inner join countries as c on cp.country_id=c.id
                     group by c.id,c.name,lon,lat,iso2_code"
         end

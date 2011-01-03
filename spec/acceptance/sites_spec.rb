@@ -56,12 +56,13 @@ feature "Sites" do
 
     within(:xpath, "//form[@action='/admin/sites/#{site.id}']") do
       attach_file('site_logo', "#{Rails.root}/test/support/images/caritas.jpg")
-      choose 'site_project_classification_1'
-      fill_in 'site_blog_url', :with => 'tumblr_username'
+      find('div#classification_option span a#1').click
+      find('input#site_show_blog').click
+      fill_in 'tumblr', :with => 'tumblr_username'
       check 'site_show_global_donations_raises'
       fill_in 'site_word_for_clusters', :with => 'grupos'
       fill_in 'site_word_for_regions', :with => 'campos'
-      fill_in 'site_level_for_regions', :with => 2
+      fill_in 'site_level_for_region', :with => 2
       click_link_or_button 'Save'
     end
 
@@ -71,11 +72,13 @@ feature "Sites" do
     assert_equal 'campos', site.word_for_regions
     assert_equal 'tumblr_username', site.blog_url
     assert_equal 1, site.project_classification
-    assert_equal 2, site.level_for_regions
+    assert_equal 2, site.level_for_region
 
-    click_link_or_button "Media (0)"
+    click_link_or_button "Media"
 
     page.should have_css("h2", :text => 'Haiti Aid Map')
+
+    find("a", :text => 'add a video').click
 
     within(:xpath, "//div[@id='new_video']/form[@action='/admin/sites/#{site.id}/media_resources']") do
       fill_in 'media_resource_vimeo_url', :with => 'http://vimeo.com/11144228'
@@ -86,14 +89,18 @@ feature "Sites" do
     assert !site.media_resources.first.vimeo_url.blank?
     assert !site.media_resources.first.vimeo_embed_html.blank?
 
-    page.should have_css("div.sidebar ul li", :text => 'Media (1)')
+    page.should have_css("div.menu ul li", :text => 'Media')
 
-    click_link_or_button 'Delete'
+    page.find('a.delete', :text => 'Delete').click
+    within '#modal_window' do
+      find('span a.remove', :text => 'delete').click
+    end
+    site.reload
 
     assert_equal 0, site.media_resources.count
-    page.should have_css("div.sidebar ul li", :text => 'Media (0)')
+    page.should have_css("div.menu ul li", :text => 'Media')
 
-    click_link_or_button "Resources (0)"
+    click_link_or_button "Resources"
 
     page.should have_css("h2", :text => 'Haiti Aid Map')
     page.should have_css("p", :text => '0 resources')
@@ -108,12 +115,16 @@ feature "Sites" do
     assert_equal 'PDF Report', site.resources.first.title
     assert_equal 'http://www.report.com/report.pdf', site.resources.first.url
 
-    page.should have_css("div.sidebar ul li", :text => 'Resources (1)')
+    page.should have_css("div.menu ul li", :text => 'Resources')
 
-    click_link_or_button 'Delete'
+    page.find('a.delete', :text => 'Delete').click
+    within '#modal_window' do
+      find('span a.remove', :text => 'delete').click
+    end
+    site.reload
 
     assert_equal 0, site.resources.count
-    page.should have_css("div.sidebar ul li", :text => 'Resources (0)')
+    page.should have_css("div.menu ul li", :text => 'Resources')
 
     click_link_or_button 'Customization'
 
@@ -124,6 +135,7 @@ feature "Sites" do
       click_link_or_button 'Add partner'
     end
 
+    site.reload
     assert_equal 1, site.partners.count
 
     page.should have_css("h2", :text => 'Edit site Haiti Aid Map')

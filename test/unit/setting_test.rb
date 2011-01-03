@@ -3,7 +3,7 @@ require File.expand_path('../../test_helper', __FILE__)
 class SettingTest < ActiveSupport::TestCase
 
   def test_our_data_is_valid
-    setting = create_setting
+    setting = create_settings
     assert_not_nil setting.data
     assert setting.data.is_a?(Hash)
     setting.data[:wadus] = 'tradus'
