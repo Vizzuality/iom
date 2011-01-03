@@ -1,10 +1,20 @@
 <div class="main_head">
   <div class="inner_main_head">
     <div class="left">
-      <h2><%= @area_parent %></h2>
+      <% if @area.is_a?(Region) && @site.navigate_by_country? %>
+      <p>
+        <%= link_to(@country.name, location_path(@country)) %>
+      </p>
+      <% else %>
+        <h2><%= @area_parent %></h2>
+      <% end %>
       <h1><%= @area.name %></h2>
       <div class="float_head">
-        <h2><%= @area_parent %></h2>
+        <% if @area.is_a?(Region) && @site.navigate_by_country? %>
+          <h2><%= link_to(@country.name, location_path(@country)) %></h2>
+        <% else %>
+          <h2><%= @area_parent %></h2>
+        <% end %>
         <h1><%= @area.name %></h2>
       </div>
     </div>

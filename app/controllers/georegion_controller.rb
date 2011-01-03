@@ -9,7 +9,7 @@ class GeoregionController < ApplicationController
 
     geo_ids = params[:ids].split('/')
 
-    @area = country = Country.find(geo_ids[0], :select => Country.custom_fields)
+    @country = @area = country = Country.find(geo_ids[0], :select => Country.custom_fields)
     render_404 and return unless country
 
     if geo_ids.size == 1
