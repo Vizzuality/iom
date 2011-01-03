@@ -155,7 +155,7 @@ HTML
   end
 
   def word_for_geo_context(area)
-    area.is_a?(Region) ? 'Region' : 'Country'
+    area.is_a?(Region) ? @site.word_for_regions.singularize : 'Country'
   end
 
 end
