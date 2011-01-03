@@ -2,10 +2,8 @@ require File.dirname(__FILE__) + "/../spec_helper"
 require "steak"
 require 'capybara/rails'
 require "capybara/dsl"
-require 'database_cleaner'
 require "selenium-webdriver"
 
-DatabaseCleaner.strategy   = :truncation
 Capybara.default_driver    = :rack_test
 Capybara.default_host      = 'example.com'
 Capybara.server_port       = 9887
@@ -25,9 +23,7 @@ RSpec.configure do |config|
 
   config.before(:each) do
     Rails.cache.clear
-    DatabaseCleaner.clean
     RR::Space.instance.reset
-    Capybara.reset_sessions!
     # any_instance_of(Action, :save_attached_files => true)
     # any_instance_of(Action, :delete_attached_files => true)
     # any_instance_of(User) do |u|
@@ -35,6 +31,7 @@ RSpec.configure do |config|
     #    stub(u).delete_attached_files {true}
     #  end
     any_instance_of(Paperclip::Attachment, :post_process => true)
+    Capybara.current_driver = :selenium
   end
 
   config.after(:each) do
