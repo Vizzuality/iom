@@ -59,7 +59,7 @@
                 </span>
                 <span class="bottom_tooltip"></span>
               </div>
-              <a class="<%= category.css_class %> icon_statistics" href="<%= category.is_a?(Cluster) ? cluster_path(category) : sector_path(category) %>"><span class="aller" style="width:<%= cluster_sector_width(count) %>px"><%= count %></span></a>
+              <a class="<%= category.css_class %> icon_statistics" href="<%= category.is_a?(Cluster) ? cluster_path(category) : sector_path(category) %>"><span class="aller" style="width:<%= cluster_sector_width(count, @site.projects_sectors_or_clusters.map{|e| e.last}.max) %>px"><%= count %></span></a>
             </li>
           <% end %>
         <% end %>

@@ -263,6 +263,7 @@ class Site < ActiveRecord::Base
     sql="select c.id,c.name,count(ps.*) as count from clusters as c
     inner join clusters_projects as cp on c.id=cp.cluster_id
     inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=#{self.id}
+    inner join projects as p on ps.project_id=p.id and p.end_date > now()
     group by c.id,c.name
     order by count desc"
 
@@ -277,6 +278,7 @@ class Site < ActiveRecord::Base
     sql="select s.id,s.name,count(ps.*) as count from sectors as s
     inner join projects_sectors as cp on s.id=cp.sector_id
     inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=#{self.id}
+    inner join projects as p on ps.project_id=p.id and p.end_date > now()
     group by s.id,s.name order by count DESC"
     Sector.find_by_sql(sql).map do |s|
       [s,s.count.to_i]
@@ -289,6 +291,7 @@ class Site < ActiveRecord::Base
     sql="select #{Region.custom_fields.join(',')},count(ps.*) as count from regions
       inner join projects_regions as pr on regions.id=pr.region_id and regions.level=#{self.level_for_region}
       inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{self.id}
+      inner join projects as p on ps.project_id=p.id and p.end_date > now()
       group by #{Region.custom_fields.join(',')} order by count DESC"
     Region.find_by_sql(sql).map do |r|
       [r,r.count.to_i]
@@ -302,6 +305,7 @@ class Site < ActiveRecord::Base
       inner join regions on regions.country_id = countries.id and regions.level=#{self.level_for_region}
       inner join projects_regions as pr on regions.id=pr.region_id
       inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{self.id}
+      inner join projects as p on ps.project_id=p.id and p.end_date > now()
       group by #{Country.custom_fields.join(',')} order by count DESC"
     Country.find_by_sql(sql).map do |c|
       [c,c.count.to_i]
@@ -313,6 +317,7 @@ class Site < ActiveRecord::Base
     sql="select o.id,o.name,count(ps.*) as count from organizations as o
       inner join projects as p on o.id=p.primary_organization_id
       inner join projects_sites as ps on p.id=ps.project_id and ps.site_id=#{self.id}
+      inner join projects as pr on ps.project_id=pr.id and pr.end_date > now()
       group by o.id,o.name order by count DESC"
     Organization.find_by_sql(sql).map do |o|
         [o,o.count.to_i]
@@ -325,7 +330,8 @@ class Site < ActiveRecord::Base
   end
 
   def total_projects(options = {})
-    sql = "select count(projects_sites.project_id) as count from projects_sites where projects_sites.site_id = #{self.id}"
+    sql = "select count(projects_sites.project_id) as count from projects_sites, projects where projects_sites.site_id = #{self.id}
+                  and projects_sites.project_id = projects.id and projects.end_date > now()"
     ActiveRecord::Base.connection.execute(sql).first['count'].to_i
   end
 
