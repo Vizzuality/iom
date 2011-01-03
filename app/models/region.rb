@@ -105,21 +105,40 @@ class Region < ActiveRecord::Base
   private :update_wikipedia_description
 
   def near(site, limit = 5)
-    Region.find_by_sql(<<-SQL
-      select * from
-      (select re.id, re.name, re.level, re.country_id, re.parent_region_id,
-           ST_Distance((select ST_Centroid(the_geom) from regions where id=#{self.id}), ST_Centroid(the_geom)) as dist,
-           (select count(*) from projects_regions as pr where region_id=re.id) as count
-           from regions as re
-           where id!=#{self.id} and
-           level=#{site.level_for_region}
-           order by dist
-      ) as subq
-      where count>0
-      order by count DESC
-      limit  #{limit}
+    unless site.navigate_by_country?
+      Region.find_by_sql(<<-SQL
+        select * from
+        (select re.id, re.name, re.level, re.country_id, re.parent_region_id,
+             ST_Distance((select ST_Centroid(the_geom) from regions where id=#{self.id}), ST_Centroid(the_geom)) as dist,
+             (select count(*) from projects_regions as pr where region_id=re.id) as count
+             from regions as re
+             where id!=#{self.id} and
+             level=#{site.level_for_region}
+             order by dist
+        ) as subq
+        where count>0
+        order by count DESC
+        limit  #{limit}
 SQL
-    )
+      )
+    else
+      Region.find_by_sql(<<-SQL
+        select * from
+        (select re.id, re.name, re.level, re.country_id, re.parent_region_id,
+             ST_Distance((select ST_Centroid(the_geom) from regions where id=#{self.id}), ST_Centroid(the_geom)) as dist,
+             (select count(*) from projects_regions as pr where region_id=re.id) as count
+             from regions as re
+             where id!=#{self.id} and
+             re.level=#{self.level} and
+             re.country_id = #{self.country_id}
+             order by dist
+        ) as subq
+        where count>0
+        order by count DESC
+        limit  #{limit}
+SQL
+      )
+    end
   end
 
   def projects_count(site)
