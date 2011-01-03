@@ -112,6 +112,11 @@ class Site < ActiveRecord::Base
 
   alias :word_for_cluster_sector :word_for_clusters
 
+  def word_for_regions
+    w = read_attribute(:word_for_regions)
+    w.blank? ? 'regions' : w
+  end
+
   def cluster
     Cluster.find(self.project_context_cluster_id)
   rescue ActiveRecord::RecordNotFound

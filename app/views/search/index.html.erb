@@ -39,7 +39,7 @@
       <div class="right">
         <div class="block">
           <% if @regions && @regions.any? %>
-            <h2>Filter by region</h2>
+            <h2>Filter by <%= @site.word_for_regions %></h2>
             <ul class="filter_list">
             <% index = 0 %>
             <% @regions.each do |region, count| %>

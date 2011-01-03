@@ -32,8 +32,8 @@
             #if the site defines a country then display the regions
             elsif @site.geographic_context_country_id? %>
             <li id="region_option">
-              <a class="geneva main_option with_suboptions">REGIONS<span class="with_suboptions"></span></a>
-              <div class="header_title"><a>REGIONS<span class="with_suboptions"></span></a></div>
+              <a class="geneva main_option with_suboptions"><%= @site.word_for_regions.upcase %><span class="with_suboptions"></span></a>
+              <div class="header_title"><a><%= @site.word_for_regions.upcase %><span class="with_suboptions"></span></a></div>
               <div class="suboptions_body">
                 <span class="suboptions_body_top"></span>
                 <div class="wrapper">
