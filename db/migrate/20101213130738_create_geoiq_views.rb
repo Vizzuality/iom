@@ -13,32 +13,32 @@ class CreateGeoiqViews < ActiveRecord::Migration
     
     execute "create or replace view v_projects as SELECT p.id, p.primary_organization_id, p.start_date, p.end_date, ST_AsText(p.the_geom) as the_geom, 
 
-    array_to_string(array_agg(distinct projects_sites.site_id),'|') as sites,
-    array_to_string(array_agg(distinct countries_projects.country_id),'|') as countries,
-    array_to_string(array_agg(distinct clusters_projects.cluster_id),'|') as clusters,
-    array_to_string(array_agg(distinct projects_tags.tag_id),'|') as tags,
-    array_to_string(array_agg(distinct projects_sectors.sector_id),'|') as sectors,
+        '|'||array_to_string(array_agg(distinct projects_sites.site_id),'|')||'|' as sites,
+        '|'||array_to_string(array_agg(distinct countries_projects.country_id),'|')||'|' as countries,
+        '|'||array_to_string(array_agg(distinct clusters_projects.cluster_id),'|')||'|' as clusters,
+        '|'||array_to_string(array_agg(distinct projects_tags.tag_id),'|')||'|' as tags,
+        '|'||array_to_string(array_agg(distinct projects_sectors.sector_id),'|')||'|' as sectors,
 
-    (SELECT 
-    array_to_string(array_agg(distinct regions.name),' | ')
-    FROM (projects_regions RIGHT JOIN projects ON projects_regions.project_id = projects.id) LEFT JOIN regions ON projects_regions.region_id = regions.id
-    WHERE (((projects.id)=p.id) AND ((regions.level)=1))) as regions_level1,
+        '|'||(SELECT 
+        array_to_string(array_agg(distinct regions.name),' | ')
+        FROM (projects_regions RIGHT JOIN projects ON projects_regions.project_id = projects.id) LEFT JOIN regions ON projects_regions.region_id = regions.id
+        WHERE (((projects.id)=p.id) AND ((regions.level)=1)))||'|' as regions_level1,
 
-    (SELECT 
-    array_to_string(array_agg(distinct regions.name),' | ')
-    FROM (projects_regions RIGHT JOIN projects ON projects_regions.project_id = projects.id) LEFT JOIN regions ON projects_regions.region_id = regions.id
-    WHERE (((projects.id)=p.id) AND ((regions.level)=2))) as regions_level2,
+        '|'||(SELECT 
+        array_to_string(array_agg(distinct regions.name),' | ')
+        FROM (projects_regions RIGHT JOIN projects ON projects_regions.project_id = projects.id) LEFT JOIN regions ON projects_regions.region_id = regions.id
+        WHERE (((projects.id)=p.id) AND ((regions.level)=2)))||'|' as regions_level2,
 
-    (SELECT 
-    array_to_string(array_agg(distinct regions.name),' | ')
-    FROM (projects_regions RIGHT JOIN projects ON projects_regions.project_id = projects.id) LEFT JOIN regions ON projects_regions.region_id = regions.id
-    WHERE (((projects.id)=p.id) AND ((regions.level)=3))) as regions_level3
+        '|'||(SELECT 
+        array_to_string(array_agg(distinct regions.name),' | ')
+        FROM (projects_regions RIGHT JOIN projects ON projects_regions.project_id = projects.id) LEFT JOIN regions ON projects_regions.region_id = regions.id
+        WHERE (((projects.id)=p.id) AND ((regions.level)=3)))||'|' as regions_level3
 
-    FROM ((((projects as p LEFT JOIN projects_sectors ON p.id = projects_sectors.project_id) LEFT JOIN clusters_projects ON p.id = clusters_projects.project_id) 
-    LEFT JOIN countries_projects ON p.id = countries_projects.project_id) 
-    LEFT JOIN projects_tags ON p.id = projects_tags.project_id)
-    LEFT JOIN projects_sites ON p.id = projects_sites.project_id
-    group by p.id, p.primary_organization_id, p.start_date, p.end_date, p.the_geom;"              
+        FROM ((((projects as p LEFT JOIN projects_sectors ON p.id = projects_sectors.project_id) LEFT JOIN clusters_projects ON p.id = clusters_projects.project_id) 
+        LEFT JOIN countries_projects ON p.id = countries_projects.project_id) 
+        LEFT JOIN projects_tags ON p.id = projects_tags.project_id)
+        LEFT JOIN projects_sites ON p.id = projects_sites.project_id
+        group by p.id, p.primary_organization_id, p.start_date, p.end_date, p.the_geom;"              
     execute "insert into geometry_columns VALUES('','public','v_projects','the_geom',2,'4326','MULTIPOINT')"    
     
   end

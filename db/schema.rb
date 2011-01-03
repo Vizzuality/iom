@@ -79,6 +79,27 @@ ActiveRecord::Schema.define(:version => 20101227103614) do
 
   add_index "donors", ["name"], :name => "index_donors_on_name"
 
+  create_table "level1", :primary_key => "gid", :force => true do |t|
+    t.integer       "objectid"
+    t.integer       "id_0"
+    t.string        "iso",        :limit => 3
+    t.string        "name_0",     :limit => 75
+    t.integer       "id_1"
+    t.string        "name_1",     :limit => 75
+    t.string        "varname_1",  :limit => 150
+    t.string        "nl_name_1",  :limit => 50
+    t.string        "hasc_1",     :limit => 15
+    t.string        "cc_1",       :limit => 15
+    t.string        "type_1",     :limit => 50
+    t.string        "engtype_1",  :limit => 50
+    t.string        "validfr_1",  :limit => 25
+    t.string        "validto_1",  :limit => 25
+    t.string        "remarks_1",  :limit => 125
+    t.decimal       "shape_leng"
+    t.decimal       "shape_area"
+    t.multi_polygon "the_geom",   :limit => nil, :srid => 4326
+  end
+
   create_table "media_resources", :force => true do |t|
     t.integer  "position",                 :default => 0
     t.integer  "element_id"

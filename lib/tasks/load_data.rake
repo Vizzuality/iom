@@ -20,83 +20,102 @@ namespace :iom do
     desc "load country data"
     task :load_countries => :environment do
       DB = ActiveRecord::Base.connection
-      DB.execute 'DELETE FROM countries'
       system("unzip -o #{Rails.root}/db/data/countries/TM_WORLD_BORDERS-0.3.zip -d #{Rails.root}/db/data/countries/")
       system("shp2pgsql -d -s 4326 -gthe_geom -i -WLATIN1 #{Rails.root}/db/data/countries/TM_WORLD_BORDERS-0.3.shp public.tmp_countries | psql -Upostgres -diom_#{RAILS_ENV}")
 
       #Insert the country and get the value
-      sql="INSERT INTO countries(\"name\",code,the_geom,iso2_code,iso3_code)
-      SELECT name,iso3,the_geom,iso2,iso3 from tmp_countries"
+      sql="INSERT INTO countries(\"name\",code,center_lat,center_lon,iso2_code,iso3_code)
+      SELECT name,iso3,y(ST_Centroid(the_geom)),x(ST_Centroid(the_geom)),iso2,iso3 from tmp_countries
+      where iso3 not in (select code from countries)"
       DB.execute sql
 
-      DB.execute "UPDATE countries SET center_lat=y(ST_Centroid(the_geom)),center_lon=x(ST_Centroid(the_geom))"
-      DB.execute "UPDATE countries SET the_geom_geojson=ST_AsGeoJSON(the_geom,6)"
+      #DB.execute "UPDATE countries SET center_lat=y(ST_Centroid(the_geom)),center_lon=x(ST_Centroid(the_geom))"
+      #DB.execute "UPDATE countries SET the_geom_geojson=ST_AsGeoJSON(the_geom,6)"
 
       DB.execute 'DROP TABLE tmp_countries'
       system("rm -rf #{Rails.root}/db/data/countries/TM_WORLD_BORDERS-0.3.shp #{Rails.root}/db/data/countries/TM_WORLD_BORDERS-0.3.shx #{Rails.root}/db/data/countries/TM_WORLD_BORDERS-0.3.dbf #{Rails.root}/db/data/countries/TM_WORLD_BORDERS-0.3.prj #{Rails.root}/db/data/countries/Readme.txt")
     end
 
-    desc "load 3th administrative level Haiti geo data. (Communes)"
+    desc "load all available regions not imported already"
     task :load_adm_levels => :environment do
-      DB = ActiveRecord::Base.connection
-
-      DB.execute 'DELETE FROM regions'
-
-      #Import data from GADM (http://www.gadm.org/country)
-
-      system("shp2pgsql -d -s 4326 -gthe_geom -i -WLATIN1 #{Rails.root}/db/data/regions/HTI_adm1.shp public.tmp_haiti_adm1 | psql -Upostgres -diom_#{RAILS_ENV}")
-
-      system("shp2pgsql -d -s 4326 -gthe_geom -i -WLATIN1 #{Rails.root}/db/data/regions/HTI_adm2.shp public.tmp_haiti_adm2 | psql -Upostgres -diom_#{RAILS_ENV}")
-
-      system("shp2pgsql -d -s 4326 -gthe_geom -i -WLATIN1 #{Rails.root}/db/data/regions/HTI_adm3.shp public.tmp_haiti_adm3 | psql -Upostgres -diom_#{RAILS_ENV}")
-
-      country_id = Country.where("code=?","HTI").select(Country.custom_fields).first.id
-
-
-      #Level1
-      sql="insert into regions(\"name\",\"level\",country_id,the_geom,gadm_id)
-      select name_1 as \"name\",1 as \"level\",#{country_id} as country_id,the_geom,id_1 from tmp_haiti_adm1"
-      DB.execute sql
-
-      #Level2
-      sql="insert into regions(\"name\",\"level\",country_id,parent_region_id,the_geom,gadm_id)
-      select name_2 as \"name\",2 as \"level\",#{country_id} as country_id,
-      (select id from regions where gadm_id=adm2.id_1 and \"level\"=1 limit 1) as parent_id
-      ,the_geom,id_2 from tmp_haiti_adm2 as adm2"
-      DB.execute sql
-
-      #Level3
-      sql="insert into regions(\"name\",\"level\",country_id,parent_region_id,the_geom,gadm_id)
-      select name_3 as \"name\",3 as \"level\",#{country_id} as country_id,
-      (select id from regions where gadm_id=adm3.id_2 and \"level\"=2 limit 1) as parent_id
-      ,the_geom,id_3 from tmp_haiti_adm3 as adm3"
-      DB.execute sql
-
-      DB.execute 'DROP TABLE tmp_haiti_adm1'
-      DB.execute 'DROP TABLE tmp_haiti_adm2'
-      DB.execute 'DROP TABLE tmp_haiti_adm3'
-
-      DB.execute "UPDATE regions SET center_lat=y(ST_Centroid(the_geom)),center_lon=x(ST_Centroid(the_geom))"
-      DB.execute "UPDATE regions SET the_geom_geojson=ST_AsGeoJSON(the_geom,6)"
-
-
+      
+      csv = CsvMapper.import("#{Rails.root}/db/data/gadm_data/gadm_level1.csv") do
+        read_attributes_from_file
+      end
+      csv.each do |row|
+        if (Region.find_by_gadm_id_and_level(row.gadm1_id,1).blank?)
+          r = Region.new
+          r.name = row.name
+          r.level = 1
+          r.country = Country.find_by_code(row.iso)
+          r.center_lat = row.lat
+          r.center_lon = row.lon
+          r.gadm_id = row.gadm1_id
+          r.save!
+          puts "created: 1 #{row.name}"  
+        else
+          puts "already existing: 1 #{row.name}"  
+        end
+      end
+      
+      csv = CsvMapper.import("#{Rails.root}/db/data/gadm_data/gadm_level2.csv") do
+        read_attributes_from_file
+      end
+      csv.each do |row|
+        if (Region.find_by_gadm_id_and_level(row.gadm2_id,2).blank?)
+          r = Region.new
+          r.name = row.name
+          r.level = 2
+          r.country = Country.find_by_code(row.iso)
+          r.center_lat = row.lat
+          r.center_lon = row.lon
+          r.gadm_id = row.gadm2_id
+          r.parent_region_id = Region.find_by_gadm_id_and_level(row.gadm1_id,1).id
+          r.save!
+          puts "created: 2 #{row.name}"  
+        else
+          puts "already existing: 2 #{row.name}"  
+        end
+      end
+      
+      csv = CsvMapper.import("#{Rails.root}/db/data/gadm_data/gadm_level3.csv") do
+        read_attributes_from_file
+      end
+      csv.each do |row|
+        if (Region.find_by_gadm_id_and_level(row.gadm3_id,3).blank?)
+          r = Region.new
+          r.name = row.name
+          r.level = 3
+          r.country = Country.find_by_code(row.iso)
+          r.center_lat = row.lat
+          r.center_lon = row.lon
+          r.gadm_id = row.gadm3_id
+          r.parent_region_id = Region.find_by_gadm_id_and_level(row.gadm2_id,2).id
+          r.save!
+          puts "created: 3 #{row.name}"  
+        else
+          puts "already existing: 3 #{row.name}"  
+        end
+      end
+      
+      #DB = ActiveRecord::Base.connection
       #Temporary matching for Google Map Charts
-      DB.execute "UPDATE regions set code='HT-GR' WHERE name like 'Grand%' and level=1"
-      DB.execute "UPDATE regions set code='HT-AR' WHERE name like '%Artibonite' and level=1"
-      DB.execute "UPDATE regions set code='HT-NI' WHERE name='Nippes' and level=1"
-      DB.execute "UPDATE regions set code='HT-ND' WHERE name='Nord' and level=1"
-      DB.execute "UPDATE regions set code='HT-NE' WHERE name='Nord-Est' and level=1"
-      DB.execute "UPDATE regions set code='HT-NO' WHERE name='Nord-Ouest' and level=1"
-      DB.execute "UPDATE regions set code='HT-OU' WHERE name='Ouest' and level=1"
-      DB.execute "UPDATE regions set code='HT-SD' WHERE name='Sud' and level=1"
-      DB.execute "UPDATE regions set code='HT-SE' WHERE name='Sud-Est' and level=1"
-      DB.execute "UPDATE regions set code='HT-CE' WHERE name='Centre' and level=1"
+      # DB.execute "UPDATE regions set code='HT-GR' WHERE name like 'Grand%' and level=1"
+      # DB.execute "UPDATE regions set code='HT-AR' WHERE name like '%Artibonite' and level=1"
+      # DB.execute "UPDATE regions set code='HT-NI' WHERE name='Nippes' and level=1"
+      # DB.execute "UPDATE regions set code='HT-ND' WHERE name='Nord' and level=1"
+      # DB.execute "UPDATE regions set code='HT-NE' WHERE name='Nord-Est' and level=1"
+      # DB.execute "UPDATE regions set code='HT-NO' WHERE name='Nord-Ouest' and level=1"
+      # DB.execute "UPDATE regions set code='HT-OU' WHERE name='Ouest' and level=1"
+      # DB.execute "UPDATE regions set code='HT-SD' WHERE name='Sud' and level=1"
+      # DB.execute "UPDATE regions set code='HT-SE' WHERE name='Sud-Est' and level=1"
+      # DB.execute "UPDATE regions set code='HT-CE' WHERE name='Centre' and level=1"
     end
 
     desc 'Load organizations data'
     task :load_orgs => :environment do
       DB = ActiveRecord::Base.connection
-      DB.execute 'DELETE FROM organizations'
+      #DB.execute 'DELETE FROM organizations'
       #The haitiAidMap must be already created and it has ID=1
 
       csv_orgs = CsvMapper.import("#{Rails.root}/db/data/organizations_20_10_10.csv") do
