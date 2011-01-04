@@ -218,9 +218,9 @@
       </li>
     </ul>
   </div>
+
   <!-- SECTION  -->
   <h3 class="section museo_sans">IMPACT</h3>
-
 
   <label>PROJECT BUDGET</label>
   <div id="project_budget" class="field">
@@ -289,6 +289,56 @@
         </span>
       </div> <!-- field -->
     </div>
+  </div>
+
+  <div class="two_columns">
+    <div class="left_column">
+      <div id="target" class="field">
+        <label>TARGET</label>
+        <span class="input_short">
+          <%= f.text_field :target %>
+        </span>
+      </div>
+    </div>
+    <div class="right_column">
+       <div id="estimated_people" class="field">
+          <label>ESTIMATED PEOPLE REACHED</label>
+          <span class="input_short">
+            <%= f.text_field :estimated_people_reached %>
+            <p class="msg">people</p>
+          </span>
+        </div>
+    </div>
+  </div>
+
+  <h3 class="section museo_sans">OTHER FIELDS</h3>
+
+  <div id="verbatim_location" class="field">
+    <label>VERBATIM LOCATION</label>
+    <span class="textarea">
+      <%= f.text_area :verbatim_location %>
+    </span>
+  </div>
+
+  <div id="calculation_of_number_of_people_reached" class="field">
+    <label>CALCULATION OF NUMBER OF PEOPLE REACHED</label>
+    <span class="textarea">
+      <%= f.text_area :calculation_of_number_of_people_reached %>
+    </span>
+  </div>
+
+  <div id="project_needs" class="field">
+    <label>PROJECT NEEDS</label>
+    <span class="textarea">
+      <%= f.text_area :project_needs %>
+    </span>
+  </div>
+
+  <div id="idprefugee_camp" class="field">
+    <label>IDPREFUGEE CAMP</label>
+    <span class="textarea">
+      <%= f.text_area :idprefugee_camp %>
+    </span>
   </div>
 
   <%= f.submit '', :class => "#{'error' if @project.invalid? && action_name != 'new'}" %>
