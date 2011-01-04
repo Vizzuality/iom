@@ -165,7 +165,7 @@ SQL
 
   def to_param
     if respond_to?(:ids_for_url)
-      return ids_for_url.split('|')
+      return ids_for_url.split('|').join('/')
     end
     case level.to_i
       when 1
