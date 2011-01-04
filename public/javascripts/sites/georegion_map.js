@@ -32,7 +32,7 @@
         streetViewControl: false,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         disableDefaultUI: true,
-        zoom: 15,
+        zoom: 9,
         center: new google.maps.LatLng(map_data[0].lat, map_data[0].lon)
       }
       map = new google.maps.Map(document.getElementById("map"), myOptions);
@@ -47,9 +47,8 @@
         var marker_ = new IOMMarker(map_data[i],diameter, marker_image,map);
       }
   
-      var polygon = createGeoJsonPolygon(area_geojson);
-      polygon.setMap(map)
-
+      //var polygon = createGeoJsonPolygon(area_geojson);
+      //polygon.setMap(map)
   
   
       //Positionate controls

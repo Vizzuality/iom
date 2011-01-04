@@ -131,10 +131,8 @@
     var map_type = "georegion";
     <% if @map_data %>
     var map_data = [{"id":<%=@map_data["id"]%>, "lat":<%=@map_data["lat"]%>, "lon":<%=@map_data["lon"]%>, "count":<%=@map_data["count"]%>, "name":"<%=@map_data["name"]%>"}];
-    var area_geojson = <%=raw(@map_data["geojson"])%>;
     <% else %>
     var map_data = [];
-    var area_geojson = '';
     <% end %>
     var area_stroke_color = "<%=@georegion_map_stroke_color%>";
     var area_fill_color = "<%=@georegion_map_fill_color%>";
