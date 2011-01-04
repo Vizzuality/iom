@@ -3,32 +3,32 @@
 # Table name: projects
 #
 #  id                        :integer         not null, primary key
-#  name                      :string(2000)    
-#  description               :text            
-#  primary_organization_id   :integer         
-#  implementing_organization :text            
-#  partner_organizations     :text            
-#  cross_cutting_issues      :text            
-#  start_date                :date            
-#  end_date                  :date            
-#  budget                    :integer         
-#  target                    :text            
-#  estimated_people_reached  :integer         
-#  contact_person            :string(255)     
-#  contact_email             :string(255)     
-#  contact_phone_number      :string(255)     
-#  site_specific_information :text            
-#  created_at                :datetime        
-#  updated_at                :datetime        
+#  name                      :string(2000)
+#  description               :text
+#  primary_organization_id   :integer
+#  implementing_organization :text
+#  partner_organizations     :text
+#  cross_cutting_issues      :text
+#  start_date                :date
+#  end_date                  :date
+#  budget                    :integer
+#  target                    :text
+#  estimated_people_reached  :integer
+#  contact_person            :string(255)
+#  contact_email             :string(255)
+#  contact_phone_number      :string(255)
+#  site_specific_information :text
+#  created_at                :datetime
+#  updated_at                :datetime
 #  the_geom                  :string          not null
-#  activities                :text            
-#  intervention_id           :string(255)     
-#  additional_information    :text            
-#  awardee_type              :string(255)     
-#  date_provided             :date            
-#  date_updated              :date            
-#  contact_position          :string(255)     
-#  website                   :string(255)     
+#  activities                :text
+#  intervention_id           :string(255)
+#  additional_information    :text
+#  awardee_type              :string(255)
+#  date_provided             :date
+#  date_updated              :date
+#  contact_position          :string(255)
+#  website                   :string(255)
 #
 
 class Project < ActiveRecord::Base
@@ -154,6 +154,7 @@ SQL
     }
     options = default_options.merge(options)
     options[:page] ||= 1
+    level = options[:level] ? options[:level] : site.levels_for_region.join(',')
     sql = <<-SQL
     select * from
     (SELECT p.id as project_id, p.name as project_name, p.description as project_description,
@@ -172,16 +173,16 @@ SQL
     INNER JOIN organizations as o       ON p.primary_organization_id=o.id
     INNER JOIN projects_sites as ps     ON p.id=ps.project_id and ps.site_id=#{site.id}
     INNER JOIN projects_regions as pr   ON pr.project_id=p.id
-    INNER JOIN regions as r             ON pr.region_id=r.id and r.level=#{site.level_for_region}
+    INNER JOIN regions as r             ON pr.region_id=r.id and r.level IN (#{level}) #{"and r.id='#{options[:region]}'" if options[:region]}
     INNER JOIN countries_projects as cp ON cp.project_id=p.id
     INNER JOIN countries as c           ON c.id=cp.country_id
     LEFT JOIN projects_sectors as psec  ON psec.project_id=p.id
     LEFT JOIN sectors as sec             ON sec.id=psec.sector_id
     LEFT JOIN clusters_projects as cpro ON cpro.project_id=p.id
     LEFT JOIN clusters as clus           ON clus.id=cpro.cluster_id
-    GROUP BY p.id,p.name,o.id,o.name,c.name,p.created_at,p.description,p.end_date) as subq
+    GROUP BY p.id,p.name,o.id,o.name,p.created_at,p.description,p.end_date) as subq
 SQL
-    if options[:sector] || options[:cluster] || options[:donor_id] || options[:region] || options[:country] || options[:organization] || options[:active]
+    if options[:sector] || options[:cluster] || options[:donor_id] || options[:country] || options[:organization] || options[:active]
       sql << " WHERE "
       conditions = []
       if options[:sector]
@@ -192,9 +193,6 @@ SQL
       end
       if options[:donor_id]
         conditions << "project_id IN (SELECT project_id from donations WHERE donor_id=#{options[:donor_id]})"
-      end
-      if options[:region]
-        conditions << "regions like '%#{options[:region].sanitize_sql!}%'"
       end
       if options[:country]
         conditions << "countries like '%#{options[:country].sanitize_sql!}%'"
@@ -208,17 +206,9 @@ SQL
       sql << conditions.join(' and ')
     end
 
-    total_entries = if options[:random]
-      ActiveRecord::Base.connection.execute("select count(*) as count from (#{sql}) as q").first['count'].to_i
-    else
-      nil
-    end
+    total_entries = ActiveRecord::Base.connection.execute("select count(*) as count from (#{sql}) as q").first['count'].to_i
 
-    total_pages = if options[:random] && options[:per_page]
-      (total_entries.to_f / options[:per_page].to_f).ceil
-    else
-      nil
-    end
+    total_pages = (total_entries.to_f / options[:per_page].to_f).ceil
 
     start_in_page = if options[:start_in_page]
       options[:start_in_page].to_i
@@ -230,7 +220,7 @@ SQL
           0
         end
       else
-        nil
+        0
       end
     end
 

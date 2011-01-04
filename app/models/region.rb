@@ -36,7 +36,7 @@ class Region < ActiveRecord::Base
     if site.navigate_by_cluster?
       sql="select c.id,c.name,count(c.id) as count from clusters_projects as cp
           inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=#{site.id}
-          inner join projects as p on ps.project_id=p.id and p.end_date > now()
+          inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
           inner join clusters as c on cp.cluster_id=c.id
           inner join projects_regions as pr on ps.project_id=pr.project_id and region_id=#{self.id}
           group by c.id,c.name order by count DESC"
@@ -46,7 +46,7 @@ class Region < ActiveRecord::Base
     else
       sql="select s.id,s.name,count(s.id) as count from projects_sectors as pjs
           inner join projects_sites as ps on pjs.project_id=ps.project_id and ps.site_id=#{site.id}
-          inner join projects as p on ps.project_id=p.id and p.end_date > now()
+          inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
           inner join sectors as s on pjs.sector_id=s.id
           inner join projects_regions as pr on ps.project_id=pr.project_id and region_id=#{self.id}
           group by s.id,s.name order by count DESC"
@@ -60,7 +60,7 @@ class Region < ActiveRecord::Base
   # [[organization, count], [organization, count]]
   def projects_organizations(site)
     sql="select o.id,o.name,count(o.id) as count from projects_sites as ps
-    inner join projects as p on ps.project_id=p.id and ps.site_id=#{site.id} and p.end_date > now()
+    inner join projects as p on ps.project_id=p.id and ps.site_id=#{site.id} and (p.end_date is null OR p.end_date > now())
     inner join organizations as o on p.primary_organization_id=o.id
     inner join projects_regions as pr on ps.project_id=pr.project_id and region_id=#{self.id}
     group by o.id,o.name order by count DESC"
@@ -73,7 +73,7 @@ class Region < ActiveRecord::Base
     ActiveRecord::Base.connection.execute(<<-SQL
       select count(*) from (
         select distinct don.* from projects_sites as ps
-        inner join projects as p on ps.project_id=p.id and p.end_date > now()
+        inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
         inner join donations as d on ps.project_id=d.project_id and ps.site_id=#{site.id}
         inner join donors as don on don.id=d.donor_id
         inner join projects_regions as pr on ps.project_id=pr.project_id and region_id=#{self.id}
@@ -158,7 +158,6 @@ SQL
   def projects_count(site)
     sql = "select count(distinct(pr.project_id)) as count from projects_regions as pr
     inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{site.id}
-    inner join projects as p on pr.project_id=p.id and p.end_date>now()
     where pr.region_id=#{self.id}"
     ActiveRecord::Base.connection.execute(sql).first['count'].to_i
   end
