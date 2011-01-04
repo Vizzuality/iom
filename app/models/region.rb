@@ -163,6 +163,9 @@ SQL
   end
 
   def to_param
+    if respond_to?(:ids_for_url)
+      return ids_for_url.split('|')
+    end
     case level.to_i
       when 1
         [self.country_id, self.id].join('/')
