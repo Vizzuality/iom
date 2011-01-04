@@ -7,7 +7,7 @@ module ProjectsHelper
     else
       clusters_to_sentence(project)
     end
-    countries    = "in #{link_to project['countries'], location_path(project['countries_ids'].to_a), :title => project['countries']}"
+    countries    = "in #{project_countries(project)}"
     organization = "implemented by #{link_to project['organization_name'], organization_path(project['organization_id'])}"
     raw("#{clusters_sectors} #{countries}")
   end
@@ -54,6 +54,16 @@ module ProjectsHelper
     end
     result << " by #{link_to(@project.primary_organization_name, organization_path(@project.primary_organization_id))}"
     raw(result)
+  end
+
+  def project_countries(project)
+    result = []
+    countries =  project['countries'].split('|')
+    countries_ids = project['countries_ids'].split('|')
+    0.upto(countries.size - 1) do |i|
+      result << link_to(countries[i], location_path([countries_ids[i]]), :title => countries[i])
+    end
+    result.to_sentence(:last_word_connector => ' and ')
   end
 
 end

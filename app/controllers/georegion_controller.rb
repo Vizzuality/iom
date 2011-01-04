@@ -17,8 +17,6 @@ class GeoregionController < ApplicationController
     @breadcrumb << country if @site.navigate_by_country?
 
     if geo_ids.size == 1
-      render_404 and return unless @site.navigate_by_country?
-
       @projects = Project.custom_find @site, :country => country.name,
                                              :per_page => 10,
                                              :page => params[:page],
@@ -34,7 +32,7 @@ class GeoregionController < ApplicationController
         select c.id,count(ps.project_id) as count,c.name,c.center_lon as lon,c.center_lat as lat
         from (countries_projects as cp
           inner join projects_sites as ps on cp.project_id=ps.project_id and site_id=#{@site.id})
-          inner join projects as p on ps.project_id=p.id and p.end_date > now()
+          inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
           inner join countries as c on cp.country_id=c.id and c.id=#{country.id}
         group by c.id,c.name,lon,lat) as subq"
     else
@@ -51,19 +49,21 @@ class GeoregionController < ApplicationController
     render_404 if @area.is_a?(Region) && !@site.send("navigate_by_level#{@area.level}?".to_sym)
 
     if @area.is_a?(Region)
-      @projects = Project.custom_find @site, :region => @area.name,
+      @projects = Project.custom_find @site, :region => @area.id,
+                                             :level => @area.level,
                                              :per_page => 10,
                                              :page => params[:page],
                                              :order => 'created_at DESC',
                                              :start_in_page => params[:start_in_page]
 
       @area_parent = country.name
+
       sql="select *,(select the_geom_geojson from regions where id=subq.id) as geojson
         from(
         select r.id,count(ps.project_id) as count,r.name,r.center_lon as lon,r.center_lat as lat
         from (projects_regions as pr
           inner join projects_sites as ps on pr.project_id=ps.project_id and site_id=#{@site.id})
-          inner join projects as p on ps.project_id=p.id and p.end_date > now()
+          inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
           inner join regions as r on pr.region_id=r.id and r.id=#{@area.id}
         group by r.id,r.name,lon,lat) as subq"
     end
