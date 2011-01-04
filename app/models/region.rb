@@ -3,18 +3,18 @@
 # Table name: regions
 #
 #  id               :integer         not null, primary key
-#  name             :string(255)     
-#  level            :integer         
-#  country_id       :integer         
-#  parent_region_id :integer         
-#  the_geom         :string          
-#  gadm_id          :integer         
-#  wiki_url         :string(255)     
-#  wiki_description :text            
-#  code             :string(255)     
-#  center_lat       :float           
-#  center_lon       :float           
-#  the_geom_geojson :text            
+#  name             :string(255)
+#  level            :integer
+#  country_id       :integer
+#  parent_region_id :integer
+#  the_geom         :string
+#  gadm_id          :integer
+#  wiki_url         :string(255)
+#  wiki_description :text
+#  code             :string(255)
+#  center_lat       :float
+#  center_lon       :float
+#  the_geom_geojson :text
 #
 
 class Region < ActiveRecord::Base
@@ -158,6 +158,7 @@ SQL
   def projects_count(site)
     sql = "select count(distinct(pr.project_id)) as count from projects_regions as pr
     inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{site.id}
+    inner join projects as p on pr.project_id=p.id and p.end_date>now()
     where pr.region_id=#{self.id}"
     ActiveRecord::Base.connection.execute(sql).first['count'].to_i
   end
