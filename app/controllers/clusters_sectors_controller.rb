@@ -7,7 +7,7 @@ class ClustersSectorsController < ApplicationController
       # clusters
       render_404 and return unless @site.navigate_by_cluster?
       @data = Cluster.find(params[:id])
-      @projects = Project.custom_find @site, :cluster => @data.name,
+      @projects = Project.custom_find @site, :cluster => @data.id,
                                              :per_page => 10,
                                              :page => params[:page],
                                              :order => 'created_at DESC',
@@ -16,7 +16,7 @@ class ClustersSectorsController < ApplicationController
       # sectors
       render_404 and return unless @site.navigate_by_sector?
       @data = Sector.find(params[:id])
-      @projects = Project.custom_find @site, :sector => @data.name,
+      @projects = Project.custom_find @site, :sector => @data.id,
                                              :per_page => 10,
                                              :page => params[:page],
                                              :order => 'created_at DESC',
