@@ -51,6 +51,7 @@ namespace :iom do
           r.center_lat = row.lat
           r.center_lon = row.lon
           r.gadm_id = row.gadm1_id
+          r.ia_name = row.ia_name
           r.save!
           puts "created: 1 #{row.name}"  
         else
@@ -71,6 +72,7 @@ namespace :iom do
           r.center_lon = row.lon
           r.gadm_id = row.gadm2_id
           r.parent_region_id = Region.find_by_gadm_id_and_level(row.gadm1_id,1).id
+          r.ia_name = row.ia_name
           r.save!
           puts "created: 2 #{row.name}"  
         else
@@ -90,6 +92,7 @@ namespace :iom do
           r.center_lat = row.lat
           r.center_lon = row.lon
           r.gadm_id = row.gadm3_id
+          r.ia_name = row.ia_name
           r.parent_region_id = Region.find_by_gadm_id_and_level(row.gadm2_id,2).id
           r.save!
           puts "created: 3 #{row.name}"  
@@ -179,28 +182,33 @@ namespace :iom do
       # Cache geocoding
       geo_cache = {}
 
-      csv_projs = CsvMapper.import("#{Rails.root}/db/data/projects_20_10_10.csv") do
+      csv_projs = CsvMapper.import("#{Rails.root}/db/data/projects_latest.csv") do
         read_attributes_from_file
       end
       csv_projs.each do |row|
         o = Organization.find_by_name(row.organization)
-        if (o and Project.find_by_name_and_primary_organization_id(row.interv_title,o.id).blank?)
+        if (o and Project.find_by_name_and_primary_organization_id(row.project_title,o.id).blank?)
           p = Project.new
-          puts "PROJECT FOR: #{o.id}"
+          #puts "#{row.ipc} : #{row.project_title}"
           p.primary_organization      = o
           p.intervention_id           = row.ipc
-          p.name                      = row.interv_title
-          p.description               = row.interv_description
-          p.activities                = row.interv_activities
+          p.name                      = row.project_title
+          p.description               = row.project_description
+          p.activities                = row.project_activities
           p.additional_information    = row.additional_information
+          p.awardee_type              = row.awardee_type
+          p.verbatim_location         = row.cityvillage
+          p.calculation_of_number_of_people_reached = row.calculation_of_number_of_people_reached
+          p.project_needs              = row.project_needs
+          p.idprefugee_camp              = row.idprefugee_camp
 
-          p.start_date = Date.strptime(row.est_start_date_mmddyyyy, '%m/%d/%Y') unless (row.est_start_date_mmddyyyy.blank?)
-          if(row.est_end_date_mmddyyyy=="2/29/2010")
-            row.est_end_date_mmddyyyy="3/1/2010"
+          p.start_date = Date.strptime(row.est_start_date, '%m/%d/%Y') unless (row.est_start_date.blank?)
+          if(row.est_end_date=="2/29/2010")
+            row.est_end_date="3/1/2010"
           end
-          p.end_date = Date.strptime(row.est_end_date_mmddyyyy, '%m/%d/%Y') unless (row.est_end_date_mmddyyyy.blank? or row.est_end_date_mmddyyyy=="Ongoing")
+          p.end_date = Date.strptime(row.est_end_date, '%m/%d/%Y') unless (row.est_end_date.blank? or row.est_end_date=="Ongoing")
 
-          p.budget                    = row.budget_usd.to_money.dollars unless (row.budget_usd.blank?)
+          p.budget                    = row.budget.to_money.dollars unless (row.budget.blank?)
           p.cross_cutting_issues      = row.crosscutting_issues
           p.implementing_organization = row.implementing_organizations
           p.partner_organizations     = row.partner_organizations
@@ -210,8 +218,8 @@ namespace :iom do
           p.contact_position          = row.contact_title
           p.contact_email             = row.contact_email
           p.website                   = row.website
-          p.date_provided             = Date.strptime(row.date_provided_mmddyyyy, '%m/%d/%Y') unless (row.date_provided_mmddyyyy.blank?)
-          p.date_updated              = Date.strptime(row.date_updated_mmddyyyy, '%m/%d/%Y') unless (row.date_updated_mmddyyyy.blank?)
+          p.date_provided             = Date.strptime(row.date_provided, '%m/%d/%Y') unless (row.date_provided.blank?)
+          p.date_updated              = Date.strptime(row.date_updated, '%m/%d/%Y') unless (row.date_updated.blank?)
 
           # Relations
           #########################
@@ -264,53 +272,38 @@ namespace :iom do
           end
           puts "."
 
-          #Geo data
-          reg1=nil
-          if(!row._1st_administrative_level_department.blank?)
-            parsed_adm1 = row._1st_administrative_level_department.split(",").map{|e|e.strip}
-            parsed_adm1.each do |region_name|
-              reg1 = Region.where("name ilike ? and level=?",region_name,1).select(Region.custom_fields).first
-              if(reg1)
-                p.regions  << reg1
-              else
-                puts "ALERT: REGION LEVEL 1 NOT FOUND #{region_name}"
-              end
-            end
-          end
-          if p.regions.empty?
-            puts "[error] empty regions"
-            next
-          end
-          puts "."
-
-
-          reg2=nil
-          if(!row._2nd_administrative_level_arrondissement.blank?)
-            parsed_adm2 = row._2nd_administrative_level_arrondissement.split(",").map{|e|e.strip}
-            parsed_adm2.each do |region_name|
-              reg2 = Region.where("name ilike ? and level=?",region_name,2).select(Region.custom_fields).first
-              if(reg2)
-                p.regions  << reg2
-              else
-                puts "ALERT: REGION LEVEL 2 NOT FOUND #{region_name}"
-              end
-
-            end
-          end
-          puts "."
-
           multi_point=""
           reg3=nil
-          if(!row._3rd_administrative_level_commune.blank?)
-            parsed_adm3 = row._3rd_administrative_level_commune.split(",").map{|e|e.strip}
+          if(!row._3rd_administrative_level.blank?)
+            parsed_adm3 = row._3rd_administrative_level.split(",").map{|e|e.strip}
             locations = Array.new
+            if(!row.latitude.blank? and !row.longitude.blank?)
+              coords_lat_split=row.latitude.split(",").map{|e|e.strip}
+              coords_lon_split=row.longitude.split(",").map{|e|e.strip}
+              count = 0
+              coords_lat_split.each do |lat_split|
+                if(lat_split.to_f!=0 and coords_lon_split[count].to_f!=0)
+                  locations << "#{lat_split} #{coords_lon_split[count]}"
+                end
+                count = count+1
+              end
+            end
             parsed_adm3.each do |region_name|
-              reg3 = Region.where("name ilike ? and level=?",region_name,3).select(Region.custom_fields).first
+              reg3 = Region.where("ia_name ilike ? and level=? and country_id=?",region_name.strip,3,country.id).select(Region.custom_fields).first
               if(reg3)
                 p.regions  << reg3
-                sql="select ST_AsText(ST_SetSRID(ST_MakePoint(center_lon,center_lat),4326)) as point from regions where id=#{reg3.id}"
-                res = DB.execute(sql).first["point"].delete("POINT(").delete(")")
-                locations << res
+                if(locations.count<1)
+                  sql="select ST_AsText(ST_SetSRID(ST_MakePoint(center_lon,center_lat),4326)) as point from regions where id=#{reg3.id}"
+                  res = DB.execute(sql).first["point"].delete("POINT(").delete(")")
+                  locations << res
+                end
+                
+                #Add the herarchy
+                region_level2= Region.find_by_id(reg3.parent_region_id)
+                p.regions  << region_level2
+                
+                region_level1= Region.find_by_id(region_level2.parent_region_id)
+                p.regions  << region_level1                
               else
                 puts "ALERT: REGION LEVEL 3 NOT FOUND #{region_name}"
               end
