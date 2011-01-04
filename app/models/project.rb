@@ -180,21 +180,15 @@ SQL
     INNER JOIN regions as r             ON pr.region_id=r.id and r.level IN (#{level}) #{"and r.id='#{options[:region]}'" if options[:region]}
     INNER JOIN countries_projects as cp ON cp.project_id=p.id
     INNER JOIN countries as c           ON c.id=cp.country_id
-    LEFT JOIN projects_sectors as psec  ON psec.project_id=p.id
+    LEFT JOIN projects_sectors as psec  ON psec.project_id=p.id #{"and psec.sector_id='#{options[:sector]}'" if options[:sector]}
     LEFT JOIN sectors as sec             ON sec.id=psec.sector_id
-    LEFT JOIN clusters_projects as cpro ON cpro.project_id=p.id
-    LEFT JOIN clusters as clus           ON clus.id=cpro.cluster_id
+    LEFT JOIN clusters_projects as cpro ON cpro.project_id=p.id #{"and cpro.cluster_id='#{options[:cluster]}'" if options[:cluster]}
+    LEFT JOIN clusters as clus           ON clus.id=cpro.cluster_id 
     GROUP BY p.id,p.name,o.id,o.name,p.created_at,p.description,p.end_date) as subq
 SQL
-    if options[:sector] || options[:cluster] || options[:donor_id] || options[:country] || options[:organization] || options[:active]
+    if options[:donor_id] || options[:country] || options[:organization] || options[:active]
       sql << " WHERE "
       conditions = []
-      if options[:sector]
-        conditions << "sectors like '%#{options[:sector].sanitize_sql!}%'"
-      end
-      if options[:cluster]
-        conditions << "clusters like '%#{options[:cluster].sanitize_sql!}%'"
-      end
       if options[:donor_id]
         conditions << "project_id IN (SELECT project_id from donations WHERE donor_id=#{options[:donor_id]})"
       end
