@@ -116,8 +116,9 @@ HTML
     end + (Rails.env == 'development' ? ":#{request.port}" : '')
   end
 
-  def projects_by_location(site)
-    projects = if site.world_wide_context?
+  def projects_by_location(site, collection = nil)
+    projects = collection
+    projects ||= if site.world_wide_context?
       site.projects_countries
     else
       site.projects_regions

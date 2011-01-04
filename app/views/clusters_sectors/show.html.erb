@@ -40,7 +40,7 @@
           <% unless @data.projects_regions(@site).empty?%>
           <div class="block statistics less">
             <h3>PROJECTS BY LOCATION</h3>
-            <%= raw(projects_by_location(@site)) %>
+            <%= raw(projects_by_location(@site, @data.projects_regions(@site))) %>
           </div>
           <%end%>
           <% unless @data.donors(@site).empty? %>

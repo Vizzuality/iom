@@ -172,7 +172,6 @@ SQL
     array_to_string(array_agg(distinct sec.id),'|') as sector_ids,
     array_to_string(array_agg(distinct clus.name),'|') as clusters,
     array_to_string(array_agg(distinct clus.id),'|') as cluster_ids
-
     FROM projects as p
     INNER JOIN organizations as o       ON p.primary_organization_id=o.id
     INNER JOIN projects_sites as ps     ON p.id=ps.project_id and ps.site_id=#{site.id}
@@ -180,10 +179,10 @@ SQL
     INNER JOIN regions as r             ON pr.region_id=r.id and r.level IN (#{level}) #{"and r.id='#{options[:region]}'" if options[:region]}
     INNER JOIN countries_projects as cp ON cp.project_id=p.id
     INNER JOIN countries as c           ON c.id=cp.country_id
-    LEFT JOIN projects_sectors as psec  ON psec.project_id=p.id #{"and psec.sector_id='#{options[:sector]}'" if options[:sector]}
-    LEFT JOIN sectors as sec             ON sec.id=psec.sector_id
-    LEFT JOIN clusters_projects as cpro ON cpro.project_id=p.id #{"and cpro.cluster_id='#{options[:cluster]}'" if options[:cluster]}
-    LEFT JOIN clusters as clus           ON clus.id=cpro.cluster_id 
+    INNER JOIN clusters_projects as cpro ON cpro.project_id=p.id #{"and cpro.cluster_id=#{options[:cluster]}" if options[:cluster]}
+    INNER JOIN clusters as clus           ON clus.id=cpro.cluster_id 
+    INNER JOIN projects_sectors as psec  ON psec.project_id=p.id #{"and psec.sector_id=#{options[:sector]}" if options[:sector]}
+    INNER JOIN sectors as sec             ON sec.id=psec.sector_id
     GROUP BY p.id,p.name,o.id,o.name,p.created_at,p.description,p.end_date) as subq
 SQL
     if options[:donor_id] || options[:country] || options[:organization] || options[:active]
