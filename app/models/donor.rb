@@ -83,13 +83,13 @@ class Donor < ActiveRecord::Base
   def projects_regions(site)
     Region.find_by_sql(
 <<-SQL
-  select r.id,r.name,count(ps.*) as count from regions as r
+  select r.id,r.name,r.level,r.parent_region_id, r.country_id,count(ps.*) as count from regions as r
     inner join projects_regions as pr on r.id=pr.region_id
     inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{site.id}
     inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
     inner join donations as d on ps.project_id=d.project_id and d.donor_id=#{self.id}
     where r.level=#{site.level_for_region}
-    group by r.id,r.name order by count DESC
+    group by r.id,r.name,r.level,r.parent_region_id, r.country_id order by count DESC
 SQL
     ).map do |r|
       [r, r.count.to_i]
