@@ -60,30 +60,31 @@
           </div>
           <%end%>
 
-          <% unless @site.nil? || @organization.projects_clusters(@site).empty? %>
+          <% unless @site.nil? || @organization.projects_clusters_sectors(@site).empty? %>
           <div class="block statistics">
             <h3>PROJECTS BY <%= @site.word_for_cluster_sector.upcase.chop %></h3>
             <ul class="statistics_list">
-              <% @organization.projects_clusters(@site)[0...3].each do |cluster,count| %>
+              <% @organization.projects_clusters_sectors(@site)[0...3].each do |category,count| %>
                 <li>
                   <div class="tooltip">
                     <span class="body_tooltip">
-                      <label><%= cluster.name %></label>
+                      <label><%= category.name %></label>
                     </span>
                     <span class="bottom_tooltip"></span>
                   </div>
-                  <a class="<%= cluster.css_class %> icon_statistics" href="<%= cluster_path(cluster) %>"><span class="aller" style="width:<%= cluster_sector_width(count) %>px"><%= count %></span></a>
+                  <a class="<%= category.css_class %> icon_statistics" href="<%= url_for(category) %>"><span class="aller" style="width:<%= cluster_sector_width(count, @organization.projects_clusters_sectors(@site)[0...3].map{|e| e.last}.max) %>px"><%= count %></span></a>
                 </li>
               <% end %>
             </ul>
           </div>
-          <%end%>
-          <%unless @organization.projects_regions(@site).empty? %>
+          <% end %>
+
+          <% unless @organization.projects_regions(@site).empty? %>
           <div class="block statistics less">
             <h3>PROJECTS BY LOCATION</h3>
             <%= raw(projects_by_location(@site)) %>
           </div>
-          <%end%>
+          <% end %>
           <% unless @organization.resources(@site).empty? %>
             <div class="block resources">
               <h3>ADDITIONAL RESOURCES</h3>

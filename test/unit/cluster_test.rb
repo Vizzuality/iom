@@ -88,6 +88,7 @@ class ClusterTest < ActiveSupport::TestCase
     p1.regions << madrid
     p2.regions << madrid
     p1.regions << lerida
+    p3.regions << madrid
 
     site1 = create_site :name => 'Food for Haiti 1', :project_context_organization_id => organization1.id, :project_context_cluster_id => nil, :url => 'http://site1.com'
     site2 = create_site :name => 'Food for Haiti 2', :project_context_organization_id => organization2.id, :project_context_cluster_id => nil, :url => 'http://site2.com'
@@ -107,6 +108,12 @@ class ClusterTest < ActiveSupport::TestCase
 
     assert_equal 0, c2.projects_regions(site1).size
     assert_equal 0, c1.projects_regions(site2).size
+
+    p1.update_attribute(:end_date, Date.today.yesterday)
+    p1.reload
+    c1.reload
+    assert_equal 1, c1.projects_regions(site1).size
+    assert !c1.projects_regions(site1).flatten.include?(valencia)
   end
 
 end

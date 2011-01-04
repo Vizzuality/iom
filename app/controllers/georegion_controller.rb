@@ -105,9 +105,6 @@ class GeoregionController < ApplicationController
         end
         @chld = areas.join("|")
         @chd  = "t:"+data.join(",")
-
-        @first_three = @area.projects_clusters(@site)[0...3]
-        @first_three_max = @first_three.map{|g, c| c}.sort.last
       end
       format.js do
         render :update do |page|

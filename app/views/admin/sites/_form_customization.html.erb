@@ -2,6 +2,7 @@
 
   <div class="common">
     <h3>SITE CUSTOMIZATION</h3>
+
     <%= f.label :logo %>
     <div class="image_container">
       <% if @site.logo_file_name? %>
@@ -35,6 +36,7 @@
     </ul>
 
     <%= f.label "SITE IMAGE FOR NGO AID MAP SITE" %>
+
     <div class="image_container">
       <% if @site.aid_map_image_file_name? %>
         <%= image_tag(@site.aid_map_image.url(:small)) %>
@@ -50,8 +52,8 @@
         <% if @site.aid_map_image_file_name? %>
           <p class="remove_link"> or <%= link_to('remove', destroy_aid_map_image_admin_site_path(@site), :method => :put, :class => 'remove') %></p>
          <% else %>
-            <p class="message remove_link">Select a file from your computer</p>
-        <%end%>
+          <p class="message remove_link">Select a file from your computer</p>
+        <% end %>
       </div>
     </div>
 
@@ -66,14 +68,13 @@
           <%= image_tag(partner.logo.url(:small)) %>
           <p><%= partner.name %></p>
           <p class="bottom"><%= link_to(partner.url, partner.url) %></p>
-          <%= link_to('Delete', '#delete', :class => "delete", :destroy_url=>admin_site_partner_path(@site, partner), :att_name=>"logo") %>
+          <%= link_to('Delete', '#delete', :class => "delete", :destroy_url=>admin_site_partner_path(@site, partner), :att_name => "partner") %>
         </div>
       <% end -%>
     <% end -%>
 
     <span class="add_partner"><p>Add / edit the partners of the site</p><%= link_to('Add a partner', '#', :class => 'manage_partners') %></span>
   </div>
-
 
   <div class="common">
     <h3>Map configuration</h3>
@@ -158,8 +159,6 @@
   <% end -%>
 
   <%= form_for([:admin, @site, (@partner || @site.partners.new)], :html => { :multipart => true }) do |f| %>
-
-    <%= f.error_messages %>
 
     <div class="short_field">
       <%= f.label :name %>

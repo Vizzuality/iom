@@ -58,9 +58,9 @@
           </div>
         <div class="block statistics">
           <h3>PROJECTS BY <%= @site.word_for_cluster_sector.upcase %></h3>
-          <% if @area.projects_clusters(@site).size > 0 %>
+          <% if @area.projects_clusters_sectors(@site).size > 0 %>
             <ul class="statistics_list">
-              <% @first_three.each do |cluster,count| %>
+              <% @area.projects_clusters_sectors(@site)[0..3].each do |cluster,count| %>
                 <li>
                   <div class="tooltip">
                     <span class="body_tooltip">
@@ -68,7 +68,7 @@
                     </span>
                     <span class="bottom_tooltip"></span>
                   </div>
-                  <a class="<%= cluster.css_class %> icon_statistics" href="<%= cluster_path(cluster) %>"><span class="aller" style="width:<%= cluster_sector_width(count, @first_three_max) %>px"><%= count %></span></a>
+                  <a class="<%= cluster.css_class %> icon_statistics" href="<%= cluster_path(cluster) %>"><span class="aller" style="width:<%= cluster_sector_width(count, @area.projects_clusters_sectors(@site)[0..3].map{ |e| e.last }.max) %>px"><%= count %></span></a>
                 </li>
               <% end %>
             </ul>

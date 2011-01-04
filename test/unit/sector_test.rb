@@ -107,6 +107,9 @@ class SectorTest < ActiveSupport::TestCase
 
     assert_equal 0, s2.projects_regions(site1).size
     assert_equal 0, s1.projects_regions(site2).size
+
+    p2.update_attribute(:end_date, Date.today.yesterday)
+    assert_equal 0, s2.projects_regions(site2).size
   end
 
 end

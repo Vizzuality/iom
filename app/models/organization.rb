@@ -91,15 +91,27 @@ class Organization < ActiveRecord::Base
 
   # Array of arrays
   # [[cluster, count], [cluster, count]]
-  def projects_clusters(site)
-    sql="select c.id,c.name,count(ps.*) as count from clusters as c
-    inner join clusters_projects as cp on c.id=cp.cluster_id
-    inner join projects as p on p.id=cp.project_id and p.end_date > now()
-    inner join projects_sites as ps on p.id=ps.project_id and ps.site_id=#{site.id}
-    where p.primary_organization_id=#{self.id}
-    group by c.id,c.name order by count DESC"
-    Cluster.find_by_sql(sql).map do |c|
-      [c,c.count.to_i]
+  def projects_clusters_sectors(site)
+    if site.navigate_by_cluster?
+      sql="select c.id,c.name,count(ps.*) as count from clusters as c
+      inner join clusters_projects as cp on c.id=cp.cluster_id
+      inner join projects as p on p.id=cp.project_id and p.end_date > now()
+      inner join projects_sites as ps on p.id=ps.project_id and ps.site_id=#{site.id}
+      where p.primary_organization_id=#{self.id}
+      group by c.id,c.name order by count DESC"
+      Cluster.find_by_sql(sql).map do |c|
+        [c,c.count.to_i]
+      end
+    else
+      sql="select s.id,s.name,count(ps.*) as count from sectors as s
+      inner join projects_sectors as pjs on s.id=pjs.sector_id
+      inner join projects as p on p.id=pjs.project_id and p.end_date > now()
+      inner join projects_sites as ps on p.id=ps.project_id and ps.site_id=#{site.id}
+      where p.primary_organization_id=#{self.id}
+      group by s.id,s.name order by count DESC"
+      Sector.find_by_sql(sql).map do |s|
+        [s,s.count.to_i]
+      end
     end
   end
 

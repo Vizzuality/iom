@@ -10,7 +10,7 @@ class CountryTest < ActiveSupport::TestCase
   end
 
   # should list the clusters of the projects in one site that belongs to a given country
-  test "projects_clusters of a site" do
+  test "projects_clusters_sectors of a site navigated by clusters" do
     spain    = create_country :name => 'Spain'
     germany  = create_country :name => 'Germany'
 
@@ -43,16 +43,77 @@ class CountryTest < ActiveSupport::TestCase
     p2.reload
     p3.reload
 
-    assert_equal 2, spain.projects_clusters(site1).size
-    assert spain.projects_clusters(site1).flatten.include?(c1)
-    assert spain.projects_clusters(site1).flatten.include?(c3)
+    assert_equal 2, spain.projects_clusters_sectors(site1).size
+    assert spain.projects_clusters_sectors(site1).flatten.include?(c1)
+    assert spain.projects_clusters_sectors(site1).flatten.include?(c3)
 
-    assert_equal 0, spain.projects_clusters(site2).size
+    assert_equal 0, spain.projects_clusters_sectors(site2).size
 
-    assert_equal 0, germany.projects_clusters(site1).size
-    assert_equal 1, germany.projects_clusters(site2).size
+    assert_equal 0, germany.projects_clusters_sectors(site1).size
+    assert_equal 1, germany.projects_clusters_sectors(site2).size
 
-    assert germany.projects_clusters(site2).flatten.include?(c2)
+    assert germany.projects_clusters_sectors(site2).flatten.include?(c2)
+
+    p2.update_attribute(:end_date, Date.today.yesterday)
+    p2.reload
+    site2.reload
+
+    assert_equal 0, germany.projects_clusters_sectors(site2).size
+  end
+
+  test "projects_clusters_sectors of a site navigated by sectors" do
+    spain    = create_country :name => 'Spain'
+    germany  = create_country :name => 'Germany'
+
+    s1 = create_sector
+    s2 = create_sector
+    s3 = create_sector
+
+    organization1 = create_organization
+    organization2 = create_organization
+
+    p1 = create_project :name => 'P1', :primary_organization => organization1
+    p2 = create_project :name => 'P2', :primary_organization => organization2
+    p3 = create_project :name => 'P3', :primary_organization => organization1
+
+    p1.sectors << s1
+    p2.sectors << s2
+    p3.sectors << s3
+    p3.sectors << s1
+
+    p1.countries << spain
+    p2.countries << germany
+    p3.countries << spain
+
+    site1 = create_site :name => 'Food for Haiti 1', :project_context_organization_id => organization1.id,
+                        :project_context_cluster_id => nil, :url => 'http://site1.com',
+                        :project_classification => 1
+    site2 = create_site :name => 'Food for Haiti 2', :project_context_organization_id => organization2.id,
+                        :project_context_cluster_id => nil, :url => 'http://site2.com',
+                        :project_classification => 1
+
+    site1.reload
+    site2.reload
+    p1.reload
+    p2.reload
+    p3.reload
+
+    assert_equal 2, spain.projects_clusters_sectors(site1).size
+    assert spain.projects_clusters_sectors(site1).flatten.include?(s1)
+    assert spain.projects_clusters_sectors(site1).flatten.include?(s3)
+
+    assert_equal 0, spain.projects_clusters_sectors(site2).size
+
+    assert_equal 0, germany.projects_clusters_sectors(site1).size
+    assert_equal 1, germany.projects_clusters_sectors(site2).size
+
+    assert germany.projects_clusters_sectors(site2).flatten.include?(s2)
+
+    p2.update_attribute(:end_date, Date.today.yesterday)
+    p2.reload
+    site2.reload
+
+    assert_equal 0, germany.projects_clusters_sectors(site2).size
   end
 
   # should list the regions of the projects in one site that belongs to a given country
@@ -102,8 +163,12 @@ class CountryTest < ActiveSupport::TestCase
     assert_equal 0, germany.regions_projects(site1).size
 
     assert_equal 1, germany.regions_projects(site2).size
-
     assert germany.regions_projects(site2).flatten.include?(berlin)
+
+    p2.update_attribute(:end_date, Date.today.yesterday)
+    p2.reload
+    site2.reload
+    assert_equal 0, germany.regions_projects(site2).size
   end
 
   test "donors and donors count of a site" do
@@ -188,6 +253,9 @@ class CountryTest < ActiveSupport::TestCase
     assert_equal 1, germany.projects_count(site2)
     assert_equal 1, france.projects_count(site1)
     assert_equal 1, france.projects_count(site2)
+
+    p1.update_attribute(:end_date, Date.today.yesterday)
+    assert_equal 1, spain.projects_count(site1)
   end
 
 end

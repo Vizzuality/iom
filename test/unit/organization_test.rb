@@ -22,7 +22,7 @@ class OrganizationTest < ActiveSupport::TestCase
     assert_equal "Organization name fro site #{site.id}", organization.attributes_for_site(site)[:name]
   end
 
-  test "organization projects_clusters of a site" do
+  test "organization projects_clusters_sectors of a site navigated by clusters" do
     spain    = create_country :name => 'Spain'
     valencia = create_region :name => 'Valencia', :country => spain
     madrid   = create_region :name => 'Madrid', :country => spain
@@ -52,13 +52,68 @@ class OrganizationTest < ActiveSupport::TestCase
     p2.reload
     p3.reload
 
-    assert_equal 2, organization1.projects_clusters(site1).size
-    assert organization1.projects_clusters(site1).flatten.include?(c1)
-    assert organization1.projects_clusters(site1).flatten.include?(c3)
-    assert_equal 0, organization2.projects_clusters(site1).size
-    assert_equal 0, organization1.projects_clusters(site2).size
-    assert_equal 1, organization2.projects_clusters(site2).size
-    assert organization2.projects_clusters(site2).flatten.include?(c2)
+    assert_equal 2, organization1.projects_clusters_sectors(site1).size
+    assert organization1.projects_clusters_sectors(site1).flatten.include?(c1)
+    assert organization1.projects_clusters_sectors(site1).flatten.include?(c3)
+
+    assert_equal 0, organization2.projects_clusters_sectors(site1).size
+
+    assert_equal 0, organization1.projects_clusters_sectors(site2).size
+
+    assert_equal 1, organization2.projects_clusters_sectors(site2).size
+    assert organization2.projects_clusters_sectors(site2).flatten.include?(c2)
+
+    p2.update_attribute(:end_date, Date.today.yesterday)
+    assert_equal 0, organization2.projects_clusters_sectors(site2).size
+  end
+
+  test "organization projects_clusters_sectors of a site navigated by sectors" do
+    spain    = create_country :name => 'Spain'
+    valencia = create_region :name => 'Valencia', :country => spain
+    madrid   = create_region :name => 'Madrid', :country => spain
+
+    s1 = create_sector
+    s2 = create_sector
+    s3 = create_sector
+
+    organization1 = create_organization
+    organization2 = create_organization
+
+    p1 = create_project :name => 'P1', :primary_organization => organization1
+    p2 = create_project :name => 'P2', :primary_organization => organization2
+    p3 = create_project :name => 'P3', :primary_organization => organization1
+
+    p1.sectors << s1
+    p2.sectors << s2
+    p3.sectors << s3
+    p3.sectors << s1
+
+    site1 = create_site :name => 'Food for Haiti 1', :project_context_organization_id => organization1.id,
+                        :project_context_cluster_id => nil, :url => 'http://site1.com',
+                        :project_classification => 1
+    site2 = create_site :name => 'Food for Haiti 2', :project_context_organization_id => organization2.id,
+                        :project_context_cluster_id => nil, :url => 'http://site2.com',
+                        :project_classification => 1
+
+    site1.reload
+    site2.reload
+    p1.reload
+    p2.reload
+    p3.reload
+
+    assert_equal 2, organization1.projects_clusters_sectors(site1).size
+    assert organization1.projects_clusters_sectors(site1).flatten.include?(s1)
+    assert organization1.projects_clusters_sectors(site1).flatten.include?(s3)
+
+    assert_equal 0, organization2.projects_clusters_sectors(site1).size
+
+    assert_equal 0, organization1.projects_clusters_sectors(site2).size
+
+    assert_equal 1, organization2.projects_clusters_sectors(site2).size
+    assert organization2.projects_clusters_sectors(site2).flatten.include?(s2)
+
+    p2.update_attribute(:end_date, Date.today.yesterday)
+    assert_equal 0, organization2.projects_clusters_sectors(site2).size
   end
 
   test "organization projects_regions of a site" do
@@ -102,6 +157,10 @@ class OrganizationTest < ActiveSupport::TestCase
     assert_equal 0, organization2.projects_regions(site1).size
     assert_equal 1, organization2.projects_regions(site2).size
     assert organization2.projects_regions(site2).flatten.include?(berlin)
+
+    p1.update_attribute(:end_date, Date.today.yesterday)
+    assert_equal 1, organization1.projects_regions(site1).size
+    assert organization1.projects_regions(site1).flatten.include?(valencia)
   end
 
   test "organization projects_count of a site" do
@@ -129,6 +188,9 @@ class OrganizationTest < ActiveSupport::TestCase
     assert_equal 0, organization1.projects_count(site2)
     assert_equal 0, organization2.projects_count(site1)
     assert_equal 1, organization2.projects_count(site2)
+
+    p1.update_attribute(:end_date, Date.today.yesterday)
+    assert_equal 1, organization1.projects_count(site1)
   end
 
 end

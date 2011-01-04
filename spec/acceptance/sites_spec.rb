@@ -128,6 +128,10 @@ feature "Sites" do
 
     click_link_or_button 'Customization'
 
+    within('span.add_partner') do
+      find('a.manage_partners', :text => 'Add a partner').click
+    end
+
     within(:xpath, "//form[@action='/admin/sites/#{site.id}/partners']") do
       fill_in 'partner_name', :with => 'USA Gov'
       fill_in 'partner_url', :with => 'http://usa.gov'
@@ -138,13 +142,18 @@ feature "Sites" do
     site.reload
     assert_equal 1, site.partners.count
 
-    page.should have_css("h2", :text => 'Edit site Haiti Aid Map')
+    page.should have_css("h2", :text => 'Haiti Aid Map')
     page.should have_css("div.partner", :count => 1)
 
-    click_link_or_button 'Delete'
+    page.find('div.partner a.delete', :text => 'Delete').click
+    within '#modal_window' do
+      find('span a.remove', :text => 'delete').click
+    end
+    site.reload
+
     assert_equal 0, site.partners.count
 
-    click_link_or_button "Site projects (1)"
+    click_link_or_button "Site projects"
     page.should have_css("h2", :text => 'Haiti Aid Map')
     page.should have_css("p", :text => '1 project within this site')
     page.should have_css("div.project h3 a", :text => project.name)

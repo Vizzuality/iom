@@ -40,7 +40,7 @@ class DonorTest < ActiveSupport::TestCase
     assert_equal 600, donor.donations_amount
   end
 
-  test "projects_clusters of a site" do
+  test "projects_clusters of a site navigated by clusters" do
     spain    = create_country :name => 'Spain'
     valencia = create_region :name => 'Valencia', :country => spain
     madrid   = create_region :name => 'Madrid', :country => spain
@@ -95,6 +95,69 @@ class DonorTest < ActiveSupport::TestCase
     assert donor3.projects_sectors_or_clusters(site1).flatten.include?(c3)
     assert donor3.projects_sectors_or_clusters(site1).flatten.include?(c1)
     assert_equal 0, donor3.projects_sectors_or_clusters(site2).size
+
+    p3.update_attribute(:end_date, Date.today.yesterday)
+    assert_equal 0, donor3.projects_sectors_or_clusters(site1).size
+  end
+
+  test "projects_clusters of a site navigated by sectors" do
+    spain    = create_country :name => 'Spain'
+    valencia = create_region :name => 'Valencia', :country => spain
+    madrid   = create_region :name => 'Madrid', :country => spain
+
+    s1 = create_sector
+    s2 = create_sector
+    s3 = create_sector
+
+    organization1 = create_organization
+    organization2 = create_organization
+
+    p1 = create_project :name => 'P1', :primary_organization => organization1
+    p2 = create_project :name => 'P2', :primary_organization => organization2
+    p3 = create_project :name => 'P3', :primary_organization => organization1
+
+    p1.sectors << s1
+    p2.sectors << s2
+    p3.sectors << s3
+    p3.sectors << s1
+
+    donor1 = create_donor
+    donor2 = create_donor
+    donor3 = create_donor
+
+    p1.donations.create! :donor => donor1, :amount => 100
+    p2.donations.create! :donor => donor2, :amount => 100
+    p3.donations.create! :donor => donor3, :amount => 100
+
+    site1 = create_site :name => 'Food for Haiti 1', :project_context_organization_id => organization1.id,
+                        :project_context_cluster_id => nil, :url => 'http://site1.com',
+                        :project_classification => 1
+    site2 = create_site :name => 'Food for Haiti 2', :project_context_organization_id => organization2.id,
+                        :project_context_cluster_id => nil, :url => 'http://site2.com',
+                        :project_classification => 1
+
+    site1.reload
+    site2.reload
+    p1.reload
+    p2.reload
+    p3.reload
+
+    assert_equal 1, donor1.projects_sectors_or_clusters(site1).size
+    assert donor1.projects_sectors_or_clusters(site1).flatten.include?(s1)
+
+    assert_equal 0, donor1.projects_sectors_or_clusters(site2).size
+
+    assert_equal 0, donor2.projects_sectors_or_clusters(site1).size
+    assert_equal 1, donor2.projects_sectors_or_clusters(site2).size
+    assert donor2.projects_sectors_or_clusters(site2).flatten.include?(s2)
+
+    assert_equal 2, donor3.projects_sectors_or_clusters(site1).size
+    assert donor3.projects_sectors_or_clusters(site1).flatten.include?(s3)
+    assert donor3.projects_sectors_or_clusters(site1).flatten.include?(s1)
+    assert_equal 0, donor3.projects_sectors_or_clusters(site2).size
+
+    p3.update_attribute(:end_date, Date.today.yesterday)
+    assert_equal 0, donor3.projects_sectors_or_clusters(site1).size
   end
 
   test "projects_regions of a site" do
@@ -150,6 +213,9 @@ class DonorTest < ActiveSupport::TestCase
     assert_equal 1, donor3.projects_regions(site1).size
     assert donor3.projects_regions(site1).flatten.include?(valencia)
     assert_equal 0, donor3.projects_regions(site2).size
+
+    p1.update_attribute(:end_date, Date.today.yesterday)
+    assert_equal 0, donor1.projects_regions(site1).size
   end
 
 end
