@@ -192,21 +192,34 @@ namespace :iom do
           #puts "#{row.ipc} : #{row.project_title}"
           p.primary_organization      = o
           p.intervention_id           = row.ipc
-          p.name                      = row.project_title
+          p.name                      = (row.project_title.blank? ? "Unknown" : row.project_title)
           p.description               = row.project_description
           p.activities                = row.project_activities
           p.additional_information    = row.additional_information
           p.awardee_type              = row.awardee_type
           p.verbatim_location         = row.cityvillage
           p.calculation_of_number_of_people_reached = row.calculation_of_number_of_people_reached
-          p.project_needs              = row.project_needs
-          p.idprefugee_camp              = row.idprefugee_camp
+          p.project_needs             = row.project_needs
+          p.idprefugee_camp           = row.idprefugee_camp
 
-          p.start_date = Date.strptime(row.est_start_date, '%m/%d/%Y') unless (row.est_start_date.blank?)
-          if(row.est_end_date=="2/29/2010")
-            row.est_end_date="3/1/2010"
+          unless row.est_start_date.blank?
+            begin
+              if(row.est_end_date=="2/29/2010")
+                row.est_end_date="3/1/2010"
+              end
+              p.start_date = Date.strptime(row.est_start_date, '%m/%d/%Y')
+            rescue
+              p.start_date = Date.parse(row.est_start_date)
+            end
           end
-          p.end_date = Date.strptime(row.est_end_date, '%m/%d/%Y') unless (row.est_end_date.blank? or row.est_end_date=="Ongoing")
+          
+          unless row.est_end_date.blank? or row.est_end_date=="Ongoing"
+            begin
+              p.end_date = Date.strptime(row.est_end_date, '%m/%d/%Y')
+            else
+              p.end_date = Date.parse(row.est_end_date)
+            end
+          end
 
           p.budget                    = row.budget.to_money.dollars unless (row.budget.blank?)
           p.cross_cutting_issues      = row.crosscutting_issues
@@ -218,8 +231,20 @@ namespace :iom do
           p.contact_position          = row.contact_title
           p.contact_email             = row.contact_email
           p.website                   = row.website
-          p.date_provided             = Date.strptime(row.date_provided, '%m/%d/%Y') unless (row.date_provided.blank?)
-          p.date_updated              = Date.strptime(row.date_updated, '%m/%d/%Y') unless (row.date_updated.blank?)
+          unless row.date_provided.blank?
+            begin
+              p.date_provided             = Date.strptime(row.date_provided, '%m/%d/%Y') 
+            rescue
+              p.date_provided = Date.parse(row.date_provided)
+            end
+          end
+          unless row.date_updated.blank?
+            begin
+              p.date_updated              = Date.strptime(row.date_updated, '%m/%d/%Y')
+            rescue
+              p.date_updated = Date.parse(row.date_updated)
+            end
+          end
 
           # Relations
           #########################
