@@ -488,7 +488,7 @@ class Site < ActiveRecord::Base
       # Region.where(:country_id => geographic_context_country_id, :level => level_for_region).get_select_values
       Region.find_by_sql(<<-SQL
         SELECT id,name,level,parent_region_id,country_id,
-            array_to_string(ARRAY[regions.country_id, regions.parent_region_id, (select parent_region_id from regions r2 where r2.id=regions.parent_region_id), regions.id],'|') as ids_for_url
+            array_to_string(ARRAY[regions.country_id, (select parent_region_id from regions r2 where r2.id=regions.parent_region_id), regions.parent_region_id, regions.id],'|') as ids_for_url
           FROM "regions"
           WHERE ("regions"."level" = #{level_for_region}) AND ("regions"."country_id" = #{geographic_context_country_id}) ORDER BY name ASC;
 SQL
