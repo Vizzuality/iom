@@ -40,7 +40,7 @@
             </li>
           <% else %>
             <li id="region_option">
-              <a class="geneva main_option with_suboptions"><%= @site.word_for_regions.upcase %><span class="with_suboptions"></span></a>
+              <a class="geneva main_option with_suboptions"><%= @site.word_for_regions.pluralize.upcase %><span class="with_suboptions"></span></a>
               <div class="header_title"><a><%= @site.word_for_regions.upcase %><span class="with_suboptions"></span></a></div>
               <div class="suboptions_body">
                 <span class="suboptions_body_top"></span>
