@@ -4,7 +4,11 @@ class ProjectsController < ApplicationController
 
   def show
     sql = <<-SQL
-    select p.*, o.name as primary_organization_name, o.id as primary_organization_id,
+    select p.id,p.name,o.id,o.name,c.name,p.created_at,p.description, p.primary_organization_id,
+     p.implementing_organization, p.partner_organizations, p.cross_cutting_issues, p.start_date,
+     p.end_date, p.budget, p.target, p.activities, p.additional_information, p.contact_email, 
+     p.contact_person, p.contact_phone_number,
+      o.name as primary_organization_name, o.id as primary_organization_id,
          c.name as country_name, c.id as country_id,
          array_to_string(array_agg(distinct sec.name),'|') as sectors_names,
          array_to_string(array_agg(distinct sec.id),'|') as sector_ids,
@@ -24,7 +28,7 @@ class ProjectsController < ApplicationController
          p.end_date, p.budget, p.target, p.estimated_people_reached, p.contact_person, p.contact_email,
          p.contact_phone_number, p.site_specific_information, p.updated_at, p.created_at, p.activities,
          p.intervention_id, p.additional_information, p.awardee_type, p.date_provided, p.date_updated,
-         p.contact_position, p.website, p.the_geom, c.id, c.name
+         p.contact_position, c.id, c.name
 SQL
     @project = Project.find_by_sql(sql).first
     raise ActiveRecord::RecordNotFound unless @project
