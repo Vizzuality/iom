@@ -220,6 +220,13 @@ namespace :iom do
               p.end_date = Date.parse(row.est_end_date)
             end
           end
+          
+          if p.end_date && p.start_date && p.end_date < p.start_date
+            puts p.name
+            puts row.est_start_date
+            puts row.est_end_date
+            next
+          end
 
           p.budget                    = row.budget.to_money.dollars unless (row.budget.blank?)
           p.cross_cutting_issues      = row.crosscutting_issues
@@ -233,14 +240,14 @@ namespace :iom do
           p.website                   = row.website
           unless row.date_provided.blank?
             begin
-              p.date_provided             = Date.strptime(row.date_provided, '%m/%d/%Y') 
+              p.date_provided = Date.strptime(row.date_provided, '%m/%d/%Y') 
             rescue
               p.date_provided = Date.parse(row.date_provided)
             end
           end
           unless row.date_updated.blank?
             begin
-              p.date_updated              = Date.strptime(row.date_updated, '%m/%d/%Y')
+              p.date_updated = Date.strptime(row.date_updated, '%m/%d/%Y')
             rescue
               p.date_updated = Date.parse(row.date_updated)
             end
@@ -295,7 +302,6 @@ namespace :iom do
               puts "ALERT: COUNTRY NOT FOUND #{row.country}"
             end
           end
-          puts "."
 
           multi_point=""
           reg3=nil
@@ -336,7 +342,6 @@ namespace :iom do
 
             multi_point = "ST_MPointFromText('MULTIPOINT(#{locations.join(',')})',4326)" unless (locations.length<1)
           end
-          puts "."
 
           #save the Geom that we created before
           if(!multi_point.blank?)
@@ -488,7 +493,6 @@ namespace :iom do
               end
             end
           end
-          puts "."
 
           #Geo data
           reg1=nil
@@ -507,8 +511,6 @@ namespace :iom do
             puts "[error] empty regions"
             next
           end
-          puts "."
-
 
           reg2=nil
           if(!row._2nd_administrative_level.blank?)
@@ -523,7 +525,6 @@ namespace :iom do
 
             end
           end
-          puts "."
 
           multi_point=""
           reg3=nil
@@ -544,7 +545,6 @@ namespace :iom do
 
             multi_point = "ST_MPointFromText('MULTIPOINT(#{locations.join(',')})',4326)" unless (locations.length<1)
           end
-          puts "."
 
           #save the Geom that we created before
           if(!multi_point.blank?)

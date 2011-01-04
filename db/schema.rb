@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110104121538) do
+ActiveRecord::Schema.define(:version => 20110104190135) do
 
   create_table "clusters", :force => true do |t|
     t.string "name"
@@ -221,6 +221,7 @@ ActiveRecord::Schema.define(:version => 20110104121538) do
     t.text     "idprefugee_camp"
   end
 
+  add_index "projects", ["end_date"], :name => "index_projects_on_end_date"
   add_index "projects", ["name"], :name => "index_projects_on_name"
   add_index "projects", ["primary_organization_id"], :name => "index_projects_on_primary_organization_id"
   add_index "projects", ["the_geom"], :name => "index_projects_on_the_geom", :spatial => true
