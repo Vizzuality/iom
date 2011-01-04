@@ -339,7 +339,6 @@ ActiveRecord::Schema.define(:version => 20110104121538) do
     t.float    "overview_map_bbox_minx"
     t.float    "overview_map_bbox_maxy"
     t.float    "overview_map_bbox_maxx"
-    t.integer  "level_for_region",                               :default => 1
     t.boolean  "navigate_by_country",                            :default => false
     t.boolean  "navigate_by_level1",                             :default => false
     t.boolean  "navigate_by_level2",                             :default => false

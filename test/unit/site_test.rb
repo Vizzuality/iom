@@ -322,13 +322,39 @@ class SiteTest < ActiveSupport::TestCase
 
   test "setter of geographic_context_region_id" do
     organization1 = create_organization
-    site = create_site :name => 'Food for Haiti 1', :project_context_organization_id => organization1.id, :project_context_cluster_id => nil, :url => 'http://site1.com'
+    site = create_site :name => 'Food for Haiti 1', :project_context_organization_id => organization1.id,
+                       :project_context_cluster_id => nil, :url => 'http://site1.com'
     site.geographic_context_region_id = 0
     site.save
     assert site.geographic_context_region_id.nil?
     site.geographic_context_region_id = 33
     site.save
     assert_equal 33, site.geographic_context_region_id
+  end
+
+  test "regions_select method" do
+    spain    = create_country :name => 'Spain'
+    valencia = create_region :name => 'Valencia', :country => spain, :level => 1
+    madrid   = create_region :name => 'Madrid', :country => spain,   :level => 1
+    lerida   = create_region :name => 'Lerida', :country => spain,   :level => 2
+
+    organization1 = create_organization
+    site = create_site :name => 'Food for Haiti 1', :project_context_organization_id => organization1.id,
+                       :project_context_cluster_id => nil, :url => 'http://site1.com',
+                       :navigate_by_level1 => true,
+                       :geographic_context_country_id => nil,
+                       :geographic_context_region_id => nil
+
+    assert site.valid?
+    assert site.regions_select.empty?
+
+    site.geographic_context_country_id = spain.id
+    site.save
+
+    assert !site.regions_select.empty?
+    region = site.regions_select.first
+    assert region.ids_for_url.split('|').is_a?(Array)
+    assert region.ids_for_url.split('|').include?(spain.id.to_s)
   end
 
 end

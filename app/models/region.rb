@@ -3,18 +3,19 @@
 # Table name: regions
 #
 #  id               :integer         not null, primary key
-#  name             :string(255)
-#  level            :integer
-#  country_id       :integer
-#  parent_region_id :integer
-#  the_geom         :string
-#  gadm_id          :integer
-#  wiki_url         :string(255)
-#  wiki_description :text
-#  code             :string(255)
-#  center_lat       :float
-#  center_lon       :float
-#  the_geom_geojson :text
+#  name             :string(255)     
+#  level            :integer         
+#  country_id       :integer         
+#  parent_region_id :integer         
+#  the_geom         :string          
+#  gadm_id          :integer         
+#  wiki_url         :string(255)     
+#  wiki_description :text            
+#  code             :string(255)     
+#  center_lat       :float           
+#  center_lon       :float           
+#  the_geom_geojson :text            
+#  ia_name          :text            
 #
 
 class Region < ActiveRecord::Base
@@ -163,6 +164,9 @@ SQL
   end
 
   def to_param
+    if respond_to?(:ids_for_url)
+      return ids_for_url.split('|')
+    end
     case level.to_i
       when 1
         [self.country_id, self.id].join('/')
