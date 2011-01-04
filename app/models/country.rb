@@ -33,7 +33,7 @@ class Country < ActiveRecord::Base
       sql="select c.id,c.name,count(ps.*) as count from clusters as c
       inner join clusters_projects as cp on c.id=cp.cluster_id
       inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=#{site.id}
-      inner join projects as p on ps.project_id=p.id and p.end_date > now()
+      inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
       inner join countries_projects as cop on ps.project_id=cop.project_id and cop.country_id=#{self.id}
       group by c.id,c.name order by count DESC"
       Cluster.find_by_sql(sql).map do |c|
@@ -43,7 +43,7 @@ class Country < ActiveRecord::Base
       sql="select s.id,s.name,count(ps.*) as count from sectors as s
       inner join projects_sectors as pjs on s.id=pjs.sector_id
       inner join projects_sites as ps on pjs.project_id=ps.project_id and ps.site_id=#{site.id}
-      inner join projects as p on ps.project_id=p.id and p.end_date > now()
+      inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
       inner join countries_projects as cop on ps.project_id=cop.project_id and cop.country_id=#{self.id}
       group by s.id,s.name order by count DESC"
       Sector.find_by_sql(sql).map do |s|
@@ -58,7 +58,7 @@ class Country < ActiveRecord::Base
     sql="select r.id,r.name,count(ps.*) as count from regions as r
     inner join projects_regions as pr on r.id=pr.region_id
     inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{site.id}
-    inner join projects as p on ps.project_id=p.id and p.end_date > now()
+    inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
     where r.level=#{site.level_for_region} and r.country_id=#{self.id}
     group by r.id,r.name order by count DESC"
     Region.find_by_sql(sql).map do |r|
@@ -126,7 +126,7 @@ SQL
   def projects_count(site)
     sql = "select count(distinct(cp.project_id)) as count from countries_projects as cp
     inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=#{site.id}
-    inner join projects as p on ps.project_id=p.id and p.end_date > now()
+    inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
     where cp.country_id=#{self.id} order by count DESC"
     ActiveRecord::Base.connection.execute(sql).first['count'].to_i
   end

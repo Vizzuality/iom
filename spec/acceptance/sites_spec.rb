@@ -62,7 +62,7 @@ feature "Sites" do
       check 'site_show_global_donations_raises'
       fill_in 'site_word_for_clusters', :with => 'grupos'
       fill_in 'site_word_for_regions', :with => 'campos'
-      fill_in 'site_level_for_region', :with => 2
+      check 'site_navigate_by_level2'
       click_link_or_button 'Save'
     end
 

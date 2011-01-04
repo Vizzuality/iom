@@ -5,7 +5,9 @@
         <li <%= cycle('class=even', 'class=odd') %>>
           <h4><a href="<%= project_path(project['project_id']) %>"><%= truncate(project['project_name'], :length=>65) %></a></h4>
            <% if controller_name == 'clusters_sectors' %>
-           <p class="author">in <%= link_to(project['countries'], location_path(project['countries_ids'].to_a), :title => project['countries']) %></p>
+           <p class="author">in
+             <%= project_countries(project) %>
+           </p>
            <% else %>
            <p class="author"><%= subtitle(project, @site) %></p>
            <% end %>

@@ -135,14 +135,31 @@
   </div>
 
   <div class="common">
-    <h3>LEVEL FOR REGIONS</h3>
+    <h3>GEOGRAPHIC NAVIGATION</h3>
     <div class="field">
-      <%= f.label :level_for_region %>
-      <%= f.text_field :level_for_region, :class=>"short" %>
+      <span>
+        <%= f.check_box :navigate_by_country %><p>Navigate by country</p>
+      </span>
+    </div>
+    <div class="field">
+      <span>
+        <%= f.check_box :navigate_by_level1 %><p>Navigate by regions of level 1</p>
+      </span>
+    </div>
+    <div class="field">
+      <span>
+        <%= f.check_box :navigate_by_level2 %><p>Navigate by regions of level 2</p>
+      </span>
+    </div>
+    <div class="field">
+      <span>
+        <%= f.check_box :navigate_by_level3 %><p>Navigate by regions of level 3</p>
+      </span>
     </div>
   </div>
 
   <%= f.hidden_field :theme_id, :value => Theme.first.id %>
+  <input type="hidden" name="customization" value="true" />
 
   <%= f.submit 'Save' %>
 

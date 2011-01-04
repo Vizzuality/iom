@@ -1,19 +1,24 @@
 <div class="main_head">
   <div class="inner_main_head">
     <div class="left">
-      <% if @area.is_a?(Region) && @site.navigate_by_country? %>
+      <% unless @breadcrumb.empty? %>
       <ul class="breadcrumb">
-        <li class="last"><%= link_to(@country.name, location_path(@country)) %></li>
+        <% @breadcrumb.each_with_index do |geo, i| %>
+          <li <%= raw('class="last"') if i == @breadcrumb.size - 1 %>><%= link_to(geo.name, location_path(geo)) %></li>
+        <% end %>
       </ul>
       <% else %>
         <h2><%= @area_parent %></h2>
       <% end %>
       <h1><%= @area.name %></h2>
       <div class="float_head">
-        <% if @area.is_a?(Region) && @site.navigate_by_country? %>
+        <% unless @breadcrumb.empty? %>
         <ul class="breadcrumb">
-          <li class="last"><%= link_to(@country.name, location_path(@country)) %></li>
-        </ul>        <% else %>
+          <% @breadcrumb.each_with_index do |geo, i| %>
+            <li <%= raw('class="last"') if i == @breadcrumb.size - 1 %>><%= link_to(geo.name, location_path(geo)) %></li>
+          <% end %>
+        </ul>
+        <% else %>
           <h2><%= @area_parent %></h2>
         <% end %>
         <h1><%= @area.name %></h2>

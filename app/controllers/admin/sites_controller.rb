@@ -37,7 +37,11 @@ class Admin::SitesController < ApplicationController
     @site = Site.find(params[:id])
     @site.attributes = params[:site]
     if @site.save
-      redirect_to edit_admin_site_path(@site), :flash => {:success => 'Site has been updated successfully'}
+      if params[:customization]
+        redirect_to customization_admin_site_path(@site), :flash => {:success => 'Site has been updated successfully'}
+      else
+        redirect_to edit_admin_site_path(@site), :flash => {:success => 'Site has been updated successfully'}
+      end
     else
       render :action => 'edit'
     end

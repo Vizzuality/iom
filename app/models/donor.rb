@@ -59,7 +59,7 @@ class Donor < ActiveRecord::Base
       sql="select s.id,s.name,count(ps.*) as count from sectors as s
       inner join projects_sectors as ps on s.id=ps.sector_id
       inner join projects_sites as psi on ps.project_id=psi.project_id and psi.site_id=#{site.id}
-      inner join projects as p on ps.project_id=p.id and p.end_date > now()
+      inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
       inner join donations as d on psi.project_id=d.project_id and d.donor_id=#{self.id}
       group by s.id,s.name order by count DESC"
       Sector.find_by_sql(sql).map do |s|
@@ -69,7 +69,7 @@ class Donor < ActiveRecord::Base
       sql="select c.id,c.name,count(ps.*) as count from clusters as c
       inner join clusters_projects as cp on c.id=cp.cluster_id
       inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=#{site.id}
-      inner join projects as p on ps.project_id=p.id and p.end_date > now()
+      inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
       inner join donations as d on ps.project_id=d.project_id and d.donor_id=#{self.id}
       group by c.id,c.name order by count DESC"
       Cluster.find_by_sql(sql).map do |c|
@@ -86,7 +86,7 @@ class Donor < ActiveRecord::Base
   select r.id,r.name,count(ps.*) as count from regions as r
     inner join projects_regions as pr on r.id=pr.region_id
     inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{site.id}
-    inner join projects as p on ps.project_id=p.id and p.end_date > now()
+    inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
     inner join donations as d on ps.project_id=d.project_id and d.donor_id=#{self.id}
     where r.level=#{site.level_for_region}
     group by r.id,r.name order by count DESC
