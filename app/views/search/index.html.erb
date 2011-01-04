@@ -89,6 +89,7 @@
           <% end %>
         </div>
       </div>
+
       <div class="view_more" id="search_view_more">
         <% if @total_projects.count > @projects.count %>
           <%= link_to('More projects', params.merge(:page => @current_page + 1), :id =>'view_more', :class => 'ajax') %>
