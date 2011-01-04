@@ -69,7 +69,7 @@ class ApplicationController < ActionController::Base
     end
 
     def render_404
-      render :file => "public/404.html", :status => 404, :layout => false
+      render :file => "public/404.html.erb", :status => 404, :layout => false
     end
 
 end
