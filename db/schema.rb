@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110103105358) do
+ActiveRecord::Schema.define(:version => 20110104102847) do
 
   create_table "clusters", :force => true do |t|
     t.string "name"
@@ -78,27 +78,6 @@ ActiveRecord::Schema.define(:version => 20110103105358) do
   end
 
   add_index "donors", ["name"], :name => "index_donors_on_name"
-
-  create_table "level1", :primary_key => "gid", :force => true do |t|
-    t.integer       "objectid"
-    t.integer       "id_0"
-    t.string        "iso",        :limit => 3
-    t.string        "name_0",     :limit => 75
-    t.integer       "id_1"
-    t.string        "name_1",     :limit => 75
-    t.string        "varname_1",  :limit => 150
-    t.string        "nl_name_1",  :limit => 50
-    t.string        "hasc_1",     :limit => 15
-    t.string        "cc_1",       :limit => 15
-    t.string        "type_1",     :limit => 50
-    t.string        "engtype_1",  :limit => 50
-    t.string        "validfr_1",  :limit => 25
-    t.string        "validto_1",  :limit => 25
-    t.string        "remarks_1",  :limit => 125
-    t.decimal       "shape_leng"
-    t.decimal       "shape_area"
-    t.multi_polygon "the_geom",   :limit => nil, :srid => 4326
-  end
 
   create_table "media_resources", :force => true do |t|
     t.integer  "position",                 :default => 0
@@ -355,7 +334,6 @@ ActiveRecord::Schema.define(:version => 20110103105358) do
     t.float    "overview_map_bbox_minx"
     t.float    "overview_map_bbox_maxy"
     t.float    "overview_map_bbox_maxx"
-    t.integer  "level_for_region",                               :default => 1
     t.boolean  "navigate_by_country",                            :default => false
     t.boolean  "navigate_by_level1",                             :default => false
     t.boolean  "navigate_by_level2",                             :default => false
@@ -385,86 +363,6 @@ ActiveRecord::Schema.define(:version => 20110103105358) do
     t.string "css_file"
     t.string "thumbnail_path"
     t.text   "data"
-  end
-
-  create_table "tmp_countries", :primary_key => "gid", :force => true do |t|
-    t.string        "fips",      :limit => 2
-    t.string        "iso2",      :limit => 2
-    t.string        "iso3",      :limit => 3
-    t.integer       "un"
-    t.string        "name",      :limit => 50
-    t.integer       "area"
-    t.integer       "pop2005"
-    t.integer       "region"
-    t.integer       "subregion"
-    t.float         "lon"
-    t.float         "lat"
-    t.multi_polygon "the_geom",  :limit => nil, :srid => 4326
-  end
-
-  create_table "tmp_haiti_adm1", :primary_key => "gid", :force => true do |t|
-    t.integer       "id_0"
-    t.string        "iso",        :limit => 3
-    t.string        "name_0",     :limit => 75
-    t.integer       "id_1"
-    t.string        "name_1",     :limit => 75
-    t.string        "varname_1",  :limit => 150
-    t.string        "nl_name_1",  :limit => 50
-    t.string        "hasc_1",     :limit => 15
-    t.string        "cc_1",       :limit => 15
-    t.string        "type_1",     :limit => 50
-    t.string        "engtype_1",  :limit => 50
-    t.string        "validfr_1",  :limit => 25
-    t.string        "validto_1",  :limit => 25
-    t.string        "remarks_1",  :limit => 125
-    t.decimal       "shape_leng"
-    t.decimal       "shape_area"
-    t.multi_polygon "the_geom",   :limit => nil, :srid => 4326
-  end
-
-  create_table "tmp_haiti_adm2", :primary_key => "gid", :force => true do |t|
-    t.integer       "id_0"
-    t.string        "iso",        :limit => 3
-    t.string        "name_0",     :limit => 75
-    t.integer       "id_1"
-    t.string        "name_1",     :limit => 75
-    t.integer       "id_2"
-    t.string        "name_2",     :limit => 75
-    t.string        "varname_2",  :limit => 150
-    t.string        "nl_name_2",  :limit => 75
-    t.string        "hasc_2",     :limit => 15
-    t.string        "cc_2",       :limit => 15
-    t.string        "type_2",     :limit => 50
-    t.string        "engtype_2",  :limit => 50
-    t.string        "validfr_2",  :limit => 25
-    t.string        "validto_2",  :limit => 25
-    t.string        "remarks_2",  :limit => 100
-    t.decimal       "shape_leng"
-    t.decimal       "shape_area"
-    t.multi_polygon "the_geom",   :limit => nil, :srid => 4326
-  end
-
-  create_table "tmp_haiti_adm3", :primary_key => "gid", :force => true do |t|
-    t.integer       "id_0"
-    t.string        "iso",        :limit => 3
-    t.string        "name_0",     :limit => 75
-    t.integer       "id_1"
-    t.string        "name_1",     :limit => 75
-    t.integer       "id_2"
-    t.string        "name_2",     :limit => 75
-    t.integer       "id_3"
-    t.string        "name_3",     :limit => 75
-    t.string        "varname_3",  :limit => 100
-    t.string        "nl_name_3",  :limit => 75
-    t.string        "hasc_3",     :limit => 25
-    t.string        "type_3",     :limit => 50
-    t.string        "engtype_3",  :limit => 50
-    t.string        "validfr_3",  :limit => 25
-    t.string        "validto_3",  :limit => 25
-    t.string        "remarks_3",  :limit => 50
-    t.decimal       "shape_leng"
-    t.decimal       "shape_area"
-    t.multi_polygon "the_geom",   :limit => nil, :srid => 4326
   end
 
   create_table "users", :force => true do |t|

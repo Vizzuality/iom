@@ -24,7 +24,9 @@ class SiteTest < ActiveSupport::TestCase
                         :project_context => ['clusters', 'tags'],
                         :project_context_cluster_id => cluster.id,
                         :project_context_organization_id => 3,
-                        :project_context_tags => "#{tag1.name},   #{tag2.name}, non_existing_tag"
+                        :project_context_tags => "#{tag1.name},   #{tag2.name}, non_existing_tag",
+                        :navigate_by_level3 => true
+
     assert site.valid?
     site.reload
     assert !site.new_record?
@@ -113,7 +115,8 @@ class SiteTest < ActiveSupport::TestCase
     p3.regions << barcelona
 
     site = create_site :name => 'Food for Spain', :geographic_context_country_id => spain.id,
-                       :project_context_cluster_id => nil, :level_for_region => 3
+                       :project_context_cluster_id => nil, :navigate_by_level3 => true,
+                       :navigate_by_level1 => false
 
     site.reload
     p1.reload
@@ -124,7 +127,8 @@ class SiteTest < ActiveSupport::TestCase
     assert site.cached_projects.include?(p2)
     assert site.cached_projects.include?(p3)
 
-    site.level_for_region = 1
+    site.navigate_by_level3 = false
+    site.navigate_by_level1 = true
     site.save
     site.reload
 

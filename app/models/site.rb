@@ -42,7 +42,6 @@
 #  overview_map_bbox_minx          :float
 #  overview_map_bbox_maxy          :float
 #  overview_map_bbox_maxx          :float
-#  level_for_region                :integer         default(1)
 #  navigate_by_country             :boolean
 #  navigate_by_level1              :boolean
 #  navigate_by_level2              :boolean
@@ -237,6 +236,16 @@ class Site < ActiveRecord::Base
   # Return All the projects within the Site (already executed)
   def projects(options = {})
     projects_sql(options.merge(:limit => nil, :offset => nil)).all
+  end
+
+  def level_for_region
+    if navigate_by_level1?
+      1
+    elsif navigate_by_level2?
+      2
+    elsif navigate_by_level3?
+      3
+    end
   end
 
   def projects_sectors_or_clusters
@@ -441,7 +450,7 @@ class Site < ActiveRecord::Base
       Country.get_select_values
     else
       if geographic_context_region_id.blank?
-        Country.find(self.geographic_context_country_id, :select => Country.custom_fields)
+        [Country.find(self.geographic_context_country_id, :select => Country.custom_fields)]
       else
         nil
       end
