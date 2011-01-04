@@ -28,9 +28,9 @@ class SitesController < ApplicationController
           sql="select r.id,count(ps.project_id) as count,r.name,r.center_lon as lon,
                     r.center_lat as lat,r.name,'/regions/'||r.id as url,r.code
                     from ((projects_regions as pr inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{@site.id})
+                    inner join projects as p on pr.project_id=p.id and (p.end_date is null OR p.end_date > now())
                     inner join regions as r on pr.region_id=r.id and r.level=#{@site.level_for_region})
-                    inner join countries as c on r.country_id=c.id
-                    group by r.id,r.name,lon,lat,c.name,url,r.code"
+                    group by r.id,r.name,lon,lat,r.name,url,r.code"
         else
           sql="select c.id,count(ps.project_id) as count,c.name,c.center_lon as lon,
                     c.center_lat as lat,

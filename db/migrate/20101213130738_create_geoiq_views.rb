@@ -11,7 +11,9 @@ class CreateGeoiqViews < ActiveRecord::Migration
     group by regions.id,projects_sites.site_id,regions.name, regions.level, regions.country_id,regions.parent_region_id,regions.the_geom;"              
     execute "insert into geometry_columns VALUES('','public','v_regions_num_projects','the_geom',2,'4326','MULTIPOINT')"
     
-    execute "create or replace view v_projects as SELECT p.id, p.primary_organization_id, p.start_date, p.end_date, ST_AsText(p.the_geom) as the_geom, 
+    execute "create or replace view v_projects as SELECT p.id, p.primary_organization_id,
+              CASE WHEN p.end_date < now() OR p.end_date is null THEN false ELSE true END as is_active,
+     ST_AsText(p.the_geom) as the_geom, 
 
         '|'||array_to_string(array_agg(distinct projects_sites.site_id),'|')||'|' as sites,
         '|'||array_to_string(array_agg(distinct countries_projects.country_id),'|')||'|' as countries,
