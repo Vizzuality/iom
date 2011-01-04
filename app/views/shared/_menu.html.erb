@@ -1,7 +1,7 @@
 
 <div id="header">
   <div class="inner_header">
-    <div class="left <%= (action_name == 'home')? 'home':''%>">
+    <div class="left <%= (action_name == 'home') ? 'home' : '' %>">
       <h1><%= link_to(@site.name,'/') %></h1>
       <ul class="menu">
           <% if @site.cluster %>

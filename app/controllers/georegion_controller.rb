@@ -9,10 +9,16 @@ class GeoregionController < ApplicationController
 
     geo_ids = params[:ids].split('/')
 
+    @breadcrumb = []
+
     @country = @area = country = Country.find(geo_ids[0], :select => Country.custom_fields)
     render_404 and return unless country
 
+    @breadcrumb << country if @site.navigate_by_country?
+
     if geo_ids.size == 1
+      render_404 and return unless @site.navigate_by_country?
+
       @projects = Project.custom_find @site, :country => country.name,
                                              :per_page => 10,
                                              :page => params[:page],
@@ -31,37 +37,18 @@ class GeoregionController < ApplicationController
           inner join projects as p on ps.project_id=p.id and p.end_date > now()
           inner join countries as c on cp.country_id=c.id and c.id=#{country.id}
         group by c.id,c.name,lon,lat) as subq"
+    else
+      level = 1
+      geo_ids[1..-1].each do |geo_id|
+        region = Region.find(geo_id, :select => Region.custom_fields, :conditions => {:level => level, :country_id => country.id})
+        render_404 and return unless region
+        @breadcrumb << region unless !@site.send("navigate_by_level#{level}?".to_sym)
+        @area = region
+        level += 1
+      end
     end
 
-    if @site.navigate_by_level1? && geo_ids.size > 1
-      render_404 and return if geo_ids.size > 2
-
-      region = Region.find(geo_ids[1], :select => Region.custom_fields, :conditions => {:level => 1, :country_id => country.id})
-      render_404 and return unless region
-
-      @area = region
-    end
-
-    if @site.navigate_by_level2? && geo_ids.size > 2
-      render_404 and return if geo_ids.size > 3
-
-      region = Region.find(geo_ids[2], :select => Region.custom_fields, :conditions => {:level => 2, :country_id => country.id, :parent_region_id => geo_ids[1]})
-      render_404 and return unless region
-
-      @area = region
-    end
-
-    if @site.navigate_by_level3? && geo_ids.size > 3
-      render_404 and return if geo_ids.size > 4
-
-      parent_region = Region.find(geo_ids[2], :select => Region.custom_fields, :conditions => {:level => 2, :country_id => country.id, :parent_region_id => geo_ids[1]})
-      render_404 and return unless parent_region
-
-      region = Region.find(geo_ids[3], :select => Region.custom_fields, :conditions => {:level => 3, :country_id => country.id, :parent_region_id => geo_ids[2]})
-      render_404 and return unless region
-
-      @area = region
-    end
+    render_404 if @area.is_a?(Region) && !@site.send("navigate_by_level#{@area.level}?".to_sym)
 
     if @area.is_a?(Region)
       @projects = Project.custom_find @site, :region => @area.name,
@@ -105,6 +92,7 @@ class GeoregionController < ApplicationController
         end
         @chld = areas.join("|")
         @chd  = "t:"+data.join(",")
+        @breadcrumb.pop
       end
       format.js do
         render :update do |page|
