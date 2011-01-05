@@ -16,7 +16,10 @@
                   <% if !page.children.empty? %>
                     <div class="body">
                       <% page.children.each do |children| %>
-                        <span><%= link_to(children.title, edit_admin_site_page_path(@site, children)) %> - <%= link_to("Delete", '#delete', :destroy_url=>admin_site_page_path(@site, children), :att_name=>"subpage") %></span>
+                        <span>
+                          <%= link_to(children.title, edit_admin_site_page_path(@site, children)) %>
+                          <%= link_to("Delete", '#delete', :destroy_url=>admin_site_page_path(@site, children), :att_name=>"subpage", :class=>"delete") %>
+                        </span>
                       <% end %>
                     </div>
                   <div class="down"></bottom>
@@ -36,4 +39,6 @@
         <a href="<%= new_admin_site_page_path(@site) %>">Create new page on this site</a>
       </div>
     </div>
-
+    
+    
+    <script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>

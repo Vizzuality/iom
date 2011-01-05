@@ -9,9 +9,8 @@
   <div class="long_field">
     <span class="chars">
       <%= f.label :body, raw("BODY  <strong>*</strong>") %>
-      <p id="chars_left">2500 chars left</p>
     </span>
-    <%= f.text_area :body, :class=>"huge #{'error' if !@page.errors[:body].empty? && action_name != 'new'}", :onkeyup=>"limitChars('page_body', 2500, 'chars_left')" %>
+    <%= f.text_area :body, :class=>"huge #{'error' if !@page.errors[:body].empty? && action_name != 'new'}" %>
   </div>
 
   <div class="field">
