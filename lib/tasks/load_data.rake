@@ -182,7 +182,7 @@ namespace :iom do
       # Cache geocoding
       geo_cache = {}
 
-      csv_projs = CsvMapper.import("#{Rails.root}/db/data/projects_latest.csv") do
+      csv_projs = CsvMapper.import("#{Rails.root}/db/data/projects_latest_refine.csv") do
         read_attributes_from_file
       end
       csv_projs.each do |row|
@@ -268,7 +268,12 @@ namespace :iom do
           if(!row.clusters.blank?)
             parsed_clusters = row.clusters.split(",").map{|e|e.strip}
             parsed_clusters.each do |clus|
-              p.clusters << Cluster.find_or_create_by_name(:name=>clus.strip)
+              clust = Cluster.find_by_name(clus.strip)
+              if clust
+                p.clusters << clust
+              else
+                puts "CLUSTER NOT FOUND: #{clus}"
+              end
             end
           end
 
@@ -277,7 +282,12 @@ namespace :iom do
           if(!row.ia_sectors.blank?)
             parsed_sectors = row.ia_sectors.split(",").map{|e|e.strip}
             parsed_sectors.each do |sec|
-              p.sectors << Sector.find_or_create_by_name(:name=>sec.strip)
+              sect = Sector.find_by_name(sec.strip)
+              if sect
+                p.sectors << sect
+              else
+                puts "SECTOR NOT FOUND: #{sec}"
+              end              
             end
           end
 

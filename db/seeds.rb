@@ -64,8 +64,8 @@ Cluster.create :name => 'Health'
 Cluster.create :name => 'Logistics'
 Cluster.create :name => 'Nutrition'
 Cluster.create :name => 'Protection'
-Cluster.create :name => 'Shelter and Non-food Items'
-Cluster.create :name => 'Water, Sanitation and Hygiene'
+Cluster.create :name => 'Shelter and Non-Food Items'
+Cluster.create :name => 'Water Sanitation and Hygiene'
 
 Sector.create :name => 'Agriculture'
 Sector.create :name => 'Communications'
@@ -75,11 +75,11 @@ Sector.create :name => 'Education'
 Sector.create :name => 'Environment'
 Sector.create :name => 'Food Aid'
 Sector.create :name => 'Health'
-Sector.create :name => 'Human Rights, Democracy and Governance'
+Sector.create :name => 'Human Rights Democracy and Governance'
 Sector.create :name => 'Peace and Security'
 Sector.create :name => 'Protection'
 Sector.create :name => 'Shelter and Housing'
-Sector.create :name => 'Water, Sanitation and Hygiene'
+Sector.create :name => 'Water Sanitation and Hygiene'
 Sector.create :name => 'Other'
 
 Tag.create :name => 'asia'
@@ -95,6 +95,7 @@ Tag.create :name => 'earthquake'
 site = Site.new :name              => 'Haiti Aid Map',
                 :url               => "#{Rails.env.eql?('development') ? 'dev-' : ''}haiti.ngoaidmap.org",
                 :status            => true,
+                :project_classification => 1,
                 :short_description =>'Mapping efforts to reduce poverty and suffering',
                 :long_description  =>'On January 12th 2010, a catastrophic earthquake occured at Haiti, leaving more than 250.000 deaths and more than 1.000.000 homeless people. It was one of the biggest disasters in the century. Since then and until now, a huge effort has been made by some of the interaction members',
                 :theme             => Theme.find_by_name('Garnet'),
