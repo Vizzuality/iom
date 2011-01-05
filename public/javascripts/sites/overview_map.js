@@ -65,8 +65,8 @@
       
       if (map_type == "overview_map") {
         if (map_data[i].count <range) {
-          diameter = 34;
-          image_source = "/images/themes/"+ theme + '/marker_4.png';
+          diameter = 24;
+          image_source = "/images/themes/"+ theme + '/marker_3.png';
         } else if ((map_data[i].count>=(range)) && (map_data[i].count<(range*2))) {
           diameter = 42;
           image_source = "/images/themes/"+ theme + '/marker_5.png';
