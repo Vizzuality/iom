@@ -195,7 +195,7 @@ namespace :iom do
           puts "ORG NOT FOUND: \"#{row.organization}\""
           next
         end
-        unless Project.find_by_name_and_primary_organization_id(row.project_title.try(:strip),o.id)
+        unless Project.find_by_intervention_id(row.ipc)
           p = Project.new
           #puts "#{row.ipc} : #{row.project_title}"
           p.primary_organization      = o

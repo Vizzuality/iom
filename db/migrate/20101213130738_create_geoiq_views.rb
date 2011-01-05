@@ -41,7 +41,12 @@ class CreateGeoiqViews < ActiveRecord::Migration
         LEFT JOIN projects_tags ON p.id = projects_tags.project_id)
         LEFT JOIN projects_sites ON p.id = projects_sites.project_id
         group by p.id, p.primary_organization_id, p.start_date, p.end_date, p.the_geom;"              
-    execute "insert into geometry_columns VALUES('','public','v_projects','the_geom',2,'4326','MULTIPOINT')"    
+    execute "insert into geometry_columns VALUES('','public','v_projects','the_geom',2,'4326','MULTIPOINT')"
+    
+    #Create a geoiq user and give him permissions:
+    execute "DROP ROLE IF EXISTS geoiq;"
+    execute "CREATE ROLE geoiq LOGIN ENCRYPTED PASSWORD 'md54c67ea040991d532eb7586d147a178b5' VALID UNTIL 'infinity';"
+    execute "GRANT SELECT ON TABLE v_projects TO geoiq;"
     
   end
 
