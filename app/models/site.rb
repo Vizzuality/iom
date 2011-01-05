@@ -110,7 +110,7 @@ class Site < ActiveRecord::Base
   
   def blog_url
     url = read_attribute(:blog_url)
-    unless url =~ /^http:\/\//
+    if url !~ /^http:\/\// && !url.blank?
       url = "http://#{url}"
     end
     url

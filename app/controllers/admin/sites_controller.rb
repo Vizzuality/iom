@@ -36,6 +36,9 @@ class Admin::SitesController < ApplicationController
   def update
     @site = Site.find(params[:id])
     @site.attributes = params[:site]
+    if params[:site] && params[:site][:show_blog] == '0'
+      @site.blog_url = nil
+    end
     if @site.save
       if params[:customization]
         redirect_to customization_admin_site_path(@site), :flash => {:success => 'Site has been updated successfully'}
