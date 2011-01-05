@@ -55,8 +55,9 @@
         if (map.getZoom() > 12) map.setZoom(12);
     });
     
+    console.log(max_count);
     if (map_type == "overview_map") {
-      var range = max_count/3;
+      var range = max_count/5;
     }
     var diameter = 0;
     
@@ -64,16 +65,40 @@
       var image_source = '';
       
       if (map_type == "overview_map") {
-        if (map_data[i].count <range) {
-          diameter = 24;
+        // if (map_data[i].count <range) {
+        //   diameter = 20;
+        //   image_source = "/images/themes/"+ theme + '/marker_2.png';
+        // } else if ((map_data[i].count>=(range)) && (map_data[i].count<(range*2))) {
+        //   diameter = 26;
+        //   image_source = "/images/themes/"+ theme + '/marker_3.png';
+        // } else if ((map_data[i].count>=(range*2)) && (map_data[i].count<(range*3))) {
+        //   diameter = 34;
+        //   image_source = "/images/themes/"+ theme + '/marker_4.png';
+        // } else if ((map_data[i].count>=(range*3)) && (map_data[i].count<(range*4))) {
+        //   diameter = 42;
+        //   image_source = "/images/themes/"+ theme + '/marker_5.png';
+        // } else {
+        //   diameter = 58;
+        //   image_source = "/images/themes/"+ theme + '/marker_6.png';
+        // }
+        
+        if (map_data[i].count < 25) {
+          diameter = 20;
+          image_source = "/images/themes/"+ theme + '/marker_2.png';
+        } else if ((map_data[i].count>=25) && (map_data[i].count<50)) {
+          diameter = 26;
           image_source = "/images/themes/"+ theme + '/marker_3.png';
-        } else if ((map_data[i].count>=(range)) && (map_data[i].count<(range*2))) {
+        } else if ((map_data[i].count>=50) && (map_data[i].count<90)) {
+          diameter = 34;
+          image_source = "/images/themes/"+ theme + '/marker_4.png';
+        } else if ((map_data[i].count>=90) && (map_data[i].count<130)) {
           diameter = 42;
           image_source = "/images/themes/"+ theme + '/marker_5.png';
         } else {
           diameter = 58;
           image_source = "/images/themes/"+ theme + '/marker_6.png';
         }
+        
       } else {
         diameter = 72;
         image_source = "/images/themes/"+ theme + '/project_marker.png';
