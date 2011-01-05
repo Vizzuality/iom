@@ -555,9 +555,9 @@ SQL
     end
 
     def create_pages
-      self.pages.create :title => 'About'
-      self.pages.create :title => 'Contact'
-      self.pages.create :title => 'Highlights'
+      about = self.pages.create :title => 'About'
+      self.pages.create :title => 'Contact', :parent_id => about.id
+      self.pages.create :title => 'Highlights', :parent_id => about.id
     end
 
     def set_cached_projects

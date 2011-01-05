@@ -73,8 +73,9 @@
                 </div>
               </div>
             </li>
-            <li><a href="<%= page_path(Page.highlights(@site)) %>" class="geneva main_option">HIGHLIGHTS</a></li>
-            <li><a href="<%= page_path(Page.about(@site)) %>" class="geneva main_option">ABOUT</a></li>
+            <% @site.pages.highlighted.each do |page| %>
+              <li><a href="<%= page_path(page) %>" class="geneva main_option"><%= page.title.upcase %></a></li>
+            <% end %>
             <% if @site.show_blog? %>
               <li><a href="<%= @site.blog_url %>" class="geneva main_option" rel="nofollow">BLOG</a></li>
             <% end %>
