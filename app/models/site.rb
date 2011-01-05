@@ -107,6 +107,14 @@ class Site < ActiveRecord::Base
     !blog_url.blank?
   end
   alias :show_blog? :show_blog
+  
+  def blog_url
+    url = read_attribute(:blog_url)
+    unless url =~ /^http:\/\//
+      url = "http://#{url}"
+    end
+    url
+  end
 
   def word_for_clusters
     w = read_attribute(:word_for_clusters)

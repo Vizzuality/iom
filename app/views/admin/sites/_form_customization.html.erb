@@ -113,7 +113,7 @@
       <span class="blog">
         <%= f.check_box :show_blog %><p>Show blog</p>
         <div id="tumbler_id" style="<%= (@site.blog_url.blank? ? 'display:none' : 'display:block') %>">
-          <%= f.text_field :blog_url, :value=>"Please write Tumblr ID", :id=>"tumblr" %>
+          <%= f.text_field :blog_url, :value => @site.blog_url.blank? ? "Please write Tumblr url" : @site.blog_url, :id => "tumblr" %>
         </div>
       </span>
       <span>
