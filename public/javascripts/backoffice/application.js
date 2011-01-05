@@ -85,9 +85,7 @@ $(document).ready(function(ev){
     //window alert -> delete something (NGO, donor, site, project or object)
     $('div.delete a, a.delete').click(function(ev){
       ev.stopPropagation();
-      ev.preventDefault();
-      
-      console.log('jamon');
+      ev.preventDefault();      
     
       // We are using the same modal window with other options        
       if ($('div#modal_window').children('div.alert').hasClass('import_csv')){

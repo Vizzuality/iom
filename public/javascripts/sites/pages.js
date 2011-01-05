@@ -21,10 +21,8 @@
 
         });
         
-        
         //Check space in the layout
-        resizeColumn();
-        
+        setTimeout("resizeColumn()",300);        
         
         //remove text from input
         $('input#q').focusin(function(ev){

@@ -51,11 +51,17 @@
             count.style.left = "50%";
             count.style.height = "15px";
             count.style.textAlign = "center";
-            if (this.diameter==24) {
+            if (this.diameter==20) {
               count.style.margin ="-6px 0 0 0px";
               count.style.font = "normal 10px Arial";
+            } else if (this.diameter==26) {
+              count.style.margin ="-6px 0 0 0px";
+              count.style.font = "normal 11px Arial";
+            } else if (this.diameter==34) {
+              count.style.margin ="-7px 0 0 0px";
+              count.style.font = "normal 12px Arial";
             } else if (this.diameter==42) {
-              count.style.margin ="-8px 0 0 0px";
+              count.style.margin ="-7px 0 0 0px";
               count.style.font = "normal 15px Arial";
             } else {
               count.style.margin ="-9px 0 0 0px";

@@ -29,6 +29,12 @@ class Page < ActiveRecord::Base
   def children
     Page.where(:parent_id => self.id)
   end
+  
+  def  parent
+    if parent_id?
+      Page.find(parent_id)
+    end
+  end
 
   def to_param
     permalink
@@ -53,7 +59,7 @@ class Page < ActiveRecord::Base
   def set_status
     self.published ||= true
   end
-
+  
   private
 
     def set_permalink
