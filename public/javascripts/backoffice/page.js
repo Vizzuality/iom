@@ -1,4 +1,6 @@
-
+    
+    var htmlArea;
+    
     $(document).ready( function() {
       
       //$("#txtDefaultHtmlArea").htmlarea();
@@ -7,10 +9,13 @@
           // Override/Specify the Toolbar buttons to show
           toolbar: [
               ["bold", "italic", "underline", "|", "forecolor"],
-              ["h1", "h2", "h3", "h4", "h5", "h6"],
-              ["link", "unlink", "|", "image"]                    
+              ["p","h1", "h2", "h3", "h4", "h5", "h6"],
+              ["link", "unlink", "|", "image"]
           ],
-          css: "/stylesheets/backoffice/htmlArea.css"
+          css: "/stylesheets/backoffice/htmlArea.css",
+          loaded: function() {
+              htmlArea = this;
+          }
       });
       
       $('iframe').removeAttr('style');
@@ -26,10 +31,12 @@
         ev.stopPropagation();
         if ($('div.jHtmlArea div').is(':visible')) {
           $('div.jHtmlArea div').hide();
+          $('div.jHtmlArea textarea').text(htmlArea.toHtmlString());
           $('div.jHtmlArea textarea').show();
           $(this).text('Show Editor');
         } else {
           $('div.jHtmlArea textarea').hide();
+          
           $('div.jHtmlArea div').show();
           $(this).text('Show HTML');
         }
