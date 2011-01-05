@@ -3,10 +3,9 @@ class PagesController < ApplicationController
   layout 'site_layout'
 
   def show
-    unless @page = Page.find_by_permalink(params[:id])
+    unless @page = @site.pages.find_by_permalink(params[:id])
       raise ActiveRecord::RecordNotFound
     end
-    # debugger
   end
 
 end

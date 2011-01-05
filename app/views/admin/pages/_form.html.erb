@@ -27,9 +27,9 @@
       <p id="0">Select a parent page</p>
       <ul class="options">
         <li><a id="0">Select a parent page</a></li>
-      <% (@site.pages.highlighted - [@page]).collect do |sector| %>
-        <li><a id="<%= sector.id %>"><%= sector.title %></a></li>
-      <% end %>
+        <% (@site.pages.highlighted - [@page]).collect do |sector| %>
+          <li><a id="<%= sector.id %>"><%= sector.title %></a></li>
+        <% end %>
         <li class="last"></li>
       </ul>
     </span>
