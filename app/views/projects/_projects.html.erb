@@ -11,7 +11,8 @@
            <% else %>
            <p class="author"><%= subtitle(project, @site) %></p>
            <% end %>
-          <p class="info"><%= anglo(truncate(project['project_description'], :length => 175)) %> <a href="<%= project_path(project['project_id']) %>" class="learn_more">Learn more</a></p>
+          <p class="info"><%= anglo(raw(truncate(project['project_description'], :length => 175, :omission => "... <a href=\"#{project_path(project['project_id'])}\" class=\"learn_more\">Learn more</a>"))) %> 
+          </p>
         </li>
         <% end %>
       </ul>
