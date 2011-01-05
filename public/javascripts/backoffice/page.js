@@ -16,6 +16,13 @@
           };
         });
       });
+      
+      $("select#page_parent_id option:selected").each(function(index,element){
+        $('span#parent_page p').attr('id',$(element).attr('value'));
+        $('span#parent_page p').text($(element).text());
+      });
+      
+      
       $('span#parent_page ul.options li').click(function(ev){
         ev.stopPropagation();
         ev.preventDefault();
@@ -39,7 +46,4 @@
              $('input#page_published').val($(this).attr('id'));
           });
       }
-      
-      
-    
     });

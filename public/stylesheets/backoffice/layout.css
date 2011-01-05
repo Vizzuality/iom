@@ -996,7 +996,7 @@ ul.pages li div.head {position:relative; float:left; width:535px; height:42px; p
 ul.pages li div.head.more {background:url('/images/backoffice/resources/header_resources.png') no-repeat 0 0!important; margin:20px 0 0 0;}
 ul.pages li div.head.one {background:url('/images/backoffice/pages/one_page_list.png') no-repeat 0 0!important;}
 ul.pages li div.head h3 {margin:12px 0 0 0; font:bold 17px Arial;}
-ul.pages li div.head h3 a {color:#E93E3F;}
+ul.pages li div.head h3 a {color:#E93E3F; text-align:left;}
 ul.pages li div.head h3 a:hover {text-decoration:underline;}
 ul.pages li div.head a.delete {position:absolute; right:17px; top:28px; width:15px; height:16px; background:url('/images/backoffice/icons/close_bkg.png') no-repeat 0 0; text-indent:-9999px; font-size:0; display:block; line-height:0;}
 ul.pages li div.head a.delete:hover {background-position:0 -16px;}
