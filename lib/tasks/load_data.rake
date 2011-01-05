@@ -118,21 +118,20 @@ namespace :iom do
     desc 'Load organizations data'
     task :load_orgs => :environment do
 
-      csv_orgs = CsvMapper.import("#{Rails.root}/db/data/organizations_20_10_10.csv") do
+      csv_orgs = CsvMapper.import("#{Rails.root}/db/data/haiti_organizations.csv") do
         read_attributes_from_file
       end
       csv_orgs.each do |row|
         if(Organization.find_by_name(row.organization).blank?)
           o = Organization.new
-          puts row.organization
           o.name                    = row.organization
           o.website                 = row.website
           o.description             = row.about
           o.international_staff     = row.international_staff
           o.contact_name            = row.us_contact_name
-          o.contact_position        = row.title
+          o.contact_position        = row.us_contact_title
           o.contact_phone_number    = row.us_contact_phone
-          o.contact_email           = row.email
+          o.contact_email           = row.us_contact_email
           o.donation_address        = [row.donation_address_line_1,row.address_line_2].join("\n")
           o.city                    = row.city
           o.state                   = row.state
@@ -166,9 +165,10 @@ namespace :iom do
           o.media_contact_email     = row.media_contact_email
 
 
-          #Site specific attributes for Haiti
+          # Site specific attributes for Haiti
           o.attributes_for_site = {:organization_values => {:description=>row.organizations_work_in_haiti}, :site_id => 1}
           o.save!
+          puts "Created ORG: #{o.name}"
         else
           puts "ORG already imported"
         end
@@ -186,8 +186,16 @@ namespace :iom do
         read_attributes_from_file
       end
       csv_projs.each do |row|
-        o = Organization.find_by_name(row.organization)
-        if (o and Project.find_by_name_and_primary_organization_id(row.project_title,o.id).blank?)
+        # Organization names mapping 
+        if row.organization.strip == "U.S. Committee for Refugees & Immigrants (USCRI)"
+          row.organization = "US Committee for Refugees & Immigrants (USCRI)"
+        end
+        o = Organization.find_by_name(row.organization.strip)
+        unless o
+          puts "ORG NOT FOUND: \"#{row.organization}\""
+          next
+        end
+        unless Project.find_by_name_and_primary_organization_id(row.project_title.try(:strip),o.id)
           p = Project.new
           #puts "#{row.ipc} : #{row.project_title}"
           p.primary_organization      = o
@@ -260,7 +268,7 @@ namespace :iom do
           if(!row.clusters.blank?)
             parsed_clusters = row.clusters.split(",").map{|e|e.strip}
             parsed_clusters.each do |clus|
-              p.clusters << Cluster.find_or_create_by_name(:name=>clus)
+              p.clusters << Cluster.find_or_create_by_name(:name=>clus.strip)
             end
           end
 
@@ -269,7 +277,7 @@ namespace :iom do
           if(!row.ia_sectors.blank?)
             parsed_sectors = row.ia_sectors.split(",").map{|e|e.strip}
             parsed_sectors.each do |sec|
-              p.sectors << Sector.find_or_create_by_name(:name=>sec)
+              p.sectors << Sector.find_or_create_by_name(:name=>sec.strip)
             end
           end
 
@@ -295,7 +303,7 @@ namespace :iom do
 
           # -->Country
           if (!row.country.blank?)
-            country= Country.where("name ilike ?",row.country).select(Country.custom_fields).first
+            country = Country.where("name ilike ?",row.country.strip).select(Country.custom_fields).first
             if(country)
               p.countries  << country
             else
@@ -350,7 +358,7 @@ namespace :iom do
           end
 
         else
-          puts "NOT FOUND #{row.organization} OR PROJECT ALREADY IMPORTED"
+          puts "Project \"#{row.project_title}\" ALREADY IMPORTED"
         end
 
         Site.all.each{ |site| site.save! }
