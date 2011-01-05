@@ -177,6 +177,38 @@
       <a class="add_sector museo_sans shadow_green">add sector</a>
     </div>
   </div>
+  
+  <label>GEOGRAPHIC REGION <strong>*</strong></label>
+  <ul class="ubications">
+    <!-- TODO - put list of regions previosly saved. -->
+    <% @project.regions.select(Region.custom_fields).each do |region| %>
+    <li><p><%= region.name %>, <%= region.country.name %></p><a class="close"></a></li>
+    <% end %>
+  </ul>
+  <div class="location_options region_block empty">
+    <p class="msg">Add / edit the different regions of the project</p>
+    <a class="add_location museo_sans shadow_green" id="add_region_map">add region</a>
+    
+    <div class="region_window">
+      <div class="top_region">
+        <a class="close">Close</a>
+        <h3 class="museo_sans">Add a region to the project</h3>
+      </div>
+      <div class="bottom_region">
+        <p>You can specify the administrative level you need (1st, 2nd or 3rd)</p>
+        <label>COUNTRY <strong>*</strong></label>
+        <select></select>
+        <label>1st ADMINISTRATIVE LEVEL</label>
+        <select></select>
+        <label>2st ADMINISTRATIVE LEVEL</label>
+        <select></select>
+        <label>3st ADMINISTRATIVE LEVEL</label>
+        <select></select>
+        <a class="add_location museo_sans shadow_green">add region</a>
+      </div>
+    </div>
+    
+  </div>
 
   <label>GEOGRAPHIC LOCATION  <strong>*</strong></label>
   <ul class="ubications">
@@ -359,6 +391,7 @@
     <p>You can click multiple points to add<br/>several locations to the project</p>
     <a class="save">save position</a>
   </div>
+
 
   <!-- COMMON IN EDIT AND NEW FORM -->
 

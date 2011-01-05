@@ -669,9 +669,7 @@ div.block.project_info div.med div.left form div.sector_options a.add_sector {fl
 div.block.project_info div.med div.left form div.sector_options a.add_sector:hover {cursor:pointer; background-position:0 -32px;}
 div.block.project_info div.bottom {float:left; height:15px; width:100%; background: url('/images/backoffice/backgrounds/bottom_two_columns.png') no-repeat scroll top left!important;}
 
-
-
-
+div.block.project_info div.med div.left form div.location_options.region_block {position:relative;}
 div.block.project_info div.med div.left form div.location_options.empty {float:left; margin:10px 0 0 0; background:url('/images/backoffice/projects/bkg_cluster_options.png') no-repeat 0 0; width:411px; height:50px;}
 div.block.project_info div.med div.left form div.location_options.empty p.msg {float:left; margin:18px 0 0 12px; width:269px; font:normal 13px Arial; color:#616851;  }
 div.block.project_info div.med div.left form div.location_options.empty a.add_location {float:right; margin:10px 10px 0 0; background:url('/images/backoffice/projects/add_cluster_bttn.png') no-repeat 0 0; width:118px; height:25px; font:500 15px "Museo Sans",Arial; color:#FFFFFF; text-shadow:0 1px #6E8C30; text-align:center; padding:7px 0 0 0;}
@@ -679,6 +677,17 @@ div.block.project_info div.med div.left form div.location_options.empty a.add_lo
 div.block.project_info div.med div.left form span.input_short {float:left; margin:5px 0 0 0; width:272px; height:34px; background:url('/images/backoffice/projects/bkg_input_short.png') no-repeat 0 0;}
 div.block.project_info div.med div.left form span.input_short p.msg {float:right; margin:8px 8px 0 0; font:italic 15px Arial; color:#999999;}
 div.block.project_info div.med div.left form span.input_short input[type="text"]{float:left; margin:8px 0 0 5px; width:210px; height:20px; border:none;}
+
+
+div.region_window {position:absolute; display:none; bottom:20px; right:-100px; width:358px;}
+div.region_window div.top_region {float:left; width:330px; padding:14px 14px 0; background:url('/images/backoffice/projects/top_region_window.png') no-repeat 0 0!important;}
+div.region_window div.bottom_region {float:left; width:330px; padding:0 14px 40px; background:url('/images/backoffice/projects/bottom_region_window.png') no-repeat 0 bottom!important;}
+div.region_window div h3 {float:left; width:100%; font:normal 21px "Museo Sans",Arial; color:#333333;}
+div.region_window div a.close {position:absolute; right:20px; top:18px; width:12px; height:12px; background:url('/images/backoffice/icons/close_window.png') no-repeat 0 0; text-indent:-9999px;}
+div.region_window div a.close:hover {cursor:pointer; background-position:0 -12px;}
+div.region_window p {padding:10px 0 0; font:normal 13px Arial; color:#666666;}
+
+
 
 div.block.project_info div.med div.left form span.input_short.coin p.coin {float:left; margin:10px 0 0 8px; font:normal 15px Arial; color:#999999;}
 div.block.project_info div.med div.left form span.input_short.coin input[type="text"]{float:left; margin:9px 0 0 5px;width:240px; height:20px; border:none; }
