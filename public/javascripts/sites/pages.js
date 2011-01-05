@@ -3,7 +3,7 @@
     $('div#header div.left').width(685);
 
     $(document).ready( function() {
-        
+              
         $('ul.filter_list').each(function(index,element){
           var list_size_compress = $(element).height();
           $(element).find('li.out').css('display','none');

@@ -9,9 +9,11 @@
   <div class="long_field">
     <span class="chars">
       <%= f.label :body, raw("BODY  <strong>*</strong>") %>
+      <p><a href="#" id="show_html">Show HTML</a></p>
     </span>
-    <%= f.text_area :body, :class=>"huge #{'error' if !@page.errors[:body].empty? && action_name != 'new'}" %>
+    <%= f.text_area :body, :class=>"huge #{'error' if !@page.errors[:body].empty? && action_name != 'new'}",:cols=>"50", :rows=>"15", :id=>"txtDefaultHtmlArea" %>
   </div>
+  
 
   <div class="field">
     <%= f.label :permalink %>
@@ -50,5 +52,3 @@
   <%= f.submit 'Save', :class => "#{'error' if @page.invalid? && action_name != 'new'}" %>
 
 <% end -%>
-<script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>
-<script src="/javascripts/backoffice/page.js" type="text/javascript" charset="utf-8"></script>
