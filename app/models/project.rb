@@ -165,7 +165,7 @@ SQL
     p.created_at, o.id as organization_id, o.name as organization_name,
     p.end_date as end_date,
     array_to_string(array_agg(distinct r.name),'|') as regions,
-    array_to_string(array_agg(distinct r.id),'|') as region_ids,
+    array_to_string(array_agg(distinct r.id),'|') as regions_ids,
     array_to_string(array_agg(distinct c.name),'|') as countries,
     array_to_string(array_agg(distinct c.id),'|') as countries_ids,
     array_to_string(array_agg(distinct sec.name),'|') as sectors,
