@@ -47,7 +47,7 @@
     } else {
       map = new google.maps.Map(document.getElementById("small_map"), myOptions);
     }
-    map.overlayMapTypes.insertAt(2, mapChartType);
+    //map.overlayMapTypes.insertAt(2, mapChartType);
     map.mapTypes.set('labels', styleMapType);
     map.setMapTypeId('labels');
     

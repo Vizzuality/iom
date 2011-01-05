@@ -36,7 +36,7 @@
         center: new google.maps.LatLng(map_data[0].lat, map_data[0].lon)
       }
       map = new google.maps.Map(document.getElementById("map"), myOptions);
-      map.overlayMapTypes.insertAt(2, mapChartType);
+      //map.overlayMapTypes.insertAt(2, mapChartType);
       map.mapTypes.set('labels', styleMapType);
       map.setMapTypeId('labels');
   

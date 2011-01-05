@@ -29,25 +29,14 @@
         featureType: "water",
         elementType: "all",
         stylers: [
-          { visibility: "off" }
+          { hue: "#00c3ff" }
         ]
       },{
-        featureType: "administrative.province",
+        featureType: "landscape.natural",
         elementType: "all",
         stylers: [
-          { visibility: "off" }
-        ]
-      },{
-        featureType: "administrative.neighborhood",
-        elementType: "all",
-        stylers: [
-          { visibility: "off" }
-        ]
-      },{
-        featureType: "administrative.land_parcel",
-        elementType: "all",
-        stylers: [
-          { visibility: "off" }
+          { visibility: "off" },
+          { hue: "#ffff00" }
         ]
       }
     ];
