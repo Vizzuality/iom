@@ -118,7 +118,15 @@ class Site < ActiveRecord::Base
 
   def word_for_clusters
     w = read_attribute(:word_for_clusters)
-    w.blank? ? 'clusters' : w
+    if w.blank?
+      if navigate_by_cluster?
+        'clusters'
+      else
+        'sectors'
+      end
+    else
+      w
+    end
   end
 
   alias :word_for_cluster_sector :word_for_clusters
