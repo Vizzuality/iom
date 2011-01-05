@@ -55,7 +55,6 @@
         if (map.getZoom() > 12) map.setZoom(12);
     });
     
-    console.log(max_count);
     if (map_type == "overview_map") {
       var range = max_count/5;
     }
