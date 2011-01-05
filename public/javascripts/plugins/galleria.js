@@ -3493,7 +3493,7 @@ Galleria.utils = Utils;
 
 Galleria.log = function() {
     try {
-        window.console.log.apply( window.console, Utils.array(arguments) );
+        // window.console.log.apply( window.console, Utils.array(arguments) );
     } catch( e ) {
         try {
             opera.postError.apply( opera, arguments );
