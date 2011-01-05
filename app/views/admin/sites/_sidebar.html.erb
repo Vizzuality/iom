@@ -8,10 +8,10 @@
     </li>
     <li <%= selected_if_current_page(projects_admin_site_path(@site)) %>>
       <%= link_to("Site projects", projects_admin_site_path(@site)) %><% if !@site.total_projects!=0 %> <p><span><%=@site.total_projects%></span></p><% end %></li>
-    <li <%= selected_if_current_page(admin_site_media_resources_path(@site)) %>>
-      <%= link_to("Media", admin_site_media_resources_path(@site)) %><% if !@site.media_resources.empty? %>   <p><span><%=@site.media_resources.count%></span></p><% end %></li>
-    <li <%= selected_if_current_page(admin_site_resources_path(@site)) %>>
-      <%= link_to("Resources", admin_site_resources_path(@site)) %><% if !@site.resources.empty? %> <p><span><%=@site.resources.count%></span></p><% end %></li>
+    <!-- li <%= selected_if_current_page(admin_site_media_resources_path(@site)) %>>
+      <%= link_to("Media", admin_site_media_resources_path(@site)) %><% if !@site.media_resources.empty? %>   <p><span><%=@site.media_resources.count%></span></p><% end %></li -->
+    <!-- li <%= selected_if_current_page(admin_site_resources_path(@site)) %>>
+      <%= link_to("Resources", admin_site_resources_path(@site)) %><% if !@site.resources.empty? %> <p><span><%=@site.resources.count%></span></p><% end %></li  -->
     <li <%= selected_if_current_page(admin_site_pages_path(@site)) %>>
       <div class="bottom_selected">
         <%= link_to("Pages", admin_site_pages_path(@site), :class=>"basic") %><% if @site.pages.present? && controller_name != 'pages' %> <p><span><%=@site.pages.count%></span></p><% end %>

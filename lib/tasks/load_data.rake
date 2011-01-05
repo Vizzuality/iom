@@ -311,10 +311,15 @@ namespace :iom do
             end
           end
 
+          @nation_wide = false
           multi_point=""
           reg3=nil
           if(!row._3rd_administrative_level.blank?)
             parsed_adm3 = row._3rd_administrative_level.split(",").map{|e|e.strip}
+            if parsed_adm3.size == 1 && parsed_adm3 == ["Nation-wide"]
+              puts "importing Nation wide"
+              @nation_wide = true
+            end
             locations = Array.new
             if(!row.latitude.blank? and !row.longitude.blank?)
               coords_lat_split=row.latitude.split(",").map{|e|e.strip}
@@ -327,24 +332,47 @@ namespace :iom do
                 count = count+1
               end
             end
-            parsed_adm3.each do |region_name|
-              reg3 = Region.where("ia_name ilike ? and level=? and country_id=?",region_name.strip,3,country.id).select(Region.custom_fields).first
-              if(reg3)
+            
+            if @nation_wide == true
+              puts
+              puts "Importing Nation wide project: all regions from level 3"
+              puts
+              regions3 = Region.where("level=? and country_id=?",3,country.id).select(Region.custom_fields).all
+              regions3.each do |reg3|
                 p.regions  << reg3
                 if(locations.count<1)
                   sql="select ST_AsText(ST_SetSRID(ST_MakePoint(center_lon,center_lat),4326)) as point from regions where id=#{reg3.id}"
                   res = DB.execute(sql).first["point"].delete("POINT(").delete(")")
                   locations << res
                 end
-                
-                #Add the herarchy
+                # Add the herarchy
                 region_level2= Region.find_by_id(reg3.parent_region_id)
                 p.regions  << region_level2
-                
+              
                 region_level1= Region.find_by_id(region_level2.parent_region_id)
                 p.regions  << region_level1                
-              else
-                puts "ALERT: REGION LEVEL 3 NOT FOUND #{region_name}"
+              end
+              
+            else
+              parsed_adm3.each do |region_name|
+                reg3 = Region.where("ia_name ilike ? and level=? and country_id=?",region_name.strip,3,country.id).select(Region.custom_fields).first
+                if(reg3)
+                  p.regions  << reg3
+                  if(locations.count<1)
+                    sql="select ST_AsText(ST_SetSRID(ST_MakePoint(center_lon,center_lat),4326)) as point from regions where id=#{reg3.id}"
+                    res = DB.execute(sql).first["point"].delete("POINT(").delete(")")
+                    locations << res
+                  end
+                
+                  #Add the herarchy
+                  region_level2= Region.find_by_id(reg3.parent_region_id)
+                  p.regions  << region_level2
+                
+                  region_level1= Region.find_by_id(region_level2.parent_region_id)
+                  p.regions  << region_level1                
+                else
+                  puts "ALERT: REGION LEVEL 3 NOT FOUND #{region_name}"
+                end
               end
             end
 

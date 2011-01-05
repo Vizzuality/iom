@@ -95,7 +95,7 @@ Tag.create :name => 'earthquake'
 site = Site.new :name              => 'Haiti Aid Map',
                 :url               => "#{Rails.env.eql?('development') ? 'dev-' : ''}haiti.ngoaidmap.org",
                 :status            => true,
-                :short_description =>'Taking care of availability and access to food worldwide',
+                :short_description =>'Mapping efforts to reduce poverty and suffering',
                 :long_description  =>'On January 12th 2010, a catastrophic earthquake occured at Haiti, leaving more than 250.000 deaths and more than 1.000.000 homeless people. It was one of the biggest disasters in the century. Since then and until now, a huge effort has been made by some of the interaction members',
                 :theme             => Theme.find_by_name('Garnet'),
                 :aid_map_image     => File.open(File.join(Rails.root, '/public/images/sites/haiti_img_example.jpg')),
