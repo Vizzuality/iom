@@ -166,6 +166,10 @@
         
         ids = ids.substring(0, ids.length - 1);
         region_text = region_text.substring(2, region_text.length);
+        if (region_text.length>34) {
+          region_text = region_text.substr(0,31) + '...';
+        }
+        
         
         var id_list = ids.split(',');
                 
