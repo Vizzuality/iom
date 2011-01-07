@@ -257,6 +257,7 @@ div#left_column div.float_left div.block.wikipedia p.provided {margin:15px 0 0 0
 div#left_column div.float_left div.block.margin {margin:5px 0 0 0;}
 div#left_column div.float_left div.block.resources {background:url('/images/sites/organization/bkg_resources.png') no-repeat right bottom white;}
 div#left_column div.float_left div.block h3 {width:100%; font:normal 13px "PT Sans Bold"; color:#666666; text-shadow:none; text-transform:uppercase;}
+div#left_column div.float_left div.block h3.secondary {margin:20px 0 0 0;}
 div#left_column div.float_left div.block a {color:#CD5D4C;}
 div#left_column div.float_left div.block a:hover {text-decoration:underline;}
 div#left_column div.float_left div.block ul {width:100%; margin:10px 0 0 0; padding:0 0 6px; list-style:none;}
@@ -376,14 +377,13 @@ div#pages div.view_more a#view_more:hover {background-position:0 -26px; cursor:p
 div.statistics.less {padding-bottom:15px!important;}
 div.statistics img.pie_chart {background:none!important; margin:0 0 0 -10px; height:125px; /*hack for google maps chart api image*/}
 div.statistics ul.chart {float:right; width:120px!important; padding:6px 0 0 0!important; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div.statistics ul.chart li {float:left; width:108px; padding:0 0 0 12px!important; margin:5px 0 0 0!important; background:url('/images/sites/icons/chart_colors.png') no-repeat 0 4px!important;}
+div.statistics ul.chart li {float:left; width:108px; padding:0 0 0 12px!important; margin:5px 0 0 0!important; background:url('/images/sites/icons/chart_pos0.png') no-repeat 0 4px!important;}
 div.statistics ul.chart li a {color:#666666; text-decoration:underline!important;}
 div.statistics ul.chart li a:hover {color:#333333;}
-div.statistics ul.chart li.pos1 {background-position:0 -12px!important;}
-div.statistics ul.chart li.pos2 {background-position:0 -31px!important;}
-div.statistics ul.chart li.pos3 {background-position:0 -50px!important;}
-div.statistics ul.chart li.pos4 {background-position:0 -67px!important;}
-div.statistics ul.chart li.pos5 {background-position:0 -84px!important;}
+div.statistics ul.chart li.pos1 {background:url('/images/sites/icons/chart_pos1.png') no-repeat 0 4px!important;}
+div.statistics ul.chart li.pos2 {background:url('/images/sites/icons/chart_pos2.png') no-repeat 0 4px!important;}
+div.statistics ul.chart li.pos3 {background:url('/images/sites/icons/chart_pos3.png') no-repeat 0 4px!important;}
+
 /*cluster*/
 div.statistics ul.statistics_list {width:270px; height:auto; padding:0; margin:10px 0 0 0;}
 div.statistics ul.statistics_list li {float:left; width:100%!important; padding:0!important; margin:3px 0 0 0!important; height:auto; position:relative;}

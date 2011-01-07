@@ -44,21 +44,18 @@
     <div id="left_column">
 
       <!-- LEFT PART -->
-      <div class="left"></div> <!-- H"J"ACK -->
+      <div class="left"></div>
       <div class="outer_float">
         <div class="float_left">
           <div class="head">
-            <h2>FACTSHEET</h2>
+            <h2>OVERVIEW</h2>
           </div>
 
           <div class="block">
             <h3>FUNDING FOR <%= @site.name %></h3>
             <p class="budget"><%= number_with_delimiter(@organization.budget) %></p>
-
-            <h3>FUNDING SOURCES</h3>
-            <p>
-              <%= funding_percentages(@organization) %>
-            </p>
+            <h3 class="secondary">FUNDING SOURCES</h3>
+            <p><%= funding_percentages(@organization) %></p>
           </div>
 
 
