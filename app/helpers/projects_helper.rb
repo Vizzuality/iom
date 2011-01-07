@@ -60,9 +60,6 @@ module ProjectsHelper
     unless clusters_sectors.empty?
       result << " on #{clusters_sectors.to_sentence}"
     end
-    unless project.country_name.blank?
-      result << " in #{link_to(project.country_name, location_path(project.country_id.to_a))}"
-    end
     result << " by #{link_to(project.primary_organization_name, organization_path(project.primary_organization_id))}"
     raw(result)
   end
