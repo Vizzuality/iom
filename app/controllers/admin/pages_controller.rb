@@ -24,7 +24,7 @@ class Admin::PagesController < ApplicationController
   end
 
   def update
-    @page = @site.pages.from_param(params[:id])
+    @page = @site.pages.find_by_permalink(params[:id])
 
     if @page.update_attributes(params[:page])
       redirect_to edit_admin_site_page_path(@site, @page), :flash => {:success => 'Page has been updated successfully'}
