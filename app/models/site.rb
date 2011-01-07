@@ -239,8 +239,6 @@ class Site < ActiveRecord::Base
     end
 
     result = Project.select(select).from(from.join(',')).where(where.join(' AND ')).group(Project.custom_fields.join(','))
-    puts "select #{select} from #{from.join(',')} where #{where.join(' AND ')} group by #{Project.custom_fields.join(',')}"
-
 
     if options[:limit]
       result = result.limit(options[:limit])
