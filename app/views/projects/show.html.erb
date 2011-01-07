@@ -70,7 +70,7 @@
               </div>
            <% end %>
 
-           <% if @project.activities || @project.additional_information || @project.cross_cutting_issues || @locations.present?%>
+           <% if @project.activities || @project.additional_information || @project.cross_cutting_issues || (@locations.present? && @locations.to_a.join.present?)%>
              <div class="block info">
                <%unless @project.activities.blank? %>
                  <h3 class="first">ACTIVITIES</h3>
@@ -84,7 +84,7 @@
                  <h3 class="<%= (@project.activities.blank? && @project.additional_information.blank?)? 'first':''%>">CROSS-CUTTING ISSUES</h3>
                  <%= raw(@project.cross_cutting_issues) %>
                <%end%>
-               <%if @locations.present? %>
+               <%if @locations.present? && @locations.to_a.join.present? %>
                  <h3 class="<%= (@project.activities.blank? && @project.additional_information.blank? && @project.cross_cutting_issues.blank?)? 'first':''%>">LOCATIONS</h3>
                  <ul class="locations">
                  <% @locations.each do |location| %>
