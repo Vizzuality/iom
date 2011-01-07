@@ -105,6 +105,7 @@
       positionControls();
       $('#zoomIn').fadeIn();
       $('#zoomOut').fadeIn();
+      $('div.map_style').fadeIn();
     },500);
     
     $('#zoomIn,#zoomOut').click(function(ev){
@@ -139,8 +140,6 @@
       $('div.map_style').height(26);
     });
     
-    
-    $('div.map_style').fadeIn();
     
     $(window).resize(function() {
       positionControls();
