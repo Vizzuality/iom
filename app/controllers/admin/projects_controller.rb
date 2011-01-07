@@ -100,5 +100,23 @@ class Admin::ProjectsController < ApplicationController
     @project.destroy
     redirect_to admin_projects_path, :flash => {:success => 'Project has been deleted successfully'}
   end
+  
+  def remove_point
+    @project = Project.find(params[:id])
+    the_geom = @project.the_geom.dup
+    if params[:position].to_i >= the_geom.points.size
+      render :nothing => true and return
+    end
+    the_geom.delete_at(params[:position].to_i)
+    @project.the_geom = the_geom
+    @project.save!
+    respond_to do |format|
+      format.html do
+        render :update do |page|
+          page << "$('li#point_#{params[:position]}').fadeOut().remove();"
+        end
+      end
+    end
+  end
 
 end

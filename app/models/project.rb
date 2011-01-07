@@ -58,10 +58,6 @@ class Project < ActiveRecord::Base
 
   attr_accessor :sectors_ids, :clusters_ids
 
-   def before_save
-     self.the_geom ||= MultiPoint.from_points([Point.from_x_y(0, -77)])
-   end
-
   def sectors_ids=(value)
     value.each do |sector_id|
       if sector = Sector.find(sector_id)
