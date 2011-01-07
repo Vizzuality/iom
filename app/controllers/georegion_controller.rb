@@ -52,12 +52,13 @@ class GeoregionController < ApplicationController
     render_404 if @area.is_a?(Region) && !@site.send("navigate_by_level#{@area.level}?".to_sym)
 
     if @area.is_a?(Region)
-      @projects = Project.custom_find @site, :region => @area.id,
-                                             :level => @area.level,
-                                             :per_page => 10,
-                                             :page => params[:page],
-                                             :order => 'created_at DESC',
-                                             :start_in_page => params[:start_in_page]
+      @projects = Project.custom_find  @site,
+                                       :region => @area.id,
+                                       :level => @site.levels_for_region,
+                                      :per_page => 10,
+                                      :page => params[:page],
+                                      :order => 'created_at DESC',
+                                      :start_in_page => params[:start_in_page]
 
       @area_parent = country.name
 
@@ -66,7 +67,7 @@ class GeoregionController < ApplicationController
       if @area.level == @site.levels_for_region.max
         sql="select *,(select the_geom_geojson from regions where id=subq.id) as geojson
           from(
-          select r.id,count(ps.project_id) as count,r.name,r.center_lon as lon,r.center_lat as lat
+          select r.id,count(distinct(ps.project_id)) as count,r.name,r.center_lon as lon,r.center_lat as lat
           from (projects_regions as pr
             inner join projects_sites as ps on pr.project_id=ps.project_id and site_id=#{@site.id})
             inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
@@ -75,7 +76,7 @@ class GeoregionController < ApplicationController
       else
         sql="select *,(select the_geom_geojson from regions where id=subq.id) as geojson
           from(
-          select r.id,count(ps.project_id) as count,r.name,r.center_lon as lon,r.center_lat as lat
+          select r.id,count(distinct(ps.project_id)) as count,r.name,r.center_lon as lon,r.center_lat as lat
           from (projects_regions as pr
             inner join projects_sites as ps on pr.project_id=ps.project_id and site_id=#{@site.id})
             inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())

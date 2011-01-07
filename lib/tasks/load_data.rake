@@ -38,7 +38,7 @@ namespace :iom do
 
     desc "load all available regions not imported already"
     task :load_adm_levels => :environment do
-      
+
       csv = CsvMapper.import("#{Rails.root}/db/data/gadm_data/gadm_level1.csv") do
         read_attributes_from_file
       end
@@ -53,12 +53,12 @@ namespace :iom do
           r.gadm_id = row.gadm1_id
           r.ia_name = row.ia_name
           r.save!
-          puts "created: 1 #{row.name}"  
+          puts "created: 1 #{row.name}"
         else
-          puts "already existing: 1 #{row.name}"  
+          puts "already existing: 1 #{row.name}"
         end
       end
-      
+
       csv = CsvMapper.import("#{Rails.root}/db/data/gadm_data/gadm_level2.csv") do
         read_attributes_from_file
       end
@@ -74,12 +74,12 @@ namespace :iom do
           r.parent_region_id = Region.find_by_gadm_id_and_level(row.gadm1_id,1).id
           r.ia_name = row.ia_name
           r.save!
-          puts "created: 2 #{row.name}"  
+          puts "created: 2 #{row.name}"
         else
-          puts "already existing: 2 #{row.name}"  
+          puts "already existing: 2 #{row.name}"
         end
       end
-      
+
       csv = CsvMapper.import("#{Rails.root}/db/data/gadm_data/gadm_level3.csv") do
         read_attributes_from_file
       end
@@ -95,12 +95,12 @@ namespace :iom do
           r.ia_name = row.ia_name
           r.parent_region_id = Region.find_by_gadm_id_and_level(row.gadm2_id,2).id
           r.save!
-          puts "created: 3 #{row.name}"  
+          puts "created: 3 #{row.name}"
         else
-          puts "already existing: 3 #{row.name}"  
+          puts "already existing: 3 #{row.name}"
         end
       end
-      
+
       #DB = ActiveRecord::Base.connection
       #Temporary matching for Google Map Charts
       # DB.execute "UPDATE regions set code='HT-GR' WHERE name like 'Grand%' and level=1"
@@ -166,7 +166,7 @@ namespace :iom do
 
 
           # Site specific attributes for Haiti
-          o.attributes_for_site = {:organization_values => {:description=>row.organizations_work_in_haiti}, :site_id => 1}
+          o.attributes_for_site = {:organization_values => {:description=>row.organizations_work_in_haiti}, :site_id => Site.find_by_name('Haiti Aid Map').id}
           o.save!
           puts "Created ORG: #{o.name}"
         else
@@ -186,7 +186,7 @@ namespace :iom do
         read_attributes_from_file
       end
       csv_projs.each do |row|
-        # Organization names mapping 
+        # Organization names mapping
         if row.organization.strip == "U.S. Committee for Refugees & Immigrants (USCRI)"
           row.organization = "US Committee for Refugees & Immigrants (USCRI)"
         end
@@ -217,18 +217,28 @@ namespace :iom do
               end
               p.start_date = Date.strptime(row.est_start_date, '%m/%d/%Y')
             rescue
-              p.start_date = Date.parse(row.est_start_date)
+              begin
+                p.start_date = Date.parse(row.est_start_date)
+              rescue
+                puts "Invalid start date: #{row.est_start_date}. Ignoring...."
+                p.start_date = nil
+              end
             end
           end
-          
+
           unless row.est_end_date.blank? or row.est_end_date=="Ongoing"
             begin
               p.end_date = Date.strptime(row.est_end_date, '%m/%d/%Y')
-            else
-              p.end_date = Date.parse(row.est_end_date)
+            rescue
+              begin
+                p.end_date = Date.parse(row.est_end_date)
+              rescue
+                puts "Invalid end date: #{row.est_end_date}. Ignoring...."
+                p.end_date = nil
+              end
             end
           end
-          
+
           if p.end_date && p.start_date && p.end_date < p.start_date
             puts p.name
             puts row.est_start_date
@@ -248,16 +258,26 @@ namespace :iom do
           p.website                   = row.website
           unless row.date_provided.blank?
             begin
-              p.date_provided = Date.strptime(row.date_provided, '%m/%d/%Y') 
+              p.date_provided = Date.strptime(row.date_provided, '%m/%d/%Y')
             rescue
-              p.date_provided = Date.parse(row.date_provided)
+              begin
+                p.date_provided = Date.parse(row.date_provided)
+              rescue
+                p.date_provided = nil
+                puts "Invalid date provided: #{row.date_provided}. Ignoring...."
+              end
             end
           end
           unless row.date_updated.blank?
             begin
               p.date_updated = Date.strptime(row.date_updated, '%m/%d/%Y')
             rescue
-              p.date_updated = Date.parse(row.date_updated)
+              begin
+                p.date_updated = Date.parse(row.date_updated)
+              rescue
+                p.date_updated = nil
+                puts "Invalid date updated: #{row.date_updated}. Ignoring...."
+              end
             end
           end
 
@@ -287,7 +307,7 @@ namespace :iom do
                 p.sectors << sect
               else
                 puts "SECTOR NOT FOUND: #{sec}"
-              end              
+              end
             end
           end
 
@@ -342,7 +362,7 @@ namespace :iom do
             #     count = count+1
             #   end
             # end
-            
+
             if @nation_wide == true
               puts
               puts "Importing Nation wide project: all regions from level 3"
@@ -358,9 +378,9 @@ namespace :iom do
                 # Add the herarchy
                 region_level2= Region.find_by_id(reg3.parent_region_id)
                 p.regions  << region_level2
-              
+
                 region_level1= Region.find_by_id(region_level2.parent_region_id)
-                p.regions  << region_level1                
+                p.regions  << region_level1
               end
             else
               parsed_adm3.each do |region_name|
@@ -372,13 +392,13 @@ namespace :iom do
                     res = "#{reg_sel.center_lon} #{reg_sel.center_lat}"
                     locations << res
                   end
-                
+
                   #Add the herarchy
                   region_level2= Region.find_by_id(reg3.parent_region_id)
                   p.regions  << region_level2
-                
+
                   region_level1= Region.find_by_id(region_level2.parent_region_id)
-                  p.regions  << region_level1                
+                  p.regions  << region_level1
                 else
                   puts "ALERT: REGION LEVEL 3 NOT FOUND #{region_name}"
                 end

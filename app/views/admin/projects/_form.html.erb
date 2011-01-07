@@ -256,16 +256,18 @@
       </div>
     </div>
 
+    <% if false #TODO %>
     <input type="text" name="countries" id="project_countries" value="<%= @project.countries_ids  %>" class="hidden"/>
     <input type="text" name="regions_level1" id="project_regions_level1" value="<%= @project.regions_level1_ids  %>" class="hidden"/>
     <input type="text" name="regions_level2" id="project_regions_level2" value="<%= @project.regions_level2_ids  %>" class="hidden"/>
     <input type="text" name="regions_level3" id="project_regions_level3" value="<%= @project.regions_level3_ids  %>" class="hidden"/>
+    <% end %>
 
   </div>
 
   <label>GEOGRAPHIC COORDINATES  <strong>*</strong></label>
   <ul class="ubications">
-    <% unless @project.the_geom.blank? %>
+    <% if !@project.the_geom.blank? && @project.the_geom.respond_to?(:points) %>
       <% @project.the_geom.points.each_with_index do |point,i| %>
       <li id="point_<%= i %>">
         <p><%= point.x %>, <%= point.y %></p>

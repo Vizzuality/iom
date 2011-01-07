@@ -57,7 +57,7 @@ class Project < ActiveRecord::Base
   after_destroy :remove_cached_sites
 
   attr_accessor :sectors_ids, :clusters_ids
-  
+
   def before_save
     self.the_geom ||= Point.from_x_y(1,1)
   end
@@ -200,14 +200,14 @@ SQL
     FROM projects as p
     INNER JOIN organizations as o       ON p.primary_organization_id=o.id
     INNER JOIN projects_sites as ps     ON p.id=ps.project_id and ps.site_id=#{site.id}
-    LEFT JOIN projects_regions as pr   ON pr.project_id=p.id
-    LEFT JOIN regions as r             ON pr.region_id=r.id and r.level=#{level} #{"and r.id=#{options[:region]}" if options[:region]}
-    LEFT JOIN countries_projects as cp ON cp.project_id=p.id
-    LEFT JOIN countries as c           ON c.id=cp.country_id
-    LEFT JOIN clusters_projects as cpro ON cpro.project_id=p.id #{"and cpro.cluster_id=#{options[:cluster]}" if options[:cluster]}
-    LEFT JOIN clusters as clus           ON clus.id=cpro.cluster_id
-    LEFT JOIN projects_sectors as psec  ON psec.project_id=p.id #{"and psec.sector_id=#{options[:sector]}" if options[:sector]}
-    LEFT JOIN sectors as sec             ON sec.id=psec.sector_id
+    INNER JOIN projects_regions as pr   ON pr.project_id=p.id
+    INNER JOIN regions as r             ON pr.region_id=r.id and r.level=#{level} #{"and r.id=#{options[:region]}" if options[:region]}
+    INNER JOIN countries_projects as cp ON cp.project_id=p.id
+    INNER JOIN countries as c           ON c.id=cp.country_id
+    INNER JOIN clusters_projects as cpro ON cpro.project_id=p.id #{"and cpro.cluster_id=#{options[:cluster]}" if options[:cluster]}
+    INNER JOIN clusters as clus           ON clus.id=cpro.cluster_id
+    INNER JOIN projects_sectors as psec  ON psec.project_id=p.id #{"and psec.sector_id=#{options[:sector]}" if options[:sector]}
+    INNER JOIN sectors as sec             ON sec.id=psec.sector_id
     WHERE p.end_date is null OR p.end_date > now()
     GROUP BY p.id,p.name,o.id,o.name,p.created_at,p.description,p.end_date) as subq
 SQL
@@ -283,7 +283,7 @@ SQL
   end
 
   def the_geom_to_value
-    return "" if the_geom.blank?
+    return "" if the_geom.blank? || !the_geom.respond_to?(:points)
     the_geom.points.map do |point|
       "(#{point.y} #{point.x})"
     end.join(',')
