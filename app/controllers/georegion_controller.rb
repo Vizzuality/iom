@@ -52,12 +52,11 @@ class GeoregionController < ApplicationController
     render_404 if @area.is_a?(Region) && !@site.send("navigate_by_level#{@area.level}?".to_sym)
 
     if @area.is_a?(Region)
-      @projects = Project.custom_find @site, :region => @area.id,
-                                             :level => @area.level,
-                                             :per_page => 10,
-                                             :page => params[:page],
-                                             :order => 'created_at DESC',
-                                             :start_in_page => params[:start_in_page]
+      @projects = Project.find_all_by_region_and_level @site, @area.id, @site.levels_for_region,
+                                                              :per_page => 10,
+                                                              :page => params[:page],
+                                                              :order => 'created_at DESC',
+                                                              :start_in_page => params[:start_in_page]
 
       @area_parent = country.name
 

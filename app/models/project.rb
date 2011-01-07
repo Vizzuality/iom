@@ -57,7 +57,7 @@ class Project < ActiveRecord::Base
   after_destroy :remove_cached_sites
 
   attr_accessor :sectors_ids, :clusters_ids
-  
+
   def before_save
     self.the_geom ||= Point.from_x_y(1,1)
   end
@@ -200,14 +200,14 @@ SQL
     FROM projects as p
     INNER JOIN organizations as o       ON p.primary_organization_id=o.id
     INNER JOIN projects_sites as ps     ON p.id=ps.project_id and ps.site_id=#{site.id}
-    LEFT JOIN projects_regions as pr   ON pr.project_id=p.id
-    LEFT JOIN regions as r             ON pr.region_id=r.id and r.level=#{level} #{"and r.id=#{options[:region]}" if options[:region]}
-    LEFT JOIN countries_projects as cp ON cp.project_id=p.id
-    LEFT JOIN countries as c           ON c.id=cp.country_id
-    LEFT JOIN clusters_projects as cpro ON cpro.project_id=p.id #{"and cpro.cluster_id=#{options[:cluster]}" if options[:cluster]}
-    LEFT JOIN clusters as clus           ON clus.id=cpro.cluster_id
-    LEFT JOIN projects_sectors as psec  ON psec.project_id=p.id #{"and psec.sector_id=#{options[:sector]}" if options[:sector]}
-    LEFT JOIN sectors as sec             ON sec.id=psec.sector_id
+    INNER JOIN projects_regions as pr   ON pr.project_id=p.id
+    INNER JOIN regions as r             ON pr.region_id=r.id and r.level=#{level} #{"and r.id=#{options[:region]}" if options[:region]}
+    INNER JOIN countries_projects as cp ON cp.project_id=p.id
+    INNER JOIN countries as c           ON c.id=cp.country_id
+    INNER JOIN clusters_projects as cpro ON cpro.project_id=p.id #{"and cpro.cluster_id=#{options[:cluster]}" if options[:cluster]}
+    INNER JOIN clusters as clus           ON clus.id=cpro.cluster_id
+    INNER JOIN projects_sectors as psec  ON psec.project_id=p.id #{"and psec.sector_id=#{options[:sector]}" if options[:sector]}
+    INNER JOIN sectors as sec             ON sec.id=psec.sector_id
     WHERE p.end_date is null OR p.end_date > now()
     GROUP BY p.id,p.name,o.id,o.name,p.created_at,p.description,p.end_date) as subq
 SQL
@@ -265,6 +265,80 @@ SQL
       # page = 3 > real page = 7 > offset = 60
       # page = 4 > real page = 1 > offset = 0
       # page = 5 > real page = 2 > offset = 10
+      offset = if (options[:page].to_i + start_in_page - 1) <= total_pages
+        options[:per_page].to_i * (options[:page].to_i + start_in_page - 1)
+      else
+        options[:per_page].to_i * (options[:page].to_i - start_in_page)
+      end
+      sql << " OFFSET #{offset}"
+    end
+    result = ActiveRecord::Base.connection.execute(sql).map{ |r| r }
+    WillPaginate::RandomCollection.create(options[:page] ? options[:page].to_i : 1, options[:per_page], total_entries, start_in_page) do |pager|
+      pager.replace(result.sort_by{rand})
+    end
+  end
+
+  def self.find_all_by_region_and_level(site, region_id, level, options = {})
+    default_options = {
+      :order => 'created_at DESC',
+      :random => true,
+    }
+    options = default_options.merge(options)
+    options[:page] ||= 1
+    sql = <<-SQL
+    select * from
+    (SELECT p.id as project_id, p.name as project_name, p.description as project_description,
+    p.created_at, o.id as organization_id, o.name as organization_name,
+    p.end_date as end_date,
+    array_to_string(array_agg(distinct r.name),'|') as regions,
+    array_to_string(array_agg(distinct r.id),'|') as regions_ids,
+    array_to_string(array_agg(distinct c.name),'|') as countries,
+    array_to_string(array_agg(distinct c.id),'|') as countries_ids,
+    array_to_string(array_agg(distinct sec.name),'|') as sectors,
+    array_to_string(array_agg(distinct sec.id),'|') as sector_ids,
+    array_to_string(array_agg(distinct clus.name),'|') as clusters,
+    array_to_string(array_agg(distinct clus.id),'|') as cluster_ids
+    FROM projects as p
+    INNER JOIN organizations as o       ON p.primary_organization_id=o.id
+    INNER JOIN projects_sites as ps     ON p.id=ps.project_id and ps.site_id=#{site.id}
+    INNER JOIN projects_regions as pr   ON pr.project_id=p.id
+    INNER JOIN regions as r             ON pr.region_id=r.id and r.level=#{level} and r.id=#{region_id}
+    INNER JOIN countries_projects as cp ON cp.project_id=p.id
+    INNER JOIN countries as c           ON c.id=cp.country_id
+    INNER JOIN clusters_projects as cpro ON cpro.project_id=p.id
+    INNER JOIN clusters as clus           ON clus.id=cpro.cluster_id
+    INNER JOIN projects_sectors as psec  ON psec.project_id=p.id
+    INNER JOIN sectors as sec             ON sec.id=psec.sector_id
+    WHERE p.end_date is null OR p.end_date > now()
+    GROUP BY p.id,p.name,o.id,o.name,p.created_at,p.description,p.end_date) as subq
+SQL
+
+    total_entries = ActiveRecord::Base.connection.execute("select count(*) as count from (#{sql}) as q").first['count'].to_i
+
+    total_pages = (total_entries.to_f / options[:per_page].to_f).ceil
+
+    start_in_page = if options[:start_in_page]
+      options[:start_in_page].to_i
+    else
+      if total_pages
+        if total_pages > 2
+          rand(total_pages - 1)
+        else
+          0
+        end
+      else
+        0
+      end
+    end
+
+    if options[:order]
+      sql << " ORDER BY #{options[:order]}"
+    end
+    # Let's query an extra result: if it exists, whe have to show the paginator link "More projects"
+    if options[:per_page]
+      sql << " LIMIT #{options[:per_page].to_i}"
+    end
+    if options[:page] && options[:per_page]
       offset = if (options[:page].to_i + start_in_page - 1) <= total_pages
         options[:per_page].to_i * (options[:page].to_i + start_in_page - 1)
       else
