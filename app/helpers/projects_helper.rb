@@ -6,7 +6,7 @@ module ProjectsHelper
     else
       clusters_to_sentence(project)
     end
-    place        = "in #{project_regions_and_countries(project)}"
+    place        = project_regions_and_countries(project)
     organization = "by #{link_to project['organization_name'], organization_path(project['organization_id'])}"
 
     case controller_name
@@ -68,13 +68,14 @@ module ProjectsHelper
   end
 
   def project_regions_and_countries(project)
-    result = []
-    countries =  project['countries'].split('|')
-    countries_ids = project['countries_ids'].split('|')
-    0.upto(countries.size - 1) do |i|
-      result << link_to(countries[i], location_path([countries_ids[i]]), :title => countries[i])
+    regions     = project['regions'].split('|')
+    regions_ids = project['regions_ids'].split('|')
+
+    if regions.size == 1
+      "in #{link_to(regions.first, "/regions/#{regions_ids.first}", :title => regions.first)}"
+    else
+      "in #{pluralize(regions.size, 'place')}"
     end
-    result.to_sentence(:last_word_connector => ' and ')
   end
 
 end
