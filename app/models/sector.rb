@@ -3,7 +3,7 @@
 # Table name: sectors
 #
 #  id   :integer         not null, primary key
-#  name :string(255)     
+#  name :string(255)
 #
 
 class Sector < ActiveRecord::Base
@@ -37,6 +37,24 @@ SQL
     ).map do |r|
       [r, r.count.to_i]
     end
+  end
+
+  def total_regions(site)
+    sql = "select count(distinct(pr.region_id)) as count from projects_regions as pr
+    inner join regions as r on pr.region_id=r.id and level=#{site.level_for_region}
+    inner join projects as p on p.id=pr.project_id and (p.end_date is null OR p.end_date > now())
+    inner join projects_sites as psi on p.id=psi.project_id and psi.site_id=#{site.id}
+    inner join projects_sectors as ps on ps.project_id=psi.project_id
+    where ps.sector_id=#{self.id}"
+    ActiveRecord::Base.connection.execute(sql).first['count'].to_i
+  end
+
+  def total_projects(site)
+    sql = "select count(distinct(ps.project_id)) as count from projects_sectors as ps
+    inner join projects as p on p.id=ps.project_id and (p.end_date is null OR p.end_date > now())
+    inner join projects_sites as psi on p.id=psi.project_id and psi.site_id=#{site.id}
+    where ps.sector_id=#{self.id}"
+    ActiveRecord::Base.connection.execute(sql).first['count'].to_i
   end
 
   # to get only id and name

@@ -139,7 +139,7 @@
 
       <!-- RIGHT PART -->
       <div class="right">
-        <h3><%= pluralize(@organization.projects_count(@site), 'PROJECT', 'PROJECTS') %> BY <%= @organization.name.upcase %><br/><strong>(One project may take place in multiple locations)</strong></h3>
+        <h3><%= pluralize(@organization.projects_count(@site), 'PROJECT', 'PROJECTS') %> in <%= pluralize(@organization.total_regions(@site), @site.word_for_regions.singularize, @site.word_for_regions) %></h3>
         <div id="projects">
           <%= render :partial => 'projects/projects' %>
         </div>

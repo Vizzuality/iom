@@ -179,7 +179,7 @@ SQL
     }
     options = default_options.merge(options)
     options[:page] ||= 1
-    level = options[:level] ? options[:level] : site.levels_for_region.join(',')
+    level = options[:level] ? options[:level] : site.levels_for_region.max
     sql = <<-SQL
     select * from
     (SELECT p.id as project_id, p.name as project_name, p.description as project_description,
@@ -197,13 +197,14 @@ SQL
     INNER JOIN organizations as o       ON p.primary_organization_id=o.id
     INNER JOIN projects_sites as ps     ON p.id=ps.project_id and ps.site_id=#{site.id}
     LEFT JOIN projects_regions as pr   ON pr.project_id=p.id
-    LEFT JOIN regions as r             ON pr.region_id=r.id and r.level IN (#{level}) #{"and r.id='#{options[:region]}'" if options[:region]}
+    LEFT JOIN regions as r             ON pr.region_id=r.id and r.level=#{level} #{"and r.id=#{options[:region]}" if options[:region]}
     LEFT JOIN countries_projects as cp ON cp.project_id=p.id
     LEFT JOIN countries as c           ON c.id=cp.country_id
     LEFT JOIN clusters_projects as cpro ON cpro.project_id=p.id #{"and cpro.cluster_id=#{options[:cluster]}" if options[:cluster]}
     LEFT JOIN clusters as clus           ON clus.id=cpro.cluster_id
     LEFT JOIN projects_sectors as psec  ON psec.project_id=p.id #{"and psec.sector_id=#{options[:sector]}" if options[:sector]}
     LEFT JOIN sectors as sec             ON sec.id=psec.sector_id
+    WHERE p.end_date is null OR p.end_date > now()
     GROUP BY p.id,p.name,o.id,o.name,p.created_at,p.description,p.end_date) as subq
 SQL
     if options[:donor_id] || options[:country] || options[:organization] || options[:active]
