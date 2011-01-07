@@ -182,7 +182,7 @@ namespace :iom do
       # Cache geocoding
       geo_cache = {}
 
-      csv_projs = CsvMapper.import("#{Rails.root}/db/data/projects_latest_refine.csv") do
+      csv_projs = CsvMapper.import("#{Rails.root}/db/data/haiti_projects.csv") do
         read_attributes_from_file
       end
       csv_projs.each do |row|
@@ -331,17 +331,17 @@ namespace :iom do
               @nation_wide = true
             end
             locations = Array.new
-            if(!row.latitude.blank? and !row.longitude.blank?)
-              coords_lat_split=row.latitude.split(",").map{|e|e.strip}
-              coords_lon_split=row.longitude.split(",").map{|e|e.strip}
-              count = 0
-              coords_lat_split.each do |lat_split|
-                if(lat_split.to_f!=0 and coords_lon_split[count].to_f!=0)
-                  locations << "#{lat_split} #{coords_lon_split[count]}"
-                end
-                count = count+1
-              end
-            end
+            # if(!row.latitude.blank? and !row.longitude.blank?)
+            #   coords_lat_split=row.latitude.split(",").map{|e|e.strip}
+            #   coords_lon_split=row.longitude.split(",").map{|e|e.strip}
+            #   count = 0
+            #   coords_lat_split.each do |lat_split|
+            #     if(lat_split.to_f!=0 and coords_lon_split[count].to_f!=0)
+            #       locations << "#{lat_split} #{coords_lon_split[count]}"
+            #     end
+            #     count = count+1
+            #   end
+            # end
             
             if @nation_wide == true
               puts
@@ -351,8 +351,8 @@ namespace :iom do
               regions3.each do |reg3|
                 p.regions  << reg3
                 if(locations.count<1)
-                  sql="select ST_AsText(ST_SetSRID(ST_MakePoint(center_lon,center_lat),4326)) as point from regions where id=#{reg3.id}"
-                  res = DB.execute(sql).first["point"].delete("POINT(").delete(")")
+                  reg_sel = Region.find_by_id(reg3.id)
+                  res = "#{reg_sel.center_lon} #{reg_sel.center_lat}"
                   locations << res
                 end
                 # Add the herarchy
@@ -369,8 +369,8 @@ namespace :iom do
                 if(reg3)
                   p.regions  << reg3
                   if(locations.count<1)
-                    sql="select ST_AsText(ST_SetSRID(ST_MakePoint(center_lon,center_lat),4326)) as point from regions where id=#{reg3.id}"
-                    res = DB.execute(sql).first["point"].delete("POINT(").delete(")")
+                    reg_sel = Region.find_by_id(reg3.id)
+                    res = "#{reg_sel.center_lon} #{reg_sel.center_lat}"
                     locations << res
                   end
                 
@@ -385,7 +385,7 @@ namespace :iom do
                 end
               end
             end
-
+            multi_point = nil
             multi_point = "ST_MPointFromText('MULTIPOINT(#{locations.join(',')})',4326)" unless (locations.length<1)
           end
 
