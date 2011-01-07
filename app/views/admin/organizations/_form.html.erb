@@ -32,7 +32,7 @@
 
   <div class="field">
     <%= f.label :budget %>
-    <%= f.text_field :budget, :class=>"short budget" %>
+    <%= f.text_field :budget, :value => number_with_precision(f.object.budget, :precision => 0, :delimiter => ','), :class=>"short budget" %>
   </div>
 
   <div class="short_field">

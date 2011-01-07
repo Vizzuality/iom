@@ -153,4 +153,10 @@ class ProjectTest < ActiveSupport::TestCase
     p3.reload
   end
 
+  test "saving a project with a big budget"do
+    project = create_project :budget => 99999999999999999
+    assert project.valid?
+    assert_equal 99999999999999999, project.budget
+  end
+
 end
