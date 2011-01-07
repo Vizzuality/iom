@@ -115,7 +115,7 @@ div#header ul.menu li {float:left; width:auto; margin:0 23px 0 0; position:relat
 
 div#header ul.menu li#cluster_option.clicked ul.suboptions {position:absolute; top:35px; left:-10px; z-index:110; background:url('/images/sites/common/menu/cluster_body_clicked.png') no-repeat 0 0; display:none; width:505px; height:177px; display:inline; padding:0 13px 0 15px;}
 div#header ul.menu li#cluster_option.clicked ul.suboptions.longer {background:url('/images/sites/common/menu/cluster_body_clicked_long.png') no-repeat 0 0; height:290px;}
-div#header ul.menu li#sector_option.clicked ul.suboptions {position:absolute; top:35px; left:-10px; z-index:110; background:url('/images/sites/common/menu/cluster_body_clicked.png') no-repeat 0 0; display:none; width:497px; height:177px; display:inline; padding:7px 13px 0 23px;}
+div#header ul.menu li#sector_option.clicked ul.suboptions {position:absolute; top:35px; left:-10px; z-index:110; background:url('/images/sites/common/menu/cluster_body_clicked.png') no-repeat 0 0; display:none; width:497px; height:177px; display:inline; padding:3px 13px 0;}
 div#header ul.menu li#sector_option.clicked ul.suboptions.longer {background:url('/images/sites/common/menu/cluster_body_clicked_long.png') no-repeat 0 0; height:290px;}
 
 div#header ul.menu li div.header_title {display:none;}
@@ -164,7 +164,7 @@ div#header ul.menu li#organization_option.clicked ul.content li a:hover {color:w
 
 div#header ul.menu li#organization_option.clicked ul#orgs_list {position:relative; float:left; overflow-y:scroll; overflow-x:hidden;}
 div#header ul.menu li#organization_option.clicked ul#orgs_list li {float:left; margin:7px 0 0 0;}
-div#header ul.menu li#organization_option.clicked ul#orgs_list li a {float:left; font:normal 13px Arial; color:#C1C1C0;}
+div#header ul.menu li#organization_option.clicked ul#orgs_list li a {float:left; font:normal 13px "PT Sans",Arial; color:#C1C1C0;}
 div#header ul.menu li#organization_option.clicked ul#orgs_list li a:hover {color:white;}
 
 div#header ul.menu li.clicked ul.suboptions {display:inline;}
@@ -191,7 +191,7 @@ a#zoomIn:hover {background-position:0 -25px;}
 a#zoomOut {position:absolute; display:none; width:26px; height:25px; background:url('/images/sites/maps/zoom_out.png') no-repeat 0 0; z-index:100;}
 a#zoomOut:hover {background-position:0 -25px;}
 div.map_style {position:absolute; display:none; top:10px; left:50px; width:111px; height:26px; background:url('/images/sites/maps/map_style.png') no-repeat 0 0; overflow:hidden; z-index:100;}
-div.map_style:hover {cursor:default;}
+div.map_style:hover {cursor:pointer;}
 div.map_style p {margin:7px 0 0 10px; font:normal 13px 'PT Sans'; color:white;}
 div.map_style ul {width:93px; margin:10px 10px 0 10px;}
 div.map_style ul li {padding:3px 0 3px;}
@@ -256,7 +256,7 @@ div#left_column div.float_left div.block.wikipedia p {line-height:17px;}
 div#left_column div.float_left div.block.wikipedia p.provided {margin:15px 0 0 0;}
 div#left_column div.float_left div.block.margin {margin:5px 0 0 0;}
 div#left_column div.float_left div.block.resources {background:url('/images/sites/organization/bkg_resources.png') no-repeat right bottom white;}
-div#left_column div.float_left div.block h3 {width:100%; font:normal 13px "PT Sans Bold"; color:#999999; text-shadow:none; text-transform:uppercase;}
+div#left_column div.float_left div.block h3 {width:100%; font:normal 13px "PT Sans Bold"; color:#666666; text-shadow:none; text-transform:uppercase;}
 div#left_column div.float_left div.block a {color:#CD5D4C;}
 div#left_column div.float_left div.block a:hover {text-decoration:underline;}
 div#left_column div.float_left div.block ul {width:100%; margin:10px 0 0 0; padding:0 0 6px; list-style:none;}
@@ -492,7 +492,7 @@ div.statistics ul.statistics_list li a:hover span {text-decoration:none!importan
 
 /*PROJECTS*/
 div#project_layout {width:992px; margin:0 auto;}
-div.main_head.projects div#completed {position:absolute; bottom:-20px; right:-15px; width:173px; height:41px; background:url('/images/sites/projects/completed_msg.png') no-repeat; display:block; z-index:200;}
+div.main_head.projects div#completed {position:absolute; bottom:10px!important; right:-15px; width:173px; height:41px; background:url('/images/sites/projects/completed_msg.png') no-repeat; display:block; z-index:200;}
 div.main_head.projects div#completed p {margin:5px 0 0 10px; font:normal 13px 'PT Sans Bold'; color:white;}
 div.main_head.projects div.left {width:596px; height:auto; padding:30px 37px; margin:0; background:url('/images/sites/common/mesh.png') repeat 0 0; display:inline-block; vertical-align:top; zoom:1; *display:inline;}
 div.main_head.projects div.float_head {position:absolute; top:0; left:5px; width:596px; height:auto; padding:32px 32px 40px; background:url('/images/sites/search/head_mask.png') repeat 0 0 #CD5D4C; z-index:100;}

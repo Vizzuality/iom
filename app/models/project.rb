@@ -57,6 +57,10 @@ class Project < ActiveRecord::Base
   after_destroy :remove_cached_sites
 
   attr_accessor :sectors_ids, :clusters_ids
+  
+  def before_save
+    self.the_geom ||= Point.from_x_y(1,1)
+  end
 
   def sectors_ids=(value)
     value.each do |sector_id|

@@ -87,7 +87,7 @@ div.block div.med div.right ul li.disabled:hover a {color:#cccccc; cursor:defaul
 
 div.block div.med div.right ul li.list_selected {float:left; width:auto; margin:10px 0 0 0; padding:15px 0 0 0; background:url('/images/backoffice/donors/menu_top.png') no-repeat right 0;}
 div.block div.med div.right ul li.list_selected div.bottom_selected {float:left; width:auto; padding:0 14px 15px 0; background:url('/images/backoffice/donors/menu_bottom.png') no-repeat right bottom;}
-div.block div.med div.right ul li.list_selected div.bottom_selected a.basic {color:#E93E3F; padding:0 0 0 20px;}
+div.block div.med div.right ul li.list_selected div.bottom_selected a.basic {width:100%; color:#E93E3F; padding:0 0 0 20px;}
 div.block div.med div.right ul li.list_selected div.bottom_selected a.basic:hover {cursor:default;}
 div.block div.med div.right ul li.list_selected div.bottom_selected span.list {float:left; width:auto; margin:3px 0 0 0;}
 div.block div.med div.right ul li.list_selected div.bottom_selected span.list p {float:left; width:100%; margin:5px 0 0 15px; background:none;}
@@ -1018,8 +1018,9 @@ ul.pages li {float:left; width:100%;}
 ul.pages li div.head {position:relative; float:left; width:535px; height:42px; padding:15px;}
 ul.pages li div.head.more {background:url('/images/backoffice/resources/header_resources.png') no-repeat 0 0!important; margin:20px 0 0 0;}
 ul.pages li div.head.one {background:url('/images/backoffice/pages/one_page_list.png') no-repeat 0 0!important;}
-ul.pages li div.head h3 {margin:12px 0 0 0; font:bold 17px Arial;}
-ul.pages li div.head h3 a {color:#E93E3F; text-align:left;}
+ul.pages li div.head.one h3 {margin:12px 0 0 0; font:bold 17px Arial!important;}
+ul.pages li div.head h3 {margin:12px 0 0 0; font:bold 17px Arial!important;}
+ul.pages li div.head h3 a {color:#E93E3F; text-align:left; font:bold 17px Arial!important;}
 ul.pages li div.head h3 a:hover {text-decoration:underline;}
 ul.pages li div.head a.delete {position:absolute; right:17px; top:28px; width:15px; height:16px; background:url('/images/backoffice/icons/close_bkg.png') no-repeat 0 0; text-indent:-9999px; font-size:0; display:block; line-height:0;}
 ul.pages li div.head a.delete:hover {background-position:0 -16px;}

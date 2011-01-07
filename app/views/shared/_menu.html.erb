@@ -16,7 +16,11 @@
                 <% @site.clusters_or_sectors.reject{|c| c.name.eql?('N/A') }.each do |category| %>
                 <li>
                   <a href="<%= category.is_a?(Cluster) ? cluster_path(category) : sector_path(category) %>" class="geneva <%= category.css_class %> <%= (category.name.size > 17)? 'double_line':''%> icon_menu">
-                    <%= category.name %>
+                    <% if category.name.size>25 %>
+                      <%= category.name[0..22] + '...' %>
+                    <% else %>
+                      <%= category.name %>
+                    <% end %>
                   </a>
                 </li>
                 <% end %>
@@ -41,7 +45,7 @@
           <% else %>
             <li id="region_option">
               <a class="geneva main_option with_suboptions"><%= @site.word_for_regions.pluralize.upcase %><span class="with_suboptions"></span></a>
-              <div class="header_title"><a><%= @site.word_for_regions.upcase %><span class="with_suboptions"></span></a></div>
+              <div class="header_title"><a><%= @site.word_for_regions.pluralize.upcase %><span class="with_suboptions"></span></a></div>
               <div class="suboptions_body">
                 <span class="suboptions_body_top"></span>
                 <div class="wrapper">

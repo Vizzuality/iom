@@ -24,20 +24,6 @@
         //Check space in the layout
         setTimeout("resizeColumn()",300);        
         
-        //remove text from input
-        $('input#q').focusin(function(ev){
-          var value = $(this).attr('value');
-          if (value == "Search...") {
-            old_value = value;
-            $(this).attr('value','');
-          }
-        });
-        $('input#q').focusout(function(ev){
-          var value = $(this).attr('value');
-          if (value == "") {
-            $(this).attr('value',old_value);
-          }
-        });
         
         if ($('div#footer_sites').length > 0){
           var dif_height = $('div.body').height() - $('div.left').height();

@@ -111,12 +111,14 @@
     $('#zoomIn').fadeIn();
     $('#zoomOut').fadeIn();
     
-    $('div.map_style').hover(function(){
-      $('div.map_style').css('background-position','0 -26px');
-      $('div.map_style').height(76);
-    },function(){
-      $('div.map_style').css('background-position','0 0');
-      $('div.map_style').height(26);
+    $('div.map_style').click(function(){
+      if ($('div.map_style').height()==76) {
+        $('div.map_style').css('background-position','0 0');
+        $('div.map_style').height(26);
+      } else {
+        $('div.map_style').css('background-position','0 -26px');
+        $('div.map_style').height(76);
+      }
     });
     
     $('div.map_style ul li a').click(function(ev){
@@ -130,6 +132,8 @@
         }
         $('div.map_style p').text($(this).text());
       }
+      $('div.map_style').css('background-position','0 0');
+      $('div.map_style').height(26);
     });
     
     

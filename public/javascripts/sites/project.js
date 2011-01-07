@@ -29,7 +29,7 @@
         //Days left effect
         var d = new Date();
         var total_days = daydiff(parseDate($('p.first_date').text()), parseDate($('p.second_date').text()));
-        var days_completed = daydiff(parseDate($('p.first_date').text()), parseDate((d.getDate())+'/'+(d.getMonth()+1)+'/'+(d.getFullYear())));
+        var days_completed = daydiff(parseDate($('p.first_date').text()), parseDate((d.getMonth()+1)+'/'+(d.getDate())+'/'+(d.getFullYear())));
         if (days_completed<(total_days/2)) {
           $('div.timeline p').css('color','#999999');
         }else if (days_completed >= total_days){
