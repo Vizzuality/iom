@@ -166,7 +166,7 @@ namespace :iom do
 
 
           # Site specific attributes for Haiti
-          o.attributes_for_site = {:organization_values => {:description=>row.organizations_work_in_haiti}, :site_id => 1}
+          o.attributes_for_site = {:organization_values => {:description=>row.organizations_work_in_haiti}, :site_id => Site.find_by_name('Haiti Aid Map').id}
           o.save!
           puts "Created ORG: #{o.name}"
         else

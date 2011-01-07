@@ -31,7 +31,6 @@ class ProjectsController < ApplicationController
          p.contact_position, p.the_geom, c.id, c.name
 SQL
 
-    puts sql
     @project = Project.find_by_sql(sql).first
     raise ActiveRecord::RecordNotFound unless @project
 
@@ -42,9 +41,9 @@ SQL
         from (projects as p inner join projects_regions as pr on pr.project_id=p.id and p.id=#{@project.id})
         inner join regions as r on pr.region_id=r.id and r.level=#{@site.level_for_region}"
 
-        result=ActiveRecord::Base.connection.execute(sql)
-        @map_data=result.to_json
-        puts sql
+        @locations = ActiveRecord::Base.connection.execute(sql)
+        @map_data  = @locations.to_json
+
         @overview_map_bbox = [{
                   :lat => @site.overview_map_bbox_miny,
                   :lon => @site.overview_map_bbox_minx}, {
@@ -57,7 +56,7 @@ SQL
         areas= []
         data = []
         @map_data_max_count=0
-        result.each do |c|
+        @locations.each do |c|
           areas << c["code"]
           data  << 1
         end
