@@ -36,11 +36,22 @@
             }
             map = new google.maps.Map(document.getElementById("map"),myOptions);
 
+            var image = new google.maps.MarkerImage('/images/backoffice/projects/project_marker.png',new google.maps.Size(34, 42),new google.maps.Point(0,0),  new google.maps.Point(17, 42));
+
             google.maps.event.addListener(map,"click",function(event){
-              var image = new google.maps.MarkerImage('/images/backoffice/projects/project_marker.png',new google.maps.Size(34, 42),new google.maps.Point(0,0),  new google.maps.Point(17, 42));
               var marker = new google.maps.Marker({position: event.latLng,  map:map, icon:image});
               markers_position.push(event.latLng);
             });
+
+            if($('#project_geometry').attr('value') != ''){
+              var points = $('#project_geometry').attr('value').split(',');
+              for(var i=0;i<points.length;i++) {
+                var point = points[i].replace(/\(/,'').replace(/\)/,'').split(' ');
+                var position = new google.maps.LatLng(point[0],point[1]);
+                var marker = new google.maps.Marker({position: position,  map:map, icon:image});
+                markers_position.push(position);
+              }
+            }
           }
         });
 
@@ -56,30 +67,10 @@
         $('div.map_window').fadeOut();
       });
 
-      $('a.save').click(function(){
-        var csrf_token = $('meta[name=csrf-token]').attr('content'),
-            csrf_param = $('meta[name=csrf-param]').attr('content');
-
-        var link = $(this),
-            href = link.attr('href'),
-            method = 'put',
-            form = $('<form method="post" action="'+href+'"></form>'),
-            metadata_input = '<input name="_method" value="'+method+'" type="hidden" />';
-
-        if (csrf_param != null && csrf_token != null) {
-          metadata_input += '<input name="'+csrf_param+'" value="'+csrf_token+'" type="hidden" />';
-        }
-
-        metadata_input += '<input name="'+markers_position+'" value="'+markers_position+'" type="hidden" />';
-
-        alert(metadata_input);
-
-        form.hide()
-            .append(metadata_input)
-            .appendTo('body');
-        alert(form);
-        e.preventDefault();
-        form.submit();
+      $('a.save').click(function(e){
+        $('#project_geometry').val(markers_position);
+        $(window).unbind('resize');
+        $('div.map_window').fadeOut();
       });
 
     });

@@ -70,6 +70,7 @@ class Admin::ProjectsController < ApplicationController
 
   def create
     @project = Project.new(params[:project])
+    set_project_geometry
     if @project.valid? && @project.save
       redirect_to edit_admin_project_path(@project), :flash => {:success => 'Project has been created successfully'}
     else
@@ -88,6 +89,7 @@ class Admin::ProjectsController < ApplicationController
   def update
     @project = Project.find(params[:id])
     @project.attributes = params[:project]
+    set_project_geometry
     if @project.save
       redirect_to edit_admin_project_path(@project), :flash => {:success => 'Project has been updated successfully'}
     else
@@ -100,7 +102,7 @@ class Admin::ProjectsController < ApplicationController
     @project.destroy
     redirect_to admin_projects_path, :flash => {:success => 'Project has been deleted successfully'}
   end
-  
+
   def remove_point
     @project = Project.find(params[:id])
     the_geom = @project.the_geom.dup
@@ -112,11 +114,26 @@ class Admin::ProjectsController < ApplicationController
     @project.save!
     respond_to do |format|
       format.html do
+        redirect_to edit_admin_project_path(@project,:anchor => 'map'), :flash => {:success => 'Project has been deleted successfully'}
+      end
+      format.js do
         render :update do |page|
           page << "$('li#point_#{params[:position]}').fadeOut().remove();"
         end
       end
     end
   end
+
+  private
+
+    def set_project_geometry
+      if params[:project_geometry]
+        points = []
+        params[:project_geometry].tr('(','').tr(')','').split(',').in_groups_of(2) do |point|
+          points << Point.from_x_y(point[1].strip.to_f, point[0].strip.to_f)
+        end
+        @project.the_geom = MultiPoint.from_points(points)
+      end
+    end
 
 end
