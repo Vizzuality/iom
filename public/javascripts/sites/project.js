@@ -55,10 +55,12 @@
           var mdy = str.split('/')
           return new Date(mdy[2], mdy[1]-1, mdy[0]);
       }
+      
 
       function daydiff(first, second) {
           return (second-first)/(1000*60*60*24)
       }
+      
 
       function startGalleria() {
         if ($('div.galleryStyle').length>0) {

@@ -9,7 +9,7 @@ var donationDate = new Array(3);
 var limitTextCombo = 12;
 $(document).ready(function(ev){
 
-        // COUNTRY COMBO
+      // COUNTRY COMBO
 	    $('select#country').sSelect({ddMaxWidth: '134px',ddMaxHeight:'220px',containerClass:'country_index'});
     
 

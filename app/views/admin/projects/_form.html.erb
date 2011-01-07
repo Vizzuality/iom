@@ -133,7 +133,6 @@
     <div class="cluster_options">
       <span class="combo_cluster_options">
         <%= errors_for_span(@project, :clusters) %>
-
         <p id="0">Select more clusters</p>
         <div class="wrapper">
           <ul class="options scroll_pane">
@@ -192,39 +191,73 @@
     <div class="region_window">
       <div class="top_region">
         <a class="close">Close</a>
-        <h3 class="museo_sans">Add a region to the project</h3>
       </div>
       <div class="bottom_region">
+        <h3 class="museo_sans">Add a region to the project</h3>
         <p>You can specify the administrative level you need (1st, 2nd or 3rd)</p>
         <label>COUNTRY <strong>*</strong></label>
-        <select name="page[parent_id]">
-          <option value="0" selected="selected">Not specified</option> 
-          <option value="5">Contact</option> 
-          <option value="4">About</option>
-        </select>
+
+        <div class="country_region">
+          <span class="region_combo">
+            <%= errors_for_span(@project, :clusters) %>
+            <p id="country_0">Not specified</p>
+            <div class="wrapper">
+              <ul class="options scroll_pane">
+              <% Cluster.get_select_values.collect do |cluster| %>
+                <li><a id="<%= cluster.id %>"><%= cluster.name %></a></li>
+              <% end %>
+                <li class="last"></li>
+              </ul>
+            </div>
+          </span>
+        </div>
+          
         <div class="level_1">
           <label>1st ADMINISTRATIVE LEVEL</label>
-          <select name="page[parent_id]">
-            <option value="0" selected="selected">Not specified</option> 
-            <option value="5">Contact</option> 
-            <option value="4">About</option>
-          </select>
+          <span class="region_combo">
+            <%= errors_for_span(@project, :clusters) %>
+            <p id="level_1">Not specified</p>
+            <div class="wrapper">
+              <ul class="options scroll_pane">
+              <% Cluster.get_select_values.collect do |cluster| %>
+                <li><a id="<%= cluster.id %>"><%= cluster.name %></a></li>
+              <% end %>
+                <li class="last"></li>
+              </ul>
+            </div>
+          </span>
         </div>
+        
         <div class="level_2">
-        <label>2st ADMINISTRATIVE LEVEL</label>
-          <select name="page[parent_id]">
-            <option value="0" selected="selected">Not specified</option> 
-            <option value="5">Contact</option> 
-            <option value="4">About</option>
-          </select>
+          <label>2st ADMINISTRATIVE LEVEL</label>
+          <span class="region_combo">
+            <%= errors_for_span(@project, :clusters) %>
+            <p id="level2_0">Not specified</p>
+            <div class="wrapper">
+              <ul class="options scroll_pane">
+              <% Cluster.get_select_values.collect do |cluster| %>
+                <li><a id="<%= cluster.id %>"><%= cluster.name %></a></li>
+              <% end %>
+                <li class="last"></li>
+              </ul>
+            </div>
+          </span>
         </div>
+        
         <div class="level_3">
           <label>3st ADMINISTRATIVE LEVEL</label>
-          <select name="page[parent_id]">
-            <option value="0" selected="selected">Not specified</option> 
-            <option value="5">Contact</option> 
-            <option value="4">About</option>
-          </select>
+          <span class="region_combo">
+            <%= errors_for_span(@project, :clusters) %>
+            <p id="level3_0">Not specified</p>
+            <div class="wrapper">
+              <ul class="options scroll_pane">
+              <% Cluster.get_select_values.collect do |cluster| %>
+                <li><a id="<%= cluster.id %>"><%= cluster.name %></a></li>
+              <% end %>
+                <li class="last"></li>
+              </ul>
+            </div>
+          </span>
         </div>
         <a class="add_location museo_sans shadow_green">add region</a>
       </div>
