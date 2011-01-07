@@ -184,34 +184,130 @@ SQL
     options = default_options.merge(options)
     options[:page] ||= 1
     level = options[:level] ? options[:level] : site.levels_for_region.max
-    sql = <<-SQL
-    select * from
-    (SELECT p.id as project_id, p.name as project_name, p.description as project_description,
-    p.created_at, o.id as organization_id, o.name as organization_name,
-    p.end_date as end_date,
-    array_to_string(array_agg(distinct r.name),'|') as regions,
-    array_to_string(array_agg(distinct r.id),'|') as regions_ids,
-    array_to_string(array_agg(distinct c.name),'|') as countries,
-    array_to_string(array_agg(distinct c.id),'|') as countries_ids,
-    array_to_string(array_agg(distinct sec.name),'|') as sectors,
-    array_to_string(array_agg(distinct sec.id),'|') as sector_ids,
-    array_to_string(array_agg(distinct clus.name),'|') as clusters,
-    array_to_string(array_agg(distinct clus.id),'|') as cluster_ids
-    FROM projects as p
-    INNER JOIN organizations as o       ON p.primary_organization_id=o.id
-    INNER JOIN projects_sites as ps     ON p.id=ps.project_id and ps.site_id=#{site.id}
-    INNER JOIN projects_regions as pr   ON pr.project_id=p.id
-    INNER JOIN regions as r             ON pr.region_id=r.id and r.level=#{level} #{"and r.id=#{options[:region]}" if options[:region]}
-    INNER JOIN countries_projects as cp ON cp.project_id=p.id
-    INNER JOIN countries as c           ON c.id=cp.country_id
-    INNER JOIN clusters_projects as cpro ON cpro.project_id=p.id #{"and cpro.cluster_id=#{options[:cluster]}" if options[:cluster]}
-    INNER JOIN clusters as clus           ON clus.id=cpro.cluster_id
-    INNER JOIN projects_sectors as psec  ON psec.project_id=p.id #{"and psec.sector_id=#{options[:sector]}" if options[:sector]}
-    INNER JOIN sectors as sec             ON sec.id=psec.sector_id
-    WHERE p.end_date is null OR p.end_date > now()
-    GROUP BY p.id,p.name,o.id,o.name,p.created_at,p.description,p.end_date) as subq
-SQL
-    if options[:donor_id] || options[:country] || options[:organization] || options[:active]
+
+    sql = ""
+    if options[:region]
+      sql = "select distinct * from
+       (SELECT p.id as project_id, p.name as project_name, p.description as project_description,
+       p.created_at, o.id as organization_id, o.name as organization_name,
+       p.end_date as end_date,
+       array_to_string(array_agg(distinct c.name),'|') as countries,
+       array_to_string(array_agg(distinct c.id),'|') as countries_ids,
+       array_to_string(array_agg(distinct sec.name),'|') as sectors,
+       array_to_string(array_agg(distinct sec.id),'|') as sector_ids,
+       array_to_string(array_agg(distinct clus.name),'|') as clusters,
+       array_to_string(array_agg(distinct clus.id),'|') as cluster_ids
+       FROM projects as p
+       INNER JOIN organizations as o ON p.primary_organization_id=o.id
+       INNER JOIN projects_sites as ps ON p.id=ps.project_id and ps.site_id=#{site.id}
+       INNER JOIN projects_regions as pr ON pr.project_id=p.id
+       INNER JOIN regions as r ON pr.region_id=r.id and r.level=#{level} and r.id=#{options[:region]}
+       INNER JOIN countries_projects as cp ON cp.project_id=p.id
+       INNER JOIN countries as c ON c.id=cp.country_id
+       INNER JOIN clusters_projects as cpro ON cpro.project_id=p.id
+       INNER JOIN clusters as clus ON clus.id=cpro.cluster_id
+       INNER JOIN projects_sectors as psec ON psec.project_id=p.id
+       INNER JOIN sectors as sec ON sec.id=psec.sector_id
+       WHERE p.end_date is null OR p.end_date > now()
+       GROUP BY p.id,p.name,o.id,o.name,p.created_at,p.description,p.end_date) as subq"
+    elsif options[:country]
+      # TODO
+    elsif options[:cluster]
+      sql = "select distinct * from
+       (SELECT p.id as project_id, p.name as project_name, p.description as project_description,
+       p.created_at, o.id as organization_id, o.name as organization_name,
+       p.end_date as end_date,
+       array_to_string(array_agg(distinct r.name),'|') as regions,
+       array_to_string(array_agg(distinct r.id),'|') as regions_ids,
+       array_to_string(array_agg(distinct c.name),'|') as countries,
+       array_to_string(array_agg(distinct c.id),'|') as countries_ids
+       FROM projects as p
+       INNER JOIN organizations as o ON p.primary_organization_id=o.id
+       INNER JOIN projects_sites as ps ON p.id=ps.project_id and ps.site_id=#{site.id}
+       LEFT JOIN projects_regions as pr ON pr.project_id=p.id
+       LEFT JOIN regions as r ON pr.region_id=r.id and r.level=#{level}
+       LEFT JOIN countries_projects as cp ON cp.project_id=p.id
+       LEFT JOIN countries as c ON c.id=cp.country_id
+       INNER JOIN clusters_projects as cpro ON cpro.project_id=p.id and cpro.cluster_id=#{options[:cluster]}
+       WHERE p.end_date is null OR p.end_date > now()
+       GROUP BY p.id,p.name,o.id,o.name,p.created_at,p.description,p.end_date) as subq"
+    elsif options[:sector]
+      sql = "select distinct * from
+       (SELECT p.id as project_id, p.name as project_name, p.description as project_description,
+       p.created_at, o.id as organization_id, o.name as organization_name,
+       p.end_date as end_date,
+       array_to_string(array_agg(distinct r.name),'|') as regions,
+       array_to_string(array_agg(distinct r.id),'|') as regions_ids,
+       array_to_string(array_agg(distinct c.name),'|') as countries,
+       array_to_string(array_agg(distinct c.id),'|') as countries_ids
+       FROM projects as p
+       INNER JOIN organizations as o ON p.primary_organization_id=o.id
+       INNER JOIN projects_sites as ps ON p.id=ps.project_id and ps.site_id=#{site.id}
+       LEFT JOIN projects_regions as pr ON pr.project_id=p.id
+       LEFT JOIN regions as r ON pr.region_id=r.id and r.level=#{level}
+       LEFT JOIN countries_projects as cp ON cp.project_id=p.id
+       LEFT JOIN countries as c ON c.id=cp.country_id
+       INNER JOIN projects_sectors as psec ON psec.project_id=p.id and psec.sector_id=#{options[:sector]}
+       WHERE p.end_date is null OR p.end_date > now()
+       GROUP BY p.id,p.name,o.id,o.name,p.created_at,p.description,p.end_date) as subq"
+    elsif options[:donor_id]
+      # TODO
+    elsif options[:organization]
+      sql = "select distinct * from
+       (SELECT p.id as project_id, p.name as project_name, p.description as project_description,
+       p.created_at,
+       p.end_date as end_date,
+       array_to_string(array_agg(distinct r.name),'|') as regions,
+       array_to_string(array_agg(distinct r.id),'|') as regions_ids,
+       array_to_string(array_agg(distinct c.name),'|') as countries,
+       array_to_string(array_agg(distinct c.id),'|') as countries_ids,
+       array_to_string(array_agg(distinct sec.name),'|') as sectors,
+       array_to_string(array_agg(distinct sec.id),'|') as sector_ids,
+       array_to_string(array_agg(distinct clus.name),'|') as clusters,
+       array_to_string(array_agg(distinct clus.id),'|') as cluster_ids
+       FROM projects as p
+       INNER JOIN projects_sites as ps ON p.id=ps.project_id and ps.site_id=#{site.id}
+       LEFT JOIN projects_regions as pr ON pr.project_id=p.id
+       LEFT JOIN regions as r ON pr.region_id=r.id and r.level=#{level}
+       LEFT JOIN countries_projects as cp ON cp.project_id=p.id
+       LEFT JOIN countries as c ON c.id=cp.country_id
+       LEFT JOIN clusters_projects as cpro ON cpro.project_id=p.id
+       LEFT JOIN clusters as clus ON clus.id=cpro.cluster_id
+       LEFT JOIN projects_sectors as psec ON psec.project_id=p.id
+       LEFT JOIN sectors as sec ON sec.id=psec.sector_id
+       WHERE (p.end_date is null OR p.end_date > now()) AND p.primary_organization_id=#{options[:organization]}
+       GROUP BY p.id,p.name,p.created_at,p.description,p.end_date) as subq"
+    else
+      sql = <<-SQL
+      select * from
+      (SELECT p.id as project_id, p.name as project_name, p.description as project_description,
+      p.created_at, o.id as organization_id, o.name as organization_name,
+      p.end_date as end_date,
+      array_to_string(array_agg(distinct r.name),'|') as regions,
+      array_to_string(array_agg(distinct r.id),'|') as regions_ids,
+      array_to_string(array_agg(distinct c.name),'|') as countries,
+      array_to_string(array_agg(distinct c.id),'|') as countries_ids,
+      array_to_string(array_agg(distinct sec.name),'|') as sectors,
+      array_to_string(array_agg(distinct sec.id),'|') as sector_ids,
+      array_to_string(array_agg(distinct clus.name),'|') as clusters,
+      array_to_string(array_agg(distinct clus.id),'|') as cluster_ids
+      FROM projects as p
+      INNER JOIN organizations as o       ON p.primary_organization_id=o.id
+      INNER JOIN projects_sites as ps     ON p.id=ps.project_id and ps.site_id=#{site.id}
+      INNER JOIN projects_regions as pr   ON pr.project_id=p.id
+      INNER JOIN regions as r             ON pr.region_id=r.id and r.level=#{level} #{"and r.id=#{options[:region]}" if options[:region]}
+      INNER JOIN countries_projects as cp ON cp.project_id=p.id
+      INNER JOIN countries as c           ON c.id=cp.country_id
+      INNER JOIN clusters_projects as cpro ON cpro.project_id=p.id #{"and cpro.cluster_id=#{options[:cluster]}" if options[:cluster]}
+      INNER JOIN clusters as clus           ON clus.id=cpro.cluster_id
+      INNER JOIN projects_sectors as psec  ON psec.project_id=p.id #{"and psec.sector_id=#{options[:sector]}" if options[:sector]}
+      INNER JOIN sectors as sec             ON sec.id=psec.sector_id
+      WHERE p.end_date is null OR p.end_date > now()
+      GROUP BY p.id,p.name,o.id,o.name,p.created_at,p.description,p.end_date) as subq
+  SQL
+    end
+
+    if options[:donor_id] || options[:country]
       sql << " WHERE "
       conditions = []
       if options[:donor_id]
@@ -219,12 +315,6 @@ SQL
       end
       if options[:country]
         conditions << "countries like '%#{options[:country].sanitize_sql!}%'"
-      end
-      if options[:organization]
-        conditions << "organization_id=#{options[:organization]}"
-      end
-      if options[:active]
-        conditions << "end_date is not null AND end_date > '#{Date.today.to_s(:db)}'"
       end
       sql << conditions.join(' and ')
     end
