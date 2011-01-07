@@ -11,14 +11,14 @@
                 <li>
                   <div class="head <%= page.children.empty? ? 'one' :'more' %>">
                     <h3><%= link_to(page.title, edit_admin_site_page_path(@site, page)) %></h3>
-                    <%= link_to("Delete", '#delete' ,:class=>"delete", :destroy_url=>admin_site_page_path(@site, page), :att_name=>"page") %>
+                    <%= link_to("Delete", '#delete' ,:class=>"delete", :destroy_url=>admin_site_page_path(@site, page.id), :att_name=>"page") %>
                   </div>
                   <% if !page.children.empty? %>
                     <div class="body">
                       <% page.children.each do |children| %>
                         <span>
                           <%= link_to(children.title, edit_admin_site_page_path(@site, children)) %>
-                          <%= link_to("Delete", '#delete', :destroy_url=>admin_site_page_path(@site, children), :att_name=>"subpage", :class=>"delete") %>
+                          <%= link_to("Delete", '#delete', :destroy_url => admin_site_page_path(@site, children.id), :att_name=>"subpage", :class=>"delete") %>
                         </span>
                       <% end %>
                     </div>
@@ -39,6 +39,6 @@
         <a href="<%= new_admin_site_page_path(@site) %>">Create new page on this site</a>
       </div>
     </div>
-    
-    
+
+
     <script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>

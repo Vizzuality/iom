@@ -3,14 +3,14 @@
 # Table name: pages
 #
 #  id         :integer         not null, primary key
-#  title      :string(255)     
-#  body       :text            
-#  site_id    :integer         
-#  published  :boolean         
-#  permalink  :string(255)     
-#  created_at :datetime        
-#  updated_at :datetime        
-#  parent_id  :integer         
+#  title      :string(255)
+#  body       :text
+#  site_id    :integer
+#  published  :boolean
+#  permalink  :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#  parent_id  :integer
 #
 
 class Page < ActiveRecord::Base
@@ -22,6 +22,7 @@ class Page < ActiveRecord::Base
   validates_uniqueness_of :title, :scope => [:site_id]
 
   before_create :set_permalink, :set_status
+  before_destroy :set_children_parent
 
   scope :published, where(:published => true)
   scope :highlighted, where(:parent_id => nil)
@@ -29,7 +30,7 @@ class Page < ActiveRecord::Base
   def children
     Page.where(:parent_id => self.id)
   end
-  
+
   def  parent
     if parent_id?
       Page.find(parent_id)
@@ -59,11 +60,18 @@ class Page < ActiveRecord::Base
   def set_status
     self.published ||= true
   end
-  
+
   private
 
     def set_permalink
       self.permalink = self.title.sanitize unless self.title.blank?
+    end
+
+    def set_children_parent
+      return if children.empty?
+      children.each do |child|
+        child.update_attribute(:parent_id, nil)
+      end
     end
 
 end
