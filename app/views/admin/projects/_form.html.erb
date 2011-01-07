@@ -178,7 +178,7 @@
   </div>
 
   <label>GEOGRAPHIC REGION <strong>*</strong></label>
-  <ul class="ubications">
+  <ul class="ubications" id="regions_list">
     <!-- TODO - put list of regions previosly saved. -->
     <% @project.regions.select(Region.custom_fields).each do |region| %>
     <li><p><%= region.name %>, <%= region.country.name %></p><a class="close"></a></li>
@@ -252,7 +252,7 @@
             </div>
           </span>
         </div>
-        <a class="add_location museo_sans shadow_green">add region</a>
+        <a class="add_location museo_sans shadow_green" id="add_region_to_list">add region</a>
       </div>
     </div>
 
@@ -317,7 +317,7 @@
   <div id="project_budget" class="field">
     <span class="input_short coin">
       <p class="coin">$</p>
-      <%= f.text_field :budget %>
+      <%= f.text_field :budget, :value => number_with_precision(f.object.budget, :precision => 0, :delimiter => ',') %>
 
     </span>
   </div>

@@ -50,17 +50,17 @@
     <h3>FUNDING</h3>
     <div class="short_field">
       <%= f.label :private_funding %>
-      <%= f.text_field :private_funding, :class=>"short" %>
+      <%= f.text_field :private_funding, :value => number_with_precision(f.object.private_funding, :precision => 0, :delimiter => ','), :class=>"short budget" %>
     </div>
 
     <div class="short_field">
       <%= f.label :usg_funding %>
-      <%= f.text_field :usg_funding, :class=>"short" %>
+      <%= f.text_field :usg_funding, :value => number_with_precision(f.object.usg_funding, :precision => 0, :delimiter => ','), :class=>"short budget" %>
     </div>
 
     <div class="short_field">
       <%= f.label :other_funding %>
-      <%= f.text_field :other_funding, :class=>"short" %>
+      <%= f.text_field :other_funding, :value => number_with_precision(f.object.other_funding, :precision => 0, :delimiter => ','), :class=>"short budget" %>
     </div>
   </div>
 

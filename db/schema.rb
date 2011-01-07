@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110104190135) do
+ActiveRecord::Schema.define(:version => 20110107103059) do
 
   create_table "clusters", :force => true do |t|
     t.string "name"
@@ -197,7 +197,7 @@ ActiveRecord::Schema.define(:version => 20110104190135) do
     t.text     "cross_cutting_issues"
     t.date     "start_date"
     t.date     "end_date"
-    t.integer  "budget"
+    t.float    "budget"
     t.text     "target"
     t.integer  "estimated_people_reached"
     t.string   "contact_person"

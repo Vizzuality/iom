@@ -1,15 +1,26 @@
 module ProjectsHelper
 
   def subtitle(project, site)
-    # TODO: take into account the sectors
     clusters_sectors = if site.navigate_by_sector?
       sectors_to_sentence(project)
     else
       clusters_to_sentence(project)
     end
-    countries    = "in #{project_regions_and_countries(project)}"
-    organization = "implemented by #{link_to project['organization_name'], organization_path(project['organization_id'])}"
-    raw("#{clusters_sectors} #{countries}")
+    place        = "in #{project_regions_and_countries(project)}"
+    organization = "by #{link_to project['organization_name'], organization_path(project['organization_id'])}"
+
+    case controller_name
+    when 'sites'
+      raw("#{clusters_sectors} #{place} #{organization}")
+    when 'organizations'
+      raw("#{clusters_sectors} #{place}")
+    when 'clusters_sectors'
+      raw("#{place} #{organization}")
+    when 'georegion'
+      raw("#{clusters_sectors} #{organization}")
+    when 'donors'
+      raw("#{clusters_sectors} #{place} #{organization}")
+    end
   end
 
   def clusters_to_sentence(project)
@@ -58,11 +69,6 @@ module ProjectsHelper
 
   def project_regions_and_countries(project)
     result = []
-    # regions =  project['regions'].split('|')
-    # regions_ids = project['regions_ids'].split('|')
-    # 0.upto(regions.size - 1) do |i|
-    #   result << link_to(regions[i], location_path([regions_ids[i]]), :title => regions[i])
-    # end
     countries =  project['countries'].split('|')
     countries_ids = project['countries_ids'].split('|')
     0.upto(countries.size - 1) do |i|
