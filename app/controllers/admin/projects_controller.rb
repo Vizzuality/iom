@@ -130,7 +130,7 @@ class Admin::ProjectsController < ApplicationController
       if params[:project_geometry] && !params[:project_geometry].blank?
         points = []
         params[:project_geometry].tr('(','').tr(')','').split(',').in_groups_of(2) do |point|
-          points << Point.from_x_y(point[1].strip.to_f, point[0].strip.to_f)
+          points << Point.from_x_y(point[1].strip.to_f, point[0].strip.to_f) unless point[1].blank? || point[0].blank?
         end
         @project.the_geom = MultiPoint.from_points(points)
       end
