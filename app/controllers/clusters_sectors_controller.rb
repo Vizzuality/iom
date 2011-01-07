@@ -26,8 +26,6 @@ class ClustersSectorsController < ApplicationController
     respond_to do |format|
       format.html do
         # Get the data for the map depending on the region definition of the site (country or region)
-        
-        
         sql="select r.id,r.name,count(ps.*) as count,r.center_lon as lon,r.center_lat as lat,r.name,'/regions/'||r.id as url,r.code
         from regions as r
           inner join projects_regions as pr on r.id=pr.region_id and r.level=#{@site.level_for_region}
