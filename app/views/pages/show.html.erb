@@ -15,19 +15,16 @@
         <div class="block">
             <h2><%= @page.title %> IN THIS SITE</h2>
             <ul>
-              <% @site.pages.highlighted.each do |page| %>
-                <li><%= link_to(page.title, page_path(page)) %>
-                <% if page.children.any? %>
-                  <ul>
-                    <% page.children.each do |child| %>
-                    <li><%= link_to(child.title, page_path(child)) %></li>
-                    <% end %>
-                  </ul>
-                <% end %>
-                </li>
+              <li><%= link_to(@page.title, page_path(@page)) %>
+              <% if @page.children.any? %>
+                <ul>
+                  <% @page.children.each do |child| %>
+                  <li><%= link_to(child.title, page_path(child)) %></li>
+                  <% end %>
+                </ul>
               <% end %>
             </ul>
         </div>
     </div>
-    
+
     <script src="/javascripts/sites/pages.js" type="text/javascript" charset="utf-8"></script>

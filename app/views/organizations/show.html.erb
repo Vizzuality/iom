@@ -14,8 +14,8 @@
   <div class="main_head">
     <div class="inner_main_head">
       <div class="left">
+        <h2 class="organization_name">Organization</h2>
         <h1><%= @organization.name %></h1>
-        <%unless @organization.projects_count(@site).eql?(0) %><p><%= pluralize(@organization.projects_count(@site), 'project', 'projects') %></p><%end%>
         <div class="float_head">
           <h2 class="organization_name">Organization</h2>
           <h1><%= @organization.name %></h1>
@@ -44,24 +44,21 @@
     <div id="left_column">
 
       <!-- LEFT PART -->
-      <div class="left"></div> <!-- H"J"ACK -->
+      <div class="left"></div>
       <div class="outer_float">
         <div class="float_left">
           <div class="head">
-            <h2>FACTSHEET</h2>
+            <h2>OVERVIEW</h2>
           </div>
-
-          <div class="block">
-            <h3>FUNDING FOR <%= @site.name %></h3>
-            <p class="budget"><%= number_with_delimiter(@organization.budget) %></p>
-
-            <h3>FUNDING SOURCES</h3>
-            <p>
-              <%= funding_percentages(@organization) %>
-            </p>
-          </div>
-
-
+          
+          <% if !@organization.budget.blank? %>          
+            <div class="block">
+              <h3>FUNDING FOR <%= @site.name %></h3>
+              <p class="budget"><%= number_with_delimiter(@organization.budget) %></p>
+              <h3 class="secondary">FUNDING SOURCES</h3>
+              <p><%= funding_percentages(@organization) %></p>
+            </div>
+          <% end %>
 
           <% unless @site.nil? || @organization.projects_clusters_sectors(@site).empty? %>
           <div class="block statistics">
@@ -143,7 +140,15 @@
 
       <!-- RIGHT PART -->
       <div class="right">
-        <h3><%= pluralize(@organization.projects_count(@site), 'PROJECT', 'PROJECTS') %> in <%= pluralize(@organization.total_regions(@site), @site.word_for_regions.singularize, @site.word_for_regions) %></h3>
+        <h3><%= pluralize(@organization.projects_count(@site), 'PROJECT', 'PROJECTS') %> in <%= pluralize(@organization.total_regions(@site), @site.word_for_regions.singularize, @site.word_for_regions) %> <a id="see_all" href="#">See all</a> 
+          <div class="tooltip">
+            <span class="body_tooltip">
+              <label>Coming soon!</label>
+              <p>Please stay tuned.</p>
+            </span>
+            <span class="bottom_tooltip"></span>
+          </div>
+        </h3>
         <div id="projects">
           <%= render :partial => 'projects/projects' %>
         </div>

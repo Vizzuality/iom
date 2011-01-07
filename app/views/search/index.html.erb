@@ -43,7 +43,7 @@
             <ul class="filter_list">
             <% index = 0 %>
             <% @regions.each do |region, count| %>
-              <% if index<9 %>
+              <% if index<10 %>
                 <% if params[:region_id] && params[:region_id].to_i == region.id %>
                   <li><%= region.name %></li>
                 <% else %>
@@ -55,7 +55,7 @@
               <% index = index + 1 %>
             <% end %>
             </ul>
-            <% if index>11 %>
+            <% if index>10 %>
               <a href="#more_results" class="more">More results</a>
             <% end %>
           <% end %>
@@ -67,7 +67,7 @@
             <ul class="filter_list">
             <% index = 0 %>
             <% @clusters.each do |cluster, count| %>
-              <% if index<9 %>
+              <% if index<10 %>
                 <% if params[:cluster_id] && params[:cluster_id].to_i == cluster.id && !cluster.name.eql?('N/A')%>
                   <li><%= cluster.name %></li>
                 <% else %>
@@ -83,7 +83,7 @@
               <% index = index + 1 %>
             <% end %>
             </ul>
-            <% if index>11 %>
+            <% if index>10 %>
               <a href="#more_results" class="more">More results</a>
             <% end %>
           <% end %>

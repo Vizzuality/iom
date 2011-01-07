@@ -16,6 +16,18 @@ if ($.browser.msie) {
 
 $(document).ready( function() {
 
+    //See all tooltip
+    $("a#see_all").hover(function(){
+      var position = $(this).position();
+      $(this).parent().children('div.tooltip').css('top',position.top-65+'px');
+      $(this).parent().children('div.tooltip').css('left',position.left-55+'px');
+      $(this).parent().children('div.tooltip').show();
+    },function(){
+      $(this).parent().children('div.tooltip').hide();
+    });
+    
+    $("a#see_all").click(function(ev){ev.preventDefault(); ev.stopPropagation();});
+    
 
     if ($.browser.msie) {
       var zIndexNumber = 1000;  
@@ -36,8 +48,7 @@ $(document).ready( function() {
 
     // TODO: update scrollbar to content
     if ($('.scroll_pane_auto').length > 0){    
-        $('.scroll_pane_auto').jScrollPane({
-                           autoReinitialise:true });
+        $('.scroll_pane_auto').jScrollPane({autoReinitialise:true });
     }
 
 

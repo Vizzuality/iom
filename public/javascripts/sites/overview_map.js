@@ -101,15 +101,18 @@
     }
     
     //Positionate zoom controls
-    positionControls();
+    setTimeout(function(){
+      positionControls();
+      $('#zoomIn').fadeIn();
+      $('#zoomOut').fadeIn();
+    },500);
     
     $('#zoomIn,#zoomOut').click(function(ev){
       ev.preventDefault();
       ev.stopPropagation();
     });
     
-    $('#zoomIn').fadeIn();
-    $('#zoomOut').fadeIn();
+    
     
     $('div.map_style').click(function(){
       if ($('div.map_style').height()==76) {

@@ -79,7 +79,15 @@
 
       <!-- RIGHT PART -->
       <div class="right">
-        <h3><%= pluralize(@data.total_projects(@site), 'active project', 'active projects') %> in <%= pluralize(@data.total_regions(@site), @site.word_for_regions.singularize, @site.word_for_regions) %></h3>
+        <h3><%= pluralize(@data.total_projects(@site), 'active project', 'active projects') %> in <%= pluralize(@data.total_regions(@site), @site.word_for_regions.singularize, @site.word_for_regions) %> <a id="see_all" href="#">See all</a>
+          <div class="tooltip">
+            <span class="body_tooltip">
+              <label>Coming soon!</label>
+              <p>Please stay tuned.</p>
+            </span>
+            <span class="bottom_tooltip"></span>
+          </div>
+        </h3>
         <div id="projects">
           <%= render :partial => 'projects/projects' %>
         </div>
