@@ -3,7 +3,7 @@ class SearchController < ApplicationController
   layout 'site_layout'
 
   def index
-    where  = []
+    where  = ["(p.end_date is null OR p.end_date > now())"]
     where_facet = []
     limit = 20
     @current_page   = params[:page] ? params[:page].to_i : 1
@@ -69,7 +69,7 @@ class SearchController < ApplicationController
                 inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=#{@site.id}
                 inner join clusters as c on cp.cluster_id=c.id
                 inner join projects_regions as pr on ps.project_id=pr.project_id
-                inner join projects as p on ps.project_id=p.id
+                inner join projects as p on ps.project_id=p.id and (p.end_date is not null OR p.end_date > now())
                 #{where_facet}
                 group by c.id,c.name order by count DESC"
 
@@ -81,7 +81,7 @@ class SearchController < ApplicationController
                 inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=1
                 inner join projects_regions as pr on ps.project_id=pr.project_id
                 inner join regions as r on pr.region_id=r.id and r.level=#{@site.level_for_region}
-                inner join projects as p on ps.project_id=p.id
+                inner join projects as p on ps.project_id=p.id and (p.end_date is not null OR p.end_date > now())
                 #{where_facet}
                 group by r.id,r.name order by count DESC"
 
