@@ -194,17 +194,18 @@
       </div>
       <div class="bottom_region">
         <h3 class="museo_sans">Add a region to the project</h3>
-        <p>You can specify the administrative level you need (1st, 2nd or 3rd)</p>
-        <label>COUNTRY <strong>*</strong></label>
-        <div class="country_region">
+        <p class="info_region_exp">You can specify the administrative level you need (1st, 2nd or 3rd)</p>
+        <div class="level_0">
+          <label>COUNTRY <strong>*</strong></label>
+          <img class="loader" src="/images/backoffice/projects/activity-indicator.gif" alt="loader" title="loader"/>
           <span class="region_combo">
             <p id="country_0">Not specified</p>
             <div class="wrapper">
               <ul class="options scroll_pane">
                 <li><a id="country_0">Not specified</a></li>
-              <% Country.select("id,name").all.each do |country| %>
-                <li><a id="country_<%= country.id %>"><%= country.name %></a></li>
-              <% end %>
+                <% Country.select("id,name").all.each do |country| %>
+                  <li><a id="country_<%= country.id %>"><%= country.name %></a></li>
+                <% end %>
                 <li class="last"></li>
               </ul>
             </div>
@@ -212,30 +213,27 @@
         </div>
 
         <div class="level_1">
+          <img class="loader" src="/images/backoffice/projects/activity-indicator.gif" alt="loader" title="loader"/>
           <label>1st ADMINISTRATIVE LEVEL</label>
           <span class="region_combo">
-            <p id="level_1">Not specified</p>
+            <p id="level1_0">Not specified</p>
             <div class="wrapper">
               <ul class="options scroll_pane">
-              <% Cluster.get_select_values.collect do |cluster| %>
-                <li><a id="<%= cluster.id %>"><%= cluster.name %></a></li>
-              <% end %>
+                <li><a id="level1_0">Not specified</a></li>
                 <li class="last"></li>
               </ul>
             </div>
           </span>
-
         </div>
 
         <div class="level_2">
+          <img class="loader" src="/images/backoffice/projects/activity-indicator.gif" alt="loader" title="loader"/>
           <label>2st ADMINISTRATIVE LEVEL</label>
           <span class="region_combo">
             <p id="level2_0">Not specified</p>
             <div class="wrapper">
               <ul class="options scroll_pane">
-              <% Cluster.get_select_values.collect do |cluster| %>
-                <li><a id="<%= cluster.id %>"><%= cluster.name %></a></li>
-              <% end %>
+                <li><a id="level2_0">Not specified</a></li>
                 <li class="last"></li>
               </ul>
             </div>
@@ -248,9 +246,7 @@
             <p id="level3_0">Not specified</p>
             <div class="wrapper">
               <ul class="options scroll_pane">
-              <% Cluster.get_select_values.collect do |cluster| %>
-                <li><a id="<%= cluster.id %>"><%= cluster.name %></a></li>
-              <% end %>
+                <li><a id="level3_0">Not specified</a></li>
                 <li class="last"></li>
               </ul>
             </div>
@@ -260,10 +256,10 @@
       </div>
     </div>
 
-    <!-- <input type="text" name="countries" id="project_countries" />
-    <input type="text" name="regions_level1" id="project_regions_level1" />
-    <input type="text" name="regions_level2" id="project_regions_level2" />
-    <input type="text" name="regions_level3" id="project_regions_level3" /> -->
+    <input type="text" name="countries" id="project_countries" class="hidden"/>
+    <input type="text" name="regions_level1" id="project_regions_level1" class="hidden"/>
+    <input type="text" name="regions_level2" id="project_regions_level2" class="hidden"/>
+    <input type="text" name="regions_level3" id="project_regions_level3" class="hidden"/>
 
 
   </div>
@@ -464,6 +460,7 @@
   <script src="/javascripts/backoffice/project_map.js" type="text/javascript" charset="utf-8"></script>
   <script src="/javascripts/plugins/jquery.mousewheel.js" type="text/javascript" charset="utf-8"></script>
   <script src="/javascripts/plugins/jquery.jscrollpane.js" type="text/javascript" charset="utf-8"></script>
+  <script src="/javascripts/plugins/jquery.livequery.min.js" type="text/javascript" charset="utf-8"></script>
   <script src="/javascripts/plugins/jquery.stylish-select.js" type="text/javascript" charset="utf-8"></script>
   <script src="/javascripts/backoffice/project.js" type="text/javascript" charset="utf-8"></script>
   <script src="/javascripts/backoffice/project_region.js" type="text/javascript" charset="utf-8"></script>

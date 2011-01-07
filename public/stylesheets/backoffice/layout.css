@@ -685,6 +685,10 @@ div.region_window div h3 {float:left; width:100%; padding:0 0 10px 0; font:norma
 div.region_window div a.close {position:absolute; right:20px; top:18px; width:12px; height:12px; background:url('/images/backoffice/icons/close_window.png') no-repeat 0 0; text-indent:-9999px;}
 div.region_window div a.close:hover {cursor:pointer; background-position:0 -12px;}
 div.region_window div p {padding:10px 0 0; font:normal 13px Arial; color:#666666;}
+div.region_window div img.loader {position:absolute; display:none; right:22px; top:131px;}
+div.region_window div.level_1 {display:none;}
+div.region_window div.level_2 {display:none;}
+div.region_window div.level_3 {display:none;}
 div.region_window span.region_combo {position:relative; float:left; margin:10px 0 0 3px; background:url('/images/backoffice/projects/combos/combo_add_cluster.png') no-repeat 0 0; width:254px; height:24px; padding:8px 0 0 10px;}
 div.region_window span.region_combo p {padding:0; margin:0; font:normal 13px Arial; color:#999999;}
 div.region_window span.region_combo ul.options {display:none;}
