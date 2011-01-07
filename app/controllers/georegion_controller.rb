@@ -2,6 +2,8 @@ class GeoregionController < ApplicationController
 
   layout 'site_layout'
 
+  skip_before_filter :set_site, :only => [:list_regions1_from_country,:list_regions2_from_country,:list_regions3_from_country]
+
   def show
     render_404 and return if params[:ids].blank?
     render_404 and return unless params[:ids] =~ /([\d|\/]+)/
@@ -59,7 +61,7 @@ class GeoregionController < ApplicationController
 
       @area_parent = country.name
 
-      # If we are in the main level whe only show the projects of 
+      # If we are in the main level whe only show the projects of
       # this level
       if @area.level == @site.levels_for_region.max
         sql="select *,(select the_geom_geojson from regions where id=subq.id) as geojson
@@ -87,7 +89,7 @@ class GeoregionController < ApplicationController
     respond_to do |format|
       format.html do
         result = ActiveRecord::Base.connection.execute(sql)
-        @map_data = result.first
+        @map_data = result.first || {'id' => nil, 'lat' => nil, 'lon' => nil, 'count' => nil, 'geojson' => nil}
         @georegion_map_chco = @site.theme.data[:georegion_map_chco]
         @georegion_map_chf = @site.theme.data[:georegion_map_chf]
         @georegion_map_marker_source = @site.theme.data[:georegion_map_marker_source]
@@ -124,6 +126,36 @@ class GeoregionController < ApplicationController
     region = Region.find(params[:id], :select => Region.custom_fields)
     render_404 and return unless region
     redirect_to location_path(region), :status => 301
+  end
+
+  def list_regions1_from_country
+    country = Country.find(params[:id])
+    regions = country.regions.select("id,name").where(:level => 1).order("name ASC")
+    respond_to do |format|
+      format.json do
+        render :json => regions.map{ |r| {:name => r.name, :id => r.id}}.to_json , :layout => false
+      end
+    end
+  end
+
+  def list_regions2_from_country
+    region = Region.find_by_id_and_level(params[:id], 1)
+    regions = Region.select("id,name").where(:level => 2,:parent_region_id => region.id).order("name ASC")
+    respond_to do |format|
+      format.json do
+        render :json => regions.map{ |r| {:name => r.name, :id => r.id}}.to_json , :layout => false
+      end
+    end
+  end
+
+  def list_regions3_from_country
+    region = Region.find_by_id_and_level(params[:id], 2)
+    regions = Region.select("id,name").where(:level => 3,:parent_region_id => region.id).order("name ASC")
+    respond_to do |format|
+      format.json do
+        render :json => regions.map{ |r| {:name => r.name, :id => r.id}}.to_json , :layout => false
+      end
+    end
   end
 
 end

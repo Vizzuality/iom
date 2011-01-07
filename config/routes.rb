@@ -27,6 +27,10 @@ Iom::Application.routes.draw do
   match '/p/:id' => 'pages#show', :as => :page
   # search
   match '/search' => 'search#index', :as => :search
+  # list of regions of each level
+  match '/geo/regions/1/:id.json' => 'georegion#list_regions1_from_country', :format => :json
+  match '/geo/regions/2/:id.json' => 'georegion#list_regions2_from_country', :format => :json
+  match '/geo/regions/3/:id.json' => 'georegion#list_regions3_from_country', :format => :json
 
   # Administration
   namespace :admin do
@@ -53,6 +57,7 @@ Iom::Application.routes.draw do
       resources :resources, :only => [:index, :create, :destroy, :update]
       get 'donations', :on => :member
       resources :donations, :only => [:create, :destroy]
+      put 'remove_point', :on => :member
     end
     resources :sites do
       get 'customization', :on => :member

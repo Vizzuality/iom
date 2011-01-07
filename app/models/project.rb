@@ -3,36 +3,36 @@
 # Table name: projects
 #
 #  id                                      :integer         not null, primary key
-#  name                                    :string(2000)    
-#  description                             :text            
-#  primary_organization_id                 :integer         
-#  implementing_organization               :text            
-#  partner_organizations                   :text            
-#  cross_cutting_issues                    :text            
-#  start_date                              :date            
-#  end_date                                :date            
-#  budget                                  :integer         
-#  target                                  :text            
-#  estimated_people_reached                :integer         
-#  contact_person                          :string(255)     
-#  contact_email                           :string(255)     
-#  contact_phone_number                    :string(255)     
-#  site_specific_information               :text            
-#  created_at                              :datetime        
-#  updated_at                              :datetime        
+#  name                                    :string(2000)
+#  description                             :text
+#  primary_organization_id                 :integer
+#  implementing_organization               :text
+#  partner_organizations                   :text
+#  cross_cutting_issues                    :text
+#  start_date                              :date
+#  end_date                                :date
+#  budget                                  :integer
+#  target                                  :text
+#  estimated_people_reached                :integer
+#  contact_person                          :string(255)
+#  contact_email                           :string(255)
+#  contact_phone_number                    :string(255)
+#  site_specific_information               :text
+#  created_at                              :datetime
+#  updated_at                              :datetime
 #  the_geom                                :string          not null
-#  activities                              :text            
-#  intervention_id                         :string(255)     
-#  additional_information                  :text            
-#  awardee_type                            :string(255)     
-#  date_provided                           :date            
-#  date_updated                            :date            
-#  contact_position                        :string(255)     
-#  website                                 :string(255)     
-#  verbatim_location                       :text            
-#  calculation_of_number_of_people_reached :text            
-#  project_needs                           :text            
-#  idprefugee_camp                         :text            
+#  activities                              :text
+#  intervention_id                         :string(255)
+#  additional_information                  :text
+#  awardee_type                            :string(255)
+#  date_provided                           :date
+#  date_updated                            :date
+#  contact_position                        :string(255)
+#  website                                 :string(255)
+#  verbatim_location                       :text
+#  calculation_of_number_of_people_reached :text
+#  project_needs                           :text
+#  idprefugee_camp                         :text
 #
 
 class Project < ActiveRecord::Base
@@ -57,10 +57,6 @@ class Project < ActiveRecord::Base
   after_destroy :remove_cached_sites
 
   attr_accessor :sectors_ids, :clusters_ids
-
-   def before_save
-     self.the_geom ||= MultiPoint.from_points([Point.from_x_y(0, -77)])
-   end
 
   def sectors_ids=(value)
     value.each do |sector_id|
@@ -254,6 +250,13 @@ SQL
 
   def self.custom_fields
     (columns.map{ |c| c.name }).map{ |c| "#{self.table_name}.#{c}" }
+  end
+
+  def the_geom_to_value
+    return "" if the_geom.blank?
+    the_geom.points.map do |point|
+      "(#{point.y} #{point.x})"
+    end.join(',')
   end
 
   private

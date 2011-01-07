@@ -362,7 +362,6 @@ namespace :iom do
                 region_level1= Region.find_by_id(region_level2.parent_region_id)
                 p.regions  << region_level1                
               end
-              
             else
               parsed_adm3.each do |region_name|
                 reg3 = Region.where("ia_name ilike ? and level=? and country_id=?",region_name.strip,3,country.id).select(Region.custom_fields).first

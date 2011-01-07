@@ -177,7 +177,7 @@
       <a class="add_sector museo_sans shadow_green">add sector</a>
     </div>
   </div>
-  
+
   <label>GEOGRAPHIC REGION <strong>*</strong></label>
   <ul class="ubications">
     <!-- TODO - put list of regions previosly saved. -->
@@ -188,7 +188,7 @@
   <div class="location_options region_block empty">
     <p class="msg">Add / edit the different regions of the project</p>
     <a class="add_location museo_sans shadow_green" id="add_region_map">add region</a>
-    
+
     <div class="region_window">
       <div class="top_region">
         <a class="close">Close</a>
@@ -198,52 +198,58 @@
         <p>You can specify the administrative level you need (1st, 2nd or 3rd)</p>
         <label>COUNTRY <strong>*</strong></label>
         <select name="page[parent_id]">
-          <option value="0" selected="selected">Not specified</option> 
-          <option value="5">Contact</option> 
+          <option value="0" selected="selected">Not specified</option>
+          <option value="5">Contact</option>
           <option value="4">About</option>
         </select>
         <div class="level_1">
           <label>1st ADMINISTRATIVE LEVEL</label>
           <select name="page[parent_id]">
-            <option value="0" selected="selected">Not specified</option> 
-            <option value="5">Contact</option> 
+            <option value="0" selected="selected">Not specified</option>
+            <option value="5">Contact</option>
             <option value="4">About</option>
           </select>
         </div>
         <div class="level_2">
         <label>2st ADMINISTRATIVE LEVEL</label>
           <select name="page[parent_id]">
-            <option value="0" selected="selected">Not specified</option> 
-            <option value="5">Contact</option> 
+            <option value="0" selected="selected">Not specified</option>
+            <option value="5">Contact</option>
             <option value="4">About</option>
           </select>
         </div>
         <div class="level_3">
           <label>3st ADMINISTRATIVE LEVEL</label>
           <select name="page[parent_id]">
-            <option value="0" selected="selected">Not specified</option> 
-            <option value="5">Contact</option> 
+            <option value="0" selected="selected">Not specified</option>
+            <option value="5">Contact</option>
             <option value="4">About</option>
           </select>
         </div>
         <a class="add_location museo_sans shadow_green">add region</a>
       </div>
     </div>
-    
+
     <!-- <input type="text" name="countries" id="project_countries" />
     <input type="text" name="regions_level1" id="project_regions_level1" />
     <input type="text" name="regions_level2" id="project_regions_level2" />
     <input type="text" name="regions_level3" id="project_regions_level3" /> -->
-    
-    
+
+
   </div>
 
-  <label>GEOGRAPHIC LOCATION  <strong>*</strong></label>
+  <label>GEOGRAPHIC COORDINATES  <strong>*</strong></label>
   <ul class="ubications">
-    <% @project.regions.select(Region.custom_fields).each do |region| %>
-    <li><p><%= region.name %>, <%= region.country.name %></p><a class="close"></a></li>
+    <% unless @project.the_geom.blank? %>
+      <% @project.the_geom.points.each_with_index do |point,i| %>
+      <li id="point_<%= i %>">
+        <p><%= point.x %>, <%= point.y %></p>
+        <%= link_to("", remove_point_admin_project_path(@project, :position => i), :class => 'close', :method => :put) %>
+      </li>
+      <% end %>
     <% end %>
   </ul>
+
   <div class="location_options empty">
     <p class="msg">Add / edit the different locations of the project</p>
     <a class="add_location museo_sans shadow_green" id="add_location_map">add location</a>
@@ -401,6 +407,8 @@
     </span>
   </div>
 
+  <input id="project_geometry" name="project_geometry" value="<%= @project.the_geom_to_value %>" type="hidden" />
+
   <%= f.submit '', :class => "#{'error' if @project.invalid? && action_name != 'new'}" %>
   <!-- END EDIT PAGE -->
 
@@ -417,9 +425,8 @@
       <div id="map"></div>
     </div>
     <p>You can click multiple points to add<br/>several locations to the project</p>
-    <a class="save">save position</a>
+    <a class="save" href="javascript:void(null)">save position</a>
   </div>
-
 
   <!-- COMMON IN EDIT AND NEW FORM -->
 
