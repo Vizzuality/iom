@@ -193,4 +193,10 @@ class OrganizationTest < ActiveSupport::TestCase
     assert_equal 1, organization1.projects_count(site1)
   end
 
+  test "saving an organization with a big budget"do
+    organization = create_organization :budget => 99999999999999999
+    assert organization.valid?
+    assert_equal 99999999999999999, organization.budget
+  end
+
 end
