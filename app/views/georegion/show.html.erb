@@ -115,7 +115,15 @@
     <!-- outer_float -->
     <!-- RIGHT PART -->
     <div class="right">
-      <h3><%= pluralize(@area.projects_count(@site), 'PROJECT', 'PROJECTS') %> AT <%= @area.name.upcase %></h3>
+      <h3><%= pluralize(@area.projects_count(@site), 'PROJECT', 'PROJECTS') %> AT <%= @area.name.upcase %> <a id="see_all" href="#">See all</a>
+        <div class="tooltip">
+          <span class="body_tooltip">
+            <label>Coming soon!</label>
+            <p>Please stay tuned.</p>
+          </span>
+          <span class="bottom_tooltip"></span>
+        </div>
+      </h3>
       <div id="projects">
         <%= render :partial => 'projects/projects' %>
       </div>

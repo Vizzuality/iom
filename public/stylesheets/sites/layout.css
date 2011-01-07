@@ -87,11 +87,12 @@ ul#gallery_thumbails li.last {margin:30px 0 0 0;}
 /* ***************** END HOME SITES*/
 
 /*CLUSTER AND SECTORS TOOLTIPS*/
-div.tooltip {position:absolute; bottom:18px; left:-71px; display:none;}
+div.tooltip {position:absolute; bottom:18px; left:-71px; width:175px; display:none;}
 div.tooltip span.bottom_tooltip {float:left; background:url('/images/sites/common/tooltips/bottom_tooltip.png') no-repeat 0 0; width:175px; height:16px;}
 div.tooltip span.body_tooltip {float:left; background:url('/images/sites/common/tooltips/body_tooltip.png') repeat-y top; width:149px; height:auto; padding:9px 15px 0 11px;}
-div.tooltip label {float:left; font:normal 13px "PT Sans Bold"; color:white; text-align:center; width:152px;}
-div.tooltip p {float:left; font:normal 13px Arial; color:#999999; margin:5px 0 0 3px; padding:0 0 5px!important;}
+div.tooltip label {float:left; font:normal 13px "PT Sans Bold"; color:white; text-align:center; width:152px; text-shadow:none;}
+div.tooltip p {float:left; font:normal 13px Arial; color:#999999; margin:5px 0 0 3px; padding:0 0 5px!important; text-transform:none; text-shadow:none;}
+h3 div.tooltip p {width:152px; text-align:center;}
 div.tooltip a {font:normal 13px Arial; color:white!important; text-decoration:underline!important;}
 div.tooltip a:hover {cursor:pointer!important; text-decoration:none!important;}
 
@@ -283,6 +284,8 @@ div.projects div.block div.import_data a:hover {text-decoration:underline!import
 div#left_column div.float_left div.block a.more:hover {text-decoration:underline;}
 div#left_column div.right {width:632px; margin:0; padding:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#left_column div.right h3 {width:572px; padding:20px 26px 20px 34px; font:normal 13px "PT Sans Bold"; color:#999999; text-shadow:0 1px white; text-transform:uppercase;}
+div#left_column div.right h3 a#see_all {padding:0 0 0 10px; text-transform:none; text-shadow:none; font:normal 13px Arial;}
+div#left_column div.right h3 a#see_all:hover {text-decoration:underline;}
 div#left_column div.right h3 strong {padding:10px 0 0; font:normal 12px Arial; color:#777777; text-transform:none; text-shadow:none; line-height:20px;}
 div#left_column div.right ul {width:100%; padding:0!important;}
 div#left_column div.right ul li {width:572px; height:74px; padding:20px 26px 20px 34px;}
@@ -585,9 +588,11 @@ div#project_layout div#footer_pages div.left {width:630px; height:auto!important
 div#footer_pages div.left a.logo {float:left; display:block; width:67px; height:43px; margin:0 15px 0 0; background:url('/images/sites/common/logo_interaction.png') no-repeat 0 0;}
 div#footer_pages div.left a.logo:hover {cursor:pointer;}
 div#footer_pages div.left div.project {float:left; width:450px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#footer_pages div.left div.project h1 {float:left; width:100%; margin:0; padding:0;}
+div#footer_pages div.left div.project h1 {float:left; width:100%; margin:0; padding:0; font:normal 13px "PT Sans Bold"; color:#888888; text-transform:uppercase;}
 div#footer_pages div.left div.project h1 a{float:left; padding:0; margin:0; font:normal 13px "PT Sans Bold"; color:#888888; text-transform:uppercase; width:100%;}
 div#footer_pages div.left div.project p {float:left; padding:0; margin:5px 0 0 0 ; font:normal 13px "PT Sans"; color:#B3B3B3;}
+div#footer_pages div.left div.project p a {color:#B3B3B3;}
+div#footer_pages div.left div.project p a:hover {text-decoration:underline;}
 div#footer_pages div.right {width:245px; margin:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline; text-align:right;}
 div#project_layout div#footer_pages div.right {width:280px; margin:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline; text-align:right;}
 div#footer_pages div.right ul {float:left; margin:19px 0 0 0; padding:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
@@ -601,9 +606,11 @@ div#footer_errors div.left {width:660px; height:auto!important; margin:0 0 0 5px
 div#footer_errors div.left a.logo {float:left; display:block; width:67px; height:43px; margin:0 15px 0 0; background:url('/images/sites/common/logo_interaction.png') no-repeat 0 0;}
 div#footer_errors div.left a.logo:hover {cursor:pointer;}
 div#footer_errors div.left div.project {float:left; width:450px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#footer_errors div.left div.project h1 {float:left; width:100%; margin:0; padding:0;}
+div#footer_errors div.left div.project h1 {float:left; width:100%; margin:0; padding:0; font:normal 13px "PT Sans Bold"; color:#888888; text-transform:uppercase;}
 div#footer_errors div.left div.project h1 a{float:left; padding:0; margin:0; font:normal 13px "PT Sans Bold"; color:#888888; text-transform:uppercase; width:100%;}
 div#footer_errors div.left div.project p {float:left; padding:0; margin:5px 0 0 0 ; font:normal 13px "PT Sans"; color:#B3B3B3;}
+div#footer_errors div.left div.project p a {color:#B3B3B3;}
+div#footer_errors div.left div.project p a:hover {text-decoration:underline;}
 div#footer_errors div.right {width:auto; margin:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline; text-align:right;}
 div#footer_errors div.right ul {float:left; margin:19px 0 0 0; padding:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#footer_errors div.right ul li {margin:0 0 0 6px; padding:0; font:normal 13px "PT Sans"; color:#B3B3B3; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
@@ -616,6 +623,8 @@ div#footer div.right {width:600px; margin:0 0 0 60px; background:none; display:i
 div#footer div.right div.project {float:left; width:350px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#footer div.right div.project h1 {font:normal 13px "PT Sans Bold"; color:#888888; text-transform:uppercase; display:inline-block;}
 div#footer div.right div.project p {padding:0; font:normal 13px "PT Sans"; color:#B3B3B3;}
+div#footer div.right div.project p a {color:#B3B3B3;}
+div#footer div.right div.project p a:hover {text-decoration:underline;}
 div#footer div.right div.links {float:right; width:auto; margin:15px 0 0 0;}
 div#footer div.right div.links ul {float:left; margin:0; padding:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#footer div.right div.links ul li {margin:0 0 0 6px; padding:0; font:normal 13px "PT Sans"; color:#B3B3B3; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}

@@ -91,7 +91,7 @@
            <div class="block margin">
              <% related_projects = @project.related(@site) %>
              <% unless related_projects.empty? %>
-             <h3 class="first">RELATED PROJECTS</h3>
+             <h3 class="first">OTHER PROJECTS</h3>
              <ul class="related_projects">
                <% related_projects.each_with_index do |project,i| %>
                <li <%= raw('class="last"') if i > 0 %>>
