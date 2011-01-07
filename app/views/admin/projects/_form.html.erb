@@ -203,7 +203,7 @@
             <div class="wrapper">
               <ul class="options scroll_pane">
                 <li><a id="country_0">Not specified</a></li>
-                <% Country.select("id,name").all.each do |country| %>
+                <% Country.select("id,name").order("name ASC").all.each do |country| %>
                   <li><a id="country_<%= country.id %>"><%= country.name %></a></li>
                 <% end %>
                 <li class="last"></li>
