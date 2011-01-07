@@ -220,6 +220,7 @@ namespace :iom do
               begin
                 p.start_date = Date.parse(row.est_start_date)
               rescue
+                puts "Invalid start date: #{row.est_start_date}. Ignoring...."
                 p.start_date = nil
               end
             end
@@ -232,6 +233,7 @@ namespace :iom do
               begin
                 p.end_date = Date.parse(row.est_end_date)
               rescue
+                puts "Invalid end date: #{row.est_end_date}. Ignoring...."
                 p.end_date = nil
               end
             end
@@ -258,14 +260,24 @@ namespace :iom do
             begin
               p.date_provided = Date.strptime(row.date_provided, '%m/%d/%Y')
             rescue
-              p.date_provided = Date.parse(row.date_provided)
+              begin
+                p.date_provided = Date.parse(row.date_provided)
+              rescue
+                p.date_provided = nil
+                puts "Invalid date provided: #{row.date_provided}. Ignoring...."
+              end
             end
           end
           unless row.date_updated.blank?
             begin
               p.date_updated = Date.strptime(row.date_updated, '%m/%d/%Y')
             rescue
-              p.date_updated = Date.parse(row.date_updated)
+              begin
+                p.date_updated = Date.parse(row.date_updated)
+              rescue
+                p.date_updated = nil
+                puts "Invalid date updated: #{row.date_updated}. Ignoring...."
+              end
             end
           end
 
