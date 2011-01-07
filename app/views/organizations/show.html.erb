@@ -48,17 +48,20 @@
       <div class="outer_float">
         <div class="float_left">
           <div class="head">
-            <h2>OVERVIEW</h2>
+            <h2>FACTSHEET</h2>
           </div>
 
-          <% unless @organization.donations.nil? || @organization.donations.sum(:amount).eql?(0.0) %>
           <div class="block">
-            <h3>BUDGET FOR FOOD SECURITY</h3>
-            <p class="budget"><%= number_with_delimiter(@organization.donations.sum(:amount)) %></p>
-            <% donors_total = @organization.donors_count %>
-            <p><%= link_to(pluralize(donors_total, 'donor to this organization', 'donors to this organization'),'#') %> </p>
+            <h3>FUNDING FOR <%= @site.name %></h3>
+            <p class="budget"><%= number_with_delimiter(@organization.budget) %></p>
+
+            <h3>FUNDING SOURCES</h3>
+            <p>
+              <%= funding_percentages(@organization) %>
+            </p>
           </div>
-          <%end%>
+
+
 
           <% unless @site.nil? || @organization.projects_clusters_sectors(@site).empty? %>
           <div class="block statistics">
