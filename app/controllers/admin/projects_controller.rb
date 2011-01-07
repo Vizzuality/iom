@@ -127,7 +127,7 @@ class Admin::ProjectsController < ApplicationController
   private
 
     def set_project_geometry
-      if params[:project_geometry]
+      if params[:project_geometry] && !params[:project_geometry].blank?
         points = []
         params[:project_geometry].tr('(','').tr(')','').split(',').in_groups_of(2) do |point|
           points << Point.from_x_y(point[1].strip.to_f, point[0].strip.to_f)

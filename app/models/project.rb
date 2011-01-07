@@ -283,7 +283,7 @@ SQL
   end
 
   def the_geom_to_value
-    return "" if the_geom.blank?
+    return "" if the_geom.blank? || !the_geom.respond_to?(:points)
     the_geom.points.map do |point|
       "(#{point.y} #{point.x})"
     end.join(',')
