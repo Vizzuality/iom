@@ -162,10 +162,10 @@
              </div>
            <%end%>
 
-         <% unless @project.donations.nil? || @project.donations.sum(:amount).eql?(0.0) %>
+         <% unless @project.budget.nil? || @project.budget.eql?(0.0) %>
          <div class="block">
-           <h3>Project funding</h3>
-           <p class="budget"><%= number_with_delimiter(@project.donations.sum(:amount)) %></p>
+           <h3>Project budget</h3>
+           <p class="budget"><%= number_with_delimiter(@project.budget) %></p>
          </div>
          <%end%>
 
