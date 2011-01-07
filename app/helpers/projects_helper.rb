@@ -65,6 +65,7 @@ module ProjectsHelper
   end
 
   def project_regions_and_countries(project)
+    return if project['regions'].nil? || project['regions_ids'].nil?
     regions     = project['regions'].split('|')
     regions_ids = project['regions_ids'].split('|')
 
