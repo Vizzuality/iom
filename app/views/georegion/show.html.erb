@@ -65,15 +65,15 @@
           <h3>PROJECTS BY <%= @site.word_for_cluster_sector.upcase %></h3>
           <% if @area.projects_clusters_sectors(@site).size > 0 %>
             <ul class="statistics_list">
-              <% @area.projects_clusters_sectors(@site)[0..3].each do |cluster,count| %>
+              <% @area.projects_clusters_sectors(@site)[0..3].each do |category,count| %>
                 <li>
                   <div class="tooltip">
                     <span class="body_tooltip">
-                      <label><%= cluster.name %></label>
+                      <label><%= category.name %></label>
                     </span>
                     <span class="bottom_tooltip"></span>
                   </div>
-                  <a class="<%= cluster.css_class %> icon_statistics" href="<%= cluster_path(cluster) %>"><span class="aller" style="width:<%= cluster_sector_width(count, @area.projects_clusters_sectors(@site)[0..3].map{ |e| e.last }.max) %>px"><%= count %></span></a>
+                  <a class="<%= category.css_class %> icon_statistics" href="<%= category.is_a?(Cluster) ? cluster_path(category) : sector_path(category) %>"><span class="aller" style="width:<%= cluster_sector_width(count, @area.projects_clusters_sectors(@site)[0..3].map{ |e| e.last }.max) %>px"><%= count %></span></a>
                 </li>
               <% end %>
             </ul>
