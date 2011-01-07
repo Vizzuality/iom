@@ -30,11 +30,6 @@
     </div>
   </div>
 
-  <div class="field">
-    <%= f.label :budget %>
-    <%= f.text_field :budget, :value => number_with_precision(f.object.budget, :precision => 0, :delimiter => ','), :class=>"short budget" %>
-  </div>
-
   <div class="short_field">
     <%= f.label :website %>
     <%= f.text_field :website, :class=>"short website" %>
@@ -49,6 +44,24 @@
   <div class="short_field last">
     <%= f.label :international_staff %>
     <%= f.text_field :international_staff, :class=>"short" %>
+  </div>
+
+  <div class="common">
+    <h3>FUNDING</h3>
+    <div class="short_field">
+      <%= f.label :private_funding %>
+      <%= f.text_field :private_funding, :value => number_with_precision(f.object.private_funding, :precision => 0, :delimiter => ','), :class=>"short budget" %>
+    </div>
+
+    <div class="short_field">
+      <%= f.label :usg_funding %>
+      <%= f.text_field :usg_funding, :value => number_with_precision(f.object.usg_funding, :precision => 0, :delimiter => ','), :class=>"short budget" %>
+    </div>
+
+    <div class="short_field">
+      <%= f.label :other_funding %>
+      <%= f.text_field :other_funding, :value => number_with_precision(f.object.other_funding, :precision => 0, :delimiter => ','), :class=>"short budget" %>
+    </div>
   </div>
 
   <div class="common">

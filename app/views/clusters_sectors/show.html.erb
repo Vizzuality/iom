@@ -79,7 +79,7 @@
 
       <!-- RIGHT PART -->
       <div class="right">
-        <h3><%= @data.name.upcase %> PROJECTS</h3>
+        <h3><%= pluralize(@data.total_projects(@site), 'active project', 'active projects') %> in <%= pluralize(@data.total_regions(@site), @site.word_for_regions.singularize, @site.word_for_regions) %></h3>
         <div id="projects">
           <%= render :partial => 'projects/projects' %>
         </div>
@@ -98,7 +98,7 @@
       var map_type = 'overview_map';
       var theme = "<%=@site.theme_id%>";
     </script>
-    
-    
+
+
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
     <%=raw(javascript_include_merged(:clusters_sectors_show)) %>

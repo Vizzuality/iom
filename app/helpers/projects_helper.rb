@@ -48,11 +48,11 @@ module ProjectsHelper
   def metainformation(project, site)
     result = ""
     clusters_sectors = []
-    if site.navigate_by_sector?
+    if site.navigate_by_sector? && project.sectors_names.present?
       project.sectors_names.split('|').each_with_index do |sector_name, i|
         clusters_sectors << link_to(sector_name, sector_path(project.sector_ids[i]))
       end
-    else
+    elsif site.navigate_by_cluster? && project.clusters_names.present?
       project.clusters_names.split('|').each_with_index do |cluster_name, i|
         clusters_sectors << link_to(cluster_name, cluster_path(project.cluster_ids[i]))
       end
@@ -60,10 +60,10 @@ module ProjectsHelper
     unless clusters_sectors.empty?
       result << " on #{clusters_sectors.to_sentence}"
     end
-    unless @project.country_name.blank?
-      result << " in #{link_to(@project.country_name, location_path(@project.country_id.to_a))}"
+    unless project.country_name.blank?
+      result << " in #{link_to(project.country_name, location_path(project.country_id.to_a))}"
     end
-    result << " by #{link_to(@project.primary_organization_name, organization_path(@project.primary_organization_id))}"
+    result << " by #{link_to(project.primary_organization_name, organization_path(project.primary_organization_id))}"
     raw(result)
   end
 

@@ -3,7 +3,7 @@
 # Table name: clusters
 #
 #  id   :integer         not null, primary key
-#  name :string(255)     
+#  name :string(255)
 #
 
 class Cluster < ActiveRecord::Base
@@ -39,6 +39,25 @@ SQL
       [r, r.count.to_i]
     end
   end
+
+  def total_regions(site)
+    sql = "select count(distinct(pr.region_id)) as count from projects_regions as pr
+    inner join regions as r on pr.region_id=r.id and level=#{site.level_for_region}
+    inner join projects as p on p.id=pr.project_id and (p.end_date is null OR p.end_date > now())
+    inner join projects_sites as psi on p.id=psi.project_id and psi.site_id=#{site.id}
+    inner join clusters_projects as cp on cp.project_id=psi.project_id
+    where cp.cluster_id=#{self.id}"
+    ActiveRecord::Base.connection.execute(sql).first['count'].to_i
+  end
+
+  def total_projects(site)
+    sql = "select count(distinct(cp.project_id)) as count from clusters_projects as cp
+    inner join projects as p on p.id=cp.project_id and (p.end_date is null OR p.end_date > now())
+    inner join projects_sites as psi on p.id=psi.project_id and psi.site_id=#{site.id}
+    where cp.cluster_id=#{self.id}"
+    ActiveRecord::Base.connection.execute(sql).first['count'].to_i
+  end
+
 
   # to get only id and name
   def self.get_select_values

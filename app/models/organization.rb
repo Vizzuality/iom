@@ -3,52 +3,52 @@
 # Table name: organizations
 #
 #  id                              :integer         not null, primary key
-#  name                            :string(255)     
-#  description                     :text            
-#  budget                          :float           
-#  website                         :string(255)     
-#  national_staff                  :integer         
-#  twitter                         :string(255)     
-#  facebook                        :string(255)     
-#  hq_address                      :string(255)     
-#  contact_email                   :string(255)     
-#  contact_phone_number            :string(255)     
-#  donation_address                :string(255)     
-#  zip_code                        :string(255)     
-#  city                            :string(255)     
-#  state                           :string(255)     
-#  donation_phone_number           :string(255)     
-#  donation_website                :string(255)     
-#  site_specific_information       :text            
-#  created_at                      :datetime        
-#  updated_at                      :datetime        
-#  logo_file_name                  :string(255)     
-#  logo_content_type               :string(255)     
-#  logo_file_size                  :integer         
-#  logo_updated_at                 :datetime        
-#  international_staff             :string(255)     
-#  contact_name                    :string(255)     
-#  contact_position                :string(255)     
-#  contact_zip                     :string(255)     
-#  contact_city                    :string(255)     
-#  contact_state                   :string(255)     
-#  contact_country                 :string(255)     
-#  donation_country                :string(255)     
-#  estimated_people_reached        :integer         
-#  private_funding                 :float           
-#  usg_funding                     :float           
-#  other_funding                   :float           
-#  private_funding_spent           :float           
-#  usg_funding_spent               :float           
-#  other_funding_spent             :float           
-#  spent_funding_on_relief         :float           
-#  spent_funding_on_reconstruction :float           
-#  percen_relief                   :integer         
-#  percen_reconstruction           :integer         
-#  media_contact_name              :string(255)     
-#  media_contact_position          :string(255)     
-#  media_contact_phone_number      :string(255)     
-#  media_contact_email             :string(255)     
+#  name                            :string(255)
+#  description                     :text
+#  budget                          :float
+#  website                         :string(255)
+#  national_staff                  :integer
+#  twitter                         :string(255)
+#  facebook                        :string(255)
+#  hq_address                      :string(255)
+#  contact_email                   :string(255)
+#  contact_phone_number            :string(255)
+#  donation_address                :string(255)
+#  zip_code                        :string(255)
+#  city                            :string(255)
+#  state                           :string(255)
+#  donation_phone_number           :string(255)
+#  donation_website                :string(255)
+#  site_specific_information       :text
+#  created_at                      :datetime
+#  updated_at                      :datetime
+#  logo_file_name                  :string(255)
+#  logo_content_type               :string(255)
+#  logo_file_size                  :integer
+#  logo_updated_at                 :datetime
+#  international_staff             :string(255)
+#  contact_name                    :string(255)
+#  contact_position                :string(255)
+#  contact_zip                     :string(255)
+#  contact_city                    :string(255)
+#  contact_state                   :string(255)
+#  contact_country                 :string(255)
+#  donation_country                :string(255)
+#  estimated_people_reached        :integer
+#  private_funding                 :float
+#  usg_funding                     :float
+#  other_funding                   :float
+#  private_funding_spent           :float
+#  usg_funding_spent               :float
+#  other_funding_spent             :float
+#  spent_funding_on_relief         :float
+#  spent_funding_on_reconstruction :float
+#  percen_relief                   :integer
+#  percen_reconstruction           :integer
+#  media_contact_name              :string(255)
+#  media_contact_position          :string(255)
+#  media_contact_phone_number      :string(255)
+#  media_contact_email             :string(255)
 #
 
 class Organization < ActiveRecord::Base
@@ -171,6 +171,15 @@ SQL
     sql = "select count(p.id) as count from projects as p
     inner join projects_sites as ps on p.id=ps.project_id and ps.site_id=#{site.id}
     where p.primary_organization_id=#{self.id} and (p.end_date is null OR p.end_date > now())"
+    ActiveRecord::Base.connection.execute(sql).first['count'].to_i
+  end
+
+  def total_regions(site)
+    sql = "select count(distinct(pr.region_id)) as count from projects_regions as pr
+    inner join regions as r on pr.region_id=r.id and level=#{site.level_for_region}
+    inner join projects as p on p.id=pr.project_id and (p.end_date is null OR p.end_date > now())
+                                and p.primary_organization_id=#{self.id}
+    inner join projects_sites as psi on p.id=psi.project_id and psi.site_id=#{site.id}"
     ActiveRecord::Base.connection.execute(sql).first['count'].to_i
   end
 

@@ -135,7 +135,7 @@ class Project < ActiveRecord::Base
 
   def related(site, limit = 2)
     return [] unless the_geom?
-    Project.find_by_sql(<<-SQL
+    result = Project.find_by_sql(<<-SQL
       select * from
       (select p.id, p.name, p.primary_organization_id, o.name as primary_organization_name, c.name as country_name,
            ST_Distance((select ST_Centroid(p.the_geom) from projects where id=#{self.id}), ST_Centroid(p.the_geom)) as dist
@@ -146,7 +146,32 @@ class Project < ActiveRecord::Base
            where p.id!=#{self.id} and o.id=p.primary_organization_id
            order by dist
       ) as subq
-      limit  #{limit}
+      limit #{limit}
+SQL
+    )
+    return result unless result.empty?
+    # If there are not close projects try with projects of a different organization
+    result = Project.find_by_sql(<<-SQL
+      select * from
+      (select p.id, p.name, p.primary_organization_id, o.name as primary_organization_name, c.name as country_name,
+           ST_Distance((select ST_Centroid(p.the_geom) from projects where id=#{self.id}), ST_Centroid(p.the_geom)) as dist
+           from organizations o, projects as p
+           inner join projects_sites as ps on p.id=ps.project_id and ps.site_id=#{site.id}
+           inner join countries_projects as cp on ps.project_id=cp.project_id
+           inner join countries as c on cp.country_id=c.id
+           where p.id!=#{self.id}
+           order by dist
+      ) as subq
+      limit #{limit}
+SQL
+    )
+    return result unless result.empty?
+    total_projects = site.total_projects
+    return [] if total_projects < 2
+    offset = rand(total_projects - 2)
+    Project.find_by_sql(<<-SQL
+      select projects.* from projects inner join projects_sites on projects_sites.site_id=#{site.id}
+      limit 2 offset #{offset}
 SQL
     )
   end
@@ -158,7 +183,7 @@ SQL
     }
     options = default_options.merge(options)
     options[:page] ||= 1
-    level = options[:level] ? options[:level] : site.levels_for_region.join(',')
+    level = options[:level] ? options[:level] : site.levels_for_region.max
     sql = <<-SQL
     select * from
     (SELECT p.id as project_id, p.name as project_name, p.description as project_description,
@@ -176,13 +201,14 @@ SQL
     INNER JOIN organizations as o       ON p.primary_organization_id=o.id
     INNER JOIN projects_sites as ps     ON p.id=ps.project_id and ps.site_id=#{site.id}
     LEFT JOIN projects_regions as pr   ON pr.project_id=p.id
-    LEFT JOIN regions as r             ON pr.region_id=r.id and r.level IN (#{level}) #{"and r.id='#{options[:region]}'" if options[:region]}
+    LEFT JOIN regions as r             ON pr.region_id=r.id and r.level=#{level} #{"and r.id=#{options[:region]}" if options[:region]}
     LEFT JOIN countries_projects as cp ON cp.project_id=p.id
     LEFT JOIN countries as c           ON c.id=cp.country_id
     LEFT JOIN clusters_projects as cpro ON cpro.project_id=p.id #{"and cpro.cluster_id=#{options[:cluster]}" if options[:cluster]}
     LEFT JOIN clusters as clus           ON clus.id=cpro.cluster_id
     LEFT JOIN projects_sectors as psec  ON psec.project_id=p.id #{"and psec.sector_id=#{options[:sector]}" if options[:sector]}
     LEFT JOIN sectors as sec             ON sec.id=psec.sector_id
+    WHERE p.end_date is null OR p.end_date > now()
     GROUP BY p.id,p.name,o.id,o.name,p.created_at,p.description,p.end_date) as subq
 SQL
     if options[:donor_id] || options[:country] || options[:organization] || options[:active]

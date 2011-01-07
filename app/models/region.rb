@@ -3,19 +3,19 @@
 # Table name: regions
 #
 #  id               :integer         not null, primary key
-#  name             :string(255)     
-#  level            :integer         
-#  country_id       :integer         
-#  parent_region_id :integer         
-#  the_geom         :string          
-#  gadm_id          :integer         
-#  wiki_url         :string(255)     
-#  wiki_description :text            
-#  code             :string(255)     
-#  center_lat       :float           
-#  center_lon       :float           
-#  the_geom_geojson :text            
-#  ia_name          :text            
+#  name             :string(255)
+#  level            :integer
+#  country_id       :integer
+#  parent_region_id :integer
+#  the_geom         :string
+#  gadm_id          :integer
+#  wiki_url         :string(255)
+#  wiki_description :text
+#  code             :string(255)
+#  center_lat       :float
+#  center_lon       :float
+#  the_geom_geojson :text
+#  ia_name          :text
 #
 
 class Region < ActiveRecord::Base
@@ -125,7 +125,11 @@ class Region < ActiveRecord::Base
         select * from
         (select re.id, re.name, re.level, re.country_id, re.parent_region_id,
              ST_Distance((select ST_Centroid(the_geom) from regions where id=#{self.id}), ST_Centroid(the_geom)) as dist,
-             (select count(*) from projects_regions as pr where region_id=re.id) as count
+             (
+              select count(*) from projects_regions as pr
+              inner join projects as p on p.id=pr.project_id and (p.end_date is null OR p.end_date > now())
+              where region_id=re.id
+            ) as count
              from regions as re
              where id!=#{self.id} and
              level=#{site.level_for_region}
@@ -159,6 +163,7 @@ SQL
   def projects_count(site)
     sql = "select count(distinct(pr.project_id)) as count from projects_regions as pr
     inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{site.id}
+    inner join projects as p on pr.project_id=p.id and (p.end_date is null OR p.end_date > now())
     where pr.region_id=#{self.id}"
     ActiveRecord::Base.connection.execute(sql).first['count'].to_i
   end
