@@ -107,7 +107,7 @@ site.overview_map_bbox_miny        = 17.78605726800591
 site.overview_map_bbox_minx        = -76.94549560546851
 site.overview_map_bbox_maxy        = 20.262938421364236
 site.overview_map_bbox_maxx        = -69.66705322265601
-site.word_for_regions="Commune"
+site.word_for_regions="Communes"
 
 
 site.save!
