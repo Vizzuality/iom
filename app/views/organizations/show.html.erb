@@ -106,7 +106,11 @@
           <% unless @organization.donation_phone_number.nil? && @organization.donation_website.nil? %>
           <div class="block green">
             <h3>DONATION INFORMATION</h3>
-            <p><strong>Donations</strong><br/><%= @organization.donation_address %></p>
+            <p>
+              <strong>Donations</strong>
+              <br/><%= @organization.donation_address %>
+              <br/><%= @organization.city %>, <%= @organization.state %> <%= @organization.zip_code %>
+            </p>
             <p><%= @organization.donation_phone_number %><br/><%= link_to(@organization.donation_website, @organization.donation_website) %></p>
           </div>
           <%end%>
