@@ -176,7 +176,7 @@ SQL
     LEFT JOIN countries_projects as cp ON cp.project_id=p.id
     LEFT JOIN countries as c           ON c.id=cp.country_id
     LEFT JOIN clusters_projects as cpro ON cpro.project_id=p.id #{"and cpro.cluster_id=#{options[:cluster]}" if options[:cluster]}
-    LEFT JOIN clusters as clus           ON clus.id=cpro.cluster_id 
+    LEFT JOIN clusters as clus           ON clus.id=cpro.cluster_id
     LEFT JOIN projects_sectors as psec  ON psec.project_id=p.id #{"and psec.sector_id=#{options[:sector]}" if options[:sector]}
     LEFT JOIN sectors as sec             ON sec.id=psec.sector_id
     GROUP BY p.id,p.name,o.id,o.name,p.created_at,p.description,p.end_date) as subq
@@ -257,6 +257,36 @@ SQL
     the_geom.points.map do |point|
       "(#{point.y} #{point.x})"
     end.join(',')
+  end
+
+  def countries_ids
+    return "" if self.new_record?
+    sql = "select country_id from countries_projects where project_id=#{self.id}"
+    ActiveRecord::Base.connection.execute(sql).map{ |r| r['country_id'] }.join(',')
+  end
+
+  def regions_level1_ids
+    return "" if self.new_record?
+    sql = "select region_id from projects_regions
+    inner join regions on regions.id=projects_regions.region_id and regions.level=1
+    where project_id=#{self.id}"
+    ActiveRecord::Base.connection.execute(sql).map{ |r| r['region_id'] }.uniq.join(',')
+  end
+
+  def regions_level2_ids
+    return "" if self.new_record?
+    sql = "select region_id from projects_regions
+    inner join regions on regions.id=projects_regions.region_id and regions.level=2
+    where project_id=#{self.id}"
+    ActiveRecord::Base.connection.execute(sql).map{ |r| r['region_id'] }.uniq.join(',')
+  end
+
+  def regions_level3_ids
+    return "" if self.new_record?
+    sql = "select region_id from projects_regions
+    inner join regions on regions.id=projects_regions.region_id and regions.level=3
+    where project_id=#{self.id}"
+    ActiveRecord::Base.connection.execute(sql).map{ |r| r['region_id'] }.uniq.join(',')
   end
 
   private

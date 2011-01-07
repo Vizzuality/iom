@@ -256,11 +256,10 @@
       </div>
     </div>
 
-    <input type="text" name="countries" id="project_countries" class="hidden"/>
-    <input type="text" name="regions_level1" id="project_regions_level1" class="hidden"/>
-    <input type="text" name="regions_level2" id="project_regions_level2" class="hidden"/>
-    <input type="text" name="regions_level3" id="project_regions_level3" class="hidden"/>
-
+    <input type="text" name="countries" id="project_countries" value="<%= @project.countries_ids  %>" class="hidden"/>
+    <input type="text" name="regions_level1" id="project_regions_level1" value="<%= @project.regions_level1_ids  %>" class="hidden"/>
+    <input type="text" name="regions_level2" id="project_regions_level2" value="<%= @project.regions_level2_ids  %>" class="hidden"/>
+    <input type="text" name="regions_level3" id="project_regions_level3" value="<%= @project.regions_level3_ids  %>" class="hidden"/>
 
   </div>
 
