@@ -163,7 +163,7 @@ SQL
   def projects_count(site)
     sql = "select count(distinct(pr.project_id)) as count from projects_regions as pr
     inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{site.id}
-    inner join projects as p on pr.project_id=p.id and (p.end_date is null OR p.end_date > now())
+    inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
     where pr.region_id=#{self.id}"
     ActiveRecord::Base.connection.execute(sql).first['count'].to_i
   end

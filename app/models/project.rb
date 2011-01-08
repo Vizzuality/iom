@@ -213,10 +213,10 @@ SQL
        INNER JOIN regions as r ON pr.region_id=r.id and r.level=#{level} and r.id=#{options[:region]}
        INNER JOIN countries_projects as cp ON cp.project_id=p.id
        INNER JOIN countries as c ON c.id=cp.country_id
-       INNER JOIN clusters_projects as cpro ON cpro.project_id=p.id
-       INNER JOIN clusters as clus ON clus.id=cpro.cluster_id
-       INNER JOIN projects_sectors as psec ON psec.project_id=p.id
-       INNER JOIN sectors as sec ON sec.id=psec.sector_id
+       LEFT JOIN clusters_projects as cpro ON cpro.project_id=p.id
+       LEFT JOIN clusters as clus ON clus.id=cpro.cluster_id
+       LEFT JOIN projects_sectors as psec ON psec.project_id=p.id
+       LEFT JOIN sectors as sec ON sec.id=psec.sector_id
        WHERE p.end_date is null OR p.end_date > now()
        GROUP BY p.id,p.name,o.id,o.name,p.created_at,p.description,p.end_date) as subq"
     elsif options[:cluster]
