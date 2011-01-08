@@ -319,7 +319,7 @@
   <div id="project_budget" class="field">
     <span class="input_short coin">
       <p class="coin">$</p>
-      <%= f.text_field :budget, :value => number_with_precision(f.object.budget, :precision => 0, :delimiter => ',') %>
+      <%= f.text_field :budget, :value => number_with_precision(f.object.budget, :precision => 2, :strip_insignificant_zeros => true, :delimiter => ',') %>
 
     </span>
   </div>

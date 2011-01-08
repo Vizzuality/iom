@@ -98,6 +98,15 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def budget=(ammount)
+    return if ammount.blank?
+
+    case ammount
+      when String then write_attribute(:budget, ammount.delete(',').to_f)
+      when Float  then write_attribute(:budget, ammount)
+    end
+  end
+
   def update_tag_counter(tag)
     tag.update_tag_counter
   end
