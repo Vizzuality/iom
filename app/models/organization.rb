@@ -183,4 +183,30 @@ SQL
     ActiveRecord::Base.connection.execute(sql).first['count'].to_i
   end
 
+  def private_funding=(ammount)
+    return if ammount.blank?
+
+    case ammount
+      when String then write_attribute(:private_funding, ammount.delete(',').to_f)
+      when Float  then write_attribute(:private_funding, ammount)
+    end
+  end
+
+  def usg_funding=(ammount)
+    return if ammount.blank?
+
+    case ammount
+      when String then write_attribute(:usg_funding, ammount.delete(',').to_f)
+      when Float  then write_attribute(:usg_funding, ammount)
+    end
+  end
+
+  def other_funding=(ammount)
+    return if ammount.blank?
+
+    case ammount
+      when String then write_attribute(:other_funding, ammount.delete(',').to_f)
+      when Float  then write_attribute(:other_funding, ammount)
+    end
+  end
 end
