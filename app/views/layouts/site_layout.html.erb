@@ -31,9 +31,13 @@
         </div>
         <div class="right">
           <ul>
-            <li><a href="/p/contact">contact us</a></li>
+            <% if Page.contact(@site)%>
+            <li><a href="<%= page_path(Page.contact(@site)) %>">contact us</a></li>
             <li>/</li>
-            <li><a href="/p/about">About the project</a></li>
+            <% end %>
+            <% if Page.about(@site)%>
+            <li><a href="<%= page_path(Page.about(@site)) %>">About the project</a></li>
+            <% end %>
           </ul>
         </div>
       </div>
@@ -49,9 +53,13 @@
           </div>
           <div class="links">
             <ul>
+              <% if Page.contact(@site) %>
               <li><a href="<%= page_path(Page.contact(@site)) %>">contact us</a></li>
               <li>/</li>
+              <% end %>
+              <% if Page.about(@site) %>
               <li><a href="<%= page_path(Page.about(@site)) %>">About the project</a></li>
+              <% end %>
             </ul>
           </div>
         </div>
