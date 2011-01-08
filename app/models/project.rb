@@ -210,8 +210,6 @@ SQL
        INNER JOIN sectors as sec ON sec.id=psec.sector_id
        WHERE p.end_date is null OR p.end_date > now()
        GROUP BY p.id,p.name,o.id,o.name,p.created_at,p.description,p.end_date) as subq"
-    elsif options[:country]
-      # TODO
     elsif options[:cluster]
       sql = "select distinct * from
        (SELECT p.id as project_id, p.name as project_name, p.description as project_description,
@@ -250,8 +248,6 @@ SQL
        INNER JOIN projects_sectors as psec ON psec.project_id=p.id and psec.sector_id=#{options[:sector]}
        WHERE p.end_date is null OR p.end_date > now()
        GROUP BY p.id,p.name,o.id,o.name,p.created_at,p.description,p.end_date) as subq"
-    elsif options[:donor_id]
-      # TODO
     elsif options[:organization]
       sql = "select distinct * from
        (SELECT p.id as project_id, p.name as project_name, p.description as project_description,
