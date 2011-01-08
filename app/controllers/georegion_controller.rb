@@ -19,7 +19,7 @@ class GeoregionController < ApplicationController
     @breadcrumb << country if @site.navigate_by_country?
 
     if geo_ids.size == 1 && @site.navigate_by_country?
-      @projects = Project.custom_find @site, :country => country.name,
+      @projects = Project.custom_find @site, :country => country.id,
                                              :level => 1,
                                              :per_page => 10,
                                              :page => params[:page],
@@ -29,8 +29,7 @@ class GeoregionController < ApplicationController
       # TODO
       @area_parent = "America"
 
-      sql="select *,
-        (select the_geom_geojson from regions where id=subq.id) as geojson
+      sql="select *
         from(
         select c.id,count(ps.project_id) as count,c.name,c.center_lon as lon,c.center_lat as lat
         from (countries_projects as cp

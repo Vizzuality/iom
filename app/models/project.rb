@@ -196,149 +196,29 @@ SQL
 
     sql = ""
     if options[:region]
-      sql = "select distinct * from
-       (SELECT p.id as project_id, p.name as project_name, p.description as project_description,
-       p.created_at, o.id as organization_id, o.name as organization_name,
-       p.end_date as end_date,
-       array_to_string(array_agg(distinct c.name),'|') as countries,
-       array_to_string(array_agg(distinct c.id),'|') as countries_ids,
-       array_to_string(array_agg(distinct sec.name),'|') as sectors,
-       array_to_string(array_agg(distinct sec.id),'|') as sector_ids,
-       array_to_string(array_agg(distinct clus.name),'|') as clusters,
-       array_to_string(array_agg(distinct clus.id),'|') as cluster_ids
-       FROM projects as p
-       INNER JOIN organizations as o ON p.primary_organization_id=o.id
-       INNER JOIN projects_sites as ps ON p.id=ps.project_id and ps.site_id=#{site.id}
-       INNER JOIN projects_regions as pr ON pr.project_id=p.id
-       INNER JOIN regions as r ON pr.region_id=r.id and r.level=#{level} and r.id=#{options[:region]}
-       INNER JOIN countries_projects as cp ON cp.project_id=p.id
-       INNER JOIN countries as c ON c.id=cp.country_id
-       LEFT JOIN clusters_projects as cpro ON cpro.project_id=p.id
-       LEFT JOIN clusters as clus ON clus.id=cpro.cluster_id
-       LEFT JOIN projects_sectors as psec ON psec.project_id=p.id
-       LEFT JOIN sectors as sec ON sec.id=psec.sector_id
-       WHERE p.end_date is null OR p.end_date > now()
-       GROUP BY p.id,p.name,o.id,o.name,p.created_at,p.description,p.end_date) as subq"
+      sql="select * from data_denormalization where regions_ids && '{#{options[:region]}}' and site_id=#{site.id} and is_active=true"
     elsif options[:cluster]
-      sql = "select distinct * from
-       (SELECT p.id as project_id, p.name as project_name, p.description as project_description,
-       p.created_at, o.id as organization_id, o.name as organization_name,
-       p.end_date as end_date,
-       array_to_string(array_agg(distinct r.name),'|') as regions,
-       array_to_string(array_agg(distinct r.id),'|') as regions_ids,
-       array_to_string(array_agg(distinct c.name),'|') as countries,
-       array_to_string(array_agg(distinct c.id),'|') as countries_ids
-       FROM projects as p
-       INNER JOIN organizations as o ON p.primary_organization_id=o.id
-       INNER JOIN projects_sites as ps ON p.id=ps.project_id and ps.site_id=#{site.id}
-       LEFT JOIN projects_regions as pr ON pr.project_id=p.id
-       LEFT JOIN regions as r ON pr.region_id=r.id and r.level=#{level}
-       LEFT JOIN countries_projects as cp ON cp.project_id=p.id
-       LEFT JOIN countries as c ON c.id=cp.country_id
-       INNER JOIN clusters_projects as cpro ON cpro.project_id=p.id and cpro.cluster_id=#{options[:cluster]}
-       WHERE p.end_date is null OR p.end_date > now()
-       GROUP BY p.id,p.name,o.id,o.name,p.created_at,p.description,p.end_date) as subq"
+      sql="select * from data_denormalization where cluster_ids && '{#{options[:cluster]}}' and site_id=#{site.id} and is_active=true"
     elsif options[:sector]
-      sql = "select distinct * from
-       (SELECT p.id as project_id, p.name as project_name, p.description as project_description,
-       p.created_at, o.id as organization_id, o.name as organization_name,
-       p.end_date as end_date,
-       array_to_string(array_agg(distinct r.name),'|') as regions,
-       array_to_string(array_agg(distinct r.id),'|') as regions_ids,
-       array_to_string(array_agg(distinct c.name),'|') as countries,
-       array_to_string(array_agg(distinct c.id),'|') as countries_ids
-       FROM projects as p
-       INNER JOIN organizations as o ON p.primary_organization_id=o.id
-       INNER JOIN projects_sites as ps ON p.id=ps.project_id and ps.site_id=#{site.id}
-       LEFT JOIN projects_regions as pr ON pr.project_id=p.id
-       LEFT JOIN regions as r ON pr.region_id=r.id and r.level=#{level}
-       LEFT JOIN countries_projects as cp ON cp.project_id=p.id
-       LEFT JOIN countries as c ON c.id=cp.country_id
-       INNER JOIN projects_sectors as psec ON psec.project_id=p.id and psec.sector_id=#{options[:sector]}
-       WHERE p.end_date is null OR p.end_date > now()
-       GROUP BY p.id,p.name,o.id,o.name,p.created_at,p.description,p.end_date) as subq"
+      sql="select * from data_denormalization where sector_ids && '{#{options[:sector]}}' and site_id=#{site.id} and is_active=true"
     elsif options[:organization]
-      sql = "select distinct * from
-       (SELECT p.id as project_id, p.name as project_name, p.description as project_description,
-       p.created_at,
-       p.end_date as end_date,
-       array_to_string(array_agg(distinct r.name),'|') as regions,
-       array_to_string(array_agg(distinct r.id),'|') as regions_ids,
-       array_to_string(array_agg(distinct c.name),'|') as countries,
-       array_to_string(array_agg(distinct c.id),'|') as countries_ids,
-       array_to_string(array_agg(distinct sec.name),'|') as sectors,
-       array_to_string(array_agg(distinct sec.id),'|') as sector_ids,
-       array_to_string(array_agg(distinct clus.name),'|') as clusters,
-       array_to_string(array_agg(distinct clus.id),'|') as cluster_ids
-       FROM projects as p
-       INNER JOIN projects_sites as ps ON p.id=ps.project_id and ps.site_id=#{site.id}
-       LEFT JOIN projects_regions as pr ON pr.project_id=p.id
-       LEFT JOIN regions as r ON pr.region_id=r.id and r.level=#{level}
-       LEFT JOIN countries_projects as cp ON cp.project_id=p.id
-       LEFT JOIN countries as c ON c.id=cp.country_id
-       LEFT JOIN clusters_projects as cpro ON cpro.project_id=p.id
-       LEFT JOIN clusters as clus ON clus.id=cpro.cluster_id
-       LEFT JOIN projects_sectors as psec ON psec.project_id=p.id
-       LEFT JOIN sectors as sec ON sec.id=psec.sector_id
-       WHERE (p.end_date is null OR p.end_date > now()) AND p.primary_organization_id=#{options[:organization]}
-       GROUP BY p.id,p.name,p.created_at,p.description,p.end_date) as subq"
+      sql="select * from data_denormalization where organization_id = #{options[:organization]} and site_id=#{site.id} and is_active=true"
     elsif options[:donor_id]
-      sql = "select distinct * from
-       (SELECT p.id as project_id, p.name as project_name, p.description as project_description,
-       p.created_at,
-       p.end_date as end_date, o.id as organization_id, o.name as organization_name,
-       array_to_string(array_agg(distinct r.name),'|') as regions,
-       array_to_string(array_agg(distinct r.id),'|') as regions_ids,
-       array_to_string(array_agg(distinct c.name),'|') as countries,
-       array_to_string(array_agg(distinct c.id),'|') as countries_ids,
-       array_to_string(array_agg(distinct sec.name),'|') as sectors,
-       array_to_string(array_agg(distinct sec.id),'|') as sector_ids,
-       array_to_string(array_agg(distinct clus.name),'|') as clusters,
-       array_to_string(array_agg(distinct clus.id),'|') as cluster_ids
-       FROM projects as p
-       INNER JOIN organizations as o ON p.primary_organization_id=o.id
-       INNER JOIN projects_sites as ps ON p.id=ps.project_id and ps.site_id=#{site.id}
-       INNER JOIN donations as d ON d.project_id=ps.project_id AND d.donor_id=#{options[:donor_id]}
-       LEFT JOIN projects_regions as pr ON pr.project_id=p.id
-       LEFT JOIN regions as r ON pr.region_id=r.id and r.level=#{level}
-       LEFT JOIN countries_projects as cp ON cp.project_id=p.id
-       LEFT JOIN countries as c ON c.id=cp.country_id
-       LEFT JOIN clusters_projects as cpro ON cpro.project_id=p.id
-       LEFT JOIN clusters as clus ON clus.id=cpro.cluster_id
-       LEFT JOIN projects_sectors as psec ON psec.project_id=p.id
-       LEFT JOIN sectors as sec ON sec.id=psec.sector_id
-       WHERE (p.end_date is null OR p.end_date > now())
-       GROUP BY p.id,p.name,p.created_at,o.id,o.name,p.description,p.end_date) as subq"
+      sql="select * from data_denormalization where donors_ids && '{#{options[:donor_id]}}' and site_id=#{site.id} and is_active=true"
     else
-      sql = "select dn.project_id, dn.project_name, dn.project_description, dn.organization_id,
-      dn.organization_name, dn.end_date, dn.regions, dn.regions_ids, dn.countries, dn.countries_ids,
-      dn.sectors, dn.sector_ids, dn.clusters, dn.cluster_ids, dn.is_active, dn.site_id
-      from data_denormalization as dn
-      inner join projects_regions on projects_regions.project_id=dn.project_id
-      inner join regions on projects_regions.region_id = regions.id and regions.level=#{site.level_for_region}
-       where site_id=#{site.id} AND is_active=true
-       group by dn.project_id, dn.project_name, dn.project_description, dn.organization_id,
-       dn.organization_name, dn.end_date, dn.regions, dn.regions_ids, dn.countries, dn.countries_ids,
-       dn.sectors, dn.sector_ids, dn.clusters, dn.cluster_ids, dn.is_active, dn.site_id"
-
-       sql_total_entries = "select count(distinct(dn.project_id))
-       from data_denormalization as dn
-       inner join projects_regions on projects_regions.project_id=dn.project_id
-       inner join regions on projects_regions.region_id = regions.id and regions.level=#{site.level_for_region}
-        where site_id=#{site.id} AND is_active=true"
-       total_entries = ActiveRecord::Base.connection.execute(sql_total_entries).first['count'].to_i
+      sql="select * from data_denormalization where site_id=#{site.id} and is_active=true"
     end
 
     if options[:country]
       sql << " WHERE "
       conditions = []
       if options[:country]
-        conditions << "countries like '%#{options[:country].sanitize_sql!}%'"
+        conditions << "countries_ids && '{#{options[:country]}}'"
       end
       sql << conditions.join(' and ')
     end
 
-    total_entries ||= ActiveRecord::Base.connection.execute("select count(*) as count from (#{sql}) as q").first['count'].to_i
+    total_entries = ActiveRecord::Base.connection.execute("select count(*) as count from (#{sql}) as q").first['count'].to_i
 
     total_pages = (total_entries.to_f / options[:per_page].to_f).ceil
 
