@@ -606,7 +606,7 @@ SQL
              INNER JOIN organizations as o ON p.primary_organization_id=o.id
              INNER JOIN projects_sites as ps ON p.id=ps.project_id
              LEFT JOIN projects_regions as pr ON pr.project_id=p.id
-             LEFT JOIN regions as r ON pr.region_id=r.id and r.level=3
+             LEFT JOIN regions as r ON pr.region_id=r.id and r.level=#{self.level_for_region}
              LEFT JOIN countries_projects as cp ON cp.project_id=p.id
              LEFT JOIN countries as c ON c.id=cp.country_id
              LEFT JOIN clusters_projects as cpro ON cpro.project_id=p.id 
@@ -614,7 +614,7 @@ SQL
              LEFT JOIN projects_sectors as psec ON psec.project_id=p.id
              LEFT JOIN sectors as sec ON sec.id=psec.sector_id
              LEFT JOIN donations as d ON d.project_id=ps.project_id
-             where site_id=1
+             where site_id=#{self.id}
              GROUP BY p.id,p.name,o.id,o.name,p.description,p.end_date,ps.site_id,p.created_at) as subq"
        ActiveRecord::Base.connection.execute(sql)
       
