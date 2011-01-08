@@ -11,8 +11,9 @@
 <body>
 
   <% unless action_name == 'home' && controller_name == 'sites' %>
-    <!-- div id="header" -->
-    <%= render :partial => 'shared/menu' %>
+    <% cache("#{@site.id}/home/menu") do %>
+      <%= render :partial => 'shared/menu' %>
+    <% end %>
   <% end %>
 
   <div id="outer_layout">

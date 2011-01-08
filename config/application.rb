@@ -13,6 +13,8 @@ module Iom
     config.encoding = "utf-8"
 
     config.filter_parameters += [:password]
+
+    config.autoload_paths += %W(#{Rails.root}/app/controllers/sweepers)
   end
 end
 

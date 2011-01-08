@@ -14,8 +14,9 @@
   </div>
 </div>
 
-<!-- div id="header" -->
-<%= render :partial => 'shared/menu'  %>
+<% cache("#{@site.id}/home/menu") do %>
+  <%= render :partial => 'shared/menu'  %>
+<% end %>
 
 <div id="map" class="home"></div>
 <a href="#zoom_in" id="zoomIn" onclick="zoomIn()"></a>
@@ -94,7 +95,7 @@
           <p>Please stay tuned.</p>
         </span>
         <span class="bottom_tooltip"></span>
-      </div>  
+      </div>
     </h3>
     <div id="projects">
       <%= render 'projects/projects' %>

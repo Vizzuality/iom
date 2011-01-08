@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
 
   include AuthenticatedSystem
 
+  cache_sweeper :menu_sweeper
+
   protected
 
     # Site management
