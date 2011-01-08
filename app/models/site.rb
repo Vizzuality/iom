@@ -586,7 +586,7 @@ SQL
       ActiveRecord::Base.connection.execute(sql)      
       #Work on the denormalization
       
-      sql="insert into data_denormalization(project_id,project_name,project_description,organization_id,organization_name,end_date,regions,regions_ids,countries,countries_ids,sectors,sector_ids,clusters,cluster_ids,is_active,site_id)
+      sql="insert into data_denormalization(project_id,project_name,project_description,organization_id,organization_name,end_date,regions,regions_ids,countries,countries_ids,sectors,sector_ids,clusters,cluster_ids,is_active,site_id,created_at)
       select  * from
              (SELECT p.id as project_id, p.name as project_name, p.description as project_description,
              o.id as organization_id, o.name as organization_name,
