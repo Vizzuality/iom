@@ -157,7 +157,7 @@
            <% elsif @project.start_date?%>
             <div class="block">
               <h3>Project timeline</h3>
-              <p>Active since <%= @project.start_date.strftime("%d/%m/%Y") %></p>
+              <p>Active since <%= @project.start_date.strftime("%m/%d/%Y") %></p>
              </div>
            <%end%>
 
