@@ -15,10 +15,12 @@
         <div class="block">
             <h2><%= @page.title %> IN THIS SITE</h2>
             <ul>
-              <li><%= link_to(@page.title, page_path(@page)) %>
-              <% if @page.children.any? %>
+              <% top_parent = @page.top_parent %>
+              <li><%= link_to(top_parent.title, page_path(top_parent)) %>
+              <% pages      = top_parent.children %>
+              <% if pages.any? %>
                 <ul>
-                  <% @page.children.each do |child| %>
+                  <% pages.each do |child| %>
                   <li><%= link_to(child.title, page_path(child)) %></li>
                   <% end %>
                 </ul>
