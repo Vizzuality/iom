@@ -16,6 +16,7 @@ class AddCachingDenormalizedTable < ActiveRecord::Migration
       sector_ids integer[],
       clusters text,
       cluster_ids integer[],
+      donors_ids integer[],
       is_active boolean,
       site_id integer,
       created_at timestamp without time zone

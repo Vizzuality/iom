@@ -37,6 +37,14 @@ class Page < ActiveRecord::Base
     end
   end
 
+  def top_parent
+    parent_page = self
+    while parent_page.parent
+      parent_page = parent_page.parent
+    end
+    parent_page
+  end
+
   def to_param
     permalink
   end

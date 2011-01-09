@@ -164,7 +164,7 @@
          <% unless @project.budget.nil? || @project.budget.eql?(0.0) %>
          <div class="block">
            <h3>Project budget</h3>
-           <p class="budget"><%= number_with_delimiter(@project.budget) %></p>
+           <p class="budget"><%= number_with_precision(@project.budget, :precision => 0, :delimiter => ',') %></p>
          </div>
          <%end%>
 
