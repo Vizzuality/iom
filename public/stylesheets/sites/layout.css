@@ -595,6 +595,8 @@ div#footer_pages div.left div.project h1 a{float:left; padding:0; margin:0; font
 div#footer_pages div.left div.project p {float:left; padding:0; margin:5px 0 0 0 ; font:normal 13px "PT Sans"; color:#B3B3B3;}
 div#footer_pages div.left div.project p a {color:#B3B3B3;}
 div#footer_pages div.left div.project p a:hover {text-decoration:underline;}
+div#footer_pages div.left div.project p.site_name {font:normal 13px "PT Sans Bold";}
+div#footer_pages div.left div.project p.site_name a {color:#B3B3B3; text-decoration:underline;}
 div#footer_pages div.right {width:245px; margin:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline; text-align:right;}
 div#project_layout div#footer_pages div.right {width:280px; margin:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline; text-align:right;}
 div#footer_pages div.right ul {float:left; margin:19px 0 0 0; padding:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
