@@ -26,7 +26,7 @@ module SearchHelper
     active_facets = ''
     if params[:cluster_id]
       cluster = @clusters.map{|c| c.first}.select{|c| c.id == params[:cluster_id].to_i}.first
-      active_facets << "in #{link_to(cluster.name, remove_filter_url(:cluster_id))} CLUSTER"
+      active_facets << "in #{link_to(cluster.name, remove_filter_url(:cluster_id))} #{@site.word_for_clusters.singularize.upcase}"
     end
     if params[:region_id]
       region = @regions.map{|r| r.first}.select{|r| r.id == params[:region_id].to_i}.first
