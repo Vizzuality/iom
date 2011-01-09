@@ -1,6 +1,6 @@
-class MenuSweeper < ActionController::Caching::Sweeper
+class PageSweeper < ActionController::Caching::Sweeper
 
-  observe Cluster,Sector,Organization,Page,Site,Region
+  observe Page
 
   def after_save(record)
     Site.select("id").all.each do |site|
