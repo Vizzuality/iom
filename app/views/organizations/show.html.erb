@@ -50,11 +50,11 @@
           <div class="head">
             <h2>OVERVIEW</h2>
           </div>
-          
-          <% if !@organization.budget.blank? %>          
+
+          <% if !@organization.budget.blank? %>
             <div class="block">
               <h3>FUNDING FOR <%= @site.name %></h3>
-              <p class="budget"><%= number_with_delimiter(@organization.budget) %></p>
+              <p class="budget"><%= number_with_precision(@organization.budget, :precision => 0, :delimiter => ',') %></p>
               <h3 class="secondary">FUNDING SOURCES</h3>
               <p><%= funding_percentages(@organization) %></p>
             </div>
@@ -140,7 +140,7 @@
 
       <!-- RIGHT PART -->
       <div class="right">
-        <h3><%= pluralize(@organization.projects_count(@site), 'PROJECT', 'PROJECTS') %> in <%= pluralize(@organization.total_regions(@site), @site.word_for_regions.singularize, @site.word_for_regions) %> <a id="see_all" href="#">See all</a> 
+        <h3><%= pluralize(@organization.projects_count(@site), 'PROJECT', 'PROJECTS') %> in <%= pluralize(@organization.total_regions(@site), @site.word_for_regions.singularize, @site.word_for_regions) %> <a id="see_all" href="#">See all</a>
           <div class="tooltip">
             <span class="body_tooltip">
               <label>Coming soon!</label>
