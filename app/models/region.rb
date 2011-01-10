@@ -124,7 +124,7 @@ class Region < ActiveRecord::Base
     unless site.navigate_by_country?
       Region.find_by_sql(<<-SQL
         select * from
-        (select re.id, re.name, re.level, re.country_id, re.parent_region_id,
+        (select re.id, re.name, re.level, re.country_id, re.parent_region_id, re.path,
              ST_Distance((select ST_Centroid(the_geom) from regions where id=#{self.id}), ST_Centroid(the_geom)) as dist,
              (
               select count(*) from projects_regions as pr
@@ -144,7 +144,7 @@ SQL
     else
       Region.find_by_sql(<<-SQL
         select * from
-        (select re.id, re.name, re.level, re.country_id, re.parent_region_id,
+        (select re.id, re.name, re.level, re.country_id, re.parent_region_id, re.path,
              ST_Distance((select ST_Centroid(the_geom) from regions where id=#{self.id}), ST_Centroid(the_geom)) as dist,
              (select count(*) from projects_regions as pr where region_id=re.id) as count
              from regions as re
