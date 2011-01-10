@@ -10,8 +10,10 @@
 
         //Number of men for painting
 		var people_width = $('span.people_amount').attr('estimate');
-		// console.log(custRound(custLog(Number(people_width),10),0));
-        $('span.people_amount').width(people_width/5);
+			
+		people_width = custLog(Number(people_width),10);
+        $('span.people_amount').width(255*(people_width/7));
+		if ($('span.people_amount').width() == 0) $('span.people_amount').width(5);
         $('span.people_amount').css('display','block');
 
         //If left part is bigger than float right
