@@ -496,7 +496,13 @@ class Site < ActiveRecord::Base
 
   def countries
     if geographic_context_country_id.blank? && geographic_context_region_id.blank?
-      Country.select(Country.custom_fields).all
+      Country.find_by_sql(<<-SQL
+        select id,name from countries
+        where id in (select country_id 
+        from countries_projects as cr inner join projects_sites as ps 
+        on cr.project_id=ps.project_id and site_id=#{self.id}) order by name
+SQL
+      )
     else
       if geographic_context_region_id.blank?
         Country.find(self.geographic_context_country_id, :select => Country.custom_fields)
@@ -512,12 +518,24 @@ class Site < ActiveRecord::Base
     else
       # Region.where(:country_id => geographic_context_country_id, :level => level_for_region).get_select_values
       Region.find_by_sql(<<-SQL
-        SELECT id,name,level,parent_region_id,country_id,path
-          FROM "regions"
-          WHERE ("regions"."level" = #{level_for_region}) AND ("regions"."country_id" = #{geographic_context_country_id}) ORDER BY name ASC;
+        select id,name,path from regions
+        where level=#{level_for_region}
+        and id in (select region_id from projects_regions as pr 
+        inner join projects_sites as ps on pr.project_id=ps.project_id and site_id=#{self.id})
+        order by name
 SQL
       )
     end
+  end
+  
+  def organizations_select
+    Organization.find_by_sql(<<-SQL
+        select distinct o.id,o.name from organizations as o
+        inner join projects as p on p.primary_organization_id=o.id 
+        inner join projects_sites as ps on p.id=ps.project_id and site_id=#{self.id}
+        order by o.name
+SQL
+    )
   end
 
   def regions
