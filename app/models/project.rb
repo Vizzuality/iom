@@ -58,10 +58,6 @@ class Project < ActiveRecord::Base
 
   attr_accessor :sectors_ids, :clusters_ids
 
-  def before_save
-    self.the_geom ||= Point.from_x_y(1,1)
-  end
-
   def sectors_ids=(value)
     value.each do |sector_id|
       if sector = Sector.find(sector_id)
@@ -152,6 +148,7 @@ class Project < ActiveRecord::Base
       from data_denormalization where
       organization_id = #{self.primary_organization_id}
       and project_id!=#{self.id} and site_id=#{site.id} and is_active=true
+      and (select center_lat from regions where id=regions_ids[1]) is not null
       limit #{limit}
 SQL
     )
@@ -166,6 +163,7 @@ SQL
           from data_denormalization where
           regions_ids && (select ('{'||array_to_string(array_agg(region_id),',')||'}')::integer[] as regions_ids from projects_regions where project_id=#{self.id})
           and project_id!=#{self.id} and site_id=#{site.id} and is_active=true
+          and (select center_lat from regions where id=regions_ids[1]) is not null
           limit #{limit}
 SQL
     )

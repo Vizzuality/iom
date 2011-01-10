@@ -261,6 +261,8 @@ class Site < ActiveRecord::Base
       2
     elsif navigate_by_level3?
       3
+    else
+      0
     end
   end
 
@@ -516,7 +518,6 @@ SQL
     if geographic_context_country_id.blank? && geographic_context_region_id.blank?
       []
     else
-      # Region.where(:country_id => geographic_context_country_id, :level => level_for_region).get_select_values
       Region.find_by_sql(<<-SQL
         select id,name,path from regions
         where level=#{level_for_region}

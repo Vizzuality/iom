@@ -54,11 +54,11 @@ div.main_layout p.link_to_back {background:url('/images/backoffice/common/red_ar
 div.main_layout p.link_to_back a {float:left; font:normal 13px Arial; color:#CC5B4B; padding:0 0 0 22px;}
 div.main_layout p.link_to_back a:hover {cursor:pointer; text-decoration:underline;}
 div.main_layout div.block {float:left; width:942px; margin:20px 0 0 0;}
-div.main_layout div.block.first {margin:40px 0 0 0;}
+div.main_layout div.block.first {margin:20px 0 0 0;}
 div.main_layout div.block div.top {float:left; width:942px; height:15px; background:url('/images/backoffice/backgrounds/top_long.png') no-repeat center 0; position:relative;}
 div.main_layout div.block div.med {float:left; width:880px; padding:16px 31px 28px; background:url('/images/backoffice/backgrounds/mid_long.png') repeat-y center 0;}
 /*add new site,donor,...*/
-div.add_new {float:left; width:922px; height:98px; padding:5px; margin:25px 0 0 5px; background:url('/images/backoffice/dashboard/add_new_bkg.png') no-repeat center 0;}
+div.add_new {float:left; width:922px; height:98px; padding:5px; margin:20px 0 0 5px; background:url('/images/backoffice/dashboard/add_new_bkg.png') no-repeat center 0;}
 div.add_new a {float:left; width:922px; height:70px; padding:28px 0 0 0; margin:0px; background:url('/images/backoffice/dashboard/add_bkg_a.png') repeat-x 0 0; text-align:center; font:normal 27px "Museo Sans",Arial; color:white;}
 div.add_new a:hover {background-position:0 -98px;}
 div.add_new a strong {float:left; width:100%; font:normal 15px Arial; color:#C3DB9F; text-align:center;}
