@@ -4,7 +4,7 @@
       <div class="float_left">
         <div class="outer_head">
           <div class="head">
-            <h1><%= @page.title %> <%= @site.name %></h1>
+            <h1><%= @page.title %></h1>
           </div>
         </div>
         <div class="body">
@@ -13,7 +13,7 @@
       </div>
       <div class="right">
         <div class="block">
-            <h2><%= @page.title %> IN THIS SITE</h2>
+            <h2><%= @page.title %></h2>
             <ul>
               <% top_parent = @page.top_parent %>
               <li><%= link_to(top_parent.title, page_path(top_parent)) %>

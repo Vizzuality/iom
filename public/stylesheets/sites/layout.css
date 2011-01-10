@@ -595,6 +595,8 @@ div#footer_pages div.left div.project h1 a{float:left; padding:0; margin:0; font
 div#footer_pages div.left div.project p {float:left; padding:0; margin:5px 0 0 0 ; font:normal 13px "PT Sans"; color:#B3B3B3;}
 div#footer_pages div.left div.project p a {color:#B3B3B3;}
 div#footer_pages div.left div.project p a:hover {text-decoration:underline;}
+div#footer_pages div.left div.project p.site_name {font:normal 13px "PT Sans Bold";}
+div#footer_pages div.left div.project p.site_name a {color:#B3B3B3; text-decoration:underline;}
 div#footer_pages div.right {width:245px; margin:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline; text-align:right;}
 div#project_layout div#footer_pages div.right {width:280px; margin:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline; text-align:right;}
 div#footer_pages div.right ul {float:left; margin:19px 0 0 0; padding:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
@@ -621,17 +623,19 @@ div#footer_errors div.right ul li a:hover {text-decoration:underline;}
 
 /* FOOTER OTHER */
 div#footer {clear:both; width:100%; padding:100px 0 100px 0;}
-div#footer div.right {width:600px; margin:0 0 0 60px; background:none; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#footer div.right {float: left; width:850px; margin:5px 0 0 10px; background:none; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#footer div.right div.project {float:left; width:350px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#footer div.right div.project h1 {font:normal 13px "PT Sans Bold"; color:#888888; text-transform:uppercase; display:inline-block;}
 div#footer div.right div.project p {padding:0; font:normal 13px "PT Sans"; color:#B3B3B3;}
 div#footer div.right div.project p a {color:#B3B3B3;}
 div#footer div.right div.project p a:hover {text-decoration:underline;}
+div#footer div.right div.project p.site_name {font:normal 13px "PT Sans Bold";}
+div#footer div.right div.project p.site_name a {color:#B3B3B3; text-decoration:underline;}
 div#footer div.right div.links {float:right; width:auto; margin:15px 0 0 0;}
 div#footer div.right div.links ul {float:left; margin:0; padding:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#footer div.right div.links ul li {margin:0 0 0 6px; padding:0; font:normal 13px "PT Sans"; color:#B3B3B3; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#footer div.right div.links ul li a {color:#B3B3B3;}
 div#footer div.right div.links ul li a:hover {text-decoration:underline;}
-div#footer div.left {float:left; width:272px; margin:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline; text-align:right;}
+div#footer div.left {float:left; margin:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline; text-align:right;}
 div#footer div.left a.logo {float:left; display:block; width:67px; height:43px; background:url('/images/sites/common/logo_interaction.png') no-repeat 0 0;}
 div#footer div.left a.logo:hover {cursor:pointer;}

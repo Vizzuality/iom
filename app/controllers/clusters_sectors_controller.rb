@@ -25,14 +25,25 @@ class ClustersSectorsController < ApplicationController
 
     respond_to do |format|
       format.html do
-        # Get the data for the map depending on the region definition of the site (country or region)
-        sql="select r.id,r.name,count(ps.*) as count,r.center_lon as lon,r.center_lat as lat,r.name,'/regions/'||r.id as url,r.code
-        from regions as r
-          inner join projects_regions as pr on r.id=pr.region_id and r.level=#{@site.level_for_region}
-          inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{@site.id}
-          inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
-          inner join clusters_projects as cp on cp.project_id=p.id and cp.cluster_id=#{params[:id].gsub(/\\/, '\&\&').gsub(/'/, "''")}
-          group by r.id,r.name,lon,lat,r.name,url,r.code"
+        if @data.is_a?(Cluster)
+          # Get the data for the map depending on the region definition of the site (country or region)
+          sql="select r.id,r.name,count(ps.*) as count,r.center_lon as lon,r.center_lat as lat,r.name,'/regions/'||r.id as url,r.code
+          from regions as r
+            inner join projects_regions as pr on r.id=pr.region_id and r.level=#{@site.level_for_region}
+            inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{@site.id}
+            inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
+            inner join clusters_projects as cp on cp.project_id=p.id and cp.cluster_id=#{params[:id].sanitize_sql!}
+            group by r.id,r.name,lon,lat,r.name,url,r.code"
+        else
+          # Get the data for the map depending on the region definition of the site (country or region)
+          sql="select r.id,r.name,count(ps.*) as count,r.center_lon as lon,r.center_lat as lat,r.name,'/regions/'||r.id as url,r.code
+          from regions as r
+            inner join projects_regions as pr on r.id=pr.region_id and r.level=#{@site.level_for_region}
+            inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{@site.id}
+            inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
+            inner join projects_sectors as pse on pse.project_id=p.id and pse.sector_id=#{params[:id].sanitize_sql!}
+            group by r.id,r.name,lon,lat,r.name,url,r.code"
+        end
 
         result=ActiveRecord::Base.connection.execute(sql)
         @map_data=result.to_json

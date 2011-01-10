@@ -25,8 +25,8 @@ module ProjectsHelper
 
   def clusters_to_sentence(project)
     return "" if project['clusters'].nil? || project['cluster_ids'].nil?
-    clusters = project['clusters'].split('|')
-    clusters_ids = project['cluster_ids'].split('|')
+    clusters = project['clusters'].split('|').reject{|c| c.blank?}
+    clusters_ids = project['cluster_ids'].delete('{}').split(',')
     if clusters.size == 1
       "A #{link_to clusters.first, cluster_path(clusters_ids.first), :title => clusters.first} project"
     else
@@ -36,8 +36,8 @@ module ProjectsHelper
 
   def sectors_to_sentence(project)
     return "" if project['sectors'].nil? || project['sector_ids'].nil?
-    sectors = project['sectors'].split('|')
-    sectors_ids = project['sector_ids'].split('|')
+    sectors = project['sectors'].split('|').reject{|s| s.blank?}
+    sectors_ids = project['sector_ids'].delete('{}').split(',')
     if sectors.size == 1
       "A #{link_to sectors.first, sector_path(sectors_ids.first), :title => sectors.first} project"
     else
@@ -66,8 +66,8 @@ module ProjectsHelper
 
   def project_regions_and_countries(project)
     return if project['regions'].nil? || project['regions_ids'].nil?
-    regions     = project['regions'].split('|')
-    regions_ids = project['regions_ids'].split('|')
+    regions     = project['regions'].split('|').reject{|r| r.blank?}
+    regions_ids = project['regions_ids'].delete('{}').split(',')
 
     if regions.size == 1
       "in #{link_to(regions.first, "/regions/#{regions_ids.first}", :title => regions.first)}"
