@@ -126,7 +126,7 @@ div#header ul.menu li div.header_title {display:none;}
 div#header ul.menu li div.header_title a {display:none;}
 div#header ul.menu li#cluster_option.clicked div.header_title {position:absolute; top:0; left:-10px; background:url('/images/sites/common/menu/cluster_head_clicked.png') no-repeat 0 0; width:94px; height:35px; display:inline;}
 div#header ul.menu li#sector_option.clicked div.header_title {position:absolute; top:0; left:-10px; background:url('/images/sites/common/menu/cluster_head_clicked.png') no-repeat 0 0; width:94px; height:35px; display:inline;}
-div#header ul.menu li.clicked div.header_title a {float:left; margin:8px 0 0 10px; padding:0 8px 0 0; font:normal 13px "Geneva"; color:white; text-decoration:none; display:inline; background:url('/images/sites/common/arrow_menu.png') no-repeat right 6px;}
+div#header ul.menu li.clicked div.header_title a {float:left; margin:7px 0 0 10px; padding:0 8px 0 0; font:normal 13px "Geneva"; color:white; text-decoration:none; display:inline; background:url('/images/sites/common/arrow_menu.png') no-repeat right 7px;}
 
 /*COUNTRY*/
 div#header ul.menu li#country_option.clicked div.header_title {position:absolute; top:0; left:-15px; background:url('/images/sites/common/menu/country_head_clicked.png') no-repeat 0 0; width:106px; height:35px; display:inline;}
@@ -142,23 +142,23 @@ div#header ul.menu li#region_option.clicked span.suboptions_body_top {position:a
 div#header ul.menu li#region_option.clicked div.suboptions_body {position:absolute; top:37px; left:-19px; z-index:110; background:url('/images/sites/common/menu/region_body_clicked.png') repeat-y 0 bottom; display:none; width:238px; max-height:238px; height:auto; display:inline; padding:7px; display:inline;}
 div#header ul.menu li#region_option.clicked div.suboptions_body div.content_float {float:left; width:238px; height:auto; background:url('/images/sites/common/menu/region_body_clicked.png') repeat-y 0 bottom;}
 
-div#header ul.menu li#region_option.clicked div.header_title a {margin:8px 0 0 15px;}
+div#header ul.menu li#region_option.clicked div.header_title a {margin:7px 0 0 15px;}
 div#header ul.menu li#region_option.clicked ul.content {float:left; width:204px; height:auto; max-height:213px; overflow-x:hidden; overflow-y:auto; margin:0 0 0 13px; padding:0 0 5px 0;}
 div#header ul.menu li#region_option.clicked ul.content li {float:left; margin:3px 0 0 0; width:185px;}
 div#header ul.menu li#region_option.clicked ul.content li a {float:left; margin:0; font:normal 13px "PT Sans"; color:#C0C0BF; text-decoration:none;}
 div#header ul.menu li#region_option.clicked ul.content li a:hover {color:white;}
 
 
-div#header ul.menu li#organization_option.clicked div.header_title {position:absolute; top:0; left:-15px; background:url('/images/sites/common/menu/org_head_clicked.png') no-repeat 0 0; width:138px; height:35px; display:inline;}
+div#header ul.menu li#organization_option.clicked div.header_title {position:absolute; top:-1px; left:-15px; background:url('/images/sites/common/menu/org_head_clicked.png') no-repeat 0 0; width:138px; height:36px; display:inline;}
 div#header ul.menu li#organization_option.clicked div.suboptions_body {position:absolute; top:35px; left:-15px; z-index:110; background:url('/images/sites/common/menu/org_body_clicked.png') no-repeat 0 0; display:none; width:238px; height:234px; display:inline; padding:7px; display:inline;}
 div#header ul.menu li#organization_option.clicked div.suboptions_body span.suboptions_body_top {position:absolute; top:-2px; left:0; z-index:110; background:url('/images/sites/common/menu/org_body_clicked_top.png') no-repeat 0 0; width:234px; height:2px; display:none;}
 div#header ul.menu li#organization_option.clicked div.suboptions_body.short {position:absolute; width:238px; height:auto; background:url('/images/sites/common/menu/org_body_clicked_repeaty.png') repeat-y 0 bottom!important; top:37px; max-height:262px; padding:2px 7px 13px;}
 div#header ul.menu li#organization_option.clicked div.suboptions_body.short span.suboptions_body_top {display:inline;}
 
 
-div#header ul.menu li#organization_option.clicked div.suboptions_body input[type="text"]#ngos_search{float:left; margin:3px 0 0 7px; background:url('/images/sites/common/menu/input_ngos.png') no-repeat 0 0; width:191px; height:22px; padding:0 7px; font:normal 13px Arial; color:#B7B7B7; border:0px;}
+div#header ul.menu li#organization_option.clicked div.suboptions_body input[type="text"]#ngos_search{float:left; margin:3px 0 0 7px; background:url('/images/sites/common/menu/input_ngos.png') no-repeat 0 0; width:191px; height:22px; padding:0 7px; font:normal 13px Arial; color:#666666; border:0px;}
 div#header ul.menu li#organization_option.clicked div.suboptions_body.short input[type="text"]{display:none!important;}
-div#header ul.menu li#organization_option.clicked div.header_title a {margin:8px 0 0 15px; padding:0 8px 0 0; background:url('/images/sites/common/arrow_menu.png') no-repeat right 6px;}
+div#header ul.menu li#organization_option.clicked div.header_title a {margin:8px 0 0 15px; padding:0 8px 0 0; background:url('/images/sites/common/arrow_menu.png') no-repeat right 7px;}
 div#header ul.menu li#organization_option.clicked div.suboptions_body.short ul.content {margin:3px 0 0 13px;}
 div#header ul.menu li#organization_option.clicked ul.content {float:left; width:204px; height:189px; overflow-x:hidden; overflow-y:auto; margin:17px 0 0 13px;}
 div#header ul.menu li#organization_option.clicked ul.content li {float:left; margin:3px 0 0 0; width:185px;}
@@ -179,7 +179,7 @@ div#header ul.menu li a.with_suboptions {padding:0 8px 0 0; background:url('/ima
 div#header ul.menu li a span.with_suboptions {display:none;}
 div#header ul.menu li div.suboptions_body {display:none;}
 div#header ul.menu li ul.suboptions {position:absolute; top:20px; left:-13px; background-color:#2F2E2C; z-index:110; display:none;}
-div#header ul.menu li ul.suboptions li {float:left; width:150px; padding:0 5px; margin:9px 0 0 0; height:auto; z-index:10;}
+div#header ul.menu li ul.suboptions li {float:left; width:148px; padding:0 5px; margin:9px 0 0 0; height:auto; z-index:10;}
 
 div#header div.right {margin:10px 0 0 0; width:auto; height:20px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#header div.right form.search {position:relative; float:right;}
@@ -393,10 +393,12 @@ div.statistics ul.chart li a:hover {color:#333333;}
 div.statistics ul.chart li.pos1 {background:url('/images/sites/icons/chart_pos1.png') no-repeat 0 4px!important;}
 div.statistics ul.chart li.pos2 {background:url('/images/sites/icons/chart_pos2.png') no-repeat 0 4px!important;}
 div.statistics ul.chart li.pos3 {background:url('/images/sites/icons/chart_pos3.png') no-repeat 0 4px!important;}
+div.statistics p.other {float:left; margin:10px 0 0 0!important; font:normal 13px Arial!important;}
 
 /*cluster*/
 div.statistics ul.statistics_list {width:270px; height:auto; padding:0; margin:10px 0 0 0;}
 div.statistics ul.statistics_list li {float:left; width:100%!important; padding:0!important; margin:3px 0 0 0!important; height:auto; position:relative;}
+
 
 /*ICONS*/
 /* TO PROGRESS BAR */
@@ -559,10 +561,10 @@ div.projects div.right div.block ul li a {color:#CE5D4C; text-decoration:none;}
 div.projects div.right div.block ul li a:hover {text-decoration:underline;}
 div.projects div.right div.block p {width:252px; padding:7px 0 0 0; font:normal 13px Arial; color:#666666; line-height:17px;}
 div.projects div.right div.block p.no_margin {padding:3px 0 0 0;}
-div.projects div.right div.block p.budget {padding:5px 0 0 10px; font:normal 25px "Aller"; color:#666666; background:url('/images/sites/icons/budget.png') no-repeat 0 16px;}
+div.projects div.right div.block p.budget {padding:3px 0 0 10px; font:normal 25px "Aller"; color:#666666; background:url('/images/sites/icons/budget.png') no-repeat 0 14px;}
 div.projects div.right div.block p a {color:#CE5D4C; text-decoration:none;} /* TODO: color*/
 div.projects div.right div.block p a:hover {text-decoration:underline;}
-div.projects div.right div.block span.people_amount {display:none; height:20px; padding:0; background:url('/images/sites/projects/man.png') repeat 0 0; max-width:255px;}
+div.projects div.right div.block span.people_amount {display:none; height:20px; padding:0; background:url('/images/sites/projects/man.png') repeat 0 0; max-width:255px; margin:2px 0 0 0;}
 div.projects div.right div.block p.estimate {font:normal 25px "Aller"; color:#666666; width:auto;}
 div.projects div.right div.block p.estimate sup {font:normal 13px "Aller"; color:#666666;}
 div.projects div.right div.block div.timeline {position:relative; width:237px; height:23px; padding:3px; margin:6px 0 0 0; background:url('/images/sites/projects/days_left_bkg.png') no-repeat 0 0;}

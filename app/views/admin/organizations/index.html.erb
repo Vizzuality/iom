@@ -30,7 +30,7 @@
               <% @organizations.each do |organization| %>
                 <li>
                   <h3><%= link_to(truncate(organization.name, :length => 60), edit_admin_organization_path(organization)) %></h3>
-                  <p class="red"><%= link_to(pluralize(organization.projects.count,' project','projects'), edit_admin_organization_path(organization)) %></a></p>
+                  <p class="red"><%= link_to(pluralize(organization.projects.count,' project','projects'), admin_organization_projects_path(organization)) %></a></p>
                   <p><a href="mailto:<%= organization.contact_email %>"><%= truncate(organization.contact_email, :length => 20, :omission => '...') %></a></p>
                 </li>
               <% end -%>

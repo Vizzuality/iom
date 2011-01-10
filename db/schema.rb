@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110110131044) do
+ActiveRecord::Schema.define(:version => 20110110191540) do
 
   create_table "clusters", :force => true do |t|
     t.string "name"
@@ -234,7 +234,7 @@ ActiveRecord::Schema.define(:version => 20110110131044) do
     t.text     "site_specific_information"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.geometry "the_geom",                                :limit => nil,  :null => false, :srid => 4326
+    t.geometry "the_geom",                                :limit => nil,  :srid => 4326
     t.text     "activities"
     t.string   "intervention_id"
     t.text     "additional_information"

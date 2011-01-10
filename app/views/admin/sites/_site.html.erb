@@ -29,7 +29,9 @@
         <% elsif site.geographic_context_region_id? %>
           <p>Limited to <strong><%= site.region.name %> region</strong></p>
         <% end %>
+        <% if site.published? %>
         <p>Available <%= link_to('here', url(site)) %></p>
+        <% end %>
       </div>
       <div class="right_graph">
         <img src="http://chart.apis.google.com/chart?chs=590x120&cht=ls&chco=333333&chd=t:<%= site.last_visits(30) %>|<%= site.last_visits(30) %>&chls=2&chma=6,6,6,6&chm=o,333333,0,-1,12|o,FFFFFF,0,-1,8" width="590" height="120" style="border-bottom:1px solid #CCCCCC" alt="Graph">
