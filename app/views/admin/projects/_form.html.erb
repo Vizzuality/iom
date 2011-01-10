@@ -31,7 +31,7 @@
       <div class="wrapper">
         <ul class="list_combo_content scroll_pane">
             <% Organization.get_select_values.each do |organization| %>
-              <li class="element" id="<%= organization.id %>"><p class="project_name"><%= truncate(organization.name, :length=> 40) %></p><p class="amount_projects"><%= pluralize(organization.projects.count, 'project', 'projects')%></p></li>
+              <li class="element" id="orgs_<%= organization.id %>"><p class="project_name"><%= truncate(organization.name, :length=> 40) %></p><p class="amount_projects"><%= pluralize(organization.projects.count, 'project', 'projects')%></p></li>
             <% end -%>
         </ul>
       </div>
@@ -133,11 +133,11 @@
     <div class="cluster_options">
       <span class="combo_cluster_options">
         <%= errors_for_span(@project, :clusters) %>
-        <p id="0">Select more clusters</p>
+        <p id="clusters_0">Select more clusters</p>
         <div class="wrapper">
           <ul class="options scroll_pane">
           <% Cluster.get_select_values.collect do |cluster| %>
-            <li><a id="<%= cluster.id %>"><%= cluster.name %></a></li>
+            <li><a id="clusters_<%= cluster.id %>"><%= cluster.name %></a></li>
           <% end %>
             <li class="last"></li>
           </ul>
@@ -163,11 +163,11 @@
       <span id="sector" class="combo_sector_options">
         <%= errors_for_span(@project, :sectors) %>
 
-        <p id="0">Select more sectors</p>
+        <p id="sectors_0">Select more sectors</p>
         <div class="wrapper">
           <ul class="options scroll_pane">
           <% Sector.get_select_values.collect do |sector| %>
-            <li><a id="<%= sector.id %>"><%= sector.name %></a></li>
+            <li><a id="sectors_<%= sector.id %>"><%= sector.name %></a></li>
           <% end %>
             <li class="last"></li>
           </ul>
@@ -375,26 +375,6 @@
           <%= f.text_field :contact_phone_number %>
         </span>
       </div> <!-- field -->
-    </div>
-  </div>
-
-  <div class="two_columns">
-    <div class="left_column">
-      <div id="target" class="field">
-        <label>TARGET</label>
-        <span class="input_short">
-          <%= f.text_field :target %>
-        </span>
-      </div>
-    </div>
-    <div class="right_column">
-       <div id="estimated_people" class="field">
-          <label>ESTIMATED PEOPLE REACHED</label>
-          <span class="input_short">
-            <%= f.text_field :estimated_people_reached %>
-            <p class="msg">people</p>
-          </span>
-        </div>
     </div>
   </div>
 

@@ -12,7 +12,7 @@ module ApplicationHelper
         raw("class=\"selected\"") if request.path == url_path
       end
     elsif @page
-      if action_name == 'edit' && controller_name == 'pages'
+      if %w(edit update).include?(action_name) && controller_name == 'pages'
         raw("class=\"sublist_selected\"") if request.path.match(url_path)
       end
     else

@@ -18,7 +18,21 @@
   <%= render :partial => 'shared/menu'  %>
 <% end %>
 
-<div id="map" class="home"></div>
+<style>#maker_map_41 {width: 100%; height: 467px;}</style>
+<div class="geocommons_map" id="maker_map_41"></div>
+<script type="text/javascript" charset="utf-8"
+src="http://vizzuality-interaction.geoiq.com/javascripts/f1.api.js"></script>
+
+<script type="text/javascript" charset="utf-8">
+ maker_map_41 = new F1.Maker.Map({
+     map_id: "41", 
+     dom_id: "maker_map_41", 
+     uiLayers:false, 
+     uiStyles:false, 
+     uiLegend: false,
+     uiZoom: true});
+</script>
+
 <a href="#zoom_in" id="zoomIn" onclick="zoomIn()"></a>
 <a href="#zoom_out" id="zoomOut" onclick="zoomOut()"></a>
 <div class="map_style">
@@ -50,7 +64,7 @@
 
       <% cache("#{@site.id}/home/projects_by_cluster_sector") do %>
       <div class="block statistics">
-        <h3>PROJECTS BY <%= @site.word_for_cluster_sector.upcase.chop %></h3>
+        <h3>PROJECT <%= @site.word_for_cluster_sector.upcase %></h3>
         <ul class="statistics_list">
         <% @site.projects_sectors_or_clusters.each do |category, count| %>
           <% unless category.name.eql?('N/A') %>
@@ -71,7 +85,7 @@
 
       <% cache("#{@site.id}/home/projects_by_location") do %>
       <div class="block statistics less">
-        <h3>PROJECTS BY LOCATION</h3>
+        <h3>PROJECTS LOCATIONS</h3>
         <%= raw(projects_by_location(@site)) %>
       </div>
       <% end %>
