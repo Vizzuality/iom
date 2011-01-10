@@ -1,14 +1,21 @@
 class ApplicationController < ActionController::Base
+  class BrowserIsIE6OrLower < Exception; end;
 
   # rescue_from ActiveRecord::RecordNotFound,   :with => :render_404
   # rescue_from ActionController::RoutingError, :with => :render_404
+  rescue_from  BrowserIsIE6OrLower, :with => :old_browser
 
-  before_filter :set_site
+  before_filter :set_site, :browser_is_ie6_or_lower?
 
   include AuthenticatedSystem
 
   cache_sweeper :cluster_sector_sweeper, :organization_sweeper, :page_sweeper, :project_sweeper,
                 :region_country_sweeper, :site_sweeper
+
+  def old_browser
+    render :file => "/public/old_browser.html.erb", :status => 200, :layout => false
+    render :file => "public/404.html.erb", :status => 404, :layout => false
+  end
 
   protected
 
@@ -75,4 +82,13 @@ class ApplicationController < ActionController::Base
       render :file => "public/404.html.erb", :status => 404, :layout => false
     end
 
+    def browser_is_ie6_or_lower?
+      user_agent = request.user_agent.downcase
+      if ie_version = user_agent.match(/MSIE (\d)\.\d;/)
+        ie_version = ie_version[1].to_i if ie_version && ie_version.size > 1 && ie_version[1]
+        if ie_version && ie_version <= 6
+          raise BrowserIsIE6OrLower
+        end
+      end
+    end
 end

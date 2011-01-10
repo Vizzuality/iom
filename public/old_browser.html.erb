@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>NGOAIDMAP - 404 Error</title>
+
+  <script src="/javascripts/jquery.min.js?1291711062" type="text/javascript"></script>
+  <script src="/javascripts/jquery.ui.core.js?1291711062" type="text/javascript"></script>
+  <script src="/javascripts/jquery.ui.widget.js?1291711062" type="text/javascript"></script>
+  <script src="/javascripts/jquery.ui.position.js?1291711062" type="text/javascript"></script>
+  <script src="/javascripts/plugins/jquery.mousewheel.js?1291711063" type="text/javascript"></script>
+  <script src="/javascripts/plugins/jquery.jscrollpane.js?1292844654" type="text/javascript"></script>
+  <script src="/javascripts/plugins/quicksilver.js?1292844654" type="text/javascript"></script>
+  <script src="/javascripts/plugins/jquery.livesearch.js?1292844654" type="text/javascript"></script>
+  <script src="/javascripts/rails.js?1291711063" type="text/javascript"></script>
+  <script src="/javascripts/sites/application.js?1293188418" type="text/javascript"></script>
+
+  <link href="/stylesheets/sites/jscroll.css?1292844654" media="screen" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/sites/layout.css?1293448380" media="screen" rel="stylesheet" type="text/css" />
+  <link href="/stylesheets/themes/garnet.css?1291918966" media="screen" rel="stylesheet" type="text/css" />
+
+  <link rel="shortcut icon" href="/images/favicon.ico"/>
+</head>
+<body>
+
+  <% if @site %>
+    <%= render :partial => 'shared/menu' %>
+  <% else %>
+  <div id="header">
+    <div class="inner_header">
+      <div class="left">
+        <h1><a href="http://ngoaidmap.org">NGO Aid Map</a></h1>
+      </div>
+    </div>
+  </div>
+  <% end %>
+
+  <div id="layout">
+
+    <div class="error_block">
+      <div class="block">
+        <h1>We're sorry</h1>
+        <h2>The page that you are looking for doesn't exist</h2>
+        <p>Try to <a href="/">browse our maps</a> to find what you are searching</p>
+      </div>
+    </div>
+
+    <!-- FOOTERS -->
+      <div id="footer_errors">
+        <div class="left">
+          <a class="logo"></a>
+          <div class="project">
+            <h1><a href="/">NGOAIDMAP</a></h1>
+            <p class="all_rights">Copyrighted by InterAction ©2011. All rights reserved.</p>
+          </div>
+        </div>
+        <div class="right">
+          <ul>
+            <li><a href="/p/contact">contact us</a></li>
+            <li>/</li>
+            <li><a href="/p/about">About the project</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
