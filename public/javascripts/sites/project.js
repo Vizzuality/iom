@@ -9,7 +9,9 @@
       $(document).ready( function() {
 
         //Number of men for painting
-        $('span.people_amount').width($('span.people_amount').attr('estimate')/5);
+		var people_width = $('span.people_amount').attr('estimate');
+		// console.log(custRound(custLog(Number(people_width),10),0));
+        $('span.people_amount').width(people_width/5);
         $('span.people_amount').css('display','block');
 
         //If left part is bigger than float right
@@ -85,4 +87,10 @@
         $('div.loader_gallery').fadeIn();
       }
 
-
+	function custLog(x,base) {
+		return (Math.log(x))/(Math.log(base));
+	}
+	
+	function custRound(x,places) {
+		return (Math.round(x*Math.pow(10,places)))/Math.pow(10,places)
+	}
