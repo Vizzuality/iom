@@ -13,19 +13,16 @@
       </div>
       <div class="right">
         <div class="block">
-            <h2><%= @page.title %></h2>
-            <ul>
-              <% top_parent = @page.top_parent %>
-              <li><%= link_to(top_parent.title, page_path(top_parent)) %>
-              <% pages      = top_parent.children %>
+            <% top_parent = @page.top_parent %>
+            <h3><%= link_to(top_parent.title, page_path(top_parent)) %></h3>
+              <% pages = top_parent.children %>
               <% if pages.any? %>
                 <ul>
                   <% pages.each do |child| %>
-                  <li><%= link_to(child.title, page_path(child)) %></li>
+                  <li class="page"><%= link_to_unless(child==@page,child.title, page_path(child)) %></li>
                   <% end %>
                 </ul>
               <% end %>
-            </ul>
         </div>
     </div>
 

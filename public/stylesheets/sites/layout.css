@@ -211,7 +211,7 @@ div.main_head div.left h2.cluster_sector_name, div.main_head div.left h2.organiz
 div.main_head div.left h3 {width:100%; font:normal 15px "PT Sans Bold"; color:#7B3C32; text-transform:uppercase;}
 div.main_head div.left p {padding:5px 0 0 0; font:normal 13px Arial; color:#7B3932;}
 div.main_head div.float_head {position:absolute; top:0; left:5px; width:238px; padding:30px 32px 44px; background:url('/images/sites/search/head_mask.png') repeat 0 0 #C45A4B; z-index:100;}
-div.main_head div.float_head.home {padding-bottom:23px;}
+div.main_head div.float_head.home {padding-bottom:37px;}
 div.main_head div.float_head.home h1 {font-size:32px; text-transform:uppercase; position:relative; width:200px;}
 div.main_head div.float_head.home sup.beta {font:normal 11px "PT Sans"; color:#73352B; padding:3px;}
 div.main_head div.float_head.home h3 {width:100%; font:normal 15px "PT Sans Bold"; color:#7B3C32; text-transform:uppercase; margin:20px 0 0 0;}
@@ -326,6 +326,8 @@ div#pages div.float_left div.body p a {color:#D05F4C; text-decoration:none;}
 div#pages div.float_left div.body p a:hover {text-decoration:underline; cursor:pointer;}
 div#pages div.float_left div.body ul {width:100%; margin:10px 0 0 0; padding:0 0 6px; list-style:none;}
 div#pages div.float_left div.body ul li {padding:3px 0 3px 13px; background:url('/images/sites/icons/list_disc.png') no-repeat 0 10px; font:normal 13px Arial; color:#666666;}
+div#pages div.float_left div.body ul li a {color:#D05F4C; text-decoration:none;}
+div#pages div.float_left div.body ul li a:hover {text-decoration:underline;}
 div#pages div.float_left div.results_list {width:660px; margin:0 5px 0 5px; background:white;}
 div#pages div.float_left div.results_list h3 {margin:0; padding:30px 0 30px 32px; font:normal 13px "PT Sans Bold"; color:#666666; text-transform:uppercase;}
 div#pages div.float_left div.results_list h3 a {color:#666666; padding:0 8px 0 0; background:url('/images/sites/icons/remove.png') no-repeat right 0; border-bottom:1px dotted #C45A4B;}
@@ -366,6 +368,7 @@ div#pages div.right div.block p a {color:#CD5D4C;}
 div#pages div.right div.block p a:hover {text-decoration:underline;}
 div#pages div.right div.block ul {width:100%; margin:7px 0 0 0; padding:0 0 6px; list-style:none;}
 div#pages div.right div.block ul li {padding:3px 0 3px 10px; background:url('/images/sites/icons/list_disc.png') no-repeat 0 10px; font:normal 13px Arial; color:#999999;}
+div#pages div.right div.block ul li.page {color:#333333;}
 div#pages div.right div.block ul li a {color:#D05F4C; text-decoration:none;}
 div#pages div.right div.block ul li a:hover {text-decoration:underline; cursor:pointer;}
 div#pages div.right div.block ul li.selected {background:none;}

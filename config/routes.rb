@@ -3,6 +3,7 @@ Iom::Application.routes.draw do
   # Home
   root :to => "sites#home"
   match 'about' => 'sites#about'
+  match 'about-interaction' => 'sites#about_interaction'
   match 'contact' => 'sites#contact'
   match 'explore' => 'sites#explore'
 
