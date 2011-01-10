@@ -1,13 +1,11 @@
-$(document).ready(function(ev){
-    
+$(document).ready(function(ev){    
     /************** ADMIN PAGE - INIT (GET PARAMETERS)  ************************** */
     // console.log('country '+ $('select#gc_limited_country_section').val());
     // console.log('bbox '+ $('input#site_geographic_boundary_box').val());
     // console.log('cluster or sector '+ $('input#site_project_context_cluster_id').val());
     // console.log('organization '+ $('input#site_project_context_organization_id').val());   
-    // console.log('tags '+ $('input#pc_tags_section').val());         
-    
-    
+    // console.log('tags '+ $('input#pc_tags_section').val());           
+
     // REMOVE SELECTED STYLE (CHECKBOX)
     if (!$('input#site_project_context_cluster_id').val()){
         $('li#include_sector_cluster').removeClass('selected');
@@ -97,7 +95,11 @@ $(document).ready(function(ev){
         if (!$(this).hasClass('clicked')){
           $(this).addClass('clicked');
         }
-
+		
+		if (!$(this).find('.jspContainer').length > 0){
+			$(this).find('.scroll_pane').jScrollPane({autoReinitialise:false });		   
+		}		
+			
         $(document).click(function(event) {
           if (!$(event.target).closest('span.select_country_combo').length) {
             $('li#gc_limited_region').find('span.select_country_combo').removeClass('clicked');

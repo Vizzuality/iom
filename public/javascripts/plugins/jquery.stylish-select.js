@@ -216,10 +216,12 @@ Dual licensed under the MIT and GPL licenses.
 
     				// To reset api jscrollPane
                     var element = $newUl.parent().children('div.selectedTxt').parent('div.newListSelected').find('.scroll_pane');
-                    // console.log(element);
+
                     if ((element != undefined) && (element.length > 0)){
-                        var api = element.data('jsp');
-                        api.reinitialise();                
+
+                        var api = element.data('jsp');						
+                       	api.reinitialise();                
+						$newUl.parent().children('.newList_content').show();
                     }
 					
 				}else {

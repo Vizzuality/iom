@@ -956,6 +956,7 @@ div.block.site_info div.med div.left form ul.geographic_options li.selected span
 div.block.site_info div.med div.left form ul.geographic_options li.selected span.select_country_combo.clicked div.values {position:absolute; width:239px; height:202px; top:32px; left:0; background:url('/images/backoffice/sites/select_country_combo_body.png') no-repeat 0 0; z-index:30; display:inline;}
 div.block.site_info div.med div.left form ul.geographic_options li.selected span.select_country_combo ul {display:none;}
 div.block.site_info div.med div.left form ul.geographic_options li.selected span.select_country_combo.clicked div.values ul {float:left; width:234px; height:180px; margin:4px 0 0 1px; padding:0; overflow-y:auto; display:inline; overflow-x:hidden;}
+div.block.site_info div.med div.left form ul.geographic_options li.selected span.select_country_combo.clicked div.values ul.regions {width:248px;}
 div.block.site_info div.med div.left form ul.geographic_options li.selected span.select_country_combo.clicked div.values ul li {float:left; margin:0; width:233px; height:25px;}
 div.block.site_info div.med div.left form ul.geographic_options li.selected span.select_country_combo.clicked div.values ul li:hover {background-color:#E4F0CA;}
 div.block.site_info div.med div.left form ul.geographic_options li.selected span.select_country_combo.clicked div.values ul li a {float:left; font:normal 15px Arial; color:#666666; background:none; padding:0; margin:4px 9px;}
@@ -1123,7 +1124,7 @@ ul.newList.year li {width:76px; margin:0 0 0 1px;}
 .newListSelected.country {width:237px; color:#000; height:29px; padding:3px 0 0 6px; float:left; background:url('/images/backoffice/sites/combo/country_head.png') no-repeat 0 0; margin:10px 0 0 13px;}
 .newListSelected.country .selectedTxt {width:225px; overflow:hidden; height:20px; margin:4px 0 0 3px; font:normal 13px Arial; color:#999999; line-height:21px;}
 div.newList_content.country {background:url('/images/backoffice/sites/combo/country_body.png') no-repeat 0 0; height:205px; width:237px; top:32px!important; left:0; position:absolute;}
-ul.newList.country {float:left; height:194px; overflow-x:hidden; width:228px; margin:0 0 0 1px; overflow-y:auto;}
+ul.newList.country {float:left; height:194px; overflow-x:hidden; width:248px; margin:0 0 0 1px; overflow-y:auto;}
 ul.newList.country li {width:233px; margin:0;}
 ul.newList.country li a {font:normal 15px Arial; color:#666666;}
 
