@@ -12,18 +12,18 @@
         <p>
         <% if @site.world_wide_context? %>
           <% unless project['countries'].blank? %>
-            <% if project['countries'].split('|').size > 3 %>
-              <%= project['countries'].split('|')[0..3].join(', ') %> and <%= project['countries'].size - 3 %> more
+            <% if project['countries'].split('|').delete_if{ |e| e.blank? }.size > 3 %>
+              <%= project['countries'].split('|').delete_if{ |e| e.blank? }[0..3].join(', ') %> and <%= project['countries'].split('|').delete_if{ |e| e.blank? }.size - 3 %> more
             <% else %>
-              <%= project['countries'].split('|').to_sentence(:last_word_connector => ' and ') %>
+              <%= project['countries'].split('|').delete_if{ |e| e.blank? }.to_sentence(:last_word_connector => ' and ') %>
             <% end %>
           <% end %>
         <% else %>
           <% unless project['regions'].blank? %>
-            <% if project['regions'].split('|').size > 3 %>
-              <%= project['regions'].split('|')[0..3].join(', ') %> and <%= project['regions'].size - 3 %> more
+            <% if project['regions'].split('|').delete_if{ |e| e.blank? }.size > 3 %>
+              <%= project['regions'].split('|').delete_if{ |e| e.blank? }[0..3].join(', ') %> and <%= project['regions'].split('|').delete_if{ |e| e.blank? }.size - 3 %> more
             <% else %>
-              <%= project['regions'].split('|').to_sentence(:last_word_connector => ' and ') %>
+              <%= project['regions'].split('|').delete_if{ |e| e.blank? }.to_sentence(:last_word_connector => ' and ') %>
             <% end %>
           <% end %>
         <% end %>

@@ -564,7 +564,7 @@ SQL
            ('{'||array_to_string(array_agg(distinct sec.id),',')||'}')::integer[] as sector_ids,
            '|'||array_to_string(array_agg(distinct clus.name),'|')||'|' as clusters,
            ('{'||array_to_string(array_agg(distinct clus.id),',')||'}')::integer[] as cluster_ids,
-           ('{'||array_to_string(array_agg(distinct d.id),',')||'}')::integer[] as donors_ids,
+           ('{'||array_to_string(array_agg(distinct d.donor_id),',')||'}')::integer[] as donors_ids,
            CASE WHEN end_date is null OR p.end_date > now() THEN true ELSE false END AS is_active,
            ps.site_id,p.created_at
            FROM projects as p
