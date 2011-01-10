@@ -2,9 +2,11 @@
     $(document).ready( function() {
       
       //If description is bigger than main_head
-      if ($('div.inner_main_head div.right').height()>$('div.inner_main_head div.left').height()) {
+      if (($('div.inner_main_head div.right').height()+64)>$('div.inner_main_head div.left div.float_head').height()) {
         $('div.inner_main_head div.left').height($('div.inner_main_head div.right').height());
-        $('div.inner_main_head div.float_head').height($('div.inner_main_head div.right').height() + 40);
+        $('div.inner_main_head div.left div.float_head').height($('div.inner_main_head div.right').height() + 40);
+      } else {
+        $('div.inner_main_head div.left').height($('div.inner_main_head div.left div.float_head').height()-39);
       }
       
       //If right part is bigger than float left

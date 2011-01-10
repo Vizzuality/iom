@@ -1,14 +1,17 @@
 class CreateGeoiqViews < ActiveRecord::Migration
   def self.up
-    execute "create or replace view v_regions_num_projects as
-    SELECT  regions.id as region_id,regions.name, regions.level, regions.parent_region_id,regions.country_id, projects_sites.site_id,
-    count(projects.id) as num_projects,ST_AsText(regions.the_geom) as the_geom
-
-    FROM ((regions INNER JOIN projects_regions ON regions.id = projects_regions.region_id) 
-    INNER JOIN projects ON projects_regions.project_id = projects.id) 
-    INNER JOIN projects_sites ON projects.id = projects_sites.project_id
-
-    group by regions.id,projects_sites.site_id,regions.name, regions.level, regions.country_id,regions.parent_region_id,regions.the_geom;"              
+    execute "CREATE OR REPLACE VIEW v_regions_num_projects AS
+    SELECT r3.id AS region_id, r3.name,
+    count(p.id) AS num_projects, 
+    st_astext(st_makepoint(r3.center_lon,r3.center_lat)) AS geom,
+    'http://haiti.ngoaidmap.org/location/'|| r3.country_id ||'/'||r2.parent_region_id||'/'||r2.id||'/'||r3.id as url
+       FROM regions as r3
+       INNER JOIN regions as r2 on r3.parent_region_id=r2.id
+       INNER JOIN projects_regions as pr ON r3.id = pr.region_id
+       INNER JOIN projects as p ON pr.project_id = p.id
+       INNER JOIN projects_sites as ps ON p.id = ps.project_id
+       where r3.level=3 and ps.site_id=1
+      GROUP BY r3.id, r3.name, geom,url;"              
     execute "insert into geometry_columns VALUES('','public','v_regions_num_projects','the_geom',2,'4326','MULTIPOINT')"
     
     execute "create or replace view v_projects as SELECT p.id, p.primary_organization_id,
@@ -47,6 +50,7 @@ class CreateGeoiqViews < ActiveRecord::Migration
     execute "DROP ROLE IF EXISTS geoiq;"
     execute "CREATE ROLE geoiq LOGIN ENCRYPTED PASSWORD 'md54c67ea040991d532eb7586d147a178b5' VALID UNTIL 'infinity';"
     execute "GRANT SELECT ON TABLE v_projects TO geoiq;"
+    execute "GRANT SELECT ON TABLE v_regions_num_projects TO geoiq;"
     
   end
 

@@ -97,19 +97,19 @@
 
            <div class="block margin">
              <% related_projects = @project.related(@site) %>
-             <% unless related_projects.empty? %>
+             <% unless related_projects.count<1 %>
              <h3 class="first">OTHER PROJECTS</h3>
              <ul class="related_projects">
-               <% related_projects.each_with_index do |project,i| %>
+               <% related_projects.each_with_index do |r,i| %>
                <li <%= raw('class="last"') if i > 0 %>>
                  <div class="image">
-                   <img src="http://maps.google.com/maps/api/staticmap?size=90x70&maptype=terrain&style=feature:all|element:labels|visibility:off&path=fillcolor:0x00000090|color:0x00000001|enc:}zswFtikbMjJzZ|RdPfZ}DxWvBjWpF~IvJnEvBrMvIvUpGtQpFhOQdKpz@bIx{A|PfYlvApz@bl@tcAdTpGpVwQtX}i@|Gen@lCeAda@bjA`q@v}@rfAbjA|EwBpbAd_@he@hDbu@uIzWcWtZoTdImTdIwu@tDaOXw_@fc@st@~VgQ|[uPzNtA`LlEvHiYyLs^nPhCpG}SzCNwHpz@cEvXg@bWdG`]lL~MdTmEnCwJ[iJhOae@nCm[`Aq]qE_pAaNiyBuDurAuB}}Ay`@|EKv_@?|[qGji@lAhYyH`@Xiw@tBerAs@q]jHohAYkSmW?aNoaAbR}LnPqNtMtIbRyRuDef@eT_z@mW_Nm|B~j@zC~hAyUyJ_U{Z??cPvg@}s@sHsc@_z@cj@kp@YePoNyYyb@_iAyb@gBw^bOokArcA}GwJuzBre@i\tf@sZnd@oElb@hStW{]vv@??kz@~vAcj@zKa`Atf@uQj_Aee@pU_UrcA&sensor=false" title="<%= project.name %>" />
-                   <img class="marker" src="/images/themes/1/marker_1.png" alt="<%= project.name %>" title="<%= project.name %>" />
+                   <img src="http://maps.google.com/maps/api/staticmap?size=90x70&maptype=roadmap&style=feature:all|element:labels|visibility:off&path=fillcolor:0x00000090|color:0x00000001&sensor=false&center=<%=r['center_lat']%>,<%=r['center_lon']%>&zoom=6" title="<%= r['project_name'] %>" />
+                   <img class="marker" src="/images/themes/1/marker_1.png" alt="<%= r['project_name'] %>" title="<%= r['project_name'] %>" />
                  </div>
                  <div class="info">
-                   <h4><%= link_to(truncate(project.name, :length => 40), project_path(project)) %></h4>
-                   <p>by <%= truncate(project.primary_organization_name, :length => 20) %></p>
-                   <p class="sub">in <%= project.country_name %></p>
+                   <h4><a href="/organizations/<%=r['project_id']%>"><%=truncate(r['project_name'], :length => 40)%></a></h4>
+                   <p>by <%= truncate(r['organization_name'], :length => 20) %></p>
+                   <p class="sub">in <a href="/location/<%=r['path']%>"><%= truncate(r['region_name']) %></a></p>
                  </div>
                </li>
                <% end %>
