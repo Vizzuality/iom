@@ -159,4 +159,9 @@ class ProjectTest < ActiveSupport::TestCase
     assert_equal 99999999999999999, project.budget
   end
 
+  test "saving a project with a big estimated people reached"do
+    project = create_project :estimated_people_reached => 99999999999999999
+    assert project.valid?
+    assert_equal 99999999999999999, project.estimated_people_reached
+  end
 end
