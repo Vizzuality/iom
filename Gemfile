@@ -18,6 +18,7 @@ gem 'geokit'
 gem 'nokogiri'
 gem 'vimeo'
 gem 'hoptoad_notifier'
+gem 'memcache-client'
 
 group :development do
   gem 'capistrano'
