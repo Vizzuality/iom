@@ -4,12 +4,14 @@
   <span class="select_country_combo region"><p class="region">Select a region</p>
     <input type="hidden" name="site[geographic_context_region_id]" id="site_geographic_context_region_id" value="" />
     <div class="values region">
-      <ul>
-        <li><a class="region_value" id="0">All regions</a></li>
-        <% (@regions || Region.get_select_values).each do |region| %>
-          <li><a class="region_value" id="<%= region.id %>"><%= region.name %></a></li>
-        <%end -%>
-      </ul>
+      <div class="wrapper">
+          <ul class="regions scroll_pane">
+            <li><a class="region_value" id="0">All regions</a></li>
+            <% (@regions || Region.get_select_values).each do |region| %>
+              <li><a class="region_value" id="<%= region.id %>"><%= region.name %></a></li>
+            <%end -%>
+          </ul>
+      </div>
     </div>
   </span>
 <% end %>

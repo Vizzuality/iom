@@ -109,7 +109,9 @@
                  <div class="info">
                    <h4><a href="<%= project_path(:id => r['project_id']) %>"><%=truncate(r['project_name'], :length => 40)%></a></h4>
                    <p>by <%= truncate(r['organization_name'], :length => 20) %></p>
+                   <% if r['path'] %>
                    <p class="sub">in <a href="<%= location_path(:ids => r['path']) %>"><%= truncate(r['region_name']) %></a></p>
+                   <% end %>
                  </div>
                </li>
                <% end %>

@@ -3,36 +3,36 @@
 # Table name: projects
 #
 #  id                                      :integer         not null, primary key
-#  name                                    :string(2000)    
-#  description                             :text            
-#  primary_organization_id                 :integer         
-#  implementing_organization               :text            
-#  partner_organizations                   :text            
-#  cross_cutting_issues                    :text            
-#  start_date                              :date            
-#  end_date                                :date            
-#  budget                                  :float           
-#  target                                  :text            
-#  estimated_people_reached                :integer         
-#  contact_person                          :string(255)     
-#  contact_email                           :string(255)     
-#  contact_phone_number                    :string(255)     
-#  site_specific_information               :text            
-#  created_at                              :datetime        
-#  updated_at                              :datetime        
+#  name                                    :string(2000)
+#  description                             :text
+#  primary_organization_id                 :integer
+#  implementing_organization               :text
+#  partner_organizations                   :text
+#  cross_cutting_issues                    :text
+#  start_date                              :date
+#  end_date                                :date
+#  budget                                  :float
+#  target                                  :text
+#  estimated_people_reached                :integer
+#  contact_person                          :string(255)
+#  contact_email                           :string(255)
+#  contact_phone_number                    :string(255)
+#  site_specific_information               :text
+#  created_at                              :datetime
+#  updated_at                              :datetime
 #  the_geom                                :string          not null
-#  activities                              :text            
-#  intervention_id                         :string(255)     
-#  additional_information                  :text            
-#  awardee_type                            :string(255)     
-#  date_provided                           :date            
-#  date_updated                            :date            
-#  contact_position                        :string(255)     
-#  website                                 :string(255)     
-#  verbatim_location                       :text            
-#  calculation_of_number_of_people_reached :text            
-#  project_needs                           :text            
-#  idprefugee_camp                         :text            
+#  activities                              :text
+#  intervention_id                         :string(255)
+#  additional_information                  :text
+#  awardee_type                            :string(255)
+#  date_provided                           :date
+#  date_updated                            :date
+#  contact_position                        :string(255)
+#  website                                 :string(255)
+#  verbatim_location                       :text
+#  calculation_of_number_of_people_reached :text
+#  project_needs                           :text
+#  idprefugee_camp                         :text
 #
 
 class Project < ActiveRecord::Base
@@ -325,7 +325,7 @@ SQL
                ('{'||array_to_string(array_agg(distinct sec.id),',')||'}')::integer[] as sector_ids,
                '|'||array_to_string(array_agg(distinct clus.name),'|')||'|' as clusters,
                ('{'||array_to_string(array_agg(distinct clus.id),',')||'}')::integer[] as cluster_ids,
-               ('{'||array_to_string(array_agg(distinct d.id),',')||'}')::integer[] as donors_ids,
+               ('{'||array_to_string(array_agg(distinct d.donor_id),',')||'}')::integer[] as donors_ids,
                CASE WHEN end_date is null OR p.end_date > now() THEN true ELSE false END AS is_active,
                ps.site_id,p.created_at
                FROM projects as p
