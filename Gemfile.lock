@@ -94,6 +94,7 @@ GEM
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    memcache-client (1.8.5)
     mime-types (1.16)
     money (3.5.4)
       i18n (~> 0.4)
@@ -196,6 +197,7 @@ DEPENDENCIES
   geokit
   hoptoad_notifier
   launchy
+  memcache-client
   money
   nofxx-georuby
   nokogiri

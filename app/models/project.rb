@@ -308,6 +308,18 @@ SQL
     ActiveRecord::Base.connection.execute(sql).map{ |r| r['region_id'] }.uniq.join(',')
   end
 
+  def set_cached_sites
+    Site.all.each do |site|
+      site.set_cached_projects
+    end
+  end
+
+  def remove_cached_sites
+    Site.all.each do |site|
+      site.set_cached_projects
+    end
+  end
+
   private
 
     def dates_consistency
@@ -341,20 +353,4 @@ SQL
         errors.add(:clusters, "can't be blank")
       end
     end
-
-    def set_cached_sites
-      sql="DELETE FROM projects_sites WHERE project_id=#{self.id}"
-      ActiveRecord::Base.connection.execute(sql)
-
-      Site.all.each do |site|
-        if site.is_project_included?(self.id)
-          ActiveRecord::Base.connection.execute("INSERT INTO projects_sites (project_id, site_id) VALUES (#{self.id},#{site.id})")
-        end
-      end
-    end
-
-    def remove_cached_sites
-      ActiveRecord::Base.connection.execute("DELETE FROM projects_sites WHERE project_id = '#{self.id}'")
-    end
-
 end
