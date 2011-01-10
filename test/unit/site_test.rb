@@ -343,6 +343,13 @@ class SiteTest < ActiveSupport::TestCase
     lerida   = create_region :name => 'Lerida', :country => spain,   :level => 2
 
     organization1 = create_organization
+
+    p1 = create_project :name => 'P1', :primary_organization_id => organization1.id
+    p2 = create_project :name => 'P2', :primary_organization_id => organization1.id
+
+    p1.regions << valencia
+    p2.regions << madrid
+
     site = create_site :name => 'Food for Haiti 1', :project_context_organization_id => organization1.id,
                        :project_context_cluster_id => nil, :url => 'http://site1.com',
                        :navigate_by_level1 => true,
