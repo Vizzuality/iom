@@ -833,6 +833,7 @@ div.block.resources div.med div.left ul li a.delete {position:absolute; right:0;
 div.block.resources div.med div.left ul li a.delete:hover {background-position:0 -16px;}
 div.block.resources div.med div.left ul.ngo {position:relative; float:left; padding:0 0 50px 0; border:none;}
 div.block.resources div.med div.left ul li.ngo {border:none; padding:0 0 15px 0; margin:0 0 0 3px;}
+div.block.resources div.med div.left ul li.ngo form {background:none; height:auto; margin:0; padding:0;}
 div.block.resources div.med div.left ul li.ngo div.head {position:relative; float:left; width:535px; height:42px; padding:15px; background:url('/images/backoffice/resources/header_resources.png') no-repeat 0 0;}
 div.block.resources div.med div.left ul li.ngo div.head h3 {margin:0;}
 div.block.resources div.med div.left ul li.ngo div.head a.delete {right:17px; top:28px;}
