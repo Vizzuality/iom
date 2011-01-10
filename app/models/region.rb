@@ -16,6 +16,7 @@
 #  center_lon       :float
 #  the_geom_geojson :text
 #  ia_name          :text
+#  path             :string(255)
 #
 
 class Region < ActiveRecord::Base
@@ -169,18 +170,7 @@ SQL
   end
 
   def to_param
-    if respond_to?(:ids_for_url)
-      return ids_for_url.split('|').join('/')
-    end
-    case level.to_i
-      when 1
-        [self.country_id, self.id].join('/')
-      when 2
-        [self.country_id, self.parent_region_id, self.id].join('/')
-      when 3
-        parent_region = Region.find(self.parent_region_id, :select => "id, parent_region_id")
-        [self.country_id, parent_region.parent_region_id, self.parent_region_id, self.id].join('/')
-    end
+    self.path
   end
 
 end
