@@ -28,6 +28,8 @@ class Region < ActiveRecord::Base
 
   before_save :update_wikipedia_description
 
+  after_save :set_path
+
   def self.custom_fields
     (columns.map{ |c| c.name } - ['the_geom']).map{ |c| "#{self.table_name}.#{c}" }
   end
@@ -172,5 +174,34 @@ SQL
   def to_param
     self.path
   end
+
+  private
+
+    def set_path
+      sql = case level
+        when 1
+          unless self.country_id.blank?
+            "update regions set path=#{self.country_id} || '/' || #{self.id} where id=#{self.id}"
+          else
+            nil
+          end
+        when 2
+          unless self.country_id.blank? || self.parent_region_id.blank?
+            "update regions set path=#{self.country_id} || '/' || #{self.parent_region_id} || '/' || #{self.id} where id=#{self.id}"
+          else
+            nil
+          end
+        when 3
+          "update regions as ur set path=(
+          SELECT (((((( r3.country_id) || '/'::text) || r2.parent_region_id) || '/'::text) || r2.id) || '/'::text) || r3.id AS url
+          FROM regions r3
+          JOIN regions r2 ON r3.parent_region_id = r2.id
+          WHERE r3.id=#{self.id})"
+      end
+      unless sql.blank?
+        ActiveRecord::Base.connection.execute(sql)
+        reload
+      end
+    end
 
 end

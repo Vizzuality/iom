@@ -268,4 +268,17 @@ class RegionTest < ActiveSupport::TestCase
     assert_equal 0, madrid.projects_count(site2)
   end
 
+  test "updating path of the regions" do
+    spain = create_country :name => 'Spain'
+    valencia = create_region :name => 'Valencia', :country_id => spain.id, :level => 1
+    assert valencia.valid?
+    assert_equal "#{spain.id}/#{valencia.id}", valencia.path
+    burjassot = create_region :name => 'Burjassot', :country_id => spain.id, :level => 2, :parent_region_id => valencia.id
+    assert burjassot.valid?
+    assert_equal "#{spain.id}/#{valencia.id}/#{burjassot.id}", burjassot.path
+    pouet = create_region :name => 'Pouet', :country_id => spain.id, :level => 3, :parent_region_id => burjassot.id
+    assert pouet.valid?
+    assert_equal "#{spain.id}/#{valencia.id}/#{burjassot.id}/#{pouet.id}", pouet.path
+  end
+
 end

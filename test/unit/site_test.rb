@@ -73,7 +73,10 @@ class SiteTest < ActiveSupport::TestCase
     #  - sector filtering:  s1
 
     # Projects: should return projects P1, P2 and P4
-    s = Site.new :name => 'Brand new site', :url => 'www.brand-new-site.com', :project_context_tags => 't2,t4', :geographic_context_region_id => valencia.id, :project_context_sector_id => s1.id
+    s = Site.new :name => 'Brand new site', :url => 'www.brand-new-site.com', :project_context_tags => 't2,t4',
+                 :geographic_context_region_id => valencia.id, :project_context_sector_id => s1.id,
+                 :navigate_by_level2 => true
+
     s.save
     assert s.valid?
 
@@ -104,11 +107,12 @@ class SiteTest < ActiveSupport::TestCase
 
   test "Given a site contextualized in a country and some projects in some regions the projects in the site should those in the same level of the site" do
     spain    = create_country :name => 'Spain'
+    valencia  = create_region :name => 'Valencia',  :country => spain, :level => 1
     catalonia = create_region :name => 'Catalonia', :country => spain, :level => 1
     barcelona = create_region :name => 'Barcelona', :country => spain, :level => 3
 
     p1 = create_project :name => 'P1'
-    p1.regions << catalonia
+    p1.regions << valencia
     p2 = create_project :name => 'P2'
     p2.regions << barcelona
     p3 = create_project :name => 'P3'
@@ -353,8 +357,8 @@ class SiteTest < ActiveSupport::TestCase
 
     assert !site.regions_select.empty?
     region = site.regions_select.first
-    assert region.ids_for_url.split('|').is_a?(Array)
-    assert region.ids_for_url.split('|').include?(spain.id.to_s)
+    assert region.path.split('/').is_a?(Array)
+    assert region.path.split('/').include?(spain.id.to_s)
   end
 
 end
