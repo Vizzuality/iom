@@ -4,9 +4,8 @@ class CreateGeoiqViews < ActiveRecord::Migration
     SELECT r3.id AS region_id, r3.name,
     count(p.id) AS num_projects, 
     st_astext(st_makepoint(r3.center_lon,r3.center_lat)) AS geom,
-    'http://haiti.ngoaidmap.org/location/'|| r3.country_id ||'/'||r2.parent_region_id||'/'||r2.id||'/'||r3.id as url
+    'http://haiti.ngoaidmap.org/location/'|| r3.path as url
        FROM regions as r3
-       INNER JOIN regions as r2 on r3.parent_region_id=r2.id
        INNER JOIN projects_regions as pr ON r3.id = pr.region_id
        INNER JOIN projects as p ON pr.project_id = p.id
        INNER JOIN projects_sites as ps ON p.id = ps.project_id
