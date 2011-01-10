@@ -475,7 +475,7 @@ class Site < ActiveRecord::Base
   end
 
   def last_visits(limit = 30)
-    stats.order("date DESC").limit(limit).map{ |s| s.visits }.join(',')
+    stats.order("date ASC").limit(limit).map{ |s| s.visits }.join(',')
   end
 
   def countries_select
@@ -498,8 +498,8 @@ class Site < ActiveRecord::Base
     if geographic_context_country_id.blank? && geographic_context_region_id.blank?
       Country.find_by_sql(<<-SQL
         select id,name from countries
-        where id in (select country_id 
-        from countries_projects as cr inner join projects_sites as ps 
+        where id in (select country_id
+        from countries_projects as cr inner join projects_sites as ps
         on cr.project_id=ps.project_id and site_id=#{self.id}) order by name
 SQL
       )
@@ -520,18 +520,18 @@ SQL
       Region.find_by_sql(<<-SQL
         select id,name,path from regions
         where level=#{level_for_region}
-        and id in (select region_id from projects_regions as pr 
+        and id in (select region_id from projects_regions as pr
         inner join projects_sites as ps on pr.project_id=ps.project_id and site_id=#{self.id})
         order by name
 SQL
       )
     end
   end
-  
+
   def organizations_select
     Organization.find_by_sql(<<-SQL
         select distinct o.id,o.name from organizations as o
-        inner join projects as p on p.primary_organization_id=o.id 
+        inner join projects as p on p.primary_organization_id=o.id
         inner join projects_sites as ps on p.id=ps.project_id and site_id=#{self.id}
         order by o.name
 SQL
