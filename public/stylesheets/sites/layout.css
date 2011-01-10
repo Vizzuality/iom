@@ -156,7 +156,7 @@ div#header ul.menu li#organization_option.clicked div.suboptions_body.short {pos
 div#header ul.menu li#organization_option.clicked div.suboptions_body.short span.suboptions_body_top {display:inline;}
 
 
-div#header ul.menu li#organization_option.clicked div.suboptions_body input[type="text"]#ngos_search{float:left; margin:3px 0 0 7px; background:url('/images/sites/common/menu/input_ngos.png') no-repeat 0 0; width:191px; height:22px; padding:0 7px; font:normal 13px Arial; color:#B7B7B7; border:0px;}
+div#header ul.menu li#organization_option.clicked div.suboptions_body input[type="text"]#ngos_search{float:left; margin:3px 0 0 7px; background:url('/images/sites/common/menu/input_ngos.png') no-repeat 0 0; width:191px; height:22px; padding:0 7px; font:normal 13px Arial; color:#666666; border:0px;}
 div#header ul.menu li#organization_option.clicked div.suboptions_body.short input[type="text"]{display:none!important;}
 div#header ul.menu li#organization_option.clicked div.header_title a {margin:8px 0 0 15px; padding:0 8px 0 0; background:url('/images/sites/common/arrow_menu.png') no-repeat right 6px;}
 div#header ul.menu li#organization_option.clicked div.suboptions_body.short ul.content {margin:3px 0 0 13px;}
@@ -179,7 +179,7 @@ div#header ul.menu li a.with_suboptions {padding:0 8px 0 0; background:url('/ima
 div#header ul.menu li a span.with_suboptions {display:none;}
 div#header ul.menu li div.suboptions_body {display:none;}
 div#header ul.menu li ul.suboptions {position:absolute; top:20px; left:-13px; background-color:#2F2E2C; z-index:110; display:none;}
-div#header ul.menu li ul.suboptions li {float:left; width:150px; padding:0 5px; margin:9px 0 0 0; height:auto; z-index:10;}
+div#header ul.menu li ul.suboptions li {float:left; width:148px; padding:0 5px; margin:9px 0 0 0; height:auto; z-index:10;}
 
 div#header div.right {margin:10px 0 0 0; width:auto; height:20px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#header div.right form.search {position:relative; float:right;}
@@ -393,10 +393,12 @@ div.statistics ul.chart li a:hover {color:#333333;}
 div.statistics ul.chart li.pos1 {background:url('/images/sites/icons/chart_pos1.png') no-repeat 0 4px!important;}
 div.statistics ul.chart li.pos2 {background:url('/images/sites/icons/chart_pos2.png') no-repeat 0 4px!important;}
 div.statistics ul.chart li.pos3 {background:url('/images/sites/icons/chart_pos3.png') no-repeat 0 4px!important;}
+div.statistics p.other {float:left; margin:10px 0 0 0!important; font:normal 13px Arial!important;}
 
 /*cluster*/
 div.statistics ul.statistics_list {width:270px; height:auto; padding:0; margin:10px 0 0 0;}
 div.statistics ul.statistics_list li {float:left; width:100%!important; padding:0!important; margin:3px 0 0 0!important; height:auto; position:relative;}
+
 
 /*ICONS*/
 /* TO PROGRESS BAR */

@@ -53,6 +53,9 @@
               </li>
             <% end %>
           </ul>
+          <% unless @donor.projects_sectors_or_clusters(@site).size < 4%>
+              <p class="other">and <%= pluralize(@donor.projects_sectors_or_clusters(@site).size - 3,"more #{@site.word_for_cluster_sector.singularize}", "more #{@site.word_for_cluster_sector.pluralize}") %></p>
+          <% end %>                            
         </div>
 
         <!-- PROJECTS BY AREA -->
