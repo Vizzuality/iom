@@ -179,9 +179,8 @@
 
   <label>GEOGRAPHIC REGION <strong>*</strong></label>
   <ul class="ubications" id="regions_list">
-    <!-- TODO - put list of regions previosly saved. -->
-    <% @project.regions.select(Region.custom_fields).each do |region| %>
-    <li><p><%= region.name %>, <%= region.country.name %></p><a class="close"></a></li>
+    <% @project.regions_hierarchized.each do |region| %>
+    <li><p><%= region_breadcrumb(region) %></p><a class="close"></a></li>
     <% end %>
   </ul>
   <div class="location_options region_block empty">
@@ -256,13 +255,8 @@
       </div>
     </div>
 
-    <% if false #TODO %>
-    <input type="text" name="countries" id="project_countries" value="<%= @project.countries_ids  %>" class="hidden"/>
-    <input type="text" name="regions_level1" id="project_regions_level1" value="<%= @project.regions_level1_ids  %>" class="hidden"/>
-    <input type="text" name="regions_level2" id="project_regions_level2" value="<%= @project.regions_level2_ids  %>" class="hidden"/>
-    <input type="text" name="regions_level3" id="project_regions_level3" value="<%= @project.regions_level3_ids  %>" class="hidden"/>
-    <% end %>
-
+    <input type="hidden" name="project[project_countries]" id="project_countries" value="<%= @project.countries_ids  %>" class="hidden"/>
+    <input type="hidden" name="project[project_regions]" id="project_regions" value="<%= @project.regions_ids  %>" class="hidden"/>
   </div>
 
   <label>GEOGRAPHIC COORDINATES  <strong>*</strong></label>

@@ -238,7 +238,7 @@ div#left_column div.float_left {position:absolute; top:-40px; left:5px;}
 div#left_column div.float_left div.head {position:relative; width:238px; height:auto; padding:30px 32px; background:url('/images/sites/search/head_mask.png') repeat 0 0 #C45A4B;}
 div#left_column div.float_left div.head p {font:normal 13px Arial; color:#7B3932;}
 div#left_column div.float_left div.head h2 {width:100%; font:normal 15px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42; text-transform:uppercase;}
-div#left_column div.float_left div#secondary_map {width:300px; height:189px; border:1px solid #999999; background:#99B3CA;}
+div#left_column div.float_left div#secondary_map {width:300px; height:189px; border-bottom:1px solid #999999; background:#99B3CA;}
 div#left_column div.float_left div.block {float:left; width:238px; padding:32px; background:white; border-bottom:1px solid #DEDEDE;}
 div.inner_main_head div.block {border-bottom:none!important;}
 div#left_column div.float_left div.block.box_info {float:left; width:238px; border-bottom:1px solid #DEDEDE; padding:0 32px 0; }
@@ -555,13 +555,13 @@ div.projects div.right div.block div.logo img {position:absolute; top:3px; left:
 div.projects div.right div.block div.logo a {width:130px; padding:10px 0 0 5px; font:normal 13px Arial; color:#CE5D4C; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;} /* TODO: color*/
 div.projects div.right div.block div.logo a.long {width:100%; padding:0;}
 div.projects div.right div.block div.logo a:hover {text-decoration:underline;}
-div.projects div.right div.block ul {width:100%; margin:7px 0 0 0; padding:0 0 6px; list-style:none;}
+div.projects div.right div.block ul {width:100%; margin:7px 0 0 0; padding:0; list-style:none;}
 div.projects div.right div.block ul li {padding:3px 0 3px 10px; background:url('/images/sites/icons/list_disc.png') no-repeat 0 10px; font:normal 13px Arial; color:#999999;}
 div.projects div.right div.block ul li a {color:#CE5D4C; text-decoration:none;}
 div.projects div.right div.block ul li a:hover {text-decoration:underline;}
 div.projects div.right div.block p {width:252px; padding:7px 0 0 0; font:normal 13px Arial; color:#666666; line-height:17px;}
 div.projects div.right div.block p.no_margin {padding:3px 0 0 0;}
-div.projects div.right div.block p.budget {padding:10px 0 0 10px; font:normal 25px "Aller"; color:#666666; background:url('/images/sites/icons/budget.png') no-repeat 0 16px;}
+div.projects div.right div.block p.budget {padding:5px 0 0 10px; font:normal 25px "Aller"; color:#666666; background:url('/images/sites/icons/budget.png') no-repeat 0 16px;}
 div.projects div.right div.block p a {color:#CE5D4C; text-decoration:none;} /* TODO: color*/
 div.projects div.right div.block p a:hover {text-decoration:underline;}
 div.projects div.right div.block span.people_amount {display:none; height:20px; padding:0; background:url('/images/sites/projects/man.png') repeat 0 0; max-width:255px;}

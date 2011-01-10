@@ -20,7 +20,7 @@ $(document).ready( function() {
     $("a#see_all").hover(function(){
       var position = $(this).position();
       $(this).parent().children('div.tooltip').css('top',position.top-65+'px');
-      $(this).parent().children('div.tooltip').css('left',position.left-55+'px');
+      $(this).parent().children('div.tooltip').css('left',position.left-23+'px');
       $(this).parent().children('div.tooltip').show();
     },function(){
       $(this).parent().children('div.tooltip').hide();
