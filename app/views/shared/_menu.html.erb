@@ -72,6 +72,7 @@
                 </form>
                 <div class="wrapper">
                   <ul id="orgs_list" class="content scroll_pane">
+                      <p class="no_founded">No organizations found</p>
                       <% @site.organizations.each do |organization| %>
                         <li><a href="<%= organization_path(organization) %>"><%= organization.name %></a></li>
                       <% end %>

@@ -167,6 +167,7 @@ div#header ul.menu li#organization_option.clicked ul.content li a:hover {color:w
 
 
 div#header ul.menu li#organization_option.clicked ul#orgs_list {position:relative; float:left; overflow-y:scroll; overflow-x:hidden;}
+div#header ul.menu li#organization_option.clicked ul#orgs_list p.no_founded {position:absolute; top:10px; left:0; font:italic 13px Arial; color:#C1C1C0; display:none;}
 div#header ul.menu li#organization_option.clicked ul#orgs_list li {float:left; margin:7px 0 0 0;}
 div#header ul.menu li#organization_option.clicked ul#orgs_list li a {float:left; font:normal 13px "PT Sans",Arial; color:#C1C1C0;}
 div#header ul.menu li#organization_option.clicked ul#orgs_list li a:hover {color:white;}
@@ -445,7 +446,7 @@ a.icon_menu:hover {background-position:0 -22px; cursor:pointer;}
 
 /* TO WATER_MARK */
 
-span.icon_watermark {position:absolute; right:32px; top:47px; height:37px; width:37px; z-index:0;}
+span.icon_watermark {position:absolute; right:32px; top:47px; height:37px; width:37px; z-index:-5;}
 span.icon_watermark.agriculture {background:url('/images/sites/common/icons/watermark/agriculture.png') no-repeat left 0;}
 span.icon_watermark.camp_coordination {background:url('/images/sites/common/icons/watermark/camp.png') no-repeat left 0;}
 span.icon_watermark.communications {background:url('/images/sites/common/icons/watermark/communication.png') no-repeat left 0;}
