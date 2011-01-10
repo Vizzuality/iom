@@ -213,6 +213,7 @@ Dual licensed under the MIT and GPL licenses.
 
 					$newUl.find('ul').css('display','inline');
 					$newUl.find('ul').css('visibility','visible');
+					$newUl.css('visibility','visible');
 
     				// To reset api jscrollPane
                     var element = $newUl.parent().children('div.selectedTxt').parent('div.newListSelected').find('.scroll_pane');
@@ -222,6 +223,10 @@ Dual licensed under the MIT and GPL licenses.
                         var api = element.data('jsp');						
                        	api.reinitialise();                
 						$newUl.parent().children('.newList_content').show();
+						$newUl.css('visibility','visible');
+						if ($('span.clicked').length > 0){
+							$('span.clicked').removeClass('clicked');	
+						}
                     }
 					
 				}else {

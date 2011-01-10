@@ -106,7 +106,7 @@ $(document).ready(function(ev){
   $('span#status_combo_search').click(function(ev){
     ev.stopPropagation();
     ev.preventDefault();
-
+	hideCountryCombo();
     if (!$(this).hasClass('clicked')){
       $('span.clicked').removeClass('clicked');
       $(this).addClass('clicked');
@@ -139,50 +139,12 @@ $(document).ready(function(ev){
     }
   });
 
-
-  //  COMBO COUNTRY
-  // $('span#country_combo_search').click(function(ev){
-  //   ev.stopPropagation();
-  //   ev.preventDefault();
-  // 
-  //   if (!$(this).hasClass('clicked')){
-  //     $('span.clicked').removeClass('clicked');
-  //     $(this).addClass('clicked');
-  //   }else {
-  //     $('span.clicked').removeClass('clicked');
-  //     $(this).removeClass('clicked');
-  //   }
-  // 
-  //   $(document).click(function(event) {
-  //     if (!$(event.target).closest('span#country_combo_search').length) {
-  //       $('span#country_combo_search').removeClass('clicked');
-  //     };
-  //   });
-  // });
-  // 
-  // $('span#country_combo_search').find('li').click(function(ev){
-  //   ev.stopPropagation();
-  //   ev.preventDefault();
-  //   var id = $(this).children('a').attr('id');
-  //   var name = $(this).children('a').text();
-  //   if ((id != undefined)&&(name != undefined)){
-  // 
-  //       if (name.length > limitTextCombo) {
-  //           name = name.substring(0,limitTextCombo - 3)+'...';
-  //       }
-  //       
-  //     $('span#country_combo_search').children('p').text(name);
-  //     $('input#country_input').val(id);
-  //     $('span#country_combo_search').removeClass('clicked');
-  //   }
-  // });
-
-  // END COUNTRY
-
   //  COMBO CLUSTER
   $('span#cluster_combo_search').click(function(ev){
     ev.stopPropagation();
     ev.preventDefault();
+
+	hideCountryCombo();
 
     if (!$(this).hasClass('clicked')){
       $('span.clicked').removeClass('clicked');
@@ -224,9 +186,12 @@ $(document).ready(function(ev){
 
   //  SECTOR CLUSTER
   $('span#sector_combo_search').click(function(ev){
+	
     ev.stopPropagation();
     ev.preventDefault();
-
+	
+	hideCountryCombo();
+	
     if (!$(this).hasClass('clicked')){
       $('span.clicked').removeClass('clicked');
       $(this).addClass('clicked');
@@ -784,6 +749,17 @@ function checkElementAdded(list, id){
         }
       });   
       return elementAdded;    
+}
+
+function hideCountryCombo(){
+	$('div.newListSelected').each(function() {
+    		$(this).css('background-position','0 0');
+    		$(this).css('zIndex',200);
+			$('div.newList_content').find('ul').css('display','none');
+			// $('div.country_index').css('display','none');
+			$('div.newList_content').css('visibility','hidden');
+			$('div.newList_content').find('ul').css('visibility','hidden');
+    	});
 }
 
 // AUTOCOMPLETE TAGS
