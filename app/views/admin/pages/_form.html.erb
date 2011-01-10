@@ -9,9 +9,9 @@
   <div class="long_field">
     <span class="chars">
       <%= f.label :body, raw("BODY  <strong>*</strong>") %>
-      <p><a href="#" id="show_html">Show HTML</a></p>
+      <p class="html"><a href="#" id="show_html">Show HTML</a></p>
     </span>
-    <%= f.text_area :body, :class=>"huge #{'error' if !@page.errors[:body].empty? && action_name != 'new'}",:cols=>"50", :rows=>"15", :id=>"txtDefaultHtmlArea" %>
+    <%= f.text_area :body, :class=>"huge richeditor #{'error' if !@page.errors[:body].empty? && action_name != 'new'}",:cols=>"50", :rows=>"15", :id=>"txtDefaultHtmlArea" %>
   </div>
 
 

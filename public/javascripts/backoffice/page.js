@@ -9,7 +9,8 @@
           // Override/Specify the Toolbar buttons to show
           toolbar: [
               ["bold", "italic", "underline", "|", "forecolor"],
-              ["p","h1", "h2", "h3", "h4", "h5", "h6"],
+              ["p","h1", "h2", "h3", "h4", "h5", "h6"], 
+              ["orderedlist", "unorderedlist"],
               ["link", "unlink", "|", "image"]
           ],
           css: "/stylesheets/backoffice/htmlArea.css",
