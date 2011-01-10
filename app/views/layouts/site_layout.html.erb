@@ -21,13 +21,12 @@
     <%= yield %> <!-- Main layout has to content <div id="layout"> -->
 
     <!-- FOOTERS -->
-    <% if controller_name == 'pages' || controller_name == 'search' || controller_name == 'donors' || controller_name == 'projects' %>
       <div id="footer_pages">
         <div class="left">
           <a href="http://www.interaction.org/" class="logo"></a>
           <div class="project">
             <p class="site_name"><%= link_to @site.name, url(@site) %> is a sub-site of <%= link_to 'NGO Aid Map', "http://#{Settings.main_site_host}" %></p>
-            <p class="all_rights">Copyrighted by <a href="http://www.interaction.org/">InterAction</a> ©2011. All rights reserved.</p>
+            <p class="all_rights">Designed and developed by <a href="http://www.vizzuality.com/">Vizzuality</a> | Copyrighted by <a href="http://www.interaction.org/">InterAction</a> ©2011. All rights reserved.</p>
           </div>
         </div>
         <div class="right">
@@ -42,30 +41,6 @@
           </ul>
         </div>
       </div>
-    <% else %>
-      <div id="footer">
-        <div class="left">
-          <a href="http://www.interaction.org/" class="logo"></a>
-        </div>
-        <div class="right">
-          <div class="project">
-            <p class="site_name"><%= link_to @site.name, url(@site) %> is a sub-site of <%= link_to 'NGO Aid Map', "http://#{Settings.main_site_host}" %></p>
-            <p class="all_rights">Copyrighted by <a href="http://www.interaction.org/">InterAction</a> ©2011. All rights reserved.</p>
-          </div>
-          <div class="links">
-            <ul>
-              <% if Page.contact(@site) %>
-              <li><a href="<%= page_path(Page.contact(@site)) %>">contact us</a></li>
-              <li>/</li>
-              <% end %>
-              <% if Page.about(@site) %>
-              <li><a href="<%= page_path(Page.about(@site)) %>">About the project</a></li>
-              <% end %>
-            </ul>
-          </div>
-        </div>
-      </div>
-    <% end %>
     </div>
   </div>
   <%= yield :js %>
