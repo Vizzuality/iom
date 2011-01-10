@@ -422,8 +422,8 @@ class Site < ActiveRecord::Base
   end
 
   def set_yesterday_visits!
-    return if self.google_analytics_id.blank? || Settings.first.google_analytics_username.blank? || Settings.first.google_analytics_password.blank?
-    Garb::Session.login(Settings.first.google_analytics_username, Settings.first.google_analytics_password)
+    return if self.google_analytics_id.blank? || Settings.first.data[:google_analytics_username].blank? || Settings.first.data[:google_analytics_password].blank?
+    Garb::Session.login(Settings.first.data[:google_analytics_username], Settings.first.data[:google_analytics_password])
     profile = Garb::Profile.all.detect{|p| p.web_property_id == self.google_analytics_id}
     report = Garb::Report.new(profile, :start_date => (Date.today - 1.day).beginning_of_day, :end_date => (Date.today - 1.day).end_of_day)
     report.metrics :pageviews
@@ -432,8 +432,8 @@ class Site < ActiveRecord::Base
   end
 
   def set_visits!
-    return if self.google_analytics_id.blank? || Settings.first.google_analytics_username.blank? || Settings.first.google_analytics_password.blank?
-    Garb::Session.login(Settings.first.google_analytics_username, Settings.first.google_analytics_password)
+    return if self.google_analytics_id.blank? || Settings.first.data[:google_analytics_username].blank? || Settings.first.data[:google_analytics_password].blank?
+    Garb::Session.login(Settings.first.data[:google_analytics_username], Settings.first.data[:google_analytics_password])
     profile = Garb::Profile.all.detect{|p| p.web_property_id == self.google_analytics_id}
     report = Garb::Report.new(profile)
     report.metrics :pageviews
@@ -442,8 +442,8 @@ class Site < ActiveRecord::Base
   end
 
   def set_visits_from_last_week!
-    return if self.google_analytics_id.blank? || Settings.first.google_analytics_username.blank? || Settings.first.google_analytics_password.blank?
-    Garb::Session.login(Settings.first.google_analytics_username, Settings.first.google_analytics_password)
+    return if self.google_analytics_id.blank? || Settings.first.data[:google_analytics_username].blank? || Settings.first.data[:google_analytics_password].blank?
+    Garb::Session.login(Settings.first.data[:google_analytics_username], Settings.first.data[:google_analytics_password])
     profile = Garb::Profile.all.detect{|p| p.web_property_id == self.google_analytics_id}
     report = Garb::Report.new(profile, :start_date => (Date.today - 7.days), :end_date => Date.today)
     report.metrics :pageviews
@@ -583,9 +583,9 @@ SQL
       #Insert into the relation all the sites that belong to the site.
       sql="insert into projects_sites
       select subsql.id as project_id, #{self.id} as site_id from (#{projects_sql({ :limit => nil, :offset => nil }).to_sql}) as subsql"
-      ActiveRecord::Base.connection.execute(sql)      
+      ActiveRecord::Base.connection.execute(sql)
       #Work on the denormalization
-      
+
       sql="insert into data_denormalization(project_id,project_name,project_description,organization_id,organization_name,end_date,regions,regions_ids,countries,countries_ids,sectors,sector_ids,clusters,cluster_ids,donors_ids,is_active,site_id,created_at)
       select  * from
              (SELECT p.id as project_id, p.name as project_name, p.description as project_description,
@@ -609,7 +609,7 @@ SQL
              LEFT JOIN regions as r ON pr.region_id=r.id and r.level=#{self.level_for_region}
              LEFT JOIN countries_projects as cp ON cp.project_id=p.id
              LEFT JOIN countries as c ON c.id=cp.country_id
-             LEFT JOIN clusters_projects as cpro ON cpro.project_id=p.id 
+             LEFT JOIN clusters_projects as cpro ON cpro.project_id=p.id
              LEFT JOIN clusters as clus ON clus.id=cpro.cluster_id
              LEFT JOIN projects_sectors as psec ON psec.project_id=p.id
              LEFT JOIN sectors as sec ON sec.id=psec.sector_id
@@ -617,8 +617,8 @@ SQL
              where site_id=#{self.id}
              GROUP BY p.id,p.name,o.id,o.name,p.description,p.end_date,ps.site_id,p.created_at) as subq"
        ActiveRecord::Base.connection.execute(sql)
-      
-      
+
+
     end
 
     def remove_cached_projects
