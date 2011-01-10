@@ -23,9 +23,6 @@
 </head>
 <body>
 
-  <% if @site %>
-    <%= render :partial => 'shared/menu' %>
-  <% else %>
   <div id="header">
     <div class="inner_header">
       <div class="left">
@@ -33,15 +30,14 @@
       </div>
     </div>
   </div>
-  <% end %>
 
   <div id="layout">
 
     <div class="error_block">
       <div class="block">
         <h1>We're sorry</h1>
-        <h2>The page that you are looking for doesn't exist</h2>
-        <p>Try to <a href="/">browse our maps</a> to find what you are searching</p>
+        <h2>This browser is not supported</h2>
+        <p>Visit this <a href="http://alternativebrowseralliance.com/">page</a> to find a solution</p>
       </div>
     </div>
 
