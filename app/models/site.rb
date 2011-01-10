@@ -426,9 +426,9 @@ class Site < ActiveRecord::Base
     Garb::Session.login(Settings.first.data[:google_analytics_username], Settings.first.data[:google_analytics_password])
     profile = Garb::Profile.all.detect{|p| p.web_property_id == self.google_analytics_id}
     report = Garb::Report.new(profile, :start_date => (Date.today - 1.day).beginning_of_day, :end_date => (Date.today - 1.day).end_of_day)
-    report.metrics :pageviews
+    report.metrics :visits
     result = report.results.first
-    stats.create(:visits => result.pageviews.to_i, :date => Date.yesterday)
+    stats.create(:visits => result.visits.to_i, :date => Date.yesterday)
   end
 
   def set_visits!
@@ -436,9 +436,9 @@ class Site < ActiveRecord::Base
     Garb::Session.login(Settings.first.data[:google_analytics_username], Settings.first.data[:google_analytics_password])
     profile = Garb::Profile.all.detect{|p| p.web_property_id == self.google_analytics_id}
     report = Garb::Report.new(profile)
-    report.metrics :pageviews
+    report.metrics :visits
     result = report.results.first
-    update_attribute(:visits, result.pageviews.to_i)
+    update_attribute(:visits, result.visits.to_i)
   end
 
   def set_visits_from_last_week!
@@ -446,10 +446,10 @@ class Site < ActiveRecord::Base
     Garb::Session.login(Settings.first.data[:google_analytics_username], Settings.first.data[:google_analytics_password])
     profile = Garb::Profile.all.detect{|p| p.web_property_id == self.google_analytics_id}
     report = Garb::Report.new(profile, :start_date => (Date.today - 7.days), :end_date => Date.today)
-    report.metrics :pageviews
+    report.metrics :visits
     report.dimensions :date
     result = report.results.first
-    update_attribute(:visits_last_week, result.pageviews.to_i)
+    update_attribute(:visits_last_week, result.visits.to_i)
   end
 
   def geographic_boundary_box

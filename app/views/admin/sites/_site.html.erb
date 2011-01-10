@@ -14,11 +14,11 @@
       <% if site.google_analytics_id? %>
         <li>
           <label>VISITS TO THE SITE</label>
-          <p class="museo_sans"><%= number_with_delimiter(site.visits) %></p>
+          <p class="museo_sans"><%= number_with_delimiter(site.visits.to_i) %></p>
         </li>
         <li>
           <label>LAST 7 DAYS</label>
-          <p class="museo_sans"><%= number_with_delimiter(site.visits_last_week) %></p>
+          <p class="museo_sans"><%= number_with_delimiter(site.visits_last_week.to_i) %></p>
         </li>
       <% end %>
     </ul>
