@@ -251,12 +251,9 @@
             </div>
           </span>
         </div>
-        <a class="add_location museo_sans shadow_green" id="add_region_to_list">add region</a>
+        <a class="add_location museo_sans shadow_green" id="add_region_to_list" href="<%= add_country_region_admin_project_path(@project) %>" data-remote="true" data-method="put">add region</a>
       </div>
     </div>
-
-    <input type="hidden" name="project[project_countries]" id="project_countries" value="<%= @project.countries_ids  %>" class="hidden"/>
-    <input type="hidden" name="project[project_regions]" id="project_regions" value="<%= @project.regions_ids  %>" class="hidden"/>
   </div>
 
   <label>GEOGRAPHIC COORDINATES  <strong>*</strong></label>

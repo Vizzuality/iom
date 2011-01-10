@@ -151,34 +151,44 @@
       }
     });
 
-    $('a#add_region_to_list').click(function(){
+    $('a#add_region_to_list').click(function(e){
       if ($('div.level_0 span.region_combo p').attr('id')!="country_0") {
 
-        var ids='';
-        var region_text='';
+        var csrf_token = $('meta[name=csrf-token]').attr('content'),
+            csrf_param = $('meta[name=csrf-param]').attr('content');
 
-        $('div.region_window div span.region_combo p').each(function(index,element){
-          if ($(element).text()!="Not specified") {
-            ids += $(element).attr('id').split('_')[1]+' > ';
-            region_text = region_text + ' > ' + $(element).text();
-          }
-        });
+        var link = $(this),
+            href = link.attr('href'),
+            method = link.attr('data-method'),
+            form = $('<form method="post" action="'+href+'"></form>'),
+            metadata_input = '<input name="_method" value="'+method+'" type="hidden" />',
+            countries = [], regions = [];
 
-        ids = ids.substring(0, ids.length - 1);
-        region_text = region_text.substring(2, region_text.length);
-        if (region_text.length>34) {
-          region_text = region_text.substr(0,31) + '...';
+        if (csrf_param != null && csrf_token != null) {
+          metadata_input += '<input name="'+csrf_param+'" value="'+csrf_token+'" type="hidden" />';
         }
 
-        var id_list = ids.split(' > ');
-
-        (id_list[0]!=undefined)?$('input#project_countries').attr('value',$('input#project_countries').attr('value') +','+ id_list[0]):null;
-        (id_list[1]!=undefined)?$('input#project_regions').attr('value',$('input#project_regions').attr('value') +','+ id_list[1] +','+ id_list[1] +','+ id_list[2] +','+ id_list[3]):null;
-
-        $('ul#regions_list').append('<li><p rel="'+ids+'">'+region_text+'</p><a class="close"></a></li>');
-        $('div.region_window').fadeOut(function(){
-          resetRegionValues();
+        var i = 0;
+        $('div.region_window div span.region_combo p').each(function(index,element){
+          if ($(element).text()!="Not specified") {
+            if(i == 0){
+              countries.push($(element).attr('id').split('_')[1]);
+            } else {
+              regions.push($(element).attr('id').split('_')[1]);
+            }
+          }
+          i++;
         });
+
+        metadata_input += '<input name="project[project_countries]" value="'+countries.join(',')+'" type="hidden" />';
+        metadata_input += '<input name="project[project_regions]" value="'+regions.join(',')+'" type="hidden" />';
+
+        form.hide()
+            .append(metadata_input)
+            .appendTo('body');
+
+        e.preventDefault();
+        form.submit();
       }
     });
 

@@ -60,6 +60,7 @@ Iom::Application.routes.draw do
       get 'donations', :on => :member
       resources :donations, :only => [:create, :destroy]
       put 'remove_point', :on => :member
+      put 'add_country_region', :on => :member, :format => :js
     end
     resources :sites do
       get 'customization', :on => :member

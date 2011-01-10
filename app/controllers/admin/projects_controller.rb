@@ -124,6 +124,18 @@ class Admin::ProjectsController < ApplicationController
     end
   end
 
+  def add_country_region
+    @project = Project.find(params[:id])
+    @project.country_ids = params[:project][:project_countries].split(',')
+    @project.sector_ids = params[:project][:project_regions].split(',')
+    respond_to do |format|
+      format.js do
+        page << "$('#regions_list').append('<li></li>');"
+        regions_list
+      end
+    end
+  end
+
   private
 
     def set_project_geometry
