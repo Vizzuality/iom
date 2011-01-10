@@ -169,6 +169,7 @@
       var max_count = <%=@map_data_max_count%>;
       var map_type = 'overview_map';
       var theme = "<%=@site.theme_id%>";
+      var kind = 'org.';
     </script>
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
     <%=raw(javascript_include_merged(:organizations_show)) %>

@@ -11,7 +11,7 @@ input:focus{outline:none}
 body {background:#E1E5E7;}
 ul {list-style:none;}
 label strong {font:normal 14px Georgia; color:#E93E3F;}
-
+textarea:focus {outline:none;}
 
 /*IE7 reset properties*/
 input[type="text"] {border:0px;}
@@ -577,6 +577,7 @@ div.block.project_info div.bottom {float:left; height:15px; width:100%; backgrou
 div.block.project_info div.med div.left form span.textarea.error {background-position:0 -214px;}
 div.block.project_info div.med div.left form span.textarea {float:left; margin:5px 0 0 0; background:url('/images/backoffice/projects/input_project_multiple.png') no-repeat 0 0; width:564px; height:214px; position:relative;}
 div.block.project_info div.med div.left form textarea{position:absolute; top:9px; left:9px; width:546px; height:197px; min-width:546px; max-width:546px; min-height:197px; max-height:197px; font:normal 15px Arial; color:#333333; border:none; line-height:17px;}
+div.block.project_info div.med div.left form textarea:focus {outline:none;}
 div.block.project_info div.med div.left form div.list_combo {float:left; width:419px; height:auto; position:relative;}
 div.block.project_info div.med div.left form ul.list_combo_content {position:absolute; top:35px; width:434px; height:199px; display:none; left:0; z-index:10; background:url('/images/backoffice/projects/combos/body_combo_orgs.png') no-repeat 0 0; overflow-x:hidden; overflow-y:auto;}
 div.block.project_info div.med div.left form ul.list_combo_content li.element {float:left; margin:0 0 0 1px; width:404px; height:22px; font:normal 15px Arial; color:#333333; padding:5px 0 0 12px; position:relative;}
