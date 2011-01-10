@@ -143,44 +143,42 @@ class Project < ActiveRecord::Base
   end
 
   def related(site, limit = 2)
-    return [] unless the_geom?
-    result = Project.find_by_sql(<<-SQL
-      select * from
-      (select p.id, p.name, p.primary_organization_id, o.name as primary_organization_name, c.name as country_name,
-           ST_Distance((select ST_Centroid(p.the_geom) from projects where id=#{self.id}), ST_Centroid(p.the_geom)) as dist
-           from organizations o, projects as p
-           inner join projects_sites as ps on p.id=ps.project_id and ps.site_id=#{site.id}
-           inner join countries_projects as cp on ps.project_id=cp.project_id
-           inner join countries as c on cp.country_id=c.id
-           where p.id!=#{self.id} and o.id=p.primary_organization_id
-           order by dist
-      ) as subq
+    result = ActiveRecord::Base.connection.execute(<<-SQL
+      select project_id,project_name,organization_id,organization_name,
+      (select name from regions where id=regions_ids[1]) as region_name,
+      (select center_lat from regions where id=regions_ids[1]) as center_lat,
+      (select center_lon from regions where id=regions_ids[1]) as center_lon,
+      (select path from regions where id=regions_ids[1]) as path
+      from data_denormalization where
+      organization_id = #{self.primary_organization_id}
+      and project_id!=#{self.id} and site_id=#{site.id} and is_active=true
       limit #{limit}
 SQL
     )
-    return result unless result.empty?
+    return result unless result.count<1
     # If there are not close projects try with projects of a different organization
-    result = Project.find_by_sql(<<-SQL
-      select * from
-      (select p.id, p.name, p.primary_organization_id, o.name as primary_organization_name, c.name as country_name,
-           ST_Distance((select ST_Centroid(p.the_geom) from projects where id=#{self.id}), ST_Centroid(p.the_geom)) as dist
-           from organizations o, projects as p
-           inner join projects_sites as ps on p.id=ps.project_id and ps.site_id=#{site.id}
-           inner join countries_projects as cp on ps.project_id=cp.project_id
-           inner join countries as c on cp.country_id=c.id
-           where p.id!=#{self.id}
-           order by dist
-      ) as subq
-      limit #{limit}
+        result = ActiveRecord::Base.connection.execute(<<-SQL
+          select project_id,project_name,organization_id,organization_name,
+          (select name from regions where id=regions_ids[1]) as region_name,
+          (select center_lat from regions where id=regions_ids[1]) as center_lat,
+          (select center_lon from regions where id=regions_ids[1]) as center_lon,
+          (select path from regions where id=regions_ids[1]) as path
+          from data_denormalization where
+          regions_ids && (select ('{'||array_to_string(array_agg(region_id),',')||'}')::integer[] as regions_ids from projects_regions where project_id=#{self.id})
+          and project_id!=#{self.id} and site_id=#{site.id} and is_active=true
+          limit #{limit}
 SQL
     )
-    return result unless result.empty?
-    total_projects = site.total_projects
-    return [] if total_projects < 2
-    offset = rand(total_projects - 2)
-    Project.find_by_sql(<<-SQL
-      select projects.* from projects inner join projects_sites on projects_sites.site_id=#{site.id}
-      limit 2 offset #{offset}
+    return result unless result.count<1
+        result = ActiveRecord::Base.connection.execute(<<-SQL
+          select project_id,project_name,organization_id,organization_name,
+          (select name from regions where id=regions_ids[1]) as region_name,
+          (select center_lat from regions where id=regions_ids[1]) as center_lat,
+          (select center_lon from regions where id=regions_ids[1]) as center_lon,
+          (select path from regions where id=regions_ids[1]) as path
+          from data_denormalization where
+          project_id!=#{self.id} and site_id=#{site.id} and is_active=true
+          limit #{limit}
 SQL
     )
   end
