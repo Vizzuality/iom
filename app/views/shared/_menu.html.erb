@@ -38,7 +38,7 @@
                 <div class="wrapper">
                   <ul class="content scroll_pane">
                     <% @site.countries_select.each do |country| %>
-                    <li><%= link_to(country.name, ("/location/"+country.id), :class => 'geneva') %></li>
+                    <li><%= link_to(country.name, ("/location/"+country.id.to_s), :class => 'geneva') %></li>
                     <% end %>
                   </ul>
                 </div>

@@ -10,7 +10,8 @@
   <div class="field">
     <span class="chars">
       <label>SHORT DESCRIPTION <strong>*</strong></label>
-      <p id="chars_left">56 chars left</p>
+      <% short_description = f.object.short_description || '' %>
+      <p id="chars_left"><%= 56 - short_description.length %> chars left</p>
     </span>
 
     <span class="textarea_little <%= 'error' if !@site.errors[:short_description].empty? && action_name != 'new' %>">
@@ -20,7 +21,8 @@
   <div class="field">
     <span class="chars">
       <label>LONG DESCRIPTION <strong>*</strong></label>
-      <p id="chars_left_long">730 chars left</p>
+      <% long_description =  f.object.long_description || '' %>
+      <p id="chars_left_long"><%= 730 - long_description.length %> chars left</p>
     </span>
     <span class="textarea <%= 'error' if !@site.errors[:long_description].empty? && action_name != 'new' %>">
       <%= f.text_area :long_description , :onkeyup=>"limitChars('site_long_description', 730, 'chars_left_long')" %>

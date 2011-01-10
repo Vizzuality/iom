@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(:version => 20110110191540) do
     t.string   "project_name",        :limit => 2000
     t.text     "project_description"
     t.integer  "organization_id"
-    t.string   "organization_name"
+    t.string   "organization_name",   :limit => 2000
     t.date     "end_date"
     t.text     "regions"
     t.string   "regions_ids",         :limit => nil
@@ -68,7 +68,12 @@ ActiveRecord::Schema.define(:version => 20110110191540) do
     t.datetime "created_at"
   end
 
-  add_index "data_denormalization", ["project_id"], :name => "data_denormalization_project_idx"
+  add_index "data_denormalization", ["created_at"], :name => "index_data_denormalization_on_created_at"
+  add_index "data_denormalization", ["is_active"], :name => "index_data_denormalization_on_is_active"
+  add_index "data_denormalization", ["organization_id"], :name => "index_data_denormalization_on_organization_id"
+  add_index "data_denormalization", ["project_id"], :name => "index_data_denormalization_on_project_id"
+  add_index "data_denormalization", ["project_name"], :name => "index_data_denormalization_on_project_name"
+  add_index "data_denormalization", ["site_id"], :name => "index_data_denormalization_on_site_id"
 
   create_table "donations", :force => true do |t|
     t.integer "donor_id"
