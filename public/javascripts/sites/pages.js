@@ -36,6 +36,9 @@
       if ($('div#pages div.float_left').height() > ($('div#pages div.right').height() + 120)) {
         var offset =  $('div#pages div.float_left').height();
         $('div#pages div#relative_content').height(offset);
+        if ($('div#pages div.body').length>0) {
+          $('div#pages div#relative_content').height(offset-620);
+        }
       } else {
         var offset =  $('div#pages div.right').height() + 180;
         $('div#pages div#relative_content').height(offset+142);
