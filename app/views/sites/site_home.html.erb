@@ -48,6 +48,7 @@
         </div>
       </div>
 
+      <% cache("#{@site.id}/home/projects_by_cluster_sector") do %>
       <div class="block statistics">
         <h3>PROJECTS BY <%= @site.word_for_cluster_sector.upcase.chop %></h3>
         <ul class="statistics_list">
@@ -66,12 +67,16 @@
         <% end %>
         </ul>
       </div>
+      <% end %>
 
+      <% cache("#{@site.id}/home/projects_by_location") do %>
       <div class="block statistics less">
         <h3>PROJECTS BY LOCATION</h3>
         <%= raw(projects_by_location(@site)) %>
       </div>
+      <% end %>
 
+      <% cache("#{@site.id}/home/organizations") do %>
       <div id="most_active_orgs" class="block margin">
         <h3>Some Organizations</h3>
         <ul>
@@ -80,6 +85,7 @@
           <% end  -%>
         </ul>
       </div>
+      <% end %>
 
     </div>
     <!-- div.float_left -->

@@ -7,7 +7,8 @@ class ApplicationController < ActionController::Base
 
   include AuthenticatedSystem
 
-  cache_sweeper :menu_sweeper
+  cache_sweeper :cluster_sector_sweeper, :organization_sweeper, :page_sweeper, :project_sweeper,
+                :region_country_sweeper, :site_sweeper
 
   protected
 

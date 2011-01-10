@@ -424,6 +424,24 @@ namespace :iom do
 
     end
 
+    desc 'Update project people reached'
+    task :update_people_reached => :environment do
+      DB = ActiveRecord::Base.connection
+
+      csv_projs = CsvMapper.import("#{Rails.root}/db/data/haiti_reached_peoples_fix.csv") do
+        read_attributes_from_file
+      end
+      puts "Updating estimated_people_reached"
+      csv_projs.each do |row|
+        if project = Project.find_by_intervention_id(row.ipc)
+          project.update_attribute(:estimated_people_reached, row.numer_people_reached_target)
+          putc '.'
+        else
+          puts "Project not found: #{row.ipc}"
+        end
+      end
+    end
+
     desc 'Load data for Food Security'
     task :load_food_security => :environment do
       DB = ActiveRecord::Base.connection

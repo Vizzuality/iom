@@ -101,7 +101,7 @@ site = Site.new :name              => 'Haiti Aid Map',
                 :theme             => Theme.find_by_name('Garnet'),
                 :aid_map_image     => File.open(File.join(Rails.root, '/public/images/sites/haiti_img_example.jpg')),
                 :navigate_by_level3 => true,
-                :google_analytics_id => 'UA-20618949-2'
+                :google_analytics_id => 'UA-20618946-2'
 
 site.geographic_context_country_id = Country.find_by_name('Haiti').id
 site.overview_map_bbox_miny        = 17.78605726800591
@@ -165,8 +165,7 @@ site = Site.new :name => 'Food Security',
                 :theme => Theme.find_by_name('Garnet'),
                 :aid_map_image => File.open(File.join(Rails.root, '/public/images/sites/food_img_example.jpg')),
                 :navigate_by_country => true,
-                :navigate_by_level1 => true,
-                :google_analytics_id => 'UA-20618949-3'
+                :navigate_by_level1 => true
 
 site.overview_map_bbox_miny = -65
 site.overview_map_bbox_minx = -170
