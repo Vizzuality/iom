@@ -67,12 +67,12 @@
               <ul class="clusters_or_sectors scroll_pane">
                 <li class="section"><p>CLUSTERS</p></li>
                 <% Cluster.get_select_values.each do |cluster| %>
-                  <li><a class="cluster_value" id="<%= cluster.id %>"><%= truncate(cluster.name, :length => 30)  %></a></li>
+                  <li><a class="cluster_value" id="cluster_<%= cluster.id %>"><%= truncate(cluster.name, :length => 30)  %></a></li>
                 <%end -%>
                 <%= f.hidden_field :project_context_sector_id  %>
                 <li class="section"><p>SECTORS</p></li>
                 <% Sector.get_select_values.each do |sector| %>
-                  <li><a class="sector_value" id="<%= sector.id %>"><%= truncate(sector.name, :length => 30)  %></a></li>
+                  <li><a class="sector_value" id="sector_<%= sector.id %>"><%= truncate(sector.name, :length => 30)  %></a></li>
                 <%end -%>
               </ul>
             </div>
@@ -89,7 +89,7 @@
               <ul class="organizations scroll_pane">
                 <%= f.hidden_field :project_context_organization_id  %>
                 <% Organization.get_select_values.each do |organization| %>
-                  <li><a class="organization" id="<%= organization.id %>"><%= truncate(organization.name, :length => 31) %></a></li>
+                  <li><a class="organization" id="orgs_<%= organization.id %>"><%= truncate(organization.name, :length => 31) %></a></li>
                 <%end -%>
               </ul>
             </div>
