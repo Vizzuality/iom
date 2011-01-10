@@ -442,6 +442,41 @@ namespace :iom do
       end
     end
 
+    desc 'Update fundings'
+    task :update_fundings => :environment do
+      DB = ActiveRecord::Base.connection
+
+      csv_projs = CsvMapper.import("#{Rails.root}/db/data/haiti_organizations_money_fix.csv") do
+        read_attributes_from_file
+      end
+      puts "Updating fundings"
+      csv_projs.each do |row|
+        if organization = Organization.find_by_name(row.organization)
+          organization.update_attributes({
+            :private_funding => row.private_funding,
+            :usg_funding => row.usg_funding,
+            :other_funding => row.other_funding
+          })
+
+          budget=0
+          budget = organization.private_funding unless organization.private_funding.nil?
+          budget = budget + organization.usg_funding  unless organization.usg_funding.nil?
+          budget = budget + organization.other_funding  unless organization.other_funding.nil?
+          organization.budget = budget unless budget==0
+
+          organization.private_funding_spent   = row.private_funding_spent unless (row.private_funding_spent.blank?)
+          organization.usg_funding_spent       = row.usg_funding_spent unless (row.usg_funding_spent.blank?)
+          organization.other_funding_spent     = row.other_funding_spent unless (row.other_funding_spent.blank?)
+
+          organization.save
+
+          putc '.'
+        else
+          puts "Organization not found: #{row.organization}"
+        end
+      end
+    end
+
     desc 'Load data for Food Security'
     task :load_food_security => :environment do
       DB = ActiveRecord::Base.connection
