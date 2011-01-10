@@ -261,6 +261,8 @@ class Site < ActiveRecord::Base
       2
     elsif navigate_by_level3?
       3
+    else
+      0
     end
   end
 
