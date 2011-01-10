@@ -284,27 +284,37 @@ SQL
     ActiveRecord::Base.connection.execute(sql).map{ |r| r['country_id'] }.join(',')
   end
 
-  def regions_level1_ids
+  def regions_hierarchized
     return "" if self.new_record?
-    sql = "select region_id from projects_regions
-    inner join regions on regions.id=projects_regions.region_id and regions.level=1
-    where project_id=#{self.id}"
-    ActiveRecord::Base.connection.execute(sql).map{ |r| r['region_id'] }.uniq.join(',')
+    level = 3
+    result_regions = []
+    all_regions = Region.find_by_sql("select #{Region.custom_fields.join(',')} from regions inner join projects_regions on projects_regions.region_id=regions.id where project_id=#{self.id}")
+    while all_regions.any?
+      result_regions += all_regions.select{ |r| r.level == level }
+      all_regions = all_regions - result_regions
+      parent_region_ids = result_regions.map do |region|
+        region.path.split('/')[1..-1].map{ |e| e.to_i }
+      end.flatten
+      all_regions = all_regions.delete_if{ |r| parent_region_ids.include?(r.id) }
+      level -= 1
+    end
+    result_regions
   end
 
-  def regions_level2_ids
-    return "" if self.new_record?
-    sql = "select region_id from projects_regions
-    inner join regions on regions.id=projects_regions.region_id and regions.level=2
-    where project_id=#{self.id}"
-    ActiveRecord::Base.connection.execute(sql).map{ |r| r['region_id'] }.uniq.join(',')
+  def project_countries=(value)
+    self.country_ids = (self.country_ids + value.split(',').delete_if{ |e| e.blank? }.uniq.map{|e| e.to_i}).uniq.join(',')
   end
 
-  def regions_level3_ids
+  def project_regions=(value)
+    regions_ids = value.split(',').delete_if{ |e| e.blank? || e == 'undefined' }.uniq.map{|e| e.to_i}
+    unless regions_ids.empty?
+      self.region_ids = (self.region_ids + regions_ids).uniq
+    end
+  end
+
+  def regions_ids
     return "" if self.new_record?
-    sql = "select region_id from projects_regions
-    inner join regions on regions.id=projects_regions.region_id and regions.level=3
-    where project_id=#{self.id}"
+    sql = "select region_id from projects_regions where project_id=#{self.id}"
     ActiveRecord::Base.connection.execute(sql).map{ |r| r['region_id'] }.uniq.join(',')
   end
 
