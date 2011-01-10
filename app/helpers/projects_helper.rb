@@ -48,19 +48,21 @@ module ProjectsHelper
   def metainformation(project, site)
     result = ""
     clusters_sectors = []
-    if site.navigate_by_sector? && project.sectors_names.present?
-      project.sectors_names.split('|').each_with_index do |sector_name, i|
-        clusters_sectors << link_to(sector_name, sector_path(project.sector_ids[i]))
+    if site.navigate_by_sector? && project['sectors'].present?
+      project['sectors'].split('|').delete_if{ |e| e.blank? }.each_with_index do |sector_name, i|
+        next if sector_name.blank?
+        clusters_sectors << link_to(sector_name, sector_path(project['sector_ids'].delete('{}').split(',')[i]))
       end
-    elsif site.navigate_by_cluster? && project.clusters_names.present?
-      project.clusters_names.split('|').each_with_index do |cluster_name, i|
-        clusters_sectors << link_to(cluster_name, cluster_path(project.cluster_ids[i]))
+    elsif site.navigate_by_cluster? && project['clusters'].present?
+      project['clusters'].split('|').delete_if{ |e| e.blank? }.each_with_index do |cluster_name, i|
+        next if sector_name.blank?
+        clusters_sectors << link_to(cluster_name, cluster_path(project['cluster_ids'].delete('{}').split(',')[i]))
       end
     end
     unless clusters_sectors.empty?
       result << " on #{clusters_sectors.to_sentence}"
     end
-    result << " by #{link_to(project.primary_organization_name, organization_path(project.primary_organization_id))}"
+    result << " by #{link_to(project['organization_name'], organization_path(project['organization_id']))}"
     raw(result)
   end
 

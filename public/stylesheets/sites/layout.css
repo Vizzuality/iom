@@ -116,7 +116,10 @@ div#header ul.menu li {float:left; width:auto; margin:0 23px 0 0; position:relat
 
 div#header ul.menu li#cluster_option.clicked ul.suboptions {position:absolute; top:35px; left:-10px; z-index:110; background:url('/images/sites/common/menu/cluster_body_clicked.png') no-repeat 0 0; display:none; width:505px; height:177px; display:inline; padding:0 13px 0 15px;}
 div#header ul.menu li#cluster_option.clicked ul.suboptions.longer {background:url('/images/sites/common/menu/cluster_body_clicked_long.png') no-repeat 0 0; height:290px;}
-div#header ul.menu li#sector_option.clicked ul.suboptions {position:absolute; top:35px; left:-10px; z-index:110; background:url('/images/sites/common/menu/cluster_body_clicked.png') no-repeat 0 0; display:none; width:497px; height:177px; display:inline; padding:3px 13px 0;}
+div#header ul.menu li#sector_option.clicked ul.suboptions {position:absolute; top:35px; left:-8px; z-index:110; background:url('/images/sites/common/menu/body_sectors_content.png') repeat-y 0; display:none; width:495px; height:auto; display:inline; padding:3px 13px 0;}
+
+div#header ul.menu li#sector_option.clicked ul.suboptions span.top_content {position:absolute; top:0; left:0; background:url('/images/sites/common/menu/top_sectors_content.png') no-repeat 0 0; width:495px; height:3px;}
+div#header ul.menu li#sector_option.clicked ul.suboptions span.bottom_content {position:absolute; bottom:-30px; left:0; background:url('/images/sites/common/menu/bottom_sectors_content.png') no-repeat 0 0; width:495px; height:30px;}
 div#header ul.menu li#sector_option.clicked ul.suboptions.longer {background:url('/images/sites/common/menu/cluster_body_clicked_long.png') no-repeat 0 0; height:290px;}
 
 div#header ul.menu li div.header_title {display:none;}
@@ -134,7 +137,7 @@ div#header ul.menu li#country_option.clicked ul.content li {float:left; margin:3
 div#header ul.menu li#country_option.clicked ul.content li a {float:left; margin:0; font:normal 13px "PT Sans"; color:#C0C0BF; text-decoration:none;}
 div#header ul.menu li#country_option.clicked ul.content li a:hover {color:white;}
 /*REGION*/
-div#header ul.menu li#region_option.clicked div.header_title {position:absolute; top:0; left:-15px; background:url('/images/sites/common/menu/region_head_clicked.png') no-repeat 0 0; width:106px; height:35px; display:inline;}
+div#header ul.menu li#region_option.clicked div.header_title {position:absolute; top:0; left:-15px; background:url('/images/sites/common/menu/region_head_clicked.png') no-repeat 0 0; width:110px; height:35px; display:inline;}
 div#header ul.menu li#region_option.clicked span.suboptions_body_top {position:absolute; top:-2px; left:0; z-index:110; background:url('/images/sites/common/menu/region_body_clicked_top.png') no-repeat 0 0; width:238px; height:2px;}
 div#header ul.menu li#region_option.clicked div.suboptions_body {position:absolute; top:37px; left:-19px; z-index:110; background:url('/images/sites/common/menu/region_body_clicked.png') repeat-y 0 bottom; display:none; width:238px; max-height:238px; height:auto; display:inline; padding:7px; display:inline;}
 div#header ul.menu li#region_option.clicked div.suboptions_body div.content_float {float:left; width:238px; height:auto; background:url('/images/sites/common/menu/region_body_clicked.png') repeat-y 0 bottom;}
@@ -164,6 +167,7 @@ div#header ul.menu li#organization_option.clicked ul.content li a:hover {color:w
 
 
 div#header ul.menu li#organization_option.clicked ul#orgs_list {position:relative; float:left; overflow-y:scroll; overflow-x:hidden;}
+div#header ul.menu li#organization_option.clicked ul#orgs_list p.no_founded {position:absolute; top:10px; left:0; font:italic 13px Arial; color:#C1C1C0; display:none;}
 div#header ul.menu li#organization_option.clicked ul#orgs_list li {float:left; margin:7px 0 0 0;}
 div#header ul.menu li#organization_option.clicked ul#orgs_list li a {float:left; font:normal 13px "PT Sans",Arial; color:#C1C1C0;}
 div#header ul.menu li#organization_option.clicked ul#orgs_list li a:hover {color:white;}
@@ -175,7 +179,7 @@ div#header ul.menu li a.with_suboptions {padding:0 8px 0 0; background:url('/ima
 div#header ul.menu li a span.with_suboptions {display:none;}
 div#header ul.menu li div.suboptions_body {display:none;}
 div#header ul.menu li ul.suboptions {position:absolute; top:20px; left:-13px; background-color:#2F2E2C; z-index:110; display:none;}
-div#header ul.menu li ul.suboptions li {float:left; width:155px; padding:0 5px; margin:9px 0 0 0; height:auto;}
+div#header ul.menu li ul.suboptions li {float:left; width:150px; padding:0 5px; margin:9px 0 0 0; height:auto; z-index:10;}
 
 div#header div.right {margin:10px 0 0 0; width:auto; height:20px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#header div.right form.search {position:relative; float:right;}
@@ -211,7 +215,7 @@ div.main_head div.left h2.cluster_sector_name, div.main_head div.left h2.organiz
 div.main_head div.left h3 {width:100%; font:normal 15px "PT Sans Bold"; color:#7B3C32; text-transform:uppercase;}
 div.main_head div.left p {padding:5px 0 0 0; font:normal 13px Arial; color:#7B3932;}
 div.main_head div.float_head {position:absolute; top:0; left:5px; width:238px; padding:30px 32px 44px; background:url('/images/sites/search/head_mask.png') repeat 0 0 #C45A4B; z-index:100;}
-div.main_head div.float_head.home {padding-bottom:23px;}
+div.main_head div.float_head.home {padding-bottom:37px;}
 div.main_head div.float_head.home h1 {font-size:32px; text-transform:uppercase; position:relative; width:200px;}
 div.main_head div.float_head.home sup.beta {font:normal 11px "PT Sans"; color:#73352B; padding:3px;}
 div.main_head div.float_head.home h3 {width:100%; font:normal 15px "PT Sans Bold"; color:#7B3C32; text-transform:uppercase; margin:20px 0 0 0;}
@@ -326,6 +330,8 @@ div#pages div.float_left div.body p a {color:#D05F4C; text-decoration:none;}
 div#pages div.float_left div.body p a:hover {text-decoration:underline; cursor:pointer;}
 div#pages div.float_left div.body ul {width:100%; margin:10px 0 0 0; padding:0 0 6px; list-style:none;}
 div#pages div.float_left div.body ul li {padding:3px 0 3px 13px; background:url('/images/sites/icons/list_disc.png') no-repeat 0 10px; font:normal 13px Arial; color:#666666;}
+div#pages div.float_left div.body ul li a {color:#D05F4C; text-decoration:none;}
+div#pages div.float_left div.body ul li a:hover {text-decoration:underline;}
 div#pages div.float_left div.results_list {width:660px; margin:0 5px 0 5px; background:white;}
 div#pages div.float_left div.results_list h3 {margin:0; padding:30px 0 30px 32px; font:normal 13px "PT Sans Bold"; color:#666666; text-transform:uppercase;}
 div#pages div.float_left div.results_list h3 a {color:#666666; padding:0 8px 0 0; background:url('/images/sites/icons/remove.png') no-repeat right 0; border-bottom:1px dotted #C45A4B;}
@@ -366,6 +372,7 @@ div#pages div.right div.block p a {color:#CD5D4C;}
 div#pages div.right div.block p a:hover {text-decoration:underline;}
 div#pages div.right div.block ul {width:100%; margin:7px 0 0 0; padding:0 0 6px; list-style:none;}
 div#pages div.right div.block ul li {padding:3px 0 3px 10px; background:url('/images/sites/icons/list_disc.png') no-repeat 0 10px; font:normal 13px Arial; color:#999999;}
+div#pages div.right div.block ul li.page {color:#333333;}
 div#pages div.right div.block ul li a {color:#D05F4C; text-decoration:none;}
 div#pages div.right div.block ul li a:hover {text-decoration:underline; cursor:pointer;}
 div#pages div.right div.block ul li.selected {background:none;}
@@ -442,7 +449,7 @@ a.icon_menu:hover {background-position:0 -22px; cursor:pointer;}
 
 /* TO WATER_MARK */
 
-span.icon_watermark {position:absolute; right:32px; top:47px; height:37px; width:37px; z-index:0;}
+span.icon_watermark {position:absolute; right:32px; top:47px; height:37px; width:37px; z-index:-5;}
 span.icon_watermark.agriculture {background:url('/images/sites/common/icons/watermark/agriculture.png') no-repeat left 0;}
 span.icon_watermark.camp_coordination {background:url('/images/sites/common/icons/watermark/camp.png') no-repeat left 0;}
 span.icon_watermark.communications {background:url('/images/sites/common/icons/watermark/communication.png') no-repeat left 0;}

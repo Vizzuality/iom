@@ -3,12 +3,12 @@
       <div class="left">
         <h1><%= @project.name %></h1>
         <p>
-          <%= metainformation(@project, @site) %>
+          <%= metainformation(@raw_project, @site) %>
         </p>
         <div class="float_head">
           <h1><%= @project.name %></h1>
           <p>
-            <%= metainformation(@project, @site) %>
+            <%= metainformation(@raw_project, @site) %>
           </p>
           <% if @project.finished? %>
           <div id="completed">

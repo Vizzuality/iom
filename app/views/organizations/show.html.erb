@@ -53,7 +53,7 @@
 
           <% if !@organization.budget.blank? %>
             <div class="block">
-              <h3>FUNDING FOR <%= @site.name %></h3>
+              <h3>Funding raised</h3>
               <p class="budget"><%= number_with_precision(@organization.budget, :precision => 0, :delimiter => ',') %></p>
               <h3 class="secondary">FUNDING SOURCES</h3>
               <p><%= funding_percentages(@organization) %></p>

@@ -1,9 +1,17 @@
-h6 {font:normal 13px "PT Sans Bold"; color:#666666; margin:10px 0 0 0;}
-h5 {font:normal 14px "PT Sans Bold"; color:#666666; margin:10px 0 0 0;}
-h4 {font:normal 15px "PT Sans Bold"; color:#666666; margin:10px 0 0 0;}
-h3 {font:normal 16px "PT Sans Bold"; color:#666666; margin:10px 0 0 0;}
-h2 {font:normal 18px "PT Sans Bold"; color:#666666; margin:10px 0 0 0;}
-h1 {font:normal 20px "PT Sans Bold"; color:#666666; margin:10px 0 0 0;}
+@font-face {
+  font-family: 'PT Sans Bold';
+  src: url('/fonts/bold-webfont.eot');
+  src: local('☺'), url('/fonts/bold-webfont.woff') format('woff'), url('/fonts/bold-webfont.ttf') format('truetype'), url('/fonts/bold-webfont.svg#webfontsAYHMuxi') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+h6 {font:normal 10px "PT Sans Bold",Arial; color:#666666; margin:10px 0 0 0; text-transform:uppercase;}
+h5 {font:normal 12px "PT Sans Bold",Arial; color:#666666; margin:10px 0 0 0; text-transform:uppercase;}
+h4 {font:normal 12px "PT Sans Bold",Arial; color:#666666; margin:10px 0 0 0; text-transform:uppercase;}
+h3 {font:normal 13px "PT Sans Bold",Arial; color:#666666; margin:10px 0 0 0; text-transform:uppercase;}
+h2 {font:normal 16px "PT Sans Bold",Arial; color:#666666; margin:10px 0 0 0; text-transform:uppercase;}
+h1 {font:normal 18px "PT Sans Bold",Arial; color:#666666; margin:10px 0 0 0; text-transform:uppercase;}
 p {font:normal 13px Arial; color:#666666; margin:10px 0 0 0;}
 p a {color:#D05F4C; text-decoration:none;}
 p a:hover {text-decoration:underline; cursor:pointer;}
