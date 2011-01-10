@@ -64,7 +64,7 @@ src="http://vizzuality-interaction.geoiq.com/javascripts/f1.api.js"></script>
 
       <% cache("#{@site.id}/home/projects_by_cluster_sector") do %>
       <div class="block statistics">
-        <h3>PROJECTS BY <%= @site.word_for_cluster_sector.upcase.chop %></h3>
+        <h3>PROJECT <%= @site.word_for_cluster_sector.upcase %></h3>
         <ul class="statistics_list">
         <% @site.projects_sectors_or_clusters.each do |category, count| %>
           <% unless category.name.eql?('N/A') %>
@@ -85,7 +85,7 @@ src="http://vizzuality-interaction.geoiq.com/javascripts/f1.api.js"></script>
 
       <% cache("#{@site.id}/home/projects_by_location") do %>
       <div class="block statistics less">
-        <h3>PROJECTS BY LOCATION</h3>
+        <h3>PROJECT LOCATIONS</h3>
         <%= raw(projects_by_location(@site)) %>
       </div>
       <% end %>

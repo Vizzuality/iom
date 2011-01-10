@@ -39,7 +39,7 @@
 
         <!-- CLUSTER -->
         <div class="block border statistics">
-          <h2>FUNDING BY <%= @site.word_for_cluster_sector.chop %></h2>
+          <h2>PROJECT <%= @site.word_for_cluster_sector %></h2>
           <ul class="statistics_list">
             <% @donor.projects_sectors_or_clusters(@site)[0...3].each do |category,count| %>
               <li>
@@ -57,7 +57,7 @@
 
         <!-- PROJECTS BY AREA -->
         <div class="block border statistics">
-          <h2>FUNDING BY LOCATION</h2>
+          <h2>PROJECT LOCATIONS</h2>
           <%= raw(projects_by_location(@site, @donor.projects_regions(@site))) %>
         </div>
 

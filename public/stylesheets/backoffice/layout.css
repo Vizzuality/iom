@@ -1032,9 +1032,10 @@ ul.pages li div.body span a:hover {text-decoration:underline;}
 ul.pages li div.body span a.delete {float:left; width:14px; height:14px; margin:2px 0 0 7px; background:url('/images/backoffice/icons/tiny_close.png') no-repeat 0 0; text-indent:-9999px;}
 ul.pages li div.body span a.delete:hover {background-position:0 -14px;}
 ul.pages li div.down {float:left; width:565px; height:15px; background:url('/images/backoffice/resources/resources_bottom.png') no-repeat 0 bottom;}
-span.chars {float:left; width:100%;}
+span.chars {position:relative; float:left; width:100%;}
 span.chars label {width:auto!important;}
 span.chars p {float:right!important; margin:20px 10px 0 0; width:auto; font:normal 13px Arial!important; color:#999999;}
+span.chars p.html {position:absolute; top:30px; right:0; z-index:100;}
 span.chars p a {font:normal 12px Arial!important; color:#666666; text-decoration:underline;}
 span.chars p a:hover {color:#333333;}
 span.chars p.few {color:#FF9900;}
@@ -1052,7 +1053,7 @@ span#parent_page.clicked ul.options li a {font:normal 13px Arial; color:#666666;
 span#parent_page:hover {cursor:pointer;}
 textarea.huge {float:left; min-width:548px!important; max-width:548px!important; max-height:687px!important; min-height:687px!important; margin:5px 0 0 0; padding:5px 8px; background:url('/images/backoffice/pages/textarea_bkg.jpg') no-repeat 0 0!important; border:none; font:normal 15px Arial; color:#333333;}
 textarea.huge.error {background-position:0 -697px!important;}
-
+textarea.huge.richeditor {margin:44px 0 0 0!important;}
 
 /*window alert*/
 div#modal_window {position:absolute; display:none; top:0; left:0; right:0; bottom:0; background:url('/images/backoffice/common/modal_bkg.png') repeat 0 0; z-index:10;}

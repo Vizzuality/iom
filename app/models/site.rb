@@ -426,9 +426,9 @@ class Site < ActiveRecord::Base
     Garb::Session.login(Settings.first.data[:google_analytics_username], Settings.first.data[:google_analytics_password])
     profile = Garb::Profile.all.detect{|p| p.web_property_id == self.google_analytics_id}
     report = Garb::Report.new(profile, :start_date => (Date.today - 1.day).beginning_of_day, :end_date => (Date.today - 1.day).end_of_day)
-    report.metrics :pageviews
+    report.metrics :visits
     result = report.results.first
-    stats.create(:visits => result.pageviews.to_i, :date => Date.yesterday)
+    stats.create(:visits => result.visits.to_i, :date => Date.yesterday)
   end
 
   def set_visits!
@@ -436,9 +436,9 @@ class Site < ActiveRecord::Base
     Garb::Session.login(Settings.first.data[:google_analytics_username], Settings.first.data[:google_analytics_password])
     profile = Garb::Profile.all.detect{|p| p.web_property_id == self.google_analytics_id}
     report = Garb::Report.new(profile)
-    report.metrics :pageviews
+    report.metrics :visits
     result = report.results.first
-    update_attribute(:visits, result.pageviews.to_i)
+    update_attribute(:visits, result.visits.to_i)
   end
 
   def set_visits_from_last_week!
@@ -446,10 +446,10 @@ class Site < ActiveRecord::Base
     Garb::Session.login(Settings.first.data[:google_analytics_username], Settings.first.data[:google_analytics_password])
     profile = Garb::Profile.all.detect{|p| p.web_property_id == self.google_analytics_id}
     report = Garb::Report.new(profile, :start_date => (Date.today - 7.days), :end_date => Date.today)
-    report.metrics :pageviews
+    report.metrics :visits
     report.dimensions :date
     result = report.results.first
-    update_attribute(:visits_last_week, result.pageviews.to_i)
+    update_attribute(:visits_last_week, result.visits.to_i)
   end
 
   def geographic_boundary_box
@@ -475,7 +475,7 @@ class Site < ActiveRecord::Base
   end
 
   def last_visits(limit = 30)
-    stats.order("date DESC").limit(limit).map{ |s| s.visits }.join(',')
+    stats.order("date ASC").limit(limit).map{ |s| s.visits }.join(',')
   end
 
   def countries_select
@@ -498,8 +498,8 @@ class Site < ActiveRecord::Base
     if geographic_context_country_id.blank? && geographic_context_region_id.blank?
       Country.find_by_sql(<<-SQL
         select id,name from countries
-        where id in (select country_id 
-        from countries_projects as cr inner join projects_sites as ps 
+        where id in (select country_id
+        from countries_projects as cr inner join projects_sites as ps
         on cr.project_id=ps.project_id and site_id=#{self.id}) order by name
 SQL
       )
@@ -520,18 +520,18 @@ SQL
       Region.find_by_sql(<<-SQL
         select id,name,path from regions
         where level=#{level_for_region}
-        and id in (select region_id from projects_regions as pr 
+        and id in (select region_id from projects_regions as pr
         inner join projects_sites as ps on pr.project_id=ps.project_id and site_id=#{self.id})
         order by name
 SQL
       )
     end
   end
-  
+
   def organizations_select
     Organization.find_by_sql(<<-SQL
         select distinct o.id,o.name from organizations as o
-        inner join projects as p on p.primary_organization_id=o.id 
+        inner join projects as p on p.primary_organization_id=o.id
         inner join projects_sites as ps on p.id=ps.project_id and site_id=#{self.id}
         order by o.name
 SQL

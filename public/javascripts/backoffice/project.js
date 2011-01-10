@@ -7,6 +7,13 @@ var dateEnd = new Array(3);
 var donationDate = new Array(3);
 
 var limitTextCombo = 12;
+
+// ID's
+var orgs_id = 5; // orgs_
+var clusters_id = 9; // clusters_
+var clusterToAdd = 13; // clusterToAdd_
+var sectors_id = 8; // sectors_
+var sectorToAdd = 12; // sectorToAdd_
 $(document).ready(function(ev){
 
       // COUNTRY COMBO
@@ -286,8 +293,11 @@ $(document).ready(function(ev){
   $('ul.list_combo_content').find('li.element').click(function(ev){
     var id = $(this).attr('id');
     var name = $(this).children('p.project_name').text();
+	id = id.substring(orgs_id,id.length);
+	
+	// id substring
+    $('input#project_primary_organization_id').val(id);
 
-    $('input#project_primary_organization_id').val($(this).attr('id'));
     $('div.list_combo').find('a.organization').text(name);
     $('div.list_combo').find('ul.list_combo_content').css('display','none');
     $('div.list_combo').children('span.combo_large').attr('id','hidden');
@@ -339,6 +349,7 @@ $(document).ready(function(ev){
     ev.preventDefault();
 
     if (!$(this).hasClass('clicked')){
+
         // THIS IS A IE HACK
         $(this).css('position','relative');
         
@@ -362,7 +373,9 @@ $(document).ready(function(ev){
     ev.stopPropagation();
     ev.preventDefault();
     $('span.combo_cluster_options').children('p').text($(this).children('a').text());
-    $('span.combo_cluster_options').children('p').attr('id',$(this).children('a').attr('id'));
+ 	var id = $(this).children('a').attr('id');
+	id = id.substring(clusters_id,id.length);
+    $('span.combo_cluster_options').children('p').attr('id','clusterToAdd_'+id);
     $('span.combo_cluster_options.clicked').removeClass('clicked');
 
   });
@@ -373,7 +386,8 @@ $(document).ready(function(ev){
     ev.preventDefault();
 
     var id = $('span.combo_cluster_options').children('p').attr('id');
-
+	id = id.substring(clusterToAdd,id.length);
+	
     var notAdded = false;
     notAdded = checkElementAdded($('ul.clusters'),id);
 
@@ -385,7 +399,7 @@ $(document).ready(function(ev){
 
       $('ul.clusters').append(htmlToAdd);
       $('span.combo_cluster_options').children('p').text('Select more clusters');
-      $('span.combo_cluster_options').children('p').attr('id','0');
+      $('span.combo_cluster_options').children('p').attr('id','clusterToAdd_0');
     }
     $('div.block div.med div.left').resize();
     });
@@ -425,7 +439,10 @@ $(document).ready(function(ev){
       ev.stopPropagation();
       ev.preventDefault();
       $('span#sector').children('p').text($(this).children('a').text());
-      $('span#sector').children('p').attr('id',$(this).children('a').attr('id'));
+	  var id = $(this).children('a').attr('id');
+
+	  id = id.substring(sectors_id,id.length);
+      $('span#sector').children('p').attr('id','sectorToAdd_'+id);
       $('span#sector.clicked').removeClass('clicked');
     });
 
@@ -436,7 +453,7 @@ $(document).ready(function(ev){
       ev.preventDefault();
 
       var id = $('span#sector').children('p').attr('id');
-
+	  id = id.substring(sectorToAdd,id.length); 
       var notAdded = false;
       notAdded = checkElementAdded($('ul.sectors'),id);
       
@@ -447,7 +464,7 @@ $(document).ready(function(ev){
 
         $('ul.sectors').append(htmlToAdd);
         $('span#sector').children('p').text('Select more sectors');
-        $('span#sector').children('p').attr('id','0');
+        $('span#sector').children('p').attr('id','sectorToAdd_0');
       }
       $('div.block div.med div.left').resize();
       });

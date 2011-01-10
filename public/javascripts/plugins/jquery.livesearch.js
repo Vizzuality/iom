@@ -50,11 +50,16 @@
 
 			if (element.length >0){
                 var api = element.data('jsp');
-                api.reinitialise();
-            }
-            
+                api.reinitialise();				
+            }else {
+				this.list.find('p.no_founded').css('display','inline');			
+			}
 			
-			
+			if (scores.length > 0){
+				this.list.find('p.no_founded').css('display','none');
+			}else {
+				this.list.find('p.no_founded').css('display','inline');
+			}		
 		},
 		getScores: function(term) {
 			var scores = [];
@@ -62,13 +67,12 @@
 			for (var i=0; i < this.cache_length; i++) { 
 			    
                 var score = this.cache[i].contains(term) ;
-                if (score > 0) { 
-					this.list.find('p.no_founded').css('display','none'); 
+                if (score > 0) { 				
 					scores.push([score, i]); 
 				}
-			    else {
-					this.list.find('p.no_founded').css('display','inline');
-				}
+
+					
+
 			    // If we'd rather a "quicksilver search"
                 // var score = this.cache[i].score(term);
                 // if (score > 0) { scores.push([score, i]); }

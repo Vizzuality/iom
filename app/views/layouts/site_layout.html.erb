@@ -26,7 +26,7 @@
         <div class="left">
           <a href="http://www.interaction.org/" class="logo"></a>
           <div class="project">
-            <p class="site_name"><%= link_to @site.name %> is a sub-site of <%= link_to 'NGO Aid Map', "http://#{Settings.main_site_host}" %></p>
+            <p class="site_name"><%= link_to @site.name, url(@site) %> is a sub-site of <%= link_to 'NGO Aid Map', "http://#{Settings.main_site_host}" %></p>
             <p class="all_rights">Copyrighted by <a href="http://www.interaction.org/">InterAction</a> ©2011. All rights reserved.</p>
           </div>
         </div>
@@ -49,7 +49,7 @@
         </div>
         <div class="right">
           <div class="project">
-            <p class="site_name"><%= link_to @site.name %> is a sub-site of <%= link_to 'NGO Aid Map', "http://#{Settings.main_site_host}" %></p>
+            <p class="site_name"><%= link_to @site.name, url(@site) %> is a sub-site of <%= link_to 'NGO Aid Map', "http://#{Settings.main_site_host}" %></p>
             <p class="all_rights">Copyrighted by <a href="http://www.interaction.org/">InterAction</a> ©2011. All rights reserved.</p>
           </div>
           <div class="links">

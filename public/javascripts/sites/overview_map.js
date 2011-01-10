@@ -97,7 +97,10 @@
     map.fitBounds(bounds);
     
     if (map_type=="overview_map") {
-      setTimeout(function(){zoomIn()},200);
+      google.maps.event.addListener(map,'tilesloaded',function(){
+        google.maps.event.clearListeners(map,'tilesloaded');
+        zoomIn();
+      });
     }
     
     //Positionate zoom controls
