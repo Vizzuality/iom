@@ -1,5 +1,7 @@
 
+
     $(document).ready( function() {
+      $('div#header div.left').width(820);
       
       //If description is bigger than main_head
       if (($('div.inner_main_head div.right').height()+64)>$('div.inner_main_head div.left div.float_head').height()) {
