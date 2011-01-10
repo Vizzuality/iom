@@ -314,7 +314,7 @@ div.med.donors_list h2 a.remove:hover {border-bottom:1px solid #EB4142; text-dec
 div.med.donors_list ul {float:left; width:100%; padding:0; margin:23px 0 0 0; border-top:1px solid #CCCCCC;}
 div.med.donors_list ul li {float:left; width:100%; padding:0; margin:0; border-bottom:1px solid #CCCCCC; height:71px;}
 div.med.donors_list ul li.last {border:none;}
-div.med.donors_list ul li h3 {float:left; width:379px; height:71px; margin:0; padding:27px 0; display:inline;}
+div.med.donors_list ul li h3 {float:left; width:546px!important; height:71px; margin:0; padding:27px 0; display:inline;}
 div.med.donors_list ul li h3 a {font:bold 17px Arial; color:#E93E3F;}
 div.med.donors_list ul li h3 a:hover {text-decoration:underline;}
 div.med.donors_list ul li p {float:left; width:167px; height:41px; padding:30px 0 0 0; margin:0; font:normal 13px Arial; color:#666666; text-align:center;}
@@ -927,13 +927,13 @@ div.block.site_info div.med div.left form span.input_large {float:left; margin:5
 div.block.site_info div.med div.left form span.input_large.active {background:url('/images/backoffice/projects/large_combo_head_displayed.png') no-repeat 0 0;}
 div.block.site_info div.med div.left form input[type="text"]{position:absolute; top:6px; left:7px; width:400px; height:21px; font:normal 15px Arial; color:#333333; border:none; padding:0;}
 div.block.site_info div.med div.left form span.textarea {float:left; margin:5px 0 0 0; background:url('/images/backoffice/projects/input_project_multiple.png') no-repeat 0 0; width:564px; height:214px; position:relative;}
-div.block.site_info div.med div.left form span.textarea textarea{position:absolute; top:9px; left:9px; width:546px; height:197px; font:normal 15px Arial; color:#333333; border:none; line-height:17px;}
+div.block.site_info div.med div.left form span.textarea textarea{position:absolute; top:9px; left:9px; max-width:546px; max-height:197px; min-width:546px; min-height:197px; font:normal 15px Arial; color:#333333; border:none; line-height:17px;}
 
 div.block.site_info div.med div.left form span.textarea_little {float:left; margin:5px 0 0 0; background:url('/images/backoffice/sites/little_descript.png') no-repeat 0 0; width:564px; height:34px; position:relative;}
-div.block.site_info div.med div.left form span.textarea_little textarea{position:absolute; top:9px; left:9px; width:546px; height:17px; font:normal 15px Arial; color:#333333; border:none; line-height:17px;}
+div.block.site_info div.med div.left form span.textarea_little textarea{position:absolute; top:9px; left:9px; min-width:546px; min-height:17px; max-width:546px; max-height:17px; font:normal 15px Arial; color:#333333; border:none; line-height:17px;}
 div.block.site_info div.med div.left form span.textarea_little.error {background-position:0 -34px;}
 
-div.block.site_info div.med div.left form span.textarea_short {float:left; margin:5px 0 0 0; background:url('/images/backoffice/sites/short_descript.png') no-repeat 0 0; width:564px; height:114px; position:relative;}
+div.block.site_info div.med div.left form span.textarea_short {float:left; margin:5px 0 0 0; background:url('/images/backoffice/sites/short_descript.png') no-repeat 0 0; min-width:564px; min-height:114px; max-width:564px; max-height:114px; position:relative;}
 div.block.site_info div.med div.left form span.textarea_short.error {background-position:0 -114px;}
 div.block.site_info div.med div.left form span.textarea_short textarea{position:absolute; top:9px; left:9px; width:546px; height:97px; font:normal 15px Arial; color:#333333; border:none; line-height:17px;}
 div.block.site_info div.med div.left form h3.section {float:left; margin:35px 0 0 2px; width:100%; font:500 17px "Museo Sans",Arial; color:#333333;}
