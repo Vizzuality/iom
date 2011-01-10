@@ -1,0 +1,125 @@
+<div class="main_head">
+  <div class="inner_main_head">
+    <div class="left">
+      <h1><%= @site.name %><sup class="beta">BETA</sup></h1>
+      <% unless @site.short_description.nil? %><h3><%= @site.short_description %></h3><%end%>
+      <div class="float_head home">
+        <h1><%= @site.name %><sup class="beta">BETA</sup></h1>
+        <% unless @site.short_description.nil? %><h3><%= @site.short_description %></h3><%end%>
+      </div>
+    </div>
+    <div class="right home">
+      <% unless @site.short_description.nil? %><p><%= anglo(@site.long_description) %> <a href="<%= page_path(Page.about(@site)) %>">Learn more</a></p><%end%>
+    </div>
+  </div>
+</div>
+
+<% cache("#{@site.id}/home/menu") do %>
+  <%= render :partial => 'shared/menu'  %>
+<% end %>
+
+<div id="map" class="home"></div>
+<a href="#zoom_in" id="zoomIn" onclick="zoomIn()"></a>
+<a href="#zoom_out" id="zoomOut" onclick="zoomOut()"></a>
+<div class="map_style">
+  <p>PLAIN</p>
+  <ul>
+    <li><a id="plain_map" href="#plain">PLAIN</a></li>
+    <li><a id="satellite_map" href="#satellite">SATELLITE</a></li>
+  </ul>
+</div>
+
+
+<div id="layout">
+<div id="left_column">
+
+  <!-- LEFT PART -->
+  <div class="left"></div> <!-- H"J"ACK -->
+  <div class="outer_float">
+    <div class="float_left">
+      <div class="block box_info">
+        <div class="projects_account">
+          <label>PROJECTS</label>
+          <h2><%= @site.total_projects %></h2>
+        </div>
+        <div class="orgs_account">
+          <label>ORGANIZATIONS</label>
+          <h2><%= @site.organizations_count %></h2>
+        </div>
+      </div>
+
+      <% cache("#{@site.id}/home/projects_by_cluster_sector") do %>
+      <div class="block statistics">
+        <h3>PROJECTS BY <%= @site.word_for_cluster_sector.upcase.chop %></h3>
+        <ul class="statistics_list">
+        <% @site.projects_sectors_or_clusters.each do |category, count| %>
+          <% unless category.name.eql?('N/A') %>
+            <li>
+              <div class="tooltip">
+                <span class="body_tooltip">
+                  <label><%= category.name %></label>
+                </span>
+                <span class="bottom_tooltip"></span>
+              </div>
+              <a class="<%= category.css_class %> icon_statistics" href="<%= category.is_a?(Cluster) ? cluster_path(category) : sector_path(category) %>"><span class="aller" style="width:<%= cluster_sector_width(count, @site.projects_sectors_or_clusters.map{|e| e.last}.max) %>px"><%= count %></span></a>
+            </li>
+          <% end %>
+        <% end %>
+        </ul>
+      </div>
+      <% end %>
+
+      <% cache("#{@site.id}/home/projects_by_location") do %>
+      <div class="block statistics less">
+        <h3>PROJECTS BY LOCATION</h3>
+        <%= raw(projects_by_location(@site)) %>
+      </div>
+      <% end %>
+
+      <% cache("#{@site.id}/home/organizations") do %>
+      <div id="most_active_orgs" class="block margin">
+        <h3>Some Organizations</h3>
+        <ul>
+          <% @site.projects_organizations[0...9].each do |organization, count| %>
+          <li><%= link_to organization.name, organization_path(organization) %> - <%= pluralize(count, 'project') %></li>
+          <% end  -%>
+        </ul>
+      </div>
+      <% end %>
+
+    </div>
+    <!-- div.float_left -->
+  </div>
+  <!-- <div class="outer_float"> -->
+
+  <!-- RIGHT PART -->
+  <div class="right">
+    <h3><%= pluralize(@site.total_projects, 'active project', 'active projects') %> in <%= pluralize(@site.total_regions, @site.word_for_regions.singularize, @site.word_for_regions) %> <a id="see_all" href="#">See all</a>
+      <div class="tooltip">
+        <span class="body_tooltip">
+          <label>Coming soon!</label>
+          <p>Please stay tuned.</p>
+        </span>
+        <span class="bottom_tooltip"></span>
+      </div>
+    </h3>
+    <div id="projects">
+      <%= render 'projects/projects' %>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  var bbox = <%=raw(@overview_map_bbox.to_json)%>;
+  var chco = "<%=@overview_map_chco%>";
+  var chf = "<%=@overview_map_chf%>";
+  var chld = "<%=@chld%>";
+  var chd = "<%=@chd%>";
+  var map_data = <%=raw(@map_data)%>;
+  var max_count = <%=@map_data_max_count%>;
+  var map_type = 'overview_map';
+  var theme = "<%=@site.theme_id%>";
+</script>
+
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+<%=raw(javascript_include_merged(:sites_home)) %>
