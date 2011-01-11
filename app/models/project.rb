@@ -267,27 +267,21 @@ SQL
     level = 3
     result_regions = []
     all_regions = Region.find_by_sql("select #{Region.custom_fields.join(',')} from regions inner join projects_regions on projects_regions.region_id=regions.id where project_id=#{self.id}")
+    all_countries = Country.find_by_sql("select #{Country.custom_fields.join(',')} from countries inner join countries_projects on countries_projects.country_id=countries.id where project_id=#{self.id}")
     while all_regions.any?
       result_regions += all_regions.select{ |r| r.level == level }
       all_regions = all_regions - result_regions
       parent_region_ids = result_regions.map do |region|
         region.path.split('/')[1..-1].map{ |e| e.to_i }
       end.flatten
+      parent_countries_ids = result_regions.map do |region|
+        region.path.split('/').first.to_i
+      end.flatten
       all_regions = all_regions.delete_if{ |r| parent_region_ids.include?(r.id) }
+      all_countries = all_countries.delete_if{ |c| parent_countries_ids.include?(c.id) }
       level -= 1
     end
-    result_regions
-  end
-
-  def project_countries=(value)
-    self.country_ids = (self.country_ids + value.split(',').delete_if{ |e| e.blank? }.uniq.map{|e| e.to_i}).uniq.join(',')
-  end
-
-  def project_regions=(value)
-    regions_ids = value.split(',').delete_if{ |e| e.blank? || e == 'undefined' }.uniq.map{|e| e.to_i}
-    unless regions_ids.empty?
-      self.region_ids = (self.region_ids + regions_ids).uniq
-    end
+    all_countries + result_regions
   end
 
   def regions_ids

@@ -126,12 +126,53 @@ class Admin::ProjectsController < ApplicationController
 
   def add_country_region
     @project = Project.find(params[:id])
-    @project.country_ids = params[:project][:project_countries].split(',')
-    @project.sector_ids = params[:project][:project_regions].split(',')
+    @project.country_ids += [params[:project][:project_countries]] if params[:project][:project_countries]
+    if params[:project][:project_regions]
+      @project.region_ids += params[:project][:project_regions].split(',')
+    end
+    @region = if params[:project][:project_regions].nil? || params[:project][:project_regions].empty?
+      Country.find(params[:project][:project_countries], :select => "id, name")
+    else
+      Region.find(params[:project][:project_regions].split(',').last)
+    end
     respond_to do |format|
       format.js do
-        page << "$('#regions_list').append('<li></li>');"
-        regions_list
+        render :update do |page|
+          page << "$('#regions_list').append('#{escape_javascript(render(:inline => "<li id=\"geographic_region_<%= @region.class.name.downcase + '_' + @region.id.to_s %>\"><p><%= region_breadcrumb(@region) %></p><a class=\"close\" href=\"<%= remove_country_region_admin_project_path(@project) %>\" rel=\"<%= @region.class.name.downcase + '_' + @region.id.to_s %>\"></a></li>"))}');"
+        end
+      end
+    end
+  end
+
+  def remove_country_region
+    @project = Project.find(params[:id])
+    if params[:type_and_id]
+      class_name,id = params[:type_and_id].split('_')
+    end
+    if class_name == 'country'
+      @project.country_ids = @project.country_ids - [id.to_i]
+    elsif class_name == 'region'
+      region = Region.find(id, :select => Region.custom_fields)
+      remove_country_id,remove_region_1,remove_region_2,remove_region_3 = region.path.split('/').map{ |e| e.to_i }
+      all_regions = @project.regions.select(Region.custom_fields) - [region]
+      all_countries_ids = all_regions.map{ |r| r.path.split('/').first }.uniq.map{ |e| e.to_i }
+      remove_country_id = nil if all_countries_ids.include?(remove_country_id)
+      all_regions_ids = all_regions.map{ |r| r.path.split('/')[1..-1] }.flatten.uniq.map{ |e| e.to_i }
+      remove_region_1 = nil if all_regions_ids.include?(remove_region_1)
+      remove_region_2 = nil if all_regions_ids.include?(remove_region_2)
+      remove_region_3 = nil if all_regions_ids.include?(remove_region_3)
+      @project.region_ids = @project.region_ids - [remove_region_1,remove_region_2,remove_region_3].compact
+      if remove_country_id
+        @project.country_ids = @project.country_ids - [remove_country_id]
+      end
+    end
+    respond_to do |format|
+      format.js do
+        render :update do |page|
+          unless params[:type_and_id].blank?
+            page << "$('#geographic_region_#{params[:type_and_id]}').remove();"
+          end
+        end
       end
     end
   end

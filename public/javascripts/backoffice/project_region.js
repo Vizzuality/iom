@@ -151,15 +151,44 @@
       }
     });
 
-    $('a#add_region_to_list').click(function(e){
-      if ($('div.level_0 span.region_combo p').attr('id')!="country_0") {
+    $('#regions_list a.close').live('click',function (e){
+      e.preventDefault();
+      e.stopPropagation();
+      var csrf_token = $('meta[name=csrf-token]').attr('content'),
+          csrf_param = $('meta[name=csrf-param]').attr('content');
 
+      var link = $(this),
+          href = link.attr('href'),
+          method = 'post',
+          form = $('<form method="post" action="'+href+'"></form>'),
+          metadata_input = '<input name="_method" value="'+method+'" type="hidden" />',
+          countries = [], regions = [];
+
+      if (csrf_param != null && csrf_token != null) {
+        metadata_input += '<input name="'+csrf_param+'" value="'+csrf_token+'" type="hidden" />';
+      }
+      metadata_input += '<input name="type_and_id" value="'+$(this).attr('rel')+'" type="hidden" />';
+      form.hide()
+          .append(metadata_input)
+          .appendTo('body');
+      var el = form;
+      var data = el.is('form') ? el.serializeArray() : [];
+
+      $.ajax({
+        url: href,
+        data: form.serializeArray(),
+        dataType: 'script',
+        type: method.toUpperCase()
+      });
+    });
+
+    $('a#add_region_to_list').click(function (e){
         var csrf_token = $('meta[name=csrf-token]').attr('content'),
             csrf_param = $('meta[name=csrf-param]').attr('content');
 
         var link = $(this),
             href = link.attr('href'),
-            method = link.attr('data-method'),
+            method = 'post',
             form = $('<form method="post" action="'+href+'"></form>'),
             metadata_input = '<input name="_method" value="'+method+'" type="hidden" />',
             countries = [], regions = [];
@@ -180,16 +209,39 @@
           i++;
         });
 
-        metadata_input += '<input name="project[project_countries]" value="'+countries.join(',')+'" type="hidden" />';
-        metadata_input += '<input name="project[project_regions]" value="'+regions.join(',')+'" type="hidden" />';
+        if( regions.length == 0 )
+          metadata_input += '<input name="project[project_countries]" value="'+countries.join(',')+'" type="hidden" />';
+        else
+          metadata_input += '<input name="project[project_regions]" value="'+regions.join(',')+'" type="hidden" />';
 
         form.hide()
             .append(metadata_input)
             .appendTo('body');
-
+        var el = form;
+        var data = el.is('form') ? el.serializeArray() : [];
+        $.ajax({
+            url: href,
+            data: form.serializeArray(),
+            dataType: 'script',
+            type: method.toUpperCase(),
+            beforeSend: function (xhr) {
+                el.trigger('ajax:loading', xhr);
+            },
+            success: function (data, status, xhr) {
+                el.trigger('ajax:success', [data, status, xhr]);
+            },
+            complete: function (xhr) {
+                el.trigger('ajax:complete', xhr);
+            },
+            error: function (xhr, status, error) {
+                el.trigger('ajax:failure', [xhr, status, error]);
+            }
+        });
         e.preventDefault();
-        form.submit();
-      }
+        e.stopPropagation();
+        $('div.region_window').fadeOut(function(e){
+          resetRegionValues();
+        });
     });
 
   });
