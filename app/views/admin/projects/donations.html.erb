@@ -5,7 +5,7 @@
       <div class="left">
         <h2><%= @project.name %></h2>
         <p class="by">by <%= link_to(@project.primary_organization.name, edit_admin_organization_path(@project.primary_organization)) %> /
-          <%= @project.countries.first.name %>
+          <%= @project.countries.select(Country.custom_fields).first.try(:name) %>
         </p>
 
         <% unless @project.donations.empty? %>
@@ -56,7 +56,7 @@
                 <p id="day" class="title">DAY</p>
                 <p id="year" class="title">YEAR</p>
 
-                  <%= f.date_select :date, :start_year => Date.today.year - 5, :order => [:month, :day, :year]  %>
+                  <%= f.date_select :date, :start_year => Date.today.year - 20, :order => [:month, :day, :year]  %>
               </div>
             </span>
 
