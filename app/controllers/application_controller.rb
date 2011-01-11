@@ -82,6 +82,7 @@ class ApplicationController < ActionController::Base
     end
 
     def browser_is_ie6_or_lower?
+      return unless request.user_agent
       user_agent = request.user_agent.downcase
       if ie_version = user_agent.match(/msie (\d)\.\d;/)
         ie_version = ie_version[1].to_i if ie_version && ie_version.size > 1 && ie_version[1]

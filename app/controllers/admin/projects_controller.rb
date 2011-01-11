@@ -103,6 +103,22 @@ class Admin::ProjectsController < ApplicationController
     redirect_to admin_projects_path, :flash => {:success => 'Project has been deleted successfully'}
   end
 
+  def update_points
+    @project = Project.find(params[:id])
+    the_geom = @project.the_geom.dup
+    @project.save!
+    respond_to do |format|
+      format.html do
+        redirect_to edit_admin_project_path(@project,:anchor => 'map'), :flash => {:success => 'Project has been deleted successfully'}
+      end
+      format.js do
+        render :update do |page|
+          page << "$('#coordinates').html('<%= escape_javascript(render(:partial => 'admin/projects/coordinates')) %>');"
+        end
+      end
+    end
+  end
+
   def remove_point
     @project = Project.find(params[:id])
     the_geom = @project.the_geom.dup
