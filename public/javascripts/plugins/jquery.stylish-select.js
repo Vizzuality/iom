@@ -224,7 +224,8 @@ Dual licensed under the MIT and GPL licenses.
                        	api.reinitialise();                
 						$newUl.parent().children('.newList_content').show();
 						$newUl.css('visibility','visible');
-						if ($('span.clicked').length > 0){
+			
+						if (($('span#status_combo_search.clicked').length > 0)||($('span#cluster_combo_search.clicked').length > 0)||($('span#cluster_combo_search.clicked').length > 0)||($('span#sector_combo_search.clicked').length > 0)){
 							$('span.clicked').removeClass('clicked');	
 						}
                     }

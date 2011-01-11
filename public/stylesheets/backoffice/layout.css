@@ -679,7 +679,7 @@ div.block.project_info div.med div.left form span.input_short p.msg {float:right
 div.block.project_info div.med div.left form span.input_short input[type="text"]{float:left; margin:8px 0 0 5px; width:210px; height:20px; border:none;}
 
 
-div.region_window {position:absolute; display:none; bottom:20px; right:-100px; width:358px;}
+div.region_window {position:absolute; display:none; bottom:20px; right:-100px; width:358px; z-index:100;}
 div.region_window div.top_region {float:left; width:330px; padding:14px 14px 0; background:url('/images/backoffice/projects/top_region_window.png') no-repeat 0 0!important;}
 div.region_window div.bottom_region {float:left; width:330px; padding:0 14px 40px; background:url('/images/backoffice/projects/bottom_region_window.png') no-repeat 0 bottom!important;}
 div.region_window div h3 {float:left; width:100%; padding:0 0 10px 0; font:normal 21px "Museo Sans",Arial; color:#333333;}
@@ -759,30 +759,30 @@ div.block.donations_project div.med div.left form div#donor_name span.active {ba
 div.block.donations_project div.med div.left form div#donor_name span input[type="text"] {border:none; font:normal 13px Arial; color:#999999; position:absolute; top:8px; left:10px; width:210px;}
 div.block.donations_project div.med div.left form div#donation_date {float:left; width:173px; height:64px; margin:0 7px 0 0;}
 
-div.block.donations_project div.med div.left form div#donation_date span.combo_date {float:left; background:url('/images/backoffice/projects/date_input_amount.png') no-repeat 0 0; font:normal 15px Arial; color:#333333; width:120px; height:24px; position:relative; margin:3px 0 0 7px; padding:8px 0 0 9px;}
+div.block.donations_project div.med div.left form div#donation_date span.combo_donation_date {float:left; background:url('/images/backoffice/projects/date_input_amount.png') no-repeat 0 0; font:normal 15px Arial; color:#333333; width:120px; height:24px; position:relative; margin:3px 0 0 7px; padding:8px 0 0 9px;}
 
-div.block.donations_project div.med div.left form div#donation_date span.combo_date:hover {cursor:pointer;}
-div.block.donations_project div.med div.left form div#donation_date span.combo_date div.select_dates {display:none;}
-div.block.donations_project div.med div.left form div#donation_date span.combo_date.clicked {background:url('/images/backoffice/projects/date/bkg_header_clicked_date_white.png') no-repeat 0 0;}
-div.block.donations_project div.med div.left form div#donation_date span.combo_date.clicked div.select_dates {position:absolute; top:29px; left:0; background:url('/images/backoffice/projects/date/bkg_date_content_white.png') no-repeat 0 0; width:335px; height:68px; z-index:20; display:inline;}
-div.block.donations_project div.med div.left form div#donation_date span.combo_date.clicked div.select_dates.end_date {background:url('/images/backoffice/projects/date/bkg_date_content_right.png') no-repeat 0 0; position:absolute; top:30px; left:-142px;}
+div.block.donations_project div.med div.left form div#donation_date span.combo_donation_date:hover {cursor:pointer;}
+div.block.donations_project div.med div.left form div#donation_date span.combo_donation_date div.select_dates {display:none;}
+div.block.donations_project div.med div.left form div#donation_date span.combo_donation_date.clicked {background:url('/images/backoffice/projects/date/bkg_header_clicked_date_white.png') no-repeat 0 0;}
+div.block.donations_project div.med div.left form div#donation_date span.combo_donation_date.clicked div.select_dates {position:absolute; top:29px; left:0; background:url('/images/backoffice/projects/date/bkg_date_content_white.png') no-repeat 0 0; width:335px; height:68px; z-index:20; display:inline;}
+div.block.donations_project div.med div.left form div#donation_date span.combo_donation_date.clicked div.select_dates.end_date {background:url('/images/backoffice/projects/date/bkg_date_content_right.png') no-repeat 0 0; position:absolute; top:30px; left:-142px;}
 
-div.block.donations_project div.med div.left form div#donation_date span.combo_date.clicked div.select_dates span.month {float:left; width:124px; height:51px; margin:10px 9px 0 10px;}
-div.block.donations_project div.med div.left form div#donation_date span.combo_date.clicked div.select_dates span.day {float:left; width:62px; height:51px; margin:10px 9px 0 8px;}
-div.block.donations_project div.med div.left form div#donation_date span.combo_date.clicked div.select_dates span.year {float:left; width:76px; height:51px; margin:10px 0 0 0;}
+div.block.donations_project div.med div.left form div#donation_date span.combo_donation_date.clicked div.select_dates span.month {float:left; width:124px; height:51px; margin:10px 9px 0 10px;}
+div.block.donations_project div.med div.left form div#donation_date span.combo_donation_date.clicked div.select_dates span.day {float:left; width:62px; height:51px; margin:10px 9px 0 8px;}
+div.block.donations_project div.med div.left form div#donation_date span.combo_donation_date.clicked div.select_dates span.year {float:left; width:76px; height:51px; margin:10px 0 0 0;}
 
 div.block.donations_project div.med div.left form div#donation_date span.combo_date.clicked div.select_dates p.title {float:left; margin:0 0 0 5px; font:normal 11px Arial; color:#606851; text-transform:uppercase; width:auto;}
-div.block.donations_project div.med div.left form div#donation_date span.combo_date.clicked div.select_dates p.title#month {float:left; margin:12px 10px 0 10px; width:132px;}
-div.block.donations_project div.med div.left form div#donation_date span.combo_date.clicked div.select_dates p.title#day {float:left; margin:12px 10px 0 0; width:63px;}
-div.block.donations_project div.med div.left form div#donation_date span.combo_date.clicked div.select_dates p.title#year {float:left; margin:12px 10px 0 0; width:100px;}
-div.block.donations_project div.med div.left form div#donation_date span.combo_date.clicked div.select_dates a {font:normal 13px Arial; color:#333333;}
-div.block.donations_project div.med div.left form div#donation_date span.combo_date.clicked div.select_dates a:hover {cursor:pointer;}
-div.block.donations_project div.med div.left form div#donation_date span.combo_date.clicked div.select_dates a.month_combo {float:left; margin:2px 0 0 0; background:url('/images/backoffice/projects/date/month_combo.png') no-repeat 0 0; width:123px; height:23px; padding:9px 0 0 10px;}
-div.block.donations_project div.med div.left form div#donation_date span.combo_date.clicked div.select_dates a.day_combo {float:left; margin:2px 0 0 0; background:url('/images/backoffice/projects/date/day_combo.png') no-repeat 0 0; width:54px; height:23px; padding:9px 0 0 10px;}
-div.block.donations_project div.med div.left form div#donation_date span.combo_date.clicked div.select_dates a.year_combo {float:left; margin:2px 0 0 0; background:url('/images/backoffice/projects/date/year_combo.png') no-repeat 0 0; width:68px; height:23px; padding:9px 0 0 10px;}
+div.block.donations_project div.med div.left form div#donation_date span.combo_donation_date.clicked div.select_dates p.title#month {float:left; margin:12px 10px 0 10px; width:132px;}
+div.block.donations_project div.med div.left form div#donation_date span.combo_donation_date.clicked div.select_dates p.title#day {float:left; margin:12px 10px 0 0; width:63px;}
+div.block.donations_project div.med div.left form div#donation_date span.combo_donation_date.clicked div.select_dates p.title#year {float:left; margin:12px 10px 0 0; width:100px;}
+div.block.donations_project div.med div.left form div#donation_date span.combo_donation_date.clicked div.select_dates a {font:normal 13px Arial; color:#333333;}
+div.block.donations_project div.med div.left form div#donation_date span.combo_donation_date.clicked div.select_dates a:hover {cursor:pointer;}
+div.block.donations_project div.med div.left form div#donation_date span.combo_donation_date.clicked div.select_dates a.month_combo {float:left; margin:2px 0 0 0; background:url('/images/backoffice/projects/date/month_combo.png') no-repeat 0 0; width:123px; height:23px; padding:9px 0 0 10px;}
+div.block.donations_project div.med div.left form div#donation_date span.combo_donation_date.clicked div.select_dates a.day_combo {float:left; margin:2px 0 0 0; background:url('/images/backoffice/projects/date/day_combo.png') no-repeat 0 0; width:54px; height:23px; padding:9px 0 0 10px;}
+div.block.donations_project div.med div.left form div#donation_date span.combo_donation_date.clicked div.select_dates a.year_combo {float:left; margin:2px 0 0 0; background:url('/images/backoffice/projects/date/year_combo.png') no-repeat 0 0; width:68px; height:23px; padding:9px 0 0 10px;}
 
 /*DATE COMBOS DISPLAYED*/
-div.block.donations_project div.med div.left form div#donation_date span.combo_date.clicked div.select_dates ul.newList {top:0; left:0;}
+div.block.donations_project div.med div.left form div#donation_date span.combo_donation_date.clicked div.select_dates ul.newList {top:0; left:0;}
 
 
 div.block.donations_project div.med div.left form div#donation_amount {float:left; width:92px; height:32px; margin:0 0 0 10px;}
@@ -1093,7 +1093,7 @@ div#modal_window div.alert.import_csv.error ul#errors_csv li {float:left; margin
 div#footer {float:left; width:100%; height:120px; margin:40px 0 0 0 ; background:url('/images/backoffice/common/header_bkg.jpg') repeat-x 0 0;}
 div#footer div.inner_footer {margin:0 auto; width:932px;}
 div#footer div.inner_footer a.logo {float:left; margin:35px 0 0 0;}
-div#footer div.inner_footer ul {float:right; margin:50px 0 0 0;}
+div#footer div.inner_footer ul {float:right; margin:50px 2px 0 0;}
 div#footer div.inner_footer ul li {float:left; width:auto; padding:0 13px; background:url('/images/backoffice/common/footer_list_separator.png') no-repeat right -2px;}
 div#footer div.inner_footer ul li.last {padding:0 0 0 10px; background:none;}
 div#footer div.inner_footer ul li a {font:normal 13px Arial; color:#999999; text-decoration:none;}

@@ -106,7 +106,7 @@ $(document).ready(function(ev){
   $('span#status_combo_search').click(function(ev){
     ev.stopPropagation();
     ev.preventDefault();
-  hideCountryCombo();
+  	hideCountryCombo();
     if (!$(this).hasClass('clicked')){
       $('span.clicked').removeClass('clicked');
       $(this).addClass('clicked');
@@ -273,17 +273,16 @@ $(document).ready(function(ev){
   $('span.combo_date').click(function(ev){
     ev.stopPropagation();
     ev.preventDefault();
-
     if (!$(this).hasClass('clicked')){
       $('span.combo_date.clicked').removeClass('clicked');
       $(this).addClass('clicked');
     $(this).find('div.newListSelected').css('background-position','0 0');
     }
-
+    
     $(document).click(function(event) {
       if (!$(event.target).closest('span.combo_date').length) {
         $('span.combo_date.clicked').removeClass('clicked');
-    updateDateInfo();
+    	updateDateInfo();
       };
     });
   });
@@ -292,17 +291,16 @@ $(document).ready(function(ev){
   $('span#donation_date').click(function(ev){
     ev.stopPropagation();
     ev.preventDefault();
-
     if (!$(this).hasClass('clicked')){
-      $('span.combo_date.clicked').removeClass('clicked');
+      $('span#donation_date.clicked').removeClass('clicked');
       $(this).addClass('clicked');
-    $(this).find('div.newListSelected').css('background-position','0 0');
+      $(this).find('div.newListSelected').css('background-position','0 0');
     }
-
+    
     $(document).click(function(event) {
-      if (!$(event.target).closest('span#donation_date').length) {
+      if (!$(event.target).closest('div.select_dates').length) {
         $('span#donation_date.clicked').removeClass('clicked');
-    updateDateInfoDonations();
+    	updateDateInfoDonations();
       };
     });
   });
@@ -532,8 +530,9 @@ $(document).ready(function(ev){
         if (!$(this).hasClass('clicked')){
           $(this).addClass('clicked');
         }
-    resetCombo($(this));
+    	resetCombo($(this));
         $(document).click(function(event) {
+
           if (!$(event.target).closest('span.select_country_combo').length) {
             $('li#gc_limited_country').find('span.select_country_combo').removeClass('clicked');
           };
@@ -561,6 +560,7 @@ $(document).ready(function(ev){
           $(this).addClass('clicked');
         }
         $(document).click(function(event) {
+
           if (!$(event.target).closest('span.select_country_combo').length) {
             $('li#gc_limited_region').find('span.select_country_combo').removeClass('clicked');
           };
@@ -612,6 +612,7 @@ $(document).ready(function(ev){
         $(this).addClass('clicked');
         resetCombo($(this));
         $(document).click(function(event) {
+
           if (!$(event.target).closest('span.select_combo_typology').length) {
             $('span.select_combo_typology').removeClass('clicked');
           };
