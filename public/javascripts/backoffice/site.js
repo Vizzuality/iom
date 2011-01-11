@@ -1,10 +1,5 @@
 $(document).ready(function(ev){    
     /************** ADMIN PAGE - INIT (GET PARAMETERS)  ************************** */
-    // console.log('country '+ $('select#gc_limited_country_section').val());
-    // console.log('bbox '+ $('input#site_geographic_boundary_box').val());
-    // console.log('cluster or sector '+ $('input#site_project_context_cluster_id').val());
-    // console.log('organization '+ $('input#site_project_context_organization_id').val());   
-    // console.log('tags '+ $('input#pc_tags_section').val());           
 
     // REMOVE SELECTED STYLE (CHECKBOX)
     if (!$('input#site_project_context_cluster_id').val()){
@@ -15,7 +10,7 @@ $(document).ready(function(ev){
     }
     else {
         var id_org = $('input#site_project_context_organization_id').val();
-        var name = $('ul.organizations').find('a#'+id_org).text();
+        var name = $('ul.organizations').find('a#orgs_'+id_org).text();
         $('li#include_ngo').find('p.ngo').text(name);
     }
     if (!$('input#pc_tags_section').val()){
@@ -29,11 +24,11 @@ $(document).ready(function(ev){
         var id = '';
         if ($('input#site_project_context_cluster_id').val()){
             id = $('input#site_project_context_cluster_id').val();
-            text = $('ul.clusters_or_sectors').find('a#'+ id+ '.cluster_value').text();
+            text = $('ul.clusters_or_sectors').find('a#cluster_'+ id+ '.cluster_value').text();
     
         }else if ($('input#site_project_context_sector_id').val()){
             id = $('input#site_project_context_sector_id').val();
-            text = $('ul.clusters_or_sectors').find('a#'+ id+ '.sector_value').text();
+            text = $('ul.clusters_or_sectors').find('a#sector_'+ id+ '.sector_value').text();
         }else {
             text = 'Select a cluster or a sector';
         }
@@ -171,12 +166,15 @@ $(document).ready(function(ev){
         ev.preventDefault();
 
         var id = $(this).children('a').attr('id');
+
         var name = $(this).children('a').text();
 
         if ($(this).children('a').hasClass('cluster_value')){
+		  id = id.substring(8,id.length);
           $('input#site_project_context_cluster_id').val(id);
           $('input#site_project_context_sector_id').val('');
         }else if ($(this).children('a').hasClass('sector_value')){
+		  id = id.substring(7,id.length);
           $('input#site_project_context_sector_id').val(id);
           $('input#site_project_context_cluster_id').val('');          
         }
@@ -191,6 +189,7 @@ $(document).ready(function(ev){
         ev.preventDefault();
 
         var id = $(this).children('a').attr('id');
+		id = id.substring(5,id.length);
         var name = $(this).children('a').text();
 
         $('input#site_project_context_organization_id').val(id);

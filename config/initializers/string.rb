@@ -81,4 +81,8 @@ class String
      self.gsub(/\\/, '\&\&').gsub(/'/, "''")
    end
 
+   def text2array
+    self.split('|').delete_if{ |r| r.blank? }.compact
+   end
+
 end

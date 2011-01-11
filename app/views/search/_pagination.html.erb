@@ -1,0 +1,3 @@
+<% if @current_page < @total_pages %>
+  <%= link_to('More projects', params.merge(:page => @current_page + 1), :id =>'view_more', :class => 'ajax') %>
+<% end %>

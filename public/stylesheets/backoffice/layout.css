@@ -11,7 +11,7 @@ input:focus{outline:none}
 body {background:#E1E5E7;}
 ul {list-style:none;}
 label strong {font:normal 14px Georgia; color:#E93E3F;}
-
+textarea:focus {outline:none;}
 
 /*IE7 reset properties*/
 input[type="text"] {border:0px;}
@@ -314,7 +314,7 @@ div.med.donors_list h2 a.remove:hover {border-bottom:1px solid #EB4142; text-dec
 div.med.donors_list ul {float:left; width:100%; padding:0; margin:23px 0 0 0; border-top:1px solid #CCCCCC;}
 div.med.donors_list ul li {float:left; width:100%; padding:0; margin:0; border-bottom:1px solid #CCCCCC; height:71px;}
 div.med.donors_list ul li.last {border:none;}
-div.med.donors_list ul li h3 {float:left; width:379px; height:71px; margin:0; padding:27px 0; display:inline;}
+div.med.donors_list ul li h3 {float:left; width:546px!important; height:71px; margin:0; padding:27px 0; display:inline;}
 div.med.donors_list ul li h3 a {font:bold 17px Arial; color:#E93E3F;}
 div.med.donors_list ul li h3 a:hover {text-decoration:underline;}
 div.med.donors_list ul li p {float:left; width:167px; height:41px; padding:30px 0 0 0; margin:0; font:normal 13px Arial; color:#666666; text-align:center;}
@@ -577,6 +577,7 @@ div.block.project_info div.bottom {float:left; height:15px; width:100%; backgrou
 div.block.project_info div.med div.left form span.textarea.error {background-position:0 -214px;}
 div.block.project_info div.med div.left form span.textarea {float:left; margin:5px 0 0 0; background:url('/images/backoffice/projects/input_project_multiple.png') no-repeat 0 0; width:564px; height:214px; position:relative;}
 div.block.project_info div.med div.left form textarea{position:absolute; top:9px; left:9px; width:546px; height:197px; min-width:546px; max-width:546px; min-height:197px; max-height:197px; font:normal 15px Arial; color:#333333; border:none; line-height:17px;}
+div.block.project_info div.med div.left form textarea:focus {outline:none;}
 div.block.project_info div.med div.left form div.list_combo {float:left; width:419px; height:auto; position:relative;}
 div.block.project_info div.med div.left form ul.list_combo_content {position:absolute; top:35px; width:434px; height:199px; display:none; left:0; z-index:10; background:url('/images/backoffice/projects/combos/body_combo_orgs.png') no-repeat 0 0; overflow-x:hidden; overflow-y:auto;}
 div.block.project_info div.med div.left form ul.list_combo_content li.element {float:left; margin:0 0 0 1px; width:404px; height:22px; font:normal 15px Arial; color:#333333; padding:5px 0 0 12px; position:relative;}
@@ -790,10 +791,9 @@ div.block.donations_project div.med div.left form div#donation_amount span input
 div.block.donations_project div.med div.left form h4 {font:normal 21px "Museo Sans",Arial; color:#333333; text-shadow:0 1px white; margin:22px 0 0 22px;}
 div.block.donations_project div.med div.left form label {float:left; width:400px; margin:17px 0 0 9px; font:normal 11px Arial; color:#666666; text-shadow:none; text-transform:uppercase; width:100px; }
 
-div.block.donations_project div.med div.left form input[type="submit"] {float:right; width:128px; height:32px; background:url('/images/backoffice/projects/add_donation_bttn.png') no-repeat 0 0; border:none; text-indent:-9999px; font-size:0; display:block; line-height:0; z-index:0; margin:18px 22px 0 0;}
+div.block.donations_project div.med div.left form input[type="submit"] {float:right; width:128px; height:32px; background:url('/images/backoffice/projects/add_donation_bttn.png') no-repeat 0 0!important; border:none; text-indent:-9999px; font-size:0; display:block; line-height:0; z-index:0; margin:18px 22px 0 0;}
 div.block.donations_project div.med div.left form input[type="submit"]:hover {background-position:0 -32px; cursor:pointer;}
 div.block.donations_project div.bottom {float:left; height:15px; width:100%; background: url('/images/backoffice/backgrounds/bottom_two_columns.png') no-repeat scroll top left!important;}
-
 
 /*ngos search*/
 div.med.ngos_list h2 a.remove {padding:0 10px 0 0; color:#333333; border-bottom:1px dotted #EB4142; background:url('/images/backoffice/icons/red_x.png') no-repeat right 17px;}
@@ -824,14 +824,15 @@ div.block.resources div.med div.left {float:left; width:572px;}
 div.block.resources div.med div.left p {float:left; width:100%; font:normal 15px Arial; color:#666666;}
 div.block.resources div.med div.left p.resources_account {margin:14px 0 0 0;}
 div.block.resources div.med div.left ul {float:left; width:100%; margin:20px 0 0 0; border-top:1px solid #CCCCCC;}
-div.block.resources div.med div.left ul li {position:relative; float:left; width:100%; height:71px; border-bottom:1px solid #CCCCCC;}
+div.block.resources div.med div.left ul li {position:relative; float:left; width:100%; height:auto; border-bottom:1px solid #CCCCCC;}
 div.block.resources div.med div.left ul li h3 {float:left; width:100%; margin:15px 0 0 0;}
 div.block.resources div.med div.left ul li h3 a {font:bold 17px Arial; color:#E93E3F;}
 div.block.resources div.med div.left ul li p {float:left; padding:5px 0 0 0; font:normal 13px Arial; color:#666666;}
 div.block.resources div.med div.left ul li a.delete {position:absolute; right:0; top:25px; width:15px; height:16px; background:url('/images/backoffice/icons/close_bkg.png') no-repeat 0 0; text-indent:-9999px; font-size:0; display:block; line-height:0;}
 div.block.resources div.med div.left ul li a.delete:hover {background-position:0 -16px;}
-div.block.resources div.med div.left ul.ngo {position:relative; float:left; padding:0 0 50px 0; border:none;}
-div.block.resources div.med div.left ul li.ngo {border:none; padding:0 0 15px 0; margin:0 0 0 3px;}
+div.block.resources div.med div.left ul.ngo {position:relative; float:left; padding:0; border:none;}
+div.block.resources div.med div.left ul li.ngo {border:none; padding:0 0 30px 0; margin:0 0 0 3px;}
+div.block.resources div.med div.left ul li.ngo form {background:none; height:auto; margin:0; padding:0;}
 div.block.resources div.med div.left ul li.ngo div.head {position:relative; float:left; width:535px; height:42px; padding:15px; background:url('/images/backoffice/resources/header_resources.png') no-repeat 0 0;}
 div.block.resources div.med div.left ul li.ngo div.head h3 {margin:0;}
 div.block.resources div.med div.left ul li.ngo div.head a.delete {right:17px; top:28px;}
@@ -842,12 +843,15 @@ div.block.resources div.med div.left ul li.ngo div.down {float:left; width:565px
 div.block.resources div.med div.left form {float:left; width:527px; height:209px; padding:21px; margin:20px 0 0 2px; background:url('/images/backoffice/common/green_form_bkg.png') no-repeat center center;}
 div.block.resources div.med div.left form h4 {font:normal 21px "Museo Sans",Arial; color:#333333; text-shadow:0 1px white;}
 div.block.resources div.med div.left form label {float:left; width:400px; margin:12px 0 0 3px; font:normal 11px Arial; color:#333333; text-shadow:none; text-transform:uppercase;}
+div.block.resources div.med div.left form label.site {width:auto; margin:0 15px 0 3px;}
 div.block.resources div.med div.left form input[type="text"] {float:left; width:509px; height:22px; padding:6px 8px; margin:5px 0 0 0; font:normal 13px Arial; color:#666666; background:url('/images/backoffice/resources/url_input_bkg.png') no-repeat 0 0; border:none;}
 div.block.resources div.med div.left form input[type="text"].title {float:left; width:319px; height:22px; background:url('/images/backoffice/resources/title_input_bkg.png') no-repeat 0 0;}
-div.block.resources div.med div.left form input[type="submit"] {float:right; width:130px; height:32px; margin:15px 3px 0 0; background:url('/images/backoffice/resources/add_input_bkg.png') no-repeat 0 0; border:none; text-indent:-9999px; font-size:0; display:block; line-height:0;}
-div.block.resources div.med div.left form input[type="submit"]:hover {background-position:0 -32px; cursor:pointer;}
+div.block.resources div.med div.left form input[type="submit"].add {float:right; width:130px; height:32px; margin:15px 3px 0 0; background:url('/images/backoffice/resources/add_input_bkg.png') no-repeat 0 0; border:none; text-indent:-9999px; font-size:0; display:block; line-height:0;}
+div.block.resources div.med div.left form input[type="submit"].add:hover {background-position:0 -32px; cursor:pointer;}
 div.block.resources div.bottom {float:left; height:15px; width:100%; background: url('/images/backoffice/backgrounds/bottom_two_columns.png') no-repeat scroll top left!important;}
-
+div.block.resources div.med div.left form input[type="checkbox"] {float:left; width:10px; height:10px; margin:2px 0 0 0; }
+div.block.resources div.med div.left form input[type="submit"].update {float:right; width:130px; height:32px; margin:15px 3px 0 0; border:none; text-indent:-9999px; font-size:0; display:block; line-height:0; font:normal 14px Arial; color:#666666; background:url('/images/backoffice/ngos/save_changes.png') no-repeat 0 0; width:106px; height:28px;}
+div.block.resources div.med div.left form input[type="submit"].update:hover {cursor:pointer; background-position:0 -28px; }
 
 
 /*media*/
@@ -927,13 +931,13 @@ div.block.site_info div.med div.left form span.input_large {float:left; margin:5
 div.block.site_info div.med div.left form span.input_large.active {background:url('/images/backoffice/projects/large_combo_head_displayed.png') no-repeat 0 0;}
 div.block.site_info div.med div.left form input[type="text"]{position:absolute; top:6px; left:7px; width:400px; height:21px; font:normal 15px Arial; color:#333333; border:none; padding:0;}
 div.block.site_info div.med div.left form span.textarea {float:left; margin:5px 0 0 0; background:url('/images/backoffice/projects/input_project_multiple.png') no-repeat 0 0; width:564px; height:214px; position:relative;}
-div.block.site_info div.med div.left form span.textarea textarea{position:absolute; top:9px; left:9px; width:546px; height:197px; font:normal 15px Arial; color:#333333; border:none; line-height:17px;}
+div.block.site_info div.med div.left form span.textarea textarea{position:absolute; top:9px; left:9px; max-width:546px; max-height:197px; min-width:546px; min-height:197px; font:normal 15px Arial; color:#333333; border:none; line-height:17px;}
 
 div.block.site_info div.med div.left form span.textarea_little {float:left; margin:5px 0 0 0; background:url('/images/backoffice/sites/little_descript.png') no-repeat 0 0; width:564px; height:34px; position:relative;}
-div.block.site_info div.med div.left form span.textarea_little textarea{position:absolute; top:9px; left:9px; width:546px; height:17px; font:normal 15px Arial; color:#333333; border:none; line-height:17px;}
+div.block.site_info div.med div.left form span.textarea_little textarea{position:absolute; top:9px; left:9px; min-width:546px; min-height:17px; max-width:546px; max-height:17px; font:normal 15px Arial; color:#333333; border:none; line-height:17px;}
 div.block.site_info div.med div.left form span.textarea_little.error {background-position:0 -34px;}
 
-div.block.site_info div.med div.left form span.textarea_short {float:left; margin:5px 0 0 0; background:url('/images/backoffice/sites/short_descript.png') no-repeat 0 0; width:564px; height:114px; position:relative;}
+div.block.site_info div.med div.left form span.textarea_short {float:left; margin:5px 0 0 0; background:url('/images/backoffice/sites/short_descript.png') no-repeat 0 0; min-width:564px; min-height:114px; max-width:564px; max-height:114px; position:relative;}
 div.block.site_info div.med div.left form span.textarea_short.error {background-position:0 -114px;}
 div.block.site_info div.med div.left form span.textarea_short textarea{position:absolute; top:9px; left:9px; width:546px; height:97px; font:normal 15px Arial; color:#333333; border:none; line-height:17px;}
 div.block.site_info div.med div.left form h3.section {float:left; margin:35px 0 0 2px; width:100%; font:500 17px "Museo Sans",Arial; color:#333333;}

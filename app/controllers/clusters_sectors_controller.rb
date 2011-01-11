@@ -27,7 +27,8 @@ class ClustersSectorsController < ApplicationController
       format.html do
         if @data.is_a?(Cluster)
           # Get the data for the map depending on the region definition of the site (country or region)
-          sql="select r.id,r.name,count(ps.*) as count,r.center_lon as lon,r.center_lat as lat,r.name,'/regions/'||r.id as url,r.code
+          sql="select r.id,r.name,count(ps.*) as count,r.center_lon as lon,r.center_lat as lat,r.name,'/location/'||r.path as url,r.code,
+              (select count(*) from data_denormalization where regions_ids && ('{'||r.id||'}')::integer[] and is_active=true and site_id=#{@site.id}) as total_in_region
           from regions as r
             inner join projects_regions as pr on r.id=pr.region_id and r.level=#{@site.level_for_region}
             inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{@site.id}
@@ -36,7 +37,8 @@ class ClustersSectorsController < ApplicationController
             group by r.id,r.name,lon,lat,r.name,url,r.code"
         else
           # Get the data for the map depending on the region definition of the site (country or region)
-          sql="select r.id,r.name,count(ps.*) as count,r.center_lon as lon,r.center_lat as lat,r.name,'/regions/'||r.id as url,r.code
+          sql="select r.id,r.name,count(ps.*) as count,r.center_lon as lon,r.center_lat as lat,r.name,'/location/'||r.path as url,r.code,
+              (select count(*) from data_denormalization where regions_ids && ('{'||r.id||'}')::integer[] and is_active=true and site_id=#{@site.id}) as total_in_region
           from regions as r
             inner join projects_regions as pr on r.id=pr.region_id and r.level=#{@site.level_for_region}
             inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{@site.id}

@@ -4,6 +4,7 @@
       this.latlng_ = new google.maps.LatLng(parseFloat(info.lat),parseFloat(info.lon));
       this.url = info.url;
       this.count = info.count;
+      this.total_in_region = info.total_in_region;
       this.image = image;
     	this.map_ = map;
     	this.name = info.name;
@@ -85,19 +86,41 @@
           hidden_div.style.left = (this.diameter/2)-(175/2)+"px";
           hidden_div.style.width = '175px';
 
-          var top_hidden = document.createElement('div');
-          top_hidden.style.border = "none";
-          top_hidden.style.position = "relative";
-          top_hidden.style.float = "left";
-          top_hidden.style.padding = "9px 15px 3px 11px";
-          top_hidden.style.width = '149px';
-          top_hidden.style.height = 'auto';
-          top_hidden.style.background = "url('/images/sites/common/tooltips/body_tooltip.png') no-repeat center top";
-          top_hidden.style.font = "normal 17px 'PT Sans Bold'";
-          top_hidden.style.textAlign = "center";
-          top_hidden.style.color = "white";
-          $(top_hidden).html(this.name+'<br/><strong style="font:normal 13px Arial; color:#999999">'+this.count+ ((this.count>1)?' projects':' project')+'</strong>');
-          hidden_div.appendChild(top_hidden);
+          try {
+          if (kind!=null) {
+            var top_hidden = document.createElement('div');
+            top_hidden.style.border = "none";
+            top_hidden.style.position = "relative";
+            top_hidden.style.float = "left";
+            top_hidden.style.padding = "9px 15px 3px 11px";
+            top_hidden.style.width = '149px';
+            top_hidden.style.height = 'auto';
+            top_hidden.style.background = "url('/images/sites/common/tooltips/body_tooltip.png') no-repeat center top";
+            top_hidden.style.font = "normal 17px 'PT Sans Bold'";
+            top_hidden.style.textAlign = "center";
+            top_hidden.style.color = "white";
+            if (kind=="sector" || kind=="cluster") {
+              $(top_hidden).html(this.name+'<br/><strong style="font:normal 13px Arial; color:#dddddd">'+this.count+ ((this.count>1)?' projects in this '+kind:' project in this '+kind)+'</strong><br/><strong style="font:normal 12px Arial; color:#999999">'+this.total_in_region+' in total</strong>');
+            } else {
+              $(top_hidden).html(this.name+'<br/><strong style="font:normal 13px Arial; color:#dddddd">'+this.count+ ((this.count>1)?' projects by this '+kind:' project by this '+kind)+'</strong><br/><strong style="font:normal 12px Arial; color:#999999">'+this.total_in_region+' in total</strong>');
+            }
+            hidden_div.appendChild(top_hidden);
+          }} catch (e) {
+            var top_hidden = document.createElement('div');
+            top_hidden.style.border = "none";
+            top_hidden.style.position = "relative";
+            top_hidden.style.float = "left";
+            top_hidden.style.padding = "9px 15px 3px 11px";
+            top_hidden.style.width = '149px';
+            top_hidden.style.height = 'auto';
+            top_hidden.style.background = "url('/images/sites/common/tooltips/body_tooltip.png') no-repeat center top";
+            top_hidden.style.font = "normal 17px 'PT Sans Bold'";
+            top_hidden.style.textAlign = "center";
+            top_hidden.style.color = "white";
+            $(top_hidden).html(this.name+'<br/><strong style="font:normal 13px Arial; color:#999999">'+this.count+ ((this.count>1)?' projects':' project')+'</strong>');
+            hidden_div.appendChild(top_hidden);
+          }
+
 
           var bottom_hidden = document.createElement('div');
           bottom_hidden.style.border = "none";

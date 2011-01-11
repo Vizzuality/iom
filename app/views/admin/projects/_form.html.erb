@@ -125,7 +125,7 @@
         <% unless @project.clusters.empty? %>
           <% @project.clusters.each do |cluster| %>
           <li id="cluster_<%= cluster.id %>">
-            <p><%= cluster.name %></p><input id="<%= cluster.id %>" type="checkbox" name="project[clusters_ids][]" value="<%= cluster.id %>" checked="true"/><a href="#cluster_<%= cluster.id %>" class="remove_this close"></a>
+            <p><%= cluster.name %></p><input id="<%= cluster.id %>" type="checkbox" name="project[cluster_ids][]" value="<%= cluster.id %>" checked="true"/><a href="#cluster_<%= cluster.id %>" class="remove_this close"></a>
           </li>
           <% end -%>
         <% end -%>
@@ -153,7 +153,7 @@
     <ul class="sectors">
       <% unless @project.sectors.empty? %>
         <% @project.sectors.each do |sector| %>
-          <li id="sector_<%= sector.id %>"><p><%= sector.name %></p><input id="<%= sector.id %>" type="checkbox" name="project[sectors_ids][]" value="<%= sector.id %>" checked="true"/><a href="#sector_<%= sector.id %>" class="remove_this close"></a>
+          <li id="sector_<%= sector.id %>"><p><%= sector.name %></p><input id="<%= sector.id %>" type="checkbox" name="project[sector_ids][]" value="<%= sector.id %>" checked="true"/><a href="#sector_<%= sector.id %>" class="remove_this close"></a>
           </li>
         <% end -%>
       <% end -%>

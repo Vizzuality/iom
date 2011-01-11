@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110110191540) do
+ActiveRecord::Schema.define(:version => 20110111113043) do
 
   create_table "clusters", :force => true do |t|
     t.string "name"
@@ -196,6 +196,7 @@ ActiveRecord::Schema.define(:version => 20110110191540) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "parent_id"
+    t.integer  "order_index"
   end
 
   add_index "pages", ["parent_id"], :name => "index_pages_on_parent_id"
@@ -227,7 +228,7 @@ ActiveRecord::Schema.define(:version => 20110110191540) do
     t.date     "end_date"
     t.float    "budget"
     t.text     "target"
-    t.integer  "estimated_people_reached"
+    t.integer  "estimated_people_reached",                :limit => 8
     t.string   "contact_person"
     t.string   "contact_email"
     t.string   "contact_phone_number"

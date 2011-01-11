@@ -174,7 +174,7 @@
          <div class="block">
            <% if @project.estimated_people_reached? %>
              <h3>People reached</h3>
-             <p class="estimate"><%= @project.estimated_people_reached %><sup>(estimate)</sup></p>
+             <p class="estimate"><%= @project.estimated_people_reached %></p>
              <span estimate="<%= @project.estimated_people_reached %>" class="people_amount"></span>
            <%end%>
            <% if @project.target? %>

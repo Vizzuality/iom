@@ -619,9 +619,9 @@
 					return;
 				}
 				if (destY < 0) {
-					destY = 0;
+					destY = '3px';
 				} else if (destY > dragMaxY) {
-					destY = dragMaxY;
+					destY = dragMaxY - 3;
 				}
 
 				// can't just check if(animate) because false is a valid value that could be passed in...
@@ -639,6 +639,7 @@
 
 			function _positionDragY(destY)
 			{
+				
 				if (destY == undefined) {
 					destY = verticalDrag.position().top;
 				}

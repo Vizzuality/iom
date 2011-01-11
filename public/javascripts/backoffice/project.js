@@ -17,96 +17,96 @@ var sectorToAdd = 12; // sectorToAdd_
 $(document).ready(function(ev){
 
       // COUNTRY COMBO
-	    $('select#country').sSelect({ddMaxWidth: '134px',ddMaxHeight:'220px',containerClass:'country_index'});
-    
+      $('select#country').sSelect({ddMaxWidth: '134px',ddMaxHeight:'220px',containerClass:'country_index'});
 
-		if ($('div.select_dates').length > 0){
 
-			// To set initial values
-			dateProvided[0] = $('select#project_date_provided_2i').val();
-			dateProvided[1] = $('select#project_date_provided_3i').val();
-			dateProvided[2] = $('select#project_date_provided_1i').val();			
+    if ($('div.select_dates').length > 0){
 
-			var dateValue = getStringDate(dateProvided[0],dateProvided[1],dateProvided[2]);			
-			$('span#date_provided').children('p').text(dateValue);
-			
-			dateUpdated[0] = $('select#project_date_updated_2i').val();
-			dateUpdated[1] = $('select#project_date_updated_3i').val();
-			dateUpdated[2] = $('select#project_date_updated_1i').val();			
+      // To set initial values
+      dateProvided[0] = $('select#project_date_provided_2i').val();
+      dateProvided[1] = $('select#project_date_provided_3i').val();
+      dateProvided[2] = $('select#project_date_provided_1i').val();
 
-			dateValue = getStringDate(dateUpdated[0],dateUpdated[1],dateUpdated[2]);			
-			$('span#date_updated').children('p').text(dateValue);
-			
-			dateStart[0] = $('select#project_start_date_2i').val();
-			dateStart[1] = $('select#project_start_date_3i').val();
-			dateStart[2] = $('select#project_start_date_1i').val();			
+      var dateValue = getStringDate(dateProvided[0],dateProvided[1],dateProvided[2]);
+      $('span#date_provided').children('p').text(dateValue);
 
-			dateValue = getStringDate(dateStart[0],dateStart[1],dateStart[2]);			
-			$('span#start_date').children('p').text(dateValue);
-			
-			dateEnd[0] = $('select#project_end_date_2i').val();
-			dateEnd[1] = $('select#project_end_date_3i').val();
-			dateEnd[2] = $('select#project_end_date_1i').val();
-			
-			dateValue = getStringDate(dateEnd[0],dateEnd[1],dateEnd[2]);			
-			$('span#end_date').children('p').text(dateValue);		
-			
-			donationDate[0] = $('select#donation_date_2i').val();
-			donationDate[1] = $('select#donation_date_3i').val();
-			donationDate[2] = $('select#donation_date_1i').val();
-			
-			dateValue = getStringDate(donationDate[0],donationDate[1],donationDate[2]);			
-			$('span#donation_date').children('p').text(dateValue);		
-			
-	
-			
-			// *********** DATE PROVIDED
-			// YEAR
-			$('select#project_date_provided_1i').sSelect({ddMaxWidth: '76px',ddMaxHeight:'200px',containerClass:'year'});
-			// MONTH
-			$('select#project_date_provided_2i').sSelect({ddMaxWidth: '131px',ddMaxHeight:'200px',containerClass:'month'});
-			// DAY
-			$('select#project_date_provided_3i').sSelect({ddMaxWidth: '62px',ddMaxHeight:'200px',containerClass:'day'});
+      dateUpdated[0] = $('select#project_date_updated_2i').val();
+      dateUpdated[1] = $('select#project_date_updated_3i').val();
+      dateUpdated[2] = $('select#project_date_updated_1i').val();
 
-			// *********** DATE UPDATED
-			// YEAR
-			$('select#project_date_updated_1i').sSelect({ddMaxWidth: '76px',ddMaxHeight:'200px',containerClass:'year'});
-			// MONTH
-			$('select#project_date_updated_2i').sSelect({ddMaxWidth: '131px',ddMaxHeight:'200px',containerClass:'month'});
-			// DAY
-			$('select#project_date_updated_3i').sSelect({ddMaxWidth: '62px',ddMaxHeight:'200px',containerClass:'day'});
-			
-			// *********** DATE START			
-			// YEAR
-			$('select#project_start_date_1i').sSelect({ddMaxWidth: '76px',ddMaxHeight:'200px',containerClass:'year'});
-			// MONTH
-			$('select#project_start_date_2i').sSelect({ddMaxWidth: '131px',ddMaxHeight:'200px',containerClass:'month'});
-			// DAY
-			$('select#project_start_date_3i').sSelect({ddMaxWidth: '62px',ddMaxHeight:'200px',containerClass:'day'});
+      dateValue = getStringDate(dateUpdated[0],dateUpdated[1],dateUpdated[2]);
+      $('span#date_updated').children('p').text(dateValue);
 
-			// *********** DATE END
-			// YEAR
-			$('select#project_end_date_1i').sSelect({ddMaxWidth: '76px',ddMaxHeight:'200px',containerClass:'year'});
-			// MONTH
-			$('select#project_end_date_2i').sSelect({ddMaxWidth: '131px',ddMaxHeight:'200px',containerClass:'month'});
-			// DAY
-			$('select#project_end_date_3i').sSelect({ddMaxWidth: '62px',ddMaxHeight:'200px',containerClass:'day'});
-			
-			// *********** DATE DONATION
-			// YEAR
-			$('select#donation_date_1i').sSelect({ddMaxWidth: '76px',ddMaxHeight:'200px',containerClass:'year'});
-			// MONTH
-			$('select#donation_date_2i').sSelect({ddMaxWidth: '131px',ddMaxHeight:'200px',containerClass:'month'});
-			// DAY
-			$('select#donation_date_3i').sSelect({ddMaxWidth: '62px',ddMaxHeight:'200px',containerClass:'day'});
-		}
+      dateStart[0] = $('select#project_start_date_2i').val();
+      dateStart[1] = $('select#project_start_date_3i').val();
+      dateStart[2] = $('select#project_start_date_1i').val();
+
+      dateValue = getStringDate(dateStart[0],dateStart[1],dateStart[2]);
+      $('span#start_date').children('p').text(dateValue);
+
+      dateEnd[0] = $('select#project_end_date_2i').val();
+      dateEnd[1] = $('select#project_end_date_3i').val();
+      dateEnd[2] = $('select#project_end_date_1i').val();
+
+      dateValue = getStringDate(dateEnd[0],dateEnd[1],dateEnd[2]);
+      $('span#end_date').children('p').text(dateValue);
+
+      donationDate[0] = $('select#donation_date_2i').val();
+      donationDate[1] = $('select#donation_date_3i').val();
+      donationDate[2] = $('select#donation_date_1i').val();
+
+      dateValue = getStringDate(donationDate[0],donationDate[1],donationDate[2]);
+      $('span#donation_date').children('p').text(dateValue);
+
+
+
+      // *********** DATE PROVIDED
+      // YEAR
+      $('select#project_date_provided_1i').sSelect({ddMaxWidth: '76px',ddMaxHeight:'200px',containerClass:'year'});
+      // MONTH
+      $('select#project_date_provided_2i').sSelect({ddMaxWidth: '131px',ddMaxHeight:'200px',containerClass:'month'});
+      // DAY
+      $('select#project_date_provided_3i').sSelect({ddMaxWidth: '62px',ddMaxHeight:'200px',containerClass:'day'});
+
+      // *********** DATE UPDATED
+      // YEAR
+      $('select#project_date_updated_1i').sSelect({ddMaxWidth: '76px',ddMaxHeight:'200px',containerClass:'year'});
+      // MONTH
+      $('select#project_date_updated_2i').sSelect({ddMaxWidth: '131px',ddMaxHeight:'200px',containerClass:'month'});
+      // DAY
+      $('select#project_date_updated_3i').sSelect({ddMaxWidth: '62px',ddMaxHeight:'200px',containerClass:'day'});
+
+      // *********** DATE START
+      // YEAR
+      $('select#project_start_date_1i').sSelect({ddMaxWidth: '76px',ddMaxHeight:'200px',containerClass:'year'});
+      // MONTH
+      $('select#project_start_date_2i').sSelect({ddMaxWidth: '131px',ddMaxHeight:'200px',containerClass:'month'});
+      // DAY
+      $('select#project_start_date_3i').sSelect({ddMaxWidth: '62px',ddMaxHeight:'200px',containerClass:'day'});
+
+      // *********** DATE END
+      // YEAR
+      $('select#project_end_date_1i').sSelect({ddMaxWidth: '76px',ddMaxHeight:'200px',containerClass:'year'});
+      // MONTH
+      $('select#project_end_date_2i').sSelect({ddMaxWidth: '131px',ddMaxHeight:'200px',containerClass:'month'});
+      // DAY
+      $('select#project_end_date_3i').sSelect({ddMaxWidth: '62px',ddMaxHeight:'200px',containerClass:'day'});
+
+      // *********** DATE DONATION
+      // YEAR
+      $('select#donation_date_1i').sSelect({ddMaxWidth: '76px',ddMaxHeight:'200px',containerClass:'year'});
+      // MONTH
+      $('select#donation_date_2i').sSelect({ddMaxWidth: '131px',ddMaxHeight:'200px',containerClass:'month'});
+      // DAY
+      $('select#donation_date_3i').sSelect({ddMaxWidth: '62px',ddMaxHeight:'200px',containerClass:'day'});
+    }
 
   // **************************************************** COMBOS
   //  combo status
   $('span#status_combo_search').click(function(ev){
     ev.stopPropagation();
     ev.preventDefault();
-
+  hideCountryCombo();
     if (!$(this).hasClass('clicked')){
       $('span.clicked').removeClass('clicked');
       $(this).addClass('clicked');
@@ -114,13 +114,13 @@ $(document).ready(function(ev){
       $('span.clicked').removeClass('clicked');
       $(this).removeClass('clicked');
 
-	  updateDateInfo();
+    updateDateInfo();
     }
 
     $(document).click(function(event) {
       if (!$(event.target).closest('span#status_combo_search').length) {
         $('span#status_combo_search').removeClass('clicked');
-        updateDateInfo();        
+        updateDateInfo();
       };
     });
   });
@@ -139,50 +139,12 @@ $(document).ready(function(ev){
     }
   });
 
-
-  //  COMBO COUNTRY
-  // $('span#country_combo_search').click(function(ev){
-  //   ev.stopPropagation();
-  //   ev.preventDefault();
-  // 
-  //   if (!$(this).hasClass('clicked')){
-  //     $('span.clicked').removeClass('clicked');
-  //     $(this).addClass('clicked');
-  //   }else {
-  //     $('span.clicked').removeClass('clicked');
-  //     $(this).removeClass('clicked');
-  //   }
-  // 
-  //   $(document).click(function(event) {
-  //     if (!$(event.target).closest('span#country_combo_search').length) {
-  //       $('span#country_combo_search').removeClass('clicked');
-  //     };
-  //   });
-  // });
-  // 
-  // $('span#country_combo_search').find('li').click(function(ev){
-  //   ev.stopPropagation();
-  //   ev.preventDefault();
-  //   var id = $(this).children('a').attr('id');
-  //   var name = $(this).children('a').text();
-  //   if ((id != undefined)&&(name != undefined)){
-  // 
-  //       if (name.length > limitTextCombo) {
-  //           name = name.substring(0,limitTextCombo - 3)+'...';
-  //       }
-  //       
-  //     $('span#country_combo_search').children('p').text(name);
-  //     $('input#country_input').val(id);
-  //     $('span#country_combo_search').removeClass('clicked');
-  //   }
-  // });
-
-  // END COUNTRY
-
   //  COMBO CLUSTER
   $('span#cluster_combo_search').click(function(ev){
     ev.stopPropagation();
     ev.preventDefault();
+
+  hideCountryCombo();
 
     if (!$(this).hasClass('clicked')){
       $('span.clicked').removeClass('clicked');
@@ -198,9 +160,9 @@ $(document).ready(function(ev){
         $('span#cluster_combo_search').removeClass('clicked');
       };
     });
-    
-    
-    
+
+
+
   });
 
   $('span#cluster_combo_search').find('li').click(function(ev){
@@ -214,7 +176,7 @@ $(document).ready(function(ev){
             name = name.substring(0,limitTextCombo - 3)+'...';
         }
         $('span#cluster_combo_search').children('p').text(name);
-      
+
       $('input#cluster_input').val(id);
       $('span#cluster_combo_search').removeClass('clicked');
     }
@@ -224,8 +186,11 @@ $(document).ready(function(ev){
 
   //  SECTOR CLUSTER
   $('span#sector_combo_search').click(function(ev){
+
     ev.stopPropagation();
     ev.preventDefault();
+
+  hideCountryCombo();
 
     if (!$(this).hasClass('clicked')){
       $('span.clicked').removeClass('clicked');
@@ -248,11 +213,11 @@ $(document).ready(function(ev){
     ev.preventDefault();
     var id = $(this).children('a').attr('id');
     var name = $(this).children('a').text();
-    
+
     if (name.length > limitTextCombo) {
         name = name.substring(0,limitTextCombo - 3)+'...';
     }
-    
+
     if ((id != undefined)&&(name != undefined)){
       $('span#sector_combo_search').children('p').text(name);
       $('input#sector_input').val(id);
@@ -271,7 +236,7 @@ $(document).ready(function(ev){
       $('div.list_combo').find('ul.list_combo_content').css('display','inline');
       $(this).addClass('displayed');
       $(this).attr('id','visible');
-      
+
       resetCombo($('div.list_combo'));
     }else{
       $('div.list_combo').find('ul.list_combo_content').css('display','none');
@@ -293,9 +258,9 @@ $(document).ready(function(ev){
   $('ul.list_combo_content').find('li.element').click(function(ev){
     var id = $(this).attr('id');
     var name = $(this).children('p.project_name').text();
-	id = id.substring(orgs_id,id.length);
-	
-	// id substring
+  id = id.substring(orgs_id,id.length);
+
+  // id substring
     $('input#project_primary_organization_id').val(id);
 
     $('div.list_combo').find('a.organization').text(name);
@@ -312,17 +277,17 @@ $(document).ready(function(ev){
     if (!$(this).hasClass('clicked')){
       $('span.combo_date.clicked').removeClass('clicked');
       $(this).addClass('clicked');
-	  $(this).find('div.newListSelected').css('background-position','0 0');
+    $(this).find('div.newListSelected').css('background-position','0 0');
     }
 
     $(document).click(function(event) {
       if (!$(event.target).closest('span.combo_date').length) {
         $('span.combo_date.clicked').removeClass('clicked');
-		updateDateInfo();
+    updateDateInfo();
       };
     });
   });
-  
+
   // COMBO DATE IN DONATIONS
   $('span#donation_date').click(function(ev){
     ev.stopPropagation();
@@ -331,17 +296,17 @@ $(document).ready(function(ev){
     if (!$(this).hasClass('clicked')){
       $('span.combo_date.clicked').removeClass('clicked');
       $(this).addClass('clicked');
-	  $(this).find('div.newListSelected').css('background-position','0 0');
+    $(this).find('div.newListSelected').css('background-position','0 0');
     }
 
     $(document).click(function(event) {
       if (!$(event.target).closest('span#donation_date').length) {
         $('span#donation_date.clicked').removeClass('clicked');
-		updateDateInfoDonations();
+    updateDateInfoDonations();
       };
     });
   });
-  
+
 
   /************** CLUSTERS ************************** */
   $('span.combo_cluster_options').click(function(ev){
@@ -352,18 +317,18 @@ $(document).ready(function(ev){
 
         // THIS IS A IE HACK
         $(this).css('position','relative');
-        
+
       $(this).addClass('clicked');
-      resetCombo($('span.combo_cluster_options'));      
+      resetCombo($('span.combo_cluster_options'));
     }else {
       $(this).removeClass('clicked');
-      $(this).css('position','static');      
+      $(this).css('position','static');
     }
 
     $(document).click(function(event) {
       if ((!$(event.target).closest('span.combo_cluster_options').length)&&(!$(event.target).closest('.scroll_pane').length)) {
         $('span.combo_cluster_options.clicked').removeClass('clicked');
-        $('span.combo_cluster_options').css('position','static');              
+        $('span.combo_cluster_options').css('position','static');
       };
     });
   });
@@ -373,8 +338,8 @@ $(document).ready(function(ev){
     ev.stopPropagation();
     ev.preventDefault();
     $('span.combo_cluster_options').children('p').text($(this).children('a').text());
- 	var id = $(this).children('a').attr('id');
-	id = id.substring(clusters_id,id.length);
+   var id = $(this).children('a').attr('id');
+  id = id.substring(clusters_id,id.length);
     $('span.combo_cluster_options').children('p').attr('id','clusterToAdd_'+id);
     $('span.combo_cluster_options.clicked').removeClass('clicked');
 
@@ -386,8 +351,8 @@ $(document).ready(function(ev){
     ev.preventDefault();
 
     var id = $('span.combo_cluster_options').children('p').attr('id');
-	id = id.substring(clusterToAdd,id.length);
-	
+  id = id.substring(clusterToAdd,id.length);
+
     var notAdded = false;
     notAdded = checkElementAdded($('ul.clusters'),id);
 
@@ -395,7 +360,7 @@ $(document).ready(function(ev){
     if ((id != 0)&&(!notAdded)){
       var text = $('span.combo_cluster_options').children('p').text();
 
-      var htmlToAdd = '<li id="cluster_'+id+'"><p>'+text+'</p><input id="'+id+'"type="checkbox" name="project[clusters_ids][]" value="'+id+'" checked="true"" /><a id="'+id+'" class="remove_this close"></a></li>';
+      var htmlToAdd = '<li id="cluster_'+id+'"><p>'+text+'</p><input id="'+id+'"type="checkbox" name="project[cluster_ids][]" value="'+id+'" checked="true"" /><a id="'+id+'" class="remove_this close"></a></li>';
 
       $('ul.clusters').append(htmlToAdd);
       $('span.combo_cluster_options').children('p').text('Select more clusters');
@@ -420,7 +385,7 @@ $(document).ready(function(ev){
     if (!$(this).hasClass('clicked')){
       $(this).css('position','relative');
       $(this).addClass('clicked');
-      resetCombo($('span#sector'));            
+      resetCombo($('span#sector'));
     }else {
       $(this).removeClass('clicked');
       $(this).css('position','static');
@@ -429,7 +394,7 @@ $(document).ready(function(ev){
     $(document).click(function(event) {
       if ((!$(event.target).closest('span.combo_sector_options').length)&&(!$(event.target).closest('.scroll_pane').length)) {
         $('span.combo_sector_options.clicked').removeClass('clicked');
-        $('span#sector').css('position','static');        
+        $('span#sector').css('position','static');
       };
     });
   });
@@ -439,9 +404,9 @@ $(document).ready(function(ev){
       ev.stopPropagation();
       ev.preventDefault();
       $('span#sector').children('p').text($(this).children('a').text());
-	  var id = $(this).children('a').attr('id');
+    var id = $(this).children('a').attr('id');
 
-	  id = id.substring(sectors_id,id.length);
+    id = id.substring(sectors_id,id.length);
       $('span#sector').children('p').attr('id','sectorToAdd_'+id);
       $('span#sector.clicked').removeClass('clicked');
     });
@@ -453,14 +418,14 @@ $(document).ready(function(ev){
       ev.preventDefault();
 
       var id = $('span#sector').children('p').attr('id');
-	  id = id.substring(sectorToAdd,id.length); 
+    id = id.substring(sectorToAdd,id.length);
       var notAdded = false;
       notAdded = checkElementAdded($('ul.sectors'),id);
-      
+
       // If we have some element (id=0 is a simple control to test it)
     if ((id != 0)&&(!notAdded)){
         var text = $('span#sector').children('p').text();
-        var htmlToAdd = '<li id="sector_'+id+'"><p>'+text+'</p><input id="'+id+'"type="checkbox" name="project[sectors_ids][]" value="'+id+'" checked="true"" /><a id="'+id+'" class="remove_this close"></a></li>';
+        var htmlToAdd = '<li id="sector_'+id+'"><p>'+text+'</p><input id="'+id+'"type="checkbox" name="project[sector_ids][]" value="'+id+'" checked="true"" /><a id="'+id+'" class="remove_this close"></a></li>';
 
         $('ul.sectors').append(htmlToAdd);
         $('span#sector').children('p').text('Select more sectors');
@@ -501,7 +466,7 @@ $(document).ready(function(ev){
         $('span#subsector').children('p').text($(this).children('a').text());
         $('span#subsector').children('p').attr('id',$(this).children('a').attr('id'));
         $('span#subsector.clicked').removeClass('clicked');
-        $('div.block div.med div.left').resize();        
+        $('div.block div.med div.left').resize();
       });
 
       // CLICK ON ADD SECTOR
@@ -515,7 +480,7 @@ $(document).ready(function(ev){
       //   // If we have some element (id=0 is a simple control to test it)
       //   if (id != 0){
       //     var text = $('span#sector').children('p').text();
-      //     var htmlToAdd = '<li id="sector_'+id+'">'+text+'<input id="'+id+'"type="checkbox" name="project[sectors_ids][]" value="'+id+'" checked="true"" /><a id="'+id+'" class="remove_this close"></a></li>';
+      //     var htmlToAdd = '<li id="sector_'+id+'">'+text+'<input id="'+id+'"type="checkbox" name="project[sector_ids][]" value="'+id+'" checked="true"" /><a id="'+id+'" class="remove_this close"></a></li>';
       //
       //     $('ul.sectors').append(htmlToAdd);
       //     $('span#sector').children('p').text('Select more sectors');
@@ -567,7 +532,7 @@ $(document).ready(function(ev){
         if (!$(this).hasClass('clicked')){
           $(this).addClass('clicked');
         }
-		resetCombo($(this));
+    resetCombo($(this));
         $(document).click(function(event) {
           if (!$(event.target).closest('span.select_country_combo').length) {
             $('li#gc_limited_country').find('span.select_country_combo').removeClass('clicked');
@@ -589,7 +554,7 @@ $(document).ready(function(ev){
 
       // click on country combo (LIMITED TO A REGION)
       $('li#gc_limited_region').find('span.select_country_combo').click(function(ev){
-	    ev.stopPropagation();
+      ev.stopPropagation();
         ev.preventDefault();
 
         if (!$(this).hasClass('clicked')){
@@ -602,7 +567,7 @@ $(document).ready(function(ev){
         });
       });
 
-      // SET VALUE IF CLICK ON REGION	
+      // SET VALUE IF CLICK ON REGION
       $('div.values.region').find('li').click(function(ev){
         ev.stopPropagation();
         ev.preventDefault();
@@ -684,32 +649,32 @@ $(document).ready(function(ev){
         $('span.select_combo_typology.clicked').removeClass('clicked');
 
       });
-      
+
       // TO FIX IE7 BUG WITH Z-INDEX WE HAVE TO RESTORE Z-INDEX VALUES
       $('div.list_combo').css('zIndex', 200);
       $('div#implement_org').css('zIndex', 199);
       $('div#partner_org').css('zIndex', 198);
-      $('ul.newList').css('zIndex', 197);      
-            
+      $('ul.newList').css('zIndex', 197);
+
       $('div#cross_cutting').css('zIndex', 196);
 
       $('div#clusters_content').css('zIndex', 195);
       $('div.select_dates').css('zIndex', 200);
       $('input#donation_submit').css('zIndex', 100);
-      
-     
-      
-      
+
+
+
+
 });
 
- // This is a function to set date value in correct format	
+ // This is a function to set date value in correct format
  function getStringDate (month, day, year){
-	var dateValue = month + '/' + day + '/' + year;
-	return dateValue;
+  var dateValue = month + '/' + day + '/' + year;
+  return dateValue;
 }
 
 function updateDateInfo(){
-        
+
         // Updating dateProvided
         var year = $('select#project_date_provided_1i option:selected').val();
         var month = $('select#project_date_provided_2i option:selected').val();
@@ -718,7 +683,7 @@ function updateDateInfo(){
         dateProvided[0] = month;
         dateProvided[1] = day;
         dateProvided[2] = year;
-				
+
         var dateValue = getStringDate(month,day,year);
 
         $('span#date_provided').children('p').text(dateValue);
@@ -746,7 +711,7 @@ function updateDateInfo(){
 
 
         dateValue = getStringDate(month,day,year);
-        $('span#start_date').children('p').text(dateValue);	
+        $('span#start_date').children('p').text(dateValue);
 
         year = $('select#project_end_date_1i option:selected').val();
         month = $('select#project_end_date_2i option:selected').val();
@@ -760,7 +725,7 @@ function updateDateInfo(){
         $('span#end_date').children('p').text(dateValue);
         $('span#end_date').removeClass('clicked');
   }
-  
+
   function updateDateInfoDonations(){
 
           // Updating dateProvided
@@ -778,12 +743,23 @@ function checkElementAdded(list, id){
 
     $(list).children('li').each(function(index) {
         id_li_element = $(this).children('input').attr('id');
-        
+
         if (id == id_li_element){
             elementAdded = true;
         }
-      });   
-      return elementAdded;    
+      });
+      return elementAdded;
+}
+
+function hideCountryCombo(){
+  $('div.newListSelected').each(function() {
+        $(this).css('background-position','0 0');
+        $(this).css('zIndex',200);
+      $('div.newList_content').find('ul').css('display','none');
+      // $('div.country_index').css('display','none');
+      $('div.newList_content').css('visibility','hidden');
+      $('div.newList_content').find('ul').css('visibility','hidden');
+      });
 }
 
 // AUTOCOMPLETE TAGS
@@ -794,8 +770,8 @@ $(function() {
 
 
   if ($('#project_tags').length > 0){
-      var custom_url =  '/admin/tags?term=';    
- 
+      var custom_url =  '/admin/tags?term=';
+
       $("#project_tags").autocomplete({
         style: 'project_tags',
         source: function( request, response ) {
@@ -841,11 +817,11 @@ $(function() {
         }
       });
     }
-  
+
 
      if ($('#autocomplete_donor_name').length > 0){
           var custom_donors_url = '/admin/donors?q=';
-  
+
           // AUTOCOMPLETE FOR DONORS IN PROJECT
           $("#autocomplete_donor_name").autocomplete({
            style:'donor_names',
@@ -881,6 +857,5 @@ $(function() {
               this.element.children("li.ui-menu-item:odd a").addClass("ui-menu-item-alternate");
            }
          });
-      }     
+      }
 });
-    

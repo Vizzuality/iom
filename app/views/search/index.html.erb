@@ -15,10 +15,10 @@
         <div class="results_list">
           <h3><p>
             <% if params[:q]!='' %>
-              <%= pluralize(@total_projects.count, 'project') %> for '<%= params[:q] %>'
+              <%= pluralize(@total_projects, 'active project') %> for '<%= params[:q] %>'
               <%= active_facets %>
             <% else %>
-              <%= pluralize(@total_projects.count, 'project') %> in total
+              <%= pluralize(@total_projects, 'active project') %> in total
               <%= active_facets %>
             <% end %>
           </p></h3>
@@ -62,40 +62,65 @@
         </div>
 
         <div class="block">
-          <% if @clusters && @clusters.any? %>
-            <h2>Filter by TOP <%= @site.word_for_clusters %></h2>
-            <ul class="filter_list">
-            <% index = 0 %>
-            <% @clusters.each do |cluster, count| %>
-              <% if index<10 %>
-                <% if params[:cluster_id] && params[:cluster_id].to_i == cluster.id && !cluster.name.eql?('N/A')%>
-                  <li><%= cluster.name %></li>
+          <% if @site.navigate_by_cluster? %>
+            <% if @clusters && @clusters.any? %>
+              <h2>Filter by TOP <%= @site.word_for_clusters %></h2>
+              <ul class="filter_list">
+              <% index = 0 %>
+              <% @clusters.each do |cluster, count| %>
+                <% if index<10 %>
+                  <% if params[:cluster_id] && params[:cluster_id].to_i == cluster.id && !cluster.name.eql?('N/A')%>
+                    <li><%= cluster.name %></li>
+                  <% else %>
+                  <% unless cluster.name.eql?('N/A') %>
+                    <li><%= link_to(cluster.name, filter_url(cluster)) %> (<%= count %>)</li>
+                  <% end %>
+                  <% end %>
                 <% else %>
-                <% unless cluster.name.eql?('N/A') %>
-                  <li><%= link_to(cluster.name, filter_url(cluster)) %> (<%= count %>)</li>
+                  <% unless cluster.name.eql?('N/A') %>
+                    <li><%= link_to(cluster.name, filter_url(cluster)) %> (<%= count %>)</li>
+                  <%end%>
                 <% end %>
-                <% end %>
-              <% else %>
-                <% unless cluster.name.eql?('N/A') %>
-                  <li><%= link_to(cluster.name, filter_url(cluster)) %> (<%= count %>)</li>
-                <%end%>
+                <% index = index + 1 %>
               <% end %>
-              <% index = index + 1 %>
+              </ul>
+              <% if index>10 %>
+                <a href="#more_results" class="more">More results</a>
+              <% end %>
             <% end %>
-            </ul>
-            <% if index>10 %>
-              <a href="#more_results" class="more">More results</a>
+          <% elsif @site.navigate_by_sector? %>
+            <% if @sectors && @sectors.any? %>
+              <h2>Filter by TOP <%= @site.word_for_clusters %></h2>
+              <ul class="filter_list">
+              <% index = 0 %>
+              <% @sectors.each do |sector, count| %>
+                <% if index<10 %>
+                  <% if params[:sector_id] && params[:sector].to_i == sector.id && !sector.name.eql?('N/A')%>
+                    <li><%= sector.name %></li>
+                  <% else %>
+                  <% unless sector.name.eql?('N/A') %>
+                    <li><%= link_to(sector.name, filter_url(sector)) %> (<%= count %>)</li>
+                  <% end %>
+                  <% end %>
+                <% else %>
+                  <% unless sector.name.eql?('N/A') %>
+                    <li><%= link_to(sector.name, filter_url(sector)) %> (<%= count %>)</li>
+                  <%end%>
+                <% end %>
+                <% index = index + 1 %>
+              <% end %>
+              </ul>
+              <% if index>10 %>
+                <a href="#more_results" class="more">More results</a>
+              <% end %>
             <% end %>
           <% end %>
         </div>
       </div>
 
       <div class="view_more" id="search_view_more">
-        <% if @total_projects.count > @projects.count %>
-          <%= link_to('More projects', params.merge(:page => @current_page + 1), :id =>'view_more', :class => 'ajax') %>
-        <% end %>
+        <%= render :partial => 'search/pagination' %>
       </div>
     </div>
 
     <script src="/javascripts/sites/pages.js" type="text/javascript" charset="utf-8"></script>
-
