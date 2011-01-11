@@ -56,24 +56,6 @@ class Project < ActiveRecord::Base
   after_save :set_cached_sites
   after_destroy :remove_cached_sites
 
-  attr_accessor :sectors_ids, :clusters_ids
-
-  def sectors_ids=(value)
-    value.each do |sector_id|
-      if sector = Sector.find(sector_id)
-        sectors << sector unless sectors.include?(sector)
-      end
-    end
-  end
-
-  def clusters_ids=(value)
-    value.each do |cluster_id|
-      if cluster = Cluster.find(cluster_id)
-        clusters << cluster unless clusters.include?(cluster)
-      end
-    end
-  end
-
   def tags=(tag_names)
     return if tag_names.blank?
     if tag_names.is_a?(String)
