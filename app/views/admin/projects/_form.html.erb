@@ -179,6 +179,8 @@
     </div>
   </div>
 
+
+  <% unless @project.new_record? %>
   <label>GEOGRAPHIC REGION <strong>*</strong></label>
   <ul class="ubications" id="regions_list">
     <% @project.regions_hierarchized.each do |region| %>
@@ -188,6 +190,7 @@
       </li>
     <% end %>
   </ul>
+
   <div class="location_options region_block empty">
     <p class="msg">Add / edit the different regions of the project</p>
     <a class="add_location museo_sans shadow_green" id="add_region_map">add region</a>
@@ -260,7 +263,9 @@
       </div>
     </div>
   </div>
+  <% end %>
 
+  <% unless @project.new_record? %>
   <label>GEOGRAPHIC COORDINATES  <strong>*</strong></label>
   <ul class="ubications">
     <% if !@project.the_geom.blank? && @project.the_geom.respond_to?(:points) %>
@@ -277,6 +282,7 @@
     <p class="msg">Add / edit the different locations of the project</p>
     <a class="add_location museo_sans shadow_green" id="add_location_map">add location</a>
   </div>
+  <% end %>
 
   <div class="field">
     <ul class="dates">
@@ -417,6 +423,7 @@
 
 <%end%>
 
+<% unless @project.new_record? %>
   <div class="map_window">
     <a class="close">Close</a>
     <h3 class="museo_sans">Geolocate this project</h3>
@@ -430,6 +437,7 @@
     <p>You can click multiple points to add<br/>several locations to the project</p>
     <a class="save" href="javascript:void(null)">save position</a>
   </div>
+<% end %>
 
   <!-- COMMON IN EDIT AND NEW FORM -->
 
