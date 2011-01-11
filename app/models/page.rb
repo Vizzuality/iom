@@ -28,7 +28,7 @@ class Page < ActiveRecord::Base
   scope :highlighted, where(:parent_id => nil)
 
   def children
-    Page.where(:parent_id => self.id)
+    Page.where(:parent_id => self.id).order("order_index ASC")
   end
 
   def  parent
