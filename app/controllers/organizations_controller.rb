@@ -22,7 +22,7 @@ class OrganizationsController < ApplicationController
         #Map data
         if(@site.geographic_context_country_id)
           sql="select r.id,count(ps.project_id) as count,r.name,r.center_lon as lon,r.center_lat as lat,r.name,'/location/'||r.path as url,r.code,
-                (select count(*) from data_denormalization where regions_ids && ('{'||r.id||'}')::integer[]) as total_in_region
+                (select count(*) from data_denormalization where regions_ids && ('{'||r.id||'}')::integer[] and is_active=true and site_id=#{@site.id}) as total_in_region
                 from ((((projects as p inner join organizations as o on o.id=p.primary_organization_id and
                 o.id=#{params[:id].sanitize_sql!})
                 inner join projects_sites as ps on p.id=ps.project_id and ps.site_id=#{@site.id})
@@ -32,7 +32,7 @@ class OrganizationsController < ApplicationController
                 group by r.id,r.name,lon,lat,r.name,url,r.code"
         else
           sql="select c.id,count(ps.project_id) as count,c.name,r.center_lon as lon,r.center_lat as lat,c.name,'/location/'||c.id as url,c.iso2_code as code,
-                (select count(*) from data_denormalization where regions_ids && ('{'||r.id||'}')::integer[]) as total_in_region
+                (select count(*) from data_denormalization where regions_ids && ('{'||r.id||'}')::integer[] and is_active=true and site_id=#{@site.id}) as total_in_region
                 from ((((projects as p inner join organizations as o on o.id=p.primary_organization_id and o.id=#{params[:id].sanitize_sql!})
                 inner join projects_sites as ps on p.id=ps.project_id and ps.site_id=#{@site.id}) inner join projects_regions as pr on pr.project_id=p.id)
                 inner join projects as prj on ps.project_id=prj.id and (prj.end_date is null OR prj.end_date > now())
