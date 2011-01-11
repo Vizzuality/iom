@@ -79,6 +79,9 @@ module ProjectsHelper
   end
 
   def region_breadcrumb(region)
+    if region.is_a?(Country)
+      return region.name
+    end
     result = [region.country.name]
     if region.level == 1
     elsif region.level == 2

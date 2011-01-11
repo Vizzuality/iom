@@ -151,35 +151,97 @@
       }
     });
 
-    $('a#add_region_to_list').click(function(){
-      if ($('div.level_0 span.region_combo p').attr('id')!="country_0") {
+    $('#regions_list a.close').live('click',function (e){
+      e.preventDefault();
+      e.stopPropagation();
+      var csrf_token = $('meta[name=csrf-token]').attr('content'),
+          csrf_param = $('meta[name=csrf-param]').attr('content');
 
-        var ids='';
-        var region_text='';
+      var link = $(this),
+          href = link.attr('href'),
+          method = 'post',
+          form = $('<form method="post" action="'+href+'"></form>'),
+          metadata_input = '<input name="_method" value="'+method+'" type="hidden" />',
+          countries = [], regions = [];
 
-        $('div.region_window div span.region_combo p').each(function(index,element){
-          if ($(element).text()!="Not specified") {
-            ids += $(element).attr('id').split('_')[1]+' > ';
-            region_text = region_text + ' > ' + $(element).text();
-          }
-        });
+      if (csrf_param != null && csrf_token != null) {
+        metadata_input += '<input name="'+csrf_param+'" value="'+csrf_token+'" type="hidden" />';
+      }
+      metadata_input += '<input name="type_and_id" value="'+$(this).attr('rel')+'" type="hidden" />';
+      form.hide()
+          .append(metadata_input)
+          .appendTo('body');
+      var el = form;
+      var data = el.is('form') ? el.serializeArray() : [];
 
-        ids = ids.substring(0, ids.length - 1);
-        region_text = region_text.substring(2, region_text.length);
-        if (region_text.length>34) {
-          region_text = region_text.substr(0,31) + '...';
+      $.ajax({
+        url: href,
+        data: form.serializeArray(),
+        dataType: 'script',
+        type: method.toUpperCase()
+      });
+    });
+
+    $('a#add_region_to_list').click(function (e){
+        var csrf_token = $('meta[name=csrf-token]').attr('content'),
+            csrf_param = $('meta[name=csrf-param]').attr('content');
+
+        var link = $(this),
+            href = link.attr('href'),
+            method = 'post',
+            form = $('<form method="post" action="'+href+'"></form>'),
+            metadata_input = '<input name="_method" value="'+method+'" type="hidden" />',
+            countries = [], regions = [];
+
+        if (csrf_param != null && csrf_token != null) {
+          metadata_input += '<input name="'+csrf_param+'" value="'+csrf_token+'" type="hidden" />';
         }
 
-        var id_list = ids.split(' > ');
+        var i = 0;
+        $('div.region_window div span.region_combo p').each(function(index,element){
+          if ($(element).text()!="Not specified") {
+            if(i == 0){
+              countries.push($(element).attr('id').split('_')[1]);
+            } else {
+              regions.push($(element).attr('id').split('_')[1]);
+            }
+          }
+          i++;
+        });
 
-        (id_list[0]!=undefined)?$('input#project_countries').attr('value',$('input#project_countries').attr('value') +','+ id_list[0]):null;
-        (id_list[1]!=undefined)?$('input#project_regions').attr('value',$('input#project_regions').attr('value') +','+ id_list[1] +','+ id_list[1] +','+ id_list[2] +','+ id_list[3]):null;
+        if( regions.length == 0 )
+          metadata_input += '<input name="project[project_countries]" value="'+countries.join(',')+'" type="hidden" />';
+        else
+          metadata_input += '<input name="project[project_regions]" value="'+regions.join(',')+'" type="hidden" />';
 
-        $('ul#regions_list').append('<li><p rel="'+ids+'">'+region_text+'</p><a class="close"></a></li>');
-        $('div.region_window').fadeOut(function(){
+        form.hide()
+            .append(metadata_input)
+            .appendTo('body');
+        var el = form;
+        var data = el.is('form') ? el.serializeArray() : [];
+        $.ajax({
+            url: href,
+            data: form.serializeArray(),
+            dataType: 'script',
+            type: method.toUpperCase(),
+            beforeSend: function (xhr) {
+                el.trigger('ajax:loading', xhr);
+            },
+            success: function (data, status, xhr) {
+                el.trigger('ajax:success', [data, status, xhr]);
+            },
+            complete: function (xhr) {
+                el.trigger('ajax:complete', xhr);
+            },
+            error: function (xhr, status, error) {
+                el.trigger('ajax:failure', [xhr, status, error]);
+            }
+        });
+        e.preventDefault();
+        e.stopPropagation();
+        $('div.region_window').fadeOut(function(e){
           resetRegionValues();
         });
-      }
     });
 
   });

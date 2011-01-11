@@ -96,7 +96,7 @@
           <p id="day" class="title">DAY</p>
           <p id="year" class="title">YEAR</p>
 
-         <%= f.date_select :date_provided, :start_year => Date.today.year - 5, :order => [:month, :day, :year]  %>
+         <%= f.date_select :date_provided, :start_year => Date.today.year - 20, :order => [:month, :day, :year]  %>
         </div>
         </span>
       </li>
@@ -109,7 +109,7 @@
           <p id="day" class="title">DAY</p>
           <p id="year" class="title">YEAR</p>
 
-            <%= f.date_select :date_updated, :start_year => Date.today.year - 5, :order => [:month, :day, :year]  %>
+            <%= f.date_select :date_updated, :start_year => Date.today.year - 20, :order => [:month, :day, :year]  %>
         </div>
      </span>
       </li>
@@ -180,7 +180,10 @@
   <label>GEOGRAPHIC REGION <strong>*</strong></label>
   <ul class="ubications" id="regions_list">
     <% @project.regions_hierarchized.each do |region| %>
-    <li><p><%= region_breadcrumb(region) %></p><a class="close"></a></li>
+      <li id="geographic_region_<%= region.class.name.downcase + '_' + region.id.to_s %>">
+        <p><%= region_breadcrumb(region) %></p>
+        <a class="close" href="<%= remove_country_region_admin_project_path(@project) %>" rel="<%= region.class.name.downcase + '_' + region.id.to_s %>"></a>
+      </li>
     <% end %>
   </ul>
   <div class="location_options region_block empty">
@@ -251,12 +254,9 @@
             </div>
           </span>
         </div>
-        <a class="add_location museo_sans shadow_green" id="add_region_to_list">add region</a>
+        <a class="add_location museo_sans shadow_green" id="add_region_to_list" href="<%= add_country_region_admin_project_path(@project) %>">add region</a>
       </div>
     </div>
-
-    <input type="hidden" name="project[project_countries]" id="project_countries" value="<%= @project.countries_ids  %>" class="hidden"/>
-    <input type="hidden" name="project[project_regions]" id="project_regions" value="<%= @project.regions_ids  %>" class="hidden"/>
   </div>
 
   <label>GEOGRAPHIC COORDINATES  <strong>*</strong></label>
@@ -286,7 +286,7 @@
             <p id="day" class="title">DAY</p>
             <p id="year" class="title">YEAR</p>
 
-              <%= f.date_select :start_date, :start_year => Date.today.year - 5, :order => [:month, :day, :year]  %>
+              <%= f.date_select :start_date, :start_year => Date.today.year - 20, :order => [:month, :day, :year]  %>
           </div>
         </span>
       </li>
@@ -299,7 +299,7 @@
             <p id="day" class="title">DAY</p>
             <p id="year" class="title">YEAR</p>
 
-              <%= f.date_select :end_date, :start_year => Date.today.year - 5, :order => [:month, :day, :year]  %>
+              <%= f.date_select :end_date, :start_year => Date.today.year - 20, :order => [:month, :day, :year]  %>
           </div>
         </span>
       </li>
