@@ -791,10 +791,9 @@ div.block.donations_project div.med div.left form div#donation_amount span input
 div.block.donations_project div.med div.left form h4 {font:normal 21px "Museo Sans",Arial; color:#333333; text-shadow:0 1px white; margin:22px 0 0 22px;}
 div.block.donations_project div.med div.left form label {float:left; width:400px; margin:17px 0 0 9px; font:normal 11px Arial; color:#666666; text-shadow:none; text-transform:uppercase; width:100px; }
 
-div.block.donations_project div.med div.left form input[type="submit"] {float:right; width:128px; height:32px; background:url('/images/backoffice/projects/add_donation_bttn.png') no-repeat 0 0; border:none; text-indent:-9999px; font-size:0; display:block; line-height:0; z-index:0; margin:18px 22px 0 0;}
+div.block.donations_project div.med div.left form input[type="submit"] {float:right; width:128px; height:32px; background:url('/images/backoffice/projects/add_donation_bttn.png') no-repeat 0 0!important; border:none; text-indent:-9999px; font-size:0; display:block; line-height:0; z-index:0; margin:18px 22px 0 0;}
 div.block.donations_project div.med div.left form input[type="submit"]:hover {background-position:0 -32px; cursor:pointer;}
 div.block.donations_project div.bottom {float:left; height:15px; width:100%; background: url('/images/backoffice/backgrounds/bottom_two_columns.png') no-repeat scroll top left!important;}
-
 
 /*ngos search*/
 div.med.ngos_list h2 a.remove {padding:0 10px 0 0; color:#333333; border-bottom:1px dotted #EB4142; background:url('/images/backoffice/icons/red_x.png') no-repeat right 17px;}
@@ -825,14 +824,14 @@ div.block.resources div.med div.left {float:left; width:572px;}
 div.block.resources div.med div.left p {float:left; width:100%; font:normal 15px Arial; color:#666666;}
 div.block.resources div.med div.left p.resources_account {margin:14px 0 0 0;}
 div.block.resources div.med div.left ul {float:left; width:100%; margin:20px 0 0 0; border-top:1px solid #CCCCCC;}
-div.block.resources div.med div.left ul li {position:relative; float:left; width:100%; height:71px; border-bottom:1px solid #CCCCCC;}
+div.block.resources div.med div.left ul li {position:relative; float:left; width:100%; height:auto; border-bottom:1px solid #CCCCCC;}
 div.block.resources div.med div.left ul li h3 {float:left; width:100%; margin:15px 0 0 0;}
 div.block.resources div.med div.left ul li h3 a {font:bold 17px Arial; color:#E93E3F;}
 div.block.resources div.med div.left ul li p {float:left; padding:5px 0 0 0; font:normal 13px Arial; color:#666666;}
 div.block.resources div.med div.left ul li a.delete {position:absolute; right:0; top:25px; width:15px; height:16px; background:url('/images/backoffice/icons/close_bkg.png') no-repeat 0 0; text-indent:-9999px; font-size:0; display:block; line-height:0;}
 div.block.resources div.med div.left ul li a.delete:hover {background-position:0 -16px;}
-div.block.resources div.med div.left ul.ngo {position:relative; float:left; padding:0 0 50px 0; border:none;}
-div.block.resources div.med div.left ul li.ngo {border:none; padding:0 0 15px 0; margin:0 0 0 3px;}
+div.block.resources div.med div.left ul.ngo {position:relative; float:left; padding:0; border:none;}
+div.block.resources div.med div.left ul li.ngo {border:none; padding:0 0 30px 0; margin:0 0 0 3px;}
 div.block.resources div.med div.left ul li.ngo form {background:none; height:auto; margin:0; padding:0;}
 div.block.resources div.med div.left ul li.ngo div.head {position:relative; float:left; width:535px; height:42px; padding:15px; background:url('/images/backoffice/resources/header_resources.png') no-repeat 0 0;}
 div.block.resources div.med div.left ul li.ngo div.head h3 {margin:0;}
@@ -844,12 +843,15 @@ div.block.resources div.med div.left ul li.ngo div.down {float:left; width:565px
 div.block.resources div.med div.left form {float:left; width:527px; height:209px; padding:21px; margin:20px 0 0 2px; background:url('/images/backoffice/common/green_form_bkg.png') no-repeat center center;}
 div.block.resources div.med div.left form h4 {font:normal 21px "Museo Sans",Arial; color:#333333; text-shadow:0 1px white;}
 div.block.resources div.med div.left form label {float:left; width:400px; margin:12px 0 0 3px; font:normal 11px Arial; color:#333333; text-shadow:none; text-transform:uppercase;}
+div.block.resources div.med div.left form label.site {width:auto; margin:0 15px 0 3px;}
 div.block.resources div.med div.left form input[type="text"] {float:left; width:509px; height:22px; padding:6px 8px; margin:5px 0 0 0; font:normal 13px Arial; color:#666666; background:url('/images/backoffice/resources/url_input_bkg.png') no-repeat 0 0; border:none;}
 div.block.resources div.med div.left form input[type="text"].title {float:left; width:319px; height:22px; background:url('/images/backoffice/resources/title_input_bkg.png') no-repeat 0 0;}
-div.block.resources div.med div.left form input[type="submit"] {float:right; width:130px; height:32px; margin:15px 3px 0 0; background:url('/images/backoffice/resources/add_input_bkg.png') no-repeat 0 0; border:none; text-indent:-9999px; font-size:0; display:block; line-height:0;}
-div.block.resources div.med div.left form input[type="submit"]:hover {background-position:0 -32px; cursor:pointer;}
+div.block.resources div.med div.left form input[type="submit"].add {float:right; width:130px; height:32px; margin:15px 3px 0 0; background:url('/images/backoffice/resources/add_input_bkg.png') no-repeat 0 0; border:none; text-indent:-9999px; font-size:0; display:block; line-height:0;}
+div.block.resources div.med div.left form input[type="submit"].add:hover {background-position:0 -32px; cursor:pointer;}
 div.block.resources div.bottom {float:left; height:15px; width:100%; background: url('/images/backoffice/backgrounds/bottom_two_columns.png') no-repeat scroll top left!important;}
-
+div.block.resources div.med div.left form input[type="checkbox"] {float:left; width:10px; height:10px; margin:2px 0 0 0; }
+div.block.resources div.med div.left form input[type="submit"].update {float:right; width:130px; height:32px; margin:15px 3px 0 0; border:none; text-indent:-9999px; font-size:0; display:block; line-height:0; font:normal 14px Arial; color:#666666; background:url('/images/backoffice/ngos/save_changes.png') no-repeat 0 0; width:106px; height:28px;}
+div.block.resources div.med div.left form input[type="submit"].update:hover {cursor:pointer; background-position:0 -28px; }
 
 
 /*media*/
