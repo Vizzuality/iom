@@ -118,7 +118,7 @@
           $('div.region_window div.bottom_region').prepend($('div.region_window h3'));
         }
       } else {
-        $.getJSON('/geo/regions/'+item_level+'/'+item_id+'.json',function(result){
+        $.getJSON('/geo/regions/'+item_level+'/'+item_id+'/json',function(result){
           $('img.loader').hide();
           var settings = {showArrows: false};
           var pane = next_element.children('span.region_combo').children('div.wrapper').children('ul.scroll_pane')
