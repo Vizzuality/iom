@@ -1,13 +1,15 @@
 <% @projects.each_with_index do |project,index| %>
   <li class="<%= cycle('even', 'odd') %>">
     <div class="project_name">
-      <h3><%= link_to(truncate(project['name'],:length=>43,:omission=>"..."), project_path(project['project_id'])) %></h3>
+      <h3><%= link_to(truncate(project['project_name'],:length=>43,:omission=>"..."), project_path(project['project_id'])) %></h3>
       <p>by <%= link_to(project['organization_name'], organization_path(project['organization_id'])) %></p>
     </div>
     <div class="project_places">
       <p>
-        <% regions = project['regions'].split('|') %>
-        <% regions.slice!(0, 2).each do |region| %><%= "#{region}, #{project['country_name']}"%> <% end %>
+        <% regions = project['regions'] ? project['regions'].text2array : [] %>
+        <% regions.slice!(0, 2).each do |region| %>
+            <%= "#{region}, #{project['countries'].text2array}"%>
+        <% end %>
         <% if regions.count > 0 %>and <%= content_tag :span, "#{regions.count} more" %><% end %>
       </p>
     </div>
