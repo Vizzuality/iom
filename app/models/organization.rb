@@ -75,7 +75,7 @@ class Organization < ActiveRecord::Base
   # Attributes for site getter
   def attributes_for_site(site)
     atts = site_specific_information || {}
-    atts[site.id.to_s]
+    atts[site.id.to_s].reject{|key,value| value.nil? }
   end
 
   # Attributes for site setter
