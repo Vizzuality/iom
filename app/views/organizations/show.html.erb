@@ -114,7 +114,7 @@
               <br/><%= @organization.donation_address %>
               <br/><%= @organization.city %>, <%= @organization.state %> <%= @organization.zip_code %>
             </p>
-            <p><%= @organization.donation_phone_number %><br/><%= link_to(@organization.donation_website, @organization.donation_website) %></p>
+            <p><%= @organization.donation_phone_number %><br/><%= link_to(truncate(@organization.donation_website, :length=>41), @organization.donation_website) %></p>
           </div>
           <%end%>
           <% unless @organization.twitter.nil? &&  @organization.facebook.nil? && @organization.website.nil? %>
@@ -134,7 +134,7 @@
             </p>
             <% end %>
             <% if @organization.website? %>
-              <p class="website"><%= link_to(@organization.website, @organization.website, :rel => 'nofollow', :target => '_blank') %></p>
+              <p class="website"><%= link_to(truncate(@organization.website, :length=>41), @organization.website, :rel => 'nofollow', :target => '_blank') %></p>
             <% end %>
           </div>
           <%end%>
