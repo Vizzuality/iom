@@ -15,10 +15,21 @@ var clusterToAdd = 13; // clusterToAdd_
 var sectors_id = 8; // sectors_
 var sectorToAdd = 12; // sectorToAdd_
 $(document).ready(function(ev){
-
-      // COUNTRY COMBO
-      $('select#country').sSelect({ddMaxWidth: '134px',ddMaxHeight:'220px',containerClass:'country_index'});
-
+	if ($('#project_description').length > 0){
+		var text = $('#project_description').val();
+	    var textlength = text.length;
+	
+		// 747 is the characters's limit
+		// if(textlength > 747) {
+		// 	  	  $('#project_description').addClass('scroll_pane');
+		// 	$('#project_description').jScrollPane({
+		//                          autoReinitialise:false });	
+		// 	    }	
+	}
+	
+	
+    // COUNTRY COMBO
+    $('select#country').sSelect({ddMaxWidth: '134px',ddMaxHeight:'220px',containerClass:'country_index'});
 
     if ($('div.select_dates').length > 0){
 
@@ -819,7 +830,6 @@ $(function() {
       });
     }
 
-
      if ($('#autocomplete_donor_name').length > 0){
           var custom_donors_url = '/admin/donors?q=';
 
@@ -860,3 +870,19 @@ $(function() {
          });
       }
 });
+
+function checkScrollBar() {
+	// var text = $('#project_description').val();
+	//     var textlength = text.length;
+	// 
+	// // 747 is the characters's limit
+	// if(textlength > 747) {
+	//   	  $('#project_description').addClass('scroll_pane');
+	// 	$('#project_description').jScrollPane({
+	//                          autoReinitialise:false });	
+	//     }else {
+	// 	$('#project_description').removeClass('scroll_pane');
+	// }	
+}
+
+

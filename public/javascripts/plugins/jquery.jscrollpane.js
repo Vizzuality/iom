@@ -50,7 +50,7 @@
 (function($,window,undefined){
 
 	$.fn.jScrollPane = function(settings)
-	{
+	{	
 		// JScrollPane "class" - public methods are available through $('selector').data('jsp')
 		function JScrollPane(elem, s)
 		{

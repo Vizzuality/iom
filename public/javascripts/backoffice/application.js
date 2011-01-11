@@ -255,8 +255,6 @@ $(document).ready(function(ev){
    form.submit();
  }
 
-
-
   function limitChars(textid, limit, infodiv) {
     var text = $('#'+textid).val();
 
