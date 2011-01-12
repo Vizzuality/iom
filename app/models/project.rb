@@ -298,6 +298,22 @@ SQL
     ActiveRecord::Base.connection.execute(sql).map{ |r| r['region_id'] }.uniq.join(',')
   end
 
+  def regions_ids=(value)
+    country_ids = []
+    region_ids = []
+    value.each do |country_or_region|
+      if country_or_region =~ /^country/
+        country_ids += [country_or_region.split('_').last.to_i]
+      elsif country_or_region =~ /^region/
+        region = Region.find(country_or_region.split('_').last, :select => "id,name,path")
+        country_ids += [region.path.split('/').first.to_i]
+        region_ids += region.path.split('/')[1..-1].map{ |e| e.to_i}
+      end
+    end
+    self.country_ids = country_ids
+    self.region_ids = region_ids
+  end
+
   def set_cached_sites
     remove_cached_sites
     Site.all.each do |site|
