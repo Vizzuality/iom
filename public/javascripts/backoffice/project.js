@@ -831,8 +831,12 @@ $(function() {
                url: custom_donors_url + value,
                dataType: "json",
                success: function( data ) {
-                 if(data != null) {
-                   response($.map(data, function(donor) {
+                 if(data != null) {                 
+                    
+                    if (data.length > 5){
+                       data.splice(0,data.length-5);
+                    } 
+                     response($.map(data, function(donor) {
                      return {
                        label: donor.name,
                        value: donor.name,
@@ -851,6 +855,7 @@ $(function() {
            select: function( event, ui ) {
              $('#autocomplete_donor_name').val(ui.item.value);
              $('#donation_donor_id').val(ui.item.element_id);
+          
            },
            refresh: function(){
               this.element.children("li.ui-menu-item:odd a").addClass("ui-menu-item-alternate");
