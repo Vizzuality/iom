@@ -41,9 +41,12 @@ $(document).ready(function(ev){
     
     
     // CUSTOM SCROLLBARS
-    if ($('.scroll_pane').length > 0){    
+    if ($('.scroll_pane').length > 0){ 
+       console.log('entra');
         $('.scroll_pane').jScrollPane({
-                           autoReinitialise:false });
+                           autoReinitialise:false, 
+                           showArrows: true,
+                     			verticalGutter: 5});
     }
 
     if ($('div.right.menu').length > 0) {
