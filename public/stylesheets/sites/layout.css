@@ -119,8 +119,8 @@ div#header ul.menu li#cluster_option.clicked ul.suboptions {position:absolute; t
 div#header ul.menu li#cluster_option.clicked ul.suboptions.longer {background:url('/images/sites/common/menu/cluster_body_clicked_long.png') no-repeat 0 0; height:290px;}
 div#header ul.menu li#sector_option.clicked ul.suboptions {position:absolute; top:35px; left:-8px; z-index:110; background:url('/images/sites/common/menu/body_sectors_content.png') repeat-y 0; display:none; width:495px; height:auto; display:inline; padding:3px 13px 0;}
 
-div#header ul.menu li#sector_option.clicked ul.suboptions span.top_content {position:absolute; top:0; left:0; background:url('/images/sites/common/menu/top_sectors_content.png') no-repeat 0 0; width:495px; height:3px;}
-div#header ul.menu li#sector_option.clicked ul.suboptions span.bottom_content {position:absolute; bottom:-30px; left:0; background:url('/images/sites/common/menu/bottom_sectors_content.png') no-repeat 0 0; width:495px; height:30px;}
+div#header ul.menu li#sector_option.clicked ul.suboptions span.top_content {position:absolute; top:0; left:0px; background:url('/images/sites/common/menu/top_sectors_content.png') no-repeat 0 0; width:495px; height:3px;}
+div#header ul.menu li#sector_option.clicked ul.suboptions span.bottom_content {position:absolute; bottom:-30px; left:0px; background:url('/images/sites/common/menu/bottom_sectors_content.png') no-repeat 0 0; width:495px; height:30px;}
 div#header ul.menu li#sector_option.clicked ul.suboptions.longer {background:url('/images/sites/common/menu/cluster_body_clicked_long.png') no-repeat 0 0; height:290px;}
 
 div#header ul.menu li div.header_title {display:none;}
