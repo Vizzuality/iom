@@ -42,7 +42,6 @@ $(document).ready(function(ev){
     
     // CUSTOM SCROLLBARS
     if ($('.scroll_pane').length > 0){ 
-       console.log('entra');
         $('.scroll_pane').jScrollPane({
                            autoReinitialise:false, 
                            showArrows: true,
