@@ -85,6 +85,14 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def points=(value)
+    points = value.map do |point|
+      point = point.tr('(','').tr(')','').split(',')
+      Point.from_x_y(point[1].strip.to_f, point[0].strip.to_f)
+    end
+    self.the_geom = MultiPoint.from_points(points)
+  end
+
   def update_tag_counter(tag)
     tag.update_tag_counter
   end

@@ -70,7 +70,6 @@ class Admin::ProjectsController < ApplicationController
 
   def create
     @project = Project.new(params[:project])
-    set_project_geometry
     if @project.valid? && @project.save
       redirect_to edit_admin_project_path(@project), :flash => {:success => 'Project has been created successfully'}
     else
@@ -89,7 +88,6 @@ class Admin::ProjectsController < ApplicationController
   def update
     @project = Project.find(params[:id])
     @project.attributes = params[:project]
-    set_project_geometry
     if @project.save
       redirect_to edit_admin_project_path(@project), :flash => {:success => 'Project has been updated successfully'}
     else
@@ -192,17 +190,5 @@ class Admin::ProjectsController < ApplicationController
       end
     end
   end
-
-  private
-
-    def set_project_geometry
-      if params[:project_geometry] && !params[:project_geometry].blank?
-        points = []
-        params[:project_geometry].tr('(','').tr(')','').split(',').in_groups_of(2) do |point|
-          points << Point.from_x_y(point[1].strip.to_f, point[0].strip.to_f) unless point[1].blank? || point[0].blank?
-        end
-        @project.the_geom = MultiPoint.from_points(points)
-      end
-    end
 
 end
