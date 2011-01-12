@@ -15,19 +15,37 @@ var clusterToAdd = 13; // clusterToAdd_
 var sectors_id = 8; // sectors_
 var sectorToAdd = 12; // sectorToAdd_
 $(document).ready(function(ev){
-	if ($('#project_description').length > 0){
-		var text = $('#project_description').val();
-	    var textlength = text.length;
-	
-		// 747 is the characters's limit
-		// if(textlength > 747) {
-		// 	  	  $('#project_description').addClass('scroll_pane');
-		// 	$('#project_description').jScrollPane({
-		//                          autoReinitialise:false });	
-		// 	    }	
-	}
-	
-	
+
+    // if ($('#project_description').length > 0){                                
+    //   //       var pane = $('#project_description');
+    //   // pane.jScrollPane({autoReinitialise:false});
+    //   // 
+    //   // var contentPane = pane.data('jsp').getContentPane();     
+    //   // api = pane.data('jsp');
+    //   // 
+    //   //        var text = $('#project_description').val();
+    //   //  contentPane.find('div.jspPane').append(text);
+    //   //        $('#project_description').val(text);
+    //   //        console.log($('#project_description').val());
+    //   //        var textlength = text.length;
+    //   // 
+    //   // // // 747 is the characters's limit
+    //   // if(textlength > 747) {
+    //   //    api.reinitialise();
+    //   // }
+    // //  var text = $('#project_description').val();
+    // //     var textlength = text.length;
+    // // 
+    // //  // 747 is the characters's limit
+    //  // if(textlength > 747) {
+    //                   // $('#project_description').addClass('scroll_pane');                                                                    
+    //                               // }                                   
+    // // 
+    // // 
+    // // 
+    // // 
+    // }        
+
     // COUNTRY COMBO
     $('select#country').sSelect({ddMaxWidth: '134px',ddMaxHeight:'220px',containerClass:'country_index'});
 
@@ -872,17 +890,25 @@ $(function() {
 });
 
 function checkScrollBar() {
-	// var text = $('#project_description').val();
-	//     var textlength = text.length;
-	// 
-	// // 747 is the characters's limit
-	// if(textlength > 747) {
-	//   	  $('#project_description').addClass('scroll_pane');
-	// 	$('#project_description').jScrollPane({
-	//                          autoReinitialise:false });	
-	//     }else {
-	// 	$('#project_description').removeClass('scroll_pane');
-	// }	
+   
+   // Update content
+   // var pane = $('#project_description');
+   // pane.jScrollPane({autoReinitialise:false});
+   // 
+   // var contentPane = pane.data('jsp').getContentPane();     
+   // api = pane.data('jsp');
+   //    
+   //    var text = $('#project_description').val();
+   // contentPane.find('div.jspPane').append(text);
+   //    
+   //    var textlength = text.length;
+   // 
+   // // // 747 is the characters's limit
+   // if(textlength > 747) {
+   //    api.reinitialise();
+   // }
+	
+	
 }
 
 

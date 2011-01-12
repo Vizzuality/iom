@@ -120,7 +120,11 @@
           <% unless @organization.twitter.nil? &&  @organization.facebook.nil? && @organization.website.nil? %>
           <div class="block">
             <% if @organization.logo? %>
-              <%= image_tag(@organization.logo.url(:small), :class=>'logo') %>
+             <% if @organization.website? %>
+                <a href="<%= @organization.website %>"><%= image_tag(@organization.logo.url(:small), :class=>'logo') %></a>
+             <%else%>
+                <%= image_tag(@organization.logo.url(:small), :class=>'logo') %>
+             <%end%>
             <%end%>
             <% if @organization.twitter? || @organization.facebook? %>
             <p class="social">

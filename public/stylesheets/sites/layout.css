@@ -255,7 +255,7 @@ div#left_column div.float_left div.block p.social a {padding:0 5px 0 20px; color
 div#left_column div.float_left div.block p.social a:hover {color:#333333;}
 div#left_column div.float_left div.block p.social a.twitter {background:url('/images/sites/icons/twitter.png') no-repeat 0 0;}
 div#left_column div.float_left div.block p.social a.facebook {margin:0 0 0 4px; background:url('/images/sites/icons/facebook.png') no-repeat 0 0;}
-div#left_column div.float_left div.block img.logo {padding:0 0 10px 0;}
+div#left_column div.float_left div.block img.logo {padding:0 0 10px 0; max-width:80px; max-height:46px; width:auto; height:auto;}
 div#left_column div.float_left div.block p.website {padding:0;}
 div#left_column div.float_left div.block.wikipedia {background:url('/images/sites/regions/wikipedia.png') no-repeat right bottom #FFFFFF;}
 div#left_column div.float_left div.block.wikipedia p {line-height:17px;}
@@ -553,7 +553,7 @@ div.projects div.right div.block h3 {width:100%; font:normal 13px "PT Sans Bold"
 div.projects div.right div.block h3.margin {padding:20px 0 0 0;}
 div.projects div.right div.block div.logo {float:left; width:100%; padding:7px 0 15px;}
 div.projects div.right div.block div.logo div.logo_bkg {float:left; position:relative; width:86px; height:52px; background:url('/images/sites/projects/logo_bkg.png') no-repeat 0 0; vertical-align:top; overflow:hidden;}
-div.projects div.right div.block div.logo img {position:absolute; top:3px; left:3px; width:80px; height:46px;}
+div.projects div.right div.block div.logo img {position:absolute; top:3px; left:3px; max-width:80px; max-height:46px; width:auto; height:auto;}
 div.projects div.right div.block div.logo a {width:130px; padding:10px 0 0 5px; font:normal 13px Arial; color:#CE5D4C; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;} /* TODO: color*/
 div.projects div.right div.block div.logo a.long {width:100%; padding:0;}
 div.projects div.right div.block div.logo a:hover {text-decoration:underline;}
