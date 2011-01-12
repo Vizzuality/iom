@@ -16,6 +16,8 @@ module Iom
 
     config.autoload_paths += %W(#{Rails.root}/app/controllers/sweepers)
   end
+
+  class InvalidOffset < Exception; end;
 end
 
 require 'open-uri'

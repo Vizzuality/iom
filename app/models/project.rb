@@ -245,6 +245,7 @@ SQL
       else
         options[:per_page].to_i * (options[:page].to_i - start_in_page)
       end
+      raise Iom::InvalidOffset if offset < 0
       sql << " OFFSET #{offset}"
     end
     result = ActiveRecord::Base.connection.execute(sql).map{ |r| r }
