@@ -180,16 +180,17 @@
   </div>
 
 
-  <% unless @project.new_record? %>
   <label>GEOGRAPHIC REGION <strong>*</strong></label>
   <ul class="ubications" id="regions_list">
     <% @project.regions_hierarchized.each do |region| %>
-      <li id="geographic_region_<%= region.class.name.downcase + '_' + region.id.to_s %>">
+      <li>
         <p><%= region_breadcrumb(region) %></p>
-        <a class="close" href="<%= remove_country_region_admin_project_path(@project) %>" rel="<%= region.class.name.downcase + '_' + region.id.to_s %>"></a>
+        <input type="hidden" name="project[regions_ids][]" value="<%= region.class.name.downcase + '_' + region.id.to_s %>" />
+        <a class="close" href="javascript:void(null)"></a>
       </li>
     <% end %>
   </ul>
+  <input type="hidden" name="project[regions_ids][]" value="" />
 
   <div class="location_options region_block empty">
     <p class="msg">Add / edit the different regions of the project</p>
@@ -259,11 +260,10 @@
             </div>
           </span>
         </div>
-        <a class="add_location museo_sans shadow_green" id="add_region_to_list" href="<%= add_country_region_admin_project_path(@project) %>">add region</a>
+        <a class="add_location museo_sans shadow_green" id="add_region_to_list">add region</a>
       </div>
     </div>
   </div>
-  <% end %>
 
   <label>GEOGRAPHIC COORDINATES  <strong>*</strong></label>
   <ul class="ubications" id="project_coordinates">
