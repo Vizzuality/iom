@@ -619,9 +619,9 @@
 					return;
 				}
 				if (destY < 0) {
-					destY = '3px';
+					destY = 0;
 				} else if (destY > dragMaxY) {
-					destY = dragMaxY - 3;
+					destY = dragMaxY;
 				}
 
 				// can't just check if(animate) because false is a valid value that could be passed in...
@@ -660,6 +660,7 @@
 				
 				updateVerticalArrows(isAtTop, isAtBottom);
 				pane.css('top', destTop);
+							
 				elem.trigger('jsp-scroll-y', [-destTop, isAtTop, isAtBottom]);
 			}
 
@@ -715,6 +716,11 @@
 				if (settings.showArrows) {
 					arrowUp[isAtTop ? 'addClass' : 'removeClass']('jspDisabled');
 					arrowDown[isAtBottom ? 'addClass' : 'removeClass']('jspDisabled');
+				}
+				if (isAtTop){
+				   verticalDrag.css('top', '3px');
+				}else if (isAtBottom){
+				   verticalDrag.css('top', dragMaxY - 3);
 				}
 			}
 
