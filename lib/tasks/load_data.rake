@@ -489,7 +489,6 @@ namespace :iom do
       geo_cache = {}
 
       csv_projs.each do |row|
-        p = Project.new
         # Map organization names with existing names
         organization = case row.organization.strip
           when 'Adventist Development and Relief Agency International'
@@ -518,160 +517,190 @@ namespace :iom do
             row.organization
         end
         o = Organization.find_by_name(organization)
-        if o
-          puts "PROJECT FOR: #{o.id}"
-          p.primary_organization      = o
-          p.intervention_id           = row.ipc
-          p.name                      = row.interv_title
-          p.description               = row.interv_description
-          p.activities                = row.interv_activities
-          p.additional_information    = row.additional_information
+        unless o
+          puts "[Not found] Organization name: #{row.organization}"
+          next
+        end
+        if Project.find_by_intervention_id(row.ipc)
+          puts "[Skipping] #{row.interv_title}"
+          next
+        end
+        p = Project.new
+        p.primary_organization      = o
+        p.intervention_id           = row.ipc
+        p.name                      = row.interv_title
+        p.description               = row.interv_description
+        p.activities                = row.interv_activities
+        p.additional_information    = row.additional_information
 
-          unless row.start_date_mmddyyyy.blank?
-            start_date = row.start_date_mmddyyyy.strip
-            if start_date =~ /^(\d{2})\/(\d{2})\/(\d{2})$/
-              start_date = if $3.to_i > 10
-                "#{$1}/#{$2}/19#{$3}"
-              else
-                "#{$1}/#{$2}/20#{$3}"
+        unless row.start_date_mmddyyyy.blank?
+          start_date = row.start_date_mmddyyyy.strip
+          if start_date =~ /^(\d{2})\/(\d{2})\/(\d{2})$/
+            start_date = if $3.to_i > 10
+              "#{$1}/#{$2}/19#{$3}"
+            else
+              "#{$1}/#{$2}/20#{$3}"
+            end
+          end
+          p.start_date = Date.strptime(start_date, '%m/%d/%Y')
+        end
+
+        if row.end_date_mmddyyyy=="2/29/2010"
+          row.end_date_mmddyyyy="3/1/2010"
+        end
+
+        if row.end_date_mmddyyyy == '1/1/'
+          row.end_date_mmddyyyy = nil
+        end
+
+        unless (row.end_date_mmddyyyy.blank? or row.end_date_mmddyyyy=="Ongoing")
+          end_date = row.end_date_mmddyyyy.strip
+          if end_date =~ /^(\d{2})\/(\d{2})\/(\d{2})$/
+            end_date = "#{$1}/#{$2}/20#{$3}"
+          end
+          p.end_date = Date.strptime(end_date, '%m/%d/%Y')
+        end
+
+        p.cross_cutting_issues      = row.crosscutting_issues
+        p.implementing_organization = row.implementing_organizations
+        p.partner_organizations     = row.partner_organizations
+        p.awardee_type              = row.awardee_type_prime_awardeesubawardee
+        unless row.number_of_people_reached_target.blank?
+          p.estimated_people_reached  = row.number_of_people_reached_target.gsub(/,/,'').to_i
+        end
+        p.target                    = row.target_groups
+        p.contact_person            = row.contact_name
+        p.contact_position          = row.contact_title
+        p.contact_email             = row.contact_email
+        p.website                   = row.website
+        p.date_provided             = Date.strptime(row.date_provided_mmddyyyy, '%m/%d/%Y') unless (row.date_provided_mmddyyyy.blank?)
+        p.date_updated              = Date.strptime(row.date_updated_mmddyyyy, '%m/%d/%Y') unless (row.date_updated_mmddyyyy.blank?)
+
+        # Relations
+        #########################
+
+        # --> Sectors
+        unless row.ia_sectors.blank?
+          parsed_sectors = row.ia_sectors.split(",").map{|e|e.strip}
+          parsed_sectors.each do |sec|
+            p.sectors << Sector.find_or_create_by_name(:name => sec)
+          end
+        end
+
+        # --> Donors
+        unless row.donors.blank?
+          parsed_donors = row.donors.split(",").map{|e|e.strip}
+          parsed_donors.each do |donor_name|
+            unless donor = Donor.where("name ilike ?", donor_name).first
+              donor = Donor.new
+              donor.name = donor_name
+              donor.save!
+            end
+            donation = Donation.new
+            donation.project = p
+            donation.donor = donor
+            p.donations << donation
+          end
+        end
+
+        p.save!
+        puts "[OK] Created project #{p.name}"
+
+        # --> Countries
+        unless row.country.blank?
+          row.country.split(',').map{ |c| c.strip }.each do |country_name|
+            country_name = if country_name == 'Laos'
+              "Lao People's Democratic Republic"
+            elsif country_name == 'Guinea Bissau'
+              'Guinea-Bissau'
+            elsif country_name == 'Vietnam'
+              'Viet Nam'
+            elsif country_name == 'Burma / Myanmar'
+              'Burma'
+            elsif country_name == 'DR Congo'
+              'Congo'
+            elsif country_name == 'Tanzania'
+              'United Republic of Tanzania'
+            else
+              country_name
+            end
+            if country = Country.where("name ilike ?",country_name).select(Country.custom_fields).first
+              p.countries << country
+            else
+              puts "[Not found] Country name #{country_name} for project #{p.name}"
+            end
+          end
+        end
+
+        #Geo data
+        reg1 = nil
+        unless row._1st_administrative_level.blank?
+          parsed_adm1 = row._1st_administrative_level.split(",").map{|e|e.strip}
+          parsed_adm1.each do |region_name|
+            if region_name == 'Nation-wide'
+              puts "Project #{p.name} is Nation-wide"
+              p.countries.select("id,name").each do |country|
+                Region.where(:level => 1, :country_id => country.id).select(Region.custom_fields).each do |region|
+                  p.regions << region
+                end
               end
-            end
-            p.start_date = Date.strptime(start_date, '%m/%d/%Y')
-          end
-
-          if row.end_date_mmddyyyy=="2/29/2010"
-            row.end_date_mmddyyyy="3/1/2010"
-          end
-
-          if row.end_date_mmddyyyy == '1/1/'
-            row.end_date_mmddyyyy = nil
-          end
-
-          unless (row.end_date_mmddyyyy.blank? or row.end_date_mmddyyyy=="Ongoing")
-            end_date = row.end_date_mmddyyyy.strip
-            if end_date =~ /^(\d{2})\/(\d{2})\/(\d{2})$/
-              end_date = "#{$1}/#{$2}/20#{$3}"
-            end
-            p.end_date = Date.strptime(end_date, '%m/%d/%Y')
-          end
-
-          p.cross_cutting_issues      = row.crosscutting_issues
-          p.implementing_organization = row.implementing_organizations
-          p.partner_organizations     = row.partner_organizations
-          p.awardee_type              = row.awardee_type_prime_awardeesubawardee
-          p.estimated_people_reached  = row.number_of_people_reached_target
-          p.target                    = row.target_groups
-          p.contact_person            = row.contact_name
-          p.contact_position          = row.contact_title
-          p.contact_email             = row.contact_email
-          p.website                   = row.website
-          p.date_provided             = Date.strptime(row.date_provided_mmddyyyy, '%m/%d/%Y') unless (row.date_provided_mmddyyyy.blank?)
-          p.date_updated              = Date.strptime(row.date_updated_mmddyyyy, '%m/%d/%Y') unless (row.date_updated_mmddyyyy.blank?)
-
-          # Relations
-          #########################
-
-          # -->Sectors
-          # they come separated by commas
-          if(!row.ia_sectors.blank?)
-            parsed_sectors = row.ia_sectors.split(",").map{|e|e.strip}
-            parsed_sectors.each do |sec|
-              p.sectors << Sector.find_or_create_by_name(:name=>sec)
-            end
-          end
-
-          # -->Donor
-          if(!row.donors.blank?)
-            parsed_donors = row.donors.split(",").map{|e|e.strip}
-            parsed_donors.each do |don|
-
-              donor= Donor.where("name ilike ?",don).first
-              if(!donor)
-                donor = Donor.new
-                donor.name =don
-                donor.save!
-              end
-              donation = Donation.new
-              donation.project = p
-              donation.donor = donor
-              p.donations << donation
-            end
-          end
-
-          p.save!
-
-          # -->Country
-          unless row.country.blank?
-            row.country.split(',').map{ |c| c.strip }.each do |country_name|
-              country = Country.where("name ilike ?",country_name).select(Country.custom_fields).first
-              if(country)
-                p.countries  << country
-              else
-                puts "ALERT: COUNTRY NOT FOUND #{country_name}"
-              end
-            end
-          end
-
-          #Geo data
-          reg1=nil
-          if(!row._1st_administrative_level.blank?)
-            parsed_adm1 = row._1st_administrative_level.split(",").map{|e|e.strip}
-            parsed_adm1.each do |region_name|
-              reg1 = Region.where("name ilike ? and level=?",region_name,1).select(Region.custom_fields).first
-              if(reg1)
+            else
+              if reg1 = Region.where("name ilike ? and level=?",region_name,1).select(Region.custom_fields).first
                 p.regions  << reg1
               else
-                puts "ALERT: REGION LEVEL 1 NOT FOUND #{region_name}"
+                puts "[Not found] Region level 1 name #{region_name} for project #{p.name}"
               end
             end
           end
-          if p.regions.empty?
-            puts "[error] empty regions"
-            next
-          end
+        end
 
-          reg2=nil
-          if(!row._2nd_administrative_level.blank?)
-            parsed_adm2 = row._2nd_administrative_level.split(",").map{|e|e.strip}
-            parsed_adm2.each do |region_name|
-              reg2 = Region.where("name ilike ? and level=?",region_name,2).select(Region.custom_fields).first
-              if(reg2)
-                p.regions  << reg2
-              else
-                puts "ALERT: REGION LEVEL 2 NOT FOUND #{region_name}"
-              end
+        if p.regions.empty?
+          puts "[ERROR] Empty regions for level 1 for project #{p.name}"
+          next
+        end
 
+        reg2 = nil
+        unless row._2nd_administrative_level.blank?
+          parsed_adm2 = row._2nd_administrative_level.split(",").map{|e|e.strip}
+          parsed_adm2.each do |region_name|
+            reg2 = Region.where("name ilike ? and level=?",region_name,2).select(Region.custom_fields).first
+            if(reg2)
+              p.regions  << reg2
+            else
+              puts "[Not found] Region level 2 name #{region_name} for project #{p.name}"
             end
           end
+        end
 
-          multi_point=""
-          reg3=nil
-          if(!row._3rd_administrative_level.blank?)
-            parsed_adm3 = row._3rd_administrative_level.split(",").map{|e|e.strip}
-            locations = Array.new
-            parsed_adm3.each do |region_name|
-              reg3 = Region.where("name ilike ? and level=?",region_name,3).select(Region.custom_fields).first
-              if(reg3)
-                p.regions  << reg3
-                sql="select ST_AsText(ST_PointOnSurface(the_geom)) as point from regions where id=#{reg3.id}"
-                res = DB.execute(sql).first["point"].delete("POINT(").delete(")")
+        multi_point = ""
+        reg3 = nil
+        unless row._3rd_administrative_level.blank?
+          parsed_adm3 = row._3rd_administrative_level.split(",").map{|e|e.strip}
+          locations = Array.new
+          parsed_adm3.each do |region_name|
+            if reg3 = Region.where("name ilike ? and level=?",region_name,3).select(Region.custom_fields).first
+              p.regions  << reg3
+              sql = "select ST_AsText(ST_PointOnSurface(the_geom)) as point from regions where id=#{reg3.id}"
+              point = DB.execute(sql).first["point"]
+              unless point.blank?
+                res = point.delete("POINT(").delete(")")
                 locations << res
               else
-                puts "ALERT: REGION LEVEL 3 NOT FOUND #{region_name}"
+                puts "[Error] Region level 3 name #{region_name} has a null geometry"
               end
+            else
+              puts "[Not found] Region level 3 name #{region_name} for project #{p.name}"
             end
-
-            multi_point = "ST_MPointFromText('MULTIPOINT(#{locations.join(',')})',4326)" unless (locations.length<1)
           end
-
-          #save the Geom that we created before
-          if(!multi_point.blank?)
-            sql="UPDATE projects SET the_geom=#{multi_point} WHERE id=#{p.id}"
-            DB.execute sql
+          if locations.length > 0
+            multi_point = "ST_MPointFromText('MULTIPOINT(#{locations.join(',')})',4326)"
           end
+        end
 
-        else
-          puts "NOT FOUND #{row.organization}"
+        #save the Geom that we created before
+        unless multi_point.blank?
+          sql = "UPDATE projects SET the_geom=#{multi_point} WHERE id=#{p.id}"
+          DB.execute sql
         end
       end
 
