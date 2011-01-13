@@ -27,13 +27,13 @@ ActiveRecord::Schema.define(:version => 20110111113043) do
   create_table "countries", :force => true do |t|
     t.string        "name"
     t.string        "code"
+    t.float         "center_lat"
+    t.float         "center_lon"
     t.multi_polygon "the_geom",         :limit => nil, :srid => 4326
     t.string        "wiki_url"
     t.text          "wiki_description"
     t.string        "iso2_code"
     t.string        "iso3_code"
-    t.float         "center_lat"
-    t.float         "center_lon"
     t.text          "the_geom_geojson"
   end
 
@@ -293,16 +293,16 @@ ActiveRecord::Schema.define(:version => 20110111113043) do
     t.integer  "level"
     t.integer  "country_id"
     t.integer  "parent_region_id"
+    t.float    "center_lat"
+    t.float    "center_lon"
+    t.string   "path"
     t.geometry "the_geom",         :limit => nil, :srid => 4326
     t.integer  "gadm_id"
     t.string   "wiki_url"
     t.text     "wiki_description"
     t.string   "code"
-    t.float    "center_lat"
-    t.float    "center_lon"
     t.text     "the_geom_geojson"
     t.text     "ia_name"
-    t.string   "path"
   end
 
   add_index "regions", ["country_id"], :name => "index_regions_on_country_id"

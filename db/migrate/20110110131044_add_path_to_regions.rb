@@ -1,6 +1,5 @@
 class AddPathToRegions < ActiveRecord::Migration
   def self.up
-    add_column :regions, :path, :string
     execute "update regions as ur set path=(
     SELECT (((((( r3.country_id) || '/'::text) || r2.parent_region_id) || '/'::text) || r2.id) || '/'::text) || r3.id AS url
     FROM regions r3
@@ -12,6 +11,5 @@ class AddPathToRegions < ActiveRecord::Migration
   end
 
   def self.down
-    remove_column :regions, :path
   end
 end

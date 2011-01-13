@@ -5,7 +5,10 @@ class CreateRegions < ActiveRecord::Migration
       t.integer     :level
       t.integer     :country_id
       t.integer     :parent_region_id
-      t.geometry    :the_geom, :srid => 4326     
+      t.float       :center_lat
+      t.float       :center_lon
+      t.string      :path
+      t.geometry    :the_geom, :srid => 4326
     end
     add_index :regions, :country_id
     add_index :regions, :level
