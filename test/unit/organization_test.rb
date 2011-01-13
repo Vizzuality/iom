@@ -12,7 +12,7 @@ class OrganizationTest < ActiveSupport::TestCase
     organization = create_organization
     site = create_site :project_context_organization_id => organization.id
 
-    assert_nil organization.attributes_for_site(site)
+    assert_equal({}, organization.attributes_for_site(site))
 
     atts = {:name => "Organization name fro site #{site.id}"}
     organization.attributes_for_site = {:organization_values => atts, :site_id => site.id}
@@ -193,10 +193,31 @@ class OrganizationTest < ActiveSupport::TestCase
     assert_equal 1, organization1.projects_count(site1)
   end
 
-  test "saving an organization with a big budget"do
-    organization = create_organization :budget => 99999999999999999
-    assert organization.valid?
-    assert_equal 99999999999999999, organization.budget
+  test "organization budget is calculated" do
+    organization = create_organization
+    organization.private_funding = 10
+    organization.usg_funding = 20
+    organization.other_funding = 5
+    organization.save
+    organization.reload
+    assert_equal 35, organization.budget
+  end
+
+  test "remove fundings" do
+    organization = create_organization
+    organization.private_funding = 10
+    organization.usg_funding = 20
+    organization.other_funding = 5
+    organization.save
+    organization.reload
+    organization.private_funding = nil
+    organization.usg_funding = ""
+    organization.other_funding = 0
+    organization.save
+    assert_equal 0, organization.budget
+    assert_equal 0, organization.private_funding
+    assert_equal 0, organization.usg_funding
+    assert_equal 0, organization.other_funding
   end
 
 end

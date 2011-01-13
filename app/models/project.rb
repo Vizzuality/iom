@@ -77,11 +77,13 @@ class Project < ActiveRecord::Base
   end
 
   def budget=(ammount)
-    return if ammount.blank?
-
-    case ammount
-      when String then write_attribute(:budget, ammount.delete(',').to_f)
-      when Float  then write_attribute(:budget, ammount)
+    if ammount.blank?
+      write_attribute(:budget, 0)
+    else
+      case ammount
+        when String then write_attribute(:budget, ammount.delete(',').to_f)
+        else             write_attribute(:budget, ammount)
+      end
     end
   end
 

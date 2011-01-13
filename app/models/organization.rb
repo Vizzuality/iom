@@ -189,29 +189,43 @@ SQL
   end
 
   def private_funding=(ammount)
-    return if ammount.blank?
-
-    case ammount
-      when String then write_attribute(:private_funding, ammount.delete(',').to_f)
-      when Float  then write_attribute(:private_funding, ammount)
+    if ammount.blank?
+      write_attribute(:private_funding, 0.0)
+    else
+      case ammount
+        when String then write_attribute(:private_funding, ammount.delete(',').to_f)
+        else             write_attribute(:private_funding, ammount)
+      end
     end
+    set_budget
   end
 
   def usg_funding=(ammount)
-    return if ammount.blank?
-
-    case ammount
-      when String then write_attribute(:usg_funding, ammount.delete(',').to_f)
-      when Float  then write_attribute(:usg_funding, ammount)
+    if ammount.blank?
+      write_attribute(:usg_funding, 0.0)
+    else
+      case ammount
+        when String then write_attribute(:usg_funding, ammount.delete(',').to_f)
+        else             write_attribute(:usg_funding, ammount)
+      end
     end
+    set_budget
   end
 
   def other_funding=(ammount)
-    return if ammount.blank?
-
-    case ammount
-      when String then write_attribute(:other_funding, ammount.delete(',').to_f)
-      when Float  then write_attribute(:other_funding, ammount)
+    if ammount.blank?
+      write_attribute(:other_funding, 0.0)
+    else
+      case ammount
+        when String then write_attribute(:other_funding, ammount.delete(',').to_f)
+        else             write_attribute(:other_funding, ammount)
+      end
     end
+    set_budget
   end
+
+  def set_budget
+    self.budget = (self.usg_funding || 0) + (self.other_funding || 0) + (self.private_funding || 0)
+  end
+
 end
