@@ -3,6 +3,11 @@ class ProjectsController < ApplicationController
   layout 'site_layout'
 
   def show
+    id = if params[:id].sanitize_sql! =~ /^\d+$/
+      params[:id].sanitize_sql!
+    else
+      raise ActiveRecord::RecordNotFound
+    end
     sql = "select * from data_denormalization where site_id=#{@site.id} and
                                                     is_active=true and
                                                     project_id=#{params[:id].sanitize_sql!}"
