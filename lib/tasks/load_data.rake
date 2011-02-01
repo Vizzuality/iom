@@ -9,7 +9,7 @@ namespace :db do
   task :reset_2 => %w(db:seed iom:data:load_adm_levels iom:data:load_orgs iom:data:load_projects)
 
   desc 'reset 3'
-  task :reset_3 => %w(db:seed iom:data:load_adm_levels iom:data:load_orgs iom:data:load_food_security)
+  task :reset_3 => %w(db:seed iom:data:load_adm_levels iom:data:load_food_security)
 end
 
 namespace :iom do
@@ -38,81 +38,72 @@ namespace :iom do
 
     desc "load all available regions not imported already"
     task :load_adm_levels => :environment do
-
-      csv = CsvMapper.import("#{Rails.root}/db/data/gadm_data/gadm_level1.csv") do
+      puts "Loading adm levels"
+      puts " Level 1:"
+      csv = CsvMapper.import("#{Rails.root}/db/data/gadm.csv") do
         read_attributes_from_file
       end
       csv.each do |row|
-        if (Region.find_by_gadm_id_and_level(row.gadm1_id,1).blank?)
+        next if row.iso == 'HTI'
+        unless country = Country.find_by_iso3_code(row.iso, :select => Country.custom_fields)
+          puts " [KO] Country not found #{row.iso}"
+          next
+        end
+        unless region = Region.find_by_country_id_and_level_and_name(country.id, 1, row._1st_administrative_level_name)
           r = Region.new
-          r.name = row.name
+          r.name = row._1st_administrative_level_name
           r.level = 1
-          r.country = Country.find_by_code(row.iso)
+          r.country_id = country.id
           r.center_lat = row.lat
           r.center_lon = row.lon
-          r.gadm_id = row.gadm1_id
-          r.ia_name = row.ia_name
           r.save!
-          puts "created: 1 #{row.name}"
+          puts " [OK] created: #{r.name}"
         else
-          puts "already existing: 1 #{row.name}"
+          puts " [KO] existing region name #{row._1st_administrative_level_name}"
         end
       end
 
-      csv = CsvMapper.import("#{Rails.root}/db/data/gadm_data/gadm_level2.csv") do
-        read_attributes_from_file
-      end
-      csv.each do |row|
-        if (Region.find_by_gadm_id_and_level(row.gadm2_id,2).blank?)
-          r = Region.new
-          r.name = row.name
-          r.level = 2
-          r.country = Country.find_by_code(row.iso)
-          r.center_lat = row.lat
-          r.center_lon = row.lon
-          r.gadm_id = row.gadm2_id
-          r.parent_region_id = Region.find_by_gadm_id_and_level(row.gadm1_id,1).id
-          r.ia_name = row.ia_name
-          r.save!
-          puts "created: 2 #{row.name}"
-        else
-          puts "already existing: 2 #{row.name}"
-        end
-      end
-
-      csv = CsvMapper.import("#{Rails.root}/db/data/gadm_data/gadm_level3.csv") do
-        read_attributes_from_file
-      end
-      csv.each do |row|
-        if (Region.find_by_gadm_id_and_level(row.gadm3_id,3).blank?)
-          r = Region.new
-          r.name = row.name
-          r.level = 3
-          r.country = Country.find_by_code(row.iso)
-          r.center_lat = row.lat
-          r.center_lon = row.lon
-          r.gadm_id = row.gadm3_id
-          r.ia_name = row.ia_name
-          r.parent_region_id = Region.find_by_gadm_id_and_level(row.gadm2_id,2).id
-          r.save!
-          puts "created: 3 #{row.name}"
-        else
-          puts "already existing: 3 #{row.name}"
-        end
-      end
-
-      #DB = ActiveRecord::Base.connection
-      #Temporary matching for Google Map Charts
-      # DB.execute "UPDATE regions set code='HT-GR' WHERE name like 'Grand%' and level=1"
-      # DB.execute "UPDATE regions set code='HT-AR' WHERE name like '%Artibonite' and level=1"
-      # DB.execute "UPDATE regions set code='HT-NI' WHERE name='Nippes' and level=1"
-      # DB.execute "UPDATE regions set code='HT-ND' WHERE name='Nord' and level=1"
-      # DB.execute "UPDATE regions set code='HT-NE' WHERE name='Nord-Est' and level=1"
-      # DB.execute "UPDATE regions set code='HT-NO' WHERE name='Nord-Ouest' and level=1"
-      # DB.execute "UPDATE regions set code='HT-OU' WHERE name='Ouest' and level=1"
-      # DB.execute "UPDATE regions set code='HT-SD' WHERE name='Sud' and level=1"
-      # DB.execute "UPDATE regions set code='HT-SE' WHERE name='Sud-Est' and level=1"
-      # DB.execute "UPDATE regions set code='HT-CE' WHERE name='Centre' and level=1"
+      # csv = CsvMapper.import("#{Rails.root}/db/data/gadm_data/gadm_level2.csv") do
+      #   read_attributes_from_file
+      # end
+      # csv.each do |row|
+      #   if (Region.find_by_gadm_id_and_level(row.gadm2_id,2).blank?)
+      #     r = Region.new
+      #     r.name = row.name
+      #     r.level = 2
+      #     r.country = Country.find_by_code(row.iso)
+      #     r.center_lat = row.lat
+      #     r.center_lon = row.lon
+      #     r.gadm_id = row.gadm2_id
+      #     r.parent_region_id = Region.find_by_gadm_id_and_level(row.gadm1_id,1).id
+      #     r.ia_name = row.ia_name
+      #     r.save!
+      #     puts "created: 2 #{row.name}"
+      #   else
+      #     puts "already existing: 2 #{row.name}"
+      #   end
+      # end
+      #
+      # csv = CsvMapper.import("#{Rails.root}/db/data/gadm_data/gadm_level3.csv") do
+      #   read_attributes_from_file
+      # end
+      # csv.each do |row|
+      #   if (Region.find_by_gadm_id_and_level(row.gadm3_id,3).blank?)
+      #     r = Region.new
+      #     r.name = row.name
+      #     r.level = 3
+      #     r.country = Country.find_by_code(row.iso)
+      #     r.center_lat = row.lat
+      #     r.center_lon = row.lon
+      #     r.gadm_id = row.gadm3_id
+      #     r.ia_name = row.ia_name
+      #     r.parent_region_id = Region.find_by_gadm_id_and_level(row.gadm2_id,2).id
+      #     r.save!
+      #     puts "created: 3 #{row.name}"
+      #   else
+      #     puts "already existing: 3 #{row.name}"
+      #   end
+      # end
     end
 
     desc 'Load organizations data'
