@@ -94,7 +94,14 @@
 
   <!-- RIGHT PART -->
   <div class="right">
-    <h3><%= pluralize(@site.total_projects, 'active project', 'active projects') %> in <%= pluralize(@site.total_regions, @site.word_for_regions.singularize, @site.word_for_regions) %> <a id="see_all" href="#">View past projects</a>
+    <h3>
+      <%= pluralize(@site.total_projects, 'active project', 'active projects') %> in
+      <% if @site.navigate_by_country? %>
+        <%= pluralize(@site.total_countries, @site.word_for_regions.singularize, @site.word_for_regions) %>
+      <% else %>
+        <%= pluralize(@site.total_regions, @site.word_for_regions.singularize, @site.word_for_regions) %>
+      <% end %>
+      <a id="see_all" href="#">View past projects</a>
       <div class="tooltip">
         <span class="body_tooltip">
           <label>Coming soon!</label>

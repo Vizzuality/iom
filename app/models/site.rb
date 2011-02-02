@@ -339,6 +339,14 @@ class Site < ActiveRecord::Base
     ActiveRecord::Base.connection.execute(sql).first['count'].to_i
   end
 
+  def total_countries
+    sql="select count(distinct(countries.id)) as count from countries
+      inner join countries_projects as pr on pr.country_id=countries.id
+      inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{self.id}
+      inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now());"
+    ActiveRecord::Base.connection.execute(sql).first['count'].to_i
+  end
+
   # Array of arrays
   # [[country, count], [country, count]]
   def projects_countries
