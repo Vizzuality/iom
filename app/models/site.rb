@@ -299,9 +299,7 @@ class Site < ActiveRecord::Base
     inner join clusters_projects as cp on c.id=cp.cluster_id
     inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=#{self.id}
     inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
-    group by c.id,c.name
-    order by count desc"
-
+    group by c.id,c.name order by count desc limit 20"
     Cluster.find_by_sql(sql).map do |c|
       [c,c.count.to_i]
     end
@@ -314,7 +312,7 @@ class Site < ActiveRecord::Base
     inner join projects_sectors as cp on s.id=cp.sector_id
     inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=#{self.id}
     inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
-    group by s.id,s.name order by count DESC"
+    group by s.id,s.name order by count DESC limit 20"
     Sector.find_by_sql(sql).map do |s|
       [s,s.count.to_i]
     end
@@ -401,12 +399,16 @@ class Site < ActiveRecord::Base
 
   def clusters
     Cluster.find_by_sql("select c.* from clusters as c where id in (
-        select cp.cluster_id from (clusters_projects as cp inner join projects as p on cp.project_id=p.id) inner join projects_sites as ps on p.id=ps.project_id and site_id=#{self.id}) order by c.name")
+        select cp.cluster_id from (clusters_projects as cp inner join projects as p on cp.project_id=p.id)
+        inner join projects_sites as ps on p.id=ps.project_id and site_id=#{self.id})
+        order by c.name")
   end
 
   def sectors
     Sector.find_by_sql("select s.* from sectors as s where id in (
-        select pse.project_id from (projects_sectors as pse inner join projects as p on pse.project_id=p.id) inner join projects_sites as ps on p.id=ps.project_id and site_id=#{self.id}) order by s.name")
+        select pse.project_id from (projects_sectors as pse inner join projects as p on pse.project_id=p.id)
+        inner join projects_sites as ps on p.id=ps.project_id and site_id=#{self.id})
+        order by s.name")
   end
 
   def clusters_or_sectors
