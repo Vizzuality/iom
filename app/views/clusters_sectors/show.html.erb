@@ -49,7 +49,7 @@
             <ul id="donors_list">
               <% index = 1 %>
               <% @data.donors(@site).each do |donor| %>
-                <li class="<%= (index>10)? "out" : "" %>"><%= link_to(donor.name.html_sfae, donor_path(donor)) %></li>
+                <li class="<%= (index>10)? "out" : "" %>"><%= link_to(donor.name.html_safe, donor_path(donor)) %></li>
                 <% index = index + 1 %>
               <% end %>
             </ul>
