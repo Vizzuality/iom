@@ -27,7 +27,7 @@ class GeoregionController < ApplicationController
                                              :start_in_page => params[:start_in_page]
 
       # TODO
-      @area_parent = "America"
+      @area_parent = ""
 
       sql="select *
         from(
