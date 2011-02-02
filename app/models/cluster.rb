@@ -14,6 +14,7 @@ class Cluster < ActiveRecord::Base
     sql="select distinct d.* from donors as d
     inner join donations as don on d.id=donor_id
     inner join clusters_projects as cp on don.project_id=cp.project_id and cp.cluster_id=#{self.id}
+    inner join projects as p on cp.project_id=p.id and (p.end_date is null OR p.end_date > now())
     inner join projects_sites as ps on ps.project_id=don.project_id and ps.site_id=#{site.id}"
     Donor.find_by_sql(sql)
   end

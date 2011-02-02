@@ -14,6 +14,7 @@ class Sector < ActiveRecord::Base
     sql="select distinct d.* from donors as d
     inner join donations as don on d.id=donor_id
     inner join projects_sectors as ps on don.project_id=ps.project_id and ps.sector_id=#{self.id}
+    inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
     inner join projects_sites as psi on psi.project_id=ps.project_id and psi.site_id=#{site.id}"
     Donor.find_by_sql(sql)
   end
