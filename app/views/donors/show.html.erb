@@ -5,7 +5,7 @@
       <div class="float_left">
         <div class="outer_head">
           <div class="head">
-            <h1><%= @donor.name %></h1>
+            <h1><%= @donor.name.html_safe %></h1>
             <p>Funding <%= pluralize(@donor.donated_projects.count, 'project', 'projects') %></p>
           </div>
         </div>
@@ -55,7 +55,7 @@
           </ul>
           <% unless @donor.projects_sectors_or_clusters(@site).size < 4%>
               <p class="other">and <%= pluralize(@donor.projects_sectors_or_clusters(@site).size - 3,"more #{@site.word_for_cluster_sector.singularize}", "more #{@site.word_for_cluster_sector.pluralize}") %></p>
-          <% end %>                            
+          <% end %>
         </div>
 
         <!-- PROJECTS BY AREA -->

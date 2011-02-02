@@ -61,10 +61,10 @@
         <div id="secondary_map">
           <img src="http://maps.google.com/maps/api/staticmap?size=302x189&maptype=roadmap&style=feature:all|element:labels|visibility:off&style=feature:road|element:all|visibility:off&style=feature:administrative.province|element:all|visibility:off&style=feature:water|element:all|hue:0x00c3ff&sensor=false&center=<%=@area.center_lat%>,<%=@area.center_lon%>&zoom=3&markers=icon:http://www.ngoaidmap.org/images/themes/1/marker_1.png|18.43906835,-72.58736767"/>
           </div>
-        <% if @area.projects_clusters_sectors(@site).size > 0 %>          
+        <% if @area.projects_clusters_sectors(@site).size > 0 %>
         <div class="block statistics">
           <h3>PROJECT <%= @site.word_for_cluster_sector.upcase %></h3>
-          
+
             <ul class="statistics_list">
               <% @area.projects_clusters_sectors(@site)[0..3].each do |category,count| %>
                 <li>
@@ -80,7 +80,7 @@
             </ul>
             <% unless @area.projects_clusters_sectors(@site).size < 4%>
                 <p class="other">and <%= pluralize(@area.projects_clusters_sectors(@site).size - 3,"more #{@site.word_for_cluster_sector.singularize}", "more #{@site.word_for_cluster_sector.pluralize}") %></p>
-            <% end %>        
+            <% end %>
         </div>
         <% end %>
         <% donors = @area.donors(@site, 11) %>
@@ -89,7 +89,7 @@
           <% unless donors.empty? %>
             <ul>
               <% donors[0...10].each do |donor| %>
-              <li><%= link_to(donor.name, donor_path(donor)) %></li>
+              <li><%= link_to(donor.name.html_safe, donor_path(donor)) %></li>
               <% end %>
             </ul>
             <% if @area.donors_count(@site) > 10 %>

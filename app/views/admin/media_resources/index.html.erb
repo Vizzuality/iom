@@ -4,7 +4,7 @@
     <div class="top"></div>
     <div class="med">
       <div class="left">
-        <h2 class="museo_sans"><%= @element.name %></h2>
+        <h2 class="museo_sans"><%= @element.name.html_safe %></h2>
 
         <% unless @project.nil? %>
         <p class="by">by <%= link_to(@project.primary_organization.name, edit_admin_organization_path(@project.primary_organization)) %> /

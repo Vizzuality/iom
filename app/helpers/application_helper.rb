@@ -74,7 +74,7 @@ HTML
       result << @data.name
     end
     if @donor
-      result << @donor.name
+      result << @donor.name.html_safe
     end
     if @project
       result << @project.name

@@ -13,7 +13,7 @@ class Admin::DonorsController < ApplicationController
     respond_to do |format|
       format.html
       format.json do
-        render :json => @donors.map{ |donor| {:name => donor.name, :id => donor.id} }.to_json
+        render :json => @donors.map{ |donor| {:name => donor.name.html_safe, :id => donor.id} }.to_json
       end
     end
   end

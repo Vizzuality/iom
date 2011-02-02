@@ -2,7 +2,7 @@
 
   <div class="field">
     <label>NAME   <strong>*</strong></label>
-    <%= f.text_field :name, :class=>"long #{'error' if !@donor.errors[:name].empty? && action_name != 'new'}" %>
+    <%= f.text_field :name, :class=>"long #{'error' if !@donor.errors[:name].empty? && action_name != 'new'}", :value => @donor.name.html_safe %>
     <%= errors_for @donor, :name %>
   </div>
 
