@@ -577,8 +577,8 @@ namespace :iom do
         #########################
 
         # --> Sectors
-        unless row.sectors.blank?
-          parsed_sectors = row.sectors.split(",").map{|e|e.strip}
+        unless row.ia_sectors.blank?
+          parsed_sectors = row.ia_sectors.split(",").map{|e|e.strip}
           parsed_sectors.each do |sec|
             p.sectors << Sector.find_or_create_by_name(:name => sec)
           end
