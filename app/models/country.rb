@@ -3,16 +3,16 @@
 # Table name: countries
 #
 #  id               :integer         not null, primary key
-#  name             :string(255)     
-#  code             :string(255)     
-#  the_geom         :string          
-#  wiki_url         :string(255)     
-#  wiki_description :text            
-#  iso2_code        :string(255)     
-#  iso3_code        :string(255)     
-#  center_lat       :float           
-#  center_lon       :float           
-#  the_geom_geojson :text            
+#  name             :string(255)
+#  code             :string(255)
+#  the_geom         :string
+#  wiki_url         :string(255)
+#  wiki_description :text
+#  iso2_code        :string(255)
+#  iso3_code        :string(255)
+#  center_lat       :float
+#  center_lon       :float
+#  the_geom_geojson :text
 #
 
 class Country < ActiveRecord::Base
@@ -78,6 +78,7 @@ class Country < ActiveRecord::Base
   def donors(site, limit = 10)
     sql="select donors.* from donors
     inner join donations as d on donors.id=d.donor_id
+    inner join projects as p on d.project_id = p.id and (p.end_date is null OR p.end_date > now())
     inner join projects_sites as ps on d.project_id=ps.project_id and ps.site_id=#{site.id}
     inner join countries_projects as cp on ps.project_id=cp.project_id and cp.country_id=#{self.id}
     LIMIT #{limit}"
