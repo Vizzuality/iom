@@ -23,13 +23,13 @@
         <% unless @donors.empty? %>
           <h2><%= pluralize(@donors.total_entries, 'donor', 'donors') %> supporting projects
             <% if params[:q] %>
-            on <a class="remove" href="/admin/donors"><%= params[:q] %></a>
+            on <a class="remove" href="<%= admin_donors_path %>"><%= params[:q] %></a>
             <% end %>
           </h2>
           <ul>
             <% @donors.each do |donor| %>
               <li>
-                <h3><%= link_to( truncate(donor.name,:length=>40), edit_admin_donor_path(donor)) %></h3>
+                <h3><%= link_to(truncate(donor.name,:length=>40).html_safe, edit_admin_donor_path(donor)) %></h3>
                 <p class="red"><a href="<%= projects_admin_donor_path(donor) %>"><%= pluralize(donor.donations.count, 'donation', 'donations') %></a></p>
                 <% if (donor.donations.count > 0) %>
                     <p>$<%= number_with_delimiter(donor.donations_amount) %></p>
@@ -44,7 +44,7 @@
           <% if Donor.count>1 %>
             <div class="no_results">
               <h2>There are not donors for your search</h2>
-              <p>Try to search with different terms or simply <a href="/admin/donors">browse all donors</a>.</p>
+              <p>Try to search with different terms or simply <a href="<%= admin_donors_path %>">browse all donors</a>.</p>
             </div>
           <% else %>
             <div class="no_results">

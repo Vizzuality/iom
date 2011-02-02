@@ -3,7 +3,7 @@
     <div class="top"></div>
     <div class="med">
       <div class="left">
-        <h2 class="museo_sans"><%= @element.name %></h2>
+        <h2 class="museo_sans"><%= @element.name.html_safe %></h2>
         <% unless @project.nil?  %>
         <p class="by">by <%= link_to(@project.primary_organization.name, edit_admin_organization_path(@project.primary_organization)) %> /
           <%= @project.countries.first.name %>
@@ -38,7 +38,7 @@
                       <% Site.all.each do |site| %>
                         <input type="checkbox" name="resource[sites_ids][]" id="site_<%= site.id %>" value="<%= site.id %>" <%= 'checked="checked"' if resource.sites_ids.include?(site.id.to_s) %> /><label class="site" for="site_<%= site.id %>"><%= site.name %></label>
                       <% end %>
-                    <%= f.submit 'Update', :class=>'update' %>                      
+                    <%= f.submit 'Update', :class=>'update' %>
                     </div>
                   <% end %>
                 <% end %>

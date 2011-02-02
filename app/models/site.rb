@@ -334,11 +334,10 @@ class Site < ActiveRecord::Base
   end
 
   def total_regions
-    sql="select count(pr.region_id) as count from projects_regions as pr
-      inner join regions on regions.id=pr.region_id and regions.level=#{self.level_for_region}
+    sql="select count(distinct(regions.id)) as count from regions
+      inner join projects_regions as pr on pr.region_id=regions.id and regions.level=#{self.level_for_region}
       inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{self.id}
-      inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
-      group by pr.region_id"
+      inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now());"
     ActiveRecord::Base.connection.execute(sql).first['count'].to_i
   end
 

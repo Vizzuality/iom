@@ -3,7 +3,7 @@
     <div class="top"></div>
     <div class="med">
       <div class="left">
-        <h2 class="museo_sans"><%= @donor.name %></h2>
+        <h2 class="museo_sans"><%= @donor.name.html_safe %></h2>
 
         <p><%= pluralize(@donor.donated_projects.count, ' funded project', 'funded projects') %></p>
         <% unless @donor.donated_projects.empty? %>

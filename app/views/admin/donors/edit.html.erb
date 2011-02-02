@@ -3,7 +3,7 @@
       <div class="top"></div>
       <div class="med">
         <div class="left">
-          <h2 class="museo_sans"><%= @donor.name %></h2>
+          <h2 class="museo_sans"><%= @donor.name.html_safe %></h2>
           <%= render :partial => 'form' %>
         </div>
         <div class="right menu">
@@ -13,5 +13,5 @@
       <div class="bottom"></div>
     </div>
   </div>
-  
+
   <script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>
