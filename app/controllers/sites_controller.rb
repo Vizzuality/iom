@@ -64,7 +64,7 @@ class SitesController < ApplicationController
         end
         @chld = areas.join("|")
         @chd  = "t:"+data.join(",")
-        render request.request_uri.match('home2') ? :site_home2 : :site_home
+        render request.fullpath.match('home2') ? :site_home2 : :site_home
       end
       format.js do
         render :update do |page|
