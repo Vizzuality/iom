@@ -1,31 +1,30 @@
-
-    <% unless @projects.empty? %>
-      <ul class="projects">
-        <% @projects.each do |project| %>
-        <li <%= cycle('class=even', 'class=odd') %>>
-          <h4><a href="<%= project_path(project['project_id']) %>"><%= truncate(project['project_name'], :length=>60) %></a></h4>
-          <p class="author"><%= subtitle(project, @site) %></p>
-          <p class="info"><%= anglo(raw(truncate(project['project_description'], :length => 175, :omission => "... <a href=\"#{project_path(project['project_id'])}\" class=\"learn_more\">Learn more</a>"))) %>
-          </p>
-        </li>
-        <% end %>
-      </ul>
+<% unless @projects.empty? %>
+  <ul class="projects">
+    <% @projects.each do |project| %>
+    <li <%= cycle('class=even', 'class=odd') %>>
+      <h4><a href="<%= project_path(project['project_id']) %>"><%= truncate(project['project_name'], :length=>60) %></a></h4>
+      <p class="author"><%= subtitle(project, @site) %></p>
+      <p class="info"><%= anglo(raw(truncate(project['project_description'], :length => 175, :omission => "... <a href=\"#{project_path(project['project_id'])}\" class=\"learn_more\">Learn more</a>"))) %>
+      </p>
+    </li>
     <% end %>
+  </ul>
+<% end %>
 
-    <div class="view_more" id="projects_view_more">
-      <% if @projects.total_pages > 1 && @projects.current_page < @projects.total_pages %>
-        <% if @area %>
-          <%= link_to('More projects', location_path(pagination_params), :id =>'view_more', :class => 'ajax') %>
+<div class="view_more" id="projects_view_more">
+  <% if @projects.total_pages > 1 && @projects.current_page < @projects.total_pages %>
+    <% if @area %>
+      <%= link_to('More projects', location_path(pagination_params), :id =>'view_more', :class => 'ajax') %>
+    <% else %>
+      <% if @data %>
+        <% if @data.is_a?(Cluster) %>
+          <%= link_to('More projects', cluster_path(pagination_params), :id =>'view_more', :class => 'ajax') %>
         <% else %>
-          <% if @data %>
-            <% if @data.is_a?(Cluster) %>
-              <%= link_to('More projects', cluster_path(pagination_params), :id =>'view_more', :class => 'ajax') %>
-            <% else %>
-              <%= link_to('More projects', sector_path(pagination_params), :id =>'view_more', :class => 'ajax') %>
-            <% end %>
-          <% else %>
-            <%= link_to('More projects', pagination_params, :id =>'view_more', :class => 'ajax') %>
-          <% end %>
+          <%= link_to('More projects', sector_path(pagination_params), :id =>'view_more', :class => 'ajax') %>
         <% end %>
+      <% else %>
+        <%= link_to('More projects', pagination_params, :id =>'view_more', :class => 'ajax') %>
       <% end %>
-    </div>
+    <% end %>
+  <% end %>
+</div>
