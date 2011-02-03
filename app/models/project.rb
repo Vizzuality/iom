@@ -157,36 +157,44 @@ class Project < ActiveRecord::Base
     else
       ActiveRecord::Base.connection.execute("select * from data_denormalization where project_id = #{self.id} AND site_id = #{site_id}").first
     end
-    return if raw_result.nil?
+    return [] if raw_result.nil?
     columns = []
     columns << raw_result['organization_name']
     columns << raw_result['project_name']
     columns << raw_result['project_description']
     columns << self.activities
     columns << self.additional_information
-    columns << self.start_date.nil? ? "" : self.start_date.strftime("%Y-%m-%d")
-    columns << self.end_date.nil? ? "" : self.end_date.strftime("%Y-%m-%d")
+    columns << if self.start_date.nil?
+      ""
+    else
+      self.start_date.strftime("%Y-%m-%d")
+    end
+    columns << if self.end_date.nil?
+      ""
+    else
+      self.end_date.strftime("%Y-%m-%d")
+    end
     columns << self.donors.map{ |donor| donor.name }.join(',')
     columns << self.budget
     columns << self.implementing_organization
     columns << self.partner_organizations
-    if raw_result['clusters']
-      columns << raw_result['clusters'].text2array.join(',')
+    columns << if raw_result['clusters']
+      raw_result['clusters'].text2array.join(',')
     else
-      columns << ""
+      ""
     end
-    if raw_result['sectors']
-      columns << raw_result['sectors'].text2array.join(',')
+    columns << if raw_result['sectors']
+      raw_result['sectors'].text2array.join(',')
     else
-      columns << ""
+      ""
     end
     columns << self.cross_cutting_issues
     columns << self.estimated_people_reached
     columns << self.target
-    if raw_result['countries']
-      columns << raw_result['countries'].text2array.join(',')
+    columns << if raw_result['countries']
+      raw_result['countries'].text2array.join(',')
     else
-      columns << ""
+      ""
     end
     columns << regions.where(:level => 1).select(Region.custom_fields).map{ |r| r.name }.join(',')
     columns << regions.where(:level => 2).select(Region.custom_fields).map{ |r| r.name }.join(',')
@@ -195,8 +203,16 @@ class Project < ActiveRecord::Base
     columns << self.contact_position
     columns << self.contact_email
     columns << self.website
-    columns << self.date_provided.nil? ? "" : self.date_provided.strftime("%Y-%m-%d")
-    columns << self.date_updated.nil? ? "" : self.date_updated.strftime("%Y-%m-%d")
+    columns << if self.date_provided.nil?
+      ""
+    else
+      self.date_provided.strftime("%Y-%m-%d")
+    end
+    columns << if self.date_updated.nil?
+      ""
+    else
+      self.date_updated.strftime("%Y-%m-%d")
+    end
     columns
   end
 
