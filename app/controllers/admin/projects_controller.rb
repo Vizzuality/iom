@@ -56,9 +56,14 @@ class Admin::ProjectsController < ApplicationController
       end
       format.csv do
         if projects.present?
-          send_data projects.serialize_to_csv,
+          filename = if @organization
+            "#{@organization.name}_projects.csv"
+          else
+            "projects.csv"
+          end
+          send_data projects.serialize_to_csv(:headers => Project.csv_attributes),
             :type => 'application/vnd.ms-excel; text/csv; charset=iso-8859-1; header=present',
-            :disposition => "attachment; filename=#{@organization.name}_projects.csv"
+            :disposition => "attachment; filename=#{filename}"
         end
       end
     end
