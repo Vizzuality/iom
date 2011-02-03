@@ -119,15 +119,92 @@ class Project < ActiveRecord::Base
     the_geom.as_kml if the_geom.present?
   end
 
-  def to_csv(site_id)
-    sql = <<-SQL
-      SELECT *
-      FROM v_projects_denormalized
-      WHERE id = #{self.id}
-    SQL
+  # execute "CREATE TABLE data_denormalization
+  # (
+  #   project_id integer,
+  #   project_name character varying(2000),
+  #   project_description text,
+  #   organization_id integer,
+  #   organization_name character varying(2000),
+  #   end_date date,
+  #   regions text,
+  #   regions_ids integer[],
+  #   countries text,
+  #   countries_ids integer[],
+  #   sectors text,
+  #   sector_ids integer[],
+  #   clusters text,
+  #   cluster_ids integer[],
+  #   donors_ids integer[],
+  #   is_active boolean,
+  #   site_id integer,
+  #   created_at timestamp without time zone
+  # ) WITH (OIDS=FALSE)"
 
-    result = ActiveRecord::Base.connection.execute(sql)
-    result.serialize_to_csv
+
+  def self.csv_attributes
+    %W{ Organization Project\ Title Project\ Description Project\ Activities
+        Additional\ Information Estimated\ Start\ Date Estimated\ End\ Date
+        Donor Budget Implementing\ Organization(s) Partner\ Organization(s)
+        Cluster(s) Sector(s) Cross\ Cutting\ Issues Number\ of\ People\ Reached\ (target) Target\ Groups
+        Country 1st\ Admin\ Level 2nd\ Admin\ Level 3rd\ Admin\ Level Contact\ Name Contact\ Title
+        Contact\ Email Website Date\ Provided Date\ Updated }
+  end
+
+  def csv_columns(site_id = nil)
+    raw_result = if site_id.nil?
+      ActiveRecord::Base.connection.execute("select * from data_denormalization where project_id = #{self.id} LIMIT 1").first
+    else
+      ActiveRecord::Base.connection.execute("select * from data_denormalization where project_id = #{self.id} AND site_id = #{site_id}").first
+    end
+    return if raw_result.nil?
+    columns = []
+    columns << raw_result['organization_name']
+    columns << raw_result['project_name']
+    columns << raw_result['project_description']
+    columns << self.activities
+    columns << self.additional_information
+    columns << self.start_date.nil? ? "" : self.start_date.strftime("%Y-%m-%d")
+    columns << self.end_date.nil? ? "" : self.end_date.strftime("%Y-%m-%d")
+    columns << self.donors.map{ |donor| donor.name }.join(',')
+    columns << self.budget
+    columns << self.implementing_organization
+    columns << self.partner_organizations
+    if raw_result['clusters']
+      columns << raw_result['clusters'].text2array.join(',')
+    else
+      columns << ""
+    end
+    if raw_result['sectors']
+      columns << raw_result['sectors'].text2array.join(',')
+    else
+      columns << ""
+    end
+    columns << self.cross_cutting_issues
+    columns << self.estimated_people_reached
+    columns << self.target
+    if raw_result['countries']
+      columns << raw_result['countries'].text2array.join(',')
+    else
+      columns << ""
+    end
+    columns << regions.where(:level => 1).select(Region.custom_fields).map{ |r| r.name }.join(',')
+    columns << regions.where(:level => 2).select(Region.custom_fields).map{ |r| r.name }.join(',')
+    columns << regions.where(:level => 3).select(Region.custom_fields).map{ |r| r.name }.join(',')
+    columns << self.contact_person
+    columns << self.contact_position
+    columns << self.contact_email
+    columns << self.website
+    columns << self.date_provided.nil? ? "" : self.date_provided.strftime("%Y-%m-%d")
+    columns << self.date_updated.nil? ? "" : self.date_updated.strftime("%Y-%m-%d")
+    columns
+  end
+
+  def to_csv(site_id)
+    FasterCSV.generate do |csv|
+      csv << self.class.csv_attributes
+      csv << csv_columns(site_id)
+    end
   end
 
   def related(site, limit = 2)
