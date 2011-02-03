@@ -201,7 +201,7 @@ class Project < ActiveRecord::Base
   end
 
   def to_csv(site_id)
-    FasterCSV.generate do |csv|
+    FasterCSV.generate(:col_sep => ';') do |csv|
       csv << self.class.csv_attributes
       csv << csv_columns(site_id)
     end
