@@ -9,7 +9,7 @@ namespace :db do
   task :reset_2 => %w(db:seed iom:data:load_adm_levels iom:data:load_orgs iom:data:load_projects)
 
   desc 'reset 3'
-  task :reset_3 => %w(db:seed iom:data:load_adm_levels iom:data:load_orgs iom:data:load_food_security)
+  task :reset_3 => %w(db:seed iom:data:load_adm_levels iom:data:load_orgs iom:data:load_food_security_projects)
 end
 
 namespace :iom do
@@ -474,8 +474,8 @@ namespace :iom do
       end
     end
 
-    desc 'Load data for Food Security'
-    task :load_food_security => :environment do
+    desc 'Load projects from Food Security'
+    task :load_food_security_projects => :environment do
       DB = ActiveRecord::Base.connection
 
       csv_projs = CsvMapper.import("#{Rails.root}/db/data/FS-Data-def.csv") do
@@ -674,17 +674,6 @@ namespace :iom do
           if locations.length > 0
             multi_point = "ST_MPointFromText('MULTIPOINT(#{locations.join(',')})',4326)"
           end
-        end
-
-        #save the Geom that we created before
-        unless multi_point.blank?
-          sql = "UPDATE projects SET the_geom=#{multi_point} WHERE id=#{p.id}"
-          DB.execute sql
-        end
-
-        if p.regions.empty?
-          puts "[ERROR] Empty regions for level 1 for project #{p.name}"
-          next
         end
 
         #save the Geom that we created before
