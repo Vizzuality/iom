@@ -6,7 +6,7 @@
         <div class="outer_head">
           <div class="head">
             <h1><%= @donor.name.html_safe %></h1>
-            <p>Funding <%= pluralize(@donor.donated_projects.count, 'project', 'projects') %></p>
+            <p>Funding <%= pluralize(@donor.donated_projects_count(@site), 'project', 'projects') %></p>
           </div>
         </div>
         <div class="results_list" id="projects">
@@ -61,7 +61,11 @@
         <!-- PROJECTS BY AREA -->
         <div class="block border statistics">
           <h2>PROJECT LOCATIONS</h2>
-          <%= raw(projects_by_location(@site, @donor.projects_regions(@site))) %>
+          <% if @site.navigate_by_country? %>
+            <%= raw(projects_by_location(@site, @donor.projects_countries(@site))) %>
+          <% else %>
+            <%= raw(projects_by_location(@site, @donor.projects_regions(@site))) %>
+          <% end %>
         </div>
 
         <% unless @donor.resources.empty? %>

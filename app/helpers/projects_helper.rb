@@ -67,14 +67,25 @@ module ProjectsHelper
   end
 
   def project_regions_and_countries(project)
-    return if project['regions'].nil? || project['regions_ids'].nil?
-    regions     = project['regions'].split('|').reject{|r| r.blank?}
-    regions_ids = project['regions_ids'].delete('{}').split(',')
-
-    if regions.size == 1
-      "in #{link_to(regions.first, "/regions/#{regions_ids.first}", :title => regions.first)}"
+    if @site.navigate_by_country?
+      return if project['countries'].nil? || project['countries_ids'].nil?
+      countries     = project['countries'].split('|').reject{|r| r.blank?}
+      countries_ids = project['countries_ids'].delete('{}').split(',')
+      if countries.size == 1
+        "in #{link_to(countries.first, location_path(:ids => [countries_ids.first]), :title => countries.first)}"
+      else
+        "in #{pluralize(countries.size, 'country', 'countries')}"
+      end
     else
-      "in #{pluralize(regions.size, 'place')}"
+      return if project['regions'].nil? || project['regions_ids'].nil?
+      regions     = project['regions'].split('|').reject{|r| r.blank?}
+      regions_ids = project['regions_ids'].delete('{}').split(',')
+
+      if regions.size == 1
+        "in #{link_to(regions.first, "/regions/#{regions_ids.first}", :title => regions.first)}"
+      else
+        "in #{pluralize(regions.size, 'place')}"
+      end
     end
   end
 

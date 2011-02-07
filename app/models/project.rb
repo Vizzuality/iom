@@ -278,6 +278,8 @@ SQL
     sql = ""
     if options[:region]
       sql="select * from data_denormalization where regions_ids && '{#{options[:region]}}' and site_id=#{site.id} and is_active=true"
+    elsif options[:country]
+      sql="select * from data_denormalization where countries_ids && '{#{options[:country]}}' and site_id=#{site.id} and is_active=true"
     elsif options[:cluster]
       sql="select * from data_denormalization where cluster_ids && '{#{options[:cluster]}}' and site_id=#{site.id} and is_active=true"
     elsif options[:sector]
@@ -288,15 +290,6 @@ SQL
       sql="select * from data_denormalization where donors_ids && '{#{options[:donor_id]}}' and site_id=#{site.id} and is_active=true"
     else
       sql="select * from data_denormalization where site_id=#{site.id} and is_active=true"
-    end
-
-    if options[:country]
-      sql << " WHERE "
-      conditions = []
-      if options[:country]
-        conditions << "countries_ids && '{#{options[:country]}}'"
-      end
-      sql << conditions.join(' and ')
     end
 
     total_entries = ActiveRecord::Base.connection.execute("select count(*) as count from (#{sql}) as q").first['count'].to_i

@@ -85,10 +85,16 @@
                  <%= raw(@project.cross_cutting_issues) %>
                <%end%>
                <%if @locations.present? && @locations.to_a.join.present? %>
-                 <h3 class="<%= (@project.activities.blank? && @project.additional_information.blank? && @project.cross_cutting_issues.blank?)? 'first':''%>">LOCATIONS</h3>
+                 <h3 class="<%= (@project.activities.blank? && @project.additional_information.blank? && @project.cross_cutting_issues.blank?)? 'first':''%>">
+                 <%= @locations.count == 1 ? 'LOCATION' : 'LOCATIONS' %>
+                 </h3>
                  <ul class="locations">
                  <% @locations.each do |location| %>
-                  <li><%= location['name'] %></li>
+                  <% if @site.navigate_by_country? %>
+                    <li><%= location['name'] %>, <%= Country.find(location['country_id'], :select => 'name').name %></li>
+                  <% else %>
+                    <li><%= location['name'] %></li>
+                  <% end %>
                  <% end %>
                  </ul>
                <%end%>

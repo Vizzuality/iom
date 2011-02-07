@@ -299,9 +299,7 @@ class Site < ActiveRecord::Base
     inner join clusters_projects as cp on c.id=cp.cluster_id
     inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=#{self.id}
     inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
-    group by c.id,c.name
-    order by count desc"
-
+    group by c.id,c.name order by count desc limit 20"
     Cluster.find_by_sql(sql).map do |c|
       [c,c.count.to_i]
     end
@@ -314,7 +312,7 @@ class Site < ActiveRecord::Base
     inner join projects_sectors as cp on s.id=cp.sector_id
     inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=#{self.id}
     inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
-    group by s.id,s.name order by count DESC"
+    group by s.id,s.name order by count DESC limit 20"
     Sector.find_by_sql(sql).map do |s|
       [s,s.count.to_i]
     end
@@ -336,6 +334,14 @@ class Site < ActiveRecord::Base
   def total_regions
     sql="select count(distinct(regions.id)) as count from regions
       inner join projects_regions as pr on pr.region_id=regions.id and regions.level=#{self.level_for_region}
+      inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{self.id}
+      inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now());"
+    ActiveRecord::Base.connection.execute(sql).first['count'].to_i
+  end
+
+  def total_countries
+    sql="select count(distinct(countries.id)) as count from countries
+      inner join countries_projects as pr on pr.country_id=countries.id
       inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{self.id}
       inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now());"
     ActiveRecord::Base.connection.execute(sql).first['count'].to_i
@@ -401,12 +407,16 @@ class Site < ActiveRecord::Base
 
   def clusters
     Cluster.find_by_sql("select c.* from clusters as c where id in (
-        select cp.cluster_id from (clusters_projects as cp inner join projects as p on cp.project_id=p.id) inner join projects_sites as ps on p.id=ps.project_id and site_id=#{self.id}) order by c.name")
+        select cp.cluster_id from (clusters_projects as cp inner join projects as p on cp.project_id=p.id)
+        inner join projects_sites as ps on p.id=ps.project_id and site_id=#{self.id})
+        order by c.name")
   end
 
   def sectors
     Sector.find_by_sql("select s.* from sectors as s where id in (
-        select pse.project_id from (projects_sectors as pse inner join projects as p on pse.project_id=p.id) inner join projects_sites as ps on p.id=ps.project_id and site_id=#{self.id}) order by s.name")
+        select pse.project_id from (projects_sectors as pse inner join projects as p on pse.project_id=p.id)
+        inner join projects_sites as ps on p.id=ps.project_id and site_id=#{self.id})
+        order by s.name")
   end
 
   def clusters_or_sectors
@@ -481,7 +491,14 @@ class Site < ActiveRecord::Base
 
   def countries_select
     if geographic_context_country_id.blank? && geographic_context_region_id.blank?
-      Country.get_select_values
+      # Country.get_select_values
+      Country.find_by_sql(<<-SQL
+        select id,name from countries
+        where id in (select country_id
+        from countries_projects as cr inner join projects_sites as ps
+        on cr.project_id=ps.project_id and site_id=#{self.id}) order by name
+SQL
+      )
     else
       if geographic_context_region_id.blank?
         [Country.find(self.geographic_context_country_id, :select => Country.custom_fields)]
@@ -544,6 +561,10 @@ SQL
     else
       Region.where(:country_id => geographic_context_country_id, :level => level_for_region).select(Region.custom_fields)
     end
+  end
+
+  def navigate_by_regions?
+    navigate_by_level1? || navigate_by_level2 || navigate_by_level3
   end
 
   def navigate_by

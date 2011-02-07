@@ -14,6 +14,7 @@ class Cluster < ActiveRecord::Base
     sql="select distinct d.* from donors as d
     inner join donations as don on d.id=donor_id
     inner join clusters_projects as cp on don.project_id=cp.project_id and cp.cluster_id=#{self.id}
+    inner join projects as p on cp.project_id=p.id and (p.end_date is null OR p.end_date > now())
     inner join projects_sites as ps on ps.project_id=don.project_id and ps.site_id=#{site.id}"
     Donor.find_by_sql(sql)
   end
@@ -40,9 +41,36 @@ SQL
     end
   end
 
+  # Array of arrays
+  # [[region, count], [region, count]]
+  def projects_countries(site)
+    Country.find_by_sql(
+<<-SQL
+  select c.id,c.name, count(ps.*) as count from countries as c
+  inner join countries_projects as pr on c.id=pr.country_id
+  inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{site.id}
+  inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
+  inner join clusters_projects as cp on cp.project_id=p.id and cp.cluster_id=#{self.id}
+  where r.level = #{site.level_for_region}
+  group by c.id,c.name  order by count DESC
+SQL
+    ).map do |r|
+      [r, r.count.to_i]
+    end
+  end
+
   def total_regions(site)
     sql = "select count(distinct(pr.region_id)) as count from projects_regions as pr
     inner join regions as r on pr.region_id=r.id and level=#{site.level_for_region}
+    inner join projects as p on p.id=pr.project_id and (p.end_date is null OR p.end_date > now())
+    inner join projects_sites as psi on p.id=psi.project_id and psi.site_id=#{site.id}
+    inner join clusters_projects as cp on cp.project_id=psi.project_id
+    where cp.cluster_id=#{self.id}"
+    ActiveRecord::Base.connection.execute(sql).first['count'].to_i
+  end
+
+  def total_countries(site)
+    sql = "select count(distinct(pr.country)) as count from countries_projects as pr
     inner join projects as p on p.id=pr.project_id and (p.end_date is null OR p.end_date > now())
     inner join projects_sites as psi on p.id=psi.project_id and psi.site_id=#{site.id}
     inner join clusters_projects as cp on cp.project_id=psi.project_id

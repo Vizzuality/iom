@@ -27,16 +27,25 @@ class GeoregionController < ApplicationController
                                              :start_in_page => params[:start_in_page]
 
       # TODO
-      @area_parent = "America"
+      @area_parent = ""
 
-      sql="select *
-        from(
-        select c.id,count(ps.project_id) as count,c.name,c.center_lon as lon,c.center_lat as lat
-        from (countries_projects as cp
-          inner join projects_sites as ps on cp.project_id=ps.project_id and site_id=#{@site.id})
-          inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
-          inner join countries as c on cp.country_id=c.id and c.id=#{country.id}
-        group by c.id,c.name,lon,lat) as subq"
+      if @site.navigate_by_regions?
+        sql="select r.id,count(ps.project_id) as count,r.name,r.center_lon as lon,
+                  r.center_lat as lat,r.name,'/location/'||r.path as url,r.code
+                  from ((projects_regions as pr inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{@site.id})
+                  inner join projects as p on pr.project_id=p.id and (p.end_date is null OR p.end_date > now())
+                  inner join regions as r on pr.region_id=r.id and r.level=#{@site.levels_for_region.min} and r.country_id=#{country.id})
+                  group by r.id,r.name,lon,lat,r.name,url,r.code"
+      else
+        sql="select *
+          from(
+          select c.id,count(ps.project_id) as count,c.name,c.center_lon as lon,c.center_lat as lat
+          from (countries_projects as cp
+            inner join projects_sites as ps on cp.project_id=ps.project_id and site_id=#{@site.id})
+            inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
+            inner join countries as c on cp.country_id=c.id and c.id=#{country.id}
+          group by c.id,c.name,lon,lat) as subq"
+      end
     else
       level = 1
       geo_ids[1..-1].each do |geo_id|
@@ -54,10 +63,10 @@ class GeoregionController < ApplicationController
       @projects = Project.custom_find  @site,
                                        :region => @area.id,
                                        :level => @site.levels_for_region,
-                                      :per_page => 10,
-                                      :page => params[:page],
-                                      :order => 'created_at DESC',
-                                      :start_in_page => params[:start_in_page]
+                                       :per_page => 10,
+                                       :page => params[:page],
+                                       :order => 'created_at DESC',
+                                       :start_in_page => params[:start_in_page]
 
       @area_parent = country.name
 
@@ -88,13 +97,19 @@ class GeoregionController < ApplicationController
 
     respond_to do |format|
       format.html do
-        result = ActiveRecord::Base.connection.execute(sql)
-        @map_data = result.first || {'id' => nil, 'lat' => nil, 'lon' => nil, 'count' => nil, 'geojson' => nil}
+
         @georegion_map_chco = @site.theme.data[:georegion_map_chco]
         @georegion_map_chf = @site.theme.data[:georegion_map_chf]
         @georegion_map_marker_source = @site.theme.data[:georegion_map_marker_source]
         @georegion_map_stroke_color = @site.theme.data[:georegion_map_stroke_color]
         @georegion_map_fill_color = @site.theme.data[:georegion_map_fill_color]
+
+        result = ActiveRecord::Base.connection.execute(sql)
+        if @area.is_a?(Country) && @site.navigate_by_regions?
+          @map_data = result.to_json
+        else
+          @map_data = result.first || {'id' => nil, 'lat' => nil, 'lon' => nil, 'count' => nil, 'geojson' => nil}
+        end
 
         areas= []
         data = []
@@ -108,6 +123,7 @@ class GeoregionController < ApplicationController
         end
         @chld = areas.join("|")
         @chd  = "t:"+data.join(",")
+
         @breadcrumb.pop
       end
       format.js do
