@@ -27,7 +27,7 @@
     <%= f.label :theme %>
     <ul class="themes">
       <% Theme.all.each_with_index do |theme, i| %>
-      <li rel="<%= theme.id %>" class="<%='selected' if i == 0 %> <%= 'last' if i == Theme.count - 1 %>">
+      <li rel="<%= theme.id %>" class="<%='selected' if theme == @site.theme %> <%= 'last' if i == Theme.count - 1 %>">
         <img src="<%= theme.thumbnail_path %>" width="157" height="135" alt="<%= theme.name %>">
         <a class="preview" href="<%= url(@site) %><%= project_path %>?theme_id=<%= theme.id %>">PREVIEW</a>
         <span class="ready"></span>

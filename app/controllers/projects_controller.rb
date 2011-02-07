@@ -11,7 +11,6 @@ class ProjectsController < ApplicationController
     sql = "select * from data_denormalization where site_id=#{@site.id} and
                                                     is_active=true and
                                                     project_id=#{params[:id].sanitize_sql!}"
-
     @raw_project = Project.find_by_sql(sql).first
     raise ActiveRecord::RecordNotFound unless @raw_project
     @project = Project.find(@raw_project['project_id'])
@@ -19,7 +18,7 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       format.html do
         #Map data
-        sql="select r.id,r.center_lon as lon,r.center_lat as lat,r.name,r.code
+        sql="select r.id,r.center_lon as lon,r.center_lat as lat,r.name,r.code,r.country_id
         from (projects as p inner join projects_regions as pr on pr.project_id=p.id and p.id=#{@project.id})
         inner join regions as r on pr.region_id=r.id and r.level=#{@site.level_for_region}"
 

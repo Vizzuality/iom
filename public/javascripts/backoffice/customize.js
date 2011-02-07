@@ -90,7 +90,7 @@
         scrollwheel: false,
         mapTypeControl: false,
         streetViewControl: false,
-        mapTypeId: google.maps.MapTypeId.TERRAIN,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
         disableDefaultUI: true,
         zoom: 1,
         center: bounds.getCenter()
@@ -114,8 +114,8 @@
          $('div.list_combo').children('span.combo_large').attr('id','hidden');
          $('div.list_combo').children('span.combo_large').removeClass('displayed');
     }
-    
-    
+
+
     function zoomIn() {
       map.setZoom(map.getZoom() + 1);
     }

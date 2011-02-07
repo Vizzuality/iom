@@ -138,6 +138,23 @@ SQL
     end
   end
 
+  # Array of arrays
+  # [[country, count], [country, count]]
+  def projects_countries(site)
+    Country.find_by_sql(
+<<-SQL
+select c.id,c.name,count(ps.*) as count from countries as c
+  inner join countries_projects as pr on c.id=pr.country_id
+  inner join projects as p on p.id=pr.project_id and (p.end_date is null OR p.end_date > now())
+  inner join projects_sites as ps on p.id=ps.project_id and ps.site_id=#{site.id}
+  where p.primary_organization_id=#{self.id}
+  group by c.id, c.name order by count DESC
+SQL
+    ).map do |r|
+      [r, r.count.to_i]
+    end
+  end
+
   def projects_file=(file)
     return if file.blank?
     projects_ids_to_delete = self.project_ids || []
@@ -182,6 +199,14 @@ SQL
   def total_regions(site)
     sql = "select count(distinct(pr.region_id)) as count from projects_regions as pr
     inner join regions as r on pr.region_id=r.id and level=#{site.level_for_region}
+    inner join projects as p on p.id=pr.project_id and (p.end_date is null OR p.end_date > now())
+                                and p.primary_organization_id=#{self.id}
+    inner join projects_sites as psi on p.id=psi.project_id and psi.site_id=#{site.id}"
+    ActiveRecord::Base.connection.execute(sql).first['count'].to_i
+  end
+
+  def total_countries(site)
+    sql = "select count(distinct(pr.country_id)) as count from countries_projects as pr
     inner join projects as p on p.id=pr.project_id and (p.end_date is null OR p.end_date > now())
                                 and p.primary_organization_id=#{self.id}
     inner join projects_sites as psi on p.id=psi.project_id and psi.site_id=#{site.id}"

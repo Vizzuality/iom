@@ -69,6 +69,7 @@ class Country < ActiveRecord::Base
   def donors_count(site)
     ActiveRecord::Base.connection.execute(<<-SQL
       select count(distinct(donor_id)) as count from donations as d
+      inner join projects as p on d.project_id = p.id and (p.end_date is null OR p.end_date > now())
       inner join projects_sites as ps on d.project_id=ps.project_id and ps.site_id=#{site.id}
       inner join countries_projects as cp on ps.project_id=cp.project_id and cp.country_id=#{self.id}
     SQL

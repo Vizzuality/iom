@@ -40,9 +40,13 @@
           <% unless @data.projects_regions(@site).empty?%>
           <div class="block statistics less">
             <h3>PROJECT LOCATIONS</h3>
-            <%= raw(projects_by_location(@site, @data.projects_regions(@site))) %>
+            <% if @site.navigate_by_country? %>
+              <%= raw(projects_by_location(@site, @data.projects_countries(@site))) %>
+            <% else %>
+              <%= raw(projects_by_location(@site, @data.projects_regions(@site))) %>
+            <% end %>
           </div>
-          <%end%>
+          <% end %>
           <% unless @data.donors(@site).empty? %>
           <div class="block">
             <h3>DONORS IN THIS <%= @site.word_for_cluster_sector.chop %></h3>
@@ -79,7 +83,14 @@
 
       <!-- RIGHT PART -->
       <div class="right">
-        <h3><%= pluralize(@data.total_projects(@site), 'active project', 'active projects') %> in <%= pluralize(@data.total_regions(@site), @site.word_for_regions.singularize, @site.word_for_regions) %> <a id="see_all" href="#">View past projects</a>
+        <h3>
+          <%= pluralize(@data.total_projects(@site), 'active project', 'active projects') %> in
+          <% if @site.navigate_by_country? %>
+            <%= pluralize(@data.total_countries(@site), @site.word_for_regions.singularize, @site.word_for_regions) %>
+          <% else %>
+            <%= pluralize(@data.total_regions(@site), @site.word_for_regions.singularize, @site.word_for_regions) %>
+          <% end %>
+          <a id="see_all" href="#">View past projects</a>
           <div class="tooltip">
             <span class="body_tooltip">
               <label>Coming soon!</label>

@@ -41,6 +41,14 @@ class Donor < ActiveRecord::Base
 
   validates_presence_of :name
 
+  def donated_projects_count(site)
+    sql = "select count(distinct(d.project_id)) from donations d
+    inner join projects as p on d.project_id = p.id and (p.end_date is null OR p.end_date > now())
+    inner join projects_sites as ps on d.project_id=ps.project_id and ps.site_id=#{site.id}
+    where d.donor_id=#{self.id}"
+    ActiveRecord::Base.connection.execute(sql).first['count'].to_i
+  end
+
   def donations_amount
     donations.inject(0){
       |result, donation|
@@ -79,7 +87,7 @@ class Donor < ActiveRecord::Base
   end
 
   # Array of arrays
-  # [[cluster, count], [cluster, count]]
+  # [[region, count], [region, count]]
   def projects_regions(site)
     Region.find_by_sql(
 <<-SQL
@@ -96,6 +104,22 @@ SQL
     end
   end
 
+  # Array of arrays
+  # [[country, count], [country, count]]
+  def projects_countries(site)
+    Country.find_by_sql(
+<<-SQL
+  select c.id,c.name,count(ps.*) as count from countries as c
+    inner join countries_projects as pr on c.id=pr.country_id
+    inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{site.id}
+    inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
+    inner join donations as d on ps.project_id=d.project_id and d.donor_id=#{self.id}
+    group by c.id,c.name order by count DESC
+SQL
+    ).map do |r|
+      [r, r.count.to_i]
+    end
+  end
   serialize :site_specific_information
 
   # Attributes for site getter
