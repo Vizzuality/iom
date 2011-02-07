@@ -563,6 +563,10 @@ SQL
     end
   end
 
+  def navigate_by_regions?
+    navigate_by_level1? || navigate_by_level2 || navigate_by_level3
+  end
+
   def navigate_by
     if navigate_by_country?
       :country

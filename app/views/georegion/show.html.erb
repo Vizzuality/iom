@@ -139,9 +139,13 @@
     var marker_source = "<%=@georegion_map_marker_source%>";
     var map_type = "georegion";
     <% if @map_data %>
-    var map_data = [{"id":<%=@map_data["id"]%>, "lat":<%=@map_data["lat"]%>, "lon":<%=@map_data["lon"]%>, "count":<%=@map_data["count"]%>, "name":"<%=@map_data["name"]%>"}];
+      <% if @area.is_a?(Country) && @site.navigate_by_regions? %>
+      var map_data = <%=raw(@map_data)%>;
+      <% else %>
+      var map_data = [{"id":<%=@map_data["id"]%>, "lat":<%=@map_data["lat"]%>, "lon":<%=@map_data["lon"]%>, "count":<%=@map_data["count"]%>, "name":"<%=@map_data["name"]%>"}];
+      <% end %>
     <% else %>
-    var map_data = [];
+      var map_data = [];
     <% end %>
     var area_stroke_color = "<%=@georegion_map_stroke_color%>";
     var area_fill_color = "<%=@georegion_map_fill_color%>";
