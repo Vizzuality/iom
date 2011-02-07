@@ -491,7 +491,14 @@ class Site < ActiveRecord::Base
 
   def countries_select
     if geographic_context_country_id.blank? && geographic_context_region_id.blank?
-      Country.get_select_values
+      # Country.get_select_values
+      Country.find_by_sql(<<-SQL
+        select id,name from countries
+        where id in (select country_id
+        from countries_projects as cr inner join projects_sites as ps
+        on cr.project_id=ps.project_id and site_id=#{self.id}) order by name
+SQL
+      )
     else
       if geographic_context_region_id.blank?
         [Country.find(self.geographic_context_country_id, :select => Country.custom_fields)]
