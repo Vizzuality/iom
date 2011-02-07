@@ -39,7 +39,7 @@
                 <div class="wrapper">
                   <ul class="content scroll_pane">
                     <% @site.countries_select.each do |country| %>
-                    <li><%= link_to(country.name, ("/location/"+country.id.to_s), :class => 'geneva') %></li>
+                    <li><%= link_to(country.name, location_path(:ids => country), :class => 'geneva') %></li>
                     <% end %>
                   </ul>
                 </div>
@@ -55,7 +55,9 @@
                   <!-- We have to ask for numbers of elements to show (or not) custom scroll bar -->
                   <ul id="regions" class="content <%= (@site.regions_select.length > 11) ? 'scroll_pane' : ''%>">
                     <% @site.regions_select.each do |region| %>
-                    <li><a href="/location/<%=region.path%>" class="geneva"><%=region.name%></a></li>
+                    <li>
+                      <%= link_to(region.name, location_path(:ids => region) , :class => 'geneva') %>
+                    </li>
                     <% end %>
                   </ul>
                 </div>
