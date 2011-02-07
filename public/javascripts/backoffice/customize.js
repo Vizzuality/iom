@@ -1,5 +1,5 @@
   var map;
-  var bounds = new google.maps.LatLngBounds();
+  var bounds_ = new google.maps.LatLngBounds();
 
 
     $(document).ready( function() {
@@ -52,6 +52,12 @@
           $('#site_theme_id').val($(this).attr('rel'));
         }
       });
+      
+      
+      $('#zoomIn,#zoomOut').click(function(ev){
+        ev.stopPropagation();
+        ev.preventDefault();
+      });
 
 
       // CHANGE EACH LIST
@@ -77,13 +83,12 @@
       }
 
 
-
       //Map customization
-      if ($('input[name="site[overview_map_bbox_miny]"]').attr('value')!='') {
-        bounds.extend(new google.maps.LatLng($('input[name="site[overview_map_bbox_miny]"]').attr('value'),$('input[name="site[overview_map_bbox_minx]"]').attr('value')));
-        bounds.extend(new google.maps.LatLng($('input[name="site[overview_map_bbox_maxy]"]').attr('value'),$('input[name="site[overview_map_bbox_maxx]"]').attr('value')));
+      if ($('#site_overview_map_bbox_minx').attr('value')!='') {
+        bounds_.extend(new google.maps.LatLng($('#site_overview_map_bbox_miny').attr('value'),$('#site_overview_map_bbox_minx').attr('value')));
+        bounds_.extend(new google.maps.LatLng($('#site_overview_map_bbox_maxy').attr('value'),$('#site_overview_map_bbox_maxx').attr('value')));
       } else {
-        bounds.extend(new google.maps.LatLng(0,0));
+        bounds_.extend(new google.maps.LatLng(0,0));
       }
 
      var myOptions = {
@@ -93,26 +98,39 @@
         mapTypeId: google.maps.MapTypeId.TERRAIN,
         disableDefaultUI: true,
         zoom: 1,
-        center: bounds.getCenter()
+        center: bounds_.getCenter()
       }
       map = new google.maps.Map(document.getElementById("map"), myOptions);
-      map.fitBounds(bounds);
-      google.maps.event.addListener(map, "bounds_changed", function(ev) {
+
+      var marker = new google.maps.Marker({
+              position: new google.maps.LatLng($('#site_overview_map_bbox_miny').attr('value'),$('#site_overview_map_bbox_minx').attr('value')), 
+              map: map,
+              title:"Hello World!"
+          });
+      var marker = new google.maps.Marker({
+              position: new google.maps.LatLng($('#site_overview_map_bbox_maxy').attr('value'),$('#site_overview_map_bbox_maxx').attr('value')), 
+              map: map,
+              title:"Hello World!"
+          });
+  
+      google.maps.event.addListener(map, "tilesloaded", function(ev) {
+        map.fitBounds(bounds_);
+        zoomIn();
+        google.maps.event.clearListeners(map,"tilesloaded");
+        google.maps.event.addListener(map, "bounds_changed", function(ev) {
           var map_bounds = map.getBounds();
-
-          $('input[name="site[overview_map_bbox_maxy]"]').attr('value',map_bounds.getNorthEast().lat());
-          $('input[name="site[overview_map_bbox_maxx]"]').attr('value',map_bounds.getNorthEast().lng());
-
-          $('input[name="site[overview_map_bbox_miny]"]').attr('value',map_bounds.getSouthWest().lat());
-          $('input[name="site[overview_map_bbox_minx]"]').attr('value',map_bounds.getSouthWest().lng());
+          $('#site_overview_map_bbox_maxy').attr('value',map_bounds.getNorthEast().lat());
+          $('#site_overview_map_bbox_minx').attr('value',map_bounds.getNorthEast().lng());
+          $('#site_overview_map_bbox_miny').attr('value',map_bounds.getSouthWest().lat());
+          $('#site_overview_map_bbox_maxx').attr('value',map_bounds.getSouthWest().lng());
+        });
       });
-
     });
 
     function hideAllMapCombos(){
-         $('div.list_combo').find('ul.list_combo_content').css('display','none');
-         $('div.list_combo').children('span.combo_large').attr('id','hidden');
-         $('div.list_combo').children('span.combo_large').removeClass('displayed');
+     $('div.list_combo').find('ul.list_combo_content').css('display','none');
+     $('div.list_combo').children('span.combo_large').attr('id','hidden');
+     $('div.list_combo').children('span.combo_large').removeClass('displayed');
     }
     
     
