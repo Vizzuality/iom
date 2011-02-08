@@ -106,7 +106,10 @@ class GeoregionController < ApplicationController
 
         result = ActiveRecord::Base.connection.execute(sql)
         if @area.is_a?(Country) && @site.navigate_by_regions?
-          @map_data = result.to_json
+          @map_data = result.map do |r|
+            r['url'] = r['url'] + "?force_site_id=#{@site.id}" unless @site.published?
+            r
+          end.to_json
         else
           @map_data = result.first || {'id' => nil, 'lat' => nil, 'lon' => nil, 'count' => nil, 'geojson' => nil}
         end
@@ -123,15 +126,6 @@ class GeoregionController < ApplicationController
         end
         @chld = areas.join("|")
         @chd  = "t:"+data.join(",")
-
-        if @area.is_a?(Country) && @site.navigate_by_regions?
-        else
-          @overview_map_bbox = [{
-                    :lat => @site.overview_map_bbox_miny,
-                    :lon => @site.overview_map_bbox_minx}, {
-                    :lat => @site.overview_map_bbox_maxy,
-                    :lon => @site.overview_map_bbox_maxx}]
-        end
 
         @breadcrumb.pop
       end

@@ -41,8 +41,11 @@ class SitesController < ApplicationController
                     group by c.id,c.name,lon,lat,iso2_code"
         end
 
-        result=ActiveRecord::Base.connection.execute(sql)
-        @map_data=result.to_json
+        result = ActiveRecord::Base.connection.execute(sql)
+        @map_data = result.map do |r|
+          r['url'] = r['url'] + "?force_site_id=#{@site.id}" unless @site.published?
+          r
+        end.to_json
         @overview_map_chco = @site.theme.data[:overview_map_chco]
         @overview_map_chf = @site.theme.data[:overview_map_chf]
         @overview_map_marker_source = @site.theme.data[:overview_map_marker_source]

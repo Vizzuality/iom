@@ -31,6 +31,8 @@
         <% end %>
         <% if site.published? %>
         <p>Available <%= link_to('here', url(site)) %></p>
+        <% else %>
+        <p>Browse the private version <%= link_to('here', root_path(:force_site_id => site.id)) %></p>
         <% end %>
       </div>
       <div class="right_graph">
