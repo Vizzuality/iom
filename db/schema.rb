@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110111113043) do
+ActiveRecord::Schema.define(:version => 20110208092114) do
 
   create_table "clusters", :force => true do |t|
     t.string "name"
@@ -374,6 +374,7 @@ ActiveRecord::Schema.define(:version => 20110111113043) do
     t.boolean  "navigate_by_level1",                             :default => false
     t.boolean  "navigate_by_level2",                             :default => false
     t.boolean  "navigate_by_level3",                             :default => false
+    t.text     "map_styles"
   end
 
   add_index "sites", ["geographic_context_geometry"], :name => "index_sites_on_geographic_context_geometry", :spatial => true

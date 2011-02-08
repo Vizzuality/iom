@@ -3,7 +3,7 @@
 # Table name: clusters
 #
 #  id   :integer         not null, primary key
-#  name :string(255)
+#  name :string(255)     
 #
 
 class Cluster < ActiveRecord::Base

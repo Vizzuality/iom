@@ -46,6 +46,7 @@
 #  navigate_by_level1              :boolean
 #  navigate_by_level2              :boolean
 #  navigate_by_level3              :boolean
+#  map_styles                      :text
 #
 
 
