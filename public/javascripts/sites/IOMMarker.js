@@ -44,34 +44,36 @@
         marker_image.src = this.image;
         div.appendChild(marker_image);
     		
-        if (show_regions_with_one_project!=undefined) {
-          var count = document.createElement('p');
-          count.style.position = "absolute";
-          count.style.top = "50%";
-          count.style.left = "50%";
-          count.style.height = "15px";
-          count.style.textAlign = "center";
-          if (this.diameter==20) {
-            count.style.margin ="-6px 0 0 0px";
-            count.style.font = "normal 10px Arial";
-          } else if (this.diameter==26) {
-            count.style.margin ="-6px 0 0 0px";
-            count.style.font = "normal 11px Arial";
-          } else if (this.diameter==34) {
-            count.style.margin ="-7px 0 0 0px";
-            count.style.font = "normal 12px Arial";
-          } else if (this.diameter==42) {
-            count.style.margin ="-7px 0 0 0px";
-            count.style.font = "normal 15px Arial";
-          } else {
-            count.style.margin ="-9px 0 0 0px";
-            count.style.font = "normal 18px Arial";
+    		try {
+    		  if (show_regions_with_one_project!=undefined) {
+            var count = document.createElement('p');
+            count.style.position = "absolute";
+            count.style.top = "50%";
+            count.style.left = "50%";
+            count.style.height = "15px";
+            count.style.textAlign = "center";
+            if (this.diameter==20) {
+              count.style.margin ="-6px 0 0 0px";
+              count.style.font = "normal 10px Arial";
+            } else if (this.diameter==26) {
+              count.style.margin ="-6px 0 0 0px";
+              count.style.font = "normal 11px Arial";
+            } else if (this.diameter==34) {
+              count.style.margin ="-7px 0 0 0px";
+              count.style.font = "normal 12px Arial";
+            } else if (this.diameter==42) {
+              count.style.margin ="-7px 0 0 0px";
+              count.style.font = "normal 15px Arial";
+            } else {
+              count.style.margin ="-9px 0 0 0px";
+              count.style.font = "normal 18px Arial";
+            }
+            count.style.color = "white";
+            $(count).text(this.count);
+            div.appendChild(count);
           }
-          count.style.color = "white";
-          $(count).text(this.count);
-          div.appendChild(count);
-        } else {
-          if(this.count>1) {
+    		} catch(e) {
+    		  if(this.count>1) {
               var count = document.createElement('p');
               count.style.position = "absolute";
               count.style.top = "50%";
@@ -98,8 +100,7 @@
               $(count).text(this.count);
               div.appendChild(count);            
           }
-        }
-
+    		}
 
         //Marker address
         if (map_type=="overview_map") {

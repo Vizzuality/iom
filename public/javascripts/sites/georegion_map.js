@@ -40,15 +40,14 @@
       map.mapTypes.set('labels', styleMapType);
       map.setMapTypeId('labels');
   
-  
+    	var bounds = new google.maps.LatLngBounds();
       for (var i = 0; i<map_data.length; i++) {
         diameter = 58;
         marker_image = marker_source+'marker_6.png';
         var marker_ = new IOMMarker(map_data[i],diameter, marker_image,map);
+        bounds.extend(new google.maps.LatLng(map_data[i].lat,map_data[i].lon));
       }
-  
-      //var polygon = createGeoJsonPolygon(area_geojson);
-      //polygon.setMap(map)
+      map.fitBounds(bounds);
   
   
       //Positionate controls
