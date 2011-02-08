@@ -114,7 +114,7 @@ class Country < ActiveRecord::Base
       (select co.id, co.name,
            ST_Distance((select ST_Centroid(the_geom) from countries where id=#{self.id}), ST_Centroid(the_geom)) as dist,
            (select count(*) from countries_projects as cp
-           inner join projects_sites on projects_sites.project_id=cp.project_id and projects_sites.site_id=#{self.id}
+           inner join projects_sites on projects_sites.project_id=cp.project_id and projects_sites.site_id=#{site.id}
            where country_id=co.id) as count
            from countries as co
            where id!=#{self.id}
