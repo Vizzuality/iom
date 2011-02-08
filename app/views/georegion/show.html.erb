@@ -132,12 +132,14 @@
   </div>
 
   <script type="text/javascript">
+    var bbox = <%=raw(@overview_map_bbox.to_json)%>;
     var chco = "<%=@georegion_map_chco%>";
     var chf = "<%=@georegion_map_chf%>";
     var chld = "<%=@chld%>";
     var chd = "<%=@chd%>";
     var marker_source = "<%=@georegion_map_marker_source%>";
     var map_type = "georegion";
+    var show_regions_with_one_project = "<%= @area.is_a?(Country) && @site.navigate_by_regions? ? "true" : "false" %>";
     <% if @map_data %>
       <% if @area.is_a?(Country) && @site.navigate_by_regions? %>
       var map_data = <%=raw(@map_data)%>;
