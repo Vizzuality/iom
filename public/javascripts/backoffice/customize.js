@@ -85,8 +85,10 @@
 
       //Map customization
       if ($('#site_overview_map_bbox_minx').attr('value')!='') {
-        bounds_.extend(new google.maps.LatLng($('#site_overview_map_bbox_miny').attr('value'),$('#site_overview_map_bbox_minx').attr('value')));
-        bounds_.extend(new google.maps.LatLng($('#site_overview_map_bbox_maxy').attr('value'),$('#site_overview_map_bbox_maxx').attr('value')));
+        bounds_ = new google.maps.LatLngBounds(
+          new google.maps.LatLng($('#site_overview_map_bbox_miny').attr('value'),$('#site_overview_map_bbox_maxx').attr('value')),
+          new google.maps.LatLng($('#site_overview_map_bbox_maxy').attr('value'),$('#site_overview_map_bbox_minx').attr('value'))
+          );
       } else {
         bounds_.extend(new google.maps.LatLng(0,0));
       }
@@ -101,17 +103,6 @@
         center: bounds_.getCenter()
       }
       map = new google.maps.Map(document.getElementById("map"), myOptions);
-
-      var marker = new google.maps.Marker({
-              position: new google.maps.LatLng($('#site_overview_map_bbox_miny').attr('value'),$('#site_overview_map_bbox_minx').attr('value')), 
-              map: map,
-              title:"Hello World!"
-          });
-      var marker = new google.maps.Marker({
-              position: new google.maps.LatLng($('#site_overview_map_bbox_maxy').attr('value'),$('#site_overview_map_bbox_maxx').attr('value')), 
-              map: map,
-              title:"Hello World!"
-          });
   
       google.maps.event.addListener(map, "tilesloaded", function(ev) {
         map.fitBounds(bounds_);
