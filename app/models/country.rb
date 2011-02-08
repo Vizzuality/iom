@@ -3,16 +3,16 @@
 # Table name: countries
 #
 #  id               :integer         not null, primary key
-#  name             :string(255)     
-#  code             :string(255)     
-#  center_lat       :float           
-#  center_lon       :float           
-#  the_geom         :string          
-#  wiki_url         :string(255)     
-#  wiki_description :text            
-#  iso2_code        :string(255)     
-#  iso3_code        :string(255)     
-#  the_geom_geojson :text            
+#  name             :string(255)
+#  code             :string(255)
+#  center_lat       :float
+#  center_lon       :float
+#  the_geom         :string
+#  wiki_url         :string(255)
+#  wiki_description :text
+#  iso2_code        :string(255)
+#  iso3_code        :string(255)
+#  the_geom_geojson :text
 #
 
 class Country < ActiveRecord::Base
@@ -113,7 +113,9 @@ class Country < ActiveRecord::Base
       select * from
       (select co.id, co.name,
            ST_Distance((select ST_Centroid(the_geom) from countries where id=#{self.id}), ST_Centroid(the_geom)) as dist,
-           (select count(*) from countries_projects as cp where country_id=co.id) as count
+           (select count(*) from countries_projects as cp
+           inner join projects_sites on projects_sites.project_id=cp.project_id and projects_sites.site_id=#{site.id}
+           where country_id=co.id) as count
            from countries as co
            where id!=#{self.id}
            order by dist
