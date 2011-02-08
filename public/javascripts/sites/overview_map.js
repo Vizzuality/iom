@@ -25,12 +25,11 @@
     };
     mapChartType = new google.maps.ImageMapType(mapChartOptions);      
     if (map_type=="overview_map" || map_type=="project_map") {
-      bounds =new google.maps.LatLngBounds(
-        new google.maps.LatLng(bbox[0].lat,bbox[1].lon),
-        new google.maps.LatLng(bbox[1].lat,bbox[0].lon)
-      );
+      var latlng = new google.maps.LatLng(map_center[0],map_center[1]);
+      var zoom = map_zoom;
     } else {
-      bounds = new google.maps.LatLngBounds();
+      var latlng = new google.maps.LatLng(0,0);
+      var zoom = 1;
     }
 
     var myOptions = {
@@ -39,8 +38,8 @@
       streetViewControl: false,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       disableDefaultUI: true,
-      zoom: 2,
-      center: bounds.getCenter()
+      zoom: zoom,
+      center: latlng
     }
     if ($('#map').length>0) {
       map = new google.maps.Map(document.getElementById("map"), myOptions);
