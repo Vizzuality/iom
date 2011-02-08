@@ -84,10 +84,9 @@
       <a href="#zoom_in" id="zoomIn" onclick="zoomIn()"></a>
       <a href="#zoom_out" id="zoomOut" onclick="zoomOut()"></a>
     </div>
-    <%= f.hidden_field :overview_map_bbox_minx, :style => 'display:none', :value => (@site.overview_map_bbox_minx || "") %>
-    <%= f.hidden_field :overview_map_bbox_maxx, :style => 'display:none', :value => (@site.overview_map_bbox_maxx || "") %>
-    <%= f.hidden_field :overview_map_bbox_miny, :style => 'display:none', :value => (@site.overview_map_bbox_miny || "") %>
-    <%= f.hidden_field :overview_map_bbox_maxy, :style => 'display:none', :value => (@site.overview_map_bbox_maxy || "") %>
+    <%= f.hidden_field :overview_map_lat %>
+    <%= f.hidden_field :overview_map_lon %>
+    <%= f.hidden_field :overview_map_zoom %>
   </div>
 
 

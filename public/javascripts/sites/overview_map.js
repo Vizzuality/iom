@@ -26,9 +26,9 @@
     mapChartType = new google.maps.ImageMapType(mapChartOptions);      
     if (map_type=="overview_map" || map_type=="project_map") {
       bounds =new google.maps.LatLngBounds(
-        new google.maps.LatLng(bbox[0].lat,bbox[0].lon),
-        new google.maps.LatLng(bbox[1].lat,bbox[1].lon)
-        );
+        new google.maps.LatLng(bbox[0].lat,bbox[1].lon),
+        new google.maps.LatLng(bbox[1].lat,bbox[0].lon)
+      );
     } else {
       bounds = new google.maps.LatLngBounds();
     }

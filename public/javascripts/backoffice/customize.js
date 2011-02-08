@@ -84,13 +84,12 @@
 
 
       //Map customization
-      if ($('#site_overview_map_bbox_minx').attr('value')!='') {
-        bounds_ = new google.maps.LatLngBounds(
-          new google.maps.LatLng($('#site_overview_map_bbox_miny').attr('value'),$('#site_overview_map_bbox_maxx').attr('value')),
-          new google.maps.LatLng($('#site_overview_map_bbox_maxy').attr('value'),$('#site_overview_map_bbox_minx').attr('value'))
-          );
+      if ($('#site_overview_map_lat').attr('value')!='') {
+        latlng = new google.maps.LatLng($('#site_overview_map_lat').attr('value'),$('#site_overview_map_lon').attr('value'));
+        zoom = $('#site_overview_map_zoom').attr('value');
       } else {
-        bounds_.extend(new google.maps.LatLng(0,0));
+        latlng = new google.maps.LatLng(0,0);
+        zoom = 1;
       }
 
      var myOptions = {
@@ -99,8 +98,8 @@
         streetViewControl: false,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
         disableDefaultUI: true,
-        zoom: 1,
-        center: bounds_.getCenter()
+        zoom: zoom,
+        center: latlng
       }
       map = new google.maps.Map(document.getElementById("map"), myOptions);
   
@@ -109,11 +108,9 @@
         zoomIn();
         google.maps.event.clearListeners(map,"tilesloaded");
         google.maps.event.addListener(map, "bounds_changed", function(ev) {
-          var map_bounds = map.getBounds();
-          $('#site_overview_map_bbox_maxy').attr('value',map_bounds.getNorthEast().lat());
-          $('#site_overview_map_bbox_minx').attr('value',map_bounds.getNorthEast().lng());
-          $('#site_overview_map_bbox_miny').attr('value',map_bounds.getSouthWest().lat());
-          $('#site_overview_map_bbox_maxx').attr('value',map_bounds.getSouthWest().lng());
+          $('#site_overview_map_lat').attr('value',map.getCenter().lat());
+          $('#site_overview_map_lon').attr('value',map.getCenter().lon());
+          $('#site_overview_map_zoom').attr('value',map.getZoom());
         });
       });
     });
