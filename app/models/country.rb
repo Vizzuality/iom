@@ -112,17 +112,19 @@ class Country < ActiveRecord::Base
     Country.find_by_sql(<<-SQL
       select * from
       (select co.id, co.name,
-           ST_Distance((select ST_Centroid(the_geom) from countries where id=#{self.id}), ST_Centroid(the_geom)) as dist,
-           (select count(*) from countries_projects as cp
-           inner join projects_sites on projects_sites.project_id=cp.project_id and projects_sites.site_id=#{site.id}
-           where country_id=co.id) as count
+           ST_Distance((select ST_Centroid(the_geom) from regions where id=#{self.id}), ST_Centroid(the_geom)) as dist,
+           (
+            select count(*) from countries_projects as cp
+            inner join projects as p on p.id=cp.project_id and (p.end_date is null OR p.end_date > now())
+            where country_id=co.id
+          ) as count
            from countries as co
            where id!=#{self.id}
            order by dist
       ) as subq
       where count>0
-      order by count desc
-      limit  #{limit}
+      order by count DESC
+      limit  #{limit};
 SQL
     )
   end
