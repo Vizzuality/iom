@@ -132,7 +132,9 @@
   </div>
 
   <script type="text/javascript">
+    <% if @overview_map_bbox %>
     var bbox = <%=raw(@overview_map_bbox.to_json)%>;
+    <% end %>
     var chco = "<%=@georegion_map_chco%>";
     var chf = "<%=@georegion_map_chf%>";
     var chld = "<%=@chld%>";

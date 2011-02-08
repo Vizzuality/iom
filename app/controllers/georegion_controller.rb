@@ -125,19 +125,12 @@ class GeoregionController < ApplicationController
         @chd  = "t:"+data.join(",")
 
         if @area.is_a?(Country) && @site.navigate_by_regions?
-          bbox = LineString.from_points(result.map{ |r| Point.from_x_y(r['lon'].to_f, r['lat'].to_f)}).bounding_box
-          @overview_map_bbox = [{
-                    :lat => bbox[0].y,
-                    :lon => bbox[0].x}, {
-                    :lat => bbox[1].y,
-                    :lon => bbox[1].x}]
         else
           @overview_map_bbox = [{
                     :lat => @site.overview_map_bbox_miny,
                     :lon => @site.overview_map_bbox_minx}, {
                     :lat => @site.overview_map_bbox_maxy,
                     :lon => @site.overview_map_bbox_maxx}]
-
         end
 
         @breadcrumb.pop
