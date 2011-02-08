@@ -78,14 +78,12 @@ class SitesController < ApplicationController
   end
 
   def about
-
   end
 
   def about_interaction
   end
 
   def contact
-
   end
 
   def sites_layout
