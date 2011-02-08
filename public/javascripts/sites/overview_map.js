@@ -23,8 +23,11 @@
         opacity:parseFloat(0.4),
         isPng: true
     };
-    mapChartType = new google.maps.ImageMapType(mapChartOptions);      
+    mapChartType = new google.maps.ImageMapType(mapChartOptions);
+    bounds = new google.maps.LatLngBounds();
+    
     if (map_type=="overview_map" || map_type=="project_map") {
+      console.log(map_center);
       var latlng = new google.maps.LatLng(map_center[0],map_center[1]);
       var zoom = map_zoom;
     } else {
@@ -92,8 +95,9 @@
       }
     }
     
-
-    map.fitBounds(bounds);
+    if (map_type!="overview_map") {
+      map.fitBounds(bounds);
+    }
     
     if (map_type=="overview_map") {
       google.maps.event.addListener(map,'tilesloaded',function(){
