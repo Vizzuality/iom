@@ -86,7 +86,7 @@
       //Map customization
       if ($('#site_overview_map_lat').attr('value')!='') {
         latlng = new google.maps.LatLng($('#site_overview_map_lat').attr('value'),$('#site_overview_map_lon').attr('value'));
-        zoom = $('#site_overview_map_zoom').attr('value');
+        zoom = parseInt($('#site_overview_map_zoom').attr('value'));
       } else {
         latlng = new google.maps.LatLng(0,0);
         zoom = 1;
@@ -104,12 +104,10 @@
       map = new google.maps.Map(document.getElementById("map"), myOptions);
   
       google.maps.event.addListener(map, "tilesloaded", function(ev) {
-        map.fitBounds(bounds_);
-        zoomIn();
         google.maps.event.clearListeners(map,"tilesloaded");
         google.maps.event.addListener(map, "bounds_changed", function(ev) {
           $('#site_overview_map_lat').attr('value',map.getCenter().lat());
-          $('#site_overview_map_lon').attr('value',map.getCenter().lon());
+          $('#site_overview_map_lon').attr('value',map.getCenter().lng());
           $('#site_overview_map_zoom').attr('value',map.getZoom());
         });
       });
