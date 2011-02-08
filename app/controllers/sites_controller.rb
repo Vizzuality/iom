@@ -46,7 +46,6 @@ class SitesController < ApplicationController
         @overview_map_chco = @site.theme.data[:overview_map_chco]
         @overview_map_chf = @site.theme.data[:overview_map_chf]
         @overview_map_marker_source = @site.theme.data[:overview_map_marker_source]
-
         areas= []
         data = []
         @map_data_max_count=0

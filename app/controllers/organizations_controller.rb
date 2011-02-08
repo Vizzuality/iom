@@ -48,11 +48,6 @@ class OrganizationsController < ApplicationController
 
         result=ActiveRecord::Base.connection.execute(sql)
         @map_data=result.to_json
-        @overview_map_bbox = [{
-                  :lat => @site.overview_map_bbox_miny,
-                  :lon => @site.overview_map_bbox_minx}, {
-                  :lat => @site.overview_map_bbox_maxy,
-                  :lon => @site.overview_map_bbox_maxx}]
         @overview_map_chco = @site.theme.data[:overview_map_chco]
         @overview_map_chf = @site.theme.data[:overview_map_chf]
         @overview_map_marker_source = @site.theme.data[:overview_map_marker_source]

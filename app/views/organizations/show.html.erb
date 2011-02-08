@@ -180,7 +180,12 @@
 
     <!-- MAP -->
     <script type="text/javascript">
-      var bbox = <%=raw(@overview_map_bbox.to_json)%>;
+      <% if @site.overview_map_lat && @site.overview_map_lon %>
+      var map_center = [<%= @site.overview_map_lat %>, <%= @site.overview_map_lon %>];
+      <% else %>
+      var map_center = [];
+      <% end %>
+      var map_zoom = <%= @site.overview_map_zoom %>;
       var chco = "<%=@overview_map_chco%>";
       var chf = "<%=@overview_map_chf%>";
       var chld = "<%=@chld%>";
