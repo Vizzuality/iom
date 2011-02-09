@@ -110,7 +110,7 @@
                <li <%= raw('class="last"') if i > 0 %>>
                  <div class="image">
                    <img src="http://maps.google.com/maps/api/staticmap?size=90x70&maptype=roadmap&style=feature:all|element:labels|visibility:off&path=fillcolor:0x00000090|color:0x00000001&sensor=false&center=<%=r['center_lat']%>,<%=r['center_lon']%>&zoom=6" title="<%= r['project_name'] %>" />
-                   <img class="marker" src="/images/themes/1/marker_1.png" alt="<%= r['project_name'] %>" title="<%= r['project_name'] %>" />
+                   <img class="marker" src="/images/themes/<%=@site.theme_id%>/marker_1.png" alt="<%= r['project_name'] %>" title="<%= r['project_name'] %>" />
                  </div>
                  <div class="info">
                    <h4><a href="<%= project_path(:id => r['project_id']) %>"><%=truncate(r['project_name'], :length => 40)%></a></h4>

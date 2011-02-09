@@ -103,7 +103,7 @@
     		}
 
         //Marker address
-        if (map_type=="overview_map") {
+        if (map_type=="overview_map" || map_type=="administrative_map") {
           
           var hidden_div = document.createElement('div');
           hidden_div.style.border = "none";

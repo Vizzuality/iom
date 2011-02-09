@@ -59,7 +59,7 @@
         </div>
 
         <div id="secondary_map">
-          <img src="http://maps.google.com/maps/api/staticmap?size=302x189&maptype=roadmap&style=feature:all|element:labels|visibility:off&style=feature:road|element:all|visibility:off&style=feature:administrative.province|element:all|visibility:off&style=feature:water|element:all|hue:0x00c3ff&sensor=false&center=<%=@area.center_lat%>,<%=@area.center_lon%>&zoom=3&markers=icon:http://www.ngoaidmap.org/images/themes/1/marker_1.png|<%=@area.center_lat%>,<%=@area.center_lon%>"/>
+          <img src="http://maps.google.com/maps/api/staticmap?size=302x189&maptype=roadmap&style=feature:all|element:labels|visibility:off&style=feature:road|element:all|visibility:off&style=feature:administrative.province|element:all|visibility:off&style=feature:water|element:all|hue:0x00c3ff&sensor=false&center=<%=@area.center_lat%>,<%=@area.center_lon%>&zoom=3&markers=icon:http://www.ngoaidmap.org/images/themes/<%=@site.theme_id%>/marker_1.png|<%=@area.center_lat%>,<%=@area.center_lon%>"/>
           </div>
         <% if @area.projects_clusters_sectors(@site).size > 0 %>
         <div class="block statistics">
@@ -140,7 +140,12 @@
     var chld = "<%=@chld%>";
     var chd = "<%=@chd%>";
     var marker_source = "<%=@georegion_map_marker_source%>";
-    var map_type = "georegion";
+    <% if @area.is_a?(Country) && @site.navigate_by_regions? %>
+      var map_type = "administrative_map";
+    <% else %>
+      var map_type = "georegion";
+    <% end  %>
+    var last_level = "<%= @area.is_a?(Country) && @site.navigate_by_regions? ? "false" : "true" %>";
     var show_regions_with_one_project = "<%= @area.is_a?(Country) && @site.navigate_by_regions? ? "true" : "false" %>";
     <% if @map_data %>
       <% if @area.is_a?(Country) && @site.navigate_by_regions? %>
@@ -151,8 +156,14 @@
     <% else %>
       var map_data = [];
     <% end %>
+    var max_count = <%=@map_data_max_count%>;
     var area_stroke_color = "<%=@georegion_map_stroke_color%>";
     var area_fill_color = "<%=@georegion_map_fill_color%>";
+    var theme = <%=@site.theme_id%>;
   </script>
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+  <% if @area.is_a?(Country) && @site.navigate_by_regions? %>
+  <%=raw(javascript_include_merged(:georegion_overview_map_show)) %>
+  <% else %>
   <%=raw(javascript_include_merged(:georegion_show)) %>
+  <% end %>

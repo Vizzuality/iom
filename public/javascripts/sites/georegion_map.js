@@ -48,7 +48,15 @@
         bounds.extend(new google.maps.LatLng(map_data[i].lat,map_data[i].lon));
       }
       map.fitBounds(bounds);
-  
+      google.maps.event.addListener(map, "bounds_changed", function(ev) {
+        if (map.getZoom()>8) {
+          map.setZoom(8);
+        }
+      });
+      
+      if (map.getZoom()>9) {
+        map.setZoom(9);
+      }
   
       //Positionate controls
       setTimeout(function(){
