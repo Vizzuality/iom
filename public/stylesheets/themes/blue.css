@@ -1,9 +1,9 @@
-a {color:#00B8F3;}
+/*a {color:#00B8F3;}*/
 
 div.main_head div.left h1 {text-shadow:0 1px #006E90;}
 div.main_head div.left p {color:#006E90;}
-div.main_head div.float_head {background:url('/images/sites/search/head_mask.png') repeat 0 0 #00B8F3;}
-div.main_head div.float_head h2 {color:white; text-shadow:0 1px #006E90;}
+div.main_head div.float_head {background:url('/images/sites/search/head_mask.png') repeat 0 0 #00B8F3!important;}
+div.main_head div.float_head h2 {color:#006E90!important; text-shadow:none;}
 div#left_column div.float_left div.head h2 {color:white; text-shadow:0 1px #006E90;}
 div#left_column div.float_left div.head {background:url('/images/sites/search/head_mask.png') repeat 0 0 #00B8F3;}
 div#left_column div.float_left div.block a {color:#00B8F3;}
@@ -11,7 +11,7 @@ div#left_column div.float_left div.block ul.clusters li a {color:#00B8F3;}
 div#left_column div.right ul li h4 a {color:#00B8F3;}
 div#left_column div.right ul li p.info a {color:#00B8F3}
 
-div#pages div.float_left div.outer_head div.head {background:url('/images/sites/search/head_mask.png') no-repeat 0 0 #00B8F3;}
+div#pages div.float_left div.outer_head div.head {background:url('/images/sites/search/head_mask.png') no-repeat 0 0 #00B8F3!important;}
 div#pages div.float_left div.outer_head div.head p {color:#006E90;}
 div#pages div.float_left div.body p a {color:#00B8F3; text-decoration:none;}
 div#pages div.float_left div.results_list ul li div.project_name h3 a {color:#00B8F3;}
@@ -27,3 +27,22 @@ div#project div.float_right div.head p a:hover {color:#00465C;}
 div#project div.float_right div.block ul li div.info h4 a {color:#00B8F3;}
 div#project div.left div.block ul li a {color:#00B8F3;}
 div#project div.left div.block p a {color:#00B8F3;}
+
+
+
+div.main_head div.float_head.home h3 {color:#00384A;}
+div.main_head div.float_head.home sup.beta {color:#00384A;}
+div#pages div.float_left div.outer_head div.head h1 {text-shadow:0 1px #006E90;}
+div#pages div.float_left div.outer_head div.head {border-bottom:1px solid #006E90;}
+div.main_head.projects div.float_head p a {color:#006E90; text-decoration:underline;}
+div.projects div.right div.block p a {color:#00B8F3;}
+div.projects div.right div.block ul li a {color:#00B8F3;}
+div.projects div.right div.block div.logo a.long {color:#00B8F3;}
+div.projects div.float_left div.block ul.related_projects li div.info h4 a {color:#00B8F3;}
+p.sub a {color:#00B8F3;}
+p.sub a:hover {text-decoration:underline;}
+a#see_all {color:#00B8F3;}
+div.view_more a {color:#00B8F3;}
+div.block h3 a {color:#00B8F3;}
+a.more {color:#00B8F3;}
+div#pages div.right div.block a.more {background:url('/images/themes/3/down.png') no-repeat right 6px;}
