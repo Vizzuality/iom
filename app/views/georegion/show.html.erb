@@ -141,6 +141,14 @@
     var chd = "<%=@chd%>";
     var marker_source = "<%=@georegion_map_marker_source%>";
     var map_type = "georegion";
+    <% if @area.is_a?(Country) && @site.navigate_by_regions? %>
+      <% if @site.overview_map_lat && @site.overview_map_lon %>
+      var map_center = [<%= @site.overview_map_lat %>, <%= @site.overview_map_lon %>];
+      <% else %>
+      var map_center = [];
+      <% end %>
+      var map_zoom = <%= @site.overview_map_zoom %>;
+    <% end %>
     var last_level = "<%= @area.is_a?(Country) && @site.navigate_by_regions? ? "false" : "true" %>";
     var show_regions_with_one_project = "<%= @area.is_a?(Country) && @site.navigate_by_regions? ? "true" : "false" %>";
     <% if @map_data %>
