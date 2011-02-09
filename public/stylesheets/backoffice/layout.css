@@ -293,8 +293,13 @@ div.block.donor_funded div.med div.left ul li p {float:left; width:148px; height
 div.block.donor_funded div.med div.left ul li p.more {padding:20px 10px 0 10px; height:51px;}
 div.block.donor_funded div.med div.left ul li p a {font:normal 14px Arial; color:#E93E3F; text-decoration:none;}
 div.block.donor_funded div.med div.left ul li p a:hover {text-decoration:underline;}
-div.block.donor_funded div.bottom {float:left; height:15px; width:100%; background: url('/images/backoffice/backgrounds/bottom_two_columns.png') no-repeat scroll top left!important;}
-
+div.block.donor_funded div.bottom_projects_org {float:left; height:61px; width:100%; background: url('/images/backoffice/backgrounds/bottom_paginate.png') no-repeat left bottom!important;}
+div.block.donor_funded div.bottom_projects_org div.pagination {float:left; width:auto; padding:0; margin:0 0 0 30px!important;}
+div.block.donor_funded div.bottom_projects_org div.pagination em {float:left; padding:20px 10px 7px; background:url('/images/backoffice/donors/page_selected.jpg') no-repeat center bottom; font:normal 15px "Museo Sans",Arial; color:#333333;}
+div.block.donor_funded div.bottom_projects_org div.pagination a {float:left; margin:0; padding:20px 10px 7px 10px; font:normal 15px "Museo Sans",Arial; color:#E93E3F; line-height:15px; text-transform:uppercase;}
+div.block.donor_funded div.bottom_projects_org div.pagination a:hover {color:#333333; text-decoration:none;}
+div.block.donor_funded div.bottom_projects_org div.pagination span.disabled {display:none;}
+div.block.donor_funded div.bottom_projects_org div.pagination span.gap {float:left; height:34px; border-bottom:1px dotted #EA3C44; padding:0;}
 
 /*donors search*/
 div.two_donors {float:left; width:583px; height:100px; margin:20px 10px 0 0; padding:40px 30px 0; background:url('/images/backoffice/donors/two_donors.png') no-repeat 0 0;}
