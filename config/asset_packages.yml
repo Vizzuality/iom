@@ -38,6 +38,12 @@ javascripts:
   - sites/IOMMarker
   - sites/labels_style
   - sites/georegion_map
+- georegion_overview_map_show:
+  - sites/location
+  - sites/mercatorProjection
+  - sites/IOMMarker
+  - sites/labels_style
+  - sites/overview_map
 - organizations_show:
   - sites/location
   - sites/mercatorProjection
