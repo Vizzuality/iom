@@ -23,7 +23,9 @@
           <%= render 'admin/organizations/sidebar' %>
         </div>
       </div>
-      <div class="bottom"></div>
+      <div class="bottom_projects_org">
+        <%= will_paginate(@projects) %>
+      </div>
     </div>
 
     <div class="add_new">
