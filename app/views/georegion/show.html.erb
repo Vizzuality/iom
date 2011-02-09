@@ -140,8 +140,12 @@
     var chld = "<%=@chld%>";
     var chd = "<%=@chd%>";
     var marker_source = "<%=@georegion_map_marker_source%>";
-    var map_type = "georegion";
-    var last_level = "<%= @area.is_a?(Country) && @site.navigate_by_regions? ? "false" : "true" %>";
+    <% if @area.is_a?(Country) && @site.navigate_by_regions? %>
+      var map_type = "overview_map";
+    <% else %>
+      var map_type = "georegion";
+    <% end  %>
+    var last_level = <%= @area.is_a?(Country) && @site.navigate_by_regions? ? false : true %>;
     var show_regions_with_one_project = "<%= @area.is_a?(Country) && @site.navigate_by_regions? ? "true" : "false" %>";
     <% if @map_data %>
       <% if @area.is_a?(Country) && @site.navigate_by_regions? %>
@@ -154,6 +158,7 @@
     <% end %>
     var area_stroke_color = "<%=@georegion_map_stroke_color%>";
     var area_fill_color = "<%=@georegion_map_fill_color%>";
+    var theme = <%=@site.theme_id%>;
   </script>
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
   <% if @area.is_a?(Country) && @site.navigate_by_regions? %>
