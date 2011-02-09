@@ -26,8 +26,6 @@
         $('div#left_column div.left').height($('div#left_column div.float_left').height());
       }
       
-      //If right part is bigger than float left
-      // $('div#left_column div.outer_float').height($('div#left_column div.left').height()-81);
       
       
       // TO ADAPT LEFT AND RIGHT COLUMN PROPERLY
@@ -37,6 +35,5 @@
         $('div#left_column div.outer_float').height($('div#left_column div.right').height() + 40);
         var dif = $('div#left_column div.outer_float').height() - ($('div#left_column div.float_left').height());
         $('div#most_active_orgs').height($('div#most_active_orgs').height() + dif + 41);
-		// console.log($('div#most_active_orgs').height());
       }
     }
