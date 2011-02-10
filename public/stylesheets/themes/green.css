@@ -1,0 +1,38 @@
+a {color:#518842;}
+
+div.main_head div.left h1 {text-shadow:0 1px #1E3218;}
+div.main_head div.left p {color:#1E3218;}
+div.main_head div.float_head {background:url('/images/sites/search/head_mask.png') repeat 0 0 #518842!important;}
+div.main_head div.float_head h2 {color:#1E3218!important; text-shadow:none;}
+div#left_column div.float_left div.head h2 {color:white; text-shadow:0 1px #1E3218;}
+div#left_column div.float_left div.head {background:url('/images/sites/search/head_mask.png') repeat 0 0 #518842!important;}
+div#left_column div.float_left div.block a {color:#518842;}
+div#left_column div.float_left div.block ul.clusters li a {color:#518842;}
+div#left_column div.right ul li h4 a {color:#518842;}
+div#left_column div.right ul li p.info a {color:#518842}
+
+div#pages div.float_left div.outer_head div.head {background:url('/images/sites/search/head_mask.png') repeat-x 0 0 #518842!important;}
+div#pages div.float_left div.outer_head div.head p {color:#1E3218;}
+div#pages div.float_left div.body p a {color:#518842; text-decoration:none;}
+div#pages div.float_left div.results_list ul li div.project_name h3 a {color:#518842;}
+div#pages div.right div.block p a {color:#518842;}
+div#pages div.right div.block ul li a {color:#518842;}
+
+div#project div.left div.block div.logo a {color:#518842;}
+div#project div.float_right div.head {background:url('/images/sites/search/head_mask.png') repeat 0 0 #518842!important;}
+div#project div.float_right div.head p {color:#1E3218;}
+div#project div.float_right div.head p a {color:#1E3218;}
+div#project div.float_right div.head p a:hover {color:#1E3218;}
+div#project div.float_right div.block ul li div.info h4 a {color:#518842;}
+div#project div.left div.block ul li a {color:#518842;}
+div#project div.left div.block p a {color:#518842;}
+
+div.main_head div.float_head.home h3 {color:#1E3218;}
+div.main_head div.float_head.home sup.beta {color:#1E3218;}
+div#pages div.float_left div.outer_head div.head h1 {text-shadow:0 1px #1E3218;}
+div#pages div.float_left div.outer_head div.head {border-bottom:1px solid #1E3218;}
+div.main_head.projects div.float_head p a {color:#1E3218; text-decoration:underline;}
+div.projects div.right div.block p a {color:#518842;}
+div.projects div.right div.block ul li a {color:#518842;}
+div.projects div.right div.block div.logo a.long {color:#518842;}
+div.projects div.float_left div.block ul.related_projects li div.info h4 a {color:#518842;}

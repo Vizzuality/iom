@@ -12,7 +12,7 @@ div#left_column div.float_left div.block ul.clusters li a {color:#CE5D4C;}
 div#left_column div.right ul li h4 a {color:#CE5D4C;}
 div#left_column div.right ul li p.info a {color:#CE5D4C}
 
-div#pages div.float_left div.outer_head div.head {background:url('/images/sites/search/head_mask.png') no-repeat 0 0 #CE5D4C;}
+div#pages div.float_left div.outer_head div.head {background:url('/images/sites/search/head_mask.png') repeat-x 0 0 #CE5D4C;}
 div#pages div.float_left div.outer_head div.head p {color:#8E4035;}
 div#pages div.float_left div.body p a {color:#CE5D4C; text-decoration:none;}
 div#pages div.float_left div.results_list ul li div.project_name h3 a {color:#CE5D4C;}

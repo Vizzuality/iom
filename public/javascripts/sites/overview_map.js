@@ -104,20 +104,17 @@
       }
       var marker_ = new IOMMarker(map_data[i],diameter, image_source,map);
 
-      if (map_type!="overview_map" && map_type!='project_map') {
+      if (map_type!="overview_map") {
         bounds.extend(new google.maps.LatLng(map_data[i].lat, map_data[i].lon));
       }
     }
 
-    if (map_type!="overview_map" && map_type!='project_map') {
+    if (map_type!="overview_map") {
       map.fitBounds(bounds);
     }
 
-    if (map_type=="overview_map" && map_type == "project_map") {
-      google.maps.event.addListener(map,'tilesloaded',function(){
-        google.maps.event.clearListeners(map,'tilesloaded');
-        zoomIn();
-      });
+    if (map_type=="project_map") {
+      map.panBy(130,20);
     }
 
     //Positionate zoom controls
