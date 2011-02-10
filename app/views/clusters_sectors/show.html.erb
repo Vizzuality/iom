@@ -86,7 +86,7 @@
         <h3>
           <%= pluralize(@data.total_projects(@site), 'active project', 'active projects') %> in
           <% if @site.navigate_by_country? %>
-            <%= pluralize(@data.total_countries(@site), @site.word_for_regions.singularize, @site.word_for_regions) %>
+            <%= pluralize(@data.total_countries(@site), 'country', 'countries') %>
           <% else %>
             <%= pluralize(@data.total_regions(@site), @site.word_for_regions.singularize, @site.word_for_regions) %>
           <% end %>

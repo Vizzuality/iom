@@ -97,7 +97,7 @@
     <h3>
       <%= pluralize(@site.total_projects, 'active project', 'active projects') %> in
       <% if @site.navigate_by_country? %>
-        <%= pluralize(@site.total_countries, @site.word_for_regions.singularize, @site.word_for_regions) %>
+        <%= pluralize(@site.total_countries, 'country', 'countries') %>
       <% else %>
         <%= pluralize(@site.total_regions, @site.word_for_regions.singularize, @site.word_for_regions) %>
       <% end %>
