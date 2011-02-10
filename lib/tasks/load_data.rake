@@ -689,7 +689,7 @@ namespace :iom do
       Site.all.each{ |site| site.save! }
     end
 
-    desc 'Load projects from Food Security'
+    desc 'Fix locations from projects from Food Security'
     task :fix_fs_projects_location => :environment do
       DB = ActiveRecord::Base.connection
 
@@ -774,6 +774,25 @@ namespace :iom do
       Site.all.each{ |site| site.save! }
     end
 
+  end
 
+  namespace :fixes do
+    desc "Make Haiti fundings site specific"
+    task :haiti_fundings => :environment do
+      Organization.all.each do |organization|
+        organization.attributes_for_site = {
+          :site_id => '1',
+          :organization_values => {
+            :private_funding => organization.private_funding,
+            :usg_funding => organization.usg_funding,
+            :other_funding => organization.other_funding
+          }
+        }
+        organization.private_funding = nil
+        organization.usg_funding = nil
+        organization.other_funding = nil
+        organization.save
+      end
+    end
   end
 end
