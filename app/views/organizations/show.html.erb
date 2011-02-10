@@ -51,12 +51,12 @@
             <h2>OVERVIEW</h2>
           </div>
 
-          <% if !@organization.budget.blank? %>
+          <% if @organization.budget(@site) > 0 %>
             <div class="block">
               <h3>Funding raised</h3>
-              <p class="budget"><%= number_with_precision(@organization.budget, :precision => 0, :delimiter => ',') %></p>
+              <p class="budget"><%= number_with_precision(@organization.budget(@site), :precision => 0, :delimiter => ',') %></p>
               <h3 class="secondary">FUNDING SOURCES</h3>
-              <p><%= funding_percentages(@organization) %></p>
+              <p><%= funding_percentages(@organization, @site) %></p>
             </div>
           <% end %>
 

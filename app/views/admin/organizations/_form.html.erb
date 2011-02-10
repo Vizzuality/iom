@@ -47,24 +47,6 @@
   </div>
 
   <div class="common">
-    <h3>FUNDING</h3>
-    <div class="short_field">
-      <%= f.label :private_funding %>
-      <%= f.text_field :private_funding, :value => number_with_precision(f.object.private_funding, :precision => 2, :strip_insignificant_zeros => true, :delimiter => ','), :class=>"short budget" %>
-    </div>
-
-    <div class="short_field">
-      <%= f.label :usg_funding %>
-      <%= f.text_field :usg_funding, :value => number_with_precision(f.object.usg_funding, :precision => 2, :strip_insignificant_zeros => true, :delimiter => ','), :class=>"short budget" %>
-    </div>
-
-    <div class="short_field">
-      <%= f.label :other_funding %>
-      <%= f.text_field :other_funding, :value => number_with_precision(f.object.other_funding, :precision => 2, :strip_insignificant_zeros => true, :delimiter => ','), :class=>"short budget" %>
-    </div>
-  </div>
-
-  <div class="common">
     <h3>SOCIAL LINK</h3>
     <div class="short_field">
       <%= f.label :twitter %>

@@ -87,6 +87,30 @@ class Organization < ActiveRecord::Base
   def attributes_for_site=(value)
     atts = site_specific_information || {}
     atts[value[:site_id].to_s] = value[:organization_values]
+
+    # Funding values set to float
+    if atts[value[:site_id].to_s][:usg_funding]
+      if atts[value[:site_id].to_s][:usg_funding].is_a?(String)
+        atts[value[:site_id].to_s][:usg_funding] = atts[value[:site_id].to_s][:usg_funding].delete(',').to_f
+      end
+    else
+      atts[value[:site_id].to_s][:usg_funding] = 0.0
+    end
+    if atts[value[:site_id].to_s][:private_funding]
+      if atts[value[:site_id].to_s][:private_funding].is_a?(String)
+        atts[value[:site_id].to_s][:private_funding] = atts[value[:site_id].to_s][:private_funding].delete(',').to_f
+      end
+    else
+      atts[value[:site_id].to_s][:private_funding] = 0.0
+    end
+    if atts[value[:site_id].to_s][:other_funding]
+      if atts[value[:site_id].to_s][:other_funding].is_a?(String)
+        atts[value[:site_id].to_s][:other_funding] = atts[value[:site_id].to_s][:other_funding].delete(',').to_f
+      end
+    else
+      atts[value[:site_id].to_s][:other_funding] = 0.0
+    end
+
     update_attribute(:site_specific_information, atts)
   end
 
@@ -188,6 +212,11 @@ SQL
     end
   end
 
+  def budget(site)
+    atts_for_site = attributes_for_site(site)
+    return (atts_for_site[:usg_funding].to_f || 0) + (atts_for_site[:private_funding].to_f || 0) + (atts_for_site[:other_funding].to_f || 0)
+  end
+
   # to get only id and name
   def self.get_select_values
     scoped.select("id,name").order("name ASC")
@@ -215,46 +244,6 @@ SQL
                                 and p.primary_organization_id=#{self.id}
     inner join projects_sites as psi on p.id=psi.project_id and psi.site_id=#{site.id}"
     ActiveRecord::Base.connection.execute(sql).first['count'].to_i
-  end
-
-  def private_funding=(ammount)
-    if ammount.blank?
-      write_attribute(:private_funding, 0.0)
-    else
-      case ammount
-        when String then write_attribute(:private_funding, ammount.delete(',').to_f)
-        else             write_attribute(:private_funding, ammount)
-      end
-    end
-    set_budget
-  end
-
-  def usg_funding=(ammount)
-    if ammount.blank?
-      write_attribute(:usg_funding, 0.0)
-    else
-      case ammount
-        when String then write_attribute(:usg_funding, ammount.delete(',').to_f)
-        else             write_attribute(:usg_funding, ammount)
-      end
-    end
-    set_budget
-  end
-
-  def other_funding=(ammount)
-    if ammount.blank?
-      write_attribute(:other_funding, 0.0)
-    else
-      case ammount
-        when String then write_attribute(:other_funding, ammount.delete(',').to_f)
-        else             write_attribute(:other_funding, ammount)
-      end
-    end
-    set_budget
-  end
-
-  def set_budget
-    self.budget = (self.usg_funding || 0) + (self.other_funding || 0) + (self.private_funding || 0)
   end
 
 end
