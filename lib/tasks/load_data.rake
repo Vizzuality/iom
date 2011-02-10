@@ -689,5 +689,91 @@ namespace :iom do
       Site.all.each{ |site| site.save! }
     end
 
+    desc 'Load projects from Food Security'
+    task :fix_fs_projects_location => :environment do
+      DB = ActiveRecord::Base.connection
+
+      csv_projs = CsvMapper.import("#{Rails.root}/db/data/FS-Data-def.csv") do
+        read_attributes_from_file
+      end
+
+      # Cache geocoding
+      geo_cache = {}
+
+      csv_projs.each do |row|
+        if p = Project.find_by_intervention_id(row.ipc)
+          puts "Updating project #{p.name}..."
+          unless row.country.blank?
+            p.countries.clear
+            row.country.split(',').map{ |c| c.strip }.each do |country_name|
+              country_name = if country_name == 'Laos'
+                "Lao People's Democratic Republic"
+              elsif country_name == 'Guinea Bissau'
+                'Guinea-Bissau'
+              elsif country_name == 'Vietnam'
+                'Viet Nam'
+              elsif country_name == 'Myanmar'
+                'Burma'
+              elsif country_name == 'DR Congo'
+                'Congo'
+              elsif country_name == 'Tanzania'
+                'United Republic of Tanzania'
+              else
+                country_name
+              end
+              if country = Country.where("name ilike ?",country_name).select(Country.custom_fields).first
+                p.countries << country
+              else
+                puts "[Not found] Country name #{country_name} for project #{p.name}"
+              end
+            end
+          end
+          if p.countries.empty?
+            puts "[ERROR] Empty countries for project #{p.name}"
+            next
+          end
+
+          #Geo data
+          multi_point = ""
+          reg1 = nil
+          p.regions.clear
+          unless row._1st_administrative_level.blank?
+            parsed_adm1 = row._1st_administrative_level.split(",").map{|e|e.strip}
+            locations = Array.new
+            parsed_adm1.each do |region_name|
+              if reg1 = Region.where("name ilike ? and level=? and country_id IN (#{(p.countries.map(&:id) + [-1]).join(',')})",region_name, 1).select(Region.custom_fields).first
+                p.regions  << reg1
+                sql = "select ST_AsText(ST_PointOnSurface(the_geom)) as point from regions where id=#{reg1.id}"
+                point = DB.execute(sql).first["point"]
+                unless point.blank?
+                  res = point.delete("POINT(").delete(")")
+                  locations << res
+                else
+                  puts "[Error] Region level 1 name #{region_name} has a null geometry"
+                end
+              else
+                puts "[Not found] Region level 1 name #{region_name} for project #{p.name}"
+              end
+            end
+            if locations.length > 0
+              multi_point = "ST_MPointFromText('MULTIPOINT(#{locations.join(',')})',4326)"
+            end
+          end
+
+          #save the Geom that we created before
+          unless multi_point.blank?
+            sql = "UPDATE projects SET the_geom=#{multi_point} WHERE id=#{p.id}"
+            DB.execute sql
+          end
+        end
+      end
+
+      puts
+      puts "Updating finished"
+
+      Site.all.each{ |site| site.save! }
+    end
+
+
   end
 end
