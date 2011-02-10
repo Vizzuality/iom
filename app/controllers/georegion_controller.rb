@@ -19,6 +19,7 @@ class GeoregionController < ApplicationController
     @breadcrumb << country if @site.navigate_by_country?
 
     if geo_ids.size == 1 && @site.navigate_by_country?
+      render_404 and return if country.projects_count(@site) == 0
       @projects = Project.custom_find @site, :country => country.id,
                                              :level => 1,
                                              :per_page => 10,
