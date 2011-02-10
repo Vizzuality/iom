@@ -98,17 +98,17 @@
             <% end %>
           <% end %>
 
-          <% unless @organization.resources(@site).empty? %>
-            <div class="block resources">
-              <h3>ADDITIONAL RESOURCES</h3>
+          <% unless @organization.resources_for_site(@site).empty? %>
+          <div class="block resources">
+            <h3>ADDITIONAL RESOURCES</h3>
 
-              <% @organization.resources(@site).each do |resource| %>
-                <ul>
-                  <li><a href="<%= resource.url %>" target="_blank"><%= resource.title %></a></li>
-                </ul>
-              <%end%>
-            </div>
-          <%end%>
+            <% @organization.resources_for_site(@site).each do |resource| %>
+              <ul>
+                <li><a href="<%= resource.url %>" target="_blank"><%= resource.title %></a></li>
+              </ul>
+            <%end%>
+          </div>
+          <% end %>
           <%unless @organization.contact_name.nil? &&  @organization.contact_position.nil? && @organization.hq_address.nil? && @organization.contact_zip.nil? && @organization.contact_phone_number.nil? %>
           <div class="block">
             <h3>CONTACT INFORMATION</h3>
