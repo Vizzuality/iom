@@ -95,6 +95,9 @@
       <%= form_tag(search_path, :method => :get, :class => 'search') do %>
         <span class="input_search">
           <%= text_field_tag :q, params[:q], :value=>'Search...' %>
+          <% unless @site.published? %>
+          <input type="hidden" name="force_site_id" value="<%= @site.id %>" />
+          <% end %>
           <%= submit_tag '' %>
         </span>
       <% end %>
