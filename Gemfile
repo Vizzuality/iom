@@ -21,6 +21,7 @@ gem 'hoptoad_notifier'
 gem 'memcache-client'
 
 group :development do
+  gem 'git-up'
   gem 'capistrano'
   gem 'capistrano-ext'
   gem 'wirble'
