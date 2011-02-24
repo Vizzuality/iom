@@ -10,23 +10,23 @@
 
       <div class="field">
         <%= f.label :name %>
-        <%= f.text_field :name, :class=>"long #{'error' if !@organization.errors[:name].empty? && action_name != 'new'}", :disabled=>"true" %>
+        <%= f.text_field :name, :class => "long #{'error' if !@organization.errors[:name].empty? && action_name != 'new'}" %>
         <%= errors_for @organization, :name %>
       </div>
 
       <div class="field">
         <%= f.label :description %>
-        <%= f.text_area :description, :disabled=>"true" %>
+        <%= f.text_area :description %>
       </div>
 
       <div class="short_field">
         <%= f.label :website %>
-        <%= f.text_field :website, :disabled=>"true", :class=>"short" %>
+        <%= f.text_field :website, :class => "short" %>
       </div>
 
       <div class="short_field">
         <%= f.label :national_staff %>
-        <%= f.text_field :national_staff, :disabled=>"true", :class=>"short people" %>
+        <%= f.text_field :national_staff, :class => "short people" %>
       </div>
 
     </div>
@@ -42,17 +42,17 @@
       </span>
       <div class="short_field">
         <%= f.label :private_funding %>
-        <%= f.text_field :private_funding, :value => number_with_precision(f.object.private_funding, :precision => 2, :strip_insignificant_zeros => true, :delimiter => ','), :class=>"short budget" %>
+        <%= f.text_field :private_funding, :value => number_with_precision(f.object.private_funding, :precision => 2, :strip_insignificant_zeros => true, :delimiter => ','), :class => "short budget" %>
       </div>
 
       <div class="short_field">
         <%= f.label :usg_funding %>
-        <%= f.text_field :usg_funding, :value => number_with_precision(f.object.usg_funding, :precision => 2, :strip_insignificant_zeros => true, :delimiter => ','), :class=>"short budget" %>
+        <%= f.text_field :usg_funding, :value => number_with_precision(f.object.usg_funding, :precision => 2, :strip_insignificant_zeros => true, :delimiter => ','), :class => "short budget" %>
       </div>
 
       <div class="short_field">
         <%= f.label :other_funding %>
-        <%= f.text_field :other_funding, :value => number_with_precision(f.object.other_funding, :precision => 2, :strip_insignificant_zeros => true, :delimiter => ','), :class=>"short budget" %>
+        <%= f.text_field :other_funding, :value => number_with_precision(f.object.other_funding, :precision => 2, :strip_insignificant_zeros => true, :delimiter => ','), :class => "short budget" %>
       </div>
     </div>
     <div class="bottom"></div>
@@ -67,12 +67,12 @@
       </span>
       <div class="field">
         <%= f.label :twitter %>
-        <%= f.text_field :twitter, :disabled=>"true", :class=>"short twitter" %>
+        <%= f.text_field :twitter, :class => "short twitter" %>
       </div>
 
       <div class="field">
         <%= f.label :facebook %>
-        <%= f.text_field :facebook, :disabled=>"true", :class=>"long facebook" %>
+        <%= f.text_field :facebook, :class => "long facebook" %>
       </div>
     </div>
     <div class="bottom"></div>
@@ -85,19 +85,78 @@
         <h3 class="museo_sans">CONTACT INFORMATION</h3>
         <p class="paylock close"><a href="#">Click to edit the specific fields</a></p>
       </span>
+      <div class="short_field">
+        <%= f.label :contact_name %>
+        <%= f.text_field :contact_name, :class => "short" %>
+      </div>
+
+      <div class="short_field last">
+        <%= f.label :contact_position %>
+        <%= f.text_field :contact_position, :class => "short" %>
+      </div>
+
       <div class="field">
-        <%= f.label :contact_email %>
-        <%= f.text_field :contact_email, :class=>"short", :disabled=>"true" %>
+        <%= f.label :hq_address %>
+        <%= f.text_field :hq_address, :class => "address" %>
       </div>
 
       <div class="short_field">
-        <%= f.label :hq_address %>
-        <%= f.text_field :hq_address, :class=>"short", :disabled=>"true" %>
+        <%= f.label :contact_city %>
+        <%= f.text_field :contact_city, :class => "short" %>
+      </div>
+
+      <div class="short_field last">
+        <%= f.label :contact_zip %>
+        <%= f.text_field :contact_zip, :class => "short" %>
+      </div>
+
+      <div class="short_field">
+        <%= f.label :contact_state %>
+        <%= f.text_field :contact_state, :class => "short" %>
+      </div>
+
+      <div class="short_field last">
+        <%= f.label :contact_position %>
+        <%= f.text_field :contact_position, :class => "short" %>
+      </div>
+
+      <div class="short_field">
+        <%= f.label :contact_email %>
+        <%= f.text_field :contact_email, :class => "short" %>
       </div>
 
       <div class="short_field last">
         <%= f.label :contact_phone_number %>
-        <%= f.text_field :contact_phone_number, :class=>"short", :disabled=>"true" %>
+        <%= f.text_field :contact_phone_number, :class => "short" %>
+      </div>
+    </div>
+    <div class="bottom"></div>
+  </div>
+
+
+  <div class="specific_edit closed">
+    <div class="top"></div>
+    <div class="med">
+      <span>
+        <h3>MEDIA CONTACT INFORMATION</h3>
+        <p class="paylock close"><a href="#">Click to edit the specific fields</a></p>
+      </span>
+      <div class="short_field">
+        <%= f.label :media_contact_name %>
+        <%= f.text_field :media_contact_name, :class=>"short" %>
+      </div>
+      <div class="short_field last">
+        <%= f.label :media_contact_position %>
+        <%= f.text_field :media_contact_position, :class=>"short" %>
+      </div>
+      <div class="short_field">
+        <%= f.label :media_contact_email %>
+        <%= f.text_field :media_contact_email, :class=>"short" %>
+      </div>
+
+      <div class="short_field last">
+        <%= f.label :media_contact_phone_number %>
+        <%= f.text_field :media_contact_phone_number, :class=>"short" %>
       </div>
     </div>
     <div class="bottom"></div>
@@ -113,32 +172,37 @@
       </span>
       <div class="field">
         <%= f.label :donation_address %>
-        <%= f.text_field :donation_address, :class=>"long" %>
+        <%= f.text_field :donation_address, :class => "long" %>
       </div>
 
       <div class="tiny_field last">
         <%= f.label :zip_code %>
-        <%= f.text_field :zip_code, :class=>"tiny" %>
+        <%= f.text_field :zip_code, :class => "tiny" %>
       </div>
 
       <div class="short_field">
         <%= f.label :city %>
-        <%= f.text_field :city, :class=>"short" %>
+        <%= f.text_field :city, :class => "short" %>
       </div>
 
       <div class="short_field last">
         <%= f.label :state %>
-        <%= f.text_field :state, :class=>"short" %>
+        <%= f.text_field :state, :class => "short" %>
       </div>
 
       <div class="short_field">
         <%= f.label :donation_phone_number %>
-        <%= f.text_field :donation_phone_number, :class=>"short" %>
+        <%= f.text_field :donation_phone_number, :class => "short" %>
       </div>
 
       <div class="short_field">
         <%= f.label :donation_website %>
-        <%= f.text_field :donation_website, :class=>"short" %>
+        <%= f.text_field :donation_website, :class => "short" %>
+      </div>
+
+      <div class="short_field last">
+        <%= f.label :donation_country %>
+        <%= f.text_field :donation_country, :class=>"short" %>
       </div>
     </div>
     <div class="bottom"></div>

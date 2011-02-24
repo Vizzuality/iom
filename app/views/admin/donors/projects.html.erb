@@ -5,13 +5,13 @@
       <div class="left">
         <h2 class="museo_sans"><%= @donor.name.html_safe %></h2>
 
-        <p><%= pluralize(@donor.donated_projects.count, ' funded project', 'funded projects') %></p>
-        <% unless @donor.donated_projects.empty? %>
+        <p><%= pluralize(@donor.all_donated_projects.count, ' funded project', 'funded projects') %></p>
+        <% unless @donor.all_donated_projects.empty? %>
           <ul>
-            <% @donor.donated_projects.each do |project| %>
+            <% @donor.all_donated_projects.each do |project| %>
             <li>
               <span class="first">
-                <h3><%= link_to(truncate(project.name, :length => 47), edit_admin_project_path(project)) %></h3>
+                <h3><%= link_to(truncate(project.name, :length => 43), edit_admin_project_path(project), :title => project.name) %></h3>
                 <p class="<%= project.finished? ? 'closed' : 'active' %>"><%= project.finished? ? 'Closed' : 'Active' %></p>
               </span>
               <p>$<%= @donor.donations.where(:project_id => project.id).first.try(:amount) || 0 %></p>

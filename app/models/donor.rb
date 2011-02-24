@@ -28,6 +28,7 @@ class Donor < ActiveRecord::Base
   has_many :media_resources, :conditions => 'media_resources.element_type = #{Iom::ActsAsResource::DONOR_TYPE}', :foreign_key => :element_id, :dependent => :destroy, :order => 'position ASC'
   has_many :donations, :dependent => :destroy
   has_many :donated_projects, :through => :donations, :source => :project, :uniq => true, :conditions => "(projects.end_date is null or projects.end_date > now())"
+  has_many :all_donated_projects, :through => :donations, :source => :project, :uniq => true
 
   has_attached_file :logo, :styles => {
                                       :small => {
