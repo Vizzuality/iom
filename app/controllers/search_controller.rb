@@ -25,7 +25,8 @@ class SearchController < ApplicationController
       q = "%#{params[:q].sanitize_sql!}%"
       where << "(project_name ilike '#{q}' OR 
                  project_description ilike '#{q}' OR 
-                 organization_name ilike '#{q}' OR 
+                 organization_name ilike '#{q}' OR
+                 sectors ilike '#{q}' OR
                  regions ilike '#{q}' )"
       where_facet << "(p.name ilike '#{q}' OR p.description ilike '#{q}')"
     end
