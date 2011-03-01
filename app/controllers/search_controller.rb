@@ -23,7 +23,10 @@ class SearchController < ApplicationController
 
     if params[:q].present?
       q = "%#{params[:q].sanitize_sql!}%"
-      where << "(project_name ilike '#{q}' OR project_description ilike '#{q}')"
+      where << "(project_name ilike '#{q}' OR 
+                 project_description ilike '#{q}' OR 
+                 organization_name ilike '#{q}' OR 
+                 regions ilike '#{q}' )"
       where_facet << "(p.name ilike '#{q}' OR p.description ilike '#{q}')"
     end
 
@@ -39,6 +42,8 @@ class SearchController < ApplicationController
     sql_count = "select count(*) as count from data_denormalization #{where}"
     @total_projects = ActiveRecord::Base.connection.execute(sql_count).first['count'].to_i
     @total_pages = (@total_projects.to_f / limit.to_f).ceil
+
+    #TODO: I am not taking in consideration the search on organization and location when using the facets.
 
     respond_to do |format|
       format.html do
