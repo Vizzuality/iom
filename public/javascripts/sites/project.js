@@ -7,6 +7,23 @@
       var vimeo_count = 0;
 
       $(document).ready( function() {
+	
+				//Collapsable list of donors
+        $('ul.donor_list').each(function(index,element){
+          var list_size_compress = $(element).height();
+          $(element).find('li.out').css('display','none');
+          var list_size = $(element).height();
+          $(element).height(list_size);
+          $(element).css('overflow','hidden');
+          $(element).parent().children('a.more').attr('title',list_size_compress);
+          $(element).parent().children('a.more').click(function(){
+            $(this).parent().find('li.out').css('display','block');
+            var size = $(this).attr('title') + 'px';
+            $(this).parent().find('ul').animate({height: size},500, function(){
+              $(this).parent().find('a.more').remove();
+            });
+          });
+        });
 
         //Number of men for painting
 		var people_width = $('span.people_amount').attr('estimate');
@@ -17,7 +34,7 @@
         $('span.people_amount').css('display','block');
         
         $('p.estimate').text(parseInt($('p.estimate').text()).toMoney(0,'.',','));
-        $('p.estimate').html($('p.estimate').text() + '<sup>(estimate)</sup>');
+        $('p.estimate').html($('p.estimate').text() + '<sup>(target)</sup>');
         
 
         //If left part is bigger than float right
