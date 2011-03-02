@@ -532,7 +532,7 @@ div.projects div.right div.block div.logo a {width:130px; padding:10px 0 0 5px; 
 div.projects div.right div.block div.logo a.long {width:100%; padding:0;}
 div.projects div.right div.block div.logo a:hover {text-decoration:underline;}
 div.projects div.right div.block ul {width:100%; margin:7px 0 0 0; padding:0; list-style:none;}
-div.projects div.right div.block ul.donor_list {margin:7px 0 10px 0;}
+div.projects div.right div.block ul.donor_list {margin:7px 0 0px 0;}
 div.projects div.right div.block ul li {padding:3px 0 3px 10px; background:url('/images/sites/icons/list_disc.png') no-repeat 0 10px; font:normal 13px Arial; color:#999999;}
 div.projects div.right div.block ul li a {color:#CE5D4C; text-decoration:none;}
 div.projects div.right div.block ul li a:hover {text-decoration:underline;}
@@ -541,7 +541,7 @@ div.projects div.right div.block p.no_margin {padding:3px 0 0 0;}
 div.projects div.right div.block p.budget {padding:3px 0 0 10px; font:normal 25px "Aller"; color:#666666; background:url('/images/sites/icons/budget.png') no-repeat 0 16px;}
 div.projects div.right div.block p a {color:#CE5D4C; text-decoration:none;} /* TODO: color*/
 div.projects div.right div.block p a:hover {text-decoration:underline;}
-div.projects div.right div.block a.more {position:relative; margin:50px 0 0 10px; padding:0 12px 0 0; background:url('/images/sites/icons/down_garnet.png') no-repeat right 6px;}
+div.projects div.right div.block a.more {position:relative; float: left; margin:10px 0 0 10px; padding:0px 12px 0 0; background:url('/images/sites/icons/down_garnet.png') no-repeat right 6px;}
 div.projects div.right div.block a.more:hover {text-decoration:underline;}
 
 div.projects div.right div.block span.people_amount {display:none; height:20px; padding:0; background:url('/images/sites/projects/man.png') repeat 0 0; max-width:255px; margin:2px 0 0 0;}
