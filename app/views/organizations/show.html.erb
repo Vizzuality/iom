@@ -22,7 +22,7 @@
         </div>
       </div>
       <div class="right">
-        <%= anglo(simple_format(@organization.description.squish.truncate(800))) if @organization.description.present? %>
+        <%= simple_format(@organization.description.squish.truncate(800)) if @organization.description.present? %>
       </div>
     </div>
   </div>
