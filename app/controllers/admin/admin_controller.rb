@@ -21,7 +21,6 @@ class Admin::AdminController < ApplicationController
         send_data results_in_csv,
           :type => 'application/download; application/vnd.ms-excel; text/csv; charset=iso-8859-1; header=present',
           :disposition => "attachment; filename=ngoaidmap_projects.csv"
-        end
       end
     end
   end
