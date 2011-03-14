@@ -314,6 +314,8 @@ div.one_donor p {float:left; margin:20px 5px 0 0; width:auto; font:normal 43px "
 div.one_donor label {float:left; font:normal 15px "Museo Sans",Arial; color:#666666; margin:24px 0 0 0; text-align:left;}
 div.one_donor a {float:left; width:152px; height:28px; margin:7px 0 0 46px; padding:4px 0 0 40px; background:url('/images/backoffice/donors/add_donor.png') no-repeat 0 0; font:normal 19px "Museo Sans",Arial; color:white; text-shadow:0 1px #5C7C31;}
 div.one_donor a:hover {background-position:0 -32px;}
+div.one_donor a.import_csv {float:left; width:165px; height:26px; margin:3px 0 0 46px; padding:6px 0 0 27px; background:url('/images/backoffice/projects/import_csv_bttn.png') no-repeat 0 0; font:normal 19px "Museo Sans",Arial; color:white; text-shadow:0 1px #000000;}
+div.one_donor a.import_csv:hover {background-position:0 -32px;}
 div.med.donors_list h2 a.remove {padding:0 10px 0 0; color:#333333; border-bottom:1px dotted #EB4142; background:url('/images/backoffice/icons/red_x.png') no-repeat right 17px;}
 div.med.donors_list h2 a.remove:hover {border-bottom:1px solid #EB4142; text-decoration:none;}
 div.med.donors_list ul {float:left; width:100%; padding:0; margin:23px 0 0 0; border-top:1px solid #CCCCCC;}
