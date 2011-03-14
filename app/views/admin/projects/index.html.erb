@@ -87,7 +87,7 @@
         <label class="museo_sans"><%= Project.count == 1 ? 'project' : 'projects' %><br/>registered</label>
       </div>
         <a class="add_project museo_sans shadow_green" href="<%= new_admin_project_path %>">Add new project</a>
-        <a class="import_csv museo_sans shadow_black" href="<%= admin_export_projects_path %>">Export projects</a>
+        <a class="import_csv museo_sans shadow_black" href="<%= admin_export_projects_path(:format => 'csv') %>">Export projects</a>
     </div>
     <span class="bottom"></span>
     </div>
