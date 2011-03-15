@@ -1,7 +1,8 @@
 
 
     function IOMMarker(info, diameter, image, map) {
-      this.latlng_ = new google.maps.LatLng(parseFloat(info.lat),parseFloat(info.lon));
+      this.latlng_ = new google.maps.LatLng(info.lat,info.lon);
+      console.log(this.latlng_);
       this.url = info.url;
       this.count = info.count;
       this.total_in_region = info.total_in_region;
