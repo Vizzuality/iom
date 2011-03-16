@@ -40,7 +40,8 @@ class Admin::AdminController < ApplicationController
     countries,
     (select '|' || array_to_string(array_agg(distinct name),'|') ||'|' from regions as r inner join projects_regions as pr on r.id=pr.region_id where r.level=1 and pr.project_id=dd.project_id) as regions_level1,
     (select '|' || array_to_string(array_agg(distinct name),'|') ||'|' from regions as r inner join projects_regions as pr on r.id=pr.region_id where r.level=2 and pr.project_id=dd.project_id) as regions_level2,
-    (select '|' || array_to_string(array_agg(distinct name),'|') ||'|' from regions as r inner join projects_regions as pr on r.id=pr.region_id where r.level=3 and pr.project_id=dd.project_id) as regions_level3
+    (select '|' || array_to_string(array_agg(distinct name),'|') ||'|' from regions as r inner join projects_regions as pr on r.id=pr.region_id where r.level=3 and pr.project_id=dd.project_id) as regions_level3,
+    (select '|' || array_to_string(array_agg(distinct name),'|') ||'|' from donors as d inner join donations as dn on d.id=dn.donor_id and dn.project_id=dd.project_id) as donors
     from data_denormalization as dd inner join projects as p on dd.project_id=p.id
     group by
     project_id,
