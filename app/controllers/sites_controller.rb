@@ -11,7 +11,7 @@ class SitesController < ApplicationController
   end
 
   def general_home
-    @sites = Site.published.paginate :per_page => 20, :page => params[:page], :order => 'created_at DESC'
+    @sites = Site.published.paginate :per_page => 20, :page => params[:page], :order => 'id DESC'
     render :general_home
   end
 
