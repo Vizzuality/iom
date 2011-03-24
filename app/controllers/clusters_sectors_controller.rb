@@ -26,25 +26,47 @@ class ClustersSectorsController < ApplicationController
     respond_to do |format|
       format.html do
         if @data.is_a?(Cluster)
-          # Get the data for the map depending on the region definition of the site (country or region)
-          sql="select r.id,r.name,count(ps.*) as count,r.center_lon as lon,r.center_lat as lat,r.name,'/location/'||r.path as url,r.code,
-              (select count(*) from data_denormalization where regions_ids && ('{'||r.id||'}')::integer[] and is_active=true and site_id=#{@site.id}) as total_in_region
-          from regions as r
-            inner join projects_regions as pr on r.id=pr.region_id and r.level=#{@site.level_for_region}
-            inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{@site.id}
-            inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
-            inner join clusters_projects as cp on cp.project_id=p.id and cp.cluster_id=#{params[:id].sanitize_sql!}
-            group by r.id,r.name,lon,lat,r.name,url,r.code"
+          if @site.geographic_context_country_id          
+            # Get the data for the map depending on the region definition of the site (country or region)
+            sql="select r.id,r.name,count(ps.*) as count,r.center_lon as lon,r.center_lat as lat,r.name,'/location/'||r.path as url,r.code,
+                (select count(*) from data_denormalization where regions_ids && ('{'||r.id||'}')::integer[] and is_active=true and site_id=#{@site.id}) as total_in_region
+            from regions as r
+              inner join projects_regions as pr on r.id=pr.region_id and r.level=#{@site.level_for_region}
+              inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{@site.id}
+              inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
+              inner join clusters_projects as cp on cp.project_id=p.id and cp.cluster_id=#{params[:id].sanitize_sql!}
+              group by r.id,r.name,lon,lat,r.name,url,r.code"
+          else
+             sql="select c.id,c.name,count(ps.*) as count,c.center_lon as lon,c.center_lat as lat,c.name,'/location/'||c.id as url,
+                  (select count(*) from data_denormalization where countries_ids && ('{'||c.id||'}')::integer[] and is_active=true and site_id=#{@site.id}) as total_in_region
+              from countries as c
+                inner join countries_projects as cp on c.id=cp.country_id
+                inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=#{@site.id}
+                inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
+                inner join clusters_projects as cpr on cpr.project_id=p.id and cpr.cluster_id=#{params[:id].sanitize_sql!}
+                group by c.id,c.name,lon,lat,c.name,url"
+          end
         else
-          # Get the data for the map depending on the region definition of the site (country or region)
-          sql="select r.id,r.name,count(ps.*) as count,r.center_lon as lon,r.center_lat as lat,r.name,'/location/'||r.path as url,r.code,
-              (select count(*) from data_denormalization where regions_ids && ('{'||r.id||'}')::integer[] and is_active=true and site_id=#{@site.id}) as total_in_region
-          from regions as r
-            inner join projects_regions as pr on r.id=pr.region_id and r.level=#{@site.level_for_region}
-            inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{@site.id}
-            inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
-            inner join projects_sectors as pse on pse.project_id=p.id and pse.sector_id=#{params[:id].sanitize_sql!}
-            group by r.id,r.name,lon,lat,r.name,url,r.code"
+          if @site.geographic_context_country_id          
+            # Get the data for the map depending on the region definition of the site (country or region)
+            sql="select r.id,r.name,count(ps.*) as count,r.center_lon as lon,r.center_lat as lat,r.name,'/location/'||r.path as url,r.code,
+                (select count(*) from data_denormalization where regions_ids && ('{'||r.id||'}')::integer[] and is_active=true and site_id=#{@site.id}) as total_in_region
+            from regions as r
+              inner join projects_regions as pr on r.id=pr.region_id and r.level=#{@site.level_for_region}
+              inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{@site.id}
+              inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
+              inner join projects_sectors as pse on pse.project_id=p.id and pse.sector_id=#{params[:id].sanitize_sql!}
+              group by r.id,r.name,lon,lat,r.name,url,r.code"
+          else
+            sql="select c.id,c.name,count(ps.*) as count,c.center_lon as lon,c.center_lat as lat,c.name,'/location/'||c.id as url,
+                (select count(*) from data_denormalization where countries_ids && ('{'||c.id||'}')::integer[] and is_active=true and site_id=#{@site.id}) as total_in_region
+            from countries as c
+              inner join countries_projects as cp on c.id=cp.country_id
+              inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=#{@site.id}
+              inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
+              inner join projects_sectors as pse on pse.project_id=p.id and pse.sector_id=#{params[:id].sanitize_sql!}
+              group by c.id,c.name,lon,lat,c.name,url"
+          end
         end
 
         result = ActiveRecord::Base.connection.execute(sql)
