@@ -351,8 +351,7 @@ class Site < ActiveRecord::Base
   # [[country, count], [country, count]]
   def projects_countries
     sql="select #{Country.custom_fields.join(',')},count(ps.*) as count from countries
-      inner join regions on regions.country_id = countries.id and regions.level=#{self.level_for_region}
-      inner join projects_regions as pr on regions.id=pr.region_id
+      inner join countries_projects as pr on pr.country_id=countries.id
       inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{self.id}
       inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
       group by #{Country.custom_fields.join(',')} order by count DESC"
