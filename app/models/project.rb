@@ -57,7 +57,10 @@ class Project < ActiveRecord::Base
   after_destroy :remove_cached_sites
 
   def tags=(tag_names)
-    return if tag_names.blank?
+    if tag_names.blank?
+      tags.clear
+      return
+    end
     if tag_names.is_a?(String)
       tag_names = tag_names.split(',').map{ |t| t.strip }.compact.delete_if{ |t| t.blank? }
     end

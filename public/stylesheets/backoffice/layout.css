@@ -303,17 +303,21 @@ div.block.donor_funded div.bottom_projects_org div.pagination span.gap {float:le
 
 /*donors search*/
 div.two_donors {float:left; width:583px; height:100px; margin:20px 10px 0 0; padding:40px 30px 0; background:url('/images/backoffice/donors/two_donors.png') no-repeat 0 0;}
+div.two_donors.big {height:140px; background:url('/images/backoffice/donors/two_donors_big.png') no-repeat 0 0;}
 div.two_donors label {float:left; margin:0 0 0 3px; font:bold 11px Arial; color:#999999;}
 div.two_donors form {float:left; position:relative; width:100%;}
 div.two_donors input[type="text"] {float:left; width:559px; height:21px; margin:5px 0 0 0; padding:8px; font:normal 17px Arial; color:#CCCCCC; border:none; background:url('/images/backoffice/donors/input_bkg.jpg') no-repeat 0 0;}
 div.two_donors input[type="submit"] {position:absolute; width:15px; height:15px; right:20px; top:28px; background:url('/images/backoffice/donors/lens.jpg') no-repeat 0 0; border:none;}
 div.two_donors input[type="submit"]:hover {background-position:0 -15px; cursor:pointer;}
-div.one_donor {float:left; width:288px; height:140px; margin:20px 0 0 0; padding:0; background:url('/images/backoffice/donors/one_donor.png') no-repeat 0 0;}
+div.one_donor {float:left; width:288px; height:180px; margin:20px 0 0 0; padding:0; background:url('/images/backoffice/donors/one_donor.png') no-repeat 0 0;}
+div.one_donor.big {background:url('/images/backoffice/donors/one_donor_big.png') no-repeat 0 0;}
 div.one_donor div.center {float:left; width:100%; text-align:center;}
 div.one_donor p {float:left; margin:20px 5px 0 0; width:auto; font:normal 43px "Museo Sans",Arial; color:#333333;}
 div.one_donor label {float:left; font:normal 15px "Museo Sans",Arial; color:#666666; margin:24px 0 0 0; text-align:left;}
 div.one_donor a {float:left; width:152px; height:28px; margin:7px 0 0 46px; padding:4px 0 0 40px; background:url('/images/backoffice/donors/add_donor.png') no-repeat 0 0; font:normal 19px "Museo Sans",Arial; color:white; text-shadow:0 1px #5C7C31;}
 div.one_donor a:hover {background-position:0 -32px;}
+div.one_donor a.import_csv {float:left; width:165px; height:26px; margin:3px 0 0 46px; padding:6px 0 0 27px; background:url('/images/backoffice/projects/import_csv_bttn.png') no-repeat 0 0; font:normal 19px "Museo Sans",Arial; color:white; text-shadow:0 1px #000000;}
+div.one_donor a.import_csv:hover {background-position:0 -32px;}
 div.med.donors_list h2 a.remove {padding:0 10px 0 0; color:#333333; border-bottom:1px dotted #EB4142; background:url('/images/backoffice/icons/red_x.png') no-repeat right 17px;}
 div.med.donors_list h2 a.remove:hover {border-bottom:1px solid #EB4142; text-decoration:none;}
 div.med.donors_list ul {float:left; width:100%; padding:0; margin:23px 0 0 0; border-top:1px solid #CCCCCC;}

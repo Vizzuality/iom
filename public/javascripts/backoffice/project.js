@@ -105,7 +105,7 @@ $(document).ready(function(ev){
   $('span#status_combo_search').click(function(ev){
     ev.stopPropagation();
     ev.preventDefault();
-  	hideCountryCombo();
+    hideCountryCombo();
     if (!$(this).hasClass('clicked')){
       $('span.clicked').removeClass('clicked');
       $(this).addClass('clicked');
@@ -277,11 +277,11 @@ $(document).ready(function(ev){
       $(this).addClass('clicked');
     $(this).find('div.newListSelected').css('background-position','0 0');
     }
-    
+
     $(document).click(function(event) {
       if (!$(event.target).closest('span.combo_date').length) {
         $('span.combo_date.clicked').removeClass('clicked');
-    	updateDateInfo();
+      updateDateInfo();
       };
     });
   });
@@ -295,11 +295,11 @@ $(document).ready(function(ev){
       $(this).addClass('clicked');
       $(this).find('div.newListSelected').css('background-position','0 0');
     }
-    
+
     $(document).click(function(event) {
       if (!$(event.target).closest('div.select_dates').length) {
         $('span#donation_date.clicked').removeClass('clicked');
-    	updateDateInfoDonations();
+      updateDateInfoDonations();
       };
     });
   });
@@ -529,7 +529,7 @@ $(document).ready(function(ev){
         if (!$(this).hasClass('clicked')){
           $(this).addClass('clicked');
         }
-    	resetCombo($(this));
+      resetCombo($(this));
         $(document).click(function(event) {
 
           if (!$(event.target).closest('span.select_country_combo').length) {
@@ -831,11 +831,11 @@ $(function() {
                url: custom_donors_url + value,
                dataType: "json",
                success: function( data ) {
-                 if(data != null) {                 
-                    
+                 if(data != null) {
+
                     if (data.length > 5){
                        data.splice(0,data.length-5);
-                    } 
+                    }
                      response($.map(data, function(donor) {
                      return {
                        label: donor.name,
@@ -855,7 +855,6 @@ $(function() {
            select: function( event, ui ) {
              $('#autocomplete_donor_name').val(ui.item.value);
              $('#donation_donor_id').val(ui.item.element_id);
-          
            },
            refresh: function(){
               this.element.children("li.ui-menu-item:odd a").addClass("ui-menu-item-alternate");

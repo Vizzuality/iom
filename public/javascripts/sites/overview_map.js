@@ -5,6 +5,7 @@
   var map;
   var baseUrl="http://chart.apis.google.com/chart?chs=256x256";
   var global_index = 10;
+  var marker_;
 
   $(document).ready( function() {
     var styleMapType = new google.maps.StyledMapType(stylez, styledMapOptions);
@@ -61,61 +62,119 @@
     }
     var diameter = 0;
 
-    for (var i = 0; i<map_data.length; i++) {
-      var image_source = '';
+	for (var i = 0; i<map_data.length; i++) {
+	  var image_source = '';
+	
+	  if (map_type == "overview_map") {
+	    if (map_data[i].count < 25) {
+	      diameter = 20;
+	      image_source = "/images/themes/"+ theme + '/marker_2.png';
+	    } else if ((map_data[i].count>=25) && (map_data[i].count<50)) {
+	      diameter = 26;
+	      image_source = "/images/themes/"+ theme + '/marker_3.png';
+	    } else if ((map_data[i].count>=50) && (map_data[i].count<90)) {
+	      diameter = 34;
+	      image_source = "/images/themes/"+ theme + '/marker_4.png';
+	    } else if ((map_data[i].count>=90) && (map_data[i].count<130)) {
+	      diameter = 42;
+	      image_source = "/images/themes/"+ theme + '/marker_5.png';
+	    } else {
+	      diameter = 58;
+	      image_source = "/images/themes/"+ theme + '/marker_6.png';
+	    }
+	  } else if (map_type=="administrative_map") {
+	    if (map_data[i].count < range) {
+	      diameter = 20;
+	      image_source = "/images/themes/"+ theme + '/marker_2.png';
+	    } else if ((map_data[i].count>=range) && (map_data[i].count<(range*2))) {
+	      diameter = 26;
+	      image_source = "/images/themes/"+ theme + '/marker_3.png';
+	    } else if ((map_data[i].count>=(range*2)) && (map_data[i].count<(range*3))) {
+	      diameter = 34;
+	      image_source = "/images/themes/"+ theme + '/marker_4.png';
+	    } else if ((map_data[i].count>=(range*3)) && (map_data[i].count<(range*4))) {
+	      diameter = 42;
+	      image_source = "/images/themes/"+ theme + '/marker_5.png';
+	    } else {
+	      diameter = 58;
+	      image_source = "/images/themes/"+ theme + '/marker_6.png';
+	    }
+	  } else {
+	    diameter = 72;
+	    image_source = "/images/themes/"+ theme + '/project_marker.png';
+	  }
+	  var marker_ = new IOMMarker(map_data[i],diameter, image_source,map);
+	
+	  if (map_type!="overview_map") {
+	    bounds.extend(new google.maps.LatLng(map_data[i].lat, map_data[i].lon));
+	  }
+	}
+	
+	if (map_type!="overview_map") {
+	  map.fitBounds(bounds);
+	}
+	
+	if (map_type=="project_map") {
+	  map.panBy(130,20);
+	}
 
-      if (map_type == "overview_map") {
-        if (map_data[i].count < 25) {
-          diameter = 20;
-          image_source = "/images/themes/"+ theme + '/marker_2.png';
-        } else if ((map_data[i].count>=25) && (map_data[i].count<50)) {
-          diameter = 26;
-          image_source = "/images/themes/"+ theme + '/marker_3.png';
-        } else if ((map_data[i].count>=50) && (map_data[i].count<90)) {
-          diameter = 34;
-          image_source = "/images/themes/"+ theme + '/marker_4.png';
-        } else if ((map_data[i].count>=90) && (map_data[i].count<130)) {
-          diameter = 42;
-          image_source = "/images/themes/"+ theme + '/marker_5.png';
-        } else {
-          diameter = 58;
-          image_source = "/images/themes/"+ theme + '/marker_6.png';
-        }
-      } else if (map_type=="administrative_map") {
-        if (map_data[i].count < range) {
-          diameter = 20;
-          image_source = "/images/themes/"+ theme + '/marker_2.png';
-        } else if ((map_data[i].count>=range) && (map_data[i].count<(range*2))) {
-          diameter = 26;
-          image_source = "/images/themes/"+ theme + '/marker_3.png';
-        } else if ((map_data[i].count>=(range*2)) && (map_data[i].count<(range*3))) {
-          diameter = 34;
-          image_source = "/images/themes/"+ theme + '/marker_4.png';
-        } else if ((map_data[i].count>=(range*3)) && (map_data[i].count<(range*4))) {
-          diameter = 42;
-          image_source = "/images/themes/"+ theme + '/marker_5.png';
-        } else {
-          diameter = 58;
-          image_source = "/images/themes/"+ theme + '/marker_6.png';
-        }
-      } else {
-        diameter = 72;
-        image_source = "/images/themes/"+ theme + '/project_marker.png';
-      }
-      var marker_ = new IOMMarker(map_data[i],diameter, image_source,map);
+    // for (var i = 0; i<map_data.length; i++) {
+    //   var image_source = '';
+    //   
+    //   console.log(map_data);
+    // 
+    //   if (map_type == "overview_map") {
+    //     if (map_data[i].count < 25) {
+    //       diameter = 20;
+    //       image_source = "/images/themes/"+ theme + '/marker_2.png';
+    //     } else if ((map_data[i].count>=25) && (map_data[i].count<50)) {
+    //       diameter = 26;
+    //       image_source = "/images/themes/"+ theme + '/marker_3.png';
+    //     } else if ((map_data[i].count>=50) && (map_data[i].count<90)) {
+    //       diameter = 34;
+    //       image_source = "/images/themes/"+ theme + '/marker_4.png';
+    //     } else if ((map_data[i].count>=90) && (map_data[i].count<130)) {
+    //       diameter = 42;
+    //       image_source = "/images/themes/"+ theme + '/marker_5.png';
+    //     } else {
+    //       diameter = 58;
+    //       image_source = "/images/themes/"+ theme + '/marker_6.png';
+    //     }
+    //   } else if (map_type=="administrative_map") {
+    //     if (map_data[i].count < range) {
+    //       diameter = 20;
+    //       image_source = "/images/themes/"+ theme + '/marker_2.png';
+    //     } else if ((map_data[i].count>=range) && (map_data[i].count<(range*2))) {
+    //       diameter = 26;
+    //       image_source = "/images/themes/"+ theme + '/marker_3.png';
+    //     } else if ((map_data[i].count>=(range*2)) && (map_data[i].count<(range*3))) {
+    //       diameter = 34;
+    //       image_source = "/images/themes/"+ theme + '/marker_4.png';
+    //     } else if ((map_data[i].count>=(range*3)) && (map_data[i].count<(range*4))) {
+    //       diameter = 42;
+    //       image_source = "/images/themes/"+ theme + '/marker_5.png';
+    //     } else {
+    //       diameter = 58;
+    //       image_source = "/images/themes/"+ theme + '/marker_6.png';
+    //     }
+    //   } else {
+    //     diameter = 72;
+    //     image_source = "/images/themes/"+ theme + '/project_marker.png';
+    //   }
+    //   marker_ = new IOMMarker(map_data[i],diameter, image_source,map);
+    // 
+    //   if (map_type!="overview_map") {
+    //     bounds.extend(new google.maps.LatLng(map_data[i].lat, map_data[i].lon));
+    //   }
+    // }
+    // 
+    // if (map_type!="overview_map") {
+    //   map.fitBounds(bounds);
+    // }
 
-      if (map_type!="overview_map") {
-        bounds.extend(new google.maps.LatLng(map_data[i].lat, map_data[i].lon));
-      }
-    }
-
-    if (map_type!="overview_map") {
-      map.fitBounds(bounds);
-    }
-
-    if (map_type=="project_map") {
-      map.panBy(130,20);
-    }
+    // if (map_type=="project_map") {
+    //   map.panBy(130,20);
+    // }
 
     //Positionate zoom controls
     setTimeout(function(){

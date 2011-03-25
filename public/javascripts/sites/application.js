@@ -54,7 +54,9 @@ $(document).ready( function() {
 
     // LIVE SEARCH IN ORGANIZATIONS
     $('#ngos_search').val('');
-    $('#ngos_search').liveUpdate('orgs_list');
+    if(document.getElementById('orgs_list')) {
+      $('#ngos_search').liveUpdate('orgs_list');
+    }
 
     // CUSTOM SCROLLBARS
     if ($('.scroll_pane').length > 0){    
