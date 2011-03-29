@@ -37,6 +37,7 @@ div#pages div.float_left div.outer_head div.head {border-bottom:1px solid #003F4
 div.main_head.projects div.float_head p a {color:#003F4F; text-decoration:underline;}
 div.projects div.right div.block p a {color:#008BB0;}
 div.projects div.right div.block ul li a {color:#008BB0;}
+div.projects div.right div.block div.logo a {color:#008BB0;}
 div.projects div.right div.block div.logo a.long {color:#008BB0;}
 div.projects div.float_left div.block ul.related_projects li div.info h4 a {color:#008BB0;}
 p.sub a {color:#008BB0;}
