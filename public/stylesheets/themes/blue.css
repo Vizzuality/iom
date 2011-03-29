@@ -1,4 +1,4 @@
-a {color:#008BB0!important;}
+a {color:#008BB0;}
 
 div.main_head div.left h1 {text-shadow:0 1px #003F4F;}
 div.main_head div.left p {color:#003F4F;}
@@ -18,7 +18,7 @@ div#pages div.float_left div.results_list ul li div.project_name h3 a {color:#00
 div#pages div.right div.block p a {color:#008BB0;}
 div#pages div.right div.block ul li a {color:#008BB0;}
 
-div#project div.left div.block div.logo a {color:#008BB0;}
+div#project div.left div.block div.logo a {color:#008BB0!important;}
 div#project div.float_right div.head {background:url('/images/sites/search/head_mask.png') repeat 0 0 #008BB0;}
 div#project div.float_right div.head h1 {text-shadow:0 1px #008BB0;}
 div#project div.float_right div.head p {color:#008BB0;}
@@ -27,7 +27,7 @@ div#project div.float_right div.head p a:hover {color:#003F4F;}
 div#project div.float_right div.block ul li div.info h4 a {color:#008BB0;}
 div#project div.left div.block ul li a {color:#008BB0;}
 div#project div.left div.block p a {color:#008BB0;}
-
+ul.breadcrumb li a {color:#003F4F!important}
 
 
 div.main_head div.float_head.home h3 {color:#003F4F;}
