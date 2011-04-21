@@ -145,7 +145,7 @@ namespace :iom do
           budget = o.private_funding unless o.private_funding.nil?
           budget = budget + o.usg_funding  unless o.usg_funding.nil?
           budget = budget + o.other_funding  unless o.other_funding.nil?
-          o.budget                  = budget unless budget==0
+          #o.budget                  = budget unless budget==0
 
 
           o.private_funding_spent   = row.private_funding_spent.to_money.dollars unless (row.private_funding_spent.blank?)

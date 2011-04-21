@@ -641,7 +641,7 @@ div.block.project_info div.med div.left form ul.sectors li a.close:hover {cursor
 
 /*UBICATIONS*/
 div.block.project_info div.med div.left form ul.ubications {float:left; width:272px; height:auto; margin:0 0 0 0;}
-div.block.project_info div.med div.left form ul.ubications li {float:left; width:262px; height:24px; background:url('/images/backoffice/projects/bkg_cluster.png') no-repeat 0 0; font:normal 13px Arial; color:#333333; padding:6px 0 0 10px; margin:10px 0 0 0;}
+div.block.project_info div.med div.left form ul.ubications li {float:left; width:490px; height:24px; background:url('/images/backoffice/projects/bkg_cluster2.png') no-repeat 0 0; font:normal 13px Arial; color:#333333; padding:6px 0 0 10px; margin:10px 0 0 0;}
 div.block.project_info div.med div.left form ul.ubications li p {float:left; width:auto;}
 div.block.project_info div.med div.left form ul.ubications li a.close {float:right; margin:1px 5px 0 0; background:url('/images/backoffice/projects/close_cluster_bttn.png') no-repeat 0 0; width:16px; height:16px;}
 div.block.project_info div.med div.left form ul.ubications li a.close:hover {cursor:pointer;}
