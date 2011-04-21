@@ -402,8 +402,8 @@ SQL
         region_ids += region.path.split('/')[1..-1].map{ |e| e.to_i}
       end
     end
-    self.country_ids = country_ids
-    self.region_ids = region_ids
+    self.country_ids = country_ids.uniq
+    self.region_ids = region_ids.uniq
   end
 
   def set_cached_sites
