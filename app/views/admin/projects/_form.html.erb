@@ -1,26 +1,7 @@
 <%= form_for(@project, :url => (@project.new_record? ? admin_projects_path : admin_project_path(@project))) do |f| %>
+<!-- ##################### PROJECT IDENTIFICATION ##################### -->
 
-  <div class="field">
-    <label>PROJECT NAME  <strong>*</strong></label>
-    <span class="input_large <%= 'error' if !@project.errors[:name].empty? && action_name != 'new' %>">
-        <%= f.text_field :name, :class=>"long #{'error' if !@project.errors[:name].empty? && action_name != 'new'}" %>
-        <%= errors_for @project, :name %>
-    </span>
-  </div>
-  <div class="field">
-    <label>DESCRIPTION  <strong>*</strong></label>
-    <span class="textarea <%= 'error' if !@project.errors[:description].empty? && action_name != 'new' %>">
-        <div class="wrapper">
-            <%= f.text_area :description,:class => "#{'error' if !@project.errors[:description].empty? && action_name != 'new'}" %>
-        </div>
-    </span>
-  </div>
-  <div class="field">
-    <p class="title">TAGS <span class="info">Use comma (",") to separate project tags</span></p>
-    <span id="tags_combo" class="input_large">
-      <%= f.text_field :tags, :value => @project.tags.map{ |tag| tag.name }.join(', ') %>
-    </span>
-  </div>
+  <h3 class="section museo_sans">PROJECT IDENTIFICATION</h3>
   <div class="field">
     <label>ORGANIZATION  <strong>*</strong></label>
 
@@ -39,22 +20,35 @@
       </div>
     </div>
   </div>
-  <div id="implement_org" class="field">
-    <label>IMPLEMENTING ORGANIZATION</label>
+  <div class="field">
+    <label>INTERVENTION ID</label>
     <span class="input_large">
-      <%= f.text_field :implementing_organization %>
+      <%= f.text_field :intervention_id %>
     </span>
   </div>
-  <div id="partner_org" class="field">
-    <label>PARTNER ORGANIZATIONS</label>
-    <span class="input_large">
-      <%= f.text_field :partner_organizations %>
+  <div class="field">
+    <p class="title">TAGS <span class="info">Use comma (",") to separate project tags</span></p>
+    <span id="tags_combo" class="input_large">
+      <%= f.text_field :tags, :value => @project.tags.map{ |tag| tag.name }.join(', ') %>
     </span>
-  </div> <!-- field -->
-  <div id="cross_cutting" class="field">
-    <label>CROSS-CUTTING ISSUES</label>
-    <span class="textarea">
-      <%= f.text_area :cross_cutting_issues %>
+  </div>
+
+<!-- ##################### PROJECT DETAILS ##################### -->
+
+  <h3 class="section museo_sans">PROJECT DETAILS</h3>
+  <div class="field">
+    <label>PROJECT NAME  <strong>*</strong></label>
+    <span class="input_large <%= 'error' if !@project.errors[:name].empty? && action_name != 'new' %>">
+        <%= f.text_field :name, :class=>"long #{'error' if !@project.errors[:name].empty? && action_name != 'new'}" %>
+        <%= errors_for @project, :name %>
+    </span>
+  </div>
+  <div class="field">
+    <label>DESCRIPTION  <strong>*</strong></label>
+    <span class="textarea <%= 'error' if !@project.errors[:description].empty? && action_name != 'new' %>">
+        <div class="wrapper">
+            <%= f.text_area :description,:class => "#{'error' if !@project.errors[:description].empty? && action_name != 'new'}" %>
+        </div>
     </span>
   </div>
   <div class="field">
@@ -64,62 +58,44 @@
     </span>
   </div>
   <div class="field">
-    <label>WEBSITE</label>
-    <span class="input_large">
-      <%= f.text_field :website %>
-    </span>
-  </div>
-  <!-- SECTION  -->
-  <h3 class="section museo_sans">PROJECT MANAGEMENT</h3>
-  <div class="field">
-    <label>INTERVENTION ID</label>
-    <span class="input_large">
-      <%= f.text_field :intervention_id %>
-    </span>
-  </div>
-  <div class="field">
     <label>ADDITIONAL INFORMATION</label>
     <span class="textarea">
       <%= f.text_area :additional_information %>
     </span>
   </div>
   <div class="field">
-    <label>AWARDEE TYPE</label>
-    <span class="input_large">
-      <%= f.text_field :awardee_type %>
-    </span>
     <ul class="dates">
       <li class="date">
-        <label>DATE PROVIDED</label>
+        <label>START DATE</label>
+        <span id="start_date" class="combo_date"><p>09/10/2010</p>
+          <div class="select_dates start_date">
+            <p id="month" class="title">MONTH</p>
+            <p id="day" class="title">DAY</p>
+            <p id="year" class="title">YEAR</p>
 
-        <span id="date_provided" class="combo_date"><p>09/10/2010</p>
-        <div class="select_dates">
-          <p id="month" class="title">MONTH</p>
-          <p id="day" class="title">DAY</p>
-          <p id="year" class="title">YEAR</p>
-
-         <%= f.date_select :date_provided, :start_year => 1970, :order => [:month, :day, :year]  %>
-        </div>
+              <%= f.date_select :start_date, :start_year => 1970, :order => [:month, :day, :year]  %>
+          </div>
         </span>
       </li>
       <li class="date">
-        <label>DATE UPDATED</label>
+        <label>END DATE</label>
 
-        <span id="date_updated" class="combo_date"><p>09/10/2010</p>
-        <div class="select_dates end_date">
-          <p id="month" class="title">MONTH</p>
-          <p id="day" class="title">DAY</p>
-          <p id="year" class="title">YEAR</p>
+        <span id="end_date" class="combo_date"><p>09/10/2010</p>
+          <div class="select_dates end_date">
+            <p id="month" class="title">MONTH</p>
+            <p id="day" class="title">DAY</p>
+            <p id="year" class="title">YEAR</p>
 
-            <%= f.date_select :date_updated, :start_year => 1970, :order => [:month, :day, :year]  %>
-        </div>
-     </span>
+              <%= f.date_select :end_date, :start_year => 1970, :order => [:month, :day, :year]  %>
+          </div>
+        </span>
       </li>
     </ul>
   </div>
-  <!-- SECTION  -->
-  <h3 class="section museo_sans">CONTEXT</h3>
 
+<!-- ##################### CONTEXT ##################### -->
+
+  <h3 class="section museo_sans">CONTEXT</h3>
   <div id="clusters_content" class="field">
     <label>CLUSTERS  <strong>*</strong></label>
 
@@ -148,7 +124,6 @@
       <a id="add_cluster_bttn" class="add_cluster museo_sans shadow_green">add cluster</a>
     </div>
   </div>
-
   <div class="field">
     <label>SECTORS  <strong>*</strong></label>
 
@@ -178,8 +153,75 @@
       <a class="add_sector museo_sans shadow_green">add sector</a>
     </div>
   </div>
+  <div id="cross_cutting" class="field">
+    <label>CROSS-CUTTING ISSUES</label>
+    <span class="textarea">
+      <%= f.text_area :cross_cutting_issues %>
+    </span>
+  </div>
 
+<!-- ##################### PROJECT MANAGEMENT ##################### -->
 
+  <h3 class="section museo_sans">PROJECT MANAGEMENT</h3>
+  <label>PROJECT BUDGET</label>
+  <div id="project_budget" class="field">
+    <span class="input_short coin">
+      <p class="coin">$</p>
+      <%= f.text_field :budget, :value => number_with_precision(f.object.budget, :precision => 2, :strip_insignificant_zeros => true, :delimiter => ',') %>
+
+    </span>
+  </div>
+  <div id="implement_org" class="field">
+    <label>IMPLEMENTING ORGANIZATION</label>
+    <span class="input_large">
+      <%= f.text_field :implementing_organization %>
+    </span>
+  </div>
+  <div id="partner_org" class="field">
+    <label>PARTNER ORGANIZATIONS</label>
+    <span class="input_large">
+      <%= f.text_field :partner_organizations %>
+    </span>
+  </div> <!-- field -->
+  <div class="field">
+    <label>AWARDEE TYPE</label>
+    <span class="input_large">
+      <%= f.text_field :awardee_type %>
+    </span>
+  </div>
+
+<!-- ##################### PROJECT IMPACT ##################### -->
+
+  <h3 class="section museo_sans">PROJECT IMPACT</h3>
+  <div class="two_columns">
+    <div class="left_column">
+       <div id="estimated_people" class="field">
+          <label>ESTIMATED PEOPLE REACHED</label>
+          <span class="input_short">
+            <%= f.text_field :estimated_people_reached %>
+            <p class="msg">people</p>
+          </span>
+        </div>
+    </div>
+    <div class="right_column">
+      <div id="target" class="field">
+        <label>TARGET</label>
+        <span class="input_short">
+          <%= f.text_field :target %>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div id="calculation_of_number_of_people_reached" class="field">
+    <label>CALCULATION OF NUMBER OF PEOPLE REACHED</label>
+    <span class="textarea">
+      <%= f.text_area :calculation_of_number_of_people_reached %>
+    </span>
+  </div>
+
+<!-- ##################### LOCATION ##################### -->
+
+  <h3 class="section museo_sans">LOCATION</h3>
   <label>GEOGRAPHIC REGION <strong>*</strong></label>
   <ul class="ubications" id="regions_list">
     <% @project.regions_hierarchized.each do |region| %>
@@ -264,7 +306,18 @@
       </div>
     </div>
   </div>
-
+  <div id="verbatim_location" class="field">
+    <label>VERBATIM LOCATION</label>
+    <span class="textarea">
+      <%= f.text_area :verbatim_location %>
+    </span>
+  </div>
+  <div id="idprefugee_camp" class="field">
+    <label>IDP/REFUGEE CAMP</label>
+    <span class="textarea">
+      <%= f.text_area :idprefugee_camp %>
+    </span>
+  </div>
   <label>GEOGRAPHIC COORDINATES  <strong>*</strong></label>
   <ul class="ubications" id="project_coordinates">
     <% if !@project.the_geom.blank? && @project.the_geom.respond_to?(:points) %>
@@ -283,74 +336,13 @@
     <a class="add_location museo_sans shadow_green" id="add_location_map">add location</a>
   </div>
 
-  <div class="field">
-    <ul class="dates">
-      <li class="date">
-        <label>START DATE</label>
-        <span id="start_date" class="combo_date"><p>09/10/2010</p>
-          <div class="select_dates start_date">
-            <p id="month" class="title">MONTH</p>
-            <p id="day" class="title">DAY</p>
-            <p id="year" class="title">YEAR</p>
+<!-- ##################### CONTACT INFORMATION ##################### -->
 
-              <%= f.date_select :start_date, :start_year => 1970, :order => [:month, :day, :year]  %>
-          </div>
-        </span>
-      </li>
-      <li class="date">
-        <label>END DATE</label>
-
-        <span id="end_date" class="combo_date"><p>09/10/2010</p>
-          <div class="select_dates end_date">
-            <p id="month" class="title">MONTH</p>
-            <p id="day" class="title">DAY</p>
-            <p id="year" class="title">YEAR</p>
-
-              <%= f.date_select :end_date, :start_year => 1970, :order => [:month, :day, :year]  %>
-          </div>
-        </span>
-      </li>
-    </ul>
-  </div>
-
-  <!-- SECTION  -->
-  <h3 class="section museo_sans">IMPACT</h3>
-
-  <label>PROJECT BUDGET</label>
-  <div id="project_budget" class="field">
-    <span class="input_short coin">
-      <p class="coin">$</p>
-      <%= f.text_field :budget, :value => number_with_precision(f.object.budget, :precision => 2, :strip_insignificant_zeros => true, :delimiter => ',') %>
-
-    </span>
-  </div>
-  <div class="two_columns">
-    <div class="left_column">
-      <div id="target" class="field">
-        <label>TARGET</label>
-        <span class="input_short">
-          <%= f.text_field :target %>
-        </span>
-      </div>
-    </div>
-    <div class="right_column">
-       <div id="estimated_people" class="field">
-          <label>ESTIMATED PEOPLE REACHED</label>
-          <span class="input_short">
-            <%= f.text_field :estimated_people_reached %>
-            <p class="msg">people</p>
-          </span>
-        </div>
-    </div>
-  </div>
-
-  <!-- SECTION  -->
   <h3 class="section museo_sans">CONTACT INFORMATION</h3>
-
   <div class="two_columns">
     <div class="left_column">
       <div class="field">
-        <label>CONTACT NAME</label>
+        <label>CONTACT PERSON</label>
         <span class="input_short">
           <%= f.text_field :contact_person %>
         </span>
@@ -365,7 +357,6 @@
       </div> <!-- field -->
     </div>
   </div>
-
   <div class="two_columns">
     <div class="left_column">
       <div class="field">
@@ -384,23 +375,46 @@
       </div> <!-- field -->
     </div>
   </div>
-
-  <h3 class="section museo_sans">OTHER FIELDS</h3>
-
-  <div id="verbatim_location" class="field">
-    <label>VERBATIM LOCATION</label>
-    <span class="textarea">
-      <%= f.text_area :verbatim_location %>
+  <div class="field">
+    <label>WEBSITE</label>
+    <span class="input_large">
+      <%= f.text_field :website %>
     </span>
   </div>
 
-  <div id="calculation_of_number_of_people_reached" class="field">
-    <label>CALCULATION OF NUMBER OF PEOPLE REACHED</label>
-    <span class="textarea">
-      <%= f.text_area :calculation_of_number_of_people_reached %>
-    </span>
-  </div>
+<!-- ##################### INTERNAL MANAGEMENT ##################### -->
 
+  <h3 class="section museo_sans">INTERNAL MANAGEMENT</h3>
+  <div class="field">
+    <ul class="dates">
+      <li class="date">
+        <label>DATE PROVIDED</label>
+
+        <span id="date_provided" class="combo_date"><p>09/10/2010</p>
+        <div class="select_dates">
+          <p id="month" class="title">MONTH</p>
+          <p id="day" class="title">DAY</p>
+          <p id="year" class="title">YEAR</p>
+
+         <%= f.date_select :date_provided, :start_year => 1970, :order => [:month, :day, :year]  %>
+        </div>
+        </span>
+      </li>
+      <li class="date">
+        <label>DATE UPDATED</label>
+
+        <span id="date_updated" class="combo_date"><p>09/10/2010</p>
+        <div class="select_dates end_date">
+          <p id="month" class="title">MONTH</p>
+          <p id="day" class="title">DAY</p>
+          <p id="year" class="title">YEAR</p>
+
+            <%= f.date_select :date_updated, :start_year => 1970, :order => [:month, :day, :year]  %>
+        </div>
+     </span>
+      </li>
+    </ul>
+  </div>
   <div id="project_needs" class="field">
     <label>PROJECT NEEDS</label>
     <span class="textarea">
@@ -408,12 +422,13 @@
     </span>
   </div>
 
-  <div id="idprefugee_camp" class="field">
-    <label>IDPREFUGEE CAMP</label>
-    <span class="textarea">
-      <%= f.text_area :idprefugee_camp %>
-    </span>
-  </div>
+<!-- ################################################ -->
+<!-- ################################################ -->
+<!-- ################################################ -->
+
+
+
+
 
   <%= f.submit '', :class => "#{'error' if @project.invalid? && action_name != 'new'}" %>
   <!-- END EDIT PAGE -->
