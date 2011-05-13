@@ -5,6 +5,7 @@
         <%= link_to(image_tag(site.aid_map_image.url(:huge), :title => site.try(:name), :desc => truncate(site.short_description, :length => 72), :alt => truncate(site.long_description, :length => 278)), url(site)) %>
       <% end %>
     </div>
+    <%= link_to 'Photo credits', '/about#credits', :class => 'credits' %>
   </div>
   <!-- <div id="gallery"> -->
   <ul id="gallery_thumbails">

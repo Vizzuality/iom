@@ -46,8 +46,9 @@ div#header_sites ul.menu li.last {margin:0;}
 div#header_sites ul.menu li a {float:left; font:normal 13px "PT Sans Bold"; color:#666666; text-decoration:none;}
 div#header_sites ul.menu li a:hover {cursor:pointer; text-decoration:underline!important;}
 
-div#gallery {float:left; width:958px; height:548px; background:url('/images/sites/home/bkg_gallery.png') no-repeat 0 0; margin:45px 0 0;}
+div#gallery {position: relative; float:left; width:958px; height:548px; background:url('/images/sites/home/bkg_gallery.png') no-repeat 0 0; margin:45px 0 0;}
 div#gallery div.content_gallery {float:left; margin:10px 0 0 10px; width:927px; height:524px; overflow:hidden;}
+div#gallery a.credits{position: absolute; right: 50px; bottom: 126px; z-index: 100; font-family: Arial; font-size: 11px; color: #696A6C; text-decoration: underline;}
 div#gallery img {float:left; width:927px; height:524px; margin:0;}
 
 ul#gallery_thumbails {float:left; width:950px; margin:0;}
