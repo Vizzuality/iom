@@ -58,6 +58,10 @@ javascripts:
   - sites/IOMMarker
   - sites/labels_style
   - sites/overview_map
+- search:
+  - jquery.ui.autocomplete
+  - sites/search
+  - sites/pages
 
 stylesheets:
 - base:

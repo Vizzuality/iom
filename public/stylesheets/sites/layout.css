@@ -353,10 +353,12 @@ div#pages div.right div.block p.website {padding:5px 0 0 0;}
 div#pages div.right div.block p a {color:#CD5D4C;}
 div#pages div.right div.block p a:hover {text-decoration:underline;}
 div#pages div.right div.block ul {width:100%; margin:7px 0 0 0; padding:0 0 6px; list-style:none;}
-div#pages div.right div.block ul li {padding:3px 0 3px 10px; background:url('/images/sites/icons/list_disc.png') no-repeat 0 10px; font:normal 13px Arial; color:#999999;}
+div#pages div.right div.block ul li {padding:3px 0 3px 10px; background:url('/images/sites/icons/list_disc.png') no-repeat 0 10px; font:normal 13px Arial; color:#333333;}
 div#pages div.right div.block ul li.page {color:#333333;}
 div#pages div.right div.block ul li a {color:#D05F4C; text-decoration:none;}
 div#pages div.right div.block ul li a:hover {text-decoration:underline; cursor:pointer;}
+div#pages div.right div.block ul li a.delete {margin: 0 5px;}
+div#pages div.right div.block ul li a.delete img {vertical-align: middle;}
 div#pages div.right div.block ul li.selected {background:none;}
 div#pages div.right div.block ul li.selected a {color:#666666;}
 div#pages div.right div.block ul li.selected a:hover {text-decoration:none; color:#666666;}
@@ -365,6 +367,22 @@ div#pages div.right div.block a.more:hover {text-decoration:underline;}
 div#pages div.view_more {clear:both; width:100%; padding:30px 0 0 0;}
 div#pages div.view_more a#view_more {display:block; width:162px; height:14px; margin:0 0 0 230px; padding:5px 0 5px; font:normal 13px "PT Sans Bold"; background:url('/images/sites/search/view_more.png') no-repeat 0 0; text-align:center;}
 div#pages div.view_more a#view_more:hover {background-position:0 -26px; cursor:pointer;}
+
+div#pages form div.right div.block {position: relative; width: 200px;}
+div#pages form div.right div.block input.add {position: absolute; bottom: 1px; left: 198px; display: block; border: 0; padding: 0; width: 20px; height: 20px; background-color: transparent; font-family: Arial; font-size: 16px; color: #B0B0B0; font-weight: bold; line-height: 20px; text-shadow: 0 1px 0 white; cursor: pointer;}
+div#pages form div.right div.block input.add:hover { -moz-box-shadow: inset 1px 1px 1px #CCCCCC; -webkit-box-shadow: inset 1px 1px 1px #CCCCCC; box-shadow: inset 1px 1px 1px #CCCCCC;}
+div#pages form div.right div.block input.add:active { -moz-box-shadow: inset 1px 1px 1px #999999; -webkit-box-shadow: inset 1px 1px 1px #999999; box-shadow: inset 1px 1px 1px #999999; padding-top: 1px; padding-left: 1px;}
+div#pages form div.right div.block input.autocomplete {width: 158px; height: 21px; padding: 0; padding-left: 5px; padding-right: 31px; border: 0 none; font-family: Arial; font-size: 13px; color: #999999; background:url('/images/sites/search/autocomplete_bkg.png') no-repeat 0 0;}
+div#pages form div.right div.block input.autocomplete:focus {background:url('/images/sites/search/autocomplete_bkg.png') no-repeat 0 -21px;}
+ul.ui-autocomplete { width: 189px; height: 213px; background:url('/images/sites/search/autocomplete_list_bkg.png') no-repeat 0 0; overflow: hidden;}
+ul.ui-autocomplete li a{ width: 177px; height: 42px; padding: 3px 6px; display: block; border-top: 1px solid #999999; }
+ul.ui-autocomplete li span { margin: 3px 0; display: block; font-weight: bold;}
+ul.ui-autocomplete li span.subtitle { color: #CCCCCC;}
+ul.ui-autocomplete li a.ui-state-hover { background-color: #333333;}
+ul.ui-autocomplete li a.ui-state-hover span { color: white;}
+ul.ui-autocomplete li a.ui-state-hover span.subtitle { color: #CCCCCC;}
+
+
 /*chart*/
 div.statistics.less {padding-bottom:15px!important;}
 div.statistics img.pie_chart {background:none!important; margin:0 0 0 -10px; height:125px; /*hack for google maps chart api image*/}
