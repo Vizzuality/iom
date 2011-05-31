@@ -2277,7 +2277,7 @@ YTSGkoSZmQtOU1BhcGVyU2l6ZYaShJychIQMe19OU1NpemU9ZmZ9ooFTAoFKA4aG
 hg==
 ]]></encodedPrintInfo>
         <autoSizeTablesOption><![CDATA[0]]></autoSizeTablesOption>
-        <documentScaleFactor><![CDATA[0.9]]></documentScaleFactor>
+        <documentScaleFactor><![CDATA[0.25]]></documentScaleFactor>
         <exportDialect><![CDATA[postgres]]></exportDialect>
         <fileversion><![CDATA[3.1]]></fileversion>
         <hideFieldIcons><![CDATA[0]]></hideFieldIcons>

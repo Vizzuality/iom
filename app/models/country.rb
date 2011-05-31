@@ -121,6 +121,7 @@ class Country < ActiveRecord::Base
           ) as count
            from countries as co
            where id!=#{self.id}
+           and (p.end_date is null OR p.end_date > now())
            order by dist
       ) as subq
       where count>0
