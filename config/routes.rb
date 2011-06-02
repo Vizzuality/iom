@@ -19,6 +19,10 @@ Iom::Application.routes.draw do
   resources :organizations, :only => [:index, :show]
 
   match 'regions/:id' => 'georegion#old_regions'
+  # HACK!! route globbing doesn't work well when trying to get the request format in Rails <=3.0.7
+  match 'location/*ids.csv' => 'georegion#show', :as => 'location', :format => 'csv'
+  match 'location/*ids.kml' => 'georegion#show', :as => 'location', :format => 'kml'
+  # End HACK!!
   match 'location/*ids' => 'georegion#show', :as => 'location'
 
   # clusters and sector work through the same controller and view

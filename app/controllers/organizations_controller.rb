@@ -76,6 +76,17 @@ class OrganizationsController < ApplicationController
           page << "resizeColumn();"
         end
       end
+      format.csv do
+        projects_for_csv = @organization.projects_for_csv(@site)
+        headers = projects_for_csv.any?? projects_for_csv.first.keys : nil
+
+        send_data projects_for_csv.serialize_to_csv(:headers => headers),
+          :type => 'text/plain; charset=utf-8; application/download',
+          :disposition => "attachment; filename=#{@organization.name}_projects.csv"
+      end
+      format.kml do
+        @projects_for_kml = @organization.projects_for_kml(@site)
+      end
     end
   end
 

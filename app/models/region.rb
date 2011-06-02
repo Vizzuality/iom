@@ -3,20 +3,20 @@
 # Table name: regions
 #
 #  id               :integer         not null, primary key
-#  name             :string(255)     
-#  level            :integer         
-#  country_id       :integer         
-#  parent_region_id :integer         
-#  center_lat       :float           
-#  center_lon       :float           
-#  path             :string(255)     
-#  the_geom         :string          
-#  gadm_id          :integer         
-#  wiki_url         :string(255)     
-#  wiki_description :text            
-#  code             :string(255)     
-#  the_geom_geojson :text            
-#  ia_name          :text            
+#  name             :string(255)
+#  level            :integer
+#  country_id       :integer
+#  parent_region_id :integer
+#  center_lat       :float
+#  center_lon       :float
+#  path             :string(255)
+#  the_geom         :string
+#  gadm_id          :integer
+#  wiki_url         :string(255)
+#  wiki_description :text
+#  code             :string(255)
+#  the_geom_geojson :text
+#  ia_name          :text
 #
 
 class Region < ActiveRecord::Base
@@ -172,6 +172,24 @@ SQL
     inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
     where pr.region_id=#{self.id}"
     ActiveRecord::Base.connection.execute(sql).first['count'].to_i
+  end
+
+  def projects_for_csv(site)
+    sql = "select p.id, p.name, p.description, p.primary_organization_id, p.implementing_organization, p.partner_organizations, p.cross_cutting_issues, p.start_date, p.end_date, p.budget, p.target, p.estimated_people_reached, p.contact_person, p.contact_email, p.contact_phone_number, p.site_specific_information, p.created_at, p.updated_at, p.activities, p.intervention_id, p.additional_information, p.awardee_type, p.date_provided, p.date_updated, p.contact_position, p.website, p.verbatim_location, p.calculation_of_number_of_people_reached, p.project_needs, p.idprefugee_camp
+    from projects_regions as pr
+    inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{site.id}
+    inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
+    where pr.region_id=#{self.id}"
+    ActiveRecord::Base.connection.execute(sql)
+  end
+
+  def projects_for_kml(site)
+    sql = "select p.name, ST_AsKML(p.the_geom) as the_geom
+    from projects_regions as pr
+    inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{site.id}
+    inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
+    where pr.region_id=#{self.id}"
+    ActiveRecord::Base.connection.execute(sql)
   end
 
   def to_param

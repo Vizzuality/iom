@@ -164,6 +164,11 @@
             <%= pluralize(@organization.total_regions(@site), @site.word_for_regions.singularize, @site.word_for_regions) %>
           <% end %>
           <a id="see_all" href="#">View past projects</a>
+          <ul class="download">
+            <li><%= link_to 'CSV', organization_path(@organization, :csv) %></li>
+            <li>|</li>
+            <li><%= link_to 'KML', organization_path(@organization, :kml) %></li>
+          </ul>
           <div class="tooltip">
             <span class="body_tooltip">
               <label>Coming soon!</label>

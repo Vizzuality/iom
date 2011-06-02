@@ -91,6 +91,11 @@
             <%= pluralize(@data.total_regions(@site), @site.word_for_regions.singularize, @site.word_for_regions) %>
           <% end %>
           <a id="see_all" href="#">View past projects</a>
+          <ul class="download">
+            <li><%= link_to 'CSV', @site.navigate_by_cluster?? cluster_path(@data, :csv) : sector_path(@data, :csv) %></li>
+            <li>|</li>
+            <li><%= link_to 'KML', @site.navigate_by_cluster?? cluster_path(@data, :kml) : sector_path(@data, :kml) %></li>
+          </ul>
           <div class="tooltip">
             <span class="body_tooltip">
               <label>Coming soon!</label>

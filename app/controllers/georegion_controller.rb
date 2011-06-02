@@ -6,10 +6,12 @@ class GeoregionController < ApplicationController
 
   def show
     render_404 and return if params[:ids].blank?
-    render_404 and return unless params[:ids] =~ /([\d|\/]+)/
-    render_404 and return unless $1.size == params[:ids].size
 
-    geo_ids = params[:ids].split('/')
+    ids = params[:ids]
+    render_404 and return unless ids =~ /([\d|\/]+)/
+    render_404 and return unless $1.size == ids.size
+
+    geo_ids = ids.split('/')
 
     @breadcrumb = []
 
@@ -137,6 +139,18 @@ class GeoregionController < ApplicationController
           page << "IOM.ajax_pagination();"
           page << "resizeColumn();"
         end
+      end
+      format.csv do
+        projects_for_csv = @area.projects_for_csv(@site)
+        headers = projects_for_csv.any?? projects_for_csv.first.keys : nil
+
+        send_data projects_for_csv.serialize_to_csv(:headers => headers),
+          :type => 'text/plain; charset=utf-8; application/download',
+          :disposition => "attachment; filename=#{@area.name}_projects.csv"
+
+      end
+      format.kml do
+        @projects_for_kml = @area.projects_for_kml(@site)
       end
     end
 

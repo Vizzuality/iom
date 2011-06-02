@@ -26,7 +26,7 @@ class ClustersSectorsController < ApplicationController
     respond_to do |format|
       format.html do
         if @data.is_a?(Cluster)
-          if @site.geographic_context_country_id          
+          if @site.geographic_context_country_id
             # Get the data for the map depending on the region definition of the site (country or region)
             sql="select r.id,r.name,count(ps.*) as count,r.center_lon as lon,r.center_lat as lat,r.name,'/location/'||r.path as url,r.code,
                 (select count(*) from data_denormalization where regions_ids && ('{'||r.id||'}')::integer[] and is_active=true and site_id=#{@site.id}) as total_in_region
@@ -47,7 +47,7 @@ class ClustersSectorsController < ApplicationController
                 group by c.id,c.name,lon,lat,c.name,url"
           end
         else
-          if @site.geographic_context_country_id          
+          if @site.geographic_context_country_id
             # Get the data for the map depending on the region definition of the site (country or region)
             sql="select r.id,r.name,count(ps.*) as count,r.center_lon as lon,r.center_lat as lat,r.name,'/location/'||r.path as url,r.code,
                 (select count(*) from data_denormalization where regions_ids && ('{'||r.id||'}')::integer[] and is_active=true and site_id=#{@site.id}) as total_in_region
@@ -101,6 +101,18 @@ class ClustersSectorsController < ApplicationController
           page << "IOM.ajax_pagination();"
           page << "resizeColumn();"
         end
+      end
+      format.csv do
+        projects_for_csv = @data.projects_for_csv(@site)
+        headers = projects_for_csv.any?? projects_for_csv.first.keys : nil
+
+        send_data projects_for_csv.serialize_to_csv(:headers => headers),
+          :type => 'text/plain; charset=utf-8; application/download',
+          :disposition => "attachment; filename=#{@data.name}_projects.csv"
+
+      end
+      format.kml do
+        @projects_for_kml = @data.projects_for_kml(@site)
       end
     end
   end

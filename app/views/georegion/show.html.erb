@@ -116,7 +116,14 @@
     <!-- outer_float -->
     <!-- RIGHT PART -->
     <div class="right">
-      <h3><%= pluralize(@area.projects_count(@site), 'ACTIVE PROJECT', 'ACTIVE PROJECTS') %> IN <%= @area.name.upcase %> <a id="see_all" href="#">View past projects</a>
+      <h3>
+        <%= pluralize(@area.projects_count(@site), 'ACTIVE PROJECT', 'ACTIVE PROJECTS') %> IN <%= @area.name.upcase %>
+        <a id="see_all" href="#">View past projects</a>
+        <ul class="download">
+          <li><%= link_to 'CSV', location_path(@area, :csv) %></li>
+          <li>|</li>
+          <li><%= link_to 'KML', location_path(@area, :kml) %></li>
+        </ul>
         <div class="tooltip">
           <span class="body_tooltip">
             <label>Coming soon!</label>
