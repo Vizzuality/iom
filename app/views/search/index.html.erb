@@ -19,7 +19,7 @@
   <div id="layout">
     <div id="pages">
       <div class="left" id="relative_content"></div>
-      <%= form_tag(search_path, :method => :get) do %>
+      <%= form_tag(search_path, :method => :get, :id => 'search') do%>
         <div class="float_left">
           <div class="outer_head">
             <div class="head">
@@ -29,13 +29,16 @@
             </div>
           </div>
           <div class="results_list">
-            <h3><p>
-              <% if params[:q]!='' %>
-                <%= pluralize(@total_projects, 'active project') %> for '<%= params[:q] %>'
-              <% else %>
-                <%= pluralize(@total_projects, 'active project') %> in total
-              <% end %>
-            </p></h3>
+            <h3>
+              <p>
+                <% if params[:q]!='' %>
+                  <%= pluralize(@total_projects, 'active project') %> for '<%= params[:q] %>'
+                <% else %>
+                  <%= pluralize(@total_projects, 'active project') %> in total
+                <% end %>
+                <%= date_facet %>
+              </p>
+            </h3>
             <% if @projects.present? %>
               <ul id="search_results">
                 <%= render :partial => 'search/projects' %>
@@ -123,6 +126,17 @@
               <%= hidden_field_tag('donors_ids', @filtered_donors.map(&:id).join(','), :class => 'donors ids') %>
           </div>
 
+          <div class="block">
+            <h2>Starting after</h2>
+              <%= select_month @start_date, :field_name => 'start_month', :prompt => 'Month' %>
+              <%= select_year @start_date, :field_name => 'start_year', :prompt => 'Year', :start_year => 1980 %>
+          </div>
+
+          <div class="block">
+            <h2>Ending before</h2>
+              <%= select_month @end_date, :field_name => 'end_month', :prompt => 'Month' %>
+              <%= select_year @end_date, :field_name => 'end_year', :prompt => 'Year', :start_year => 1980 %>
+          </div>
         </div>
 
         <div class="view_more" id="search_view_more">

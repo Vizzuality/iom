@@ -10,75 +10,75 @@ Dual licensed under the MIT and GPL licenses.
 
 */
 (function($){
-	//add class to html tag
-	$('html').addClass('stylish-select');
+  //add class to html tag
+  $('html').addClass('stylish-select');
 
-	//create cross-browser indexOf
-	Array.prototype.indexOf = function (obj, start) {
-		for (var i = (start || 0); i < this.length; i++) {
-			if (this[i] == obj) {
-				return i;
-			}
-		}
-	}
+  //create cross-browser indexOf
+  Array.prototype.indexOf = function (obj, start) {
+    for (var i = (start || 0); i < this.length; i++) {
+      if (this[i] == obj) {
+        return i;
+      }
+    }
+  }
 
-	//utility methods
-	$.fn.extend({
-		getSetSSValue: function(value){
-			if (value){
-				//set value and trigger change event
-				$(this).val(value).change();
-				return this;
-			} else {
-				return $(this).find(':selected').val();
-			}
-		},
-		//added by Justin Beasley
-		resetSS: function(){
-			var oldOpts = $(this).data('ssOpts');
-			$this = $(this);
-			$this.next().remove();
-			//unbind all events and redraw
-			$this.unbind('.sSelect').sSelect(oldOpts);
-		}
-	});
+  //utility methods
+  $.fn.extend({
+    getSetSSValue: function(value){
+      if (value){
+        //set value and trigger change event
+        $(this).val(value).change();
+        return this;
+      } else {
+        return $(this).find(':selected').val();
+      }
+    },
+    //added by Justin Beasley
+    resetSS: function(){
+      var oldOpts = $(this).data('ssOpts');
+      $this = $(this);
+      $this.next().remove();
+      //unbind all events and redraw
+      $this.unbind('.sSelect').sSelect(oldOpts);
+    }
+  });
 
-	$.fn.sSelect = function(options) {
+  $.fn.sSelect = function(options) {
 
-		return this.each(function(){
+    return this.each(function(){
 
-		var defaults = {
-			defaultText: 'Please select',
-			animationSpeed: 0, //set speed of dropdown
-			ddMaxHeight: '', //set css max-height value of dropdown
-			containerClass: '' //additional classes for container div
-		};
+    var defaults = {
+      defaultText: 'Please select',
+      animationSpeed: 0, //set speed of dropdown
+      ddMaxHeight: '', //set css max-height value of dropdown
+      containerClass: '' //additional classes for container div
+    };
 
-		//initial variables
-		var opts = $.extend(defaults, options),
-		$input = $(this),
-		$containerDivText = $('<div class="selectedTxt"></div>'),
-		$containerDiv = $('<div class="newListSelected ' + opts.containerClass + '"></div>'),   
+    //initial variables
+    var opts = $.extend(defaults, options),
+    $input = $(this),
+    $containerDivText = $('<div class="selectedTxt"></div>'),
+    $containerDiv = $('<div class="newListSelected ' + opts.containerClass + '"></div>'),
         $newUl = $('<div class="newList_content ' + opts.containerClass + '"><div class="wrapper"><ul class="newList scroll_pane ' + opts.containerClass + '" style="visibility:hidden;"></ul></div></div>'),
-		itemIndex = -1,
-		currentIndex = -1,
-		keys = [],
-		prevKey = false,
-		prevented = false,
-		$newLi;
+    itemIndex = -1,
+    currentIndex = -1,
+    keys = [],
+    prevKey = false,
+    prevented = false,
+    $newLi;
 
-		//added by Justin Beasley
-		$(this).data('ssOpts',options);
+    //added by Justin Beasley
+    $(this).data('ssOpts',options);
 
-		//build new list
-		$containerDiv.insertAfter($input);
-		$containerDiv.attr("tabindex", $input.attr("tabindex") || "0");
-		$containerDivText.prependTo($containerDiv);
-		$newUl.appendTo($containerDiv);
-		$input.hide();
+    //build new list
+    $containerDiv.insertAfter($input);
+    $containerDiv.attr("tabindex", $input.attr("tabindex") || "0");
+    $containerDivText.prependTo($containerDiv);
+    $newUl.appendTo($containerDiv);
+    $input.hide();
 
-		//added by Justin Beasley (used for lists initialized while hidden)
-		$containerDivText.data('ssReRender',!$containerDivText.is(':visible'));
+    //added by Justin Beasley (used for lists initialized while hidden)
+    $containerDivText.data('ssReRender',!$containerDivText.is(':visible'));
 
             //test for optgroup
             if ($input.children('optgroup').length == 0){
@@ -138,7 +138,7 @@ Dual licensed under the MIT and GPL licenses.
             } else {
                 //set placeholder text
                 $containerDivText.text(opts.defaultText);
-                
+
             }
 
             //decide if to place the new list above or below the drop-down
@@ -172,7 +172,7 @@ Dual licensed under the MIT and GPL licenses.
             newUlPos();
 
             //run function on browser window resize
-			$(window).bind('resize.sSelect scroll.sSelect', newUlPos);
+      $(window).bind('resize.sSelect scroll.sSelect', newUlPos);
 
             //positioning
             function positionFix(){
@@ -185,56 +185,56 @@ Dual licensed under the MIT and GPL licenses.
 
             $containerDivText.bind('click.sSelect',function(event){
                 event.stopPropagation();
-            
-				//added by Justin Beasley
-				if($(this).data('ssReRender')) {
-					newUlHeight = $newUl.find('ul.newList').height('').height();
-					containerHeight = $containerDiv.height();
-					$(this).data('ssReRender',false);
-					newUlPos();
-				}
-                
+
+        //added by Justin Beasley
+        if($(this).data('ssReRender')) {
+          newUlHeight = $newUl.find('ul.newList').height('').height();
+          containerHeight = $containerDiv.height();
+          $(this).data('ssReRender',false);
+          newUlPos();
+        }
+
                 //hide all menus apart from this one
-				$('.newList').not($(this).next()).hide()
+        $('.newList').not($(this).next()).hide()
                     .parent()
                         .css('position', 'static')
                         .removeClass('newListSelFocus');
                  // To remove clicked style in others
                     $('div.newListSelected').each(function() {
-                    		$(this).css('background-position','0 0');
-                    		$(this).css('zIndex',200);
-    	                    $newUl.find('ul').css('display','none');
+                        $(this).css('background-position','0 0');
+                        $(this).css('zIndex',200);
+                          $newUl.find('ul').css('display','none');
                             $newUl.find('ul').css('visibility','hidden');
-                    	});
- 	        
-				if ($newUl.is(':hidden')){
-				    $newUl.show();
-					$newUl.parent().children('div.selectedTxt').parent('div.newListSelected').css('background-position','0 -32px');
+                      });
 
-					$newUl.find('ul').css('display','inline');
-					$newUl.find('ul').css('visibility','visible');
-					$newUl.css('visibility','visible');
+        if ($newUl.is(':hidden')){
+            $newUl.show();
+          $newUl.parent().children('div.selectedTxt').parent('div.newListSelected').css('background-position','0 -32px');
 
-    				// To reset api jscrollPane
+          $newUl.find('ul').css('display','inline');
+          $newUl.find('ul').css('visibility','visible');
+          $newUl.css('visibility','visible');
+
+            // To reset api jscrollPane
                     var element = $newUl.parent().children('div.selectedTxt').parent('div.newListSelected').find('.scroll_pane');
 
                     if ((element != undefined) && (element.length > 0)){
 
-                        var api = element.data('jsp');						
-                       	api.reinitialise();                
-						$newUl.parent().children('.newList_content').show();
-						$newUl.css('visibility','visible');
-			
-						if (($('span#status_combo_search.clicked').length > 0)||($('span#cluster_combo_search.clicked').length > 0)||($('span#cluster_combo_search.clicked').length > 0)||($('span#sector_combo_search.clicked').length > 0)){
-							$('span.clicked').removeClass('clicked');	
-						}
+                        var api = element.data('jsp');
+                         api.reinitialise();
+            $newUl.parent().children('.newList_content').show();
+            $newUl.css('visibility','visible');
+
+            if (($('span#status_combo_search.clicked').length > 0)||($('span#cluster_combo_search.clicked').length > 0)||($('span#cluster_combo_search.clicked').length > 0)||($('span#sector_combo_search.clicked').length > 0)){
+              $('span.clicked').removeClass('clicked');
+            }
                     }
-					
-				}else {
-				    //show/hide this menu 
-                    $newUl.hide();                    
-				}
-				
+
+        }else {
+            //show/hide this menu
+                    $newUl.hide();
+        }
+
                 positionFix();
                 //scroll list to selected item
                 $newLi.eq(currentIndex).focus();
@@ -242,7 +242,7 @@ Dual licensed under the MIT and GPL licenses.
             });
 
             $newLi.bind('click.sSelect',function(e){
-				$newUl.parent().children('div.selectedTxt').parent('div.newListSelected').css('background-position','0 0');
+        $newUl.parent().children('div.selectedTxt').parent('div.newListSelected').css('background-position','0 0');
                 var $clickedLi = $(e.target);
 
                 //update counter
@@ -257,16 +257,16 @@ Dual licensed under the MIT and GPL licenses.
             });
 
             $newLi.bind('mouseenter.sSelect',
-				function(e) {
-					var $hoveredLi = $(e.target);
-					$hoveredLi.addClass('newListHover');
-				}
-			).bind('mouseleave.sSelect',
-				function(e) {
-					var $hoveredLi = $(e.target);
-					$hoveredLi.removeClass('newListHover');
-				}
-			);
+        function(e) {
+          var $hoveredLi = $(e.target);
+          $hoveredLi.addClass('newListHover');
+        }
+      ).bind('mouseleave.sSelect',
+        function(e) {
+          var $hoveredLi = $(e.target);
+          $hoveredLi.removeClass('newListHover');
+        }
+      );
 
             function navigateList(currentIndex, init){
                 $newLi.removeClass('hiLite')
@@ -284,23 +284,23 @@ Dual licensed under the MIT and GPL licenses.
                 if (init == true){
                     $input.val(val);
                     if ($containerDiv.hasClass('country_index')){
-                        text = text.substring(0,10) + '...';                         
+                        text = text.substring(0,10) + '...';
                     }
                     $containerDivText.text(text);
                     return false;
                 }
 
-		try {
-		    $input.val(val)
-		} catch(ex) {
-		    // handle ie6 exception
-		    $input[0].selectedIndex = currentIndex;
-		}
+    try {
+        $input.val(val)
+    } catch(ex) {
+        // handle ie6 exception
+        $input[0].selectedIndex = currentIndex;
+    }
 
                 $input.change();
-                
+
                 if ($containerDiv.hasClass('country_index')){
-                    text = text.substring(0,10) + '...';                         
+                    text = text.substring(0,10) + '...';
                 }
                 $containerDivText.text(text);
             }
@@ -318,7 +318,7 @@ Dual licensed under the MIT and GPL licenses.
                 currentIndex = $targetInput.find('option').index($currentOpt);
 
                 navigateList(currentIndex, true);
-			});
+      });
 
             //handle up and down keys
             function keyPress(element) {
@@ -407,7 +407,7 @@ Dual licensed under the MIT and GPL licenses.
             });
 
             $containerDiv.bind('focus.sSelect',function(){
-                $(this).addClass('newListSelFocus');              
+                $(this).addClass('newListSelFocus');
                 keyPress(this);
             });
 
@@ -420,24 +420,24 @@ Dual licensed under the MIT and GPL licenses.
                 $containerDiv.removeClass('newListSelFocus');
                 $newUl.hide();
                 positionHideFix();
-                
+
                 $newUl.parent().children('div.selectedTxt').parent('div.newListSelected').css('background-position','0 0');
-				$newUl.find('ul').css('display','none');
-				$newUl.find('ul').css('visibility','hidden');
-				
+        $newUl.find('ul').css('display','none');
+        $newUl.find('ul').css('visibility','hidden');
+
             });
 
             //add classes on hover
             $containerDivText.bind('mouseenter.sSelect',
-				function(e) {
-					var $hoveredTxt = $(e.target);
-					$hoveredTxt.parent().addClass('newListSelHover');
-				}
-			).bind('mouseleave.sSelect',
-				function(e) {
-					var $hoveredTxt = $(e.target);
-					$hoveredTxt.parent().removeClass('newListSelHover');
-				}
+        function(e) {
+          var $hoveredTxt = $(e.target);
+          $hoveredTxt.parent().addClass('newListSelHover');
+        }
+      ).bind('mouseleave.sSelect',
+        function(e) {
+          var $hoveredTxt = $(e.target);
+          $hoveredTxt.parent().removeClass('newListSelHover');
+        }
             );
 
             //reset left property and hide

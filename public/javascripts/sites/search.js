@@ -1,9 +1,16 @@
 $(document).ready(function() {
+
   $('.autocomplete').focus(function(){
     this.select();
   });
 
   var cache = {};
+
+  $('#delete_date_filter').click(function(evt){
+    evt.preventDefault();
+    $('select#date_start_month,select#date_start_year,select#date_end_month,select#date_end_year').val(null);
+    $('form#search').submit();
+  });
 
   $('ul.filter_list li a.delete').live('click', function(evt){
     evt.preventDefault();
@@ -17,11 +24,11 @@ $(document).ready(function() {
       $(this).remove();
     });
 
-    $('form').submit();
+    $('form#search').submit();
   });
 
   $('input.autocomplete').each(function(index, element){
-    $(element).data('data_class', $(element).closest('div.block').attr('class').replace('block', '').trim());
+    $(element).data('data_class', $.trim($(element).closest('div.block').attr('class').replace('block', '')));
     $(element).autocomplete({
       'minLength': 2,
       'position': {'offset': '1 -2'},
@@ -85,7 +92,7 @@ $(document).ready(function() {
 
         $(this).val('Add a ' + (word_for[data_class] || data_class));
 
-        $('form').submit();
+        $('form#search').submit();
 
         return false;
       },
@@ -112,6 +119,29 @@ $(document).ready(function() {
         .appendTo( ul );
     };
   });
+
+  $('select#date_start_month,select#date_start_year').change(function(evt){
+    if ($('select#date_start_month').val() && $('select#date_start_year').val()) {
+      $('form#search').submit();
+    };
+  });
+  $('select#date_end_month,select#date_end_year').change(function(evt){
+    if ($('select#date_end_month').val() && $('select#date_end_year').val()) {
+      $('form#search').submit();
+    };
+  });
+  $('select#date_start_month').sSelect({ddMaxWidth: '107px', ddMaxHeight: '128px', containerClass: 'month'});
+  $('select#date_start_year').sSelect({ddMaxWidth: '63px', ddMaxHeight: '128px', containerClass: 'year'});
+  $('select#date_end_month').sSelect({ddMaxWidth: '107px', ddMaxHeight: '128px', containerClass: 'month'});
+  $('select#date_end_year').sSelect({ddMaxWidth: '63px', ddMaxHeight: '128px', containerClass: 'year'});
+
+  if ($('.scroll_pane').length > 0){
+    $('.scroll_pane').jScrollPane({
+      autoReinitialise: false,
+      showArrows: false,
+      verticalGutter: 5
+    });
+  };
 });
 
 Array.prototype.removeByValue = function(val) {

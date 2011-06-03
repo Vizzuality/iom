@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110208105308) do
+ActiveRecord::Schema.define(:version => 20110602170808) do
 
   create_table "clusters", :force => true do |t|
     t.string "name"
@@ -27,21 +27,21 @@ ActiveRecord::Schema.define(:version => 20110208105308) do
   create_table "countries", :force => true do |t|
     t.string        "name"
     t.string        "code"
-    t.float         "center_lat"
-    t.float         "center_lon"
     t.multi_polygon "the_geom",         :limit => nil, :srid => 4326
     t.string        "wiki_url"
     t.text          "wiki_description"
     t.string        "iso2_code"
     t.string        "iso3_code"
+    t.float         "center_lat"
+    t.float         "center_lon"
     t.text          "the_geom_geojson"
   end
 
   add_index "countries", ["the_geom"], :name => "index_countries_on_the_geom", :spatial => true
 
   create_table "countries_projects", :id => false, :force => true do |t|
-    t.integer "country_id"
-    t.integer "project_id"
+    t.integer "country_id", :null => false
+    t.integer "project_id", :null => false
   end
 
   add_index "countries_projects", ["country_id"], :name => "index_countries_projects_on_country_id"
@@ -66,14 +66,57 @@ ActiveRecord::Schema.define(:version => 20110208105308) do
     t.boolean  "is_active"
     t.integer  "site_id"
     t.datetime "created_at"
+    t.date     "start_date"
   end
 
-  add_index "data_denormalization", ["created_at"], :name => "index_data_denormalization_on_created_at"
-  add_index "data_denormalization", ["is_active"], :name => "index_data_denormalization_on_is_active"
-  add_index "data_denormalization", ["organization_id"], :name => "index_data_denormalization_on_organization_id"
-  add_index "data_denormalization", ["project_id"], :name => "index_data_denormalization_on_project_id"
-  add_index "data_denormalization", ["project_name"], :name => "index_data_denormalization_on_project_name"
-  add_index "data_denormalization", ["site_id"], :name => "index_data_denormalization_on_site_id"
+  add_index "data_denormalization", ["cluster_ids"], :name => "data_denormalization_cluster_idsx"
+  add_index "data_denormalization", ["countries_ids"], :name => "data_denormalization_countries_idsx"
+  add_index "data_denormalization", ["donors_ids"], :name => "data_denormalization_donors_idsx"
+  add_index "data_denormalization", ["is_active"], :name => "data_denormalization_is_activex"
+  add_index "data_denormalization", ["organization_id"], :name => "data_denormalization_organization_idx"
+  add_index "data_denormalization", ["organization_name"], :name => "data_denormalization_organization_namex"
+  add_index "data_denormalization", ["project_id"], :name => "data_denormalization_project_idx"
+  add_index "data_denormalization", ["project_name"], :name => "data_denormalization_project_name_idx"
+  add_index "data_denormalization", ["regions_ids"], :name => "data_denormalization_regions_idsx"
+  add_index "data_denormalization", ["sector_ids"], :name => "data_denormalization_sector_idsx"
+  add_index "data_denormalization", ["site_id"], :name => "data_denormalization_site_idx"
+
+  create_table "data_export", :id => false, :force => true do |t|
+    t.integer "project_id"
+    t.string  "project_name",                            :limit => 2000
+    t.text    "project_description"
+    t.integer "organization_id"
+    t.string  "organization_name",                       :limit => 2000
+    t.text    "implementing_organization"
+    t.text    "partner_organizations"
+    t.text    "cross_cutting_issues"
+    t.date    "start_date"
+    t.date    "end_date"
+    t.float   "budget"
+    t.text    "target"
+    t.integer "estimated_people_reached",                :limit => 8
+    t.string  "project_contact_person"
+    t.string  "project_contact_email"
+    t.string  "project_contact_phone_number"
+    t.text    "activities"
+    t.string  "intervention_id"
+    t.text    "additional_information"
+    t.string  "awardee_type"
+    t.date    "date_provided"
+    t.date    "date_updated"
+    t.string  "project_contact_position"
+    t.string  "project_website"
+    t.text    "verbatim_location"
+    t.text    "calculation_of_number_of_people_reached"
+    t.text    "project_needs"
+    t.text    "sectors"
+    t.text    "clusters"
+    t.text    "project_tags"
+    t.text    "countries"
+    t.text    "regions_level1"
+    t.text    "regions_level2"
+    t.text    "regions_level3"
+  end
 
   create_table "donations", :force => true do |t|
     t.integer "donor_id"
@@ -178,6 +221,57 @@ ActiveRecord::Schema.define(:version => 20110208105308) do
   end
 
   add_index "organizations", ["name"], :name => "index_organizations_on_name"
+
+  create_table "organizations2", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.float    "budget"
+    t.string   "website"
+    t.integer  "national_staff"
+    t.string   "twitter"
+    t.string   "facebook"
+    t.string   "hq_address"
+    t.string   "contact_email"
+    t.string   "contact_phone_number"
+    t.string   "donation_address"
+    t.string   "zip_code"
+    t.string   "city"
+    t.string   "state"
+    t.string   "donation_phone_number"
+    t.string   "donation_website"
+    t.text     "site_specific_information"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
+    t.string   "international_staff"
+    t.string   "contact_name"
+    t.string   "contact_position"
+    t.string   "contact_zip"
+    t.string   "contact_city"
+    t.string   "contact_state"
+    t.string   "contact_country"
+    t.string   "donation_country"
+    t.integer  "estimated_people_reached"
+    t.float    "private_funding"
+    t.float    "usg_funding"
+    t.float    "other_funding"
+    t.float    "private_funding_spent"
+    t.float    "usg_funding_spent"
+    t.float    "other_funding_spent"
+    t.float    "spent_funding_on_relief"
+    t.float    "spent_funding_on_reconstruction"
+    t.integer  "percen_relief"
+    t.integer  "percen_reconstruction"
+    t.string   "media_contact_name"
+    t.string   "media_contact_position"
+    t.string   "media_contact_phone_number"
+    t.string   "media_contact_email"
+  end
+
+  add_index "organizations2", ["name"], :name => "index_organizations2_on_name"
 
   create_table "organizations_projects", :id => false, :force => true do |t|
     t.integer "organization_id"
@@ -293,16 +387,16 @@ ActiveRecord::Schema.define(:version => 20110208105308) do
     t.integer  "level"
     t.integer  "country_id"
     t.integer  "parent_region_id"
-    t.float    "center_lat"
-    t.float    "center_lon"
-    t.string   "path"
     t.geometry "the_geom",         :limit => nil, :srid => 4326
     t.integer  "gadm_id"
     t.string   "wiki_url"
     t.text     "wiki_description"
     t.string   "code"
+    t.float    "center_lat"
+    t.float    "center_lon"
     t.text     "the_geom_geojson"
     t.text     "ia_name"
+    t.string   "path"
   end
 
   add_index "regions", ["country_id"], :name => "index_regions_on_country_id"

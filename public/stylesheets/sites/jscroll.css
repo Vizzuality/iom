@@ -177,3 +177,55 @@
   float: left;
   height: 100%;
 }
+
+/* CSS styles for scrollbars in combos */
+.newList_content .jspVerticalBar
+{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 11px;
+  height: 100%;
+}
+
+.newList_content .jspTrack
+{
+  background: transparent;
+  position: relative;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+}
+
+.newList_content .jspDrag
+{
+  background: #8B8B8B;
+  position: relative;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  width: 5px;
+}
+
+.newList_content .jspArrow
+{
+  background: #50506d;
+  text-indent: -20000px;
+  display: none!important;
+  cursor: pointer;
+}
+
+.newList_content .jspVerticalBar .jspArrow
+{
+  height: 0;
+}
+
+.newList_content .jspCorner
+{
+  background: #eeeef4;
+  float: left;
+  height: 100%;
+}

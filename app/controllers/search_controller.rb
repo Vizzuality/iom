@@ -47,6 +47,27 @@ class SearchController < ApplicationController
       end
     end
 
+    if params[:date]
+      start_month = params[:date][:start_month]
+      start_year  = params[:date][:start_year]
+      end_month   = params[:date][:end_month]
+      end_year    = params[:date][:end_year]
+
+      if start_month.present? && start_year.present?
+        start_month = start_month.sanitize_sql!.to_i
+        start_year = start_year.sanitize_sql!.to_i
+        @start_date = Date.new(start_year, start_month, 1)
+        where << "start_date >= '#{@start_date.strftime('%Y-%m-%d')}'"
+      end
+
+      if end_month.present? && end_year.present?
+        end_month = end_month.sanitize_sql!.to_i
+        end_year = end_year.sanitize_sql!.to_i
+        @end_date = Date.new(end_year, end_month, 1)
+        where << "end_date <= '#{@end_date.strftime('%Y-%m-%d')}'"
+      end
+    end
+
     if params[:q].present?
       q = "%#{params[:q].sanitize_sql!}%"
       where << "(project_name ilike '#{q}' OR

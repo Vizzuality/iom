@@ -369,12 +369,27 @@ div#pages div.view_more a#view_more {display:block; width:162px; height:14px; ma
 div#pages div.view_more a#view_more:hover {background-position:0 -26px; cursor:pointer;}
 
 div#pages form div.right div.block {position: relative; width: 200px;}
-div#pages form div.right div.block input.add {position: absolute; bottom: 1px; left: 198px; display: block; border: 0; padding: 0; width: 20px; height: 20px; background-color: transparent; font-family: Arial; font-size: 16px; color: #B0B0B0; font-weight: bold; line-height: 20px; text-shadow: 0 1px 0 white; cursor: pointer;}
+div#pages form div.right div.block input.add {position: absolute; bottom: 1px; left: 198px; display: block; border: 0; padding: 0; width: 20px; height: 20px; background-color: transparent; font-family: Arial; font-size: 16px; color: #B0B0B0; font-weight: bold; line-height: 20px; text-shadow: 0 1px 0 white; cursor: pointer; z-index: 1;}
 div#pages form div.right div.block input.add:hover { -moz-box-shadow: inset 1px 1px 1px #CCCCCC; -webkit-box-shadow: inset 1px 1px 1px #CCCCCC; box-shadow: inset 1px 1px 1px #CCCCCC;}
 div#pages form div.right div.block input.add:active { -moz-box-shadow: inset 1px 1px 1px #999999; -webkit-box-shadow: inset 1px 1px 1px #999999; box-shadow: inset 1px 1px 1px #999999; padding-top: 1px; padding-left: 1px;}
-div#pages form div.right div.block input.autocomplete {width: 158px; height: 21px; padding: 0; padding-left: 5px; padding-right: 31px; border: 0 none; font-family: Arial; font-size: 13px; color: #999999; background:url('/images/sites/search/autocomplete_bkg.png') no-repeat 0 0;}
+div#pages form div.right div.block input.autocomplete {width: 158px; height: 21px; padding: 0; padding-left: 5px; padding-right: 31px; border: 0 none; font-family: Arial; font-size: 13px; color: #999999; background:url('/images/sites/search/autocomplete_bkg.png') no-repeat 0 0; z-index: 1;}
 div#pages form div.right div.block input.autocomplete:focus {background:url('/images/sites/search/autocomplete_bkg.png') no-repeat 0 -21px;}
-ul.ui-autocomplete { width: 189px; height: 213px; background:url('/images/sites/search/autocomplete_list_bkg.png') no-repeat 0 0; overflow: hidden;}
+
+div#pages form div.right div.block .newListSelected { float: left; position: relative; height:21px; padding: 0; z-index: 1; }
+div#pages form div.right div.block .newListSelected .selectedTxt { height:21px; margin: 0 0 0 6px; color:#999999; line-height:21px; overflow:hidden;}
+div#pages form div.right div.block .newListSelected div.newList_content {position: absolute; top: 0; left: 0; float: left; height: 107px; overflow: hidden; padding-top: 21px; z-index: 10;}
+div#pages form div.right div.block .newListSelected div.newList_content ul.newList {padding: 0; margin: 0;}
+div#pages form div.right div.block .newListSelected div.newList_content ul.newList li { padding: 3px 6px; background: none transparent;}
+div#pages form div.right div.block .newListSelected div.newList_content ul.newList li a {color:#666666;}
+
+div#pages form div.right div.block .newListSelected.month {width: 107px; margin: 13px 0 0; background:url('/images/sites/search/combo_month_closed_bkg.png') no-repeat 0 0;}
+div#pages form div.right div.block div.newList_content.month { width: 107px; background: url('/images/sites/search/combo_month_opened_bkg.png') no-repeat 0 0; }
+div#pages form div.right div.block .newListSelected.year {width: 67px; margin: 13px 0 0 20px; background:url('/images/sites/search/combo_year_closed_bkg.png') no-repeat 0 0;}
+div#pages form div.right div.block div.newList_content.year { width: 67px; background: url('/images/sites/search/combo_year_opened_bkg.png') no-repeat 0 0; }
+
+
+
+ul.ui-autocomplete { width: 189px; height: 213px; background:url('/images/sites/search/autocomplete_list_bkg.png') no-repeat 0 0; overflow: hidden; }
 ul.ui-autocomplete li a{ width: 177px; height: 42px; padding: 3px 6px; display: block; border-top: 1px solid #999999; }
 ul.ui-autocomplete li span { margin: 3px 0; display: block; font-weight: bold;}
 ul.ui-autocomplete li span.subtitle { color: #CCCCCC;}

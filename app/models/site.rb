@@ -589,10 +589,11 @@ SQL
     ActiveRecord::Base.connection.execute(sql)
     #Work on the denormalization
 
-    sql="insert into data_denormalization(project_id,project_name,project_description,organization_id,organization_name,end_date,regions,regions_ids,countries,countries_ids,sectors,sector_ids,clusters,cluster_ids,donors_ids,is_active,site_id,created_at)
+    sql="insert into data_denormalization(project_id,project_name,project_description,organization_id,organization_name,start_date,end_date,regions,regions_ids,countries,countries_ids,sectors,sector_ids,clusters,cluster_ids,donors_ids,is_active,site_id,created_at)
     select  * from
            (SELECT p.id as project_id, p.name as project_name, p.description as project_description,
            o.id as organization_id, o.name as organization_name,
+           p.start_date as start_date ,
            p.end_date as end_date,
            '|'||array_to_string(array_agg(distinct r.name),'|')||'|' as regions,
            ('{'||array_to_string(array_agg(distinct r.id),',')||'}')::integer[] as regions_ids,
@@ -618,7 +619,7 @@ SQL
            LEFT JOIN sectors as sec ON sec.id=psec.sector_id
            LEFT JOIN donations as d ON d.project_id=ps.project_id
            where site_id=#{self.id}
-           GROUP BY p.id,p.name,o.id,o.name,p.description,p.end_date,ps.site_id,p.created_at) as subq"
+           GROUP BY p.id,p.name,o.id,o.name,p.description,p.start_date,p.end_date,ps.site_id,p.created_at) as subq"
      ActiveRecord::Base.connection.execute(sql)
   end
 
