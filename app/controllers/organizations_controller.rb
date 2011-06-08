@@ -12,15 +12,70 @@ class OrganizationsController < ApplicationController
     end
     @organization.attributes = @organization.attributes_for_site(@site)
 
-    @projects = Project.custom_find @site, :organization => @organization.id,
-                                           :per_page => 10,
-                                           :page => params[:page],
-                                           :order => 'created_at DESC',
-                                           :start_in_page => params[:start_in_page]
+    @filter_by_category = params[:category_id]
+    @filter_by_location = params[:location_id].split('/') if params[:location_id]
+
+    @carry_on_filters = {}
+    @carry_on_filters[:category_id] = params[:category_id] if params[:category_id].present?
+    @carry_on_filters[:location_id] = params[:location_id] if params[:location_id].present?
+
+    @filter_name = ''
+
+    if @filter_by_category && @filter_by_location
+      @category_name =  "#{(@site.navigate_by_sector?? Sector : Cluster).where(:id => @filter_by_category).first.name}"
+      @location_name = if @site.navigate_by_country?
+        "#{Country.where(:id => @filter_by_location.first).first.name}"
+      else
+        "#{Country.where(:id => @filter_by_location.first).first.name}/#{Region.where(:id => @filter_by_location.last).first.name}"
+      end
+      @filter_name =  "#{@category_name} projects in #{@location_name}"
+    elsif @filter_by_location
+      @location_name = if @site.navigate_by_country?
+        "#{Country.where(:id => @filter_by_location.first).first.name}"
+      else
+        "#{Country.where(:id => @filter_by_location.first).first.name}/#{Region.where(:id => @filter_by_location.last).first.name}"
+      end
+      @filter_name = "projects in #{@location_name}"
+    elsif @filter_by_category.present?
+      @category_name = (@site.navigate_by_sector?? Sector : Cluster).where(:id => @filter_by_category).first.name
+      @filter_name =  "#{@category_name} projects"
+    end
+
+    projects_custom_find_options = {
+      :organization  => @organization.id,
+      :per_page      => 10,
+      :page          => params[:page],
+      :order         => 'created_at DESC',
+      :start_in_page => params[:start_in_page]
+    }
+    projects_custom_find_options[:organization_sector_id] = @filter_by_category if @filter_by_category.present?
+    projects_custom_find_options[:organization_location_id] = @filter_by_location.last if @filter_by_location.present?
+
+    @organization_projects_count            = @organization.projects_count(@site, @filter_by_category, @filter_by_location)
+    @organization_projects_clusters_sectors = @organization.projects_clusters_sectors(@site, @filter_by_location)
+    @organization_projects_by_location = if @site.navigate_by_country?
+      @organization.projects_countries(@site, @filter_by_category)
+    else
+      @organization.projects_regions(@site, @filter_by_category)
+    end
+
+    @projects = Project.custom_find @site, projects_custom_find_options
     respond_to do |format|
       format.html do
+
+        if @filter_by_category.present?
+          if @site.navigate_by_cluster?
+            category_join = "inner join clusters_projects as cp on cp.project_id = prj.id and cp.cluster_id = #{@filter_by_category}"
+          else
+            category_join = "inner join projects_sectors as pse on pse.project_id = prj.id and pse.sector_id = #{@filter_by_category}"
+          end
+        end
+
         #Map data
         if @site.geographic_context_country_id
+
+          location_filter = "and r.id = #{@filter_by_location.last}" if @filter_by_location
+
           sql="select r.id,count(ps.project_id) as count,r.name,r.center_lon as lon,r.center_lat as lat,
                       r.name,'/location/'||r.path as url,r.code,
                       (select count(*) from data_denormalization where regions_ids && ('{'||r.id||'}')::integer[] and is_active=true and site_id=#{@site.id}) as total_in_region
@@ -30,9 +85,12 @@ class OrganizationsController < ApplicationController
                   inner join projects_sites as ps on p.id=ps.project_id and ps.site_id=#{@site.id})
                   inner join projects as prj on ps.project_id=prj.id and (prj.end_date is null OR prj.end_date > now())
                   inner join projects_regions as pr on pr.project_id=p.id)
-                  inner join regions as r on pr.region_id=r.id and r.level=#{@site.level_for_region})
+                  inner join regions as r on pr.region_id=r.id and r.level=#{@site.level_for_region} #{location_filter})
+                  #{category_join}
                 group by r.id,r.name,lon,lat,r.name,url,r.code"
         else
+          location_filter = "and c.id = #{@filter_by_location.first}" if @filter_by_location
+
           sql="select c.id,count(ps.project_id) as count,c.name,c.center_lon as lon,
                       c.center_lat as lat,c.name,'/location/'||c.id as url,c.iso2_code as code,
                       (select count(*) from data_denormalization where countries_ids && ('{'||c.id||'}')::integer[] and is_active=true and site_id=#{@site.id}) as total_in_region
@@ -40,7 +98,8 @@ class OrganizationsController < ApplicationController
                   projects as p inner join organizations as o on o.id=p.primary_organization_id and o.id=#{params[:id].sanitize_sql!})
                   inner join projects_sites as ps on p.id=ps.project_id and ps.site_id=#{@site.id}) inner join countries_projects as cp on cp.project_id=p.id)
                   inner join projects as prj on ps.project_id=prj.id and (prj.end_date is null OR prj.end_date > now())
-                  inner join countries as c on cp.country_id=c.id)
+                  inner join countries as c on cp.country_id=c.id #{location_filter})
+                  #{category_join}
                 group by c.id,c.name,lon,lat,c.name,url,c.iso2_code"
         end
 

@@ -3,36 +3,36 @@
 # Table name: projects
 #
 #  id                                      :integer         not null, primary key
-#  name                                    :string(2000)    
-#  description                             :text            
-#  primary_organization_id                 :integer         
-#  implementing_organization               :text            
-#  partner_organizations                   :text            
-#  cross_cutting_issues                    :text            
-#  start_date                              :date            
-#  end_date                                :date            
-#  budget                                  :float           
-#  target                                  :text            
-#  estimated_people_reached                :integer(8)      
-#  contact_person                          :string(255)     
-#  contact_email                           :string(255)     
-#  contact_phone_number                    :string(255)     
-#  site_specific_information               :text            
-#  created_at                              :datetime        
-#  updated_at                              :datetime        
-#  the_geom                                :string          
-#  activities                              :text            
-#  intervention_id                         :string(255)     
-#  additional_information                  :text            
-#  awardee_type                            :string(255)     
-#  date_provided                           :date            
-#  date_updated                            :date            
-#  contact_position                        :string(255)     
-#  website                                 :string(255)     
-#  verbatim_location                       :text            
-#  calculation_of_number_of_people_reached :text            
-#  project_needs                           :text            
-#  idprefugee_camp                         :text            
+#  name                                    :string(2000)
+#  description                             :text
+#  primary_organization_id                 :integer
+#  implementing_organization               :text
+#  partner_organizations                   :text
+#  cross_cutting_issues                    :text
+#  start_date                              :date
+#  end_date                                :date
+#  budget                                  :float
+#  target                                  :text
+#  estimated_people_reached                :integer(8)
+#  contact_person                          :string(255)
+#  contact_email                           :string(255)
+#  contact_phone_number                    :string(255)
+#  site_specific_information               :text
+#  created_at                              :datetime
+#  updated_at                              :datetime
+#  the_geom                                :string
+#  activities                              :text
+#  intervention_id                         :string(255)
+#  additional_information                  :text
+#  awardee_type                            :string(255)
+#  date_provided                           :date
+#  date_updated                            :date
+#  contact_position                        :string(255)
+#  website                                 :string(255)
+#  verbatim_location                       :text
+#  calculation_of_number_of_people_reached :text
+#  project_needs                           :text
+#  idprefugee_camp                         :text
 #
 
 class Project < ActiveRecord::Base
@@ -288,7 +288,12 @@ SQL
     elsif options[:sector]
       sql="select * from data_denormalization where sector_ids && '{#{options[:sector]}}' and site_id=#{site.id} and is_active=true"
     elsif options[:organization]
-      sql="select * from data_denormalization where organization_id = #{options[:organization]} and site_id=#{site.id} and is_active=true"
+      where = []
+      where << "organization_id = #{options[:organization]} and site_id=#{site.id} and is_active=true"
+      where << "sector_ids && '{#{options[:organization_sector_id]}}'" if options[:organization_sector_id]
+      where << "regions_ids && '{#{options[:organization_location_id]}}'" if options[:organization_location_id]
+
+      sql="select * from data_denormalization where #{where.join(' and ')}"
     elsif options[:donor_id]
       sql="select * from data_denormalization where donors_ids && '{#{options[:donor_id]}}' and site_id=#{site.id} and is_active=true"
     else
