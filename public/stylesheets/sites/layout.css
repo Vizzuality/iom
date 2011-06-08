@@ -375,18 +375,19 @@ div#pages form div.right div.block input.add:active { -moz-box-shadow: inset 1px
 div#pages form div.right div.block input.autocomplete {width: 158px; height: 21px; padding: 0; padding-left: 5px; padding-right: 31px; border: 0 none; font-family: Arial; font-size: 13px; color: #999999; background:url('/images/sites/search/autocomplete_bkg.png') no-repeat 0 0; z-index: 1;}
 div#pages form div.right div.block input.autocomplete:focus {background:url('/images/sites/search/autocomplete_bkg.png') no-repeat 0 -21px;}
 
-div#pages form div.right div.block .newListSelected { float: left; position: relative; height:21px; padding: 0; z-index: 1; }
+div#pages form div.right div.block .newListSelected { float: left; position: relative; height:21px; padding: 0; cursor: pointer;}
 div#pages form div.right div.block .newListSelected .selectedTxt { height:21px; margin: 0 0 0 6px; color:#999999; line-height:21px; overflow:hidden;}
-div#pages form div.right div.block .newListSelected div.newList_content {position: absolute; top: 0; left: 0; float: left; height: 107px; overflow: hidden; padding-top: 21px; z-index: 10;}
+div#pages form div.right div.block .newListSelected div.newList_content {position: absolute; top: 21px; left: 0; float: left; height: 107px; overflow: hidden; padding: 0; z-index: 10;}
 div#pages form div.right div.block .newListSelected div.newList_content ul.newList {padding: 0; margin: 0;}
 div#pages form div.right div.block .newListSelected div.newList_content ul.newList li { padding: 3px 6px; background: none transparent;}
 div#pages form div.right div.block .newListSelected div.newList_content ul.newList li a {color:#666666;}
 
-div#pages form div.right div.block .newListSelected.month {width: 107px; margin: 13px 0 0; background:url('/images/sites/search/combo_month_closed_bkg.png') no-repeat 0 0;}
-div#pages form div.right div.block div.newList_content.month { width: 107px; background: url('/images/sites/search/combo_month_opened_bkg.png') no-repeat 0 0; }
-div#pages form div.right div.block .newListSelected.year {width: 67px; margin: 13px 0 0 20px; background:url('/images/sites/search/combo_year_closed_bkg.png') no-repeat 0 0;}
-div#pages form div.right div.block div.newList_content.year { width: 67px; background: url('/images/sites/search/combo_year_opened_bkg.png') no-repeat 0 0; }
-
+div#pages form div.right div.block .newListSelected.month {width: 107px; margin: 13px 0 0; background:url('/images/sites/search/combo_month_bkg.png') no-repeat 0 0;}
+div#pages form div.right div.block .newListSelected.month div.newList_content {width: 107px; background:url('/images/sites/search/combo_month_body_bkg.png') no-repeat 0 0;}
+div#pages form div.right div.block .newListSelected.month div.newList_content ul.newList{ width: 107px;}
+div#pages form div.right div.block .newListSelected.year {width: 63px; margin: 13px 0 0 20px; background:url('/images/sites/search/combo_year_bkg.png') no-repeat 0 0;}
+div#pages form div.right div.block .newListSelected.year div.newList_content {width: 63px; background:url('/images/sites/search/combo_year_body_bkg.png') no-repeat 0 0;}
+div#pages form div.right div.block .newListSelected.year div.newList_content ul.newList{ width: 63px;}
 
 
 ul.ui-autocomplete { width: 189px; height: 213px; background:url('/images/sites/search/autocomplete_list_bkg.png') no-repeat 0 0; overflow: hidden; }

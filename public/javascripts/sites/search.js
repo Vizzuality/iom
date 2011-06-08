@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-  $('.autocomplete').focus(function(){
+  $('input.autocomplete').focus(function(evt){
     this.select();
   });
 
@@ -130,10 +130,11 @@ $(document).ready(function() {
       $('form#search').submit();
     };
   });
-  $('select#date_start_month').sSelect({ddMaxWidth: '107px', ddMaxHeight: '128px', containerClass: 'month'});
-  $('select#date_start_year').sSelect({ddMaxWidth: '63px', ddMaxHeight: '128px', containerClass: 'year'});
-  $('select#date_end_month').sSelect({ddMaxWidth: '107px', ddMaxHeight: '128px', containerClass: 'month'});
-  $('select#date_end_year').sSelect({ddMaxWidth: '63px', ddMaxHeight: '128px', containerClass: 'year'});
+
+  $('select#date_start_month').sSelect({ddMaxWidth: '107px', ddMaxHeight: '107px', containerClass: 'month'});
+  $('select#date_start_year').sSelect({ddMaxWidth: '63px', ddMaxHeight: '107px', containerClass: 'year'});
+  $('select#date_end_month').sSelect({ddMaxWidth: '107px', ddMaxHeight: '107px', containerClass: 'month'});
+  $('select#date_end_year').sSelect({ddMaxWidth: '63px', ddMaxHeight: '107px', containerClass: 'year'});
 
   if ($('.scroll_pane').length > 0){
     $('.scroll_pane').jScrollPane({
