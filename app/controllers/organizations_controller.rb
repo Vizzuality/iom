@@ -26,14 +26,16 @@ class OrganizationsController < ApplicationController
       @location_name = if @site.navigate_by_country?
         "#{Country.where(:id => @filter_by_location.first).first.name}"
       else
-        "#{Country.where(:id => @filter_by_location.first).first.name}/#{Region.where(:id => @filter_by_location.last).first.name}"
+        region = Region.where(:id => @filter_by_location.last).first
+        "#{region.country.name}/#{region.name}"
       end
       @filter_name =  "#{@category_name} projects in #{@location_name}"
     elsif @filter_by_location
       @location_name = if @site.navigate_by_country?
         "#{Country.where(:id => @filter_by_location.first).first.name}"
       else
-        "#{Country.where(:id => @filter_by_location.first).first.name}/#{Region.where(:id => @filter_by_location.last).first.name}"
+        region = Region.where(:id => @filter_by_location.last).first
+        "#{region.country.name}/#{region.name}"
       end
       @filter_name = "projects in #{@location_name}"
     elsif @filter_by_category.present?
@@ -72,12 +74,14 @@ class OrganizationsController < ApplicationController
         end
 
         #Map data
+        carry_on_url = organization_path(@organization, @carry_on_filters.merge(:location_id => ''))
         if @site.geographic_context_country_id
 
           location_filter = "and r.id = #{@filter_by_location.last}" if @filter_by_location
 
+
           sql="select r.id,count(ps.project_id) as count,r.name,r.center_lon as lon,r.center_lat as lat,
-                      r.name,'/location/'||r.path as url,r.code,
+                      r.name,'#{carry_on_url}'||r.path as url,r.code,
                       (select count(*) from data_denormalization where regions_ids && ('{'||r.id||'}')::integer[] and is_active=true and site_id=#{@site.id}) as total_in_region
                 from ((((
                   projects as p inner join organizations as o on o.id=p.primary_organization_id and
@@ -92,7 +96,7 @@ class OrganizationsController < ApplicationController
           location_filter = "and c.id = #{@filter_by_location.first}" if @filter_by_location
 
           sql="select c.id,count(ps.project_id) as count,c.name,c.center_lon as lon,
-                      c.center_lat as lat,c.name,'/location/'||c.id as url,c.iso2_code as code,
+                      c.center_lat as lat,c.name,'#{carry_on_url}'||c.id as url,c.iso2_code as code,
                       (select count(*) from data_denormalization where countries_ids && ('{'||c.id||'}')::integer[] and is_active=true and site_id=#{@site.id}) as total_in_region
                 from ((((
                   projects as p inner join organizations as o on o.id=p.primary_organization_id and o.id=#{params[:id].sanitize_sql!})

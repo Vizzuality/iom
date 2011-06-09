@@ -195,7 +195,7 @@ div.main_head div.float_head.home {padding-bottom:37px;}
 div.main_head div.float_head.home h1 {font-size:32px; text-transform:uppercase; position:relative; width:200px;}
 div.main_head div.float_head.home sup.beta {font:normal 11px "PT Sans"; color:#73352B; padding:3px;}
 div.main_head div.float_head.home h3 {width:100%; font:normal 15px "PT Sans Bold"; color:#7B3C32; text-transform:uppercase; margin:20px 0 0 0;}
-div.main_head a.filter {position: absolute; padding: 5px; display: block; width: 238px; font: normal 13px "PT Sans Bold"; color: white; font-weight: normal; text-transform: uppercase; z-index: 100;}
+div.main_head a.filter {position: absolute; padding: 5px; display: block; width: 260px; font: normal 13px "PT Sans Bold"; color: white; font-weight: normal; text-transform: uppercase; z-index: 100;}
 div.main_head a.filter img{margin: 2px 5px;}
 div.main_head div ul.breadcrumb {width:100%; padding:0 0 13px;}
 div.main_head div ul.breadcrumb li {display:inline; width:auto; margin:0 5px 0 0; background:url('/images/sites/icons/breadcrumb.png') no-repeat right 6px;}
@@ -433,7 +433,7 @@ a.icon_menu:hover {background-position:0 -22px; cursor:pointer;}
 
 /* TO WATER_MARK */
 
-span.icon_watermark {position:absolute; right:32px; top:47px; height:37px; width:37px; z-index:-5;}
+span.icon_watermark {position:absolute; right:32px; top:32px; height:37px; width:37px; z-index:-5;}
 span.icon_watermark.agriculture {background:url('/images/sites/common/icons/watermark/agriculture.png') no-repeat left 0;}
 span.icon_watermark.camp_coordination {background:url('/images/sites/common/icons/watermark/camp.png') no-repeat left 0;}
 span.icon_watermark.communications {background:url('/images/sites/common/icons/watermark/communication.png') no-repeat left 0;}

@@ -284,9 +284,17 @@ SQL
     elsif options[:country]
       sql="select * from data_denormalization where countries_ids && '{#{options[:country]}}' and site_id=#{site.id} and is_active=true"
     elsif options[:cluster]
-      sql="select * from data_denormalization where cluster_ids && '{#{options[:cluster]}}' and site_id=#{site.id} and is_active=true"
+      where = []
+      where << "cluster_ids && '{#{options[:cluster]}}' and site_id=#{site.id} and is_active=true"
+      where << "regions_ids && '{#{options[:cluster_location_id]}}'" if options[:cluster_location_id]
+
+      sql="select * from data_denormalization where #{where.join(' and ')}"
     elsif options[:sector]
-      sql="select * from data_denormalization where sector_ids && '{#{options[:sector]}}' and site_id=#{site.id} and is_active=true"
+      where = []
+      where << "sector_ids && '{#{options[:sector]}}' and site_id=#{site.id} and is_active=true"
+      where << "regions_ids && '{#{options[:sector_location_id]}}'" if options[:sector_location_id]
+
+      sql="select * from data_denormalization where #{where.join(' and ')}"
     elsif options[:organization]
       where = []
       where << "organization_id = #{options[:organization]} and site_id=#{site.id} and is_active=true"

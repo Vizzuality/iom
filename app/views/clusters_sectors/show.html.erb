@@ -9,6 +9,11 @@
           <h1 class="cluster_sector_name"><%= @data.name %></h1>
           <span class="<%= @data.css_class %> icon_watermark"></span>
         </div>
+        <% if @site.navigate_by_cluster? %>
+        <%= link_to raw(@filter_name + image_tag('sites/icons/carry_on_filter_remove.png')) , cluster_path(@data), :class => 'filter' if @filter_name.present? %>
+        <% else %>
+        <%= link_to raw(@filter_name + image_tag('sites/icons/carry_on_filter_remove.png')) , sector_path(@data), :class => 'filter' if @filter_name.present? %>
+        <% end %>
       </div>
       <div class="right">
       </div>
@@ -37,7 +42,7 @@
           <div class="head">
             <h2>OVERVIEW</h2>
           </div>
-          <% unless @data.projects_regions(@site).empty?%>
+          <% unless @filter_by_location.present? || @data.projects_regions(@site).empty?%>
           <div class="block statistics less">
             <h3>PROJECT LOCATIONS</h3>
             <% if @site.navigate_by_country? %>
@@ -84,13 +89,8 @@
       <!-- RIGHT PART -->
       <div class="right">
         <h3>
-          <%= pluralize(@data.total_projects(@site), 'active project', 'active projects') %> in
-          <% if @site.navigate_by_country? %>
-            <%= pluralize(@data.total_countries(@site), 'country', 'countries') %>
-          <% else %>
-            <%= pluralize(@data.total_regions(@site), @site.word_for_regions.singularize, @site.word_for_regions) %>
-          <% end %>
-          <a id="see_all" href="#">View past projects</a>
+          <%= clusters_sectors_projects_list_subtitle %>
+          <a id="see_all" href="#">See all projects</a>
           <ul class="download">
             <li><%= link_to 'CSV', @site.navigate_by_cluster?? cluster_path(@data, :csv) : sector_path(@data, :csv) %></li>
             <li>|</li>

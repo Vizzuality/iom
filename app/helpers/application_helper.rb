@@ -133,7 +133,20 @@ HTML
       geo = geo_entries.first
       count  = geo_entries.last
       lis << (content_tag :li,  :class => "pos#{index}" do
-        raw("#{link_to geo.name, location_path(geo)} - #{count}")
+        case controller_name
+        when 'organizations'
+          raw("#{link_to geo.name, organization_path(@organization, :location_id => geo.to_param)} - #{count}")
+        when 'clusters_sectors'
+          if site.navigate_by_cluster?
+            raw("#{link_to geo.name, cluster_path(@data, :location_id => geo.to_param)} - #{count}")
+          else
+            raw("#{link_to geo.name, sector_path(@data, :location_id => geo.to_param)} - #{count}")
+          end
+        when 'georegion'
+          raw("#{link_to geo.name, location_path(@area, :location_id => geo.to_param)} - #{count}")
+        else
+          raw("#{link_to geo.name, location_path(geo)} - #{count}")
+        end
       end)
     end
 
