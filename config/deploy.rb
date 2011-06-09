@@ -38,7 +38,7 @@ task :run_migrations, :roles => [:app] do
   run <<-CMD
     export RAILS_ENV=production &&
     cd #{release_path} &&
-    rake db:migrate
+    bundle exec rake db:migrate
   CMD
 end
 
@@ -52,6 +52,6 @@ task :asset_packages, :roles => [:app] do
  run <<-CMD
    export RAILS_ENV=production &&
    cd #{release_path} &&
-   rake asset:packager:build_all
+   bundle exec rake asset:packager:build_all
  CMD
 end
