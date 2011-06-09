@@ -280,9 +280,29 @@ SQL
 
     sql = ""
     if options[:region]
-      sql="select * from data_denormalization where regions_ids && '{#{options[:region]}}' and site_id=#{site.id} and is_active=true"
+      where = []
+      where << "regions_ids && '{#{options[:region]}}' and site_id=#{site.id} and is_active=true"
+      if options[:region_category_id]
+        if site.navigate_by_cluster?
+          where << "cluster_ids && '{#{options[:region_category_id]}}'"
+        else
+          where << "sector_ids && '{#{options[:region_category_id]}}'"
+        end
+      end
+
+      sql="select * from data_denormalization where #{where.join(' and ')}"
     elsif options[:country]
-      sql="select * from data_denormalization where countries_ids && '{#{options[:country]}}' and site_id=#{site.id} and is_active=true"
+      where = []
+      where << "countries_ids && '{#{options[:country]}}' and site_id=#{site.id} and is_active=true"
+      if options[:country_category_id]
+        if site.navigate_by_cluster?
+          where << "cluster_ids && '{#{options[:country_category_id]}}'"
+        else
+          where << "sector_ids && '{#{options[:country_category_id]}}'"
+        end
+      end
+
+      sql="select * from data_denormalization where #{where.join(' and ')}"
     elsif options[:cluster]
       where = []
       where << "cluster_ids && '{#{options[:cluster]}}' and site_id=#{site.id} and is_active=true"
@@ -298,7 +318,15 @@ SQL
     elsif options[:organization]
       where = []
       where << "organization_id = #{options[:organization]} and site_id=#{site.id} and is_active=true"
-      where << "sector_ids && '{#{options[:organization_sector_id]}}'" if options[:organization_sector_id]
+
+      if options[:organization_category_id]
+        if site.navigate_by_cluster?
+          where << "cluster_ids && '{#{options[:organization_category_id]}}'"
+        else
+          where << "sector_ids && '{#{options[:organization_category_id]}}'"
+        end
+      end
+
       where << "regions_ids && '{#{options[:organization_location_id]}}'" if options[:organization_location_id]
 
       sql="select * from data_denormalization where #{where.join(' and ')}"

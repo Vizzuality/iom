@@ -50,7 +50,7 @@ class OrganizationsController < ApplicationController
       :order         => 'created_at DESC',
       :start_in_page => params[:start_in_page]
     }
-    projects_custom_find_options[:organization_sector_id] = @filter_by_category if @filter_by_category.present?
+    projects_custom_find_options[:organization_category_id] = @filter_by_category if @filter_by_category.present?
     projects_custom_find_options[:organization_location_id] = @filter_by_location.last if @filter_by_location.present?
 
     @organization_projects_count            = @organization.projects_count(@site, @filter_by_category, @filter_by_location)

@@ -131,10 +131,19 @@ SQL
     )
   end
 
-  def projects_count(site)
+  def projects_count(site, category_id = nil)
+    if category_id.present?
+      if site.navigate_by_cluster?
+        category_join = "inner join clusters_projects as cp on cp.project_id = p.id and cp.cluster_id = #{category_id}"
+      else
+        category_join = "inner join projects_sectors as pse on pse.project_id = p.id and pse.sector_id = #{category_id}"
+      end
+    end
+
     sql = "select count(distinct(cp.project_id)) as count from countries_projects as cp
     inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=#{site.id}
     inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
+    #{category_join}
     where cp.country_id=#{self.id} order by count DESC"
     ActiveRecord::Base.connection.execute(sql).first['count'].to_i
   end
