@@ -3,15 +3,15 @@
 # Table name: pages
 #
 #  id          :integer         not null, primary key
-#  title       :string(255)     
-#  body        :text            
-#  site_id     :integer         
-#  published   :boolean         
-#  permalink   :string(255)     
-#  created_at  :datetime        
-#  updated_at  :datetime        
-#  parent_id   :integer         
-#  order_index :integer         
+#  title       :string(255)
+#  body        :text
+#  site_id     :integer
+#  published   :boolean
+#  permalink   :string(255)
+#  created_at  :datetime
+#  updated_at  :datetime
+#  parent_id   :integer
+#  order_index :integer
 #
 
 class Page < ActiveRecord::Base
@@ -64,6 +64,14 @@ class Page < ActiveRecord::Base
 
   def self.highlights(site)
     site.pages.find_by_title('Highlights')
+  end
+
+  def self.link_this_site(site)
+    site.pages.find_by_title('Link this site')
+  end
+
+  def self.make_your_map(site)
+    site.pages.find_by_title('Make your own map')
   end
 
   def set_status
