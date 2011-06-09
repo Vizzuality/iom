@@ -7,6 +7,7 @@ class Admin::AdminController < ApplicationController
   def export_projects
     sql = <<-SQL
     select distinct
+    site_id,
     project_id,
     project_name,
     project_description,
@@ -44,6 +45,7 @@ class Admin::AdminController < ApplicationController
     (select '|' || array_to_string(array_agg(distinct name),'|') ||'|' from donors as d inner join donations as dn on d.id=dn.donor_id and dn.project_id=dd.project_id) as donors
     from data_denormalization as dd inner join projects as p on dd.project_id=p.id
     group by
+    site_id,
     project_id,
     project_name,
     project_description,

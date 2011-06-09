@@ -146,7 +146,7 @@ class Project < ActiveRecord::Base
 
 
   def self.csv_attributes
-    %W{ Organization Project\ Title Project\ Description Project\ Activities
+    %W{ Site Id\ Organization Project\ Title Project\ Description Project\ Activities
         Additional\ Information Estimated\ Start\ Date Estimated\ End\ Date
         Donor Budget Implementing\ Organization(s) Partner\ Organization(s)
         Cluster(s) Sector(s) Cross\ Cutting\ Issues Number\ of\ People\ Reached\ (target) Target\ Groups
@@ -162,6 +162,7 @@ class Project < ActiveRecord::Base
     end
     return [] if raw_result.nil?
     columns = []
+    columns << raw_result['site_id']
     columns << raw_result['organization_name']
     columns << raw_result['project_name']
     columns << raw_result['project_description']
