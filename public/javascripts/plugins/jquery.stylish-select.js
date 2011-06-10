@@ -208,6 +208,7 @@ Dual licensed under the MIT and GPL licenses.
       $('div.newListSelected').each(function() {
         $(this).css('background-position','0 0');
         // $(this).css('zIndex',200);
+        $(this).find('.newList_content').hide();
         $newUl.find('ul').css('display','none');
         $newUl.find('ul').css('visibility','hidden');
       });
