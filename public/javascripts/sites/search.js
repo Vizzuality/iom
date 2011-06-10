@@ -84,24 +84,29 @@ $(document).ready(function() {
         var a = $("." + data_class + " ul.filter_list li:last-child a").clone();
 
         if (a.length == 0) {
-          a = $('<a>', {'href': '#'}).addClass('delete').append($('<img>', {'src': '/images/sites/search/autocomplete_x.png', 'alt': 'delete'}));
+          a = $('<a>', {'href': '#'}).addClass('delete');
+          $('<img>', {'src': '/images/sites/search/autocomplete_x.png', 'alt': 'delete'}).load(function(){
+            $(this).appendTo(a);
+
+            a.attr('rel', ui.item.id);
+
+            $("." + data_class + " ul.filter_list").append($("<li>", {"text": label}).append(a)).css('height', null);
+
+            $(this).val('Add a ' + (word_for[data_class] || data_class));
+
+            $('form#search').submit();
+          });
+        }else{
+          a.attr('rel', ui.item.id);
+
+          $("." + data_class + " ul.filter_list").append($("<li>", {"text": label}).append(a)).css('height', null);
+
+          $(this).val('Add a ' + (word_for[data_class] || data_class));
+
+          $('form#search').submit();
         };
-        a.attr('rel', ui.item.id);
-
-        $("." + data_class + " ul.filter_list").append($("<li>", {"text": label}).append(a)).css('height', null);
-
-        $(this).val('Add a ' + (word_for[data_class] || data_class));
-
-        $('form#search').submit();
 
         return false;
-      },
-      'open': function(event, ui) {
-        $('ul.ui-autocomplete').addClass('scroll_pane').jScrollPane({
-          autoReinitialise:false,
-          showArrows: false,
-          verticalGutter: 5
-        });
       }
     })
     .data( "autocomplete" )._renderItem = function( ul, item ) {
