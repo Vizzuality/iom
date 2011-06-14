@@ -385,7 +385,7 @@ div#pages form div.right div.block .newListSelected div.newList_content ul.newLi
 div#pages form div.right div.block .newListSelected div.newList_content ul.newList li { padding: 3px 6px; background: none transparent;}
 div#pages form div.right div.block .newListSelected div.newList_content ul.newList li a {color:#666666;}
 
-div#pages form div.right div.block .newListSelected.month {width: 107px; margin: 13px 0 0 20px; background:url('/images/sites/search/combo_month_bkg.png') no-repeat 0 0;}
+div#pages form div.right div.block .newListSelected.month {width: 107px; margin: 8px 0 0 20px; background:url('/images/sites/search/combo_month_bkg.png') no-repeat 0 0;}
 div#pages form div.right div.block .newListSelected.month div.newList_content {width: 107px; background:url('/images/sites/search/combo_month_body_bkg.png') no-repeat 0 0;}
 div#pages form div.right div.block .newListSelected.month div.newList_content ul.newList{ width: 107px;}
 div#pages form div.right div.block .newListSelected.year {width: 63px; margin: 8px 0 0 0; background:url('/images/sites/search/combo_year_bkg.png') no-repeat 0 0;}
