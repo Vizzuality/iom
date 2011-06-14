@@ -71,6 +71,20 @@ class SitesController < ApplicationController
           page << "resizeColumn();"
         end
       end
+      format.csv do
+        projects_for_csv = @site.projects_for_csv
+        headers = projects_for_csv.any?? projects_for_csv.first.keys : nil
+
+        send_data projects_for_csv.serialize_to_csv(:headers => headers),
+          :type => 'text/plain; charset=utf-8; application/download',
+          :disposition => "attachment; filename=#{@site.name}_projects.csv"
+      end
+      format.kml do
+        debugger
+        @projects_for_kml = @site.projects_for_kml
+
+        render :site_home
+      end
     end
   end
 
