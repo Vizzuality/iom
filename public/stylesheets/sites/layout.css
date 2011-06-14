@@ -337,7 +337,8 @@ div#pages div.float_left div.results_list ul li div.project_places ul {margin:0;
 div#pages div.float_left div.results_list ul li div.project_places ul li {margin: 0; padding:2px; background-color: transparent; line-height:13px;}
 div#pages div.float_left div.results_list ul li div.project_places p a {color:#999999; text-decoration:underline;}
 div#pages div.float_left div.results_list ul li div.project_places p a:hover {color:#333333;}
-div#pages div.right {width:272px; margin:100px 0 0 0; padding:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#pages div.right {width:272px; margin:71px 0 0 0; padding:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#pages div.rightsearch {margin:122px 0 0 0;}
 div#pages div.right div.block {float:left; width:242px; margin:23px 0 0 0; padding:0 0 0 30px;}
 div#pages div.right div.block.border {border-bottom:1px solid #D4D4D4; padding:0 0 20px 30px;}
 div#pages div.right div.block.border.last {border:none; padding:0 0 0 30px;}
@@ -354,7 +355,7 @@ div#pages div.right div.block p.social a.facebook {margin:0 0 0 4px; background:
 div#pages div.right div.block p.website {padding:5px 0 0 0;}
 div#pages div.right div.block p a {color:#CD5D4C;}
 div#pages div.right div.block p a:hover {text-decoration:underline;}
-div#pages div.right div.block ul {width:100%; margin:7px 0 0 0; padding:0 0 6px; list-style:none;}
+div#pages div.right div.block ul {width:100%; margin:2px 0 0 0; padding:0 0 6px; list-style:none;}
 div#pages div.right div.block ul li {padding:3px 0 3px 10px; background:url('/images/sites/icons/list_disc.png') no-repeat 0 10px; font:normal 13px Arial; color:#333333;}
 div#pages div.right div.block ul li.page {color:#333333;}
 div#pages div.right div.block ul li a {color:#D05F4C; text-decoration:none;}
@@ -387,7 +388,7 @@ div#pages form div.right div.block .newListSelected div.newList_content ul.newLi
 div#pages form div.right div.block .newListSelected.month {width: 107px; margin: 13px 0 0 20px; background:url('/images/sites/search/combo_month_bkg.png') no-repeat 0 0;}
 div#pages form div.right div.block .newListSelected.month div.newList_content {width: 107px; background:url('/images/sites/search/combo_month_body_bkg.png') no-repeat 0 0;}
 div#pages form div.right div.block .newListSelected.month div.newList_content ul.newList{ width: 107px;}
-div#pages form div.right div.block .newListSelected.year {width: 63px; margin: 13px 0 0 0; background:url('/images/sites/search/combo_year_bkg.png') no-repeat 0 0;}
+div#pages form div.right div.block .newListSelected.year {width: 63px; margin: 8px 0 0 0; background:url('/images/sites/search/combo_year_bkg.png') no-repeat 0 0;}
 div#pages form div.right div.block .newListSelected.year div.newList_content {width: 63px; background:url('/images/sites/search/combo_year_body_bkg.png') no-repeat 0 0;}
 div#pages form div.right div.block .newListSelected.year div.newList_content ul.newList{ width: 63px;}
 
