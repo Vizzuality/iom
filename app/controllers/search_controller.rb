@@ -58,12 +58,20 @@ class SearchController < ApplicationController
         start_year = start_year.sanitize_sql!.to_i
         @start_date = Date.new(start_year, start_month, 1)
         where << "start_date >= '#{@start_date.strftime('%Y-%m-%d')}'"
+      elsif start_month.blank? && start_year.present?
+        start_year = start_year.sanitize_sql!.to_i
+        @start_date = Date.new(start_year, 1, 1)
+        where << "start_date >= '#{@start_date.strftime('%Y-%m-%d')}'"
       end
 
       if end_month.present? && end_year.present?
         end_month = end_month.sanitize_sql!.to_i
         end_year = end_year.sanitize_sql!.to_i
         @end_date = Date.new(end_year, end_month, 1)
+        where << "end_date <= '#{@end_date.strftime('%Y-%m-%d')}'"
+      elsif end_month.blank? && end_year.present?
+        end_year = end_year.sanitize_sql!.to_i
+        @end_date = Date.new(end_year, 12, 31)
         where << "end_date <= '#{@end_date.strftime('%Y-%m-%d')}'"
       end
     end

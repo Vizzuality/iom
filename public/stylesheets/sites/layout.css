@@ -374,8 +374,8 @@ div#pages form div.right div.block {position: relative; width: 200px;}
 div#pages form div.right div.block input.add {position: absolute; bottom: 1px; left: 198px; display: block; border: 0; padding: 0; width: 20px; height: 20px; background-color: transparent; font-family: Arial; font-size: 16px; color: #B0B0B0; font-weight: bold; line-height: 20px; text-shadow: 0 1px 0 white; cursor: pointer; z-index: 1;}
 div#pages form div.right div.block input.add:hover { -moz-box-shadow: inset 1px 1px 1px #CCCCCC; -webkit-box-shadow: inset 1px 1px 1px #CCCCCC; box-shadow: inset 1px 1px 1px #CCCCCC;}
 div#pages form div.right div.block input.add:active { -moz-box-shadow: inset 1px 1px 1px #999999; -webkit-box-shadow: inset 1px 1px 1px #999999; box-shadow: inset 1px 1px 1px #999999; padding-top: 1px; padding-left: 1px;}
-div#pages form div.right div.block input.autocomplete {width: 158px; height: 21px; padding: 0; padding-left: 5px; padding-right: 31px; border: 0 none; font-family: Arial; font-size: 13px; color: #999999; background:url('/images/sites/search/autocomplete_bkg.png') no-repeat 0 0; z-index: 1;}
-div#pages form div.right div.block input.autocomplete:focus {background:url('/images/sites/search/autocomplete_bkg.png') no-repeat 0 -21px;}
+div#pages form div.right div.block input.autocomplete {width: 158px; height: 21px; margin: 0; padding: 0; padding-left: 5px; padding-right: 31px; border: 0 none; font-family: Arial; font-size: 13px; color: #999999; background:url('/images/sites/search/autocomplete_bkg.png') no-repeat 0 0; z-index: 1;}
+div#pages form div.right div.block input.autocomplete.opened {background:url('/images/sites/search/autocomplete_bkg.png') no-repeat 0 -21px;}
 
 div#pages form div.right div.block .newListSelected { float: left; position: relative; height:21px; padding: 0; cursor: pointer;}
 div#pages form div.right div.block .newListSelected .selectedTxt { height:21px; margin: 0 0 0 6px; color:#999999; line-height:21px; overflow:hidden;}
@@ -384,21 +384,17 @@ div#pages form div.right div.block .newListSelected div.newList_content ul.newLi
 div#pages form div.right div.block .newListSelected div.newList_content ul.newList li { padding: 3px 6px; background: none transparent;}
 div#pages form div.right div.block .newListSelected div.newList_content ul.newList li a {color:#666666;}
 
-div#pages form div.right div.block .newListSelected.month {width: 107px; margin: 13px 0 0; background:url('/images/sites/search/combo_month_bkg.png') no-repeat 0 0;}
+div#pages form div.right div.block .newListSelected.month {width: 107px; margin: 13px 0 0 20px; background:url('/images/sites/search/combo_month_bkg.png') no-repeat 0 0;}
 div#pages form div.right div.block .newListSelected.month div.newList_content {width: 107px; background:url('/images/sites/search/combo_month_body_bkg.png') no-repeat 0 0;}
 div#pages form div.right div.block .newListSelected.month div.newList_content ul.newList{ width: 107px;}
-div#pages form div.right div.block .newListSelected.year {width: 63px; margin: 13px 0 0 20px; background:url('/images/sites/search/combo_year_bkg.png') no-repeat 0 0;}
+div#pages form div.right div.block .newListSelected.year {width: 63px; margin: 13px 0 0 0; background:url('/images/sites/search/combo_year_bkg.png') no-repeat 0 0;}
 div#pages form div.right div.block .newListSelected.year div.newList_content {width: 63px; background:url('/images/sites/search/combo_year_body_bkg.png') no-repeat 0 0;}
 div#pages form div.right div.block .newListSelected.year div.newList_content ul.newList{ width: 63px;}
 
 
-ul.ui-autocomplete { width: 189px; height: 213px; background:url('/images/sites/search/autocomplete_list_bkg.png') no-repeat 0 0; overflow: hidden; }
-ul.ui-autocomplete li a{ width: 177px; height: 42px; padding: 3px 6px; display: block; border-top: 1px solid #999999; }
-ul.ui-autocomplete li span { margin: 3px 0; display: block; font-weight: bold;}
-ul.ui-autocomplete li span.subtitle { color: #CCCCCC;}
-ul.ui-autocomplete li a.ui-state-hover { background-color: #333333;}
-ul.ui-autocomplete li a.ui-state-hover span { color: white;}
-ul.ui-autocomplete li a.ui-state-hover span.subtitle { color: #CCCCCC;}
+ul.ui-autocomplete { width: 177px; height: 107px; margin: 0; padding: 6px; background:url('/images/sites/search/autocomplete_list_bkg.png') no-repeat 0 0; overflow: hidden; }
+ul.ui-autocomplete li a{color: #999999; line-height: 18px;}
+ul.ui-autocomplete li a.ui-state-hover { text-decoration: underline;}
 
 
 /*chart*/

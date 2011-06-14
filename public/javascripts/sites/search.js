@@ -1,10 +1,10 @@
 $(document).ready(function() {
-
-  $('input.autocomplete').focus(function(evt){
-    this.select();
-  });
-
-  var cache = {};
+  var autocomplete_offset;
+  if ($.browser.webkit || $.browser.opera) {
+    autocomplete_offset = '0 0'
+  }else if($.browser.mozilla){
+    autocomplete_offset = '1 0'
+  };
 
   $('#delete_date_filter').click(function(evt){
     evt.preventDefault();
@@ -30,9 +30,11 @@ $(document).ready(function() {
   $('input.autocomplete').each(function(index, element){
     $(element).data('data_class', $.trim($(element).closest('div.block').attr('class').replace('block', '')));
     $(element).autocomplete({
-      'minLength': 2,
-      'position': {'offset': '1 -2'},
+      'minLength': 0,
+      'position': {'offset': autocomplete_offset},
       'source': function(request, response) {
+
+        var cache = $(this).data('autocomplete_cache') || {};
         if ( request.term in cache ) {
           response( cache[ request.term ] );
           return;
@@ -48,17 +50,17 @@ $(document).ready(function() {
         });
 
         cache[ request.term ] = results;
+        $(this).data('autocomplete_cache', cache);
         response( results );
       },
       'focus': function(event, ui) {
-        if (ui && ui.item) {
-          var value = [ui.item.title];
-          if (ui.item.subtitle) {
-            value.push(ui.item.subtitle);
-          };
-
-          $(this).val(value.join(', '));
-        };
+        if (!ui || !ui.item) { return; };
+        // var value = [ui.item.title];
+        // if (ui.item.subtitle) {
+        //   value.push(ui.item.subtitle);
+        // };
+        //
+        //   $(this).val(value.join(', '));
 
         return false;
       },
@@ -107,30 +109,66 @@ $(document).ready(function() {
         };
 
         return false;
+      },
+      'open': function(event, ui) {
+        $(this)
+        .addClass('opened')
+        .autocomplete('widget')
+        .jScrollPane({
+          autoReinitialise: false,
+          showArrows: false,
+          verticalGutter: 5
+        });
+      },
+      'close': function(event, ui){
+        $(this).removeClass('opened');
       }
     })
     .data( "autocomplete" )._renderItem = function( ul, item ) {
 
       var
-          data_class = $(this.element).data('data_class'),
-          label = ['<a href="#"><span class="' + data_class + '">' + item.title + '</span>'];
+        label
+        data_class = $(this.element).data('data_class');
 
       if (item.subtitle) {
-        label.push('<span class="subtitle">' + item.subtitle + '</span></a>')
+        label = '<a href="#">' + item.title + ', ' + item.subtitle + '</a>'
+      }else{
+        label = '<a href="#">' + item.title + '</a>'
       };
       return $( "<li></li>" )
         .data( "item.autocomplete", item )
-        .append( label.join('') )
+        .append( label )
         .appendTo( ul );
+    };
+  })
+  .mouseup(function(evt){
+    return false;
+  })
+  .focus(function(){
+    // $(this).select().autocomplete('search', '');
+    $(this).data('previous_value', $(this).val());
+    $(this).val(null);
+    $(this).trigger('keydown.autocomplete');
+  })
+  .blur(function(){
+    if (!$(this).val() || $(this).val() == '') {
+      $(this).val($(this).data('previous_value'));
     };
   });
 
-  $('select#date_start_month,select#date_start_year').change(function(evt){
+  $('select#date_start_year').change(function(evt){
+    $('form#search').submit();
+  });
+
+  $('select#date_start_month').change(function(evt){
     if ($('select#date_start_month').val() && $('select#date_start_year').val()) {
       $('form#search').submit();
     };
   });
-  $('select#date_end_month,select#date_end_year').change(function(evt){
+  $('select#date_end_year').change(function(evt){
+    $('form#search').submit();
+  });
+  $('select#date_end_month').change(function(evt){
     if ($('select#date_end_month').val() && $('select#date_end_year').val()) {
       $('form#search').submit();
     };
