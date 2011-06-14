@@ -271,7 +271,6 @@ div#left_column div.right h3 a#see_all:hover {text-decoration:underline;}
 div#left_column div.right h3 strong {padding:10px 0 0; font:normal 12px Arial; color:#777777; text-transform:none; text-shadow:none; line-height:20px;}
 div#left_column div.right h3 ul.download { float:right; width: auto; display: inline; padding-left: 19px!important; background:url('/images/sites/icons/download.png') no-repeat 0 1px}
 div#left_column div.right h3 ul.download li {font:normal 13px Arial; display: inline; width: auto; height: auto; padding: 0;}
-div#left_column div.right h3 ul.download li a {color: #CE5D4C;}
 div#left_column div.right ul {width:100%; padding:0!important;}
 div#left_column div.right ul li {width:572px; height:74px; padding:20px 26px 20px 34px;}
 div#left_column div.right ul li.even {background:url('/images/sites/regions/even_bkg.png') repeat-x 0 0;}
