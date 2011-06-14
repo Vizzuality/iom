@@ -5,6 +5,8 @@ Iom::Application.routes.draw do
   match 'home2' => 'sites#home'
   match 'about' => 'sites#about'
   match 'about-interaction' => 'sites#about_interaction'
+  match 'about-data' => 'sites#about_data'  
+  match 'faq' => 'sites#faq'
   match 'contact' => 'sites#contact'
   match 'explore' => 'sites#explore'
 
