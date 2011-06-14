@@ -269,9 +269,9 @@ div#left_column div.right h3 {width:598px; padding:20px 0px 20px 34px; font:norm
 div#left_column div.right h3 a#see_all {padding:0 0 0 10px; text-transform:none; text-shadow:none; font:normal 13px Arial;}
 div#left_column div.right h3 a#see_all:hover {text-decoration:underline;}
 div#left_column div.right h3 strong {padding:10px 0 0; font:normal 12px Arial; color:#777777; text-transform:none; text-shadow:none; line-height:20px;}
-div#left_column div.right h3 ul.download { float:right; width: auto; display: inline; padding-left: 22px!important; background:url('/images/sites/icons/download.png') no-repeat 0 1px}
-div#left_column div.right h3 ul.download li { display: inline; width: auto; height: auto; padding: 0; color: #CE5D4C;}
-div#left_column div.right h3 ul.download li a { text-decoration: underline;}
+div#left_column div.right h3 ul.download { float:right; width: auto; display: inline; padding-left: 19px!important; background:url('/images/sites/icons/download.png') no-repeat 0 1px}
+div#left_column div.right h3 ul.download li {font:normal 13px Arial; display: inline; width: auto; height: auto; padding: 0;}
+div#left_column div.right h3 ul.download li a {color: #CE5D4C;}
 div#left_column div.right ul {width:100%; padding:0!important;}
 div#left_column div.right ul li {width:572px; height:74px; padding:20px 26px 20px 34px;}
 div#left_column div.right ul li.even {background:url('/images/sites/regions/even_bkg.png') repeat-x 0 0;}
@@ -643,10 +643,10 @@ div#footer_pages div.left div.project p.site_name a {color:#B3B3B3; text-decorat
 div#footer_pages div.left div.project p.site_name a:hover {color:#999999; cursor:pointer;}
 div#footer_pages div.right {width:245px; margin:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline; text-align:right;}
 div#project_layout div#footer_pages div.right {width:280px; margin:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline; text-align:right;}
-div#footer_pages div.right ul {float:left; margin:24px 0 0 0; padding:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#footer_pages div.right ul li {margin:0 0 0 6px; padding:0; font:normal 13px "PT Sans"; color:#B3B3B3; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#footer_pages div.right ul li a {color:#B3B3B3;}
-div#footer_pages div.right ul li a:hover {text-decoration:underline;}
+div#footer_pages div.right ul {margin:5px 0 0 0; padding:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;  text-align: right;}
+div#footer_pages div.right ul li {margin:0 0 0 6px; padding:0; font:normal 13px "PT Sans"; color:#B3B3B3; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;  text-align: right;}
+div#footer_pages div.right ul li a {color:#B3B3B3;text-decoration:underline;   text-align: right;}
+div#footer_pages div.right ul li a:hover {color:#999999; cursor:pointer;}
 
 /*FOOTER ERRORS*/
 div#footer_errors {clear:both; width:100%; padding:100px 0 100px 0;}
