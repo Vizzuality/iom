@@ -393,8 +393,9 @@ div#pages form div.right div.block .newListSelected.year div.newList_content {wi
 div#pages form div.right div.block .newListSelected.year div.newList_content ul.newList{ width: 63px;}
 
 
-ul.ui-autocomplete { width: 177px; height: 107px; margin: 0; padding: 6px; background:url('/images/sites/search/autocomplete_list_bkg.png') no-repeat 0 0; overflow: hidden; }
-ul.ui-autocomplete li a{color: #999999; line-height: 18px;}
+ul.ui-autocomplete { width: 177px; height: 107px; margin: 0; padding: 0; background:url('/images/sites/search/autocomplete_list_bkg.png') no-repeat 0 0; overflow: hidden; }
+ul.ui-autocomplete li {padding: 3px 6px;}
+ul.ui-autocomplete li a{color: #999999;}
 ul.ui-autocomplete li a.ui-state-hover { text-decoration: underline;}
 
 

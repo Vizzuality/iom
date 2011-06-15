@@ -80,7 +80,6 @@ class SitesController < ApplicationController
           :disposition => "attachment; filename=#{@site.name}_projects.csv"
       end
       format.kml do
-        debugger
         @projects_for_kml = @site.projects_for_kml
 
         render :site_home

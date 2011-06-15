@@ -29,38 +29,43 @@ $(document).ready(function() {
 
   $('input.autocomplete').each(function(index, element){
     $(element).data('data_class', $.trim($(element).closest('div.block').attr('class').replace('block', '')));
-    $(element).autocomplete({
+    $(element)
+    .after(
+      $('<div/>').css({
+        'position': 'absolute',
+        'bottom': 0,
+        'right': 12,
+        'width': 20,
+        'height': 20,
+        'cursor': 'pointer'
+      })
+      .click(function(){
+        var autocomplete = $(this).prev('input.autocomplete');
+        if (autocomplete.hasClass('opened')) {
+          $(this).prev('input.autocomplete').blur();
+        }else{
+          $(this).prev('input.autocomplete').focus();
+        };
+      })
+    )
+    .autocomplete({
       'minLength': 0,
       'position': {'offset': autocomplete_offset},
       'source': function(request, response) {
 
-        var cache = $(this).data('autocomplete_cache') || {};
-        if ( request.term in cache ) {
-          response( cache[ request.term ] );
-          return;
-        };
-
         var data_class = $(this.element).data('data_class');
         filtered_items = $.grep(autocomplete_data[data_class], function(item, index){
-          return item[data_class].title.match(new RegExp(request.term, "gi"));
+          return item.title.match(new RegExp(request.term, "gi"));
         })
 
         results = $.map(filtered_items, function(item, index){
-          return item[data_class];
+          return item;
         });
 
-        cache[ request.term ] = results;
-        $(this).data('autocomplete_cache', cache);
         response( results );
       },
       'focus': function(event, ui) {
         if (!ui || !ui.item) { return; };
-        // var value = [ui.item.title];
-        // if (ui.item.subtitle) {
-        //   value.push(ui.item.subtitle);
-        // };
-        //
-        //   $(this).val(value.join(', '));
 
         return false;
       },
@@ -76,11 +81,7 @@ $(document).ready(function() {
         ids.push(ui.item.id);
         input_ids.val(ids.join(','));
 
-        var label = [ui.item.title];
-        if (ui.item.subtitle) {
-          label.push(ui.item.subtitle);
-        };
-        label = label.join(', ');
+        var label = ui.item.title;
         $(this).val(label);
 
         var a = $("." + data_class + " ul.filter_list li:last-child a").clone();
@@ -114,6 +115,7 @@ $(document).ready(function() {
         $(this)
         .addClass('opened')
         .autocomplete('widget')
+        .data('jsp', null)
         .jScrollPane({
           autoReinitialise: false,
           showArrows: false,
@@ -130,11 +132,8 @@ $(document).ready(function() {
         label
         data_class = $(this.element).data('data_class');
 
-      if (item.subtitle) {
-        label = '<a href="#">' + item.title + ', ' + item.subtitle + '</a>'
-      }else{
-        label = '<a href="#">' + item.title + '</a>'
-      };
+      label = '<a href="#">' + item.title + '</a>'
+
       return $( "<li></li>" )
         .data( "item.autocomplete", item )
         .append( label )
@@ -145,10 +144,7 @@ $(document).ready(function() {
     return false;
   })
   .focus(function(){
-    // $(this).select().autocomplete('search', '');
-    $(this).data('previous_value', $(this).val());
-    $(this).val(null);
-    $(this).trigger('keydown.autocomplete');
+    $(this).select().autocomplete('search', '');
   })
   .blur(function(){
     if (!$(this).val() || $(this).val() == '') {
