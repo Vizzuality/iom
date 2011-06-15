@@ -37,6 +37,16 @@ class Admin::OrganizationsController < ApplicationController
 
   def update
     @organization = Organization.find(params[:id])
+    if params[:organization][:projects_file].present?
+      projects_with_errors = @organization.sync_projects(params[:organization].delete(:projects_file))
+
+      if projects_with_errors.present?
+        send_data projects_with_errors.serialize_to_csv(:headers => projects_with_errors.first.keys),
+          :type => 'application/download; application/vnd.ms-excel; text/csv; charset=iso-8859-1; header=present',
+          :disposition => "attachment; filename=#{@organization.name}_projects.csv"
+        return
+      end
+    end
     if params[:site_id]
       if @site = Site.find(params[:site_id])
         @organization.attributes_for_site = {:organization_values => params[:organization], :site_id => params[:site_id]}

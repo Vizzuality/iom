@@ -4,26 +4,26 @@ var heightLeft;
 var data_info = new Object();
 
 $(document).ready(function(ev){
-    
+
     // To center information projects box
     if ($('div#information_projects').length > 0){
         var account = $('div#information_projects').children('p').text().length;
         var element = $('div#information_projects').children('p');
-        
+
         var margin_left = 90 - ((account - 1) * 10);
-        var margin = '12px 5px 0 '+margin_left+'px'; 
+        var margin = '12px 5px 0 '+margin_left+'px';
         element.css('margin',margin);
     }
-    
+
     // To center information donors box
     if ($('div.one_donor').length > 0){
         var account = $('div.one_donor').children('div.center').children('p').text().length;
         var element = $('div.one_donor').children('div.center').children('p');
         var margin_left = 90 - ((account - 1) * 10);
-        var margin = '20px 5px 0 '+margin_left+'px'; 
+        var margin = '20px 5px 0 '+margin_left+'px';
         element.css('margin',margin);
     }
-    
+
 
     //Media - resources error
     if ($('p.resource_error').length>0) {
@@ -31,21 +31,21 @@ $(document).ready(function(ev){
       $('p.resource_error:eq(0)').remove();
       $('p.resource_error').show();
     }
-  
-    
+
+
     // TO SET COMBO OPTIONS CHECKED
     if ($('div#published_status').length > 0){
         var id = $('input#page_published').val();
         $('div#published_status').find('a#'+id).addClass('clicked');
     }
-    
-    
+
+
     // CUSTOM SCROLLBARS
-    if ($('.scroll_pane').length > 0){ 
+    if ($('.scroll_pane').length > 0){
         $('.scroll_pane').jScrollPane({
-                           autoReinitialise:false, 
+                           autoReinitialise:false,
                            showArrows: true,
-                     			verticalGutter: 5});
+                           verticalGutter: 5});
     }
 
     if ($('div.right.menu').length > 0) {
@@ -57,7 +57,7 @@ $(document).ready(function(ev){
             },300);
         }else {
             setTimeout(function(){
-              $('div.block div.med div.left').height($('div.right.menu').height());      
+              $('div.block div.med div.left').height($('div.right.menu').height());
               $('div.export_import,div.delete', $('div.right.menu')).show();
             },300);
         }
@@ -83,23 +83,23 @@ $(document).ready(function(ev){
       }
     });
 
-    
+
     //window alert -> delete something (NGO, donor, site, project or object)
     $('div.delete a, a.delete').click(function(ev){
       ev.stopPropagation();
-      ev.preventDefault();      
-    
-      // We are using the same modal window with other options        
+      ev.preventDefault();
+
+      // We are using the same modal window with other options
       if ($('div#modal_window').children('div.alert').hasClass('import_csv')){
           $('div#modal_window').children('div.alert').removeClass('import_csv');
-      }  
+      }
       if ($('div#modal_window').children('div.alert').hasClass('ok')){
           $('div#modal_window').children('div.alert').removeClass('ok');
       }
       if ($('div#modal_window').children('div.alert').hasClass('error')){
-          $('div#modal_window').children('div.alert').removeClass('error');              
+          $('div#modal_window').children('div.alert').removeClass('error');
       }
-            
+
       var scroll_position = window.pageYOffset;
       var window_height = (typeof window.innerHeight != 'undefined' ? window.innerHeight : document.body.offsetHeight);
       $('div#modal_window').css('height',window_height+'px');
@@ -123,7 +123,7 @@ $(document).ready(function(ev){
       $('div#modal_window').fadeIn();
     });
 
-    $('div#modal_window a.cancel').click(function(ev){      
+    $('div#modal_window a.cancel').click(function(ev){
       ev.stopPropagation();
       ev.preventDefault();
       $(window).unbind('resize');
@@ -160,65 +160,66 @@ $(document).ready(function(ev){
         $(this).parent().find('div.error_msg').show();
       }
     );
-    
+
     $('div#modal_window a.ok').click(function(ev){
-        
+
     });
-    
-  
+
+
 });
 
     // CLICK ON IMPORT LINK TO SIMULATE CLICK ON INPUT FILE (HIDDEN)
     // Window processing CSV
     function importCSV (){
-          $('div#modal_window').find('a.cancel').css('display','none');
-
-          // GET DATA
-          // var href_ = $(this).attr('destroy_url');
-          // var name_ = $(this).attr('att_name');
-          
-          data_info.num_projects = 36;  // TODO: Change this value when is finished
-          data_info.num_errors = 42;    // TODO: Change this value when is finished  
-
-          if ($('div.alert').hasClass('import_csv')) $('div.alert').removeClass('import_csv');
-          if ($('div.alert').hasClass('ok')) $('div.alert').removeClass('ok');
-          if ($('div.alert').hasClass('error')) $('div.alert').removeClass('error');
-          
-          var scroll_position = window.pageYOffset;
-          var window_height = (typeof window.innerHeight != 'undefined' ? window.innerHeight : document.body.offsetHeight);
-          
-          $('div#modal_window').css('height',window_height+'px');
-          $('div#modal_window').css('top',scroll_position+'px');
-          $('body').css('overflow','hidden');
-          
-          $(window).resize(function() {
-            var scroll_position = window.pageYOffset;
-            var window_height = (typeof window.innerHeight != 'undefined' ? window.innerHeight : document.body.offsetHeight);
-            $('div#modal_window').css('height',window_height+'px');
-            $('div#modal_window').css('top',scroll_position+'px');
-          });
-          
-    
-        $('div#modal_window h4').text('Processing file...');
-        $('div#modal_window p').text(data_info.num_projects+' projects processed. Please wait.');
-        $('div#modal_window').children('div.alert').addClass('import_csv');
-        $('div#modal_window').fadeIn();
-        
-        // IN DEVELOPMENT 
-        setTimeout("importCSV_result('ok')",2000);
+        $('form.edit_organization.sync_projects').submit();
+        //   $('div#modal_window').find('a.cancel').css('display','none');
+        //
+        //   // GET DATA
+        //   // var href_ = $(this).attr('destroy_url');
+        //   // var name_ = $(this).attr('att_name');
+        //
+        //   data_info.num_projects = 36;  // TODO: Change this value when is finished
+        //   data_info.num_errors = 42;    // TODO: Change this value when is finished
+        //
+        //   if ($('div.alert').hasClass('import_csv')) $('div.alert').removeClass('import_csv');
+        //   if ($('div.alert').hasClass('ok')) $('div.alert').removeClass('ok');
+        //   if ($('div.alert').hasClass('error')) $('div.alert').removeClass('error');
+        //
+        //   var scroll_position = window.pageYOffset;
+        //   var window_height = (typeof window.innerHeight != 'undefined' ? window.innerHeight : document.body.offsetHeight);
+        //
+        //   $('div#modal_window').css('height',window_height+'px');
+        //   $('div#modal_window').css('top',scroll_position+'px');
+        //   $('body').css('overflow','hidden');
+        //
+        //   $(window).resize(function() {
+        //     var scroll_position = window.pageYOffset;
+        //     var window_height = (typeof window.innerHeight != 'undefined' ? window.innerHeight : document.body.offsetHeight);
+        //     $('div#modal_window').css('height',window_height+'px');
+        //     $('div#modal_window').css('top',scroll_position+'px');
+        //   });
+        //
+        //
+        // $('div#modal_window h4').text('Processing file...');
+        // $('div#modal_window p').text(data_info.num_projects+' projects processed. Please wait.');
+        // $('div#modal_window').children('div.alert').addClass('import_csv');
+        // $('div#modal_window').fadeIn();
+        //
+        // // IN DEVELOPMENT
+        // setTimeout("importCSV_result('ok')",2000);
     }
-    
+
     function importCSV_result (status) {
 
         if (!$('div#modal_window').find('a.cancel').hasClass('ok'))
             $('div#modal_window').find('a.cancel').addClass('ok');
-        
+
         if (status == 'ok'){
             $('div.import_csv').addClass('ok');
             $('div#modal_window h4').text('Great! ');
-            
+
             $('div#modal_window p').text(data_info.num_projects+' projects updated succesfully :-)');
-            
+
         }else if (status == 'error'){
 
                 $('div.import_csv').addClass('error');
@@ -226,11 +227,12 @@ $(document).ready(function(ev){
                 $('ul#errors_csv').jScrollPane({
                                    autoReinitialise:false });
 
-                if (!$('div#modal_window').find('a.ok').hasClass('error'))
+                if (!$('div#modal_window').find('a.ok').hasClass('error')){
                     $('div#modal_window').find('a.ok').addClass('error');
                     $('div#modal_window h4').text('There are '+data_info.num_errors+' problems with the selected file');
-                    $('div#modal_window p').text('The information has not  been updated. Please, correct the original file and try again.');                                    
-                
+                    $('div#modal_window p').text('The information has not  been updated. Please, correct the original file and try again.');
+                }
+
         }
         $('div#modal_window').find('a.cancel').css('display','inline');
 

@@ -240,6 +240,194 @@ SQL
     end
   end
 
+  def sync_projects(file)
+    return if file.blank? || file.tempfile.blank?
+    projects_ids_to_delete = self.project_ids || []
+
+    csv_projects = []
+
+    csv_projects = CsvMapper.import(file.tempfile, :type => :io) do
+      delimited_by ';'
+      parser_options :col_sep => ';', :converters => :all
+      start_at_row 1
+      read_attributes_from_file({
+        'Project Id'                        => 'id',
+        'Site'                              => 'site_id',
+        'Id Organization'                   => 'primary_organization_id',
+        'Project Title'                     => 'name',
+        'Project Description'               => 'description',
+        'Project Activities'                => 'activities',
+        'Additional Information'            => 'additional_information',
+        'Estimated Start Date'              => 'start_date',
+        'Estimated End Date'                => 'end_date',
+        'Donor'                             => 'donor',
+        'Budget'                            => 'budget',
+        'Implementing Organization(s)'      => 'implementing_organization',
+        'Partner Organization(s)'           => 'partner_organizations',
+        'Cluster(s)'                        => 'clusters',
+        'Sector(s)'                         => 'sectors',
+        'Cross Cutting Issues'              => 'cross_cutting_issues',
+        'Number of People Reached (target)' => 'estimated_people_reached',
+        'Target Groups'                     => 'target',
+        'Country'                           => 'country',
+        '1st Admin Level'                   => 'first_admin_level',
+        '2nd Admin Level'                   => 'second_admin_level',
+        '3rd Admin Level'                   => 'third_admin_level',
+        'Contact Name'                      => 'contact_person',
+        'Contact Title'                     => 'contact_position',
+        'Contact Email'                     => 'contact_email',
+        'Website'                           => 'website',
+        'Date Provided'                     => 'date_provided',
+        'Date Updated'                      => 'date_updated'
+      })
+    end
+
+    return if csv_projects.empty?
+
+    rows_with_errors = []
+    organization = self
+    csv_projects.each do |csv_project|
+      csv_hash = Hash[*(csv_projects.first.members).zip(csv_project.values).flatten]
+      errors = []
+      project_hash = csv_hash.slice(*Project.columns_hash.keys)
+
+      if project_hash['id'].present?
+        project = Project.where(:id => project_hash.delete('id')).first
+      else
+        project = Project.new
+      end
+
+      project.attributes = project_hash
+      project.primary_organization = self
+
+      if csv_hash['country'] && (countries = csv_hash['country'].split(',')) && countries.present?
+        project.countries.clear
+        countries.each do |country_name|
+          country = Country.where(:name => country_name).first
+          if country.blank?
+            errors << "Country #{country_name} doesn't exist"
+            next
+          end
+          project.countries << country
+        end
+      end
+
+      if csv_hash['sectors'] && (sectors = csv_hash['sectors'].split(',')) && sectors.present?
+        project.sectors.clear
+        sectors.each do |sector_name|
+          sector = Sector.where(:name => sector_name).first
+          if sector.blank?
+            errors << "Sector #{sector_name} doesn't exist"
+            next
+          end
+          project.sectors << sector
+        end
+      end
+
+
+      if csv_hash['clusters'] && (clusters = csv_hash['clusters'].split(',')) && clusters.present?
+        project.clusters.clear
+        clusters.each do |cluster_name|
+          cluster = Cluster.where(:name => cluster_name).first
+          if cluster.blank?
+            errors << "cluster #{cluster_name} doesn't exist"
+            next
+          end
+          project.clusters << cluster
+        end
+      end
+
+      if csv_hash['donor'] && (donors = csv_hash['donor'].split(',')) && donors.present?
+        project.donors.clear
+        donors.each do |donor_name|
+          donor = Donor.where(:name => donor_name).first
+          if donor.blank?
+            errors << "donor #{donor_name} doesn't exist"
+            next
+          end
+          project.donors << donor
+        end
+      end
+
+      if csv_hash['first_admin_level'] && (first_admin_levels = csv_hash['first_admin_level'].split(',')) && first_admin_levels.present?
+        project.regions.where(:level => 1).clear
+        first_admin_levels.each do |first_admin_level_name|
+          region = Region.where(:name => first_admin_level_name).first
+          if region.blank?
+            errors << "1st Admin level #{first_admin_level_name} doesn't exist"
+            next
+          end
+          project.regions << region
+        end
+      end
+
+      if csv_hash['second_admin_level'] && (second_admin_levels = csv_hash['second_admin_level'].split(',')) && second_admin_levels.present?
+        project.regions.where(:level => 2).clear
+        second_admin_levels.each do |second_admin_level_name|
+          region = Region.where(:name => second_admin_level_name).first
+          if region.blank?
+            errors << "2nd Admin level #{second_admin_level_name} doesn't exist"
+            next
+          end
+          project.regions << region
+        end
+      end
+
+      if csv_hash['third_admin_level'] && (third_admin_levels = csv_hash['third_admin_level'].split(',')) && third_admin_levels.present?
+        project.regions.where(:level => 3).clear
+        third_admin_levels.each do |third_admin_level_name|
+          region = Region.where(:name => third_admin_level_name).first
+          if region.blank?
+            errors << "3rd Admin level #{third_admin_level_name} doesn't exist"
+            next
+          end
+          project.regions << region
+        end
+      end
+
+      unless project.save
+        errors += project.errors.full_messages
+      end
+
+      if errors.present?
+        errors.insert(0, 'The following errors were found:')
+        rows_with_errors << {
+          'Project Id'                        => csv_project.id,
+          'Site'                              => csv_project.site_id,
+          'Id Organization'                   => csv_project.primary_organization_id,
+          'Project Title'                     => csv_project.name,
+          'Project Description'               => csv_project.description,
+          'Project Activities'                => csv_project.activities,
+          'Additional Information'            => csv_project.additional_information,
+          'Estimated Start Date'              => csv_project.start_date,
+          'Estimated End Date'                => csv_project.end_date,
+          'Donor'                             => csv_project.donor,
+          'Budget'                            => csv_project.budget,
+          'Implementing Organization(s)'      => csv_project.implementing_organization,
+          'Partner Organization(s)'           => csv_project.partner_organizations,
+          'Cluster(s)'                        => csv_project.clusters,
+          'Sector(s)'                         => csv_project.sectors,
+          'Cross Cutting Issues'              => csv_project.cross_cutting_issues,
+          'Number of People Reached (target)' => csv_project.estimated_people_reached,
+          'Target Groups'                     => csv_project.target,
+          'Country'                           => csv_project.country,
+          '1st Admin Level'                   => csv_project.first_admin_level,
+          '2nd Admin Level'                   => csv_project.second_admin_level,
+          '3rd Admin Level'                   => csv_project.third_admin_level,
+          'Contact Name'                      => csv_project.contact_person,
+          'Contact Title'                     => csv_project.contact_position,
+          'Contact Email'                     => csv_project.contact_email,
+          'Website'                           => csv_project.website,
+          'Date Provided'                     => csv_project.date_provided,
+          'Date Updated'                      => csv_project.date_updated,
+          'Errors'                            => errors.join("\n")
+        }
+
+      end
+    end
+    rows_with_errors
+  end
+
   def budget(site)
     atts_for_site = attributes_for_site(site)
     return (atts_for_site[:usg_funding].to_f || 0) + (atts_for_site[:private_funding].to_f || 0) + (atts_for_site[:other_funding].to_f || 0)
