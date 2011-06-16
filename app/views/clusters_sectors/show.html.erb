@@ -117,6 +117,7 @@
       <% else %>
       var map_center = [];
       <% end %>
+      var show_regions_with_one_project = "true";
       var map_zoom = <%= @site.overview_map_zoom %>;
       var chco = "<%=@overview_map_chco%>";
       var chf = "<%=@overview_map_chf%>";
@@ -124,7 +125,7 @@
       var chd = "<%=@chd%>";
       var map_data = <%=raw(@map_data)%>;
       var max_count = <%=@map_data_max_count%>;
-      var map_type = 'overview_map';
+      var map_type = '<%= @filter_by_location.present?? 'administrative_map' : 'overview_map' %>';
       var theme = "<%=@site.theme_id%>";
       var kind = '<%= @site.word_for_cluster_sector.downcase.chop %>';
       var stylez = <%=raw @site.map_styles  %>
