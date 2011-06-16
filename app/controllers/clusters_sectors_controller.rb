@@ -9,11 +9,11 @@ class ClustersSectorsController < ApplicationController
     @carry_on_filters[:location_id] = params[:location_id] if params[:location_id].present?
 
     if @filter_by_location
-      @location_name = if @site.navigate_by_country?
-        "#{Country.where(:id => @filter_by_location.first).first.name}"
-      else
+      @location_name = if @site.navigate_by_regions?
         region = Region.where(:id => @filter_by_location.last).first
         "#{region.country.name}/#{region.name}"
+      elsif @site.navigate_by_country?
+        "#{Country.where(:id => @filter_by_location.first).first.name}"
       end
       @filter_name = "projects in #{@location_name}"
     end
@@ -31,7 +31,11 @@ class ClustersSectorsController < ApplicationController
         :start_in_page => params[:start_in_page]
       }
 
-      projects_custom_find_options[:cluster_location_id] = @filter_by_location.last if @filter_by_location.present?
+      if @filter_by_location.present? && @site.navigate_by_regions? && @filter_by_location.size > 1
+        projects_custom_find_options[:cluster_region_id] = @filter_by_location[1..-1].join(',').last
+      elsif @filter_by_location.present? && @site.navigate_by_country? && @filter_by_location.size >= 1
+        projects_custom_find_options[:cluster_country_id] = @filter_by_location.first
+      end
     else
       # sectors
       render_404 and return unless @site.navigate_by_sector?
@@ -45,7 +49,11 @@ class ClustersSectorsController < ApplicationController
         :start_in_page => params[:start_in_page]
       }
 
-      projects_custom_find_options[:sector_location_id] = @filter_by_location.last if @filter_by_location.present?
+      if @filter_by_location.present? && @site.navigate_by_regions? && @filter_by_location.size > 1
+        projects_custom_find_options[:sector_region_id] = @filter_by_location[1..-1].join(',').last
+      elsif @filter_by_location.present? && @site.navigate_by_country? && @filter_by_location.size >= 1
+        projects_custom_find_options[:sector_country_id] = @filter_by_location.first
+      end
     end
 
     @projects = Project.custom_find @site, projects_custom_find_options
