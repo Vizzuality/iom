@@ -6,6 +6,8 @@ Iom::Application.routes.draw do
   match 'about' => 'sites#about'
   match 'about-interaction' => 'sites#about_interaction'
   match 'about-data' => 'sites#about_data'  
+  match 'link-ngo-aid-map' => 'sites#link_ngo_aid_map'
+  match 'make-your-own-map' => 'sites#make_your_own_map'
   match 'faq' => 'sites#faq'
   match 'contact' => 'sites#contact'
   match 'explore' => 'sites#explore'
