@@ -285,8 +285,9 @@ SQL
         'donors'                                  => 'donors',
         'project_tags'                            => 'project_tags',
         'activities'                              => 'activities',
-        'organization_name'                       => 'organization_name',
+        'organization'                            => 'organization_name',
         'site_id'                                 => 'site_id'
+
       })
     end
 
@@ -442,7 +443,7 @@ SQL
           'donors'                                  => csv_project.donors,
           'project_tags'                            => csv_project.project_tags,
           'activities'                              => csv_project.activities,
-          'organization_name'                       => csv_project.organization_name,
+          'organization'                            => csv_project.organization_name,
           'site_id'                                 => csv_project.site_id,
           'Errors'                                  => errors.join("\n")
         }

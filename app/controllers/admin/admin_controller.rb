@@ -18,7 +18,7 @@ class Admin::AdminController < ApplicationController
     project_name,
     project_description,
     organization_id,
-    organization_name,
+    organization_name as organization,
     implementing_organization,
     partner_organizations,
     cross_cutting_issues,
