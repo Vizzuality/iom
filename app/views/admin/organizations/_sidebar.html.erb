@@ -40,7 +40,7 @@
           <% end %>
     </div>
     <p class="split">|</p>
-    <%= link_to 'Export CSV', admin_organization_projects_path(@organization, :csv) %>
+    <%= link_to 'Export CSV', admin_export_projects_path(:organization_id => @organization.to_param, :format => :csv) %>
     </div>
 </div>
 

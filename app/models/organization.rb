@@ -251,34 +251,42 @@ SQL
       parser_options :col_sep => ';', :converters => :all
       start_at_row 1
       read_attributes_from_file({
-        'Project Id'                        => 'id',
-        'Site'                              => 'site_id',
-        'Id Organization'                   => 'primary_organization_id',
-        'Project Title'                     => 'name',
-        'Project Description'               => 'description',
-        'Project Activities'                => 'activities',
-        'Additional Information'            => 'additional_information',
-        'Estimated Start Date'              => 'start_date',
-        'Estimated End Date'                => 'end_date',
-        'Donor'                             => 'donor',
-        'Budget'                            => 'budget',
-        'Implementing Organization(s)'      => 'implementing_organization',
-        'Partner Organization(s)'           => 'partner_organizations',
-        'Cluster(s)'                        => 'clusters',
-        'Sector(s)'                         => 'sectors',
-        'Cross Cutting Issues'              => 'cross_cutting_issues',
-        'Number of People Reached (target)' => 'estimated_people_reached',
-        'Target Groups'                     => 'target',
-        'Country'                           => 'country',
-        '1st Admin Level'                   => 'first_admin_level',
-        '2nd Admin Level'                   => 'second_admin_level',
-        '3rd Admin Level'                   => 'third_admin_level',
-        'Contact Name'                      => 'contact_person',
-        'Contact Title'                     => 'contact_position',
-        'Contact Email'                     => 'contact_email',
-        'Website'                           => 'website',
-        'Date Provided'                     => 'date_provided',
-        'Date Updated'                      => 'date_updated'
+        'project_id'                              => 'id',
+        'intervention_id'                         => 'intervention_id',
+        'project_name'                            => 'name',
+        'project_description'                     => 'description',
+        'organization_id'                         => 'primary_organization_id',
+        'implementing_organization'               => 'implementing_organization',
+        'project_contact_phone_number'            => 'contact_phone_number',
+        'start_date'                              => 'start_date',
+        'end_date'                                => 'end_date',
+        'date_provided'                           => 'date_provided',
+        'date_updated'                            => 'date_updated',
+        'verbatim_location'                       => 'verbatim_location',
+        'project_contact_email'                   => 'contact_email',
+        'additional_information'                  => 'additional_information',
+        'partner_organizations'                   => 'partner_organizations',
+        'project_needs'                           => 'project_needs',
+        'project_contact_person'                  => 'contact_person',
+        'project_contact_position'                => 'contact_position',
+        'estimated_people_reached'                => 'estimated_people_reached',
+        'calculation_of_number_of_people_reached' => 'calculation_of_number_of_people_reached',
+        'awardee_type'                            => 'awardee_type',
+        'target'                                  => 'target',
+        'budget'                                  => 'budget',
+        'project_website'                         => 'website',
+        'cross_cutting_issues'                    => 'cross_cutting_issues',
+        'countries'                               => 'countries',
+        'regions_level1'                          => 'first_admin_level',
+        'regions_level2'                          => 'second_admin_level',
+        'regions_level3'                          => 'third_admin_level',
+        'clusters'                                => 'clusters',
+        'sectors'                                 => 'sectors',
+        'donors'                                  => 'donors',
+        'project_tags'                            => 'project_tags',
+        'activities'                              => 'activities',
+        'organization_name'                       => 'organization_name',
+        'site_id'                                 => 'site_id'
       })
     end
 
@@ -300,7 +308,7 @@ SQL
       project.attributes = project_hash
       project.primary_organization = self
 
-      if csv_hash['country'] && (countries = csv_hash['country'].split(',')) && countries.present?
+      if csv_hash['countries'] && (countries = csv_hash['countries'].split(',')) && countries.present?
         project.countries.clear
         countries.each do |country_name|
           country = Country.where(:name => country_name).first
@@ -309,43 +317,6 @@ SQL
             next
           end
           project.countries << country
-        end
-      end
-
-      if csv_hash['sectors'] && (sectors = csv_hash['sectors'].split(',')) && sectors.present?
-        project.sectors.clear
-        sectors.each do |sector_name|
-          sector = Sector.where(:name => sector_name).first
-          if sector.blank?
-            errors << "Sector #{sector_name} doesn't exist"
-            next
-          end
-          project.sectors << sector
-        end
-      end
-
-
-      if csv_hash['clusters'] && (clusters = csv_hash['clusters'].split(',')) && clusters.present?
-        project.clusters.clear
-        clusters.each do |cluster_name|
-          cluster = Cluster.where(:name => cluster_name).first
-          if cluster.blank?
-            errors << "cluster #{cluster_name} doesn't exist"
-            next
-          end
-          project.clusters << cluster
-        end
-      end
-
-      if csv_hash['donor'] && (donors = csv_hash['donor'].split(',')) && donors.present?
-        project.donors.clear
-        donors.each do |donor_name|
-          donor = Donor.where(:name => donor_name).first
-          if donor.blank?
-            errors << "donor #{donor_name} doesn't exist"
-            next
-          end
-          project.donors << donor
         end
       end
 
@@ -385,6 +356,51 @@ SQL
         end
       end
 
+      if csv_hash['sectors'] && (sectors = csv_hash['sectors'].split(',')) && sectors.present?
+        project.sectors.clear
+        sectors.each do |sector_name|
+          sector = Sector.where(:name => sector_name).first
+          if sector.blank?
+            errors << "Sector #{sector_name} doesn't exist"
+            next
+          end
+          project.sectors << sector
+        end
+      end
+
+
+      if csv_hash['clusters'] && (clusters = csv_hash['clusters'].split(',')) && clusters.present?
+        project.clusters.clear
+        clusters.each do |cluster_name|
+          cluster = Cluster.where(:name => cluster_name).first
+          if cluster.blank?
+            errors << "cluster #{cluster_name} doesn't exist"
+            next
+          end
+          project.clusters << cluster
+        end
+      end
+
+      if csv_hash['donors'] && (donors = csv_hash['donors'].split(',')) && donors.present?
+        project.donors.clear
+        donors.each do |donor_name|
+          donor = Donor.where(:name => donor_name).first
+          if donor.blank?
+            errors << "donor #{donor_name} doesn't exist"
+            next
+          end
+          project.donors << donor
+        end
+      end
+
+      if csv_hash['project_tags'] && (project_tags = csv_hash['project_tags'].split(',')) && project_tags.present?
+        project.tags.clear
+        project_tags.each do |project_tag_name|
+          project_tag = Tag.find_or_create_by_name(project_tag_name)
+          project.tags << project_tag
+        end
+      end
+
       unless project.save
         errors += project.errors.full_messages
       end
@@ -392,35 +408,43 @@ SQL
       if errors.present?
         errors.insert(0, 'The following errors were found:')
         rows_with_errors << {
-          'Project Id'                        => csv_project.id,
-          'Site'                              => csv_project.site_id,
-          'Id Organization'                   => csv_project.primary_organization_id,
-          'Project Title'                     => csv_project.name,
-          'Project Description'               => csv_project.description,
-          'Project Activities'                => csv_project.activities,
-          'Additional Information'            => csv_project.additional_information,
-          'Estimated Start Date'              => csv_project.start_date,
-          'Estimated End Date'                => csv_project.end_date,
-          'Donor'                             => csv_project.donor,
-          'Budget'                            => csv_project.budget,
-          'Implementing Organization(s)'      => csv_project.implementing_organization,
-          'Partner Organization(s)'           => csv_project.partner_organizations,
-          'Cluster(s)'                        => csv_project.clusters,
-          'Sector(s)'                         => csv_project.sectors,
-          'Cross Cutting Issues'              => csv_project.cross_cutting_issues,
-          'Number of People Reached (target)' => csv_project.estimated_people_reached,
-          'Target Groups'                     => csv_project.target,
-          'Country'                           => csv_project.country,
-          '1st Admin Level'                   => csv_project.first_admin_level,
-          '2nd Admin Level'                   => csv_project.second_admin_level,
-          '3rd Admin Level'                   => csv_project.third_admin_level,
-          'Contact Name'                      => csv_project.contact_person,
-          'Contact Title'                     => csv_project.contact_position,
-          'Contact Email'                     => csv_project.contact_email,
-          'Website'                           => csv_project.website,
-          'Date Provided'                     => csv_project.date_provided,
-          'Date Updated'                      => csv_project.date_updated,
-          'Errors'                            => errors.join("\n")
+          'project_id'                              => csv_project.id,
+          'intervention_id'                         => csv_project.intervention_id,
+          'project_name'                            => csv_project.name,
+          'project_description'                     => csv_project.description,
+          'organization_id'                         => csv_project.primary_organization_id,
+          'implementing_organization'               => csv_project.implementing_organization,
+          'project_contact_phone_number'            => csv_project.contact_phone_number,
+          'start_date'                              => csv_project.start_date,
+          'end_date'                                => csv_project.end_date,
+          'date_provided'                           => csv_project.date_provided,
+          'date_updated'                            => csv_project.date_updated,
+          'verbatim_location'                       => csv_project.verbatim_location,
+          'project_contact_email'                   => csv_project.contact_email,
+          'additional_information'                  => csv_project.additional_information,
+          'partner_organizations'                   => csv_project.partner_organizations,
+          'project_needs'                           => csv_project.project_needs,
+          'project_contact_person'                  => csv_project.contact_person,
+          'project_contact_position'                => csv_project.contact_position,
+          'estimated_people_reached'                => csv_project.estimated_people_reached,
+          'calculation_of_number_of_people_reached' => csv_project.calculation_of_number_of_people_reached,
+          'awardee_type'                            => csv_project.awardee_type,
+          'target'                                  => csv_project.target,
+          'budget'                                  => csv_project.budget,
+          'project_website'                         => csv_project.website,
+          'cross_cutting_issues'                    => csv_project.cross_cutting_issues,
+          'countries'                               => csv_project.countries,
+          'regions_level1'                          => csv_project.first_admin_level,
+          'regions_level2'                          => csv_project.second_admin_level,
+          'regions_level3'                          => csv_project.third_admin_level,
+          'clusters'                                => csv_project.clusters,
+          'sectors'                                 => csv_project.sectors,
+          'donors'                                  => csv_project.donors,
+          'project_tags'                            => csv_project.project_tags,
+          'activities'                              => csv_project.activities,
+          'organization_name'                       => csv_project.organization_name,
+          'site_id'                                 => csv_project.site_id,
+          'Errors'                                  => errors.join("\n")
         }
 
       end
