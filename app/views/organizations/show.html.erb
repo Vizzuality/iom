@@ -185,7 +185,7 @@
       var chd = "<%=@chd%>";
       var map_data = <%=raw(@map_data)%>;
       var max_count = <%=@map_data_max_count%>;
-      var map_type = 'overview_map';
+      var map_type = '<%= @filter_by_location.present?? 'administrative_map' : 'overview_map' %>';
       var theme = "<%=@site.theme_id%>";
       var kind = 'org.';
       var stylez = <%=raw @site.map_styles  %>

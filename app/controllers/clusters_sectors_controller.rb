@@ -50,7 +50,7 @@ class ClustersSectorsController < ApplicationController
       }
 
       if @filter_by_location.present?
-          if @filter_by_location.size > 1
+        if @filter_by_location.size > 1
           projects_custom_find_options[:sector_region_id] = @filter_by_location.last
         else
           projects_custom_find_options[:sector_country_id] = @filter_by_location.first
