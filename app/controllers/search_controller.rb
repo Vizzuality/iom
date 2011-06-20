@@ -3,7 +3,7 @@ class SearchController < ApplicationController
   layout 'site_layout'
 
   def index
-    where  = ["is_active=true","site_id=#{@site.id}"]
+    where  = ["(end_date is null OR end_date > now())","site_id=#{@site.id}"]
     limit = 20
     @current_page = params[:page] ? params[:page].to_i : 1
     @clusters = @regions = @filtered_regions = @filtered_sectors = @filtered_clusters = @filtered_organizations = @filtered_donors = []

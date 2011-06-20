@@ -237,7 +237,7 @@ class Project < ActiveRecord::Base
       (select path from regions where id=regions_ids[1]) as path
       from data_denormalization where
       organization_id = #{self.primary_organization_id}
-      and project_id!=#{self.id} and site_id=#{site.id} and is_active=true
+      and project_id!=#{self.id} and site_id=#{site.id} and (end_date is null OR end_date > now())
       and (select center_lat from regions where id=regions_ids[1]) is not null
       limit #{limit}
 SQL
@@ -252,7 +252,7 @@ SQL
           (select path from regions where id=regions_ids[1]) as path
           from data_denormalization where
           regions_ids && (select ('{'||array_to_string(array_agg(region_id),',')||'}')::integer[] as regions_ids from projects_regions where project_id=#{self.id})
-          and project_id!=#{self.id} and site_id=#{site.id} and is_active=true
+          and project_id!=#{self.id} and site_id=#{site.id} and (end_date is null OR end_date > now())
           and (select center_lat from regions where id=regions_ids[1]) is not null
           limit #{limit}
 SQL
@@ -265,7 +265,7 @@ SQL
           (select center_lon from regions where id=regions_ids[1]) as center_lon,
           (select path from regions where id=regions_ids[1]) as path
           from data_denormalization where
-          project_id!=#{self.id} and site_id=#{site.id} and is_active=true
+          project_id!=#{self.id} and site_id=#{site.id} and (end_date is null OR end_date > now())
           limit #{limit}
 SQL
     )
@@ -283,7 +283,7 @@ SQL
     sql = ""
     if options[:region]
       where = []
-      where << "regions_ids && '{#{options[:region]}}' and site_id=#{site.id} and is_active=true"
+      where << "regions_ids && '{#{options[:region]}}' and site_id=#{site.id} and (end_date is null OR end_date > now())"
       if options[:region_category_id]
         if site.navigate_by_cluster?
           where << "cluster_ids && '{#{options[:region_category_id]}}'"
@@ -295,7 +295,7 @@ SQL
       sql="select * from data_denormalization where #{where.join(' and ')}"
     elsif options[:country]
       where = []
-      where << "countries_ids && '{#{options[:country]}}' and site_id=#{site.id} and is_active=true"
+      where << "countries_ids && '{#{options[:country]}}' and site_id=#{site.id} and (end_date is null OR end_date > now())"
       if options[:country_category_id]
         if site.navigate_by_cluster?
           where << "cluster_ids && '{#{options[:country_category_id]}}'"
@@ -307,21 +307,21 @@ SQL
       sql="select * from data_denormalization where #{where.join(' and ')}"
     elsif options[:cluster]
       where = []
-      where << "cluster_ids && '{#{options[:cluster]}}' and site_id=#{site.id} and is_active=true"
+      where << "cluster_ids && '{#{options[:cluster]}}' and site_id=#{site.id} and (end_date is null OR end_date > now())"
       where << "regions_ids && '{#{options[:cluster_region_id]}}'" if options[:cluster_region_id]
       where << "countries_ids && '{#{options[:cluster_country_id]}}'" if options[:cluster_country_id]
 
       sql="select * from data_denormalization where #{where.join(' and ')}"
     elsif options[:sector]
       where = []
-      where << "sector_ids && '{#{options[:sector]}}' and site_id=#{site.id} and is_active=true"
+      where << "sector_ids && '{#{options[:sector]}}' and site_id=#{site.id} and (end_date is null OR end_date > now())"
       where << "regions_ids && '{#{options[:sector_region_id]}}'" if options[:sector_region_id]
       where << "countries_ids && '{#{options[:sector_country_id]}}'" if options[:sector_country_id]
 
       sql="select * from data_denormalization where #{where.join(' and ')}"
     elsif options[:organization]
       where = []
-      where << "organization_id = #{options[:organization]} and site_id=#{site.id} and is_active=true"
+      where << "organization_id = #{options[:organization]} and site_id=#{site.id} and (end_date is null OR end_date > now())"
 
       if options[:organization_category_id]
         if site.navigate_by_cluster?
@@ -336,9 +336,9 @@ SQL
 
       sql="select * from data_denormalization where #{where.join(' and ')}"
     elsif options[:donor_id]
-      sql="select * from data_denormalization where donors_ids && '{#{options[:donor_id]}}' and site_id=#{site.id} and is_active=true"
+      sql="select * from data_denormalization where donors_ids && '{#{options[:donor_id]}}' and site_id=#{site.id} and (end_date is null OR end_date > now())"
     else
-      sql="select * from data_denormalization where site_id=#{site.id} and is_active=true"
+      sql="select * from data_denormalization where site_id=#{site.id} and (end_date is null OR end_date > now())"
     end
 
     total_entries = ActiveRecord::Base.connection.execute("select count(*) as count from (#{sql}) as q").first['count'].to_i

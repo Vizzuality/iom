@@ -73,7 +73,7 @@ class ClustersSectorsController < ApplicationController
 
             # Get the data for the map depending on the region definition of the site (country or region)
             sql="select r.id,r.name,count(ps.*) as count,r.center_lon as lon,r.center_lat as lat,r.name,'#{carry_on_url}'||r.path as url,r.code,
-                (select count(*) from data_denormalization where regions_ids && ('{'||r.id||'}')::integer[] and is_active=true and site_id=#{@site.id}) as total_in_region
+                (select count(*) from data_denormalization where regions_ids && ('{'||r.id||'}')::integer[] and (end_date is null OR end_date > now()) and site_id=#{@site.id}) as total_in_region
             from regions as r
               inner join projects_regions as pr on r.id=pr.region_id and r.level=#{@site.level_for_region}
               inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{@site.id}
@@ -84,7 +84,7 @@ class ClustersSectorsController < ApplicationController
           else
              location_filter = "where c.id = #{@filter_by_location.first}" if @filter_by_location
              sql="select c.id,c.name,count(ps.*) as count,c.center_lon as lon,c.center_lat as lat,c.name,'#{carry_on_url}'||c.id as url,
-                  (select count(*) from data_denormalization where countries_ids && ('{'||c.id||'}')::integer[] and is_active=true and site_id=#{@site.id}) as total_in_region
+                  (select count(*) from data_denormalization where countries_ids && ('{'||c.id||'}')::integer[] and (end_date is null OR end_date > now()) and site_id=#{@site.id}) as total_in_region
               from countries as c
                 inner join countries_projects as cp on c.id=cp.country_id
                 inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=#{@site.id}
@@ -100,7 +100,7 @@ class ClustersSectorsController < ApplicationController
 
             # Get the data for the map depending on the region definition of the site (country or region)
             sql="select r.id,r.name,count(ps.*) as count,r.center_lon as lon,r.center_lat as lat,r.name,'#{carry_on_url}'||r.path as url,r.code,
-                (select count(*) from data_denormalization where regions_ids && ('{'||r.id||'}')::integer[] and is_active=true and site_id=#{@site.id}) as total_in_region
+                (select count(*) from data_denormalization where regions_ids && ('{'||r.id||'}')::integer[] and (end_date is null OR end_date > now()) and site_id=#{@site.id}) as total_in_region
             from regions as r
               inner join projects_regions as pr on r.id=pr.region_id and r.level=#{@site.level_for_region}
               inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{@site.id}
@@ -114,7 +114,7 @@ class ClustersSectorsController < ApplicationController
               location_filter = @filter_by_location.size == 1 ? "r.country_id = #{@filter_by_location.first}" : "r.id = #{@filter_by_location.last}"
 
               sql="select r.id,r.name,count(ps.*) as count,r.center_lon as lon,r.center_lat as lat,'#{carry_on_url}'||r.path as url,
-                  (select count(*) from data_denormalization where regions_ids && ('{'||r.id||'}')::integer[] and is_active=true and site_id=#{@site.id}) as total_in_region
+                  (select count(*) from data_denormalization where regions_ids && ('{'||r.id||'}')::integer[] and (end_date is null OR end_date > now()) and site_id=#{@site.id}) as total_in_region
               from regions as r
                 inner join projects_regions as pr on r.id=pr.region_id
                 inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{@site.id}
@@ -124,7 +124,7 @@ class ClustersSectorsController < ApplicationController
                 group by r.id,r.name,lon,lat,url"
             else
               sql="select c.id,c.name,count(ps.*) as count,c.center_lon as lon,c.center_lat as lat,c.name,'#{carry_on_url}'||c.id as url,
-                  (select count(*) from data_denormalization where countries_ids && ('{'||c.id||'}')::integer[] and is_active=true and site_id=#{@site.id}) as total_in_region
+                  (select count(*) from data_denormalization where countries_ids && ('{'||c.id||'}')::integer[] and (end_date is null OR end_date > now()) and site_id=#{@site.id}) as total_in_region
               from countries as c
                 inner join countries_projects as cp on c.id=cp.country_id
                 inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=#{@site.id}

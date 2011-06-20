@@ -9,7 +9,7 @@ class ProjectsController < ApplicationController
       raise ActiveRecord::RecordNotFound
     end
     sql = "select * from data_denormalization where site_id=#{@site.id} and
-                                                    is_active=true and
+                                                    (end_date is null OR end_date > now()) and
                                                     project_id=#{id}"
     @raw_project = Project.find_by_sql(sql).first
     raise ActiveRecord::RecordNotFound unless @raw_project
