@@ -251,43 +251,39 @@ SQL
       parser_options :col_sep => ';', :converters => :all
       start_at_row 1
       read_attributes_from_file({
-        'project_id'                              => 'id',
+        'organization'                            => 'organization_name',
         'intervention_id'                         => 'intervention_id',
         'project_name'                            => 'name',
         'project_description'                     => 'description',
-        'organization_id'                         => 'primary_organization_id',
-        'implementing_organization'               => 'implementing_organization',
-        'project_contact_phone_number'            => 'contact_phone_number',
+        'activities'                              => 'activities',
+        'additional_information'                  => 'additional_information',
         'start_date'                              => 'start_date',
         'end_date'                                => 'end_date',
-        'date_provided'                           => 'date_provided',
-        'date_updated'                            => 'date_updated',
-        'verbatim_location'                       => 'verbatim_location',
-        'project_contact_email'                   => 'contact_email',
-        'additional_information'                  => 'additional_information',
+        'budget_numeric'                          => 'budget',
+        'clusters'                                => 'clusters',
+        'sectors'                                 => 'sectors',
+        'cross_cutting_issues'                    => 'cross_cutting_issues',
+        'implementing_organization'               => 'implementing_organization',
         'partner_organizations'                   => 'partner_organizations',
-        'project_needs'                           => 'project_needs',
-        'project_contact_person'                  => 'contact_person',
-        'project_contact_position'                => 'contact_position',
+        'donors'                                  => 'donors',
+        'awardee_type'                            => 'awardee_type',
         'estimated_people_reached'                => 'estimated_people_reached',
         'calculation_of_number_of_people_reached' => 'calculation_of_number_of_people_reached',
-        'awardee_type'                            => 'awardee_type',
         'target'                                  => 'target',
-        'budget'                                  => 'budget',
-        'project_website'                         => 'website',
-        'cross_cutting_issues'                    => 'cross_cutting_issues',
         'countries'                               => 'countries',
         'regions_level1'                          => 'first_admin_level',
         'regions_level2'                          => 'second_admin_level',
         'regions_level3'                          => 'third_admin_level',
-        'clusters'                                => 'clusters',
-        'sectors'                                 => 'sectors',
-        'donors'                                  => 'donors',
-        'project_tags'                            => 'project_tags',
-        'activities'                              => 'activities',
-        'organization'                            => 'organization_name',
-        'site_id'                                 => 'site_id'
-
+        'verbatim_location'                       => 'verbatim_location',
+        'idprefugee_camp'                         => 'idprefugee_camp',
+        'project_contact_person'                  => 'contact_person',
+        'project_contact_position'                => 'contact_position',
+        'project_contact_email'                   => 'contact_email',
+        'project_contact_phone_number'            => 'contact_phone_number',
+        'project_website'                         => 'website',
+        'date_provided'                           => 'date_provided',
+        'date_updated'                            => 'date_updated',
+        'project_needs'                           => 'project_needs'
       })
     end
 
@@ -300,8 +296,8 @@ SQL
       errors = []
       project_hash = csv_hash.slice(*Project.columns_hash.keys)
 
-      if project_hash['id'].present?
-        project = Project.where(:id => project_hash.delete('id')).first
+      if project_hash['intervention_id'].present?
+        project = Project.where(:intervention_id => project_hash.delete('intervention_id')).first
       else
         project = Project.new
       end
@@ -394,14 +390,6 @@ SQL
         end
       end
 
-      if csv_hash['project_tags'] && (project_tags = csv_hash['project_tags'].split(',')) && project_tags.present?
-        project.tags.clear
-        project_tags.each do |project_tag_name|
-          project_tag = Tag.find_or_create_by_name(project_tag_name)
-          project.tags << project_tag
-        end
-      end
-
       unless project.save
         errors += project.errors.full_messages
       end
@@ -409,46 +397,47 @@ SQL
       if errors.present?
         errors.insert(0, 'The following errors were found:')
         rows_with_errors << {
-          'project_id'                              => csv_project.id,
+          'organization'                            => csv_project.organization_name,
           'intervention_id'                         => csv_project.intervention_id,
           'project_name'                            => csv_project.name,
           'project_description'                     => csv_project.description,
-          'organization_id'                         => csv_project.primary_organization_id,
-          'implementing_organization'               => csv_project.implementing_organization,
-          'project_contact_phone_number'            => csv_project.contact_phone_number,
+          'activities'                              => csv_project.activities,
+          'additional_information'                  => csv_project.additional_information,
           'start_date'                              => csv_project.start_date,
           'end_date'                                => csv_project.end_date,
-          'date_provided'                           => csv_project.date_provided,
-          'date_updated'                            => csv_project.date_updated,
-          'verbatim_location'                       => csv_project.verbatim_location,
-          'project_contact_email'                   => csv_project.contact_email,
-          'additional_information'                  => csv_project.additional_information,
+          'budget_numeric'                          => csv_project.budget,
+          'clusters'                                => csv_project.clusters,
+          'sectors'                                 => csv_project.sectors,
+          'cross_cutting_issues'                    => csv_project.cross_cutting_issues,
+          'implementing_organization'               => csv_project.implementing_organization,
           'partner_organizations'                   => csv_project.partner_organizations,
-          'project_needs'                           => csv_project.project_needs,
-          'project_contact_person'                  => csv_project.contact_person,
-          'project_contact_position'                => csv_project.contact_position,
+          'donors'                                  => csv_project.donors,
+          'awardee_type'                            => csv_project.awardee_type,
           'estimated_people_reached'                => csv_project.estimated_people_reached,
           'calculation_of_number_of_people_reached' => csv_project.calculation_of_number_of_people_reached,
-          'awardee_type'                            => csv_project.awardee_type,
           'target'                                  => csv_project.target,
-          'budget'                                  => csv_project.budget,
-          'project_website'                         => csv_project.website,
-          'cross_cutting_issues'                    => csv_project.cross_cutting_issues,
           'countries'                               => csv_project.countries,
           'regions_level1'                          => csv_project.first_admin_level,
           'regions_level2'                          => csv_project.second_admin_level,
           'regions_level3'                          => csv_project.third_admin_level,
-          'clusters'                                => csv_project.clusters,
-          'sectors'                                 => csv_project.sectors,
-          'donors'                                  => csv_project.donors,
-          'project_tags'                            => csv_project.project_tags,
-          'activities'                              => csv_project.activities,
-          'organization'                            => csv_project.organization_name,
-          'site_id'                                 => csv_project.site_id,
-          'Errors'                                  => errors.join("\n")
+          'verbatim_location'                       => csv_project.verbatim_location,
+          'idprefugee_camp'                         => csv_project.idprefugee_camp,
+          'project_contact_person'                  => csv_project.contact_person,
+          'project_contact_position'                => csv_project.contact_position,
+          'project_contact_email'                   => csv_project.contact_email,
+          'project_contact_phone_number'            => csv_project.contact_phone_number,
+          'project_website'                         => csv_project.website,
+          'date_provided'                           => csv_project.date_provided,
+          'date_updated'                            => csv_project.date_updated,
+          'project_needs'                           => csv_project.project_needs,
+          'errors'                                  => errors.join("\n")
         }
 
       end
+    end
+    if rows_with_errors.present?
+      rows_with_errors.unshift %w(organization intervention_id project_name project_description activities additional_information start_date end_date budget_numeric clusters sectors cross_cutting_issues implementing_organization partner_organizations donors awardee_type estimated_people_reached calculation_of_number_of_people_reached target countries regions_level1 regions_level2 regions_level3 verbatim_location,
+idprefugee_camp project_contact_person project_contact_position project_contact_email project_contact_phone_number project_website date_provided date_updated project_needs errors)
     end
     rows_with_errors
   end

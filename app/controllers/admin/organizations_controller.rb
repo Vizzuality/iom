@@ -41,7 +41,20 @@ class Admin::OrganizationsController < ApplicationController
       projects_with_errors = @organization.sync_projects(params[:organization].delete(:projects_file))
 
       if projects_with_errors.present?
-        send_data projects_with_errors.serialize_to_csv(:headers => projects_with_errors.first.keys),
+        ordered_header = projects_with_errors.slice!(0)
+        results_in_csv = FasterCSV.generate(:col_sep => ';') do |csv|
+          csv << ordered_header
+          projects_with_errors.each do |result|
+            line = []
+            ordered_header.each do |field_name|
+              v = result[field_name]
+              line << (v.nil?? '' : v)
+            end
+            csv << line
+          end
+        end
+
+        send_data results_in_csv,
           :type => 'application/download; application/vnd.ms-excel; text/csv; charset=iso-8859-1; header=present',
           :disposition => "attachment; filename=#{@organization.name}_projects.csv"
         return
