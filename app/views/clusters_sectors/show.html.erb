@@ -91,11 +91,11 @@
         <h3>
           <%= clusters_sectors_projects_list_subtitle %>
           <ul class="download">
-            <li><%= link_to 'CSV', @site.navigate_by_cluster?? cluster_path(@data, :csv) : sector_path(@data, :csv) %></li>
+            <li><%= link_to 'CSV', @site.navigate_by_cluster?? cluster_path(@data, @carry_on_filters.merge(:format => :csv)) : sector_path(@data, @carry_on_filters.merge(:format => :csv)) %></li>
             <li>|</li>
-            <li><%= link_to 'EXCEL', @site.navigate_by_cluster?? cluster_path(@data, :xls) : sector_path(@data, :xls) %></li>
+            <li><%= link_to 'EXCEL', @site.navigate_by_cluster?? cluster_path(@data, @carry_on_filters.merge(:format => :xls)) : sector_path(@data, @carry_on_filters.merge(:format => :xls)) %></li>
             <li>|</li>
-            <li><%= link_to 'KML', @site.navigate_by_cluster?? cluster_path(@data, :kml) : sector_path(@data, :kml) %></li>
+            <li><%= link_to 'KML', @site.navigate_by_cluster?? cluster_path(@data, @carry_on_filters.merge(:format => :kml)) : sector_path(@data, @carry_on_filters.merge(:format => :kml)) %></li>
           </ul>
         </h3>
         <div id="projects">

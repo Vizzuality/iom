@@ -72,23 +72,17 @@ class SitesController < ApplicationController
         end
       end
       format.csv do
-        projects_for_csv = @site.projects_for_csv
-        headers = projects_for_csv.any?? projects_for_csv.first.keys : nil
-
-        send_data projects_for_csv.serialize_to_csv(:headers => headers),
+        send_data Project.to_csv(@site),
           :type => 'text/plain; charset=utf-8; application/download',
           :disposition => "attachment; filename=#{@site.name}_projects.csv"
       end
       format.xls do
-        projects_for_csv = @site.projects_for_csv
-        headers = projects_for_csv.any?? projects_for_csv.first.keys : nil
-
-        send_data projects_for_csv.to_excel(:headers => headers),
+        send_data Project.to_excel(@site),
           :type        => 'application/vnd.ms-excel',
           :disposition => "attachment; filename=#{@site.name}_projects.xls"
       end
       format.kml do
-        @projects_for_kml = @site.projects_for_kml
+        @projects_for_kml = Project.to_kml(@site)
 
         render :site_home
       end

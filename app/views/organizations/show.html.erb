@@ -152,11 +152,11 @@
         <h3>
           <%= projects_list_subtitle %>
           <ul class="download">
-            <li><%= link_to 'CSV', organization_path(@organization, :csv) %></li>
+            <li><%= link_to 'CSV', organization_path(@organization, @carry_on_filters.merge(:format => :csv)) %></li>
             <li>|</li>
-            <li><%= link_to 'EXCEL', organization_path(@organization, :xls) %></li>
+            <li><%= link_to 'EXCEL', organization_path(@organization, @carry_on_filters.merge(:format => :xls)) %></li>
             <li>|</li>
-            <li><%= link_to 'KML', organization_path(@organization, :kml) %></li>
+            <li><%= link_to 'KML', organization_path(@organization, @carry_on_filters.merge(:format => :kml)) %></li>
           </ul>
         </h3>
         <div id="projects">

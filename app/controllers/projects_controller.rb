@@ -49,7 +49,7 @@ class ProjectsController < ApplicationController
       end
       format.kml
       format.csv do
-        send_data @project.to_csv(@site.id),
+        send_data Project.to_csv(@site, :project => @project.id),
           :type => 'application/download; application/vnd.ms-excel; text/csv; charset=iso-8859-1; header=present',
           :disposition => "attachment; filename=#{@project.name}.csv"
       end

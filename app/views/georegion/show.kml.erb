@@ -5,8 +5,8 @@
   <description></description>
   <% @projects_for_kml.each do |project| %>
     <Placemark>
-      <name><%= project['name'] %></name>
-      <%= raw(project['the_geom']) %>
+      <name><%= project['project_name'] %></name>
+      <%= raw(project['st_askml']) %>
     </Placemark>
   <% end %>
 </Document>

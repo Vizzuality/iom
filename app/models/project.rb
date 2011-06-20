@@ -145,87 +145,180 @@ class Project < ActiveRecord::Base
   # ) WITH (OIDS=FALSE)"
 
 
-  def self.csv_attributes
-    %W{ Project\ Id Site Id\ Organization Project\ Title Project\ Description Project\ Activities
-        Additional\ Information Estimated\ Start\ Date Estimated\ End\ Date
-        Donor Budget Implementing\ Organization(s) Partner\ Organization(s)
-        Cluster(s) Sector(s) Cross\ Cutting\ Issues Number\ of\ People\ Reached\ (target) Target\ Groups
-        Country 1st\ Admin\ Level 2nd\ Admin\ Level 3rd\ Admin\ Level Contact\ Name Contact\ Title
-        Contact\ Email Website Date\ Provided Date\ Updated }
+  def self.export_headers
+    %w(organization intervention_id project_name project_description activities additional_information start_date end_date budget_numeric clusters sectors cross_cutting_issues implementing_organization partner_organizations donors awardee_type estimated_people_reached calculation_of_number_of_people_reached target countries regions_level1 regions_level2 regions_level3 verbatim_location,
+idprefugee_camp project_contact_person project_contact_position project_contact_email project_contact_phone_number project_website date_provided date_updated project_needs)
   end
 
-  def csv_columns(site_id = nil)
-    raw_result = if site_id.nil?
-      ActiveRecord::Base.connection.execute("select * from data_denormalization where project_id = #{self.id} LIMIT 1").first
-    else
-      ActiveRecord::Base.connection.execute("select * from data_denormalization where project_id = #{self.id} AND site_id = #{site_id}").first
+  def self.list_for_export(site = nil, options = {})
+    where = []
+    where << "site_id = #{site.id}" if site
+    where << '(p.end_date is null OR p.end_date > now())'
+
+    the_geom = ",#{options[:the_geom]}" if options[:the_geom]
+
+    if options[:region]
+      where << "regions_ids && '{#{options[:region]}}' and site_id=#{site.id}"
+      if options[:region_category_id]
+        if site.navigate_by_cluster?
+          where << "cluster_ids && '{#{options[:region_category_id]}}'"
+        else
+          where << "sector_ids && '{#{options[:region_category_id]}}'"
+        end
+      end
+    elsif options[:country]
+      where << "countries_ids && '{#{options[:country]}}' and site_id=#{site.id}"
+      if options[:country_category_id]
+        if site.navigate_by_cluster?
+          where << "cluster_ids && '{#{options[:country_category_id]}}'"
+        else
+          where << "sector_ids && '{#{options[:country_category_id]}}'"
+        end
+      end
+    elsif options[:cluster]
+      where << "cluster_ids && '{#{options[:cluster]}}' and site_id=#{site.id}"
+      where << "regions_ids && '{#{options[:cluster_region_id]}}'" if options[:cluster_region_id]
+      where << "countries_ids && '{#{options[:cluster_country_id]}}'" if options[:cluster_country_id]
+    elsif options[:sector]
+      where << "sector_ids && '{#{options[:sector]}}' and site_id=#{site.id}"
+      where << "regions_ids && '{#{options[:sector_region_id]}}'" if options[:sector_region_id]
+      where << "countries_ids && '{#{options[:sector_country_id]}}'" if options[:sector_country_id]
+    elsif options[:organization]
+      where << "organization_id = #{options[:organization]}"
+      where << "site_id=#{site.id}" if site
+
+      if options[:organization_category_id]
+        if site.navigate_by_cluster?
+          where << "cluster_ids && '{#{options[:organization_category_id]}}'"
+        else
+          where << "sector_ids && '{#{options[:organization_category_id]}}'"
+        end
+      end
+
+      where << "regions_ids && '{#{options[:organization_region_id]}}'::integer[]" if options[:organization_region_id]
+      where << "countries_ids && '{#{options[:organization_country_id]}}'::integer[]" if options[:organization_country_id]
+    elsif options[:project]
+      where << "project_id = #{options[:project]}"
     end
-    return [] if raw_result.nil?
-    columns = []
-    columns << raw_result['project_id']
-    columns << raw_result['site_id']
-    columns << raw_result['organization_name']
-    columns << raw_result['project_name']
-    columns << raw_result['project_description']
-    columns << self.activities
-    columns << self.additional_information
-    columns << if self.start_date.nil?
-      ""
-    else
-      self.start_date.strftime("%Y-%m-%d")
-    end
-    columns << if self.end_date.nil?
-      ""
-    else
-      self.end_date.strftime("%Y-%m-%d")
-    end
-    columns << self.donors.map{ |donor| donor.name }.join(',')
-    columns << self.budget
-    columns << self.implementing_organization
-    columns << self.partner_organizations
-    columns << if raw_result['clusters']
-      raw_result['clusters'].text2array.join(',')
-    else
-      ""
-    end
-    columns << if raw_result['sectors']
-      raw_result['sectors'].text2array.join(',')
-    else
-      ""
-    end
-    columns << self.cross_cutting_issues
-    columns << self.estimated_people_reached
-    columns << self.target
-    columns << if raw_result['countries']
-      raw_result['countries'].text2array.join(',')
-    else
-      ""
-    end
-    columns << regions.where(:level => 1).select(Region.custom_fields).map{ |r| r.name }.join(',')
-    columns << regions.where(:level => 2).select(Region.custom_fields).map{ |r| r.name }.join(',')
-    columns << regions.where(:level => 3).select(Region.custom_fields).map{ |r| r.name }.join(',')
-    columns << self.contact_person
-    columns << self.contact_position
-    columns << self.contact_email
-    columns << self.website
-    columns << if self.date_provided.nil?
-      ""
-    else
-      self.date_provided.strftime("%Y-%m-%d")
-    end
-    columns << if self.date_updated.nil?
-      ""
-    else
-      self.date_updated.strftime("%Y-%m-%d")
-    end
-    columns
+
+    where = "WHERE #{where.join(' AND ')}" if where.present?
+
+    sql = <<-SQL
+        SELECT DISTINCT
+        site_id,
+        project_id,
+        project_name,
+        project_description,
+        organization_id,
+        organization_name AS organization,
+        implementing_organization,
+        partner_organizations,
+        cross_cutting_issues,
+        p.start_date,
+        p.end_date,
+        CASE WHEN budget=0 THEN null ELSE budget END AS budget_numeric,
+        target,
+        estimated_people_reached,
+        contact_person AS project_contact_person,
+        contact_email AS project_contact_email,
+        contact_phone_number AS project_contact_phone_number,
+        activities,
+        intervention_id,
+        additional_information,
+        awardee_type,
+        date_provided,
+        date_updated,
+        contact_position AS project_contact_position,
+        website AS project_website,
+        verbatim_location,
+        calculation_of_number_of_people_reached,
+        project_needs,
+        sectors,
+        clusters,
+        (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM tags AS t INNER JOIN projects_tags AS pt ON t.id=pt.tag_id WHERE pt.project_id=dd.project_id) AS project_tags,
+        countries,
+        (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM regions AS r INNER JOIN projects_regions AS pr ON r.id=pr.region_id WHERE r.level=1 AND pr.project_id=dd.project_id) AS regions_level1,
+        (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM regions AS r INNER JOIN projects_regions AS pr ON r.id=pr.region_id WHERE r.level=2 AND pr.project_id=dd.project_id) AS regions_level2,
+        (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM regions AS r INNER JOIN projects_regions AS pr ON r.id=pr.region_id WHERE r.level=3 AND pr.project_id=dd.project_id) AS regions_level3,
+        (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM donors AS d INNER JOIN donations AS dn ON d.id=dn.donor_id AND dn.project_id=dd.project_id) AS donors
+        #{the_geom}
+        FROM data_denormalization AS dd
+        INNER JOIN projects AS p ON dd.project_id=p.id
+        #{where}
+        GROUP BY
+        site_id,
+        project_id,
+        project_name,
+        project_description,
+        organization_id,
+        organization_name,
+        implementing_organization,
+        partner_organizations,
+        cross_cutting_issues,
+        p.start_date,
+        p.end_date,
+        budget,
+        target,
+        estimated_people_reached,
+        contact_person,
+        contact_email,
+        contact_phone_number,
+        activities,
+        intervention_id,
+        additional_information,
+        awardee_type,
+        date_provided,
+        date_updated,
+        contact_position,
+        website,
+        verbatim_location,
+        calculation_of_number_of_people_reached,
+        project_needs,
+        idprefugee_camp,
+        countries,
+        sectors,
+        clusters
+        #{the_geom}
+    SQL
+    ActiveRecord::Base.connection.execute(sql)
   end
 
-  def to_csv(site_id)
-    FasterCSV.generate(:col_sep => ';') do |csv|
-      csv << self.class.csv_attributes
-      csv << csv_columns(site_id)
+  def self.to_csv(site, options = {})
+    projects = self.list_for_export(site, options)
+
+    csv_data = FasterCSV.generate(:col_sep => ',') do |csv|
+      csv << self.export_headers
+      projects.each do |project|
+        line = []
+        self.export_headers.each do |field_name|
+          v = project[field_name]
+          line << if v.nil?
+            ""
+          else
+            if %W{ start_date end_date date_provided date_updated }.include?(field_name)
+              if v =~ /^00(\d\d\-.+)/
+                "20#{$1}"
+              else
+                v
+              end
+            else
+              v.text2array.join(',')
+            end
+          end
+        end
+        csv << line
+      end
     end
+    csv_data
+  end
+
+  def self.to_excel(site, options = {})
+    projects = self.list_for_export(site, options)
+    projects.to_excel(:headers => self.export_headers)
+  end
+
+  def self.to_kml(site, options = {})
+    projects = self.list_for_export(site, options.merge(:the_geom => 'ST_AsKML(p.the_geom)'))
   end
 
   def related(site, limit = 2)

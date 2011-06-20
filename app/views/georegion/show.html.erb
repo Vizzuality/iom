@@ -119,11 +119,11 @@
     <div class="right">
       <h3><%= georegion_projects_list_subtitle %>
         <ul class="download">
-          <li><%= link_to 'CSV', location_path(@area, :csv) %></li>
+          <li><%= link_to 'CSV', location_path(@area, @carry_on_filters.merge(:format => :csv)) %></li>
           <li>|</li>
-          <li><%= link_to 'EXCEL', location_path(@area, :xls) %></li>
+          <li><%= link_to 'EXCEL', location_path(@area, @carry_on_filters.merge(:format => :xls)) %></li>
           <li>|</li>
-          <li><%= link_to 'KML', location_path(@area, :kml) %></li>
+          <li><%= link_to 'KML', location_path(@area, @carry_on_filters.merge(:format => :kml)) %></li>
         </ul>
       </h3>
       <div id="projects">

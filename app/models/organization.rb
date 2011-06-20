@@ -247,8 +247,8 @@ SQL
     csv_projects = []
 
     csv_projects = CsvMapper.import(file.tempfile, :type => :io) do
-      delimited_by ';'
-      parser_options :col_sep => ';', :converters => :all
+      delimited_by ','
+      parser_options :col_sep => ',', :converters => :all
       start_at_row 1
       read_attributes_from_file({
         'organization'                            => 'organization_name',
