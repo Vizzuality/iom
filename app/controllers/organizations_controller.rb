@@ -167,6 +167,14 @@ class OrganizationsController < ApplicationController
           :type => 'text/plain; charset=utf-8; application/download',
           :disposition => "attachment; filename=#{@organization.name}_projects.csv"
       end
+      format.xls do
+        projects_for_csv = @organization.projects_for_csv(@site)
+        headers = projects_for_csv.any?? projects_for_csv.first.keys : nil
+
+        send_data projects_for_csv.to_excel(:headers => headers),
+          :type        => 'application/vnd.ms-excel',
+          :disposition => "attachment; filename=#{@organization.name}_projects.xls"
+      end
       format.kml do
         @projects_for_kml = @organization.projects_for_kml(@site)
       end

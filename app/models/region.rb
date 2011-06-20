@@ -149,7 +149,7 @@ SQL
         select * from
         (select re.id, re.name, re.level, re.country_id, re.parent_region_id, re.path,
              ST_Distance((select ST_Centroid(the_geom) from regions where id=#{self.id}), ST_Centroid(the_geom)) as dist,
-             (select count(*) from projects_regions as pr 
+             (select count(*) from projects_regions as pr
               inner join projects as p on p.id=pr.project_id and (p.end_date is null OR p.end_date > now())
                where region_id=re.id) as count
              from regions as re

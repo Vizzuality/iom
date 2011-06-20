@@ -117,19 +117,14 @@
     <!-- outer_float -->
     <!-- RIGHT PART -->
     <div class="right">
-      <h3><%= georegion_projects_list_subtitle %> <a id="see_all" href="#">See all projects</a>
+      <h3><%= georegion_projects_list_subtitle %>
         <ul class="download">
           <li><%= link_to 'CSV', location_path(@area, :csv) %></li>
           <li>|</li>
+          <li><%= link_to 'EXCEL', location_path(@area, :xls) %></li>
+          <li>|</li>
           <li><%= link_to 'KML', location_path(@area, :kml) %></li>
         </ul>
-        <div class="tooltip">
-          <span class="body_tooltip">
-            <label>Coming soon!</label>
-            <p>Please stay tuned.</p>
-          </span>
-          <span class="bottom_tooltip"></span>
-        </div>
       </h3>
       <div id="projects">
         <%= render :partial => 'projects/projects' %>

@@ -19,6 +19,7 @@ gem 'nokogiri'
 gem 'vimeo'
 gem 'hoptoad_notifier'
 gem 'memcache-client'
+gem 'spreadsheet'
 
 group :development do
   gem 'git-up'

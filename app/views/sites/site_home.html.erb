@@ -95,25 +95,14 @@
   <!-- RIGHT PART -->
   <div class="right">
     <h3>
-      <%= pluralize(@site.total_projects, 'active project', 'active projects') %> in
-      <% if @site.navigate_by_country? %>
-        <%= pluralize(@site.total_countries, 'country', 'countries') %>
-      <% else %>
-        <%= pluralize(@site.total_regions, @site.word_for_regions.singularize, @site.word_for_regions) %>
-      <% end %>
-      <a id="see_all" href="#">View past projects</a>
+      <%= site_project_count %>
       <ul class="download">
         <li><%= link_to 'CSV', "#{url(@site)}/.csv" %></li>
         <li>|</li>
+        <li><%= link_to 'EXCEL', "#{url(@site)}/.xls" %></li>
+        <li>|</li>
         <li><%= link_to 'KML', "#{url(@site)}/.kml" %></li>
       </ul>
-      <div class="tooltip">
-        <span class="body_tooltip">
-          <label>Coming soon!</label>
-          <p>Please stay tuned.</p>
-        </span>
-        <span class="bottom_tooltip"></span>
-      </div>
     </h3>
     <div id="projects">
       <%= render 'projects/projects' %>
