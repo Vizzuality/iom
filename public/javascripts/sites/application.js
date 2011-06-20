@@ -25,15 +25,15 @@ $(document).ready( function() {
     },function(){
       $(this).parent().children('div.tooltip').hide();
     });
-    
+
     $("a#see_all").click(function(ev){ev.preventDefault(); ev.stopPropagation();});
-    
+
 
     if ($.browser.msie) {
-      var zIndexNumber = 1000;  
-      $('div,ul').each(function() {  
-        $(this).css('zIndex', zIndexNumber);  
-        zIndexNumber -= 10;  
+      var zIndexNumber = 1000;
+      $('div,ul').each(function() {
+        $(this).css('zIndex', zIndexNumber);
+        zIndexNumber -= 10;
       });
 
       $('div.loader_gallery').css('zIndex',1000);
@@ -47,7 +47,7 @@ $(document).ready( function() {
     }
 
     // TODO: update scrollbar to content
-    if ($('.scroll_pane_auto').length > 0){    
+    if ($('.scroll_pane_auto').length > 0){
         $('.scroll_pane_auto').jScrollPane({autoReinitialise:true });
     }
 
@@ -59,23 +59,21 @@ $(document).ready( function() {
     }
 
     // CUSTOM SCROLLBARS
-    if ($('.scroll_pane').length > 0){    
+    if ($('.scroll_pane').length > 0){
         $('.scroll_pane').jScrollPane({
                            autoReinitialise:false });
     }
 
-
+    if ($('span.input_search input').val() == '') {
+      $('span.input_search label').show();
+    };
     $('span.input_search input').focusin(function(ev){
-      var value = $(this).attr('value');
-      if (value == "Search...") {
-        old_value = value;
-        $(this).attr('value','');
-      }
+      $(this).prev('label').fadeOut();
     });
     $('span.input_search input').focusout(function(ev){
       var value = $(this).attr('value');
       if (value == "") {
-        $(this).attr('value',old_value);
+        $(this).prev('label').fadeIn();
       }
     });
 
@@ -83,7 +81,7 @@ $(document).ready( function() {
     // TO SHOW CLUSTER'S TOOLTIPS
     $('ul.statistics_list li a').hover(function(ev){
         ev.stopPropagation();
-        ev.preventDefault();        
+        ev.preventDefault();
         //$('div.tooltip').each(function(element){ $(element).css('display','none'); });
         $(this).parent().children('div.tooltip').show();
     },
@@ -110,14 +108,14 @@ $(document).ready( function() {
           if ($(this).parent().find('.scroll_pane').length > 0){
             resetCombo($(this).parent());
           }
-          
+
           // if there are some input text
           if ($(this).parent().find('input#ngos_search').length > 0){
               $(this).parent().find('input#ngos_search').focus();
           }
 
           $(document).click(function(event) {
-                if ((!$(event.target).closest('ul.suboptions li a').length)&&(!$(event.target).closest('ul.scroll_pane').length)&&(!$(event.target).closest('input#ngos_search').length))               
+                if ((!$(event.target).closest('ul.suboptions li a').length)&&(!$(event.target).closest('ul.scroll_pane').length)&&(!$(event.target).closest('input#ngos_search').length))
                 {
                   $('ul.menu li.clicked').removeClass('clicked');
                   $('ul.menu li a.displayed').removeClass('displayed');
@@ -137,12 +135,12 @@ function resetCombo(elementToUpdate){
     var element = elementToUpdate.find('.scroll_pane');
     if (element.length > 0){
 
-        // TO region option menu (it's liquid - height "auto") I have to specify a height for the plugin 
+        // TO region option menu (it's liquid - height "auto") I have to specify a height for the plugin
         if (element.attr('id') == $('ul#regions').attr('id')){
             var maxHeight = element.css('max-height');
             element.css('height',maxHeight);
         }
-        var api = element.data('jsp');    
+        var api = element.data('jsp');
         if (api != undefined) api.reinitialise();
     }
 }

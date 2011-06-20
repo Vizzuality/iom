@@ -160,6 +160,7 @@ div#header ul.menu li ul.suboptions li {float:left; width:148px; padding:0 5px; 
 div#header div.right {margin:10px 0 0 0; width:auto; height:20px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#header div.right form.search {position:relative; float:right;}
 div#header div.right form.search span.input_search {float:left; width:111px; height:20px; background:url('/images/sites/common/input_search_bkg.png') no-repeat 0 0; position:relative;}
+div#header div.right form.search span.input_search label{ display: none; position:absolute; top:2px; left:5px; width:83px; height:14px; font:normal 13px Arial; color:#999999; border:0px; z-index: 1;}
 div#header div.right form.search span.input_search input[type="text"]{position:absolute; top:2px; left:5px; width:83px; height:14px; font:normal 13px Arial; color:#999999; border:0px;}
 div#header div.right form.search span.input_search input[type="submit"] {position:absolute; right:5px; top:3px; width:15px; height:14px; background:url('/images/sites/common/bttn_search.png') no-repeat 0 0; border:none;}
 
