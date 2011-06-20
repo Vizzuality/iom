@@ -23,7 +23,7 @@ class OrganizationsController < ApplicationController
 
     if @filter_by_category && @filter_by_location
       @category_name =  "#{(@site.navigate_by_sector?? Sector : Cluster).where(:id => @filter_by_category).first.name}"
-      @location_name = if @site.navigate_by_country?
+      @location_name = if @filter_by_location.size == 1
         "#{Country.where(:id => @filter_by_location.first).first.name}"
       else
         region = Region.where(:id => @filter_by_location.last).first
@@ -31,7 +31,7 @@ class OrganizationsController < ApplicationController
       end
       @filter_name =  "#{@category_name} projects in #{@location_name}"
     elsif @filter_by_location
-      @location_name = if @site.navigate_by_country?
+      @location_name = if @filter_by_location.size == 1
         "#{Country.where(:id => @filter_by_location.first).first.name}"
       else
         region = Region.where(:id => @filter_by_location.last).first
@@ -99,18 +99,19 @@ class OrganizationsController < ApplicationController
                   #{category_join}
                 group by r.id,r.name,lon,lat,r.name,url,r.code"
         else
-          location_filter = "and c.id = #{@filter_by_location.first}" if @filter_by_location
           if @filter_by_location
-              sql="select r.id,r.name,count(ps.*) as count,r.center_lon as lon,r.center_lat as lat,'#{carry_on_url}'||r.path as url,
-                  (select count(*) from data_denormalization where regions_ids && ('{'||r.id||'}')::integer[] and is_active=true and site_id=#{@site.id}) as total_in_region
-              from regions as r
-                inner join projects_regions as pr on r.id=pr.region_id
-                inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{@site.id}
-                inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
-                inner join organizations as o on o.id=p.primary_organization_id and o.id=#{params[:id].sanitize_sql!}
-                #{category_join}
-                where r.country_id = #{@filter_by_location.first}
-                group by r.id,r.name,lon,lat,url"
+            location_filter = @filter_by_location.size == 1 ? "r.country_id = #{@filter_by_location.first}" : "r.id = #{@filter_by_location.last}"
+
+            sql="select r.id,r.name,count(ps.*) as count,r.center_lon as lon,r.center_lat as lat,'#{carry_on_url}'||r.path as url,
+                (select count(*) from data_denormalization where regions_ids && ('{'||r.id||'}')::integer[] and is_active=true and site_id=#{@site.id}) as total_in_region
+            from regions as r
+              inner join projects_regions as pr on r.id=pr.region_id
+              inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{@site.id}
+              inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
+              inner join organizations as o on o.id=p.primary_organization_id and o.id=#{params[:id].sanitize_sql!}
+              #{category_join}
+              where #{location_filter}
+              group by r.id,r.name,lon,lat,url"
           else
             sql="select c.id,count(ps.project_id) as count,c.name,c.center_lon as lon,
                         c.center_lat as lat,c.name,'#{carry_on_url}'||c.id as url,c.iso2_code as code,

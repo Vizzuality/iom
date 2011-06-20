@@ -111,6 +111,8 @@ class ClustersSectorsController < ApplicationController
           else
 
             if @filter_by_location
+              location_filter = @filter_by_location.size == 1 ? "r.country_id = #{@filter_by_location.first}" : "r.id = #{@filter_by_location.last}"
+
               sql="select r.id,r.name,count(ps.*) as count,r.center_lon as lon,r.center_lat as lat,'#{carry_on_url}'||r.path as url,
                   (select count(*) from data_denormalization where regions_ids && ('{'||r.id||'}')::integer[] and is_active=true and site_id=#{@site.id}) as total_in_region
               from regions as r
@@ -118,7 +120,7 @@ class ClustersSectorsController < ApplicationController
                 inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{@site.id}
                 inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
                 inner join projects_sectors as pse on pse.project_id=p.id and pse.sector_id=#{params[:id].sanitize_sql!}
-                where r.country_id = #{@filter_by_location.first}
+                where #{location_filter}
                 group by r.id,r.name,lon,lat,url"
             else
               sql="select c.id,c.name,count(ps.*) as count,c.center_lon as lon,c.center_lat as lat,c.name,'#{carry_on_url}'||c.id as url,
