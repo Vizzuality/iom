@@ -246,55 +246,25 @@ SQL
 
     csv_projects = []
 
-    csv_projects = CsvMapper.import(file.tempfile, :type => :io) do
-      delimited_by ','
-      parser_options :col_sep => ',', :converters => :all
-      start_at_row 1
-      read_attributes_from_file({
-        'organization'                            => 'organization_name',
-        'intervention_id'                         => 'intervention_id',
-        'project_name'                            => 'name',
-        'project_description'                     => 'description',
-        'activities'                              => 'activities',
-        'additional_information'                  => 'additional_information',
-        'start_date'                              => 'start_date',
-        'end_date'                                => 'end_date',
-        'budget_numeric'                          => 'budget',
-        'clusters'                                => 'clusters',
-        'sectors'                                 => 'sectors',
-        'cross_cutting_issues'                    => 'cross_cutting_issues',
-        'implementing_organization'               => 'implementing_organization',
-        'partner_organizations'                   => 'partner_organizations',
-        'donors'                                  => 'donors',
-        'awardee_type'                            => 'awardee_type',
-        'estimated_people_reached'                => 'estimated_people_reached',
-        'calculation_of_number_of_people_reached' => 'calculation_of_number_of_people_reached',
-        'target'                                  => 'target',
-        'countries'                               => 'countries',
-        'regions_level1'                          => 'first_admin_level',
-        'regions_level2'                          => 'second_admin_level',
-        'regions_level3'                          => 'third_admin_level',
-        'verbatim_location'                       => 'verbatim_location',
-        'idprefugee_camp'                         => 'idprefugee_camp',
-        'project_contact_person'                  => 'contact_person',
-        'project_contact_position'                => 'contact_position',
-        'project_contact_email'                   => 'contact_email',
-        'project_contact_phone_number'            => 'contact_phone_number',
-        'project_website'                         => 'website',
-        'date_provided'                           => 'date_provided',
-        'date_updated'                            => 'date_updated',
-        'project_needs'                           => 'project_needs'
-      })
-    end
+    Spreadsheet.client_encoding = 'UTF-8'
+    book = Spreadsheet.open file.tempfile
+    sheet = book.worksheet 0
 
-    return if csv_projects.empty?
+    return if sheet.nil?
 
-    rows_with_errors = []
+    sheet_with_errors = book.create_worksheet :name => 'Records with errors'
+
     organization = self
-    csv_projects.each do |csv_project|
-      csv_hash = Hash[*(csv_projects.first.members).zip(csv_project.values).flatten]
+
+    header = sheet.row(0)
+    sheet_with_errors_header = nil
+
+    sheet.each do |excel_project|
+      next if excel_project == header
+
+      excel_hash = Hash[*(header.to_a).zip(excel_project.to_a).flatten]
       errors = []
-      project_hash = csv_hash.slice(*Project.columns_hash.keys)
+      project_hash = excel_hash.slice(*Project.columns_hash.keys)
 
       if project_hash['intervention_id'].present?
         project = Project.where(:intervention_id => project_hash.delete('intervention_id')).first
@@ -305,7 +275,7 @@ SQL
       project.attributes = project_hash
       project.primary_organization = self
 
-      if csv_hash['countries'] && (countries = csv_hash['countries'].split(',')) && countries.present?
+      if excel_hash['countries'] && (countries = excel_hash['countries'].text2array) && countries.present?
         project.countries.clear
         countries.each do |country_name|
           country = Country.where(:name => country_name).first
@@ -317,7 +287,7 @@ SQL
         end
       end
 
-      if csv_hash['first_admin_level'] && (first_admin_levels = csv_hash['first_admin_level'].split(',')) && first_admin_levels.present?
+      if excel_hash['first_admin_level'] && (first_admin_levels = excel_hash['first_admin_level'].text2array) && first_admin_levels.present?
         project.regions.where(:level => 1).clear
         first_admin_levels.each do |first_admin_level_name|
           region = Region.where(:name => first_admin_level_name).first
@@ -329,7 +299,7 @@ SQL
         end
       end
 
-      if csv_hash['second_admin_level'] && (second_admin_levels = csv_hash['second_admin_level'].split(',')) && second_admin_levels.present?
+      if excel_hash['second_admin_level'] && (second_admin_levels = excel_hash['second_admin_level'].text2array) && second_admin_levels.present?
         project.regions.where(:level => 2).clear
         second_admin_levels.each do |second_admin_level_name|
           region = Region.where(:name => second_admin_level_name).first
@@ -341,7 +311,7 @@ SQL
         end
       end
 
-      if csv_hash['third_admin_level'] && (third_admin_levels = csv_hash['third_admin_level'].split(',')) && third_admin_levels.present?
+      if excel_hash['third_admin_level'] && (third_admin_levels = excel_hash['third_admin_level'].text2array) && third_admin_levels.present?
         project.regions.where(:level => 3).clear
         third_admin_levels.each do |third_admin_level_name|
           region = Region.where(:name => third_admin_level_name).first
@@ -353,7 +323,7 @@ SQL
         end
       end
 
-      if csv_hash['sectors'] && (sectors = csv_hash['sectors'].split(',')) && sectors.present?
+      if excel_hash['sectors'] && (sectors = excel_hash['sectors'].text2array) && sectors.present?
         project.sectors.clear
         sectors.each do |sector_name|
           sector = Sector.where(:name => sector_name).first
@@ -366,7 +336,7 @@ SQL
       end
 
 
-      if csv_hash['clusters'] && (clusters = csv_hash['clusters'].split(',')) && clusters.present?
+      if excel_hash['clusters'] && (clusters = excel_hash['clusters'].text2array) && clusters.present?
         project.clusters.clear
         clusters.each do |cluster_name|
           cluster = Cluster.where(:name => cluster_name).first
@@ -378,7 +348,7 @@ SQL
         end
       end
 
-      if csv_hash['donors'] && (donors = csv_hash['donors'].split(',')) && donors.present?
+      if excel_hash['donors'] && (donors = excel_hash['donors'].text2array) && donors.present?
         project.donors.clear
         donors.each do |donor_name|
           donor = Donor.where(:name => donor_name).first
@@ -395,51 +365,20 @@ SQL
       end
 
       if errors.present?
-        errors.insert(0, 'The following errors were found:')
-        rows_with_errors << {
-          'organization'                            => csv_project.organization_name,
-          'intervention_id'                         => csv_project.intervention_id,
-          'project_name'                            => csv_project.name,
-          'project_description'                     => csv_project.description,
-          'activities'                              => csv_project.activities,
-          'additional_information'                  => csv_project.additional_information,
-          'start_date'                              => csv_project.start_date,
-          'end_date'                                => csv_project.end_date,
-          'budget_numeric'                          => csv_project.budget,
-          'clusters'                                => csv_project.clusters,
-          'sectors'                                 => csv_project.sectors,
-          'cross_cutting_issues'                    => csv_project.cross_cutting_issues,
-          'implementing_organization'               => csv_project.implementing_organization,
-          'partner_organizations'                   => csv_project.partner_organizations,
-          'donors'                                  => csv_project.donors,
-          'awardee_type'                            => csv_project.awardee_type,
-          'estimated_people_reached'                => csv_project.estimated_people_reached,
-          'calculation_of_number_of_people_reached' => csv_project.calculation_of_number_of_people_reached,
-          'target'                                  => csv_project.target,
-          'countries'                               => csv_project.countries,
-          'regions_level1'                          => csv_project.first_admin_level,
-          'regions_level2'                          => csv_project.second_admin_level,
-          'regions_level3'                          => csv_project.third_admin_level,
-          'verbatim_location'                       => csv_project.verbatim_location,
-          'idprefugee_camp'                         => csv_project.idprefugee_camp,
-          'project_contact_person'                  => csv_project.contact_person,
-          'project_contact_position'                => csv_project.contact_position,
-          'project_contact_email'                   => csv_project.contact_email,
-          'project_contact_phone_number'            => csv_project.contact_phone_number,
-          'project_website'                         => csv_project.website,
-          'date_provided'                           => csv_project.date_provided,
-          'date_updated'                            => csv_project.date_updated,
-          'project_needs'                           => csv_project.project_needs,
-          'errors'                                  => errors.join("\n")
-        }
+        if sheet_with_errors_header.blank?
+          sheet_with_errors_header = header.to_a.push('errors')
+          sheet_with_errors.row(0).push *sheet_with_errors_header.to_a
+        end
 
+        sheet_with_errors.insert_row sheet_with_errors.last_row_index + 1, excel_project.to_a.push((['The following errors were found:'] + errors).join("\n- "))
       end
     end
-    if rows_with_errors.present?
-      rows_with_errors.unshift %w(organization intervention_id project_name project_description activities additional_information start_date end_date budget_numeric clusters sectors cross_cutting_issues implementing_organization partner_organizations donors awardee_type estimated_people_reached calculation_of_number_of_people_reached target countries regions_level1 regions_level2 regions_level3 verbatim_location,
-idprefugee_camp project_contact_person project_contact_position project_contact_email project_contact_phone_number project_website date_provided date_updated project_needs errors)
+
+    if sheet_with_errors.row_count > 0
+      output = StringIO.new ''
+      book.write output
+      output.string
     end
-    rows_with_errors
   end
 
   def budget(site)

@@ -8,6 +8,7 @@ class Admin::AdminController < ApplicationController
     options = {}
     options[:organization] = params[:organization_id] if params[:organization_id].present?
     results_in_csv = Project.to_csv(nil, options)
+    results_in_excel = Project.to_excel(nil, options)
 
     respond_to do |format|
       format.html do
@@ -17,6 +18,11 @@ class Admin::AdminController < ApplicationController
         send_data results_in_csv,
           :type => 'text/plain; charset=utf-8; application/download',
           :disposition => "attachment; filename=ngoaidmap_projects.csv"
+      end
+      format.xls do
+        send_data results_in_excel,
+          :type => 'application/vnd.ms-excel',
+          :disposition => "attachment; filename=ngoaidmap_projects.xls"
       end
     end
   end
