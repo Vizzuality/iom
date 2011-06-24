@@ -267,11 +267,11 @@ div.projects div.block div.import_data a:hover {text-decoration:underline!import
 
 div#left_column div.float_left div.block a.more:hover {text-decoration:underline;}
 div#left_column div.right {width:632px; margin:0; padding:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#left_column div.right h3 {width:598px; padding:20px 0px 20px 34px; font:normal 13px "PT Sans Bold"; color:#999999; text-shadow:0 1px white; text-transform:uppercase;}
+div#left_column div.right h3 {width:598px; padding:20px 0px 20px 34px; font:normal 13px "PT Sans Bold"; color:#999999; text-shadow:0 1px white; text-transform:uppercase; line-height: 18px;}
 div#left_column div.right h3 a#see_all {padding:0 5px; text-transform:none; text-shadow:none; font:normal 13px Arial;}
 div#left_column div.right h3 a#see_all:hover {text-decoration:underline;}
 div#left_column div.right h3 strong {padding:10px 0 0; font:normal 12px Arial; color:#777777; text-transform:none; text-shadow:none; line-height:20px;}
-div#left_column div.right h3 ul.download { float:right; width: auto; display: inline; padding-left: 19px!important; background:url('/images/sites/icons/download.png') no-repeat 0 1px}
+div#left_column div.right h3 ul.download { width: auto; padding-left: 19px!important; background:url('/images/sites/icons/download.png') no-repeat 0 5px; line-height: 25px;}
 div#left_column div.right h3 ul.download li {font:normal 13px Arial; display: inline; width: auto; height: auto; padding: 0;}
 div#left_column div.right h3 ul.download li a:hover {text-decoration: underline;}
 div#left_column div.right ul {width:100%; padding:0!important;}

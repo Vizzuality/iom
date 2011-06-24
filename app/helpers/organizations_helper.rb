@@ -4,13 +4,13 @@ module OrganizationsHelper
     by = "BY #{@organization.name}"
 
     if @filter_by_location && @filter_by_category
-      truncate((pluralize(@organization_projects_count, "#{@category_name} PROJECT", "#{@category_name} PROJECTS") + ' ' + by + " in #{@location_name}").strip, :length => 60)
+      pluralize(@organization_projects_count, "#{@category_name} PROJECT", "#{@category_name} PROJECTS") + ' ' + by + " in #{@location_name}"
     elsif @filter_by_location
-      truncate((pluralize(@organization_projects_count, "PROJECT", "PROJECTS") + ' ' + by + " in #{@location_name}").strip, :length => 60)
+      pluralize(@organization_projects_count, "PROJECT", "PROJECTS") + ' ' + by + " in #{@location_name}"
     elsif @filter_by_category
-      truncate(pluralize(@organization_projects_count, "#{@filter_name} PROJECT", "#{@filter_name} PROJECTS").strip, :length => 60)
+      pluralize(@organization_projects_count, "#{@filter_name} PROJECT", "#{@filter_name} PROJECTS")
     else
-      truncate((pluralize(@organization_projects_count, "PROJECT", "PROJECTS") + ' ' + by).strip, :length => 60)
+      pluralize(@organization_projects_count, "PROJECT", "PROJECTS") + ' ' + by
     end
   end
 
