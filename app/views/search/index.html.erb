@@ -4,14 +4,34 @@
   word_for['region']  = '<%= @site.word_for_regions.downcase.singularize %>';
   word_for['cluster'] = '<%= @site.word_for_clusters.downcase.singularize %>';
 
-  autocomplete_data['region'] = <%= @regions.map{|r| {:id => r[:id], :title => [r[:title], r[:subtitle]].compact.join(', ').truncate(25)}}.to_json.html_safe %>;
+  autocomplete_data['region'] = <%= @regions.map{|r| {
+    :id         => r[:id],
+    :title      => [r[:title], r[:subtitle]].compact.join(', ').truncate(25),
+    :long_title => [r[:title], r[:subtitle]].compact.join(', ')
+  }}.to_json.html_safe %>;
   <% if @navigate_by_cluster %>
-  autocomplete_data['cluster'] = <%= @clusters.map{|c| {:id => c[:id], :title => c[:title].truncate(25)}}.to_json.html_safe %>;
+  autocomplete_data['cluster'] = <%= @clusters.map{|c| {
+    :id         => c[:id],
+    :title      => c[:title].truncate(25),
+    :long_title => c[:title]
+  }}.to_json.html_safe %>;
   <% else %>
-  autocomplete_data['sector'] = <%= @sectors.map{|s| {:id => s[:id], :title => s[:title].truncate(25)}}.to_json.html_safe %>;
+  autocomplete_data['sector'] = <%= @sectors.map{|s| {
+    :id         => s[:id],
+    :title      => s[:title].truncate(25),
+    :long_title => s[:title]
+  }}.to_json.html_safe %>;
   <% end %>
-  autocomplete_data['organization'] = <%= @organizations.map{|o| {:id => o[:id], :title => o[:title].truncate(25)}}.to_json.html_safe %>;
-  autocomplete_data['donor'] = <%= @donors.map{|d| {:id => d[:id], :title => d[:title].truncate(25)}}.to_json.html_safe %>;
+  autocomplete_data['organization'] = <%= @organizations.map{|o| {
+    :id         => o[:id],
+    :title      => o[:title].truncate(25),
+    :long_title => o[:title]
+  }}.to_json.html_safe %>;
+  autocomplete_data['donor'] = <%= @donors.map{|d| {
+    :id         => d[:id],
+    :title      => d[:title].truncate(25),
+    :long_title => d[:title]
+  }}.to_json.html_safe %>;
 </script>
 <%=raw(javascript_include_merged(:search)) %>
 <% end %>

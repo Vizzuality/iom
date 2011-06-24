@@ -132,7 +132,7 @@ $(document).ready(function() {
         label
         data_class = $(this.element).data('data_class');
 
-      label = '<a href="#">' + item.title + '</a>'
+      label = '<a href="#" title="' + item.long_title + '">' + item.title + '</a>'
 
       return $( "<li></li>" )
         .data( "item.autocomplete", item )
