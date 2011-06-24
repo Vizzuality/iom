@@ -6,9 +6,15 @@ $(document).ready(function() {
     autocomplete_offset = '1 0'
   };
 
-  $('#delete_date_filter').click(function(evt){
+  $('a.clear_date.start_date').click(function(evt){
     evt.preventDefault();
-    $('select#date_start_month,select#date_start_year,select#date_end_month,select#date_end_year').val(null);
+    $('select#date_start_month,select#date_start_year').val(null);
+    $('form#search').submit();
+  });
+
+  $('a.clear_date.end_date').click(function(evt){
+    evt.preventDefault();
+    $('select#date_end_month,select#date_end_year').val(null);
     $('form#search').submit();
   });
 

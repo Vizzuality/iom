@@ -141,13 +141,13 @@
           </div>
 
           <div class="block">
-            <h2>Starting after</h2>
+            <h2>Starting after <%= link_to 'Clear', '#', :class => 'clear_date start_date' if @start_date %></h2>
               <%= select_year @start_date, :field_name => 'start_year', :prompt => 'Year', :start_year => 1980, :end_year => 2030 %>
               <%= select_month @start_date, :field_name => 'start_month', :prompt => 'Month' %>
           </div>
 
           <div class="block">
-            <h2>Ending before</h2>
+            <h2>Ending before <%= link_to 'Clear', '#', :class => 'clear_date end_date' if @end_date %></h2>
               <%= select_year @end_date, :field_name => 'end_year', :prompt => 'Year', :start_year => 1980, :end_year => 2030 %>
               <%= select_month @end_date, :field_name => 'end_month', :prompt => 'Month' %>
           </div>
