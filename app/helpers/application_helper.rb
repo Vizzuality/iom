@@ -135,17 +135,17 @@ HTML
       lis << (content_tag :li,  :class => "pos#{index}" do
         case controller_name
         when 'organizations'
-          raw("#{link_to geo.name, organization_path(@organization, :location_id => geo.to_param)} - #{count}")
+          raw("#{link_to geo.name, organization_path(@organization, @carry_on_filters.merge(:location_id => geo.to_param))} - #{count}")
         when 'clusters_sectors'
           if site.navigate_by_cluster?
-            raw("#{link_to geo.name, cluster_path(@data, :location_id => geo.to_param)} - #{count}")
+            raw("#{link_to geo.name, cluster_path(@data, @carry_on_filters.merge(:location_id => geo.to_param))} - #{count}")
           else
-            raw("#{link_to geo.name, sector_path(@data, :location_id => geo.to_param)} - #{count}")
+            raw("#{link_to geo.name, sector_path(@data, @carry_on_filters.merge(:location_id => geo.to_param))} - #{count}")
           end
         when 'georegion'
-          raw("#{link_to geo.name, location_path(@area, :location_id => geo.to_param)} - #{count}")
+          raw("#{link_to geo.name, location_path(@area, @carry_on_filters.merge(:location_id => geo.to_param))} - #{count}")
         else
-          raw("#{link_to geo.name, location_path(geo)} - #{count}")
+          raw("#{link_to geo.name, location_path(geo, @carry_on_filters)} - #{count}")
         end
       end)
     end
