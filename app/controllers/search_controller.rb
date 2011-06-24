@@ -119,13 +119,16 @@ class SearchController < ApplicationController
         end
 
         sql = <<-SQL
-          SELECT DISTINCT r.id, r.name AS title, c.name AS subtitle
+          SELECT DISTINCT
+            r.id, r.name AS title,
+            CASE WHEN ps.site_id = 1 THEN null ELSE c.name END AS subtitle
           FROM regions AS r
           INNER JOIN projects_regions AS pr ON r.id=pr.region_id AND r.level=#{@site.level_for_region}
           INNER JOIN projects_sites AS ps ON pr.project_id=ps.project_id AND ps.site_id=#{@site.id}
           INNER JOIN projects AS p ON ps.project_id=p.id AND (p.end_date is NULL OR p.end_date > now()) #{q_filter}
           INNER JOIN countries AS c ON c.id = r.country_id
           #{filtered_regions_where}
+          ORDER BY subtitle, title
         SQL
         @regions = Region.find_by_sql(sql)
 
@@ -135,6 +138,7 @@ class SearchController < ApplicationController
           INNER JOIN projects AS p ON (p.end_date is NULL OR p.end_date > now()) AND p.primary_organization_id = o.id #{q_filter}
           INNER JOIN projects_sites AS ps ON ps.project_id = p.id AND ps.site_id = #{@site.id}
           #{filtered_organizations_where}
+          ORDER BY title
         SQL
         @organizations = Organization.find_by_sql(sql)
 
@@ -145,6 +149,7 @@ class SearchController < ApplicationController
           INNER JOIN projects_sites AS ps ON ps.project_id = p.id AND ps.site_id = #{@site.id}
           INNER JOIN donations AS dn ON dn.donor_id = d.id AND dn.project_id = p.id
           #{filtered_donors_where}
+          ORDER BY title
         SQL
         @donors = Donor.find_by_sql(sql)
 

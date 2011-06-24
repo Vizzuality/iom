@@ -4,7 +4,7 @@
   word_for['region']  = '<%= @site.word_for_regions.downcase.singularize %>';
   word_for['cluster'] = '<%= @site.word_for_clusters.downcase.singularize %>';
 
-  autocomplete_data['region'] = <%= @regions.map{|r| {:id => r[:id], :title => "#{r[:title]}, #{r[:subtitle]}".truncate(25)}}.to_json.html_safe %>;
+  autocomplete_data['region'] = <%= @regions.map{|r| {:id => r[:id], :title => [r[:title], r[:subtitle]].compact.join(', ').truncate(25)}}.to_json.html_safe %>;
   <% if @navigate_by_cluster %>
   autocomplete_data['cluster'] = <%= @clusters.map{|c| {:id => c[:id], :title => c[:title].truncate(25)}}.to_json.html_safe %>;
   <% else %>
