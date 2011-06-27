@@ -155,7 +155,24 @@ idprefugee_camp project_contact_person project_contact_position project_contact_
     where << "site_id = #{site.id}" if site
     where << '(p.end_date is null OR p.end_date > now())'
 
-    the_geom = ",#{options[:the_geom]}" if options[:the_geom]
+    if options[:kml]
+      kml_select = <<-SQL
+        , CASE WHEN regions_ids IS NOT NULL AND regions_ids != ('{}')::integer[] THEN
+        (select
+        '<MultiGeometry><Point><coordinates>'|| array_to_string(array_agg(distinct center_lon ||','|| center_lat),'</coordinates></Point><Point><coordinates>') || '</coordinates></Point></MultiGeometry>' as lat
+        from regions as r INNER JOIN projects_regions AS pr ON r.id=pr.region_id where ('{'||r.id||'}')::integer[] && regions_ids and pr.project_id=dd.project_id)
+        ELSE
+        (select
+        '<MultiGeometry><Point><coordinates>'|| array_to_string(array_agg(distinct center_lon ||','|| center_lat),'</coordinates></Point><Point><coordinates>') || '</coordinates></Point></MultiGeometry>' as lat
+        from countries as c INNER JOIN countries_projects AS cp ON c.id=cp.country_id where ('{'||c.id||'}')::integer[] && countries_ids and cp.project_id=dd.project_id)
+        END
+        as kml
+      SQL
+      kml_group_by = <<-SQL
+        countries_ids,
+        regions_ids,
+      SQL
+    end
 
     if options[:region]
       where << "regions_ids && '{#{options[:region]}}' and site_id=#{site.id}"
@@ -241,7 +258,7 @@ idprefugee_camp project_contact_person project_contact_position project_contact_
         (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM regions AS r INNER JOIN projects_regions AS pr ON r.id=pr.region_id WHERE r.level=2 AND pr.project_id=dd.project_id) AS regions_level2,
         (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM regions AS r INNER JOIN projects_regions AS pr ON r.id=pr.region_id WHERE r.level=3 AND pr.project_id=dd.project_id) AS regions_level3,
         (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM donors AS d INNER JOIN donations AS dn ON d.id=dn.donor_id AND dn.project_id=dd.project_id) AS donors
-        #{the_geom}
+        #{kml_select}
         FROM data_denormalization AS dd
         INNER JOIN projects AS p ON dd.project_id=p.id
         #{where}
@@ -276,9 +293,9 @@ idprefugee_camp project_contact_person project_contact_position project_contact_
         project_needs,
         idprefugee_camp,
         countries,
+        #{kml_group_by}
         sectors,
         clusters
-        #{the_geom}
     SQL
     ActiveRecord::Base.connection.execute(sql)
   end
@@ -318,7 +335,7 @@ idprefugee_camp project_contact_person project_contact_position project_contact_
   end
 
   def self.to_kml(site, options = {})
-    projects = self.list_for_export(site, options.merge(:the_geom => 'ST_AsKML(p.the_geom)'))
+    projects = self.list_for_export(site, options.merge(:kml => true))
   end
 
   def related(site, limit = 2)

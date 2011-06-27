@@ -6,7 +6,7 @@
   <% @projects_for_kml.each do |project| %>
     <Placemark>
       <name><%= project['project_name'] %></name>
-      <%= raw(project['st_askml']) %>
+      <%= raw(project['kml']) %>
     </Placemark>
   <% end %>
 </Document>
