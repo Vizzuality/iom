@@ -179,16 +179,22 @@
 
 
 
-        if (this.url!=undefined) {
+        
           google.maps.event.addDomListener(div,'click',function(ev){ 
       	    try{
       				ev.stopPropagation();
       			}catch(e){
       				event.cancelBubble=true;
       			};
-      			window.location.href=me.url;
+      			
+      			if (this.url!=undefined) {
+      			  window.location.href=me.url;
+    			  } else {
+    			    $('html,body').animate({
+              scrollTop: $("#projects_div").offset().top
+              }, 1000);
+    			  }
       	  });
-        }
 
     		
     		google.maps.event.addDomListener(div,'mousedown',function(ev){ 
