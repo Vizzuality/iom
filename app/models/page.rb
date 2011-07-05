@@ -67,7 +67,7 @@ class Page < ActiveRecord::Base
   end
 
   def self.link_this_site(site)
-    site.pages.find_by_title('Link this site')
+    site.pages.find_by_title('Link to this site')
   end
 
   def self.make_your_map(site)
