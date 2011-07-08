@@ -73,7 +73,7 @@
             <p id="day" class="title">DAY</p>
             <p id="year" class="title">YEAR</p>
 
-              <%= f.date_select :start_date, :start_year => 1970, :order => [:month, :day, :year]  %>
+              <%= f.date_select :start_date, :start_year => 1970, :end_year=>2030, :order => [:month, :day, :year]  %>
           </div>
         </span>
       </li>
@@ -86,7 +86,7 @@
             <p id="day" class="title">DAY</p>
             <p id="year" class="title">YEAR</p>
 
-              <%= f.date_select :end_date, :start_year => 1970, :order => [:month, :day, :year]  %>
+              <%= f.date_select :end_date, :start_year => 1970, :end_year=>2030, :order => [:month, :day, :year]  %>
           </div>
         </span>
       </li>
