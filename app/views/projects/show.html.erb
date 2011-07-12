@@ -218,6 +218,19 @@
            <%end%>
          </div>
          <%end%>
+         
+         <% unless @project.resources.empty? %>
+         <div class="block resources">
+           <h3>ADDITIONAL RESOURCES</h3>
+
+           <% @project.resources.each do |resource| %>
+             <ul>
+               <li><a href="<%= resource.url %>" target="_blank"><%= resource.title %></a></li>
+             </ul>
+           <%end%>
+         </div>
+         <% end %>         
+         
          <div class="block last">
            <h3>EXPORT DATA</h3>
            <div class="import_data">
