@@ -400,7 +400,7 @@ class Site < ActiveRecord::Base
 
   def organizations_count
     sql = "select count(o.id) as count from organizations as o where id in (
-    select p.primary_organization_id from projects as p inner join projects_sites as ps on p.id=ps.project_id and site_id=#{self.id})"
+    select p.primary_organization_id from projects as p inner join projects_sites as ps on p.id=ps.project_id and site_id=#{self.id} where (p.end_date is null OR p.end_date > now())) "
     ActiveRecord::Base.connection.execute(sql).first['count'].to_i
   end
 

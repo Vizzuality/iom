@@ -110,7 +110,7 @@ class OrganizationsController < ApplicationController
               inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
               inner join organizations as o on o.id=p.primary_organization_id and o.id=#{params[:id].sanitize_sql!}
               #{category_join}
-              where #{location_filter}
+              where #{location_filter} and r.level=#{@site.level_for_region}
               group by r.id,r.name,lon,lat,url"
           else
             sql="select c.id,count(ps.project_id) as count,c.name,c.center_lon as lon,
