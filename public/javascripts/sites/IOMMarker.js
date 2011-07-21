@@ -187,7 +187,7 @@
       				event.cancelBubble=true;
       			};
       			
-      			if (me.url!=undefined) {
+      			if (me.url!=undefined && me.url!=window.location.pathname +window.location.search) {
       			  window.location.href=me.url;
     			  } else {
     			    $('html,body').animate({

@@ -25,15 +25,30 @@ class SitesController < ApplicationController
         # Get the data for the map depending on the region definition of the site (country or region)
         if @site.geographic_context_country_id
           sql="select r.id,count(ps.project_id) as count,r.name,r.center_lon as lon,
-                    r.center_lat as lat,r.name,'/location/'||r.path as url,r.code
+                    r.center_lat as lat,r.name,
+                    
+                    CASE WHEN count(distinct ps.project_id) > 1 THEN
+                        '/location/'||r.path 
+                    ELSE
+                        '/projects/'||(array_to_string(array_agg(ps.project_id),''))
+                    END as url,
+                    
+                    r.code
                     from ((projects_regions as pr inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{@site.id})
                     inner join projects as p on pr.project_id=p.id and (p.end_date is null OR p.end_date > now())
                     inner join regions as r on pr.region_id=r.id and r.level=#{@site.level_for_region})
-                    group by r.id,r.name,lon,lat,r.name,url,r.code"
+                    group by r.id,r.name,lon,lat,r.name,r.path,r.code"
         else
           sql="select c.id,count(ps.project_id) as count,c.name,c.center_lon as lon,
                     c.center_lat as lat,
-                    '/location/'||c.id as url,iso2_code as code
+                    
+                    CASE WHEN count(distinct ps.project_id) > 1 THEN
+                        '/location/'||c.id 
+                    ELSE
+                        '/projects/'||(array_to_string(array_agg(ps.project_id),''))
+                    END as url,
+                    
+                    iso2_code as code
                     from countries_projects as cp
                     inner join projects_sites as ps on cp.project_id=ps.project_id and site_id=#{@site.id}
                     inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
