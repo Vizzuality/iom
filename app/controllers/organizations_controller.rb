@@ -89,7 +89,7 @@ class OrganizationsController < ApplicationController
 
           sql="select r.id,count(distinct ps.project_id) as count,r.name,r.center_lon as lon,r.center_lat as lat,
                       CASE WHEN count(distinct ps.project_id) > 1 THEN
-                          r.name,'#{carry_on_url}'||r.path
+                          '#{carry_on_url}'||r.path
                       ELSE
                           '/projects/'||(array_to_string(array_agg(ps.project_id),''))
                       END as url
@@ -104,7 +104,7 @@ class OrganizationsController < ApplicationController
                   inner join projects_regions as pr on pr.project_id=p.id)
                   inner join regions as r on pr.region_id=r.id and r.level=#{@site.level_for_region} #{location_filter})
                   #{category_join}
-                group by r.id,r.name,lon,lat,r.name,r.code"
+                group by r.id,r.path,lon,lat,r.name,r.code"
         else
           if @filter_by_location
             location_filter = @filter_by_location.size == 1 ? "r.country_id = #{@filter_by_location.first}" : "r.id = #{@filter_by_location.last}"
