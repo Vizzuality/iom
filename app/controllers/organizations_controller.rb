@@ -61,7 +61,7 @@ class OrganizationsController < ApplicationController
 
     @projects = Project.custom_find @site, projects_custom_find_options
     
-    @organization_projects_count            = @projects.count
+    @organization_projects_count            = @organization.projects_count(@site, @filter_by_category, @filter_by_location)
     @organization_projects_clusters_sectors = @organization.projects_clusters_sectors(@site, @filter_by_location)
     @organization_projects_by_location = if @site.navigate_by_country?
       @organization.projects_countries(@site, @filter_by_category)
