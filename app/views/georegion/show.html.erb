@@ -75,13 +75,11 @@
                     </span>
                     <span class="bottom_tooltip"></span>
                   </div>
-                  <a class="<%= category.css_class %> icon_statistics" href="<%= location_path(@area, @carry_on_filters.merge(:category_id => category.id)) %>"><span class="aller" style="width:<%= cluster_sector_width(count, @area.projects_clusters_sectors(@site)[0..3].map{ |e| e.last }.max) %>px"><%= count %></span></a>
+                  <a class="<%= category.css_class %> icon_statistics" href="<%= location_path(@area, @carry_on_filters.merge(:category_id => category.id)) %>"><span class="aller" style="width:<%= cluster_sector_width(count, @area.projects_clusters_sectors(@site).map{ |e| e.last }.max) %>px"><%= count %></span></a>
                 </li>
               <% end %>
             </ul>
-            <% unless @area.projects_clusters_sectors(@site).size < 4%>
-                <p class="other">and <%= pluralize(@area.projects_clusters_sectors(@site).size - 3,"more #{@site.word_for_cluster_sector.singularize}", "more #{@site.word_for_cluster_sector.pluralize}") %></p>
-            <% end %>
+
         </div>
         <% end %>
         <% donors = @area.donors(@site, 11) %>
