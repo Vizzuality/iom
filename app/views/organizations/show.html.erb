@@ -61,13 +61,10 @@
                     </span>
                     <span class="bottom_tooltip"></span>
                   </div>
-                  <a class="<%= category.css_class %> icon_statistics" href="<%= organization_path(@organization, @carry_on_filters.merge(:category_id => category.id)) %>"><span class="aller" style="width:<%= cluster_sector_width(count, @organization_projects_clusters_sectors[0...3].map{|e| e.last}.max) %>px"><%= count %></span></a>
+                  <a class="<%= category.css_class %> icon_statistics" href="<%= organization_path(@organization, @carry_on_filters.merge(:category_id => category.id)) %>"><span class="aller" style="width:<%= cluster_sector_width(count, @organization_projects_clusters_sectors.map{|e| e.last}.max) %>px"><%= count %></span></a>
                 </li>
               <% end %>
             </ul>
-            <% unless @organization_projects_clusters_sectors.size < 4%>
-                <p class="other">and <%= pluralize(@organization_projects_clusters_sectors.size - 3,"more #{@site.word_for_cluster_sector.singularize}", "more #{@site.word_for_cluster_sector.pluralize}") %></p>
-            <% end %>
           </div>
           <% end %>
 
