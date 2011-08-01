@@ -400,7 +400,7 @@ class Site < ActiveRecord::Base
 
   def organizations_count
     sql = "select count(o.id) as count from organizations as o where id in (
-    select p.primary_organization_id from projects as p inner join projects_sites as ps on p.id=ps.project_id and site_id=#{self.id})"
+    select p.primary_organization_id from projects as p inner join projects_sites as ps on p.id=ps.project_id and site_id=#{self.id} where (p.end_date is null OR p.end_date > now())) "
     ActiveRecord::Base.connection.execute(sql).first['count'].to_i
   end
 
@@ -547,7 +547,7 @@ SQL
   def organizations_select
     Organization.find_by_sql(<<-SQL
         select distinct o.id,o.name from organizations as o
-        inner join projects as p on p.primary_organization_id=o.id
+        inner join projects as p on p.primary_organization_id=o.id  and (p.end_date is null OR p.end_date > now())
         inner join projects_sites as ps on p.id=ps.project_id and site_id=#{self.id}
         order by o.name
 SQL
@@ -589,10 +589,11 @@ SQL
     ActiveRecord::Base.connection.execute(sql)
     #Work on the denormalization
 
-    sql="insert into data_denormalization(project_id,project_name,project_description,organization_id,organization_name,end_date,regions,regions_ids,countries,countries_ids,sectors,sector_ids,clusters,cluster_ids,donors_ids,is_active,site_id,created_at)
+    sql="insert into data_denormalization(project_id,project_name,project_description,organization_id,organization_name,start_date,end_date,regions,regions_ids,countries,countries_ids,sectors,sector_ids,clusters,cluster_ids,donors_ids,is_active,site_id,created_at)
     select  * from
            (SELECT p.id as project_id, p.name as project_name, p.description as project_description,
            o.id as organization_id, o.name as organization_name,
+           p.start_date as start_date ,
            p.end_date as end_date,
            '|'||array_to_string(array_agg(distinct r.name),'|')||'|' as regions,
            ('{'||array_to_string(array_agg(distinct r.id),',')||'}')::integer[] as regions_ids,
@@ -618,13 +619,34 @@ SQL
            LEFT JOIN sectors as sec ON sec.id=psec.sector_id
            LEFT JOIN donations as d ON d.project_id=ps.project_id
            where site_id=#{self.id}
-           GROUP BY p.id,p.name,o.id,o.name,p.description,p.end_date,ps.site_id,p.created_at) as subq"
+           GROUP BY p.id,p.name,o.id,o.name,p.description,p.start_date,p.end_date,ps.site_id,p.created_at) as subq"
      ActiveRecord::Base.connection.execute(sql)
   end
 
   def remove_cached_projects
     ActiveRecord::Base.connection.execute("DELETE FROM projects_sites WHERE site_id = #{self.id}")
     ActiveRecord::Base.connection.execute("DELETE FROM data_denormalization WHERE site_id = #{self.id}")
+  end
+
+  def projects_for_csv
+    sql = "select p.id, p.name, p.description, p.primary_organization_id, p.implementing_organization, p.partner_organizations, p.cross_cutting_issues, p.start_date, p.end_date, p.budget, p.target, p.estimated_people_reached, p.contact_person, p.contact_email, p.contact_phone_number, p.site_specific_information, p.created_at, p.updated_at, p.activities, p.intervention_id, p.additional_information, p.awardee_type, p.date_provided, p.date_updated, p.contact_position, p.website, p.verbatim_location, p.calculation_of_number_of_people_reached, p.project_needs, p.idprefugee_camp
+    from projects as p
+    inner join projects_sites as ps on p.id=ps.project_id and ps.site_id=#{self.id}
+    where (p.end_date is null OR p.end_date > now())"
+    ActiveRecord::Base.connection.execute(sql)
+  end
+
+  def projects_for_kml
+    sql = "select p.name, ST_AsKML(p.the_geom) as the_geom
+    from projects as p
+    inner join projects_sites as ps on p.id=ps.project_id and ps.site_id=#{self.id}
+    where (p.end_date is null OR p.end_date > now())"
+    ActiveRecord::Base.connection.execute(sql)
+  end
+
+  def map_styles
+    default_map_style = "  [\n    {\n      featureType: \"administrative.country\",\n      elementType: \"geometry\",\n      stylers: [\n        { gamma: 1.63 },\n        { lightness: 14 },\n        { visibility: \"on\" }\n      ]\n    },{\n      featureType: \"administrative.neighborhood\",\n      elementType: \"all\",\n      stylers: [\n        { visibility: \"off\" }\n      ]\n    },{\n      featureType: \"administrative.land_parcel\",\n      elementType: \"all\",\n      stylers: [\n        { visibility: \"off\" }\n      ]\n    },{\n      featureType: \"administrative.locality\",\n      elementType: \"labels\",\n      stylers: [\n        { lightness: 17 }\n      ]\n    },{\n      featureType: \"administrative.province\",\n      elementType: \"all\",\n      stylers: [\n        { lightness: 19 }\n      ]\n    },{\n      featureType: \"poi\",\n      elementType: \"all\",\n      stylers: [\n        { visibility: \"off\" }\n      ]\n    },{\n      featureType: \"road\",\n      elementType: \"all\",\n      stylers: [\n        { visibility: \"off\" }\n      ]\n    },{\n      featureType: \"transit\",\n      elementType: \"all\",\n      stylers: [\n        { visibility: \"off\" }\n      ]\n    },{\n      featureType: \"water\",\n      elementType: \"all\",\n      stylers: [\n        { hue: \"#00c3ff\" }\n        ]\n    },{\n      featureType: \"water\",\n      elementType: \"labels\",\n      stylers: [\n        { visibility: \"off\" }\n      ]\n    },{\n      featureType: \"all\",\n      elementType: \"all\",\n      stylers: [\n\n      ]\n    }\n  ];\n"
+    return default_map_style if attributes[:map_styles].blank?
   end
 
   private

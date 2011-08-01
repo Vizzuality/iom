@@ -1,0 +1,16 @@
+<div id="layout">
+  <div id="pages">
+        <div class="results_list">
+            <ul id="search_results">
+                <% @organizations.each_with_index do |organization,index| %>
+                  <li class="<%= cycle('even', 'odd') %>">
+                    <div class="project_name">
+                      <h3><%= link_to(truncate(organization['name'],:length=>43,:omission=>"..."), organization_path(organization['id'])) %></h3>
+                      
+                    </div>
+                  </li>
+                <% end %>
+            </ul>
+        </div>
+  </div>
+</div>

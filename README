@@ -4,6 +4,14 @@ NGOAIDMAP is a website available at http://ngoaidmap.org/. It was a custom devel
 
 It is probably a very specific application to be used directly, but the ideas and code behind it might be applicable for other people needs. If you have questions on how to use contact@vizzuality.com
 
+== Database structure 
+
+NGOAIDMAP is a project that allows you to create websites about projects around a certain topic. For example haiti or foodsecurity. 
+
+The database consist of 4 main tables: "projects" done by "organizations" funded by "donors" which are included in different "sites".
+
+Take a look at the database schema at db/db_schema.pdf to get a better idea of what the project does.
+
 == Requirements
 
 NGOAIDMAP is a Ruby on Rails application. The dependencies are:
@@ -27,5 +35,3 @@ NGOAIDMAP is a Ruby on Rails application. The dependencies are:
         rails s
         
         
-
-

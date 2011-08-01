@@ -46,8 +46,9 @@ div#header_sites ul.menu li.last {margin:0;}
 div#header_sites ul.menu li a {float:left; font:normal 13px "PT Sans Bold"; color:#666666; text-decoration:none;}
 div#header_sites ul.menu li a:hover {cursor:pointer; text-decoration:underline!important;}
 
-div#gallery {float:left; width:958px; height:548px; background:url('/images/sites/home/bkg_gallery.png') no-repeat 0 0; margin:45px 0 0;}
+div#gallery {position: relative; float:left; width:958px; height:548px; background:url('/images/sites/home/bkg_gallery.png') no-repeat 0 0; margin:45px 0 0;}
 div#gallery div.content_gallery {float:left; margin:10px 0 0 10px; width:927px; height:524px; overflow:hidden;}
+div#gallery a.credits{position: absolute; right: 50px; bottom: 126px; z-index: 100; font-family: Arial; font-size: 11px; color: #696A6C; text-decoration: underline;}
 div#gallery img {float:left; width:927px; height:524px; margin:0;}
 
 ul#gallery_thumbails {float:left; width:950px; margin:0;}
@@ -159,6 +160,7 @@ div#header ul.menu li ul.suboptions li {float:left; width:148px; padding:0 5px; 
 div#header div.right {margin:10px 0 0 0; width:auto; height:20px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#header div.right form.search {position:relative; float:right;}
 div#header div.right form.search span.input_search {float:left; width:111px; height:20px; background:url('/images/sites/common/input_search_bkg.png') no-repeat 0 0; position:relative;}
+div#header div.right form.search span.input_search label{ display: none; position:absolute; top:2px; left:5px; width:83px; height:14px; font:normal 13px Arial; color:#999999; border:0px; z-index: 1;}
 div#header div.right form.search span.input_search input[type="text"]{position:absolute; top:2px; left:5px; width:83px; height:14px; font:normal 13px Arial; color:#999999; border:0px;}
 div#header div.right form.search span.input_search input[type="submit"] {position:absolute; right:5px; top:3px; width:15px; height:14px; background:url('/images/sites/common/bttn_search.png') no-repeat 0 0; border:none;}
 
@@ -194,6 +196,8 @@ div.main_head div.float_head.home {padding-bottom:37px;}
 div.main_head div.float_head.home h1 {font-size:32px; text-transform:uppercase; position:relative; width:200px;}
 div.main_head div.float_head.home sup.beta {font:normal 11px "PT Sans"; color:#73352B; padding:3px;}
 div.main_head div.float_head.home h3 {width:100%; font:normal 15px "PT Sans Bold"; color:#7B3C32; text-transform:uppercase; margin:20px 0 0 0;}
+div.main_head a.filter {position: absolute; padding: 5px; display: block; width: 239px; font: normal 13px "PT Sans Bold"; color: white; font-weight: normal; text-transform: uppercase; z-index: 100;}
+div.main_head a.filter img{margin: 2px 5px;}
 div.main_head div ul.breadcrumb {width:100%; padding:0 0 13px;}
 div.main_head div ul.breadcrumb li {display:inline; width:auto; margin:0 5px 0 0; background:url('/images/sites/icons/breadcrumb.png') no-repeat right 6px;}
 div.main_head div ul.breadcrumb li a {width:auto; color:#75362D; text-decoration:underline; padding:0 12px 0 0; font:normal 13px Arial;}
@@ -254,6 +258,7 @@ div#left_column div.float_left div.block ul.clusters li.last {padding:0 0 0 45px
 div#left_column div.float_left div.block ul.clusters li a {color:#CD5D4C;}
 div#left_column div.float_left div.block ul.clusters li p {padding:1px 0 0 0;}
 div#left_column div.float_left div.block a.more {position:relative; margin:0 0 0 10px; padding:0 12px 0 0; background:url('/images/sites/icons/down_garnet.png') no-repeat right 6px;}
+
 div.projects div.inner_main_head div.left div.block {padding:18px 0 20px 5px!important;}
 div.projects div.block div.import_data {float:left; margin:10px 0 0 0;}
 div.projects div.block div.import_data p {float:left; font:normal 13px Arial; color:#666666; margin:0; width:auto; padding:0 0 0 20px!important; background:url('/images/sites/icons/download.png') no-repeat 0 1px!important;}
@@ -262,10 +267,13 @@ div.projects div.block div.import_data a:hover {text-decoration:underline!import
 
 div#left_column div.float_left div.block a.more:hover {text-decoration:underline;}
 div#left_column div.right {width:632px; margin:0; padding:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#left_column div.right h3 {width:572px; padding:20px 26px 20px 34px; font:normal 13px "PT Sans Bold"; color:#999999; text-shadow:0 1px white; text-transform:uppercase;}
-div#left_column div.right h3 a#see_all {padding:0 0 0 10px; text-transform:none; text-shadow:none; font:normal 13px Arial;}
+div#left_column div.right h3 {width:598px; padding:20px 0px 20px 34px; font:normal 13px "PT Sans Bold"; color:#999999; text-shadow:0 1px white; text-transform:uppercase; line-height: 18px;}
+div#left_column div.right h3 a#see_all {padding:0 5px; text-transform:none; text-shadow:none; font:normal 13px Arial;}
 div#left_column div.right h3 a#see_all:hover {text-decoration:underline;}
 div#left_column div.right h3 strong {padding:10px 0 0; font:normal 12px Arial; color:#777777; text-transform:none; text-shadow:none; line-height:20px;}
+div#left_column div.right h3 ul.download { width: auto; padding-left: 19px!important; background:url('/images/sites/icons/download.png') no-repeat 0 5px; line-height: 25px;}
+div#left_column div.right h3 ul.download li {font:normal 13px Arial; display: inline; width: auto; height: auto; padding: 0;}
+div#left_column div.right h3 ul.download li a:hover {text-decoration: underline;}
 div#left_column div.right ul {width:100%; padding:0!important;}
 div#left_column div.right ul li {width:572px; height:74px; padding:20px 26px 20px 34px;}
 div#left_column div.right ul li.even {background:url('/images/sites/regions/even_bkg.png') repeat-x 0 0;}
@@ -287,53 +295,62 @@ div#left_column div.view_more a#view_more:hover {background-position:0 -26px; cu
 
 /*LEFT BIG COLUMN - RIGHT SIDEBAR -> SEARCH, SITE PAGES, DONORS, */
 div#pages {position:relative; width:100%; margin:65px 0 0 0;}
-div#pages div.left {width:660px; height:300px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#pages div.float_left {position:absolute; top:0; left:-5px; width:670px; padding:0 0 5px; background:url('/images/sites/common/mesh.png') repeat 0 0;}
-div#pages div.float_left div.outer_head {width:660px; padding:5px 5px 0 5px;}
-div#pages div.float_left div.outer_head div.head {width:596px; height:auto; padding:32px; background:url('/images/sites/search/head_mask.png') repeat-x 0 0 #C45A4B; border-bottom:1px solid #814941;}
-div#pages div.float_left div.outer_head div.head h1 {width:100%; font:normal 25px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42;}
-div#pages div.float_left div.outer_head div.head p {width:100%; padding:2px 0 0 0; font:normal 13px Arial; color:#7C3831; text-shadow:none;}
-div#pages div.float_left div.outer_head div.head input[type="text"] {width:467px; padding:10px; margin:10px 0 0 0; background:url('/images/sites/search/textinput_bkg.png') no-repeat 0 0; font:normal 17px Arial; color:#333333; border:none; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#pages div.float_left div.outer_head div.head input[type="submit"] {width:101px; height:38px; margin:10px 0 0 0; background:url('/images/sites/search/submit_bkg.png') no-repeat 0 0; border:none; text-indent:-9999px; font-size:0; line-height:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#pages div.float_left div.outer_head div.head input[type="submit"]:hover {background-position:0 -38px; cursor:pointer;}
-div#pages div.float_left div.body {width:600px; margin:0 0 0 5px; padding:22px 30px 50px; background:white; border-bottom:1px solid #CCCCCC;}
-div#pages div.float_left div.body.last {border:none;}
-div#pages div.float_left div.body h3 {font:normal 13px "PT Sans Bold"; color:#666666; margin:10px 0 0 0;}
-div#pages div.float_left div.body h2 {font:normal 15px "PT Sans Bold"; color:#666666; margin:10px 0 0 0;}
-div#pages div.float_left div.body p {font:normal 13px Arial; color:#666666; margin:10px 0 0 0;}
-div#pages div.float_left div.body p a {color:#D05F4C; text-decoration:none;}
-div#pages div.float_left div.body p a:hover {text-decoration:underline; cursor:pointer;}
-div#pages div.float_left div.body ul {width:100%; margin:10px 0 0 0; padding:0 0 6px; list-style:none;}
-div#pages div.float_left div.body ul li {padding:3px 0 3px 13px; background:url('/images/sites/icons/list_disc.png') no-repeat 0 10px; font:normal 13px Arial; color:#666666;}
-div#pages div.float_left div.body ul li a {color:#D05F4C; text-decoration:none;}
-div#pages div.float_left div.body ul li a:hover {text-decoration:underline;}
-div#pages div.float_left div.results_list {width:660px; margin:0 5px 0 5px; background:white;}
-div#pages div.float_left div.results_list h3 {margin:0; padding:30px 0 30px 32px; font:normal 13px "PT Sans Bold"; color:#666666; text-transform:uppercase;}
-div#pages div.float_left div.results_list h3 a {color:#666666; padding:0 8px 0 0; background:url('/images/sites/icons/remove.png') no-repeat right 0; border-bottom:1px dotted #C45A4B;}
-div#pages div.float_left div.results_list h3 a:hover {border-bottom:1px solid #C45A4B;}
-div#pages div.float_left div.results_list ul {background:white;}
-div#pages div.float_left div.results_list ul li {width:100%; height:110px; padding:0 0 25px;}
-div#pages div.float_left div.results_list ul li.odd {background:white; padding:0;}
-div#pages div.float_left div.results_list ul li.even {background:#F5F5F5; padding:0;}
-div#pages div.float_left div.results_list ul li p.no_results {padding:38px 32px; font:normal 18px "PT Sans Bold"; color:#666666;}
-div#pages div.float_left div.results_list ul li div.project_name {float:left; width:439px; height:110px; border-right:1px solid #E5E5E5; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#pages div.float_left div.results_list ul li div.project_name h3 {width:400px; padding-bottom:0; color:none;}
-div#pages div.float_left div.results_list ul li div.project_name h3 a {padding:0; font:normal 17px "PT Sans Bold"; text-transform:none; border:none; background:none; color:#C45A4B;}
-div#pages div.float_left div.results_list ul li div.project_name h3 a:hover {text-decoration:underline;}
-div#pages div.float_left div.results_list ul li div.project_name p {margin:0; padding:0 0 0 32px; font:normal 13px Arial; color:#999999;}
-div#pages div.float_left div.results_list ul li div.project_name p a {color:#999999; text-decoration:underline;}
-div#pages div.float_left div.results_list ul li div.project_name p a:hover {color:#333333;}
-div#pages div.float_left div.results_list ul li div.project_places {width:170px; height:30px; padding:35px 20px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#pages div.float_left div.results_list ul li div.project_places p {margin:0; padding:0; font:normal 13px Arial; color:#999999; text-align:center; line-height:13px;}
-div#pages div.float_left div.results_list ul li div.project_places ul {margin:0; padding:0; font:normal 13px Arial; background-color: transparent; color:#999999; text-align:center;}
-div#pages div.float_left div.results_list ul li div.project_places ul li {margin: 0; padding:2px; background-color: transparent; line-height:13px;}
-div#pages div.float_left div.results_list ul li div.project_places p a {color:#999999; text-decoration:underline;}
-div#pages div.float_left div.results_list ul li div.project_places p a:hover {color:#333333;}
-div#pages div.right {width:272px; margin:100px 0 0 0; padding:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#pages div.left {width:670px; padding-bottom: 5px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline; background:url('/images/sites/common/mesh.png') repeat 0 0;}
+
+div#pages div.left div.outer_head {width:660px; padding:5px 5px 0 5px;}
+div#pages div.left div.outer_head div.head {width:596px; height:auto; padding:32px; background:url('/images/sites/search/head_mask.png') repeat-x 0 0 #C45A4B; border-bottom:1px solid #814941;}
+div#pages div.left div.outer_head div.head h1 {width:100%; font:normal 25px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42;}
+div#pages div.left div.outer_head div.head p {width:100%; padding:2px 0 0 0; font:normal 13px Arial; color:#7C3831; text-shadow:none;}
+div#pages div.left div.outer_head div.head input[type="text"] {width:467px; padding:10px; margin:10px 0 0 0; background:url('/images/sites/search/textinput_bkg.png') no-repeat 0 0; font:normal 17px Arial; color:#333333; border:none; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#pages div.left div.outer_head div.head input[type="submit"] {width:101px; height:38px; margin:10px 0 0 0; background:url('/images/sites/search/submit_bkg.png') no-repeat 0 0; border:none; text-indent:-9999px; font-size:0; line-height:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#pages div.left div.outer_head div.head input[type="submit"]:hover {background-position:0 -38px; cursor:pointer;}
+div#pages div.left div.body {width:600px; margin:0 0 0 5px; padding:22px 30px 50px; background:white; border-bottom:1px solid #CCCCCC;}
+div#pages div.left div.body.last {border:none;}
+div#pages div.left div.body h3 {font:normal 13px "PT Sans Bold"; color:#666666; margin:25px 0 0 0;}
+div#pages div.left div.body h2 {font:normal 15px "PT Sans Bold"; color:#666666; margin:10px 0 0 0;}
+div#pages div.left div.body p {font:normal 13px Arial; color:#666666; margin:10px 0 0 0;}
+div#pages div.left div.body p.question {padding: 15px 0 0 0; font-weight: bold;}
+div#pages div.left div.body p.question#firstquestion {padding: 0}
+div#pages div.left div.body p a {color:#D05F4C; text-decoration:none;}
+div#pages div.left div.body p a:hover {text-decoration:underline; cursor:pointer;}
+div#pages div.left div.body ul {width:100%; margin:10px 0 0 0; padding:0 0 6px; list-style:none;}
+div#pages div.left div.body ul li {padding:3px 0 3px 13px; background:url('/images/sites/icons/list_disc.png') no-repeat 0 10px; font:normal 13px Arial; color:#666666;}
+div#pages div.left div.body ul li a {color:#D05F4C; text-decoration:none;}
+div#pages div.left div.body ul li a:hover {text-decoration:underline;}
+div#pages div.left div.body div.threecols {width: 630px; vertical-align: top;}
+div#pages div.left div.body div.threecols ul {display: inline-block; width: 180px; margin: 15px 20px 0 0; vertical-align: top;}
+div#pages div.left div.body div.threecols ul#last {margin: 15px 0 0 0}
+
+div#pages div.left div.results_list {width:660px; min-height: 562px; margin:0 5px 0 5px; background:white;}
+div#pages div.left div.results_list h3 {margin:0; padding:30px 0 30px 32px; font:normal 13px "PT Sans Bold"; color:#666666; text-transform:uppercase;}
+div#pages div.left div.results_list h3 a {color:#666666; padding:0 8px 0 0; background:url('/images/sites/icons/remove.png') no-repeat right 0; border-bottom:1px dotted #C45A4B;}
+div#pages div.left div.results_list h3 a:hover {border-bottom:1px solid #C45A4B;}
+div#pages div.left div.results_list ul {background:white;}
+div#pages div.left div.results_list ul li {width:100%; height:110px; padding:0 0 25px;}
+div#pages div.left div.results_list ul li.odd {background:white; padding:0;}
+div#pages div.left div.results_list ul li.even {background:#F5F5F5; padding:0;}
+div#pages div.left div.results_list ul li p.no_results {padding:38px 32px; font:normal 18px "PT Sans Bold"; color:#666666;}
+div#pages div.left div.results_list ul li div.project_name {float:left; width:439px; height:110px; border-right:1px solid #E5E5E5; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#pages div.left div.results_list ul li div.project_name h3 {width:400px; padding-bottom:0; color:none;}
+div#pages div.left div.results_list ul li div.project_name h3 a {padding:0; font:normal 17px "PT Sans Bold"; text-transform:none; border:none; background:none; color:#C45A4B;}
+div#pages div.left div.results_list ul li div.project_name h3 a:hover {text-decoration:underline;}
+div#pages div.left div.results_list ul li div.project_name p {margin:0; padding:0 0 0 32px; font:normal 13px Arial; color:#999999;}
+div#pages div.left div.results_list ul li div.project_name p a {color:#999999; text-decoration:underline;}
+div#pages div.left div.results_list ul li div.project_name p a:hover {color:#333333;}
+div#pages div.left div.results_list ul li div.project_places {width:170px; height:30px; padding:35px 20px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#pages div.left div.results_list ul li div.project_places p {margin:0; padding:0; font:normal 13px Arial; color:#999999; text-align:center; line-height:13px;}
+div#pages div.left div.results_list ul li div.project_places ul {margin:0; padding:0; font:normal 13px Arial; background-color: transparent; color:#999999; text-align:center;}
+div#pages div.left div.results_list ul li div.project_places ul li {margin: 0; padding:2px; background-color: transparent; line-height:13px;}
+div#pages div.left div.results_list ul li div.project_places p a {color:#999999; text-decoration:underline;}
+div#pages div.left div.results_list ul li div.project_places p a:hover {color:#333333;}
+
+div#pages div.right {width:262px; margin:71px 0 0 0; padding:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#pages div.rightsearch {margin:122px 0 0 0;}
 div#pages div.right div.block {float:left; width:242px; margin:23px 0 0 0; padding:0 0 0 30px;}
 div#pages div.right div.block.border {border-bottom:1px solid #D4D4D4; padding:0 0 20px 30px;}
 div#pages div.right div.block.border.last {border:none; padding:0 0 0 30px;}
 div#pages div.right div.block h2 {width:100%; font:normal 13px "PT Sans Bold"; color:#999999; text-shadow:0 1px white; text-transform:uppercase;}
+div#pages div.right div.block h2 a.clear_date{ float: right; margin-right: 12px; font-size: 11px; font-weight: normal; color: #ca5d4d; text-transform: capitalize;}
 div#pages div.right div.block h3 a:hover {cursor:pointer; text-decoration:underline;}
 div#pages div.right div.block div.logo {float:left; padding:0 0 5px; width:100%;}
 div#pages div.right div.block img {background:white;}
@@ -346,11 +363,13 @@ div#pages div.right div.block p.social a.facebook {margin:0 0 0 4px; background:
 div#pages div.right div.block p.website {padding:5px 0 0 0;}
 div#pages div.right div.block p a {color:#CD5D4C;}
 div#pages div.right div.block p a:hover {text-decoration:underline;}
-div#pages div.right div.block ul {width:100%; margin:7px 0 0 0; padding:0 0 6px; list-style:none;}
-div#pages div.right div.block ul li {padding:3px 0 3px 10px; background:url('/images/sites/icons/list_disc.png') no-repeat 0 10px; font:normal 13px Arial; color:#999999;}
+div#pages div.right div.block ul {width:100%; margin:2px 0 0 0; padding:0 0 6px; list-style:none;}
+div#pages div.right div.block ul li {padding:3px 0 3px 10px; background:url('/images/sites/icons/list_disc.png') no-repeat 0 10px; font:normal 13px Arial; color:#333333;}
 div#pages div.right div.block ul li.page {color:#333333;}
 div#pages div.right div.block ul li a {color:#D05F4C; text-decoration:none;}
 div#pages div.right div.block ul li a:hover {text-decoration:underline; cursor:pointer;}
+div#pages div.right div.block ul li a.delete {margin: 0 5px;}
+div#pages div.right div.block ul li a.delete img {vertical-align: middle;}
 div#pages div.right div.block ul li.selected {background:none;}
 div#pages div.right div.block ul li.selected a {color:#666666;}
 div#pages div.right div.block ul li.selected a:hover {text-decoration:none; color:#666666;}
@@ -359,6 +378,35 @@ div#pages div.right div.block a.more:hover {text-decoration:underline;}
 div#pages div.view_more {clear:both; width:100%; padding:30px 0 0 0;}
 div#pages div.view_more a#view_more {display:block; width:162px; height:14px; margin:0 0 0 230px; padding:5px 0 5px; font:normal 13px "PT Sans Bold"; background:url('/images/sites/search/view_more.png') no-repeat 0 0; text-align:center;}
 div#pages div.view_more a#view_more:hover {background-position:0 -26px; cursor:pointer;}
+
+div#pages form div.right div.block {position: relative; width: 200px;}
+div#pages form div.right div.block input.add {position: absolute; bottom: 1px; left: 198px; display: block; border: 0; padding: 0; width: 20px; height: 20px; background-color: transparent; font-family: Arial; font-size: 16px; color: #B0B0B0; font-weight: bold; line-height: 20px; text-shadow: 0 1px 0 white; cursor: pointer; z-index: 1;}
+div#pages form div.right div.block input.add:hover { -moz-box-shadow: inset 1px 1px 1px #CCCCCC; -webkit-box-shadow: inset 1px 1px 1px #CCCCCC; box-shadow: inset 1px 1px 1px #CCCCCC;}
+div#pages form div.right div.block input.add:active { -moz-box-shadow: inset 1px 1px 1px #999999; -webkit-box-shadow: inset 1px 1px 1px #999999; box-shadow: inset 1px 1px 1px #999999; padding-top: 1px; padding-left: 1px;}
+div#pages form div.right div.block input.autocomplete {width: 158px; height: 21px; margin: 0; padding: 0; padding-left: 5px; padding-right: 31px; border: 0 none; font-family: Arial; font-size: 13px; color: #999999; background:url('/images/sites/search/autocomplete_bkg.png') no-repeat 0 0; z-index: 1;}
+div#pages form div.right div.block input.autocomplete.opened {background:url('/images/sites/search/autocomplete_bkg.png') no-repeat 0 -21px;}
+
+div#pages form div.right div.block .newListSelected { float: left; position: relative; height:21px; padding: 0; cursor: pointer;}
+div#pages form div.right div.block .newListSelected .selectedTxt { height:21px; margin: 0 0 0 6px; color:#999999; line-height:21px; overflow:hidden;}
+div#pages form div.right div.block .newListSelected div.newList_content {position: absolute; top: 21px; left: 0; float: left; height: 107px; overflow: hidden; padding: 0; z-index: 10;}
+div#pages form div.right div.block .newListSelected div.newList_content ul.newList {padding: 0; margin: 0;}
+div#pages form div.right div.block .newListSelected div.newList_content ul.newList li { padding: 3px 6px; background: none transparent;}
+div#pages form div.right div.block .newListSelected div.newList_content ul.newList li a {color:#666666;}
+
+div#pages form div.right div.block .newListSelected.month {width: 107px; margin: 8px 0 0 20px; background:url('/images/sites/search/combo_month_bkg.png') no-repeat 0 0;}
+div#pages form div.right div.block .newListSelected.month div.newList_content {width: 107px; background:url('/images/sites/search/combo_month_body_bkg.png') no-repeat 0 0;}
+div#pages form div.right div.block .newListSelected.month div.newList_content ul.newList{ width: 107px;}
+div#pages form div.right div.block .newListSelected.year {width: 63px; margin: 8px 0 0 0; background:url('/images/sites/search/combo_year_bkg.png') no-repeat 0 0;}
+div#pages form div.right div.block .newListSelected.year div.newList_content {width: 63px; background:url('/images/sites/search/combo_year_body_bkg.png') no-repeat 0 0;}
+div#pages form div.right div.block .newListSelected.year div.newList_content ul.newList{ width: 63px;}
+
+
+ul.ui-autocomplete { width: 177px; height: 107px; margin: 0; padding: 0; background:url('/images/sites/search/autocomplete_list_bkg.png') no-repeat 0 0; overflow: hidden; }
+ul.ui-autocomplete li {padding: 3px 6px;}
+ul.ui-autocomplete li a{color: #999999;}
+ul.ui-autocomplete li a.ui-state-hover { text-decoration: underline;}
+
+
 /*chart*/
 div.statistics.less {padding-bottom:15px!important;}
 div.statistics img.pie_chart {background:none!important; margin:0 0 0 -10px; height:125px; /*hack for google maps chart api image*/}
@@ -427,7 +475,7 @@ a.icon_menu:hover {background-position:0 -22px; cursor:pointer;}
 
 /* TO WATER_MARK */
 
-span.icon_watermark {position:absolute; right:32px; top:47px; height:37px; width:37px; z-index:-5;}
+span.icon_watermark {position:absolute; right:32px; top:32px; height:37px; width:37px; z-index:-5;}
 span.icon_watermark.agriculture {background:url('/images/sites/common/icons/watermark/agriculture.png') no-repeat left 0;}
 span.icon_watermark.camp_coordination {background:url('/images/sites/common/icons/watermark/camp.png') no-repeat left 0;}
 span.icon_watermark.communications {background:url('/images/sites/common/icons/watermark/communication.png') no-repeat left 0;}
@@ -585,11 +633,11 @@ div#footer_sites div.project p.site_name a:hover {color:#999999; cursor:pointer;
 
 /* FOOTER PAGES */
 div#footer_pages {clear:both; width:100%; padding:100px 0 100px 0;}
-div#footer_pages div.left {width:630px; height:auto!important; margin:0 0 0 5px; background:none; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#project_layout div#footer_pages div.left {width:630px; height:auto!important; margin:0 0 0 30px; background:none; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#footer_pages div.left {width:450px; height:auto!important; margin:0 0 0 5px; background:none; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#project_layout div#footer_pages div.left {width:450px; height:auto!important; margin:0 0 0 30px; background:none; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#footer_pages div.left a.logo {float:left; display:block; width:67px; height:43px; margin:0 15px 0 0; background:url('/images/sites/common/logo_interaction.png') no-repeat 0 0;}
 div#footer_pages div.left a.logo:hover {cursor:pointer;}
-div#footer_pages div.left div.project {float:left; width:450px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#footer_pages div.left div.project {float:left; width:350px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#footer_pages div.left div.project h1 {float:left; width:100%; margin:0; padding:0; font:normal 13px "PT Sans Bold"; color:#888888; text-transform:uppercase;}
 div#footer_pages div.left div.project h1 a{float:left; padding:0; margin:0; font:normal 13px "PT Sans Bold"; color:#888888; text-transform:uppercase; width:100%;}
 div#footer_pages div.left div.project p {float:left; padding:0; margin:5px 0 0 0 ; font:normal 13px "PT Sans"; color:#B3B3B3;}
@@ -601,12 +649,12 @@ div#footer_pages div.left div.project p.all_rights a.link {color:#B3B3B3; text-d
 div#footer_pages div.left div.project p.all_rights a.link:hover {color:#999999; cursor:pointer;}
 div#footer_pages div.left div.project p.site_name a {color:#B3B3B3; text-decoration:underline;}
 div#footer_pages div.left div.project p.site_name a:hover {color:#999999; cursor:pointer;}
-div#footer_pages div.right {width:245px; margin:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline; text-align:right;}
+div#footer_pages div.right {width:300px; margin:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline; text-align:right;}
 div#project_layout div#footer_pages div.right {width:280px; margin:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline; text-align:right;}
-div#footer_pages div.right ul {float:left; margin:24px 0 0 0; padding:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#footer_pages div.right ul li {margin:0 0 0 6px; padding:0; font:normal 13px "PT Sans"; color:#B3B3B3; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#footer_pages div.right ul li a {color:#B3B3B3;}
-div#footer_pages div.right ul li a:hover {text-decoration:underline;}
+div#footer_pages div.right ul {margin:5px 0 0 0; padding:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;  text-align: right;}
+div#footer_pages div.right ul li {margin:0 0 0 6px; padding:0; font:normal 13px "PT Sans"; color:#B3B3B3; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;  text-align: right;}
+div#footer_pages div.right ul li a {color:#B3B3B3;text-decoration:underline;   text-align: right;}
+div#footer_pages div.right ul li a:hover {color:#999999; cursor:pointer;}
 
 /*FOOTER ERRORS*/
 div#footer_errors {clear:both; width:100%; padding:100px 0 100px 0;}

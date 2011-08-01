@@ -10,11 +10,13 @@ div#left_column div.float_left div.block a {color:#008BB0;}
 div#left_column div.float_left div.block ul.clusters li a {color:#008BB0;}
 div#left_column div.right ul li h4 a {color:#008BB0;}
 div#left_column div.right ul li p.info a {color:#008BB0}
+div#left_column div.right h3 ul.download li a {color: #008BB0;}
 
-div#pages div.float_left div.outer_head div.head {background:url('/images/sites/search/head_mask.png') repeat 0 0 #008BB0!important;}
-div#pages div.float_left div.outer_head div.head p {color:#003F4F;}
-div#pages div.float_left div.body p a {color:#008BB0; text-decoration:none;}
-div#pages div.float_left div.results_list ul li div.project_name h3 a {color:#008BB0;}
+div#pages div.left div.outer_head div.head {border-bottom:1px solid #003F4F; background:url('/images/sites/search/head_mask.png') repeat 0 0 #008BB0!important;}
+div#pages div.left div.outer_head div.head h1 {text-shadow:0 1px #003F4F;}
+div#pages div.left div.outer_head div.head p {color:#003F4F;}
+div#pages div.left div.body p a, div#pages div.left div.body ul li a {color:#008BB0; text-decoration:none;}
+div#pages div.left div.results_list ul li div.project_name h3 a {color:#008BB0;}
 div#pages div.right div.block p a {color:#008BB0;}
 div#pages div.right div.block ul li a {color:#008BB0;}
 
@@ -32,8 +34,6 @@ ul.breadcrumb li a {color:#003F4F!important}
 
 div.main_head div.float_head.home h3 {color:#003F4F;}
 div.main_head div.float_head.home sup.beta {color:#003F4F;}
-div#pages div.float_left div.outer_head div.head h1 {text-shadow:0 1px #003F4F;}
-div#pages div.float_left div.outer_head div.head {border-bottom:1px solid #003F4F;}
 div.main_head.projects div.float_head p a {color:#003F4F; text-decoration:underline;}
 div.projects div.right div.block p a {color:#008BB0;}
 div.projects div.right div.block ul li a {color:#008BB0;}

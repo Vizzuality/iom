@@ -3,7 +3,7 @@
 # Table name: sectors
 #
 #  id   :integer         not null, primary key
-#  name :string(255)     
+#  name :string(255)
 #
 
 class Sector < ActiveRecord::Base
@@ -76,12 +76,39 @@ SQL
     ActiveRecord::Base.connection.execute(sql).first['count'].to_i
   end
 
-  def total_projects(site)
+  def total_projects(site, location_id = nil)
+    if location_id.present?
+      if site.navigate_by_country
+        location_join = "inner join countries_projects cp on cp.project_id = p.id and cp.country_id = #{location_id.first}"
+      else
+        location_join = "inner join projects_regions as pr on pr.project_id = p.id and pr.region_id = #{location_id.last}"
+      end
+    end
+
     sql = "select count(distinct(ps.project_id)) as count from projects_sectors as ps
     inner join projects as p on p.id=ps.project_id and (p.end_date is null OR p.end_date > now())
     inner join projects_sites as psi on p.id=psi.project_id and psi.site_id=#{site.id}
+    #{location_join}
     where ps.sector_id=#{self.id}"
     ActiveRecord::Base.connection.execute(sql).first['count'].to_i
+  end
+
+  def projects_for_csv(site)
+    sql = "select p.id, p.name, p.description, p.primary_organization_id, p.implementing_organization, p.partner_organizations, p.cross_cutting_issues, p.start_date, p.end_date, p.budget, p.target, p.estimated_people_reached, p.contact_person, p.contact_email, p.contact_phone_number, p.site_specific_information, p.created_at, p.updated_at, p.activities, p.intervention_id, p.additional_information, p.awardee_type, p.date_provided, p.date_updated, p.contact_position, p.website, p.verbatim_location, p.calculation_of_number_of_people_reached, p.project_needs, p.idprefugee_camp
+    from projects_sectors as ps
+    inner join projects as p on p.id=ps.project_id and (p.end_date is null OR p.end_date > now())
+    inner join projects_sites as psi on p.id=psi.project_id and psi.site_id=#{site.id}
+    where ps.sector_id=#{self.id}"
+    ActiveRecord::Base.connection.execute(sql)
+  end
+
+  def projects_for_kml(site)
+    sql = "select p.name, ST_AsKML(p.the_geom) as the_geom
+    from projects_sectors as ps
+    inner join projects as p on p.id=ps.project_id and (p.end_date is null OR p.end_date > now())
+    inner join projects_sites as psi on p.id=psi.project_id and psi.site_id=#{site.id}
+    where ps.sector_id=#{self.id}"
+    ActiveRecord::Base.connection.execute(sql)
   end
 
   # to get only id and name

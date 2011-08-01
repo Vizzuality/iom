@@ -5,7 +5,7 @@
       <div class="med">
         <div class="left">
           <h2 class="museo_sans"><%= @site.name %></h2>
-          <p><%= pluralize(@site.total_projects, 'project', 'projects') %> within this site</p>
+          <p><%= pluralize(@site.total_projects, 'project', 'projects') %> active within this site</p>
           <% unless @projects.empty? %>
             <ul>
               <% @projects.each do |project| %>

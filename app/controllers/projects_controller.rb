@@ -9,7 +9,7 @@ class ProjectsController < ApplicationController
       raise ActiveRecord::RecordNotFound
     end
     sql = "select * from data_denormalization where site_id=#{@site.id} and
-                                                    is_active=true and
+                                                    (end_date is null OR end_date > now()) and
                                                     project_id=#{id}"
     @raw_project = Project.find_by_sql(sql).first
     raise ActiveRecord::RecordNotFound unless @raw_project
@@ -49,7 +49,7 @@ class ProjectsController < ApplicationController
       end
       format.kml
       format.csv do
-        send_data @project.to_csv(@site.id),
+        send_data Project.to_csv(@site, :project => @project.id),
           :type => 'application/download; application/vnd.ms-excel; text/csv; charset=iso-8859-1; header=present',
           :disposition => "attachment; filename=#{@project.name}.csv"
       end

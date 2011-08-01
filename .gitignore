@@ -5,3 +5,5 @@ db/*.sqlite3
 log/*.log
 tmp/**/*
 public/system
+bin/
+install/

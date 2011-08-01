@@ -40,4 +40,42 @@ module SearchHelper
     end
     raw(active_facets)
   end
+
+  def date_facet
+    date_facet = nil
+
+    start_date = (Date.new(params[:date][:start_year].to_i, params[:date][:start_month].to_i, 1) rescue nil)
+    end_date = (Date.new(params[:date][:end_year].to_i, params[:date][:end_month].to_i, 1) rescue nil)
+
+    if start_date && end_date
+      date_facet = link_to "Between #{start_date.strftime("%B")}, #{start_date.year} and #{end_date.strftime("%B")}, #{end_date.year}", '#', :id => 'delete_date_filter'
+    elsif start_date
+      date_facet = link_to "After #{start_date.strftime("%B")}, #{start_date.year}", '#', :id => 'delete_date_filter'
+    elsif end_date
+      date_facet = link_to "Before #{end_date.strftime("%B")}, #{end_date.year}", '#', :id => 'delete_date_filter'
+    end
+
+    raw(date_facet)
+  end
+
+  def months_list
+    {
+      'January'   => 1,
+      'February'  => 2,
+      'March'     => 3,
+      'April'     => 4,
+      'May'       => 5,
+      'June'      => 6,
+      'July'      => 7,
+      'August'    => 8,
+      'September' => 9,
+      'October'   => 10,
+      'November'  => 11,
+      'December'   => 12
+    }.to_a.sort{|x, y| x[1] <=> y[1]}
+  end
+
+  def years_list
+    (1980..Time.now.year).to_a.map{|y| [y, y]}
+  end
 end

@@ -3,36 +3,36 @@
 # Table name: projects
 #
 #  id                                      :integer         not null, primary key
-#  name                                    :string(2000)    
-#  description                             :text            
-#  primary_organization_id                 :integer         
-#  implementing_organization               :text            
-#  partner_organizations                   :text            
-#  cross_cutting_issues                    :text            
-#  start_date                              :date            
-#  end_date                                :date            
-#  budget                                  :float           
-#  target                                  :text            
-#  estimated_people_reached                :integer(8)      
-#  contact_person                          :string(255)     
-#  contact_email                           :string(255)     
-#  contact_phone_number                    :string(255)     
-#  site_specific_information               :text            
-#  created_at                              :datetime        
-#  updated_at                              :datetime        
-#  the_geom                                :string          
-#  activities                              :text            
-#  intervention_id                         :string(255)     
-#  additional_information                  :text            
-#  awardee_type                            :string(255)     
-#  date_provided                           :date            
-#  date_updated                            :date            
-#  contact_position                        :string(255)     
-#  website                                 :string(255)     
-#  verbatim_location                       :text            
-#  calculation_of_number_of_people_reached :text            
-#  project_needs                           :text            
-#  idprefugee_camp                         :text            
+#  name                                    :string(2000)
+#  description                             :text
+#  primary_organization_id                 :integer
+#  implementing_organization               :text
+#  partner_organizations                   :text
+#  cross_cutting_issues                    :text
+#  start_date                              :date
+#  end_date                                :date
+#  budget                                  :float
+#  target                                  :text
+#  estimated_people_reached                :integer(8)
+#  contact_person                          :string(255)
+#  contact_email                           :string(255)
+#  contact_phone_number                    :string(255)
+#  site_specific_information               :text
+#  created_at                              :datetime
+#  updated_at                              :datetime
+#  the_geom                                :string
+#  activities                              :text
+#  intervention_id                         :string(255)
+#  additional_information                  :text
+#  awardee_type                            :string(255)
+#  date_provided                           :date
+#  date_updated                            :date
+#  contact_position                        :string(255)
+#  website                                 :string(255)
+#  verbatim_location                       :text
+#  calculation_of_number_of_people_reached :text
+#  project_needs                           :text
+#  idprefugee_camp                         :text
 #
 
 class Project < ActiveRecord::Base
@@ -145,85 +145,197 @@ class Project < ActiveRecord::Base
   # ) WITH (OIDS=FALSE)"
 
 
-  def self.csv_attributes
-    %W{ Organization Project\ Title Project\ Description Project\ Activities
-        Additional\ Information Estimated\ Start\ Date Estimated\ End\ Date
-        Donor Budget Implementing\ Organization(s) Partner\ Organization(s)
-        Cluster(s) Sector(s) Cross\ Cutting\ Issues Number\ of\ People\ Reached\ (target) Target\ Groups
-        Country 1st\ Admin\ Level 2nd\ Admin\ Level 3rd\ Admin\ Level Contact\ Name Contact\ Title
-        Contact\ Email Website Date\ Provided Date\ Updated }
+  def self.export_headers
+    %w(organization intervention_id project_name project_description activities additional_information start_date end_date budget_numeric clusters sectors cross_cutting_issues implementing_organization partner_organizations donors awardee_type estimated_people_reached calculation_of_number_of_people_reached target countries regions_level1 regions_level2 regions_level3 verbatim_location,
+idprefugee_camp project_contact_person project_contact_position project_contact_email project_contact_phone_number project_website date_provided date_updated project_needs)
   end
 
-  def csv_columns(site_id = nil)
-    raw_result = if site_id.nil?
-      ActiveRecord::Base.connection.execute("select * from data_denormalization where project_id = #{self.id} LIMIT 1").first
-    else
-      ActiveRecord::Base.connection.execute("select * from data_denormalization where project_id = #{self.id} AND site_id = #{site_id}").first
+  def self.list_for_export(site = nil, options = {})
+    where = []
+    where << "site_id = #{site.id}" if site
+    where << '(p.end_date is null OR p.end_date > now())'
+
+    if options[:kml]
+      kml_select = <<-SQL
+        , CASE WHEN regions_ids IS NOT NULL AND regions_ids != ('{}')::integer[] THEN
+        (select
+        '<MultiGeometry><Point><coordinates>'|| array_to_string(array_agg(distinct center_lon ||','|| center_lat),'</coordinates></Point><Point><coordinates>') || '</coordinates></Point></MultiGeometry>' as lat
+        from regions as r INNER JOIN projects_regions AS pr ON r.id=pr.region_id where ('{'||r.id||'}')::integer[] && regions_ids and pr.project_id=dd.project_id)
+        ELSE
+        (select
+        '<MultiGeometry><Point><coordinates>'|| array_to_string(array_agg(distinct center_lon ||','|| center_lat),'</coordinates></Point><Point><coordinates>') || '</coordinates></Point></MultiGeometry>' as lat
+        from countries as c INNER JOIN countries_projects AS cp ON c.id=cp.country_id where ('{'||c.id||'}')::integer[] && countries_ids and cp.project_id=dd.project_id)
+        END
+        as kml
+      SQL
+      kml_group_by = <<-SQL
+        countries_ids,
+        regions_ids,
+      SQL
     end
-    return [] if raw_result.nil?
-    columns = []
-    columns << raw_result['organization_name']
-    columns << raw_result['project_name']
-    columns << raw_result['project_description']
-    columns << self.activities
-    columns << self.additional_information
-    columns << if self.start_date.nil?
-      ""
-    else
-      self.start_date.strftime("%Y-%m-%d")
+
+    if options[:region]
+      where << "regions_ids && '{#{options[:region]}}' and site_id=#{site.id}"
+      if options[:region_category_id]
+        if site.navigate_by_cluster?
+          where << "cluster_ids && '{#{options[:region_category_id]}}'"
+        else
+          where << "sector_ids && '{#{options[:region_category_id]}}'"
+        end
+      end
+    elsif options[:country]
+      where << "countries_ids && '{#{options[:country]}}' and site_id=#{site.id}"
+      if options[:country_category_id]
+        if site.navigate_by_cluster?
+          where << "cluster_ids && '{#{options[:country_category_id]}}'"
+        else
+          where << "sector_ids && '{#{options[:country_category_id]}}'"
+        end
+      end
+    elsif options[:cluster]
+      where << "cluster_ids && '{#{options[:cluster]}}' and site_id=#{site.id}"
+      where << "regions_ids && '{#{options[:cluster_region_id]}}'" if options[:cluster_region_id]
+      where << "countries_ids && '{#{options[:cluster_country_id]}}'" if options[:cluster_country_id]
+    elsif options[:sector]
+      where << "sector_ids && '{#{options[:sector]}}' and site_id=#{site.id}"
+      where << "regions_ids && '{#{options[:sector_region_id]}}'" if options[:sector_region_id]
+      where << "countries_ids && '{#{options[:sector_country_id]}}'" if options[:sector_country_id]
+    elsif options[:organization]
+      where << "organization_id = #{options[:organization]}"
+      where << "site_id=#{site.id}" if site
+
+      if options[:organization_category_id]
+        if site.navigate_by_cluster?
+          where << "cluster_ids && '{#{options[:organization_category_id]}}'"
+        else
+          where << "sector_ids && '{#{options[:organization_category_id]}}'"
+        end
+      end
+
+      where << "regions_ids && '{#{options[:organization_region_id]}}'::integer[]" if options[:organization_region_id]
+      where << "countries_ids && '{#{options[:organization_country_id]}}'::integer[]" if options[:organization_country_id]
+    elsif options[:project]
+      where << "project_id = #{options[:project]}"
     end
-    columns << if self.end_date.nil?
-      ""
-    else
-      self.end_date.strftime("%Y-%m-%d")
-    end
-    columns << self.donors.map{ |donor| donor.name }.join(',')
-    columns << self.budget
-    columns << self.implementing_organization
-    columns << self.partner_organizations
-    columns << if raw_result['clusters']
-      raw_result['clusters'].text2array.join(',')
-    else
-      ""
-    end
-    columns << if raw_result['sectors']
-      raw_result['sectors'].text2array.join(',')
-    else
-      ""
-    end
-    columns << self.cross_cutting_issues
-    columns << self.estimated_people_reached
-    columns << self.target
-    columns << if raw_result['countries']
-      raw_result['countries'].text2array.join(',')
-    else
-      ""
-    end
-    columns << regions.where(:level => 1).select(Region.custom_fields).map{ |r| r.name }.join(',')
-    columns << regions.where(:level => 2).select(Region.custom_fields).map{ |r| r.name }.join(',')
-    columns << regions.where(:level => 3).select(Region.custom_fields).map{ |r| r.name }.join(',')
-    columns << self.contact_person
-    columns << self.contact_position
-    columns << self.contact_email
-    columns << self.website
-    columns << if self.date_provided.nil?
-      ""
-    else
-      self.date_provided.strftime("%Y-%m-%d")
-    end
-    columns << if self.date_updated.nil?
-      ""
-    else
-      self.date_updated.strftime("%Y-%m-%d")
-    end
-    columns
+
+    where = "WHERE #{where.join(' AND ')}" if where.present?
+
+    sql = <<-SQL
+        SELECT DISTINCT
+        site_id,
+        project_id,
+        project_name,
+        project_description,
+        organization_id,
+        organization_name AS organization,
+        implementing_organization,
+        partner_organizations,
+        cross_cutting_issues,
+        p.start_date,
+        p.end_date,
+        CASE WHEN budget=0 THEN null ELSE budget END AS budget_numeric,
+        target,
+        estimated_people_reached,
+        contact_person AS project_contact_person,
+        contact_email AS project_contact_email,
+        contact_phone_number AS project_contact_phone_number,
+        activities,
+        intervention_id,
+        additional_information,
+        awardee_type,
+        date_provided,
+        date_updated,
+        contact_position AS project_contact_position,
+        website AS project_website,
+        verbatim_location,
+        calculation_of_number_of_people_reached,
+        project_needs,
+        sectors,
+        clusters,
+        (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM tags AS t INNER JOIN projects_tags AS pt ON t.id=pt.tag_id WHERE pt.project_id=dd.project_id) AS project_tags,
+        countries,
+        (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM regions AS r INNER JOIN projects_regions AS pr ON r.id=pr.region_id WHERE r.level=1 AND pr.project_id=dd.project_id) AS regions_level1,
+        (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM regions AS r INNER JOIN projects_regions AS pr ON r.id=pr.region_id WHERE r.level=2 AND pr.project_id=dd.project_id) AS regions_level2,
+        (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM regions AS r INNER JOIN projects_regions AS pr ON r.id=pr.region_id WHERE r.level=3 AND pr.project_id=dd.project_id) AS regions_level3,
+        (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM donors AS d INNER JOIN donations AS dn ON d.id=dn.donor_id AND dn.project_id=dd.project_id) AS donors
+        #{kml_select}
+        FROM data_denormalization AS dd
+        INNER JOIN projects AS p ON dd.project_id=p.id
+        #{where}
+        GROUP BY
+        site_id,
+        project_id,
+        project_name,
+        project_description,
+        organization_id,
+        organization_name,
+        implementing_organization,
+        partner_organizations,
+        cross_cutting_issues,
+        p.start_date,
+        p.end_date,
+        budget,
+        target,
+        estimated_people_reached,
+        contact_person,
+        contact_email,
+        contact_phone_number,
+        activities,
+        intervention_id,
+        additional_information,
+        awardee_type,
+        date_provided,
+        date_updated,
+        contact_position,
+        website,
+        verbatim_location,
+        calculation_of_number_of_people_reached,
+        project_needs,
+        idprefugee_camp,
+        countries,
+        #{kml_group_by}
+        sectors,
+        clusters
+    SQL
+    ActiveRecord::Base.connection.execute(sql)
   end
 
-  def to_csv(site_id)
-    FasterCSV.generate(:col_sep => ';') do |csv|
-      csv << self.class.csv_attributes
-      csv << csv_columns(site_id)
+  def self.to_csv(site, options = {})
+    projects = self.list_for_export(site, options)
+
+    csv_data = FasterCSV.generate(:col_sep => ',') do |csv|
+      csv << self.export_headers
+      projects.each do |project|
+        line = []
+        self.export_headers.each do |field_name|
+          v = project[field_name]
+          line << if v.nil?
+            ""
+          else
+            if %W{ start_date end_date date_provided date_updated }.include?(field_name)
+              if v =~ /^00(\d\d\-.+)/
+                "20#{$1}"
+              else
+                v
+              end
+            else
+              v.text2array.join(',')
+            end
+          end
+        end
+        csv << line
+      end
     end
+    csv_data
+  end
+
+  def self.to_excel(site, options = {})
+    projects = self.list_for_export(site, options)
+    projects.to_excel(:headers => self.export_headers)
+  end
+
+  def self.to_kml(site, options = {})
+    projects = self.list_for_export(site, options.merge(:kml => true))
   end
 
   def related(site, limit = 2)
@@ -235,7 +347,7 @@ class Project < ActiveRecord::Base
       (select path from regions where id=regions_ids[1]) as path
       from data_denormalization where
       organization_id = #{self.primary_organization_id}
-      and project_id!=#{self.id} and site_id=#{site.id} and is_active=true
+      and project_id!=#{self.id} and site_id=#{site.id} and (end_date is null OR end_date > now())
       and (select center_lat from regions where id=regions_ids[1]) is not null
       limit #{limit}
 SQL
@@ -250,7 +362,7 @@ SQL
           (select path from regions where id=regions_ids[1]) as path
           from data_denormalization where
           regions_ids && (select ('{'||array_to_string(array_agg(region_id),',')||'}')::integer[] as regions_ids from projects_regions where project_id=#{self.id})
-          and project_id!=#{self.id} and site_id=#{site.id} and is_active=true
+          and project_id!=#{self.id} and site_id=#{site.id} and (end_date is null OR end_date > now())
           and (select center_lat from regions where id=regions_ids[1]) is not null
           limit #{limit}
 SQL
@@ -263,7 +375,7 @@ SQL
           (select center_lon from regions where id=regions_ids[1]) as center_lon,
           (select path from regions where id=regions_ids[1]) as path
           from data_denormalization where
-          project_id!=#{self.id} and site_id=#{site.id} and is_active=true
+          project_id!=#{self.id} and site_id=#{site.id} and (end_date is null OR end_date > now())
           limit #{limit}
 SQL
     )
@@ -280,19 +392,63 @@ SQL
 
     sql = ""
     if options[:region]
-      sql="select * from data_denormalization where regions_ids && '{#{options[:region]}}' and site_id=#{site.id} and is_active=true"
+      where = []
+      where << "regions_ids && '{#{options[:region]}}' and site_id=#{site.id} and (end_date is null OR end_date > now())"
+      if options[:region_category_id]
+        if site.navigate_by_cluster?
+          where << "cluster_ids && '{#{options[:region_category_id]}}'"
+        else
+          where << "sector_ids && '{#{options[:region_category_id]}}'"
+        end
+      end
+
+      sql="select * from data_denormalization where #{where.join(' and ')}"
     elsif options[:country]
-      sql="select * from data_denormalization where countries_ids && '{#{options[:country]}}' and site_id=#{site.id} and is_active=true"
+      where = []
+      where << "countries_ids && '{#{options[:country]}}' and site_id=#{site.id} and (end_date is null OR end_date > now())"
+      if options[:country_category_id]
+        if site.navigate_by_cluster?
+          where << "cluster_ids && '{#{options[:country_category_id]}}'"
+        else
+          where << "sector_ids && '{#{options[:country_category_id]}}'"
+        end
+      end
+
+      sql="select * from data_denormalization where #{where.join(' and ')}"
     elsif options[:cluster]
-      sql="select * from data_denormalization where cluster_ids && '{#{options[:cluster]}}' and site_id=#{site.id} and is_active=true"
+      where = []
+      where << "cluster_ids && '{#{options[:cluster]}}' and site_id=#{site.id} and (end_date is null OR end_date > now())"
+      where << "regions_ids && '{#{options[:cluster_region_id]}}'" if options[:cluster_region_id]
+      where << "countries_ids && '{#{options[:cluster_country_id]}}'" if options[:cluster_country_id]
+
+      sql="select * from data_denormalization where #{where.join(' and ')}"
     elsif options[:sector]
-      sql="select * from data_denormalization where sector_ids && '{#{options[:sector]}}' and site_id=#{site.id} and is_active=true"
+      where = []
+      where << "sector_ids && '{#{options[:sector]}}' and site_id=#{site.id} and (end_date is null OR end_date > now())"
+      where << "regions_ids && '{#{options[:sector_region_id]}}'" if options[:sector_region_id]
+      where << "countries_ids && '{#{options[:sector_country_id]}}'" if options[:sector_country_id]
+
+      sql="select * from data_denormalization where #{where.join(' and ')}"
     elsif options[:organization]
-      sql="select * from data_denormalization where organization_id = #{options[:organization]} and site_id=#{site.id} and is_active=true"
+      where = []
+      where << "organization_id = #{options[:organization]} and site_id=#{site.id} and (end_date is null OR end_date > now())"
+
+      if options[:organization_category_id]
+        if site.navigate_by_cluster?
+          where << "cluster_ids && '{#{options[:organization_category_id]}}'"
+        else
+          where << "sector_ids && '{#{options[:organization_category_id]}}'"
+        end
+      end
+
+      where << "regions_ids && '{#{options[:organization_region_id]}}'::integer[]" if options[:organization_region_id]
+      where << "countries_ids && '{#{options[:organization_country_id]}}'::integer[]" if options[:organization_country_id]
+
+      sql="select * from data_denormalization where #{where.join(' and ')}"
     elsif options[:donor_id]
-      sql="select * from data_denormalization where donors_ids && '{#{options[:donor_id]}}' and site_id=#{site.id} and is_active=true"
+      sql="select * from data_denormalization where donors_ids && '{#{options[:donor_id]}}' and site_id=#{site.id} and (end_date is null OR end_date > now())"
     else
-      sql="select * from data_denormalization where site_id=#{site.id} and is_active=true"
+      sql="select * from data_denormalization where site_id=#{site.id} and (end_date is null OR end_date > now())"
     end
 
     total_entries = ActiveRecord::Base.connection.execute("select count(*) as count from (#{sql}) as q").first['count'].to_i
