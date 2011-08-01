@@ -101,7 +101,7 @@ class ClustersSectorsController < ApplicationController
             # Get the data for the map depending on the region definition of the site (country or region)
             sql="select r.id,r.name,count(ps.*) as count,r.center_lon as lon,r.center_lat as lat,r.name,
             CASE WHEN count(distinct ps.project_id) > 1 THEN
-                r.name,'#{carry_on_url}'||r.path
+                '#{carry_on_url}'||r.path
             ELSE
                 '/projects/'||(array_to_string(array_agg(ps.project_id),''))
             END as url,
@@ -113,7 +113,7 @@ class ClustersSectorsController < ApplicationController
               inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
               inner join projects_sectors as pse on pse.project_id=p.id and pse.sector_id=#{params[:id].sanitize_sql!}
               #{location_filter}
-              group by r.id,r.name,lon,lat,r.name,r.code"
+              group by r.id,r.name,lon,lat,r.path,r.code"
           else
 
             if @filter_by_location
