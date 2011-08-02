@@ -9,6 +9,11 @@
           <h1 class="cluster_sector_name"><%= @data.name %></h1>
           <span class="<%= @data.css_class %> icon_watermark"></span>
         </div>
+        <% if @site.navigate_by_cluster? %>
+        <%= link_to raw(@filter_name + image_tag('sites/icons/carry_on_filter_remove.png')) , cluster_path(@data), :class => 'filter' if @filter_name.present? %>
+        <% else %>
+        <%= link_to raw(@filter_name + image_tag('sites/icons/carry_on_filter_remove.png')) , sector_path(@data), :class => 'filter' if @filter_name.present? %>
+        <% end %>
       </div>
       <div class="right">
       </div>
@@ -37,7 +42,7 @@
           <div class="head">
             <h2>OVERVIEW</h2>
           </div>
-          <% unless @data.projects_regions(@site).empty?%>
+          <% unless @filter_by_location.present? || @data.projects_regions(@site).empty?%>
           <div class="block statistics less">
             <h3>PROJECT LOCATIONS</h3>
             <% if @site.navigate_by_country? %>
@@ -82,22 +87,16 @@
       </div>
 
       <!-- RIGHT PART -->
-      <div class="right">
+      <div class="right" id="projects_div">
         <h3>
-          <%= pluralize(@data.total_projects(@site), 'active project', 'active projects') %> in
-          <% if @site.navigate_by_country? %>
-            <%= pluralize(@data.total_countries(@site), 'country', 'countries') %>
-          <% else %>
-            <%= pluralize(@data.total_regions(@site), @site.word_for_regions.singularize, @site.word_for_regions) %>
-          <% end %>
-          <a id="see_all" href="#">View past projects</a>
-          <div class="tooltip">
-            <span class="body_tooltip">
-              <label>Coming soon!</label>
-              <p>Please stay tuned.</p>
-            </span>
-            <span class="bottom_tooltip"></span>
-          </div>
+          <%= clusters_sectors_projects_list_subtitle %>
+          <ul class="download">
+            <li><%= link_to 'CSV', @site.navigate_by_cluster?? cluster_path(@data, @carry_on_filters.merge(:format => :csv)) : sector_path(@data, @carry_on_filters.merge(:format => :csv)) %></li>
+            <li>|</li>
+            <li><%= link_to 'EXCEL', @site.navigate_by_cluster?? cluster_path(@data, @carry_on_filters.merge(:format => :xls)) : sector_path(@data, @carry_on_filters.merge(:format => :xls)) %></li>
+            <li>|</li>
+            <li><%= link_to 'KML', @site.navigate_by_cluster?? cluster_path(@data, @carry_on_filters.merge(:format => :kml)) : sector_path(@data, @carry_on_filters.merge(:format => :kml)) %></li>
+          </ul>
         </h3>
         <div id="projects">
           <%= render :partial => 'projects/projects' %>
@@ -112,6 +111,7 @@
       <% else %>
       var map_center = [];
       <% end %>
+      var show_regions_with_one_project = "true";
       var map_zoom = <%= @site.overview_map_zoom %>;
       var chco = "<%=@overview_map_chco%>";
       var chf = "<%=@overview_map_chf%>";
@@ -119,7 +119,7 @@
       var chd = "<%=@chd%>";
       var map_data = <%=raw(@map_data)%>;
       var max_count = <%=@map_data_max_count%>;
-      var map_type = 'overview_map';
+      var map_type = '<%= @filter_by_location.present?? 'administrative_map' : 'overview_map' %>';
       var theme = "<%=@site.theme_id%>";
       var kind = '<%= @site.word_for_cluster_sector.downcase.chop %>';
       var stylez = <%=raw @site.map_styles  %>

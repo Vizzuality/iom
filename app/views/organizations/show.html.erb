@@ -1,16 +1,4 @@
 
-  <%if false%>
-    <% content_for :js do%>
-      <%= javascript_include_tag 'http://geocommons.com/javascripts/f1.api.js', '/javascripts/sites/map.js' %>
-      <script>
-        $(document).ready( function() {
-          initialize();
-        });
-      </script>
-    <%end%>
-  <%end%>
-
-
   <div class="main_head">
     <div class="inner_main_head">
       <div class="left">
@@ -20,6 +8,7 @@
           <h2 class="organization_name">Organization</h2>
           <h1><%= @organization.name %></h1>
         </div>
+        <%= link_to raw(@filter_name + image_tag('sites/icons/carry_on_filter_remove.png')) , organization_path(@organization), :class => 'filter' if @filter_name.present? %>
       </div>
       <div class="right">
         <%= simple_format(@organization.description.squish.truncate(800)) if @organization.description.present? %>
@@ -60,11 +49,11 @@
             </div>
           <% end %>
 
-          <% unless @site.nil? || @organization.projects_clusters_sectors(@site).empty? %>
+          <% unless @site.nil? || @filter_by_category.present? || @organization_projects_clusters_sectors.empty? %>
           <div class="block statistics">
             <h3>PROJECT <%= @site.word_for_cluster_sector.upcase %></h3>
             <ul class="statistics_list">
-              <% @organization.projects_clusters_sectors(@site)[0...3].each do |category,count| %>
+              <% @organization_projects_clusters_sectors[0...3].each do |category,count| %>
                 <li>
                   <div class="tooltip">
                     <span class="body_tooltip">
@@ -72,30 +61,18 @@
                     </span>
                     <span class="bottom_tooltip"></span>
                   </div>
-                  <a class="<%= category.css_class %> icon_statistics" href="<%= url_for(category) %>"><span class="aller" style="width:<%= cluster_sector_width(count, @organization.projects_clusters_sectors(@site)[0...3].map{|e| e.last}.max) %>px"><%= count %></span></a>
+                  <a class="<%= category.css_class %> icon_statistics" href="<%= organization_path(@organization, @carry_on_filters.merge(:category_id => category.id)) %>"><span class="aller" style="width:<%= cluster_sector_width(count, @organization_projects_clusters_sectors.map{|e| e.last}.max) %>px"><%= count %></span></a>
                 </li>
               <% end %>
             </ul>
-            <% unless @organization.projects_clusters_sectors(@site).size < 4%>
-                <p class="other">and <%= pluralize(@organization.projects_clusters_sectors(@site).size - 3,"more #{@site.word_for_cluster_sector.singularize}", "more #{@site.word_for_cluster_sector.pluralize}") %></p>
-            <% end %>
           </div>
           <% end %>
 
-          <% if @site.navigate_by_country? %>
-            <% unless @organization.projects_countries(@site).empty? %>
-            <div class="block statistics less">
-              <h3>PROJECT LOCATIONS</h3>
-              <%= raw(projects_by_location(@site, @organization.projects_countries(@site))) %>
-            </div>
-            <% end %>
-          <% else %>
-            <% unless @organization.projects_regions(@site).empty? %>
-            <div class="block statistics less">
-              <h3>PROJECT LOCATIONS</h3>
-              <%= raw(projects_by_location(@site, @organization.projects_regions(@site))) %>
-            </div>
-            <% end %>
+          <% unless @filter_by_location.present? || @organization_projects_by_location.empty? %>
+          <div class="block statistics less">
+            <h3>PROJECT LOCATIONS</h3>
+            <%= raw(projects_by_location(@site, @organization_projects_by_location)) %>
+          </div>
           <% end %>
 
           <% unless @organization.resources_for_site(@site).empty? %>
@@ -156,21 +133,16 @@
       </div>
 
       <!-- RIGHT PART -->
-      <div class="right">
-        <h3><%= pluralize(@organization.projects_count(@site), 'ACTIVE PROJECT', 'ACTIVE PROJECTS') %> in
-          <% if @site.navigate_by_country? %>
-            <%= pluralize(@organization.total_countries(@site), 'country', 'countries') %>
-          <% else %>
-            <%= pluralize(@organization.total_regions(@site), @site.word_for_regions.singularize, @site.word_for_regions) %>
-          <% end %>
-          <a id="see_all" href="#">View past projects</a>
-          <div class="tooltip">
-            <span class="body_tooltip">
-              <label>Coming soon!</label>
-              <p>Please stay tuned.</p>
-            </span>
-            <span class="bottom_tooltip"></span>
-          </div>
+      <div class="right" id="projects_div">
+        <h3>
+          <%= projects_list_subtitle %>
+          <ul class="download">
+            <li><%= link_to 'CSV', organization_path(@organization, @carry_on_filters.merge(:format => :csv)) %></li>
+            <li>|</li>
+            <li><%= link_to 'EXCEL', organization_path(@organization, @carry_on_filters.merge(:format => :xls)) %></li>
+            <li>|</li>
+            <li><%= link_to 'KML', organization_path(@organization, @carry_on_filters.merge(:format => :kml)) %></li>
+          </ul>
         </h3>
         <div id="projects">
           <%= render :partial => 'projects/projects' %>
@@ -192,7 +164,7 @@
       var chd = "<%=@chd%>";
       var map_data = <%=raw(@map_data)%>;
       var max_count = <%=@map_data_max_count%>;
-      var map_type = 'overview_map';
+      var map_type = '<%= @filter_by_location.present?? 'administrative_map' : 'overview_map' %>';
       var theme = "<%=@site.theme_id%>";
       var kind = 'org.';
       var stylez = <%=raw @site.map_styles  %>

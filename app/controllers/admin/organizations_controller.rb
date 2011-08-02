@@ -37,6 +37,16 @@ class Admin::OrganizationsController < ApplicationController
 
   def update
     @organization = Organization.find(params[:id])
+    if params[:organization][:projects_file].present?
+      projects_with_errors = @organization.sync_projects(params[:organization].delete(:projects_file))
+
+      if projects_with_errors.present?
+        send_data projects_with_errors,
+          :type        => 'application/vnd.ms-excel',
+          :disposition => "attachment; filename=#{@organization.name}_projects.xls"
+      end
+      return
+    end
     if params[:site_id]
       if @site = Site.find(params[:site_id])
         @organization.attributes_for_site = {:organization_values => params[:organization], :site_id => params[:site_id]}

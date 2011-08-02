@@ -23,6 +23,7 @@
         <% end %>
         <h1><%= @area.name %></h2>
       </div>
+      <%= link_to raw(@filter_name + image_tag('sites/icons/carry_on_filter_remove.png')) , location_path(@area), :class => 'filter' if @filter_name.present? %>
     </div>
     <div class="right">
       <%= content_tag :p, @area.wiki_description if @area.wiki_description %>
@@ -61,7 +62,7 @@
         <div id="secondary_map">
           <img src="http://maps.google.com/maps/api/staticmap?size=302x189&maptype=roadmap&style=feature:all|element:labels|visibility:off&style=feature:road|element:all|visibility:off&style=feature:administrative.province|element:all|visibility:off&style=feature:water|element:all|hue:0x00c3ff&sensor=false&center=<%=@area.center_lat%>,<%=@area.center_lon%>&zoom=3&markers=icon:http://www.ngoaidmap.org/images/themes/<%=@site.theme_id%>/marker_1.png|<%=@area.center_lat%>,<%=@area.center_lon%>"/>
           </div>
-        <% if @area.projects_clusters_sectors(@site).size > 0 %>
+        <% if @filter_by_category.blank? && @area.projects_clusters_sectors(@site).size > 0 %>
         <div class="block statistics">
           <h3>PROJECT <%= @site.word_for_cluster_sector.upcase %></h3>
 
@@ -74,13 +75,11 @@
                     </span>
                     <span class="bottom_tooltip"></span>
                   </div>
-                  <a class="<%= category.css_class %> icon_statistics" href="<%= category.is_a?(Cluster) ? cluster_path(category) : sector_path(category) %>"><span class="aller" style="width:<%= cluster_sector_width(count, @area.projects_clusters_sectors(@site)[0..3].map{ |e| e.last }.max) %>px"><%= count %></span></a>
+                  <a class="<%= category.css_class %> icon_statistics" href="<%= location_path(@area, @carry_on_filters.merge(:category_id => category.id)) %>"><span class="aller" style="width:<%= cluster_sector_width(count, @area.projects_clusters_sectors(@site).map{ |e| e.last }.max) %>px"><%= count %></span></a>
                 </li>
               <% end %>
             </ul>
-            <% unless @area.projects_clusters_sectors(@site).size < 4%>
-                <p class="other">and <%= pluralize(@area.projects_clusters_sectors(@site).size - 3,"more #{@site.word_for_cluster_sector.singularize}", "more #{@site.word_for_cluster_sector.pluralize}") %></p>
-            <% end %>
+
         </div>
         <% end %>
         <% donors = @area.donors(@site, 11) %>
@@ -115,15 +114,15 @@
     </div>
     <!-- outer_float -->
     <!-- RIGHT PART -->
-    <div class="right">
-      <h3><%= pluralize(@area.projects_count(@site), 'ACTIVE PROJECT', 'ACTIVE PROJECTS') %> IN <%= @area.name.upcase %> <a id="see_all" href="#">View past projects</a>
-        <div class="tooltip">
-          <span class="body_tooltip">
-            <label>Coming soon!</label>
-            <p>Please stay tuned.</p>
-          </span>
-          <span class="bottom_tooltip"></span>
-        </div>
+    <div class="right" id="projects_div">
+      <h3><%= georegion_projects_list_subtitle %>
+        <ul class="download">
+          <li><%= link_to 'CSV', location_path(@area, @carry_on_filters.merge(:format => :csv)) %></li>
+          <li>|</li>
+          <li><%= link_to 'EXCEL', location_path(@area, @carry_on_filters.merge(:format => :xls)) %></li>
+          <li>|</li>
+          <li><%= link_to 'KML', location_path(@area, @carry_on_filters.merge(:format => :kml)) %></li>
+        </ul>
       </h3>
       <div id="projects">
         <%= render :partial => 'projects/projects' %>

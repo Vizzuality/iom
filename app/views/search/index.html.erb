@@ -1,126 +1,159 @@
+<% content_for :js do %>
+<script type="text/javascript" charset="utf-8">
+  var word_for = {}, autocomplete_data = {};
+  word_for['region']  = '<%= @site.word_for_regions.downcase.singularize %>';
+  word_for['cluster'] = '<%= @site.word_for_clusters.downcase.singularize %>';
+
+  autocomplete_data['region'] = <%= @regions.map{|r| {
+    :id         => r[:id],
+    :title      => [r[:title], r[:subtitle]].compact.join(', ').truncate(25),
+    :long_title => [r[:title], r[:subtitle]].compact.join(', ')
+  }}.to_json.html_safe %>;
+  <% if @navigate_by_cluster %>
+  autocomplete_data['cluster'] = <%= @clusters.map{|c| {
+    :id         => c[:id],
+    :title      => c[:title].truncate(25),
+    :long_title => c[:title]
+  }}.to_json.html_safe %>;
+  <% else %>
+  autocomplete_data['sector'] = <%= @sectors.map{|s| {
+    :id         => s[:id],
+    :title      => s[:title].truncate(25),
+    :long_title => s[:title]
+  }}.to_json.html_safe %>;
+  <% end %>
+  autocomplete_data['organization'] = <%= @organizations.map{|o| {
+    :id         => o[:id],
+    :title      => o[:title].truncate(25),
+    :long_title => o[:title]
+  }}.to_json.html_safe %>;
+  autocomplete_data['donor'] = <%= @donors.map{|d| {
+    :id         => d[:id],
+    :title      => d[:title].truncate(25),
+    :long_title => d[:title]
+  }}.to_json.html_safe %>;
+</script>
+<%=raw(javascript_include_merged(:search)) %>
+<% end %>
 
   <div id="layout">
     <div id="pages">
-      <div class="left" id="relative_content"></div>
-      <div class="float_left">
-        <div class="outer_head">
-          <div class="head">
-            <h1>Search projects</h1>
-            <%= form_tag(search_path, :method => :get) do %>
+      <%= form_tag(search_path, :method => :get, :id => 'search') do%>
+        <div class="left" id="relative_content">
+          <div class="outer_head">
+            <div class="head">
+              <h1>Search projects</h1>
               <%= text_field_tag :q, params[:q] %>
               <%= submit_tag 'Search' %>
+            </div>
+          </div>
+          <div class="results_list">
+            <h3>
+              <p>
+                <% if params[:q]!='' %>
+                  <%= pluralize(@total_projects, 'active project') %>
+                <% else %>
+                  <%= pluralize(@total_projects, 'active project') %>
+                <% end %>
+              </p>
+            </h3>
+            <% if @projects.present? %>
+              <ul id="search_results">
+                <%= render :partial => 'search/projects' %>
+              </ul>
+            <% else %>
+              <ul>
+                <li class="even">
+                  <p class="no_results">No projects were found for '<%= params[:q] %>'</p>
+                </li>
+              </ul>
             <% end %>
           </div>
         </div>
-        <div class="results_list">
-          <h3><p>
-            <% if params[:q]!='' %>
-              <%= pluralize(@total_projects, 'active project') %> for '<%= params[:q] %>'
-              <%= active_facets %>
-            <% else %>
-              <%= pluralize(@total_projects, 'active project') %> in total
-              <%= active_facets %>
-            <% end %>
-          </p></h3>
-          <% if @projects.present? %>
-            <ul id="search_results">
-              <%= render :partial => 'search/projects' %>
-            </ul>
+
+        <div class="right rightsearch">
+          <div class="block region">
+              <h2><%= @site.word_for_regions %></h2>
+              <ul class="filter_list">
+                <% @filtered_regions.each do |filtered_region| %>
+                  <li>
+                    <%= "#{filtered_region.title}, #{filtered_region.subtitle}" %><%= link_to image_tag('sites/search/autocomplete_x.png', :alt => 'delete'), '#', :class => 'delete', :rel => filtered_region.id %>
+                  </li>
+                <% end %>
+              </ul>
+              <input type="text" id="autocomplete_regions" class="autocomplete" value="<%= @filtered_regions.any?? "Add a #{@site.word_for_regions.downcase.singularize}" : "All #{@site.word_for_regions.downcase}" %>" />
+              <%= hidden_field_tag('regions_ids', @filtered_regions.map(&:id).join(','), :class => 'regions ids') %>
+          </div>
+
+          <% if @navigate_by_cluster %>
+            <div class="block cluster">
+              <h2><%= @site.word_for_clusters %></h2>
+              <ul class="filter_list">
+                <% @filtered_clusters.each do |filtered_cluster| %>
+                  <li>
+                    <%= filtered_cluster.title %><%= link_to image_tag('sites/search/autocomplete_x.png', :alt => 'delete'), '#', :class => 'delete', :rel => filtered_cluster.id %>
+                  </li>
+                <% end %>
+              </ul>
+              <input type="text" id="autocomplete_clusters" class="autocomplete" value="<%= @filtered_clusters.any?? "Add a #{@site.word_for_clusters.singularize}" : "All #{@site.word_for_clusters}" %>" />
+              <%= hidden_field_tag('clusters_ids', @filtered_clusters.map(&:id).join(','), :class => 'clusters ids') %>
+            </div>
           <% else %>
-            <ul>
-              <li class="even">
-                <p class="no_results">No projects were found for '<%= params[:q] %>'</p>
-              </li>
-            </ul>
+            <div class="block sector">
+              <h2><%= @site.word_for_clusters %></h2>
+                <ul class="filter_list">
+                  <% @filtered_sectors.each do |filtered_sector| %>
+                    <li>
+                      <%= filtered_sector.title %><%= link_to image_tag('sites/search/autocomplete_x.png', :alt => 'delete'), '#', :class => 'delete', :rel => filtered_sector.id %>
+                    </li>
+                  <% end %>
+                </ul>
+                <input type="text" id="autocomplete_sectors" class="autocomplete" value="<%= @filtered_sectors.any?? "Add a #{@site.word_for_clusters.singularize}" : "All #{@site.word_for_clusters}" %>" />
+                <%= hidden_field_tag('sectors_ids', @filtered_sectors.map(&:id).join(','), :class => 'sectors ids') %>
+            </div>
           <% end %>
-        </div>
-      </div>
 
-      <div class="right">
-        <div class="block">
-          <% if @regions && @regions.any? %>
-            <h2>Filter by <%= @site.word_for_regions %></h2>
-            <ul class="filter_list">
-            <% index = 0 %>
-            <% @regions.each do |region, count| %>
-              <% if index<10 %>
-                <% if params[:region_id] && params[:region_id].to_i == region.id %>
-                  <li><%= region.name %></li>
-                <% else %>
-                  <li><%= link_to(region.name, filter_url(region)) %> (<%= count %>)</li>
-                <% end %>
-              <% else %>
-                <li class="out"><%= link_to(region.name, filter_url(region)) %> (<%= count %>)</li>
-              <% end %>
-              <% index = index + 1 %>
-            <% end %>
-            </ul>
-            <% if index>10 %>
-              <a href="#more_results" class="more">More results</a>
-            <% end %>
-          <% end %>
-        </div>
-
-        <div class="block">
-          <% if @site.navigate_by_cluster? %>
-            <% if @clusters && @clusters.any? %>
-              <h2>Filter by TOP <%= @site.word_for_clusters %></h2>
+          <div class="block organization">
+            <h2>Organization</h2>
               <ul class="filter_list">
-              <% index = 0 %>
-              <% @clusters.each do |cluster, count| %>
-                <% if index<10 %>
-                  <% if params[:cluster_id] && params[:cluster_id].to_i == cluster.id && !cluster.name.eql?('N/A')%>
-                    <li><%= cluster.name %></li>
-                  <% else %>
-                  <% unless cluster.name.eql?('N/A') %>
-                    <li><%= link_to(cluster.name, filter_url(cluster)) %> (<%= count %>)</li>
-                  <% end %>
-                  <% end %>
-                <% else %>
-                  <% unless cluster.name.eql?('N/A') %>
-                    <li><%= link_to(cluster.name, filter_url(cluster)) %> (<%= count %>)</li>
-                  <%end%>
+                <% @filtered_organizations.each do |filtered_organization| %>
+                  <li>
+                    <%= filtered_organization.title %><%= link_to image_tag('sites/search/autocomplete_x.png', :alt => 'delete'), '#', :class => 'delete', :rel => filtered_organization.id %>
+                  </li>
                 <% end %>
-                <% index = index + 1 %>
-              <% end %>
               </ul>
-              <% if index>10 %>
-                <a href="#more_results" class="more">More results</a>
-              <% end %>
-            <% end %>
-          <% elsif @site.navigate_by_sector? %>
-            <% if @sectors && @sectors.any? %>
-              <h2>Filter by TOP <%= @site.word_for_clusters %></h2>
-              <ul class="filter_list">
-              <% index = 0 %>
-              <% @sectors.each do |sector, count| %>
-                <% if index<10 %>
-                  <% if params[:sector_id] && params[:sector].to_i == sector.id && !sector.name.eql?('N/A')%>
-                    <li><%= sector.name %></li>
-                  <% else %>
-                  <% unless sector.name.eql?('N/A') %>
-                    <li><%= link_to(sector.name, filter_url(sector)) %> (<%= count %>)</li>
-                  <% end %>
-                  <% end %>
-                <% else %>
-                  <% unless sector.name.eql?('N/A') %>
-                    <li><%= link_to(sector.name, filter_url(sector)) %> (<%= count %>)</li>
-                  <%end%>
-                <% end %>
-                <% index = index + 1 %>
-              <% end %>
-              </ul>
-              <% if index>10 %>
-                <a href="#more_results" class="more">More results</a>
-              <% end %>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
+              <input type="text" id="autocomplete_organizations" class="autocomplete" value="<%= @filtered_organizations.any?? "Add a organization" : "All organizations" %>" />
+              <%= hidden_field_tag('organizations_ids', @filtered_organizations.map(&:id).join(','), :class => 'organizations ids') %>
+          </div>
 
-      <div class="view_more" id="search_view_more">
-        <%= render :partial => 'search/pagination' %>
-      </div>
+          <div class="block donor">
+            <h2>Donor</h2>
+              <ul class="filter_list">
+                <% @filtered_donors.each do |filtered_donor| %>
+                  <li>
+                    <%= filtered_donor.title %><%= link_to image_tag('sites/search/autocomplete_x.png', :alt => 'delete'), '#', :class => 'delete', :rel => filtered_donor.id %>
+                  </li>
+                <% end %>
+              </ul>
+              <input type="text" id="autocomplete_donors" class="autocomplete" value="<%= @filtered_donors.any?? "Add a donor" : "All donors" %>" />
+              <%= hidden_field_tag('donors_ids', @filtered_donors.map(&:id).join(','), :class => 'donors ids') %>
+          </div>
+
+          <div class="block">
+            <h2>Starting after <%= link_to 'Clear', '#', :class => 'clear_date start_date' if @start_date %></h2>
+              <%= select_year @start_date, :field_name => 'start_year', :prompt => 'Year', :start_year => 1980, :end_year => 2030 %>
+              <%= select_month @start_date, :field_name => 'start_month', :prompt => 'Month' %>
+          </div>
+
+          <div class="block">
+            <h2>Ending before <%= link_to 'Clear', '#', :class => 'clear_date end_date' if @end_date %></h2>
+              <%= select_year @end_date, :field_name => 'end_year', :prompt => 'Year', :start_year => 1980, :end_year => 2030 %>
+              <%= select_month @end_date, :field_name => 'end_month', :prompt => 'Month' %>
+          </div>
+        </div>
+
+        <div class="view_more" id="search_view_more">
+          <%= render :partial => 'search/pagination' %>
+        </div>
+      <% end %>
     </div>
-
-    <script src="/javascripts/sites/pages.js" type="text/javascript" charset="utf-8"></script>
