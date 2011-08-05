@@ -218,7 +218,7 @@
            <%end%>
          </div>
          <%end%>
-         
+
          <% unless @project.resources.empty? %>
          <div class="block resources">
            <h3>ADDITIONAL RESOURCES</h3>
@@ -229,12 +229,12 @@
              </ul>
            <%end%>
          </div>
-         <% end %>         
-         
+         <% end %>
+
          <div class="block last">
            <h3>EXPORT DATA</h3>
            <div class="import_data">
-             <p><%= link_to 'CSV', project_path(@project, :csv) %> | <%= link_to 'KML', project_path(@project, :kml) %></p>
+             <p><%= link_to 'CSV', project_path(@project, :csv) %> | <%= link_to 'KML', project_path(@project, :kml) %> | <%= link_to 'EXCEL', project_path(@project, :xls) %></p>
            </div>
          </div>
 
