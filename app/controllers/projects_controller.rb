@@ -53,6 +53,11 @@ class ProjectsController < ApplicationController
           :type => 'application/download; application/vnd.ms-excel; text/csv; charset=iso-8859-1; header=present',
           :disposition => "attachment; filename=#{@project.name}.csv"
       end
+      format.xls do
+        send_data Project.to_excel(@site, :project => @project.id),
+          :type        => 'application/vnd.ms-excel',
+          :disposition => "attachment; filename=#{@project.name}.xls"
+      end
     end
   end
 

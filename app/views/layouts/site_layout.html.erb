@@ -54,8 +54,7 @@
             <li>|</li>
             <li><%= link_to 'Make your own map', "http://#{Settings.main_site_host}/make-your-own-map"%></li>
             <li>|</li>
-
-            <% if Page.make_your_map(@site)%>
+            <% if Page.make_your_map(@site) %>
             <li><a href="<%= page_path(Page.make_your_map(@site)) %>">Make your map</a></li>
             <li>|</li>
             <% end %>
