@@ -45,14 +45,6 @@ $(document).ready(function() {
         'height': 20,
         'cursor': 'pointer'
       })
-      .click(function(){
-        var autocomplete = $(this).prev('input.autocomplete');
-        if (autocomplete.hasClass('opened')) {
-          $(this).prev('input.autocomplete').blur();
-        }else{
-          $(this).prev('input.autocomplete').focus();
-        };
-      })
     )
     .autocomplete({
       'minLength': 0,
