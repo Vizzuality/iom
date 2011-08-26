@@ -153,7 +153,9 @@ idprefugee_camp project_contact_person project_contact_position project_contact_
   def self.list_for_export(site = nil, options = {})
     where = []
     where << "site_id = #{site.id}" if site
-    where << '(p.end_date is null OR p.end_date > now())'
+    if !options[:include_non_active]
+      where << '(p.end_date is null OR p.end_date > now())'
+    end
 
     if options[:kml]
       kml_select = <<-SQL

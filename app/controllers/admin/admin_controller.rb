@@ -5,7 +5,9 @@ class Admin::AdminController < ApplicationController
   end
 
   def export_projects
-    options = {}
+    options = {
+      :include_non_active =>true
+    }
     options[:organization] = params[:organization_id] if params[:organization_id].present?
     results_in_csv = Project.to_csv(nil, options)
     results_in_excel = Project.to_excel(nil, options)
