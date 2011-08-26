@@ -153,9 +153,9 @@ idprefugee_camp project_contact_person project_contact_position project_contact_
   def self.list_for_export(site = nil, options = {})
     where = []
     where << "site_id = #{site.id}" if site
-    if !options[:include_non_active]
-      where << '(p.end_date is null OR p.end_date > now())'
-    end
+    
+    where << '(p.end_date is null OR p.end_date > now())' if !options[:include_non_active]
+
 
     if options[:kml]
       kml_select = <<-SQL
@@ -224,7 +224,6 @@ idprefugee_camp project_contact_person project_contact_position project_contact_
 
     sql = <<-SQL
         SELECT DISTINCT
-        site_id,
         project_id,
         project_name,
         project_description,
@@ -254,6 +253,7 @@ idprefugee_camp project_contact_person project_contact_position project_contact_
         project_needs,
         sectors,
         clusters,
+        '|' || array_to_string(array_agg(distinct site_id),'|') ||'|' as site_ids,
         (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM tags AS t INNER JOIN projects_tags AS pt ON t.id=pt.tag_id WHERE pt.project_id=dd.project_id) AS project_tags,
         countries,
         (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM regions AS r INNER JOIN projects_regions AS pr ON r.id=pr.region_id WHERE r.level=1 AND pr.project_id=dd.project_id) AS regions_level1,
@@ -265,7 +265,6 @@ idprefugee_camp project_contact_person project_contact_position project_contact_
         INNER JOIN projects AS p ON dd.project_id=p.id
         #{where}
         GROUP BY
-        site_id,
         project_id,
         project_name,
         project_description,
