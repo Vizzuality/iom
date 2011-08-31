@@ -463,11 +463,13 @@ class Site < ActiveRecord::Base
   end
 
   def geographic_boundary_box
-    res = []
-    self.geographic_context_geometry.rings.collect.first.points.each{|point| 
-      res << "#{point.y} #{point.x}"
-    }
-    res.join(",")
+    if self.geographic_context_geometry
+      res = []
+      self.geographic_context_geometry.rings.collect.first.points.each{|point| 
+        res << "#{point.y} #{point.x}"
+      }
+      res.join(",")
+    end
   end
 
   def geographic_boundary_box=(geometry)
@@ -661,7 +663,6 @@ SQL
                 LEFT JOIN donations as d ON d.project_id=p.id
                 where p.id not in (select project_id from projects_sites)
                 GROUP BY p.id,p.name,o.id,o.name,p.description,p.start_date,p.end_date,p.created_at) as subq"""
-     debugger
      ActiveRecord::Base.connection.execute(sql_for_orphan_projects)
      
      
