@@ -155,7 +155,8 @@ idprefugee_camp project_contact_person project_contact_position project_contact_
     where << "site_id = #{site.id}" if site
     
     where << '(p.end_date is null OR p.end_date > now())' if !options[:include_non_active]
-
+      
+    
 
     if options[:kml]
       kml_select = <<-SQL
