@@ -66,6 +66,9 @@
 	  var image_source = '';
 	
 	  if(document.URL.indexOf("force_site_id=3")>=0 || document.URL.indexOf("hornofafrica")>=0) {
+		if (map_type == "overview_map") {
+			//map.overlayMapTypes.insertAt(2, mapChartType);	
+		}
 	    if (map_data[i].count < 5) {
 	      diameter = 20;
 	      image_source = "/images/themes/"+ theme + '/marker_2.png';
