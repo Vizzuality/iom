@@ -65,7 +65,24 @@
 	for (var i = 0; i<map_data.length; i++) {
 	  var image_source = '';
 	
-	  if (map_type == "overview_map") {
+	  if(document.URL.indexOf("force_site_id=3")>=0 || document.URL.indexOf("hornofafrica")>=0) {
+	    if (map_data[i].count < 5) {
+	      diameter = 20;
+	      image_source = "/images/themes/"+ theme + '/marker_2.png';
+	    } else if ((map_data[i].count>=5) && (map_data[i].count<10)) {
+	      diameter = 26;
+	      image_source = "/images/themes/"+ theme + '/marker_3.png';
+	    } else if ((map_data[i].count>=10) && (map_data[i].count<18)) {
+	      diameter = 34;
+	      image_source = "/images/themes/"+ theme + '/marker_4.png';
+	    } else if ((map_data[i].count>=18) && (map_data[i].count<30)) {
+	      diameter = 42;
+	      image_source = "/images/themes/"+ theme + '/marker_5.png';
+	    } else {
+	      diameter = 58;
+	      image_source = "/images/themes/"+ theme + '/marker_6.png';
+	    }	
+	  } else if (map_type == "overview_map") {
 	    if (map_data[i].count < 25) {
 	      diameter = 20;
 	      image_source = "/images/themes/"+ theme + '/marker_2.png';
