@@ -463,7 +463,13 @@ class Site < ActiveRecord::Base
   end
 
   def geographic_boundary_box
-    self.geographic_context_geometry.rings.collect{|line_string| line_string.text_representation }.join("|") if self.geographic_context_geometry
+    if self.geographic_context_geometry
+      res = []
+      self.geographic_context_geometry.rings.collect.first.points.each{|point| 
+        res << "#{point.y} #{point.x}"
+      }
+      res.join(",")
+    end
   end
 
   def geographic_boundary_box=(geometry)
@@ -471,7 +477,7 @@ class Site < ActiveRecord::Base
     coords         = geometry.split(',').map{|c| c.split(' ')}
     polygon_points = []
 
-    coords.each {|c| polygon_points << Point.from_x_y(c.first.to_f, c.last.to_f)}
+    coords.each {|c| polygon_points << Point.from_x_y(c.last.to_f, c.first.to_f)}
 
     self.geographic_context_geometry = Polygon.from_points([polygon_points])
   end
@@ -621,11 +627,51 @@ SQL
            where site_id=#{self.id}
            GROUP BY p.id,p.name,o.id,o.name,p.description,p.start_date,p.end_date,ps.site_id,p.created_at) as subq"
      ActiveRecord::Base.connection.execute(sql)
+     
+     #We also take the opportunity to add to denormalization the projects which are orphan from a site
+     #Those projects not in a site right now also need to be handled for exports
+     sql_for_orphan_projects = """
+        insert into data_denormalization(project_id,project_name,project_description,organization_id,organization_name,
+        start_date,end_date,regions,regions_ids,countries,countries_ids,sectors,sector_ids,clusters,cluster_ids,
+        donors_ids,is_active,created_at)
+        select  * from
+          (SELECT p.id as project_id, p.name as project_name, p.description as project_description,
+                o.id as organization_id, o.name as organization_name,
+                p.start_date as start_date ,
+                p.end_date as end_date,
+                '|'||array_to_string(array_agg(distinct r.name),'|')||'|' as regions,
+                ('{'||array_to_string(array_agg(distinct r.id),',')||'}')::integer[] as regions_ids,
+                '|'||array_to_string(array_agg(distinct c.name),'|')||'|' as countries,
+                ('{'||array_to_string(array_agg(distinct c.id),',')||'}')::integer[] as countries_ids,
+                '|'||array_to_string(array_agg(distinct sec.name),'|')||'|' as sectors,
+                ('{'||array_to_string(array_agg(distinct sec.id),',')||'}')::integer[] as sector_ids,
+                '|'||array_to_string(array_agg(distinct clus.name),'|')||'|' as clusters,
+                ('{'||array_to_string(array_agg(distinct clus.id),',')||'}')::integer[] as cluster_ids,
+                ('{'||array_to_string(array_agg(distinct d.donor_id),',')||'}')::integer[] as donors_ids,
+                CASE WHEN end_date is null OR p.end_date > now() THEN true ELSE false END AS is_active,
+                p.created_at
+                FROM projects as p
+                INNER JOIN organizations as o ON p.primary_organization_id=o.id
+                LEFT JOIN projects_regions as pr ON pr.project_id=p.id
+                LEFT JOIN regions as r ON pr.region_id=r.id 
+                LEFT JOIN countries_projects as cp ON cp.project_id=p.id
+                LEFT JOIN countries as c ON c.id=cp.country_id
+                LEFT JOIN clusters_projects as cpro ON cpro.project_id=p.id
+                LEFT JOIN clusters as clus ON clus.id=cpro.cluster_id
+                LEFT JOIN projects_sectors as psec ON psec.project_id=p.id
+                LEFT JOIN sectors as sec ON sec.id=psec.sector_id
+                LEFT JOIN donations as d ON d.project_id=p.id
+                where p.id not in (select project_id from projects_sites)
+                GROUP BY p.id,p.name,o.id,o.name,p.description,p.start_date,p.end_date,p.created_at) as subq"""
+     ActiveRecord::Base.connection.execute(sql_for_orphan_projects)
+     
+     
   end
 
   def remove_cached_projects
     ActiveRecord::Base.connection.execute("DELETE FROM projects_sites WHERE site_id = #{self.id}")
     ActiveRecord::Base.connection.execute("DELETE FROM data_denormalization WHERE site_id = #{self.id}")
+    ActiveRecord::Base.connection.execute("DELETE FROM data_denormalization WHERE site_id = null")
   end
 
   def projects_for_csv

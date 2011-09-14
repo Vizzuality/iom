@@ -2,6 +2,7 @@ development:
   adapter: postgresql
   template: template_postgis
   encoding: unicode
+  host: localhost
   database: iom_development
   username: postgres
   password:
