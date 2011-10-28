@@ -501,7 +501,10 @@ class Site < ActiveRecord::Base
         select id,name from countries
         where id in (select country_id
         from countries_projects as cr inner join projects_sites as ps
-        on cr.project_id=ps.project_id and site_id=#{self.id}) order by name
+        on cr.project_id=ps.project_id and site_id=#{self.id}
+        inner join projects as p on cr.project_id=p.id 
+        WHERE (p.end_date is null OR p.end_date > now())
+        ) order by name
 SQL
       )
     else
