@@ -85,4 +85,11 @@ class String
     self.split('|').delete_if{ |r| r.blank? }.compact
    end
 
+   def add_protocol_if_required!
+     if self.present?
+       return self if self.start_with?('http://') || self.start_with?('https://')
+       'http://' + self
+     end
+   end
+
 end

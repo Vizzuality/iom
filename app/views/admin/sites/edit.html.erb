@@ -1,11 +1,11 @@
-  
+
   <div class="main_layout">
     <div class="block first  <%= (action_name == 'edit' ? 'site_info' : 'edit') %>">
       <div class="top"></div>
       <div class="med">
         <div class="left">
           <h2 class="museo_sans"><%= @site.name %></h2>
-          <%= render :partial => (action_name == 'edit' || action_name == 'update' || action_name == 'create' ? 'admin/sites/form' : 'admin/sites/form_customization') %>
+          <%= edit_or_customize_site %>
         </div>
         <div class="right menu">
           <%= render 'admin/sites/sidebar' %>
