@@ -28,4 +28,7 @@ class Partner < ActiveRecord::Base
 
   validates_presence_of :name
 
+  def url=(partner_url)
+    write_attribute('url', partner_url.add_protocol_if_required!)
+  end
 end

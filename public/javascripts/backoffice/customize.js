@@ -16,13 +16,13 @@
         ev.preventDefault();
         ev.stopPropagation();
         var position = $('a.manage_partners').position();
-        $('#manage_partners').css('top',position.top-360+'px');
+        $('#manage_partners').css('top',position.top-436+'px');
         $('#manage_partners').css('left',position.left-145+'px');
         $('#manage_partners').fadeIn();
 
         $(window).resize(function() {
           var position = $('a.manage_partners').position();
-          $('#manage_partners').css('top',position.top-360+'px');
+          $('#manage_partners').css('top',position.top-436+'px');
           $('#manage_partners').css('left',position.left-145+'px');
         });
       });
@@ -52,8 +52,8 @@
           $('#site_theme_id').val($(this).attr('rel'));
         }
       });
-      
-      
+
+
       $('#zoomIn,#zoomOut').click(function(ev){
         ev.stopPropagation();
         ev.preventDefault();
@@ -102,7 +102,7 @@
         center: latlng
       }
       map = new google.maps.Map(document.getElementById("map"), myOptions);
-  
+
       google.maps.event.addListener(map, "tilesloaded", function(ev) {
         google.maps.event.clearListeners(map,"tilesloaded");
         google.maps.event.addListener(map, "bounds_changed", function(ev) {
