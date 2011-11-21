@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110602170808) do
+ActiveRecord::Schema.define(:version => 20111121131054) do
 
   create_table "clusters", :force => true do |t|
     t.string "name"
@@ -69,11 +69,16 @@ ActiveRecord::Schema.define(:version => 20110602170808) do
     t.date     "start_date"
   end
 
+  add_index "data_denormalization", ["cluster_ids"], :name => "data_denormalization_cluster_idsx"
+  add_index "data_denormalization", ["countries_ids"], :name => "data_denormalization_countries_idsx"
+  add_index "data_denormalization", ["donors_ids"], :name => "data_denormalization_donors_idsx"
   add_index "data_denormalization", ["is_active"], :name => "data_denormalization_is_activex"
   add_index "data_denormalization", ["organization_id"], :name => "data_denormalization_organization_idx"
   add_index "data_denormalization", ["organization_name"], :name => "data_denormalization_organization_namex"
   add_index "data_denormalization", ["project_id"], :name => "data_denormalization_project_idx"
   add_index "data_denormalization", ["project_name"], :name => "data_denormalization_project_name_idx"
+  add_index "data_denormalization", ["regions_ids"], :name => "data_denormalization_regions_idsx"
+  add_index "data_denormalization", ["sector_ids"], :name => "data_denormalization_sector_idsx"
   add_index "data_denormalization", ["site_id"], :name => "data_denormalization_site_idx"
 
   create_table "data_export", :id => false, :force => true do |t|
@@ -302,6 +307,7 @@ ActiveRecord::Schema.define(:version => 20110602170808) do
     t.datetime "logo_updated_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "label"
   end
 
   add_index "partners", ["site_id"], :name => "index_partners_on_site_id"

@@ -104,18 +104,17 @@
         <li><%= link_to 'KML', "#{url(@site)}/.kml" %></li>
       </ul>
     </h3>
-    <div id="sponsor">
-      <span>WITH SUPPORT FROM</span>
-      <div id="logo">
-        <% if @site.id == 1 %>
-        <a href="http://about.van.fedex.com/corporate_responsibility/philanthropy/" target="_blank"><img src="/images/sites/partners/fedex_small.png"/></a>
-      <% elsif @site.id == 2 %>
-        <img src="/images/sites/partners/ifad_small.png"/>
-      <% elsif @site.id == 3 %>
-        <img src="/images/sites/partners/fedex_small.png"/>
-      <% end %>        
+
+    <% if @site.partners.present? %>
+      <div id="sponsor">
+        <span><%= @site.partners.first.label %></span>
+        <div id="logo">
+          <%= link_to image_tag(@site.partners.first.logo.url(:small)), @site.partners.first.url %>
+        </div>
+        <div id="logo_bottom_border"></div>
       </div>
-    </div>
+    <% end -%>
+
     <div id="projects">
       <%= render 'projects/projects' %>
     </div>
