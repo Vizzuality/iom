@@ -12,6 +12,14 @@
         $('#tumbler_id').toggle();
       });
 
+      var position = $('a.manage_partners').position();
+      if ($('#manage_partners').hasClass('show')){
+        $('#manage_partners')
+        .css('top',position.top-436+'px')
+        .css('left',position.left-145+'px')
+        .fadeIn();
+      }
+
       $('a.manage_partners').click(function(ev){
         ev.preventDefault();
         ev.stopPropagation();

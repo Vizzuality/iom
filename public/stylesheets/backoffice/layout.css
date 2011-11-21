@@ -239,6 +239,7 @@ div.block.edit div.med div.left div.common h3 {float:left; width:100%; padding:0
 div.block.edit div.med div.left div.short_field {float:left; width:272px; margin:0px 20px 0 0;}
 div.block.edit div.med div.left div.short_field.last {margin:0;}
 div.block.edit div.med div.left div.short_field input[type="text"].short {float:left; width:256px; height:18px; margin:5px 0 0 0; padding:8px; font:normal 15px Arial; color:#333333; border:none; background:url('/images/backoffice/donors/short_input.png') no-repeat 0 0;}
+div.block.edit div.med div.left div.short_field input[type="text"].short.error {background-position: 0 -34px;}
 div.block.edit div.med div.left div.field {position:relative; float:left; width:419px; margin:0;}
 div.block.edit div.med div.left a.preview {float:left; width:auto; margin:43px 0 0 10px; font:normal 14px Arial; color:#D8393D; text-decoration:underline;}
 div.block.edit div.med div.left a.preview.no_margin {margin:43px 0 0 0;}

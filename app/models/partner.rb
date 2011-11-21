@@ -26,7 +26,7 @@ class Partner < ActiveRecord::Base
                                     },
                             :url => "/system/:attachment/:id/:style.:extension"
 
-  validates_presence_of :name
+  validates_presence_of :name, :url, :label, :logo
 
   def url=(partner_url)
     write_attribute('url', partner_url.add_protocol_if_required!)
