@@ -1,7 +1,7 @@
 <div class="main_head">
   <div class="inner_main_head">
     <div class="left">
-      <h1><%= @site.name %><sup class="beta">BETA</sup></h1>
+      <h1><%= @site.name %><sup class="beta">BETAss</sup></h1>
       <% unless @site.short_description.nil? %><h3><%= @site.short_description %></h3><%end%>
       <div class="float_head home">
         <h1><%= @site.name %><sup class="beta">BETA</sup></h1>
@@ -77,7 +77,7 @@
       <% end %>
 
       <% cache("#{@site.id}/home/organizations") do %>
-      <div id="most_active_orgs" class="block margin">
+      <div id="most_active_orgs" class="block">
         <h3>Some Organizations</h3>
         <ul>
           <% @site.projects_organizations[0...9].each do |organization, count| %>
@@ -86,6 +86,8 @@
         </ul>
       </div>
       <% end %>
+
+      <%= render :partial=>"shared/sharing"%>
 
     </div>
     <!-- div.float_left -->

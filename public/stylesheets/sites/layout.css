@@ -258,6 +258,10 @@ div#left_column div.float_left div.block ul.clusters li.last {padding:0 0 0 45px
 div#left_column div.float_left div.block ul.clusters li a {color:#CD5D4C;}
 div#left_column div.float_left div.block ul.clusters li p {padding:1px 0 0 0;}
 div#left_column div.float_left div.block a.more {position:relative; margin:0 0 0 10px; padding:0 12px 0 0; background:url('/images/sites/icons/down_garnet.png') no-repeat right 6px;}
+div#left_column div.float_left div.block ul.share {}
+div#left_column div.float_left div.block ul.share li{background: none; padding: 5px 0 0 0;}
+div#left_column div.float_left div.block ul.share li span.share_label {display: inline-block; width: 60px;; vertical-align: middle}
+div#left_column div.float_left div.block ul.share li span.share_icon {display: inline-block; margin: 5px 0 0 0; vertical-align: middle}
 
 div.projects div.inner_main_head div.left div.block {padding:18px 0 20px 5px!important;}
 div.projects div.block div.import_data {float:left; margin:10px 0 0 0;}
@@ -560,6 +564,16 @@ div.projects div.float_left div.block.margin {float:left; margin:5px 0 0 0;}
 div.projects div.float_left div.block p {font:normal 15px Arial; color:#666666;}
 div.projects div.float_left div.block h3 {padding:0 0 10px 0; font:normal 13px "PT Sans Bold"; color:#333333; text-transform:uppercase; margin:25px 0 0 0;}
 div.projects div.float_left div.block h3.first {margin:0;}
+
+div.projects div.float_left div.block ul.share {}
+div.projects div.float_left div.block ul.share li{display: inline-block; zoom: 1; *display: inline; vertical-align: top; margin: 0 10px 0 0; padding: 5px 0 0 0; background: none;}
+div.projects div.float_left div.block ul.share li span.share_label {display: none; margin: 5px 5px 0 0; vertical-align: middle; font:normal 13px Arial; color:#888888;}
+div.projects div.float_left div.block ul.share li span.share_icon {display: inline-block; margin: 5px 0 0 0; vertical-align: middle}
+div.projects div.float_left div.block ul.share li#fb {width: 115px; }
+div.projects div.float_left div.block ul.share li#twitter {width: 110px; }
+div.projects div.float_left div.block ul.share li#google {width: 75px; }
+div.projects div.float_left div.block ul.share li#linkedin {width: 130px; }
+
 div.projects div.float_left div.block ul.related_projects {float:left; width:100%;}
 div.projects div.float_left div.block ul.related_projects li {float:left; width:290px; margin:0 10px 0 0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div.projects div.float_left div.block ul.related_projects li.last {margin:0;}
@@ -573,6 +587,9 @@ div.projects div.float_left div.block ul.related_projects li div.info p {padding
 div.projects div.float_left div.block ul.related_projects li div.info p.sub {padding:7px 0 0 0; color:#666666;}
 div.projects div.float_left div.block ul.locations {float: left; width: 100%;}
 div.projects div.float_left div.block ul.locations li{float: left; width: 139px; margin: 0;}
+
+
+
 div.projects div.right {float:left; width:300px; height:auto; margin:0; padding:0;}
 div.projects div.right div.block {float:left; width:265px; margin:23px 0 0 0; border-bottom:1px solid #D4D4D4; padding:0 0 20px 35px;}
 div.projects div.right div.block.last {border:none; padding:0 0 0 30px;}

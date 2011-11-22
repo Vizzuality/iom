@@ -39,11 +39,14 @@
       <div class="left"></div>
       <div class="outer_float">
         <div class="float_left">
+
           <div class="head">
             <h2>OVERVIEW</h2>
           </div>
           <% unless @filter_by_location.present? || @data.projects_regions(@site).empty?%>
+
           <div class="block statistics less">
+
             <h3>PROJECT LOCATIONS</h3>
             <% if @site.navigate_by_country? %>
               <%= raw(projects_by_location(@site, @data.projects_countries(@site))) %>
@@ -53,6 +56,7 @@
           </div>
           <% end %>
           <% unless @data.donors(@site).empty? %>
+
           <div class="block">
             <h3>DONORS IN THIS <%= @site.word_for_cluster_sector.chop %></h3>
             <ul id="donors_list">
@@ -67,6 +71,7 @@
             <% end %>
           </div>
           <%end%>
+
           <% unless @site.projects_sectors_or_clusters.empty? %>
           <div class="block margin">
             <h3>OTHER <%= @site.word_for_cluster_sector.upcase %></h3>
@@ -83,6 +88,9 @@
             </ul>
           </div>
           <% end %>
+
+          <%= render :partial=>"shared/sharing"%>
+
         </div>
       </div>
 
