@@ -43,7 +43,7 @@ div#header_sites h2 {float:left; font:normal 24px Arial; color:#D06654; text-sha
 div#header_sites ul.menu {float:left; width:232px; margin:6px 0 0 0; padding:0;}
 div#header_sites ul.menu li {float:left; margin:0 32px 0 0;}
 div#header_sites ul.menu li.last {margin:0;}
-div#header_sites ul.menu li a {float:left; font:normal 13px "PT Sans Bold"; color:#666666; text-decoration:none;}
+div#header_sites ul.menu li a {float:left; font:normal 13px "PT Sans Bold"; color:#808080; text-decoration:none;}
 div#header_sites ul.menu li a:hover {cursor:pointer; text-decoration:underline!important;}
 
 div#gallery {position: relative; float:left; width:958px; height:548px; background:url('/images/sites/home/bkg_gallery.png') no-repeat 0 0; margin:45px 0 0;}
@@ -55,7 +55,7 @@ ul#gallery_thumbails {float:left; width:950px; margin:0;}
 ul#gallery_thumbails li {float:left; width:220px; margin:30px 23px 0 0;}
 ul#gallery_thumbails li div#image {float:left; width:218px; height:131px; background:url('/images/sites/home/bkg_thumbnail.png') no-repeat 0 0;}
 ul#gallery_thumbails li div#image img {float:left; width:203px; height:114px; margin:7px;}
-ul#gallery_thumbails li a.site_name {float:left; width:100%; margin:5px 0 0 9px; font:normal 15px "PT Sans Bold"; color:#666666; text-shadow:0 -1px white; text-transform:uppercase;}
+ul#gallery_thumbails li a.site_name {float:left; width:100%; margin:5px 0 0 9px; font:normal 15px "PT Sans Bold"; color:#808080; text-shadow:0 -1px white; text-transform:uppercase;}
 ul#gallery_thumbails li.last {margin:30px 0 0 0;}
 
 
@@ -267,10 +267,10 @@ div.projects div.block div.import_data a:hover {text-decoration:underline!import
 
 div#left_column div.float_left div.block a.more:hover {text-decoration:underline;}
 div#left_column div.right {width:632px; margin:0; padding:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#left_column div.right h3 {display: inline-block; width:598px; padding:20px 0px 20px 34px; font:normal 13px "PT Sans Bold"; color:#999999; text-shadow:0 1px white; text-transform:uppercase; line-height: 18px;}
+div#left_column div.right h3 {display: inline-block; width:598px; padding:20px 0px 20px 34px; font:normal 13px "PT Sans Bold"; color:#808080; text-shadow:0 1px white; text-transform:uppercase; line-height: 18px;}
 div#left_column div.right h3 a#see_all {padding:0 5px; text-transform:none; text-shadow:none; font:normal 13px Arial;}
 div#left_column div.right h3 a#see_all:hover {text-decoration:underline;}
-div#left_column div.right h3 strong {padding:10px 0 0; font:normal 12px Arial; color:#777777; text-transform:none; text-shadow:none; line-height:20px;}
+div#left_column div.right h3 strong {padding:10px 0 0; font:normal 12px Arial; color:#808080; text-transform:none; text-shadow:none; line-height:20px;}
 div#left_column div.right h3 ul.download { width: auto; padding-left: 19px!important; background:url('/images/sites/icons/download.png') no-repeat 0 5px; line-height: 25px;}
 div#left_column div.right h3 ul.download li {font:normal 13px Arial; display: inline; width: auto; height: auto; padding: 0;}
 div#left_column div.right h3 ul.download li a:hover {text-decoration: underline;}
@@ -354,7 +354,7 @@ div#pages div.rightsearch {margin:122px 0 0 0;}
 div#pages div.right div.block {float:left; width:242px; margin:23px 0 0 0; padding:0 0 0 30px;}
 div#pages div.right div.block.border {border-bottom:1px solid #D4D4D4; padding:0 0 20px 30px;}
 div#pages div.right div.block.border.last {border:none; padding:0 0 0 30px;}
-div#pages div.right div.block h2 {width:100%; font:normal 13px "PT Sans Bold"; color:#999999; text-shadow:0 1px white; text-transform:uppercase;}
+div#pages div.right div.block h2 {width:100%; font:normal 13px "PT Sans Bold"; color:#808080; text-shadow:0 1px white; text-transform:uppercase;}
 div#pages div.right div.block h2 a.clear_date{ float: right; margin-right: 12px; font-size: 11px; font-weight: normal; color: #ca5d4d; text-transform: capitalize;}
 div#pages div.right div.block h3 a:hover {cursor:pointer; text-decoration:underline;}
 div#pages div.right div.block div.logo {float:left; padding:0 0 5px; width:100%;}
@@ -576,7 +576,7 @@ div.projects div.float_left div.block ul.locations li{float: left; width: 139px;
 div.projects div.right {float:left; width:300px; height:auto; margin:0; padding:0;}
 div.projects div.right div.block {float:left; width:265px; margin:23px 0 0 0; border-bottom:1px solid #D4D4D4; padding:0 0 20px 35px;}
 div.projects div.right div.block.last {border:none; padding:0 0 0 30px;}
-div.projects div.right div.block h3 {width:100%; font:normal 13px "PT Sans Bold"; color:#999999; text-shadow:0 1px white; text-transform:uppercase;}
+div.projects div.right div.block h3 {width:100%; font:normal 13px "PT Sans Bold"; color:#808080; text-shadow:0 1px white; text-transform:uppercase;}
 div.projects div.right div.block h3.margin {padding:20px 0 0 0;}
 div.projects div.right div.block div.logo {float:left; width:100%; padding:7px 0 15px;}
 div.projects div.right div.block div.logo div.logo_bkg {float:left; position:relative; width:86px; height:52px; background:url('/images/sites/projects/logo_bkg.png') no-repeat 0 0; vertical-align:top; overflow:hidden;}
@@ -623,17 +623,17 @@ div#footer_sites a.logo {float:left; display:block; width:67px; height:43px; bac
 div#footer_sites a.logo:hover {cursor:pointer;}
 
 div#footer_sites div.project {float:left; width:450px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#footer_sites div.project h1 {float:left; width:100%; margin:0; padding:0; font:normal 13px "PT Sans Bold"; color:#888888; text-transform:uppercase;}
-div#footer_sites div.project h1 a{float:left; padding:0; margin:0; font:normal 13px "PT Sans Bold"; color:#888888; text-transform:uppercase; width:100%;}
-div#footer_sites div.project p {float:left; padding:0; margin:5px 0 0 0 ; font:normal 13px "PT Sans"; color:#B3B3B3;}
-div#footer_sites div.project p a {color:#B3B3B3;}
+div#footer_sites div.project h1 {float:left; width:100%; margin:0; padding:0; font:normal 13px "PT Sans Bold"; color:#808080; text-transform:uppercase;}
+div#footer_sites div.project h1 a{float:left; padding:0; margin:0; font:normal 13px "PT Sans Bold"; color:#808080; text-transform:uppercase; width:100%;}
+div#footer_sites div.project p {float:left; padding:0; margin:5px 0 0 0 ; font:normal 13px "PT Sans"; color:#808080;}
+div#footer_sites div.project p a {color:#808080;}
 div#footer_sites div.project p a:hover {text-decoration:underline;}
 div#footer_sites div.project p.site_name {font:normal 13px "PT Sans Bold"; width:100%;}
 div#footer_sites div.project p.all_rights {width:550px;}
-div#footer_sites div.project p.all_rights a.link {color:#B3B3B3; text-decoration:underline;}
-div#footer_sites div.project p.all_rights a.link:hover {color:#999999; cursor:pointer;}
-div#footer_sites div.project p.site_name a {color:#B3B3B3; text-decoration:underline;}
-div#footer_sites div.project p.site_name a:hover {color:#999999; cursor:pointer;}
+div#footer_sites div.project p.all_rights a.link {color:#808080; text-decoration:underline;}
+div#footer_sites div.project p.all_rights a.link:hover {color:#444444; cursor:pointer;}
+div#footer_sites div.project p.site_name a {color:#808080; text-decoration:underline;}
+div#footer_sites div.project p.site_name a:hover {color:#444444; cursor:pointer;}
 
 
 /* FOOTER PAGES */
@@ -643,23 +643,23 @@ div#project_layout div#footer_pages div.left {width:450px; height:auto!important
 div#footer_pages div.left a.logo {float:left; display:block; width:67px; height:43px; margin:0 15px 0 0; background:url('/images/sites/common/logo_interaction.png') no-repeat 0 0;}
 div#footer_pages div.left a.logo:hover {cursor:pointer;}
 div#footer_pages div.left div.project {float:left; width:350px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#footer_pages div.left div.project h1 {float:left; width:100%; margin:0; padding:0; font:normal 13px "PT Sans Bold"; color:#888888; text-transform:uppercase;}
-div#footer_pages div.left div.project h1 a{float:left; padding:0; margin:0; font:normal 13px "PT Sans Bold"; color:#888888; text-transform:uppercase; width:100%;}
-div#footer_pages div.left div.project p {float:left; padding:0; margin:5px 0 0 0 ; font:normal 13px "PT Sans"; color:#B3B3B3;}
-div#footer_pages div.left div.project p a {color:#B3B3B3;}
+div#footer_pages div.left div.project h1 {float:left; width:100%; margin:0; padding:0; font:normal 13px "PT Sans Bold"; color:#808080; text-transform:uppercase;}
+div#footer_pages div.left div.project h1 a{float:left; padding:0; margin:0; font:normal 13px "PT Sans Bold"; color:#808080; text-transform:uppercase; width:100%;}
+div#footer_pages div.left div.project p {float:left; padding:0; margin:5px 0 0 0 ; font:normal 13px "PT Sans"; color:#808080;}
+div#footer_pages div.left div.project p a {color:#808080;}
 div#footer_pages div.left div.project p a:hover {text-decoration:underline;}
 div#footer_pages div.left div.project p.site_name {font:normal 13px "PT Sans Bold"; width:100%;}
 div#footer_pages div.left div.project p.all_rights {width:550px;}
-div#footer_pages div.left div.project p.all_rights a.link {color:#B3B3B3; text-decoration:underline;}
-div#footer_pages div.left div.project p.all_rights a.link:hover {color:#999999; cursor:pointer;}
-div#footer_pages div.left div.project p.site_name a {color:#B3B3B3; text-decoration:underline;}
-div#footer_pages div.left div.project p.site_name a:hover {color:#999999; cursor:pointer;}
+div#footer_pages div.left div.project p.all_rights a.link {color:#808080; text-decoration:underline;}
+div#footer_pages div.left div.project p.all_rights a.link:hover {color:#444444; cursor:pointer;}
+div#footer_pages div.left div.project p.site_name a {color:#808080; text-decoration:underline;}
+div#footer_pages div.left div.project p.site_name a:hover {color:#444444; cursor:pointer;}
 div#footer_pages div.right {width:400px; margin:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline; text-align:right;}
 div#project_layout div#footer_pages div.right {width:350px; margin:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline; text-align:right;}
 div#footer_pages div.right ul {margin:5px 0 0 0; padding:0; text-align: right;}
-div#footer_pages div.right ul li {margin:0 0 0 6px; padding:0; font:normal 13px "PT Sans"; color:#B3B3B3; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;  text-align: right;}
-div#footer_pages div.right ul li a {color:#B3B3B3;text-decoration:underline;   text-align: right;}
-div#footer_pages div.right ul li a:hover {color:#999999; cursor:pointer;}
+div#footer_pages div.right ul li {margin:0 0 0 6px; padding:0; font:normal 13px "PT Sans"; color:#808080; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;  text-align: right;}
+div#footer_pages div.right ul li a {color:#808080;text-decoration:underline;   text-align: right;}
+div#footer_pages div.right ul li a:hover {color:#444444; cursor:pointer;}
 
 /*FOOTER ERRORS*/
 div#footer_errors {clear:both; width:100%; padding:100px 0 100px 0;}
