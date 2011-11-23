@@ -20,6 +20,8 @@ class SitesController < ApplicationController
                                            :page => params[:page],
                                            :start_in_page => params[:start_in_page]
 
+    @footer_sites = @site.sites_for_footer
+
     respond_to do |format|
       format.html do
         # Get the data for the map depending on the region definition of the site (country or region)

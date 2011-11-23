@@ -219,7 +219,8 @@ div#left_column div.float_left div.head p {font:normal 13px Arial; color:#7B3932
 div#left_column div.float_left div.head h2 {width:100%; font:normal 15px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42; text-transform:uppercase;}
 div#left_column div.float_left div#secondary_map {width:300px; height:189px; border-bottom:1px solid #999999; background:#99B3CA;}
 div#left_column div.float_left div.block {float:left; width:238px; padding:32px; background:white; border-bottom:1px solid #DEDEDE;}
-div.inner_main_head div.block {border-bottom:none!important;}
+div#left_column div.float_left div.block.sharing {min-height:214px}
+div.inner_main_head div.block {border-bottom1:none!important;}
 div#left_column div.float_left div.block.box_info {float:left; width:238px; border-bottom:1px solid #DEDEDE; padding:0 32px 0; }
 div#left_column div.float_left div.block.box_info label {float:left; margin:30px 0 0 0; font:normal 13px "PT Sans Bold"; color:#666666; width:98px;}
 div#left_column div.float_left div.block.box_info h2 {float:left; font:normal 36px "Aller"; color:#666666; width:98px;}
@@ -259,9 +260,9 @@ div#left_column div.float_left div.block ul.clusters li a {color:#CD5D4C;}
 div#left_column div.float_left div.block ul.clusters li p {padding:1px 0 0 0;}
 div#left_column div.float_left div.block a.more {position:relative; margin:0 0 0 10px; padding:0 12px 0 0; background:url('/images/sites/icons/down_garnet.png') no-repeat right 6px;}
 div#left_column div.float_left div.block ul.share {}
-div#left_column div.float_left div.block ul.share li{background: none; padding: 5px 0 0 0;}
-div#left_column div.float_left div.block ul.share li span.share_label {display: inline-block; width: 60px;; vertical-align: middle}
-div#left_column div.float_left div.block ul.share li span.share_icon {display: inline-block; margin: 5px 0 0 0; vertical-align: middle}
+div#left_column div.float_left div.block ul.share li{background: none; padding: 13px 0 0 0;}
+div#left_column div.float_left div.block ul.share li span.share_label {display: inline-block; width: 60px; vertical-align: middle}
+div#left_column div.float_left div.block ul.share li span.share_icon {display: inline-block; margin:0; vertical-align: middle}
 
 div.projects div.inner_main_head div.left div.block {padding:18px 0 20px 5px!important;}
 div.projects div.block div.import_data {float:left; margin:10px 0 0 0;}
@@ -270,7 +271,7 @@ div.projects div.block div.import_data a {font:normal 13px Arial; text-decoratio
 div.projects div.block div.import_data a:hover {text-decoration:underline!important;}
 
 div#left_column div.float_left div.block a.more:hover {text-decoration:underline;}
-div#left_column div.right {width:632px; margin:0; padding:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#left_column div.right {width:632px; padding:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#left_column div.right h3 {display: inline-block; width:598px; padding:20px 0px 20px 34px; font:normal 13px "PT Sans Bold"; color:#808080; text-shadow:0 1px white; text-transform:uppercase; line-height: 18px;}
 div#left_column div.right h3 a#see_all {padding:0 5px; text-transform:none; text-shadow:none; font:normal 13px Arial;}
 div#left_column div.right h3 a#see_all:hover {text-decoration:underline;}
@@ -572,7 +573,7 @@ div.projects div.float_left div.block ul.share li span.share_icon {display: inli
 div.projects div.float_left div.block ul.share li#fb {width: 115px; }
 div.projects div.float_left div.block ul.share li#twitter {width: 110px; }
 div.projects div.float_left div.block ul.share li#google {width: 75px; }
-div.projects div.float_left div.block ul.share li#linkedin {width: 130px; }
+div.projects div.float_left div.block ul.share li#linkedin {width: 110px; }
 
 div.projects div.float_left div.block ul.related_projects {float:left; width:100%;}
 div.projects div.float_left div.block ul.related_projects li {float:left; width:290px; margin:0 10px 0 0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
@@ -634,6 +635,7 @@ div.error_block div.block p a:hover {text-decoration:underline;}
 
 
 /* FOOTER SITES */
+
 div#footer_sites {clear:both; width:100%; padding:100px 0 100px 0;}
 div#footer_sites div.left {width:800px; margin:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline; text-align:right;}
 div#footer_sites a.logo {float:left; display:block; width:67px; height:43px; background:url('/images/sites/common/logo_interaction.png') no-repeat 0 0; margin:0 20px 0 0;}
@@ -652,30 +654,50 @@ div#footer_sites div.project p.all_rights a.link:hover {color:#444444; cursor:po
 div#footer_sites div.project p.site_name a {color:#808080; text-decoration:underline;}
 div#footer_sites div.project p.site_name a:hover {color:#444444; cursor:pointer;}
 
+/* SUPERFOOTER PAGES */
+div#superfooter_pages {clear:both; display: inline-block; zoom: 1; *display: inline; vertical-align: top; width:100%; margin: 60px 0 0 0; padding:30px 0 30px 0; background: #171717; border-bottom: 1px solid #2F2F2F}
+div#superfooter_pages div.inner_superfooter {margin:0 auto; width:932px;}
+div#superfooter_pages h2 {float: left; width: 800px; font:normal 18px "PT Sans Bold"; color: #D06654}
+div#superfooter_pages h2 span{ color: #FFFFFF}	
+div#superfooter_pages a#learnmore {float: right; padding: 3px 0 0 0}
+div#superfooter_pages a#learnmore:hover {text-decoration: underline;}
+div#superfooter_pages ul {float: left; margin: 30px 0 0 0;}
+div#superfooter_pages ul li{display: inline-block; zoom: 1; *display: inline; vertical-align: middle;  width: 285px; margin: 0 33px 0 0;}
+div#superfooter_pages ul li.last{margin: 0;}
+div#superfooter_pages ul li img{width: 285px; height: 161px;}
+div#superfooter_pages ul li span{display: block; margin: 10px 0 0 0; font:normal 15px "PT Sans Bold"; color: #D06654}
 
 /* FOOTER PAGES */
-div#footer_pages {clear:both; width:100%; padding:100px 0 100px 0;}
+div#footer_pages {clear:both; display: inline-block; width:100%; padding:30px 0 100px 0; color: #808080;}
+div.dark_footer#footer_pages {background: #171717; color: #333333}
+div#footer_pages a {color: #808080}
+div.dark_footer#footer_pages a {color: #333333}
+div.no_superfooter {margin: 60px 0 0 0;}
+
+div#footer_pages div.inner_footer {margin:0 auto; width:932px;}
 div#footer_pages div.left {width:450px; height:auto!important; margin:0 0 0 5px; background:none; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#project_layout div#footer_pages div.left {width:450px; height:auto!important; margin:0 0 0 30px; background:none; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#footer_pages div.left a.logo {float:left; display:block; width:67px; height:43px; margin:0 15px 0 0; background:url('/images/sites/common/logo_interaction.png') no-repeat 0 0;}
+div.dark_footer#footer_pages div.left a.logo {background:url('/images/sites/common/logo_interaction_light.png') no-repeat 0 0;}
+
 div#footer_pages div.left a.logo:hover {cursor:pointer;}
 div#footer_pages div.left div.project {float:left; width:350px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
-div#footer_pages div.left div.project h1 {float:left; width:100%; margin:0; padding:0; font:normal 13px "PT Sans Bold"; color:#808080; text-transform:uppercase;}
-div#footer_pages div.left div.project h1 a{float:left; padding:0; margin:0; font:normal 13px "PT Sans Bold"; color:#808080; text-transform:uppercase; width:100%;}
-div#footer_pages div.left div.project p {float:left; padding:0; margin:5px 0 0 0 ; font:normal 13px "PT Sans"; color:#808080;}
-div#footer_pages div.left div.project p a {color:#808080;}
+div#footer_pages div.left div.project h1 {float:left; width:100%; margin:0; padding:0; font:normal 13px "PT Sans Bold"; text-transform:uppercase;}
+div#footer_pages div.left div.project h1 a{float:left; padding:0; margin:0; font:normal 13px "PT Sans Bold"; text-transform:uppercase; width:100%;}
+div#footer_pages div.left div.project p {float:left; padding:0; margin:5px 0 0 0 ; font:normal 13px "PT Sans"}
+div#footer_pages div.left div.project p a {}
 div#footer_pages div.left div.project p a:hover {text-decoration:underline;}
 div#footer_pages div.left div.project p.site_name {font:normal 13px "PT Sans Bold"; width:100%;}
 div#footer_pages div.left div.project p.all_rights {width:550px;}
-div#footer_pages div.left div.project p.all_rights a.link {color:#808080; text-decoration:underline;}
+div#footer_pages div.left div.project p.all_rights a.link {text-decoration:underline;}
 div#footer_pages div.left div.project p.all_rights a.link:hover {color:#444444; cursor:pointer;}
-div#footer_pages div.left div.project p.site_name a {color:#808080; text-decoration:underline;}
+div#footer_pages div.left div.project p.site_name a {text-decoration:underline;}
 div#footer_pages div.left div.project p.site_name a:hover {color:#444444; cursor:pointer;}
 div#footer_pages div.right {width:400px; margin:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline; text-align:right;}
 div#project_layout div#footer_pages div.right {width:350px; margin:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline; text-align:right;}
 div#footer_pages div.right ul {margin:5px 0 0 0; padding:0; text-align: right;}
-div#footer_pages div.right ul li {margin:0 0 0 6px; padding:0; font:normal 13px "PT Sans"; color:#808080; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;  text-align: right;}
-div#footer_pages div.right ul li a {color:#808080;text-decoration:underline;   text-align: right;}
+div#footer_pages div.right ul li {margin:0 0 0 6px; padding:0; font:normal 13px "PT Sans"; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;  text-align: right;}
+div#footer_pages div.right ul li a {text-decoration:underline;   text-align: right;}
 div#footer_pages div.right ul li a:hover {color:#444444; cursor:pointer;}
 
 /*FOOTER ERRORS*/

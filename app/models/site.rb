@@ -75,7 +75,7 @@ class Site < ActiveRecord::Base
 
   has_attached_file :aid_map_image, :styles => {
                                       :small => {
-                                        :geometry => "203x115#",
+                                        :geometry => "285x168#",
                                         :format => 'jpg'
                                       },
                                       :huge => {
@@ -696,6 +696,10 @@ SQL
   def map_styles
     default_map_style = "  [\n    {\n      featureType: \"administrative.country\",\n      elementType: \"geometry\",\n      stylers: [\n        { gamma: 1.63 },\n        { lightness: 14 },\n        { visibility: \"on\" }\n      ]\n    },{\n      featureType: \"administrative.neighborhood\",\n      elementType: \"all\",\n      stylers: [\n        { visibility: \"off\" }\n      ]\n    },{\n      featureType: \"administrative.land_parcel\",\n      elementType: \"all\",\n      stylers: [\n        { visibility: \"off\" }\n      ]\n    },{\n      featureType: \"administrative.locality\",\n      elementType: \"labels\",\n      stylers: [\n        { lightness: 17 }\n      ]\n    },{\n      featureType: \"administrative.province\",\n      elementType: \"all\",\n      stylers: [\n        { lightness: 19 }\n      ]\n    },{\n      featureType: \"poi\",\n      elementType: \"all\",\n      stylers: [\n        { visibility: \"off\" }\n      ]\n    },{\n      featureType: \"road\",\n      elementType: \"all\",\n      stylers: [\n        { visibility: \"off\" }\n      ]\n    },{\n      featureType: \"transit\",\n      elementType: \"all\",\n      stylers: [\n        { visibility: \"off\" }\n      ]\n    },{\n      featureType: \"water\",\n      elementType: \"all\",\n      stylers: [\n        { hue: \"#00c3ff\" }\n        ]\n    },{\n      featureType: \"water\",\n      elementType: \"labels\",\n      stylers: [\n        { visibility: \"off\" }\n      ]\n    },{\n      featureType: \"all\",\n      elementType: \"all\",\n      stylers: [\n\n      ]\n    }\n  ];\n"
     return default_map_style if attributes[:map_styles].blank?
+  end
+
+  def sites_for_footer
+    Site.published.select('id, name, aid_map_image_updated_at, aid_map_image_file_size, aid_map_image_content_type, aid_map_image_file_name, url, permalink, created_at').where('id <> ?', id).order("created_at desc").limit(3).all
   end
 
   private
