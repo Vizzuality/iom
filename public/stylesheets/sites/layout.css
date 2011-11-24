@@ -219,7 +219,8 @@ div#left_column div.float_left div.head p {font:normal 13px Arial; color:#7B3932
 div#left_column div.float_left div.head h2 {width:100%; font:normal 15px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42; text-transform:uppercase;}
 div#left_column div.float_left div#secondary_map {width:300px; height:189px; border-bottom:1px solid #999999; background:#99B3CA;}
 div#left_column div.float_left div.block {float:left; width:238px; padding:32px; background:white; border-bottom:1px solid #DEDEDE;}
-div#left_column div.float_left div.block.sharing {min-height:214px}
+div#left_column div.float_left div.block.sharing {min-height:195px}
+div#left_column div.float_left div.block.sharing p {padding: 0}
 div.inner_main_head div.block {border-bottom1:none!important;}
 div#left_column div.float_left div.block.box_info {float:left; width:238px; border-bottom:1px solid #DEDEDE; padding:0 32px 0; }
 div#left_column div.float_left div.block.box_info label {float:left; margin:30px 0 0 0; font:normal 13px "PT Sans Bold"; color:#666666; width:98px;}
@@ -566,14 +567,14 @@ div.projects div.float_left div.block p {font:normal 15px Arial; color:#666666;}
 div.projects div.float_left div.block h3 {padding:0 0 10px 0; font:normal 13px "PT Sans Bold"; color:#333333; text-transform:uppercase; margin:25px 0 0 0;}
 div.projects div.float_left div.block h3.first {margin:0;}
 
-div.projects div.float_left div.block ul.share {}
-div.projects div.float_left div.block ul.share li{display: inline-block; zoom: 1; *display: inline; vertical-align: top; margin: 0 10px 0 0; padding: 5px 0 0 0; background: none;}
-div.projects div.float_left div.block ul.share li span.share_label {display: none; margin: 5px 5px 0 0; vertical-align: middle; font:normal 13px Arial; color:#888888;}
+div.projects div.float_left div.block ul.share {margin: 10px 0 0 0; padding: 0}
+div.projects div.float_left div.block ul.share li{display: inline-block; zoom: 1; *display: inline; vertical-align: top; width: 298px; padding: 5px 0 0 0; background: none;}
+div.projects div.float_left div.block ul.share li span.share_label {display: inline-block; margin: 5px 5px 0 0; vertical-align: middle; width: 60px; font:normal 13px Arial; color:#888888;}
 div.projects div.float_left div.block ul.share li span.share_icon {display: inline-block; margin: 5px 0 0 0; vertical-align: middle}
-div.projects div.float_left div.block ul.share li#fb {width: 115px; }
-div.projects div.float_left div.block ul.share li#twitter {width: 110px; }
-div.projects div.float_left div.block ul.share li#google {width: 75px; }
-div.projects div.float_left div.block ul.share li#linkedin {width: 110px; }
+div.projects div.float_left div.block ul.share li#fb {}
+div.projects div.float_left div.block ul.share li#twitter {}
+div.projects div.float_left div.block ul.share li#google {}
+div.projects div.float_left div.block ul.share li#linkedin {}
 
 div.projects div.float_left div.block ul.related_projects {float:left; width:100%;}
 div.projects div.float_left div.block ul.related_projects li {float:left; width:290px; margin:0 10px 0 0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
