@@ -569,13 +569,13 @@ div.projects div.float_left div.block h3 {padding:0 0 10px 0; font:normal 13px "
 div.projects div.float_left div.block h3.first {margin:0;}
 
 div.projects div.float_left div.block ul.share {margin: 0; padding: 0}
-div.projects div.float_left div.block ul.share li{display: inline-block; zoom: 1; *display: inline; vertical-align: top; width: auto; padding: 5px 0 0 0; background: none;}
+div.projects div.float_left div.block ul.share li{display: inline-block; zoom: 1; *display: inline; vertical-align: top; padding: 0; background: none;}
 div.projects div.float_left div.block ul.share li span.share_label {display: none; margin: 5px 5px 0 0; vertical-align: middle; width: 60px; font:normal 13px Arial; color:#888888;}
 div.projects div.float_left div.block ul.share li span.share_icon {display: inline-block; margin: 5px 0 0 0; vertical-align: middle}
-div.projects div.float_left div.block ul.share li#fb {}
-div.projects div.float_left div.block ul.share li#twitter {}
-div.projects div.float_left div.block ul.share li#google {}
-div.projects div.float_left div.block ul.share li#linkedin {}
+div.projects div.float_left div.block ul.share li#twitter {width: 120px}
+div.projects div.float_left div.block ul.share li#google {width: 83px}
+div.projects div.float_left div.block ul.share li#linkedin {width: 83px; max-width: 120px}
+div.projects div.float_left div.block ul.share li#fb {width: 120px}
 
 div.projects div.float_left div.block ul.related_projects {float:left; width:100%;}
 div.projects div.float_left div.block ul.related_projects li {float:left; width:290px; margin:0 10px 0 0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
@@ -590,8 +590,6 @@ div.projects div.float_left div.block ul.related_projects li div.info p {padding
 div.projects div.float_left div.block ul.related_projects li div.info p.sub {padding:7px 0 0 0; color:#666666;}
 div.projects div.float_left div.block ul.locations {float: left; width: 100%;}
 div.projects div.float_left div.block ul.locations li{float: left; width: 139px; margin: 0;}
-
-
 
 div.projects div.right {float:left; width:300px; height:auto; margin:0; padding:0;}
 div.projects div.right div.block {float:left; width:265px; margin:23px 0 0 0; border-bottom:1px solid #D4D4D4; padding:0 0 20px 35px;}
