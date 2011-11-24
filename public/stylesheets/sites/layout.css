@@ -219,7 +219,7 @@ div#left_column div.float_left div.head p {font:normal 13px Arial; color:#7B3932
 div#left_column div.float_left div.head h2 {width:100%; font:normal 15px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42; text-transform:uppercase;}
 div#left_column div.float_left div#secondary_map {width:300px; height:189px; border-bottom:1px solid #999999; background:#99B3CA;}
 div#left_column div.float_left div.block {float:left; width:238px; padding:32px; background:white; border-bottom:1px solid #DEDEDE;}
-div#left_column div.float_left div.block.sharing {min-height:195px}
+div#left_column div.float_left div.block.sharing {min-height:175px}
 div#left_column div.float_left div.block.sharing p {padding: 0}
 div.inner_main_head div.block {border-bottom1:none!important;}
 div#left_column div.float_left div.block.box_info {float:left; width:238px; border-bottom:1px solid #DEDEDE; padding:0 32px 0; }
@@ -394,11 +394,11 @@ div#pages form div.right div.block {position: relative; width: 200px;}
 div#pages form div.right div.block input.add {position: absolute; bottom: 1px; left: 198px; display: block; border: 0; padding: 0; width: 20px; height: 20px; background-color: transparent; font-family: Arial; font-size: 16px; color: #B0B0B0; font-weight: bold; line-height: 20px; text-shadow: 0 1px 0 white; cursor: pointer; z-index: 1;}
 div#pages form div.right div.block input.add:hover { -moz-box-shadow: inset 1px 1px 1px #CCCCCC; -webkit-box-shadow: inset 1px 1px 1px #CCCCCC; box-shadow: inset 1px 1px 1px #CCCCCC;}
 div#pages form div.right div.block input.add:active { -moz-box-shadow: inset 1px 1px 1px #999999; -webkit-box-shadow: inset 1px 1px 1px #999999; box-shadow: inset 1px 1px 1px #999999; padding-top: 1px; padding-left: 1px;}
-div#pages form div.right div.block input.autocomplete {width: 158px; height: 21px; margin: 0; padding: 0; padding-left: 5px; padding-right: 31px; border: 0 none; font-family: Arial; font-size: 13px; color: #999999; background:url('/images/sites/search/autocomplete_bkg.png') no-repeat 0 0; z-index: 1;}
+div#pages form div.right div.block input.autocomplete {width: 158px; height: 21px; margin: 0; padding: 0; padding-left: 5px; padding-right: 31px; border: 0 none; font-family: Arial; font-size: 13px; color: #666666; background:url('/images/sites/search/autocomplete_bkg.png') no-repeat 0 0; z-index: 1;}
 div#pages form div.right div.block input.autocomplete.opened {background:url('/images/sites/search/autocomplete_bkg.png') no-repeat 0 -21px;}
 
 div#pages form div.right div.block .newListSelected { float: left; position: relative; height:21px; padding: 0; cursor: pointer;}
-div#pages form div.right div.block .newListSelected .selectedTxt { height:21px; margin: 0 0 0 6px; color:#999999; line-height:21px; overflow:hidden;}
+div#pages form div.right div.block .newListSelected .selectedTxt { height:21px; margin: 0 0 0 6px; color:#666666; line-height:21px; overflow:hidden;}
 div#pages form div.right div.block .newListSelected div.newList_content {position: absolute; top: 21px; left: 0; float: left; height: 107px; overflow: hidden; padding: 0; z-index: 10;}
 div#pages form div.right div.block .newListSelected div.newList_content ul.newList {padding: 0; margin: 0;}
 div#pages form div.right div.block .newListSelected div.newList_content ul.newList li { padding: 3px 6px; background: none transparent;}
@@ -414,8 +414,9 @@ div#pages form div.right div.block .newListSelected.year div.newList_content ul.
 
 ul.ui-autocomplete { width: 177px; height: 107px; margin: 0; padding: 0; background:url('/images/sites/search/autocomplete_list_bkg.png') no-repeat 0 0; overflow: hidden; }
 ul.ui-autocomplete li {padding: 3px 6px;}
-ul.ui-autocomplete li a{color: #999999;}
-ul.ui-autocomplete li a.ui-state-hover { text-decoration: underline;}
+ul.ui-autocomplete li a{color: #666666;}
+ul.ui-
+ li a.ui-state-hover { text-decoration: underline;}
 
 
 /*chart*/
@@ -567,9 +568,9 @@ div.projects div.float_left div.block p {font:normal 15px Arial; color:#666666;}
 div.projects div.float_left div.block h3 {padding:0 0 10px 0; font:normal 13px "PT Sans Bold"; color:#333333; text-transform:uppercase; margin:25px 0 0 0;}
 div.projects div.float_left div.block h3.first {margin:0;}
 
-div.projects div.float_left div.block ul.share {margin: 10px 0 0 0; padding: 0}
-div.projects div.float_left div.block ul.share li{display: inline-block; zoom: 1; *display: inline; vertical-align: top; width: 298px; padding: 5px 0 0 0; background: none;}
-div.projects div.float_left div.block ul.share li span.share_label {display: inline-block; margin: 5px 5px 0 0; vertical-align: middle; width: 60px; font:normal 13px Arial; color:#888888;}
+div.projects div.float_left div.block ul.share {margin: 0; padding: 0}
+div.projects div.float_left div.block ul.share li{display: inline-block; zoom: 1; *display: inline; vertical-align: top; width: auto; padding: 5px 0 0 0; background: none;}
+div.projects div.float_left div.block ul.share li span.share_label {display: none; margin: 5px 5px 0 0; vertical-align: middle; width: 60px; font:normal 13px Arial; color:#888888;}
 div.projects div.float_left div.block ul.share li span.share_icon {display: inline-block; margin: 5px 0 0 0; vertical-align: middle}
 div.projects div.float_left div.block ul.share li#fb {}
 div.projects div.float_left div.block ul.share li#twitter {}
