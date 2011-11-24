@@ -2,15 +2,14 @@
     
       <div id="superfooter_pages">        
         <div class="inner_superfooter">
-        <h2>Part of <span>NGO AID MAP</span>. An </strong>InterAction</strong> initiative</h2>  
+        <h2>Part of <span>NGO AID MAP</span>. An <strong>InterAction</strong> initiative</h2>  
 
         <%= link_to 'Learn more', "http://#{Settings.main_site_host}", :id => "learnmore" %>
 
         <ul>          
           <% @footer_sites.each do |footer_site|%>
-            <li>
-              <%= link_to image_tag(footer_site.aid_map_image.url(:small)), "#{request.protocol}#{footer_site.url}:#{request.port}" %>
-              <span><%= footer_site.name %></span>
+            <li>              
+              <%= link_to (raw [image_tag(footer_site.aid_map_image.url(:small)), content_tag(:span, footer_site.name)].join), "#{request.protocol}#{footer_site.url}:#{request.port}" %>
             </li>
           <% end %>
         </ul>

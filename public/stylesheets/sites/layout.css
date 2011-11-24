@@ -656,22 +656,26 @@ div#footer_sites div.project p.site_name a:hover {color:#444444; cursor:pointer;
 
 /* SUPERFOOTER PAGES */
 div#superfooter_pages {clear:both; display: inline-block; zoom: 1; *display: inline; vertical-align: top; width:100%; margin: 60px 0 0 0; padding:30px 0 30px 0; background: #171717; border-bottom: 1px solid #2F2F2F}
+div#superfooter_pages a{color: #864237;}
+div#superfooter_pages a:hover{text-decoration: underline}
 div#superfooter_pages div.inner_superfooter {margin:0 auto; width:932px;}
-div#superfooter_pages h2 {float: left; width: 800px; font:normal 18px "PT Sans Bold"; color: #D06654}
-div#superfooter_pages h2 span{ color: #FFFFFF}	
+div#superfooter_pages h2 {float: left; width: 800px; font:normal 18px Arial; color: #D06654}
+div#superfooter_pages h2 span{color: #FFFFFF; font-weight: bold;}	
 div#superfooter_pages a#learnmore {float: right; padding: 3px 0 0 0}
 div#superfooter_pages a#learnmore:hover {text-decoration: underline;}
 div#superfooter_pages ul {float: left; margin: 30px 0 0 0;}
 div#superfooter_pages ul li{display: inline-block; zoom: 1; *display: inline; vertical-align: middle;  width: 285px; margin: 0 33px 0 0;}
 div#superfooter_pages ul li.last{margin: 0;}
-div#superfooter_pages ul li img{width: 285px; height: 161px;}
-div#superfooter_pages ul li span{display: block; margin: 10px 0 0 0; font:normal 15px "PT Sans Bold"; color: #D06654}
+div#superfooter_pages ul li a{}
+div#superfooter_pages ul li a:hover{}
+div#superfooter_pages ul li a img{width: 285px; height: 161px;}
+div#superfooter_pages ul li a span {display: block; margin: 10px 0 0 0; font:normal 15px "PT Sans Bold"; text-transform:uppercase;}
 
 /* FOOTER PAGES */
 div#footer_pages {clear:both; display: inline-block; width:100%; padding:30px 0 100px 0; color: #808080;}
-div.dark_footer#footer_pages {background: #171717; color: #333333}
+div.dark_footer#footer_pages {background: #171717; color: #A2A2A2}
 div#footer_pages a {color: #808080}
-div.dark_footer#footer_pages a {color: #333333}
+div.dark_footer#footer_pages a {color: #A2A2A2}
 div.no_superfooter {margin: 60px 0 0 0;}
 
 div#footer_pages div.inner_footer {margin:0 auto; width:932px;}
