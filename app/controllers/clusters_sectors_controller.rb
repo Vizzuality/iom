@@ -11,7 +11,7 @@ class ClustersSectorsController < ApplicationController
     if @filter_by_location
       @location_name = if @filter_by_location.size > 1
         region = Region.where(:id => @filter_by_location.last).first
-        "#{region.country.name}/#{region.name}"
+        "#{region.country.name}/#{region.name}" rescue ''
       else
         "#{Country.where(:id => @filter_by_location.first).first.name}"
       end
@@ -120,9 +120,9 @@ class ClustersSectorsController < ApplicationController
               location_filter = @filter_by_location.size == 1 ? "r.country_id = #{@filter_by_location.first}" : "r.id = #{@filter_by_location.last}"
 
               sql="select r.id,r.name,count(ps.*) as count,r.center_lon as lon,r.center_lat as lat,
-              
+
               CASE WHEN count(distinct ps.project_id) > 1 THEN
-                  '#{carry_on_url}'||r.path 
+                  '#{carry_on_url}'||r.path
               ELSE
                   '/projects/'||(array_to_string(array_agg(ps.project_id),''))
               END as url,
@@ -136,9 +136,9 @@ class ClustersSectorsController < ApplicationController
                 group by r.id,r.name,lon,lat,r.path"
             else
               sql="select c.id,c.name,count(ps.*) as count,c.center_lon as lon,c.center_lat as lat,c.name,
-              
+
               CASE WHEN count(distinct ps.project_id) > 1 THEN
-                  '#{carry_on_url}'||c.id 
+                  '#{carry_on_url}'||c.id
               ELSE
                   '/projects/'||(array_to_string(array_agg(ps.project_id),''))
               END as url,

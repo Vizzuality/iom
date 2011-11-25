@@ -27,7 +27,7 @@ class OrganizationsController < ApplicationController
         "#{Country.where(:id => @filter_by_location.first).first.name}"
       else
         region = Region.where(:id => @filter_by_location.last).first
-        "#{region.country.name}/#{region.name}"
+        "#{region.country.name}/#{region.name}" rescue ''
       end
       @filter_name =  "#{@category_name} projects in #{@location_name}"
     elsif @filter_by_location
