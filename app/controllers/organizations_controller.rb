@@ -35,7 +35,7 @@ class OrganizationsController < ApplicationController
         "#{Country.where(:id => @filter_by_location.first).first.name}"
       else
         region = Region.where(:id => @filter_by_location.last).first
-        "#{region.country.name}/#{region.name}"
+        "#{region.country.name}/#{region.name}" rescue ''
       end
       @filter_name = "projects in #{@location_name}"
     elsif @filter_by_category.present?
@@ -60,7 +60,7 @@ class OrganizationsController < ApplicationController
     end
 
     @projects = Project.custom_find @site, projects_custom_find_options
-    
+
     @organization_projects_count            = @organization.projects_count(@site, @filter_by_category, @filter_by_location)
     @organization_projects_clusters_sectors = @organization.projects_clusters_sectors(@site, @filter_by_location)
     @organization_projects_by_location = if @site.navigate_by_country?
@@ -68,7 +68,7 @@ class OrganizationsController < ApplicationController
     else
       @organization.projects_regions(@site, @filter_by_category)
     end
-    
+
     respond_to do |format|
       format.html do
 
@@ -93,7 +93,7 @@ class OrganizationsController < ApplicationController
                       ELSE
                           '/projects/'||(array_to_string(array_agg(ps.project_id),''))
                       END as url
-                      
+
                       ,r.code,
                       (select count(*) from data_denormalization where regions_ids && ('{'||r.id||'}')::integer[] and (end_date is null OR end_date > now()) and site_id=#{@site.id}) as total_in_region
                 from ((((
@@ -109,13 +109,13 @@ class OrganizationsController < ApplicationController
           if @filter_by_location
             location_filter = @filter_by_location.size == 1 ? "r.country_id = #{@filter_by_location.first}" : "r.id = #{@filter_by_location.last}"
 
-            sql="select r.id,r.name,count(distinct ps.project_id) as count,r.center_lon as lon,r.center_lat as lat,            
+            sql="select r.id,r.name,count(distinct ps.project_id) as count,r.center_lon as lon,r.center_lat as lat,
 
               CASE WHEN count(distinct ps.project_id) > 1 THEN
-                  '#{carry_on_url}'||r.path 
+                  '#{carry_on_url}'||r.path
               ELSE
                   '/projects/'||(array_to_string(array_agg(ps.project_id),''))
-              END as url,          
+              END as url,
 
                 (select count(*) from data_denormalization where regions_ids && ('{'||r.id||'}')::integer[] and (end_date is null OR end_date > now()) and site_id=#{@site.id}) as total_in_region
             from regions as r
@@ -130,7 +130,7 @@ class OrganizationsController < ApplicationController
             sql="select c.id,count(distinct ps.project_id) as count,c.name,c.center_lon as lon,
                         c.center_lat as lat,c.name,
                         CASE WHEN count(distinct ps.project_id) > 1 THEN
-                            '#{carry_on_url}'||c.id 
+                            '#{carry_on_url}'||c.id
                         ELSE
                             '/projects/'||(array_to_string(array_agg(ps.project_id),''))
                         END as url,

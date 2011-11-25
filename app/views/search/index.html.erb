@@ -51,9 +51,9 @@
             <h3>
               <p>
                 <% if params[:q]!='' %>
-                  <%= pluralize(@total_projects, 'active project') %>
+                  <%= pluralize(@total_projects, 'active project') %> for your search
                 <% else %>
-                  <%= pluralize(@total_projects, 'active project') %>
+                  <%= pluralize(@total_projects, 'active project') %> for your search
                 <% end %>
               </p>
             </h3>
