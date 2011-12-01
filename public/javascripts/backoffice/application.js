@@ -166,7 +166,29 @@ $(document).ready(function(ev){
     });
 
 
-    $('div.block.edit div.med div.left div.field a.check').click(function(evt){
+    $('div.admin .password').keyup(function(evt){
+      var password_values = $('div.admin .password').map(function(index, item){
+        return $.trim($(item).val());
+      }).get();
+
+      if(!password_values || password_values.length <= 0 || (password_values[0] == '' && password_values[1] == '')){
+        $('div.admin .show_password').fadeOut();
+      }else{
+        $('div.admin .show_password').fadeIn();
+      }
+    });
+
+    $('#reset_password').click(function(evt){
+      evt.preventDefault();
+      var new_password = password();
+      $('div.admin .password').each(function(index, item){
+        item.setAttribute('type', 'text');
+        $(item).val(new_password);
+      });
+
+    });
+
+    $('div.block.edit div.med div.left div.long_field a.check').click(function(evt){
       evt.preventDefault();
       $(this).toggleClass('selected');
       if($(this).hasClass('show_password')){
@@ -309,3 +331,35 @@ $(document).ready(function(ev){
           api.reinitialise();
       }
   }
+
+  function password(length, special) {
+    var iteration = 0;
+    var password = "";
+    var randomNumber;
+    if(length == undefined){
+      length = Math.RandomInteger(5, 10);
+    }
+    if(special == undefined){
+      var special = false;
+    }
+    while(iteration < length){
+        randomNumber = (Math.floor((Math.random() * 100)) % 94) + 33;
+        if(!special){
+              if ((randomNumber >=33) && (randomNumber <=47)) { continue; }
+              if ((randomNumber >=58) && (randomNumber <=64)) { continue; }
+              if ((randomNumber >=91) && (randomNumber <=96)) { continue; }
+              if ((randomNumber >=123) && (randomNumber <=126)) { continue; }
+            }
+        iteration++;
+        password += String.fromCharCode(randomNumber);
+      }
+    return password;
+  }
+
+  Math.RandomInteger = function(n, m) {
+      if (! m) {m = 1;} // default range starts at 1
+      var max = n > m ? n : m; // doesn't matter which value is min or max
+      var min = n === max ? m : n; // min is value that is not max
+      var d = max - min + 1; // distribution range
+      return Math.floor(Math.random() * d + min);
+  };

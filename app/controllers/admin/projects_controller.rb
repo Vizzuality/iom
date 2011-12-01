@@ -1,6 +1,5 @@
-class Admin::ProjectsController < ApplicationController
+class Admin::ProjectsController < Admin::AdminController
 
-  before_filter :login_required
   before_filter :count_projects
   before_filter :get_organizations_list
 

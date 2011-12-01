@@ -1,6 +1,4 @@
-class Admin::SitesController < ApplicationController
-
-  before_filter :login_required
+class Admin::SitesController < Admin::AdminController
 
   def index
     @sites = Site.paginate :per_page => 20, :order => 'created_at DESC', :page => params[:page]

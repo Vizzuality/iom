@@ -3,6 +3,8 @@ class Admin::OrganizationsController < ApplicationController
   before_filter :login_required
 
   def index
+    redirect_to edit_admin_organization_path(current_user.organization) and return unless current_user.admin?
+
     organizations = if params[:q]
       q = "%#{params[:q].sanitize_sql!}%"
       Organization.where(["name ilike ? OR description ilike ?", q, q])

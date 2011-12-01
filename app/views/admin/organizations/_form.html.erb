@@ -148,14 +148,15 @@
         <%= user_fields.password_field :password_confirmation, :class=>"short password #{'error' if @organization.user.errors.on(:password)}" %>
       </div>
 
-      <div class="field">
+      <div class="long_field">
         <%= link_to 'Show hidden passwords', '#', :class => 'check show_password' %>
       </div>
 
       <% if current_user.admin? -%>
-        <div class="field">
+        <div class="long_field">
           <%= link_to 'Block user', '#', :class => "check block_user #{'selected' if @organization.user && @organization.user.blocked }" %>
           <%= user_fields.hidden_field :blocked %>
+          <%= link_to 'Reset password', '#', :id => 'reset_password', :class => 'preview' %>
         </div>
       <% end -%>
     </div>

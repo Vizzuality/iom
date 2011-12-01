@@ -10,6 +10,7 @@ class Admin::AdminController < ApplicationController
       :include_non_active =>true
     }
     options[:organization] = params[:organization_id] if params[:organization_id].present?
+    options[:organization] = current_user.organization_id unless current_user.admin?
     results_in_csv = Project.to_csv(nil, options)
     results_in_excel = Project.to_excel(nil, options)
 
@@ -73,7 +74,7 @@ SQL
 
   def check_user_permissions
     unless current_user.admin?
-      redirect_to admin_projects_path if controller_name != 'projects' || controller_name != 'organizations'
+      redirect_to admin_projects_path unless controller_name == 'projects' || controller_name == 'organizations' || (controller_name == 'admin' && action_name == 'export_projects')
     end
   end
   private :check_user_permissions

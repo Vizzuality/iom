@@ -11,7 +11,7 @@
         <p><%= label_tag 'password' %><br/>
         <%= password_field_tag 'password', nil, :class=>(flash[:alert] ? "error museo_sans" : "museo_sans")%></p>
         <% if flash[:alert] %>
-        <p class="error"><%= flash[:alert] %></p>
+        <p class="error"><%= raw flash[:alert] %></p>
         <% end %>
       </div>
       <div class="bottom_data">

@@ -18,7 +18,10 @@ class SessionsController < ApplicationController
       note_failed_signin
       @email       = params[:email]
       @remember_me = params[:remember_me]
-      flash[:alert] = 'Your user account is blocked temporally'
+      flash[:alert] = <<-HTML
+        Your user account is blocked temporally.<br />
+        Send us <a href="mailto:jmontgom@interaction.org">an email</a> if you have any questions.
+      HTML
       render :action => 'new'
     else
       note_failed_signin

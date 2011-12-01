@@ -1,6 +1,4 @@
-class Admin::SettingsController < ApplicationController
-
-  before_filter :login_required
+class Admin::SettingsController < Admin::AdminController
   before_filter :load_settings
 
   def edit
