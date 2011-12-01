@@ -10,7 +10,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111201115943) do
+ActiveRecord::Schema.define(:version => 20111201145358) do
+
+  create_table "changes_histories", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "when"
+    t.text     "what"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "clusters", :force => true do |t|
     t.string "name"
