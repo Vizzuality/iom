@@ -57,6 +57,10 @@ class User < ActiveRecord::Base
     self.role.present? && self.role == 'admin'
   end
 
+  def not_blocked?
+    !self.blocked?
+  end
+
   def set_role
     self.role = 'organization' if self.id != 1
   end

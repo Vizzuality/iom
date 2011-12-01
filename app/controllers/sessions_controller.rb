@@ -9,11 +9,17 @@ class SessionsController < ApplicationController
   def create
     logout_keeping_session!
     user = User.authenticate(params[:email], params[:password])
-    if user
+    if user && user.not_blocked?
       self.current_user = user
       new_cookie_flag = (params[:remember_me] == "1")
       handle_remember_cookie! new_cookie_flag
       redirect_back_or_default(admin_admin_path, :notice => "Logged in successfully")
+    elsif user && user.blocked?
+      note_failed_signin
+      @email       = params[:email]
+      @remember_me = params[:remember_me]
+      flash[:alert] = 'Your user account is blocked temporally'
+      render :action => 'new'
     else
       note_failed_signin
       @email       = params[:email]
