@@ -13,7 +13,7 @@
       <%= f.hidden_field :primary_organization_id , :value => @project.primary_organization_id || Organization.first.id %>
       <div class="wrapper">
         <ul class="list_combo_content scroll_pane">
-            <% Organization.get_select_values.each do |organization| %>
+            <% @organizations_list.each do |organization| %>
               <li class="element" id="orgs_<%= organization.id %>"><p class="project_name"><%= truncate(organization.name, :length=> 40) %></p><p class="amount_projects"><%= pluralize(organization.projects.count, 'project', 'projects')%></p></li>
             <% end -%>
         </ul>

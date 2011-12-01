@@ -1,5 +1,6 @@
 class Admin::AdminController < ApplicationController
   before_filter :login_required
+  before_filter :check_user_permissions
 
   def index
   end
@@ -69,4 +70,11 @@ SQL
       end
     end
   end
+
+  def check_user_permissions
+    unless current_user.admin?
+      redirect_to admin_projects_path if controller_name != 'projects' || controller_name != 'organizations'
+    end
+  end
+  private :check_user_permissions
 end

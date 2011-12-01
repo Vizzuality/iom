@@ -130,6 +130,37 @@
     </div>
   </div>
 
+  <%= f.fields_for :user, (@organization.user || @organization.build_user) do |user_fields| %>
+    <div class="common admin">
+      <h3>ADMINISTRATOR USER</h3>
+      <div class="field">
+        <%= user_fields.label :email %>
+        <%= user_fields.text_field :email, :class=>"long" %>
+      </div>
+
+      <div class="short_field">
+        <%= user_fields.label :password %>
+        <%= user_fields.password_field :password, :class=>"short password #{'error' if @organization.user.errors.on(:password)}" %>
+      </div>
+
+      <div class="short_field last">
+        <%= user_fields.label :password_confirmation %>
+        <%= user_fields.password_field :password_confirmation, :class=>"short password #{'error' if @organization.user.errors.on(:password)}" %>
+      </div>
+
+      <div class="field">
+        <%= link_to 'Show hidden passwords', '#', :class => 'check show_password' %>
+      </div>
+
+      <% if current_user.admin? -%>
+        <div class="field">
+          <%= link_to 'Block user', '#', :class => "check block_user #{'selected' if @organization.user && @organization.user.blocked }" %>
+          <%= user_fields.hidden_field :blocked %>
+        </div>
+      <% end -%>
+    </div>
+  <% end -%>
+
   <div class="common">
     <h3>DONATION INFORMATION</h3>
     <div class="long_field">
@@ -175,5 +206,3 @@
   <%= f.submit 'Save', :class => "#{'error' if @organization.invalid? && action_name != 'new'}" %>
 
 <% end -%>
-
-<script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>

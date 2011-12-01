@@ -67,6 +67,9 @@ class Organization < ActiveRecord::Base
 
   has_many :sites, :foreign_key => :project_context_organization_id
   has_many :donations, :through => :projects
+  has_one :user
+
+  accepts_nested_attributes_for :user, :allow_destroy => true
 
   validates_presence_of :name
 

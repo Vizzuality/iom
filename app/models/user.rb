@@ -4,13 +4,13 @@
 #
 #  id                        :integer         not null, primary key
 #  name                      :string(100)     default("")
-#  email                     :string(100)     
-#  crypted_password          :string(40)      
-#  salt                      :string(40)      
-#  created_at                :datetime        
-#  updated_at                :datetime        
-#  remember_token            :string(40)      
-#  remember_token_expires_at :datetime        
+#  email                     :string(100)
+#  crypted_password          :string(40)
+#  salt                      :string(40)
+#  created_at                :datetime
+#  updated_at                :datetime
+#  remember_token            :string(40)
+#  remember_token_expires_at :datetime
 #
 
 require 'digest/sha1'
@@ -20,6 +20,10 @@ class User < ActiveRecord::Base
   include Authentication
   include Authentication::ByPassword
   include Authentication::ByCookieToken
+
+  belongs_to :organization
+
+  before_save :set_role
 
   validates :email, :presence   => true,
                     :uniqueness => true,
@@ -48,5 +52,14 @@ class User < ActiveRecord::Base
   def email=(value)
     write_attribute :email, (value ? value.downcase : nil)
   end
+
+  def admin?
+    self.role.present? && self.role == 'admin'
+  end
+
+  def set_role
+    self.role = 'organization' if self.id != 1
+  end
+  private :set_role
 
 end

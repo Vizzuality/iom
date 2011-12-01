@@ -41,8 +41,10 @@
         <div id="donor_name" class="field">
           <%= f.label :donor_id, raw('DONOR NAME <strong>*</strong>') %>
           <span id="donor_name_input">
-            <input type="text" id="autocomplete_donor_name">
-            <%= f.hidden_field :donor_id %>
+            <%= f.fields_for :donor, f.object.build_donor do |donor_fields| %>
+              <%= donor_fields.hidden_field :id %>
+              <%= donor_fields.text_field :name, :id => :autocomplete_donor_name %>
+            <% end -%>
           </span>
         </div>
 

@@ -257,15 +257,17 @@ div.block.edit div.med div.left div span a.combo:hover {cursor:pointer;}
 div.block.edit div.med div.left div.field input[type="text"].short {float:left; width:256px; height:18px; margin:5px 0 0 0; padding:8px; font:normal 15px Arial; color:#333333; border:none; background:url('/images/backoffice/donors/short_input.png') no-repeat 0 0;}
 div.block.edit div.med div.left div input[type="password"].short {float:left; width:256px; height:18px; margin:5px 0 0 0; padding:8px; font:normal 15px Arial; color:#333333; border:none; background:url('/images/backoffice/donors/short_input.png') no-repeat 0 0;}
 div.block.edit div.med div.left div.long_field {float:left; width:100%;}
-div.block.edit div.med div.left div.long_field input[type="text"].address {float:left; width:548px; height:18px; margin:5px 0 0 0; padding:8px; font:normal 15px Arial; color:#333333; border:none; background:url('/images/backoffice/donors/input_address.png') no-repeat 0 0;}
+div.block.edit div.med div.left div.long_field input[type="text"].email, div.block.edit div.med div.left div.long_field input[type="text"].address {float:left; width:548px; height:18px; margin:5px 0 0 0; padding:8px; font:normal 15px Arial; color:#333333; border:none; background:url('/images/backoffice/donors/input_address.png') no-repeat 0 0;}
 div.block.edit div.med div.left div.short_field input[type="text"].twitter {width:234px; padding:8px 8px 8px 30px; background:url('/images/backoffice/donors/twitter_bkg.png') no-repeat 0 0;}
 div.block.edit div.med div.left div.field input[type="text"].facebook {width:381px; padding:8px 8px 8px 30px; background:url('/images/backoffice/donors/facebook_input.png') no-repeat 0 0;}
+div.block.edit div.med div.left div.field a.check {float:left; font:normal 15px Arial; color:#333333; text-decoration:none; background:url('/images/backoffice/sites/project_tipo_check.png') no-repeat 0 4px; padding:0 0 0 15px; margin: 15px 0; height:14px;}
+div.block.edit div.med div.left div.field a.check.selected {background:url('/images/backoffice/sites/project_tipo_checked.png') no-repeat 0 4px;}
 div.block.edit div.med div.left div.final {float:left; width:100%;}
 div.block.edit div.med div.left input[type="submit"] {float:right; width:157px; height:32px; margin:20px 8px 0 0; text-indent:-9999px; font-size:0; display:block; line-height:0; background:url('/images/backoffice/donors/save_changes.png') no-repeat 0 0; border:none;}
 div.block.edit div.med div.left input[type="submit"]:hover {background-position:0 -32px; cursor:pointer;}
 div.block.edit div.med div.left input[type="submit"].error {background:url('/images/backoffice/donors/save_changes.png') no-repeat 0 -64px;}
 div.block.edit div.med div.left input[type="submit"].error:hover {background:url('/images/backoffice/donors/save_changes.png') no-repeat 0 -96px; cursor:pointer;}
-div.block.edit div.med div.left div.field input.error {width:379px; padding:8px 32px 8px 8px; background-position:0 -34px;}
+div.block.edit div.med div.left div.short_field input.error, div.block.edit div.med div.left div.field input.error {width:379px; padding:8px 32px 8px 8px; background-position:0 -34px;}
 div.block.edit div.med div.left span.field_error {position:absolute; bottom:10px; right:10px; margin:0; padding:0; width:auto;}
 div.block.edit div.med div.left span.field_error a.error {float:right; width:14px; height:14px; background: url('/images/backoffice/icons/error.png') no-repeat scroll top left;}
 div.block.edit div.med div.left span.field_error a.error:hover {cursor:pointer;}

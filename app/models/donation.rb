@@ -3,10 +3,10 @@
 # Table name: donations
 #
 #  id         :integer         not null, primary key
-#  donor_id   :integer         
-#  project_id :integer         
-#  amount     :float           
-#  date       :date            
+#  donor_id   :integer
+#  project_id :integer
+#  amount     :float
+#  date       :date
 #
 
 class Donation < ActiveRecord::Base
@@ -15,5 +15,7 @@ class Donation < ActiveRecord::Base
   belongs_to :donor
 
   validates_presence_of :donor, :project
+
+  accepts_nested_attributes_for :donor
 
 end

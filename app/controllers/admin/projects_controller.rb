@@ -1,13 +1,15 @@
 class Admin::ProjectsController < ApplicationController
 
   before_filter :login_required
+  before_filter :count_projects
+  before_filter :get_organizations_list
 
   def index
     @conditions = {}
 
     if params[:q]
       q = "%#{params[:q].sanitize_sql!}%"
-      projects = Project.where(["name ilike ? OR description ilike ?", q, q])
+      projects = find_projects(["name ilike ? OR description ilike ?", q, q])
       from = ["projects"]
       unless params[:status].blank?
         if params[:status] == 'active'
@@ -42,12 +44,11 @@ class Admin::ProjectsController < ApplicationController
       @projects = projects.paginate :per_page => 20, :order => 'created_at DESC', :page => params[:page]
     elsif params[:organization_id]
       template      = 'admin/organizations/projects'
-      @organization = Organization.find(params[:organization_id])
+      @organization = current_user.admin?? Organization.find(params[:organization_id]) : current_user.organization
       projects      = @organization.projects
       @projects     = projects.paginate :per_page => 20, :order => 'created_at DESC', :page => params[:page]
     else
-      projects  = Project.all
-      @projects = Project.paginate :per_page => 20, :order => 'created_at DESC', :page => params[:page]
+      @projects = find_projects.paginate :per_page => 20, :order => 'created_at DESC', :page => params[:page]
     end
 
     respond_to do |format|
@@ -70,11 +71,11 @@ class Admin::ProjectsController < ApplicationController
   end
 
   def new
-    @project = Project.new
+    @project = new_project
   end
 
   def create
-    @project = Project.new(params[:project])
+    @project = new_project(params[:project])
     if @project.valid? && @project.save
       redirect_to edit_admin_project_path(@project), :flash => {:success => 'Project has been created successfully'}
     else
@@ -83,15 +84,15 @@ class Admin::ProjectsController < ApplicationController
   end
 
   def donations
-    @project = Project.find(params[:id])
+    @project = find_project(params[:id])
   end
 
   def edit
-    @project = Project.find(params[:id])
+    @project = find_project(params[:id])
   end
 
   def update
-    @project = Project.find(params[:id])
+    @project = find_project(params[:id])
     @project.attributes = params[:project]
     if @project.save
       redirect_to edit_admin_project_path(@project), :flash => {:success => 'Project has been updated successfully'}
@@ -101,9 +102,57 @@ class Admin::ProjectsController < ApplicationController
   end
 
   def destroy
-    @project = Project.find(params[:id])
+    @project = find_project(params[:id])
     @project.destroy
     redirect_to admin_projects_path, :flash => {:success => 'Project has been deleted successfully'}
   end
 
+  def count_projects
+    @projects_count = if current_user.admin?
+      Project.count
+    else
+      current_user.organization.projects.count
+    end
+  end
+  private :count_projects
+
+  def new_project(attributes = {})
+    if current_user.admin?
+      Project.new(attributes)
+    else
+      current_user.organization.projects.new(attributes)
+    end
+  end
+  private :new_project
+
+  def find_project(id)
+    if current_user.admin?
+      @project = Project.find(params[:id])
+    else
+      @project = current_user.organization.projects.find(params[:id])
+    end
+  end
+  private :find_project
+
+
+  def find_projects(where = nil)
+    if current_user.admin?
+      projects = Project.scoped
+    else
+      projects = current_user.organization.projects
+    end
+    projects = projects.where(["name ilike ? OR description ilike ?", q, q]) if where.present?
+    projects || []
+  end
+  private :find_projects
+
+  def get_organizations_list
+    @organizations_list = if current_user.admin?
+      Organization.get_select_values
+    else
+      [current_user.organization]
+    end
+    @organizations_list
+  end
+  private :get_organizations_list
 end

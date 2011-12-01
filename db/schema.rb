@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111121131054) do
+ActiveRecord::Schema.define(:version => 20111201115943) do
 
   create_table "clusters", :force => true do |t|
     t.string "name"
@@ -505,6 +505,9 @@ ActiveRecord::Schema.define(:version => 20111121131054) do
     t.datetime "updated_at"
     t.string   "remember_token",            :limit => 40
     t.datetime "remember_token_expires_at"
+    t.integer  "organization_id"
+    t.string   "role"
+    t.boolean  "blocked",                                  :default => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

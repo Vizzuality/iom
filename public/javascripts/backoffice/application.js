@@ -166,6 +166,30 @@ $(document).ready(function(ev){
     });
 
 
+    $('div.block.edit div.med div.left div.field a.check').click(function(evt){
+      evt.preventDefault();
+      $(this).toggleClass('selected');
+      if($(this).hasClass('show_password')){
+        if($(this).hasClass('selected')){
+          $(this).closest('.admin').find('.password').each(function(index, item){
+            item.setAttribute('type', 'text');
+          });
+        }
+        else{
+          $(this).closest('.admin').find('.password').each(function(index, item){
+            item.setAttribute('type', 'password');
+          });
+        };
+      };
+      if($(this).hasClass('block_user')){
+        if($(this).hasClass('selected')){
+          $(this).next('input[type=hidden]').val(true);
+        }
+        else{
+          $(this).next('input[type=hidden]').val(false);
+        };
+      };
+    });
 });
 
     // CLICK ON IMPORT LINK TO SIMULATE CLICK ON INPUT FILE (HIDDEN)
