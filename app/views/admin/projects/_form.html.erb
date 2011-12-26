@@ -1,6 +1,8 @@
 <%= form_for(@project, :url => (@project.new_record? ? admin_projects_path : admin_project_path(@project))) do |f| %>
 <!-- ##################### PROJECT IDENTIFICATION ##################### -->
 
+  <div class="form_error">Sorry, there are some errors that must be corrected.</div>
+    
   <h3 class="section museo_sans">PROJECT IDENTIFICATION</h3>
   <div class="field">
     <label>ORGANIZATION  <strong>*</strong></label>

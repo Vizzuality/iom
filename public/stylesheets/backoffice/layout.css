@@ -199,6 +199,7 @@ div.med.information div.info div.left strong {color:#333333; font-weight:normal;
 div.med.information div.info div.left p a {color:#EB4142; text-decoration:none;}
 div.med.information div.info div.left p a:hover {text-decoration:underline;}
 div.med.information div.info div.right_graph {float:right;}
+div.med div.form_error {width: 483px; height: 12px; margin: 30px 0 0 0; padding: 20px 20px 20px 60px; font:normal 13px Arial; color:#FFFFFF; background:url('/images/backoffice/common/form_error_bkg.png')}
 div.bottom_grey {float:left; width:942px; height:64px; background:url('/images/backoffice/backgrounds/bottom_grey_long.png') no-repeat center 0;}
 div.bottom_grey a {float:right; width:auto; margin:20px 32px 0 0; font:normal 17px Arial; color:#EB4142; text-decoration:none;}
 div.bottom_grey a:hover {text-decoration:underline;}

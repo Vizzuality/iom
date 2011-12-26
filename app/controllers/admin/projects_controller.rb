@@ -98,6 +98,7 @@ class Admin::ProjectsController < Admin::AdminController
     if @project.save
       redirect_to edit_admin_project_path(@project), :flash => {:success => 'Project has been updated successfully'}
     else
+      flash.now[:error] = 'There are some errors.'
       render :action => 'edit'
     end
   end
