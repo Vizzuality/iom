@@ -154,7 +154,7 @@
 
       <% if current_user.admin? -%>
         <div class="long_field">
-          <%= link_to 'Block user', '#', :class => "check block_user #{'selected' if @organization.user && @organization.user.blocked }" %>
+          <%= link_to 'Blocked', '#', :class => "check block_user #{'selected' if @organization.user && @organization.user.blocked }" %>
           <%= user_fields.hidden_field :blocked %>
           <%= link_to 'Reset password', '#', :id => 'reset_password', :class => 'preview' %>
         </div>
