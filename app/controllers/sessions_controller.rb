@@ -19,15 +19,15 @@ class SessionsController < ApplicationController
       @email       = params[:email]
       @remember_me = params[:remember_me]
       flash[:alert] = <<-HTML
-        Your user account is blocked temporally.<br />
-        Send us <a href="mailto:jmontgom@interaction.org">an email</a> if you have any questions.
+        <p class="error margin">Your user account is blocked temporally.<br />
+        <a href="mailto:jmontgom@interaction.org">Write us</a> if this is a problem for you.</p>
       HTML
       render :action => 'new'
     else
       note_failed_signin
       @email       = params[:email]
       @remember_me = params[:remember_me]
-      flash[:alert] = 'Your email / password is not correct'
+      flash[:alert] = '<p class="error">Your email / password is not correct</p>'
       render :action => 'new'
     end
   end

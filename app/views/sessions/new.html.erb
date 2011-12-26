@@ -1,17 +1,15 @@
 <div class="login">
   <div class="main">
     <h1><a href="#">InterAction<sup>SiteManager</sup></a></h1>
-
     <%= form_tag session_path do -%>
       <div class="top_data"></div>
       <div class="med_data">
         <p><%= label_tag 'email' %><br />
         <%= text_field_tag 'email', @email, :class=>(flash[:alert] ? "error museo_sans" : "museo_sans") %></p>
-
         <p><%= label_tag 'password' %><br/>
         <%= password_field_tag 'password', nil, :class=>(flash[:alert] ? "error museo_sans" : "museo_sans")%></p>
         <% if flash[:alert] %>
-        <p class="error"><%= raw flash[:alert] %></p>
+          <%= raw flash[:alert] %>
         <% end %>
       </div>
       <div class="bottom_data">

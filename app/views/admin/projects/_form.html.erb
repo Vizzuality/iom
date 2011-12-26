@@ -44,7 +44,25 @@
     </span>
   </div>
   <div class="field">
-    <label>DESCRIPTION  <strong>*</strong></label>
+    <label>
+      DESCRIPTION  <strong>*</strong>
+      <!-- FIELD DESCRIPTION -->
+      <div class="field_info">
+        <span class="info">i</span>
+        <div class="field_text">
+          <div class="top">
+            <a href="#close">x</a>
+          </div>
+          <div class="bottom">
+            <h3>Activities</h3>
+            <span class="scroll">
+            <p>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum.</p>
+            </span>
+          </div>
+        </div>
+      </div>
+      <!-- END FIELD DESCRIPTION -->
+    </label>
     <span class="textarea <%= 'error' if !@project.errors[:description].empty? && action_name != 'new' %>">
         <div class="wrapper">
             <%= f.text_area :description,:class => "#{'error' if !@project.errors[:description].empty? && action_name != 'new'}" %>
