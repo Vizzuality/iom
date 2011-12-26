@@ -142,7 +142,7 @@ class Admin::ProjectsController < Admin::AdminController
     else
       projects = current_user.organization.projects
     end
-    projects = projects.where(["name ilike ? OR description ilike ?", q, q]) if where.present?
+    projects = projects.where(where) if where.present?
     projects || []
   end
   private :find_projects
