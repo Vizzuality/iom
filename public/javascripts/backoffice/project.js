@@ -15,6 +15,20 @@ var clusterToAdd = 13; // clusterToAdd_
 var sectors_id = 8; // sectors_
 var sectorToAdd = 12; // sectorToAdd_
 $(document).ready(function(ev){
+	
+	    // Field info
+    $('div.field_info span.info').click(function(ev){
+      $('div.field_info div.field_text').each(function(i,ele){
+        $(ele).fadeOut('fast');
+      });
+      $(this).parent().find('div.field_text').fadeIn('slow');
+    });
+    $('div.field_info div.top a').click(function(ev){
+      ev.preventDefault();
+      $('div.field_info div.field_text').each(function(i,ele){
+        $(ele).fadeOut('fast');
+      });
+    });
 
     // COUNTRY COMBO
     $('select#country').sSelect({ddMaxWidth: '134px',ddMaxHeight:'220px',containerClass:'country_index'});

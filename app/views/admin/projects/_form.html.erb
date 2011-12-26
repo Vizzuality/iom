@@ -27,7 +27,25 @@
     </span>
   </div>
   <div class="field">
-    <label>ORGANIZATION ID</label>
+    <label>ORGANIZATION ID
+      <!-- FIELD DESCRIPTION -->
+      <div class="field_info">
+        <span class="info">i</span>
+        <div class="field_text">
+          <div class="top">
+            <a href="#close">x</a>
+          </div>
+          <div class="bottom">
+            <h3>Organization ID</h3>
+            <span class="scroll">
+            <p>Alpha/numeric code assigned to an intervention or shipment by an organization in its internal systems.</p>
+            </span>
+          </div>
+        </div>
+      </div>
+      <!-- END FIELD DESCRIPTION -->
+      
+    </label>
     <span class="input_large">
       <%= f.text_field :organization_id %>
     </span>
@@ -43,7 +61,24 @@
 
   <h3 class="section museo_sans">PROJECT DETAILS</h3>
   <div class="field">
-    <label>PROJECT NAME  <strong>*</strong></label>
+    <label>PROJECT NAME  <strong>*</strong>
+      <!-- FIELD DESCRIPTION -->
+      <div class="field_info">
+        <span class="info">i</span>
+        <div class="field_text">
+          <div class="top">
+            <a href="#close">x</a>
+          </div>
+          <div class="bottom">
+            <h3>Project name</h3>
+            <span class="scroll">
+            <p>The official title of the project, preferable the official name used in program/project/etc documents.</p>
+            </span>
+          </div>
+        </div>
+      </div>
+      <!-- END FIELD DESCRIPTION -->    
+    </label>
     <span class="input_large <%= 'error' if !@project.errors[:name].empty? && action_name != 'new' %>">
         <%= f.text_field :name, :class=>"long #{'error' if !@project.errors[:name].empty? && action_name != 'new'}" %>
         <%= errors_for @project, :name %>
@@ -60,9 +95,9 @@
             <a href="#close">x</a>
           </div>
           <div class="bottom">
-            <h3>Activities</h3>
+            <h3>Project description</h3>
             <span class="scroll">
-            <p>Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum.</p>
+            <p>Brief description of the project (at least 150 words), including if possible, goals and/or objectives</p>
             </span>
           </div>
         </div>
@@ -76,13 +111,49 @@
     </span>
   </div>
   <div class="field">
-    <label>ACTIVITIES</label>
+    <label>ACTIVITIES
+      <!-- FIELD DESCRIPTION -->
+      <div class="field_info">
+        <span class="info">i</span>
+        <div class="field_text">
+          <div class="top">
+            <a href="#close">x</a>
+          </div>
+          <div class="bottom">
+            <h3>Project activities</h3>
+            <span class="scroll">
+            <p>Description of project activities.</p>
+            </span>
+          </div>
+        </div>
+      </div>
+      <!-- END FIELD DESCRIPTION -->
+      
+    </label>
     <span class="textarea">
       <%= f.text_area :activities %>
     </span>
   </div>
   <div class="field">
-    <label>ADDITIONAL INFORMATION</label>
+    <label>ADDITIONAL INFORMATION
+      <!-- FIELD DESCRIPTION -->
+      <div class="field_info">
+        <span class="info">i</span>
+        <div class="field_text">
+          <div class="top">
+            <a href="#close">x</a>
+          </div>
+          <div class="bottom">
+            <h3>Additional information</h3>
+            <span class="scroll">
+            <p>Optional field that can be used to provide additional information on the project, such as progress to date, results data, etc.</p>
+            </span>
+          </div>
+        </div>
+      </div>
+      <!-- END FIELD DESCRIPTION -->
+    
+    </label>
     <span class="textarea">
       <%= f.text_area :additional_information %>
     </span>
@@ -90,7 +161,25 @@
   <div class="field">
     <ul class="dates">
       <li class="date">
-        <label>START DATE</label>
+        <label>START DATE
+      <!-- FIELD DESCRIPTION -->
+      <div class="field_info">
+        <span class="info">i</span>
+        <div class="field_text">
+          <div class="top">
+            <a href="#close">x</a>
+          </div>
+          <div class="bottom">
+            <h3>Start date</h3>
+            <span class="scroll">
+            <p>Actual start date (beginning of implementation).</p>
+            </span>
+          </div>
+        </div>
+      </div>
+      <!-- END FIELD DESCRIPTION -->
+        
+        </label>
         <span id="start_date" class="combo_date"><p>09/10/2010</p>
           <div class="select_dates start_date">
             <p id="month" class="title">MONTH</p>
@@ -102,7 +191,25 @@
         </span>
       </li>
       <li class="date">
-        <label>END DATE</label>
+        <label>END DATE
+      <!-- FIELD DESCRIPTION -->
+      <div class="field_info">
+        <span class="info">i</span>
+        <div class="field_text">
+          <div class="top">
+            <a href="#close">x</a>
+          </div>
+          <div class="bottom">
+            <h3>End date</h3>
+            <span class="scroll">
+            <p>Date by which project is expected to be completed. Can be edited to update with actual end date upon completion</p>
+            </span>
+          </div>
+        </div>
+      </div>
+      <!-- END FIELD DESCRIPTION -->
+        
+        </label>
 
         <span id="end_date" class="combo_date"><p>09/10/2010</p>
           <div class="select_dates end_date">
@@ -121,7 +228,26 @@
 
   <h3 class="section museo_sans">CONTEXT</h3>
   <div id="clusters_content" class="field">
-    <label>CLUSTERS  <strong>*</strong></label>
+    <label>CLUSTERS  <strong>*</strong>
+      <!-- FIELD DESCRIPTION -->
+      <div class="field_info">
+        <span class="info">i</span>
+        <div class="field_text">
+          <div class="top">
+            <a href="#close">x</a>
+          </div>
+          <div class="bottom">
+            <h3>Cluster</h3>
+            <span class="scroll">
+            <p>United Nations Cluster to which a project or donation is reported. Only applicable for certain emergencies.</p>
+            </span>
+          </div>
+        </div>
+      </div>
+      <!-- END FIELD DESCRIPTION -->
+    
+    
+    </label>
 
       <ul class="clusters">
         <% unless @project.clusters.empty? %>
@@ -178,7 +304,25 @@
     </div>
   </div>
   <div id="cross_cutting" class="field">
-    <label>CROSS-CUTTING ISSUES</label>
+    <label>CROSS-CUTTING ISSUES
+      <!-- FIELD DESCRIPTION -->
+      <div class="field_info">
+        <span class="info">i</span>
+        <div class="field_text">
+          <div class="top">
+            <a href="#close">x</a>
+          </div>
+          <div class="bottom">
+            <h3>Cross-cutting issues</h3>
+            <span class="scroll">
+            <p>Issues that cut across more than one sector, or that should not be managed as a sector, such as gender or the environment. Separate multiple entries with a comma.</p>
+            </span>
+          </div>
+        </div>
+      </div>
+      <!-- END FIELD DESCRIPTION -->
+    
+    </label>
     <span class="textarea">
       <%= f.text_area :cross_cutting_issues %>
     </span>
@@ -187,7 +331,25 @@
 <!-- ##################### PROJECT MANAGEMENT ##################### -->
 
   <h3 class="section museo_sans">PROJECT MANAGEMENT</h3>
-  <label>PROJECT BUDGET</label>
+  <label>PROJECT BUDGET
+      <!-- FIELD DESCRIPTION -->
+      <div class="field_info">
+        <span class="info">i</span>
+        <div class="field_text">
+          <div class="top">
+            <a href="#close">x</a>
+          </div>
+          <div class="bottom">
+            <h3>Project budget</h3>
+            <span class="scroll">
+            <p> Amount budgeted for a project or, in the case of in-kind donations, the value of a shipment</p>
+            </span>
+          </div>
+        </div>
+      </div>
+      <!-- END FIELD DESCRIPTION -->  
+  
+  </label>
   <div id="project_budget" class="field">
     <span class="input_short coin">
       <p class="coin">$</p>
@@ -196,19 +358,73 @@
     </span>
   </div>
   <div id="implement_org" class="field">
-    <label>IMPLEMENTING ORGANIZATION</label>
+    <label>IMPLEMENTING ORGANIZATION
+      <!-- FIELD DESCRIPTION -->
+      <div class="field_info">
+        <span class="info">i</span>
+        <div class="field_text">
+          <div class="top">
+            <a href="#close">x</a>
+          </div>
+          <div class="bottom">
+            <h3>Implementing organizations</h3>
+            <span class="scroll">
+            <p>Name(s) of organization(s) actually carrying out the work in the field. In the case of in-kind donations, list organizations receiving goods. Multiple entries should be separated by a comma; “and” should only be used if it is part of an organization’s name.</p>
+            </span>
+          </div>
+        </div>
+      </div>
+      <!-- END FIELD DESCRIPTION -->
+    
+    </label>
     <span class="input_large">
       <%= f.text_field :implementing_organization %>
     </span>
   </div>
   <div id="partner_org" class="field">
-    <label>PARTNER ORGANIZATIONS</label>
+    <label>PARTNER ORGANIZATIONS
+      <!-- FIELD DESCRIPTION -->
+      <div class="field_info">
+        <span class="info">i</span>
+        <div class="field_text">
+          <div class="top">
+            <a href="#close">x</a>
+          </div>
+          <div class="bottom">
+            <h3>Partner organizations</h3>
+            <span class="scroll">
+            <p>Name of organization(s) associated with the project but not actually involved in implementation; does not refer to donors. Multiple entries should be separated by a comma; “and” should only be used if it is part of an organization’s name.</p>
+            </span>
+          </div>
+        </div>
+      </div>
+      <!-- END FIELD DESCRIPTION -->
+    
+    </label>
     <span class="input_large">
       <%= f.text_field :partner_organizations %>
     </span>
   </div> <!-- field -->
   <div class="field">
-    <label>AWARDEE TYPE</label>
+    <label>AWARDEE TYPE
+      <!-- FIELD DESCRIPTION -->
+      <div class="field_info">
+        <span class="info">i</span>
+        <div class="field_text">
+          <div class="top">
+            <a href="#close">x</a>
+          </div>
+          <div class="bottom">
+            <h3>Awardee type</h3>
+            <span class="scroll">
+            <p>Either “Prime awardee” (organization that directly received funding for a project) or “Sub awardee” (organization that received funding from a prime awardee.</p>
+            </span>
+          </div>
+        </div>
+      </div>
+      <!-- END FIELD DESCRIPTION -->
+    
+    </label>
     <span class="input_large">
       <%= f.text_field :awardee_type %>
     </span>
@@ -220,7 +436,25 @@
   <div class="two_columns">
     <div class="left_column">
        <div id="estimated_people" class="field">
-          <label>ESTIMATED PEOPLE REACHED</label>
+          <label>ESTIMATED PEOPLE REACHED
+      <!-- FIELD DESCRIPTION -->
+      <div class="field_info">
+        <span class="info">i</span>
+        <div class="field_text">
+          <div class="top">
+            <a href="#close">x</a>
+          </div>
+          <div class="bottom">
+            <h3>Estimated people reached</h3>
+            <span class="scroll">
+            <p>Target number of individuals to be reached over the life of the project. Should correspond to number of individuals intended to directly benefit from the project.</p>
+            </span>
+          </div>
+        </div>
+      </div>
+      <!-- END FIELD DESCRIPTION -->
+          
+          </label>
           <span class="input_short">
             <%= f.text_field :estimated_people_reached %>
             <p class="msg">people</p>
@@ -229,7 +463,25 @@
     </div>
     <div class="right_column">
       <div id="target" class="field">
-        <label>TARGET</label>
+        <label>TARGET
+      <!-- FIELD DESCRIPTION -->
+      <div class="field_info">
+        <span class="info">i</span>
+        <div class="field_text">
+          <div class="top">
+            <a href="#close">x</a>
+          </div>
+          <div class="bottom">
+            <h3>Target group</h3>
+            <span class="scroll">
+            <p>Type of individuals or groups primarily intended to benefit from the project (e.g. children under five, pregnant women, people with disabilities, etc)</p>
+            </span>
+          </div>
+        </div>
+      </div>
+      <!-- END FIELD DESCRIPTION -->
+        
+        </label>
         <span class="input_short">
           <%= f.text_field :target %>
         </span>
