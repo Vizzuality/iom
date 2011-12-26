@@ -517,6 +517,7 @@ div.med.projects_list ul li.last {border:none;}
 div.med.projects_list ul li h3 a {font:bold 17px Arial; color:#E93E3F;}
 div.med.projects_list ul li h3 a:hover {text-decoration:underline;}
 div.med.projects_list ul li div.project_name {float:left; width:443px; height:71px;}
+div.med.projects_list ul li div.project_name_long {width:610px}
 div.med.projects_list ul li div.project_name h3 {float:left; width:100%; padding:17px 0 0 0;}
 div.med.projects_list ul li div.project_name a.project_status {float:left; margin:2px 0 0 0; font:normal 13px Arial; color:#666666; padding:0 0 0 12px;}
 div.med.projects_list ul li div.project_name a.project_status.active {background:url('/images/backoffice/projects/active_icon.png') no-repeat 0 3px;}
