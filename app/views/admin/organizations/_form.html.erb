@@ -134,7 +134,7 @@
       </div>
 
       <div class="short_field">
-        <%= user_fields.label :password %>
+        <label>PASSWORD (<a href="#" class="show_password_link">show values</a>)</label>
         <%= user_fields.password_field :password, :class=>"short password #{'error' if @organization.user.errors.on(:password)}" %>
       </div>
 
@@ -149,7 +149,7 @@
 
       <% if current_user.admin? -%>
         <div class="long_field">
-          <%= link_to 'Blocked', '#', :class => "check block_user #{'selected' if @organization.user && @organization.user.blocked }" %>
+          <%= link_to 'Blocked NGO', '#', :class => "check block_user #{'selected' if @organization.user && @organization.user.blocked }" %>
           <%= user_fields.hidden_field :blocked %>
           <%= link_to 'Reset password', '#', :id => 'reset_password', :class => 'preview' %>
         </div>

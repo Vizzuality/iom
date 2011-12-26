@@ -236,6 +236,8 @@ div.block.edit div.med div.left textarea {float:left; min-width:548px; max-width
 div.block.edit div.med div.left textarea.error {background-position:0 -214px;}
 div.block.edit div.med div.left textarea:focus {outline:none;}
 div.block.edit div.med div.left label {float:left; width:100%; margin:18px 0 0 1px; font:bold 11px Arial; color:#999999; text-transform:uppercase;}
+div.block.edit div.med div.left label a.show_password_link {font:normal 13px Arial; color:#D8393D; text-transform: none; text-decoration: underline}
+
 div.block.edit div.med div.left div.common {float:left; width:100%; margin:35px 0 0 0;}
 div.block.edit div.med div.left div.common h3 {float:left; width:100%; padding:0 0 5px 0; font:normal 17px "Museo Sans","Arial"; color:#333333; text-transform:uppercase;}
 div.block.edit div.med div.left div.short_field {float:left; width:272px; margin:0px 20px 0 0;}

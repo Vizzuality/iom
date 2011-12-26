@@ -165,22 +165,33 @@ $(document).ready(function(ev){
 
     });
 
-
-    $('div.admin .password').keyup(function(evt){
-      var password_values = $('div.admin .password').map(function(index, item){
-        return $.trim($(item).val());
-      }).get();
-
-      if(!password_values || password_values.length <= 0 || (password_values[0] == '' && password_values[1] == '')){
-        $('div.admin .show_password').fadeOut();
-      }else{
-        $('div.admin .show_password').fadeIn();
-      }
+		$('a.show_password_link').click(function(evt){
+      evt.preventDefault();
+			if ($(this).text() == "show values") {
+				$("input#organization_user_attributes_password").get(0).setAttribute('type','text')				
+				$("input#organization_user_attributes_password_confirmation").get(0).setAttribute('type','text')
+				$(this).text("hide values");
+			} else {
+				$("input#organization_user_attributes_password").get(0).setAttribute('type','password')				
+				$("input#organization_user_attributes_password_confirmation").get(0).setAttribute('type','password')
+				$(this).text("show values");
+			}
     });
+
+		$('.block_user').click(function(evt){
+      evt.preventDefault();
+			$(this).toggleClass('selected');
+			if ($(this).hasClass('selected')){
+				$(this).next('input[type=hidden]').val(true);
+			} else {
+				$(this).next('input[type=hidden]').val(false);				
+			}
+		});
 
     $('#reset_password').click(function(evt){
       evt.preventDefault();
       var new_password = password();
+			$('a.show_password_link').text("hide values");
       $('div.admin .password').each(function(index, item){
         item.setAttribute('type', 'text');
         $(item).val(new_password);
@@ -188,30 +199,6 @@ $(document).ready(function(ev){
 
     });
 
-    $('div.block.edit div.med div.left div.long_field a.check').click(function(evt){
-      evt.preventDefault();
-      $(this).toggleClass('selected');
-      if($(this).hasClass('show_password')){
-        if($(this).hasClass('selected')){
-          $(this).closest('.admin').find('.password').each(function(index, item){
-            item.setAttribute('type', 'text');
-          });
-        }
-        else{
-          $(this).closest('.admin').find('.password').each(function(index, item){
-            item.setAttribute('type', 'password');
-          });
-        };
-      };
-      if($(this).hasClass('block_user')){
-        if($(this).hasClass('selected')){
-          $(this).next('input[type=hidden]').val(true);
-        }
-        else{
-          $(this).next('input[type=hidden]').val(false);
-        };
-      };
-    });
 });
 
     // CLICK ON IMPORT LINK TO SIMULATE CLICK ON INPUT FILE (HIDDEN)
