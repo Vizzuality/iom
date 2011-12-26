@@ -27,6 +27,12 @@
     </span>
   </div>
   <div class="field">
+    <label>ORGANIZATION ID</label>
+    <span class="input_large">
+      <%= f.text_field :organization_id %>
+    </span>
+  </div>
+  <div class="field">
     <p class="title">TAGS <span class="info">Use comma (",") to separate project tags</span></p>
     <span id="tags_combo" class="input_large">
       <%= f.text_field :tags, :value => @project.tags.map{ |tag| tag.name }.join(', ') %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111201145358) do
+ActiveRecord::Schema.define(:version => 20111226134501) do
 
   create_table "changes_histories", :force => true do |t|
     t.integer  "user_id"
@@ -351,6 +351,7 @@ ActiveRecord::Schema.define(:version => 20111201145358) do
     t.text     "calculation_of_number_of_people_reached"
     t.text     "project_needs"
     t.text     "idprefugee_camp"
+    t.string   "organization_id"
   end
 
   add_index "projects", ["end_date"], :name => "index_projects_on_end_date"
