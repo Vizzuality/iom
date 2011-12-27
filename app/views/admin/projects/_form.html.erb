@@ -1,8 +1,10 @@
 <%= form_for(@project, :url => (@project.new_record? ? admin_projects_path : admin_project_path(@project))) do |f| %>
 <!-- ##################### PROJECT IDENTIFICATION ##################### -->
 
-  <div class="form_error">Sorry, there are some errors that must be corrected.</div>
-    
+  <% if flash[:error] -%>
+  <div class="form_error"><%= flash[:error] %></div>
+  <% end -%>
+
   <h3 class="section museo_sans">PROJECT IDENTIFICATION</h3>
   <div class="field">
     <label>ORGANIZATION  <strong>*</strong></label>
@@ -46,7 +48,7 @@
         </div>
       </div>
       <!-- END FIELD DESCRIPTION -->
-      
+
     </label>
     <span class="input_large">
       <%= f.text_field :organization_id %>
@@ -79,7 +81,7 @@
           </div>
         </div>
       </div>
-      <!-- END FIELD DESCRIPTION -->    
+      <!-- END FIELD DESCRIPTION -->
     </label>
     <span class="input_large <%= 'error' if !@project.errors[:name].empty? && action_name != 'new' %>">
         <%= f.text_field :name, :class=>"long #{'error' if !@project.errors[:name].empty? && action_name != 'new'}" %>
@@ -130,7 +132,7 @@
         </div>
       </div>
       <!-- END FIELD DESCRIPTION -->
-      
+
     </label>
     <span class="textarea">
       <%= f.text_area :activities %>
@@ -154,7 +156,7 @@
         </div>
       </div>
       <!-- END FIELD DESCRIPTION -->
-    
+
     </label>
     <span class="textarea">
       <%= f.text_area :additional_information %>
@@ -180,7 +182,7 @@
         </div>
       </div>
       <!-- END FIELD DESCRIPTION -->
-        
+
         </label>
         <span id="start_date" class="combo_date"><p>09/10/2010</p>
           <div class="select_dates start_date">
@@ -210,7 +212,7 @@
         </div>
       </div>
       <!-- END FIELD DESCRIPTION -->
-        
+
         </label>
 
         <span id="end_date" class="combo_date"><p>09/10/2010</p>
@@ -247,8 +249,8 @@
         </div>
       </div>
       <!-- END FIELD DESCRIPTION -->
-    
-    
+
+
     </label>
 
       <ul class="clusters">
@@ -323,7 +325,7 @@
         </div>
       </div>
       <!-- END FIELD DESCRIPTION -->
-    
+
     </label>
     <span class="textarea">
       <%= f.text_area :cross_cutting_issues %>
@@ -349,8 +351,8 @@
           </div>
         </div>
       </div>
-      <!-- END FIELD DESCRIPTION -->  
-  
+      <!-- END FIELD DESCRIPTION -->
+
   </label>
   <div id="project_budget" class="field">
     <span class="input_short coin">
@@ -377,7 +379,7 @@
         </div>
       </div>
       <!-- END FIELD DESCRIPTION -->
-    
+
     </label>
     <span class="input_large">
       <%= f.text_field :implementing_organization %>
@@ -401,7 +403,7 @@
         </div>
       </div>
       <!-- END FIELD DESCRIPTION -->
-    
+
     </label>
     <span class="input_large">
       <%= f.text_field :partner_organizations %>
@@ -425,7 +427,7 @@
         </div>
       </div>
       <!-- END FIELD DESCRIPTION -->
-    
+
     </label>
     <span class="input_large">
       <%= f.text_field :awardee_type %>
@@ -455,7 +457,7 @@
         </div>
       </div>
       <!-- END FIELD DESCRIPTION -->
-          
+
           </label>
           <span class="input_short">
             <%= f.text_field :estimated_people_reached %>
@@ -482,7 +484,7 @@
         </div>
       </div>
       <!-- END FIELD DESCRIPTION -->
-        
+
         </label>
         <span class="input_short">
           <%= f.text_field :target %>
