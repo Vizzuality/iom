@@ -18,13 +18,26 @@ $(document).ready(function(ev){
 	
 	    // Field info
     $('div.field_info span.info').click(function(ev){
+      ev.stopPropagation();
       $('div.field_info div.field_text').each(function(i,ele){
         $(ele).fadeOut('fast');
       });
-      $(this).parent().find('div.field_text').fadeIn('slow');
+      $('body').unbind('click');
+      if ($(this).parent().find('div.field_text').is(':visible')) {
+        $(this).parent().find('div.field_text').fadeOut('fast');
+      } else {
+        $(this).parent().find('div.field_text').fadeIn('slow');
+        $('body').click(function(ev){
+          var $el = $(ev.target);
+          if (!$el.closest('div.field_text').length>0) {
+            $('div.field_info div.field_text').fadeOut('fast');
+          }
+        });
+      }
     });
     $('div.field_info div.top a').click(function(ev){
       ev.preventDefault();
+      ev.stopPropagation();
       $('div.field_info div.field_text').each(function(i,ele){
         $(ele).fadeOut('fast');
       });
