@@ -556,7 +556,7 @@ div.block p.by a:hover {text-decoration:underline;}
 div.block.project_info div.med div.left form {float:left; width:100%; height:auto; margin:5px 0 0 0; /*padding:0 0 15px 0;*/ position:relative; z-index:1;}
 
 div.block.project_info div.med div.left form input[type="checkbox"]{float:left; visibility:hidden; width:2px;}
-div.block.project_info div.med div.left form label {float:left; margin:20px 0 0 3px; font:bold 11px Arial; color:#999999; width:100%; text-transform:uppercase;}
+div.block.project_info div.med div.left form label {position:relative; float:left; margin:20px 0 0 3px; font:bold 11px Arial; color:#999999; width:100%; text-transform:uppercase; z-index:200;}
 
 div.block.project_info div.med div.left form p.title {float:left; margin:20px 0 0 3px; font:bold 11px Arial; color:#999999; width:100%;}
 div.block.project_info div.med div.left form p.title span.info {font:normal 13px Arial; color:#999999; width:auto; padding:0 5px;}
@@ -722,8 +722,8 @@ div.region_window span.region_combo:hover {cursor:pointer;}
 div.region_window a.add_location {margin:20px 10px 0 0!important;}
 
 
-div.field_info {position:relative; float:none; margin:0; padding:0; display:inline-block; vertical-align:top; zoom:1; *display:inline; display: -moz-inline-stack; width:18px; height:18px; overflow:visible;}
-div.field_info span.info {display:inline-block; vertical-align:top; zoom:1; *display:inline; display: -moz-inline-stack;width:18px; height:18px; text-indent:-9999px; font-size:0; line-height:0; overflow:hidden; background:url('/images/backoffice/icons/field_info.png') no-repeat 0 0;}
+div.field_info {position:relative!important; float:none; margin:0; padding:0; display:inline-block; vertical-align:top; zoom:1; *display:inline; width:18px; height:18px; overflow:visible;}
+div.field_info span.info {display:inline-block; vertical-align:top; zoom:1; *display:inline; width:18px; height:18px; text-indent:-9999px; font-size:0; line-height:0; overflow:hidden; background:url('/images/backoffice/icons/field_info.png') no-repeat 0 0;}
 div.field_info span.info:hover {background-position:0 -18px; cursor:pointer;}
 div.field_info div.field_text {position:absolute; display:none; bottom:18px; left:-155px; width:329px; z-index:300;}
 div.field_info div.field_text div.top {float:left; width:289px; padding:0 20px 0!important; margin:0; height:5px; background:url('/images/backoffice/projects/field_info.png') no-repeat 0 0!important;}
