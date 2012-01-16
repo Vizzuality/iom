@@ -206,6 +206,10 @@ div.bottom_grey a:hover {text-decoration:underline;}
 div.bottom_grey a.published {float:left; margin:20px 0 0 30px; color:#99CC33; text-decoration:underline;}
 div.bottom_grey a.not_published {float:left; margin:20px 0 0 30px; color:#FF6600; text-decoration:underline;}
 
+/*organizations form customization*/
+.organization div.med h2 {float: none;}
+div.med div.form_error {margin-top: 20px;}
+
 
 /*settings*/
 div.right.tips {width:286px;}

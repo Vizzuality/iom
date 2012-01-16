@@ -64,6 +64,7 @@ class Admin::OrganizationsController < ApplicationController
         redirect_to edit_admin_organization_path(@organization), :flash => {:success => 'Organization has been updated successfully'}
       end
     else
+      flash.now[:error] = @organization.errors.full_messages
       render :action => 'edit'
     end
   end
