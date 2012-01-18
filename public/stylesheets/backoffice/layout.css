@@ -540,7 +540,7 @@ div.med.projects_list div.no_results p {float:left; width:100%; margin:6px 0 0 0
 div.med.projects_list div.no_results p a {color:#E93E3F; text-decoration:underline;}
 div.med.projects_list div.no_results p a:hover {color:#7F2023;}
 
-div.med.projects_list table {width:100%; margin:23px 0 0 0; border-top:1px solid #CCCCCC; border-collapse:collapse;}
+div.med.projects_list table {float:left; width:100%; margin:23px 0 0 0; border-top:1px solid #CCCCCC; border-collapse:collapse;}
 div.med.projects_list table tr {width:100%;}
 div.med.projects_list table tr td {height:110px; padding:0 10px; border-bottom:1px solid #E5E5E5;}
 div.med.projects_list table tr td.center {text-align:center;}
