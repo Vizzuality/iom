@@ -104,6 +104,8 @@ class Admin::ProjectsController < Admin::AdminController
   end
 
   def destroy
+    redirect_to root_path unless current_user.present? && current_user.admin?
+
     @project = find_project(params[:id])
     @project.destroy
     redirect_to admin_projects_path, :flash => {:success => 'Project has been deleted successfully'}
@@ -157,4 +159,5 @@ class Admin::ProjectsController < Admin::AdminController
     @organizations_list
   end
   private :get_organizations_list
+
 end
