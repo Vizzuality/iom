@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
 
   def create
     logout_keeping_session!
+
     user = User.authenticate(params[:email], params[:password])
     if user && user.not_blocked?
       self.current_user = user

@@ -15,8 +15,10 @@
   </li>
 </ul>
 
+<% if current_user.admin? -%>
 <div class="delete">
   <h5 class="museo_sans">DELETE THIS PROJECT</h5>
   <p>Clicking the link below will permanently delete this donor and its references within the sites</p>
   <%= link_to("Delete this project", '#', :destroy_url => admin_project_path(@project), :att_name => 'project') %>
 </div>
+<% end -%>
