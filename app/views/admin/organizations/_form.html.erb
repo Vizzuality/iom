@@ -42,7 +42,7 @@
 
   <div class="short_field">
     <%= f.label :national_staff %>
-    <%= f.text_field :national_staff, :class=>"short" %>
+    <%= f.text_field :national_staff, :value => number_with_precision(f.object.national_staff, :precision => 0, :strip_insignificant_zeros => true, :delimiter => ','), :class => 'short' %>
   </div>
 
   <div class="short_field last">

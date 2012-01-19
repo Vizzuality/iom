@@ -18,4 +18,16 @@ class Donation < ActiveRecord::Base
 
   accepts_nested_attributes_for :donor
 
+  def amount=(ammount)
+    if ammount.blank?
+      write_attribute(:ammount, 0)
+    else
+      case ammount
+        when String then write_attribute(:amount, ammount.delete(',').to_f)
+        else             write_attribute(:amount, ammount)
+      end
+    end
+  end
+
+
 end

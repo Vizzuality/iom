@@ -24,7 +24,7 @@
               <%end%>
             </div>
             <div class="amount_box">
-              <p>$ <%= (donation.amount.nil?)? '0' : donation.amount %></p>
+              <p>$ <%= (donation.amount.nil?)? '0' : number_with_precision(donation.amount, :precision => 2, :strip_insignificant_zeros => true, :delimiter => ',') %></p>
               <%= link_to('', '#', :destroy_url => admin_project_donation_path(@project, donation), :att_name => 'donation', :class => 'delete') %>
             </div>
             <%if (!donation.amount.nil?) %>
@@ -33,7 +33,7 @@
           </li>
           <% end -%>
       </ul>
-      <h4 class="total museo_sans">TOTAL DONATED:</h4><span class="total_account">$</span><p class="amount"><%= total_account %></p>
+      <h4 class="total museo_sans">TOTAL DONATED:</h4><span class="total_account">$</span><p class="amount"><%= number_with_precision(total_account, :precision => 2, :strip_insignificant_zeros => true, :delimiter => ',') %></p>
         <% end -%>
     <%= form_for([:admin, @project, (@donation || @project.donations.new)]) do |f| %>
       <h4 class="museo_sans shadow_white">Add a new donation</h4>

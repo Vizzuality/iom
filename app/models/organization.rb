@@ -117,6 +117,17 @@ class Organization < ActiveRecord::Base
     update_attribute(:site_specific_information, atts)
   end
 
+  def national_staff=(ammount)
+    if ammount.blank?
+      write_attribute(:national_staff, 0)
+    else
+      case ammount
+        when String then write_attribute(:national_staff, ammount.delete(',').to_f)
+        else             write_attribute(:national_staff, ammount)
+      end
+    end
+  end
+
   def donors_count
     @donors_count ||= donations.map{ |d| d.donor_id }.uniq.size
   end
