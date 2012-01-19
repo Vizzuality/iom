@@ -15,7 +15,7 @@ var clusterToAdd = 13; // clusterToAdd_
 var sectors_id = 8; // sectors_
 var sectorToAdd = 12; // sectorToAdd_
 $(document).ready(function(ev){
-	
+
 	    // Field info
     $('div.field_info span.info').click(function(ev){
       ev.stopPropagation();
@@ -891,8 +891,7 @@ $(function() {
              return false;
            },
            select: function( event, ui ) {
-             $('#autocomplete_donor_name').val(ui.item.value);
-             $('#donation_donor_attributes_id').val(ui.item.element_id);
+             $('#donation_donor_id').val(ui.item.element_id);
            },
            refresh: function(){
               this.element.children("li.ui-menu-item:odd a").addClass("ui-menu-item-alternate");

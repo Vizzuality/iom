@@ -19,8 +19,8 @@
               </h3>
             </div>
             <div class="date_box">
-              <%if false %>
-                <p><%= donation.date.strftime("%Y/%m/%d") %></p>
+              <%if donation.date.present? %>
+                <p><%= donation.date.strftime("%m/%d/%Y") %></p>
               <%end%>
             </div>
             <div class="amount_box">
@@ -39,10 +39,10 @@
       <h4 class="museo_sans shadow_white">Add a new donation</h4>
 
         <div id="donor_name" class="field">
+          <%= f.hidden_field :donor_id %>
           <%= f.label :donor_id, raw('DONOR NAME <strong>*</strong>') %>
           <span id="donor_name_input">
             <%= f.fields_for :donor, f.object.build_donor do |donor_fields| %>
-              <%= donor_fields.hidden_field :id %>
               <%= donor_fields.text_field :name, :id => :autocomplete_donor_name %>
             <% end -%>
           </span>
