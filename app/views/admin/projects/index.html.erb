@@ -120,7 +120,16 @@
             <td width="625">
               <span>
                 <h3><a href="<%= edit_admin_project_path(project) %>"><%= project.name %></a><% if current_user.admin? -%> by <a href="<%= edit_admin_organization_path(project.primary_organization) %>"><%= project.primary_organization.name %></a><% end %></h3>
-                <p class="margin"><a class="project_status <%= project.finished? ? 'closed' : 'active' %>"><%= project.finished? ? 'Closed' : 'Active' %></a> on May 15th 2020 (TODODODODODODO)</p>
+                <p class="margin"><a class="project_status <%= project.finished? ? 'closed' : 'active' %>">
+                  <%= project.finished? ? 'Closed' : 'Active' %></a>
+                  <% if project.end_date.present? -%>
+                    <% if project.finished? -%>
+                      <%= project.end_date.strftime("since %b #{project.end_date.day.ordinalize}, %Y") %>
+                    <% else -%>
+                      <%= project.end_date.strftime("until %b #{project.end_date.day.ordinalize}, %Y") %>
+                    <% end -%>
+                  <% end -%>
+              </p>
               </span>
             </td>
             <td width="150" class="odd center">
