@@ -90,6 +90,17 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def estimated_people_reached=(ammount)
+    if ammount.blank?
+      write_attribute(:estimated_people_reached, 0)
+    else
+      case ammount
+        when String then write_attribute(:estimated_people_reached, ammount.delete(',').to_f)
+        else             write_attribute(:estimated_people_reached, ammount)
+      end
+    end
+  end
+
   def points=(value)
     points = value.map do |point|
       point = point.tr('(','').tr(')','').split(',')

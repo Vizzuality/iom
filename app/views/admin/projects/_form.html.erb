@@ -470,7 +470,7 @@
               <!-- END FIELD DESCRIPTION -->
           </label>
           <span class="input_short">
-            <%= f.text_field :estimated_people_reached %>
+            <%= f.text_field :estimated_people_reached, :value => number_with_precision(f.object.estimated_people_reached, :precision => 0, :strip_insignificant_zeros => true, :delimiter => ',') %>
             <p class="msg">people</p>
           </span>
         </div>
