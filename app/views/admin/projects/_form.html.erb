@@ -194,7 +194,7 @@
             <p id="day" class="title">DAY</p>
             <p id="year" class="title">YEAR</p>
 
-              <%= f.date_select :start_date, :start_year => 1970, :end_year=>2030, :order => [:month, :day, :year]  %>
+              <%= f.date_select :start_date, :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year]  %>
           </div>
         </span>
       </li>
@@ -226,7 +226,7 @@
             <p id="day" class="title">DAY</p>
             <p id="year" class="title">YEAR</p>
 
-              <%= f.date_select :end_date, :start_year => 1970, :end_year=>2030, :order => [:month, :day, :year]  %>
+              <%= f.date_select :end_date, :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year]  %>
           </div>
         </span>
       </li>
@@ -680,26 +680,26 @@
       <li class="date">
         <label>DATE PROVIDED</label>
 
-        <span id="date_provided" class="combo_date"><p>09/10/2010</p>
+        <span id="date_provided" class="combo_date"><p></p>
         <div class="select_dates">
           <p id="month" class="title">MONTH</p>
           <p id="day" class="title">DAY</p>
           <p id="year" class="title">YEAR</p>
 
-         <%= f.date_select :date_provided, :start_year => 1970, :order => [:month, :day, :year]  %>
+          <%= f.date_select :date_provided, :start_year => 1970, :end_year => 100.years.since.year, :order => [:month, :day, :year]  %>
         </div>
         </span>
       </li>
       <li class="date">
         <label>DATE UPDATED</label>
 
-        <span id="date_updated" class="combo_date"><p>09/10/2010</p>
+        <span id="date_updated" class="combo_date"><p></p>
         <div class="select_dates end_date">
           <p id="month" class="title">MONTH</p>
           <p id="day" class="title">DAY</p>
           <p id="year" class="title">YEAR</p>
 
-            <%= f.date_select :date_updated, :start_year => 1970, :order => [:month, :day, :year]  %>
+          <%= f.date_select :date_updated, :start_year => 1970, :end_year => 100.years.since.year, :order => [:month, :day, :year]  %>
         </div>
      </span>
       </li>
