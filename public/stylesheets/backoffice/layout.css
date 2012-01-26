@@ -545,7 +545,7 @@ div.med.projects_list table tr {width:100%;}
 div.med.projects_list table tr td {height:110px; padding:0 10px; border-bottom:1px solid #E5E5E5;}
 div.med.projects_list table tr td.center {text-align:center;}
 div.med.projects_list table tr td p {font:normal 13px Arial; color:#666666;}
-div.med.projects_list table tr td p.margin {margin:5px 0 0 0; color:#B8B8B8;}
+div.med.projects_list table tr td p.margin {margin:5px 0 0 0;}
 div.med.projects_list table tr td.odd {background:#F7F7F7;}
 div.med.projects_list table tr:last-child td {border-bottom:none;}
 div.med.projects_list table tr h3 {font:normal 17px Arial; color:#666666;}
