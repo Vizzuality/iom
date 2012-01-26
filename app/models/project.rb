@@ -215,7 +215,7 @@ idprefugee_camp project_contact_person project_contact_position project_contact_
       where << "regions_ids && '{#{options[:sector_region_id]}}'" if options[:sector_region_id]
       where << "countries_ids && '{#{options[:sector_country_id]}}'" if options[:sector_country_id]
     elsif options[:organization]
-      where << "organization_id = #{options[:organization]}"
+      where << "dd.organization_id = #{options[:organization]}"
       where << "site_id=#{site.id}" if site
 
       if options[:organization_category_id]
@@ -239,7 +239,7 @@ idprefugee_camp project_contact_person project_contact_position project_contact_
         project_id,
         project_name,
         project_description,
-        organization_id,
+        dd.organization_id,
         organization_name AS organization,
         implementing_organization,
         partner_organizations,
@@ -280,7 +280,7 @@ idprefugee_camp project_contact_person project_contact_position project_contact_
         project_id,
         project_name,
         project_description,
-        organization_id,
+        dd.organization_id,
         organization_name,
         implementing_organization,
         partner_organizations,
