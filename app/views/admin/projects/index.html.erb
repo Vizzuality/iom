@@ -83,8 +83,8 @@
     <span class="top"></span>
     <div class="content">
       <div id ="information_projects" class="center">
-        <p class="museo_sans"><%= Project.count %></p>
-        <label class="museo_sans"><%= Project.count == 1 ? 'project' : 'projects' %><br/>registered</label>
+        <p class="museo_sans"><%= @projects_count %></p>
+        <label class="museo_sans"><%= @projects_count == 1 ? 'project' : 'projects' %><br/>registered</label>
       </div>
         <a class="add_project museo_sans shadow_green" href="<%= new_admin_project_path %>">Add new project</a>
         <a class="import_csv museo_sans shadow_black" href="<%= admin_export_projects_path(:format => 'xls') %>">Export projects</a>
@@ -113,38 +113,44 @@
         <% end %>
       </h2>
       <% if @projects.any? %>
-      <ul>
+      <table collapse="0">
+        <tbody>
         <% @projects.each do |project| %>
-        <li>
-          <div class="project_name">
-            <h3><a href="<%= edit_admin_project_path(project) %>"><%= truncate(project.name,:length => 50) %></a></h3>
-            <a class="project_status <%= project.finished? ? 'closed' : 'active' %>"><%= project.finished? ? 'Closed' : 'Active' %></a>
-          </div>
-            <div class="gray box <%= (project.primary_organization.name.length < 20) ? 'single' : '' %>">
-              <p class="red"><a href="<%= edit_admin_organization_path(project.primary_organization) %>"><%= truncate(project.primary_organization.name, :length => 40)%></a></p>
-            </div>
-          <% unless project.clusters.empty? %>
-            <% if project.clusters.count == 1 %>
-            <div class="white box little <%= (project.clusters.first.name.length < 20)? 'single' : '' %>">
-              <p><%= project.clusters.first.name %></p>
-            </div>
-            <% else %>
-            <div class="white box little">
-              <p><%= truncate(project.clusters.first.name, :length => 19) %></p>
-              <p class="secondary"><%= "and #{project.clusters.count - 1} more" %></p>
-            </div>
-            <% end %>
-          <% else %>
-            <div class="white box little single">
+          <tr>
+            <td width="625">
+              <span>
+                <h3><a href="<%= edit_admin_project_path(project) %>"><%= project.name %></a><% if current_user.admin? -%> by <a href="<%= edit_admin_organization_path(project.primary_organization) %>"><%= project.primary_organization.name %></a><% end %></h3>
+                <p class="margin"><a class="project_status <%= project.finished? ? 'closed' : 'active' %>">
+                  <%= project.finished? ? 'Closed' : 'Active' %></a>
+                  <% if project.end_date.present? -%>
+                    <% if project.finished? -%>
+                      <%= project.end_date.strftime("since %b #{project.end_date.day.ordinalize}, %Y") %>
+                    <% else -%>
+                      <%= project.end_date.strftime("until %b #{project.end_date.day.ordinalize}, %Y") %>
+                    <% end -%>
+                  <% end -%>
+              </p>
+              </span>
+            </td>
+            <td width="150" class="odd center">
+              <% unless project.sectors.empty? %>
+                <% if project.sectors.count == 1 %>
+                  <p><%= project.sectors.first.name %></p>
+                <% else %>
+                  <p><%= truncate(project.sectors.first.name, :length => 19) %></p>
+                  <p class="secondary"><%= "and #{project.sectors.count - 1} more" %></p>
+                <% end %>
+              <% else %>
                 <p>N/A</p>
-            </div>
-          <% end %>
-          <div class="gray box little <%= (project.countries.first && project.countries.first.name.length < 20 ) ? 'single' : '' %>">
-            <p><%= project.countries.first.try(:name) %></p>
-          </div>
-        </li>
+              <% end %>
+            </td>
+            <td width="150" class="center">
+              <p><%= project.countries.first.try(:name) %></p>
+            </td>
+          </tr>
         <% end -%>
-      </ul>
+        </tbody>
+      </table>
       <% else %>
         <% if Project.count>1 %>
           <div class="no_results">

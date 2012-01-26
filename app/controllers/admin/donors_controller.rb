@@ -1,6 +1,4 @@
-class Admin::DonorsController < ApplicationController
-
-  before_filter :login_required
+class Admin::DonorsController < Admin::AdminController
 
   def index
     donors = if params[:q]

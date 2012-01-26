@@ -3,6 +3,8 @@ class Admin::OrganizationsController < ApplicationController
   before_filter :login_required
 
   def index
+    redirect_to edit_admin_organization_path(current_user.organization) and return unless current_user.admin?
+
     organizations = if params[:q]
       q = "%#{params[:q].sanitize_sql!}%"
       Organization.where(["name ilike ? OR description ilike ?", q, q])
@@ -53,6 +55,7 @@ class Admin::OrganizationsController < ApplicationController
       end
     else
       @organization.attributes = params[:organization]
+      @organization.user.blocked = params[:organization][:user_attributes][:blocked] if @organization.user && params[:organization][:user_attributes] && params[:organization][:user_attributes][:blocked]
     end
     if @organization.save
       if params[:site_id]
@@ -61,6 +64,7 @@ class Admin::OrganizationsController < ApplicationController
         redirect_to edit_admin_organization_path(@organization), :flash => {:success => 'Organization has been updated successfully'}
       end
     else
+      flash.now[:error] = @organization.errors.full_messages
       render :action => 'edit'
     end
   end

@@ -16,6 +16,41 @@ var sectors_id = 8; // sectors_
 var sectorToAdd = 12; // sectorToAdd_
 $(document).ready(function(ev){
 
+	    // Field info
+    $('div.field_info span.info').click(function(ev){
+      ev.stopPropagation();
+
+      $('div.field_info div.field_text').each(function(i,ele){
+        $(ele).closest('label').removeAttr('style');
+        $(ele).fadeOut('fast');
+      });
+
+      $(this).closest('label').css({'z-index':200});
+
+      $('body').unbind('click');
+      if ($(this).parent().find('div.field_text').is(':visible')) {
+        $(this).closest('label').removeAttr('style');
+        $(this).parent().find('div.field_text').fadeOut('fast');
+      } else {
+        $(this).parent().find('div.field_text').fadeIn('slow');
+        $('body').click(function(ev){
+          var $el = $(ev.target);
+          if (!$el.closest('div.field_text').length>0) {
+            $('div.field_info div.field_text').closest('label').removeAttr('style');
+            $('div.field_info div.field_text').fadeOut('fast');
+          }
+        });
+      }
+    });
+    $('div.field_info div.top a').click(function(ev){
+      ev.preventDefault();
+      ev.stopPropagation();
+      $('div.field_info div.field_text').each(function(i,ele){
+        $(ele).closest('label').removeAttr('style');
+        $(ele).fadeOut('fast');
+      });
+    });
+
     // COUNTRY COMBO
     $('select#country').sSelect({ddMaxWidth: '134px',ddMaxHeight:'220px',containerClass:'country_index'});
 
@@ -160,8 +195,6 @@ $(document).ready(function(ev){
       };
     });
 
-
-
   });
 
   $('span#cluster_combo_search').find('li').click(function(ev){
@@ -230,6 +263,11 @@ $(document).ready(function(ev){
   $('div.list_combo').children('span.combo_large').click(function(ev){
     ev.stopPropagation();
     ev.preventDefault();
+
+    $('div.field_info div.field_text').each(function(i,ele){
+      $(ele).closest('label').removeAttr('style');
+      $(ele).fadeOut('fast');
+    });
 
     if ($(this).attr('id') == 'hidden'){
       $('div.list_combo').find('ul.list_combo_content').css('display','inline');
@@ -853,7 +891,6 @@ $(function() {
              return false;
            },
            select: function( event, ui ) {
-             $('#autocomplete_donor_name').val(ui.item.value);
              $('#donation_donor_id').val(ui.item.element_id);
            },
            refresh: function(){

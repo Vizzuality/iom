@@ -1,5 +1,6 @@
 class Admin::AdminController < ApplicationController
   before_filter :login_required
+  before_filter :check_user_permissions
 
   def index
   end
@@ -9,6 +10,7 @@ class Admin::AdminController < ApplicationController
       :include_non_active =>true
     }
     options[:organization] = params[:organization_id] if params[:organization_id].present?
+    options[:organization] = current_user.organization_id unless current_user.admin?
     results_in_csv = Project.to_csv(nil, options)
     results_in_excel = Project.to_excel(nil, options)
 
@@ -69,4 +71,11 @@ SQL
       end
     end
   end
+
+  def check_user_permissions
+    unless current_user.admin?
+      redirect_to admin_projects_path unless controller_name == 'projects' || controller_name == 'organizations' || (controller_name == 'admin' && action_name == 'export_projects') || (controller_name == 'donors' && action_name == 'index' && request.format.json?) || (controller_name = 'donations' && action_name == 'create')
+    end
+  end
+  private :check_user_permissions
 end

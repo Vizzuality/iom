@@ -167,6 +167,8 @@ div.login div.main div.med_data input {float:left; width:309px; height:18px; lin
 div.login div.main div.med_data input[type="password"] {font-weight:bold;}
 div.login div.main div.med_data input.error {background-position:0 -32px;}
 div.login div.main div.med_data p.error {float:left; width:256px; height:33px; margin:20px 0 0 1px; padding:19px 0 0 65px; background:url('/images/backoffice/login/error_bkg.png') no-repeat 0 0; font:normal 13px Arial; color:white;}
+div.login div.main div.med_data p.error.margin {height:42px; padding-top:10px;}
+div.login div.main div.med_data p.error a {color:white; text-decoration:underline;}
 div.login div.main div.bottom_data {float:left; width:400px; height:76px; background:url('/images/backoffice/login/bottom_login.png') no-repeat scroll top left; }
 div.login div.main div.bottom_data input {float:right; width:98px; height:32px; padding:0; margin:22px 40px 0 0  ; background:url('/images/backoffice/login/submit_bkg.png') no-repeat 0 0; border:none; text-align:center;
   font:normal 19px "Museo Sans","Arial"; color:white; text-shadow:0 1px #96272D;}
@@ -197,11 +199,16 @@ div.med.information div.info div.left strong {color:#333333; font-weight:normal;
 div.med.information div.info div.left p a {color:#EB4142; text-decoration:none;}
 div.med.information div.info div.left p a:hover {text-decoration:underline;}
 div.med.information div.info div.right_graph {float:right;}
+div.med div.form_error {width: 483px; height: 12px; margin: 30px 0 0 0; padding: 20px 20px 20px 60px; font:normal 13px Arial; color:#FFFFFF; background:url('/images/backoffice/common/form_error_bkg.png')}
 div.bottom_grey {float:left; width:942px; height:64px; background:url('/images/backoffice/backgrounds/bottom_grey_long.png') no-repeat center 0;}
 div.bottom_grey a {float:right; width:auto; margin:20px 32px 0 0; font:normal 17px Arial; color:#EB4142; text-decoration:none;}
 div.bottom_grey a:hover {text-decoration:underline;}
 div.bottom_grey a.published {float:left; margin:20px 0 0 30px; color:#99CC33; text-decoration:underline;}
 div.bottom_grey a.not_published {float:left; margin:20px 0 0 30px; color:#FF6600; text-decoration:underline;}
+
+/*organizations form customization*/
+.organization div.med h2 {float: none;}
+div.med div.form_error {margin-top: 20px;}
 
 
 /*settings*/
@@ -234,6 +241,8 @@ div.block.edit div.med div.left textarea {float:left; min-width:548px; max-width
 div.block.edit div.med div.left textarea.error {background-position:0 -214px;}
 div.block.edit div.med div.left textarea:focus {outline:none;}
 div.block.edit div.med div.left label {float:left; width:100%; margin:18px 0 0 1px; font:bold 11px Arial; color:#999999; text-transform:uppercase;}
+div.block.edit div.med div.left label a.show_password_link {font:normal 13px Arial; color:#D8393D; text-transform: none; text-decoration: underline}
+
 div.block.edit div.med div.left div.common {float:left; width:100%; margin:35px 0 0 0;}
 div.block.edit div.med div.left div.common h3 {float:left; width:100%; padding:0 0 5px 0; font:normal 17px "Museo Sans","Arial"; color:#333333; text-transform:uppercase;}
 div.block.edit div.med div.left div.short_field {float:left; width:272px; margin:0px 20px 0 0;}
@@ -257,15 +266,19 @@ div.block.edit div.med div.left div span a.combo:hover {cursor:pointer;}
 div.block.edit div.med div.left div.field input[type="text"].short {float:left; width:256px; height:18px; margin:5px 0 0 0; padding:8px; font:normal 15px Arial; color:#333333; border:none; background:url('/images/backoffice/donors/short_input.png') no-repeat 0 0;}
 div.block.edit div.med div.left div input[type="password"].short {float:left; width:256px; height:18px; margin:5px 0 0 0; padding:8px; font:normal 15px Arial; color:#333333; border:none; background:url('/images/backoffice/donors/short_input.png') no-repeat 0 0;}
 div.block.edit div.med div.left div.long_field {float:left; width:100%;}
-div.block.edit div.med div.left div.long_field input[type="text"].address {float:left; width:548px; height:18px; margin:5px 0 0 0; padding:8px; font:normal 15px Arial; color:#333333; border:none; background:url('/images/backoffice/donors/input_address.png') no-repeat 0 0;}
+div.block.edit div.med div.left div.long_field input[type="text"].email, div.block.edit div.med div.left div.long_field input[type="text"].address {float:left; width:548px; height:18px; margin:5px 0 0 0; padding:8px; font:normal 15px Arial; color:#333333; border:none; background:url('/images/backoffice/donors/input_address.png') no-repeat 0 0;}
 div.block.edit div.med div.left div.short_field input[type="text"].twitter {width:234px; padding:8px 8px 8px 30px; background:url('/images/backoffice/donors/twitter_bkg.png') no-repeat 0 0;}
 div.block.edit div.med div.left div.field input[type="text"].facebook {width:381px; padding:8px 8px 8px 30px; background:url('/images/backoffice/donors/facebook_input.png') no-repeat 0 0;}
+div.block.edit div.med div.left div.long_field a.check.show_password{ display: none; }
+div.block.edit div.med div.left div.long_field a#reset_password{ float: right; margin: 16px 10px; }
+div.block.edit div.med div.left div.long_field a.check {float:left; font:normal 15px Arial; color:#333333; text-decoration:none; background:url('/images/backoffice/sites/project_tipo_check.png') no-repeat 0 4px; padding:0 0 0 15px; margin: 15px 0; height:14px;}
+div.block.edit div.med div.left div.long_field a.check.selected {background:url('/images/backoffice/sites/project_tipo_checked.png') no-repeat 0 4px;}
 div.block.edit div.med div.left div.final {float:left; width:100%;}
 div.block.edit div.med div.left input[type="submit"] {float:right; width:157px; height:32px; margin:20px 8px 0 0; text-indent:-9999px; font-size:0; display:block; line-height:0; background:url('/images/backoffice/donors/save_changes.png') no-repeat 0 0; border:none;}
 div.block.edit div.med div.left input[type="submit"]:hover {background-position:0 -32px; cursor:pointer;}
 div.block.edit div.med div.left input[type="submit"].error {background:url('/images/backoffice/donors/save_changes.png') no-repeat 0 -64px;}
 div.block.edit div.med div.left input[type="submit"].error:hover {background:url('/images/backoffice/donors/save_changes.png') no-repeat 0 -96px; cursor:pointer;}
-div.block.edit div.med div.left div.field input.error {width:379px; padding:8px 32px 8px 8px; background-position:0 -34px;}
+div.block.edit div.med div.left div.short_field input.error, div.block.edit div.med div.left div.field input.error {width:379px; padding:8px 32px 8px 8px; background-position:0 -34px;}
 div.block.edit div.med div.left span.field_error {position:absolute; bottom:10px; right:10px; margin:0; padding:0; width:auto;}
 div.block.edit div.med div.left span.field_error a.error {float:right; width:14px; height:14px; background: url('/images/backoffice/icons/error.png') no-repeat scroll top left;}
 div.block.edit div.med div.left span.field_error a.error:hover {cursor:pointer;}
@@ -511,6 +524,7 @@ div.med.projects_list ul li.last {border:none;}
 div.med.projects_list ul li h3 a {font:bold 17px Arial; color:#E93E3F;}
 div.med.projects_list ul li h3 a:hover {text-decoration:underline;}
 div.med.projects_list ul li div.project_name {float:left; width:443px; height:71px;}
+div.med.projects_list ul li div.project_name_long {width:610px}
 div.med.projects_list ul li div.project_name h3 {float:left; width:100%; padding:17px 0 0 0;}
 div.med.projects_list ul li div.project_name a.project_status {float:left; margin:2px 0 0 0; font:normal 13px Arial; color:#666666; padding:0 0 0 12px;}
 div.med.projects_list ul li div.project_name a.project_status.active {background:url('/images/backoffice/projects/active_icon.png') no-repeat 0 3px;}
@@ -525,6 +539,21 @@ div.med.projects_list div.no_results h2 {float:left; width:100%; text-align:cent
 div.med.projects_list div.no_results p {float:left; width:100%; margin:6px 0 0 0; text-align:center; font:normal 17px Arial; color:#666666;}
 div.med.projects_list div.no_results p a {color:#E93E3F; text-decoration:underline;}
 div.med.projects_list div.no_results p a:hover {color:#7F2023;}
+
+div.med.projects_list table {float:left; width:100%; margin:23px 0 0 0; border-top:1px solid #CCCCCC; border-collapse:collapse;}
+div.med.projects_list table tr {width:100%;}
+div.med.projects_list table tr td {height:110px; padding:0 10px; border-bottom:1px solid #E5E5E5;}
+div.med.projects_list table tr td.center {text-align:center;}
+div.med.projects_list table tr td p {font:normal 13px Arial; color:#666666;}
+div.med.projects_list table tr td p.margin {margin:5px 0 0 0;}
+div.med.projects_list table tr td.odd {background:#F7F7F7;}
+div.med.projects_list table tr:last-child td {border-bottom:none;}
+div.med.projects_list table tr h3 {font:normal 17px Arial; color:#666666;}
+div.med.projects_list table tr h3 a {font:bold 17px Arial; color:#E93E3F;}
+div.med.projects_list table tr h3 a:hover {text-decoration:underline;}
+div.med.projects_list table tr a.project_status {float:left; font:normal 13px Arial; color:#666666; padding:0 4px 0 12px;}
+div.med.projects_list table tr a.project_status.active {background:url('/images/backoffice/projects/active_icon.png') no-repeat 0 4px;}
+div.med.projects_list table tr a.project_status.closed {background:url('/images/backoffice/projects/closed_icon.png') no-repeat 0 3px;}
 
 
 div.med.projects_list ul li p.red {color:#EB4142; width:147px; margin:0 0 0 9px;}
@@ -546,7 +575,7 @@ div.block p.by a:hover {text-decoration:underline;}
 div.block.project_info div.med div.left form {float:left; width:100%; height:auto; margin:5px 0 0 0; /*padding:0 0 15px 0;*/ position:relative; z-index:1;}
 
 div.block.project_info div.med div.left form input[type="checkbox"]{float:left; visibility:hidden; width:2px;}
-div.block.project_info div.med div.left form label {float:left; margin:20px 0 0 3px; font:bold 11px Arial; color:#999999; width:100%; text-transform:uppercase;}
+div.block.project_info div.med div.left form label {position:relative; float:left; margin:20px 0 0 3px; font:bold 11px Arial; color:#999999; width:100%; text-transform:uppercase; z-index:1;}
 
 div.block.project_info div.med div.left form p.title {float:left; margin:20px 0 0 3px; font:bold 11px Arial; color:#999999; width:100%;}
 div.block.project_info div.med div.left form p.title span.info {font:normal 13px Arial; color:#999999; width:auto; padding:0 5px;}
@@ -711,6 +740,17 @@ div.region_window span.region_combo.clicked ul.options li a {font:normal 13px Ar
 div.region_window span.region_combo:hover {cursor:pointer;}
 div.region_window a.add_location {margin:20px 10px 0 0!important;}
 
+
+div.field_info {position:relative!important; float:none; margin:0; padding:0; display:inline-block; vertical-align:top; zoom:1; *display:inline; width:18px; height:18px; overflow:visible;}
+div.field_info span.info {display:inline-block; vertical-align:top; zoom:1; *display:inline; width:18px; height:18px; text-indent:-9999px; font-size:0; line-height:0; overflow:hidden; background:url('/images/backoffice/icons/field_info.png') no-repeat 0 0;}
+div.field_info span.info:hover {background-position:0 -18px; cursor:pointer;}
+div.field_info div.field_text {position:absolute; display:none; bottom:18px; left:-155px; width:329px; z-index:300;}
+div.field_info div.field_text div.top {float:left; width:289px; padding:0 20px 0!important; margin:0; height:5px; background:url('/images/backoffice/projects/field_info.png') no-repeat 0 0!important;}
+div.field_info div.field_text div.bottom {float:left; width:289px; height:auto; padding:0 20px 40px; background:url('/images/backoffice/projects/field_info.png') no-repeat right bottom!important;}
+div.field_info div.field_text div.bottom span.scroll {float:left; width:100%; max-height:150px; overflow:auto;}
+div.field_info div.field_text h3 {float:left; width:100%; padding:0 0 8px 0; margin:10px 0 0 0; font:normal 21px "Museo Sans",Arial; color:white; text-transform:none;}
+div.field_info div.field_text div.top a {position:absolute; right:20px; top:18px; width:12px; height:12px; color:white;}
+div.field_info div.field_text p {padding:10px 0 0; font:normal 13px Arial; color:#CCCCCC; text-transform:none!important;}
 
 
 

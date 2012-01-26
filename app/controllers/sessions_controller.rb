@@ -8,17 +8,27 @@ class SessionsController < ApplicationController
 
   def create
     logout_keeping_session!
+
     user = User.authenticate(params[:email], params[:password])
-    if user
+    if user && user.not_blocked?
       self.current_user = user
       new_cookie_flag = (params[:remember_me] == "1")
       handle_remember_cookie! new_cookie_flag
       redirect_back_or_default(admin_admin_path, :notice => "Logged in successfully")
+    elsif user && user.blocked?
+      note_failed_signin
+      @email       = params[:email]
+      @remember_me = params[:remember_me]
+      flash[:alert] = <<-HTML
+        <p class="error margin">Your user account is blocked temporally.<br />
+        <a href="mailto:jmontgom@interaction.org">Write us</a> if this is a problem for you.</p>
+      HTML
+      render :action => 'new'
     else
       note_failed_signin
       @email       = params[:email]
       @remember_me = params[:remember_me]
-      flash[:alert] = 'Your email / password is not correct'
+      flash[:alert] = '<p class="error">Your email / password is not correct</p>'
       render :action => 'new'
     end
   end

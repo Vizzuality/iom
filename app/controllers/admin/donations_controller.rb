@@ -1,4 +1,4 @@
-class Admin::DonationsController < ApplicationController
+class Admin::DonationsController < Admin::AdminController
 
   before_filter :login_required
 

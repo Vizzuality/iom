@@ -165,6 +165,39 @@ $(document).ready(function(ev){
 
     });
 
+		$('a.show_password_link').click(function(evt){
+      evt.preventDefault();
+			if ($(this).text() == "show values") {
+				$("input#organization_user_attributes_password").get(0).setAttribute('type','text')				
+				$("input#organization_user_attributes_password_confirmation").get(0).setAttribute('type','text')
+				$(this).text("hide values");
+			} else {
+				$("input#organization_user_attributes_password").get(0).setAttribute('type','password')				
+				$("input#organization_user_attributes_password_confirmation").get(0).setAttribute('type','password')
+				$(this).text("show values");
+			}
+    });
+
+		$('.block_user').click(function(evt){
+      evt.preventDefault();
+			$(this).toggleClass('selected');
+			if ($(this).hasClass('selected')){
+				$(this).next('input[type=hidden]').val(true);
+			} else {
+				$(this).next('input[type=hidden]').val(false);				
+			}
+		});
+
+    $('#reset_password').click(function(evt){
+      evt.preventDefault();
+      var new_password = password();
+			$('a.show_password_link').text("hide values");
+      $('div.admin .password').each(function(index, item){
+        item.setAttribute('type', 'text');
+        $(item).val(new_password);
+      });
+
+    });
 
 });
 
@@ -285,3 +318,35 @@ $(document).ready(function(ev){
           api.reinitialise();
       }
   }
+
+  function password(length, special) {
+    var iteration = 0;
+    var password = "";
+    var randomNumber;
+    if(length == undefined){
+      length = Math.RandomInteger(5, 10);
+    }
+    if(special == undefined){
+      var special = false;
+    }
+    while(iteration < length){
+        randomNumber = (Math.floor((Math.random() * 100)) % 94) + 33;
+        if(!special){
+              if ((randomNumber >=33) && (randomNumber <=47)) { continue; }
+              if ((randomNumber >=58) && (randomNumber <=64)) { continue; }
+              if ((randomNumber >=91) && (randomNumber <=96)) { continue; }
+              if ((randomNumber >=123) && (randomNumber <=126)) { continue; }
+            }
+        iteration++;
+        password += String.fromCharCode(randomNumber);
+      }
+    return password;
+  }
+
+  Math.RandomInteger = function(n, m) {
+      if (! m) {m = 1;} // default range starts at 1
+      var max = n > m ? n : m; // doesn't matter which value is min or max
+      var min = n === max ? m : n; // min is value that is not max
+      var d = max - min + 1; // distribution range
+      return Math.floor(Math.random() * d + min);
+  };

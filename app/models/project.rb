@@ -49,7 +49,7 @@ class Project < ActiveRecord::Base
   has_many :donors, :through => :donations
   has_many :cached_sites, :class_name => 'Site', :finder_sql => 'select sites.* from sites, projects_sites where projects_sites.project_id = #{id} and projects_sites.site_id = sites.id'
 
-  validates_presence_of :primary_organization_id, :name
+  validates_presence_of :primary_organization_id, :name, :description
 
   validate :dates_consistency#, :presence_of_clusters_and_sectors
 
@@ -86,6 +86,17 @@ class Project < ActiveRecord::Base
       case ammount
         when String then write_attribute(:budget, ammount.delete(',').to_f)
         else             write_attribute(:budget, ammount)
+      end
+    end
+  end
+
+  def estimated_people_reached=(ammount)
+    if ammount.blank?
+      write_attribute(:estimated_people_reached, 0)
+    else
+      case ammount
+        when String then write_attribute(:estimated_people_reached, ammount.delete(',').to_f)
+        else             write_attribute(:estimated_people_reached, ammount)
       end
     end
   end
@@ -153,10 +164,10 @@ idprefugee_camp project_contact_person project_contact_position project_contact_
   def self.list_for_export(site = nil, options = {})
     where = []
     where << "site_id = #{site.id}" if site
-    
+
     where << '(p.end_date is null OR p.end_date > now())' if !options[:include_non_active]
-      
-    
+
+
 
     if options[:kml]
       kml_select = <<-SQL
@@ -601,7 +612,7 @@ SQL
                where site_id=#{site.id} AND p.id=#{self.id}
                GROUP BY p.id,p.name,o.id,o.name,p.description,p.end_date,ps.site_id,p.created_at) as subq"
          ActiveRecord::Base.connection.execute(sql)
-         
+
          #We also take the opportunity to add to denormalization the projects which are orphan from a site
          #Those projects not in a site right now also need to be handled for exports
          sql_for_orphan_projects = """
@@ -627,7 +638,7 @@ SQL
                     FROM projects as p
                     INNER JOIN organizations as o ON p.primary_organization_id=o.id
                     LEFT JOIN projects_regions as pr ON pr.project_id=p.id
-                    LEFT JOIN regions as r ON pr.region_id=r.id 
+                    LEFT JOIN regions as r ON pr.region_id=r.id
                     LEFT JOIN countries_projects as cp ON cp.project_id=p.id
                     LEFT JOIN countries as c ON c.id=cp.country_id
                     LEFT JOIN clusters_projects as cpro ON cpro.project_id=p.id
@@ -637,29 +648,37 @@ SQL
                     LEFT JOIN donations as d ON d.project_id=p.id
                     where p.id not in (select project_id from projects_sites)
                     GROUP BY p.id,p.name,o.id,o.name,p.description,p.start_date,p.end_date,p.created_at) as subq"""
-         ActiveRecord::Base.connection.execute(sql_for_orphan_projects)         
-         
-         
+         ActiveRecord::Base.connection.execute(sql_for_orphan_projects)
+
+
          #We also update its geometry
          sql="""
          update projects as proj set the_geom = (
-         select ST_Collect(r.the_geom) from 
+         select ST_Collect(r.the_geom) from
          projects_regions as pr
          inner join regions as r on pr.region_id=r.id and pr.project_id=proj.id
          group by proj.id)
          where id in (select project_id from projects_regions)"""
          ActiveRecord::Base.connection.execute(sql)
          sql="""update projects as p set the_geom=
-         	(select ST_Collect(r.the_geom) from 
+         	(select ST_Collect(r.the_geom) from
          	countries_projects as cp
          	inner join regions as r on cp.country_id=r.country_id
          	where cp.project_id=p.id)
-         where id not in (select project_id from projects_regions) 
+         where id not in (select project_id from projects_regions)
          and id in (select project_id from countries_projects)"""
          ActiveRecord::Base.connection.execute(sql)
-         
+
       end
     end
+  end
+
+  def save_history(user)
+    ChangesHistory.create!(
+      :user => user,
+      :when => DateTime.now,
+      :what => self.to_json
+    )
   end
 
   def remove_cached_sites

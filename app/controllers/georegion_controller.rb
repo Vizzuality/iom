@@ -34,7 +34,7 @@ class GeoregionController < ApplicationController
     end
 
     if @filter_by_category.present?
-      @category_name = (@site.navigate_by_sector?? Sector : Cluster).where(:id => @filter_by_category).first.name
+      @category_name = (@site.navigate_by_sector?? Sector : Cluster).where(:id => @filter_by_category).first.try(:name)
       @filter_name =  "#{@category_name} projects"
     end
 

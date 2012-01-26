@@ -1,5 +1,9 @@
 <%= form_for(@organization, :url => (@organization.new_record? ? admin_organizations_path : admin_organization_path(@organization)), :html => { :multipart => true }) do |f| %>
 
+  <% if flash[:error] -%>
+  <div class="form_error"><%= flash[:error] %></div>
+  <% end -%>
+
   <div class="field">
     <label>NAME  <strong>*</strong></label>
     <%= f.text_field :name, :class=>"long #{'error' if !@organization.errors[:name].empty? && action_name != 'new'}" %>
@@ -38,7 +42,7 @@
 
   <div class="short_field">
     <%= f.label :national_staff %>
-    <%= f.text_field :national_staff, :class=>"short" %>
+    <%= f.text_field :national_staff, :value => number_with_precision(f.object.national_staff, :precision => 0, :strip_insignificant_zeros => true, :delimiter => ','), :class => 'short' %>
   </div>
 
   <div class="short_field last">
@@ -93,11 +97,6 @@
       <%= f.text_field :contact_state, :class=>"short" %>
     </div>
 
-    <div class="short_field last">
-      <%= f.label :contact_position %>
-      <%= f.text_field :contact_position, :class=>"short" %>
-    </div>
-
     <div class="short_field">
       <%= f.label :contact_email %>
       <%= f.text_field :contact_email, :class=>"short" %>
@@ -129,6 +128,38 @@
       <%= f.text_field :media_contact_phone_number, :class=>"short" %>
     </div>
   </div>
+
+  <%= f.fields_for :user, (@organization.user || @organization.build_user) do |user_fields| %>
+    <div class="common admin">
+      <h3>ADMINISTRATOR USER</h3>
+      <div class="field">
+        <%= user_fields.label :email %>
+        <%= user_fields.text_field :email, :class=>"long" %>
+      </div>
+
+      <div class="short_field">
+        <label>PASSWORD (<a href="#" class="show_password_link">show values</a>)</label>
+        <%= user_fields.password_field :password, :class=>"short password #{'error' if @organization.user.errors.on(:password)}" %>
+      </div>
+
+      <div class="short_field last">
+        <%= user_fields.label :password_confirmation %>
+        <%= user_fields.password_field :password_confirmation, :class=>"short password #{'error' if @organization.user.errors.on(:password)}" %>
+      </div>
+
+      <div class="long_field">
+        <%= link_to 'Show hidden passwords', '#', :class => 'check show_password' %>
+      </div>
+
+      <% if current_user.admin? -%>
+        <div class="long_field">
+          <%= link_to 'Blocked NGO', '#', :class => "check block_user #{'selected' if @organization.user && @organization.user.blocked }" %>
+          <%= user_fields.hidden_field :blocked %>
+          <%= link_to 'Reset password', '#', :id => 'reset_password', :class => 'preview' %>
+        </div>
+      <% end -%>
+    </div>
+  <% end -%>
 
   <div class="common">
     <h3>DONATION INFORMATION</h3>
@@ -175,5 +206,3 @@
   <%= f.submit 'Save', :class => "#{'error' if @organization.invalid? && action_name != 'new'}" %>
 
 <% end -%>
-
-<script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>
