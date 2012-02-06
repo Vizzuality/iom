@@ -57,6 +57,26 @@ div.main_layout div.block {float:left; width:942px; margin:20px 0 0 0;}
 div.main_layout div.block.first {margin:20px 0 0 0;}
 div.main_layout div.block div.top {float:left; width:942px; height:15px; background:url('/images/backoffice/backgrounds/top_long.png') no-repeat center 0; position:relative;}
 div.main_layout div.block div.med {float:left; width:880px; padding:16px 31px 28px; background:url('/images/backoffice/backgrounds/mid_long.png') repeat-y center 0;}
+
+/*ngo dashboard*/
+div.med div.header {width:100%; overflow:hidden; padding:0 0 20px 0; border-bottom:1px solid #CCCCCC;}
+div.med div.header h2 {width:auto;}
+div.med div.header span {float:right; width:273px; height:auto;}
+div.med div.header span p {display:inline-block; zoom:1; *display:inline; vertical-align:top; width:auto; padding:0 25px 0 0; font:normal 27px "Museo Sans"; color:#333333;}
+div.med div.header span p em {padding:0 0 0 3px; font:normal 11px Arial; color:#999999; text-transform:uppercase;}
+
+div.med .info_list ul {width:100%; padding:0; margin:18px 0 0!important; letter-spacing:-4px;}
+div.med .info_list ul li {float:none; display:inline-block!important; zoom:1; *display:inline; vertical-align:top; width:273px!important; margin:0 30px 0 0!important; letter-spacing:0px; }
+div.med .info_list ul li.last {margin:0!important;}
+div.med .info_list h4 {padding:10px 0 5px 0; font:bold 11px Arial; color:#999999; text-transform:uppercase;}
+div.med .info_list p {display:block!important; font:normal 15px Arial!important; color:#666666!important; letter-spacing:0!important;}
+div.med .info_list p a {color:#EB3F40; text-decoration:none;}
+div.med .info_list p a:hover {color:#EB3F40; text-decoration:underline;}
+
+.grey div.bottom_white {background:url('/images/backoffice/backgrounds/bottom_grey_long.png') repeat-y center bottom;}
+.grey div.top {background:url('/images/backoffice/backgrounds/top_grey_long.png') no-repeat center 0!important;}
+.grey div.med {background:url('/images/backoffice/backgrounds/med_grey_long.png') repeat-y center 0!important;}
+
 /*add new site,donor,...*/
 div.add_new {float:left; width:922px; height:98px; padding:5px; margin:20px 0 0 5px; background:url('/images/backoffice/dashboard/add_new_bkg.png') no-repeat center 0;}
 div.add_new a {float:left; width:922px; height:70px; padding:28px 0 0 0; margin:0px; background:url('/images/backoffice/dashboard/add_bkg_a.png') repeat-x 0 0; text-align:center; font:normal 27px "Museo Sans",Arial; color:white;}
@@ -201,10 +221,12 @@ div.med.information div.info div.left p a:hover {text-decoration:underline;}
 div.med.information div.info div.right_graph {float:right;}
 div.med div.form_error {width: 483px; height: 12px; margin: 30px 0 0 0; padding: 20px 20px 20px 60px; font:normal 13px Arial; color:#FFFFFF; background:url('/images/backoffice/common/form_error_bkg.png')}
 div.bottom_grey {float:left; width:942px; height:64px; background:url('/images/backoffice/backgrounds/bottom_grey_long.png') no-repeat center 0;}
+div.bottom_white {float:left; width:942px; height:13px; background:url('/images/backoffice/backgrounds/bottom_white_long.png') no-repeat center bottom;}
 div.bottom_grey a {float:right; width:auto; margin:20px 32px 0 0; font:normal 17px Arial; color:#EB4142; text-decoration:none;}
 div.bottom_grey a:hover {text-decoration:underline;}
 div.bottom_grey a.published {float:left; margin:20px 0 0 30px; color:#99CC33; text-decoration:underline;}
 div.bottom_grey a.not_published {float:left; margin:20px 0 0 30px; color:#FF6600; text-decoration:underline;}
+
 
 /*organizations form customization*/
 .organization div.med h2 {float: none;}
