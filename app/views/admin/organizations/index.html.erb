@@ -1,19 +1,15 @@
     <div class="main_layout">
       <div class="block">
-        <div class="two_donors big">
-          <%= form_tag(admin_organizations_path, :method => :get) do %>
-            <label>SEARCH BY TEXT</label>
-            <input type="text" value="<%= params[:q] || 'Search Organizations by name, place,...'%>" name="q" class="main_search"/>
-            <input type="submit" value="" />
-          <% end %>
-        </div>
-        <div class="one_donor big">
-          <div id="information_organizations" class="center">
-            <p><%= Organization.count %></p>
-            <label><%= Organization.count == 1 ? 'Organization' : 'Organizations' %><br/>registered</label>
+        <div class="long_search">
+          <span class="top"></span>
+          <div class="content padding">
+            <%= form_tag(admin_organizations_path, :method => :get) do %>
+              <label>SEARCH BY TEXT</label>
+              <input type="text" value="<%= params[:q] || 'Search Organizations by name, place,...'%>" name="q" class="main_search"/>
+              <input type="submit" value="" />
+            <% end %>
           </div>
-          <a href="<%= new_admin_organization_path %>">Add new org.</a>
-          <a class="import_csv museo_sans shadow_black" href="<%= admin_export_organizations_path(:format => 'csv') %>">Export orgs.</a>
+          <span class="bottom"></span>
         </div>
       </div>
 
@@ -21,11 +17,17 @@
         <div class="top"></div>
         <div class="med ngos_list">
           <% unless @organizations.empty? %>
-            <h2><%= pluralize(@organizations.total_entries, 'Organization', 'Organizations') %> implementing projects
-              <% if params[:q]%>
-              on <a class="remove" href="<%= admin_organizations_path %>"><%= params[:q] %></a>
-              <% end %>
-            </h2>
+            <div class="header no_border">
+              <h2><%= pluralize(@organizations.total_entries, 'Organization', 'Organizations') %> implementing projects
+                <% if params[:q]%>
+                on <a class="remove" href="<%= admin_organizations_path %>"><%= params[:q] %></a>
+                <% end %>
+              </h2>
+              <span class="buttons">
+                <a class="add_project museo_sans shadow_green" href="<%= new_admin_organization_path %>">New org.</a>
+                <a class="import_csv museo_sans shadow_black" href="<%= admin_export_organizations_path(:format => 'csv') %>">Export orgs.</a>
+              </span>
+            </div>
             <ul>
               <% @organizations.each do |organization| %>
                 <li>
