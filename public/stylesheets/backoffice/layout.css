@@ -1178,7 +1178,7 @@ ul.newList.country li a {font:normal 15px Arial; color:#666666;}
 /* country combo */
 .newListSelected.country_index {width:134px; color:#000; height:29px; padding:3px 0 0 6px; float:left; background:url('/images/backoffice/projects/combos/country_head.png') no-repeat 0 0; margin:6px 0 0 1px;}
 .newListSelected.country_index .selectedTxt {width:134px; overflow:hidden; height:20px; margin:2px 0 0 5px; font:normal 13px Arial; color:#333333; line-height:21px;}
-div.newList_content.country_index {background:url('/images/backoffice/projects/combos/country_body.png') no-repeat 0 0; height:201px; width:134px; top:32px!important; left:0; position:absolute;}
+div.newList_content.country_index {background:url('/images/backoffice/projects/combos/country_body.png') no-repeat 0 0; height:201px; width:134px; top:32px!important; left:0; position:absolute; z-index:100;}
 ul.newList.country_index {float:left; height:194px; overflow-x:hidden; width:147px; margin:0 0 0 1px; overflow-y:auto;}
 ul.newList.country_index li {width:233px; margin:0; height:auto !important;}
 ul.newList.country_index li:focus {outline:none;}
