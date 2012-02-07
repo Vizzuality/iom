@@ -1,19 +1,16 @@
 
   <div class="main_layout">
     <div class="block">
-      <div class="two_donors">
-        <%= form_tag(admin_donors_path, :method => :get) do %>
-          <label>SEARCH BY TEXT</label>
-          <input type="text" value="<%= params[:q] || 'Search donors by name, place,...'%>" name="q" class="main_search" />
-          <input type="submit" value=""  />
-        <% end %>
-      </div>
-      <div class="one_donor">
-        <div id="information_donors" class="center">
-          <p class="museo_sans"><%= Donor.count %></p>
-          <label class="museo_sans"><%= Donor.count == 1 ? 'donor' : 'donors' %><br/>registered</label>
+      <div class="long_search">
+        <span class="top"></span>
+        <div class="content padding">
+          <%= form_tag(admin_donors_path, :method => :get) do %>
+            <label>SEARCH BY TEXT</label>
+            <input type="text" value="<%= params[:q] || 'Search donors by name, place,...'%>" name="q" class="main_search" />
+            <input type="submit" value=""  />
+          <% end %>
         </div>
-        <a class="museo_sans" href="<%= new_admin_donor_path %>">Add new donor</a>
+        <span class="bottom"></span>
       </div>
     </div>
 
@@ -21,11 +18,16 @@
       <div class="top"></div>
       <div class="med donors_list">
         <% unless @donors.empty? %>
-          <h2><%= pluralize(@donors.total_entries, 'donor', 'donors') %> supporting projects
-            <% if params[:q] %>
-            on <a class="remove" href="<%= admin_donors_path %>"><%= params[:q] %></a>
-            <% end %>
-          </h2>
+          <div class="header no_border">
+            <h2><%= pluralize(@donors.total_entries, 'donor', 'donors') %> supporting projects
+              <% if params[:q] %>
+              on <a class="remove" href="<%= admin_donors_path %>"><%= params[:q] %></a>
+              <% end %>
+            </h2>
+            <span class="buttons">
+              <a class="add_project museo_sans shadow_green" href="<%= new_admin_donor_path %>">New donor</a>
+            </span>
+          </div>
           <ul>
             <% @donors.each do |donor| %>
               <li>

@@ -2,7 +2,7 @@
   <div class="block">
     <div class="long_search">
       <span class="top"></span>
-      <div class="content">
+      <div class="content padding">
       <%= form_tag(admin_projects_path, :method => :get) do %>
         <label>SEARCH BY TEXT</label>
         <input type="text" value="<%= params[:q] || 'Search projects by name, place,...'%>" name="q" class="main_search"/>
