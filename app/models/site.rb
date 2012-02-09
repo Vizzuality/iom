@@ -465,7 +465,7 @@ class Site < ActiveRecord::Base
   def geographic_boundary_box
     if self.geographic_context_geometry
       res = []
-      self.geographic_context_geometry.rings.collect.first.points.each{|point| 
+      self.geographic_context_geometry.rings.collect.first.points.each{|point|
         res << "#{point.y} #{point.x}"
       }
       res.join(",")
@@ -502,7 +502,7 @@ class Site < ActiveRecord::Base
         where id in (select country_id
         from countries_projects as cr inner join projects_sites as ps
         on cr.project_id=ps.project_id and site_id=#{self.id}
-        inner join projects as p on cr.project_id=p.id 
+        inner join projects as p on cr.project_id=p.id
         WHERE (p.end_date is null OR p.end_date > now())
         ) order by name
 SQL
@@ -630,7 +630,7 @@ SQL
            where site_id=#{self.id}
            GROUP BY p.id,p.name,o.id,o.name,p.description,p.start_date,p.end_date,ps.site_id,p.created_at) as subq"
      ActiveRecord::Base.connection.execute(sql)
-     
+
      #We also take the opportunity to add to denormalization the projects which are orphan from a site
      #Those projects not in a site right now also need to be handled for exports
      sql_for_orphan_projects = """
@@ -656,7 +656,7 @@ SQL
                 FROM projects as p
                 INNER JOIN organizations as o ON p.primary_organization_id=o.id
                 LEFT JOIN projects_regions as pr ON pr.project_id=p.id
-                LEFT JOIN regions as r ON pr.region_id=r.id 
+                LEFT JOIN regions as r ON pr.region_id=r.id
                 LEFT JOIN countries_projects as cp ON cp.project_id=p.id
                 LEFT JOIN countries as c ON c.id=cp.country_id
                 LEFT JOIN clusters_projects as cpro ON cpro.project_id=p.id
@@ -667,8 +667,8 @@ SQL
                 where p.id not in (select project_id from projects_sites)
                 GROUP BY p.id,p.name,o.id,o.name,p.description,p.start_date,p.end_date,p.created_at) as subq"""
      ActiveRecord::Base.connection.execute(sql_for_orphan_projects)
-     
-     
+
+
   end
 
   def remove_cached_projects
@@ -700,6 +700,11 @@ SQL
 
   def sites_for_footer
     Site.published.select('id, name, aid_map_image_updated_at, aid_map_image_file_size, aid_map_image_content_type, aid_map_image_file_name, url, permalink, created_at').where('id <> ?', id).order("created_at desc").limit(3).all
+  end
+
+  # to get only id and name
+  def self.get_select_values
+    scoped.select("id,name").order("name ASC")
   end
 
   private

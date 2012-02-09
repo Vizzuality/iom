@@ -40,6 +40,13 @@ class Admin::ProjectsController < Admin::AdminController
           projects = projects.from(from.join(',')).where("projects_sectors.sector_id = #{sector.id} AND projects_sectors.project_id = projects.id")
         end
       end
+      unless params[:site].blank? || params[:site] == '0'
+        if site = Site.find(params[:site])
+          @conditions[site.name] = {'site' => params[:site]}
+          from << 'projects_sites'
+          projects = projects.from(from.join(',')).where("projects_sites.site_id = #{site.id} AND projects_sites.project_id = projects.id")
+        end
+      end
       @projects = projects.paginate :per_page => 20, :order => 'created_at DESC', :page => params[:page]
     elsif params[:organization_id]
       template      = 'admin/organizations/projects'
