@@ -20,26 +20,32 @@ class Admin::AdminController < ApplicationController
       } )
 
       @organization_sites = organization.sites.map do |site|
-        organization_attributes =  organization.attributes_for_site(site).present?? OpenStruct.new(organization.attributes_for_site(site)) : OpenStruct.new(organization.attributes)
+        active_projects_count = site.projects_for_organization(organization).active.count
+        closed_projects_count = site.projects_for_organization(organization).closed.count
+
+        next if active_projects_count == 0 && closed_projects_count == 0
+
+        attributes_for_site = OpenStruct.new organization.attributes_for_site(site)
+        attributes          = OpenStruct.new organization.attributes
 
         OpenStruct.new(
           :site_id               => site.id,
           :name                  => site.name,
           :internal_description  => site.internal_description,
-          :active_projects_count => site.projects_for_organization(organization).active.count,
-          :closed_projects_count => site.projects_for_organization(organization).closed.count,
-          :donation_information  => [organization_attributes.donation_address,
-                                    [organization_attributes.zip_code,
-                                    organization_attributes.city,
-                                    organization_attributes.state].join(', '),
-                                    organization_attributes.donation_country,
-                                    organization_attributes.donation_phone_number,
-                                   "<a href='#{organization_attributes.donation_website}'>#{organization_attributes.donation_website}</a>"
+          :active_projects_count => active_projects_count,
+          :closed_projects_count => closed_projects_count,
+          :donation_information  => [attributes.donation_address,
+                                    [attributes.zip_code,
+                                    attributes.city,
+                                    attributes.state].join(', '),
+                                    attributes.donation_country,
+                                    attributes.donation_phone_number,
+                                   "<a href='#{attributes.donation_website}'>#{attributes.donation_website}</a>"
                                    ],
-          :data_contact_information => [organization_attributes.main_data_contact_name,
-                                        organization_attributes.main_data_contact_position,
-                                        organization_attributes.main_data_contact_phone_number,
-                                        "<a href='#{organization_attributes.main_data_contact_email}'>#{organization_attributes.main_data_contact_email}</a>"
+          :data_contact_information => [attributes_for_site.main_data_contact_name || attributes.main_data_contact_name,
+                                        attributes_for_site.main_data_contact_position || attributes.main_data_contact_position,
+                                        attributes_for_site.main_data_contact_phone_number || attributes.main_data_contact_phone_number,
+                                        "<a href='#{attributes_for_site.main_data_contact_email}'>#{attributes_for_site.main_data_contact_email}</a>".presence || "<a href='#{attributes.main_data_contact_email}'>#{attributes.main_data_contact_email}</a>"
                                        ]
         )
       end

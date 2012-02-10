@@ -16,7 +16,7 @@
             <h4>NAME</h4>
             <p><%= @organization_data.name %></p>
             <h4>WEBSITE</h4>
-            <p><%= @organization_data.website %></p>
+            <p><%= link_to @organization_data.website, @organization_data.website %></p>
           </li>
           <li>
             <h4>CONTACT INFORMATION</h4>
@@ -36,7 +36,7 @@
     <div class="bottom_white"></div>
   </div>
 
-  <% @organization_sites.each do |site| -%>
+  <% @organization_sites.compact.each do |site| -%>
     <div class="block first">
       <div class="top"></div>
       <div class="med information">
