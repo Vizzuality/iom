@@ -69,7 +69,9 @@ class Organization < ActiveRecord::Base
   has_many :donations, :through => :projects
   has_one :user
 
-  accepts_nested_attributes_for :user, :allow_destroy => true
+  accepts_nested_attributes_for :user, :reject_if => proc {|a| a['email'].blank?}, :allow_destroy => true
+
+  before_save :check_user_valid
 
   validates_presence_of :name
 
@@ -115,10 +117,6 @@ class Organization < ActiveRecord::Base
     end
 
     update_attribute(:site_specific_information, atts)
-  end
-
-  def user_attributes=(attributes)
-    write_attribute('user_attributes', attributes) unless attributes[:email].blank? && attributes[:password].blank? && attributes[:password_confirmation].blank?
   end
 
   def national_staff=(ammount)
@@ -471,6 +469,11 @@ SQL
 
   def sites
     Site.for_organization(self)
+  end
+
+  def check_user_valid
+    self.attributes = attributes.reject
+
   end
 
 end
