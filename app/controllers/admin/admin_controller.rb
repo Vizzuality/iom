@@ -11,10 +11,10 @@ class Admin::AdminController < ApplicationController
         :active_projects_count => organization.projects.active.count,
         :closed_projects_count => organization.projects.closed.count,
         :website               => organization.website,
-        :contact_information   => [organization.media_contact_name,
-                                   organization.media_contact_position,
-                                   organization.media_contact_phone_number,
-                                   "<a href='#{organization.media_contact_email}'>#{organization.media_contact_email}</a>"
+        :contact_information   => [organization.contact_name,
+                                   organization.contact_position,
+                                   organization.contact_phone_number,
+                                   "<a href='#{organization.contact_email}'>#{organization.contact_email}</a>"
                                   ],
         :logo                  => organization.logo.url(:small)
       } )
