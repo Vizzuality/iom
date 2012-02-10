@@ -84,7 +84,7 @@
 
   <div class="block">
     <div class="top"></div>
-    <div class="med projects_list">
+    <div class="med">
       <div class="header no_border">
         <h2 class="museo_sans">
           <%= pluralize(@projects.total_entries, 'project', 'projects') %>
@@ -107,7 +107,7 @@
           <a class="import_csv museo_sans shadow_black" href="<%= admin_export_projects_path(:format => 'xls') %>">Export projects</a>
         </span>
       </div>
-
+      <div class="projects_list">
       <% if @projects.any? %>
       <table collapse="0">
         <tbody>
@@ -160,6 +160,7 @@
           </div>
         <% end %>
       <% end %>
+      </div>
     </div>
 
     <div class="bottom_grey paginate">

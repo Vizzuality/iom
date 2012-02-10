@@ -565,20 +565,20 @@ div.med.projects_list div.no_results p {float:left; width:100%; margin:6px 0 0 0
 div.med.projects_list div.no_results p a {color:#E93E3F; text-decoration:underline;}
 div.med.projects_list div.no_results p a:hover {color:#7F2023;}
 
-div.med.projects_list table {float:left; width:100%; margin:23px 0 0 0; border-top:1px solid #CCCCCC; border-collapse:collapse;}
-div.med.projects_list table tr {width:100%;}
-div.med.projects_list table tr td {height:110px; padding:0 10px; border-bottom:1px solid #E5E5E5;}
-div.med.projects_list table tr td.center {text-align:center;}
-div.med.projects_list table tr td p {font:normal 13px Arial; color:#666666;}
-div.med.projects_list table tr td p.margin {margin:5px 0 0 0;}
-div.med.projects_list table tr td.odd {background:#F7F7F7;}
-div.med.projects_list table tr:last-child td {border-bottom:none;}
-div.med.projects_list table tr h3 {font:normal 17px Arial; color:#666666;}
-div.med.projects_list table tr h3 a {font:bold 17px Arial; color:#E93E3F;}
-div.med.projects_list table tr h3 a:hover {text-decoration:underline;}
-div.med.projects_list table tr a.project_status {float:left; font:normal 13px Arial; color:#666666; padding:0 4px 0 12px;}
-div.med.projects_list table tr a.project_status.active {background:url('/images/backoffice/projects/active_icon.png') no-repeat 0 4px;}
-div.med.projects_list table tr a.project_status.closed {background:url('/images/backoffice/projects/closed_icon.png') no-repeat 0 3px;}
+div.med .projects_list table {float:left; width:100%; margin:23px 0 0 0; border-top:1px solid #CCCCCC; border-collapse:collapse;}
+div.med .projects_list table tr {width:100%;}
+div.med .projects_list table tr td {height:110px; padding:0 10px; border-bottom:1px solid #E5E5E5;}
+div.med .projects_list table tr td.center {text-align:center;}
+div.med .projects_list table tr td p {font:normal 13px Arial!important; color:#666666;}
+div.med .projects_list table tr td p.margin {margin:5px 0 0 0;}
+div.med .projects_list table tr td.odd {background:#F7F7F7;}
+div.med .projects_list table tr:last-child td {border-bottom:none;}
+div.med .projects_list table tr h3 {font:normal 17px Arial; color:#666666;}
+div.med .projects_list table tr h3 a {font:bold 17px Arial; color:#E93E3F;}
+div.med .projects_list table tr h3 a:hover {text-decoration:underline;}
+div.med .projects_list table tr a.project_status {float:left; font:normal 13px Arial; color:#666666; padding:0 4px 0 12px;}
+div.med .projects_list table tr a.project_status.active {background:url('/images/backoffice/projects/active_icon.png') no-repeat 0 4px;}
+div.med .projects_list table tr a.project_status.closed {background:url('/images/backoffice/projects/closed_icon.png') no-repeat 0 3px;}
 
 
 div.med.projects_list ul li p.red {color:#EB4142; width:147px; margin:0 0 0 9px;}

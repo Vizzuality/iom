@@ -2,21 +2,37 @@
     <div class="block first donor_funded">
       <div class="top"></div>
       <div class="med">
-        <div class="left">
+        <div class="left projects_list">
           <h2><%= @organization.name %></h2>
           <p><%= pluralize(@projects.total_entries, 'project', 'projects') %> by this Organization</p>
+
           <% unless @projects.empty? %>
-            <ul>
+            <table collapse="0">
+              <tbody>
               <% @projects.each do |project| %>
-              <li>
-                <span class="first">
-                  <h3><%= link_to(truncate(project.name, :length => 47), edit_admin_project_path(project)) %></h3>
-                  <p class="<%= project.finished? ? 'closed' : 'active' %>"><%= project.finished? ? 'Closed' : 'Active' %></p>
-                </span>
-                <p class="<%= !project.finished? ? 'more' : '' %>"><%= raw(project.cached_sites.map{ |site| link_to(site.name, edit_admin_site_path(site)) }.to_sentence(:last_word_connector => ' and ')) %></p>
-              </li>
+                <tr>
+                  <td width="625">
+                    <span>
+                      <h3><a href="<%= edit_admin_project_path(project) %>"><%= project.name %></a></h3>
+                      <p class="margin"><a class="project_status <%= project.finished? ? 'closed' : 'active' %>">
+                        <%= project.finished? ? 'Closed' : 'Active' %></a>
+                        <% if project.end_date.present? -%>
+                          <% if project.finished? -%>
+                            <%= project.end_date.strftime("since %b #{project.end_date.day.ordinalize}, %Y") %>
+                          <% else -%>
+                            <%= project.end_date.strftime("until %b #{project.end_date.day.ordinalize}, %Y") %>
+                          <% end -%>
+                        <% end -%>
+                      </p>
+                    </span>
+                  </td>
+                  <td width="150" class="odd center">
+                    <p><%= project.countries.first.try(:name) %></p>
+                  </td>
+                </tr>
               <% end -%>
-            </ul>
+              </tbody>
+            </table>
           <% end -%>
         </div>
         <div class="right menu">
