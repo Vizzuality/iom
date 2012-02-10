@@ -4,6 +4,7 @@ class Admin::ProjectsController < Admin::AdminController
   before_filter :get_organizations_list
 
   def index
+    @total_projects_count = current_user.admin?? Project.count : current_user.organization.projects.count
     @conditions = {}
 
     if params[:q]
