@@ -117,6 +117,10 @@ class Organization < ActiveRecord::Base
     update_attribute(:site_specific_information, atts)
   end
 
+  def user_attributes=(attributes)
+    write_attribute('user_attributes', attributes) unless attributes[:email].blank? && attributes[:password].blank? && attributes[:password_confirmation].blank?
+  end
+
   def national_staff=(ammount)
     if ammount.blank?
       write_attribute(:national_staff, 0)
