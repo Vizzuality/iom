@@ -13,7 +13,7 @@
   </li>
   <li <%= selected_if_current_page(admin_organization_projects_path(@organization)) %>>
     <div class="bottom_selected">
-      <%= link_to('Organization projects', admin_organization_projects_path(@organization)) %><% if !@organization.sites.empty? %> <p><span><%=@organization.projects.count%></span></p><% end %>
+      <%= link_to('Organization projects', admin_organization_projects_path(@organization)) %><% if @organization.projects.present? %> <p><span><%=@organization.projects.count%></span></p><% end %>
     </div>
     </li>
   <li <%= selected_if_current_page(admin_organization_media_resources_path(@organization)) %>>

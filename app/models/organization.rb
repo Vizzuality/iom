@@ -465,4 +465,8 @@ SQL
     ActiveRecord::Base.connection.execute(sql).first['count'].to_i
   end
 
+  def sites
+    Site.for_organization(self)
+  end
+
 end

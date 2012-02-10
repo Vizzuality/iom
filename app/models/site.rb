@@ -707,6 +707,19 @@ SQL
     scoped.select("id,name").order("name ASC")
   end
 
+  def self.for_organization(organization)
+    select(Site.column_names.map{|c| "sites.#{c}"})
+    joins(:projects_sites, :projects).
+    where('projects.primary_organization_id = ?', organization.id)
+    group(Site.column_names.map{|c| "sites.#{c}"})
+  end
+
+  def projects_for_organization(organization)
+    Project.
+    joins('INNER JOIN projects_sites ps ON ps.project_id = projects.id').
+    where(:primary_organization_id => organization.id, :'ps.site_id' => id)
+  end
+
   private
 
     def clean_html

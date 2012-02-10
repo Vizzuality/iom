@@ -49,6 +49,8 @@ class Project < ActiveRecord::Base
   has_many :donors, :through => :donations
   has_many :cached_sites, :class_name => 'Site', :finder_sql => 'select sites.* from sites, projects_sites where projects_sites.project_id = #{id} and projects_sites.site_id = sites.id'
 
+  scope :active, where("end_date > ?", Date.today.to_s(:db))
+  scope :closed, where("end_date < ?", Date.today.to_s(:db))
   validates_presence_of :primary_organization_id, :name, :description
 
   validate :dates_consistency#, :presence_of_clusters_and_sectors

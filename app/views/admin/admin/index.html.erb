@@ -1,131 +1,29 @@
-<div class="main_layout">
-  <div class="block first">
-    <div class="top"></div>
-    <div class="med information">
-      <div class="header">
-        <h2 class="museo_sans"><a href="">Haiti Aid Map</a></h2>
-        <span class="ngo_activity">
-          <p>755<em>active</em></p>
-          <p>45<em>closed</em></p>
-        </span>
+<% if current_user.admin? -%>
+  <div class="main_layout">
+    <div class="block">
+      <div class="one">
+        <p class="museo_sans"><%= number_with_delimiter(Project.count) %></p>
+        <a href="<%= admin_projects_path %>" class="museo_sans"><%= pluralize(Project.count, 'project', 'projects') %> published</a>
+        <p class="info museo_sans"><strong><%= Project.where("created_at > '#{Date.today.beginning_of_month.to_s(:db)}'").count %> new</strong> this month</p>
       </div>
-      <div class="info_list">
-        <ul>
-          <li>
-            <h4>SITE DESCRIPTION</h4>
-            <p>Coordination of the NGOs field work after the devastating 2009 Eerthquake. This site will show all your projects tagged with “haiti_site” tag.</p>
-          </li>
-          <li>
-            <h4>DONATION INFORMATION</h4>
-            <p>Ulises Lima</p>
-            <p>Data Quality Manager</p>
-            <p>919-839-0689</p>
-            <p><a href="mailto:nbatista@stophungernow.org">nbatista@stophungernow.org</a></p>
-          </li>
-          <li class="last">
-            <h4>DATA CONTACT</h4>
-            <p>Ulises Lima</p>
-            <p>Data Quality Manager</p>
-            <p>919-839-0689</p>
-            <p><a href="mailto:nbatista@stophungernow.org">nbatista@stophungernow.org</a></p>
-          </li>
-        </ul>
+      <div class="one">
+        <p class="museo_sans"><%= number_with_delimiter(Organization.count) %></p>
+        <a href="<%= admin_organizations_path %>" class="museo_sans"><%= pluralize(Organization.count, 'organization', 'organizations') %> in our database</a>
+        <p class="info museo_sans"><strong><%= Organization.where("created_at > '#{Date.today.beginning_of_month.to_s(:db)}'").count %> new</strong> this month</p>
+      </div>
+      <div class="one last">
+        <p class="museo_sans"><%= number_with_delimiter(Donor.count) %></p>
+        <a href="<%= admin_donors_path %>" class="museo_sans"><%= pluralize(Donor.count, 'organization donor', 'organization donors') %></a>
+        <p class="info museo_sans"><strong><%= Donor.where("created_at > '#{Date.today.beginning_of_month.to_s(:db)}'").count %> new</strong> this month</p>
       </div>
     </div>
-    <div class="bottom_white"></div>
-  </div>
 
-  <div class="block grey">
-    <div class="top"></div>
-    <div class="med information">
-      <div class="header">
-        <h2 class="museo_sans"><a href="">Haiti Aid Map</a></h2>
-        <span class="ngo_activity">
-          <p>755<em>active</em></p>
-          <p>45<em>closed</em></p>
-        </span>
-      </div>
-      <div class="info_list">
-        <ul>
-          <li>
-            <h4>SITE DESCRIPTION</h4>
-            <p>Coordination of the NGOs field work after the devastating 2009 Eerthquake. This site will show all your projects tagged with “haiti_site” tag.</p>
-          </li>
-          <li>
-            <h4>DONATION INFORMATION</h4>
-            <p>Ulises Lima</p>
-            <p>Data Quality Manager</p>
-            <p>919-839-0689</p>
-            <p><a href="mailto:nbatista@stophungernow.org">nbatista@stophungernow.org</a></p>
-          </li>
-          <li class="last">
-            <h4>DATA CONTACT</h4>
-            <p>Ulises Lima</p>
-            <p>Data Quality Manager</p>
-            <p>919-839-0689</p>
-            <p><a href="mailto:nbatista@stophungernow.org">nbatista@stophungernow.org</a></p>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="bottom_white"></div>
-  </div>
-</div>
+    <%= render :partial => 'admin/sites/site', :collection => Site.all %>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="main_layout">
-  <div class="block">
-    <div class="one">
-      <p class="museo_sans"><%= number_with_delimiter(Project.count) %></p>
-      <a href="<%= admin_projects_path %>" class="museo_sans"><%= pluralize(Project.count, 'project', 'projects') %> published</a>
-      <p class="info museo_sans"><strong><%= Project.where("created_at > '#{Date.today.beginning_of_month.to_s(:db)}'").count %> new</strong> this month</p>
-    </div>
-    <div class="one">
-      <p class="museo_sans"><%= number_with_delimiter(Organization.count) %></p>
-      <a href="<%= admin_organizations_path %>" class="museo_sans"><%= pluralize(Organization.count, 'organization', 'organizations') %> in our database</a>
-      <p class="info museo_sans"><strong><%= Organization.where("created_at > '#{Date.today.beginning_of_month.to_s(:db)}'").count %> new</strong> this month</p>
-    </div>
-    <div class="one last">
-      <p class="museo_sans"><%= number_with_delimiter(Donor.count) %></p>
-      <a href="<%= admin_donors_path %>" class="museo_sans"><%= pluralize(Donor.count, 'organization donor', 'organization donors') %></a>
-      <p class="info museo_sans"><strong><%= Donor.where("created_at > '#{Date.today.beginning_of_month.to_s(:db)}'").count %> new</strong> this month</p>
+    <div class="add_new">
+      <a href="<%= new_admin_site_path %>">Add a new site<br/><strong>You already have <%= pluralize(Site.count, 'site', 'sites') %> created</strong></a>
     </div>
   </div>
-
-  <%= render :partial => 'admin/sites/site', :collection => Site.all %>
-
-  <div class="add_new">
-    <a href="<%= new_admin_site_path %>">Add a new site<br/><strong>You already have <%= pluralize(Site.count, 'site', 'sites') %> created</strong></a>
-  </div>
-</div>
+<% else -%>
+  <%= render 'ngo_info_boxes' %>
+<% end -%>
