@@ -32,10 +32,10 @@
     <span class="chars">
       <label>INTERNAL DESCRIPTION</label>
       <% internal_description =  f.object.internal_description || '' %>
-      <p id="chars_left_internal"><%= 730 - internal_description.length %> chars left</p>
+      <p id="chars_left_internal"><%= 250 - internal_description.length %> chars left</p>
     </span>
     <span class="textarea <%= 'error' if !@site.errors[:internal_description].empty? && action_name != 'new' %>">
-      <%= f.text_area :internal_description , :onkeyup=>"limitChars('site_internal_description', 730, 'chars_left_internal')" %>
+      <%= f.text_area :internal_description , :onkeyup=>"limitChars('site_internal_description', 250, 'chars_left_internal')" %>
     </span>
   </div>
   <h3 class="section museo_sans">GEOGRAPHIC CONTEXT</h3>
