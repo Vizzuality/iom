@@ -69,7 +69,9 @@ class Organization < ActiveRecord::Base
   has_many :donations, :through => :projects
   has_one :user
 
-  accepts_nested_attributes_for :user, :allow_destroy => true
+  accepts_nested_attributes_for :user, :reject_if => proc {|a| a['email'].blank?}, :allow_destroy => true
+
+  before_save :check_user_valid
 
   validates_presence_of :name
 
@@ -463,6 +465,15 @@ SQL
                                 and p.primary_organization_id=#{self.id}
     inner join projects_sites as psi on p.id=psi.project_id and psi.site_id=#{site.id}"
     ActiveRecord::Base.connection.execute(sql).first['count'].to_i
+  end
+
+  def sites
+    Site.for_organization(self)
+  end
+
+  def check_user_valid
+    self.attributes = attributes.reject
+
   end
 
 end

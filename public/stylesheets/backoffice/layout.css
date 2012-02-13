@@ -57,6 +57,30 @@ div.main_layout div.block {float:left; width:942px; margin:20px 0 0 0;}
 div.main_layout div.block.first {margin:20px 0 0 0;}
 div.main_layout div.block div.top {float:left; width:942px; height:15px; background:url('/images/backoffice/backgrounds/top_long.png') no-repeat center 0; position:relative;}
 div.main_layout div.block div.med {float:left; width:880px; padding:16px 31px 28px; background:url('/images/backoffice/backgrounds/mid_long.png') repeat-y center 0;}
+
+/*ngo dashboard*/
+div.med div.header {width:100%; overflow:hidden; padding:0 0 20px 0; border-bottom:1px solid #CCCCCC;}
+div.med div.header.no_border {border-bottom:0; padding:0;}
+div.med div.header h2 {width:auto;}
+div.med div.header h2 a {color:#EB3F40;}
+div.med div.header h2 a:hover {text-decoration:underline;}
+div.med div.header span {float:right; width:273px; height:auto;}
+div.med div.header span.buttons {width:auto;}
+div.med div.header span p {display:inline-block; zoom:1; *display:inline; vertical-align:top; width:auto; padding:0 25px 0 0; font:normal 27px "Museo Sans"; color:#333333;}
+div.med div.header span p em {padding:0 0 0 3px; font:normal 11px Arial; color:#999999; text-transform:uppercase;}
+
+div.med .info_list ul {width:100%; padding:0; margin:18px 0 0!important; letter-spacing:-4px;}
+div.med .info_list ul li {float:none; display:inline-block!important; zoom:1; *display:inline; vertical-align:top; width:273px!important; margin:0 30px 0 0!important; letter-spacing:0px; }
+div.med .info_list ul li.last {margin:0!important;}
+div.med .info_list h4 {padding:10px 0 5px 0; font:bold 11px Arial; color:#999999; text-transform:uppercase;}
+div.med .info_list p {display:block!important; font:normal 15px Arial!important; color:#666666!important; letter-spacing:0!important;}
+div.med .info_list p a {color:#EB3F40; text-decoration:none;}
+div.med .info_list p a:hover {color:#EB3F40; text-decoration:underline;}
+
+.grey div.bottom_white {background:url('/images/backoffice/backgrounds/bottom_grey_long.png') repeat-y center bottom;}
+.grey div.top {background:url('/images/backoffice/backgrounds/top_grey_long.png') no-repeat center 0!important;}
+.grey div.med {background:url('/images/backoffice/backgrounds/med_grey_long.png') repeat-y center 0!important;}
+
 /*add new site,donor,...*/
 div.add_new {float:left; width:922px; height:98px; padding:5px; margin:20px 0 0 5px; background:url('/images/backoffice/dashboard/add_new_bkg.png') no-repeat center 0;}
 div.add_new a {float:left; width:922px; height:70px; padding:28px 0 0 0; margin:0px; background:url('/images/backoffice/dashboard/add_bkg_a.png') repeat-x 0 0; text-align:center; font:normal 27px "Museo Sans",Arial; color:white;}
@@ -201,10 +225,12 @@ div.med.information div.info div.left p a:hover {text-decoration:underline;}
 div.med.information div.info div.right_graph {float:right;}
 div.med div.form_error {width: 483px; height: 12px; margin: 30px 0 0 0; padding: 20px 20px 20px 60px; font:normal 13px Arial; color:#FFFFFF; background:url('/images/backoffice/common/form_error_bkg.png')}
 div.bottom_grey {float:left; width:942px; height:64px; background:url('/images/backoffice/backgrounds/bottom_grey_long.png') no-repeat center 0;}
+div.bottom_white {float:left; width:942px; height:13px; background:url('/images/backoffice/backgrounds/bottom_white_long.png') no-repeat center bottom;}
 div.bottom_grey a {float:right; width:auto; margin:20px 32px 0 0; font:normal 17px Arial; color:#EB4142; text-decoration:none;}
 div.bottom_grey a:hover {text-decoration:underline;}
 div.bottom_grey a.published {float:left; margin:20px 0 0 30px; color:#99CC33; text-decoration:underline;}
 div.bottom_grey a.not_published {float:left; margin:20px 0 0 30px; color:#FF6600; text-decoration:underline;}
+
 
 /*organizations form customization*/
 .organization div.med h2 {float: none;}
@@ -474,36 +500,37 @@ div#manage_partners div.image_container input[type="file"] {margin:5px 0 0 0; co
 div#manage_partners input[type="submit"] {width:132px; height:32px; margin:25px 0 0 0; text-indent:-9999px; background:url('/images/backoffice/sites/add_partner_button.png') no-repeat 0 0;}
 div#manage_partners input[type="submit"]:hover {background-position:0 -32px;}
 
-/*projects search*/
-div.two_projects {float:left; width:643px; height:auto; margin:20px 10px 0 0; }
-div.two_projects span.top {float:left; width:643px; height:9px; background:url('/images/backoffice/backgrounds/two_top.png') no-repeat 0 0;}
-div.two_projects div.content {float:left; width:583px; height:auto; background:url('/images/backoffice/backgrounds/two_content.png') repeat-y 0; padding:15px 30px 10px;}
-div.two_projects span.bottom {float:left; width:643px; height:9px; background:url('/images/backoffice/backgrounds/two_bottom.png') no-repeat 0 0;}
-div.two_projects ul.combos {float:left; width:680px; height:60px; margin:20px 0 0 0;}
-div.two_projects ul.combos li {float:left; width:147px; height:100%;}
-div.two_projects ul.combos li span.combo {float:left; margin:6px 0 0 0; background:url('/images/backoffice/projects/single_combo_head.png') no-repeat 0 0; font:normal 13px Arial; color:#333333; text-decoration:none; width:134px; height:24px; padding:8px 0 0 11px; position:relative;}
-div.two_projects ul.combos li span.combo:focus {outline:none;}
-div.two_projects ul.combos li span.combo p {width:130px;}
-div.two_projects ul.combos li span.combo ul.elements {display:none;}
-div.two_projects ul.combos li span.combo.clicked {background:url('/images/backoffice/projects/combos/index_search_head.png') no-repeat 0 0; width:135px; position:relative;}
-div.two_projects ul.combos li span.combo.clicked div.elements_content {position:absolute; top:31px; left:0; display:inline; background:url('/images/backoffice/projects/combos/body_combo_search.png') no-repeat 0 0; width:148px; height:198px; z-index:50;}
-div.two_projects ul.combos li span.combo.clicked ul.elements {float:left; width:148px; height:194px; overflow-x:hidden; overflow-y:auto; display:inline;}
-div.two_projects ul.combos li span.combo.clicked ul.elements li {float:left; width:88px; height:auto; padding:5px 30px 5px 12px; margin:0 0 0 1px; }
-div.two_projects ul.combos li span.combo.clicked ul.elements li:hover {background-color:#E4F0CA;}
-div.two_projects ul.combos li span.combo ul.elements.short {display:none;}
-div.two_projects ul.combos li span.combo.clicked ul.elements.short {position:absolute; top:31px; left:-1px; display:inline; width:148px; height:auto; background:none; z-index:50;}
-div.two_projects ul.combos li span.combo.clicked ul.elements.short li {float:left; width:120px; height:auto; background:url('/images/backoffice/projects/combos/index_search_content.png')
+/*search*/
+div.long_search {float:left; width:937px; height:auto; margin:20px 10px 0 0; }
+div.long_search span.top {float:left; width:942px; height:9px; background:url('/images/backoffice/backgrounds/top_long.png') no-repeat 0 0;}
+div.long_search div.content {float:left; width:882px; height:auto; background:url('/images/backoffice/backgrounds/mid_long.png') repeat-y 0; padding:15px 30px 10px;}
+div.long_search div.content.padding {padding:25px 30px 25px!important;}
+div.long_search span.bottom {float:left; width:942px; height:13px; background:url('/images/backoffice/backgrounds/bottom_white_long.png') no-repeat 0 0;}
+div.long_search ul.combos {float:left; width:680px; height:60px; margin:20px 0 0 0;}
+div.long_search ul.combos li {float:left; width:147px; height:100%;}
+div.long_search ul.combos li span.combo {float:left; margin:6px 0 0 0; background:url('/images/backoffice/projects/single_combo_head.png') no-repeat 0 0; font:normal 13px Arial; color:#333333; text-decoration:none; width:134px; height:24px; padding:8px 0 0 11px; position:relative;}
+div.long_search ul.combos li span.combo:focus {outline:none;}
+div.long_search ul.combos li span.combo p {width:130px;}
+div.long_search ul.combos li span.combo ul.elements {display:none;}
+div.long_search ul.combos li span.combo.clicked {background:url('/images/backoffice/projects/combos/index_search_head.png') no-repeat 0 0; width:135px; position:relative;}
+div.long_search ul.combos li span.combo.clicked div.elements_content {position:absolute; top:31px; left:0; display:inline; background:url('/images/backoffice/projects/combos/body_combo_search.png') no-repeat 0 0; width:148px; height:198px; z-index:50;}
+div.long_search ul.combos li span.combo.clicked ul.elements {float:left; width:148px; height:194px; overflow-x:hidden; overflow-y:auto; display:inline;}
+div.long_search ul.combos li span.combo.clicked ul.elements li {float:left; width:88px; height:auto; padding:5px 30px 5px 12px; margin:0 0 0 1px; }
+div.long_search ul.combos li span.combo.clicked ul.elements li:hover {background-color:#E4F0CA;}
+div.long_search ul.combos li span.combo ul.elements.short {display:none;}
+div.long_search ul.combos li span.combo.clicked ul.elements.short {position:absolute; top:31px; left:-1px; display:inline; width:148px; height:auto; background:none; z-index:50;}
+div.long_search ul.combos li span.combo.clicked ul.elements.short li {float:left; width:120px; height:auto; background:url('/images/backoffice/projects/combos/index_search_content.png')
 repeat-y 0; padding:5px 5px 5px 12px; margin:0 0 0 1px;}
-div.two_projects ul.combos li span.combo.clicked ul.elements.short li:hover {float:left; width:264px; background:url('/images/backoffice/projects/combos/index_search_content_hover.png') repeat-y 0;}
-div.two_projects ul.combos li span.combo.clicked ul.elements.short li.first {float:left; width:135px; height:6px; background:url('/images/backoffice/projects/combos/index_search_content_first.png') no-repeat 0 0; margin:0 0 0 0 1px; padding:0;}
-div.two_projects ul.combos li span.combo.clicked ul.elements.short li.last {float:left; width:135px; height:6px; background:url('/images/backoffice/projects/combos/index_search_bottom.png') no-repeat 0 0;}
-div.two_projects ul.combos li span.combo.clicked ul.elements.short li.last:hover {background:url('/images/backoffice/projects/combos/index_search_bottom.png') no-repeat 0 0;}
-div.two_projects ul.combos li span.combo:hover {cursor:pointer;}
-div.two_projects label {float:left; margin:0 0 0 3px; font:bold 11px Arial; color:#999999;}
-div.two_projects form {float:left; position:relative; width:100%;}
-div.two_projects input[type="text"] {float:left; width:559px; height:27px; margin:5px 0 0 0; padding:5px 8px; font:normal 17px Arial; color:#CCCCCC; border:none; background:url('/images/backoffice/donors/input_bkg.jpg') no-repeat 0 0; line-height:27px;}
-div.two_projects input[type="submit"] {position:absolute; width:15px; height:15px; right:20px; top:28px; background:url('/images/backoffice/donors/lens.jpg') no-repeat 0 0; border:none;}
-div.two_projects input[type="submit"]:hover {background-position:0 -15px; cursor:pointer;}
+div.long_search ul.combos li span.combo.clicked ul.elements.short li:hover {float:left; width:264px; background:url('/images/backoffice/projects/combos/index_search_content_hover.png') repeat-y 0;}
+div.long_search ul.combos li span.combo.clicked ul.elements.short li.first {float:left; width:135px; height:6px; background:url('/images/backoffice/projects/combos/index_search_content_first.png') no-repeat 0 0; margin:0 0 0 0 1px; padding:0;}
+div.long_search ul.combos li span.combo.clicked ul.elements.short li.last {float:left; width:135px; height:6px; background:url('/images/backoffice/projects/combos/index_search_bottom.png') no-repeat 0 0;}
+div.long_search ul.combos li span.combo.clicked ul.elements.short li.last:hover {background:url('/images/backoffice/projects/combos/index_search_bottom.png') no-repeat 0 0;}
+div.long_search ul.combos li span.combo:hover {cursor:pointer;}
+div.long_search label {float:left; margin:0 0 0 3px; font:bold 11px Arial; color:#999999;}
+div.long_search form {float:left; position:relative; width:100%;}
+div.long_search input[type="text"] {float:left; width:832px; height:29px; margin:5px 0 0 0; padding:5px 36px 5px 8px; font:normal 17px Arial; color:#CCCCCC; border:none; background:url('/images/backoffice/projects/long_search.png') no-repeat 0 0; line-height:27px;}
+div.long_search input[type="submit"] {position:absolute; width:15px; height:15px; right:20px; top:31px; background:url('/images/backoffice/donors/lens.jpg') no-repeat 0 0; border:none;}
+div.long_search input[type="submit"]:hover {background-position:0 -15px; cursor:pointer;}
 div.one_project {float:left; width:288px; height:140px; margin:20px 0 0 0; padding:0;}
 div.one_project span.top {float:left; width:288px; height:8px; background:url('/images/backoffice/backgrounds/one_box_top.png') no-repeat 0 0;}
 div.one_project div.content {float:left; width:288px; height:auto; padding:0 0 26px; background:url('/images/backoffice/backgrounds/one_box_content.png') repeat-y 0;}
@@ -511,49 +538,49 @@ div.one_project span.bottom {float:left; width:288px; height:15px; background:ur
 div.one_project div.center {float:left; width:100%; text-align:center;}
 div.one_project p {float:left; margin:12px 5px 0 0; width:auto; font:normal 43px "Museo Sans",Arial; color:#333333;}
 div.one_project label {float:left; font:normal 15px "Museo Sans",Arial; color:#666666; margin:15px 0 0 0; text-align:left;}
-div.one_project a.add_project {float:left; width:156px; height:26px; margin:5px 0 0 46px; padding:6px 0 0 36px; background:url('/images/backoffice/projects/add_donor_bttn.png') no-repeat 0 0; font:normal 19px "Museo Sans",Arial; color:white; text-shadow:0 1px #5C7C31;}
-div.one_project a.add_project:hover {background-position:0 -32px;}
-div.one_project a.import_csv {float:left; width:165px; height:26px; margin:3px 0 0 46px; padding:6px 0 0 27px; background:url('/images/backoffice/projects/import_csv_bttn.png') no-repeat 0 0; font:normal 19px "Museo Sans",Arial; color:white; text-shadow:0 1px #000000;}
-div.one_project a.import_csv:hover {background-position:0 -32px;}
+a.add_project {float:left; width:127px; height:26px; margin:0 10px 0 0; padding:6px 0 0 0; background:url('/images/backoffice/projects/green_new.png') no-repeat 0 0; font:normal 19px "Museo Sans",Arial; color:white; text-shadow:0 1px #5C7C31; text-align:center;}
+a.add_project:hover {background-position:0 -32px;}
+a.import_csv {float:left; width:153px; height:26px; margin:0; padding:6px 0 0 0; background:url('/images/backoffice/projects/import_csv_bttn.png') no-repeat 0 0; font:normal 19px "Museo Sans",Arial; color:white; text-shadow:0 1px #000000; text-align:center;}
+a.import_csv:hover {background-position:0 -32px;}
 
 div.med.projects_list h2 a.remove {padding:0 10px 0 0; color:#333333; border-bottom:1px dotted #EB4142; background:url('/images/backoffice/icons/red_x.png') no-repeat right 17px;}
 div.med.projects_list h2 a.remove:hover {border-bottom:1px solid #EB4142; text-decoration:none;}
 div.med.projects_list ul {float:left; width:100%; padding:0; margin:23px 0 0 0; border-top:1px solid #CCCCCC;}
 div.med.projects_list ul li {float:left; width:100%; padding:0; margin:0; border-bottom:1px solid #CCCCCC; height:71px;}
-div.med.projects_list ul li.last {border:none;}
-div.med.projects_list ul li h3 a {font:bold 17px Arial; color:#E93E3F;}
-div.med.projects_list ul li h3 a:hover {text-decoration:underline;}
-div.med.projects_list ul li div.project_name {float:left; width:443px; height:71px;}
-div.med.projects_list ul li div.project_name_long {width:610px}
-div.med.projects_list ul li div.project_name h3 {float:left; width:100%; padding:17px 0 0 0;}
-div.med.projects_list ul li div.project_name a.project_status {float:left; margin:2px 0 0 0; font:normal 13px Arial; color:#666666; padding:0 0 0 12px;}
-div.med.projects_list ul li div.project_name a.project_status.active {background:url('/images/backoffice/projects/active_icon.png') no-repeat 0 3px;}
-div.med.projects_list ul li div.project_name a.project_status.closed {background:url('/images/backoffice/projects/closed_icon.png') no-repeat 0 3px;}
-div.med.projects_list ul li div.box {float:left; height:50px; width:167px; padding:21px 0 0 0;}
-div.med.projects_list ul li div.box.little {width:135px;}
-div.med.projects_list ul li div.box.single {padding:28px 0 0 0; height:43px;}
-div.med.projects_list ul li div.box.red {background:#f7f7f7;}
-div.med.projects_list ul li div.box.gray {background:#f7f7f7;}
-div.med.projects_list div.no_results {float:left; width:100%; padding:70px 0 80px;}
-div.med.projects_list div.no_results h2 {float:left; width:100%; text-align:center;}
-div.med.projects_list div.no_results p {float:left; width:100%; margin:6px 0 0 0; text-align:center; font:normal 17px Arial; color:#666666;}
-div.med.projects_list div.no_results p a {color:#E93E3F; text-decoration:underline;}
-div.med.projects_list div.no_results p a:hover {color:#7F2023;}
+div.med .projects_list ul li.last {border:none;}
+div.med .projects_list ul li h3 a {font:bold 17px Arial; color:#E93E3F;}
+div.med .projects_list ul li h3 a:hover {text-decoration:underline;}
+div.med .projects_list ul li div.project_name {float:left; width:443px; height:71px;}
+div.med .projects_list ul li div.project_name_long {width:610px}
+div.med .projects_list ul li div.project_name h3 {float:left; width:100%; padding:17px 0 0 0;}
+div.med .projects_list ul li div.project_name a.project_status {float:left; margin:2px 0 0 0; font:normal 13px Arial; color:#666666; padding:0 0 0 12px;}
+div.med .projects_list ul li div.project_name a.project_status.active {background:url('/images/backoffice/projects/active_icon.png') no-repeat 0 3px;}
+div.med .projects_list ul li div.project_name a.project_status.closed {background:url('/images/backoffice/projects/closed_icon.png') no-repeat 0 3px;}
+div.med .projects_list ul li div.box {float:left; height:50px; width:167px; padding:21px 0 0 0;}
+div.med .projects_list ul li div.box.little {width:135px;}
+div.med .projects_list ul li div.box.single {padding:28px 0 0 0; height:43px;}
+div.med .projects_list ul li div.box.red {background:#f7f7f7;}
+div.med .projects_list ul li div.box.gray {background:#f7f7f7;}
+div.med .projects_list div.no_results {float:left; width:100%; padding:70px 0 80px;}
+div.med .projects_list div.no_results h2 {float:left; width:100%; text-align:center;}
+div.med .projects_list div.no_results p {float:left; width:100%; margin:6px 0 0 0; text-align:center; font:normal 17px Arial; color:#666666;}
+div.med .projects_list div.no_results p a {color:#E93E3F; text-decoration:underline;}
+div.med .projects_list div.no_results p a:hover {color:#7F2023;}
 
-div.med.projects_list table {float:left; width:100%; margin:23px 0 0 0; border-top:1px solid #CCCCCC; border-collapse:collapse;}
-div.med.projects_list table tr {width:100%;}
-div.med.projects_list table tr td {height:110px; padding:0 10px; border-bottom:1px solid #E5E5E5;}
-div.med.projects_list table tr td.center {text-align:center;}
-div.med.projects_list table tr td p {font:normal 13px Arial; color:#666666;}
-div.med.projects_list table tr td p.margin {margin:5px 0 0 0;}
-div.med.projects_list table tr td.odd {background:#F7F7F7;}
-div.med.projects_list table tr:last-child td {border-bottom:none;}
-div.med.projects_list table tr h3 {font:normal 17px Arial; color:#666666;}
-div.med.projects_list table tr h3 a {font:bold 17px Arial; color:#E93E3F;}
-div.med.projects_list table tr h3 a:hover {text-decoration:underline;}
-div.med.projects_list table tr a.project_status {float:left; font:normal 13px Arial; color:#666666; padding:0 4px 0 12px;}
-div.med.projects_list table tr a.project_status.active {background:url('/images/backoffice/projects/active_icon.png') no-repeat 0 4px;}
-div.med.projects_list table tr a.project_status.closed {background:url('/images/backoffice/projects/closed_icon.png') no-repeat 0 3px;}
+div.med .projects_list table {float:left; width:100%; margin:23px 0 0 0; border-top:1px solid #CCCCCC; border-collapse:collapse;}
+div.med .projects_list table tr {width:100%;}
+div.med .projects_list table tr td {height:110px; padding:0 10px; border-bottom:1px solid #E5E5E5;}
+div.med .projects_list table tr td.center {text-align:center;}
+div.med .projects_list table tr td p {font:normal 13px Arial!important; color:#666666;}
+div.med .projects_list table tr td p.margin {margin:5px 0 0 0;}
+div.med .projects_list table tr td.odd {background:#F7F7F7;}
+div.med .projects_list table tr:last-child td {border-bottom:none;}
+div.med .projects_list table tr h3 {font:normal 17px Arial; color:#666666;}
+div.med .projects_list table tr h3 a {font:bold 17px Arial; color:#E93E3F;}
+div.med .projects_list table tr h3 a:hover {text-decoration:underline;}
+div.med .projects_list table tr a.project_status {float:left; font:normal 13px Arial; color:#666666; padding:0 4px 0 12px;}
+div.med .projects_list table tr a.project_status.active {background:url('/images/backoffice/projects/active_icon.png') no-repeat 0 4px;}
+div.med .projects_list table tr a.project_status.closed {background:url('/images/backoffice/projects/closed_icon.png') no-repeat 0 3px;}
 
 
 div.med.projects_list ul li p.red {color:#EB4142; width:147px; margin:0 0 0 9px;}
@@ -1178,7 +1205,7 @@ ul.newList.country li a {font:normal 15px Arial; color:#666666;}
 /* country combo */
 .newListSelected.country_index {width:134px; color:#000; height:29px; padding:3px 0 0 6px; float:left; background:url('/images/backoffice/projects/combos/country_head.png') no-repeat 0 0; margin:6px 0 0 1px;}
 .newListSelected.country_index .selectedTxt {width:134px; overflow:hidden; height:20px; margin:2px 0 0 5px; font:normal 13px Arial; color:#333333; line-height:21px;}
-div.newList_content.country_index {background:url('/images/backoffice/projects/combos/country_body.png') no-repeat 0 0; height:201px; width:134px; top:32px!important; left:0; position:absolute;}
+div.newList_content.country_index {background:url('/images/backoffice/projects/combos/country_body.png') no-repeat 0 0; height:201px; width:134px; top:32px!important; left:0; position:absolute; z-index:100;}
 ul.newList.country_index {float:left; height:194px; overflow-x:hidden; width:147px; margin:0 0 0 1px; overflow-y:auto;}
 ul.newList.country_index li {width:233px; margin:0; height:auto !important;}
 ul.newList.country_index li:focus {outline:none;}

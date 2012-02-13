@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111226134501) do
+ActiveRecord::Schema.define(:version => 20120210092657) do
 
   create_table "changes_histories", :force => true do |t|
     t.integer  "user_id"
@@ -232,6 +232,14 @@ ActiveRecord::Schema.define(:version => 20111226134501) do
     t.string   "media_contact_position"
     t.string   "media_contact_phone_number"
     t.string   "media_contact_email"
+    t.string   "main_data_contact_name"
+    t.string   "main_data_contact_position"
+    t.string   "main_data_contact_phone_number"
+    t.string   "main_data_contact_email"
+    t.string   "main_data_contact_zip"
+    t.string   "main_data_contact_city"
+    t.string   "main_data_contact_state"
+    t.string   "main_data_contact_country"
   end
 
   add_index "organizations", ["name"], :name => "index_organizations_on_name"
@@ -484,6 +492,7 @@ ActiveRecord::Schema.define(:version => 20111226134501) do
     t.float    "overview_map_lat"
     t.float    "overview_map_lon"
     t.integer  "overview_map_zoom"
+    t.text     "internal_description"
   end
 
   add_index "sites", ["geographic_context_geometry"], :name => "index_sites_on_geographic_context_geometry", :spatial => true

@@ -259,6 +259,48 @@ $(document).ready(function(ev){
 
   // END CLUSTER
 
+  //  SITES COMBO
+  $('span#site_combo_search').click(function(ev){
+
+    ev.stopPropagation();
+    ev.preventDefault();
+
+    hideCountryCombo();
+
+    if (!$(this).hasClass('clicked')){
+      $('span.clicked').removeClass('clicked');
+      $(this).addClass('clicked');
+      resetCombo($(this));
+    }else {
+      $('span.clicked').removeClass('clicked');
+      $(this).removeClass('clicked');
+    }
+
+    $(document).click(function(event) {
+      if ((!$(event.target).closest('span#site_combo_search').length)&&(!$(event.target).closest('.scroll_pane').length)) {
+        $('span#site_combo_search').removeClass('clicked');
+      };
+    });
+  });
+
+  $('span#site_combo_search').find('li').click(function(ev){
+    ev.stopPropagation();
+    ev.preventDefault();
+    var id = $(this).children('a').attr('id');
+    var name = $(this).children('a').text();
+
+    if (name.length > limitTextCombo) {
+        name = name.substring(0,limitTextCombo - 3)+'...';
+    }
+
+    if ((id != undefined)&&(name != undefined)){
+      $('span#site_combo_search').children('p').text(name);
+      $('input#site_input').val(id);
+      $('span#site_combo_search').removeClass('clicked');
+    }
+  });
+
+  // END SITES COMBO
   //  combo tags click
   $('div.list_combo').children('span.combo_large').click(function(ev){
     ev.stopPropagation();

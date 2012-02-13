@@ -4,6 +4,7 @@ class Admin::ProjectsController < Admin::AdminController
   before_filter :get_organizations_list
 
   def index
+    @total_projects_count = current_user.admin?? Project.count : current_user.organization.projects.count
     @conditions = {}
 
     if params[:q]
@@ -38,6 +39,13 @@ class Admin::ProjectsController < Admin::AdminController
           @conditions[sector.name] = {'sector' => params[:sector]}
           from << 'projects_sectors'
           projects = projects.from(from.join(',')).where("projects_sectors.sector_id = #{sector.id} AND projects_sectors.project_id = projects.id")
+        end
+      end
+      unless params[:site].blank? || params[:site] == '0'
+        if site = Site.find(params[:site])
+          @conditions[site.name] = {'site' => params[:site]}
+          from << 'projects_sites'
+          projects = projects.from(from.join(',')).where("projects_sites.site_id = #{site.id} AND projects_sites.project_id = projects.id")
         end
       end
       @projects = projects.paginate :per_page => 20, :order => 'created_at DESC', :page => params[:page]

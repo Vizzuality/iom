@@ -21,7 +21,6 @@
       ev.preventDefault();
       if (!$(this).hasClass('clicked')){
         $('span.clicked').removeClass('clicked');
-
         $(this).addClass('clicked');
         resetCombo($(this));
       } else {
@@ -39,7 +38,58 @@
     });
 
 
+    addComboListListener();
+
+    $('#regions_list a.close').live('click',function (e){
+      e.preventDefault();
+      e.stopPropagation();
+      $(this).closest('li').remove();
+    });
+
+    $('a#add_region_to_list').click(function (e){
+        var i = 0;
+        var countries_ids = [];
+        var regions_ids = [];
+        var countries_names = [];
+        var regions_names = [];
+        $('div.region_window div span.region_combo p').each(function(index,element){
+          if ($(element).text()!="Not specified") {
+            if(i == 0){
+              countries_ids.push($(element).attr('id').split('_')[1]);
+              countries_names.push($(element).html());
+            } else {
+              regions_ids.push($(element).attr('id').split('_')[1]);
+              regions_names.push($(element).html());
+            }
+          }
+          i++;
+        });
+
+        if( regions_ids.length == 0 )
+          $('#regions_list').append('<li><p>'+countries_names[0]+'</p><input type="hidden" name="project[regions_ids][]" value="country_'+countries_ids[0]+'" /><a href="javascript:void(null)" class="close"></a></li>');
+        else {
+          var breadcrumb = [];
+          breadcrumb.push(countries_names[0]);
+          for(var i = 0;i<regions_names.length;i++) {
+            breadcrumb.push(regions_names[i]);
+          }
+          $('#regions_list').append('<li><p>'+breadcrumb.join(' > ')+'</p><input type="hidden" name="project[regions_ids][]" value="region_'+regions_ids[regions_ids.length - 1]+'" /><a href="javascript:void(null)" class="close"></a></li>');
+        }
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        $('div.region_window').fadeOut(function(e){
+          resetRegionValues();
+        });
+    });
+
+  });
+
+
+  function addComboListListener() {
     $('span.region_combo ul li').livequery('click',function(ev){
+
       var mega_parent = $(this).parent().parent().parent().parent().parent();
       var new_item = $(this).children('a');
 
@@ -118,7 +168,7 @@
           $('div.region_window div.bottom_region').prepend($('div.region_window h3'));
         }
       } else {
-        $.getJSON('/geo/regions/'+item_level+'/'+item_id+'/json',function(result){
+        $.getJSON('/geo/regions/'+item_level+'/'+item_id+'/json?' + (new Date().getTime()),function(result){
           $('img.loader').hide();
           var settings = {showArrows: false};
           var pane = next_element.children('span.region_combo').children('div.wrapper').children('ul.scroll_pane')
@@ -148,55 +198,12 @@
             $('div.region_window div.top_region').append($('div.level_1'));
           }
           next_element.show();
+
+          addComboListListener();
         });
       }
     });
-
-    $('#regions_list a.close').live('click',function (e){
-      e.preventDefault();
-      e.stopPropagation();
-      $(this).closest('li').remove();
-    });
-
-    $('a#add_region_to_list').click(function (e){
-        var i = 0;
-        var countries_ids = [];
-        var regions_ids = [];
-        var countries_names = [];
-        var regions_names = [];
-        $('div.region_window div span.region_combo p').each(function(index,element){
-          if ($(element).text()!="Not specified") {
-            if(i == 0){
-              countries_ids.push($(element).attr('id').split('_')[1]);
-              countries_names.push($(element).html());
-            } else {
-              regions_ids.push($(element).attr('id').split('_')[1]);
-              regions_names.push($(element).html());
-            }
-          }
-          i++;
-        });
-
-        if( regions_ids.length == 0 )
-          $('#regions_list').append('<li><p>'+countries_names[0]+'</p><input type="hidden" name="project[regions_ids][]" value="country_'+countries_ids[0]+'" /><a href="javascript:void(null)" class="close"></a></li>');
-        else {
-          var breadcrumb = [];
-          breadcrumb.push(countries_names[0]);
-          for(var i = 0;i<regions_names.length;i++) {
-            breadcrumb.push(regions_names[i]);
-          }
-          $('#regions_list').append('<li><p>'+breadcrumb.join(' > ')+'</p><input type="hidden" name="project[regions_ids][]" value="region_'+regions_ids[regions_ids.length - 1]+'" /><a href="javascript:void(null)" class="close"></a></li>');
-        }
-
-        e.preventDefault();
-        e.stopPropagation();
-
-        $('div.region_window').fadeOut(function(e){
-          resetRegionValues();
-        });
-    });
-
-  });
+  }
 
 
   function resetRegionValues() {

@@ -1,8 +1,8 @@
 <div class="main_layout">
   <div class="block">
-    <div class="two_projects">
-    <span class="top"></span>
-    <div class="content">
+    <div class="long_search">
+      <span class="top"></span>
+      <div class="content padding">
       <%= form_tag(admin_projects_path, :method => :get) do %>
         <label>SEARCH BY TEXT</label>
         <input type="text" value="<%= params[:q] || 'Search projects by name, place,...'%>" name="q" class="main_search"/>
@@ -35,26 +35,6 @@
 
         </li>
         <li>
-          <label>CLUSTER</label>
-          <span id="cluster_combo_search" class="combo"><p>All clusters</p>
-          <input id="cluster_input" type="hidden" value="" name="cluster" />
-          <div class="elements_content">
-            <div class="wrapper">
-              <ul class="elements scroll_pane">
-                <li>
-                  <a id="0">All clusters</a>
-                </li>
-                 <% Cluster.get_select_values.each do |cluster| %>
-                <li>
-                  <a id="<%= cluster.id%>"><%= truncate(cluster.name,:length => 20)%></a>
-                </li>
-                <% end %>
-              </ul>
-            </div>
-          </div>
-          </span>
-        </li>
-        <li>
           <label>SECTOR</label>
           <span id="sector_combo_search" class="combo"><p>All sectors</p>
           <input id="sector_input" type="hidden" value="" name="sector" />
@@ -74,44 +54,60 @@
           </div>
           </span>
         </li>
+
+        <li>
+          <label>SITE</label>
+          <span id="site_combo_search" class="combo"><p>All sites</p>
+          <input id="site_input" type="hidden" value="" name="site" />
+          <div class="elements_content">
+            <div class="wrapper">
+              <ul class="elements scroll_pane">
+                <li>
+                  <a id="0">All sites</a>
+                </li>
+                <% Site.get_select_values.each do |site| %>
+                <li>
+                  <a id="<%= site.id%>"><%= truncate(site.name.capitalize.strip,:length => 15)%></a>
+                </li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+          </span>
+        </li>
       </ul>
       <% end %>
-    </div>
-    <span class="bottom"></span>
-    </div>
-    <div class="one_project">
-    <span class="top"></span>
-    <div class="content">
-      <div id ="information_projects" class="center">
-        <p class="museo_sans"><%= @projects_count %></p>
-        <label class="museo_sans"><%= @projects_count == 1 ? 'project' : 'projects' %><br/>registered</label>
       </div>
-        <a class="add_project museo_sans shadow_green" href="<%= new_admin_project_path %>">Add new project</a>
-        <a class="import_csv museo_sans shadow_black" href="<%= admin_export_projects_path(:format => 'xls') %>">Export projects</a>
-    </div>
-    <span class="bottom"></span>
+      <span class="bottom"></span>
     </div>
   </div>
 
   <div class="block">
     <div class="top"></div>
-    <div class="med projects_list">
-      <h2 class="museo_sans">
-        <%= pluralize(@projects.total_entries, 'project', 'projects') %>
-        <% if @conditions.any? %>
-          on
-        <%=raw(
-        @conditions.map do |c, vh|
-            if new_conditions = @conditions.dup.delete_if{ |k,v| k == c }.values.first
-              new_conditions.merge!(:q => params[:q])
-            else
-              new_conditions = {:q => params[:q]}
-            end
-            link_to(c, admin_projects_path(new_conditions), :class => 'remove')
-        end.join(' & ')
-        )%>
-        <% end %>
-      </h2>
+    <div class="med">
+      <div class="header no_border">
+        <h2 class="museo_sans">
+          <%= pluralize(@projects.total_entries, 'project', 'projects') %>
+          <% if @conditions.any? %>
+            on
+          <%=raw(
+          @conditions.map do |c, vh|
+              if new_conditions = @conditions.dup.delete_if{ |k,v| k == c }.values.first
+                new_conditions.merge!(:q => params[:q])
+              else
+                new_conditions = {:q => params[:q]}
+              end
+              link_to(c, admin_projects_path(new_conditions), :class => 'remove')
+          end.join(' & ')
+          )%>
+          <% end %>
+        </h2>
+        <span class="buttons">
+          <a class="add_project museo_sans shadow_green" href="<%= new_admin_project_path %>">New project</a>
+          <a class="import_csv museo_sans shadow_black" href="<%= admin_export_projects_path(:format => 'xls') %>">Export projects</a>
+        </span>
+      </div>
+      <div class="projects_list">
       <% if @projects.any? %>
       <table collapse="0">
         <tbody>
@@ -164,6 +160,7 @@
           </div>
         <% end %>
       <% end %>
+      </div>
     </div>
 
     <div class="bottom_grey paginate">
@@ -174,7 +171,7 @@
   <div class="add_new">
     <a class="museo_sans" href="<%= new_admin_project_path %>">
       Create new project<br/>
-      <strong>You already have <%= pluralize(Project.count, 'project', 'projects') %> created</strong>
+      <strong>You already have <%= pluralize(@total_projects_count, 'project', 'projects') %> created</strong>
     </a>
   </div>
 </div>

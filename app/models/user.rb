@@ -56,6 +56,7 @@ class User < ActiveRecord::Base
   def admin?
     self.role.present? && self.role == 'admin'
   end
+  alias administrator? admin?
 
   def not_blocked?
     !self.blocked?

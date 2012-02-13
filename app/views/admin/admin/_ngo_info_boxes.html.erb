@@ -1,0 +1,75 @@
+<div class="main_layout">
+
+  <div class="block grey">
+    <div class="top"></div>
+    <div class="med information">
+      <div class="header">
+        <h2 class="museo_sans"><%= link_to 'NGO information', edit_admin_organization_path(current_user.organization) %></h2>
+        <span class="ngo_activity">
+          <p><%= @organization_data.active_projects_count %><em>active</em></p>
+          <p><%= @organization_data.closed_projects_count %><em>closed</em></p>
+        </span>
+      </div>
+      <div class="info_list">
+        <ul>
+          <li>
+            <h4>NAME</h4>
+            <p><%= @organization_data.name %></p>
+            <h4>WEBSITE</h4>
+            <p><%= link_to @organization_data.website, @organization_data.website %></p>
+          </li>
+          <li>
+            <h4>CONTACT INFORMATION</h4>
+            <% @organization_data.contact_information.each do |info| -%>
+              <p><%= raw info %></p>
+            <% end -%>
+          </li>
+          <li class="last">
+            <% if @organization_data.logo.present? -%>
+            <h4>LOGO</h4>
+            <p><%= image_tag @organization_data.logo %></p>
+            <% end -%>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom_white"></div>
+  </div>
+
+  <% @organization_sites.compact.each do |site| -%>
+    <div class="block first">
+      <div class="top"></div>
+      <div class="med information">
+        <div class="header">
+          <h2 class="museo_sans"><%= link_to site.name, admin_projects_path(:q => '', :site => site.site_id) %></h2>
+          <span class="ngo_activity">
+            <p><%= site.active_projects_count %><em>active</em></p>
+            <p><%= site.closed_projects_count %><em>closed</em></p>
+          </span>
+        </div>
+        <div class="info_list">
+          <ul>
+            <li>
+              <h4>SITE DESCRIPTION</h4>
+              <p><%= site.internal_description %></p>
+            </li>
+            <li>
+              <h4>DONATION INFORMATION</h4>
+              <% site.donation_information.each do |info| -%>
+                <p><%= raw info %></p>
+              <% end -%>
+            </li>
+            <li class="last">
+              <h4>DATA CONTACT</h4>
+              <% site.data_contact_information.each do |info| -%>
+                <p><%= raw info %></p>
+              <% end -%>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="bottom_white"></div>
+    </div>
+  <% end -%>
+
+  </div>
