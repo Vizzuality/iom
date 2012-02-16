@@ -21,9 +21,10 @@
             <% if current_user.admin? -%>
               <li class="<%= (controller_name == 'admin' ? 'selected' : nil) %>"><%= link_to(admin_admin_path) do %><span class="museo_sans">dashboard</span><% end %></li>
               <li class="<%= ((controller_name == 'sites' || (@element && @element.is_a?(Site))) ? 'selected' : nil) %>"><%= link_to(admin_sites_path) do %><span class="museo_sans">sites</span><% end %></li>
-              <li class="<%= (((controller_name == 'projects' && !@organization) || (@element && @element.is_a?(Project))) ? 'selected' : nil) %>"><%= link_to(admin_projects_path) do %><span class="museo_sans">projects</span><% end %></li>
+              <li class="<%= (((controller_name == 'projects' && !@organization) || (@element && @element.is_a?(Project)) || (controller_name == 'activities' && action_name == 'show' && @project.present?)) ? 'selected' : nil) %>"><%= link_to(admin_projects_path) do %><span class="museo_sans">projects</span><% end %></li>
               <li class="<%= ((@organization || controller_name == 'organizations' || (@element && @element.is_a?(Organization))) ? 'selected' : nil) %>"><%= link_to(admin_organizations_path) do %><span class="museo_sans">organizations</span><% end %></li>
               <li class="<%= ((controller_name == 'donors' || (@element && @element.is_a?(Donor))) ? 'selected' : nil) %>"><%= link_to(admin_donors_path) do %><span class="museo_sans">donors</span><% end %></li>
+              <li class="<%= (controller_name == 'activities' && action_name == 'show' && @project.blank? ? 'selected' : nil) %>"><%= link_to(admin_activity_path) do %><span class="museo_sans">activity</span><% end %></li>
             <% else -%>
               <li class="<%= (controller_name == 'admin' ? 'selected' : nil) %>"><%= link_to(admin_admin_path) do %><span class="museo_sans">dashboard</span><% end %></li>
               <li class="<%= (((controller_name == 'projects' && !@organization) || (@element && @element.is_a?(Project))) ? 'selected' : nil) %>"><%= link_to(admin_projects_path) do %><span class="museo_sans">Your projects</span><% end %></li>

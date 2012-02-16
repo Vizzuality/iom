@@ -13,6 +13,12 @@
   <li <%= selected_if_current_page(admin_project_resources_path(@project)) %>>
     <%= link_to("Resources", admin_project_resources_path(@project)) %><% if !@project.resources.empty? %> <p><span><%=@project.resources.count%></span></p><% end %>
   </li>
+
+  <% if current_user.admin? -%>
+  <li <%= selected_if_current_page(admin_project_activity_path(@project)) %>>
+    <%= link_to("Activity", admin_project_activity_path(@project)) %>
+  </li>
+  <% end -%>
 </ul>
 
 <% if current_user.admin? -%>

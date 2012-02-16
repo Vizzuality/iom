@@ -72,6 +72,7 @@ Iom::Application.routes.draw do
       resources :resources, :only => [:index, :create, :destroy, :update]
       get 'donations', :on => :member
       resources :donations, :only => [:create, :destroy]
+      resource :activity
     end
     resources :sites do
       get 'customization', :on => :member
@@ -84,6 +85,7 @@ Iom::Application.routes.draw do
       resources :resources, :only => [:index, :create, :destroy, :update]
       resources :pages
     end
+    resource :activity
   end
 
 end

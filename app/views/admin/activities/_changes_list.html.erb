@@ -1,0 +1,47 @@
+<% if changes.present? %>
+  <% changes.each do |change| %>
+    <div class="change">
+      <div class="summary">
+        <div class="date_time">
+          <span class="date"><%= l change.when.to_date %></span>
+          <span class="time"><%= l change.when.to_time, :format => :hour_and_minutes %></span>
+        </div>
+
+        <div class="separator"></div>
+
+        <div>
+          <span class="title"><%= t('.header.changes_count', :count => change.changes_count, :what => change.what_name) %></span>
+          <span class="by"><%= t('.header.by_html', :user => change.who_email, :organization => link_to(change.who_organization_name, url_for_user_organization(change.who_organization))) %></span>
+        </div>
+
+        <div class="separator"></div>
+
+        <div class="more">
+          <a href="#"></a>
+        </div>
+      </div>
+
+      <div class="detail">
+        <ul>
+          <% change.changes.each do |field, values| %>
+            <li>
+              <div class="changed">
+                <span class="label">changed</span>
+                <span><%= field %></span>
+              </div>
+              <%= changes_for(values) %>
+            </li>
+          <% end %>
+        </ul>
+
+      </div>
+
+    </div>
+  <% end %>
+
+<% else %>
+  <div class="no_results">
+    <h2>There are no activity for your search</h2>
+    <p>Try to search with different terms or simply <a href="<%= admin_activity_path %>">browse all activity</a></p>
+  </div>
+<% end %>

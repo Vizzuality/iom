@@ -1,23 +1,67 @@
 module ModelChangesRecorder
+  @@included_in = []
+
+  def self.included_in
+    @@included_in
+  end
 
   def self.included(base)
 
     base.class_eval do
-      has_many  :changes_history_records
-    end if defined?(ActiveRecord::Base) && base.is_a?(ActiveRecord::Base)
+      has_many  :changes_history_records, :foreign_key => :what_id
+
+      after_save :record_changes
+    end if defined?(ActiveRecord::Base) && base < ActiveRecord::Base
 
     base.send :include, InstanceMethods
     base.send :extend, ClassMethods
+
+    @@included_in << base
   end
 
   module InstanceMethods
-    def record_changes
-      self.changes_history_records << Change.create!(:who => self.user, :what => self, :how => self.changes.to_json)
+    attr_accessor :updated_by
+
+    def last_changes
+      (changes || []).reject{|field, values| %w(created_at updated_at).include?(field)}
     end
+
+    def record_changes
+      return if last_changes.blank?
+
+      self.changes_history_records << ChangesHistoryRecord.create!(
+        :who  => updated_by,
+        :what => self,
+        :how  => last_changes.to_json,
+        :when => Time.now
+      )
+    end
+
+    def record_new_associated_object(child)
+      changed_attributes[child.class.name.tableize] = [] if changed_attributes[child.class.name.tableize].nil?
+      changed_attributes[child.class.name.tableize][0] = (self.changes[child.class.name.tableize][0] || []) + [{:new => change_label_for(child)}]
+    end
+
+    def record_deleted_associated_object(child)
+      changed_attributes[child.class.name.tableize] = [] if changed_attributes[child.class.name.tableize].nil?
+      changed_attributes[child.class.name.tableize][0] = (self.changes[child.class.name.tableize][0] || []) + [{:deleted => change_label_for(child)}]
+    end
+
+    def change_label_for(model)
+      model.name rescue model.change_label rescue model.to_s
+    end
+    private :change_label_for
   end
 
   module ClassMethods
 
+    def has_many(association_name, options = {}, &block)
+      super(association_name, options.merge(:after_add => :record_new_associated_object, :after_remove => :record_deleted_associated_object), &block)
+    end
+
+    def has_and_belongs_to_many(association_name, options = {}, &block)
+      super(association_name, options.merge(:after_add => :record_new_associated_object, :after_remove => :record_deleted_associated_object), &block)
+    end
   end
 
 end

@@ -1,0 +1,68 @@
+<div class="main_layout">
+
+  <% if @project.blank? -%>
+    <div class="block">
+      <div class="long_search">
+        <span class="top"></span>
+        <div class="content padding">
+          <%= form_for(:search, :url => admin_activity_path) do |form| %>
+            <ul class="combos">
+              <li>
+                <%= form.label :who, 'NGO USER' %>
+                <%= form.select :who, User.all.map{|u| [u, u.id]} %>
+              </li>
+              <li>
+                <%= form.label :what_type, 'TYPE' %>
+                <%= form.select :what_type, ModelChangesRecorder.included_in.map{|c| [c.name, c.name]} %>
+              </li>
+              <li>
+                <%= form.label :when_start, 'FROM' %>
+                <%= form.date_select :when_start, :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year]  %>
+              </li>
+              <li>
+                <%= form.label :when_end, 'TO' %>
+                <%= form.date_select :when_end, :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year]  %>
+              </li>
+            </ul>
+          <% end %>
+        </div>
+        <span class="bottom"></span>
+      </div>
+    </div>
+  <% end -%>
+
+  <div class="block">
+    <div class="top"></div>
+    <div class="med">
+
+      <div class="left">
+        <div class="header no_border">
+          <% if @project.blank? -%>
+            <h2 class="museo_sans"> All activity</h2>
+          <% else -%>
+            <h2 class="museo_sans"><%= @project.name %></h2>
+            <p class="by">by <%= link_to(@project.primary_organization.name, edit_admin_organization_path(@project.primary_organization)) %> /
+              <%= @project.countries.first.name if @project.countries.any? %>
+            </p>
+          <% end -%>
+        </div>
+        <div class="changes_list">
+          <%= render 'changes_list', :changes => @changes %>
+        </div>
+
+      </div>
+
+      <% if @project.present? %>
+        <div class="right menu">
+            <%= render 'admin/projects/sidebar' %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="bottom_grey paginate">
+      <%= will_paginate(@changes) %>
+    </div>
+
+  </div>
+
+</div>

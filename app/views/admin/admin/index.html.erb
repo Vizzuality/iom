@@ -12,9 +12,9 @@
         <p class="info museo_sans"><strong><%= Organization.where("created_at > '#{Date.today.beginning_of_month.to_s(:db)}'").count %> new</strong> this month</p>
       </div>
       <div class="one last">
-        <p class="museo_sans"><%= number_with_delimiter(Donor.count) %></p>
-        <a href="<%= admin_donors_path %>" class="museo_sans"><%= pluralize(Donor.count, 'organization donor', 'organization donors') %></a>
-        <p class="info museo_sans"><strong><%= Donor.where("created_at > '#{Date.today.beginning_of_month.to_s(:db)}'").count %> new</strong> this month</p>
+        <p class="museo_sans"><%= number_with_delimiter(@changes_last_day_count) %></p>
+        <a href="<%= admin_activity_path %>" class="museo_sans"><%= pluralize(@changes_last_day_count, 'non-InterAction update in 24h', 'non-InterAction updates in 24h') %></a>
+        <p class="info museo_sans"><strong><%= @changes_count %></strong> in total</p>
       </div>
     </div>
 
