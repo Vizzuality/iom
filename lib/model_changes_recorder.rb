@@ -27,24 +27,39 @@ module ModelChangesRecorder
     end
 
     def record_changes
-      return if last_changes.blank?
+      valid_changes = valid(last_changes)
+      return if valid_changes.blank?
 
       self.changes_history_records << ChangesHistoryRecord.create!(
         :who  => updated_by,
         :what => self,
-        :how  => last_changes.to_json,
+        :how  => valid_changes.to_json,
         :when => Time.now
       )
     end
 
     def record_new_associated_object(child)
-      changed_attributes[child.class.name.tableize] = [] if changed_attributes[child.class.name.tableize].nil?
-      changed_attributes[child.class.name.tableize][0] = (self.changes[child.class.name.tableize][0] || []) + [{:new => change_label_for(child)}]
+      changed_attributes[child.class.name.tableize]    = [] if changed_attributes[child.class.name.tableize].nil?
+      changed_attributes[child.class.name.tableize][0] = (changed_attributes[child.class.name.tableize][0] || []) + [{:new => change_label_for(child)}]
     end
 
     def record_deleted_associated_object(child)
-      changed_attributes[child.class.name.tableize] = [] if changed_attributes[child.class.name.tableize].nil?
-      changed_attributes[child.class.name.tableize][0] = (self.changes[child.class.name.tableize][0] || []) + [{:deleted => change_label_for(child)}]
+      changed_attributes[child.class.name.tableize]    = [] if changed_attributes[child.class.name.tableize].nil?
+      changed_attributes[child.class.name.tableize][0] = (changed_attributes[child.class.name.tableize][0] || []) + [{:deleted => change_label_for(child)}]
+    end
+
+    def valid(changes)
+      associations_changes = Hash[changes.select do |field, values|
+        old, new = *values
+        old.is_a?(Array)
+      end]
+
+      fields_changes = changes.reject do |field, values|
+        old, new = *values
+        new.is_a?(String) && old.presence.try(:strip) == new.presence.try(:strip)
+      end
+
+      associations_changes.merge(fields_changes)
     end
 
     def change_label_for(model)

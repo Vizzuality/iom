@@ -8,7 +8,7 @@ require File.expand_path("../../support/models/changes_history_record.rb", __FIL
 
 describe ModelChangesRecorder do
 
-  let(:organization) { Organization.create(:name => 'Super NGO!') }
+  let(:organization) { Organization.create(:name => 'Super NGO!', :description => nil) }
   let(:user)         { stub(:id => 1, :name => 'Fulanito')                                                 }
   let(:thing)        { stub(:name => 'wadus') }
 
@@ -24,14 +24,13 @@ describe ModelChangesRecorder do
     change.who.name.should be == user.name
     change.what.id.should be == organization.id
     change.what.type.should be == organization.class
-    change.how.should be == "[{\"name\":[\"Super NGO!\",\"Mega NGO!\"]}]"
+    change.how.should be == "{\"name\":[\"Super NGO!\",\"Mega NGO!\"]}"
   end
 
   it 'tracks changes in model associations' do
     organization.changes_history_records.should be_empty
     organization.updated_by = user
 
-    thing.should_receive(:to_s).and_return('wadus')
     organization.things << thing
 
     organization.save
@@ -42,7 +41,19 @@ describe ModelChangesRecorder do
     change.who.name.should be == user.name
     change.what.id.should be == organization.id
     change.what.type.should be == organization.class
-    change.how.should be == "[{\"things\":{\"new\":[\"wadus\"]}}]"
+    change.how.should be == "{\"r_spec/mocks/mocks\":[[{\"new\":\"wadus\"}]]}"
   end
+
+  it "shouldn't track empty changes" do
+    organization.changes_history_records.should be_empty
+    organization.updated_by = user
+    organization.update_attributes(:description => '')
+    organization.description.should be == ''
+    organization.changes_history_records.should have(0).item
+    organization.update_attributes(:budget => 0.0)
+    organization.budget.should be == 0.0
+    organization.changes_history_records.should have(1).item
+  end
+
 
 end
