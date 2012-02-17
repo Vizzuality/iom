@@ -23,8 +23,14 @@ $(document).ready(function(ev){
   $('.changes_list .change .more a').live('click', function(evt){
     evt.preventDefault();
     var change = $(this).closest('.change');
-    change.toggleClass('open');
-    change.find('.detail').slideToggle();
+    if (change.hasClass('open')){
+      change.find('.detail').slideToggle(function(){
+        change.toggleClass('open');
+      });
+    }else{
+      change.toggleClass('open');
+      change.find('.detail').slideToggle();
+    }
   });
 
 });
