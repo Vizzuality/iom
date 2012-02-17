@@ -1,27 +1,43 @@
 <div class="main_layout">
 
   <% if @project.blank? -%>
-    <div class="block">
+    <div class="block activity">
       <div class="long_search">
         <span class="top"></span>
         <div class="content padding">
-          <%= form_for(:search, :url => admin_activity_path) do |form| %>
+          <%= form_for(:search, :url => admin_activity_path, :html => {:method => 'get'}) do |form| %>
             <ul class="combos">
               <li>
                 <%= form.label :who, 'NGO USER' %>
-                <%= form.select :who, User.all.map{|u| [u, u.id]} %>
+                <%= form.select :who, User.all.map{|u| [u, u.id]}, :include_blank => 'All users' %>
               </li>
               <li>
                 <%= form.label :what_type, 'TYPE' %>
-                <%= form.select :what_type, ModelChangesRecorder.included_in.map{|c| [c.name, c.name]} %>
+                <%= form.select :what_type, ModelChangesRecorder.included_in.map{|c| [c.name, c.name]}.uniq, :include_blank => 'All types' %>
               </li>
               <li>
                 <%= form.label :when_start, 'FROM' %>
-                <%= form.date_select :when_start, :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year]  %>
+                <span class="combo_date"><p></p>
+                <div class="select_dates">
+                  <p id="month" class="title">MONTH</p>
+                  <p id="day" class="title">DAY</p>
+                  <p id="year" class="title">YEAR</p>
+
+                  <%= form.date_select :when_start, :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year], :include_blank => true  %>
+                </div>
+                </span>
               </li>
               <li>
                 <%= form.label :when_end, 'TO' %>
-                <%= form.date_select :when_end, :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year]  %>
+                <span class="combo_date"><p></p>
+                <div class="select_dates">
+                  <p id="month" class="title">MONTH</p>
+                  <p id="day" class="title">DAY</p>
+                  <p id="year" class="title">YEAR</p>
+
+                  <%= form.date_select :when_end, :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year], :include_blank => true  %>
+                </div>
+                </span>
               </li>
             </ul>
           <% end %>
@@ -38,7 +54,11 @@
       <div class="left">
         <div class="header no_border">
           <% if @project.blank? -%>
+            <% if @changes.present? -%>
             <h2 class="museo_sans"> All activity</h2>
+            <% else -%>
+            <h2 class="museo_sans"> 0 changes</h2>
+            <% end -%>
           <% else -%>
             <h2 class="museo_sans"><%= @project.name %></h2>
             <p class="by">by <%= link_to(@project.primary_organization.name, edit_admin_organization_path(@project.primary_organization)) %> /
@@ -66,4 +86,8 @@
   </div>
 
 </div>
+<script src="/javascripts/plugins/jquery.mousewheel.js" type="text/javascript" charset="utf-8"></script>
+<script src="/javascripts/plugins/jquery.jscrollpane.js" type="text/javascript" charset="utf-8"></script>
+<script src="/javascripts/plugins/jquery.livequery.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="/javascripts/plugins/jquery.stylish-select.js" type="text/javascript" charset="utf-8"></script>
 <script src="/javascripts/backoffice/activity.js" type="text/javascript" charset="utf-8"></script>
