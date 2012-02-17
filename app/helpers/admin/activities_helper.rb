@@ -11,22 +11,22 @@ module Admin::ActivitiesHelper
       values.first.each do |key, value|
         html << content_tag(:div, :class => 'from') do
           raw [
-            content_tag(:span, key, :class => 'label'),
-            content_tag(:span, value)
+            content_tag(:p, key, :class => 'label'),
+            content_tag(:p, value, :class => 'value')
           ].join
         end
       end
     else
       html << content_tag(:div, :class => 'from') do
         raw [
-          content_tag(:span, 'from', :class => 'label'),
-          content_tag(:span, values.first)
+          content_tag(:p, 'from', :class => 'label'),
+          content_tag(:p, values.first, :class => 'value')
         ].join
       end
       html << content_tag(:div, :class => 'to') do
         raw [
-          content_tag(:span, 'to', :class => 'label'),
-          content_tag(:span, values.last)
+          content_tag(:p, 'to', :class => 'label'),
+          content_tag(:p, values.last, :class => 'value')
         ].join
       end
     end

@@ -9,7 +9,7 @@ en:
     activities:
       changes_list:
         header:
-          changes_count:
+          changes_count_html:
             zero: 'No change on %{what}'
             one: '1 change on %{what}'
             other: '%{count} changes on %{what}'

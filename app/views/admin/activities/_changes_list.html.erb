@@ -1,23 +1,22 @@
 <% if changes.present? %>
   <% changes.each do |change| %>
     <div class="change">
+      <div class="border_top"></div>
       <div class="summary">
         <div class="date_time">
-          <span class="date"><%= l change.when.to_date %></span>
-          <span class="time"><%= l change.when.to_time, :format => :hour_and_minutes %></span>
+          <p class="date"><%= l change.when.to_date %></p>
+          <p class="time"><%= l change.when.to_time, :format => :hour_and_minutes %></p>
         </div>
 
-        <div class="separator"></div>
-
-        <div>
-          <span class="title"><%= t('.header.changes_count', :count => change.changes_count, :what => change.what_name) %></span>
-          <span class="by"><%= t('.header.by_html', :user => change.who_email, :organization => link_to(change.who_organization_name, url_for_user_organization(change.who_organization))) %></span>
+        <div class="title_by">
+          <p class="title"><%= t('.header.changes_count_html', :count => change.changes_count, :what => link_to(change.what_name, url_for(change.what))) %></p>
+          <p class="by"><%= t('.header.by_html', :user => change.who_email, :organization => link_to(change.who_organization_name, url_for_user_organization(change.who_organization))) %></p>
         </div>
-
-        <div class="separator"></div>
 
         <div class="more">
-          <a href="#"></a>
+          <a href="#">
+            <span class="arrow"></span>
+          </a>
         </div>
       </div>
 
@@ -26,17 +25,22 @@
           <% change.changes.each do |field, values| %>
             <li>
               <div class="changed">
-                <span class="label">changed</span>
-                <span><%= field %></span>
+                <p class="label">changed</p>
+                <p class="value"><%= field %></p>
               </div>
+
               <%= changes_for(values) %>
+
+              <div class="separator"></div>
             </li>
           <% end %>
         </ul>
 
       </div>
 
+      <div class="border_bottom"></div>
     </div>
+
   <% end %>
 
 <% else %>

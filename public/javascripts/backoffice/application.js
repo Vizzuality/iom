@@ -168,11 +168,11 @@ $(document).ready(function(ev){
 		$('a.show_password_link').click(function(evt){
       evt.preventDefault();
 			if ($(this).text() == "show values") {
-				$("input#organization_user_attributes_password").get(0).setAttribute('type','text')				
+				$("input#organization_user_attributes_password").get(0).setAttribute('type','text')
 				$("input#organization_user_attributes_password_confirmation").get(0).setAttribute('type','text')
 				$(this).text("hide values");
 			} else {
-				$("input#organization_user_attributes_password").get(0).setAttribute('type','password')				
+				$("input#organization_user_attributes_password").get(0).setAttribute('type','password')
 				$("input#organization_user_attributes_password_confirmation").get(0).setAttribute('type','password')
 				$(this).text("show values");
 			}
@@ -184,7 +184,7 @@ $(document).ready(function(ev){
 			if ($(this).hasClass('selected')){
 				$(this).next('input[type=hidden]').val(true);
 			} else {
-				$(this).next('input[type=hidden]').val(false);				
+				$(this).next('input[type=hidden]').val(false);
 			}
 		});
 
