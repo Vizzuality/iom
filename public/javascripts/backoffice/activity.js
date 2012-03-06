@@ -15,10 +15,10 @@ $(document).ready(function(ev){
     $(this).closest('form').submit();
   });
 
-  $('#search_who, #search_what_type').sSelect();
-  $('#search_when_start_1i,#search_when_end_1i').sSelect({ddMaxWidth: '76px',ddMaxHeight:'200px',containerClass:'year'});
-  $('#search_when_start_2i,#search_when_end_2i').sSelect({ddMaxWidth: '131px',ddMaxHeight:'200px',containerClass:'month'});
-  $('#search_when_start_3i,#search_when_end_3i').sSelect({ddMaxWidth: '62px',ddMaxHeight:'200px',containerClass:'day'});
+ // $('#search_who, #search_what_type').sSelect();
+ // $('#search_when_start_1i,#search_when_end_1i').sSelect({ddMaxWidth: '76px',ddMaxHeight:'200px',containerClass:'year'});
+ // $('#search_when_start_2i,#search_when_end_2i').sSelect({ddMaxWidth: '131px',ddMaxHeight:'200px',containerClass:'month'});
+ // $('#search_when_start_3i,#search_when_end_3i').sSelect({ddMaxWidth: '62px',ddMaxHeight:'200px',containerClass:'day'});
 
   $('.changes_list .change .more a').live('click', function(evt){
     evt.preventDefault();

@@ -3,77 +3,41 @@
     <div class="long_search">
       <span class="top"></span>
       <div class="content padding">
-      <%= form_tag(admin_projects_path, :method => :get) do %>
+        <%= form_tag(admin_projects_path, :method => :get, :class => :search) do %>
         <label>SEARCH BY TEXT</label>
         <input type="text" value="<%= params[:q] || 'Search projects by name, place,...'%>" name="q" class="main_search"/>
         <input type="submit" value="" />
         <ul class="combos">
-          <li>
+          <li class="comboselect">
             <label>STATUS</label>
-            <span id="status_combo_search" class="combo"><p>All status</p>
-            <input id="status_input" type="hidden" value="" name="status" />
-            <ul class="elements short">
-              <li class="first"></li>
-              <li>
-                <a id="0" class="status">All status</a>
-              </li>
-              <li>
-                <a id="active" class="status">Active</a>
-              </li>
-              <li>
-                <a id="closed" class="status">Closed</a>
-              </li>
-              <li class="last"></li>
-            </ul>
-          </span>
+
+          <%= select_tag :status_input,
+            options_for_select([['All status', 0], ['Active', 'active'], ['Closed', 'closed']] ), :class => :"chzn-select" %>
+
         </li>
-        <li>
+          <li class="comboselect">
           <label>COUNTRY</label>
 
           <%= select_tag :country,
-                         options_for_select([['All countries',0]] + Country.get_select_values.collect{ |c| [c.name, c.id] }) %>
+            options_for_select([['All countries',0]] + Country.get_select_values.collect{ |c| [c.name, c.id] }), :class => :"chzn-select" %>
 
         </li>
-        <li>
+        <li class="comboselect">
           <label>SECTOR</label>
-          <span id="sector_combo_search" class="combo"><p>All sectors</p>
-          <input id="sector_input" type="hidden" value="" name="sector" />
-          <div class="elements_content">
-            <div class="wrapper">
-              <ul class="elements scroll_pane">
-                <li>
-                  <a id="0">All sectors</a>
-                </li>
-                <% Sector.get_select_values.each do |sector| %>
-                <li>
-                  <a id="<%= sector.id%>"><%= truncate(sector.name,:length => 20)%></a>
-                </li>
-                <% end %>
-              </ul>
-            </div>
-          </div>
-          </span>
+
+
+          <%= select_tag :sector_input,
+            options_for_select([['All sectors',0]] + Sector.get_select_values.collect { |c| [c.name, c.id] }), :class => :"chzn-select" %>
+
+
         </li>
 
-        <li>
+          <li class="comboselect">
           <label>SITE</label>
-          <span id="site_combo_search" class="combo"><p>All sites</p>
-          <input id="site_input" type="hidden" value="" name="site" />
-          <div class="elements_content">
-            <div class="wrapper">
-              <ul class="elements scroll_pane">
-                <li>
-                  <a id="0">All sites</a>
-                </li>
-                <% Site.get_select_values.each do |site| %>
-                <li>
-                  <a id="<%= site.id%>"><%= truncate(site.name.capitalize.strip,:length => 15)%></a>
-                </li>
-                <% end %>
-              </ul>
-            </div>
-          </div>
-          </span>
+
+          <%= select_tag :site_input,
+            options_for_select([['All sectors',0]] + Site.get_select_values.collect { |c| [c.name.capitalize.strip, c.id] }), :class => :"chzn-select" %>
+
         </li>
       </ul>
       <% end %>
@@ -177,6 +141,10 @@
 </div>
 <script src="/javascripts/plugins/jquery.mousewheel.js" type="text/javascript" charset="utf-8"></script>
 <script src="/javascripts/plugins/jquery.jscrollpane.js" type="text/javascript" charset="utf-8"></script>
-<script src="/javascripts/plugins/jquery.stylish-select.js" type="text/javascript" charset="utf-8"></script>
+<!-- <script src="/javascripts/plugins/jquery.stylish-select.js" type="text/javascript" charset="utf-8"></script>-->
 <script src="/javascripts/backoffice/project.js" type="text/javascript" charset="utf-8"></script>
 <script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>
+<script src="/javascripts/plugins/chosen/chosen.jquery.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+$(".chzn-select").chosen();
+</script>

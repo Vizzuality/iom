@@ -467,6 +467,7 @@ div.block.edit div.med div.left div.outer_map a#zoomIn {position:absolute; width
 div.block.edit div.med div.left div.outer_map a#zoomIn:hover {background-position:0 -25px;}
 div.block.edit div.med div.left div.outer_map a#zoomOut {position:absolute; width:26px; height:25px; left:40px; top:10px; background:url('/images/sites/maps/zoom_out.png') no-repeat 0 0; z-index:100;}
 div.block.edit div.med div.left div.outer_map a#zoomOut:hover {background-position:0 -25px;}
+
 div.block.edit div.med div.left form div.list_combo {float:left; width:419px; height:auto; position:relative;}
 div.block.edit div.med div.left form ul.list_combo_content {position:absolute; top:35px; width:419px; display:none; left:0; z-index:10;}
 div.block.edit div.med div.left form ul.list_combo_content li.first {float:left; width:419px; height:4px; margin:0; background:url('/images/backoffice/projects/top_content_combo_large.png') no-repeat 0 0; padding:0;}
@@ -507,30 +508,43 @@ div.long_search div.content {float:left; width:882px; height:auto; background:ur
 div.long_search div.content.padding {padding:25px 30px 25px!important;}
 div.long_search span.bottom {float:left; width:942px; height:13px; background:url('/images/backoffice/backgrounds/bottom_white_long.png') no-repeat 0 0;}
 div.long_search ul.combos {float:left; width:680px; height:60px; margin:20px 0 0 0;}
-div.long_search ul.combos li {float:left; width:147px; height:100%;}
-div.long_search ul.combos li span.combo {float:left; margin:6px 0 0 0; background:url('/images/backoffice/projects/single_combo_head.png') no-repeat 0 0; font:normal 13px Arial; color:#333333; text-decoration:none; width:134px; height:24px; padding:8px 0 0 11px; position:relative;}
-div.long_search ul.combos li span.combo:focus {outline:none;}
-div.long_search ul.combos li span.combo p {width:130px;}
-div.long_search ul.combos li span.combo ul.elements {display:none;}
-div.long_search ul.combos li span.combo.clicked {background:url('/images/backoffice/projects/combos/index_search_head.png') no-repeat 0 0; width:135px; position:relative;}
-div.long_search ul.combos li span.combo.clicked div.elements_content {position:absolute; top:31px; left:0; display:inline; background:url('/images/backoffice/projects/combos/body_combo_search.png') no-repeat 0 0; width:148px; height:198px; z-index:50;}
-div.long_search ul.combos li span.combo.clicked ul.elements {float:left; width:148px; height:194px; overflow-x:hidden; overflow-y:auto; display:inline;}
-div.long_search ul.combos li span.combo.clicked ul.elements li {float:left; width:88px; height:auto; padding:5px 30px 5px 12px; margin:0 0 0 1px; }
-div.long_search ul.combos li span.combo.clicked ul.elements li:hover {background-color:#E4F0CA;}
-div.long_search ul.combos li span.combo ul.elements.short {display:none;}
-div.long_search ul.combos li span.combo.clicked ul.elements.short {position:absolute; top:31px; left:-1px; display:inline; width:148px; height:auto; background:none; z-index:50;}
-div.long_search ul.combos li span.combo.clicked ul.elements.short li {float:left; width:120px; height:auto; background:url('/images/backoffice/projects/combos/index_search_content.png')
+div.long_search ul.combos li.comboselect {float:left; width:170px; height:100%;}
+div.long_search ul.combos li.comboselect span.combo {float:left; margin:6px 0 0 0; background:url('/images/backoffice/projects/single_combo_head.png') no-repeat 0 0; font:normal 13px Arial; color:#333333; text-decoration:none; width:134px; height:24px; padding:8px 0 0 11px; position:relative;}
+div.long_search ul.combos li.comboselect span.combo:focus {outline:none;}
+div.long_search ul.combos li.comboselect span.combo p {width:130px;}
+div.long_search ul.combos li.comboselect span.combo ul.elements {display:none;}
+div.long_search ul.combos li.comboselect span.combo.clicked {background:url('/images/backoffice/projects/combos/index_search_head.png') no-repeat 0 0; width:135px; position:relative;}
+div.long_search ul.combos li.comboselect span.combo.clicked div.elements_content {position:absolute; top:31px; left:0; display:inline; background:url('/images/backoffice/projects/combos/body_combo_search.png') no-repeat 0 0; width:148px; height:198px; z-index:50;}
+div.long_search ul.combos li.comboselect span.combo.clicked ul.elements {float:left; width:148px; height:194px; overflow-x:hidden; overflow-y:auto; display:inline;}
+div.long_search ul.combos li.comboselect span.combo.clicked ul.elements li {float:left; width:88px; height:auto; padding:5px 30px 5px 12px; margin:0 0 0 1px; }
+div.long_search ul.combos li.comboselect span.combo.clicked ul.elements li:hover {background-color:#E4F0CA;}
+div.long_search ul.combos li.comboselect span.combo ul.elements.short {display:none;}
+div.long_search ul.combos li.comboselect span.combo.clicked ul.elements.short {position:absolute; top:31px; left:-1px; display:inline; width:148px; height:auto; background:none; z-index:50;}
+div.long_search ul.combos li.comboselect span.combo.clicked ul.elements.short li {float:left; width:120px; height:auto; background:url('/images/backoffice/projects/combos/index_search_content.png')
 repeat-y 0; padding:5px 5px 5px 12px; margin:0 0 0 1px;}
-div.long_search ul.combos li span.combo.clicked ul.elements.short li:hover {float:left; width:264px; background:url('/images/backoffice/projects/combos/index_search_content_hover.png') repeat-y 0;}
-div.long_search ul.combos li span.combo.clicked ul.elements.short li.first {float:left; width:135px; height:6px; background:url('/images/backoffice/projects/combos/index_search_content_first.png') no-repeat 0 0; margin:0 0 0 0 1px; padding:0;}
-div.long_search ul.combos li span.combo.clicked ul.elements.short li.last {float:left; width:135px; height:6px; background:url('/images/backoffice/projects/combos/index_search_bottom.png') no-repeat 0 0;}
-div.long_search ul.combos li span.combo.clicked ul.elements.short li.last:hover {background:url('/images/backoffice/projects/combos/index_search_bottom.png') no-repeat 0 0;}
-div.long_search ul.combos li span.combo:hover {cursor:pointer;}
+div.long_search ul.combos li.comboselect span.combo.clicked ul.elements.short li:hover {float:left; width:264px; background:url('/images/backoffice/projects/combos/index_search_content_hover.png') repeat-y 0;}
+div.long_search ul.combos li.comboselect span.combo.clicked ul.elements.short li.first {float:left; width:135px; height:6px; background:url('/images/backoffice/projects/combos/index_search_content_first.png') no-repeat 0 0; margin:0 0 0 0 1px; padding:0;}
+div.long_search ul.combos li.comboselect span.combo.clicked ul.elements.short li.last {float:left; width:135px; height:6px; background:url('/images/backoffice/projects/combos/index_search_bottom.png') no-repeat 0 0;}
+div.long_search ul.combos li.comboselect span.combo.clicked ul.elements.short li.last:hover {background:url('/images/backoffice/projects/combos/index_search_bottom.png') no-repeat 0 0;}
+div.long_search ul.combos li.comboselect span.combo:hover {cursor:pointer;}
+div.long_search ul.combos li.comboselect  label {display:block; clear:both;
+width: 104px;
+margin-bottom: 10px;
+}
+
+div.long_search .chzn-container .chzn-results li  {color:#333;}
+div.long_search .chzn-container .chzn-results li.active-result:hover { color:#fff;}
+
+div.long_search #status_input_chzn .chzn-search { display:none;}
+
+
 div.long_search label {float:left; margin:0 0 0 3px; font:bold 11px Arial; color:#999999;}
-div.long_search form {float:left; position:relative; width:100%;}
-div.long_search input[type="text"] {float:left; width:832px; height:29px; margin:5px 0 0 0; padding:5px 36px 5px 8px; font:normal 17px Arial; color:#CCCCCC; border:none; background:url('/images/backoffice/projects/long_search.png') no-repeat 0 0; line-height:27px;}
+div.long_search form.search {float:left; position:relative; width:100%;}
+div.long_search input[type="text"].main_search {float:left; width:832px; height:29px; margin:5px 0 0 0; padding:5px 36px 5px 8px; font:normal 17px Arial; color:#CCCCCC; border:none; background:url('/images/backoffice/projects/long_search.png') no-repeat 0 0; line-height:27px;}
 div.long_search input[type="submit"] {position:absolute; width:15px; height:15px; right:20px; top:31px; background:url('/images/backoffice/donors/lens.jpg') no-repeat 0 0; border:none;}
 div.long_search input[type="submit"]:hover {background-position:0 -15px; cursor:pointer;}
+
+
 div.one_project {float:left; width:288px; height:140px; margin:20px 0 0 0; padding:0;}
 div.one_project span.top {float:left; width:288px; height:8px; background:url('/images/backoffice/backgrounds/one_box_top.png') no-repeat 0 0;}
 div.one_project div.content {float:left; width:288px; height:auto; padding:0 0 26px; background:url('/images/backoffice/backgrounds/one_box_content.png') repeat-y 0;}

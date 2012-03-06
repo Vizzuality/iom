@@ -52,7 +52,7 @@ $(document).ready(function(ev){
     });
 
     // COUNTRY COMBO
-    $('select#country').sSelect({ddMaxWidth: '134px',ddMaxHeight:'220px',containerClass:'country_index'});
+    // $('select#country').sSelect({ddMaxWidth: '134px',ddMaxHeight:'220px',containerClass:'country_index'});
 
     if ($('div.select_dates').length > 0){
 
