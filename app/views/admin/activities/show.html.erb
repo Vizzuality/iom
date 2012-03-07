@@ -17,7 +17,7 @@
                 <%= form.select :what_type, ModelChangesRecorder.included_in.map{|c| [c.name, c.name]}.uniq, {:include_blank => 'All types'}, { :class => :"chzn-select"} %>
               </li>
 
-              <li class="comboselect">
+              <li class="comboselect date">
                 <%= form.label :when_start, 'FROM' %>
 
                 <% date_start = "" %>
@@ -33,7 +33,7 @@
                 </span>
               </li>
 
-              <li class="comboselect">
+              <li class="comboselect date">
                 <%= form.label :when_end, 'TO' %>
 
                 <% date_end = "" %>
