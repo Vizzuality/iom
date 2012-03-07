@@ -11,27 +11,27 @@
           <li class="comboselect status">
           <label>STATUS</label>
           <%= select_tag :status,
-            options_for_select([['All status', 0], ['Active', 'active'], ['Closed', 'closed']], params[:status]), :class => :"chzn-select" %>
+            options_for_select([['All statuses', 0], ['Active', 'active'], ['Closed', 'closed']], params[:status]), :class => :"chzn-select" %>
             </li>
 
             <li class="comboselect">
             <label>COUNTRY</label>
             <%= select_tag :country,
-              options_for_select([['All countries',0]] + Country.get_select_values.collect{ |c| [c.name, c.id] }, params[:country]), :class => :"chzn-select" %>
+              options_for_select([['All',0]] + Country.get_select_values.collect{ |c| [c.name, c.id] }, params[:country]), :class => :"chzn-select" %>
               </li>
 
               <li class="comboselect">
               <label>SECTOR</label>
 
               <%= select_tag :sector,
-                options_for_select([['All sectors',0]] + Sector.get_select_values.collect { |c| [c.name, c.id] }, params[:sector]), :class => :"chzn-select" %>
+                options_for_select([['Any sector',0]] + Sector.get_select_values.collect { |c| [c.name, c.id] }, params[:sector]), :class => :"chzn-select" %>
                 </li>
 
                 <li class="comboselect">
                 <label>SITE</label>
 
                 <%= select_tag :site,
-                  options_for_select([['All sites',0]] + Site.get_select_values.collect { |c| [c.name.capitalize.strip, c.id] }, params[:site]), :class => :"chzn-select" %>
+                  options_for_select([['Any site',0]] + Site.get_select_values.collect { |c| [c.name.capitalize.strip, c.id] }, params[:site]), :class => :"chzn-select" %>
 
                   </li>
                 </ul>

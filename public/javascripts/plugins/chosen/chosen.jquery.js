@@ -304,7 +304,7 @@ Copyright (c) 2011 by Harvest
         this.f_width = this.options.widths[this.container_id];
       } else {
         this.f_width = this.f_width > 170 ? 160 : this.f_width;
-        this.f_width = this.f_width <= 90 ? 120 : this.f_width;
+        this.f_width = this.f_width <= 160 ? 160 : this.f_width;
       }
 
       container_div = $("<div />", {

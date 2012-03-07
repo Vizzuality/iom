@@ -509,7 +509,7 @@ div.long_search div.content.padding {padding:25px 30px 25px!important;}
 div.long_search span.bottom {float:left; width:942px; height:13px; background:url('/images/backoffice/backgrounds/bottom_white_long.png') no-repeat 0 0;}
 div.long_search ul.combos {float:left; width:680px; height:60px; margin:20px 0 0 0;}
 div.long_search ul.combos li.comboselect {float:left; width:170px; height:100%;}
-div.long_search ul.combos li.comboselect.status {width:130px;}
+div.long_search ul.combos li.comboselect.status {width:170px;}
 
 div.long_search ul.combos li.comboselect span.combo {float:left; margin:6px 0 0 0; background:url('/images/backoffice/projects/single_combo_head.png') no-repeat 0 0; font:normal 13px Arial; color:#333333; text-decoration:none; width:134px; height:24px; padding:8px 0 0 11px; position:relative;}
 div.long_search ul.combos li.comboselect span.combo:focus {outline:none;}
