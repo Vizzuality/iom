@@ -1,5 +1,9 @@
 
 
+
+  $('select').change(function(){
+    $(this).closest('form').submit();
+  });
       /* MENU HACK POSITIONING*/
       $('div#header div.left').width(680);
   

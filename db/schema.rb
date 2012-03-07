@@ -37,13 +37,13 @@ ActiveRecord::Schema.define(:version => 20120214152607) do
   create_table "countries", :force => true do |t|
     t.string        "name"
     t.string        "code"
+    t.float         "center_lat"
+    t.float         "center_lon"
     t.multi_polygon "the_geom",         :limit => nil, :srid => 4326
     t.string        "wiki_url"
     t.text          "wiki_description"
     t.string        "iso2_code"
     t.string        "iso3_code"
-    t.float         "center_lat"
-    t.float         "center_lon"
     t.text          "the_geom_geojson"
   end
 
@@ -81,15 +81,21 @@ ActiveRecord::Schema.define(:version => 20120214152607) do
 
   add_index "data_denormalization", ["cluster_ids"], :name => "data_denormalization_cluster_idsx"
   add_index "data_denormalization", ["countries_ids"], :name => "data_denormalization_countries_idsx"
+  add_index "data_denormalization", ["created_at"], :name => "index_data_denormalization_on_created_at"
   add_index "data_denormalization", ["donors_ids"], :name => "data_denormalization_donors_idsx"
   add_index "data_denormalization", ["is_active"], :name => "data_denormalization_is_activex"
+  add_index "data_denormalization", ["is_active"], :name => "index_data_denormalization_on_is_active"
   add_index "data_denormalization", ["organization_id"], :name => "data_denormalization_organization_idx"
+  add_index "data_denormalization", ["organization_id"], :name => "index_data_denormalization_on_organization_id"
   add_index "data_denormalization", ["organization_name"], :name => "data_denormalization_organization_namex"
   add_index "data_denormalization", ["project_id"], :name => "data_denormalization_project_idx"
+  add_index "data_denormalization", ["project_id"], :name => "index_data_denormalization_on_project_id"
   add_index "data_denormalization", ["project_name"], :name => "data_denormalization_project_name_idx"
+  add_index "data_denormalization", ["project_name"], :name => "index_data_denormalization_on_project_name"
   add_index "data_denormalization", ["regions_ids"], :name => "data_denormalization_regions_idsx"
   add_index "data_denormalization", ["sector_ids"], :name => "data_denormalization_sector_idsx"
   add_index "data_denormalization", ["site_id"], :name => "data_denormalization_site_idx"
+  add_index "data_denormalization", ["site_id"], :name => "index_data_denormalization_on_site_id"
 
   create_table "data_export", :id => false, :force => true do |t|
     t.integer "project_id"
@@ -407,16 +413,16 @@ ActiveRecord::Schema.define(:version => 20120214152607) do
     t.integer  "level"
     t.integer  "country_id"
     t.integer  "parent_region_id"
+    t.float    "center_lat"
+    t.float    "center_lon"
+    t.string   "path"
     t.geometry "the_geom",         :limit => nil, :srid => 4326
     t.integer  "gadm_id"
     t.string   "wiki_url"
     t.text     "wiki_description"
     t.string   "code"
-    t.float    "center_lat"
-    t.float    "center_lon"
     t.text     "the_geom_geojson"
     t.text     "ia_name"
-    t.string   "path"
   end
 
   add_index "regions", ["country_id"], :name => "index_regions_on_country_id"

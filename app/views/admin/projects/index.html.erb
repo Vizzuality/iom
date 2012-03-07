@@ -3,180 +3,141 @@
     <div class="long_search">
       <span class="top"></span>
       <div class="content padding">
-      <%= form_tag(admin_projects_path, :method => :get) do %>
-        <label>SEARCH BY TEXT</label>
-        <input type="text" value="<%= params[:q] || 'Search projects by name, place,...'%>" name="q" class="main_search"/>
+        <%= form_tag(admin_projects_path, :method => :get, :class => :search) do %>
+          <label>SEARCH BY TEXT</label>
+          <input type="text" value="<%= params[:q] %>" placeholder = "Search projects by name, place,..." name="q" class="main_search"/>
         <input type="submit" value="" />
         <ul class="combos">
-          <li>
-            <label>STATUS</label>
-            <span id="status_combo_search" class="combo"><p>All status</p>
-            <input id="status_input" type="hidden" value="" name="status" />
-            <ul class="elements short">
-              <li class="first"></li>
-              <li>
-                <a id="0" class="status">All status</a>
+          <li class="comboselect status">
+          <label>STATUS</label>
+          <%= select_tag :status,
+            options_for_select([['All status', 0], ['Active', 'active'], ['Closed', 'closed']], params[:status]), :class => :"chzn-select" %>
+            </li>
+
+            <li class="comboselect">
+            <label>COUNTRY</label>
+            <%= select_tag :country,
+              options_for_select([['All countries',0]] + Country.get_select_values.collect{ |c| [c.name, c.id] }, params[:country]), :class => :"chzn-select" %>
               </li>
-              <li>
-                <a id="active" class="status">Active</a>
-              </li>
-              <li>
-                <a id="closed" class="status">Closed</a>
-              </li>
-              <li class="last"></li>
-            </ul>
-          </span>
-        </li>
-        <li>
-          <label>COUNTRY</label>
 
-          <%= select_tag :country,
-                         options_for_select([['All countries',0]] + Country.get_select_values.collect{ |c| [c.name, c.id] }) %>
+              <li class="comboselect">
+              <label>SECTOR</label>
 
-        </li>
-        <li>
-          <label>SECTOR</label>
-          <span id="sector_combo_search" class="combo"><p>All sectors</p>
-          <input id="sector_input" type="hidden" value="" name="sector" />
-          <div class="elements_content">
-            <div class="wrapper">
-              <ul class="elements scroll_pane">
-                <li>
-                  <a id="0">All sectors</a>
+              <%= select_tag :sector,
+                options_for_select([['All sectors',0]] + Sector.get_select_values.collect { |c| [c.name, c.id] }, params[:sector]), :class => :"chzn-select" %>
                 </li>
-                <% Sector.get_select_values.each do |sector| %>
-                <li>
-                  <a id="<%= sector.id%>"><%= truncate(sector.name,:length => 20)%></a>
-                </li>
-                <% end %>
-              </ul>
-            </div>
-          </div>
-          </span>
-        </li>
 
-        <li>
-          <label>SITE</label>
-          <span id="site_combo_search" class="combo"><p>All sites</p>
-          <input id="site_input" type="hidden" value="" name="site" />
-          <div class="elements_content">
-            <div class="wrapper">
-              <ul class="elements scroll_pane">
-                <li>
-                  <a id="0">All sites</a>
-                </li>
-                <% Site.get_select_values.each do |site| %>
-                <li>
-                  <a id="<%= site.id%>"><%= truncate(site.name.capitalize.strip,:length => 15)%></a>
-                </li>
-                <% end %>
-              </ul>
-            </div>
-          </div>
-          </span>
-        </li>
-      </ul>
-      <% end %>
-      </div>
-      <span class="bottom"></span>
-    </div>
-  </div>
+                <li class="comboselect">
+                <label>SITE</label>
 
-  <div class="block">
-    <div class="top"></div>
-    <div class="med">
-      <div class="header no_border">
-        <h2 class="museo_sans">
-          <%= pluralize(@projects.total_entries, 'project', 'projects') %>
-          <% if @conditions.any? %>
-            on
-          <%=raw(
-          @conditions.map do |c, vh|
-              if new_conditions = @conditions.dup.delete_if{ |k,v| k == c }.values.first
-                new_conditions.merge!(:q => params[:q])
-              else
-                new_conditions = {:q => params[:q]}
-              end
-              link_to(c, admin_projects_path(new_conditions), :class => 'remove')
-          end.join(' & ')
-          )%>
-          <% end %>
-        </h2>
-        <span class="buttons">
-          <a class="add_project museo_sans shadow_green" href="<%= new_admin_project_path %>">New project</a>
-          <a class="import_csv museo_sans shadow_black" href="<%= admin_export_projects_path(:format => 'xls') %>">Export projects</a>
-        </span>
-      </div>
-      <div class="projects_list">
-      <% if @projects.any? %>
-      <table collapse="0">
-        <tbody>
-        <% @projects.each do |project| %>
-          <tr>
-            <td width="625">
-              <span>
-                <h3><a href="<%= edit_admin_project_path(project) %>"><%= project.name %></a><% if current_user.admin? -%> by <a href="<%= edit_admin_organization_path(project.primary_organization) %>"><%= project.primary_organization.name %></a><% end %></h3>
-                <p class="margin"><a class="project_status <%= project.finished? ? 'closed' : 'active' %>">
-                  <%= project.finished? ? 'Closed' : 'Active' %></a>
-                  <% if project.end_date.present? -%>
-                    <% if project.finished? -%>
-                      <%= project.end_date.strftime("since %b #{project.end_date.day.ordinalize}, %Y") %>
-                    <% else -%>
-                      <%= project.end_date.strftime("until %b #{project.end_date.day.ordinalize}, %Y") %>
-                    <% end -%>
-                  <% end -%>
-              </p>
-              </span>
-            </td>
-            <td width="150" class="odd center">
-              <% unless project.sectors.empty? %>
-                <% if project.sectors.count == 1 %>
-                  <p><%= project.sectors.first.name %></p>
-                <% else %>
-                  <p><%= truncate(project.sectors.first.name, :length => 19) %></p>
-                  <p class="secondary"><%= "and #{project.sectors.count - 1} more" %></p>
-                <% end %>
-              <% else %>
-                <p>N/A</p>
+                <%= select_tag :site,
+                  options_for_select([['All sites',0]] + Site.get_select_values.collect { |c| [c.name.capitalize.strip, c.id] }, params[:site]), :class => :"chzn-select" %>
+
+                  </li>
+                </ul>
               <% end %>
-            </td>
-            <td width="150" class="center">
-              <p><%= project.countries.first.try(:name) %></p>
-            </td>
-          </tr>
-        <% end -%>
-        </tbody>
-      </table>
-      <% else %>
-        <% if Project.count>1 %>
-          <div class="no_results">
-            <h2>There are not projects for your search</h2>
-            <p>Try to search with different terms or simply <a href="<%= admin_projects_path %>">browse all projects</a></p>
+              </div>
+              <span class="bottom"></span>
+            </div>
           </div>
-        <% else %>
-          <div class="no_results">
-            <h2>There are not projects in the site</h2>
-            <p>Try to <a href="<%= new_admin_project_path %>">add new one</a>.</p>
+
+          <div class="block">
+            <div class="top"></div>
+            <div class="med">
+              <div class="header no_border">
+                <h2 class="museo_sans">
+                  <%= pluralize(@projects.total_entries, 'project', 'projects') %>
+                  <% if @conditions.any? %>
+                    on
+                  <%=raw(
+                    @conditions.map do |c, vh|
+                    if new_conditions = @conditions.dup.delete_if{ |k,v| k == c }.values.first
+                      new_conditions.merge!(:q => params[:q])
+                    else
+                      new_conditions = {:q => params[:q]}
+                    end
+                    link_to(c, admin_projects_path(new_conditions), :class => 'remove')
+                    end.join(' & ')
+                  )%>
+                <% end %>
+                </h2>
+                <span class="buttons">
+                  <a class="add_project museo_sans shadow_green" href="<%= new_admin_project_path %>">New project</a>
+                  <a class="import_csv museo_sans shadow_black" href="<%= admin_export_projects_path(:format => 'xls') %>">Export projects</a>
+                </span>
+              </div>
+              <div class="projects_list">
+                <% if @projects.any? %>
+                  <table collapse="0">
+                  <tbody>
+                  <% @projects.each do |project| %>
+                    <tr>
+                    <td width="625">
+                      <span>
+                        <h3><a href="<%= edit_admin_project_path(project) %>"><%= project.name %></a><% if current_user.admin? -%> by <a href="<%= edit_admin_organization_path(project.primary_organization) %>"><%= project.primary_organization.name %></a><% end %></h3>
+                        <p class="margin"><a class="project_status <%= project.finished? ? 'closed' : 'active' %>">
+                          <%= project.finished? ? 'Closed' : 'Active' %></a>
+                        <% if project.end_date.present? -%>
+                          <% if project.finished? -%>
+                          <%= project.end_date.strftime("since %b #{project.end_date.day.ordinalize}, %Y") %>
+                      <% else -%>
+                          <%= project.end_date.strftime("until %b #{project.end_date.day.ordinalize}, %Y") %>
+                      <% end -%>
+                      <% end -%>
+                        </p>
+                      </span>
+                    </td>
+                    <td width="150" class="odd center">
+                      <% unless project.sectors.empty? %>
+                        <% if project.sectors.count == 1 %>
+                        <p><%= project.sectors.first.name %></p>
+                    <% else %>
+                        <p><%= truncate(project.sectors.first.name, :length => 19) %></p>
+                      <p class="secondary"><%= "and #{project.sectors.count - 1} more" %></p>
+                    <% end %>
+                    <% else %>
+                        <p>N/A</p>
+                    <% end %>
+                    </td>
+                    <td width="150" class="center">
+                      <p><%= project.countries.first.try(:name) %></p>
+                    </td>
+                  </tr>
+                <% end -%>
+                  </tbody>
+                </table>
+              <% else %>
+                  <% if Project.count>1 %>
+                  <div class="no_results">
+                  <h2>There are not projects for your search</h2>
+                  <p>Try to search with different terms or simply <a href="<%= admin_projects_path %>">browse all projects</a></p>
+                </div>
+              <% else %>
+                  <div class="no_results">
+                  <h2>There are not projects in the site</h2>
+                  <p>Try to <a href="<%= new_admin_project_path %>">add new one</a>.</p>
+                </div>
+              <% end %>
+              <% end %>
+              </div>
+            </div>
+
+            <div class="bottom_grey paginate">
+              <%= will_paginate(@projects) %>
+            </div>
           </div>
-        <% end %>
-      <% end %>
-      </div>
-    </div>
 
-    <div class="bottom_grey paginate">
-      <%= will_paginate(@projects) %>
-    </div>
-  </div>
-
-  <div class="add_new">
-    <a class="museo_sans" href="<%= new_admin_project_path %>">
-      Create new project<br/>
-      <strong>You already have <%= pluralize(@total_projects_count, 'project', 'projects') %> created</strong>
-    </a>
-  </div>
-</div>
-<script src="/javascripts/plugins/jquery.mousewheel.js" type="text/javascript" charset="utf-8"></script>
-<script src="/javascripts/plugins/jquery.jscrollpane.js" type="text/javascript" charset="utf-8"></script>
-<script src="/javascripts/plugins/jquery.stylish-select.js" type="text/javascript" charset="utf-8"></script>
-<script src="/javascripts/backoffice/project.js" type="text/javascript" charset="utf-8"></script>
-<script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>
+          <div class="add_new">
+            <a class="museo_sans" href="<%= new_admin_project_path %>">
+              Create new project<br/>
+              <strong>You already have <%= pluralize(@total_projects_count, 'project', 'projects') %> created</strong>
+            </a>
+          </div>
+        </div>
+        <script src="/javascripts/plugins/jquery.mousewheel.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/javascripts/plugins/jquery.jscrollpane.js" type="text/javascript" charset="utf-8"></script>
+        <!-- <script src="/javascripts/plugins/jquery.stylish-select.js" type="text/javascript" charset="utf-8"></script>-->
+        <script src="/javascripts/backoffice/project.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/javascripts/plugins/chosen/chosen.jquery.js" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript"> $(".chzn-select").chosen(); </script>

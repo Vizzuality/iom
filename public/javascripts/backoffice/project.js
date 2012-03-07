@@ -16,6 +16,9 @@ var sectors_id = 8; // sectors_
 var sectorToAdd = 12; // sectorToAdd_
 $(document).ready(function(ev){
 
+  $('select').change(function(){
+    $(this).closest('form').submit();
+  });
 	    // Field info
     $('div.field_info span.info').click(function(ev){
       ev.stopPropagation();
@@ -52,7 +55,7 @@ $(document).ready(function(ev){
     });
 
     // COUNTRY COMBO
-    $('select#country').sSelect({ddMaxWidth: '134px',ddMaxHeight:'220px',containerClass:'country_index'});
+    // $('select#country').sSelect({ddMaxWidth: '134px',ddMaxHeight:'220px',containerClass:'country_index'});
 
     if ($('div.select_dates').length > 0){
 

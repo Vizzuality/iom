@@ -89,6 +89,7 @@
                  <%= @locations.count == 1 ? 'LOCATION' : 'LOCATIONS' %>
                  </h3>
                  <ul class="locations">
+                   s
                  <% @locations.each do |location| %>
                   <% if @site.navigate_by_country? && location['country_id'].present? %>
                     <li><%= location['name'] %>, <%= Country.find(location['country_id'], :select => 'name').name %></li>

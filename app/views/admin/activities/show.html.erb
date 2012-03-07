@@ -7,35 +7,46 @@
         <div class="content padding">
           <%= form_for(:search, :url => admin_activity_path, :html => {:method => 'get'}) do |form| %>
             <ul class="combos">
-              <li>
+
+              <li class="comboselect">
                 <%= form.label :who, 'NGO USER' %>
-                <%= form.select :who, User.all.map{|u| [u, u.id]}, :include_blank => 'All users' %>
+                <%= form.select :who, User.all.map{|u| [u, u.id]}, {:include_blank => 'All users' }, { :class => :"chzn-select"} %>
               </li>
-              <li>
+              <li class="comboselect">
                 <%= form.label :what_type, 'TYPE' %>
-                <%= form.select :what_type, ModelChangesRecorder.included_in.map{|c| [c.name, c.name]}.uniq, :include_blank => 'All types' %>
+                <%= form.select :what_type, ModelChangesRecorder.included_in.map{|c| [c.name, c.name]}.uniq, {:include_blank => 'All types'}, { :class => :"chzn-select"} %>
               </li>
-              <li>
+
+              <li class="comboselect">
                 <%= form.label :when_start, 'FROM' %>
-                <span class="combo_date"><p></p>
+
+                <% date_start = "" %>
+                <% date_start = params[:search][:when_start].strftime("%m/%d/%Y") unless params[:search].blank? or params[:search][:when_start].blank? %>
+                <span class="combo_date"><p><%= date_start %></p>
                 <div class="select_dates">
                   <p id="month" class="title">MONTH</p>
                   <p id="day" class="title">DAY</p>
                   <p id="year" class="title">YEAR</p>
 
-                  <%= form.date_select :when_start, :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year], :include_blank => true  %>
+                  <%= form.date_select :when_start, { :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year],  :include_blank => true}, { :class => :"chzn-date-select", :"data-placeholder" => ' '}  %>
                 </div>
                 </span>
               </li>
-              <li>
+
+              <li class="comboselect">
                 <%= form.label :when_end, 'TO' %>
-                <span class="combo_date"><p></p>
+
+                <% date_end = "" %>
+                <% date_end = params[:search][:when_end].strftime("%m/%d/%Y") unless params[:search].blank? or params[:search][:when_end].blank? %>
+
+                <span class="combo_date"><p><%= date_end %></p>
                 <div class="select_dates">
                   <p id="month" class="title">MONTH</p>
                   <p id="day" class="title">DAY</p>
                   <p id="year" class="title">YEAR</p>
 
-                  <%= form.date_select :when_end, :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year], :include_blank => true  %>
+                  <%= form.date_select :when_end, { :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year], :include_blank => true}, { :class => :"chzn-date-select", :"data-placeholder" => ' '} %>
+
                 </div>
                 </span>
               </li>
@@ -89,5 +100,12 @@
 <script src="/javascripts/plugins/jquery.mousewheel.js" type="text/javascript" charset="utf-8"></script>
 <script src="/javascripts/plugins/jquery.jscrollpane.js" type="text/javascript" charset="utf-8"></script>
 <script src="/javascripts/plugins/jquery.livequery.min.js" type="text/javascript" charset="utf-8"></script>
-<script src="/javascripts/plugins/jquery.stylish-select.js" type="text/javascript" charset="utf-8"></script>
+<!-- <script src="/javascripts/plugins/jquery.stylish-select.js" type="text/javascript" charset="utf-8"></script>-->
 <script src="/javascripts/backoffice/activity.js" type="text/javascript" charset="utf-8"></script>
+
+
+<script src="/javascripts/plugins/chosen/chosen.jquery.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+$(".chzn-select").chosen();
+$(".chzn-date-select").chosen({widths: { search_when_start_3i_chzn:63, search_when_start_2i_chzn:140, search_when_start_1i_chzn:90, search_when_end_3i_chzn:63, search_when_end_2i_chzn:140, search_when_end_1i_chzn:90 }, hide_search :true});
+</script>
