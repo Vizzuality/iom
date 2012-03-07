@@ -14,7 +14,6 @@ $(document).ready(function(ev){
     var day   =  !isBlank($("#search_when_"+kind+"_3i_chzn span").html());
     var year  =  !isBlank($("#search_when_"+kind+"_1i_chzn span").html());
 
-    console.log(kind, month && day && year);
     return month && day && year;
   }
 
@@ -36,7 +35,6 @@ $(document).ready(function(ev){
 
       $('span.combo_date:not(.open)').removeClass('clicked');
       
-      console.log("Checking " + kind);
 
       if (hasChanged[kind] && allSelected(kind)) {
         $('form').closest('form').submit();
@@ -56,7 +54,6 @@ $(document).ready(function(ev){
       var kind = (id.indexOf("end") != -1) ? "end" : "start";
 
       $('span.combo_date').not(event.target).removeClass('clicked');
-      console.log("Checking - " + kind);
 
       if (hasChanged[kind] && allSelected(kind)) {
         $('form').closest('form').submit();
@@ -83,13 +80,11 @@ $(document).ready(function(ev){
       if (day < 10) day = "0" + day;
 
       var year =  $("#search_when_"+kind+"_1i_chzn span").html();
-
       var date = m + "/" + day + "/" + year;
 
       $(this).parents(".combo_date").find("p:eq(0)").html(date);
     }
 
-    console.log('Setting ' + kind);
     hasChanged[kind] = true;
 
   });
