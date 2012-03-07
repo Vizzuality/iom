@@ -284,7 +284,7 @@
   z-index: 1;
 }
 .chzn-container .chzn-results-scroll span {
-  display: inline-block;
+  display: block;
   height: 17px;
   text-indent: -5000px;
   width: 9px;
