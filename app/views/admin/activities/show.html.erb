@@ -35,7 +35,7 @@
                   <p id="day" class="title">DAY</p>
                   <p id="year" class="title">YEAR</p>
 
-                  <%= form.date_select :when_end, { :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year], :include_blank => true}, { :class => :"chzn-date-select"} %>
+                  <%= form.date_select :when_end, { :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year], :include_blank => true}, { :class => :"chzn-date-select", :"data-placeholder" => ' '} %>
 
                 </div>
                 </span>
@@ -97,5 +97,5 @@
 <script src="/javascripts/plugins/chosen/chosen.jquery.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
 $(".chzn-select").chosen();
-$(".chzn-date-select").chosen({maxWidth:100, hide_search :true});
+$(".chzn-date-select").chosen({widths: { search_when_start_3i_chzn:63, search_when_start_2i_chzn:140, search_when_start_1i_chzn:90, search_when_end_3i_chzn:63, search_when_end_2i_chzn:140, search_when_end_1i_chzn:90 }, hide_search :true});
 </script>

@@ -1,5 +1,7 @@
 $(document).ready(function(ev){
 
+  var hasChanged = false;
+
   $('.chzn-container').click(function(ev){
     ev.stopPropagation();
     ev.preventDefault();
@@ -9,22 +11,40 @@ $(document).ready(function(ev){
   $('span.combo_date').click(function(ev){
     ev.stopPropagation();
     ev.preventDefault();
-    $('span.combo_date').not(this).removeClass('clicked');
+
+    $(this).addClass('open');
+
+    if ($('span.combo_date').hasClass('clicked')) {
+
+      $('span.combo_date:not(.open)').removeClass('clicked');
+
+      if (hasChanged) {
+        $('form').closest('form').submit();
+        hasChanged = false;
+      }
+    }
+
     $(this).toggleClass('clicked');
+    $(this).removeClass('open');
   });
 
   $(document).click(function(event) {
-    $('span.date_container.clicked').not(event.target).removeClass('clicked');
+    if ( $('span.combo_date').hasClass('clicked')) {
+      $('span.combo_date').not(event.target).removeClass('clicked');
+      if (hasChanged) {
+        $('form').closest('form').submit();
+        hasChanged = false;
+      }
+    }
   });
 
-  $('select').change(function(){
+  $(".chzn-select").change(function() {
     $(this).closest('form').submit();
   });
 
- // $('#search_who, #search_what_type').sSelect();
- // $('#search_when_start_1i,#search_when_end_1i').sSelect({ddMaxWidth: '76px',ddMaxHeight:'200px',containerClass:'year'});
- // $('#search_when_start_2i,#search_when_end_2i').sSelect({ddMaxWidth: '131px',ddMaxHeight:'200px',containerClass:'month'});
- // $('#search_when_start_3i,#search_when_end_3i').sSelect({ddMaxWidth: '62px',ddMaxHeight:'200px',containerClass:'day'});
+  $('select').change(function(){
+    hasChanged = true;
+  });
 
   $('.changes_list .change .more a').live('click', function(evt){
     evt.preventDefault();

@@ -300,11 +300,8 @@ Copyright (c) 2011 by Harvest
       this.f_width = this.form_field_jq.outerWidth();
       this.default_text = this.form_field_jq.data('placeholder') ? this.form_field_jq.data('placeholder') : this.default_text_default;
 
-      console.log(this.f_width, dd_width);
-      this.container = $('#' + this.container_id);
-
-      if (this.options.maxWidth)  {
-        this.f_width = this.options.maxWidth;
+      if (this.options.widths)  {
+        this.f_width = this.options.widths[this.container_id];
       } else {
         this.f_width = this.f_width > 170 ? 160 : this.f_width;
         this.f_width = this.f_width <= 90 ? 120 : this.f_width;
