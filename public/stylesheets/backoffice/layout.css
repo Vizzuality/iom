@@ -1306,9 +1306,9 @@ div.block.activity span.combo_date.clicked div.select_dates span.day {float:left
 div.block.activity span.combo_date.clicked div.select_dates span.year {float:left; width:76px; height:51px; margin:10px 0 0 0;}
 
 div.block.activity span.combo_date.clicked div.select_dates p.title {float:left; margin:0 0 0 5px; font:normal 11px Arial; color:#606851; text-transform:uppercase; width:auto;}
-div.block.activity span.combo_date.clicked div.select_dates p.title#month {float:left; margin:12px 10px 0 0px; width:135px;}
-div.block.activity span.combo_date.clicked div.select_dates p.title#day {float:left; margin:12px 10px 0 0; width:53px;}
-div.block.activity span.combo_date.clicked div.select_dates p.title#year {float:left; margin:12px 10px 0 0; width:100px;}
+div.block.activity span.combo_date.clicked div.select_dates p.title#month {float:left; margin:12px 10px 3px 0px; width:135px;}
+div.block.activity span.combo_date.clicked div.select_dates p.title#day {float:left; margin:12px 10px 3px 0; width:53px;}
+div.block.activity span.combo_date.clicked div.select_dates p.title#year {float:left; margin:12px 10px 3px 0; width:100px;}
 div.block.activity span.combo_date.clicked div.select_dates a {font:normal 13px Arial; color:#333333;}
 div.block.activity span.combo_date.clicked div.select_dates a:hover {cursor:pointer;}
 div.block.activity span.combo_date.clicked div.select_dates a.month_combo {float:left; margin:2px 0 0 0; background:url('/images/backoffice/projects/date/month_combo.png') no-repeat 0 0; width:123px; height:23px; padding:9px 0 0 10px;}
