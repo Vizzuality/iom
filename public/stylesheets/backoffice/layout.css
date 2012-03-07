@@ -61,7 +61,7 @@ div.main_layout div.block div.med {float:left; width:880px; padding:16px 31px 28
 /*ngo dashboard*/
 div.med div.header {width:100%; overflow:hidden; padding:0 0 20px 0; border-bottom:1px solid #CCCCCC;}
 div.med div.header.no_border {border-bottom:0; padding:0;}
-div.med div.header h2 {width:auto;}
+div.med div.header h2 {width:580px;}
 div.med div.header h2 a {color:#EB3F40;}
 div.med div.header h2 a:hover {text-decoration:underline;}
 div.med div.header span {float:right; width:273px; height:auto;}
@@ -509,6 +509,8 @@ div.long_search div.content.padding {padding:25px 30px 25px!important;}
 div.long_search span.bottom {float:left; width:942px; height:13px; background:url('/images/backoffice/backgrounds/bottom_white_long.png') no-repeat 0 0;}
 div.long_search ul.combos {float:left; width:680px; height:60px; margin:20px 0 0 0;}
 div.long_search ul.combos li.comboselect {float:left; width:170px; height:100%;}
+div.long_search ul.combos li.comboselect.status {width:130px;}
+
 div.long_search ul.combos li.comboselect span.combo {float:left; margin:6px 0 0 0; background:url('/images/backoffice/projects/single_combo_head.png') no-repeat 0 0; font:normal 13px Arial; color:#333333; text-decoration:none; width:134px; height:24px; padding:8px 0 0 11px; position:relative;}
 div.long_search ul.combos li.comboselect span.combo:focus {outline:none;}
 div.long_search ul.combos li.comboselect span.combo p {width:130px;}
@@ -532,7 +534,7 @@ width: 104px;
 margin-bottom: 10px;
 }
 
-div.long_search ul.combos li.comboselect .chzn-container-single .chzn-single { line-height:25px!important;}
+div.long_search ul.combos li.comboselect .chzn-container-single .chzn-single { line-height:30px!important;}
 
 div.long_search .chzn-container .chzn-results li  {color:#333;}
 div.long_search .chzn-container .chzn-results li.active-result:hover { color:#fff;}
@@ -542,7 +544,7 @@ div.long_search #status_chzn .chzn-search { display:none;}
 
 div.long_search label {float:left; margin:0 0 0 3px; font:bold 11px Arial; color:#999999;}
 div.long_search form.search {float:left; position:relative; width:100%;}
-div.long_search input[type="text"].main_search {float:left; width:832px; height:29px; margin:5px 0 0 0; padding:5px 36px 5px 8px; font:normal 17px Arial; color:#CCCCCC; border:none; background:url('/images/backoffice/projects/long_search.png') no-repeat 0 0; line-height:27px;}
+div.long_search input[type="text"].main_search {float:left; width:832px; height:29px; margin:5px 0 0 0; padding:7px 36px 5px 10px; font:normal 17px Arial; color:#333; border:none; background:url('/images/backoffice/projects/long_search.png') no-repeat 0 0; line-height:27px;}
 div.long_search input[type="submit"] {position:absolute; width:15px; height:15px; right:20px; top:31px; background:url('/images/backoffice/donors/lens.jpg') no-repeat 0 0; border:none;}
 div.long_search input[type="submit"]:hover {background-position:0 -15px; cursor:pointer;}
 

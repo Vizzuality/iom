@@ -17,7 +17,10 @@
               </li>
               <li class="comboselect">
                 <%= form.label :when_start, 'FROM' %>
-                <span class="combo_date"><p></p>
+
+                <% date_start = "" %>
+                <% date_start = params[:search][:when_start].strftime("%m/%d/%Y") unless params[:search].blank? or params[:search][:when_start].blank? %>
+                <span class="combo_date"><p><%= date_start %></p>
                 <div class="select_dates">
                   <p id="month" class="title">MONTH</p>
                   <p id="day" class="title">DAY</p>
@@ -29,7 +32,11 @@
               </li>
               <li class="comboselect">
                 <%= form.label :when_end, 'TO' %>
-                <span class="combo_date"><p></p>
+
+                <% date_end = "" %>
+                <% date_end = params[:search][:when_end].strftime("%m/%d/%Y") unless params[:search].blank? or params[:search][:when_end].blank? %>
+
+                <span class="combo_date"><p><%= date_end %></p>
                 <div class="select_dates">
                   <p id="month" class="title">MONTH</p>
                   <p id="day" class="title">DAY</p>

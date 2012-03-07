@@ -5,10 +5,10 @@
       <div class="content padding">
         <%= form_tag(admin_projects_path, :method => :get, :class => :search) do %>
           <label>SEARCH BY TEXT</label>
-        <input type="text" value="" placeholder = "Search projects by name, place,..." name="q" class="main_search"/>
+          <input type="text" value="<%= params[:q] %>" placeholder = "Search projects by name, place,..." name="q" class="main_search"/>
         <input type="submit" value="" />
         <ul class="combos">
-          <li class="comboselect">
+          <li class="comboselect status">
           <label>STATUS</label>
           <%= select_tag :status,
             options_for_select([['All status', 0], ['Active', 'active'], ['Closed', 'closed']], params[:status]), :class => :"chzn-select" %>
@@ -31,7 +31,7 @@
                 <label>SITE</label>
 
                 <%= select_tag :site,
-                  options_for_select([['All sectors',0]] + Site.get_select_values.collect { |c| [c.name.capitalize.strip, c.id] }, params[:site]), :class => :"chzn-select" %>
+                  options_for_select([['All sites',0]] + Site.get_select_values.collect { |c| [c.name.capitalize.strip, c.id] }, params[:site]), :class => :"chzn-select" %>
 
                   </li>
                 </ul>
@@ -140,6 +140,4 @@
         <script src="/javascripts/backoffice/project.js" type="text/javascript" charset="utf-8"></script>
         <script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>
         <script src="/javascripts/plugins/chosen/chosen.jquery.js" type="text/javascript" charset="utf-8"></script>
-        <script type="text/javascript">
-$(".chzn-select").chosen();
-        </script>
+        <script type="text/javascript"> $(".chzn-select").chosen(); </script>
