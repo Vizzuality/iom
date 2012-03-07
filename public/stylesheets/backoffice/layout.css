@@ -535,19 +535,15 @@ margin-bottom: 10px;
 }
 
 div.long_search ul.combos li.comboselect .chzn-container-single .chzn-single { line-height:30px!important;}
-
 div.long_search .chzn-container .chzn-results li  {color:#333;}
 div.long_search .chzn-container .chzn-results li.active-result:hover { color:#fff;}
-
 div.long_search #status_chzn .chzn-search { display:none;}
-
 
 div.long_search label {float:left; margin:0 0 0 3px; font:bold 11px Arial; color:#999999;}
 div.long_search form.search {float:left; position:relative; width:100%;}
 div.long_search input[type="text"].main_search {float:left; width:832px; height:29px; margin:5px 0 0 0; padding:7px 36px 5px 10px; font:normal 17px Arial; color:#333; border:none; background:url('/images/backoffice/projects/long_search.png') no-repeat 0 0; line-height:27px;}
 div.long_search input[type="submit"] {position:absolute; width:15px; height:15px; right:20px; top:31px; background:url('/images/backoffice/donors/lens.jpg') no-repeat 0 0; border:none;}
 div.long_search input[type="submit"]:hover {background-position:0 -15px; cursor:pointer;}
-
 
 div.one_project {float:left; width:288px; height:140px; margin:20px 0 0 0; padding:0;}
 div.one_project span.top {float:left; width:288px; height:8px; background:url('/images/backoffice/backgrounds/one_box_top.png') no-repeat 0 0;}
@@ -1310,7 +1306,7 @@ div.block.activity span.combo_date.clicked div.select_dates span.day {float:left
 div.block.activity span.combo_date.clicked div.select_dates span.year {float:left; width:76px; height:51px; margin:10px 0 0 0;}
 
 div.block.activity span.combo_date.clicked div.select_dates p.title {float:left; margin:0 0 0 5px; font:normal 11px Arial; color:#606851; text-transform:uppercase; width:auto;}
-div.block.activity span.combo_date.clicked div.select_dates p.title#month {float:left; margin:12px 10px 0 0px; width:140px;}
+div.block.activity span.combo_date.clicked div.select_dates p.title#month {float:left; margin:12px 10px 0 0px; width:135px;}
 div.block.activity span.combo_date.clicked div.select_dates p.title#day {float:left; margin:12px 10px 0 0; width:53px;}
 div.block.activity span.combo_date.clicked div.select_dates p.title#year {float:left; margin:12px 10px 0 0; width:100px;}
 div.block.activity span.combo_date.clicked div.select_dates a {font:normal 13px Arial; color:#333333;}
