@@ -1,5 +1,11 @@
 $(document).ready(function(ev){
 
+  $('.chzn-container').click(function(ev){
+    ev.stopPropagation();
+    ev.preventDefault();
+
+  });
+
   $('span.combo_date').click(function(ev){
     ev.stopPropagation();
     ev.preventDefault();

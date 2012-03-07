@@ -16,7 +16,6 @@
                 <%= form.select :what_type, ModelChangesRecorder.included_in.map{|c| [c.name, c.name]}.uniq, {:include_blank => 'All types'}, { :class => :"chzn-select"} %>
               </li>
               <li class="comboselect">
-                <%= form.label :what_type, 'TYPE' %>
                 <%= form.label :when_start, 'FROM' %>
                 <span class="combo_date"><p></p>
                 <div class="select_dates">
@@ -24,7 +23,7 @@
                   <p id="day" class="title">DAY</p>
                   <p id="year" class="title">YEAR</p>
 
-                  <%= form.date_select :when_start, { :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year],  :include_blank => true}, { :class => :"chzn-select"}  %>
+                  <%= form.date_select :when_start, { :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year],  :include_blank => true}, { :class => :"chzn-date-select", :"data-placeholder" => ' '}  %>
                 </div>
                 </span>
               </li>
@@ -36,7 +35,8 @@
                   <p id="day" class="title">DAY</p>
                   <p id="year" class="title">YEAR</p>
 
-                  <%= form.date_select :when_end, { :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year], :include_blank => true}, { :class => :"chzn-select"} %>
+                  <%= form.date_select :when_end, { :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year], :include_blank => true}, { :class => :"chzn-date-select"} %>
+
                 </div>
                 </span>
               </li>
@@ -97,4 +97,5 @@
 <script src="/javascripts/plugins/chosen/chosen.jquery.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
 $(".chzn-select").chosen();
+$(".chzn-date-select").chosen({maxWidth:100, hide_search :true});
 </script>

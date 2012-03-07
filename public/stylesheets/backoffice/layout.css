@@ -535,7 +535,7 @@ margin-bottom: 10px;
 div.long_search .chzn-container .chzn-results li  {color:#333;}
 div.long_search .chzn-container .chzn-results li.active-result:hover { color:#fff;}
 
-div.long_search #status_input_chzn .chzn-search { display:none;}
+div.long_search #status_chzn .chzn-search { display:none;}
 
 
 div.long_search label {float:left; margin:0 0 0 3px; font:bold 11px Arial; color:#999999;}
@@ -1294,7 +1294,7 @@ div.jHtmlArea .ToolBar ul li a.decreasefontsize { background-position: -64px -32
 div.jHtmlArea .ToolBar ul li a.forecolor { background-position: -80px -32px;}
 
 /* Activity Tab */
-div.block.activity span.combo_date {float:left; background:url('/images/backoffice/projects/date/bkg_calendar.png') no-repeat 0 0; width:121px; height:24px; font:normal 15px Arial; color:#333333; margin:5px 0 0 0; padding:8px 0 0 8px; position:relative;}
+div.block.activity span.combo_date {float:left; background:url('/images/backoffice/projects/date/bkg_calendar.png') no-repeat 0 0; width:121px; height:24px; font:normal 15px Arial; color:#333333; margin:0px 0 0 0; padding:8px 0 0 8px; position:relative;}
 div.block.activity span.combo_date:hover {cursor:pointer;}
 div.block.activity span.combo_date div.select_dates {display:none;}
 div.block.activity span.combo_date.clicked {background:url('/images/backoffice/projects/date/bkg_header_clicked_date.png') no-repeat 0 0;}

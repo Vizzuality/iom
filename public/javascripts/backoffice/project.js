@@ -16,6 +16,9 @@ var sectors_id = 8; // sectors_
 var sectorToAdd = 12; // sectorToAdd_
 $(document).ready(function(ev){
 
+  $('select').change(function(){
+    $(this).closest('form').submit();
+  });
 	    // Field info
     $('div.field_info span.info').click(function(ev){
       ev.stopPropagation();
