@@ -24,7 +24,7 @@
               <label>SECTOR</label>
 
               <%= select_tag :sector,
-                options_for_select([['Any sector',0]] + Sector.get_select_values.collect { |c| [c.name, c.id] }, params[:sector]), :class => :"chzn-select" %>
+                options_for_select([['Any sector',0]] + Sector.get_select_values.collect { |c| [c.name, c.id] }, params[:sector]), :class => :"chzn-sectors-select" %>
                 </li>
 
                 <li class="comboselect">
@@ -142,5 +142,6 @@
         <script src="/javascripts/plugins/chosen/chosen.jquery.js" type="text/javascript" charset="utf-8"></script>
         <script type="text/javascript"> 
 $(".chzn-select").chosen(); 
+$(".chzn-sectors-select").chosen({hide_search:true}); 
 $(".chzn-sites-select").chosen({hide_search:true}); 
         </script>
