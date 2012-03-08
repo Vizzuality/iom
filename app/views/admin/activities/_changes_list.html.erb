@@ -9,7 +9,7 @@
         </div>
 
         <div class="title_by">
-          <p class="title"><%= t('.header.changes_count_html', :count => change.changes_count, :what => link_to(change.what_name, url_for(change.what))) %></p>
+          <p class="title"><%= t('.header.changes_count_html', :count => change.changes_count, :what => link_to(change.what_name, edit_admin_project_path(change.what))) %></p>
           <p class="by"><%= t('.header.by_html', :user => change.who_email, :organization => link_to(change.who_organization_name, url_for_user_organization(change.who_organization))) %></p>
         </div>
 
