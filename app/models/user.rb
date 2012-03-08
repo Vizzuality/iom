@@ -70,6 +70,10 @@ class User < ActiveRecord::Base
     "#{[email, (organization.name rescue 'InterAction')].compact.join(' - ') }"
   end
 
+  def organization_name
+    (organization.name rescue 'InterAction')
+  end
+
   def set_role
     self.role = 'organization' if self.id != 1
   end

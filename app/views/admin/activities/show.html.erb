@@ -10,11 +10,11 @@
 
               <li class="comboselect">
                 <%= form.label :who, 'NGO USER' %>
-                <%= form.select :who, User.all.map{|u| [u, u.id]}, {:include_blank => 'All users' }, { :class => :"chzn-select"} %>
+                <%= form.select :who, User.all.map{|u| [u.organization_name, u.id]}, {:include_blank => 'All users' }, { :class => :"chzn-users-select"} %>
               </li>
               <li class="comboselect">
                 <%= form.label :what_type, 'TYPE' %>
-                <%= form.select :what_type, ModelChangesRecorder.included_in.map{|c| [c.name, c.name]}.uniq, {:include_blank => 'All types'}, { :class => :"chzn-select"} %>
+                <%= form.select :what_type, ModelChangesRecorder.included_in.map{|c| [c.name, c.name]}.uniq, {:include_blank => 'All types'}, { :class => :"chzn-types-select"} %>
               </li>
 
               <li class="comboselect date">
@@ -106,6 +106,7 @@
 
 <script src="/javascripts/plugins/chosen/chosen.jquery.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
-$(".chzn-select").chosen();
+$(".chzn-users-select").chosen();
+$(".chzn-types-select").chosen({hide_search :true});
 $(".chzn-date-select").chosen({widths: { search_when_start_3i_chzn:63, search_when_start_2i_chzn:140, search_when_start_1i_chzn:90, search_when_end_3i_chzn:63, search_when_end_2i_chzn:140, search_when_end_1i_chzn:90 }, hide_search :true});
 </script>

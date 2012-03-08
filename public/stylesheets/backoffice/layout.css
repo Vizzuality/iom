@@ -506,10 +506,11 @@ div.long_search {float:left; width:937px; height:auto; margin:20px 10px 0 0; }
 div.long_search span.top {float:left; width:942px; height:9px; background:url('/images/backoffice/backgrounds/top_long.png') no-repeat 0 0;}
 div.long_search div.content {float:left; width:882px; height:auto; background:url('/images/backoffice/backgrounds/mid_long.png') repeat-y 0; padding:15px 30px 10px;}
 div.long_search div.content.padding {padding:25px 30px 25px!important;}
+div.activity .long_search div.content.padding {padding:13px 30px 25px!important;}
 div.long_search span.bottom {float:left; width:942px; height:13px; background:url('/images/backoffice/backgrounds/bottom_white_long.png') no-repeat 0 0;}
-div.long_search ul.combos {float:left; width:680px; height:60px; margin:20px 0 0 0;}
-div.long_search ul.combos li.comboselect {float:left; width:170px; height:100%;}
-div.long_search ul.combos li.comboselect.status {width:170px;}
+div.long_search ul.combos {float:left; width:800px; height:60px; margin:20px 0 0 0;}
+div.long_search ul.combos li.comboselect {float:left; width:190px; height:100%;}
+div.long_search ul.combos li.comboselect.status {width:190px;}
 div.long_search ul.combos li.comboselect.date {width:140px;}
 div.long_search ul.combos li.comboselect.date .chzn-container-single .chzn-single span { display:inline-block; }
 
