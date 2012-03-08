@@ -1413,7 +1413,7 @@ div.med div.changes_list div.change .summary .more .arrow {
   top: 50%;
   left: 50%;
   margin-top: -3px;
-  margin-left: -4px;
+  margin-left: 1px;
   background: url('/images/backoffice/activity/arrow_down.png') no-repeat 0 0;
 }
 
