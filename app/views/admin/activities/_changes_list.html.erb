@@ -45,7 +45,13 @@
 
 <% else %>
   <div class="no_results">
-    <h2>There is no activity for this project yet</h2>
+    <% if @project -%>
+      <h2>There is no activity for this project yet</h2>
+    <% elsif @organization -%>
+      <h2>There is no activity for this NGO yet</h2>
+    <% else -%>
+      <h2>There is no activity yet</h2>
+    <% end -%>
     <p>Try to search with different terms or simply <a href="<%= admin_activity_path %>">browse all activity</a></p>
   </div>
 <% end %>

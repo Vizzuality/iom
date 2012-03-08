@@ -21,8 +21,12 @@ class Admin::ActivitiesController < Admin::AdminController
 
   def get_changes
     @changes = ChangesHistoryRecord.search(@search)
-    @project = Project.find(params[:project_id]) if params[:project_id].present?
-    @changes = @project.changes_history_records if @project
+
+    @project      = Project.find(params[:project_id])           if params[:project_id].present?
+    @organization = Organization.find(params[:organization_id]) if params[:organization_id].present?
+
+    @changes = @project.changes_history_records                     if @project
+    @changes = ChangesHistoryRecord.from_organization(@organization) if @organization
   end
   private :get_changes
 

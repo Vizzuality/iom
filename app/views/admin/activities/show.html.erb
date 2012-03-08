@@ -58,7 +58,7 @@
     </div>
   <% end -%>
 
-  <div class="block <%= 'project_info' if @project.present? %>">
+  <div class="block <%= 'project_info' if @project.present? || @organization.present? %>">
     <div class="top"></div>
     <div class="med">
 
@@ -86,6 +86,10 @@
       <% if @project.present? %>
         <div class="right menu">
             <%= render 'admin/projects/sidebar' %>
+        </div>
+      <% elsif @organization.present? -%>
+        <div class="right menu">
+            <%= render 'admin/organizations/sidebar' %>
         </div>
       <% end %>
     </div>

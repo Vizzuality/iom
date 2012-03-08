@@ -2,6 +2,10 @@ class ChangesHistoryRecord < ActiveRecord::Base
   belongs_to :who, :class_name => 'User', :foreign_key => :user_id
   belongs_to :what, :polymorphic => true
 
+  def self.from_organization(organization)
+    joins(:who).where(:'users.organization_id' => organization.id)
+  end
+
   def self.search(search_params)
     query = scoped
     query = query.where(:user_id => search_params.who)                                 if search_params.who.present?
