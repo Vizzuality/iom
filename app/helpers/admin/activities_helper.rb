@@ -12,7 +12,7 @@ module Admin::ActivitiesHelper
         html << content_tag(:div, :class => 'from') do
           raw [
             content_tag(:p, key, :class => 'label'),
-            content_tag(:p, value, :class => 'value')
+            content_tag(:p, extract(value), :class => 'value')
           ].join
         end
       end
@@ -20,13 +20,13 @@ module Admin::ActivitiesHelper
       html << content_tag(:div, :class => 'from') do
         raw [
           content_tag(:p, 'from', :class => 'label'),
-          content_tag(:p, values.first, :class => 'value')
+          content_tag(:p, extract(values.first), :class => 'value')
         ].join
       end
       html << content_tag(:div, :class => 'to') do
         raw [
           content_tag(:p, 'to', :class => 'label'),
-          content_tag(:p, values.last, :class => 'value')
+          content_tag(:p, extract(values.last), :class => 'value')
         ].join
       end
     end
@@ -34,4 +34,12 @@ module Admin::ActivitiesHelper
     raw html
   end
 
+  def extract(value)
+    case value
+    when Hash
+      "#{value['geometries'][0]['y']}, #{value['geometries'][0]['x']}" rescue ''
+    else
+      value
+    end
+  end
 end
