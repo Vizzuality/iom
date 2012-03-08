@@ -1,6 +1,6 @@
 <div class="main_layout">
 
-  <% if @project.blank? -%>
+  <% if @project.blank? && @organization.blank? -%>
     <div class="block activity">
       <div class="long_search">
         <span class="top"></span>
@@ -64,17 +64,21 @@
 
       <div class="left">
         <div class="header no_border">
-          <% if @project.blank? -%>
+          <% if @project.blank? && @organization.blank? -%>
             <% if @changes.present? -%>
             <h2 class="museo_sans"> All activity</h2>
             <% else -%>
             <h2 class="museo_sans"> 0 changes</h2>
             <% end -%>
           <% else -%>
-            <h2 class="museo_sans"><%= @project.name %></h2>
-            <p class="by">by <%= link_to(@project.primary_organization.name, edit_admin_organization_path(@project.primary_organization)) %> /
-              <%= @project.countries.first.name if @project.countries.any? %>
-            </p>
+            <% if @project.present? -%>
+              <h2 class="museo_sans"><%= @project.name %></h2>
+              <p class="by">by <%= link_to(@project.primary_organization.name, edit_admin_organization_path(@project.primary_organization)) %> /
+                <%= @project.countries.first.name if @project.countries.any? %>
+              </p>
+            <% elsif @organization.present? -%>
+              <h2 class="museo_sans"><%= @organization.name %></h2>
+            <% end -%>
           <% end -%>
         </div>
         <div class="changes_list">

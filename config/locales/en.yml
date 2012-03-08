@@ -9,8 +9,12 @@ en:
     activities:
       changes_list:
         header:
-          changes_count_html:
+          changes_count_all_html:
             zero: 'No change on %{what}'
             one: '1 change on %{what}'
             other: '%{count} changes on %{what}'
+          changes_count_html:
+            zero: 'No change'
+            one: '1 change'
+            other: '%{count} changes'
           by_html: 'by %{user}, from %{organization}'
