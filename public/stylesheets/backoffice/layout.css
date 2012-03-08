@@ -1380,6 +1380,9 @@ div.med div.changes_list div.change .summary .title_by .title{
 div.med div.changes_list div.change .summary .title_by .title a{
   color: #E93E3F;
 }
+div.med div.changes_list div.change .summary .title_by .title a:hover{
+  text-decoration: underline;
+}
 
 div.med div.changes_list div.change .summary .title_by .by{
   font-size: 13px;
