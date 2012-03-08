@@ -62,7 +62,7 @@ $(document).ready(function(ev){
     }
   });
 
-  $(".chzn-select").change(function() {
+  $(".chzn-select, .chzn-users-select, .chzn-types-select").change(function() {
      $(this).closest('form').submit();
   });
 
