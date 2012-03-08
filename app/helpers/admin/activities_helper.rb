@@ -8,11 +8,11 @@ module Admin::ActivitiesHelper
     html = []
     case values.first
     when Array
-      values.first.each do |key, value|
+      values.first.flatten.each do |hash|
         html << content_tag(:div, :class => 'from') do
           raw [
-            content_tag(:p, key, :class => 'label'),
-            content_tag(:p, extract(value), :class => 'value')
+            content_tag(:p, hash.keys.first, :class => 'label'),
+            content_tag(:p, extract(hash.values.first), :class => 'value')
           ].join
         end
       end
@@ -37,7 +37,9 @@ module Admin::ActivitiesHelper
   def extract(value)
     case value
     when Hash
-      "#{value['geometries'][0]['y']}, #{value['geometries'][0]['x']}" rescue ''
+      return "#{value['geometries'][0]['y']}, #{value['geometries'][0]['x']}" if value.has_key?('geometries')
+      return value['deleted'] if value.has_key?('deleted')
+      return value['new'] if value.has_key?('new')
     else
       value
     end

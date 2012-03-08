@@ -54,9 +54,15 @@ module ModelChangesRecorder
         old.is_a?(Array)
       end]
 
+      associations_changes = associations_changes.each do |k,v|
+        deletes = v.first.flatten.select{|o| o[:deleted].present?}.map(&:values).flatten
+        news = v.first.flatten.select{|o| o[:new].present?}.map(&:values).flatten
+        v.first.first.reject!{|hash| deletes.include?(hash.values.first) && news.include?(hash.values.first)}
+      end.reject{|k,v| v.first.first.flatten.blank?}
+
       fields_changes = changes.reject do |field, values|
         old, new = *values
-        new.is_a?(String) && old.presence.try(:strip) == new.presence.try(:strip)
+        old.is_a?(Array) || new.is_a?(String) && old.presence.try(:strip) == new.presence.try(:strip)
       end
 
       associations_changes.merge(fields_changes)
