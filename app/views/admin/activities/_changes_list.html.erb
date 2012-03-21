@@ -4,7 +4,7 @@
       <div class="border_top"></div>
       <div class="summary">
         <div class="date_time">
-          <p class="date"><%= l change.when.to_date %></p>
+          <p class="date"><%= l change.when.to_date, :format => '%m/%d/%Y' %></p>
           <p class="time"><%= l change.when.to_time, :format => :hour_and_minutes %></p>
         </div>
 
