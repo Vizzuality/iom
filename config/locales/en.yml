@@ -2,4 +2,19 @@
 # See http://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  time:
+    formats:
+      hour_and_minutes: '%H:%M'
+  admin:
+    activities:
+      changes_list:
+        header:
+          changes_count_all_html:
+            zero: 'No change on %{what}'
+            one: '1 change on %{what}'
+            other: '%{count} changes on %{what}'
+          changes_count_html:
+            zero: 'No change'
+            one: '1 change'
+            other: '%{count} changes'
+          by_html: 'by %{user}, from %{organization}'

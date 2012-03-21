@@ -1,10 +1,12 @@
 class ApplicationController < ActionController::Base
   class BrowserIsIE6OrLower < Exception; end;
 
-  rescue_from ActiveRecord::RecordNotFound,   :with => :render_404
-  rescue_from ActionController::RoutingError, :with => :render_404
-  rescue_from Iom::InvalidOffset,             :with => :render_404
-  rescue_from BrowserIsIE6OrLower,            :with => :old_browser
+  unless Rails.application.config.consider_all_requests_local
+    rescue_from ActiveRecord::RecordNotFound,   :with => :render_404
+    rescue_from ActionController::RoutingError, :with => :render_404
+    rescue_from Iom::InvalidOffset,             :with => :render_404
+    rescue_from BrowserIsIE6OrLower,            :with => :old_browser
+  end
 
   before_filter :set_site, :browser_is_ie6_or_lower?
 

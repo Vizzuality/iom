@@ -57,6 +57,7 @@ class Admin::OrganizationsController < ApplicationController
       @organization.attributes = params[:organization]
       @organization.user.blocked = params[:organization][:user_attributes][:blocked] if @organization.user && params[:organization][:user_attributes] && params[:organization][:user_attributes][:blocked]
     end
+    @organization.updated_by = current_user
     if @organization.save
       if params[:site_id]
         redirect_to organization_site_specific_information_admin_organization_path(@organization, @site), :flash => {:success => 'Organization has been updated successfully'}

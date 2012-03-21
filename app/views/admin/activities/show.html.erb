@@ -1,0 +1,120 @@
+<div class="main_layout">
+
+  <% if @project.blank? && @organization.blank? -%>
+    <div class="block activity">
+      <div class="long_search">
+        <span class="top"></span>
+        <div class="content padding">
+          <%= form_for(:search, :url => admin_activity_path, :html => {:method => 'get'}) do |form| %>
+            <ul class="combos">
+
+              <li class="comboselect">
+                <%= form.label :who, 'NGO USER' %>
+                <%= form.select :who, User.all.map{|u| [u.organization_name, u.id]}, {:include_blank => 'All users' }, { :class => :"chzn-users-select"} %>
+              </li>
+              <li class="comboselect">
+                <%= form.label :what_type, 'TYPE' %>
+                <%= form.select :what_type, ModelChangesRecorder.included_in.map{|c| [c.name, c.name]}.uniq, {:include_blank => 'All types'}, { :class => :"chzn-types-select"} %>
+              </li>
+
+              <li class="comboselect date">
+                <%= form.label :when_start, 'FROM' %>
+
+                <% date_start = "" %>
+                <% date_start = params[:search][:when_start].strftime("%m/%d/%Y") unless params[:search].blank? or params[:search][:when_start].blank? %>
+                <span class="combo_date"><p><%= date_start %></p>
+                <div class="select_dates">
+                  <p id="month" class="title">MONTH</p>
+                  <p id="day" class="title">DAY</p>
+                  <p id="year" class="title">YEAR</p>
+
+                  <%= form.date_select :when_start, { :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year],  :include_blank => true}, { :class => :"chzn-date-select", :"data-placeholder" => ' '}  %>
+                </div>
+                </span>
+              </li>
+
+              <li class="comboselect date">
+                <%= form.label :when_end, 'TO' %>
+
+                <% date_end = "" %>
+                <% date_end = params[:search][:when_end].strftime("%m/%d/%Y") unless params[:search].blank? or params[:search][:when_end].blank? %>
+
+                <span class="combo_date"><p><%= date_end %></p>
+                <div class="select_dates">
+                  <p id="month" class="title">MONTH</p>
+                  <p id="day" class="title">DAY</p>
+                  <p id="year" class="title">YEAR</p>
+
+                  <%= form.date_select :when_end, { :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year], :include_blank => true}, { :class => :"chzn-date-select", :"data-placeholder" => ' '} %>
+
+                </div>
+                </span>
+              </li>
+            </ul>
+          <% end %>
+        </div>
+        <span class="bottom"></span>
+      </div>
+    </div>
+  <% end -%>
+
+  <div class="block <%= 'project_info' if @project.present? || @organization.present? %>">
+    <div class="top"></div>
+    <div class="med">
+
+      <div class="left">
+        <div class="header no_border">
+          <% if @project.blank? && @organization.blank? -%>
+            <% if @changes.present? -%>
+            <h2 class="museo_sans"> All activity</h2>
+            <% else -%>
+            <h2 class="museo_sans"> 0 changes</h2>
+            <% end -%>
+          <% else -%>
+            <% if @project.present? -%>
+              <h2 class="museo_sans"><%= @project.name %></h2>
+              <p class="by">by <%= link_to(@project.primary_organization.name, edit_admin_organization_path(@project.primary_organization)) %> /
+                <%= @project.countries.first.name if @project.countries.any? %>
+              </p>
+            <% elsif @organization.present? -%>
+              <h2 class="museo_sans"><%= @organization.name %></h2>
+            <% end -%>
+          <% end -%>
+        </div>
+        <div class="changes_list">
+          <%= render 'changes_list', :changes => @changes %>
+        </div>
+
+      </div>
+
+      <% if @project.present? %>
+        <div class="right menu">
+            <%= render 'admin/projects/sidebar' %>
+        </div>
+      <% elsif @organization.present? -%>
+        <div class="right menu">
+            <%= render 'admin/organizations/sidebar' %>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="bottom_grey paginate">
+      <%= will_paginate(@changes) %>
+    </div>
+
+  </div>
+
+</div>
+<script src="/javascripts/plugins/jquery.mousewheel.js" type="text/javascript" charset="utf-8"></script>
+<script src="/javascripts/plugins/jquery.jscrollpane.js" type="text/javascript" charset="utf-8"></script>
+<script src="/javascripts/plugins/jquery.livequery.min.js" type="text/javascript" charset="utf-8"></script>
+<!-- <script src="/javascripts/plugins/jquery.stylish-select.js" type="text/javascript" charset="utf-8"></script>-->
+<script src="/javascripts/backoffice/activity.js" type="text/javascript" charset="utf-8"></script>
+
+
+<script src="/javascripts/plugins/chosen/chosen.jquery.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+$(".chzn-users-select").chosen();
+$(".chzn-types-select").chosen({hide_search :true});
+$(".chzn-date-select").chosen({widths: { search_when_start_3i_chzn:63, search_when_start_2i_chzn:140, search_when_start_1i_chzn:90, search_when_end_3i_chzn:63, search_when_end_2i_chzn:140, search_when_end_1i_chzn:90 }, hide_search :true});
+</script>

@@ -102,7 +102,8 @@ class Admin::ProjectsController < Admin::AdminController
   def update
     @project = find_project(params[:id])
     @project.attributes = params[:project]
-    @project.save_history(current_user)
+    @project.updated_by = current_user
+
     if @project.save
       redirect_to edit_admin_project_path(@project), :flash => {:success => 'Project has been updated successfully'}
     else

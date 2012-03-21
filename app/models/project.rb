@@ -36,6 +36,7 @@
 #
 
 class Project < ActiveRecord::Base
+  include ModelChangesRecorder
 
   belongs_to :primary_organization, :foreign_key => :primary_organization_id, :class_name => 'Organization'
   has_and_belongs_to_many :clusters
@@ -673,14 +674,6 @@ SQL
 
       end
     end
-  end
-
-  def save_history(user)
-    ChangesHistory.create!(
-      :user => user,
-      :when => DateTime.now,
-      :what => self.to_json
-    )
   end
 
   def remove_cached_sites

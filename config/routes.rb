@@ -59,6 +59,7 @@ Iom::Application.routes.draw do
       resources :resources, :only => [:index, :create, :destroy, :update]
       get 'specific_information/:site_id', :on => :member, :action => 'specific_information', :as => 'organization_site_specific_information'
       put 'destroy_logo', :on => :member
+      resource :activity
     end
     resources :donors do
       resources :media_resources, :only => [:index, :create, :update, :destroy]
@@ -72,6 +73,7 @@ Iom::Application.routes.draw do
       resources :resources, :only => [:index, :create, :destroy, :update]
       get 'donations', :on => :member
       resources :donations, :only => [:create, :destroy]
+      resource :activity
     end
     resources :sites do
       get 'customization', :on => :member
@@ -84,6 +86,7 @@ Iom::Application.routes.draw do
       resources :resources, :only => [:index, :create, :destroy, :update]
       resources :pages
     end
+    resource :activity
   end
 
 end

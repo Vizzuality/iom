@@ -1,0 +1,63 @@
+<% if changes.present? %>
+  <% changes.each do |change| %>
+    <div class="change">
+      <div class="border_top"></div>
+      <div class="summary">
+        <div class="date_time">
+          <p class="date"><%= l change.when.to_date, :format => '%m/%d/%Y' %></p>
+          <p class="time"><%= l change.when.to_time, :format => :hour_and_minutes %></p>
+        </div>
+
+        <div class="title_by">
+          <% if @project.present? -%>
+            <p class="title"><%= t('.header.changes_count_html', :count => change.changes_count) %></p>
+          <% elsif @organization.present? -%>
+            <p class="title"><%= t('.header.changes_count_html', :count => change.changes_count) %></p>
+          <% else -%>
+            <p class="title"><%= t('.header.changes_count_all_html', :count => change.changes_count, :what => link_to(truncate(change.what_name, :length => 70), edit_admin_project_path(change.what), :title => change.what_name)) %></p>
+          <% end -%>
+          <p class="by"><%= t('.header.by_html', :user => change.who_email, :organization => link_to(truncate(change.who_organization_name, :length => 26), url_for_user_organization(change.who_organization), :title => change.who_organization_name)) %></p>
+        </div>
+
+        <div class="more">
+          <a href="#">
+            <span class="arrow"></span>
+          </a>
+        </div>
+      </div>
+
+      <div class="detail">
+        <ul>
+          <% change.changes.each do |field, values| %>
+            <li>
+              <div class="changed">
+                <p class="label">changed</p>
+                <p class="value"><%= field %></p>
+              </div>
+
+              <%= changes_for(values) %>
+
+              <div class="separator"></div>
+            </li>
+          <% end %>
+        </ul>
+
+      </div>
+
+      <div class="border_bottom"></div>
+    </div>
+
+  <% end %>
+
+<% else %>
+  <div class="no_results">
+    <% if @project -%>
+      <h2>There is no activity for this project yet</h2>
+    <% elsif @organization -%>
+      <h2>There is no activity for this NGO yet</h2>
+    <% else -%>
+      <h2>There is no activity yet</h2>
+      <p>Try to search with different terms or simply <a href="<%= admin_activity_path %>">browse all activity</a></p>
+    <% end -%>
+  </div>
+<% end %>

@@ -49,6 +49,10 @@ class User < ActiveRecord::Base
     u && u.authenticated?(password) ? u : nil
   end
 
+  def self.admin
+    where(:role => 'admin').first
+  end
+
   def email=(value)
     write_attribute :email, (value ? value.downcase : nil)
   end
@@ -60,6 +64,14 @@ class User < ActiveRecord::Base
 
   def not_blocked?
     !self.blocked?
+  end
+
+  def to_s
+    "#{[email, (organization.name rescue 'InterAction')].compact.join(' - ') }"
+  end
+
+  def organization_name
+    (organization.name rescue 'InterAction')
   end
 
   def set_role

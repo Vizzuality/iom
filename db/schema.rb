@@ -10,14 +10,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120210092657) do
+ActiveRecord::Schema.define(:version => 20120214152607) do
 
-  create_table "changes_histories", :force => true do |t|
+  create_table "changes_history_records", :force => true do |t|
     t.integer  "user_id"
     t.datetime "when"
-    t.text     "what"
+    t.text     "how"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "what_id"
+    t.string   "what_type"
   end
 
   create_table "clusters", :force => true do |t|
