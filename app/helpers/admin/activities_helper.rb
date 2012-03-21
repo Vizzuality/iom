@@ -40,6 +40,8 @@ module Admin::ActivitiesHelper
       return "#{value['geometries'][0]['y']}, #{value['geometries'][0]['x']}" if value.has_key?('geometries')
       return value['deleted'] if value.has_key?('deleted')
       return value['new'] if value.has_key?('new')
+    when Date
+      localize value, :format => '%m/%d/%Y'
     else
       value
     end

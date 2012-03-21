@@ -20,7 +20,7 @@ class ChangesHistoryRecord < ActiveRecord::Base
   end
 
   def changes
-    @changes ||= JSON.parse(how) if how.present?
+    @changes ||= ActiveSupport::JSON.decode(how) if how.present?
   end
 
   def changes_count
