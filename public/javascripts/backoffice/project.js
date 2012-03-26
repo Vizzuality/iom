@@ -16,127 +16,127 @@ var sectors_id = 8; // sectors_
 var sectorToAdd = 12; // sectorToAdd_
 $(document).ready(function(ev){
 
-  $('select').change(function(){
+  $('div.long_search form.search select').change(function(){
     $(this).closest('form').submit();
   });
-	    // Field info
-    $('div.field_info span.info').click(function(ev){
-      ev.stopPropagation();
+  // Field info
+  $('div.field_info span.info').click(function(ev){
+    ev.stopPropagation();
 
-      $('div.field_info div.field_text').each(function(i,ele){
-        $(ele).closest('label').removeAttr('style');
-        $(ele).fadeOut('fast');
-      });
-
-      $(this).closest('label').css({'z-index':200});
-
-      $('body').unbind('click');
-      if ($(this).parent().find('div.field_text').is(':visible')) {
-        $(this).closest('label').removeAttr('style');
-        $(this).parent().find('div.field_text').fadeOut('fast');
-      } else {
-        $(this).parent().find('div.field_text').fadeIn('slow');
-        $('body').click(function(ev){
-          var $el = $(ev.target);
-          if (!$el.closest('div.field_text').length>0) {
-            $('div.field_info div.field_text').closest('label').removeAttr('style');
-            $('div.field_info div.field_text').fadeOut('fast');
-          }
-        });
-      }
-    });
-    $('div.field_info div.top a').click(function(ev){
-      ev.preventDefault();
-      ev.stopPropagation();
-      $('div.field_info div.field_text').each(function(i,ele){
-        $(ele).closest('label').removeAttr('style');
-        $(ele).fadeOut('fast');
-      });
+    $('div.field_info div.field_text').each(function(i,ele){
+      $(ele).closest('label').removeAttr('style');
+      $(ele).fadeOut('fast');
     });
 
-    // COUNTRY COMBO
-    // $('select#country').sSelect({ddMaxWidth: '134px',ddMaxHeight:'220px',containerClass:'country_index'});
+    $(this).closest('label').css({'z-index':200});
 
-    if ($('div.select_dates').length > 0){
-
-      // To set initial values
-      dateProvided[0] = $('select#project_date_provided_2i').val();
-      dateProvided[1] = $('select#project_date_provided_3i').val();
-      dateProvided[2] = $('select#project_date_provided_1i').val();
-
-      var dateValue = getStringDate(dateProvided[0],dateProvided[1],dateProvided[2]);
-      $('span#date_provided').children('p').text(dateValue);
-
-      dateUpdated[0] = $('select#project_date_updated_2i').val();
-      dateUpdated[1] = $('select#project_date_updated_3i').val();
-      dateUpdated[2] = $('select#project_date_updated_1i').val();
-
-      dateValue = getStringDate(dateUpdated[0],dateUpdated[1],dateUpdated[2]);
-      $('span#date_updated').children('p').text(dateValue);
-
-      dateStart[0] = $('select#project_start_date_2i').val();
-      dateStart[1] = $('select#project_start_date_3i').val();
-      dateStart[2] = $('select#project_start_date_1i').val();
-
-      dateValue = getStringDate(dateStart[0],dateStart[1],dateStart[2]);
-      $('span#start_date').children('p').text(dateValue);
-
-      dateEnd[0] = $('select#project_end_date_2i').val();
-      dateEnd[1] = $('select#project_end_date_3i').val();
-      dateEnd[2] = $('select#project_end_date_1i').val();
-
-      dateValue = getStringDate(dateEnd[0],dateEnd[1],dateEnd[2]);
-      $('span#end_date').children('p').text(dateValue);
-
-      donationDate[0] = $('select#donation_date_2i').val();
-      donationDate[1] = $('select#donation_date_3i').val();
-      donationDate[2] = $('select#donation_date_1i').val();
-
-      dateValue = getStringDate(donationDate[0],donationDate[1],donationDate[2]);
-      $('span#donation_date').children('p').text(dateValue);
-
-
-
-      // *********** DATE PROVIDED
-      // YEAR
-      $('select#project_date_provided_1i').sSelect({ddMaxWidth: '76px',ddMaxHeight:'200px',containerClass:'year'});
-      // MONTH
-      $('select#project_date_provided_2i').sSelect({ddMaxWidth: '131px',ddMaxHeight:'200px',containerClass:'month'});
-      // DAY
-      $('select#project_date_provided_3i').sSelect({ddMaxWidth: '62px',ddMaxHeight:'200px',containerClass:'day'});
-
-      // *********** DATE UPDATED
-      // YEAR
-      $('select#project_date_updated_1i').sSelect({ddMaxWidth: '76px',ddMaxHeight:'200px',containerClass:'year'});
-      // MONTH
-      $('select#project_date_updated_2i').sSelect({ddMaxWidth: '131px',ddMaxHeight:'200px',containerClass:'month'});
-      // DAY
-      $('select#project_date_updated_3i').sSelect({ddMaxWidth: '62px',ddMaxHeight:'200px',containerClass:'day'});
-
-      // *********** DATE START
-      // YEAR
-      $('select#project_start_date_1i').sSelect({ddMaxWidth: '76px',ddMaxHeight:'200px',containerClass:'year'});
-      // MONTH
-      $('select#project_start_date_2i').sSelect({ddMaxWidth: '131px',ddMaxHeight:'200px',containerClass:'month'});
-      // DAY
-      $('select#project_start_date_3i').sSelect({ddMaxWidth: '62px',ddMaxHeight:'200px',containerClass:'day'});
-
-      // *********** DATE END
-      // YEAR
-      $('select#project_end_date_1i').sSelect({ddMaxWidth: '76px',ddMaxHeight:'200px',containerClass:'year'});
-      // MONTH
-      $('select#project_end_date_2i').sSelect({ddMaxWidth: '131px',ddMaxHeight:'200px',containerClass:'month'});
-      // DAY
-      $('select#project_end_date_3i').sSelect({ddMaxWidth: '62px',ddMaxHeight:'200px',containerClass:'day'});
-
-      // *********** DATE DONATION
-      // YEAR
-      $('select#donation_date_1i').sSelect({ddMaxWidth: '76px',ddMaxHeight:'200px',containerClass:'year'});
-      // MONTH
-      $('select#donation_date_2i').sSelect({ddMaxWidth: '131px',ddMaxHeight:'200px',containerClass:'month'});
-      // DAY
-      $('select#donation_date_3i').sSelect({ddMaxWidth: '62px',ddMaxHeight:'200px',containerClass:'day'});
+    $('body').unbind('click');
+    if ($(this).parent().find('div.field_text').is(':visible')) {
+      $(this).closest('label').removeAttr('style');
+      $(this).parent().find('div.field_text').fadeOut('fast');
+    } else {
+      $(this).parent().find('div.field_text').fadeIn('slow');
+      $('body').click(function(ev){
+        var $el = $(ev.target);
+        if (!$el.closest('div.field_text').length>0) {
+          $('div.field_info div.field_text').closest('label').removeAttr('style');
+          $('div.field_info div.field_text').fadeOut('fast');
+        }
+      });
     }
+  });
+  $('div.field_info div.top a').click(function(ev){
+    ev.preventDefault();
+    ev.stopPropagation();
+    $('div.field_info div.field_text').each(function(i,ele){
+      $(ele).closest('label').removeAttr('style');
+      $(ele).fadeOut('fast');
+    });
+  });
+
+  // COUNTRY COMBO
+  // $('select#country').sSelect({ddMaxWidth: '134px',ddMaxHeight:'220px',containerClass:'country_index'});
+
+  if ($('div.select_dates').length > 0){
+
+    // To set initial values
+    dateProvided[0] = $('select#project_date_provided_2i').val();
+    dateProvided[1] = $('select#project_date_provided_3i').val();
+    dateProvided[2] = $('select#project_date_provided_1i').val();
+
+    var dateValue = getStringDate(dateProvided[0],dateProvided[1],dateProvided[2]);
+    $('span#date_provided').children('p').text(dateValue);
+
+    dateUpdated[0] = $('select#project_date_updated_2i').val();
+    dateUpdated[1] = $('select#project_date_updated_3i').val();
+    dateUpdated[2] = $('select#project_date_updated_1i').val();
+
+    dateValue = getStringDate(dateUpdated[0],dateUpdated[1],dateUpdated[2]);
+    $('span#date_updated').children('p').text(dateValue);
+
+    dateStart[0] = $('select#project_start_date_2i').val();
+    dateStart[1] = $('select#project_start_date_3i').val();
+    dateStart[2] = $('select#project_start_date_1i').val();
+
+    dateValue = getStringDate(dateStart[0],dateStart[1],dateStart[2]);
+    $('span#start_date').children('p').text(dateValue);
+
+    dateEnd[0] = $('select#project_end_date_2i').val();
+    dateEnd[1] = $('select#project_end_date_3i').val();
+    dateEnd[2] = $('select#project_end_date_1i').val();
+
+    dateValue = getStringDate(dateEnd[0],dateEnd[1],dateEnd[2]);
+    $('span#end_date').children('p').text(dateValue);
+
+    donationDate[0] = $('select#donation_date_2i').val();
+    donationDate[1] = $('select#donation_date_3i').val();
+    donationDate[2] = $('select#donation_date_1i').val();
+
+    dateValue = getStringDate(donationDate[0],donationDate[1],donationDate[2]);
+    $('span#donation_date').children('p').text(dateValue);
+
+
+
+    // *********** DATE PROVIDED
+    // YEAR
+    $('select#project_date_provided_1i').sSelect({ddMaxWidth: '76px',ddMaxHeight:'200px',containerClass:'year'});
+    // MONTH
+    $('select#project_date_provided_2i').sSelect({ddMaxWidth: '131px',ddMaxHeight:'200px',containerClass:'month'});
+    // DAY
+    $('select#project_date_provided_3i').sSelect({ddMaxWidth: '62px',ddMaxHeight:'200px',containerClass:'day'});
+
+    // *********** DATE UPDATED
+    // YEAR
+    $('select#project_date_updated_1i').sSelect({ddMaxWidth: '76px',ddMaxHeight:'200px',containerClass:'year'});
+    // MONTH
+    $('select#project_date_updated_2i').sSelect({ddMaxWidth: '131px',ddMaxHeight:'200px',containerClass:'month'});
+    // DAY
+    $('select#project_date_updated_3i').sSelect({ddMaxWidth: '62px',ddMaxHeight:'200px',containerClass:'day'});
+
+    // *********** DATE START
+    // YEAR
+    $('select#project_start_date_1i').sSelect({ddMaxWidth: '76px',ddMaxHeight:'200px',containerClass:'year'});
+    // MONTH
+    $('select#project_start_date_2i').sSelect({ddMaxWidth: '131px',ddMaxHeight:'200px',containerClass:'month'});
+    // DAY
+    $('select#project_start_date_3i').sSelect({ddMaxWidth: '62px',ddMaxHeight:'200px',containerClass:'day'});
+
+    // *********** DATE END
+    // YEAR
+    $('select#project_end_date_1i').sSelect({ddMaxWidth: '76px',ddMaxHeight:'200px',containerClass:'year'});
+    // MONTH
+    $('select#project_end_date_2i').sSelect({ddMaxWidth: '131px',ddMaxHeight:'200px',containerClass:'month'});
+    // DAY
+    $('select#project_end_date_3i').sSelect({ddMaxWidth: '62px',ddMaxHeight:'200px',containerClass:'day'});
+
+    // *********** DATE DONATION
+    // YEAR
+    $('select#donation_date_1i').sSelect({ddMaxWidth: '76px',ddMaxHeight:'200px',containerClass:'year'});
+    // MONTH
+    $('select#donation_date_2i').sSelect({ddMaxWidth: '131px',ddMaxHeight:'200px',containerClass:'month'});
+    // DAY
+    $('select#donation_date_3i').sSelect({ddMaxWidth: '62px',ddMaxHeight:'200px',containerClass:'day'});
+  }
 
   // **************************************************** COMBOS
   //  combo status
@@ -151,7 +151,7 @@ $(document).ready(function(ev){
       $('span.clicked').removeClass('clicked');
       $(this).removeClass('clicked');
 
-    updateDateInfo();
+      updateDateInfo();
     }
 
     $(document).click(function(event) {
@@ -181,7 +181,7 @@ $(document).ready(function(ev){
     ev.stopPropagation();
     ev.preventDefault();
 
-  hideCountryCombo();
+    hideCountryCombo();
 
     if (!$(this).hasClass('clicked')){
       $('span.clicked').removeClass('clicked');
@@ -207,10 +207,10 @@ $(document).ready(function(ev){
     var name = $(this).children('a').text();
     if ((id != undefined)&&(name != undefined)){
 
-        if (name.length > limitTextCombo) {
-            name = name.substring(0,limitTextCombo - 3)+'...';
-        }
-        $('span#cluster_combo_search').children('p').text(name);
+      if (name.length > limitTextCombo) {
+        name = name.substring(0,limitTextCombo - 3)+'...';
+      }
+      $('span#cluster_combo_search').children('p').text(name);
 
       $('input#cluster_input').val(id);
       $('span#cluster_combo_search').removeClass('clicked');
@@ -225,7 +225,7 @@ $(document).ready(function(ev){
     ev.stopPropagation();
     ev.preventDefault();
 
-  hideCountryCombo();
+    hideCountryCombo();
 
     if (!$(this).hasClass('clicked')){
       $('span.clicked').removeClass('clicked');
@@ -250,7 +250,7 @@ $(document).ready(function(ev){
     var name = $(this).children('a').text();
 
     if (name.length > limitTextCombo) {
-        name = name.substring(0,limitTextCombo - 3)+'...';
+      name = name.substring(0,limitTextCombo - 3)+'...';
     }
 
     if ((id != undefined)&&(name != undefined)){
@@ -293,7 +293,7 @@ $(document).ready(function(ev){
     var name = $(this).children('a').text();
 
     if (name.length > limitTextCombo) {
-        name = name.substring(0,limitTextCombo - 3)+'...';
+      name = name.substring(0,limitTextCombo - 3)+'...';
     }
 
     if ((id != undefined)&&(name != undefined)){
@@ -335,14 +335,14 @@ $(document).ready(function(ev){
     });
   });
 
-// substring(0,10)+'...'
+  // substring(0,10)+'...'
 
   $('ul.list_combo_content').find('li.element').click(function(ev){
     var id = $(this).attr('id');
     var name = $(this).children('p.project_name').text();
-  id = id.substring(orgs_id,id.length);
+    id = id.substring(orgs_id,id.length);
 
-  // id substring
+    // id substring
     $('input#project_primary_organization_id').val(id);
 
     $('div.list_combo').find('a.organization').text(name);
@@ -358,13 +358,13 @@ $(document).ready(function(ev){
     if (!$(this).hasClass('clicked')){
       $('span.combo_date.clicked').removeClass('clicked');
       $(this).addClass('clicked');
-    $(this).find('div.newListSelected').css('background-position','0 0');
+      $(this).find('div.newListSelected').css('background-position','0 0');
     }
 
     $(document).click(function(event) {
       if (!$(event.target).closest('span.combo_date').length) {
         $('span.combo_date.clicked').removeClass('clicked');
-      updateDateInfo();
+        updateDateInfo();
       };
     });
   });
@@ -382,7 +382,7 @@ $(document).ready(function(ev){
     $(document).click(function(event) {
       if (!$(event.target).closest('div.select_dates').length) {
         $('span#donation_date.clicked').removeClass('clicked');
-      updateDateInfoDonations();
+        updateDateInfoDonations();
       };
     });
   });
@@ -395,8 +395,8 @@ $(document).ready(function(ev){
 
     if (!$(this).hasClass('clicked')){
 
-        // THIS IS A IE HACK
-        $(this).css('position','relative');
+      // THIS IS A IE HACK
+      $(this).css('position','relative');
 
       $(this).addClass('clicked');
       resetCombo($('span.combo_cluster_options'));
@@ -418,8 +418,8 @@ $(document).ready(function(ev){
     ev.stopPropagation();
     ev.preventDefault();
     $('span.combo_cluster_options').children('p').text($(this).children('a').text());
-   var id = $(this).children('a').attr('id');
-  id = id.substring(clusters_id,id.length);
+    var id = $(this).children('a').attr('id');
+    id = id.substring(clusters_id,id.length);
     $('span.combo_cluster_options').children('p').attr('id','clusterToAdd_'+id);
     $('span.combo_cluster_options.clicked').removeClass('clicked');
 
@@ -431,7 +431,7 @@ $(document).ready(function(ev){
     ev.preventDefault();
 
     var id = $('span.combo_cluster_options').children('p').attr('id');
-  id = id.substring(clusterToAdd,id.length);
+    id = id.substring(clusterToAdd,id.length);
 
     var notAdded = false;
     notAdded = checkElementAdded($('ul.clusters'),id);
@@ -447,7 +447,7 @@ $(document).ready(function(ev){
       $('span.combo_cluster_options').children('p').attr('id','clusterToAdd_0');
     }
     $('div.block div.med div.left').resize();
-    });
+  });
 
   // CLICK ON REMOVE CLUSTER
   $('ul.clusters').find('a.remove_this').live('click',function(ev){
@@ -479,370 +479,370 @@ $(document).ready(function(ev){
     });
   });
 
-     // IF WE ADD SOME SECTOR
-    $('span#sector').find('ul.options li').click(function(ev){
-      ev.stopPropagation();
-      ev.preventDefault();
-      $('span#sector').children('p').text($(this).children('a').text());
+  // IF WE ADD SOME SECTOR
+  $('span#sector').find('ul.options li').click(function(ev){
+    ev.stopPropagation();
+    ev.preventDefault();
+    $('span#sector').children('p').text($(this).children('a').text());
     var id = $(this).children('a').attr('id');
 
     id = id.substring(sectors_id,id.length);
-      $('span#sector').children('p').attr('id','sectorToAdd_'+id);
-      $('span#sector.clicked').removeClass('clicked');
-    });
+    $('span#sector').children('p').attr('id','sectorToAdd_'+id);
+    $('span#sector.clicked').removeClass('clicked');
+  });
 
-    // CLICK ON ADD SECTOR
-    $('a.add_sector').click(function(ev){
+  // CLICK ON ADD SECTOR
+  $('a.add_sector').click(function(ev){
 
-      ev.stopPropagation();
-      ev.preventDefault();
+    ev.stopPropagation();
+    ev.preventDefault();
 
-      var id = $('span#sector').children('p').attr('id');
+    var id = $('span#sector').children('p').attr('id');
     id = id.substring(sectorToAdd,id.length);
-      var notAdded = false;
-      notAdded = checkElementAdded($('ul.sectors'),id);
+    var notAdded = false;
+    notAdded = checkElementAdded($('ul.sectors'),id);
 
-      // If we have some element (id=0 is a simple control to test it)
+    // If we have some element (id=0 is a simple control to test it)
     if ((id != 0)&&(!notAdded)){
-        var text = $('span#sector').children('p').text();
-        var htmlToAdd = '<li id="sector_'+id+'"><p>'+text+'</p><input id="'+id+'"type="checkbox" name="project[sector_ids][]" value="'+id+'" checked="true"" /><a id="'+id+'" class="remove_this close"></a></li>';
+      var text = $('span#sector').children('p').text();
+      var htmlToAdd = '<li id="sector_'+id+'"><p>'+text+'</p><input id="'+id+'"type="checkbox" name="project[sector_ids][]" value="'+id+'" checked="true"" /><a id="'+id+'" class="remove_this close"></a></li>';
 
-        $('ul.sectors').append(htmlToAdd);
-        $('span#sector').children('p').text('Select more sectors');
-        $('span#sector').children('p').attr('id','sectorToAdd_0');
-      }
-      $('div.block div.med div.left').resize();
-      });
+      $('ul.sectors').append(htmlToAdd);
+      $('span#sector').children('p').text('Select more sectors');
+      $('span#sector').children('p').attr('id','sectorToAdd_0');
+    }
+    $('div.block div.med div.left').resize();
+  });
 
-    // CLICK ON REMOVE SECTOR
-    $('ul.sectors').find('a.remove_this').live('click',function(ev){
-      $(this).parent().children('input#' + $(this).attr('id') +'').attr('checked',false);
-      $(this).parent().remove();
-      $('div.block div.med div.left').resize();
-    });
+  // CLICK ON REMOVE SECTOR
+  $('ul.sectors').find('a.remove_this').live('click',function(ev){
+    $(this).parent().children('input#' + $(this).attr('id') +'').attr('checked',false);
+    $(this).parent().remove();
+    $('div.block div.med div.left').resize();
+  });
 
-    /************** SUBSECTORS ************************** */
-    $('span#subsector').click(function(ev){
-      ev.stopPropagation();
-      ev.preventDefault();
+  /************** SUBSECTORS ************************** */
+  $('span#subsector').click(function(ev){
+    ev.stopPropagation();
+    ev.preventDefault();
 
-      if (!$(this).hasClass('clicked')){
-        $(this).addClass('clicked');
-      }else {
-        $(this).removeClass('clicked');
-      }
+    if (!$(this).hasClass('clicked')){
+      $(this).addClass('clicked');
+    }else {
+      $(this).removeClass('clicked');
+    }
 
-      $(document).click(function(event) {
-        if (!$(event.target).closest('span#subsector').length) {
-          $('span#subsector.clicked').removeClass('clicked');
-        };
-      });
-    });
-
-       // IF WE ADD SOME SECTOR
-      $('span#subsector').find('ul.options li').click(function(ev){
-        ev.stopPropagation();
-        ev.preventDefault();
-        $('span#subsector').children('p').text($(this).children('a').text());
-        $('span#subsector').children('p').attr('id',$(this).children('a').attr('id'));
+    $(document).click(function(event) {
+      if (!$(event.target).closest('span#subsector').length) {
         $('span#subsector.clicked').removeClass('clicked');
-        $('div.block div.med div.left').resize();
-      });
+      };
+    });
+  });
 
-      // CLICK ON ADD SECTOR
-      // $('a.add_sector').click(function(ev){
-      //
-      //   ev.stopPropagation();
-      //   ev.preventDefault();
-      //
-      //   var id = $('span#sector').children('p').attr('id');
-      //
-      //   // If we have some element (id=0 is a simple control to test it)
-      //   if (id != 0){
-      //     var text = $('span#sector').children('p').text();
-      //     var htmlToAdd = '<li id="sector_'+id+'">'+text+'<input id="'+id+'"type="checkbox" name="project[sector_ids][]" value="'+id+'" checked="true"" /><a id="'+id+'" class="remove_this close"></a></li>';
-      //
-      //     $('ul.sectors').append(htmlToAdd);
-      //     $('span#sector').children('p').text('Select more sectors');
-      //     $('span#sector').children('p').attr('id','0');
-      //   }
-      //         });
+  // IF WE ADD SOME SECTOR
+  $('span#subsector').find('ul.options li').click(function(ev){
+    ev.stopPropagation();
+    ev.preventDefault();
+    $('span#subsector').children('p').text($(this).children('a').text());
+    $('span#subsector').children('p').attr('id',$(this).children('a').attr('id'));
+    $('span#subsector.clicked').removeClass('clicked');
+    $('div.block div.med div.left').resize();
+  });
 
-      // CLICK ON REMOVE SECTOR
-      // $('ul.sectors').find('a.remove_this').live('click',function(ev){
-      //   $(this).parent().children('input#' + $(this).attr('id') +'').attr('checked',false);
-      //   $(this).parent().remove();
-      // });
+  // CLICK ON ADD SECTOR
+  // $('a.add_sector').click(function(ev){
+  //
+  //   ev.stopPropagation();
+  //   ev.preventDefault();
+  //
+  //   var id = $('span#sector').children('p').attr('id');
+  //
+  //   // If we have some element (id=0 is a simple control to test it)
+  //   if (id != 0){
+  //     var text = $('span#sector').children('p').text();
+  //     var htmlToAdd = '<li id="sector_'+id+'">'+text+'<input id="'+id+'"type="checkbox" name="project[sector_ids][]" value="'+id+'" checked="true"" /><a id="'+id+'" class="remove_this close"></a></li>';
+  //
+  //     $('ul.sectors').append(htmlToAdd);
+  //     $('span#sector').children('p').text('Select more sectors');
+  //     $('span#sector').children('p').attr('id','0');
+  //   }
+  //         });
 
-      /************** SITE PAGE  ************************** */
+  // CLICK ON REMOVE SECTOR
+  // $('ul.sectors').find('a.remove_this').live('click',function(ev){
+  //   $(this).parent().children('input#' + $(this).attr('id') +'').attr('checked',false);
+  //   $(this).parent().remove();
+  // });
 
-      // click on limited options
-      $('ul.geographic_options').children('li').children('a.limited').click(function(ev){
-        ev.stopPropagation();
-        ev.preventDefault();
+  /************** SITE PAGE  ************************** */
 
-        if (!$(this).parent().hasClass('selected')){
-          var id = $('ul.geographic_options').children('li.selected').attr('id');
+  // click on limited options
+  $('ul.geographic_options').children('li').children('a.limited').click(function(ev){
+    ev.stopPropagation();
+    ev.preventDefault();
 
-          // IF "selected" - before was...
-          if (id == 'gc_limited_country'){
-            $('input#geographic_context_country_id').val(null);
-            $('li.selected').find('p.country').text('Select a country');
+    if (!$(this).parent().hasClass('selected')){
+      var id = $('ul.geographic_options').children('li.selected').attr('id');
 
-          }else  if (id == 'gc_limited_region'){
-            $('input#geographic_context_country_id').val(null);
-            $('input#geographic_context_region_id').val(null);
-            $('li.selected').find('p.country').text('Select a country');
-            $('li.selected').find('p.region').text('Select a region');
-          }else if (id == 'gc_limited_bbox'){
-            // TODO
+      // IF "selected" - before was...
+      if (id == 'gc_limited_country'){
+        $('input#geographic_context_country_id').val(null);
+        $('li.selected').find('p.country').text('Select a country');
 
-          }
+      }else  if (id == 'gc_limited_region'){
+        $('input#geographic_context_country_id').val(null);
+        $('input#geographic_context_region_id').val(null);
+        $('li.selected').find('p.country').text('Select a country');
+        $('li.selected').find('p.region').text('Select a region');
+      }else if (id == 'gc_limited_bbox'){
+        // TODO
 
-          $('ul.geographic_options').children('li.selected').removeClass('selected');
-          $(this).parent().addClass('selected');
-        }
-      });
+      }
 
-      // click on country combo (LIMITED TO A COUNTRY)
-      $('li#gc_limited_country').find('span.select_country_combo').click(function(ev){
-        ev.stopPropagation();
-        ev.preventDefault();
+      $('ul.geographic_options').children('li.selected').removeClass('selected');
+      $(this).parent().addClass('selected');
+    }
+  });
 
-        if (!$(this).hasClass('clicked')){
-          $(this).addClass('clicked');
-        }
-      resetCombo($(this));
-        $(document).click(function(event) {
+  // click on country combo (LIMITED TO A COUNTRY)
+  $('li#gc_limited_country').find('span.select_country_combo').click(function(ev){
+    ev.stopPropagation();
+    ev.preventDefault();
 
-          if (!$(event.target).closest('span.select_country_combo').length) {
-            $('li#gc_limited_country').find('span.select_country_combo').removeClass('clicked');
-          };
-        });
-        $('div.block div.med div.left').resize();
-      });
+    if (!$(this).hasClass('clicked')){
+      $(this).addClass('clicked');
+    }
+    resetCombo($(this));
+    $(document).click(function(event) {
 
-      // SET VALUE IF CLICK ON COUNTRY
-      $('div.values.country').find('li').click(function(ev){
-        ev.stopPropagation();
-        ev.preventDefault();
-        var id = $(this).children('a').attr('id');
-        var name = $(this).children('a').text();
-        $('input#site_geographic_context_country_id').val(id);
-        $('span.select_country_combo.clicked').children('p.country').text(name);
-        $('span.select_country_combo.clicked').removeClass('clicked');
-      });
+      if (!$(event.target).closest('span.select_country_combo').length) {
+        $('li#gc_limited_country').find('span.select_country_combo').removeClass('clicked');
+      };
+    });
+    $('div.block div.med div.left').resize();
+  });
 
-      // click on country combo (LIMITED TO A REGION)
-      $('li#gc_limited_region').find('span.select_country_combo').click(function(ev){
-      ev.stopPropagation();
-        ev.preventDefault();
+  // SET VALUE IF CLICK ON COUNTRY
+  $('div.values.country').find('li').click(function(ev){
+    ev.stopPropagation();
+    ev.preventDefault();
+    var id = $(this).children('a').attr('id');
+    var name = $(this).children('a').text();
+    $('input#site_geographic_context_country_id').val(id);
+    $('span.select_country_combo.clicked').children('p.country').text(name);
+    $('span.select_country_combo.clicked').removeClass('clicked');
+  });
 
-        if (!$(this).hasClass('clicked')){
-          $(this).addClass('clicked');
-        }
-        $(document).click(function(event) {
+  // click on country combo (LIMITED TO A REGION)
+  $('li#gc_limited_region').find('span.select_country_combo').click(function(ev){
+    ev.stopPropagation();
+    ev.preventDefault();
 
-          if (!$(event.target).closest('span.select_country_combo').length) {
-            $('li#gc_limited_region').find('span.select_country_combo').removeClass('clicked');
-          };
-        });
-      });
+    if (!$(this).hasClass('clicked')){
+      $(this).addClass('clicked');
+    }
+    $(document).click(function(event) {
 
-      // SET VALUE IF CLICK ON REGION
-      $('div.values.region').find('li').click(function(ev){
-        ev.stopPropagation();
-        ev.preventDefault();
-        var id = $(this).children('a').attr('id');
-        var name = $(this).children('a').text();
-        $('input#site_geographic_context_region_id').val(id);
-        $('span.select_country_combo.region.clicked').children('p.region').text(name);
-        $('span.select_country_combo.region.clicked').removeClass('clicked');
-      });
+      if (!$(event.target).closest('span.select_country_combo').length) {
+        $('li#gc_limited_region').find('span.select_country_combo').removeClass('clicked');
+      };
+    });
+  });
+
+  // SET VALUE IF CLICK ON REGION
+  $('div.values.region').find('li').click(function(ev){
+    ev.stopPropagation();
+    ev.preventDefault();
+    var id = $(this).children('a').attr('id');
+    var name = $(this).children('a').text();
+    $('input#site_geographic_context_region_id').val(id);
+    $('span.select_country_combo.region.clicked').children('p.region').text(name);
+    $('span.select_country_combo.region.clicked').removeClass('clicked');
+  });
 
 
-      // CLICK ON EACH OPTION (CHECKBOX)
+  // CLICK ON EACH OPTION (CHECKBOX)
 
-      $('ul.project_tipo_options').children('li').children('a').click(function(ev){
-        if ($(this).parent().hasClass('selected')){
-          $(this).parent().removeClass('selected');
+  $('ul.project_tipo_options').children('li').children('a').click(function(ev){
+    if ($(this).parent().hasClass('selected')){
+      $(this).parent().removeClass('selected');
 
-          // RESET VALUES
-          var id = $(this).parent().attr('id');
-          if (id == 'include_sector_cluster'){
-            $('input#project_context_cluster_id').val(null);
-            $('input#project_context_sector_id').val(null);
-            $(this).parent().find('p.cluster_sector').text('Select a cluster or a sector');
-          }else if (id == 'include_ngo'){
-            $('input#project_context_organization_id').val(null);
-            $(this).parent().find('p.ngo').text('Select an NGO');
-          }else if (id == 'include_tags'){
-            $('input#project_context_tags').val(null);
-          }
+      // RESET VALUES
+      var id = $(this).parent().attr('id');
+      if (id == 'include_sector_cluster'){
+        $('input#project_context_cluster_id').val(null);
+        $('input#project_context_sector_id').val(null);
+        $(this).parent().find('p.cluster_sector').text('Select a cluster or a sector');
+      }else if (id == 'include_ngo'){
+        $('input#project_context_organization_id').val(null);
+        $(this).parent().find('p.ngo').text('Select an NGO');
+      }else if (id == 'include_tags'){
+        $('input#project_context_tags').val(null);
+      }
 
-        }else {
-          $(this).parent().addClass('selected');
-        }
+    }else {
+      $(this).parent().addClass('selected');
+    }
 
-      });
+  });
 
-      // CLICK ON SELECT CLUSTER OR SECTOR
-      $('span.select_combo_typology').click(function(ev){
-        ev.stopPropagation();
-        ev.preventDefault();
+  // CLICK ON SELECT CLUSTER OR SECTOR
+  $('span.select_combo_typology').click(function(ev){
+    ev.stopPropagation();
+    ev.preventDefault();
 
-        $(this).addClass('clicked');
-        resetCombo($(this));
-        $(document).click(function(event) {
+    $(this).addClass('clicked');
+    resetCombo($(this));
+    $(document).click(function(event) {
 
-          if (!$(event.target).closest('span.select_combo_typology').length) {
-            $('span.select_combo_typology').removeClass('clicked');
-          };
-        });
-      });
+      if (!$(event.target).closest('span.select_combo_typology').length) {
+        $('span.select_combo_typology').removeClass('clicked');
+      };
+    });
+  });
 
-      // CLICK ON SECTORS OR CLUSTER
-      $('span.select_combo_typology').children('div.values').children('ul.clusters_or_sectors').children('li').click(function(ev){
-        ev.stopPropagation();
-        ev.preventDefault();
+  // CLICK ON SECTORS OR CLUSTER
+  $('span.select_combo_typology').children('div.values').children('ul.clusters_or_sectors').children('li').click(function(ev){
+    ev.stopPropagation();
+    ev.preventDefault();
 
-        var id = $(this).children('a').attr('id');
-        var name = $(this).children('a').text();
+    var id = $(this).children('a').attr('id');
+    var name = $(this).children('a').text();
 
-        if ($(this).children('a').hasClass('cluster_value')){
-          $('input#site_project_context_cluster_id').val(id);
-        }else if ($(this).children('a').hasClass('sector_value')){
-          $('input#site_project_context_sector_id').val(id);
-        }
-        $('span.select_combo_typology.clicked').removeClass('clicked');
-        $('span.select_combo_typology').find('p.cluster_sector').text(name);
-      });
+    if ($(this).children('a').hasClass('cluster_value')){
+      $('input#site_project_context_cluster_id').val(id);
+    }else if ($(this).children('a').hasClass('sector_value')){
+      $('input#site_project_context_sector_id').val(id);
+    }
+    $('span.select_combo_typology.clicked').removeClass('clicked');
+    $('span.select_combo_typology').find('p.cluster_sector').text(name);
+  });
 
-      // CLICK ON ORGANIZATION
-      $('span.select_combo_typology').find('ul.organizations').children('li').click(function(ev){
+  // CLICK ON ORGANIZATION
+  $('span.select_combo_typology').find('ul.organizations').children('li').click(function(ev){
 
-        ev.stopPropagation();
-        ev.preventDefault();
+    ev.stopPropagation();
+    ev.preventDefault();
 
-        var id = $(this).children('a').attr('id');
-        var name = $(this).children('a').text();
+    var id = $(this).children('a').attr('id');
+    var name = $(this).children('a').text();
 
-        $('input#site_project_context_organization_id').val(id);
-        $('span.select_combo_typology').find('p.ngo').text(name);
-        $('span.select_combo_typology.clicked').removeClass('clicked');
+    $('input#site_project_context_organization_id').val(id);
+    $('span.select_combo_typology').find('p.ngo').text(name);
+    $('span.select_combo_typology.clicked').removeClass('clicked');
 
-      });
+  });
 
-      // TO FIX IE7 BUG WITH Z-INDEX WE HAVE TO RESTORE Z-INDEX VALUES
-      $('div.list_combo').css('zIndex', 200);
-      $('div#implement_org').css('zIndex', 199);
-      $('div#partner_org').css('zIndex', 198);
-      $('ul.newList').css('zIndex', 197);
+  // TO FIX IE7 BUG WITH Z-INDEX WE HAVE TO RESTORE Z-INDEX VALUES
+  $('div.list_combo').css('zIndex', 200);
+  $('div#implement_org').css('zIndex', 199);
+  $('div#partner_org').css('zIndex', 198);
+  $('ul.newList').css('zIndex', 197);
 
-      $('div#cross_cutting').css('zIndex', 196);
+  $('div#cross_cutting').css('zIndex', 196);
 
-      $('div#clusters_content').css('zIndex', 195);
-      $('div.select_dates').css('zIndex', 200);
-      $('input#donation_submit').css('zIndex', 100);
+  $('div#clusters_content').css('zIndex', 195);
+  $('div.select_dates').css('zIndex', 200);
+  $('input#donation_submit').css('zIndex', 100);
 
 
 
 
 });
 
- // This is a function to set date value in correct format
- function getStringDate (month, day, year){
+// This is a function to set date value in correct format
+function getStringDate (month, day, year){
   var dateValue = month + '/' + day + '/' + year;
   return dateValue;
 }
 
 function updateDateInfo(){
 
-        // Updating dateProvided
-        var year = $('select#project_date_provided_1i option:selected').val();
-        var month = $('select#project_date_provided_2i option:selected').val();
-        var day = $('select#project_date_provided_3i option:selected').val();
+  // Updating dateProvided
+  var year = $('select#project_date_provided_1i option:selected').val();
+  var month = $('select#project_date_provided_2i option:selected').val();
+  var day = $('select#project_date_provided_3i option:selected').val();
 
-        dateProvided[0] = month;
-        dateProvided[1] = day;
-        dateProvided[2] = year;
+  dateProvided[0] = month;
+  dateProvided[1] = day;
+  dateProvided[2] = year;
 
-        var dateValue = getStringDate(month,day,year);
+  var dateValue = getStringDate(month,day,year);
 
-        $('span#date_provided').children('p').text(dateValue);
+  $('span#date_provided').children('p').text(dateValue);
 
-        // Updating dateUpdated
-        year = $('select#project_date_updated_1i option:selected').val();
-        month = $('select#project_date_updated_2i option:selected').val();
-        day = $('select#project_date_updated_3i option:selected').val();
+  // Updating dateUpdated
+  year = $('select#project_date_updated_1i option:selected').val();
+  month = $('select#project_date_updated_2i option:selected').val();
+  day = $('select#project_date_updated_3i option:selected').val();
 
-        dateUpdated[0] = month;
-        dateUpdated[1] = day;
-        dateUpdated[2] = year;
+  dateUpdated[0] = month;
+  dateUpdated[1] = day;
+  dateUpdated[2] = year;
 
-        dateValue = getStringDate(month,day,year);
-        $('span#date_updated').children('p').text(dateValue);
+  dateValue = getStringDate(month,day,year);
+  $('span#date_updated').children('p').text(dateValue);
 
-        // Updating dateStart
-        year = $('select#project_start_date_1i option:selected').val();
-        month = $('select#project_start_date_2i option:selected').val();
-        day = $('select#project_start_date_3i option:selected').val();
+  // Updating dateStart
+  year = $('select#project_start_date_1i option:selected').val();
+  month = $('select#project_start_date_2i option:selected').val();
+  day = $('select#project_start_date_3i option:selected').val();
 
-        dateStart[0] = month;
-        dateStart[1] = day;
-        dateStart[2] = year;
+  dateStart[0] = month;
+  dateStart[1] = day;
+  dateStart[2] = year;
 
 
-        dateValue = getStringDate(month,day,year);
-        $('span#start_date').children('p').text(dateValue);
+  dateValue = getStringDate(month,day,year);
+  $('span#start_date').children('p').text(dateValue);
 
-        year = $('select#project_end_date_1i option:selected').val();
-        month = $('select#project_end_date_2i option:selected').val();
-        day = $('select#project_end_date_3i option:selected').val();
+  year = $('select#project_end_date_1i option:selected').val();
+  month = $('select#project_end_date_2i option:selected').val();
+  day = $('select#project_end_date_3i option:selected').val();
 
-        dateEnd[0] = month;
-        dateEnd[1] = day;
-        dateEnd[2] = year;
+  dateEnd[0] = month;
+  dateEnd[1] = day;
+  dateEnd[2] = year;
 
-        dateValue = getStringDate(month,day,year);
-        $('span#end_date').children('p').text(dateValue);
-        $('span#end_date').removeClass('clicked');
-  }
+  dateValue = getStringDate(month,day,year);
+  $('span#end_date').children('p').text(dateValue);
+  $('span#end_date').removeClass('clicked');
+}
 
-  function updateDateInfoDonations(){
+function updateDateInfoDonations(){
 
-          // Updating dateProvided
-          var year = $('select#donation_date_1i option:selected').val();
-          var month = $('select#donation_date_2i option:selected').val();
-          var day = $('select#donation_date_3i option:selected').val();
+  // Updating dateProvided
+  var year = $('select#donation_date_1i option:selected').val();
+  var month = $('select#donation_date_2i option:selected').val();
+  var day = $('select#donation_date_3i option:selected').val();
 
-          var dateValue = getStringDate(month,day,year);
+  var dateValue = getStringDate(month,day,year);
 
-          $('span#donation_date').children('p').text(dateValue);
-    }
+  $('span#donation_date').children('p').text(dateValue);
+}
 function checkElementAdded(list, id){
-    var elementAdded = false;
-    var id_li_element;
+  var elementAdded = false;
+  var id_li_element;
 
-    $(list).children('li').each(function(index) {
-        id_li_element = $(this).children('input').attr('id');
+  $(list).children('li').each(function(index) {
+    id_li_element = $(this).children('input').attr('id');
 
-        if (id == id_li_element){
-            elementAdded = true;
-        }
-      });
-      return elementAdded;
+    if (id == id_li_element){
+      elementAdded = true;
+    }
+  });
+  return elementAdded;
 }
 
 function hideCountryCombo(){
   $('div.newListSelected').each(function() {
-        $(this).css('background-position','0 0');
-        $(this).css('zIndex',200);
-      $('div.newList_content').find('ul').css('display','none');
-      // $('div.country_index').css('display','none');
-      $('div.newList_content').css('visibility','hidden');
-      $('div.newList_content').find('ul').css('visibility','hidden');
-      });
+    $(this).css('background-position','0 0');
+    $(this).css('zIndex',200);
+    $('div.newList_content').find('ul').css('display','none');
+    // $('div.country_index').css('display','none');
+    $('div.newList_content').css('visibility','hidden');
+    $('div.newList_content').find('ul').css('visibility','hidden');
+  });
 }
 
 // AUTOCOMPLETE TAGS
@@ -853,94 +853,94 @@ $(function() {
 
 
   if ($('#project_tags').length > 0){
-      var custom_url =  '/admin/tags?term=';
+    var custom_url =  '/admin/tags?term=';
 
-      $("#project_tags").autocomplete({
-        style: 'project_tags',
-        source: function( request, response ) {
-          $('span#tags_combo').addClass('active');
-          var value = $("#project_tags").val();
-          if (value.indexOf(',') != -1 ) {
-            value = value.substring(value.indexOf(',')+1, value.length);
-          }
-          $.ajax({
-            url: custom_url + value,
-            dataType: "json",
-            success: function( data ) {
-              if(data != null) {
-                response($.map(data, function(tag) {
-                  return {
-                    label: tag.name + ' ' + tag.count + ' projects',
-                    value: tag.name
-                  }
-                }));
-              }
-            }
-          });
-        },
-        minLength: 2,
-        focus: function() {
-          // prevent value inserted on focus
-          return false;
-        },
-        select: function( event, ui ) {
-          var terms = split( this.value );
-          // remove the current input
-          terms.pop();
-          // add the selected item
-          terms.push( ui.item.value );
-          // add placeholder to get the comma-and-space at the end
-          terms.push( "" );
-          this.value = terms.join( ", " );
-
-          return false;
-        },
-        refresh: function(){
-           this.element.children("li.ui-menu-item:odd a").addClass("ui-menu-item-alternate");
+    $("#project_tags").autocomplete({
+      style: 'project_tags',
+      source: function( request, response ) {
+        $('span#tags_combo').addClass('active');
+        var value = $("#project_tags").val();
+        if (value.indexOf(',') != -1 ) {
+          value = value.substring(value.indexOf(',')+1, value.length);
         }
-      });
-    }
+        $.ajax({
+          url: custom_url + value,
+          dataType: "json",
+          success: function( data ) {
+            if(data != null) {
+              response($.map(data, function(tag) {
+                return {
+                  label: tag.name + ' ' + tag.count + ' projects',
+                value: tag.name
+                }
+              }));
+            }
+          }
+        });
+      },
+      minLength: 2,
+      focus: function() {
+        // prevent value inserted on focus
+        return false;
+      },
+      select: function( event, ui ) {
+        var terms = split( this.value );
+        // remove the current input
+        terms.pop();
+        // add the selected item
+        terms.push( ui.item.value );
+        // add placeholder to get the comma-and-space at the end
+        terms.push( "" );
+        this.value = terms.join( ", " );
 
-     if ($('#autocomplete_donor_name').length > 0){
-          var custom_donors_url = '/admin/donors?q=';
-
-          // AUTOCOMPLETE FOR DONORS IN PROJECT
-          $("#autocomplete_donor_name").autocomplete({
-           style:'donor_names',
-           source: function( request, response ) {
-            $('span#donor_name_input').addClass('active');
-             var value = $("#autocomplete_donor_name").val();
-             $.ajax({
-               url: custom_donors_url + value,
-               dataType: "json",
-               success: function( data ) {
-                 if(data != null) {
-
-                    if (data.length > 5){
-                       data.splice(0,data.length-5);
-                    }
-                     response($.map(data, function(donor) {
-                     return {
-                       label: donor.name,
-                       value: donor.name,
-                       element_id: donor.id
-                     }
-                   }));
-                 }
-               }
-             });
-           },
-           minLength: 2,
-           focus: function() {
-             // prevent value inserted on focus
-             return false;
-           },
-           select: function( event, ui ) {
-             $('#donation_donor_id').val(ui.item.element_id);
-           },
-           refresh: function(){
-              this.element.children("li.ui-menu-item:odd a").addClass("ui-menu-item-alternate");
-           }
-         });
+        return false;
+      },
+      refresh: function(){
+        this.element.children("li.ui-menu-item:odd a").addClass("ui-menu-item-alternate");
       }
+    });
+  }
+
+  if ($('#autocomplete_donor_name').length > 0){
+    var custom_donors_url = '/admin/donors?q=';
+
+    // AUTOCOMPLETE FOR DONORS IN PROJECT
+    $("#autocomplete_donor_name").autocomplete({
+      style:'donor_names',
+      source: function( request, response ) {
+        $('span#donor_name_input').addClass('active');
+        var value = $("#autocomplete_donor_name").val();
+        $.ajax({
+          url: custom_donors_url + value,
+          dataType: "json",
+          success: function( data ) {
+            if(data != null) {
+
+              if (data.length > 5){
+                data.splice(0,data.length-5);
+              }
+              response($.map(data, function(donor) {
+                return {
+                  label: donor.name,
+              value: donor.name,
+              element_id: donor.id
+                }
+              }));
+            }
+          }
+        });
+      },
+      minLength: 2,
+      focus: function() {
+        // prevent value inserted on focus
+        return false;
+      },
+      select: function( event, ui ) {
+        $('#donation_donor_id').val(ui.item.element_id);
+      },
+      refresh: function(){
+        this.element.children("li.ui-menu-item:odd a").addClass("ui-menu-item-alternate");
+      }
+    });
+  }
 });
