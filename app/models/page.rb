@@ -50,6 +50,10 @@ class Page < ActiveRecord::Base
     permalink
   end
 
+  def permalink=(value)
+    write_attribute('permalink', value.parameterize) if value.present?
+  end
+
   def self.from_param(param)
     scoped.where(:permalink => param).first
   end

@@ -80,8 +80,14 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    def render_404
-      render :file => "public/404.html.erb", :status => 404, :layout => false
+    def render_404(exception)
+      begin
+        logger.error exception.message
+        logger.error exception.backtrace.join("\n")
+      rescue
+      ensure
+        render :file => "public/404.html.erb", :status => 404, :layout => false
+      end
     end
 
     def browser_is_ie6_or_lower?
