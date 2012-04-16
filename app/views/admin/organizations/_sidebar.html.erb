@@ -16,11 +16,13 @@
       <%= link_to('Organization projects', admin_organization_projects_path(@organization)) %><% if @organization.projects.present? %> <p><span><%=@organization.projects.count%></span></p><% end %>
     </div>
     </li>
+  <% if false -%>
   <li <%= selected_if_current_page(admin_organization_media_resources_path(@organization)) %>>
     <div class="bottom_selected">
     <%= link_to("Media", admin_organization_media_resources_path(@organization)) %><% if !@organization.media_resources.empty? %> <p><span><%=@organization.media_resources.count%></span></p><% end %>
     </div>
   </li>
+  <% end -%>
   <li <%= selected_if_current_page(admin_organization_resources_path(@organization)) %>>
         <div class="bottom_selected">
           <%= link_to("Resources", admin_organization_resources_path(@organization)) %><% if !@organization.resources.empty? %> <p><span><%=@organization.resources.count%></span></p><% end %>
