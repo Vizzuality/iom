@@ -39,7 +39,7 @@ Galleria.addTheme({
             }, function() {
                 $(this).not('.active').children().stop().fadeTo(400, .6);
             });
-            
+
             // this.addIdleState( this.get('image-nav-left'), { left:-69 });
             // this.addIdleState( this.get('image-nav-right'), { right:-69 });
         }
@@ -56,11 +56,11 @@ Galleria.addTheme({
             }
             this.$('info').toggle( this.hasInfo() );
             $(e.thumbTarget).css('opacity',1).parent().siblings().children().css('opacity',.6);
-        });		
+        });
         this.bind(Galleria.LOADFINISH, function(e) {
-      	this.$('thumbnails-container').animate({opacity:1},1000);		
+      	this.$('thumbnails-container').animate({opacity:1},1000);
         this.$('loader').fadeOut('fast');
-    	this.$('galleria-info').css('display','inline');        
+    	this.$('galleria-info').css('display','inline');
         // this.$('galleria-info').show().css('opacity',.8);
 	    info.show().fadeTo(200, 1);
         });

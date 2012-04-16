@@ -19,6 +19,7 @@ javascripts:
   - jquery.ui.position
 - sites_general_home:
   - plugins/galleria
+  - plugins/galleria.home
   - sites/home_sites
 - sites_home:
   - sites/home
