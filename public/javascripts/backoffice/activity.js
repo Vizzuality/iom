@@ -2,7 +2,7 @@ $(document).ready(function(ev){
 
   var hasChanged = [];
 
-  hasChanged['start'] = false; 
+  hasChanged['start'] = false;
   hasChanged['end']   = false;
 
   function isBlank(str) {
@@ -34,7 +34,7 @@ $(document).ready(function(ev){
       var kind = (id.indexOf("end") != -1) ? "end" : "start";
 
       $('span.combo_date:not(.open)').removeClass('clicked');
-      
+
 
       if (hasChanged[kind] && allSelected(kind)) {
         $('form').closest('form').submit();
@@ -99,6 +99,14 @@ $(document).ready(function(ev){
     }else{
       change.toggleClass('open');
       change.find('.detail').slideToggle();
+    }
+  });
+
+  $('.changes_list .change form input#changes_history_record_reviewed').change(function(evt){
+    evt.preventDefault();
+    console.log($(this).is(':checked'));
+    if ($(this).is(':checked')){
+      $(this).closest('form').submit();
     }
   });
 });
