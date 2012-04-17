@@ -1389,6 +1389,11 @@ div.med div.changes_list div.change .summary .title_by .by{
   color: #999999;
 }
 
+div.med div.changes_list div.change .summary .title_by form {
+  color: black;
+  text-align: right;
+}
+
 div.med div.changes_list div.change .summary .more {
   height: 37px;
   width: 60px;

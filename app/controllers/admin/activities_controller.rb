@@ -6,6 +6,12 @@ class Admin::ActivitiesController < Admin::AdminController
   def show
   end
 
+  def update
+    change = ChangesHistoryRecord.find(params[:id])
+    change.update_attributes!(params[:changes_history_record])
+    redirect_to admin_activity_path
+  end
+
   def get_search_params
     search_params = {
       'who'        => nil,
