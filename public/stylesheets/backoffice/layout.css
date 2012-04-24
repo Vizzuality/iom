@@ -1439,15 +1439,17 @@ div.med div.changes_list div.change .detail ul li div{
 }
 
 div.med div.changes_list div.change .detail ul li .label{
+  display: inline-block;
   color: #999999;
   width: 100px;
-  float: left;
-  clear: both;
 }
 
 div.med div.changes_list div.change .detail ul li .value{
+  display: inline-block;
+  width: 440px;
+  vertical-align: top;
   color: black;
-  height: 12px;
+  line-height: 1.3;
 }
 
 div.med div.changes_list div.change .border_bottom{
