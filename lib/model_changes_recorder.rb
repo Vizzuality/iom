@@ -8,7 +8,7 @@ module ModelChangesRecorder
   def self.included(base)
 
     base.class_eval do
-      has_many  :changes_history_records, :foreign_key => :what_id
+      has_many  :changes_history_records, :foreign_key => :what_id, :order => 'changes_history_records.updated_at desc'
 
       after_save :record_changes
     end if defined?(ActiveRecord::Base) && base < ActiveRecord::Base
