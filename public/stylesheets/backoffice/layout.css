@@ -1439,14 +1439,20 @@ div.med div.changes_list div.change .detail ul li div{
 }
 
 div.med div.changes_list div.change .detail ul li .label{
+  display: -moz-inline-stack;
   display: inline-block;
+  zoom: 1;
+  *display: inline;
   color: #999999;
   width: 100px;
 }
 
 div.med div.changes_list div.change .detail ul li .value{
+  display: -moz-inline-stack;
   display: inline-block;
-  width: 440px;
+  zoom: 1;
+  *display: inline;
+  width: 700px;
   vertical-align: top;
   color: black;
   line-height: 1.3;
@@ -1494,3 +1500,6 @@ div.med div.changes_list div.change .detail ul li:last-child .separator{
   background: url('/images/backoffice/activity/light_rounded_narrow_bottom.png') no-repeat 0 0;
 }
 
+.project_info div.med div.changes_list div.change .detail ul li .value {
+  width: 400px;
+}
