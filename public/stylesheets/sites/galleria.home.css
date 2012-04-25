@@ -1,5 +1,5 @@
-.galleria-container{position:relative;overflow:hidden; width:927px; height:524px;}
-.galleria-stage{position:absolute;top:0px;bottom:0px;left:0px;right:0px;overflow:hidden;width:927px; height:524px;}
+.galleria-container{position:relative;overflow:hidden; width:927px; height:444px;}
+.galleria-stage{position:absolute;top:0px;bottom:0px;left:0px;right:0px;overflow:hidden;width:927px; height:444px;}
 .galleria-counter{position:absolute;top:29px;left:33px;text-align:right;color:#fff;font:normal 11px/1 arial,sans-serif;z-index:2;}
 .galleria-loader{background:#000;width:32px;height:32px;position:absolute;top:260px;left:463px;z-index:2;display:inline;background:url('/images/sites/galleria/loading_white.gif') no-repeat 2px 2px;}
 .galleria-info{background:url('/images/sites/home/gallery_info.png') no-repeat 0 0;height:117px;width:897px;padding:15px!important;z-index:89;z-index:2;position:absolute; bottom:0px; left:0px;}
