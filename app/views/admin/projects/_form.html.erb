@@ -716,11 +716,9 @@
 <!-- ################################################ -->
 <!-- ################################################ -->
 
-
-
-
-
-  <%= f.submit '', :class => "#{'error' if @project.invalid? && action_name != 'new'}" %>
+  <div class="submit">
+    <%= f.submit '', :class => "#{'error' if @project.invalid? && action_name != 'new'}" %>
+  </div>
   <!-- END EDIT PAGE -->
 
 <%end%>

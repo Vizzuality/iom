@@ -745,8 +745,33 @@ $(document).ready(function(ev){
   $('div.select_dates').css('zIndex', 200);
   $('input#donation_submit').css('zIndex', 100);
 
+  var $submit = $('div.block div.med div.left form.edit_project .submit')
+    , $tabs   = $('div.main_layout div.block div.med div.right ul')
+    , $delete = $('div.main_layout div.block div.med div.right div.delete')
+    , previous_scrolltop = $(document).scrollTop();
 
+  $submit.css({
+           top: $submit.css('top') + (30 - (($tabs.offset().top + $tabs.outerHeight()) - $submit.offset().top))
+         });
 
+  $(document).scroll(function(evt){
+    var $this                  = $(this)
+      , scroll_top             = $this.scrollTop()
+      , button_position        = 100 + scroll_top
+      , button_offset          = $submit.offset().top
+      , delete_offset          = $delete.offset().top
+      , scroll_delta           = scroll_top - previous_scrolltop
+      , button_delete_distance = (button_offset + scroll_delta) - delete_offset
+      ;
+
+    if(button_delete_distance > -75){
+      button_position = delete_offset - 300;
+      scroll_top = previous_scrolltop;
+    }
+
+    $submit.css({top: button_position}, 40);
+    previous_scrolltop = scroll_top;
+  });
 
 });
 

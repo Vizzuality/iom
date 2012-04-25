@@ -818,7 +818,20 @@ div.map_window p {float:left; width:230px; margin:10px 0 0 0; font:normal 13px A
 div.map_window a.save {float:right; width:118px; height:32px; margin:9px 0 0 0; background:url('/images/backoffice/projects/save_position.png') no-repeat 0 0; text-indent:-9999px;}
 div.map_window a.save:hover {background-position:0 -32px; cursor:pointer;}
 
+div.block div.med div.left form.edit_project .submit {
+  position: absolute;
+  right: -197px;
+  top: 100px;
+  height: 55px;
+  width: 175px;
+  background: url("/images/backoffice/common/submit_tab.png") no-repeat scroll right 0 transparent;
+}
 
+div.block div.med div.left form.edit_project .submit input#project_submit {
+  display: block;
+  width: 163px;
+  margin: 12px 6px;
+}
 
 /* DONATIONS PROJECT */
 /*resources*/
