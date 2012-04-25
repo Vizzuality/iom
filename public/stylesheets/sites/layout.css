@@ -35,7 +35,7 @@ div.wrapper {float:left; margin:0; padding:0;}
 
 
 /*HOME SITES*/
-div#header_sites {width:100%; height:34px; padding:70px 0 0 0; margin:0 0 0 10px;}
+div#header_sites {width:100%; height:34px; padding:35px 0 0 0; margin:0 0 0 10px;}
 div#header_sites h1 {float:left; position:relative; font:normal 24px "PT Sans Bold"; color:#4A4A4A; width:auto; text-shadow:0 -1px white; margin:0 5px 0 0;}
 div#header_sites h1 a {color:#4A4A4A;}
 div#header_sites h1 span {position:absolute; top:-13px; right:0; font:normal 11px "PT Sans Bold"; color:#8B8B8B;}
@@ -46,13 +46,13 @@ div#header_sites ul.menu li.last {margin:0;}
 div#header_sites ul.menu li a {float:left; font:normal 13px "PT Sans Bold"; color:#808080; text-decoration:none;}
 div#header_sites ul.menu li a:hover {cursor:pointer; text-decoration:underline!important;}
 
-div#gallery {position: relative; float:left; width:958px; height:548px; background:url('/images/sites/home/bkg_gallery.png') no-repeat 0 0; margin:45px 0 0;}
-div#gallery div.content_gallery {float:left; margin:10px 0 0 10px; width:927px; height:524px; overflow:hidden;}
+div#gallery {position: relative; float:left; width:958px; height:469px; background:url('/images/sites/home/bkg_gallery.png') no-repeat 0 0; margin:27px 0 0;}
+div#gallery div.content_gallery {float:left; margin:10px 0 0 13px; width:927px; height:444px; overflow:hidden;}
 div#gallery a.credits{position: absolute; right: 50px; bottom: 126px; z-index: 100; font-family: Arial; font-size: 11px; color: #696A6C; text-decoration: underline;}
-div#gallery img {float:left; width:927px; height:524px; margin:0;}
+div#gallery img {float:left; width:927px; height:444px; margin:0;}
 
 ul#gallery_thumbails {float:left; width:950px; margin:0;}
-ul#gallery_thumbails li {float:left; width:220px; margin:30px 23px 0 0;}
+ul#gallery_thumbails li {float:left; width:220px; margin:25px 23px 0 0;}
 ul#gallery_thumbails li div#image {float:left; width:218px; height:131px; background:url('/images/sites/home/bkg_thumbnail.png') no-repeat 0 0;}
 ul#gallery_thumbails li div#image img {float:left; width:203px; height:114px; margin:7px;}
 ul#gallery_thumbails li a.site_name {float:left; width:100%; margin:5px 0 0 9px; font:normal 15px "PT Sans Bold"; color:#808080; text-shadow:0 -1px white; text-transform:uppercase;}
