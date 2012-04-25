@@ -80,10 +80,12 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    def render_404(exception)
+    def render_404(exception = nil)
       begin
-        logger.error exception.message
-        logger.error exception.backtrace.join("\n")
+        if exception
+          logger.error exception.message
+          logger.error exception.backtrace.join("\n")
+        end
       rescue
       ensure
         render :file => "public/404.html.erb", :status => 404, :layout => false
