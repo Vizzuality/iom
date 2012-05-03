@@ -83,6 +83,7 @@ class Admin::ProjectsController < Admin::AdminController
 
   def create
     @project = new_project(params[:project])
+    @project.updated_by = current_user
     if @project.valid? && @project.save
       redirect_to edit_admin_project_path(@project), :flash => {:success => 'Project has been created successfully'}
     else
