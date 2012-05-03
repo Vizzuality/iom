@@ -750,9 +750,11 @@ $(document).ready(function(ev){
     , $delete = $('div.main_layout div.block div.med div.right div.delete')
     , previous_scrolltop = $(document).scrollTop();
 
-  $submit.css({
-           top: $submit.css('top') + (30 - (($tabs.offset().top + $tabs.outerHeight()) - $submit.offset().top))
-         });
+  if ($submit.length > 0){
+    $submit.css({
+      top: $submit.css('top') + (30 - (($tabs.offset().top + $tabs.outerHeight()) - $submit.offset().top))
+    });
+  }
 
   $(document).scroll(function(evt){
     var $this                  = $(this)
