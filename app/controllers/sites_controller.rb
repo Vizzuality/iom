@@ -11,6 +11,7 @@ class SitesController < ApplicationController
   end
 
   def general_home
+    @main_page = MainPage.order('id asc').first
     @sites = Site.published.paginate :per_page => 20, :page => params[:page], :order => 'id DESC'
     render :general_home
   end
@@ -28,13 +29,13 @@ class SitesController < ApplicationController
         if @site.geographic_context_country_id
           sql="select r.id,count(ps.project_id) as count,r.name,r.center_lon as lon,
                     r.center_lat as lat,r.name,
-                    
+
                     CASE WHEN count(distinct ps.project_id) > 1 THEN
-                        '/location/'||r.path 
+                        '/location/'||r.path
                     ELSE
                         '/projects/'||(array_to_string(array_agg(ps.project_id),''))
                     END as url,
-                    
+
                     r.code
                     from ((projects_regions as pr inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{@site.id})
                     inner join projects as p on pr.project_id=p.id and (p.end_date is null OR p.end_date > now())
@@ -43,13 +44,13 @@ class SitesController < ApplicationController
         else
           sql="select c.id,count(ps.project_id) as count,c.name,c.center_lon as lon,
                     c.center_lat as lat,
-                    
+
                     CASE WHEN count(distinct ps.project_id) > 1 THEN
-                        '/location/'||c.id 
+                        '/location/'||c.id
                     ELSE
                         '/projects/'||(array_to_string(array_agg(ps.project_id),''))
                     END as url,
-                    
+
                     iso2_code as code
                     from countries_projects as cp
                     inner join projects_sites as ps on cp.project_id=ps.project_id and site_id=#{@site.id}
@@ -114,10 +115,5 @@ class SitesController < ApplicationController
 
   def contact
   end
-
-  def sites_layout
-    @site ? 'site_layout' : 'root_layout'
-  end
-  private :sites_layout
 
 end
