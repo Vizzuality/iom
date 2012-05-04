@@ -1,5 +1,6 @@
 
   <ul>
+    <% if @site.present? -%>
     <li <%= selected_if_current_page(edit_admin_site_path(@site)) %>>
       <%= link_to('Basic information', edit_admin_site_path(@site)) %>
     </li>
@@ -8,23 +9,20 @@
     </li>
     <li <%= selected_if_current_page(projects_admin_site_path(@site)) %>>
       <%= link_to("Site projects", projects_admin_site_path(@site)) %><% if !@site.total_projects!=0 %> <p><span><%=@site.total_projects%></span></p><% end %></li>
-    <!-- li <%= selected_if_current_page(admin_site_media_resources_path(@site)) %>>
-      <%= link_to("Media", admin_site_media_resources_path(@site)) %><% if !@site.media_resources.empty? %>   <p><span><%=@site.media_resources.count%></span></p><% end %></li -->
-    <!-- li <%= selected_if_current_page(admin_site_resources_path(@site)) %>>
-      <%= link_to("Resources", admin_site_resources_path(@site)) %><% if !@site.resources.empty? %> <p><span><%=@site.resources.count%></span></p><% end %></li  -->
-    <li <%= selected_if_current_page(admin_site_pages_path(@site)) %>>
+    <% end -%>
+    <li <%= selected_if_current_page(pages_path_for_home_or_site) %>>
       <div class="bottom_selected">
-        <%= link_to("Pages", admin_site_pages_path(@site), :class=>"basic") %><% if @site.pages.present? && controller_name != 'pages' %> <p><span><%=@site.pages.count%></span></p><% end %>
+        <%= link_to("Pages", pages_path_for_home_or_site, :class=>"basic") %><% if @site.present? && @site.pages.present? && controller_name != 'pages' %> <p><span><%=@site.pages.count%></span></p><% end %>
         <% if controller_name == 'pages' %>
          <span class="list">
-           <% @site.pages.highlighted.each do |highlighted_page| %>
-            <p class="<%= 'no' if current_page?(edit_admin_site_page_path(@site, highlighted_page)) %>">
-              <%= link_to_unless_current(highlighted_page.title, edit_admin_site_page_path(@site, highlighted_page)) %>
+           <% @all_pages.each do |highlighted_page| %>
+            <p class="<%= 'no' if current_page?(edit_page_path_for_home_or_site(highlighted_page)) %>">
+              <%= link_to_unless_current(highlighted_page.title, edit_page_path_for_home_or_site(highlighted_page)) %>
             </p>
             <% if highlighted_page.children.any? %>
               <% highlighted_page.children.each do |child_page| %>
                 <p class="sublist">
-                  <%= link_to(child_page.title, edit_admin_site_page_path(@site, child_page)) %>
+                  <%= link_to(child_page.title, edit_page_path_for_home_or_site(child_page)) %>
                 </p>
               <% end %>
             <% end %>
@@ -36,8 +34,10 @@
 
   </ul>
 
-  <div class="delete">
-    <h5 class="museo_sans">DELETE THIS SITE</h5>
-    <p>Clicking the button below you will delete permanently this site. Please take care of the domain that was pointing to this site.</p>
-    <%= link_to("Delete this SITE", '#', :destroy_url => admin_site_path(@site), :att_name => 'Site') %>
-  </div>
+  <% if @site.present? -%>
+    <div class="delete">
+      <h5 class="museo_sans">DELETE THIS SITE</h5>
+      <p>Clicking the button below you will delete permanently this site. Please take care of the domain that was pointing to this site.</p>
+      <%= link_to("Delete this SITE", '#', :destroy_url => admin_site_path(@site), :att_name => 'Site') %>
+    </div>
+  <% end -%>
