@@ -94,7 +94,7 @@ div.block div.med div.right ul li.selected {float:left; width:auto; padding:15px
 div.block div.med div.right ul li.disabled {width:200px;}
 div.block div.med div.right ul li.disabled a {color:#cccccc;}
 div.block div.med div.right ul li a {float:left; font:bold 15px Arial; color:#E93E3F; padding:0 0 0 20px;}
-div.block div.med div.right ul li p {float:left; margin:2px 0 0 7px; height:14px; padding:0 0 0 5px; background:url('/images/backoffice/common/amount_left.png') no-repeat 0 0;}
+div.block div.med div.right ul li p {float:left; margin:2px 0 0 7px; padding:0 0 0 5px; background:url('/images/backoffice/common/amount_left.png') no-repeat 0 0;}
 div.block div.med div.right ul li p span {float:left; padding:1px 7px 1px 2px; height:12px; line-height:12px; background:url('/images/backoffice/common/amount_right.png') no-repeat right 0; font:bold 11px Arial; color:white;}
 div.block div.med div.right ul li.selected a {color:#333333;}
 div.block div.med div.right ul li.selected p {background-position:0 -14px;}

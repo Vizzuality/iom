@@ -4,21 +4,21 @@
         <div class="top"></div>
         <div class="med">
           <div class="left">
-            <h2 class="museo_sans"><%= @site.name %> pages</h2>
+            <h2 class="museo_sans"><%= home_or_site %> pages</h2>
             <p><%= pluralize(@pages.count, 'page','pages') %></p>
             <ul class="pages">
               <% @pages.each do |page| %>
                 <li>
                   <div class="head <%= page.children.empty? ? 'one' :'more' %>">
-                    <h3><%= link_to(page.title, edit_admin_site_page_path(@site, page)) %></h3>
-                    <%= link_to("Delete", '#delete' ,:class=>"delete", :destroy_url=>admin_site_page_path(@site, page.id), :att_name=>"page") %>
+                    <h3><%= link_to(page.title, edit_page_path_for_home_or_site(page)) %></h3>
+                    <%= link_to("Delete", '#delete' ,:class=>"delete", :destroy_url=>page_path_for_home_or_site(page), :att_name=>"page") %>
                   </div>
                   <% if !page.children.empty? %>
                     <div class="body">
                       <% page.children.each do |children| %>
                         <span>
-                          <%= link_to(children.title, edit_admin_site_page_path(@site, children)) %>
-                          <%= link_to("Delete", '#delete', :destroy_url => admin_site_page_path(@site, children.id), :att_name=>"subpage", :class=>"delete") %>
+                          <%= link_to(children.title, edit_page_path_for_home_or_site(children)) %>
+                          <%= link_to("Delete", '#delete', :destroy_url => page_path_for_home_or_site(children), :att_name=>"subpage", :class=>"delete") %>
                         </span>
                       <% end %>
                     </div>
@@ -36,7 +36,7 @@
       </div>
 
       <div class="add_new">
-        <a href="<%= new_admin_site_page_path(@site) %>">Create new page on this site</a>
+        <a href="<%= new_page_path_for_home_or_site %>">Create new page on this site</a>
       </div>
     </div>
 
