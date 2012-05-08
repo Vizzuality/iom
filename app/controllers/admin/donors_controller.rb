@@ -7,7 +7,7 @@ class Admin::DonorsController < Admin::AdminController
     else
       Donor
     end
-    @donors = donors.paginate :per_page => 20, :order => 'created_at DESC', :page => params[:page]
+    @donors = donors.order('name asc').paginate :per_page => 20, :order => 'created_at DESC', :page => params[:page]
     respond_to do |format|
       format.html
       format.json do

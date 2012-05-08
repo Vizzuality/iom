@@ -1,7 +1,7 @@
 class Admin::SitesController < Admin::AdminController
 
   def index
-    @sites = Site.paginate :per_page => 20, :order => 'created_at DESC', :page => params[:page]
+    @sites = Site.order('name asc').paginate :per_page => 20, :order => 'created_at DESC', :page => params[:page]
   end
 
   def new
@@ -19,7 +19,12 @@ class Admin::SitesController < Admin::AdminController
 
   def projects
     @site = Site.find(params[:id])
-    @projects = Project.select("projects.*").from("projects, projects_sites").where("projects_sites.site_id = #{@site.id} and projects_sites.project_id = projects.id").paginate :per_page => 10, :order => 'created_at DESC', :page => params[:page]
+    @projects = Project.
+                select("projects.*").
+                from("projects, projects_sites").
+                where("projects_sites.site_id = #{@site.id} and projects_sites.project_id = projects.id").
+                order('projects.name asc').
+                paginate :per_page => 10, :order => 'created_at DESC', :page => params[:page]
   end
 
   def edit
