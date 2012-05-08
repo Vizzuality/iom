@@ -22,7 +22,7 @@
         <% else -%>
           <% top_parent = @page.top_parent %>
           <h3><%= link_to(top_parent.title, page_path(top_parent)) %></h3>
-          <% pages = top_parent.children %>
+          <% pages = top_parent.children.published %>
           <% if pages.any? %>
             <ul>
               <% pages.each do |child| %>

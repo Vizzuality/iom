@@ -5,7 +5,7 @@ class PagesController < ApplicationController
   layout :sites_layout
 
   def show
-    unless @page = pages.find_by_permalink(params[:id])
+    unless @page = pages.published.find_by_permalink(params[:id])
       raise ActiveRecord::RecordNotFound
     end
   end
@@ -17,7 +17,7 @@ class PagesController < ApplicationController
 
   def pages
     return @site.pages if @site.present?
-    @pages = MainPage.order('order_index asc').all
+    @pages = MainPage.published.order('order_index asc').all
     MainPage
   end
   private :pages

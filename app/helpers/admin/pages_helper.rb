@@ -31,7 +31,7 @@ module Admin::PagesHelper
   end
 
   def create_or_update_pages_path_for_home_or_site
-    return page_path_for_home_or_site(@page) if @page.present?
+    return page_path_for_home_or_site(@page) if @page && @page.persisted?
     pages_path_for_home_or_site
   end
 
