@@ -2,7 +2,7 @@
   <div id="gallery">
     <div class="content_gallery">
       <% @sites.shuffle.each do |site| %>
-        <%= link_to(image_tag(site.aid_map_image.url(:huge), :title => site.try(:name), :desc => truncate(site.short_description, :length => 72), :alt => truncate(site.long_description, :length => 278)), site.aid_map_image.url(:huge)) %>
+        <%= link_to(image_tag(site.aid_map_image.url(:huge), :title => site.try(:name), :desc => truncate(site.short_description, :length => 72), :alt => truncate(site.long_description, :length => 278)), url(site)) %>
       <% end %>
     </div>
     <%= link_to 'Photo credits', '/about#credits', :class => 'credits' %>

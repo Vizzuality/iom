@@ -12,7 +12,6 @@
     name: 'home',
     author: 'Vizzuality',
     version: '1.5',
-    css: '../../stylesheets/sites/galleria.home.css',
     defaults: {
       transition: 'slide',
       thumb_crop: 'height',
