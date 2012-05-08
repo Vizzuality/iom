@@ -45,6 +45,7 @@
             <%= f.fields_for :donor, f.object.build_donor do |donor_fields| %>
               <%= donor_fields.text_field :name, :id => :autocomplete_donor_name %>
             <% end -%>
+            <div class="spinner"></div>
           </span>
         </div>
 

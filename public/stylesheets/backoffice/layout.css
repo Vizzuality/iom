@@ -858,6 +858,7 @@ div.block.donations_project div.med div.left form div#donor_name span {float:lef
 div.block.donations_project div.med div.left form div#donor_name span.error {background-position:0 -32px;}
 div.block.donations_project div.med div.left form div#donor_name span.active {background:url('/images/backoffice/projects/input_donation_name_active.png') no-repeat 0 0; height:33px;}
 div.block.donations_project div.med div.left form div#donor_name span input[type="text"] {border:none; font:normal 13px Arial; color:#999999; position:absolute; top:8px; left:10px; width:253px;}
+div.block.donations_project div.med div.left form div#donor_name span .spinner { display: none; position: absolute; top: 8px; right: 8px; background: url('/images/backoffice/projects/donors_spinner.gif') no-repeat 0 0; width: 16px; height: 16px;}
 div.block.donations_project div.med div.left form div#donation_date {float:left; width:128px; height:64px; margin:3px 7px 0 0;}
 div.block.donations_project div.med div.left form div#donation_date span.combo_donation_date {float:left; background:url('/images/backoffice/projects/date_input_amount.png') no-repeat 0 0; font:normal 15px Arial; color:#333333; width:120px; height:24px; position:relative; margin:4px 0 0 7px; padding:8px 0 0 9px;}
 div.block.donations_project div.med div.left form div#donation_date span.combo_donation_date:hover {cursor:pointer;}
