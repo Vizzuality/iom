@@ -745,32 +745,9 @@ $(document).ready(function(ev){
   $('div.select_dates').css('zIndex', 200);
   $('input#donation_submit').css('zIndex', 100);
 
-  var $window          = $(window)
-    , $submit          = $('div.block div.med div.left form.edit_project .submit')
-    , $tabs            = $('div.main_layout div.block div.med div.right ul')
-    , $delete          = $('div.main_layout div.block div.med div.right div.delete')
-    , container_offset = $submit.closest('.med').offset().top
-    , initial_position = $window.height() - 100;
-
-  if ($submit.length > 0){
-    $submit.css({
-      top: initial_position
-    });
+  if (typeof floatingSubmit == 'function') {
+    floatingSubmit($('form .submit'), $('div.main_layout div.block div.med div.right div.delete'));
   }
-
-  $window.scroll(function(evt){
-    var button_position = $submit.offset().top
-      , delete_position = $delete.offset().top
-      ;
-
-    //if(button_position >= delete_position - 113){
-    if($window.scrollTop() >= 3035){
-      $submit.css({position: 'absolute', top: 3650, left: 438}) ;
-    }else{
-      $submit.css({position: 'fixed', top: initial_position, left: '50%'});
-    }
-  });
-
 });
 
 // This is a function to set date value in correct format

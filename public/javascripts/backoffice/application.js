@@ -201,6 +201,34 @@ $(document).ready(function(ev){
 
 });
 
+
+    var floatingSubmit = function($submit, $delete){
+
+      var $window          = $(window)
+        , container_offset = $submit.closest('.med').offset().top
+        , form_offset      = $submit.closest('form').offset().top
+        , initial_position = $window.height() - 100;
+
+      if ($submit.length > 0){
+        $submit.css({
+          top: initial_position
+        });
+      }
+
+      $window.scroll(function(evt){
+        var button_position = $submit.offset().top
+          , delete_position = $delete.offset().top
+          ;
+
+        if((delete_position - $window.scrollTop()) <= 946){
+          $submit.css({position: 'absolute', top: delete_position - form_offset - 100, left: 438}) ;
+        }else{
+          $submit.css({position: 'fixed', top: initial_position, left: '50%'});
+        }
+      });
+
+    }
+
     // CLICK ON IMPORT LINK TO SIMULATE CLICK ON INPUT FILE (HIDDEN)
     // Window processing CSV
     function importCSV (){

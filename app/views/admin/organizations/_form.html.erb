@@ -243,6 +243,14 @@
   <% if action_name == 'specific_information' %>
     <%= hidden_field_tag :site_id, params[:site_id] %>
   <% end %>
-  <%= f.submit 'Save', :class => "#{'error' if @organization.invalid? && action_name != 'new'}" %>
+  <div class="submit floating">
+    <%= f.submit 'Save', :class => "#{'error' if @organization.invalid? && action_name != 'new'}" %>
+  </div>
+
+  <script type="text/javascript">
+    $(function(){
+      floatingSubmit($('form .submit'), $('div.main_layout div.block div.med div.right div.export_import'))
+    });
+  </script>
 
 <% end -%>

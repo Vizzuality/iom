@@ -613,7 +613,7 @@ div.block.project_info div.med div.left {float:left; width:572px; margin:0 0 0 2
 div.block p.by {float:left; width:100%; font:normal 15px Arial; color:#666666;}
 div.block p.by a {width:auto; font:normal 15px Arial; color:#E93E3F; text-decoration:none;}
 div.block p.by a:hover {text-decoration:underline;}
-div.block.project_info div.med div.left form {float:left; width:100%; height:auto; margin:5px 0 0 0; /*padding:0 0 15px 0;*/ position:relative; z-index:1;}
+div.block div.med div.left form {float:left; width:100%; height:auto; margin:5px 0 0 0; /*padding:0 0 15px 0;*/ position:relative; z-index:1;}
 
 div.block.project_info div.med div.left form input[type="checkbox"]{float:left; visibility:hidden; width:2px;}
 div.block.project_info div.med div.left form label {position:relative; float:left; margin:20px 0 0 3px; font:bold 11px Arial; color:#999999; width:100%; text-transform:uppercase; z-index:1;}
@@ -818,7 +818,7 @@ div.map_window p {float:left; width:230px; margin:10px 0 0 0; font:normal 13px A
 div.map_window a.save {float:right; width:118px; height:32px; margin:9px 0 0 0; background:url('/images/backoffice/projects/save_position.png') no-repeat 0 0; text-indent:-9999px;}
 div.map_window a.save:hover {background-position:0 -32px; cursor:pointer;}
 
-div.block div.med div.left form.edit_project .submit {
+div.block div.med div.left form .submit.floating {
   position: fixed;
   top: 500px;
   left: 50%;
@@ -828,10 +828,10 @@ div.block div.med div.left form.edit_project .submit {
   background: url("/images/backoffice/common/submit_tab.png") no-repeat scroll right 0 transparent;
 }
 
-div.block div.med div.left form.edit_project .submit input#project_submit {
+div.block div.med div.left form .submit.floating input {
   display: block;
   width: 163px;
-  margin: 12px 6px;
+  margin: 12px 6px !important;
 }
 
 /* DONATIONS PROJECT */
