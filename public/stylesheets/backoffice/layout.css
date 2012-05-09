@@ -830,7 +830,7 @@ div.block div.med div.left form .submit.floating {
 
 div.block div.med div.left form .submit.floating input {
   display: block;
-  width: 163px;
+  width: 163px !important;
   margin: 12px 6px !important;
 }
 
