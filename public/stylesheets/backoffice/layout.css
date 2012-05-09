@@ -819,9 +819,10 @@ div.map_window a.save {float:right; width:118px; height:32px; margin:9px 0 0 0; 
 div.map_window a.save:hover {background-position:0 -32px; cursor:pointer;}
 
 div.block div.med div.left form.edit_project .submit {
-  position: absolute;
-  right: -197px;
-  top: 100px;
+  position: fixed;
+  top: 500px;
+  left: 50%;
+  margin-left: 156px;
   height: 55px;
   width: 175px;
   background: url("/images/backoffice/common/submit_tab.png") no-repeat scroll right 0 transparent;

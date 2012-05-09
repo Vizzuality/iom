@@ -745,34 +745,30 @@ $(document).ready(function(ev){
   $('div.select_dates').css('zIndex', 200);
   $('input#donation_submit').css('zIndex', 100);
 
-  var $submit = $('div.block div.med div.left form.edit_project .submit')
-    , $tabs   = $('div.main_layout div.block div.med div.right ul')
-    , $delete = $('div.main_layout div.block div.med div.right div.delete')
-    , previous_scrolltop = $(document).scrollTop();
+  var $window          = $(window)
+    , $submit          = $('div.block div.med div.left form.edit_project .submit')
+    , $tabs            = $('div.main_layout div.block div.med div.right ul')
+    , $delete          = $('div.main_layout div.block div.med div.right div.delete')
+    , container_offset = $submit.closest('.med').offset().top
+    , initial_position = $window.height() - 100;
 
   if ($submit.length > 0){
     $submit.css({
-      top: $submit.css('top') + (30 - (($tabs.offset().top + $tabs.outerHeight()) - $submit.offset().top))
+      top: initial_position
     });
   }
 
-  $(document).scroll(function(evt){
-    var $this                  = $(this)
-      , scroll_top             = $this.scrollTop()
-      , button_position        = 100 + scroll_top
-      , button_offset          = $submit.offset().top
-      , delete_offset          = $delete.offset().top
-      , scroll_delta           = scroll_top - previous_scrolltop
-      , button_delete_distance = (button_offset + scroll_delta) - delete_offset
+  $window.scroll(function(evt){
+    var button_position = $submit.offset().top
+      , delete_position = $delete.offset().top
       ;
 
-    if(button_delete_distance > -75){
-      button_position = delete_offset - 300;
-      scroll_top = previous_scrolltop;
+    //if(button_position >= delete_position - 113){
+    if($window.scrollTop() >= 3035){
+      $submit.css({position: 'absolute', top: 3650, left: 438}) ;
+    }else{
+      $submit.css({position: 'fixed', top: initial_position, left: '50%'});
     }
-
-    $submit.css({top: button_position}, 40);
-    previous_scrolltop = scroll_top;
   });
 
 });
