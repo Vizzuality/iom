@@ -102,12 +102,16 @@ $(document).ready(function(ev){
     }
   });
 
-  $('.changes_list .change form input#changes_history_record_reviewed').change(function(evt){
+  $('.changes_list .change .reviewed form').submit(function(evt){
     evt.preventDefault();
-    console.log($(this).is(':checked'));
-    if ($(this).is(':checked')){
-      $(this).closest('form').submit();
-    }
+    var $form    = $(this)
+      , $hidden  = $form.find('.value')
+      , reviewed = $hidden.val()
+      ;
+
+    $form.closest('.reviewed').toggleClass('checked');
+    $hidden.val(reviewed == 'true' ? false : true);
+    $.post($form.attr('action'), $form.serialize());
   });
 });
 

@@ -9,6 +9,8 @@ class Admin::ActivitiesController < Admin::AdminController
   def update
     change = ChangesHistoryRecord.find(params[:id])
     change.update_attributes!(params[:changes_history_record])
+
+    render :nothing => true  and return if request.xhr?
     redirect_to admin_activity_path
   end
 

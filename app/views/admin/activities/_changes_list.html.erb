@@ -3,6 +3,16 @@
     <div class="change">
       <div class="border_top"></div>
       <div class="summary">
+        <div class="reviewed <%= 'checked' if change.reviewed %>">
+          <%= form_for change, :url => admin_changes_history_record_path(change), :html_options => {:method => :put} do |f| %>
+            <%= f.hidden_field :reviewed, :value => change.reviewed, :class => :value %>
+            <button type="submit">
+              <span class="arrow"></span>
+            </button>
+            <%= f.submit '', :class => :button %>
+          <% end -%>
+        </div>
+
         <div class="date_time">
           <p class="date"><%= l change.when.to_date, :format => '%m/%d/%Y' %></p>
           <p class="time"><%= l change.when.to_time, :format => :hour_and_minutes %></p>
@@ -17,10 +27,6 @@
             <p class="title"><%= t('.header.changes_count_all_html', :count => change.changes_count, :what => link_to(truncate(change.what_name, :length => 70), edit_admin_project_path(change.what), :title => change.what_name)) %></p>
           <% end -%>
           <p class="by"><%= t('.header.by_html', :user => change.who_email, :organization => link_to(truncate(change.who_organization_name, :length => 26), url_for_user_organization(change.who_organization), :title => change.who_organization_name)) %></p>
-          <%= form_for change, :url => admin_changes_history_record_path(change.id) do |f| %>
-            <%= f.label :reviewed %>
-            <%= f.check_box :reviewed %>
-          <% end -%>
         </div>
 
         <div class="more">

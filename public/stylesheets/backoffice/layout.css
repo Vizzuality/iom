@@ -1345,24 +1345,68 @@ div.med div.changes_list div.change {
   margin-bottom: 19px;
 }
 
-div.med div.changes_list div.change .border_top{
+div.med div.changes_list div.change .border_top {
   background: url('/images/backoffice/activity/blue_rounded_wide_top.png') no-repeat 0 0;
   height: 5px;
   width: 874px;
 }
 
-div.med div.changes_list div.change .summary{
+div.med div.changes_list div.change .summary {
   background-color: #e0edf1;
   height: 47px;
   margin: 0;
-  padding: 10px;
+  padding: 10px 0 10px;
   clear: both;
+}
+
+div.med div.changes_list div.change.open .summary {
+  height: 50px;
+}
+
+div.med div.changes_list div.change .summary .reviewed {
+  width: 55px;
+  height: 75px;
+  border-color: #CCC;
+  border-style: solid;
+  border-width: 0 1px 0 0;
+  float: left;
+  margin-top: -14px;
+}
+
+div.med div.changes_list div.change .summary .reviewed button {
+  position: relative;
+  width: 55px;
+  height: 67px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+div.med div.changes_list div.change .summary .reviewed input {
+  display: none;
+}
+
+div.med div.changes_list div.change .summary .reviewed button .arrow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -4.5px;
+  margin-left: -6px;
+  display: block;
+  width: 13px;
+  height: 9px;
+  border: 0;
+  background: url('/images/backoffice/activity/check.png') no-repeat 0 0;
+}
+
+div.med div.changes_list div.change .summary .reviewed.checked button .arrow {
+  background-position: 0 -10px;
 }
 
 div.med div.changes_list div.change .summary .date_time {
   height: 37px;
-  width: 79px;
-  padding: 5px;
+  width: 65px;
+  padding: 5px 17px;
   float: left;
   font-size: 13px;
 }
@@ -1379,12 +1423,12 @@ div.med div.changes_list div.change .summary .date_time .time {
 
 div.med div.changes_list div.change .summary .title_by {
   height: 37px;
-  width: 653px;
+  width: 608px;
   padding: 5px 20px;
   float: left;
   border-color: #cccccc;
   border-style: solid;
-  border-width: 0 1px 0 1px;
+  border-width: 0 0 0 1px;
 }
 
 div.med div.changes_list div.change .summary .title_by .title{
@@ -1503,7 +1547,7 @@ div.med div.changes_list div.change .detail ul li:last-child .separator{
 }
 
 .project_info div.med div.changes_list div.change .summary .title_by {
-  width: 343px;
+  width: 298px;
 }
 
 .project_info div.med div.changes_list div.change .border_top{
