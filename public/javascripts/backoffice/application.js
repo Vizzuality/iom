@@ -205,9 +205,12 @@ $(document).ready(function(ev){
     var floatingSubmit = function($submit, $delete){
 
       var $window          = $(window)
-        , container_offset = $submit.closest('.med').offset().top
+        , container        = $submit.closest('.med')
+        , container_offset = container.offset().top
         , form_offset      = $submit.closest('form').offset().top
-        , initial_position = $window.height() - 100;
+        , initial_position = $window.height() - 100
+        , button_position  = null
+        , delete_position  = null;
 
       if ($submit.length > 0){
         $submit.css({
@@ -216,10 +219,14 @@ $(document).ready(function(ev){
       }
 
       $window.scroll(function(evt){
-        var button_position = $submit.offset().top
-          , delete_position = $delete.offset().top
-          ;
+        button_position = $submit.offset().top;
+        if ($delete.length > 0){
+          delete_position = $delete.offset().top;
+        }else{
+          delete_position = container_offset + container.height() + 85;
+        }
 
+        console.log(delete_position);
         if((delete_position - $window.scrollTop()) <= 946){
           $submit.css({position: 'absolute', top: delete_position - form_offset - 100, left: 438}) ;
         }else{
