@@ -1,9 +1,9 @@
 <% if changes.present? %>
   <% changes.each do |change| %>
-    <div class="change">
+    <div class="change <%= 'checked' if change.reviewed %>">
       <div class="border_top"></div>
       <div class="summary">
-        <div class="reviewed <%= 'checked' if change.reviewed %>">
+        <div class="reviewed">
           <%= form_for change, :url => admin_changes_history_record_path(change), :html_options => {:method => :put} do |f| %>
             <%= f.hidden_field :reviewed, :value => change.reviewed, :class => :value %>
             <button type="submit">

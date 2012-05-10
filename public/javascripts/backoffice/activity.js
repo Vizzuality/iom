@@ -109,7 +109,7 @@ $(document).ready(function(ev){
       , reviewed = $hidden.val()
       ;
 
-    $form.closest('.reviewed').toggleClass('checked');
+    $form.closest('.change').toggleClass('checked');
     $hidden.val(reviewed == 'true' ? false : true);
     $.post($form.attr('action'), $form.serialize());
   });
