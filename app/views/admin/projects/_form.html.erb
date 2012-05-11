@@ -167,9 +167,10 @@
   </div>
   <div class="field">
     <ul class="dates">
-      <li class="date">
+
+      <li class="comboselect date">
         <label>START DATE
-        <strong>&nbsp;</strong>
+        <strong>*</strong>
         <!-- FIELD DESCRIPTION -->
         <div class="field_info">
           <span class="info">i</span>
@@ -186,21 +187,23 @@
           </div>
         </div>
         <!-- END FIELD DESCRIPTION -->
-
         </label>
-        <span id="start_date" class="combo_date"><p>09/10/2010</p>
-          <div class="select_dates start_date">
-            <p id="month" class="title">MONTH</p>
-            <p id="day" class="title">DAY</p>
-            <p id="year" class="title">YEAR</p>
 
-              <%= f.date_select :start_date, :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year]  %>
-          </div>
+        <span class="combo_date"><p><%= l @project.start_date, :format => '%m/%d/%Y' rescue '' %></p>
+        <div class="select_dates">
+          <p id="month" class="title">MONTH</p>
+          <p id="day" class="title">DAY</p>
+          <p id="year" class="title">YEAR</p>
+
+          <%= f.date_select :start_date, { :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year],  :include_blank => true}, { :class => :"chzn-date-select", :"data-placeholder" => ' '}  %>
+        </div>
         </span>
       </li>
-      <li class="date">
+
+
+      <li class="comboselect date">
         <label>END DATE
-        <strong>&nbsp;</strong>
+        <strong>*</strong>
         <!-- FIELD DESCRIPTION -->
         <div class="field_info">
           <span class="info">i</span>
@@ -219,17 +222,17 @@
         <!-- END FIELD DESCRIPTION -->
 
         </label>
+        <span class="combo_date"><p><%= l @project.end_date, :format => '%m/%d/%Y' rescue '' %></p>
+        <div class="select_dates">
+          <p id="month" class="title">MONTH</p>
+          <p id="day" class="title">DAY</p>
+          <p id="year" class="title">YEAR</p>
 
-        <span id="end_date" class="combo_date"><p>09/10/2010</p>
-          <div class="select_dates end_date">
-            <p id="month" class="title">MONTH</p>
-            <p id="day" class="title">DAY</p>
-            <p id="year" class="title">YEAR</p>
-
-              <%= f.date_select :end_date, :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year]  %>
-          </div>
+          <%= f.date_select :end_date, { :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year],  :include_blank => true}, { :class => :"chzn-date-select", :"data-placeholder" => ' '}  %>
+        </div>
         </span>
       </li>
+
     </ul>
   </div>
 
@@ -677,32 +680,34 @@
   <h3 class="section museo_sans">INTERNAL MANAGEMENT</h3>
   <div class="two_columns">
     <ul class="dates">
-      <li class="date">
-        <label>DATE PROVIDED</label>
+      <li class="comboselect date">
+        <%= f.label :date_provided, 'DATE PROVIDED' %>
 
-        <span id="date_provided" class="combo_date"><p></p>
+        <span class="combo_date"><p><%= l @project.date_provided, :format => '%m/%d/%Y' rescue '' %></p>
         <div class="select_dates">
           <p id="month" class="title">MONTH</p>
           <p id="day" class="title">DAY</p>
           <p id="year" class="title">YEAR</p>
 
-          <%= f.date_select :date_provided, :start_year => 1970, :end_year => 100.years.since.year, :order => [:month, :day, :year]  %>
+          <%= f.date_select :date_provided, { :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year],  :include_blank => true}, { :class => :"chzn-date-select", :"data-placeholder" => ' '}  %>
         </div>
         </span>
       </li>
-      <li class="date">
-        <label>DATE UPDATED</label>
 
-        <span id="date_updated" class="combo_date"><p></p>
-        <div class="select_dates end_date">
+      <li class="comboselect date">
+        <%= f.label :date_updated, 'DATE UPDATED' %>
+
+        <span class="combo_date"><p><%= l @project.date_updated, :format => '%m/%d/%Y' rescue '' %></p>
+        <div class="select_dates">
           <p id="month" class="title">MONTH</p>
           <p id="day" class="title">DAY</p>
           <p id="year" class="title">YEAR</p>
 
-          <%= f.date_select :date_updated, :start_year => 1970, :end_year => 100.years.since.year, :order => [:month, :day, :year]  %>
+          <%= f.date_select :date_updated, { :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year],  :include_blank => true}, { :class => :"chzn-date-select", :"data-placeholder" => ' '}  %>
         </div>
-     </span>
+        </span>
       </li>
+
     </ul>
   </div>
   <%#<div id="project_needs" class="field">%>

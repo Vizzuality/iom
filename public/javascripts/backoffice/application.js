@@ -227,7 +227,6 @@ $(document).ready(function(ev){
           delete_position = container_offset + container.height() + 85;
         }
 
-        console.log(delete_position);
         if((delete_position - $window.scrollTop()) <= 946){
           $submit.css({position: 'absolute', top: delete_position - form_offset - 100, left: 438}) ;
         }else{
