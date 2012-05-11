@@ -189,7 +189,8 @@
         <!-- END FIELD DESCRIPTION -->
         </label>
 
-        <span class="combo_date"><p><%= l @project.start_date, :format => '%m/%d/%Y' rescue '' %></p>
+        <span class="combo_date <%= 'error' if @project.errors[:start_date].present? && action_name != 'new' %>"><p><%= l @project.start_date, :format => '%m/%d/%Y' rescue '' %></p>
+        <%= errors_for @project, :start_date %>
         <div class="select_dates">
           <p id="month" class="title">MONTH</p>
           <p id="day" class="title">DAY</p>
@@ -222,7 +223,8 @@
         <!-- END FIELD DESCRIPTION -->
 
         </label>
-        <span class="combo_date"><p><%= l @project.end_date, :format => '%m/%d/%Y' rescue '' %></p>
+        <span class="combo_date <%= 'error' if @project.errors[:end_date].present? && action_name != 'new' %>"><p><%= l @project.end_date, :format => '%m/%d/%Y' rescue '' %></p>
+          <%= errors_for @project, :end_date %>
         <div class="select_dates">
           <p id="month" class="title">MONTH</p>
           <p id="day" class="title">DAY</p>
