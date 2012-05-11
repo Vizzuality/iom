@@ -203,6 +203,7 @@ $(document).ready(function(ev){
 
 
     var floatingSubmit = function($submit, $delete){
+      if ($submit.length == 0) return;
 
       var $window          = $(window)
         , container        = $submit.closest('.med')
