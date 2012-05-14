@@ -196,7 +196,7 @@
           <p id="day" class="title">DAY</p>
           <p id="year" class="title">YEAR</p>
 
-          <%= f.date_select :start_date, { :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year],  :include_blank => true}, { :class => :"chzn-date-select", :"data-placeholder" => ' '}  %>
+          <%= f.date_select :start_date, { :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year],  :prompt => '-'}, { :class => :"chzn-date-select", :"data-placeholder" => ' '}  %>
         </div>
         </span>
       </li>
@@ -691,7 +691,7 @@
           <p id="day" class="title">DAY</p>
           <p id="year" class="title">YEAR</p>
 
-          <%= f.date_select :date_provided, { :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year],  :include_blank => true}, { :class => :"chzn-date-select", :"data-placeholder" => ' '}  %>
+          <%= f.date_select :date_provided, { :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year],  :prompt => '-'}, { :class => :"chzn-date-select", :"data-placeholder" => ' '}  %>
         </div>
         </span>
       </li>
@@ -705,7 +705,7 @@
           <p id="day" class="title">DAY</p>
           <p id="year" class="title">YEAR</p>
 
-          <%= f.date_select :date_updated, { :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year],  :include_blank => true}, { :class => :"chzn-date-select", :"data-placeholder" => ' '}  %>
+          <%= f.date_select :date_updated, { :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year],  :prompt => '-'}, { :class => :"chzn-date-select", :"data-placeholder" => ' '}  %>
         </div>
         </span>
       </li>
