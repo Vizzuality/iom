@@ -74,6 +74,17 @@ jQuery.fn.dateCombos = (function(options){
         hide_search: true
       });
 
+      var $chosen_combo = $this.next('.chzn-container');
+      $chosen_combo.click(function(e){
+        $combos.not($this).each(function(){
+          $(this).data('chosen').close_field();
+        });
+      });
+
+      //$(this).click(function(evt){
+        //console.log(evt);
+      //});
+
     });
 
     $(document).click(function(event) {
