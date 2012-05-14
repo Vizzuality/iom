@@ -12,6 +12,7 @@ jQuery.fn.dateCombos = (function(options){
         '2i': 140,
         '3i': 63
       }
+    , all_dates = this
     ;
 
   options = $.extend(defaults, options);
@@ -25,11 +26,12 @@ jQuery.fn.dateCombos = (function(options){
       ev.stopPropagation();
       ev.preventDefault();
 
+      all_dates.removeClass('clicked');
       $widget.addClass('open');
 
       if ($widget.hasClass('clicked')) {
 
-        $widget.filter(':not(.open)').removeClass('clicked');
+        all_dates.filter(':not(.open)').removeClass('clicked');
 
         if (options.submitOnChange && $widget.data('has-changed') && allSelected($combos)) {
           $widget.closest('form').submit();
