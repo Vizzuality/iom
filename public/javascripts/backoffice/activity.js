@@ -2,7 +2,7 @@ $(document).ready(function(ev){
 
   var hasChanged = [];
 
-  hasChanged['start'] = false; 
+  hasChanged['start'] = false;
   hasChanged['end']   = false;
 
   function isBlank(str) {
@@ -34,7 +34,7 @@ $(document).ready(function(ev){
       var kind = (id.indexOf("end") != -1) ? "end" : "start";
 
       $('span.combo_date:not(.open)').removeClass('clicked');
-      
+
 
       if (hasChanged[kind] && allSelected(kind)) {
         $('form').closest('form').submit();
@@ -100,6 +100,18 @@ $(document).ready(function(ev){
       change.toggleClass('open');
       change.find('.detail').slideToggle();
     }
+  });
+
+  $('.changes_list .change .reviewed form').submit(function(evt){
+    evt.preventDefault();
+    var $form    = $(this)
+      , $hidden  = $form.find('.value')
+      , reviewed = $hidden.val()
+      ;
+
+    $form.closest('.change').toggleClass('checked');
+    $hidden.val(reviewed == 'true' ? false : true);
+    $.post($form.attr('action'), $form.serialize());
   });
 });
 

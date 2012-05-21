@@ -162,7 +162,9 @@
   <%= f.hidden_field :theme_id, :value => Theme.first.id %>
   <input type="hidden" name="customization" value="true" />
 
-  <%= f.submit 'Save' %>
+  <div class="submit floating">
+    <%= f.submit 'Save' %>
+  </div>
 
 <% end -%>
 

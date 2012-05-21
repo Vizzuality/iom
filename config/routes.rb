@@ -87,6 +87,8 @@ Iom::Application.routes.draw do
       resources :pages
     end
     resource :activity
+    resources :changes_history_records, :controller => "activities"
+    resources :pages
   end
 
 end

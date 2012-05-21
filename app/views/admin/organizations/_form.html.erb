@@ -77,6 +77,16 @@
       <%= f.text_field :contact_position, :class=>"short" %>
     </div>
 
+    <div class="short_field">
+      <%= f.label :contact_email %>
+      <%= f.text_field :contact_email, :class=>"short" %>
+    </div>
+
+    <div class="short_field last">
+      <%= f.label :contact_phone_number %>
+      <%= f.text_field :contact_phone_number, :class=>"short" %>
+    </div>
+
     <div class="long_field">
       <%= f.label :hq_address %>
       <%= f.text_field :hq_address, :class=>"address" %>
@@ -97,15 +107,6 @@
       <%= f.text_field :contact_state, :class=>"short" %>
     </div>
 
-    <div class="short_field">
-      <%= f.label :contact_email %>
-      <%= f.text_field :contact_email, :class=>"short" %>
-    </div>
-
-    <div class="short_field last">
-      <%= f.label :contact_phone_number %>
-      <%= f.text_field :contact_phone_number, :class=>"short" %>
-    </div>
   </div>
 
   <div class="common">
@@ -118,6 +119,16 @@
     <div class="short_field last">
       <%= f.label :main_data_contact_position, 'DATA CONTACT POSITION' %>
       <%= f.text_field :main_data_contact_position, :class=>"short" %>
+    </div>
+
+    <div class="short_field">
+      <%= f.label :main_data_contact_email, 'DATA CONTACT EMAIL' %>
+      <%= f.text_field :main_data_contact_email, :class=>"short" %>
+    </div>
+
+    <div class="short_field last">
+      <%= f.label :main_data_contact_phone_number, 'DATA CONTACT PHONE NUMBER' %>
+      <%= f.text_field :main_data_contact_phone_number, :class=>"short" %>
     </div>
 
     <div class="short_field">
@@ -135,15 +146,6 @@
       <%= f.text_field :main_data_contact_state, :class=>"short" %>
     </div>
 
-    <div class="short_field">
-      <%= f.label :main_data_contact_email, 'DATA CONTACT EMAIL' %>
-      <%= f.text_field :main_data_contact_email, :class=>"short" %>
-    </div>
-
-    <div class="short_field last">
-      <%= f.label :main_data_contact_phone_number, 'DATA CONTACT PHONE NUMBER' %>
-      <%= f.text_field :main_data_contact_phone_number, :class=>"short" %>
-    </div>
   </div>
 
   <div class="common">
@@ -167,7 +169,7 @@
     </div>
   </div>
 
-  <%= f.fields_for :user, (@organization.user || @organization.build_user) do |user_fields| %>
+  <%= f.fields_for :user, (@organization.user || User.new) do |user_fields| %>
     <div class="common admin">
       <h3>ADMINISTRATOR USER</h3>
       <div class="field">
@@ -177,12 +179,12 @@
 
       <div class="short_field">
         <label>PASSWORD (<a href="#" class="show_password_link">show values</a>)</label>
-        <%= user_fields.password_field :password, :class=>"short password #{'error' if @organization.user.errors.on(:password)}" %>
+        <%= user_fields.password_field :password, :class=>"short password #{'error' if user_fields.object.errors.on(:password)}" %>
       </div>
 
       <div class="short_field last">
         <%= user_fields.label :password_confirmation %>
-        <%= user_fields.password_field :password_confirmation, :class=>"short password #{'error' if @organization.user.errors.on(:password)}" %>
+        <%= user_fields.password_field :password_confirmation, :class=>"short password #{'error' if user_fields.object.errors.on(:password)}" %>
       </div>
 
       <div class="long_field">
@@ -191,7 +193,7 @@
 
       <% if current_user.admin? -%>
         <div class="long_field">
-          <%= link_to 'Blocked NGO', '#', :class => "check block_user #{'selected' if @organization.user && @organization.user.blocked }" %>
+          <%= link_to 'Blocked NGO', '#', :class => "check block_user #{'selected' if user_fields.object && user_fields.object.blocked }" %>
           <%= user_fields.hidden_field :blocked %>
           <%= link_to 'Reset password', '#', :id => 'reset_password', :class => 'preview' %>
         </div>
@@ -241,6 +243,14 @@
   <% if action_name == 'specific_information' %>
     <%= hidden_field_tag :site_id, params[:site_id] %>
   <% end %>
-  <%= f.submit 'Save', :class => "#{'error' if @organization.invalid? && action_name != 'new'}" %>
+  <div class="submit floating">
+    <%= f.submit 'Save', :class => "#{'error' if @organization.invalid? && action_name != 'new'}" %>
+  </div>
+
+  <script type="text/javascript">
+    $(function(){
+      floatingSubmit($('form .submit'), $('div.main_layout div.block div.med div.right div.export_import'))
+    });
+  </script>
 
 <% end -%>

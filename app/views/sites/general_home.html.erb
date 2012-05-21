@@ -1,7 +1,7 @@
   <!-- div id="header_sites" -->
   <div id="gallery">
     <div class="content_gallery">
-      <% @sites.each do |site| %>
+      <% @sites.shuffle.each do |site| %>
         <%= link_to(image_tag(site.aid_map_image.url(:huge), :title => site.try(:name), :desc => truncate(site.short_description, :length => 72), :alt => truncate(site.long_description, :length => 278)), url(site)) %>
       <% end %>
     </div>
@@ -16,6 +16,11 @@
           <%= link_to(image_tag(site.aid_map_image.url(:small), :alt => site.name), url(site)) %>
         </div>
         <a class="site_name" href="<%= url(site) %>"><%= site.name %></a>
+        <% if site.partners.present?%>
+        <p class="sponsor">
+          Site funded by <%= link_to site.partners.first.name, site.partners.first.url %>
+        </p>
+        <% end %>
       </li>
     <% end %>
     <li class="<%= ((@sites.size+1)%4==0) ? 'last' : '' %>">

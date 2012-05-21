@@ -1,8 +1,18 @@
 <% if changes.present? %>
   <% changes.each do |change| %>
-    <div class="change">
+    <div class="change <%= 'checked' if change.reviewed %>">
       <div class="border_top"></div>
       <div class="summary">
+        <div class="reviewed">
+          <%= form_for change, :url => admin_changes_history_record_path(change), :html_options => {:method => :put} do |f| %>
+            <%= f.hidden_field :reviewed, :value => change.reviewed, :class => :value %>
+            <button type="submit">
+              <span class="arrow"></span>
+            </button>
+            <%= f.submit '', :class => :button %>
+          <% end -%>
+        </div>
+
         <div class="date_time">
           <p class="date"><%= l change.when.to_date, :format => '%m/%d/%Y' %></p>
           <p class="time"><%= l change.when.to_time, :format => :hour_and_minutes %></p>

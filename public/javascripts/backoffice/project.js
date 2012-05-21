@@ -745,9 +745,9 @@ $(document).ready(function(ev){
   $('div.select_dates').css('zIndex', 200);
   $('input#donation_submit').css('zIndex', 100);
 
-
-
-
+  if (typeof floatingSubmit == 'function') {
+    floatingSubmit($('form .submit'), $('div.main_layout div.block div.med div.right div.delete'));
+  }
 });
 
 // This is a function to set date value in correct format
@@ -908,24 +908,16 @@ $(function() {
     $("#autocomplete_donor_name").autocomplete({
       style:'donor_names',
       source: function( request, response ) {
-        $('span#donor_name_input').addClass('active');
+        var textbox = $('#autocomplete_donor_name');
         var value = $("#autocomplete_donor_name").val();
+        textbox.next('.spinner').fadeIn('fast');
         $.ajax({
           url: custom_donors_url + value,
           dataType: "json",
           success: function( data ) {
+            textbox.next('.spinner').fadeOut('fast');
             if(data != null) {
-
-              if (data.length > 5){
-                data.splice(0,data.length-5);
-              }
-              response($.map(data, function(donor) {
-                return {
-                  label: donor.name,
-              value: donor.name,
-              element_id: donor.id
-                }
-              }));
+              response(data);
             }
           }
         });
@@ -940,6 +932,8 @@ $(function() {
       },
       refresh: function(){
         this.element.children("li.ui-menu-item:odd a").addClass("ui-menu-item-alternate");
+        console.log(this);
+        $('span#donor_name_input').addClass('active');
       }
     });
   }

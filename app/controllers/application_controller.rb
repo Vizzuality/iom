@@ -102,4 +102,9 @@ class ApplicationController < ActionController::Base
         end
       end
     end
+
+  def sites_layout
+    @site ? 'site_layout' : 'root_layout'
+  end
+  protected :sites_layout
 end

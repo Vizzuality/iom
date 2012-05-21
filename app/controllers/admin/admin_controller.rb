@@ -14,10 +14,10 @@ class Admin::AdminController < ApplicationController
         :active_projects_count => organization.projects.active.count,
         :closed_projects_count => organization.projects.closed.count,
         :website               => organization.website,
-        :contact_information   => [organization.contact_name,
-                                   organization.contact_position,
-                                   organization.contact_phone_number,
-                                   "<a href='#{organization.contact_email}'>#{organization.contact_email}</a>"
+        :contact_information   => [organization.hq_address,
+                                   organization.contact_city,
+                                   organization.contact_zip,
+                                   organization.contact_state
                                   ],
         :logo                  => organization.logo.url(:small)
       } )

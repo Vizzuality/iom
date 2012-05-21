@@ -1,4 +1,4 @@
-$(document).ready(function(ev){    
+$(document).ready(function(ev){
     /************** ADMIN PAGE - INIT (GET PARAMETERS)  ************************** */
 
     // REMOVE SELECTED STYLE (CHECKBOX)
@@ -17,7 +17,7 @@ $(document).ready(function(ev){
         $('li#include_tags').removeClass('selected');
     }
 
-    
+
     // CLEANING TYPOLOGY
     if ($('span.select_combo_typology').length > 0){
         var text = '';
@@ -25,7 +25,7 @@ $(document).ready(function(ev){
         if ($('input#site_project_context_cluster_id').val()){
             id = $('input#site_project_context_cluster_id').val();
             text = $('ul.clusters_or_sectors').find('a#cluster_'+ id+ '.cluster_value').text();
-    
+
         }else if ($('input#site_project_context_sector_id').val()){
             id = $('input#site_project_context_sector_id').val();
             text = $('ul.clusters_or_sectors').find('a#sector_'+ id+ '.sector_value').text();
@@ -70,7 +70,7 @@ $(document).ready(function(ev){
           $(this).parent().addClass('selected');
         }
         $('div.block div.med div.left').resize();
-        
+
       });
 
        $(document).click(function(event) {
@@ -81,7 +81,7 @@ $(document).ready(function(ev){
           };
         });
 
- 
+
       // click on country combo (LIMITED TO A REGION)
       $('li#gc_limited_region').find('span.select_country_combo').live('click',function(ev){
         ev.stopPropagation();
@@ -90,11 +90,11 @@ $(document).ready(function(ev){
         if (!$(this).hasClass('clicked')){
           $(this).addClass('clicked');
         }
-		
+
 		if (!$(this).find('.jspContainer').length > 0){
-			$(this).find('.scroll_pane').jScrollPane({autoReinitialise:false });		   
-		}		
-			
+			$(this).find('.scroll_pane').jScrollPane({autoReinitialise:false });
+		}
+
         $(document).click(function(event) {
           if (!$(event.target).closest('span.select_country_combo').length) {
             $('li#gc_limited_region').find('span.select_country_combo').removeClass('clicked');
@@ -120,7 +120,7 @@ $(document).ready(function(ev){
         if ($(this).parent().hasClass('selected')){
           $(this).parent().removeClass('selected');
           $(this).parent().find('input').val('');
-        
+
           // RESET VALUES
           var id = $(this).parent().attr('id');
           if (id == 'include_sector_cluster'){
@@ -176,7 +176,7 @@ $(document).ready(function(ev){
         }else if ($(this).children('a').hasClass('sector_value')){
 		  id = id.substring(7,id.length);
           $('input#site_project_context_sector_id').val(id);
-          $('input#site_project_context_cluster_id').val('');          
+          $('input#site_project_context_cluster_id').val('');
         }
         $('span.select_combo_typology.clicked').removeClass('clicked');
         $('span.select_combo_typology').find('p.cluster_sector').text(name);
@@ -197,6 +197,8 @@ $(document).ready(function(ev){
         $('span.select_combo_typology.clicked').removeClass('clicked');
 
       });
+
+    floatingSubmit($('form .submit'), $('div.main_layout div.block div.med div.right div.delete'));
 });
 
 // AUTOCOMPLETE TAGS

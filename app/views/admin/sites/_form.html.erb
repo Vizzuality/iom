@@ -157,7 +157,9 @@
       </span>
    </div>
 
-  <%= f.submit 'Save changes', :class => "#{'error' if @site.invalid? && action_name != 'new'}" %>
+   <div class="submit floating">
+    <%= f.submit 'Save changes', :class => "#{'error' if @site.invalid? && action_name != 'new'}" %>
+   </div>
 
 <%end%>
 

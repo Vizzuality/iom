@@ -256,7 +256,9 @@
   <% if action_name == 'specific_information' %>
     <%= hidden_field_tag :site_id, params[:site_id] %>
   <% end %>
-  <%= f.submit 'Save', :class => "#{'error' if @organization.invalid? && action_name != 'new'}" %>
+  <div class="submit floating">
+    <%= f.submit 'Save', :class => "#{'error' if @organization.invalid? && action_name != 'new'}" %>
+  </div>
 
 <% end -%>
 

@@ -79,7 +79,7 @@ class Site < ActiveRecord::Base
                                         :format => 'jpg'
                                       },
                                       :huge => {
-                                        :geometry => "927x524#",
+                                        :geometry => "927x444#",
                                         :format => 'jpg'
                                       }
                                     },

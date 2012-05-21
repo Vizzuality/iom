@@ -7,11 +7,11 @@ class Admin::DonorsController < Admin::AdminController
     else
       Donor
     end
-    @donors = donors.paginate :per_page => 20, :order => 'created_at DESC', :page => params[:page]
+    @donors = donors.order('name asc').paginate :per_page => 20, :order => 'created_at DESC', :page => params[:page]
     respond_to do |format|
       format.html
       format.json do
-        render :json => @donors.map{ |donor| {:name => donor.name.html_safe, :id => donor.id} }.to_json
+        render :json => @donors.first(5).map{ |donor| {:value => donor.name.html_safe, :label => donor.name.html_safe.truncate(40), :element_id => donor.id} }.to_json
       end
     end
   end

@@ -94,7 +94,7 @@ div.block div.med div.right ul li.selected {float:left; width:auto; padding:15px
 div.block div.med div.right ul li.disabled {width:200px;}
 div.block div.med div.right ul li.disabled a {color:#cccccc;}
 div.block div.med div.right ul li a {float:left; font:bold 15px Arial; color:#E93E3F; padding:0 0 0 20px;}
-div.block div.med div.right ul li p {float:left; margin:2px 0 0 7px; height:14px; padding:0 0 0 5px; background:url('/images/backoffice/common/amount_left.png') no-repeat 0 0;}
+div.block div.med div.right ul li p {float:left; margin:2px 0 0 7px; padding:0 0 0 5px; background:url('/images/backoffice/common/amount_left.png') no-repeat 0 0;}
 div.block div.med div.right ul li p span {float:left; padding:1px 7px 1px 2px; height:12px; line-height:12px; background:url('/images/backoffice/common/amount_right.png') no-repeat right 0; font:bold 11px Arial; color:white;}
 div.block div.med div.right ul li.selected a {color:#333333;}
 div.block div.med div.right ul li.selected p {background-position:0 -14px;}
@@ -542,8 +542,8 @@ div.long_search #status_chzn .chzn-search { display:none;}
 div.long_search label {float:left; margin:0 0 0 3px; font:bold 11px Arial; color:#999999;}
 div.long_search form.search {float:left; position:relative; width:100%;}
 div.long_search input[type="text"].main_search {float:left; width:832px; height:29px; margin:5px 0 0 0; padding:7px 36px 5px 10px; font:normal 17px Arial; color:#333; border:none; background:url('/images/backoffice/projects/long_search.png') no-repeat 0 0; line-height:27px;}
-div.long_search input[type="submit"] {position:absolute; width:15px; height:15px; right:20px; top:31px; background:url('/images/backoffice/donors/lens.jpg') no-repeat 0 0; border:none;}
-div.long_search input[type="submit"]:hover {background-position:0 -15px; cursor:pointer;}
+div.long_search input[type="submit"] {position: absolute;width: 152px;height: 41px;right: 5px;top: 17px;background: url('/images/backoffice/common/search.png') no-repeat 0 0;border: none;}
+div.long_search input[type="submit"]:hover {background-position:0 -41px; cursor:pointer;}
 
 div.one_project {float:left; width:288px; height:140px; margin:20px 0 0 0; padding:0;}
 div.one_project span.top {float:left; width:288px; height:8px; background:url('/images/backoffice/backgrounds/one_box_top.png') no-repeat 0 0;}
@@ -613,7 +613,7 @@ div.block.project_info div.med div.left {float:left; width:572px; margin:0 0 0 2
 div.block p.by {float:left; width:100%; font:normal 15px Arial; color:#666666;}
 div.block p.by a {width:auto; font:normal 15px Arial; color:#E93E3F; text-decoration:none;}
 div.block p.by a:hover {text-decoration:underline;}
-div.block.project_info div.med div.left form {float:left; width:100%; height:auto; margin:5px 0 0 0; /*padding:0 0 15px 0;*/ position:relative; z-index:1;}
+div.block div.med div.left form {float:left; width:100%; height:auto; margin:5px 0 0 0; /*padding:0 0 15px 0;*/ position:relative; z-index:1;}
 
 div.block.project_info div.med div.left form input[type="checkbox"]{float:left; visibility:hidden; width:2px;}
 div.block.project_info div.med div.left form label {position:relative; float:left; margin:20px 0 0 3px; font:bold 11px Arial; color:#999999; width:100%; text-transform:uppercase; z-index:1;}
@@ -818,7 +818,21 @@ div.map_window p {float:left; width:230px; margin:10px 0 0 0; font:normal 13px A
 div.map_window a.save {float:right; width:118px; height:32px; margin:9px 0 0 0; background:url('/images/backoffice/projects/save_position.png') no-repeat 0 0; text-indent:-9999px;}
 div.map_window a.save:hover {background-position:0 -32px; cursor:pointer;}
 
+div.block div.med div.left form .submit.floating {
+  position: fixed;
+  top: 500px;
+  left: 50%;
+  margin-left: 156px;
+  height: 55px;
+  width: 175px;
+  background: url("/images/backoffice/common/submit_tab.png") no-repeat scroll right 0 transparent;
+}
 
+div.block div.med div.left form .submit.floating input {
+  display: block;
+  width: 163px !important;
+  margin: 12px 6px !important;
+}
 
 /* DONATIONS PROJECT */
 /*resources*/
@@ -845,6 +859,7 @@ div.block.donations_project div.med div.left form div#donor_name span {float:lef
 div.block.donations_project div.med div.left form div#donor_name span.error {background-position:0 -32px;}
 div.block.donations_project div.med div.left form div#donor_name span.active {background:url('/images/backoffice/projects/input_donation_name_active.png') no-repeat 0 0; height:33px;}
 div.block.donations_project div.med div.left form div#donor_name span input[type="text"] {border:none; font:normal 13px Arial; color:#999999; position:absolute; top:8px; left:10px; width:253px;}
+div.block.donations_project div.med div.left form div#donor_name span .spinner { display: none; position: absolute; top: 8px; right: 8px; background: url('/images/backoffice/projects/donors_spinner.gif') no-repeat 0 0; width: 16px; height: 16px;}
 div.block.donations_project div.med div.left form div#donation_date {float:left; width:128px; height:64px; margin:3px 7px 0 0;}
 div.block.donations_project div.med div.left form div#donation_date span.combo_donation_date {float:left; background:url('/images/backoffice/projects/date_input_amount.png') no-repeat 0 0; font:normal 15px Arial; color:#333333; width:120px; height:24px; position:relative; margin:4px 0 0 7px; padding:8px 0 0 9px;}
 div.block.donations_project div.med div.left form div#donation_date span.combo_donation_date:hover {cursor:pointer;}
@@ -1330,25 +1345,71 @@ div.med div.changes_list div.change {
   margin-bottom: 19px;
 }
 
-div.med div.changes_list div.change .border_top{
+div.med div.changes_list div.change .border_top {
   background: url('/images/backoffice/activity/blue_rounded_wide_top.png') no-repeat 0 0;
   height: 5px;
   width: 874px;
 }
 
-div.med div.changes_list div.change .summary{
+div.med div.changes_list div.change .summary {
   background-color: #e0edf1;
   height: 47px;
   margin: 0;
-  padding: 10px;
+  padding: 10px 0 10px;
   clear: both;
 }
 
+div.med div.changes_list div.change.open .summary {
+  height: 50px;
+}
+
+div.med div.changes_list div.change .summary .reviewed {
+  display:inline-block;
+  zoom:1;
+  *display:inline;
+  vertical-align:top;
+  width: 55px;
+  height: 75px;
+  border-color: #CCC;
+  border-style: solid;
+  border-width: 0 1px 0 0;
+  margin-top: -14px;
+}
+
+div.med div.changes_list div.change .summary .reviewed button {
+  position: relative;
+  width: 55px;
+  height: 67px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+div.med div.changes_list div.change .summary .reviewed input {
+  display: none;
+}
+
+div.med div.changes_list div.change .summary .reviewed button .arrow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -4.5px;
+  margin-left: -6px;
+  display: block;
+  width: 13px;
+  height: 9px;
+  border: 0;
+  background: url('/images/backoffice/activity/check.png') no-repeat 0 0;
+}
+
 div.med div.changes_list div.change .summary .date_time {
+  display:inline-block;
+  zoom:1;
+  *display:inline;
+  vertical-align:top;
   height: 37px;
-  width: 79px;
-  padding: 5px;
-  float: left;
+  width: 65px;
+  padding: 5px 17px;
   font-size: 13px;
 }
 
@@ -1363,13 +1424,16 @@ div.med div.changes_list div.change .summary .date_time .time {
 }
 
 div.med div.changes_list div.change .summary .title_by {
+  display:inline-block;
+  zoom:1;
+  *display:inline;
+  vertical-align:top;
   height: 37px;
-  width: 653px;
+  width: 599px;
   padding: 5px 20px;
-  float: left;
   border-color: #cccccc;
   border-style: solid;
-  border-width: 0 1px 0 1px;
+  border-width: 0 0 0 1px;
 }
 
 div.med div.changes_list div.change .summary .title_by .title{
@@ -1380,6 +1444,7 @@ div.med div.changes_list div.change .summary .title_by .title{
 div.med div.changes_list div.change .summary .title_by .title a{
   color: #E93E3F;
 }
+
 div.med div.changes_list div.change .summary .title_by .title a:hover{
   text-decoration: underline;
 }
@@ -1388,12 +1453,19 @@ div.med div.changes_list div.change .summary .title_by .by{
   font-size: 13px;
   color: #999999;
 }
+div.med div.changes_list div.change .summary .title_by form {
+  color: black;
+  text-align: right;
+}
 
 div.med div.changes_list div.change .summary .more {
+  display:inline-block;
+  zoom:1;
+  *display:inline;
+  vertical-align:top;
   height: 37px;
   width: 60px;
   padding: 5px;
-  float: left;
   font-size: 13px;
   position: relative;
 }
@@ -1425,9 +1497,13 @@ div.med div.changes_list div.change .detail{
   display: none;
   border-top: 1px solid #cccccc;
   background-color: #eff6f8;
-  padding: 10px;
+  padding: 10px 10px 10px 76px;
   font-size: 11px;
   text-transform: uppercase;
+}
+
+div.med div.changes_list div.change .detail{
+  background-color: rgba(239, 246, 248, 0.5);
 }
 
 div.med div.changes_list div.change .detail ul li{
@@ -1444,7 +1520,11 @@ div.med div.changes_list div.change .detail ul li .label{
   zoom: 1;
   *display: inline;
   color: #999999;
-  width: 100px;
+  width: 106px;
+}
+
+div.med div.changes_list div.change .detail ul li .label{
+  color: rgba(153, 153, 153, 0.5);
 }
 
 div.med div.changes_list div.change .detail ul li .value{
@@ -1452,7 +1532,7 @@ div.med div.changes_list div.change .detail ul li .value{
   display: inline-block;
   zoom: 1;
   *display: inline;
-  width: 700px;
+  width: 679px;
   vertical-align: top;
   color: black;
   line-height: 1.3;
@@ -1465,7 +1545,7 @@ div.med div.changes_list div.change .border_bottom{
 }
 
 div.med div.changes_list div.change.open .border_bottom{
-  background: url('/images/backoffice/activity/light_rounded_wide_bottom.png') no-repeat 0 0;
+  background: url('/images/backoffice/activity/light_blue_rounded_wide_bottom.png') no-repeat 0 0;
 }
 
 div.med div.changes_list div.change .detail ul li .separator{
@@ -1483,7 +1563,7 @@ div.med div.changes_list div.change .detail ul li:last-child .separator{
 }
 
 .project_info div.med div.changes_list div.change .summary .title_by {
-  width: 343px;
+  width: 289px;
 }
 
 .project_info div.med div.changes_list div.change .border_top{
@@ -1497,9 +1577,90 @@ div.med div.changes_list div.change .detail ul li:last-child .separator{
 }
 
 .project_info div.med div.changes_list div.change.open .border_bottom{
-  background: url('/images/backoffice/activity/light_rounded_narrow_bottom.png') no-repeat 0 0;
+  background: url('/images/backoffice/activity/light_blue_rounded_narrow_bottom.png') no-repeat 0 0;
 }
 
 .project_info div.med div.changes_list div.change .detail ul li .value {
-  width: 400px;
+  width: 369px;
+}
+
+div.med div.changes_list div.change.checked .border_top {
+  background: url('/images/backoffice/activity/light_blue_rounded_wide_top.png') no-repeat 0 0;
+}
+
+div.med div.changes_list div.change.checked .border_bottom{
+  background: url('/images/backoffice/activity/light_blue_rounded_wide_bottom.png') no-repeat 0 0;
+}
+
+.project_info div.med div.changes_list div.change.checked .border_top {
+  background: url('/images/backoffice/activity/light_blue_rounded_narrow_top.png') no-repeat 0 0;
+}
+
+.project_info div.med div.changes_list div.change.checked .border_bottom{
+  background: url('/images/backoffice/activity/light_blue_rounded_narrow_bottom.png') no-repeat 0 0;
+}
+
+div.med div.changes_list div.change.checked .summary {
+  background-color: #F8FAFB;
+}
+
+div.med div.changes_list div.change.checked .summary .reviewed {
+  border-color: rgba(204, 204, 204, 0.5);
+}
+
+div.med div.changes_list div.change.checked .summary .reviewed button .arrow {
+  background-position: 0 -10px;
+}
+
+div.med div.changes_list div.change.checked .summary .date_time .date {
+  color: rgba(102, 102, 102, 0.5);
+}
+
+div.med div.changes_list div.change.checked .summary .date_time .time {
+  color: rgba(153, 153, 153, 0.5);
+}
+
+div.med div.changes_list div.change.checked .summary .title_by {
+  border-color: rgba(204, 204, 204, 0.5);
+}
+
+div.med div.changes_list div.change.checked .summary .title_by .title{
+  color: rgba(102, 102, 102, 0.5);
+}
+
+div.med div.changes_list div.change.checked .summary .title_by .title a{
+  color: rgba(233, 62, 63, 0.5);
+}
+
+div.med div.changes_list div.change.checked .summary .title_by .by{
+  color: rgba(153, 153, 153, 0.5);
+}
+
+div.med div.changes_list div.change.checked .summary .title_by .by a {
+  color: rgba(233, 62, 63, 0.5);
+}
+
+div.med div.changes_list div.change.checked .summary .title_by form {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+div.med div.changes_list div.change.checked .summary .more .arrow {
+  background: url('/images/backoffice/activity/light_arrow_down.png') no-repeat 0 0;
+}
+
+div.med div.changes_list div.change.open.checked .summary .more .arrow {
+  background: url('/images/backoffice/activity/light_arrow_up.png') no-repeat 0 0;
+}
+
+div.med div.changes_list div.change.checked .detail{
+  border-color: rgba(204, 204, 204, 0.5);
+  background-color: rgba(239, 246, 248, 0.5);
+}
+
+div.med div.changes_list div.change.checked .detail ul li .value{
+  color: rgba(0, 0, 0, 0.5)
+}
+
+div.med div.changes_list div.change.checked .detail ul li .separator{
+  background-color: rgba(221, 225, 226, 0.5);
 }

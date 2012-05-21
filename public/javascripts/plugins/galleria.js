@@ -693,7 +693,7 @@ Galleria = function() {
                     carousel.set( carousel.current - self._options.carousel_steps );
                 }
             });
-            
+
         },
 
         // calculate and set positions
@@ -842,9 +842,9 @@ Galleria = function() {
 
                     self.$( 'container' ).unbind( 'mousemove', tooltip.move );
                     Utils.clearTimer( 'tooltip' );
-                    
+
                     self.$( 'tooltip' ).stop();
-                    
+
                     Utils.hide( self.get( 'tooltip' ), 200, function() {
                         Utils.addTimer('switch_tooltip', function() {
                             tooltip.open = false;
@@ -864,29 +864,29 @@ Galleria = function() {
         },
 
         show: function( elem ) {
-            
+
             elem = $( elem in self._dom ? self.get(elem) : elem );
-            
+
             var text = elem.data( 'tt' );
-            
+
             if ( ! text ) {
                 return;
             }
-            
+
             text = typeof text == 'function' ? text() : text;
-            
+
             self.$( 'tooltip' ).html( text.replace(/\s/, '&nbsp;') );
-            
+
             // trigger mousemove on mouseup in case of click
             elem.bind( 'mouseup', function( e ) {
-                
+
                 // attach a tiny settimeout to make sure the new tooltip is filled
                 window.setTimeout( (function( ev ) {
                     return function() {
                         tooltip.move( ev );
                     }
                 })( e ), 10);
-                
+
                 elem.unbind( 'mouseup', arguments.callee );
             });
         },
@@ -1087,7 +1087,7 @@ Galleria = function() {
                 }
 
                 elem.data('idle').complete = false;
-                
+
                 elem.stop().animate(data.to, {
                     duration: 600,
                     queue: false,
@@ -1114,7 +1114,7 @@ Galleria = function() {
                 data.busy = true;
 
                 self.trigger( Galleria.IDLE_EXIT );
-                
+
                 Utils.clearTimer( 'idle' );
 
                 elem.stop().animate(data.from, {
@@ -1196,7 +1196,7 @@ Galleria = function() {
                 self.addElement( 'lightbox-' + elemId );
                 el[ elemId ] = lightbox.elems[ elemId ] = self.get( 'lightbox-' + elemId );
             });
-            
+
             // initiate the image
             lightbox.image = new Galleria.Picture();
 
@@ -1344,9 +1344,9 @@ Galleria = function() {
 // end Galleria constructor
 
 Galleria.prototype = {
-    
+
     // bring back the constructor reference
-    
+
     constructor: Galleria,
 
     /**
@@ -1381,7 +1381,7 @@ Galleria.prototype = {
              Galleria.raise('Target not found.');
              return;
         }
-        
+
 
         // apply options
         this._options = {
@@ -1500,15 +1500,15 @@ Galleria.prototype = {
 
                     // keep trying to get the value
                     $.each(['width', 'height'], function( i, m ) {
-                        
+
                         // first check if options is set
-                        
+
                         if (self._options[ m ] && typeof self._options[ m ] == 'number') {
                             num[ m ] = self._options[ m ];
                         } else {
-                            
+
                             // else extract the meassures in the following order:
-                            
+
                             num[m] = Utils.parseValue( $container.css( m ) ) ||         // 1. the container css
                                      Utils.parseValue( self.$( 'target' ).css( m ) ) || // 2. the target css
                                      $container[ m ]() ||                               // 3. the container jQuery method
@@ -1576,12 +1576,12 @@ Galleria.prototype = {
                     self.next();
                 });
             }
-            
+
             // BIND CLICK ACTION ON EXPLORE BUTTON
             this.$( 'info-explore' ).bind( CLICK(), function(e) {
                 window.location.href = self._data[self._active].link;
             });
-            
+
 
             // bind carousel nav
             if ( this._options.carousel ) {
@@ -1719,7 +1719,7 @@ Galleria.prototype = {
             if ( self._options.clicknext ) {
                 e.stopPropagation();
             }
-            
+
 
             // pause if options is set
             if ( self._options.pause_on_interaction ) {
@@ -1737,10 +1737,10 @@ Galleria.prototype = {
             if ( self._options[ 'show_' + el.replace(/-/, '') ] === false ) {
                 Utils.moveOut( self.get( el ) );
             }
-            
+
         });
-        
-        
+
+
 
         // load up target content
         this.load();
@@ -1889,12 +1889,12 @@ Galleria.prototype = {
                 if ( optval == 'numbers' ) {
                     $( thumb.image ).text( i + 1 );
                 }
-                
+
                 this.$( 'thumbnails' ).append( thumb.container );
-                
+
                 // we need to "fake" a loading delay before we append and trigger
                 // 50+ should be enough
-                
+
                 window.setTimeout((function(image, index, container) {
                     return function() {
                         $( container ).append( image );
@@ -1905,7 +1905,7 @@ Galleria.prototype = {
                         });
                     }
                 })( thumb.image, i, thumb.container ), 50 + (i*20) );
-                
+
 
             // create null object to silent errors
             } else {
@@ -1944,13 +1944,13 @@ Galleria.prototype = {
             until: function() {
                 self._stageWidth  = self.$( 'stage' ).width();
                 self._stageHeight = self.$( 'stage' ).height();
-                return( self._stageWidth && 
+                return( self._stageWidth &&
                         self._stageHeight > 50 ); // what is an acceptable height?
             },
 
             success: function() {
                 self.trigger( Galleria.READY );
-                
+
                 // TO SHOW ONLY ARROWS IF GALLERY HAS MORE THAN 1 IMAGE
                 if (self._data.length > 1){
                     self.$( 'image-nav' ).css('display','inline');
@@ -2035,13 +2035,13 @@ Galleria.prototype = {
             // mix default extractions with the hrefs and config
             // and push it into the data array
             self._data.push( $.extend({
-                vimeo_id:    img.attr('vimeo_id'), 
+                vimeo_id:    img.attr('vimeo_id'),
                 title:       img.attr('title'),
                 thumb:       img.attr('src'),
                 image:       img.attr('src'),
                 shortdescription: img.attr('desc'),
                 explore:     img.attr('longdesc'),
-                description: img.attr('alt'),                
+                description: img.attr('alt'),
                 link:        img.attr('longdesc'),
                 original:    img.get(0) // saved as a reference
 
@@ -2213,7 +2213,7 @@ Galleria.prototype = {
 
     /**
         Note: this method is deprecated. Use refreshTooltip() instead.
-        
+
         Redefine a tooltip.
         Use this if you want to re-apply a tooltip value to an already bound tooltip element.
 
@@ -2458,7 +2458,7 @@ $(document).mousemove(function(e) {
     addElement : function( id ) {
 
         var dom = this._dom;
-        
+
         $.each( Utils.array(arguments), function( i, blueprint ) {
            dom[ blueprint ] = Utils.create( 'galleria-' + blueprint );
         });
@@ -2569,7 +2569,7 @@ this.prependChild( 'info', 'myElement' );
 
     // an internal helper for scaling according to options
     _scaleImage : function( image, options ) {
-        
+
         options = $.extend({
             width:    this._stageWidth,
             height:   this._stageHeight,
@@ -2679,7 +2679,7 @@ this.prependChild( 'info', 'myElement' );
         if ( index === false || !this._options.queue && this._queue.stalled ) {
             return;
         }
-        
+
         index = Math.max( 0, Math.min( parseInt(index), this.getDataLength() - 1 ) );
 
         rewind = typeof rewind != 'undefined' ? !!rewind : index < this.getIndex();
@@ -2712,11 +2712,11 @@ this.prependChild( 'info', 'myElement' );
         var self   = this,
             queue  = this._queue[ 0 ],
             data   = this.getData( queue.index );
-        
+
         if ( !data ) {
             return;
         }
-        
+
         var src    = data.image,
             active = this._controls.getActive(),
             next   = this._controls.getNext(),
@@ -2920,12 +2920,12 @@ this.prependChild( 'info', 'myElement' );
           this.$('galleria-info').fadeIn().css('opacity',.8);
 	        this.$('info-text').fadeIn().fadeTo(200, .8);
         }
-            
+
         if ( this.getDataLength() > 1 ) {
             this.show( this.getNext(), false );
         }
-        
-        
+
+
         return this;
     },
 
@@ -2936,7 +2936,7 @@ this.prependChild( 'info', 'myElement' );
     */
 
     prev : function() {
-        
+
         if (this._data[this.getPrev()].vimeo_id!=undefined) {
            $('a.video').attr('vimeo-id',this._data[this.getPrev()].vimeo_id);
            $('a.video').fadeIn();
@@ -2945,7 +2945,7 @@ this.prependChild( 'info', 'myElement' );
  	         this.$('info-text').fadeIn().fadeTo(200, .8);
            $('a.video').fadeOut();
          }
-        
+
         if ( this.getDataLength() > 1 ) {
             this.show( this.getPrev(), true );
         }
@@ -3061,13 +3061,13 @@ this.prependChild( 'info', 'myElement' );
     */
 
     play : function( delay ) {
-        
+
         this._playing = true;
-        
+
         this._playtime = delay || this._playtime;
 
         this._playCheck();
-        
+
         this.trigger( Galleria.PLAY );
 
         return this;
@@ -3080,11 +3080,11 @@ this.prependChild( 'info', 'myElement' );
     */
 
     pause : function() {
-        
+
         this._playing = false;
-        
+
         this.trigger( Galleria.PAUSE );
-        
+
         return this;
     },
 
@@ -3099,13 +3099,13 @@ this.prependChild( 'info', 'myElement' );
     playToggle : function( delay ) {
         return ( this._playing ) ? this.pause() : this.play( delay );
     },
-    
+
     /**
         Checks if the gallery is currently playing
 
         @returns {Boolean}
     */
-    
+
     isPlaying : function() {
         return this._playing;
     },

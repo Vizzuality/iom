@@ -1,4 +1,4 @@
-<%= form_for([:admin, @site, @page || @site.pages.new]) do |f| %>
+<%= form_for page_resources, :url => create_or_update_pages_path_for_home_or_site do |f| %>
 
   <div class="field">
     <%= f.label :title, raw("TITLE  <strong>*</strong>") %>
@@ -21,22 +21,25 @@
     <%= errors_for @page, :permalink %>
   </div>
 
+  <% if @site.present? -%>
   <div class="field">
     <%= f.label :parent_id, 'Parent page' %>
 
     <span id="parent_page" class="parent_page">
-      <p id="0">Select a parent page</p>
+      <p>Select a parent page</p>
       <ul class="options">
-        <li><a id="0">Select a parent page</a></li>
-        <% (@site.pages.highlighted - [@page]).collect do |sector| %>
+        <li>Select a parent page</li>
+        <li><a id="0">None</a></li>
+        <% (@all_pages - [@page]).collect do |sector| %>
           <li><a id="<%= sector.id %>"><%= sector.title %></a></li>
         <% end %>
         <li class="last"></li>
       </ul>
     </span>
 
-    <%= f.select :parent_id, (@site.pages.highlighted - [@page]).collect{ |p| [p.title, p.id] }, :prompt => 'Select a parent page' %>
+    <%= f.select :parent_id, (@all_pages - [@page]).collect{ |p| [p.title, p.id] }, :prompt => 'Select a parent page', :include_blank => 'None' %>
   </div>
+  <% end -%>
 
   <div id="published_status" class="field">
     <%= f.label :published %>

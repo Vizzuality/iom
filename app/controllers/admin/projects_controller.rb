@@ -48,14 +48,14 @@ class Admin::ProjectsController < Admin::AdminController
           projects = projects.from(from.join(',')).where("projects_sites.site_id = #{site.id} AND projects_sites.project_id = projects.id")
         end
       end
-      @projects = projects.paginate :per_page => 20, :order => 'created_at DESC', :page => params[:page]
+      @projects = projects.paginate :per_page => 20, :order => 'name asc', :page => params[:page]
     elsif params[:organization_id]
       template      = 'admin/organizations/projects'
       @organization = current_user.admin?? Organization.find(params[:organization_id]) : current_user.organization
       projects      = @organization.projects
-      @projects     = projects.paginate :per_page => 20, :order => 'created_at DESC', :page => params[:page]
+      @projects     = projects.paginate :per_page => 20, :order => 'name asc', :page => params[:page]
     else
-      @projects = find_projects.paginate :per_page => 20, :order => 'created_at DESC', :page => params[:page]
+      @projects = find_projects.paginate :per_page => 20, :order => 'name asc', :page => params[:page]
     end
 
     respond_to do |format|

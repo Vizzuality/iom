@@ -12,7 +12,7 @@ class ChangesHistoryRecord < ActiveRecord::Base
     query = query.where(:what_type => search_params.what_type)                        if search_params.what_type.present?
     query = query.where('changes_history_records.when > ?', search_params.when_start) if search_params.when_start.present?
     query = query.where('changes_history_records.when < ?', search_params.when_end)   if search_params.when_end.present?
-    query = query.order('changes_history_records.updated_at desc')
+    query = query.order('changes_history_records.when desc')
     query = query.all.select{|change| change.who.present? && change.what.present?}
     query
   end
@@ -43,5 +43,9 @@ class ChangesHistoryRecord < ActiveRecord::Base
 
   def who_organization_name
     who_organization.name rescue 'Interaction'
+  end
+
+  def reviewed=(value)
+    write_attribute('reviewed', value == 'true')
   end
 end

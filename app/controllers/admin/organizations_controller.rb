@@ -11,7 +11,7 @@ class Admin::OrganizationsController < ApplicationController
     else
       Organization
     end
-    @organizations = organizations.paginate :per_page => 20, :order => 'created_at DESC', :page => params[:page]
+    @organizations = organizations.order('name asc').paginate :per_page => 20, :order => 'created_at DESC', :page => params[:page]
   end
 
   def new

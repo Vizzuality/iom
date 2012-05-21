@@ -1,28 +1,37 @@
-  <div id="layout">
-    <div id="pages">
-      <div id="relative_content" class="left">
-        <div class="outer_head">
-          <div class="head">
-            <h1><%= @page.title %></h1>
-          </div>
-        </div>
-        <div class="body">
-          <%= raw(@page.body) %>
+<div id="layout">
+  <div id="pages">
+    <div id="relative_content" class="left">
+      <div class="outer_head">
+        <div class="head">
+          <h1><%= @page.title %></h1>
         </div>
       </div>
-      <div class="right">
-        <div class="block">
-            <% top_parent = @page.top_parent %>
-            <h3><%= link_to(top_parent.title, page_path(top_parent)) %></h3>
-              <% pages = top_parent.children %>
-              <% if pages.any? %>
-                <ul>
-                  <% pages.each do |child| %>
-                  <li class="page"><%= link_to_unless(child==@page,child.title, page_path(child)) %></li>
-                  <% end %>
-                </ul>
+      <div class="body">
+        <%= raw @page.body  %>
+      </div>
+    </div>
+    <div class="right">
+      <div class="block">
+        <% if @pages.present? -%>
+          <h2>About</h2>
+          <ul>
+            <% @pages.each do |child| %>
+              <li class="page"><%= link_to_unless(child==@page,child.title, page_path(child)) %></li>
+            <% end %>
+          </ul>
+        <% else -%>
+          <% top_parent = @page.top_parent %>
+          <h3><%= link_to(top_parent.title, page_path(top_parent)) %></h3>
+          <% pages = top_parent.children.published %>
+          <% if pages.any? %>
+            <ul>
+              <% pages.each do |child| %>
+                <li class="page"><%= link_to_unless(child==@page,child.title, page_path(child)) %></li>
               <% end %>
-        </div>
+            </ul>
+          <% end %>
+        <% end -%>
+      </div>
     </div>
 
     <script src="/javascripts/sites/pages.js" type="text/javascript" charset="utf-8"></script>
