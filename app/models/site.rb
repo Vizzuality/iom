@@ -235,7 +235,7 @@ class Site < ActiveRecord::Base
     # (7)
     if geographic_context_geometry?
       from  << 'sites'
-      where << "ST_Contains(sites.geographic_context_geometry,projects.the_geom)"
+      where << "ST_Intersects(sites.geographic_context_geometry,projects.the_geom)"
     end
 
     result = Project.select(select).from(from.join(',')).where(where.join(' AND ')).group(Project.custom_fields.join(','))
