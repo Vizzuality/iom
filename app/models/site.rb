@@ -235,7 +235,7 @@ class Site < ActiveRecord::Base
     # (7)
     if geographic_context_geometry?
       from  << 'sites'
-      where << "ST_Contains(sites.geographic_context_geometry,projects.the_geom)"
+      where << "ST_Intersects(sites.geographic_context_geometry,projects.the_geom)"
     end
 
     result = Project.select(select).from(from.join(',')).where(where.join(' AND ')).group(Project.custom_fields.join(','))
@@ -554,12 +554,13 @@ SQL
   end
 
   def organizations_select
-    Organization.find_by_sql(<<-SQL
-        select distinct o.id,o.name from organizations as o
-        inner join projects as p on p.primary_organization_id=o.id  and (p.end_date is null OR p.end_date > now())
-        inner join projects_sites as ps on p.id=ps.project_id and site_id=#{self.id}
-        order by o.name
-SQL
+    Project.find_by_sql(<<-SQL
+      select distinct o.id,o.name
+      from organizations as o,
+      (#{projects_sql(:limit => nil, :offset => nil).to_sql}) as p
+      where p.primary_organization_id=o.id
+      order by o.name
+    SQL
     )
   end
 
