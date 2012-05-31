@@ -3,12 +3,17 @@ class ClustersSectorsController < ApplicationController
   layout 'site_layout'
 
   def show
-    @filter_by_location = params[:location_id].split('/') if params[:location_id]
+    if params[:location_id].present?
+      case params[:location_id]
+      when String
+        @filter_by_location = params[:location_id].split('/')
+      end
+    end
 
     @carry_on_filters = {}
-    @carry_on_filters[:location_id] = params[:location_id] if params[:location_id].present?
+    @carry_on_filters[:location_id] = @filter_by_location if @filter_by_location.present?
 
-    if @filter_by_location
+    if @filter_by_location.present?
       @location_name = if @filter_by_location.size > 1
         region = Region.where(:id => @filter_by_location.last).first
         "#{region.country.name}/#{region.name}" rescue ''
