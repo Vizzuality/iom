@@ -136,7 +136,10 @@ class GeoregionController < ApplicationController
 
     @georegion_projects_count = @area.projects_count(@site, @filter_by_category)
 
-    render_404 and return if sql.nil?
+    if sql.blank?
+      render_404
+      return
+    end
 
     respond_to do |format|
       format.html do
