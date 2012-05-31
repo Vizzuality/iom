@@ -26,7 +26,7 @@ class ClustersSectorsController < ApplicationController
     if(request.url.match(/clusters/))
       # clusters
       render_404 and return unless @site.navigate_by_cluster?
-      @data = Cluster.find(params[:id])
+      @data = Cluster.find(params[:id].to_i)
 
       projects_custom_find_options = {
         :cluster       => @data.id,
@@ -44,7 +44,7 @@ class ClustersSectorsController < ApplicationController
     else
       # sectors
       render_404 and return unless @site.navigate_by_sector?
-      @data = Sector.find(params[:id])
+      @data = Sector.find(params[:id].to_i)
 
       projects_custom_find_options = {
         :sector        => @data.id,
@@ -83,7 +83,7 @@ class ClustersSectorsController < ApplicationController
               inner join projects_regions as pr on r.id=pr.region_id and r.level=#{@site.level_for_region}
               inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{@site.id}
               inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
-              inner join clusters_projects as cp on cp.project_id=p.id and cp.cluster_id=#{params[:id].sanitize_sql!}
+              inner join clusters_projects as cp on cp.project_id=p.id and cp.cluster_id=#{params[:id].sanitize_sql!.to_i}
               #{location_filter}
               group by r.id,r.name,lon,lat,r.name,url,r.code"
           else
@@ -94,7 +94,7 @@ class ClustersSectorsController < ApplicationController
                 inner join countries_projects as cp on c.id=cp.country_id
                 inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=#{@site.id}
                 inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
-                inner join clusters_projects as cpr on cpr.project_id=p.id and cpr.cluster_id=#{params[:id].sanitize_sql!}
+                inner join clusters_projects as cpr on cpr.project_id=p.id and cpr.cluster_id=#{params[:id].sanitize_sql!.to_i}
                 #{location_filter}
                 group by c.id,c.name,lon,lat,c.name,url"
           end
@@ -116,7 +116,7 @@ class ClustersSectorsController < ApplicationController
               inner join projects_regions as pr on r.id=pr.region_id and r.level=#{@site.level_for_region}
               inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{@site.id}
               inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
-              inner join projects_sectors as pse on pse.project_id=p.id and pse.sector_id=#{params[:id].sanitize_sql!}
+              inner join projects_sectors as pse on pse.project_id=p.id and pse.sector_id=#{params[:id].sanitize_sql!.to_i}
               #{location_filter}
               group by r.id,r.name,lon,lat,r.path,r.code"
           else
@@ -136,7 +136,7 @@ class ClustersSectorsController < ApplicationController
                 inner join projects_regions as pr on r.id=pr.region_id
                 inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{@site.id}
                 inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
-                inner join projects_sectors as pse on pse.project_id=p.id and pse.sector_id=#{params[:id].sanitize_sql!}
+                inner join projects_sectors as pse on pse.project_id=p.id and pse.sector_id=#{params[:id].sanitize_sql!.to_i}
                 where #{location_filter}
                 group by r.id,r.name,lon,lat,r.path"
             else
@@ -152,7 +152,7 @@ class ClustersSectorsController < ApplicationController
                 inner join countries_projects as cp on c.id=cp.country_id
                 inner join projects_sites as ps on cp.project_id=ps.project_id and ps.site_id=#{@site.id}
                 inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
-                inner join projects_sectors as pse on pse.project_id=p.id and pse.sector_id=#{params[:id].sanitize_sql!}
+                inner join projects_sectors as pse on pse.project_id=p.id and pse.sector_id=#{params[:id].sanitize_sql!.to_i}
                 group by c.id,c.name,lon,lat,c.name"
             end
 
