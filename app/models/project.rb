@@ -512,7 +512,7 @@ SQL
       sql << " OFFSET #{offset}"
     end
     result = ActiveRecord::Base.connection.execute(sql).map{ |r| r }
-    WillPaginate::RandomCollection.create(options[:page] ? options[:page].to_i : 1, options[:per_page], total_entries, start_in_page) do |pager|
+    WillPaginate::RandomCollection.create((Integer(options[:page]) rescue 1), options[:per_page], total_entries, start_in_page) do |pager|
       pager.replace(result.sort_by{rand})
     end
   end
