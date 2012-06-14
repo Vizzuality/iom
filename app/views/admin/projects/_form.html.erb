@@ -374,7 +374,7 @@
     </span>
   </div>
   <div id="implement_org" class="field">
-    <label>IMPLEMENTING ORGANIZATION
+    <label>INTERNATIONAL PARTNERS
       <strong>&nbsp;</strong>
       <!-- FIELD DESCRIPTION -->
       <div class="field_info">
@@ -384,9 +384,9 @@
             <a href="#close">x</a>
           </div>
           <div class="bottom">
-            <h3>Implementing organizations</h3>
+            <h3>International Partners</h3>
             <span class="scroll">
-            <p>Name(s) of organization(s) actually carrying out the work in the field. In the case of in-kind donations, list organizations receiving goods. Multiple entries should be separated by a comma; “and” should only be used if it is part of an organization’s name.</p>
+            <p>Name(s) of international, non-local organization(s) involved in the implementation of the project. In the case of in-kind donations, list organizations receiving goods. Multiple entries should be separated by a comma.</p>
             </span>
           </div>
         </div>
@@ -399,7 +399,7 @@
     </span>
   </div>
   <div id="partner_org" class="field">
-    <label>PARTNER ORGANIZATIONS
+    <label>LOCAL PARTNERS
       <strong>&nbsp;</strong>
       <!-- FIELD DESCRIPTION -->
       <div class="field_info">
@@ -409,9 +409,9 @@
             <a href="#close">x</a>
           </div>
           <div class="bottom">
-            <h3>Partner organizations</h3>
+            <h3>Local Partners</h3>
             <span class="scroll">
-            <p>Name of organization(s) associated with the project but not actually involved in implementation; does not refer to donors. Multiple entries should be separated by a comma; “and” should only be used if it is part of an organization’s name.</p>
+            <p>Name(s) of local organization(s) involved in the implementation of the project. In the case of in-kind donations, list organizations receiving goods. Multiple entries should be separated by a comma.</p>
             </span>
           </div>
         </div>
@@ -424,7 +424,7 @@
     </span>
   </div> <!-- field -->
   <div class="field">
-    <label>AWARDEE TYPE
+    <label>PRIME AWARDEE
       <strong>&nbsp;</strong>
       <!-- FIELD DESCRIPTION -->
       <div class="field_info">
@@ -434,9 +434,9 @@
             <a href="#close">x</a>
           </div>
           <div class="bottom">
-            <h3>Awardee type</h3>
+            <h3>Prime Awardee</h3>
             <span class="scroll">
-            <p>Either “Prime awardee” (organization that directly received funding for a project) or “Sub awardee” (organization that received funding from a prime awardee.</p>
+            <p>Name of the organization that received the funding directly from the donor.</p>
             </span>
           </div>
         </div>
@@ -482,7 +482,7 @@
     </div>
     <div class="right_column">
       <div id="target" class="field">
-        <label>TARGET
+        <label>TARGET GROUPS
           <strong>&nbsp;</strong>
           <!-- FIELD DESCRIPTION -->
           <div class="field_info">
@@ -492,7 +492,7 @@
                 <a href="#close">x</a>
               </div>
               <div class="bottom">
-                <h3>Target group</h3>
+                <h3>Target Groups</h3>
                 <span class="scroll">
                 <p>Type of individuals or groups primarily intended to benefit from the project (e.g. children under five, pregnant women, people with disabilities, etc)</p>
                 </span>
@@ -506,12 +506,6 @@
         </span>
       </div>
     </div>
-  </div>
-  <div id="calculation_of_number_of_people_reached" class="field">
-    <label>CALCULATION OF NUMBER OF PEOPLE REACHED</label>
-    <span class="textarea">
-      <%= f.text_area :calculation_of_number_of_people_reached %>
-    </span>
   </div>
 
 <!-- ##################### LOCATION ##################### -->
@@ -671,7 +665,7 @@
     </div>
   </div>
   <div class="field">
-    <label>WEBSITE</label>
+    <label>PROJECT WEBSITE</label>
     <span class="input_large">
       <%= f.text_field :website %>
     </span>
