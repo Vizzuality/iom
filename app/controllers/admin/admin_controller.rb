@@ -125,7 +125,7 @@ class Admin::AdminController < ApplicationController
 
   def check_user_permissions
     unless current_user.admin?
-      redirect_to admin_admin_path unless controller_name == 'projects' || controller_name == 'organizations' || (controller_name == 'admin' && (action_name == 'export_projects' || action_name == 'index')) || (controller_name == 'donors' && action_name == 'index' && request.format.json?) || (controller_name = 'donations' && action_name == 'create')
+      redirect_to admin_admin_path unless controller_name == 'projects' || controller_name == 'organizations' || (controller_name == 'admin' && (action_name == 'export_projects' || action_name == 'index')) || (controller_name == 'donors' && action_name == 'index' && request.format.json?) || (controller_name = 'donations' && ( action_name == 'create' || action_name == 'destroy' ))
     end
   end
   private :check_user_permissions

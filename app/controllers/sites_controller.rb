@@ -104,6 +104,11 @@ class SitesController < ApplicationController
 
         render :site_home
       end
+      format.rss do
+        @rss_items = @site.projects
+
+        render :site_home
+      end
     end
   end
 
