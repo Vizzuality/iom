@@ -503,11 +503,15 @@ SQL
       # page = 3 > real page = 7 > offset = 60
       # page = 4 > real page = 1 > offset = 0
       # page = 5 > real page = 2 > offset = 10
-      offset = if (options[:page].to_i + start_in_page - 1) <= total_pages
-        options[:per_page].to_i * (options[:page].to_i + start_in_page - 1)
-      else
-        options[:per_page].to_i * (options[:page].to_i - start_in_page)
-      end
+
+      # Apparently, the offset is not being calculated correctly
+      #offset = if (options[:page].to_i + start_in_page - 1) <= total_pages
+        #options[:per_page].to_i * (options[:page].to_i + start_in_page - 1)
+      #else
+        #options[:per_page].to_i * (options[:page].to_i - start_in_page)
+      #end
+      #
+      offset = (options[:page].to_i - 1) * options[:per_page].to_i
       raise Iom::InvalidOffset if offset < 0
       sql << " OFFSET #{offset}"
     end
