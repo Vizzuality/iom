@@ -555,11 +555,11 @@ SQL
 
   def organizations_select
     Project.find_by_sql(<<-SQL
-      select distinct o.id,o.name
-      from organizations as o,
-      (#{projects_sql(:limit => nil, :offset => nil).to_sql}) as p
-      where p.primary_organization_id=o.id
-      order by o.name
+      select distinct organization_id as id, organization_name as name
+      from data_denormalization
+      where site_id = #{self.id}
+            and (end_date is null OR end_date > now())
+      order by organization_name
     SQL
     )
   end
