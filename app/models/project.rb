@@ -694,6 +694,9 @@ SQL
 
     def dates_consistency
       return true if end_date.nil? || start_date.nil?
+      if start_date.present? && start_date > 1.week.since.to_date
+        errors.add(:start_date, "max 1 week from today")
+      end
       if !end_date.nil? && !start_date.nil? && end_date < start_date
         errors.add(:end_date, "can't be previous to start_date")
       end
