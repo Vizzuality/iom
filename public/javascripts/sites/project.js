@@ -38,7 +38,7 @@
         $('span.people_amount').css('display','block');
 
         $('p.estimate').text(parseInt($('p.estimate').text()).toMoney(0,'.',','));
-        $('p.estimate').html($('p.estimate').text() + '<sup>(direct)</sup>');
+        $('p.estimate').html($('p.estimate').text() + '<sup>(target)</sup>');
 
 
         //If left part is bigger than float right

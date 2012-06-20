@@ -205,6 +205,13 @@
             </div>
           <%end%>
 
+          <% unless @project.budget.nil? || @project.budget.eql?(0.0) %>
+            <div class="block">
+              <h3>Project budget</h3>
+              <p class="budget"><%= number_with_precision(@project.budget, :precision => 0, :delimiter => ',') %></p>
+            </div>
+          <%end%>
+
           <% unless @project.donors.empty? %>
             <div class="block">
               <h3>Donors</h3>
@@ -226,7 +233,7 @@
             </div>
           <% end %>
 
-          <% if @project.awardee_type -%>
+          <% if @project.awardee_type.present? -%>
             <div class="block">
               <h3>Prime Awardee</h3>
               <p><%= @project.awardee_type %></p>
@@ -246,13 +253,6 @@
             <% end %>
           </div>
           <% end -%>
-
-          <% unless @project.budget.nil? || @project.budget.eql?(0.0) %>
-            <div class="block">
-              <h3>Project budget</h3>
-              <p class="budget"><%= number_with_precision(@project.budget, :precision => 0, :delimiter => ',') %></p>
-            </div>
-          <%end%>
 
           <% unless !@project.estimated_people_reached? && !@project.target?%>
             <div class="block">
