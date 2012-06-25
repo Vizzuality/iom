@@ -25,7 +25,7 @@
             </div>
             <div class="amount_box">
               <p>$ <%= (donation.amount.nil?)? '0' : number_with_precision(donation.amount, :precision => 2, :strip_insignificant_zeros => true, :delimiter => ',') %></p>
-              <%= link_to('', '#', :destroy_url => admin_project_donation_path(@project, donation), :att_name => 'donation', :class => 'delete') %>
+              <%= link_to('', '#', :destroy_url => admin_project_donation_path(@project, donation), :att_name => 'donor', :no_subtitle => true, :class => 'delete') %>
             </div>
             <%if (!donation.amount.nil?) %>
               <%= total_account += donation.amount %>
