@@ -104,7 +104,7 @@ class SitesController < ApplicationController
 
         render :site_home
       end
-      format.rss do
+      format.xml do
         @rss_items = Project.custom_find @site, :start_in_page => 0, :random => false, :per_page => 1000
 
         render :site_home

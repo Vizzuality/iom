@@ -6,7 +6,7 @@
   <%=raw(javascript_include_merged(:base_2)) %>
   <%=raw(stylesheet_link_merged(:base)) %>
   <%=stylesheet_link_tag @site.theme.css_file if @site.theme %>
-  <%=auto_discovery_link_tag(:rss, root_url(:format => 'rss'), {:title => @site.name}) %>
+  <%=auto_discovery_link_tag(:rss, "#{url(@site)}/.xml", {:title => @site.name}) %>
   <link rel="shortcut icon" href="/images/favicon.ico"/>
 
   <% if Rails.env.production? %>
