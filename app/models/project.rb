@@ -580,6 +580,11 @@ SQL
     end
     self.country_ids = country_ids.uniq
     self.region_ids = region_ids.uniq
+
+    points = (self.country_ids.map{|id| Country.find(id)} + self.region_ids.map{|id| Region.find(id)}).map{|model| [model.center_lon, model.center_lat]}.map do |point|
+      Point.from_x_y(point[0], point[1])
+    end
+    self.the_geom = MultiPoint.from_points(points)
   end
 
   def set_cached_sites
