@@ -49,21 +49,20 @@
           </span>
         </div>
 
-        <div id="donation_date" class="field">
+        <div id="donation_date" class="field comboselect date">
+          <%= f.label :date, 'DONATION DATE' %>
 
-            <%= f.label :date, 'DONATION DATE' %>
+          <span class="combo_date"><p><%= l @project.date_provided, :format => '%m/%d/%Y' rescue '' %></p>
+          <div class="select_dates">
+            <p id="month" class="title">MONTH</p>
+            <p id="day" class="title">DAY</p>
+            <p id="year" class="title">YEAR</p>
 
-            <span id="donation_date" class="combo_donation_date"><p>09/10/2010</p>
-              <div class="select_dates">
-                <p id="month" class="title">MONTH</p>
-                <p id="day" class="title">DAY</p>
-                <p id="year" class="title">YEAR</p>
-
-                  <%= f.date_select :date, :start_year => Date.today.year - 20, :order => [:month, :day, :year]  %>
-              </div>
-            </span>
-
+            <%= f.date_select :date, { :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year],  :prompt => '-'}, { :class => :"chzn-date-select", :"data-placeholder" => ' '}  %>
+          </div>
+          </span>
         </div>
+
         <div id="donation_amount" class="field">
           <%= f.label :amount, 'AMOUNT' %>
         <span>
