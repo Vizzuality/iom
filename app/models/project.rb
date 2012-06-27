@@ -580,11 +580,6 @@ SQL
     end
     self.country_ids = country_ids.uniq
     self.region_ids = region_ids.uniq
-
-    points = (self.country_ids.map{|id| Country.find(id)} + self.region_ids.map{|id| Region.find(id)}).map{|model| [model.center_lon, model.center_lat]}.map do |point|
-      Point.from_x_y(point[0], point[1])
-    end
-    self.the_geom = MultiPoint.from_points(points)
   end
 
   def set_cached_sites
@@ -662,23 +657,40 @@ SQL
                     GROUP BY p.id,p.name,o.id,o.name,p.description,p.start_date,p.end_date,p.created_at) as subq"""
          ActiveRecord::Base.connection.execute(sql_for_orphan_projects)
 
-
          #We also update its geometry
-         sql="""
-         update projects as proj set the_geom = (
-         select ST_Collect(r.the_geom) from
-         projects_regions as pr
-         inner join regions as r on pr.region_id=r.id and pr.project_id=proj.id
-         group by proj.id)
-         where id in (select project_id from projects_regions)"""
+         sql = <<-SQL
+           UPDATE projects p SET the_geom = geoms.the_geom
+           FROM (
+             SELECT ST_Collect(r.the_geom) AS the_geom, proj.id
+             FROM
+             projects proj
+             INNER JOIN projects_regions pr ON pr.project_id = proj.id
+             INNER JOIN regions r ON pr.region_id = r.id
+             GROUP BY proj.id
+           ) AS geoms
+           WHERE p.id = geoms.id
+         SQL
          ActiveRecord::Base.connection.execute(sql)
-         sql="""update projects as p set the_geom=
-         	(select ST_Collect(r.the_geom) from
-         	countries_projects as cp
-         	inner join regions as r on cp.country_id=r.country_id
-         	where cp.project_id=p.id)
-         where id not in (select project_id from projects_regions)
-         and id in (select project_id from countries_projects)"""
+
+         sql = <<-SQL
+           UPDATE projects p SET the_geom = geoms.the_geom
+           FROM
+           (
+             SELECT ST_Collect(ST_SetSRID(ST_Point(c.center_lon, c.center_lat), 4326)) AS the_geom, proj.id
+             FROM
+             projects proj
+             INNER JOIN countries_projects cp ON cp.project_id = proj.id
+             INNER JOIN countries c ON cp.country_id = c.id
+             GROUP BY proj.id
+           ) AS geoms,
+           (
+             SELECT proj.id
+             FROM projects proj
+             LEFT OUTER JOIN projects_regions pr ON pr.project_id = proj.id
+             WHERE pr.project_id IS NULL
+           ) projects_without_regions
+           WHERE p.id = geoms.id AND  p.id = projects_without_regions.id
+         SQL
          ActiveRecord::Base.connection.execute(sql)
 
       end
