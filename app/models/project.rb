@@ -56,7 +56,7 @@ class Project < ActiveRecord::Base
 
   validate :dates_consistency#, :presence_of_clusters_and_sectors
 
-  after_save :set_cached_sites
+  after_commit :set_cached_sites
   after_destroy :remove_cached_sites
 
   def tags=(tag_names)
@@ -583,7 +583,45 @@ SQL
   end
 
   def set_cached_sites
+
+    #We also update its geometry
+    sql = <<-SQL
+      UPDATE projects p SET the_geom = geoms.the_geom
+      FROM (
+        SELECT ST_Collect(r.the_geom) AS the_geom, proj.id
+        FROM
+        projects proj
+        INNER JOIN projects_regions pr ON pr.project_id = proj.id
+        INNER JOIN regions r ON pr.region_id = r.id
+        GROUP BY proj.id
+      ) AS geoms
+      WHERE p.id = geoms.id
+    SQL
+    ActiveRecord::Base.connection.execute(sql)
+
+    sql = <<-SQL
+      UPDATE projects p SET the_geom = geoms.the_geom
+      FROM
+      (
+        SELECT ST_Collect(ST_SetSRID(ST_Point(c.center_lon, c.center_lat), 4326)) AS the_geom, proj.id
+        FROM
+        projects proj
+        INNER JOIN countries_projects cp ON cp.project_id = proj.id
+        INNER JOIN countries c ON cp.country_id = c.id
+        GROUP BY proj.id
+      ) AS geoms,
+      (
+        SELECT proj.id
+        FROM projects proj
+        LEFT OUTER JOIN projects_regions pr ON pr.project_id = proj.id
+        WHERE pr.project_id IS NULL
+      ) projects_without_regions
+      WHERE p.id = geoms.id AND  p.id = projects_without_regions.id
+    SQL
+    ActiveRecord::Base.connection.execute(sql)
+
     remove_cached_sites
+
     Site.all.each do |site|
       if site.projects.map(&:id).include?(self.id)
         sql = "insert into projects_sites (project_id, site_id) values (#{self.id}, #{site.id})"
@@ -657,44 +695,10 @@ SQL
                     GROUP BY p.id,p.name,o.id,o.name,p.description,p.start_date,p.end_date,p.created_at) as subq"""
          ActiveRecord::Base.connection.execute(sql_for_orphan_projects)
 
-         #We also update its geometry
-         sql = <<-SQL
-           UPDATE projects p SET the_geom = geoms.the_geom
-           FROM (
-             SELECT ST_Collect(r.the_geom) AS the_geom, proj.id
-             FROM
-             projects proj
-             INNER JOIN projects_regions pr ON pr.project_id = proj.id
-             INNER JOIN regions r ON pr.region_id = r.id
-             GROUP BY proj.id
-           ) AS geoms
-           WHERE p.id = geoms.id
-         SQL
-         ActiveRecord::Base.connection.execute(sql)
-
-         sql = <<-SQL
-           UPDATE projects p SET the_geom = geoms.the_geom
-           FROM
-           (
-             SELECT ST_Collect(ST_SetSRID(ST_Point(c.center_lon, c.center_lat), 4326)) AS the_geom, proj.id
-             FROM
-             projects proj
-             INNER JOIN countries_projects cp ON cp.project_id = proj.id
-             INNER JOIN countries c ON cp.country_id = c.id
-             GROUP BY proj.id
-           ) AS geoms,
-           (
-             SELECT proj.id
-             FROM projects proj
-             LEFT OUTER JOIN projects_regions pr ON pr.project_id = proj.id
-             WHERE pr.project_id IS NULL
-           ) projects_without_regions
-           WHERE p.id = geoms.id AND  p.id = projects_without_regions.id
-         SQL
-         ActiveRecord::Base.connection.execute(sql)
-
       end
+
     end
+
   end
 
   def remove_cached_sites
