@@ -19,7 +19,7 @@ class SitesController < ApplicationController
   def site_home
     @projects = Project.custom_find @site, :per_page => 10,
                                            :page => params[:page],
-                                           :start_in_page => params[:start_in_page]
+                                           :order => 'project_name ASC'
 
     @footer_sites = @site.sites_for_footer
 
@@ -84,7 +84,7 @@ class SitesController < ApplicationController
       format.js do
         render :update do |page|
           page << "$('#projects_view_more').remove();"
-          page << "$('#projects').append('#{escape_javascript(render(:partial => 'projects/projects'))}');"
+          page << "$('#projects').html('#{escape_javascript(render(:partial => 'projects/projects'))}');"
           page << "IOM.ajax_pagination();"
           page << "resizeColumn();"
         end

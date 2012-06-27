@@ -157,7 +157,7 @@ class SearchController < ApplicationController
       format.js do
         render :update do |page|
           page << "$('#search_view_more').html('#{escape_javascript(render(:partial => 'search/pagination'))}');"
-          page << "$('#search_results').append('#{escape_javascript(render(:partial => 'search/projects'))}');"
+          page << "$('#search_results').html('#{escape_javascript(render(:partial => 'search/projects'))}');"
           page << "IOM.ajax_pagination();"
           page << "resizeColumn();"
         end

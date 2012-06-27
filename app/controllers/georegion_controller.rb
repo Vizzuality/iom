@@ -175,7 +175,7 @@ class GeoregionController < ApplicationController
       format.js do
         render :update do |page|
           page << "$('#projects_view_more').remove();"
-          page << "$('#projects').append('#{escape_javascript(render(:partial => 'projects/projects'))}');"
+          page << "$('#projects').html('#{escape_javascript(render(:partial => 'projects/projects'))}');"
           page << "IOM.ajax_pagination();"
           page << "resizeColumn();"
         end

@@ -12,19 +12,15 @@
 <% end %>
 
 <div class="view_more" id="projects_view_more">
-  <% if @projects.total_pages > 1 && @projects.current_page < @projects.total_pages %>
-    <% if @area %>
-      <%= link_to('More projects', location_path(pagination_params), :id =>'view_more', :class => 'ajax') %>
-    <% else %>
-      <% if @data %>
-        <% if @data.is_a?(Cluster) %>
-          <%= link_to('More projects', cluster_path(pagination_params), :id =>'view_more', :class => 'ajax') %>
-        <% else %>
-          <%= link_to('More projects', sector_path(pagination_params), :id =>'view_more', :class => 'ajax') %>
-        <% end %>
-      <% else %>
-        <%= link_to('More projects', pagination_params, :id =>'view_more', :class => 'ajax') %>
-      <% end %>
-    <% end %>
+  <% if @projects.total_pages > 1 %>
+
+    <% if @projects.current_page > 1 -%>
+      <%= link_to('previous', pagination_link(previous_pagination_params), :id =>'previous') %>
+    <% end -%>
+
+    <% if @projects.current_page < @projects.total_pages -%>
+      <%= link_to('next', pagination_link(next_pagination_params), :id =>'next') %>
+    <% end -%>
+
   <% end %>
 </div>
