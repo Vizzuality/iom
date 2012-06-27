@@ -164,12 +164,32 @@ HTML
     end
   end
 
-  def pagination_params
-    params.merge(:page => @projects.current_page + 1, :start_in_page => @projects.start_in_page)
+  def previous_pagination_params
+    params.merge(:page => @projects.current_page - 1)
+  end
+
+  def next_pagination_params
+    params.merge(:page => @projects.current_page + 1)
   end
 
   def word_for_geo_context(area)
     area.is_a?(Region) ? @site.word_for_regions.singularize : 'Country'
+  end
+
+  def pagination_link(pagination_params)
+    if @area
+      location_path(pagination_params)
+    else
+      if @data
+        if @data.is_a?(Cluster)
+          cluster_path(pagination_params)
+        else
+          sector_path(pagination_params)
+        end
+      else
+        pagination_params
+      end
+    end
   end
 
 end

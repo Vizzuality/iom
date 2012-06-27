@@ -5,18 +5,18 @@ class GeoregionController < ApplicationController
   skip_before_filter :set_site, :only => [:list_regions1_from_country,:list_regions2_from_country,:list_regions3_from_country]
 
   def show
-    render_404 and return if params[:ids].blank?
+    raise NotFound if params[:ids].blank?
 
     ids = params[:ids]
-    render_404 and return unless ids =~ /([\d|\/]+)/
-    render_404 and return unless $1.size == ids.size
+    raise NotFound unless ids =~ /([\d|\/]+)/
+    raise NotFound unless $1.size == ids.size
 
     geo_ids = ids.split('/')
 
     @breadcrumb = []
 
     @country = @area = country = Country.find(geo_ids[0], :select => Country.custom_fields)
-    render_404 and return unless country
+    raise NotFound unless country
 
     @breadcrumb << country if @site.navigate_by_country?
 
@@ -39,7 +39,7 @@ class GeoregionController < ApplicationController
     end
 
     if geo_ids.size == 1 && @site.navigate_by_country?
-      render_404 and return if country.projects_count(@site) == 0
+      raise NotFound if country.projects_count(@site) == 0
 
       projects_custom_find_options = {
         :country => country.id,
@@ -85,7 +85,7 @@ class GeoregionController < ApplicationController
       level = 1
       geo_ids[1..-1].each do |geo_id|
         region = Region.find(geo_id, :select => Region.custom_fields, :conditions => {:level => level, :country_id => country.id})
-        render_404 and return unless region
+        raise NotFound unless region
         @breadcrumb << region unless !@site.send("navigate_by_level#{level}?".to_sym)
         @area = region
         level += 1
@@ -136,7 +136,7 @@ class GeoregionController < ApplicationController
 
     @georegion_projects_count = @area.projects_count(@site, @filter_by_category)
 
-    render_404 and return if sql.nil?
+    raise NotFound if sql.blank?
 
     respond_to do |format|
       format.html do
@@ -175,7 +175,7 @@ class GeoregionController < ApplicationController
       format.js do
         render :update do |page|
           page << "$('#projects_view_more').remove();"
-          page << "$('#projects').append('#{escape_javascript(render(:partial => 'projects/projects'))}');"
+          page << "$('#projects').html('#{escape_javascript(render(:partial => 'projects/projects'))}');"
           page << "IOM.ajax_pagination();"
           page << "resizeColumn();"
         end
@@ -195,12 +195,11 @@ class GeoregionController < ApplicationController
         @projects_for_kml = Project.to_kml(@site, projects_custom_find_options)
       end
     end
-
   end
 
   def old_regions
     region = Region.find(params[:id], :select => Region.custom_fields)
-    render_404 and return unless region
+    raise NotFound unless region
     redirect_to location_path(region), :status => 301
   end
 

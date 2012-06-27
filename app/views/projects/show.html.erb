@@ -175,117 +175,129 @@
 
         </div>
 
-       <div class="right"> <!--270px with shadow below-->
-         <div class="block">
+        <div class="right"> <!--270px with shadow below-->
+          <div class="block">
 
-           <h3>A project by</h3>
-           <div class="logo">
-             <% if @project.primary_organization.logo.file? %>
-               <div class="logo_bkg">
-                 <a href="<%= organization_path(@project.primary_organization) %>"><%= image_tag(@project.primary_organization.logo.url(:small)) %></a>
-               </div>
-               <%= link_to(@project.primary_organization.name, organization_path(@project.primary_organization)) %>
-             <% else %>
-               <%= link_to(@project.primary_organization.name, organization_path(@project.primary_organization), :class=>'long') %>
-             <% end %>
-           </div>
-
-           <% if @project.implementing_organization? %>
-             <h3>Implementing organizations</h3>
-             <p><%= @project.implementing_organization %></p>
-           <% end %>
-
-           <% if @project.partner_organizations? && !@project.partner_organizations.eql?('N/A') %>
-             <h3 class="margin">Partner Organizations</h3>
-             <p><%= @project.partner_organizations %></p>
-           <% end %>
-         </div>
-
-
-           <%if !@project.end_date.nil?%>
-           <div class="block">
-              <h3>Project timeline</h3>
-             <div class="timeline"><span></span><p class="months_left"><%= pluralize(@project.months_left, 'month', 'months') %> left</p></div>
-             <p class="first_date"><%= @project.start_date.strftime("%m/%d/%Y") %></p>
-             <p class="second_date"><%= @project.end_date.strftime("%m/%d/%Y") %></p>
+            <h3>Reporting Organization</h3>
+            <div class="logo">
+              <% if @project.primary_organization.logo.file? %>
+                <div class="logo_bkg">
+                  <a href="<%= organization_path(@project.primary_organization) %>"><%= image_tag(@project.primary_organization.logo.url(:small)) %></a>
+                </div>
+                <%= link_to(@project.primary_organization.name, organization_path(@project.primary_organization)) %>
+              <% else %>
+                <%= link_to(@project.primary_organization.name, organization_path(@project.primary_organization), :class=>'long') %>
+              <% end %>
             </div>
-           <% elsif @project.start_date?%>
+          </div>
+
+          <%if !@project.end_date.nil?%>
+            <div class="block">
+              <h3>Project timeline</h3>
+              <div class="timeline"><span></span><p class="months_left"><%= pluralize(@project.months_left, 'month', 'months') %> left</p></div>
+              <p class="first_date"><%= @project.start_date.strftime("%m/%d/%Y") %></p>
+              <p class="second_date"><%= @project.end_date.strftime("%m/%d/%Y") %></p>
+            </div>
+          <% elsif @project.start_date?%>
             <div class="block">
               <h3>Project timeline</h3>
               <p>Active since <%= @project.start_date.strftime("%m/%d/%Y") %></p>
-             </div>
-           <%end%>
+            </div>
+          <%end%>
 
-         <% unless @project.budget.nil? || @project.budget.eql?(0.0) %>
-         <div class="block">
-           <h3>Project budget</h3>
-           <p class="budget"><%= number_with_precision(@project.budget, :precision => 0, :delimiter => ',') %></p>
-         </div>
-         <%end%>
+          <% unless @project.budget.nil? || @project.budget.eql?(0.0) %>
+            <div class="block">
+              <h3>Project budget</h3>
+              <p class="budget"><%= number_with_precision(@project.budget, :precision => 0, :delimiter => ',') %></p>
+            </div>
+          <%end%>
 
-         <% unless !@project.estimated_people_reached? && !@project.target?%>
-         <div class="block">
-           <% if @project.estimated_people_reached? %>
-             <h3>People reached</h3>
-             <p class="estimate"><%= @project.estimated_people_reached %></p>
-             <span estimate="<%= @project.estimated_people_reached %>" class="people_amount"></span>
-           <%end%>
-           <% if @project.target? %>
-             <h3 class="<%= (@project.estimated_people_reached?)? 'margin':'' %>">Target groups</h3>
-             <p><%= @project.target %></p>
-           <% end %>
-         </div>
-         <% end %>
-         <% unless @project.donors.empty? %>
-         <div class="block">
-             <h3>Donors</h3>
-             <ul class="donor_list">
-             <% index = 0 %>
-             <% @project.donors.each do |donor, count| %>
-               <% if index<5 %>
-                 <li><%= link_to(donor.name.html_safe, donor_path(donor)) %></li>
-              <% else %>
-                 <li class="out"><%= link_to(donor.name.html_safe, donor_path(donor)) %></li>
+          <% unless @project.donors.empty? %>
+            <div class="block">
+              <h3>Donors</h3>
+              <ul class="donor_list">
+                <% index = 0 %>
+                <% @project.donors.each do |donor, count| %>
+                  <% if index<5 %>
+                    <li><%= link_to(donor.name.html_safe, donor_path(donor)) %></li>
+                  <% else %>
+                    <li class="out"><%= link_to(donor.name.html_safe, donor_path(donor)) %></li>
+                  <% end %>
+                  <% index = index + 1 %>
+                <% end %>
+              </ul>
+              <% if index>5 %>
+                <a href="#more_donors" class="more">More donors</a>
               <% end %>
-              <% index = index + 1 %>
+
+            </div>
+          <% end %>
+
+          <% if @project.awardee_type.present? -%>
+            <div class="block">
+              <h3>Prime Awardee</h3>
+              <p><%= @project.awardee_type %></p>
+            </div>
+          <% end -%>
+
+          <% if @project.implementing_organization? || (@project.partner_organizations? && !@project.partner_organizations.eql?('N/A')) -%>
+          <div class="block">
+            <% if @project.implementing_organization? %>
+              <h3>International Partners</h3>
+              <p><%= @project.implementing_organization %></p>
             <% end %>
-             </ul>
-            <% if index>5 %>
-              <a href="#more_donors" class="more">More donors</a>
+
+            <% if @project.partner_organizations? && !@project.partner_organizations.eql?('N/A') %>
+              <h3 class="margin">Local Partners</h3>
+              <p><%= @project.partner_organizations %></p>
             <% end %>
+          </div>
+          <% end -%>
 
-         </div>
-         <% end %>
-         <% unless ((@project.contact_email.nil?)||(@project.contact_email.empty?))&&(@project.contact_person.nil?)&&(@project.contact_phone_number.nil?) %>
-         <div class="block">
-           <h3>Contact information</h3>
-           <p><strong><%= @project.contact_person %></strong><br/><%= @project.contact_phone_number %></p>
-           <% unless (@project.contact_email.nil?)||(@project.contact_email.empty?) %>
-             <p class="no_margin"><%= link_to(@project.contact_email, "mailto:#{@project.contact_email}") %></p>
-           <%end%>
-         </div>
-         <%end%>
+          <% unless !@project.estimated_people_reached? && !@project.target?%>
+            <div class="block">
+              <% if @project.estimated_people_reached? %>
+                <h3>People reached</h3>
+                <p class="estimate"><%= @project.estimated_people_reached %></p>
+                <span estimate="<%= @project.estimated_people_reached %>" class="people_amount"></span>
+              <%end%>
+              <% if @project.target? %>
+                <h3 class="<%= (@project.estimated_people_reached?)? 'margin':'' %>">Target groups</h3>
+                <p><%= @project.target %></p>
+              <% end %>
+            </div>
+          <% end %>
 
-         <% unless @project.resources.empty? %>
-         <div class="block resources">
-           <h3>ADDITIONAL RESOURCES</h3>
+          <% unless ((@project.contact_email.nil?)||(@project.contact_email.empty?))&&(@project.contact_person.nil?)&&(@project.contact_phone_number.nil?) %>
+            <div class="block">
+              <h3>Contact information</h3>
+              <p><strong><%= @project.contact_person %></strong><br/><%= @project.contact_phone_number %></p>
+              <% unless (@project.contact_email.nil?)||(@project.contact_email.empty?) %>
+                <p class="no_margin"><%= link_to(@project.contact_email, "mailto:#{@project.contact_email}") %></p>
+              <%end%>
+            </div>
+          <%end%>
 
-           <% @project.resources.each do |resource| %>
-             <ul>
-               <li><a href="<%= resource.url %>" target="_blank"><%= resource.title %></a></li>
-             </ul>
-           <%end%>
-         </div>
-         <% end %>
+          <% unless @project.resources.empty? %>
+            <div class="block resources">
+              <h3>ADDITIONAL RESOURCES</h3>
 
-         <div class="block last">
-           <h3>EXPORT DATA</h3>
-           <div class="import_data">
-             <p><%= link_to 'CSV', project_path(@project, :csv) %> | <%= link_to 'KML', project_path(@project, :kml) %> | <%= link_to 'EXCEL', project_path(@project, :xls) %></p>
-           </div>
-         </div>
+              <% @project.resources.each do |resource| %>
+                <ul>
+                  <li><a href="<%= resource.url %>" target="_blank"><%= resource.title %></a></li>
+                </ul>
+              <%end%>
+            </div>
+          <% end %>
 
-       </div>
+          <div class="block last">
+            <h3>EXPORT DATA</h3>
+            <div class="import_data">
+              <p><%= link_to 'CSV', project_path(@project, :csv) %> | <%= link_to 'KML', project_path(@project, :kml) %> | <%= link_to 'EXCEL', project_path(@project, :xls) %></p>
+            </div>
+          </div>
+
+        </div>
      </div>
 
 <!-- MAP -->

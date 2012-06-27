@@ -13,7 +13,7 @@ class OrganizationsController < ApplicationController
     @organization.attributes = @organization.attributes_for_site(@site)
 
     @filter_by_category = params[:category_id]
-    @filter_by_location = params[:location_id].split('/') if params[:location_id]
+    @filter_by_location = params[:location_id].split('/') if params[:location_id] && params[:location_id].is_a?(String)
 
     @carry_on_filters = {}
     @carry_on_filters[:category_id] = params[:category_id] if params[:category_id].present?
@@ -98,7 +98,7 @@ class OrganizationsController < ApplicationController
                       (select count(*) from data_denormalization where regions_ids && ('{'||r.id||'}')::integer[] and (end_date is null OR end_date > now()) and site_id=#{@site.id}) as total_in_region
                 from ((((
                   projects as p inner join organizations as o on o.id=p.primary_organization_id and
-                  o.id=#{params[:id].sanitize_sql!})
+                  o.id=#{params[:id].sanitize_sql!.to_i})
                   inner join projects_sites as ps on p.id=ps.project_id and ps.site_id=#{@site.id})
                   inner join projects as prj on ps.project_id=prj.id and (prj.end_date is null OR prj.end_date > now())
                   inner join projects_regions as pr on pr.project_id=p.id)
@@ -122,7 +122,7 @@ class OrganizationsController < ApplicationController
               inner join projects_regions as pr on r.id=pr.region_id
               inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{@site.id}
               inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now())
-              inner join organizations as o on o.id=p.primary_organization_id and o.id=#{params[:id].sanitize_sql!}
+              inner join organizations as o on o.id=p.primary_organization_id and o.id=#{params[:id].sanitize_sql!.to_i}
               #{category_join}
               where #{location_filter} and r.level=#{@site.level_for_region}
               group by r.id,r.name,lon,lat,r.path"
@@ -137,7 +137,7 @@ class OrganizationsController < ApplicationController
                         c.iso2_code as code,
                         (select count(*) from data_denormalization where countries_ids && ('{'||c.id||'}')::integer[] and (end_date is null OR end_date > now()) and site_id=#{@site.id}) as total_in_region
                   from ((((
-                    projects as p inner join organizations as o on o.id=p.primary_organization_id and o.id=#{params[:id].sanitize_sql!})
+                    projects as p inner join organizations as o on o.id=p.primary_organization_id and o.id=#{params[:id].sanitize_sql!.to_i})
                     inner join projects_sites as ps on p.id=ps.project_id and ps.site_id=#{@site.id}) inner join countries_projects as cp on cp.project_id=p.id)
                     inner join projects as prj on ps.project_id=prj.id and (prj.end_date is null OR prj.end_date > now())
                     inner join countries as c on cp.country_id=c.id)
@@ -174,7 +174,7 @@ class OrganizationsController < ApplicationController
       format.js do
         render :update do |page|
           page << "$('#projects_view_more').remove();"
-          page << "$('#projects').append('#{escape_javascript(render(:partial => 'projects/projects'))}');"
+          page << "$('#projects').html('#{escape_javascript(render(:partial => 'projects/projects'))}');"
           page << "IOM.ajax_pagination();"
           page << "resizeColumn();"
         end
