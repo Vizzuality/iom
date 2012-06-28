@@ -19,7 +19,7 @@ class SitesController < ApplicationController
   def site_home
     @projects = Project.custom_find @site, :per_page => 10,
                                            :page => params[:page],
-                                           :order => 'project_name ASC'
+                                           :order => 'created_at DESC'
 
     @footer_sites = @site.sites_for_footer
 
