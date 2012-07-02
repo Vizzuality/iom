@@ -632,9 +632,9 @@ SQL
            GROUP BY p.id,p.name,o.id,o.name,p.description,p.start_date,p.end_date,ps.site_id,p.created_at) as subq"
      ActiveRecord::Base.connection.execute(sql)
 
-     #We also take the opportunity to add to denormalization the projects which are orphan from a site
-     #Those projects not in a site right now also need to be handled for exports
-     sql_for_orphan_projects = """
+           #We also take the opportunity to add to denormalization the projects which are orphan from a site
+           #Those projects not in a site right now also need to be handled for exports
+           sql_for_orphan_projects = """
         insert into data_denormalization(project_id,project_name,project_description,organization_id,organization_name,
         start_date,end_date,regions,regions_ids,countries,countries_ids,sectors,sector_ids,clusters,cluster_ids,
         donors_ids,is_active,created_at)
@@ -667,8 +667,9 @@ SQL
                 LEFT JOIN donations as d ON d.project_id=p.id
                 where p.id not in (select project_id from projects_sites)
                 GROUP BY p.id,p.name,o.id,o.name,p.description,p.start_date,p.end_date,p.created_at) as subq"""
-     ActiveRecord::Base.connection.execute(sql_for_orphan_projects)
+    ActiveRecord::Base.connection.execute(sql_for_orphan_projects)
 
+    Rails.cache.clear
 
   end
 

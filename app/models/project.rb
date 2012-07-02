@@ -701,6 +701,8 @@ SQL
 
     end
 
+    Rails.cache.clear
+
   end
 
   def remove_cached_sites
