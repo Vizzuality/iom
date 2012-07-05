@@ -7,7 +7,7 @@
   </li>
 
   <li <%= selected_if_current_page(donations_admin_project_path(@project)) %>>
-      <%= link_to('Donations', donations_admin_project_path(@project)) %><% if !@project.donations.empty? %> <p><span><%=@project.donations.count%></span></p><% end %>
+      <%= link_to('Donors', donations_admin_project_path(@project)) %><% if !@project.donations.empty? %> <p><span><%=@project.donations.count%></span></p><% end %>
   </li>
 
   <% if false -%>

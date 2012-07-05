@@ -82,6 +82,7 @@ class Admin::ProjectsController < Admin::AdminController
   end
 
   def create
+    require 'ruby-debug'; debugger
     @project = new_project(params[:project])
     @project.updated_by = current_user
     if @project.valid? && @project.save

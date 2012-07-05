@@ -56,7 +56,7 @@ class Project < ActiveRecord::Base
 
   validate :dates_consistency#, :presence_of_clusters_and_sectors
 
-  after_save :set_cached_sites
+  after_commit :set_cached_sites
   after_destroy :remove_cached_sites
 
   def tags=(tag_names)
@@ -503,17 +503,23 @@ SQL
       # page = 3 > real page = 7 > offset = 60
       # page = 4 > real page = 1 > offset = 0
       # page = 5 > real page = 2 > offset = 10
-      offset = if (options[:page].to_i + start_in_page - 1) <= total_pages
-        options[:per_page].to_i * (options[:page].to_i + start_in_page - 1)
-      else
-        options[:per_page].to_i * (options[:page].to_i - start_in_page)
-      end
+
+      # Apparently, the offset is not being calculated correctly
+      #offset = if (options[:page].to_i + start_in_page - 1) <= total_pages
+        #options[:per_page].to_i * (options[:page].to_i + start_in_page - 1)
+      #else
+        #options[:per_page].to_i * (options[:page].to_i - start_in_page)
+      #end
+      #
+      offset = (options[:page].to_i - 1) * options[:per_page].to_i
       raise Iom::InvalidOffset if offset < 0
       sql << " OFFSET #{offset}"
     end
     result = ActiveRecord::Base.connection.execute(sql).map{ |r| r }
-    WillPaginate::RandomCollection.create((Integer(options[:page]) rescue 1), options[:per_page], total_entries, start_in_page) do |pager|
-      pager.replace(result.sort_by{rand})
+    page = Integer(options[:page]) rescue 1
+
+    WillPaginate::RandomCollection.create(page, options[:per_page], total_entries, page - 1) do |pager|
+      pager.replace(result)
     end
   end
 
@@ -579,7 +585,45 @@ SQL
   end
 
   def set_cached_sites
+
+    #We also update its geometry
+    sql = <<-SQL
+      UPDATE projects p SET the_geom = geoms.the_geom
+      FROM (
+        SELECT ST_Collect(r.the_geom) AS the_geom, proj.id
+        FROM
+        projects proj
+        INNER JOIN projects_regions pr ON pr.project_id = proj.id
+        INNER JOIN regions r ON pr.region_id = r.id
+        GROUP BY proj.id
+      ) AS geoms
+      WHERE p.id = geoms.id
+    SQL
+    ActiveRecord::Base.connection.execute(sql)
+
+    sql = <<-SQL
+      UPDATE projects p SET the_geom = geoms.the_geom
+      FROM
+      (
+        SELECT ST_Collect(ST_SetSRID(ST_Point(c.center_lon, c.center_lat), 4326)) AS the_geom, proj.id
+        FROM
+        projects proj
+        INNER JOIN countries_projects cp ON cp.project_id = proj.id
+        INNER JOIN countries c ON cp.country_id = c.id
+        GROUP BY proj.id
+      ) AS geoms,
+      (
+        SELECT proj.id
+        FROM projects proj
+        LEFT OUTER JOIN projects_regions pr ON pr.project_id = proj.id
+        WHERE pr.project_id IS NULL
+      ) projects_without_regions
+      WHERE p.id = geoms.id AND  p.id = projects_without_regions.id
+    SQL
+    ActiveRecord::Base.connection.execute(sql)
+
     remove_cached_sites
+
     Site.all.each do |site|
       if site.projects.map(&:id).include?(self.id)
         sql = "insert into projects_sites (project_id, site_id) values (#{self.id}, #{site.id})"
@@ -653,27 +697,12 @@ SQL
                     GROUP BY p.id,p.name,o.id,o.name,p.description,p.start_date,p.end_date,p.created_at) as subq"""
          ActiveRecord::Base.connection.execute(sql_for_orphan_projects)
 
-
-         #We also update its geometry
-         sql="""
-         update projects as proj set the_geom = (
-         select ST_Collect(r.the_geom) from
-         projects_regions as pr
-         inner join regions as r on pr.region_id=r.id and pr.project_id=proj.id
-         group by proj.id)
-         where id in (select project_id from projects_regions)"""
-         ActiveRecord::Base.connection.execute(sql)
-         sql="""update projects as p set the_geom=
-         	(select ST_Collect(r.the_geom) from
-         	countries_projects as cp
-         	inner join regions as r on cp.country_id=r.country_id
-         	where cp.project_id=p.id)
-         where id not in (select project_id from projects_regions)
-         and id in (select project_id from countries_projects)"""
-         ActiveRecord::Base.connection.execute(sql)
-
       end
+
     end
+
+    Rails.cache.clear
+
   end
 
   def remove_cached_sites
@@ -690,6 +719,9 @@ SQL
 
     def dates_consistency
       return true if end_date.nil? || start_date.nil?
+      if start_date.present? && start_date > 1.week.since.to_date
+        errors.add(:start_date, "max 1 week from today")
+      end
       if !end_date.nil? && !start_date.nil? && end_date < start_date
         errors.add(:end_date, "can't be previous to start_date")
       end

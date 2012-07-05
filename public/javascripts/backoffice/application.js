@@ -113,6 +113,7 @@ $(document).ready(function(ev){
       });
       var href_ = $(this).attr('destroy_url');
       var name_ = $(this).attr('att_name');
+      var no_subtitle = $(this).attr('no_subtitle');
 
       $('div#modal_window a.remove').click(function(evt){
         evt.preventDefault();
@@ -120,6 +121,9 @@ $(document).ready(function(ev){
       });
       $('div#modal_window h4').text('You are about deleting this '+capitaliseFirstLetter(name_));
       $('div#modal_window p').text('If you delete this '+name_+', it will not appear in any site.');
+      if (no_subtitle) {
+        $('div#modal_window p').text('');
+      }
       $('div#modal_window').fadeIn();
     });
 

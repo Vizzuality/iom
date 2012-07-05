@@ -301,8 +301,10 @@ div#left_column div.right ul li p.info {padding:10px 0 0 0;}
 div#left_column div.right ul li p.info a {text-decoration:underline; color:#D05F4E;}
 div#left_column div.right ul li p.info a:hover {text-decoration:none;}
 div#left_column div.view_more {clear:both; width:100%; padding:20px 0 0 0;}
-div#left_column div.view_more a#view_more {display:block; width:162px; height:15px; margin:0 0 0 245px; padding:5px 0 5px; font:normal 13px "PT Sans Bold"; background:url('/images/sites/search/view_more.png') no-repeat 0 0; text-align:center;}
-div#left_column div.view_more a#view_more:hover {background-position:0 -26px; cursor:pointer;}
+div#left_column div.view_more a {display:inline; height:15px; margin:0 0 0 0; font:normal 13px "PT Sans Bold"; background:url('/images/sites/search/pagination.png') no-repeat 0 0; text-align:center;}
+div#left_column div.view_more a:hover {background-position:0 -26px; cursor:pointer;}
+div#left_column div.view_more a#previous {float: left; margin-left: 34px; padding: 5px 18px; }
+div#left_column div.view_more a#next {float: right; padding: 5px 30px;}
 
 
 
