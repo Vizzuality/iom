@@ -24,7 +24,7 @@ class Partner < ActiveRecord::Base
                                         :format => 'jpg'
                                       }
                                     },
-                            :url => "/system/:attachment/:id/:style.:extension"
+                            :url => "/system/partners/:attachment/:id/:style.:extension"
 
   validates_presence_of :name, :url, :label, :logo
 
