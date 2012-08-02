@@ -49,7 +49,7 @@ Galleria.addTheme({
           $(e.thumbTarget).parent(':not(.active)').children().css('opacity',.6)
         });
 
-        
+
 
         this.bind(Galleria.LOADSTART, function(e) {
           if (!e.cached) {
@@ -58,11 +58,11 @@ Galleria.addTheme({
           }
           this.$('info').toggle( this.hasInfo() );
           $(e.thumbTarget).css('opacity',1).parent().siblings().children().css('opacity',.6);
-        });		
+        });
         this.bind(Galleria.LOADFINISH, function(e) {
-      	  this.$('thumbnails-container').animate({opacity:1},1000);		
+      	  this.$('thumbnails-container').animate({opacity:1},1000);
 	        this.$('loader').fadeOut('fast');
-	        
+
 	        var me = this;
 	        $('a.video').click(function(ev){
 	          ev.stopPropagation();
@@ -70,7 +70,7 @@ Galleria.addTheme({
 	          me.pause();
             playVideo($(this).attr('vimeo-id'));
 	        });
-	        
+
 	        $('a#back_gallery').click(function(ev){
 	          ev.stopPropagation();
 	          ev.preventDefault();
@@ -79,7 +79,7 @@ Galleria.addTheme({
               me.play();
             });
 	        });
-	        
+
           if (this._data[0].vimeo_id!=undefined) {
             $('a.video').attr('vimeo-id',this._data[0].vimeo_id);
             $('a.video').show();
