@@ -68,5 +68,4 @@ stylesheets:
 - base:
   - sites/jscroll
   - sites/layout
-  - sites/galleria.home
 
