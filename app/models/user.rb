@@ -45,8 +45,8 @@ class User < ActiveRecord::Base
   #
   def self.authenticate(email, password)
     return nil if email.blank? || password.blank?
-    u = find_by_email(email.downcase) # need to get the salt
-    u && u.authenticated?(password) ? u : nil
+    u = find_by_email(email.downcase.strip) # need to get the salt
+    u && u.authenticated?(password.strip) ? u : nil
   end
 
   def self.admin
@@ -55,6 +55,14 @@ class User < ActiveRecord::Base
 
   def email=(value)
     write_attribute :email, (value ? value.downcase : nil)
+  end
+
+  def password=(value)
+    write_attribute :password, (value ? value.strip : nil)
+  end
+
+  def password_confirmation=(value)
+    write_attribute :password_confirmation, (value ? value.strip : nil)
   end
 
   def admin?
