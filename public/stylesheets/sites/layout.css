@@ -285,8 +285,8 @@ div#left_column div.right h3 ul.download li a:hover {text-decoration: underline;
 div#left_column div.right h3.withlogo {width:300px}
 div#left_column div.right div#sponsor {position: absolute; right: 0; top: 0px;}
 div#left_column div.right div#sponsor span {float: left; vertical-align: top; padding: 21px 0 0 0; font: normal 13px "PT Sans Bold"; color:#999999; text-shadow:0 1px white; text-transform:uppercase;}
-div#left_column div.right div#sponsor div#logo {float: left;; width: 101px; padding: 15px 0 0 0; text-align: center; background: url('/images/sites/home/sponsor_frame.png');}
-div#left_column div.right div#sponsor div#logo_bottom_border{position: absolute; width: 101px; height: 10px; padding: 0; text-align: center; background: url('/images/sites/home/sponsor_frame_bottom.png'); right: 0; bottom: -10px;}
+div#left_column div.right div#sponsor div#logo {float: left;; width: 101px; padding: 15px 0 0 0; text-align: center; }
+div#left_column div.right div#sponsor div#logo_bottom_border{position: absolute; width: 101px; height: 10px; padding: 0; text-align: center; right: 0; bottom: -10px;}
 div#left_column div.right ul {width:100%; padding:0!important;}
 div#left_column div.right ul li {width:572px; height:74px; padding:20px 26px 20px 34px;}
 div#left_column div.right ul li.even {background:url('/images/sites/regions/even_bkg.png') repeat-x 0 0;}

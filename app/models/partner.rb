@@ -21,7 +21,7 @@ class Partner < ActiveRecord::Base
   has_attached_file :logo, :styles => {
                                       :small => {
                                         :geometry => '80x46>',
-                                        :format => 'jpg'
+                                        :format => 'png'
                                       }
                                     },
                             :url => "/system/partners/:attachment/:id/:style.:extension"
