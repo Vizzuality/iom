@@ -58,11 +58,11 @@ class User < ActiveRecord::Base
   end
 
   def password=(value)
-    write_attribute :password, (value ? value.strip : nil)
+    @password = value ? value.strip : nil
   end
 
   def password_confirmation=(value)
-    write_attribute :password_confirmation, (value ? value.strip : nil)
+    @password_confirmation = value ? value.strip : nil
   end
 
   def admin?
