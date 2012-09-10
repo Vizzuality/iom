@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <%=raw(javascript_include_merged(:base)) %>
+    <%=raw(javascript_include_merged(:base_2)) %>
+    <%=raw(stylesheet_link_merged(:base)) %>
+    <%=stylesheet_link_tag @site.theme.css_file if @site.theme %>
+    <style>
+      body {background: none;}
+      #maker_map_41 {width: 100%; height: 467px;}
+    </style>
+  </head>
+  <body>
+    <div id="map" class="home"></div>
+    <a href="#zoom_in" id="zoomIn" onclick="zoomIn()"></a>
+    <a href="#zoom_out" id="zoomOut" onclick="zoomOut()"></a>
+    <div class="map_style">
+      <p>PLAIN</p>
+      <ul>
+        <li><a id="plain_map" href="#plain">PLAIN</a></li>
+        <li><a id="satellite_map" href="#satellite">SATELLITE</a></li>
+      </ul>
+    </div>
+    <script type="text/javascript">
+      <% if @site.overview_map_lat && @site.overview_map_lon %>
+      var map_center = [<%= @site.overview_map_lat %>, <%= @site.overview_map_lon %>];
+      <% else %>
+      var map_center = [];
+      <% end %>
+      var map_zoom = <%= @site.overview_map_zoom %>;
+      var chco = "<%=@overview_map_chco%>";
+      var chf = "<%=@overview_map_chf%>";
+      var chld = "<%=@chld%>";
+      var chd = "<%=@chd%>";
+      var map_data = <%=raw(@map_data)%>;
+      var max_count = <%=@map_data_max_count%>;
+      var map_type = 'overview_map';
+      var theme = "<%=@site.theme_id%>";
+      var stylez = <%=raw @site.map_styles  %>
+    </script>
+
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true&amp;v=3.3"></script>
+    <%=raw(javascript_include_merged(:sites_home)) %>
+  </body>
+</html>
