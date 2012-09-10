@@ -89,7 +89,7 @@
           <%unless @organization.contact_name.nil? &&  @organization.contact_position.nil? && @organization.hq_address.nil? && @organization.contact_zip.nil? && @organization.contact_phone_number.nil? %>
           <div class="block">
             <h3>CONTACT INFORMATION</h3>
-            <p><strong><%= @organization.contact_name %></strong><br/><%= @organization.contact_position %><br/><%= @organization.hq_address %> <%= @organization.contact_zip %></p>
+            <p><strong><%= @organization.contact_name %></strong><br/><%= @organization.contact_position %></p>
             <p><%= @organization.contact_phone_number %><br/><% unless (@organization.contact_email.nil?)||(@organization.contact_email.empty?) %><%= link_to(@organization.contact_email, "mailto:#{@organization.contact_email}") %><%end%></p>
           </div>
           <%end%>
