@@ -93,15 +93,19 @@
             <p><%= @organization.contact_phone_number %><br/><% unless (@organization.contact_email.nil?)||(@organization.contact_email.empty?) %><%= link_to(@organization.contact_email, "mailto:#{@organization.contact_email}") %><%end%></p>
           </div>
           <%end%>
-          <% unless @organization.donation_phone_number.nil? && @organization.donation_website.nil? %>
+          <% if donation_information?(@organization) %>
           <div class="block green">
             <h3>DONATION INFORMATION</h3>
+            <% if donation_address?(@organization) %>
             <p>
               <strong>Donations</strong>
               <br/><%= @organization.donation_address %>
               <br/><%= @organization.city %>, <%= @organization.state %> <%= @organization.zip_code %>
             </p>
+            <% end %>
+            <% if donation_phone?(@organization) %>
             <p><%= @organization.donation_phone_number %><br/><%= link_to(truncate(@organization.donation_website, :length=>41), @organization.donation_website) %></p>
+            <% end %>
           </div>
           <%end%>
           <% unless @organization.twitter.nil? &&  @organization.facebook.nil? && @organization.website.nil? %>
@@ -134,7 +138,7 @@
 
 
         </div>
-        
+
       </div>
 
       <!-- RIGHT PART -->
