@@ -89,8 +89,6 @@
 
   function addComboListListener() {
     $('span.region_combo ul li').livequery('click',function(ev){
-      console.log('entra')
-
       var mega_parent = $(this).parent().parent().parent().parent().parent();
       var new_item = $(this).children('a');
 
