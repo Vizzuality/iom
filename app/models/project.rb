@@ -52,7 +52,7 @@ class Project < ActiveRecord::Base
 
   scope :active, where("end_date > ?", Date.today.to_s(:db))
   scope :closed, where("end_date < ?", Date.today.to_s(:db))
-  validates_presence_of :primary_organization_id, :name, :description, :start_date, :end_date
+  validates_presence_of :primary_organization_id, :name, :description, :start_date, :end_date, :country_ids
 
   validate :dates_consistency#, :presence_of_clusters_and_sectors
 
