@@ -1,52 +1,33 @@
-    <!-- FOOTERS -->
-    
-      <div id="superfooter_pages">        
-        <div class="inner_superfooter">
-        <h2>Part of <span>NGO AID MAP</span>. An <strong>InterAction</strong> initiative</h2>  
+<!-- FOOTERS -->
 
-        <%= link_to 'Learn more', "http://#{Settings.main_site_host}", :id => "learnmore" %>
+<div id="superfooter_pages">
+  <div class="inner_superfooter">
+    <h2>Part of <span>NGO AID MAP</span>. An <strong>InterAction</strong> initiative</h2>
 
-        <ul>          
-          <% @footer_sites.each do |footer_site|%>
-            <li>              
-              <%= link_to (raw [image_tag(footer_site.aid_map_image.url(:small)), content_tag(:span, footer_site.name)].join), "#{request.protocol}#{footer_site.url}:#{request.port}" %>
-            </li>
-          <% end %>
-        </ul>
+    <%= link_to 'Learn more', "http://#{Settings.main_site_host}", :id => "learnmore" %>
 
-        </div>    
+    <ul>
+      <% @footer_sites.each do |footer_site|%>
+        <li>
+          <%= link_to (raw [image_tag(footer_site.aid_map_image.url(:small)), content_tag(:span, footer_site.name)].join), "#{request.protocol}#{footer_site.url}:#{request.port}" %>
+        </li>
+      <% end %>
+    </ul>
+
+  </div>
+</div>
+
+<div id="footer_pages" class="dark_footer">
+  <div class="inner_footer">
+    <div class="left">
+      <a href="http://www.interaction.org/" class="logo"></a>
+      <div class="project">
+        <p class="site_name"><%= link_to @site.name, url(@site) %> is a sub-site of <%= link_to 'NGO Aid Map', "http://#{Settings.main_site_host}" %></p>
+        <p class="all_rights">© <a class="link interaction" href="http://www.interaction.org/">InterAction</a> 2011. <!-- Sponsored by <a class="link fedex" href="">FedEx</a>.--> Developed by <a class="link" href="http://www.vizzuality.com/">Vizzuality</a></p>
       </div>
-    
-      <div id="footer_pages" class="dark_footer">
-        <div class="inner_footer">
-        <div class="left">
-          <a href="http://www.interaction.org/" class="logo"></a>
-          <div class="project">
-            <p class="site_name"><%= link_to @site.name, url(@site) %> is a sub-site of <%= link_to 'NGO Aid Map', "http://#{Settings.main_site_host}" %></p>
-            <p class="all_rights">© <a class="link interaction" href="http://www.interaction.org/">InterAction</a> 2011. <!-- Sponsored by <a class="link fedex" href="">FedEx</a>.--> Developed by <a class="link" href="http://www.vizzuality.com/">Vizzuality</a></p>
-          </div>
-        </div>
-        <div class="right">
-          <ul>
-            <% if Page.contact(@site)%>
-            <li><a href="<%= page_path(Page.contact(@site)) %>">Contact</a></li>
-            <li>|</li>
-            <% end %>
-            <li><%= link_to 'Link to this site', "http://#{Settings.main_site_host}/link-ngo-aid-map" %></li>
-            <li>|</li>
-            <li><%= link_to 'Make your own map', "http://#{Settings.main_site_host}/make-your-own-map"%></li>
-            <li>|</li>
-            <% if Page.make_your_map(@site) %>
-            <li><a href="<%= page_path(Page.make_your_map(@site)) %>">Make your map</a></li>
-            <li>|</li>
-            <% end %>
-            <% if Page.about(@site)%>
-            <li><a href="<%= page_path(Page.about(@site)) %>">About</a></li>
-            <% end %>
-          </ul>
-        </div>
-        </div>
-      </div>
-      
-      
-      
+    </div>
+  </div>
+</div>
+
+
+
