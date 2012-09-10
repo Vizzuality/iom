@@ -25,4 +25,16 @@ module OrganizationsHelper
     result.join(', ')
   end
 
+  def donation_information?(organization)
+     donation_address?(organization) || donation_phone?(organization)
+  end
+
+  def donation_address?(organization)
+    organization.donation_address.present? && organization.city.present? && organization.state.present? && organization.zip_code.present?
+  end
+
+  def donation_phone?(organization)
+    organization.donation_phone_number.present? && organization.donation_website.present?
+  end
+
 end

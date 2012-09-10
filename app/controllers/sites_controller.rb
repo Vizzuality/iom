@@ -79,6 +79,7 @@ class SitesController < ApplicationController
         end
         @chld = areas.join("|")
         @chd  = "t:"+data.join(",")
+        render 'site_home_map', :layout => false and return if params[:embed].present?
         render request.fullpath.match('home2') ? :site_home2 : :site_home
       end
       format.js do
