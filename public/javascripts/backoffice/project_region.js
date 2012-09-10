@@ -89,6 +89,7 @@
 
   function addComboListListener() {
     $('span.region_combo ul li').livequery('click',function(ev){
+      console.log('entra')
 
       var mega_parent = $(this).parent().parent().parent().parent().parent();
       var new_item = $(this).children('a');
@@ -169,7 +170,6 @@
         }
       } else {
         $.getJSON('/geo/regions/'+item_level+'/'+item_id+'/json?' + (new Date().getTime()),function(result){
-          $('img.loader').hide();
           var settings = {showArrows: false};
           var pane = next_element.children('span.region_combo').children('div.wrapper').children('ul.scroll_pane')
           pane.jScrollPane(settings);
@@ -199,7 +199,7 @@
           }
           next_element.show();
 
-          addComboListListener();
+          $('img.loader').hide();
         });
       }
     });
