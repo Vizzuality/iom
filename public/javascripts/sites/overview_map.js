@@ -64,10 +64,10 @@
 
 	for (var i = 0; i<map_data.length; i++) {
 	  var image_source = '';
-	
+
 	  if(document.URL.indexOf("force_site_id=3")>=0 || document.URL.indexOf("hornofafrica")>=0) {
 		if (map_type == "overview_map") {
-			//map.overlayMapTypes.insertAt(2, mapChartType);	
+			//map.overlayMapTypes.insertAt(2, mapChartType);
 		}
 	    if (map_data[i].count < 5) {
 	      diameter = 20;
@@ -84,7 +84,7 @@
 	    } else {
 	      diameter = 58;
 	      image_source = "/images/themes/"+ theme + '/marker_6.png';
-	    }	
+	    }
 	  } else if (map_type == "overview_map") {
 	    if (map_data[i].count < 25) {
 	      diameter = 20;
@@ -124,25 +124,25 @@
 	    image_source = "/images/themes/"+ theme + '/project_marker.png';
 	  }
 	  var marker_ = new IOMMarker(map_data[i],diameter, image_source,map);
-	
+
 	  if (map_type!="overview_map") {
 	    bounds.extend(new google.maps.LatLng(map_data[i].lat, map_data[i].lon));
 	  }
 	}
-	
+
 	if (map_type!="overview_map") {
 	  map.fitBounds(bounds);
 	}
-	
+
 	if (map_type=="project_map") {
 	  map.panBy(130,20);
 	}
 
     // for (var i = 0; i<map_data.length; i++) {
     //   var image_source = '';
-    //   
+    //
     //   console.log(map_data);
-    // 
+    //
     //   if (map_type == "overview_map") {
     //     if (map_data[i].count < 25) {
     //       diameter = 20;
@@ -182,12 +182,12 @@
     //     image_source = "/images/themes/"+ theme + '/project_marker.png';
     //   }
     //   marker_ = new IOMMarker(map_data[i],diameter, image_source,map);
-    // 
+    //
     //   if (map_type!="overview_map") {
     //     bounds.extend(new google.maps.LatLng(map_data[i].lat, map_data[i].lon));
     //   }
     // }
-    // 
+    //
     // if (map_type!="overview_map") {
     //   map.fitBounds(bounds);
     // }
@@ -245,19 +245,26 @@
 
 
   function positionControls() {
+    var header_height = 0;
     if ($('#layout').length>0) {
       var column_position = $('#layout').offset().left;
       var map_position = $('#map').position().top + 25;
+      var column_height = $('.float_head').outerHeight();
     } else {
       var column_position = $('#mesh').offset().left + 5;
       var map_position = $('#small_map').position().top + 25;
+      var column_height = $('.float_head').outerHeight();
     }
 
-    $('#zoomIn').css('left',column_position+'px');
-    $('#zoomIn').css('top',map_position+'px');
+    if ($('#outer_layout #header').length == 0){
+      var header_height = $('#header').outerHeight();
+    }
 
-    $('#zoomOut').css('left',column_position+32+'px');
-    $('#zoomOut').css('top',map_position+'px');
+    $('#zoomIn').css('left', column_position+'px');
+    $('#zoomIn').css('top', column_height + header_height + 25);
+
+    $('#zoomOut').css('left', column_position+32+'px');
+    $('#zoomOut').css('top', column_height + header_height + 25);
 
     $('div.map_style').css('left',column_position+821+'px');
     $('div.map_style').css('top',map_position+'px');
