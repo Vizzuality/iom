@@ -291,7 +291,7 @@ div#left_column div.right ul {width:100%; padding:0!important;}
 div#left_column div.right ul li {width:572px; height:74px; padding:20px 26px 20px 34px;}
 div#left_column div.right ul li.even {background:url('/images/sites/regions/even_bkg.png') repeat-x 0 0;}
 div#left_column div.right ul li h4 {width:100%; padding:0; margin:0;}
-div#left_column div.right ul li h4 a {font:normal 17px "PT Sans Bold"; color:#D05F4E; text-decoration:none;}
+div#left_column div.right ul li h4 a {font:bold 17px "PT Sans"; color:#D05F4E; text-decoration:none;}
 div#left_column div.right ul li h4 a:hover {text-decoration:underline;}
 div#left_column div.right ul li p {font:normal 13px Arial; color:#666666;}
 div#left_column div.right ul li p.author {padding:0!important; margin:0;}
