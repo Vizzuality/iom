@@ -1,21 +1,21 @@
 
     var map;
     var bounds;
-    var overlay; 
+    var overlay;
     var map;
     var baseUrl="http://chart.apis.google.com/chart?chs=256x256";
     var global_index = 10;
 
     $(document).ready( function() {
-      var styleMapType = new google.maps.StyledMapType(stylez, styledMapOptions);    
+      var styleMapType = new google.maps.StyledMapType(stylez, styledMapOptions);
 
       var mapChartOptions = {
           getTileUrl: function(coord, zoom) {
               var lULP = new google.maps.Point(coord.x*256,(coord.y+1)*256);
-              var lLRP = new google.maps.Point((coord.x+1)*256,coord.y*256);     
+              var lLRP = new google.maps.Point((coord.x+1)*256,coord.y*256);
               var projectionMap = new MercatorProjection();
               var lULg = projectionMap.fromDivPixelToLatLng(lULP, zoom);
-              var lLRg = projectionMap.fromDivPixelToLatLng(lLRP, zoom);                 
+              var lLRg = projectionMap.fromDivPixelToLatLng(lLRP, zoom);
               return baseUrl+"&chd="+chd+"&chco="+chco+"&chld="+chld+"&chf="+chf+"&cht=map:fixed="+
                  lULg.lat() +","+ lULg.lng() + "," + lLRg.lat() + "," + lLRg.lng();
           },
@@ -23,8 +23,8 @@
           opacity:parseFloat(0.4),
           isPng: true
       };
-      var mapChartType = new google.maps.ImageMapType(mapChartOptions);      
-    
+      var mapChartType = new google.maps.ImageMapType(mapChartOptions);
+
 
       var myOptions = {
         scrollwheel: false,
@@ -39,7 +39,7 @@
       //map.overlayMapTypes.insertAt(2, mapChartType);
       map.mapTypes.set('labels', styleMapType);
       map.setMapTypeId('labels');
-  
+
     	var bounds = new google.maps.LatLngBounds();
       for (var i = 0; i<map_data.length; i++) {
         diameter = 58;
@@ -53,11 +53,11 @@
           map.setZoom(8);
         }
       });
-      
+
       if (map.getZoom()>9) {
         map.setZoom(9);
       }
-  
+
       //Positionate controls
       setTimeout(function(){
         positionControls();
@@ -65,12 +65,12 @@
         $('#zoomOut').fadeIn();
         $('div.map_style').fadeIn();
       },500);
-      
+
       $('#zoomIn,#zoomOut').click(function(ev){
         ev.preventDefault();
         ev.stopPropagation();
       });
-      
+
       $('div.map_style').click(function(){
         if ($('div.map_style').height()==76) {
           $('div.map_style').css('background-position','0 0');
@@ -96,12 +96,12 @@
         $('div.map_style').height(26);
       });
 
-      
-      
+
+
       $(window).resize(function(){
         positionControls();
       });
-  
+
     });
 
 
@@ -109,16 +109,19 @@
       if ($('#layout').length>0) {
         var column_position = $('#layout').offset().left;
         var map_position = $('#map').position().top + 25;
+        var column_height = $('.float_head').outerHeight();
+        var header_height = $('#header').outerHeight();
       } else {
         var column_position = $('#mesh').offset().left + 5;
         var map_position = $('#small_map').position().top + 25;
+        var header_height = $('#header').outerHeight();
       }
 
       $('#zoomIn').css('left',column_position+'px');
-      $('#zoomIn').css('top',map_position+'px');
+      $('#zoomIn').css('top',column_height + header_height + 25);
 
       $('#zoomOut').css('left',column_position+32+'px');
-      $('#zoomOut').css('top',map_position+'px');
+      $('#zoomOut').css('top',column_height + header_height + 25);
 
       $('div.map_style').css('left',column_position+821+'px');
       $('div.map_style').css('top',map_position+'px');
