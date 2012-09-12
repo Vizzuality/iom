@@ -170,11 +170,11 @@ div#map {display:block; width:100%; height:465px; background:#99B3CA; border-bot
 div#map.home {border-top:none;}
 
 div#small_map {width:100%; height:335px; background:#99B3CA; border-top:2px solid white; border-bottom:2px solid white;}
-a#zoomIn {position:absolute; display:none; width:26px; height:25px; background:url('/images/sites/maps/zoom_in.png') no-repeat 0 0; z-index:100;}
+a#zoomIn {position:absolute; display:none; width:26px; height:25px; top:10px; left:10px; background:url('/images/sites/maps/zoom_in.png') no-repeat 0 0; z-index:100;}
 a#zoomIn:hover {background-position:0 -25px;}
-a#zoomOut {position:absolute; display:none; width:26px; height:25px; background:url('/images/sites/maps/zoom_out.png') no-repeat 0 0; z-index:100;}
+a#zoomOut {position:absolute; display:none; width:26px; height:25px; top:10px; left:40px; background:url('/images/sites/maps/zoom_out.png') no-repeat 0 0; z-index:100;}
 a#zoomOut:hover {background-position:0 -25px;}
-div.map_style {position:absolute; display:none; top:10px; left:50px; width:111px; height:26px; background:url('/images/sites/maps/map_style.png') no-repeat 0 0; overflow:hidden; z-index:100;}
+div.map_style {position:absolute; display:none; top:10px; right:10px; width:111px; height:26px; background:url('/images/sites/maps/map_style.png') no-repeat 0 0; overflow:hidden; z-index:100;}
 div.map_style:hover {cursor:pointer;}
 div.map_style p {margin:7px 0 0 10px; font:normal 13px 'PT Sans'; color:white;}
 div.map_style ul {width:93px; margin:10px 10px 0 10px;}
@@ -282,6 +282,7 @@ div#left_column div.right h3 strong {padding:10px 0 0; font:normal 12px Arial; c
 div#left_column div.right h3 ul.download { width: auto; padding-left: 19px!important; background:url('/images/sites/icons/download.png') no-repeat 0 5px; line-height: 25px;}
 div#left_column div.right h3 ul.download li {font:normal 13px Arial; display: inline; width: auto; height: auto; padding: 0;}
 div#left_column div.right h3 ul.download li a:hover {text-decoration: underline;}
+div#left_column div.right h3 a#embed_map {text-transform: none; }
 div#left_column div.right h3.withlogo {width:300px}
 div#left_column div.right div#sponsor {position: absolute; right: 0; top: 0px;}
 div#left_column div.right div#sponsor span {float: left; vertical-align: top; padding: 21px 0 0 0; font: normal 13px "PT Sans Bold"; color:#999999; text-shadow:0 1px white; text-transform:uppercase;}
@@ -306,6 +307,74 @@ div#left_column div.view_more a:hover {background-position:0 -26px; cursor:point
 div#left_column div.view_more a#previous {float: left; margin-left: 34px; padding: 5px 18px; }
 div#left_column div.view_more a#next {float: right; padding: 5px 30px;}
 
+div#popup.embed_map {
+  display: none;
+  position: fixed;
+  width: 468px;
+  height: 240px;
+  padding: 30px;
+  top: 50%;
+  left: 50%;
+  margin-top: -150px;
+  margin-left: -264px;
+  background-color: white;
+  z-index: 100;
+}
+
+div#popup.embed_map h5{
+  font-family: 'PT Sans'
+  font-size: 13px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+div#popup.embed_map p{
+  font-size: 15px;
+  padding: 10px 0;
+}
+
+div#popup.embed_map a.close.top {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background-image: url('/images/sites/common/popup_close_x.png');
+  width: 8px;
+  height: 8px;
+  display: block;
+}
+
+div#popup.embed_map a.close.button {
+  background-image: url('/images/sites/common/popup_close_button.png');
+  width: 81px;
+  height: 33px;
+  display: block;
+  color: white;
+  font-family: "PT Sans";
+  font-size: 15px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 33px;
+  margin: 20px 0;
+}
+
+div#popup.embed_map textarea{
+  width: 462px;
+  height: 134px;
+  border: 1px solid #CCCCCC;
+  font-family: 'Courier new';
+  font-size: 15px;
+}
+
+div.popup_background {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 50;
+}
 
 
 /*LEFT BIG COLUMN - RIGHT SIDEBAR -> SEARCH, SITE PAGES, DONORS, */
