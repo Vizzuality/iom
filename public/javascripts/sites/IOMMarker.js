@@ -126,7 +126,7 @@
             top_hidden.style.width = '149px';
             top_hidden.style.height = 'auto';
             top_hidden.style.background = "url('/images/sites/common/tooltips/body_tooltip.png') no-repeat center top";
-            top_hidden.style.font = "normal 17px 'PT Sans Bold'";
+            top_hidden.style.font = "bold 17px 'PT Sans'";
             top_hidden.style.textAlign = "center";
             top_hidden.style.color = "white";
             if (kind=="sector" || kind=="cluster") {
@@ -144,7 +144,7 @@
             top_hidden.style.width = '149px';
             top_hidden.style.height = 'auto';
             top_hidden.style.background = "url('/images/sites/common/tooltips/body_tooltip.png') no-repeat center top";
-            top_hidden.style.font = "normal 17px 'PT Sans Bold'";
+            top_hidden.style.font = "bold 17px 'PT Sans'";
             top_hidden.style.textAlign = "center";
             top_hidden.style.color = "white";
             $(top_hidden).html(this.name+'<br/><strong style="font:normal 13px Arial; color:#999999">'+this.count+ ((this.count>1)?' projects':' project')+'</strong>');
