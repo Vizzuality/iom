@@ -723,15 +723,15 @@ div#footer_sites a.logo:hover {cursor:pointer;}
 
 div#footer_sites div.project {float:left; width:450px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#footer_sites div.project h1 {float:left; width:100%; margin:0; padding:0; font:normal 13px "PT Sans Bold"; color:#808080; text-transform:uppercase;}
-div#footer_sites div.project h1 a{float:left; padding:0; margin:0; font:normal 13px "PT Sans Bold"; color:#808080; text-transform:uppercase; width:100%;}
-div#footer_sites div.project p {float:left; padding:0; margin:5px 0 0 0 ; font:normal 13px "PT Sans"; color:#808080;}
-div#footer_sites div.project p a {color:#808080;}
+div#footer_sites div.project h1 a{float:left; padding:0; margin:0; font:normal 13px Arial; color:#808080; text-transform:uppercase; width:100%;}
+div#footer_sites div.project p {float:left; padding:0; margin:5px 0 0 0 ; font:normal 13px Arial; color:#AAA;}
+div#footer_sites div.project p a {color:#AAA;}
 div#footer_sites div.project p a:hover {text-decoration:underline;}
-div#footer_sites div.project p.site_name {font:normal 13px "PT Sans Bold"; width:100%;}
+div#footer_sites div.project p.site_name {font:bold 15px Arial; width:100%;}
 div#footer_sites div.project p.all_rights {width:550px;}
-div#footer_sites div.project p.all_rights a.link {color:#808080; text-decoration:underline;}
+div#footer_sites div.project p.all_rights a.link {color:#AAA; text-decoration:underline;}
 div#footer_sites div.project p.all_rights a.link:hover {color:#444444; cursor:pointer;}
-div#footer_sites div.project p.site_name a {color:#808080; text-decoration:underline;}
+div#footer_sites div.project p.site_name a {color:#AAA; text-decoration:underline;}
 div#footer_sites div.project p.site_name a:hover {color:#444444; cursor:pointer;}
 
 /* SUPERFOOTER PAGES */
@@ -759,24 +759,31 @@ div.dark_footer#footer_pages a {color: #A2A2A2}
 div.no_superfooter {margin: 60px 0 0 0;}
 
 div#footer_pages div.inner_footer {margin:0 auto; width:932px;}
-div#footer_pages div.left {width:450px; height:auto!important; margin:0 0 0 5px; background:none; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#footer_pages div.left {width:500px; height:auto!important; margin:0 0 0 5px; background:none; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#project_layout div#footer_pages div.left {width:450px; height:auto!important; margin:0 0 0 30px; background:none; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#footer_pages div.left a.logo {float:left; display:block; width:67px; height:43px; margin:0 15px 0 0; background:url('/images/sites/common/logo_interaction.png') no-repeat 0 0;}
 div.dark_footer#footer_pages div.left a.logo {background:url('/images/sites/common/logo_interaction_light.png') no-repeat 0 0;}
+div.dark_footer#footer_pages div.left div.project p.site_name {color: #444;}
+div.dark_footer#footer_pages div.left div.project p.site_name a {color: #444;}
+div.dark_footer#footer_pages div.left div.project p.site_name a:hover {color:#555;}
+div.dark_footer#footer_pages div.left div.project p.all_rights {color: #444;}
+div.dark_footer#footer_pages div.left div.project p.all_rights a.link {color: #444;}
+div.dark_footer#footer_pages div.left div.project p.all_rights a.link:hover {color:#555;}
+
 
 div#footer_pages div.left a.logo:hover {cursor:pointer;}
-div#footer_pages div.left div.project {float:left; width:350px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#footer_pages div.left div.project {float:left; width:380px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#footer_pages div.left div.project h1 {float:left; width:100%; margin:0; padding:0; font:normal 13px "PT Sans Bold"; text-transform:uppercase;}
 div#footer_pages div.left div.project h1 a{float:left; padding:0; margin:0; font:normal 13px "PT Sans Bold"; text-transform:uppercase; width:100%;}
 div#footer_pages div.left div.project p {float:left; padding:0; margin:5px 0 0 0 ; font:normal 13px "PT Sans"}
 div#footer_pages div.left div.project p a {}
 div#footer_pages div.left div.project p a:hover {text-decoration:underline;}
-div#footer_pages div.left div.project p.site_name {font:normal 13px "PT Sans Bold"; width:100%;}
-div#footer_pages div.left div.project p.all_rights {width:550px;}
-div#footer_pages div.left div.project p.all_rights a.link {text-decoration:underline;}
-div#footer_pages div.left div.project p.all_rights a.link:hover {color:#444444; cursor:pointer;}
-div#footer_pages div.left div.project p.site_name a {text-decoration:underline;}
-div#footer_pages div.left div.project p.site_name a:hover {color:#444444; cursor:pointer;}
+div#footer_pages div.left div.project p.site_name {font:bold 15px Arial; width:100%; color: #AAA;}
+div#footer_pages div.left div.project p.site_name a {text-decoration:underline; color: #AAA;}
+div#footer_pages div.left div.project p.site_name a:hover {color:#888888; cursor:pointer;}
+div#footer_pages div.left div.project p.all_rights {font:normal 13px Arial; width:550px; color: #AAA;}
+div#footer_pages div.left div.project p.all_rights a.link {text-decoration:underline; color: #AAA;}
+div#footer_pages div.left div.project p.all_rights a.link:hover {color:#666666; cursor:pointer;}
 div#footer_pages div.right {width:400px; margin:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline; text-align:right;}
 div#project_layout div#footer_pages div.right {width:350px; margin:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline; text-align:right;}
 div#footer_pages div.right ul {margin:5px 0 0 0; padding:0; text-align: right;}
