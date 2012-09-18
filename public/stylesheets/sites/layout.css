@@ -170,10 +170,10 @@ div#map {display:block; width:100%; height:465px; background:#99B3CA; border-bot
 div#map.home {border-top:none;}
 
 div#small_map {width:100%; height:335px; background:#99B3CA; border-top:2px solid white; border-bottom:2px solid white;}
-a#zoomIn {position:absolute; display:none; width:26px; height:25px; top:10px; left:10px; background:url('/images/sites/maps/zoom_in.png') no-repeat 0 0; z-index:100;}
-a#zoomIn:hover {background-position:0 -25px;}
-a#zoomOut {position:absolute; display:none; width:26px; height:25px; top:10px; left:40px; background:url('/images/sites/maps/zoom_out.png') no-repeat 0 0; z-index:100;}
-a#zoomOut:hover {background-position:0 -25px;}
+a#zoomIn {position:absolute; display:none; width:24px; height:24px; top:10px; left:10px; background:url('/images/sites/maps/zoom_in.png') no-repeat 0 0; z-index:100;}
+a#zoomIn:hover {background-position:0 -24px;}
+a#zoomOut {position:absolute; display:none; width:24px; height:24px; top:10px; left:40px; background:url('/images/sites/maps/zoom_out.png') no-repeat 0 0; z-index:100;}
+a#zoomOut:hover {background-position:0 -24px;}
 div.map_style {position:absolute; display:none; top:10px; right:10px; width:111px; height:26px; background:url('/images/sites/maps/map_style.png') no-repeat 0 0; overflow:hidden; z-index:100;}
 div.map_style:hover {cursor:pointer;}
 div.map_style p {margin:7px 0 0 10px; font:normal 13px 'PT Sans'; color:white;}
