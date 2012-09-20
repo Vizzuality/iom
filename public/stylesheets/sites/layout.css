@@ -68,7 +68,7 @@ ul#gallery_thumbails li.last {margin:25px 0 0 0;}
 div.tooltip {position:absolute; bottom:18px; left:-71px; width:175px; display:none;}
 div.tooltip span.bottom_tooltip {float:left; background:url('/images/sites/common/tooltips/bottom_tooltip.png') no-repeat 0 0; width:175px; height:16px;}
 div.tooltip span.body_tooltip {float:left; background:url('/images/sites/common/tooltips/body_tooltip.png') repeat-y top; width:149px; height:auto; padding:9px 15px 0 11px;}
-div.tooltip label {float:left; font:normal 13px "PT Sans Bold"; color:white; text-align:center; width:152px; text-shadow:none;}
+div.tooltip label {float:left; font:bold 13px "PT Sans"; color:white; text-align:center; width:152px; text-shadow:none;}
 div.tooltip p {float:left; font:normal 13px Arial; color:#999999; margin:5px 0 0 3px; padding:0 0 5px!important; text-transform:none; text-shadow:none;}
 h3 div.tooltip p {width:152px; text-align:center;}
 div.tooltip a {font:normal 13px Arial; color:white!important; text-decoration:underline!important;}
@@ -87,7 +87,7 @@ div#header {width:100%; height:40px; padding:0; background:url(/images/sites/com
 div#header div.inner_header {margin:0 auto; width:932px; height:40px;}
 div#header div.left {width:810px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#header div.left.home {width:810px;}
-div#header h1 {float:left; margin:11px 0 0 0; font:normal 15px "PT Sans Bold"; color:white; text-transform:uppercase; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#header h1 {float:left; margin:11px 0 0 0; font:bold 15px "PT Sans"; line-height: 24px; color:white; text-transform:uppercase; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#header h1 a {color:white;}
 div#header ul.menu {position:relative; float:right; margin:4px 0 0; width:auto; height:25px;}
 div#header ul.menu li {float:left; width:auto; margin:0 23px 0 0; position:relative;}
@@ -111,8 +111,8 @@ div#header ul.menu li#country_option.clicked div.header_title {position:absolute
 div#header ul.menu li#country_option.clicked div.suboptions_body {position:absolute; top:35px; left:-18px; z-index:110; background:url('/images/sites/common/menu/country_body_clicked.png') no-repeat 0 0; display:none; width:238px; height:234px; display:inline; padding:7px; display:inline;}
 div#header ul.menu li#country_option.clicked div.header_title a {margin:8px 0 0 15px;}
 div#header ul.menu li#country_option.clicked ul.content {float:left; width:204px; height:218px; overflow-x:hidden; overflow-y:auto; margin:0 0 0 13px;}
-div#header ul.menu li#country_option.clicked ul.content li {float:left; margin:3px 0 0 0; width:185px;}
-div#header ul.menu li#country_option.clicked ul.content li a {float:left; margin:0; font:normal 13px "PT Sans"; color:#C0C0BF; text-decoration:none;}
+div#header ul.menu li#country_option.clicked ul.content li {float:left; margin:6px 0 0 0; width:185px;}
+div#header ul.menu li#country_option.clicked ul.content li a {float:left; margin: 0; font:normal 13px "Geneva"; linecolor:#C0C0BF; text-decoration:none;}
 div#header ul.menu li#country_option.clicked ul.content li a:hover {color:white;}
 /*REGION*/
 div#header ul.menu li#region_option.clicked div.header_title {position:absolute; top:0; left:-15px; background:url('/images/sites/common/menu/region_head_clicked.png') no-repeat 0 0; width:110px; height:35px; display:inline;}
@@ -140,14 +140,14 @@ div#header ul.menu li#organization_option.clicked div.header_title a {margin:8px
 div#header ul.menu li#organization_option.clicked div.suboptions_body.short ul.content {margin:3px 0 0 13px;}
 div#header ul.menu li#organization_option.clicked ul.content {float:left; width:204px; height:189px; overflow-x:hidden; overflow-y:auto; margin:17px 0 0 13px;}
 div#header ul.menu li#organization_option.clicked ul.content li {float:left; margin:3px 0 0 0; width:185px;}
-div#header ul.menu li#organization_option.clicked ul.content li a {float:left; margin:0; font:normal 13px "PT Sans"; color:#C0C0BF; text-decoration:none;}
+div#header ul.menu li#organization_option.clicked ul.content li a {float:left; margin:2px 0 0 0; font:normal 13px "Geneva"; color:#C0C0BF; text-decoration:none;}
 div#header ul.menu li#organization_option.clicked ul.content li a:hover {color:white;}
 
 
 div#header ul.menu li#organization_option.clicked ul#orgs_list {position:relative; float:left; overflow-y:scroll; overflow-x:hidden;}
 div#header ul.menu li#organization_option.clicked ul#orgs_list p.no_founded {position:absolute; top:10px; left:0; font:italic 13px Arial; color:#C1C1C0; display:none;}
-div#header ul.menu li#organization_option.clicked ul#orgs_list li {float:left; margin:7px 0 0 0;}
-div#header ul.menu li#organization_option.clicked ul#orgs_list li a {float:left; font:normal 13px "PT Sans",Arial; color:#C1C1C0;}
+div#header ul.menu li#organization_option.clicked ul#orgs_list li {float:left; margin:6px 0 0 0;}
+div#header ul.menu li#organization_option.clicked ul#orgs_list li a {float:left; font:normal 13px "Geneva",Arial; color:#C1C1C0;}
 div#header ul.menu li#organization_option.clicked ul#orgs_list li a:hover {color:white;}
 
 div#header ul.menu li.clicked ul.suboptions {display:inline;}
@@ -170,10 +170,10 @@ div#map {display:block; width:100%; height:465px; background:#99B3CA; border-bot
 div#map.home {border-top:none;}
 
 div#small_map {width:100%; height:335px; background:#99B3CA; border-top:2px solid white; border-bottom:2px solid white;}
-a#zoomIn {position:absolute; display:none; width:26px; height:25px; top:10px; left:10px; background:url('/images/sites/maps/zoom_in.png') no-repeat 0 0; z-index:100;}
-a#zoomIn:hover {background-position:0 -25px;}
-a#zoomOut {position:absolute; display:none; width:26px; height:25px; top:10px; left:40px; background:url('/images/sites/maps/zoom_out.png') no-repeat 0 0; z-index:100;}
-a#zoomOut:hover {background-position:0 -25px;}
+a#zoomIn {position:absolute; display:none; width:24px; height:24px; top:10px; left:10px; background:url('/images/sites/maps/zoom_in.png') no-repeat 0 0; z-index:100;}
+a#zoomIn:hover {background-position:0 -24px;}
+a#zoomOut {position:absolute; display:none; width:24px; height:24px; top:10px; left:40px; background:url('/images/sites/maps/zoom_out.png') no-repeat 0 0; z-index:100;}
+a#zoomOut:hover {background-position:0 -24px;}
 div.map_style {position:absolute; display:none; top:10px; right:10px; width:111px; height:26px; background:url('/images/sites/maps/map_style.png') no-repeat 0 0; overflow:hidden; z-index:100;}
 div.map_style:hover {cursor:pointer;}
 div.map_style p {margin:7px 0 0 10px; font:normal 13px 'PT Sans'; color:white;}
@@ -187,18 +187,18 @@ div.map_style ul li a:hover {cursor:pointer;}
 div.main_head {display:inline-block; vertical-align:top; zoom:1; *display:inline; width:100%;}
 div.inner_main_head {position:relative; width:942px; margin:0 auto;}
 div.main_head div.left {width:248px; padding:30px 32px; background:url('/images/sites/common/mesh.png') repeat 0 0; display:inline-block; vertical-align:top; zoom:1; *display:inline;}
-div.main_head div.left h1 {width:237px; font:normal 25px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42; z-index:50;}
+div.main_head div.left h1 {width:237px; font:bold 25px "PT Sans"; color:white; text-shadow:0 1px #A44B42; z-index:50;}
 div.main_head div.left h1.cluster_sector_name {width:190px; z-index:50;}
-div.main_head div.left h2 {width:100%; font:normal 15px "PT Sans Bold"; color:white; text-shadow:0 1px #A44B42; text-transform:uppercase;}
-div.main_head div.left h2.cluster_sector_name, div.main_head div.left h2.organization_name {width:100%; font:normal 15px "PT Sans Bold"; color:#532620; text-transform:uppercase; text-shadow:none;}
-div.main_head div.left h3 {width:100%; font:normal 15px "PT Sans Bold"; color:#7B3C32; text-transform:uppercase;}
+div.main_head div.left h2 {width:100%; font:bold 15px "PT Sans"; color:white; text-shadow:0 1px #A44B42; text-transform:uppercase;}
+div.main_head div.left h2.cluster_sector_name, div.main_head div.left h2.organization_name {width:100%; font:bold 15px "PT Sans"; color:#532620; text-transform:uppercase; text-shadow:none;}
+div.main_head div.left h3 {width:100%; font:bold 15px "PT Sans"; color:#7B3C32; text-transform:uppercase;}
 div.main_head div.left p {padding:5px 0 0 0; font:normal 13px Arial; color:#7B3932;}
 div.main_head div.float_head {position:absolute; top:0; left:5px; width:238px; padding:30px 32px 44px; background:url('/images/sites/search/head_mask.png') repeat 0 0 #C45A4B; z-index:100;}
 div.main_head div.float_head.home {padding-bottom:37px;}
 div.main_head div.float_head.home h1 {font-size:32px; text-transform:uppercase; position:relative; width:200px;}
 div.main_head div.float_head.home sup.beta {font:normal 11px "PT Sans"; color:#73352B; padding:3px;}
-div.main_head div.float_head.home h3 {width:100%; font:normal 15px "PT Sans Bold"; color:#7B3C32; text-transform:uppercase; margin:20px 0 0 0;}
-div.main_head a.filter {position: absolute; padding: 5px; display: block; width: 239px; font: normal 13px "PT Sans Bold"; color: white; font-weight: normal; text-transform: uppercase; z-index: 100;}
+div.main_head div.float_head.home h3 {width:100%; font:bold 15px "PT Sans"; color:#7B3C32; text-transform:uppercase; margin:20px 0 0 0;}
+div.main_head a.filter {position: absolute; padding: 5px; display: block; width: 239px; font: bold 13px "PT Sans"; color: white; font-weight: normal; text-transform: uppercase; z-index: 100;}
 div.main_head a.filter img{margin: 2px 5px;}
 div.main_head div ul.breadcrumb {width:100%; padding:0 0 13px;}
 div.main_head div ul.breadcrumb li {display:inline; width:auto; margin:0 5px 0 0; background:url('/images/sites/icons/breadcrumb.png') no-repeat right 6px;}
@@ -397,8 +397,8 @@ div#pages div.left div.outer_head div.head input[type="submit"] {width:101px; he
 div#pages div.left div.outer_head div.head input[type="submit"]:hover {background-position:0 -38px; cursor:pointer;}
 div#pages div.left div.body {width:600px; margin:0 0 0 5px; padding:22px 30px 50px; background:white; border-bottom:1px solid #CCCCCC;}
 div#pages div.left div.body.last {border:none;}
-div#pages div.left div.body h3 {font:normal 13px "PT Sans Bold"; color:#666666; margin:25px 0 0 0;}
-div#pages div.left div.body h2 {font:normal 15px "PT Sans Bold"; color:#666666; margin:10px 0 0 0;}
+div#pages div.left div.body h3 {font:bold 13px "PT Sans"; color:#666666; margin:25px 0 0 0;}
+div#pages div.left div.body h2 {font:bold 15px "PT Sans"; color:#666666; margin:10px 0 0 0;}
 div#pages div.left div.body p {font:normal 13px Arial; color:#666666; margin:10px 0 0 0;}
 div#pages div.left div.body p.question {padding: 15px 0 0 0; font-weight: bold;}
 div#pages div.left div.body p.question#firstquestion {padding: 0}
@@ -723,15 +723,15 @@ div#footer_sites a.logo:hover {cursor:pointer;}
 
 div#footer_sites div.project {float:left; width:450px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#footer_sites div.project h1 {float:left; width:100%; margin:0; padding:0; font:normal 13px "PT Sans Bold"; color:#808080; text-transform:uppercase;}
-div#footer_sites div.project h1 a{float:left; padding:0; margin:0; font:normal 13px "PT Sans Bold"; color:#808080; text-transform:uppercase; width:100%;}
-div#footer_sites div.project p {float:left; padding:0; margin:5px 0 0 0 ; font:normal 13px "PT Sans"; color:#808080;}
-div#footer_sites div.project p a {color:#808080;}
+div#footer_sites div.project h1 a{float:left; padding:0; margin:0; font:normal 13px Arial; color:#808080; text-transform:uppercase; width:100%;}
+div#footer_sites div.project p {float:left; padding:0; margin:5px 0 0 0 ; font:normal 13px Arial; color:#AAA;}
+div#footer_sites div.project p a {color:#AAA;}
 div#footer_sites div.project p a:hover {text-decoration:underline;}
-div#footer_sites div.project p.site_name {font:normal 13px "PT Sans Bold"; width:100%;}
+div#footer_sites div.project p.site_name {font:bold 15px Arial; width:100%;}
 div#footer_sites div.project p.all_rights {width:550px;}
-div#footer_sites div.project p.all_rights a.link {color:#808080; text-decoration:underline;}
+div#footer_sites div.project p.all_rights a.link {color:#AAA; text-decoration:underline;}
 div#footer_sites div.project p.all_rights a.link:hover {color:#444444; cursor:pointer;}
-div#footer_sites div.project p.site_name a {color:#808080; text-decoration:underline;}
+div#footer_sites div.project p.site_name a {color:#AAA; text-decoration:underline;}
 div#footer_sites div.project p.site_name a:hover {color:#444444; cursor:pointer;}
 
 /* SUPERFOOTER PAGES */
@@ -759,24 +759,31 @@ div.dark_footer#footer_pages a {color: #A2A2A2}
 div.no_superfooter {margin: 60px 0 0 0;}
 
 div#footer_pages div.inner_footer {margin:0 auto; width:932px;}
-div#footer_pages div.left {width:450px; height:auto!important; margin:0 0 0 5px; background:none; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#footer_pages div.left {width:500px; height:auto!important; margin:0 0 0 5px; background:none; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#project_layout div#footer_pages div.left {width:450px; height:auto!important; margin:0 0 0 30px; background:none; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#footer_pages div.left a.logo {float:left; display:block; width:67px; height:43px; margin:0 15px 0 0; background:url('/images/sites/common/logo_interaction.png') no-repeat 0 0;}
 div.dark_footer#footer_pages div.left a.logo {background:url('/images/sites/common/logo_interaction_light.png') no-repeat 0 0;}
+div.dark_footer#footer_pages div.left div.project p.site_name {color: #444;}
+div.dark_footer#footer_pages div.left div.project p.site_name a {color: #444;}
+div.dark_footer#footer_pages div.left div.project p.site_name a:hover {color:#555;}
+div.dark_footer#footer_pages div.left div.project p.all_rights {color: #444;}
+div.dark_footer#footer_pages div.left div.project p.all_rights a.link {color: #444;}
+div.dark_footer#footer_pages div.left div.project p.all_rights a.link:hover {color:#555;}
+
 
 div#footer_pages div.left a.logo:hover {cursor:pointer;}
-div#footer_pages div.left div.project {float:left; width:350px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
+div#footer_pages div.left div.project {float:left; width:380px; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline;}
 div#footer_pages div.left div.project h1 {float:left; width:100%; margin:0; padding:0; font:normal 13px "PT Sans Bold"; text-transform:uppercase;}
 div#footer_pages div.left div.project h1 a{float:left; padding:0; margin:0; font:normal 13px "PT Sans Bold"; text-transform:uppercase; width:100%;}
 div#footer_pages div.left div.project p {float:left; padding:0; margin:5px 0 0 0 ; font:normal 13px "PT Sans"}
 div#footer_pages div.left div.project p a {}
 div#footer_pages div.left div.project p a:hover {text-decoration:underline;}
-div#footer_pages div.left div.project p.site_name {font:normal 13px "PT Sans Bold"; width:100%;}
-div#footer_pages div.left div.project p.all_rights {width:550px;}
-div#footer_pages div.left div.project p.all_rights a.link {text-decoration:underline;}
-div#footer_pages div.left div.project p.all_rights a.link:hover {color:#444444; cursor:pointer;}
-div#footer_pages div.left div.project p.site_name a {text-decoration:underline;}
-div#footer_pages div.left div.project p.site_name a:hover {color:#444444; cursor:pointer;}
+div#footer_pages div.left div.project p.site_name {font:bold 15px Arial; width:100%; color: #AAA;}
+div#footer_pages div.left div.project p.site_name a {text-decoration:underline; color: #AAA;}
+div#footer_pages div.left div.project p.site_name a:hover {color:#888888; cursor:pointer;}
+div#footer_pages div.left div.project p.all_rights {font:normal 13px Arial; width:550px; color: #AAA;}
+div#footer_pages div.left div.project p.all_rights a.link {text-decoration:underline; color: #AAA;}
+div#footer_pages div.left div.project p.all_rights a.link:hover {color:#666666; cursor:pointer;}
 div#footer_pages div.right {width:400px; margin:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline; text-align:right;}
 div#project_layout div#footer_pages div.right {width:350px; margin:0; display:inline-block; vertical-align:top; display:-moz-inline-stack; zoom:1; *display:inline; text-align:right;}
 div#footer_pages div.right ul {margin:5px 0 0 0; padding:0; text-align: right;}
