@@ -43,7 +43,7 @@ div#header_sites h2 {float:left; font:normal 24px Arial; color:#D06654; text-sha
 div#header_sites ul.menu {float:left; width:362px; margin:6px 0 0 0; padding:0;}
 div#header_sites ul.menu li {float:left; margin:0 32px 0 0;}
 div#header_sites ul.menu li.last {margin:0;}
-div#header_sites ul.menu li a {float:left; font:normal 13px "PT Sans Bold"; color:#808080; text-decoration:none;}
+div#header_sites ul.menu li a {float:left; font:bold 13px "PT Sans"; color:#808080; text-decoration:none;}
 div#header_sites ul.menu li a:hover {cursor:pointer; text-decoration:underline!important;}
 
 div#gallery {position: relative; float:left; width:958px; height:469px; background:url('/images/sites/home/bkg_gallery.png') no-repeat 0 0; margin:27px 0 0;}
@@ -55,7 +55,7 @@ ul#gallery_thumbails {float:left; width:950px; margin:0;}
 ul#gallery_thumbails li {float:left; width:220px; margin:25px 23px 0 0;}
 ul#gallery_thumbails li div#image {float:left; width:218px; height:131px; background:url('/images/sites/home/bkg_thumbnail.png') no-repeat 0 0;}
 ul#gallery_thumbails li div#image img {float:left; width:203px; height:114px; margin:7px;}
-ul#gallery_thumbails li a.site_name {float:left; width:100%; margin:5px 0 0 9px; font:normal 15px "PT Sans Bold"; color:#808080; text-shadow:0 -1px white; text-transform:uppercase;}
+ul#gallery_thumbails li a.site_name {float:left; width:100%; margin:5px 0 0 9px; font:bold 15px "PT Sans"; color:#808080; text-shadow:0 -1px white; text-transform:uppercase;}
 ul#gallery_thumbails li p.sponsor {float:left; width:100%; margin:5px 0 0 9px; color:#808080; }
 ul#gallery_thumbails li p.sponsor a {color:#808080; text-decoration: underline;}
 ul#gallery_thumbails li.last {margin:25px 0 0 0;}
@@ -122,8 +122,8 @@ div#header ul.menu li#region_option.clicked div.suboptions_body div.content_floa
 
 div#header ul.menu li#region_option.clicked div.header_title a {margin:7px 0 0 15px;}
 div#header ul.menu li#region_option.clicked ul.content {float:left; width:204px; height:auto; max-height:213px; overflow-x:hidden; overflow-y:auto; margin:0 0 0 13px; padding:0 0 5px 0;}
-div#header ul.menu li#region_option.clicked ul.content li {float:left; margin:3px 0 0 0; width:185px;}
-div#header ul.menu li#region_option.clicked ul.content li a {float:left; margin:0; font:normal 13px "PT Sans"; color:#C0C0BF; text-decoration:none;}
+div#header ul.menu li#region_option.clicked ul.content li {float:left; margin:7px 0 0 0; width:185px;}
+div#header ul.menu li#region_option.clicked ul.content li a {float:left; margin:0; font:normal 13px "Geneva"; color:#C0C0BF; text-decoration:none;}
 div#header ul.menu li#region_option.clicked ul.content li a:hover {color:white;}
 
 
