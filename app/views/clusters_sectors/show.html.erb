@@ -58,7 +58,7 @@
           <% unless @data.donors(@site).empty? %>
 
           <div class="block">
-            <h3>DONORS IN THIS <%= @site.word_for_cluster_sector %></h3>
+            <h3>DONORS IN THIS <%= @site.word_for_cluster_sector.singularize %></h3>
             <ul id="donors_list">
               <% index = 1 %>
               <% @data.donors(@site).each do |donor| %>
