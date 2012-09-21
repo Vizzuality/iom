@@ -753,9 +753,13 @@ div.block.project_info div.bottom {float:left; height:15px; width:100%; backgrou
 
 div.block.project_info div.med div.left form div.location_options.region_block {position:relative;}
 div.block.project_info div.med div.left form div.location_options.empty {float:left; margin:10px 0 0 0; background:url('/images/backoffice/projects/bkg_cluster_options.png') no-repeat 0 0; width:411px; height:50px;}
+div.block.project_info div.med div.left form div.location_options.empty.error {width: 412px; height: 51px; background:url('/images/backoffice/projects/bkg_cluster_options_error.png')}
 div.block.project_info div.med div.left form div.location_options.empty p.msg {float:left; margin:18px 0 0 12px; width:269px; font:normal 13px Arial; color:#616851;  }
+div.block.project_info div.med div.left form div.location_options.empty.error p.msg {color: white;}
 div.block.project_info div.med div.left form div.location_options.empty a.add_location {float:right; margin:10px 10px 0 0; background:url('/images/backoffice/projects/add_cluster_bttn.png') no-repeat 0 0; width:118px; height:25px; font:500 15px "Museo Sans",Arial; color:#FFFFFF; text-shadow:0 1px #6E8C30; text-align:center; padding:7px 0 0 0;}
 div.block.project_info div.med div.left form div.location_options.empty a.add_location:hover {cursor:pointer; background-position:0 -32px;}
+div.block.project_info div.med div.left form div.location_options.empty.error a.add_location {width: 119px; height: 26px; background:url('/images/backoffice/projects/add_cluster_bttn_error.png') no-repeat 0 -2px;}
+div.block.project_info div.med div.left form div.location_options.empty.error a.add_location:hover {cursor:pointer; background-position:0 -37px;}
 div.block.project_info div.med div.left form span.input_short {float:left; margin:5px 0 0 0; width:272px; height:34px; background:url('/images/backoffice/projects/bkg_input_short.png') no-repeat 0 0;}
 div.block.project_info div.med div.left form span.input_short p.msg {float:right; margin:8px 8px 0 0; font:italic 15px Arial; color:#999999;}
 div.block.project_info div.med div.left form span.input_short input[type="text"]{float:left; margin:8px 0 0 5px; width:210px; height:20px; border:none;}

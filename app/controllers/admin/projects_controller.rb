@@ -87,6 +87,8 @@ class Admin::ProjectsController < Admin::AdminController
     if @project.valid? && @project.save
       redirect_to edit_admin_project_path(@project), :flash => {:success => 'Project has been created successfully'}
     else
+      @countries = @project.country_ids.map{|id| Country.find(id)}
+      @regions = @project.region_ids.map{|id| Region.find(id)}
       render :action => 'new'
     end
   end
