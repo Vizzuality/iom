@@ -27,6 +27,7 @@ group :development do
   gem 'capistrano-ext'
   gem 'wirble'
   gem 'railroady'
+  gem 'mail_view', :git => 'https://github.com/37signals/mail_view.git'
 end
 
 group :test, :development do

@@ -1,0 +1,97 @@
+<html>
+  <head>
+    <style type="text/css">
+      body {
+        font-family: Arial;
+        font-size: 15px;
+        color: #666666;
+        width: 800px;
+        padding: 20px;
+      }
+
+      #content {
+        padding-bottom: 15px;
+        border-bottom: 1px solid #cad0da;
+      }
+
+      h1 {
+        font-size: 27px;
+        color: black;
+      }
+
+      a {
+        color: #E93E3F;
+        text-decoration: none;
+      }
+
+      h3 {
+        display: inline;
+        font-size: 17px;
+      }
+
+      ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        border-bottom: 1px solid #e5e5e5;
+      }
+
+      ul li {
+        margin: 0;
+        height: 72px;
+        border-top: 1px solid #e5e5e5;
+      }
+
+      ul li div {
+        padding: 15px 0 0;
+      }
+
+      ul li a {
+        font-size: 17px;
+      }
+
+      ul li p {
+        font-size: 13px;
+        color: #B8B8B8;
+        line-height: 0;
+      }
+
+      #footer {
+        font-size: 13px;
+        text-align: right;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="content">
+      <h1>NGOAidMap <%= Time.now.strftime('%B') %> <%= Time.now.year %> report</h1>
+      <p>Hello,</p>
+
+      <p>We'd just like to remind you that the following project(s) are ending this month. Do you need to make any updates?</p>
+
+      <ul>
+      <% @projects.each do |project| %>
+        <li>
+          <div>
+            <h3><%= link_to truncate(project[:name], :length => 60), edit_admin_project_url(Project.find(project[:id]), :host => 'ngoaidmap.org'), :title => project[:name] %></h3><%= raw " in #{ link_to(project[:country_name], '#') }" if project[:country_name].present? %>
+          </div>
+          <p>It will finish on <%= project[:end_date] %></p>
+        </li>
+      <% end %>
+      </ul>
+
+      <p>You can update project information by logging in to your Member Workspace at <a href="http://ngoaidmap.org/admin">http://ngoaidmap.org/admin</a>. If you can't find your log-in information, please send us an email at <a href="mailto:mappinginfo@interaction.org">mappinginfo@interaction.org</a>.</p>
+
+      <p>Also, if you have any new projects underway, please take a moment to add them to the site!</p>
+
+      <p>Best,<br />
+      <strong>The Mapping Team</strong></p>
+
+      <p>P.S. If any of these projects appear on another NGO Aid Map site, the data contact for that site has also received this notification. You can see who the data contact for each site is on the dashboard of your Member Workspace.</p>
+    </div>
+    <p id="footer">
+      <a href="http://www.ngoaidmap.org/admin">http://www.ngoaidmap.org/admin</a>
+    </p>
+  </body>
+</html>
