@@ -34,7 +34,7 @@ module OrganizationsHelper
   end
 
   def donation_phone?(organization)
-    organization.donation_phone_number.present? && organization.donation_website.present?
+    organization.donation_phone_number.present? || organization.donation_website.present?
   end
 
 end

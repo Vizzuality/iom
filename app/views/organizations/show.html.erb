@@ -103,8 +103,18 @@
               <br/><%= @organization.city %>, <%= @organization.state %> <%= @organization.zip_code %>
             </p>
             <% end %>
-            <% if donation_phone?(@organization) %>
-            <p><%= @organization.donation_phone_number %><br/><%= link_to(truncate(@organization.donation_website, :length=>41), @organization.donation_website) %></p>
+            <% if @organization.donation_phone_number.present? || @organization.donation_website.present? %>
+              <p>
+                <% if @organization.donation_phone_number.present? %>
+                <%= @organization.donation_phone_number %>
+                <% end %>
+                <% if @organization.donation_phone_number.present? && @organization.donation_website.present? %>
+                <br/>
+                <% end %>
+                <% if @organization.donation_website.present? %>
+                  <%= link_to(truncate(@organization.donation_website, :length=>41), @organization.donation_website) %>
+                <% end %>
+              </p>
             <% end %>
           </div>
           <%end%>
