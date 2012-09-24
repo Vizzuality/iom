@@ -20,6 +20,7 @@ gem 'vimeo'
 gem 'hoptoad_notifier'
 gem 'memcache-client'
 gem 'spreadsheet'
+gem 'roadie'
 
 group :development do
   gem 'git-up'

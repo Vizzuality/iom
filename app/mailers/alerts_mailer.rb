@@ -19,7 +19,6 @@ class AlertsMailer < ActionMailer::Base
             :end_date     => begin
               date = project.end_date || 1.month.since
               date = "#{date.strftime('%B')} #{date.day.ordinalize}, #{date.strftime('%Y')}"
-              puts date
               date
             end
           }

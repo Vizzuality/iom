@@ -38,12 +38,12 @@
 
       ul li {
         margin: 0;
-        height: 72px;
+        padding: 16px 0;
         border-top: 1px solid #e5e5e5;
       }
 
       ul li div {
-        padding: 15px 0 0;
+        padding: 0 0 0;
       }
 
       ul li a {
@@ -74,7 +74,7 @@
       <% @projects.each do |project| %>
         <li>
           <div>
-            <h3><%= link_to truncate(project[:name], :length => 60), edit_admin_project_url(Project.find(project[:id]), :host => 'ngoaidmap.org'), :title => project[:name] %></h3><%= raw " in #{ link_to(project[:country_name], '#') }" if project[:country_name].present? %>
+            <h3><%= link_to project[:name], edit_admin_project_url(Project.find(project[:id]), :host => 'ngoaidmap.org'), :title => project[:name] %></h3><%= " in #{ project[:country_name] }" if project[:country_name].present? %>
           </div>
           <p>It will finish on <%= project[:end_date] %></p>
         </li>
