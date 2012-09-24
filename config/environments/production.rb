@@ -37,12 +37,6 @@ Iom::Application.configure do
   # Disable delivery errors, bad email addresses will be ignored
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    :address              => APP_CONFIG['smtp_address'],
-    :port                 => APP_CONFIG['smtp_port'],
-    :user_name            => APP_CONFIG['smtp_user_name'],
-    :password             => APP_CONFIG['smtp_password'],
-    :authentication       => 'plain' }
 
   # Enable threaded mode
   # config.threadsafe!
