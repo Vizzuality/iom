@@ -23,6 +23,7 @@
       </ul>
     </div>
     <script type="text/javascript">
+      var MAP_EMBED = true;
       <% if @site.overview_map_lat && @site.overview_map_lon %>
       var map_center = [<%= @site.overview_map_lat %>, <%= @site.overview_map_lon %>];
       <% else %>
