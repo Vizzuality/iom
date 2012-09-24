@@ -4,13 +4,13 @@ namespace :iom do
 
     desc 'Send an email alert to all project administration whose projects are about to end'
     task :projects_about_to_end => :environment do
-      about_to_end = Project.where('end_date <= ?', 1.month.since.advance(:days => -1))
+      about_to_end = Project.where('end_date >= ? AND end_date <= ?', Time.now, 1.month.since.advance(:days => -1))
 
       to = {}
       about_to_end.each do |project|
         project.cached_sites.each do |site|
           email = begin
-                    project.primary_organization.site_specific_information[site.id.to_s][:contact_email].presence || 'mappinginfo@interaction.org'
+                    project.primary_organization.attributes_for_site(site)[:contact_email].presence || project.primary_organization.contact_email.presence || 'mappinginfo@interaction.org'
                   rescue
                     project.primary_organization.contact_email.presence || 'mappinginfo@interaction.org'
                   end

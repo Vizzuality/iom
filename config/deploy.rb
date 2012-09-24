@@ -42,8 +42,15 @@ task :run_migrations, :roles => [:app] do
   CMD
 end
 
+desc "Uploads config yml files to app server's shared config folder"
+task :upload_yml_files, :roles => :app do
+  run "mkdir #{deploy_to}/shared/config ; true"
+  upload("config/app_config.yml", "#{deploy_to}/shared/config/app_config.yml")
+end
+
 task :symlinks, :roles => [:app] do
   run <<-CMD
+    ln -s #{shared_path}/config/app_config.yml #{release_path}/config/app_config.yml;
   CMD
 end
 
