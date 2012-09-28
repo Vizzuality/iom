@@ -41,7 +41,7 @@ div#header_sites {width:100%; height:34px; padding:35px 0 0 0; margin:0 0 0 10px
 div#header_sites h1 {float:left; position:relative; font:bold 24px "PT Sans"; color:#4A4A4A; width:auto; text-shadow:0 -1px white; margin:0 5px 0 0;}
 div#header_sites h1 a {color:#4A4A4A;}
 div#header_sites h1 span {position:absolute; top:-13px; right:0; font:bold 11px "PT Sans"; color:#8B8B8B;}
-div#header_sites h2 {float:left; font:normal 24px Arial; color:#D06654; text-shadow:0 -1px white;}
+div#header_sites h2 {float:left; margin: 1px 0 0 0; font:normal 24px Arial; color:#D06654; text-shadow:0 -1px white;}
 div#header_sites ul.menu {float:right; margin:9px 0 0 0; padding:0;}
 div#header_sites ul.menu li {float:left; margin:0 32px 0 0;}
 div#header_sites ul.menu li.last {margin:0;}
