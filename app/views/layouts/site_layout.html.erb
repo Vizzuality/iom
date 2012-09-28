@@ -2,12 +2,15 @@
 <html>
 <head>
   <title><%= title %></title>
+  <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
   <%=raw(javascript_include_merged(:base)) %>
   <%=raw(javascript_include_merged(:base_2)) %>
   <%=raw(stylesheet_link_merged(:base)) %>
   <%=stylesheet_link_tag @site.theme.css_file if @site.theme %>
   <%=auto_discovery_link_tag(:rss, "#{url(@site)}/.xml", {:title => @site.name}) %>
   <link rel="shortcut icon" href="/images/favicon.ico"/>
+
+
 
   <% if Rails.env.production? %>
   <script type="text/javascript">
