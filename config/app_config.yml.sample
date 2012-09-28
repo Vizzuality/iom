@@ -1,6 +1,6 @@
 production:
-  smtp_address: '',
-  smtp_port: 25,
-  smtp_user_name: '',
-  smtp_password: '',
-  smtp_authentication: 'plain' }
+  smtp_address: ''
+  smtp_port: 25
+  smtp_user_name: ''
+  smtp_password: ''
+  smtp_authentication: 'plain'
