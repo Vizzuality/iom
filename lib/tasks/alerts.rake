@@ -10,9 +10,9 @@ namespace :iom do
       about_to_end.each do |project|
         project.cached_sites.each do |site|
           email = begin
-                    project.primary_organization.attributes_for_site(site)[:contact_email].presence || project.primary_organization.contact_email.presence || 'mappinginfo@interaction.org'
+                    project.primary_organization.attributes_for_site(site)[:main_data_contact_email].presence || project.primary_organization.main_data_contact_email.presence || 'mappinginfo@interaction.org'
                   rescue
-                    project.primary_organization.contact_email.presence || 'mappinginfo@interaction.org'
+                    project.primary_organization.main_data_contact_email.presence || 'mappinginfo@interaction.org'
                   end
 
           to[email] = [] unless to.has_key?(email)
