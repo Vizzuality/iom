@@ -268,7 +268,7 @@
             </div>
           <% end %>
 
-          <% unless @project.contact_email.blank? && @project.contact_person.blank? && @project.contact_phone_number.blank? && @project.website.blank?%>
+          <% unless @project.contact_email.blank? && @project.contact_person.blank? && @project.contact_phone_number.blank? %>
             <div class="block">
               <h3>Contact information</h3>
               <p>
@@ -279,6 +279,12 @@
               <% unless (@project.contact_email.nil?)||(@project.contact_email.empty?) %>
                 <p class="no_margin"><%= link_to(@project.contact_email, "mailto:#{@project.contact_email}") %></p>
               <%end%>
+            </div>
+          <%end%>
+
+          <% unless @project.website.blank?%>
+            <div class="block">
+              <h3>Project Website</h3>
               <% unless (@project.website.nil?)||(@project.website.empty?) %>
                 <p class="no_margin"><%= link_to(@project.website, @project.website) %></p>
               <%end%>

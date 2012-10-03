@@ -98,8 +98,7 @@
             <h3>DONATION INFORMATION</h3>
             <% if donation_address?(@organization) %>
             <p>
-              <strong>Donations</strong>
-              <br/><%= @organization.donation_address %>
+              <%= @organization.donation_address %>
               <br/><%= @organization.city %>, <%= @organization.state %> <%= @organization.zip_code %>
             </p>
             <% end %>

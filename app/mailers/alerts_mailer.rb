@@ -3,7 +3,7 @@ class AlertsMailer < ActionMailer::Base
 
   def projects_about_to_end(contact_email, projects)
     @projects = projects
-    mail(:to => contact_email, :subject => "Projects about to end soon!")
+    mail(:to => contact_email, :subject => "[NGO Aid Map] Projects about to end soon!")
   end
 
   if Rails.env.development?
@@ -16,11 +16,7 @@ class AlertsMailer < ActionMailer::Base
             :id           => project.id,
             :name         => project.name,
             :country_name => project.countries.map(&:name).join(', ').presence || 'Spain',
-            :end_date     => begin
-              date = project.end_date || 1.month.since
-              date = "#{date.strftime('%B')} #{date.day.ordinalize}, #{date.strftime('%Y')}"
-              date
-            end
+            :end_date     => project.end_date.to_date
           }
         end
         AlertsMailer.projects_about_to_end(contact_email, projects)

@@ -20,11 +20,7 @@ namespace :iom do
             :id           => project.id,
             :name         => project.name,
             :country_name => project.countries.map(&:name).join(', '),
-            :end_date     => begin
-              date = project.end_date
-              date = "#{date.strftime('%B')} #{date.day.ordinalize}, #{date.strftime('%Y')}"
-              date
-            end
+            :end_date     => project.end_date.to_date
           }
           to[email].uniq!
         end
