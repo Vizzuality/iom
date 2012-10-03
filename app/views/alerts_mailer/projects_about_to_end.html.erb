@@ -57,6 +57,10 @@
         line-height: 0;
       }
 
+      table tr td p strong {
+        color: black;
+      }
+
       #footer {
         font-size: 13px;
         text-align: right;
@@ -68,7 +72,7 @@
     <div id="content">
       <h1>NGO Aid Map projects ending soon.</h1>
       <strong>
-        <%= @projects.size %> projects ending between <%= l(Time.now.to_date, :format => :month_day_year) %> and <%= l(1.month.since.advance(:days => -1).to_date, :format => :month_day_year)%>
+        <%= @projects.size %> project(s) ending between <%= l(Time.now.to_date, :format => :month_day_year) %> and <%= l(1.month.since.advance(:days => -1).to_date, :format => :month_day_year)%>
       </strong>
 
       <p>Hello,</p>
@@ -82,7 +86,7 @@
             <div>
               <h3><%= link_to project[:name], edit_admin_project_url(Project.find(project[:id]), :host => 'ngoaidmap.org'), :title => project[:name] %></h3><%= raw "&nbsp;in #{ project[:country_name] }" if project[:country_name].present? %>
             </div>
-            <p>End date: <%= l project[:end_date], :format => :month_day_year %></p>
+            <p>End date: <strong><%= l project[:end_date], :format => :month_day_year %></strong></p>
           </td>
         </tr>
       <% end %>

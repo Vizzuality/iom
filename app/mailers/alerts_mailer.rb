@@ -3,7 +3,7 @@ class AlertsMailer < ActionMailer::Base
 
   def projects_about_to_end(contact_email, projects)
     @projects = projects
-    mail(:to => contact_email, :subject => "[NGO Aid Map] Projects about to end soon!")
+    mail(:to => contact_email, :subject => "[NGO Aid Map] Projects about to end!")
   end
 
   if Rails.env.development?
