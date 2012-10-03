@@ -44,8 +44,10 @@
       }
 
       table tr td div {
-        display: inline;
         padding: 0 0 0;
+      }
+
+      table tr td div h3 span{
       }
 
       table tr td a {
@@ -85,7 +87,7 @@
         <tr>
           <td>
             <div>
-              <h3><%= link_to project[:name], edit_admin_project_url(Project.find(project[:id]), :host => 'ngoaidmap.org'), :title => project[:name] %></h3><%= raw "&nbsp;in #{ project[:country_name] }" if project[:country_name].present? %>
+              <h3><%= link_to project[:name], edit_admin_project_url(Project.find(project[:id]), :host => 'ngoaidmap.org'), :title => project[:name] %></h3><span><%= raw "&nbsp;in #{ project[:country_name] }" if project[:country_name].present? %></span>
             </div>
             <p>End date: <strong><%= l project[:end_date], :format => :month_day_year %></strong></p>
           </td>
