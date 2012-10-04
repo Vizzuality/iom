@@ -26,6 +26,8 @@
       }
 
       h3 {
+        display: inline;
+        font-size: 17px;
       }
 
       table {
@@ -45,27 +47,19 @@
         padding: 0 0 0;
       }
 
-      table tr td div p {
-        display: inline;
-        font-size: 17px;
-        font-weight: bold;
-      }
-
-      table tr td div h3 span{
-        font-weight: normal;
-      }
-
       table tr td a {
         font-size: 17px;
       }
 
-      table tr td p.end_date {
+      table tr td span {
+        display: block;
+        padding-top: 13px;
         font-size: 13px;
         color: #B8B8B8;
         line-height: 0;
       }
 
-      table tr td p strong {
+      table tr td span strong {
         color: #666666;
       }
 
@@ -92,9 +86,9 @@
         <tr>
           <td>
             <div>
-              <p><%= link_to project[:name], edit_admin_project_url(Project.find(project[:id]), :host => 'ngoaidmap.org'), :title => project[:name] %></p>
+              <h3><%= link_to project[:name], edit_admin_project_url(Project.find(project[:id]), :host => 'ngoaidmap.org'), :title => project[:name] %></h3>
             </div>
-            <p class="end_date"><%= raw "&nbsp;In #{ project[:country_name] }" if project[:country_name].present? %>&nbsp;&middot;&nbsp;End date: <strong><%= l project[:end_date], :format => :month_day_year %></strong></p>
+            <span><%= raw "In #{ project[:country_name] }&nbsp;&middot;&nbsp;" if project[:country_name].present? %>End date: <strong><%= l project[:end_date], :format => :month_day_year %></strong></span>
           </td>
         </tr>
       <% end %>
