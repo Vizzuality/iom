@@ -66,7 +66,7 @@
       }
 
       table tr td p strong {
-        color: black;
+        color: #666666;
       }
 
       #footer {
@@ -92,9 +92,9 @@
         <tr>
           <td>
             <div>
-              <p><%= link_to project[:name], edit_admin_project_url(Project.find(project[:id]), :host => 'ngoaidmap.org'), :title => project[:name] %><span><%= raw "&nbsp;in #{ project[:country_name] }" if project[:country_name].present? %></span></p>
+              <p><%= link_to project[:name], edit_admin_project_url(Project.find(project[:id]), :host => 'ngoaidmap.org'), :title => project[:name] %></p>
             </div>
-            <p class="end_date">End date: <strong><%= l project[:end_date], :format => :month_day_year %></strong></p>
+            <p class="end_date"><%= raw "&nbsp;In #{ project[:country_name] }" if project[:country_name].present? %>&nbsp;&middot;&nbsp;End date: <strong><%= l project[:end_date], :format => :month_day_year %></strong></p>
           </td>
         </tr>
       <% end %>
