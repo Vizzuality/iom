@@ -88,7 +88,7 @@
             <div>
               <h3><%= link_to project[:name], edit_admin_project_url(Project.find(project[:id]), :host => 'ngoaidmap.org'), :title => project[:name] %></h3>
             </div>
-            <span><%= raw "In #{ project[:country_name] }&nbsp;&middot;&nbsp;" if project[:country_name].present? %>End date: <strong><%= l project[:end_date], :format => :month_day_year %></strong></span>
+            <span><%= raw "In <strong>#{ project[:country_name] }</strong>&nbsp;&middot;&nbsp;" if project[:country_name].present? %>End date: <strong><%= l project[:end_date], :format => :month_day_year %></strong></span>
           </td>
         </tr>
       <% end %>
