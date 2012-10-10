@@ -91,4 +91,7 @@ Iom::Application.routes.draw do
     resources :pages
   end
 
+  if Rails.env.development?
+    mount AlertsMailer::Preview => 'mail_view'
+  end
 end

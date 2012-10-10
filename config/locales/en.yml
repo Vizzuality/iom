@@ -5,6 +5,9 @@ en:
   time:
     formats:
       hour_and_minutes: '%H:%M'
+  date:
+    formats:
+      month_day_year: '%B %e, %Y'
   admin:
     activities:
       changes_list:

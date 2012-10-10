@@ -1,10 +1,10 @@
 <div class="main_head">
   <div class="inner_main_head">
     <div class="left">
-      <h1><%= @site.name %><sup class="beta">BETAss</sup></h1>
+      <h1><%= @site.name %></h1>
       <% unless @site.short_description.nil? %><h3><%= @site.short_description %></h3><%end%>
       <div class="float_head home">
-        <h1><%= @site.name %><sup class="beta">BETA</sup></h1>
+        <h1><%= @site.name %></h1>
         <% unless @site.short_description.nil? %><h3><%= @site.short_description %></h3><%end%>
       </div>
     </div>
@@ -106,8 +106,19 @@
         <li><%= link_to 'KML', "#{url(@site)}/.kml" %></li>
         <li>|</li>
         <li><%= link_to 'RSS', "#{url(@site)}/.xml" %></li>
+        <li>·</li>
+        <li><%= link_to 'Embed this map', '#', :id => 'embed_map' %></li>
       </ul>
     </h3>
+
+    <div id="popup" class="embed_map">
+      <a class="close top" href="#"></a>
+      <h5>Embed this map</h5>
+      <p>Copy this code and paste it in your HTML page for embedding the map.</p>
+      <textarea><iframe src="<%= url(@site) + '/?embed=true' %>" frameborder="0" width="600" height="600"></iframe></textarea>
+      <a href="#" class="close button">Close</a>
+    </div>
+    <div class="popup_background"></div>
 
     <% if @site.partners.present? %>
       <div id="sponsor">

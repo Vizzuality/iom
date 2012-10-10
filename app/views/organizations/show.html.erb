@@ -89,19 +89,32 @@
           <%unless @organization.contact_name.nil? &&  @organization.contact_position.nil? && @organization.hq_address.nil? && @organization.contact_zip.nil? && @organization.contact_phone_number.nil? %>
           <div class="block">
             <h3>CONTACT INFORMATION</h3>
-            <p><strong><%= @organization.contact_name %></strong><br/><%= @organization.contact_position %><br/><%= @organization.hq_address %> <%= @organization.contact_zip %></p>
+            <p><strong><%= @organization.contact_name %></strong><br/><%= @organization.contact_position %></p>
             <p><%= @organization.contact_phone_number %><br/><% unless (@organization.contact_email.nil?)||(@organization.contact_email.empty?) %><%= link_to(@organization.contact_email, "mailto:#{@organization.contact_email}") %><%end%></p>
           </div>
           <%end%>
-          <% unless @organization.donation_phone_number.nil? && @organization.donation_website.nil? %>
+          <% if donation_information?(@organization) %>
           <div class="block green">
             <h3>DONATION INFORMATION</h3>
+            <% if donation_address?(@organization) %>
             <p>
-              <strong>Donations</strong>
-              <br/><%= @organization.donation_address %>
+              <%= @organization.donation_address %>
               <br/><%= @organization.city %>, <%= @organization.state %> <%= @organization.zip_code %>
             </p>
-            <p><%= @organization.donation_phone_number %><br/><%= link_to(truncate(@organization.donation_website, :length=>41), @organization.donation_website) %></p>
+            <% end %>
+            <% if @organization.donation_phone_number.present? || @organization.donation_website.present? %>
+              <p>
+                <% if @organization.donation_phone_number.present? %>
+                <%= @organization.donation_phone_number %>
+                <% end %>
+                <% if @organization.donation_phone_number.present? && @organization.donation_website.present? %>
+                <br/>
+                <% end %>
+                <% if @organization.donation_website.present? %>
+                  <%= link_to(truncate(@organization.donation_website, :length=>41), @organization.donation_website) %>
+                <% end %>
+              </p>
+            <% end %>
           </div>
           <%end%>
           <% unless @organization.twitter.nil? &&  @organization.facebook.nil? && @organization.website.nil? %>
@@ -134,7 +147,7 @@
 
 
         </div>
-        
+
       </div>
 
       <!-- RIGHT PART -->

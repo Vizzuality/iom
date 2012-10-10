@@ -53,7 +53,7 @@ class Project < ActiveRecord::Base
   scope :active, where("end_date > ?", Date.today.to_s(:db))
   scope :closed, where("end_date < ?", Date.today.to_s(:db))
   validates_presence_of :primary_organization_id, :name, :description, :start_date, :end_date
-
+  validate :location_presence
   validate :dates_consistency#, :presence_of_clusters_and_sectors
 
   after_commit :set_cached_sites
@@ -717,38 +717,43 @@ SQL
 
   private
 
-    def dates_consistency
-      return true if end_date.nil? || start_date.nil?
-      if start_date.present? && start_date > 1.week.since.to_date
-        errors.add(:start_date, "max 1 week from today")
-      end
-      if !end_date.nil? && !start_date.nil? && end_date < start_date
-        errors.add(:end_date, "can't be previous to start_date")
-      end
-      if !date_updated.nil? && !date_provided.nil? && date_updated < date_provided
-        errors.add(:date_updated, "can't be previous to date_provided")
-      end
-    end
+  def location_presence
+    return true if region_ids.present? || country_ids.present?
+    errors.add(:location, 'Sorry, location information is mandatory') if region_ids.blank? && country_ids.blank?
+  end
 
-    def add_to_country(region)
-      return if self.new_record?
-      count = ActiveRecord::Base.connection.execute("select count(*) as count from countries_projects where project_id=#{self.id} AND country_id=#{region.country_id}").first['count'].to_i
-      if count == 0
-        ActiveRecord::Base.connection.execute("INSERT INTO countries_projects (project_id, country_id) VALUES (#{self.id},#{region.country_id})")
-      end
+  def dates_consistency
+    return true if end_date.nil? || start_date.nil?
+    if start_date.present? && start_date > 1.week.since.to_date
+      errors.add(:start_date, "max 1 week from today")
     end
+    if !end_date.nil? && !start_date.nil? && end_date < start_date
+      errors.add(:end_date, "can't be previous to start_date")
+    end
+    if !date_updated.nil? && !date_provided.nil? && date_updated < date_provided
+      errors.add(:date_updated, "can't be previous to date_provided")
+    end
+  end
 
-    def remove_from_country(region)
-      ActiveRecord::Base.connection.execute("DELETE from countries_projects where project_id=#{self.id} AND country_id=#{region.country_id}")
+  def add_to_country(region)
+    return if self.new_record?
+    count = ActiveRecord::Base.connection.execute("select count(*) as count from countries_projects where project_id=#{self.id} AND country_id=#{region.country_id}").first['count'].to_i
+    if count == 0
+      ActiveRecord::Base.connection.execute("INSERT INTO countries_projects (project_id, country_id) VALUES (#{self.id},#{region.country_id})")
     end
+  end
 
-    def presence_of_clusters_and_sectors
-      return unless self.new_record?
-      if sectors_ids.blank? && sectors.empty?
-        errors.add(:sectors, "can't be blank")
-      end
-      if clusters_ids.blank? && clusters.empty?
-        errors.add(:clusters, "can't be blank")
-      end
+  def remove_from_country(region)
+    ActiveRecord::Base.connection.execute("DELETE from countries_projects where project_id=#{self.id} AND country_id=#{region.country_id}")
+  end
+
+  def presence_of_clusters_and_sectors
+    return unless self.new_record?
+    if sectors_ids.blank? && sectors.empty?
+      errors.add(:sectors, "can't be blank")
     end
+    if clusters_ids.blank? && clusters.empty?
+      errors.add(:clusters, "can't be blank")
+    end
+  end
 end

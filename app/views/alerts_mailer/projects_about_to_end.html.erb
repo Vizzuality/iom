@@ -1,0 +1,110 @@
+<html>
+  <head>
+    <style type="text/css">
+      body {
+        font-family: Arial;
+        font-size: 15px;
+        color: #666666;
+        width: 800px;
+        padding: 20px;
+      }
+
+      #content {
+        padding-bottom: 15px;
+        border-bottom: 1px solid #cad0da;
+      }
+
+      h1 {
+        font-size: 27px;
+        color: black;
+        margin-bottom: 5px;
+      }
+
+      a {
+        color: #E93E3F;
+        text-decoration: none;
+      }
+
+      h3 {
+        display: inline;
+        font-size: 17px;
+      }
+
+      table {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        border-bottom: 1px solid #e5e5e5;
+      }
+
+      table tr td {
+        margin: 0;
+        padding: 16px 0;
+        border-top: 1px solid #e5e5e5;
+      }
+
+      table tr td div {
+        padding: 0 0 0;
+      }
+
+      table tr td a {
+        font-size: 17px;
+      }
+
+      table tr td span {
+        display: block;
+        padding-top: 13px;
+        font-size: 13px;
+        color: #B8B8B8;
+        line-height: 0;
+      }
+
+      table tr td span strong {
+        color: #666666;
+      }
+
+      #footer {
+        font-size: 13px;
+        text-align: right;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div id="content">
+      <h1>NGO Aid Map projects ending soon.</h1>
+      <strong>
+        <%= @projects.size %> project(s) ending between <%= l(Time.now.to_date, :format => :month_day_year) %> and <%= l(1.month.since.advance(:days => -1).to_date, :format => :month_day_year)%>
+      </strong>
+
+      <p>Hello,</p>
+
+      <p>We'd just like to remind you that the following project(s) will be ending within a month.</p>
+
+      <table>
+      <% @projects.each do |project| %>
+        <tr>
+          <td>
+            <div>
+              <h3><%= link_to project[:name], edit_admin_project_url(Project.find(project[:id]), :host => 'ngoaidmap.org'), :title => project[:name] %></h3>
+            </div>
+            <span><%= raw "In <strong>#{ project[:country_name] }</strong>&nbsp;&middot;&nbsp;" if project[:country_name].present? %>End date: <strong><%= l project[:end_date], :format => :month_day_year %></strong></span>
+          </td>
+        </tr>
+      <% end %>
+      </table>
+
+      <p>You can update project information by logging in to your Member Workspace at <a href="http://ngoaidmap.org/admin">http://ngoaidmap.org/admin</a>. If you can't find your log-in information, please send us an email at <a href="mailto:mappinginfo@interaction.org">mappinginfo@interaction.org</a>.</p>
+
+      <p>Also, if you have any new projects underway, please take a moment to add them to the site!</p>
+
+      <p>Best,<br />
+      <strong>The Mapping Team</strong></p>
+
+      <p>P.S. If any of these projects appear on another NGO Aid Map site, the data contact for that site has also received this notification. You can see who the data contact for each site is on the dashboard of your Member Workspace.</p>
+    </div>
+    <p id="footer">
+      <a href="http://www.ngoaidmap.org/admin">http://www.ngoaidmap.org/admin</a>
+    </p>
+  </body>
+</html>

@@ -513,7 +513,7 @@
   <h3 class="section museo_sans">LOCATION</h3>
   <label>GEOGRAPHIC REGION <strong>*</strong></label>
   <ul class="ubications" id="regions_list">
-    <% @project.regions_hierarchized.each do |region| %>
+    <% (@project.regions_hierarchized.presence || @regions.presence || @countries).each do |region| %>
       <li>
         <p><%= region_breadcrumb(region) %></p>
         <input type="hidden" name="project[regions_ids][]" value="<%= region.class.name.downcase + '_' + region.id.to_s %>" />
@@ -523,8 +523,12 @@
   </ul>
   <input type="hidden" name="project[regions_ids][]" value="" />
 
-  <div class="location_options region_block empty">
-    <p class="msg">Add / edit the different regions of the project</p>
+  <div class="location_options region_block empty <%= 'error' if @project.errors[:location].present? %>">
+    <% if @project.errors[:location].present? %>
+      <p class="msg">Sorry, location information is mandatory</p>
+    <% else %>
+      <p class="msg">Add / edit the different regions of the project</p>
+    <% end %>
     <a class="add_location museo_sans shadow_green" id="add_region_map">add region</a>
 
     <div class="region_window">
@@ -606,23 +610,6 @@
     <span class="textarea">
       <%= f.text_area :idprefugee_camp %>
     </span>
-  </div>
-  <label>GEOGRAPHIC COORDINATES  <strong>*</strong></label>
-  <ul class="ubications" id="project_coordinates">
-    <% if !@project.the_geom.blank? && @project.the_geom.respond_to?(:points) %>
-      <% @project.the_geom.points.each_with_index do |point,i| %>
-      <li>
-        <p>(<%= point.y %>, <%= point.x %>)</p>
-        <input name="project[points][]" value="<%= "(#{point.y}, #{point.x})" %>" type="hidden" />
-        <%= link_to("", 'javascript:void(null)', :class => 'close') %>
-      </li>
-      <% end %>
-    <% end %>
-  </ul>
-
-  <div class="location_options empty">
-    <p class="msg">Add / edit the different locations of the project</p>
-    <a class="add_location museo_sans shadow_green" id="add_location_map">add location</a>
   </div>
 
 <!-- ##################### CONTACT INFORMATION ##################### -->
