@@ -513,7 +513,7 @@
   <h3 class="section museo_sans">LOCATION</h3>
   <label>GEOGRAPHIC REGION <strong>*</strong></label>
   <ul class="ubications" id="regions_list">
-    <% (@project.regions_hierarchized.presence || @regions.presence || @countries).each do |region| %>
+    <% (@project.regions_hierarchized.presence || @regions.presence || @countries || []).each do |region| %>
       <li>
         <p><%= region_breadcrumb(region) %></p>
         <input type="hidden" name="project[regions_ids][]" value="<%= region.class.name.downcase + '_' + region.id.to_s %>" />
