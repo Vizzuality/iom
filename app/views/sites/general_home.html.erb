@@ -11,7 +11,7 @@
   <ul id="gallery_thumbails">
 
     <% @sites.each_with_index do |site, i| %>
-      <li class="<%= (i%4==0 && i!=0) ? 'last' : '' %>">
+      <li class="<%= (i % 3 == 0 && i > 0) ? 'last' : '' %>">
         <div id="image">
           <%= link_to(image_tag(site.aid_map_image.url(:small), :alt => site.name), url(site)) %>
         </div>
@@ -23,7 +23,7 @@
         <% end %>
       </li>
     <% end %>
-    <li class="<%= ((@sites.size+1)%4==0) ? 'last' : '' %>">
+    <li class="<%= ((@sites.size + 1) % 4 == 0) ? 'last' : '' %>">
         <div id="image">
           <%= image_tag("sites/home/more_project.jpg", :alt => 'More projects coming soon') %>
         </div>
