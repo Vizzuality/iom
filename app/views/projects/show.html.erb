@@ -124,7 +124,7 @@
             <ul class="share">
               <li id="twitter">
                 <span class="share_label">Twitter</span>
-                <span class="share_icon"><a id="twitter_button" href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="irekiatest" data-lang="en">Tweet</a></span>
+                <span class="share_icon"><a id="twitter_button" href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="NGOAidMap" data-text="<%= truncate(@project.name, :length=>(130 - request.fullpath.length - 'via @NGOAidMap'.length)) %>" data-lang="en">Tweet</a></span>
               </li>
 
               <li id="google">
