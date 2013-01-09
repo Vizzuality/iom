@@ -159,9 +159,9 @@ HTML
 
   def anglo(text)
     return "" if text.blank?
-    text.gsub(/(\d+\.[\d+\.?\d+]+)/) do |n|
+    raw(text.gsub(/(\d+\.[\d+\.?\d+]+)/) do |n|
       n.gsub(/\./,",")
-    end
+    end)
   end
 
   def previous_pagination_params
