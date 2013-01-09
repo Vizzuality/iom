@@ -4,7 +4,7 @@
     <li <%= cycle('class=even', 'class=odd') %>>
       <h4><a href="<%= project_path(project['project_id']) %>"><%= truncate(project['project_name'], :length=>60) %></a></h4>
       <p class="author"><%= subtitle(project, @site) %></p>
-      <p class="info"><%= anglo(raw(truncate(project['project_description'], :length => 175, :omission => "... <a href=\"#{project_path(project['project_id'])}\" class=\"learn_more\">Learn more</a>"))) %>
+      <p class="info"><%= anglo(truncate(project['project_description'], :length => 175, :omission => "... <a href=\"#{project_path(project['project_id'])}\" class=\"learn_more\">Learn more</a>")) %>
       </p>
     </li>
     <% end %>
