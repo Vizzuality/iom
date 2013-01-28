@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130128100737) do
+ActiveRecord::Schema.define(:version => 20130128140613) do
 
   create_table "changes_history_records", :force => true do |t|
     t.integer  "user_id"
@@ -171,15 +171,15 @@ ActiveRecord::Schema.define(:version => 20130128100737) do
     t.string   "picture_content_type"
     t.integer  "picture_filesize"
     t.datetime "picture_updated_at"
-    t.string   "vimeo_url"
-    t.text     "vimeo_embed_html"
+    t.string   "video_url"
+    t.text     "video_embed_html"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "caption"
-    t.string   "vimeo_thumb_file_name"
-    t.string   "vimeo_thumb_content_type"
-    t.integer  "vimeo_thumb_file_size"
-    t.datetime "vimeo_thumb_updated_at"
+    t.string   "video_thumb_file_name"
+    t.string   "video_thumb_content_type"
+    t.integer  "video_thumb_file_size"
+    t.datetime "video_thumb_updated_at"
   end
 
   add_index "media_resources", ["element_type", "element_id"], :name => "index_media_resources_on_element_type_and_element_id"

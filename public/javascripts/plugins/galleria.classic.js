@@ -68,20 +68,20 @@ Galleria.addTheme({
 	          ev.stopPropagation();
 	          ev.preventDefault();
 	          me.pause();
-            playVideo($(this).attr('vimeo-id'));
+            playVideo($(this).attr('video-id'));
 	        });
 
 	        $('a#back_gallery').click(function(ev){
 	          ev.stopPropagation();
 	          ev.preventDefault();
             $('div.loader_gallery').fadeOut(function(){
-  	          $("#vimeo_frame").remove();
+  	          $("#video_frame").remove();
               me.play();
             });
 	        });
 
-          if (this._data[0].vimeo_id!=undefined) {
-            $('a.video').attr('vimeo-id',this._data[0].vimeo_id);
+          if (this._data[0].video_id!=undefined) {
+            $('a.video').attr('video-id',this._data[0].video_id);
             $('a.video').show();
           }
           this.$('galleria-info').show().css('opacity',.8);

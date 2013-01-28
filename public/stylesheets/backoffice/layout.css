@@ -972,6 +972,7 @@ div.block.media div.med div.left ul li div.top_media {float:left; width:566px; h
 div.block.media div.med div.left ul li div.med_media {position:relative; float:left; width:549px; height:auto; padding:0 9px; background:url('/images/backoffice/backgrounds/med_media.png') repeat-y 0 0;}
 div.block.media div.med div.left ul li div.med_media:hover span.over {display:block;}
 div.block.media div.med div.left ul li div.med_media img {max-width:549px;}
+div.block.media div.med div.left ul li div.med_media iframe {width:100%; max-height: 300px;}
 div.block.media div.med div.left ul li div.med_media span.over {position:absolute; display:none; top:50%; left:50%; margin:-37px 0 0 -104px; z-index:10000; width:208px; height:74px; background:url('/images/backoffice/media/over_bkg.png') no-repeat 0 0;}
 div.block.media div.med div.left ul li div.med_media span.over a.up {float:left; width:24px; height:27px; margin:24px 0 0 45px; background:url('/images/backoffice/media/up.png') no-repeat 0 0; text-indent:-9999px; font-size:0; display:block; line-height:0;}
 div.block.media div.med div.left ul li div.med_media span.over a.down {float:left; width:24px; height:27px; margin:24px 0 0 20px; background:url('/images/backoffice/media/down.png') no-repeat 0 0; text-indent:-9999px; font-size:0; display:block; line-height:0;}

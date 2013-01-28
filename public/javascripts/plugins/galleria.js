@@ -2035,7 +2035,7 @@ Galleria.prototype = {
             // mix default extractions with the hrefs and config
             // and push it into the data array
             self._data.push( $.extend({
-                vimeo_id:    img.attr('vimeo_id'),
+                video_id:    img.attr('video_id'),
                 title:       img.attr('title'),
                 thumb:       img.attr('src'),
                 image:       img.attr('src'),
@@ -2912,8 +2912,8 @@ this.prependChild( 'info', 'myElement' );
     */
 
     next : function() {
-        if (this._data[this.getNext()].vimeo_id!=undefined) {
-          $('a.video').attr('vimeo-id',this._data[this.getNext()].vimeo_id);
+        if (this._data[this.getNext()].video_id!=undefined) {
+          $('a.video').attr('video-id',this._data[this.getNext()].video_id);
           $('a.video').fadeIn();
         } else {
           $('a.video').fadeOut();
@@ -2937,8 +2937,8 @@ this.prependChild( 'info', 'myElement' );
 
     prev : function() {
 
-        if (this._data[this.getPrev()].vimeo_id!=undefined) {
-           $('a.video').attr('vimeo-id',this._data[this.getPrev()].vimeo_id);
+        if (this._data[this.getPrev()].video_id!=undefined) {
+           $('a.video').attr('video-id',this._data[this.getPrev()].video_id);
            $('a.video').fadeIn();
          } else {
            this.$('galleria-info').fadeIn().css('opacity',.8);

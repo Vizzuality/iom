@@ -16,11 +16,11 @@ gem 'fastercsv'
 gem 'money'
 gem 'geokit'
 gem 'nokogiri'
-gem 'vimeo'
 gem 'hoptoad_notifier'
 gem 'memcache-client'
 gem 'spreadsheet'
 gem 'roadie'
+gem 'ruby-oembed'
 
 group :development do
   gem 'git-up'
