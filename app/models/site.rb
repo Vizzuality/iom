@@ -622,7 +622,7 @@ SQL
            LEFT JOIN projects_regions as pr ON pr.project_id=p.id
            LEFT JOIN regions as r ON pr.region_id=r.id and r.level=#{self.level_for_region}
            LEFT JOIN countries_projects as cp ON cp.project_id=p.id
-           LEFT JOIN countries as c ON c.id=cp.country_id
+           LEFT JOIN countries as c ON c.id=cp.country_id OR c.id = r.country_id
            LEFT JOIN clusters_projects as cpro ON cpro.project_id=p.id
            LEFT JOIN clusters as clus ON clus.id=cpro.cluster_id
            LEFT JOIN projects_sectors as psec ON psec.project_id=p.id
