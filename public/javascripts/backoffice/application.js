@@ -57,7 +57,6 @@ $(document).ready(function(ev){
             },300);
         }else {
             setTimeout(function(){
-              $('div.block div.med div.left').height($('div.right.menu').height());
               $('div.export_import,div.delete', $('div.right.menu')).show();
             },300);
         }
