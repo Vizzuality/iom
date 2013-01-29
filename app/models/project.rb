@@ -160,8 +160,8 @@ class Project < ActiveRecord::Base
 
 
   def self.export_headers
-    %w(organization intervention_id project_name project_description activities additional_information start_date end_date budget_numeric clusters sectors cross_cutting_issues implementing_organization partner_organizations donors awardee_type estimated_people_reached calculation_of_number_of_people_reached target countries regions_level1 regions_level2 regions_level3 verbatim_location,
-idprefugee_camp project_contact_person project_contact_position project_contact_email project_contact_phone_number project_website date_provided date_updated project_needs)
+    %w(organization org_intervention_id project_name project_description activities additional_information start_date end_date budget_numeric clusters sectors cross_cutting_issues implementing_organization local_partners donors awardee_type estimated_people_reached target countries regions_level1 regions_level2 regions_level3 verbatim_location,
+idprefugee_camp project_contact_person project_contact_position project_contact_email project_contact_phone_number project_website date_provided date_updated)
   end
 
   def self.list_for_export(site = nil, options = {})
@@ -245,7 +245,7 @@ idprefugee_camp project_contact_person project_contact_position project_contact_
         dd.organization_id,
         organization_name AS organization,
         implementing_organization,
-        partner_organizations,
+        partner_organizations AS local_partners,
         cross_cutting_issues,
         p.start_date,
         p.end_date,
@@ -264,8 +264,6 @@ idprefugee_camp project_contact_person project_contact_position project_contact_
         contact_position AS project_contact_position,
         website AS project_website,
         verbatim_location,
-        calculation_of_number_of_people_reached,
-        project_needs,
         sectors,
         clusters,
         '|' || array_to_string(array_agg(distinct site_id),'|') ||'|' as site_ids,
@@ -305,8 +303,6 @@ idprefugee_camp project_contact_person project_contact_position project_contact_
         contact_position,
         website,
         verbatim_location,
-        calculation_of_number_of_people_reached,
-        project_needs,
         idprefugee_camp,
         countries,
         #{kml_group_by}
