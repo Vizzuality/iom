@@ -1,6 +1,6 @@
 class OrganizationsController < ApplicationController
 
-  layout 'site_layout'
+  layout :sites_layout
 
   def index
     @organizations = @site.organizations

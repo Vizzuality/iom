@@ -1,6 +1,6 @@
 class GeoregionController < ApplicationController
 
-  layout 'site_layout'
+  layout :sites_layout
 
   skip_before_filter :set_site, :only => [:list_regions1_from_country,:list_regions2_from_country,:list_regions3_from_country]
 

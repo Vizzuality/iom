@@ -1,6 +1,6 @@
 class ClustersSectorsController < ApplicationController
 
-  layout 'site_layout'
+  layout :sites_layout
 
   def show
     if params[:location_id].present?

@@ -106,7 +106,12 @@ class ApplicationController < ActionController::Base
     end
 
   def sites_layout
-    @site ? 'site_layout' : 'root_layout'
+    if params[:embed].present?
+      'map_layout'
+    else
+      @site ? 'site_layout' : 'root_layout'
+    end
   end
+
   protected :sites_layout
 end

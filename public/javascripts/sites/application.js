@@ -131,6 +131,7 @@ $(document).ready( function() {
 
   IOM.ajax_pagination();
 
+  setupEmbedMapPopup();
 });
 
 function resetCombo(elementToUpdate){
@@ -145,4 +146,20 @@ function resetCombo(elementToUpdate){
         var api = element.data('jsp');
         if (api != undefined) api.reinitialise();
     }
+}
+
+function setupEmbedMapPopup(){
+  $('#embed_map').click(function(evt){
+    evt.preventDefault();
+    $('#popup.embed_map, .popup_background').fadeIn('fast');
+  });
+
+  $('.popup_background').click(function(){
+    $('#popup.embed_map, .popup_background').fadeOut('fast');
+  })
+
+  $('#popup.embed_map a').click(function(evt){
+    evt.preventDefault();
+    $('#popup.embed_map, .popup_background').fadeOut('fast');
+  });
 }
