@@ -1,0 +1,60 @@
+<%
+# Data is a dynamic field
+# if you want to add more settings, add some fields
+# in the same way that this fields are and the model
+# will store and read them as normal fields
+%>
+
+<h2 class="museo_sans">Platform Settings</h2>
+
+<%= form_for(@settings, :url => admin_setting_path(@settings)) do |f| %>
+  <%= f.fields_for :data do |df| %>
+    <div class="common">
+      <h3 class="museo_sans">SITE HOST</h3>
+      <div class="short_field">
+        <%= df.label :main_site_host %>
+        <%= df.text_field :main_site_host, :class => "short", :value => @settings.data.try(:[], :main_site_host) %>
+      </div>
+    </div>
+
+    <div class="common">
+      <h3 class="museo_sans">DEFAULT CONTACT INFORMATION</h3>
+      <div class="short_field">
+        <%= df.label :default_email %>
+        <%= df.text_field :default_email, :class => "short", :value => @settings.data.try(:[], :default_email) %>
+      </div>
+      <div class="short_field">
+        <%= df.label :default_contact_name %>
+        <%= df.text_field :default_contact_name, :class => "short", :value => @settings.data.try(:[], :default_contact_name) %>
+      </div>
+    </div>
+
+    <div class="common">
+      <h3 class="museo_sans">DEFAULT CONTACT INFORMATION</h3>
+      <div class="short_field">
+        <%= df.label :geoiq_parameter_1 %>
+        <%= df.text_field :geoiq_parameter_1, :class => "short", :value => @settings.data.try(:[], :geoiq_parameter_1) %>
+      </div>
+      <div class="short_field">
+        <%= df.label :geoiq_parameter_2 %>
+        <%= df.text_field :geoiq_parameter_2, :class => "short", :value => @settings.data.try(:[], :geoiq_parameter_2) %>
+      </div>
+    </div>
+
+    <div class="common">
+      <h3 class="museo_sans">GOOGLE ANALYTICS</h3>
+      <div class="short_field">
+        <%= df.label :google_analytics_username %>
+        <%= df.text_field :google_analytics_username, :class => "short", :value => @settings.data.try(:[], :google_analytics_username) %>
+      </div>
+      <div class="short_field">
+        <%= df.label :google_analytics_password %>
+        <%= df.password_field :google_analytics_password, :class => "short", :value => @settings.data.try(:[], :google_analytics_password) %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="final">
+    <%= f.submit 'Save' %>
+  </div>
+<% end -%>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130128140613) do
+ActiveRecord::Schema.define(:version => 20130204150246) do
 
   create_table "changes_history_records", :force => true do |t|
     t.integer  "user_id"
@@ -531,6 +531,8 @@ ActiveRecord::Schema.define(:version => 20130128140613) do
     t.integer  "organization_id"
     t.string   "role"
     t.boolean  "blocked",                                  :default => false
+    t.string   "site_id"
+    t.text     "description"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

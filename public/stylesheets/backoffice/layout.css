@@ -279,8 +279,8 @@ div.block.edit div.med div.left div.field {position:relative; float:left; width:
 div.block.edit div.med div.left a.preview {float:left; width:auto; margin:43px 0 0 10px; font:normal 14px Arial; color:#D8393D; text-decoration:underline;}
 div.block.edit div.med div.left a.preview.no_margin {margin:43px 0 0 0;}
 div.block.edit div.med div.left a.preview:hover {color:#7F2023;}
-div.block.edit div.med div.left div.field input[type="text"] {float:left; width:403px; height:18px; margin:5px 0 0 0; padding:8px; font:normal 15px Arial; color:#333333; border:none; background:url('/images/backoffice/donors/long_input.png') no-repeat 0 0;}
-div.block.edit div.med div.left div span {float:left; width:100%; margin:10px 0 0 0;}
+div.field input[type="text"], div.field input[type="password"], div.field input[type="email"] {float:left; width:403px; height:18px; margin:5px 0 0 0; padding:8px; font:normal 15px Arial; color:#333333; border:none; background:url('/images/backoffice/donors/long_input.png') no-repeat 0 0;}
+div.block.edit div.med div.left div a span {float:left; width:100%; margin:10px 0 0 0;}
 div.block.edit div.med div.left div span input[type="radio"] {float:left; margin:3px 5px 0 10px;}
 div.block.edit div.med div.left div span input[type="checkbox"] {float:left; margin:3px 5px 0 10px;}
 div.block.edit div.med div.left div span p {float:left; font:normal 15px Arial; color:#333333;}
@@ -297,10 +297,12 @@ div.block.edit div.med div.left div.short_field input[type="text"].twitter {widt
 div.block.edit div.med div.left div.field input[type="text"].facebook {width:381px; padding:8px 8px 8px 30px; background:url('/images/backoffice/donors/facebook_input.png') no-repeat 0 0;}
 div.block.edit div.med div.left div.long_field a.check.show_password{ display: none; }
 div.block.edit div.med div.left div.long_field a#reset_password{ float: right; margin: 16px 10px; }
-div.block.edit div.med div.left div.long_field a.check {float:left; font:normal 15px Arial; color:#333333; text-decoration:none; background:url('/images/backoffice/sites/project_tipo_check.png') no-repeat 0 4px; padding:0 0 0 15px; margin: 15px 0; height:14px;}
-div.block.edit div.med div.left div.long_field a.check.selected {background:url('/images/backoffice/sites/project_tipo_checked.png') no-repeat 0 4px;}
+div.block.edit div.med div.left div.field a.check, div.block.edit div.med div.left div.long_field a.check {float:left; font:normal 15px Arial; color:#333333; text-decoration:none; background:url('/images/backoffice/sites/project_tipo_check.png') no-repeat 0 4px; padding:0 0 0 15px; margin: 15px 0; height:14px;}
+div.block.edit div.med div.left div.field div.options { padding-left: 15px; }
+div.block.edit div.med div.left div.field div.options a.check { clear: left; margin: 9px 0; }
+div.block.edit div.med div.left div.field a.check.selected, div.block.edit div.med div.left div.long_field a.check.selected {background:url('/images/backoffice/sites/project_tipo_checked.png') no-repeat 0 4px;}
 div.block.edit div.med div.left div.final {float:left; width:100%;}
-div.block.edit div.med div.left input[type="submit"] {float:right; width:157px; height:32px; margin:20px 8px 0 0; text-indent:-9999px; font-size:0; display:block; line-height:0; background:url('/images/backoffice/donors/save_changes.png') no-repeat 0 0; border:none;}
+div.block.edit div.med div.left input[type="submit"], div.block.edit div.med div.left input[type="button"] {float:right; width:157px; height:32px; margin:20px 8px 0 0; text-indent:-9999px; font-size:0; display:block; line-height:0; background:url('/images/backoffice/donors/save_changes.png') no-repeat 0 0; border:none;}
 div.block.edit div.med div.left input[type="submit"]:hover {background-position:0 -32px; cursor:pointer;}
 div.block.edit div.med div.left input[type="submit"].error {background:url('/images/backoffice/donors/save_changes.png') no-repeat 0 -64px;}
 div.block.edit div.med div.left input[type="submit"].error:hover {background:url('/images/backoffice/donors/save_changes.png') no-repeat 0 -96px; cursor:pointer;}
@@ -1672,4 +1674,63 @@ div.med div.changes_list div.change.checked .detail ul li .value{
 
 div.med div.changes_list div.change.checked .detail ul li .separator{
   background-color: rgba(221, 225, 226, 0.5);
+}
+
+/* USERS */
+.users div.block.edit div.med div.left div.field { width: auto; }
+.users div.block.edit div.med div.left input.new_user { float: left; width:105px; height:36px; margin: 0 0 0 15px; background: url('/images/backoffice/users/new_user.png') no-repeat 0 0; }
+.users div.block.edit div.med div.left input.export_users { float: left; width:131px; height:36px; margin: 0 0 0 15px; background: url('/images/backoffice/users/export_users.png') no-repeat 0 0; }
+.users div.block.edit div.med div.left input.remove { float: none; width:17px; height:16px; background: url('/images/backoffice/users/remove_user.png') no-repeat 0 0; }
+
+.users div.block.edit div.med div.left h2 {
+  padding-bottom: 20px;
+}
+
+.users div.block.edit div.med div.left #new_user {
+  margin-bottom: 20px;
+}
+.users div.block.edit div.med div.left #new_user .chzn-container .chzn-results {
+  float: left;
+}
+
+.users div.block.edit div.med div.left .user {
+  position: relative;
+  float: left;
+  width: 534px;
+  height: 56px;
+  background: url('/images/backoffice/users/user_item_bkg.png') no-repeat 0 0;
+  margin-bottom: 20px;
+  padding: 15px;
+  color: #999999;
+}
+
+
+
+.users div.block.edit div.med div.left .user a {
+  color: #E93E3F;
+}
+
+.users div.block.edit div.med div.left .user .name {
+  display: block;
+  font-size: 17px;
+  height: 28px;
+  line-height: 2;
+}
+
+.users div.block.edit div.med div.left .user .details {
+  height: 28px;
+  line-height: 2;
+  font-size: 13px;
+}
+
+.users div.block.edit div.med div.left .user form {
+  position: static;
+}
+
+.users div.block.edit div.med div.left .user .remove {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  margin: 0;
+  margin-top: -8px;
 }
