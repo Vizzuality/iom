@@ -340,11 +340,32 @@ class Site < ActiveRecord::Base
   end
 
   def total_countries
-    sql="select count(distinct(countries.id)) as count from countries
-      inner join countries_projects as pr on pr.country_id=countries.id
-      inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{self.id}
-      inner join projects as p on ps.project_id=p.id and (p.end_date is null OR p.end_date > now());"
-    ActiveRecord::Base.connection.execute(sql).first['count'].to_i
+
+    filter = if geographic_context_country_id? && geographic_context_region_id.blank?
+               <<-SQL
+                 INNER JOIN countries_projects cp ON cp.project_id = projects.id AND cp.country_id = #{self.geographic_context_country_id} AND cp.country_id = c.id
+               SQL
+             elsif geographic_context_region_id?
+               <<-SQL
+                 INNER JOIN regions r ON r.id = #{geographic_context_region_id} AND r.country_id = c.id
+               SQL
+             elsif geographic_context_geometry?
+               <<-SQL
+                 INNER JOIN sites s ON ST_Intersects(s.geographic_context_geometry, ST_SetSRID(ST_Point(c.center_lon, c.center_lat), 4326)) AND s.id = #{id}
+               SQL
+             else
+               <<-SQL
+                INNER JOIN countries_projects AS pr ON pr.country_id = c.id
+                INNER JOIN projects_sites     AS ps ON pr.project_id = ps.project_id AND ps.site_id = #{id}
+                INNER JOIN projects           AS p  ON ps.project_id=p.id AND (p.end_date IS NULL OR p.end_date > now())
+               SQL
+             end
+
+    ActiveRecord::Base.connection.execute(<<-SQL).first['count'].to_i
+      SELECT COUNT(distinct(c.id)) AS count
+      FROM countries c
+      #{filter}
+    SQL
   end
 
   # Array of arrays
