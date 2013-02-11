@@ -1,0 +1,20 @@
+<div class="login passwords">
+  <div class="main">
+    <h1><a href="#">InterAction<sup>SiteManager</sup></a></h1>
+    <%= form_tag passwords_path do -%>
+      <div class="top_data"></div>
+      <div class="med_data">
+        <h3>Forgot your password?</h3>
+        <p>Please, enter your email so we can send you a link to reset your password</p>
+        <p><%= text_field_tag 'email', @email, :class=>(flash[:alert] ? "error museo_sans" : "museo_sans"), :placeholder => 'Enter your email' %></p>
+        <% if flash[:alert] %>
+          <%= raw flash[:alert] %>
+        <% end %>
+      </div>
+      <div class="bottom_data">
+        <%= submit_tag 'Send' %>
+        <%= link_to 'Cancel', new_session_path %>
+      </div>
+    <% end -%>
+  </div>
+</div>

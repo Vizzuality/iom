@@ -194,10 +194,14 @@ div.login div.main div.med_data p.error {float:left; width:256px; height:33px; m
 div.login div.main div.med_data p.error.margin {height:42px; padding-top:10px;}
 div.login div.main div.med_data p.error a {color:white; text-decoration:underline;}
 div.login div.main div.bottom_data {float:left; width:400px; height:76px; background:url('/images/backoffice/login/bottom_login.png') no-repeat scroll top left; }
-div.login div.main div.bottom_data input {float:right; width:98px; height:32px; padding:0; margin:22px 40px 0 0  ; background:url('/images/backoffice/login/submit_bkg.png') no-repeat 0 0; border:none; text-align:center;
+div.login div.main div.bottom_data input {float:left; width:98px; height:32px; padding:0; margin:22px 0 0 39px; background:url('/images/backoffice/login/submit_bkg.png') no-repeat 0 0; border:none; text-align:center;
   font:normal 19px "Museo Sans","Arial"; color:white; text-shadow:0 1px #96272D;}
 div.login div.main div.bottom_data input:hover {background-position:0 -32px; cursor:pointer;}
+div.login div.main div.bottom_data a { float:right; height: 32px; margin:22px 40px 0 0; font-size: 15px; color: red; text-decoration: underline; line-height: 32px; }
 
+/*Passwords*/
+div.passwords div.main div.med_data h3, div.login div.main div.med_data p { float:left; width:322px; margin:20px 0 0 2px; font:normal 15px Arial; color:#666666;  }
+div.passwords div.main div.med_data h3 { font-weight: bold; }
 
 /*dashboard & main sites*/
 div.one {float:left; width:307px; height:143px; margin:20px 10px 0 0; padding:30px 0 0 0; background:url('/images/backoffice/dashboard/one_top.png') no-repeat 0 0;}

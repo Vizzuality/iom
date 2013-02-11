@@ -1,0 +1,17 @@
+<div class="login passwords">
+  <div class="main">
+    <h1><a href="#">InterAction<sup>SiteManager</sup></a></h1>
+    <%= form_tag passwords_path do -%>
+      <div class="top_data"></div>
+      <div class="med_data">
+        <h3>Please, check your inbox</h3>
+        <p>We just sent you an email. Check your inbox and follow the instructions to change your password.</p>
+        <p>Thanks!</p>
+      </div>
+      <div class="bottom_data">
+        <%= link_to "I didn't receive any email, please send it again", new_passwords_path %>
+      </div>
+    <% end -%>
+  </div>
+</div>
+

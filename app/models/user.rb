@@ -30,10 +30,6 @@ class User < ActiveRecord::Base
                     :format     => { :with => Authentication.email_regex, :message => Authentication.bad_email_message },
                     :length     => { :within => 6..100 }
 
-  validates :password,        :presence => true
-
-
-
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
@@ -92,9 +88,30 @@ class User < ActiveRecord::Base
     @site_id ||= (attributes['site_id'] || '').split(',')
   end
 
+  def update_password(password, password_confirmation)
+    self.password               = password
+    self.password_confirmation  = password_confirmation
+    self.password_reset_sent_at = nil
+    self.password_reset_token   = nil
+    self.save
+  end
+
+  def send_password_reset
+    generate_token(:password_reset_token)
+    self.password_reset_sent_at = Time.zone.now
+    save!
+  end
+
   def set_role
     self.role = 'organization' if self.id != 1
   end
   private :set_role
+
+  def generate_token(column)
+    begin
+      self[column] = SecureRandom.base64
+    end while User.exists?(column => self[column])
+  end
+  private :generate_token
 
 end

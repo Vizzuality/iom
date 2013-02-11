@@ -61,7 +61,7 @@ class ApplicationController < ActionController::Base
         end
       else
         # Sessions controller doesn't depend on the host
-        return true if controller_name == 'sessions'
+        return true if %w(sessions passwords).include?(controller_name)
         # If root path, just go out
         return false if controller_name == 'sites' && params[:site_id].blank?
         # If the controller is not in the namespace /admin,

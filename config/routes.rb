@@ -19,6 +19,8 @@ Iom::Application.routes.draw do
   match 'login' => 'sessions#new', :as => :login
   match 'logout' => 'sessions#destroy', :as => :logout
 
+  resource :passwords
+
   # Front urls
   resources :donors,        :only => [:index, :show]
   resources :projects,      :only => [:index, :show]
