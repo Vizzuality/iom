@@ -33,6 +33,28 @@ div.wrapper {float:left; margin:0; padding:0;}
 div.field {float:left;}
 div.field.save {float:right;}
 
+/*FLASH*/
+.flash {
+  width: 942px;
+  height: 85px;
+  margin: 0 auto;
+}
+
+.flash div {
+  float: left;
+  width: 100%;
+  margin: 40px 0 20px 3px;
+  padding: 0 20px;
+  font-size: 21px;
+  line-height: 85px;
+  color: #333333;
+}
+
+.flash .notice {
+  background: url('/images/backoffice/backgrounds/flash_notice.png') no-repeat scroll top left;
+}
+
+
 /*ERROR MESSAGES*/
 span.field_error {position:absolute; bottom:10px; right:10px; margin:0; padding:0;}
 span.field_error a.error {float:right; width:14px; height:14px; background: url('/images/backoffice/icons/error.png') no-repeat scroll top left;}

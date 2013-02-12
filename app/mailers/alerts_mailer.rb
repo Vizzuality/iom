@@ -6,8 +6,9 @@ class AlertsMailer < ActionMailer::Base
     mail(:to => contact_email, :subject => "[NGO Aid Map] Projects about to end!")
   end
 
-  def reset_password(reset_token)
+  def reset_password(user_email, reset_token)
     @reset_token = reset_token
+    mail(:to => user_email, :subject => "Change your NGO Aid Map password")
   end
 
   if Rails.env.development?
@@ -29,7 +30,7 @@ class AlertsMailer < ActionMailer::Base
       def reset_password
         user = User.first
         user.send_password_reset
-        ::AlertsMailer.reset_password(user.password_reset_token)
+        ::AlertsMailer.reset_password(user.email, user.password_reset_token)
       end
 
     end

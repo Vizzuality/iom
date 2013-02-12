@@ -100,6 +100,7 @@ class User < ActiveRecord::Base
     generate_token(:password_reset_token)
     self.password_reset_sent_at = Time.zone.now
     save!
+    AlertsMailer.reset_password(email, password_reset_token).deliver
   end
 
   def set_role
