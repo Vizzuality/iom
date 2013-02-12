@@ -75,8 +75,7 @@ div.main_layout {margin:0 auto; width:942px;}
 div.main_layout p.link_to_back {background:url('/images/backoffice/common/red_arrow.png') no-repeat 0 3px; width:auto; height:auto; position:absolute; top:-25px; left:4px;}
 div.main_layout p.link_to_back a {float:left; font:normal 13px Arial; color:#CC5B4B; padding:0 0 0 22px;}
 div.main_layout p.link_to_back a:hover {cursor:pointer; text-decoration:underline;}
-div.main_layout div.block {float:left; width:942px; margin:20px 0 0 0;}
-div.main_layout div.block.first {margin:20px 0 0 0;}
+div.main_layout div.block {float:left; width:942px; margin:40px 0 0 0;}
 div.main_layout div.block div.top {float:left; width:942px; height:15px; background:url('/images/backoffice/backgrounds/top_long.png') no-repeat center 0; position:relative;}
 div.main_layout div.block div.med {float:left; width:880px; padding:16px 31px 28px; background:url('/images/backoffice/backgrounds/mid_long.png') repeat-y center 0;}
 
