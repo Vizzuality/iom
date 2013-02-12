@@ -100,7 +100,7 @@
                     <% end %>
                     </td>
                     <td width="150" class="center">
-                      <p><%= project.countries.first.try(:name) %></p>
+                      <p><%= project.countries.map(&:name).to_sentence %></p>
                     </td>
                   </tr>
                 <% end -%>
@@ -140,8 +140,8 @@
         <script src="/javascripts/backoffice/project.js" type="text/javascript" charset="utf-8"></script>
         <script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>
         <script src="/javascripts/plugins/chosen/chosen.jquery.js" type="text/javascript" charset="utf-8"></script>
-        <script type="text/javascript"> 
-$(".chzn-select").chosen(); 
-$(".chzn-sectors-select").chosen({hide_search:true}); 
-$(".chzn-sites-select").chosen({hide_search:true}); 
+        <script type="text/javascript">
+$(".chzn-select").chosen();
+$(".chzn-sectors-select").chosen({hide_search:true});
+$(".chzn-sites-select").chosen({hide_search:true});
         </script>

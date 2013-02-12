@@ -1,0 +1,29 @@
+<h2 class="museo_sans">Platform Users</h2>
+
+<%= form_for [:admin, @new_user], :url => new_admin_user_path, :html => {:method => :get, :id => 'new_user'} do |f| %>
+
+  <div class="field">
+    <%= f.select :organization_id, @organizations.map{|o| [o.name, o.id]}, {:include_blank => 'Interaction'}, :class => 'chzn-select short' %>
+  </div>
+
+  <div class="submit">
+    <%= f.submit '', :class => 'new_user' %>
+    <%= f.submit '', :class => 'export_users', :type => 'button' %>
+  </div>
+
+<% end %>
+
+<% @users.each do |user| %>
+
+  <div class="user">
+    <%= link_to user.name.presence || '<No name>', edit_admin_user_path(user), :class => 'name' %>
+    <div class="details">
+      <%= user.email %><%= ", #{user.role}" if user.role.present? %>
+      <%= raw("in #{link_to truncate(user.organization.name, :length => 45), edit_admin_organization_path(user.organization), :title => user.organization.name}") if user.organization.present? %>
+      <%= button_to '', admin_user_path(user), :method => :delete, :class => 'remove' %>
+    </div>
+  </div>
+
+<% end %>
+
+<%= javascript_include_tag 'backoffice/users' %>

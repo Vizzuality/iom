@@ -20,6 +20,10 @@ module ApplicationHelper
     end
   end
 
+  def selected_if(condition)
+    raw 'class="selected"' if condition
+  end
+
   def show_sites?
     (@organization || @donor) && ((controller_name == 'organizations' || controller_name == 'donors') && (action_name == "specific_information" || action_name == 'edit' || action_name == 'create' || action_name == 'update'))
   end
@@ -192,4 +196,7 @@ HTML
     end
   end
 
+  def error_for(model, field)
+    'error' if %w(create update).include?(action_name) && model.errors[field].present?
+  end
 end

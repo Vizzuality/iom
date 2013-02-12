@@ -30,12 +30,10 @@ class User < ActiveRecord::Base
                     :format     => { :with => Authentication.email_regex, :message => Authentication.bad_email_message },
                     :length     => { :within => 6..100 }
 
-
-
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :email, :name, :password, :password_confirmation
+  attr_accessible :email, :name, :password, :password_confirmation, :description, :organization_id, :site_id
 
   # Authenticates a user by their email name and unencrypted password.  Returns the user or nil.
   #
@@ -82,9 +80,39 @@ class User < ActiveRecord::Base
     (organization.name rescue 'InterAction')
   end
 
+  def site_id=(value)
+    write_attribute :site_id, value.join(',')
+  end
+
+  def site_id
+    @site_id ||= (attributes['site_id'] || '').split(',')
+  end
+
+  def update_password(password, password_confirmation)
+    self.password               = password
+    self.password_confirmation  = password_confirmation
+    self.password_reset_sent_at = nil
+    self.password_reset_token   = nil
+    self.save
+  end
+
+  def send_password_reset
+    generate_token(:password_reset_token)
+    self.password_reset_sent_at = Time.zone.now
+    save!
+    AlertsMailer.reset_password(email, password_reset_token).deliver
+  end
+
   def set_role
     self.role = 'organization' if self.id != 1
   end
   private :set_role
+
+  def generate_token(column)
+    begin
+      self[column] = SecureRandom.base64
+    end while User.exists?(column => self[column])
+  end
+  private :generate_token
 
 end

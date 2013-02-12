@@ -1,20 +1,22 @@
-<div class="login">
+<div class="login passwords">
   <div class="main">
     <h1><a href="#">InterAction<sup>SiteManager</sup></a></h1>
-    <%= form_tag session_path do -%>
+    <%= form_for @user, :url => passwords_path(:id => params[:id]) do |f| %>
       <div class="top_data"></div>
       <div class="med_data">
-        <p><%= label_tag 'email' %><br />
-        <%= text_field_tag 'email', @email, :class=>(flash[:alert] ? "error museo_sans" : "museo_sans") %></p>
-        <p><%= label_tag 'password' %><br/>
+        <p><%= label_tag 'new password' %><br/>
         <%= password_field_tag 'password', nil, :class=>(flash[:alert] ? "error museo_sans" : "museo_sans")%></p>
+
+        <p><%= label_tag 'repeat new password' %><br/>
+        <%= password_field_tag 'password_confirmation', nil, :class=>(flash[:alert] ? "error museo_sans" : "museo_sans")%></p>
+
         <% if flash[:alert] %>
           <%= raw flash[:alert] %>
         <% end %>
       </div>
       <div class="bottom_data">
-        <%= submit_tag 'Sign in' %>
-        <%= link_to 'Forgot your password?', new_passwords_path %>
+        <%= submit_tag 'Send' %>
+        <%= link_to 'Cancel', new_session_path %>
       </div>
     <% end -%>
   </div>

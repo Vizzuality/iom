@@ -1,0 +1,15 @@
+<ul>
+
+  <li <%= selected_if(controller_name == 'settings') %>>
+    <div class="bottom_selected">
+      <%= link_to('Platform Settings', edit_admin_setting_path(Settings.first)) %>
+    </div>
+  </li>
+
+  <li <%= selected_if(controller_name == 'users') %>>
+    <div class="bottom_selected">
+      <%= link_to('Users', admin_users_path) %>
+    </div>
+  </li>
+
+</ul>
