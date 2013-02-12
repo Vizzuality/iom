@@ -29,6 +29,13 @@ namespace :iom do
       to.each { |email, projects| AlertsMailer.projects_about_to_end(email, projects).deliver }
     end
 
+    desc 'Send an email alert to all managers who have not logged in in the last six months'
+    task :six_months_since_last_login => :environment do
+      User.where('last_login IS NULL OR last_login < ?', 1.minute.ago).find_each do |user|
+        AlertsMailer.six_months_since_last_login(user)
+      end
+    end
+
   end
 
 end
