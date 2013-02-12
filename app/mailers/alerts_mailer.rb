@@ -11,6 +11,10 @@ class AlertsMailer < ActionMailer::Base
     mail(:to => user_email, :subject => "Change your NGO Aid Map password")
   end
 
+  def six_months_since_last_login(user)
+    mail(:to => user.email, :subject => "NGO Aid Map - We Miss You!")
+  end
+
   if Rails.env.development?
     class Preview < MailView
 
@@ -33,6 +37,9 @@ class AlertsMailer < ActionMailer::Base
         ::AlertsMailer.reset_password(user.email, user.password_reset_token)
       end
 
+      def six_months_since_last_login
+        ::AlertsMailer.six_months_since_last_login(User.first)
+      end
     end
   end
 end

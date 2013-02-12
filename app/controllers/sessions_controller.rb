@@ -11,6 +11,7 @@ class SessionsController < ApplicationController
 
     user = User.authenticate(params[:email], params[:password])
     if user && user.not_blocked?
+      user.update_attribute(:last_login, Time.now)
       self.current_user = user
       new_cookie_flag = (params[:remember_me] == "1")
       handle_remember_cookie! new_cookie_flag
