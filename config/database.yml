@@ -19,7 +19,7 @@ staging:
   adapter: postgresql
   template: template_postgis
   encoding: unicode
-  database: iom
+  database: iom_production
   username: postgres
   password:
 
