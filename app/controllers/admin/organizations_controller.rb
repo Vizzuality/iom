@@ -21,6 +21,7 @@ class Admin::OrganizationsController < ApplicationController
   def create
     @organization = Organization.new(params[:organization])
     if @organization.save
+      flash[:notice] = 'Organization created succesfully.'
       redirect_to edit_admin_organization_path(@organization), :flash => {:success => 'Organization has been created successfully'}
     else
       render :action => 'new'
@@ -59,6 +60,7 @@ class Admin::OrganizationsController < ApplicationController
     end
     @organization.updated_by = current_user
     if @organization.save
+      flash[:notice] = 'Organization updated succesfully.'
       if params[:site_id]
         redirect_to organization_site_specific_information_admin_organization_path(@organization, @site), :flash => {:success => 'Organization has been updated successfully'}
       else
