@@ -63,7 +63,7 @@ class User < ActiveRecord::Base
   end
 
   def admin?
-    self.role.present? && self.role == 'admin'
+    self.organization.blank?
   end
   alias administrator? admin?
 
