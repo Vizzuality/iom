@@ -178,7 +178,7 @@ class Organization < ActiveRecord::Base
   # Array of arrays
   # [[region, count], [region, count]]
   def projects_regions(site, category_id = nil)
-    if category_id.present?
+    if category_id.present? && category_id.to_i > 0
       if site.navigate_by_cluster?
         category_join = "inner join clusters_projects as cp on cp.project_id = p.id and cp.cluster_id = #{category_id}"
       else
@@ -205,7 +205,7 @@ SQL
   # Array of arrays
   # [[country, count], [country, count]]
   def projects_countries(site, category_id = nil)
-    if category_id.present?
+    if category_id.present? && category_id.to_i > 0
       if site.navigate_by_cluster?
         category_join = "inner join clusters_projects as cp on cp.project_id = p.id and cp.cluster_id = #{category_id}"
       else
@@ -410,7 +410,7 @@ SQL
 
   def projects_count(site, category_id = nil, location_id = nil)
 
-    if category_id.present?
+    if category_id.present? && category_id.to_i > 0
       if site.navigate_by_cluster?
         category_join = "inner join clusters_projects as cp on cp.project_id = p.id and cp.cluster_id = #{category_id}"
       else
@@ -418,7 +418,7 @@ SQL
       end
     end
 
-    if location_id.present?
+    if location_id.present? && location_id.to_i > 0
       if location_id.size == 1
         location_join = "inner join countries_projects cp on cp.project_id = p.id and cp.country_id = #{location_id.first}"
       else
