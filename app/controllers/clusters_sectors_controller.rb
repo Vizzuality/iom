@@ -7,6 +7,8 @@ class ClustersSectorsController < ApplicationController
       case params[:location_id]
       when String
         @filter_by_location = params[:location_id].split('/')
+      when Array
+        @filter_by_location = params[:location_id]
       end
     end
 
