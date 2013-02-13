@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
 
   belongs_to :organization
 
+  validates :name, :presence   => true
   validates :email, :presence   => true,
                     :uniqueness => true,
                     :format     => { :with => Authentication.email_regex, :message => Authentication.bad_email_message },
