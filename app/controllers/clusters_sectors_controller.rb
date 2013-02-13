@@ -23,6 +23,11 @@ class ClustersSectorsController < ApplicationController
       @filter_name = "projects in #{@location_name}"
     end
 
+    if params[:id].to_i <= 0
+      render_404
+      return
+    end
+
     if(request.url.match(/clusters/))
       # clusters
       render_404 and return unless @site.navigate_by_cluster?
