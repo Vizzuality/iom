@@ -679,7 +679,7 @@ ul.ui-autocomplete.site_tags li.ui-menu-item a {font:normal 13px Arial; width:10
 /*END - AUTOCOMPLETE - TAGS*/
 
 
-div.block.project_info div.med div.left form input[type="text"]{float:left; margin:7px 0 0 7px;width:400px; height:21px; font:normal 15px Arial; color:#333333; border:none; padding:0; border:0px;}
+div.block.project_info div.med div.left form input[type="text"]{float:left; margin:7px 0 0 7px;width:400px; height:21px; font:normal 15px Arial; color:#333333; border:none; padding:0; border:0px; background: none;}
 div.block.project_info div.bottom {float:left; height:15px; width:100%; background: url('/images/backoffice/backgrounds/bottom_two_columns.png') no-repeat scroll top left!important;}
 div.block.project_info div.med div.left form span.textarea.error {background-position:0 -214px;}
 div.block.project_info div.med div.left form span.textarea {float:left; margin:5px 0 0 0; background:url('/images/backoffice/projects/input_project_multiple.png') no-repeat 0 0; width:564px; height:214px; position:relative;}

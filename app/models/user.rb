@@ -23,8 +23,6 @@ class User < ActiveRecord::Base
 
   belongs_to :organization
 
-  before_save :set_role
-
   validates :email, :presence   => true,
                     :uniqueness => true,
                     :format     => { :with => Authentication.email_regex, :message => Authentication.bad_email_message },
@@ -33,7 +31,7 @@ class User < ActiveRecord::Base
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :email, :name, :password, :password_confirmation, :description, :organization_id, :site_id
+  attr_accessible :email, :name, :password, :password_confirmation, :description, :organization_id, :site_id, :role
 
   # Authenticates a user by their email name and unencrypted password.  Returns the user or nil.
   #
@@ -102,11 +100,6 @@ class User < ActiveRecord::Base
     save!
     AlertsMailer.reset_password(email, password_reset_token).deliver
   end
-
-  def set_role
-    self.role = 'organization' if self.id != 1
-  end
-  private :set_role
 
   def generate_token(column)
     begin
