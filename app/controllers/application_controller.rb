@@ -37,6 +37,8 @@ class ApplicationController < ActionController::Base
           'localhost.lan'
         when 'test'
           'example.com'
+        when 'staging'
+          Settings.main_site_host
         when 'production'
           Settings.main_site_host
       end

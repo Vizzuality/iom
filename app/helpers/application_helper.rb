@@ -199,4 +199,12 @@ HTML
   def error_for(model, field)
     'error' if %w(create update).include?(action_name) && model.errors[field].present?
   end
+
+  def url_with_embed_param
+    port = if Rails.env.development? then ":#{request.port}" else nil end
+    query_string = '?' + request.query_string.split('&').push('embed=true').join('&')
+
+    %Q{#{request.protocol}#{request.host}#{port}#{request.path}#{query_string}}
+  end
+
 end
