@@ -19,7 +19,7 @@
     <%= link_to user.name.presence || '<No name>', edit_admin_user_path(user), :class => 'name' %>
     <div class="details">
       <%= user.email %><%= ", #{user.role}" if user.role.present? %>
-      <%= raw("in #{link_to truncate(user.organization.name, :length => 45), edit_admin_organization_path(user.organization), :title => user.organization.name}") if user.organization.present? %>
+      <%= user_organization_name(user) %>
       <%= button_to '', admin_user_path(user), :method => :delete, :class => 'remove' %>
     </div>
   </div>

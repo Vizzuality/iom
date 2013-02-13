@@ -10,7 +10,7 @@ class Admin::AdminController < ApplicationController
       organization = current_user.organization
 
       @organization_data = OpenStruct.new( {
-        :name                  => organization.name,
+        :name                  => organization.try(:name),
         :active_projects_count => organization.projects.active.count,
         :closed_projects_count => organization.projects.closed.count,
         :website               => organization.website,
