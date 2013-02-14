@@ -102,6 +102,11 @@ class User < ActiveRecord::Base
     AlertsMailer.reset_password(email, password_reset_token).deliver
   end
 
+  def self.filter_by_organization(attributes)
+    return scoped if attributes.blank?
+    where(:organization_id => attributes[:organization_id].presence)
+  end
+
   def generate_token(column)
     begin
       self[column] = SecureRandom.base64
