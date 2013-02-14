@@ -3037,7 +3037,7 @@ div.med div.changes_list div.change.checked .detail ul li .separator{
 .users div.block.edit div.med div.left div.submit { float: left; margin-bottom: 20px; }
 .users div.block.edit div.med div.left .new_user { float: left; width:105px; height:36px; margin: 0 0 0 15px; background: url('/images/backoffice/users/new_user.png') no-repeat 0 0; }
 .users div.block.edit div.med div.left .export_users { float: left; width:131px; height:36px; margin: 0 0 0 15px; background: url('/images/backoffice/users/export_users.png') no-repeat 0 0; }
-.users div.block.edit div.med div.left input.remove { float: none; width:17px; height:16px; background: url('/images/backoffice/users/remove_user.png') no-repeat 0 0; }
+.users div.block.edit div.med div.left .remove { float: none; width:17px; height:16px; background: url('/images/backoffice/users/remove_user.png') no-repeat 0 0; }
 
 .users div.block.edit div.med div.left h2 {
   padding-bottom: 20px;
