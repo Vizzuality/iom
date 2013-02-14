@@ -7,7 +7,9 @@
       <div class="details">
         <%= user.email %><%= ", #{user.role}" if user.role.present? %>
         <%= user_organization_name(user) %>
-        <%= button_to '', admin_user_path(user), :method => :delete, :class => 'remove' %>
+        <div class="delete">
+          <%= link_to '', '#', :method => :delete, :class => 'remove', :destroy_url => admin_user_path(user), :att_name => "user", :no_subtitle => true %>
+        </div>
       </div>
     </div>
 
