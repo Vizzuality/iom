@@ -7,4 +7,14 @@ $(function(){
     link.toggleClass('selected');
     link.next('input')[0].disabled = !link.hasClass('selected');
   })
+  $('#users_list_filter select').change(function(evt){
+    $(this).closest('form').submit();
+  });
+  //$('#users_list_filter').submit(function(evt){
+    //evt.preventDefault();
+    //var form = $(this);
+    //$.get(form.attr('action'), form.serialize(), function(html){
+      //$('.users_list').html(html);
+    //})
+  //});
 });

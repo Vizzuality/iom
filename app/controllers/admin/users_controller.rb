@@ -4,12 +4,15 @@ class Admin::UsersController < Admin::AdminController
   before_filter :get_sites,         :only => [:new, :edit]
 
   def index
-    @new_user = User.new
-    @users    = User.order('id asc').all
+    @new_user  =  User.new(params[:user])
+    @users     =  User.order('id asc')
+    @users     =  @users.filter_by_organization(params[:user])
+    @users     =  @users.paginate :per_page => 20, :order => 'name asc', :page => params[:page]
+    render :partial => 'users' and return if request.xhr?
   end
 
   def new
-    @user = User.new(params[:user])
+    @user = User.new
   end
 
   def create
@@ -49,11 +52,12 @@ class Admin::UsersController < Admin::AdminController
   end
 
   def get_organizations
-    @organizations = Organization.select([:id, :name]).all
+    @organizations = Organization.select([:id, :name]).order('name asc').all
   end
 
   def get_sites
     @sites = Site.select([:id, :name]).all
   end
+
 end
 
