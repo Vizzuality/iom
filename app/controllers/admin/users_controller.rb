@@ -52,7 +52,7 @@ class Admin::UsersController < Admin::AdminController
   end
 
   def get_organizations
-    @organizations = Organization.select([:id, :name]).order('name asc').all
+    @organizations = Organization.with_admin_user.all
   end
 
   def get_sites

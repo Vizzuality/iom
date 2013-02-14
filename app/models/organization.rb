@@ -408,6 +408,13 @@ SQL
     scoped.select("id,name").order("name ASC")
   end
 
+  def self.with_admin_user
+    select('DISTINCT organizations.id, organizations.name').
+    joins(:user).
+    where('organization_id IS NOT NULL').
+    order('name asc')
+  end
+
   def projects_count(site, category_id = nil, location_id = nil)
 
     if category_id.present? && category_id.to_i > 0
