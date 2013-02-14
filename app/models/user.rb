@@ -103,7 +103,7 @@ class User < ActiveRecord::Base
   end
 
   def self.filter_by_organization(attributes)
-    return scoped if attributes.blank?
+    return scoped if attributes.blank? || attributes[:organization_id] == '-1'
     where(:organization_id => attributes[:organization_id].presence)
   end
 

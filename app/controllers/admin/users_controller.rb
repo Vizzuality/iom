@@ -53,11 +53,16 @@ class Admin::UsersController < Admin::AdminController
 
   def get_organizations
     @organizations = Organization.with_admin_user.all
+    OpenStruct.__send__(:define_method, :id) { @table[:id] }
+    @organizations.unshift(OpenStruct.new('id' => -1, 'name' => 'All')) if organization_filter_active?
   end
 
   def get_sites
     @sites = Site.select([:id, :name]).all
   end
 
+  def organization_filter_active?
+    params[:user].present? && params[:user][:organization_id].present?
+  end
 end
 
