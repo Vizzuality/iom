@@ -1701,45 +1701,6 @@ div.med div.changes_list div.change.checked .detail ul li .separator{
   background-color: rgba(221, 225, 226, 0.5);
 }
 
-/* USERS */
-.users div.block.edit div.med div.left div.field { width: auto; margin-bottom: 20px; }
-.users div.block.edit div.med div.left div.submit { float: left; margin-bottom: 20px; }
-.users div.block.edit div.med div.left .new_user { float: left; width:105px; height:36px; margin: 0 0 0 15px; background: url('/images/backoffice/users/new_user.png') no-repeat 0 0; }
-.users div.block.edit div.med div.left .export_users { float: left; width:131px; height:36px; margin: 0 0 0 15px; background: url('/images/backoffice/users/export_users.png') no-repeat 0 0; }
-.users div.block.edit div.med div.left input.remove { float: none; width:17px; height:16px; background: url('/images/backoffice/users/remove_user.png') no-repeat 0 0; }
-
-.users div.block.edit div.med div.left h2 {
-  padding-bottom: 20px;
-}
-
-.users div.block.edit div.med div.left #users_list_filter {
-  float: left;
-  width: auto;
-  margin-top: 2px;
-}
-.users div.block.edit div.med div.left #users_list_filter .chzn-container .chzn-results {
-  float: left;
-}
-
-.users div.block.edit div.med div.left .user {
-  position: relative;
-  float: left;
-  width: 534px;
-  height: 56px;
-  background: url('/images/backoffice/users/user_item_bkg.png') no-repeat 0 0;
-  margin-bottom: 20px;
-  padding: 15px;
-  color: #999999;
-}
-
-
-.users_list div.pagination {float:right; width:auto; padding:0; margin:0 30px 0 0!important;}
-.users_list div.pagination em {float:left; padding:20px 10px 7px; background:url('/images/backoffice/donors/page_selected.jpg') no-repeat center bottom; font:normal 15px "Museo Sans",Arial; color:#333333;}
-.users_list div.pagination a {float:left; margin:0; padding:20px 10px 7px 10px; font:normal 15px "Museo Sans",Arial; color:#E93E3F; line-height:15px; text-transform:uppercase;}
-.users_list div.pagination a:hover {color:#333333; text-decoration:none;}
-.users_list div.pagination span.disabled {display:none;}
-.users_list div.pagination span.gap {float:left; height:34px; border-bottom:1px dotted #EA3C44; padding:0;}
-
 /*specific NGO*/
 div.block.edit div.med div.left div.specific_edit {float:left; width:526px; height:312px; margin:30px 0 0 0; padding:20px; background:url('/images/backoffice/ngos/edit_specific_bkg.png') no-repeat 0 0;}
 div.block.edit div.med div.left div.specific_edit span {float:left; width:100%;}
@@ -3035,7 +2996,7 @@ div.med div.changes_list div.change.checked .detail ul li .separator{
 /* USERS */
 .users div.block.edit div.med div.left div.field { width: auto; margin-bottom: 20px; }
 .users div.block.edit div.med div.left div.submit { float: left; margin-bottom: 20px; }
-.users div.block.edit div.med div.left .new_user { float: left; width:105px; height:36px; margin: 0 0 0 15px; background: url('/images/backoffice/users/new_user.png') no-repeat 0 0; }
+.users div.block.edit div.med div.left a.new_user { float: left; width:105px; height:36px; margin: 0 0 0 15px; background: url('/images/backoffice/users/new_user.png') no-repeat 0 0; }
 .users div.block.edit div.med div.left .export_users { float: left; width:131px; height:36px; margin: 0 0 0 15px; background: url('/images/backoffice/users/export_users.png') no-repeat 0 0; }
 .users div.block.edit div.med div.left .remove { float: none; width:17px; height:16px; background: url('/images/backoffice/users/remove_user.png') no-repeat 0 0; }
 
