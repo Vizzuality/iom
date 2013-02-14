@@ -3,21 +3,25 @@
   <div class="field">
     <%= f.label :name, raw('Full name&nbsp;<strong>*</strong>') %>
     <%= f.text_field :name, :class => error_for(@user, :name) %>
+    <%= errors_for @user, :name %>
   </div>
 
   <div class="field">
     <%= f.label :email, raw('Email&nbsp;<strong>*</strong>') %>
     <%= f.email_field :email, :class => error_for(@user, :email) %>
+    <%= errors_for @user, :email %>
   </div>
 
   <div class="field">
     <%= f.label :password, raw('Password&nbsp;<strong>*</strong>') %>
     <%= f.password_field :password, :value => nil, :autocomplete => 'off', :class => error_for(@user, :password) %>
+    <%= errors_for @user, :password %>
   </div>
 
   <div class="field">
     <%= f.label :password_confirmation, raw('Repeat password&nbsp;<strong>*</strong>') %>
     <%= f.password_field :password_confirmation, :value => nil, :autocomplete => 'off', :class => error_for(@user, :password_confirmation) %>
+    <%= errors_for @user, :password_confirmation %>
   </div>
 
   <div class="field">

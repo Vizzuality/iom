@@ -35,7 +35,7 @@ module ApplicationHelper
           <span class="field_error">
             <a class="error"></a>
             <div class="error_msg">
-              <p><span>#{obj.errors[attribute]}</span></p>
+              <p><span>#{obj.errors[attribute].first}</span></p>
             </div>
           </span>
       HTML
