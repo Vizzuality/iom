@@ -87,6 +87,11 @@ class User < ActiveRecord::Base
     @site_id ||= (attributes['site_id'] || '').split(',')
   end
 
+  def organization_id=(value)
+    value = value.to_i
+    write_attribute(:organization_id, value.to_i) if value > 0
+  end
+
   def update_password(password, password_confirmation)
     self.password               = password
     self.password_confirmation  = password_confirmation

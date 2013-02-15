@@ -3009,7 +3009,7 @@ div.med div.changes_list div.change.checked .detail ul li .separator{
   width: auto;
   margin-top: 2px;
 }
-.users div.block.edit div.med div.left #users_list_filter .chzn-container .chzn-results {
+.users div.block.edit div.med div.left .chzn-container .chzn-results {
   float: left;
 }
 

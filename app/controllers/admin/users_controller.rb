@@ -1,18 +1,21 @@
 class Admin::UsersController < Admin::AdminController
   before_filter :get_user,          :only => [:edit, :update, :destroy]
-  before_filter :get_organizations, :only => [:index, :new, :edit]
   before_filter :get_sites,         :only => [:new, :edit]
 
   def index
-    @new_user  =  User.new(params[:user])
-    @users     =  User.order('id asc')
-    @users     =  @users.filter_by_organization(params[:user])
-    @users     =  @users.paginate :per_page => 20, :order => 'name asc', :page => params[:page]
+    params[:user]  = {'organization_id' => '-1'}.merge(params[:user] || {})
+
+    @user          = User.new(params[:user])
+    @users         = User.order('id asc')
+    @users         = @users.filter_by_organization(params[:user])
+    @users         = @users.paginate :per_page => 20, :order => 'name asc', :page => params[:page]
+    @organizations = grouped_organizations
     render :partial => 'users' and return if request.xhr?
   end
 
   def new
-    @user = User.new
+    @user          = User.new
+    @organizations = Organization.with_admin_user.all
   end
 
   def create
@@ -20,20 +23,21 @@ class Admin::UsersController < Admin::AdminController
     if @user.save
       redirect_to :admin_users
     else
-      get_organizations
+      @organizations = Organization.with_admin_user.all
       get_sites
       render :new
     end
   end
 
   def edit
+    @organizations = Organization.with_admin_user.all
   end
 
   def update
     if @user.update_attributes(params[:user])
       redirect_to :admin_users
     else
-      get_organizations
+      @organizations = Organization.with_admin_user.all
       get_sites
       render :edit
     end
@@ -51,10 +55,12 @@ class Admin::UsersController < Admin::AdminController
     @user = User.find(params[:id])
   end
 
-  def get_organizations
-    @organizations = Organization.with_admin_user.all
-    OpenStruct.__send__(:define_method, :id) { @table[:id] }
-    @organizations.unshift(OpenStruct.new('id' => -1, 'name' => 'All')) if organization_filter_active?
+  def grouped_organizations
+    [
+      ['', [['All', '-1']]],
+      ['', [['Interaction', nil]]],
+      ['', Organization.with_admin_user.all.map{|o| [o.name, o.id]}]
+    ]
   end
 
   def get_sites

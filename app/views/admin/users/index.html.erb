@@ -6,10 +6,10 @@
 
         <h2 class="museo_sans">Platform Users</h2>
 
-        <%= form_for [:admin, @new_user], :url => admin_users_path, :html => {:method => :get, :class => 'users_list_filter', :id => 'users_list_filter'} do |f| %>
+        <%= form_for [:admin, @user], :url => admin_users_path, :html => {:method => :get, :class => 'users_list_filter', :id => 'users_list_filter'} do |f| %>
 
           <div class="field">
-            <%= f.select :organization_id, @organizations.map{|o| [o.name, o.id]}, {:include_blank => 'Interaction'}, :class => 'chzn-select short' %>
+            <%= f.select :organization_id, grouped_options_for_select(@organizations, @user.organization_id), {}, :class => 'chzn-select short' %>
           </div>
 
         <% end %>
