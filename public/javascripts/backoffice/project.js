@@ -3,11 +3,15 @@ var old_value;
 var limitTextCombo = 12;
 
 // ID's
-var orgs_id = 5; // orgs_
-var clusters_id = 9; // clusters_
-var clusterToAdd = 13; // clusterToAdd_
-var sectors_id = 8; // sectors_
-var sectorToAdd = 12; // sectorToAdd_
+var orgs_id                  = 5; // orgs_
+var clusters_id              = 9; // clusters_
+var clusterToAdd             = 13; // clusterToAdd_
+var sectors_id               = 8; // sectors_
+var sectorToAdd              = 12; // sectorToAdd_
+var organization_id          = 'XXXX';
+var country_iso_codes         = [];
+var current_year_last_digits = (new Date()).getFullYear().toString().substr(2, 2);
+var project_id               = 'XXX';
 $(document).ready(function(ev){
 
   $('div.long_search form.search select').change(function(){
@@ -255,6 +259,8 @@ $(document).ready(function(ev){
 
     // id substring
     $('input#project_primary_organization_id').val(id);
+    organization_id = organizations_ids[id];
+    update_project_intervention_id();
 
     $('div.list_combo').find('a.organization').text(name);
     $('div.list_combo').find('ul.list_combo_content').css('display','none');
@@ -262,6 +268,10 @@ $(document).ready(function(ev){
     $('div.list_combo').children('span.combo_large').removeClass('displayed');
   });
   // end combo tags click
+  $('input#project_organization_id').change(function(){
+    project_id = $(this).val();
+    update_project_intervention_id();
+  });
 
   /************** CLUSTERS ************************** */
   $('span.combo_cluster_options').click(function(ev){
@@ -622,6 +632,7 @@ $(document).ready(function(ev){
   if (typeof floatingSubmit == 'function') {
     floatingSubmit($('form .submit'), $('div.main_layout div.block div.med div.right div.delete'));
   }
+
 });
 
 function checkElementAdded(list, id){
@@ -750,3 +761,23 @@ $(function() {
   });
 
 });
+
+function update_project_intervention_id() {
+  var project_intervention_id = organization_id + '-' +
+                                (country_iso_codes.sort()[0] || 'XX') + '-' +
+                                current_year_last_digits + '-' +
+                                project_id;
+
+  $('input#project_intervention_id.editable').val(project_intervention_id);
+}
+
+function updateCountryIsoCode(country_id) {
+  country_iso_codes.push(countries_iso_codes[country_id]);
+  update_project_intervention_id();
+}
+
+function removeCountryIsoCode(country_id) {
+  var iso_code = countries_iso_codes[country_id];
+  country_iso_codes.splice(country_iso_codes.indexOf(iso_code), 1)
+  update_project_intervention_id();
+}

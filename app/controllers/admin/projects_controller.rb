@@ -78,7 +78,9 @@ class Admin::ProjectsController < Admin::AdminController
   end
 
   def new
-    @project = new_project
+    @project             = new_project(:date_provided => Time.now)
+    @organizations_ids   = organizations_ids
+    @countries_iso_codes = countries_iso_codes
   end
 
   def create
@@ -99,7 +101,8 @@ class Admin::ProjectsController < Admin::AdminController
   end
 
   def edit
-    @project = find_project(params[:id])
+    @project              = find_project(params[:id])
+    @project.date_updated = Time.now
   end
 
   def update
@@ -172,5 +175,15 @@ class Admin::ProjectsController < Admin::AdminController
     @organizations_list
   end
   private :get_organizations_list
+
+  def organizations_ids
+    Hash[Organization.select([:id, :organization_id]).all.map{|o| [o.id, o.organization_id]}]
+  end
+  private :organizations_ids
+
+  def countries_iso_codes
+    Hash[Country.select([:id, :iso2_code]).all.map{|o| [o.id, o.iso2_code]}]
+  end
+  private :countries_iso_codes
 
 end

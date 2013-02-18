@@ -24,12 +24,16 @@
       </div>
     </div>
   </div>
+
+  <% if current_user.admin? %>
   <div class="field">
     <label>InterAction Intervention ID</label>
     <span class="input_large">
-      <%= f.text_field :intervention_id %>
+      <%= f.text_field :intervention_id, :class => if action_name == 'new' then 'editable' end, :disabled => action_name == 'edit' %>
     </span>
   </div>
+  <% end %>
+
   <div class="field">
     <label>Organization Intervention ID
     <strong>&nbsp;</strong>
@@ -735,3 +739,7 @@
   <script src="/javascripts/plugins/jquery.stylish-select.js" type="text/javascript" charset="utf-8"></script>
   <script src="/javascripts/backoffice/project.js" type="text/javascript" charset="utf-8"></script>
   <script src="/javascripts/backoffice/project_region.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript">
+    var organizations_ids =   <%= (@organizations_ids || {}).to_json.html_safe %>;
+    var countries_iso_codes = <%= (@countries_iso_codes || {}).to_json.html_safe %>;
+  </script>

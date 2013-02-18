@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130212123245) do
+ActiveRecord::Schema.define(:version => 20130218104721) do
 
   create_table "changes_history_records", :force => true do |t|
     t.integer  "user_id"
@@ -239,6 +239,7 @@ ActiveRecord::Schema.define(:version => 20130212123245) do
     t.string   "main_data_contact_city"
     t.string   "main_data_contact_state"
     t.string   "main_data_contact_country"
+    t.string   "organization_id"
   end
 
   add_index "organizations", ["name"], :name => "index_organizations_on_name"

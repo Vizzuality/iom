@@ -43,7 +43,9 @@
     $('#regions_list a.close').live('click',function (e){
       e.preventDefault();
       e.stopPropagation();
-      $(this).closest('li').remove();
+      var li = $(this).closest('li');
+      removeCountryIsoCode(li.attr('data-country-id'));
+      li.remove();
     });
 
     $('a#add_region_to_list').click(function (e){
@@ -55,7 +57,9 @@
         $('div.region_window div span.region_combo p').each(function(index,element){
           if ($(element).text()!="Not specified") {
             if(i == 0){
-              countries_ids.push($(element).attr('id').split('_')[1]);
+              var country_id   = $(element).attr('id').split('_')[1];
+              updateCountryIsoCode(country_id);
+              countries_ids.push(country_id);
               countries_names.push($(element).html());
             } else {
               regions_ids.push($(element).attr('id').split('_')[1]);
@@ -66,14 +70,14 @@
         });
 
         if( regions_ids.length == 0 )
-          $('#regions_list').append('<li><p>'+countries_names[0]+'</p><input type="hidden" name="project[regions_ids][]" value="country_'+countries_ids[0]+'" /><a href="javascript:void(null)" class="close"></a></li>');
+          $('#regions_list').append('<li data-country-id="'+countries_ids[0]+'"><p>'+countries_names[0]+'</p><input type="hidden" name="project[regions_ids][]" value="country_'+countries_ids[0]+'" /><a href="javascript:void(null)" class="close"></a></li>');
         else {
           var breadcrumb = [];
           breadcrumb.push(countries_names[0]);
           for(var i = 0;i<regions_names.length;i++) {
             breadcrumb.push(regions_names[i]);
           }
-          $('#regions_list').append('<li><p>'+breadcrumb.join(' > ')+'</p><input type="hidden" name="project[regions_ids][]" value="region_'+regions_ids[regions_ids.length - 1]+'" /><a href="javascript:void(null)" class="close"></a></li>');
+          $('#regions_list').append('<li data-country-id="'+countries_ids[0]+'"><p>'+breadcrumb.join(' > ')+'</p><input type="hidden" name="project[regions_ids][]" value="region_'+regions_ids[regions_ids.length - 1]+'" /><a href="javascript:void(null)" class="close"></a></li>');
         }
 
         e.preventDefault();

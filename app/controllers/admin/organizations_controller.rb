@@ -56,7 +56,6 @@ class Admin::OrganizationsController < ApplicationController
       end
     else
       @organization.attributes = params[:organization]
-      @organization.user.blocked = params[:organization][:user_attributes][:blocked] if @organization.user && params[:organization][:user_attributes] && params[:organization][:user_attributes][:blocked]
     end
     @organization.updated_by = current_user
     if @organization.save
