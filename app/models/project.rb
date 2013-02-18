@@ -273,7 +273,7 @@ idprefugee_camp project_contact_person project_contact_position project_contact_
         (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM regions AS r INNER JOIN projects_regions AS pr ON r.id=pr.region_id WHERE r.level=2 AND pr.project_id=dd.project_id) AS regions_level2,
         (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM regions AS r INNER JOIN projects_regions AS pr ON r.id=pr.region_id WHERE r.level=3 AND pr.project_id=dd.project_id) AS regions_level3,
         (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM donors AS d INNER JOIN donations AS dn ON d.id=dn.donor_id AND dn.project_id=dd.project_id) AS donors,
-        intervention_id as org_intervention_id
+        organization_id as org_intervention_id
         #{kml_select}
         FROM data_denormalization AS dd
         INNER JOIN projects AS p ON dd.project_id=p.id
