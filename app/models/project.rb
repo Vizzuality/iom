@@ -160,7 +160,7 @@ class Project < ActiveRecord::Base
 
 
   def self.export_headers
-    %w(organization org_intervention_id project_name project_description activities additional_information start_date end_date budget_numeric clusters sectors cross_cutting_issues implementing_organization local_partners donors awardee_type estimated_people_reached target countries regions_level1 regions_level2 regions_level3 verbatim_location
+    %w(organization interaction_intervention_id org_intervention_id project_name project_description activities additional_information start_date end_date budget_numeric clusters sectors cross_cutting_issues implementing_organization local_partners donors awardee_type estimated_people_reached target countries regions_level1 regions_level2 regions_level3 verbatim_location
 idprefugee_camp project_contact_person project_contact_position project_contact_email project_contact_phone_number project_website date_provided date_updated)
   end
 
@@ -257,6 +257,7 @@ idprefugee_camp project_contact_person project_contact_position project_contact_
         contact_phone_number AS project_contact_phone_number,
         activities,
         intervention_id,
+        intervention_id as interaction_intervention_id,
         additional_information,
         awardee_type,
         date_provided,
