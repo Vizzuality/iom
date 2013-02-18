@@ -411,7 +411,7 @@ SQL
   def self.with_admin_user
     select('DISTINCT organizations.id, organizations.name').
     joins(:user).
-    where('organization_id IS NOT NULL').
+    where('users.organization_id IS NOT NULL').
     order('name asc')
   end
 
