@@ -714,6 +714,12 @@ SQL
     end
   end
 
+  def update_countries_from_regions
+    regions_countries = regions.map(&:country).uniq
+    self.countries = regions_countries
+    save!
+  end
+
   private
 
   def location_presence
