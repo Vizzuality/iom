@@ -75,6 +75,7 @@ class Organization < ActiveRecord::Base
   before_save :check_user_valid
 
   validates_presence_of :name
+  validates_uniqueness_of :organization_id
 
   serialize :site_specific_information
 
