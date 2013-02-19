@@ -259,7 +259,12 @@ $(document).ready(function(ev){
 
     // id substring
     $('input#project_primary_organization_id').val(id);
-    organization_id = organizations_ids[id];
+
+    organization_id = 'XXXX';
+    if (organizations_ids[id] && organizations_ids[id] != '') {
+      organization_id = organizations_ids[id];
+    }
+
     update_project_intervention_id();
 
     $('div.list_combo').find('a.organization').text(name);
