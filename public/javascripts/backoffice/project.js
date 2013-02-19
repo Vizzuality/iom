@@ -753,7 +753,7 @@ $(function() {
     });
   }
 
-  $('span.combo_date').dateCombos();
+  $('span.combo_date:not(.disabled)').dateCombos();
 
   $('.chzn-container').click(function(ev){
     ev.stopPropagation();
