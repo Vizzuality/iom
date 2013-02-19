@@ -12,9 +12,9 @@
     <div class="list_combo">
       <span id="hidden" class="combo_large">
         <%= errors_for_span(@project, :primary_organization) %>
-        <a class="organization"><%= @project.primary_organization.try(:name) || Organization.first.name %></a>
+        <a class="organization"><%= @project.primary_organization.try(:name) %></a>
       </span>
-      <%= f.hidden_field :primary_organization_id , :value => @project.primary_organization_id || Organization.first.id %>
+      <%= f.hidden_field :primary_organization_id , :value => @project.primary_organization_id %>
       <div class="wrapper">
         <ul class="list_combo_content scroll_pane">
             <% @organizations_list.each do |organization| %>
