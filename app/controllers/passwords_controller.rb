@@ -1,7 +1,7 @@
 class PasswordsController < ApplicationController
 
   def new
-
+    flash[:alert] = nil
   end
 
   def create
