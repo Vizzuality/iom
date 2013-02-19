@@ -33,6 +33,7 @@ class PasswordsController < ApplicationController
         redirect_to root_url, :notice => "Password has been reset!"
       end
     else
+      flash[:alert] = %Q{<p class="error">#{@user.errors.full_messages.first}</p>}
       render :edit
     end
   end
