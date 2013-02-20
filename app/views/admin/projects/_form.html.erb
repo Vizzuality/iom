@@ -10,8 +10,8 @@
     <label>ORGANIZATION  <strong>*</strong></label>
 
     <div class="list_combo">
-      <span id="hidden" class="combo_large">
-        <%= errors_for_span(@project, :primary_organization) %>
+      <span id="hidden" class="combo_large <%= 'error' if @project.errors[:primary_organization_id].present? %>">
+        <%= errors_for @project, :primary_organization_id %>
         <a class="organization"><%= @project.primary_organization.try(:name) %></a>
       </span>
       <%= f.hidden_field :primary_organization_id , :value => @project.primary_organization_id %>
@@ -674,7 +674,7 @@
       <div class="field">
         <%= f.label :date_provided, 'DATE PROVIDED' %>
         <span class="input_short">
-          <%= f.text_field :date_provided, :value => l(@project.date_provided, :format => '%m/%d/%Y'), :disabled => true %>
+          <%= f.text_field :date_provided, :value => format_date(@project.date_provided), :disabled => true %>
         </span>
       </div>
     </div>
@@ -683,7 +683,7 @@
       <div class="field">
         <%= f.label :date_updated, 'DATE UPDATED' %>
         <span class="input_short">
-          <%= f.text_field :date_updated, :value => l(@project.date_updated, :format => '%m/%d/%Y'), :disabled => true %>
+          <%= f.text_field :date_updated, :value => format_date(@project.date_updated), :disabled => true %>
         </span>
       </div>
     </div>

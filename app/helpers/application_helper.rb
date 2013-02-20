@@ -207,4 +207,8 @@ HTML
     %Q{#{request.protocol}#{request.host}#{port}#{request.path}#{query_string}}
   end
 
+  def format_date(date)
+    l(date, :format => '%m/%d/%Y') if date.present?
+  end
+
 end

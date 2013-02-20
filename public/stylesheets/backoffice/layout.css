@@ -1984,6 +1984,7 @@ div.block.project_info div.med div.left form ul.list_combo_content li.element p.
 div.block.project_info div.med div.left form ul.list_combo_content li.element p.amount_projects {position:absolute; top:7px; right:30px; font:normal 13px Arial; color:#666666; width:auto;}
 div.block.project_info div.med div.left form ul.list_combo_content li.element:hover {cursor:pointer; background-color:#CCE599;}
 div.block.project_info div.med div.left form span.combo_large {float:left; margin:5px 0 0 0; background:url('/images/backoffice/projects/large_combo_head.png') no-repeat 0 0; width:410px; height:24px; font:normal 13px Arial; color:#999999; padding:9px 0 0 11px; position:relative;}
+div.block.project_info div.med div.left form span.combo_large.error {background-position: 0 -36px;}
 div.block.project_info div.med div.left form span.combo_large a.organization {position:absolute; top:10px; left:12px; width:374px; height:19px; font:normal 13px Arial; color:#999999;}
 div.block.project_info div.med div.left form span.combo_large a.organization:hover {cursor:pointer;}
 div.block.project_info div.med div.left form span.combo_large.displayed {background:url('/images/backoffice/projects/large_combo_head_displayed2.png') no-repeat 0 0;}
