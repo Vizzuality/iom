@@ -666,36 +666,29 @@
 
   <h3 class="section museo_sans">INTERNAL MANAGEMENT</h3>
   <div class="two_columns">
-    <ul class="dates">
-      <li class="comboselect date">
+
+
+
+  <div class="two_columns">
+    <div class="left_column">
+      <div class="field">
         <%= f.label :date_provided, 'DATE PROVIDED' %>
-
-        <span class="combo_date disabled"><p><%= l @project.date_provided, :format => '%m/%d/%Y' rescue '' %></p>
-        <div class="select_dates">
-          <p id="month" class="title">MONTH</p>
-          <p id="day" class="title">DAY</p>
-          <p id="year" class="title">YEAR</p>
-
-          <%= f.date_select :date_provided, { :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year],  :prompt => '-'}, { :class => :"chzn-date-select", :"data-placeholder" => ' ', :disabled => true}  %>
-        </div>
+        <span class="input_short">
+          <%= f.text_field :date_provided, :value => l(@project.date_provided, :format => '%m/%d/%Y'), :disabled => true %>
         </span>
-      </li>
+      </div>
+    </div>
 
-      <li class="comboselect date">
+    <div class="right_column">
+      <div class="field">
         <%= f.label :date_updated, 'DATE UPDATED' %>
-
-        <span class="combo_date disabled"><p><%= l @project.date_updated, :format => '%m/%d/%Y' rescue '' %></p>
-        <div class="select_dates">
-          <p id="month" class="title">MONTH</p>
-          <p id="day" class="title">DAY</p>
-          <p id="year" class="title">YEAR</p>
-
-          <%= f.date_select :date_updated, { :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year],  :prompt => '-'}, { :class => :"chzn-date-select", :"data-placeholder" => ' ', :disabled => true}  %>
-        </div>
+        <span class="input_short">
+          <%= f.text_field :date_updated, :value => l(@project.date_updated, :format => '%m/%d/%Y'), :disabled => true %>
         </span>
-      </li>
+      </div>
+    </div>
+  </div>
 
-    </ul>
   </div>
   <%#<div id="project_needs" class="field">%>
     <%#<label>PROJECT NEEDS</label>%>
