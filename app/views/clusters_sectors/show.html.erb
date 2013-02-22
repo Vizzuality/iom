@@ -62,11 +62,11 @@
             <ul id="donors_list">
               <% index = 1 %>
               <% @data.donors(@site).each do |donor| %>
-                <li class="<%= (index>10)? "out" : "" %>"><%= link_to(donor.name.html_safe, donor_path(donor)) %></li>
+                <li class="<%= (index > 10)? "out" : "" %>"><%= link_to(donor.name.html_safe, donor_path(donor)) %></li>
                 <% index = index + 1 %>
               <% end %>
             </ul>
-            <% if index>11 %>
+            <% if index > 11 %>
               <a id="show_donor_list">See more donors</a>
             <% end %>
           </div>
