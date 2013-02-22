@@ -76,13 +76,17 @@ class Country < ActiveRecord::Base
     ).first['count'].to_i
   end
 
-  def donors(site, limit = 10)
+  def donors(site, limit = nil)
+    limit = ''
+    limit = "LIMIT #{limit}" if limit.present?
+
     sql="select donors.* from donors
     inner join donations as d on donors.id=d.donor_id
     inner join projects as p on d.project_id = p.id and (p.end_date is null OR p.end_date > now())
     inner join projects_sites as ps on d.project_id=ps.project_id and ps.site_id=#{site.id}
     inner join countries_projects as cp on ps.project_id=cp.project_id and cp.country_id=#{self.id}
-    LIMIT #{limit}"
+    #{limit}"
+
     Donor.find_by_sql(sql).uniq
   end
 

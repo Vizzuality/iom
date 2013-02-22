@@ -82,17 +82,19 @@
 
         </div>
         <% end %>
-        <% donors = @area.donors(@site, 11) %>
+        <% donors = @area.donors(@site) %>
         <div class="block">
           <h3>DONORS IN THIS <%= word_for_geo_context(@area) %></h3>
           <% unless donors.empty? %>
-            <ul>
-              <% donors[0...10].each do |donor| %>
-              <li><%= link_to(donor.name.html_safe, donor_path(donor)) %></li>
+            <ul id="donors_list">
+              <% index = 1 %>
+              <% donors.each do |donor| %>
+                <li class="<%= (index > 10)? "out" : "" %>"><%= link_to(donor.name.html_safe, donor_path(donor)) %></li>
+                <% index = index + 1 %>
               <% end %>
             </ul>
-            <% if @area.donors_count(@site) > 10 %>
-              <p>and <%= pluralize(@area.donors_count(@site) - 10, 'more donor', 'more donors') %></p>
+            <% if index > 11 %>
+              <a id="show_donor_list">See more donors</a>
             <% end %>
           <% else %>
             <p>The are no donors</p>
