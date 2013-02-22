@@ -30,7 +30,7 @@ class Donation < ActiveRecord::Base
   end
 
   def change_label
-    [donor.name, date.strftime("%m/%d/%Y"), "$#{amount}"].join(' -  ')
+    [donor.name, date.try(:strftime, '%m/%d/%Y'), "$#{amount.to_f}"].map(&:presence).compact.join(' -  ')
   end
 
 end
