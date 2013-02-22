@@ -93,7 +93,7 @@ class Admin::ProjectsController < Admin::AdminController
     @project = new_project(params[:project])
     @project.updated_by = current_user
     if @project.valid? && @project.save
-      flash[:notice] = 'Project created successfully.'
+      flash[:notice] = "Project created! Now you can <a href='#{donations_admin_project_path(@project)}'>provide the donor information</a> for this project."
       redirect_to edit_admin_project_path(@project), :flash => {:success => 'Project has been created successfully'}
     else
       @countries = @project.country_ids.map{|id| Country.find(id)}

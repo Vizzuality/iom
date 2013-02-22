@@ -46,7 +46,7 @@
 
     <% if flash[:notice] -%>
       <div class="flash">
-        <div class="notice"><%= flash[:notice] %></div>
+        <div class="notice"><%= raw flash[:notice] %></div>
       </div>
     <% end -%>
 
