@@ -42,7 +42,7 @@ div.field.save {float:right;}
 
 .flash div {
   float: left;
-  width: 100%;
+  width: 902px;
   margin: 20px 0 -20px 3px;
   padding: 0 20px;
   font-size: 21px;
@@ -52,6 +52,12 @@ div.field.save {float:right;}
 
 .flash .notice {
   background: url('/images/backoffice/backgrounds/flash_notice.png') no-repeat scroll top left;
+  text-align: center;
+}
+
+.flash .notice a {
+  color: #E93E3F;
+  text-decoration: underline;
 }
 
 
