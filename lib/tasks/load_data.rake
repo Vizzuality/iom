@@ -774,6 +774,31 @@ namespace :iom do
       Site.all.each{ |site| site.save! }
     end
 
+    desc 'Loads all codes for organizations'
+    task :load_organization_codes => :environment do
+      csv_path = Rails.root.join('db/data/ngoaidmap_organization_codes.csv')
+
+      #require 'ruby-debug'; debugger
+      csv_data = Hash[FasterCSV.read(csv_path, :col_sep => ';')]
+
+      Organization.find_each do |organization|
+        csv_data.each do |name, id|
+          if name =~ /#{organization.name}/
+            organization.organization_id = id
+            organization.save
+            break
+          end
+        end
+      end
+
+      #bbdd_organizations_names       = Organization.where(:organization_id => nil).map(&:name)
+      #bbdd_organizations_not_matched = bbdd_organizations_names.map{|o| o if Hash[csv_data][o].blank?}.compact
+      #csv_organizations_not_matched  = Hash[csv_data.map{|k,v| [v,k]}].except(*bbdd_organizations_matched)
+
+      #require 'pp'
+      #pp bbdd_organizations_not_matched
+
+    end
   end
 
   namespace :fixes do
