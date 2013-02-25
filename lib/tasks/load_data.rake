@@ -799,6 +799,19 @@ namespace :iom do
       #pp bbdd_organizations_not_matched
 
     end
+
+    desc "Fills all projects with its interaction id if it doesn't exist"
+    task :fill_projects_interaction_id => :environment do
+      Project.where(:intervention_id => nil).find_each do |project|
+        next if project.primary_organization.blank? || project.primary_organization.organization_id.blank?
+
+        project.intervention_id = project.primary_organization.organization_id + '-' +
+                                  project.countries.sort{|x, y| x.name <=> y.name}.first.iso2_code + '-' +
+                                  Time.now.strftime('%y') + '-' +
+                                  project.organization_id
+        project.save!
+      end
+    end
   end
 
   namespace :fixes do
