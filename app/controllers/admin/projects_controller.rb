@@ -79,6 +79,12 @@ class Admin::ProjectsController < Admin::AdminController
 
   def new
     @project             = new_project(:date_provided => Time.now)
+
+    if Rails.env.development?
+      @project.start_date  = Time.now
+      @project.end_date    = 10.years.since
+    end
+
     @organizations_ids   = organizations_ids
     @countries_iso_codes = countries_iso_codes
   end
@@ -111,7 +117,7 @@ class Admin::ProjectsController < Admin::AdminController
     @project.updated_by = current_user
 
     if @project.save
-      flash[:notice] = 'Project updated succesfully.'
+      flash[:notice] = 'Project updated successfully.'
       redirect_to edit_admin_project_path(@project), :flash => {:success => 'Project has been updated successfully'}
     else
       flash.now[:error] = 'Sorry, there are some errors that must be corrected.'
