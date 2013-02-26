@@ -185,11 +185,12 @@ class Project < ActiveRecord::Base
 
   def self.export_headers(options = {})
     options = {:show_private_fields => false}.merge(options || {})
-    headers = %w(organization interaction_intervention_id org_intervention_id project_name project_description activities additional_information start_date end_date budget_numeric clusters sectors cross_cutting_issues international_partners local_partners donors prime_awardee estimated_people_reached target_groups countries regions_level1 regions_level2 regions_level3 project_contact_person project_contact_position project_contact_email project_contact_phone_number project_website date_provided date_updated)
 
-    #some fields should not be visible in the front-end
-    headers += %w(verbatim_location idprefugee_camp) if options[:show_private_fields]
-    headers
+    if options[:show_private_fields]
+      %w(organization interaction_intervention_id org_intervention_id project_name project_description activities additional_information start_date end_date budget_numeric clusters sectors cross_cutting_issues international_partners local_partners donors prime_awardee estimated_people_reached target_groups countries regions_level1 regions_level2 regions_level3 verbatim_location idprefugee_camp project_contact_person project_contact_position project_contact_email project_contact_phone_number project_website date_provided date_updated)
+    else
+      %w(organization interaction_intervention_id org_intervention_id project_name project_description activities additional_information start_date end_date budget_numeric clusters sectors cross_cutting_issues international_partners local_partners donors prime_awardee estimated_people_reached target_groups countries regions_level1 regions_level2 regions_level3 project_contact_person project_contact_position project_contact_email project_contact_phone_number project_website date_provided date_updated)
+    end
   end
 
   def self.list_for_export(site = nil, options = {})
