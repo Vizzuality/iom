@@ -79,6 +79,12 @@ class Admin::ProjectsController < Admin::AdminController
 
   def new
     @project             = new_project(:date_provided => Time.now)
+
+    if Rails.env.development?
+      @project.start_date  = Time.now
+      @project.end_date    = 10.years.since
+    end
+
     @organizations_ids   = organizations_ids
     @countries_iso_codes = countries_iso_codes
   end

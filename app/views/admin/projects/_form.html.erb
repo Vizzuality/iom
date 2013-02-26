@@ -675,6 +675,7 @@
         <%= f.label :date_provided, 'DATE PROVIDED' %>
         <span class="input_short">
           <%= f.text_field :date_provided, :value => format_date(@project.date_provided), :disabled => true %>
+          <%= f.hidden_field :date_provided, :value => format_date(@project.date_provided) %>
         </span>
       </div>
     </div>
@@ -684,6 +685,7 @@
         <%= f.label :date_updated, 'DATE UPDATED' %>
         <span class="input_short">
           <%= f.text_field :date_updated, :value => format_date(@project.date_updated), :disabled => true %>
+          <%= f.hidden_field :date_updated, :value => format_date(@project.date_updated) %>
         </span>
       </div>
     </div>

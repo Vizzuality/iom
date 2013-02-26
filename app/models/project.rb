@@ -112,6 +112,30 @@ class Project < ActiveRecord::Base
     self.the_geom = MultiPoint.from_points(points)
   end
 
+  def date_provided=(value)
+    if value.present?
+      value = case value
+              when String
+                Date.parse(value)
+              when Date, Time, DateTime
+                value
+              end
+      write_attribute(:date_provided, value)
+    end
+  end
+
+  def date_updated=(value)
+    if value.present?
+      value = case value
+              when String
+                Date.parse(value)
+              when Date, Time, DateTime
+                value
+              end
+      write_attribute(:date_updated, value)
+    end
+  end
+
   def update_tag_counter(tag)
     tag.update_tag_counter
   end
