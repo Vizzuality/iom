@@ -289,7 +289,7 @@ $(document).ready(function(ev){
             $('div.import_csv').addClass('ok');
             $('div#modal_window h4').text('Great! ');
 
-            $('div#modal_window p').text(data_info.num_projects+' projects updated succesfully :-)');
+            $('div#modal_window p').text(data_info.num_projects+' projects updated successfully :-)');
 
         }else if (status == 'error'){
 
