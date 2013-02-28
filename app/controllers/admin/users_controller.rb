@@ -11,6 +11,15 @@ class Admin::UsersController < Admin::AdminController
     @users         = @users.paginate :per_page => 20, :order => 'name asc', :page => params[:page]
     @organizations = grouped_organizations
     render :partial => 'users' and return if request.xhr?
+
+    respond_to do |format|
+      format.html
+      format.xls do
+        send_data User.to_excel(params[:user]['organization_id']),
+          :type        => 'application/vnd.ms-excel',
+          :disposition => "attachment; filename=users.xls"
+      end
+    end
   end
 
   def new
