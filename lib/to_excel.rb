@@ -37,7 +37,7 @@ module ExcelMethods
 
   def cell_value(field_name, row)
     value = row[field_name]
-    if field_name.match(/date/) && value.present?
+    if field_name.match(/date/) && value.present? && value.is_a?(String)
       value = DateTime.parse(row[field_name]).strftime('%m/%d/%Y')
     end
     value

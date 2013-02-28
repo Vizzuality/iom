@@ -51,6 +51,20 @@ class User < ActiveRecord::Base
     where(:role => 'admin').first
   end
 
+  def self.export_headers
+    %w(name email created_at updated_at organization_id role site_id description last_login)
+  end
+
+  def self.to_excel(organization_id = nil)
+    users = if organization_id.blank? || organization_id.to_i < 1
+              User.all
+            else
+              User.where(:organization_id => organization_id).all
+            end.as_json(:root => false)
+
+    users.to_excel(:headers => User.export_headers)
+  end
+
   def email=(value)
     write_attribute :email, (value ? value.downcase : nil)
   end
@@ -111,6 +125,20 @@ class User < ActiveRecord::Base
   def self.filter_by_organization(attributes)
     return scoped if attributes.blank? || attributes[:organization_id] == '-1'
     where(:organization_id => attributes[:organization_id].presence)
+  end
+
+  def as_json(attributes = {})
+    {
+      'name'            => name,
+      'email'           => email,
+      'created_at'      => created_at,
+      'updated_at'      => updated_at,
+      'organization'    => organization.try(:name),
+      'role'            => role,
+      'site_id'         => site_id,
+      'description'     => description,
+      'last_login'      => last_login
+    }
   end
 
   def generate_token(column)
