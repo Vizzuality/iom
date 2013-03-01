@@ -16,7 +16,7 @@
 
         <div class="submit">
           <%= link_to '', new_admin_user_path, :class => 'new_user' %>
-          <%= link_to '', admin_users_path(:format => 'xls'), :class => 'export_users', :type => 'button' %>
+          <%= link_to '', admin_users_path(:user => params[:user], :format => 'xls'), :class => 'export_users', :type => 'button' %>
         </div>
 
         <%= render :partial => 'users' %>
