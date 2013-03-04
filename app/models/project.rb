@@ -112,6 +112,30 @@ class Project < ActiveRecord::Base
     self.the_geom = MultiPoint.from_points(points)
   end
 
+  def date_provided=(value)
+    if value.present?
+      value = case value
+              when String
+                Date.parse(value)
+              when Date, Time, DateTime
+                value
+              end
+      write_attribute(:date_provided, value)
+    end
+  end
+
+  def date_updated=(value)
+    if value.present?
+      value = case value
+              when String
+                Date.parse(value)
+              when Date, Time, DateTime
+                value
+              end
+      write_attribute(:date_updated, value)
+    end
+  end
+
   def update_tag_counter(tag)
     tag.update_tag_counter
   end
@@ -159,9 +183,14 @@ class Project < ActiveRecord::Base
   # ) WITH (OIDS=FALSE)"
 
 
-  def self.export_headers
-    %w(organization intervention_id project_name project_description activities additional_information start_date end_date budget_numeric clusters sectors cross_cutting_issues implementing_organization partner_organizations donors awardee_type estimated_people_reached calculation_of_number_of_people_reached target countries regions_level1 regions_level2 regions_level3 verbatim_location,
-idprefugee_camp project_contact_person project_contact_position project_contact_email project_contact_phone_number project_website date_provided date_updated project_needs)
+  def self.export_headers(options = {})
+    options = {:show_private_fields => false}.merge(options || {})
+
+    if options[:show_private_fields]
+      %w(organization interaction_intervention_id org_intervention_id project_name project_description activities additional_information start_date end_date budget_numeric clusters sectors cross_cutting_issues international_partners local_partners donors prime_awardee estimated_people_reached target_groups countries regions_level1 regions_level2 regions_level3 verbatim_location idprefugee_camp project_contact_person project_contact_position project_contact_email project_contact_phone_number project_website date_provided date_updated)
+    else
+      %w(organization interaction_intervention_id org_intervention_id project_name project_description activities additional_information start_date end_date budget_numeric clusters sectors cross_cutting_issues international_partners local_partners donors prime_awardee estimated_people_reached target_groups countries regions_level1 regions_level2 regions_level3 project_contact_person project_contact_position project_contact_email project_contact_phone_number project_website date_provided date_updated)
+    end
   end
 
   def self.list_for_export(site = nil, options = {})
@@ -244,28 +273,27 @@ idprefugee_camp project_contact_person project_contact_position project_contact_
         project_description,
         dd.organization_id,
         organization_name AS organization,
-        implementing_organization,
-        partner_organizations,
+        implementing_organization as international_partners,
+        partner_organizations AS local_partners,
         cross_cutting_issues,
         p.start_date,
         p.end_date,
         CASE WHEN budget=0 THEN null ELSE budget END AS budget_numeric,
-        target,
+        target as target_groups,
         estimated_people_reached,
         contact_person AS project_contact_person,
         contact_email AS project_contact_email,
         contact_phone_number AS project_contact_phone_number,
         activities,
         intervention_id,
+        intervention_id as interaction_intervention_id,
         additional_information,
-        awardee_type,
+        awardee_type as prime_awardee,
         date_provided,
         date_updated,
         contact_position AS project_contact_position,
         website AS project_website,
         verbatim_location,
-        calculation_of_number_of_people_reached,
-        project_needs,
         sectors,
         clusters,
         '|' || array_to_string(array_agg(distinct site_id),'|') ||'|' as site_ids,
@@ -274,7 +302,8 @@ idprefugee_camp project_contact_person project_contact_position project_contact_
         (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM regions AS r INNER JOIN projects_regions AS pr ON r.id=pr.region_id WHERE r.level=1 AND pr.project_id=dd.project_id) AS regions_level1,
         (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM regions AS r INNER JOIN projects_regions AS pr ON r.id=pr.region_id WHERE r.level=2 AND pr.project_id=dd.project_id) AS regions_level2,
         (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM regions AS r INNER JOIN projects_regions AS pr ON r.id=pr.region_id WHERE r.level=3 AND pr.project_id=dd.project_id) AS regions_level3,
-        (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM donors AS d INNER JOIN donations AS dn ON d.id=dn.donor_id AND dn.project_id=dd.project_id) AS donors
+        (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM donors AS d INNER JOIN donations AS dn ON d.id=dn.donor_id AND dn.project_id=dd.project_id) AS donors,
+        p.organization_id as org_intervention_id
         #{kml_select}
         FROM data_denormalization AS dd
         INNER JOIN projects AS p ON dd.project_id=p.id
@@ -298,6 +327,7 @@ idprefugee_camp project_contact_person project_contact_position project_contact_
         contact_phone_number,
         activities,
         intervention_id,
+        p.organization_id,
         additional_information,
         awardee_type,
         date_provided,
@@ -305,8 +335,6 @@ idprefugee_camp project_contact_person project_contact_position project_contact_
         contact_position,
         website,
         verbatim_location,
-        calculation_of_number_of_people_reached,
-        project_needs,
         idprefugee_camp,
         countries,
         #{kml_group_by}
@@ -318,12 +346,13 @@ idprefugee_camp project_contact_person project_contact_position project_contact_
 
   def self.to_csv(site, options = {})
     projects = self.list_for_export(site, options)
+    csv_headers = self.export_headers(options[:headers_options])
 
     csv_data = FasterCSV.generate(:col_sep => ',') do |csv|
-      csv << self.export_headers
+      csv << csv_headers
       projects.each do |project|
         line = []
-        self.export_headers.each do |field_name|
+        csv_headers.each do |field_name|
           v = project[field_name]
           line << if v.nil?
             ""
@@ -347,7 +376,7 @@ idprefugee_camp project_contact_person project_contact_position project_contact_
 
   def self.to_excel(site, options = {})
     projects = self.list_for_export(site, options)
-    projects.to_excel(:headers => self.export_headers)
+    projects.to_excel(:headers => self.export_headers(options[:headers_options]))
   end
 
   def self.to_kml(site, options = {})
@@ -713,6 +742,12 @@ SQL
       ActiveRecord::Base.connection.execute(sql)
       ActiveRecord::Base.connection.execute("DELETE FROM data_denormalization WHERE site_id = null")
     end
+  end
+
+  def update_countries_from_regions
+    regions_countries = regions.map(&:country).uniq
+    self.countries = regions_countries
+    save!
   end
 
   private

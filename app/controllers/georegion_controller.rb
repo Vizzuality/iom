@@ -1,6 +1,6 @@
 class GeoregionController < ApplicationController
 
-  layout 'site_layout'
+  layout :sites_layout
 
   skip_before_filter :set_site, :only => [:list_regions1_from_country,:list_regions2_from_country,:list_regions3_from_country]
 
@@ -141,11 +141,11 @@ class GeoregionController < ApplicationController
     respond_to do |format|
       format.html do
 
-        @georegion_map_chco = @site.theme.data[:georegion_map_chco]
-        @georegion_map_chf = @site.theme.data[:georegion_map_chf]
+        @georegion_map_chco          = @site.theme.data[:georegion_map_chco]
+        @georegion_map_chf           = @site.theme.data[:georegion_map_chf]
         @georegion_map_marker_source = @site.theme.data[:georegion_map_marker_source]
-        @georegion_map_stroke_color = @site.theme.data[:georegion_map_stroke_color]
-        @georegion_map_fill_color = @site.theme.data[:georegion_map_fill_color]
+        @georegion_map_stroke_color  = @site.theme.data[:georegion_map_stroke_color]
+        @georegion_map_fill_color    = @site.theme.data[:georegion_map_fill_color]
 
         result = ActiveRecord::Base.connection.execute(sql)
         if @area.is_a?(Country) && @site.navigate_by_regions?
@@ -153,8 +153,10 @@ class GeoregionController < ApplicationController
             r['url'] = r['url'] + "?force_site_id=#{@site.id}" unless @site.published?
             r
           end.to_json
+          @map_type = 'administrative_map'
         else
-          @map_data = result.first || {'id' => nil, 'lat' => nil, 'lon' => nil, 'count' => nil, 'geojson' => nil}
+          @map_data = ([result.first || {'id' => nil, 'lat' => nil, 'lon' => nil, 'count' => nil, 'geojson' => nil}]).to_json
+          @map_type = 'georegion'
         end
 
         areas= []

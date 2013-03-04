@@ -17,6 +17,7 @@ class Admin::PagesController < ApplicationController
     @pages = pages.highlighted
     @page = pages.new(params[:page])
     if @page.save
+      flash[:notice] = 'Page created successfully.'
       redirect_to edit_page_path_for_home_or_site(@page), :flash => {:success => 'Page has been created successfully'}
     else
       render :action => 'new'
@@ -32,6 +33,7 @@ class Admin::PagesController < ApplicationController
     @page = pages.find_by_permalink(params[:id])
 
     if @page.update_attributes(params[:page])
+      flash[:notice] = 'Page updated successfully.'
       redirect_to edit_page_path_for_home_or_site(@page), :flash => {:success => 'Page has been updated successfully'}
     else
       render :action => 'edit'

@@ -1,0 +1,58 @@
+<%= form_for [:admin, @user] do |f| %>
+
+  <div class="field">
+    <%= f.label :name, raw('Full name&nbsp;<strong>*</strong>') %>
+    <%= f.text_field :name, :class => error_for(@user, :name) %>
+    <%= errors_for @user, :name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email, raw('Email&nbsp;<strong>*</strong>') %>
+    <%= f.email_field :email, :class => error_for(@user, :email) %>
+    <%= errors_for @user, :email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password, raw('Password&nbsp;<strong>*</strong>') %>
+    <%= f.password_field :password, :value => nil, :autocomplete => 'off', :class => error_for(@user, :password) %>
+    <%= errors_for @user, :password %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation, raw('Repeat password&nbsp;<strong>*</strong>') %>
+    <%= f.password_field :password_confirmation, :value => nil, :autocomplete => 'off', :class => error_for(@user, :password_confirmation) %>
+    <%= errors_for @user, :password_confirmation %>
+  </div>
+
+  <div class="field">
+    <%= f.label :organization_id, raw('Organization&nbsp;<strong>*</strong>') %>
+    <%= f.select :organization_id, @organizations.map{|o| [o.name, o.id]}, {:include_blank => 'Interaction'}, :class => 'chzn-select long' %>
+  </div>
+
+  <div class="field">
+    <%= f.label :role, 'Role' %>
+    <%= f.text_field :role %>
+  </div>
+
+  <div class="field">
+    <%= f.label :site, 'Sites (Note: this field is not calculated automatically)' %>
+    <div class="options">
+      <% @sites.each do |site| %>
+        <%= link_to site.name, '#', :class => "check #{@user.site_id.include?(site.id.to_s) ? 'selected' : nil}" %>
+        <%= hidden_field_tag "user[site_id][]", site.id, :id => "user_site_id_#{site.id}", :disabled => !@user.site_id.include?(site.id.to_s) %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="field">
+    <%= f.label :description, 'Notes' %>
+    <%= f.text_area :description %>
+  </div>
+
+  <div class="submit">
+    <%= f.submit 'Save', :class => "#{'error' if @user.invalid? && %w(create update).include?('new') }" %>
+  </div>
+<% end %>
+
+
+<%= javascript_include_tag 'backoffice/users' %>

@@ -78,13 +78,22 @@ class Admin::ProjectsController < Admin::AdminController
   end
 
   def new
-    @project = new_project
+    @project             = new_project(:date_provided => Time.now)
+
+    if Rails.env.development?
+      @project.start_date  = Time.now
+      @project.end_date    = 10.years.since
+    end
+
+    @organizations_ids   = organizations_ids
+    @countries_iso_codes = countries_iso_codes
   end
 
   def create
     @project = new_project(params[:project])
     @project.updated_by = current_user
     if @project.valid? && @project.save
+      flash[:notice] = 'Project created successfully.'
       redirect_to edit_admin_project_path(@project), :flash => {:success => 'Project has been created successfully'}
     else
       @countries = @project.country_ids.map{|id| Country.find(id)}
@@ -98,7 +107,8 @@ class Admin::ProjectsController < Admin::AdminController
   end
 
   def edit
-    @project = find_project(params[:id])
+    @project              = find_project(params[:id])
+    @project.date_updated = Time.now
   end
 
   def update
@@ -107,6 +117,7 @@ class Admin::ProjectsController < Admin::AdminController
     @project.updated_by = current_user
 
     if @project.save
+      flash[:notice] = 'Project updated successfully.'
       redirect_to edit_admin_project_path(@project), :flash => {:success => 'Project has been updated successfully'}
     else
       flash.now[:error] = 'Sorry, there are some errors that must be corrected.'
@@ -170,5 +181,15 @@ class Admin::ProjectsController < Admin::AdminController
     @organizations_list
   end
   private :get_organizations_list
+
+  def organizations_ids
+    Hash[Organization.select([:id, :organization_id]).all.map{|o| [o.id, o.organization_id]}]
+  end
+  private :organizations_ids
+
+  def countries_iso_codes
+    Hash[Country.select([:id, :iso2_code]).all.map{|o| [o.id, o.iso2_code]}]
+  end
+  private :countries_iso_codes
 
 end

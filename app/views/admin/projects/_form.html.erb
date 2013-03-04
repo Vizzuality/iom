@@ -10,11 +10,11 @@
     <label>ORGANIZATION  <strong>*</strong></label>
 
     <div class="list_combo">
-      <span id="hidden" class="combo_large">
-        <%= errors_for_span(@project, :primary_organization) %>
-        <a class="organization"><%= @project.primary_organization.try(:name) || Organization.first.name %></a>
+      <span id="hidden" class="combo_large <%= 'error' if @project.errors[:primary_organization_id].present? %>">
+        <%= errors_for @project, :primary_organization_id %>
+        <a class="organization"><%= @project.primary_organization.try(:name) %></a>
       </span>
-      <%= f.hidden_field :primary_organization_id , :value => @project.primary_organization_id || Organization.first.id %>
+      <%= f.hidden_field :primary_organization_id , :value => @project.primary_organization_id %>
       <div class="wrapper">
         <ul class="list_combo_content scroll_pane">
             <% @organizations_list.each do |organization| %>
@@ -24,12 +24,16 @@
       </div>
     </div>
   </div>
+
+  <% if current_user.admin? %>
   <div class="field">
     <label>InterAction Intervention ID</label>
     <span class="input_large">
-      <%= f.text_field :intervention_id %>
+      <%= f.text_field :intervention_id, :class => if action_name == 'new' then 'editable' end, :disabled => action_name == 'edit' %>
     </span>
   </div>
+  <% end %>
+
   <div class="field">
     <label>Organization Intervention ID
     <strong>&nbsp;</strong>
@@ -662,36 +666,31 @@
 
   <h3 class="section museo_sans">INTERNAL MANAGEMENT</h3>
   <div class="two_columns">
-    <ul class="dates">
-      <li class="comboselect date">
+
+
+
+  <div class="two_columns">
+    <div class="left_column">
+      <div class="field">
         <%= f.label :date_provided, 'DATE PROVIDED' %>
-
-        <span class="combo_date"><p><%= l @project.date_provided, :format => '%m/%d/%Y' rescue '' %></p>
-        <div class="select_dates">
-          <p id="month" class="title">MONTH</p>
-          <p id="day" class="title">DAY</p>
-          <p id="year" class="title">YEAR</p>
-
-          <%= f.date_select :date_provided, { :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year],  :prompt => '-'}, { :class => :"chzn-date-select", :"data-placeholder" => ' '}  %>
-        </div>
+        <span class="input_short">
+          <%= f.text_field :date_provided, :value => format_date(@project.date_provided), :disabled => true %>
+          <%= f.hidden_field :date_provided, :value => format_date(@project.date_provided) %>
         </span>
-      </li>
+      </div>
+    </div>
 
-      <li class="comboselect date">
+    <div class="right_column">
+      <div class="field">
         <%= f.label :date_updated, 'DATE UPDATED' %>
-
-        <span class="combo_date"><p><%= l @project.date_updated, :format => '%m/%d/%Y' rescue '' %></p>
-        <div class="select_dates">
-          <p id="month" class="title">MONTH</p>
-          <p id="day" class="title">DAY</p>
-          <p id="year" class="title">YEAR</p>
-
-          <%= f.date_select :date_updated, { :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year],  :prompt => '-'}, { :class => :"chzn-date-select", :"data-placeholder" => ' '}  %>
-        </div>
+        <span class="input_short">
+          <%= f.text_field :date_updated, :value => format_date(@project.date_updated), :disabled => true %>
+          <%= f.hidden_field :date_updated, :value => format_date(@project.date_updated) %>
         </span>
-      </li>
+      </div>
+    </div>
+  </div>
 
-    </ul>
   </div>
   <%#<div id="project_needs" class="field">%>
     <%#<label>PROJECT NEEDS</label>%>
@@ -735,3 +734,7 @@
   <script src="/javascripts/plugins/jquery.stylish-select.js" type="text/javascript" charset="utf-8"></script>
   <script src="/javascripts/backoffice/project.js" type="text/javascript" charset="utf-8"></script>
   <script src="/javascripts/backoffice/project_region.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript">
+    var organizations_ids =   <%= (@organizations_ids || {}).to_json.html_safe %>;
+    var countries_iso_codes = <%= (@countries_iso_codes || {}).to_json.html_safe %>;
+  </script>

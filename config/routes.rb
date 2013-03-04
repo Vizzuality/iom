@@ -19,6 +19,8 @@ Iom::Application.routes.draw do
   match 'login' => 'sessions#new', :as => :login
   match 'logout' => 'sessions#destroy', :as => :logout
 
+  resource :passwords
+
   # Front urls
   resources :donors,        :only => [:index, :show]
   resources :projects,      :only => [:index, :show]
@@ -51,6 +53,7 @@ Iom::Application.routes.draw do
     match '/export_projects' => 'admin#export_projects', :as => :export_projects
     match '/export_organizations' => 'admin#export_organizations', :as => :export_organizations
     resources :settings, :only => [:edit, :update]
+    resources :users
     resources :tags, :only => [:index]
     resources :regions, :only => [:index]
     resources :organizations do

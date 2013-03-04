@@ -75,6 +75,7 @@ class Organization < ActiveRecord::Base
   before_save :check_user_valid
 
   validates_presence_of :name
+  validates_uniqueness_of :organization_id
 
   serialize :site_specific_information
 
@@ -178,7 +179,7 @@ class Organization < ActiveRecord::Base
   # Array of arrays
   # [[region, count], [region, count]]
   def projects_regions(site, category_id = nil)
-    if category_id.present?
+    if category_id.present? && category_id.to_i > 0
       if site.navigate_by_cluster?
         category_join = "inner join clusters_projects as cp on cp.project_id = p.id and cp.cluster_id = #{category_id}"
       else
@@ -205,7 +206,7 @@ SQL
   # Array of arrays
   # [[country, count], [country, count]]
   def projects_countries(site, category_id = nil)
-    if category_id.present?
+    if category_id.present? && category_id.to_i > 0
       if site.navigate_by_cluster?
         category_join = "inner join clusters_projects as cp on cp.project_id = p.id and cp.cluster_id = #{category_id}"
       else
@@ -408,9 +409,16 @@ SQL
     scoped.select("id,name").order("name ASC")
   end
 
+  def self.with_admin_user
+    select('DISTINCT organizations.id, organizations.name').
+    joins(:user).
+    where('users.organization_id IS NOT NULL').
+    order('name asc')
+  end
+
   def projects_count(site, category_id = nil, location_id = nil)
 
-    if category_id.present?
+    if category_id.present? && category_id.to_i > 0
       if site.navigate_by_cluster?
         category_join = "inner join clusters_projects as cp on cp.project_id = p.id and cp.cluster_id = #{category_id}"
       else
@@ -418,7 +426,7 @@ SQL
       end
     end
 
-    if location_id.present?
+    if location_id.present? && location_id.to_i > 0
       if location_id.size == 1
         location_join = "inner join countries_projects cp on cp.project_id = p.id and cp.country_id = #{location_id.first}"
       else

@@ -1,0 +1,38 @@
+<div class="main_layout users">
+  <div class="block edit first">
+    <div class="top"></div>
+    <div class="med">
+      <div class="left">
+
+        <h2 class="museo_sans">Platform Users</h2>
+
+        <%= form_for [:admin, @user], :url => admin_users_path, :html => {:method => :get, :class => 'users_list_filter', :id => 'users_list_filter'} do |f| %>
+
+          <div class="field">
+            <%= f.select :organization_id, grouped_options_for_select(@organizations, @user.organization_id), {}, :class => 'chzn-select short' %>
+          </div>
+
+        <% end %>
+
+        <div class="submit">
+          <%= link_to '', new_admin_user_path, :class => 'new_user' %>
+          <%= link_to '', admin_users_path(:user => params[:user], :format => 'xls'), :class => 'export_users', :type => 'button' %>
+        </div>
+
+        <%= render :partial => 'users' %>
+      </div>
+
+      <div class="right menu">
+        <%= render 'sidebar' %>
+      </div>
+    </div>
+
+    <div class="bottom_grey paginate">
+      <%= will_paginate(@users) %>
+    </div>
+
+  </div>
+</div>
+
+<script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>
+<%= javascript_include_tag 'backoffice/users' %>

@@ -57,7 +57,6 @@ $(document).ready(function(ev){
             },300);
         }else {
             setTimeout(function(){
-              $('div.block div.med div.left').height($('div.right.menu').height());
               $('div.export_import,div.delete', $('div.right.menu')).show();
             },300);
         }
@@ -290,7 +289,7 @@ $(document).ready(function(ev){
             $('div.import_csv').addClass('ok');
             $('div#modal_window h4').text('Great! ');
 
-            $('div#modal_window p').text(data_info.num_projects+' projects updated succesfully :-)');
+            $('div#modal_window p').text(data_info.num_projects+' projects updated successfully :-)');
 
         }else if (status == 'error'){
 

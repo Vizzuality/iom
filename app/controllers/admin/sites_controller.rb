@@ -11,6 +11,7 @@ class Admin::SitesController < Admin::AdminController
   def create
     @site = Site.new(params[:site])
     if @site.save
+      flash[:notice] = 'Site created successfully.'
       redirect_to customization_admin_site_path(@site), :flash => {:success => 'Site has been created successfully'}
     else
       render :action => 'new'
@@ -43,6 +44,7 @@ class Admin::SitesController < Admin::AdminController
       @site.blog_url = nil
     end
     if @site.save
+      flash[:notice] = 'Site updated successfully.'
       if params[:customization]
         redirect_to customization_admin_site_path(@site), :flash => {:success => 'Site has been updated successfully'}
       else

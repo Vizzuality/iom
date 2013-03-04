@@ -23,6 +23,7 @@ class Admin::DonorsController < Admin::AdminController
   def create
     @donor = Donor.new(params[:donor])
     if @donor.save
+      flash[:notice] = 'Donor created successfully.'
       redirect_to edit_admin_donor_path(@donor), :flash => {:success => 'Donor has been created successfully'}
     else
       render :action => 'new'
@@ -47,6 +48,7 @@ class Admin::DonorsController < Admin::AdminController
       @donor.attributes = params[:donor]
     end
     if @donor.save
+      flash[:notice] = 'Donor updated successfully.'
       if params[:site_id]
         redirect_to donor_site_specific_information_admin_donor_path(@donor, @site), :flash => {:success => 'Donor has been updated successfully'}
       else

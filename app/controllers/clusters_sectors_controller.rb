@@ -1,12 +1,14 @@
 class ClustersSectorsController < ApplicationController
 
-  layout 'site_layout'
+  layout :sites_layout
 
   def show
     if params[:location_id].present?
       case params[:location_id]
       when String
         @filter_by_location = params[:location_id].split('/')
+      when Array
+        @filter_by_location = params[:location_id]
       end
     end
 
@@ -21,6 +23,11 @@ class ClustersSectorsController < ApplicationController
         "#{Country.where(:id => @filter_by_location.first).first.name}"
       end
       @filter_name = "projects in #{@location_name}"
+    end
+
+    if params[:id].to_i <= 0
+      render_404
+      return
     end
 
     if(request.url.match(/clusters/))

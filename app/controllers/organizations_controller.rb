@@ -1,6 +1,6 @@
 class OrganizationsController < ApplicationController
 
-  layout 'site_layout'
+  layout :sites_layout
 
   def index
     @organizations = @site.organizations
@@ -12,8 +12,8 @@ class OrganizationsController < ApplicationController
     end
     @organization.attributes = @organization.attributes_for_site(@site)
 
-    @filter_by_category = params[:category_id]
-    @filter_by_location = params[:location_id].split('/') if params[:location_id] && params[:location_id].is_a?(String)
+    @filter_by_category = params[:category_id].to_i
+    @filter_by_location = params[:location_id].split('/').map(&:to_i) if params[:location_id] && params[:location_id].is_a?(String)
 
     @carry_on_filters = {}
     @carry_on_filters[:category_id] = params[:category_id] if params[:category_id].present?
@@ -38,7 +38,7 @@ class OrganizationsController < ApplicationController
         "#{region.country.name}/#{region.name}" rescue ''
       end
       @filter_name = "projects in #{@location_name}"
-    elsif @filter_by_category.present?
+    elsif filter_by_category_valid?
       @category_name = (@site.navigate_by_sector?? Sector : Cluster).where(:id => @filter_by_category).first.name
       @filter_name =  "#{@category_name} projects"
     end
@@ -50,7 +50,7 @@ class OrganizationsController < ApplicationController
       :order         => 'created_at DESC',
       :start_in_page => params[:start_in_page]
     }
-    projects_custom_find_options[:organization_category_id] = @filter_by_category if @filter_by_category.present?
+    projects_custom_find_options[:organization_category_id] = @filter_by_category if filter_by_category_valid?
     if @filter_by_location.present?
       if @filter_by_location.size > 1
         projects_custom_find_options[:organization_region_id] = @filter_by_location.last
@@ -195,6 +195,11 @@ class OrganizationsController < ApplicationController
         @projects_for_kml = Project.to_kml(@site, projects_custom_find_options)
       end
     end
+  end
+
+  private
+  def filter_by_category_valid?
+    @filter_by_category.present? && @filter_by_category.to_i > 0
   end
 
 end

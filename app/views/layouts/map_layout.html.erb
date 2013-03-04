@@ -23,6 +23,9 @@
       </ul>
     </div>
     <script type="text/javascript">
+      <% if @overview_map_bbox %>
+      var bbox = <%=raw(@overview_map_bbox.to_json)%>;
+      <% end %>
       var MAP_EMBED = true;
       <% if @site.overview_map_lat && @site.overview_map_lon %>
       var map_center = [<%= @site.overview_map_lat %>, <%= @site.overview_map_lon %>];
@@ -34,14 +37,23 @@
       var chf = "<%=@overview_map_chf%>";
       var chld = "<%=@chld%>";
       var chd = "<%=@chd%>";
+      var marker_source = "<%=@georegion_map_marker_source%>";
       var map_data = <%=raw(@map_data)%>;
       var max_count = <%=@map_data_max_count%>;
-      var map_type = 'overview_map';
+      var map_type = '<%= @map_type || 'overview_map' %>';
       var theme = "<%=@site.theme_id%>";
       var stylez = <%=raw @site.map_styles  %>
     </script>
 
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true&amp;v=3.3"></script>
-    <%=raw(javascript_include_merged(:sites_home)) %>
+    <% if controller_name == 'georegion' %>
+      <% if @area.is_a?(Country) && @site.navigate_by_regions? %>
+      <%=raw(javascript_include_merged(:georegion_overview_map_show)) %>
+      <% else %>
+      <%=raw(javascript_include_merged(:georegion_show)) %>
+      <% end %>
+    <% else %>
+      <%=raw(javascript_include_merged(:sites_home)) %>
+    <% end %>
   </body>
 </html>

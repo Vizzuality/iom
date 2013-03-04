@@ -18,7 +18,7 @@
               <li>
                 <div class="top_media"></div>
                 <div class="med_media">
-                  <%= raw(CGI.unescapeHTML(resource.vimeo_embed_html)) %>
+                  <%= raw(CGI.unescapeHTML(resource.video_embed_html)) %>
                   <% if resource.caption? %>
                     <p class="caption"><%= resource.caption %>, <a href="#edit" class="edit_caption">edit it?</a></p>
                   <% else %>
@@ -90,7 +90,7 @@
         </div>
 
         <div id="new_video" class="add_media" style="display:none">
-          <h3>Add a new video from <img src="/images/backoffice/media/vimeo.jpg" width="64" height="19" alt="Vimeo"></h3>
+          <h3>Add a new video</h3>
           <p>or <a href="javascript:void(null)" class="toggle_image_video">add an image</a></p>
 
           <% if !@resource.valid? && action_name != 'index' %>
@@ -99,7 +99,7 @@
 
           <%= form_for([:admin, @element, @resource]) do |f| %>
             <div class="field">
-              <%= f.text_field :vimeo_url, :value => "Enter a Vimeo URL", :class => "vimeo #{'error' if !@resource.valid? && action_name != 'index'}" %>
+              <%= f.text_field :video_url, :value => "Enter a Vimeo or Youtube URL", :class => "video #{'error' if !@resource.valid? && action_name != 'index'}" %>
             </div>
             <div class="field">
               <%= f.submit 'save' %>

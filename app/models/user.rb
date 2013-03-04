@@ -23,19 +23,17 @@ class User < ActiveRecord::Base
 
   belongs_to :organization
 
-  before_save :set_role
-
+  validates :name, :presence   => true
   validates :email, :presence   => true,
                     :uniqueness => true,
                     :format     => { :with => Authentication.email_regex, :message => Authentication.bad_email_message },
                     :length     => { :within => 6..100 }
-
-
+  validates :password, :confirmation => true
 
   # HACK HACK HACK -- how to do attr_accessible from here?
   # prevents a user from submitting a crafted form that bypasses activation
   # anything else you want your user to change should be added here.
-  attr_accessible :email, :name, :password, :password_confirmation
+  attr_accessible :email, :name, :password, :password_confirmation, :description, :organization_id, :site_id, :role
 
   # Authenticates a user by their email name and unencrypted password.  Returns the user or nil.
   #
@@ -53,6 +51,20 @@ class User < ActiveRecord::Base
     where(:role => 'admin').first
   end
 
+  def self.export_headers
+    %w(name email created_at updated_at organization role site_id description last_login)
+  end
+
+  def self.to_excel(organization_id = nil)
+    users = if organization_id.blank? || organization_id.to_i < 1
+              User.all
+            else
+              User.where(:organization_id => organization_id).all
+            end.as_json(:root => false)
+
+    users.to_excel(:headers => User.export_headers)
+  end
+
   def email=(value)
     write_attribute :email, (value ? value.downcase : nil)
   end
@@ -66,7 +78,7 @@ class User < ActiveRecord::Base
   end
 
   def admin?
-    self.role.present? && self.role == 'admin'
+    self.organization.blank?
   end
   alias administrator? admin?
 
@@ -82,9 +94,58 @@ class User < ActiveRecord::Base
     (organization.name rescue 'InterAction')
   end
 
-  def set_role
-    self.role = 'organization' if self.id != 1
+  def site_id=(value)
+    write_attribute :site_id, value.join(',')
   end
-  private :set_role
+
+  def site_id
+    @site_id ||= (attributes['site_id'] || '').split(',')
+  end
+
+  def organization_id=(value)
+    value = value.to_i
+    write_attribute(:organization_id, value.to_i) if value > 0
+  end
+
+  def update_password(password, password_confirmation)
+    self.password               = password
+    self.password_confirmation  = password_confirmation
+    self.password_reset_sent_at = nil
+    self.password_reset_token   = nil
+    self.save
+  end
+
+  def send_password_reset
+    generate_token(:password_reset_token)
+    self.password_reset_sent_at = Time.zone.now
+    save!
+    AlertsMailer.reset_password(email, password_reset_token).deliver
+  end
+
+  def self.filter_by_organization(attributes)
+    return scoped if attributes.blank? || attributes[:organization_id] == '-1'
+    where(:organization_id => attributes[:organization_id].presence)
+  end
+
+  def as_json(attributes = {})
+    {
+      'name'            => name,
+      'email'           => email,
+      'created_at'      => created_at,
+      'updated_at'      => updated_at,
+      'organization'    => organization.try(:name),
+      'role'            => role,
+      'site_id'         => site_id,
+      'description'     => description,
+      'last_login'      => last_login
+    }
+  end
+
+  def generate_token(column)
+    begin
+      self[column] = SecureRandom.base64
+    end while User.exists?(column => self[column])
+  end
+  private :generate_token
 
 end

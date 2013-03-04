@@ -516,25 +516,33 @@ class Site < ActiveRecord::Base
   end
 
   def countries_select
-    if geographic_context_country_id.blank? && geographic_context_region_id.blank?
-      # Country.get_select_values
-      Country.find_by_sql(<<-SQL
-        select id,name from countries
-        where id in (select country_id
-        from countries_projects as cr inner join projects_sites as ps
-        on cr.project_id=ps.project_id and site_id=#{self.id}
-        inner join projects as p on cr.project_id=p.id
-        WHERE (p.end_date is null OR p.end_date > now())
-        ) order by name
-SQL
-      )
-    else
-      if geographic_context_region_id.blank?
-        [Country.find(self.geographic_context_country_id, :select => Country.custom_fields)]
-      else
-        nil
-      end
-    end
+
+    filter = if geographic_context_country_id? && geographic_context_region_id.blank?
+               <<-SQL
+                 INNER JOIN countries_projects cp ON cp.project_id = projects.id AND cp.country_id = #{self.geographic_context_country_id} AND cp.country_id = c.id
+               SQL
+             elsif geographic_context_region_id?
+               <<-SQL
+                 INNER JOIN regions r ON r.id = #{geographic_context_region_id} AND r.country_id = c.id
+               SQL
+             elsif geographic_context_geometry?
+               <<-SQL
+                 INNER JOIN sites s ON ST_Intersects(s.geographic_context_geometry, ST_SetSRID(ST_Point(c.center_lon, c.center_lat), 4326)) AND s.id = #{id}
+               SQL
+             else
+               <<-SQL
+                INNER JOIN countries_projects AS pr ON pr.country_id = c.id
+                INNER JOIN projects_sites     AS ps ON pr.project_id = ps.project_id AND ps.site_id = #{id}
+                INNER JOIN projects           AS p  ON ps.project_id=p.id AND (p.end_date IS NULL OR p.end_date > now())
+               SQL
+             end
+
+    Country.find_by_sql(<<-SQL)
+      SELECT DISTINCT c.id, c.name
+      FROM countries c
+      #{filter}
+      ORDER BY name
+    SQL
   end
 
   def world_wide_context?
@@ -643,7 +651,7 @@ SQL
            LEFT JOIN projects_regions as pr ON pr.project_id=p.id
            LEFT JOIN regions as r ON pr.region_id=r.id and r.level=#{self.level_for_region}
            LEFT JOIN countries_projects as cp ON cp.project_id=p.id
-           LEFT JOIN countries as c ON c.id=cp.country_id
+           LEFT JOIN countries as c ON c.id=cp.country_id OR c.id = r.country_id
            LEFT JOIN clusters_projects as cpro ON cpro.project_id=p.id
            LEFT JOIN clusters as clus ON clus.id=cpro.cluster_id
            LEFT JOIN projects_sectors as psec ON psec.project_id=p.id

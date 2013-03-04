@@ -20,6 +20,10 @@ module ApplicationHelper
     end
   end
 
+  def selected_if(condition)
+    raw 'class="selected"' if condition
+  end
+
   def show_sites?
     (@organization || @donor) && ((controller_name == 'organizations' || controller_name == 'donors') && (action_name == "specific_information" || action_name == 'edit' || action_name == 'create' || action_name == 'update'))
   end
@@ -31,7 +35,7 @@ module ApplicationHelper
           <span class="field_error">
             <a class="error"></a>
             <div class="error_msg">
-              <p><span>#{obj.errors[attribute]}</span></p>
+              <p><span>#{obj.errors[attribute].first}</span></p>
             </div>
           </span>
       HTML
@@ -190,6 +194,21 @@ HTML
         pagination_params
       end
     end
+  end
+
+  def error_for(model, field)
+    'error' if %w(create update).include?(action_name) && model.errors[field].present?
+  end
+
+  def url_with_embed_param
+    port = if Rails.env.development? then ":#{request.port}" else nil end
+    query_string = '?' + request.query_string.split('&').push('embed=true').join('&')
+
+    %Q{#{request.protocol}#{request.host}#{port}#{request.path}#{query_string}}
+  end
+
+  def format_date(date)
+    l(date, :format => '%m/%d/%Y') if date.present?
   end
 
 end

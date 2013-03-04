@@ -10,7 +10,7 @@ class Admin::AdminController < ApplicationController
       organization = current_user.organization
 
       @organization_data = OpenStruct.new( {
-        :name                  => organization.name,
+        :name                  => organization.try(:name),
         :active_projects_count => organization.projects.active.count,
         :closed_projects_count => organization.projects.closed.count,
         :website               => organization.website,
@@ -60,10 +60,11 @@ class Admin::AdminController < ApplicationController
     options = {
       :include_non_active =>true
     }
-    options[:organization] = params[:organization_id] if params[:organization_id].present?
-    options[:organization] = current_user.organization_id unless current_user.admin?
-    results_in_csv = Project.to_csv(nil, options)
-    results_in_excel = Project.to_excel(nil, options)
+    options[:organization]    = params[:organization_id] if params[:organization_id].present?
+    options[:organization]    = current_user.organization_id unless current_user.admin?
+    options[:headers_options] = {:show_private_fields => true}
+    results_in_csv            = Project.to_csv(nil, options)
+    results_in_excel          = Project.to_excel(nil, options)
 
     respond_to do |format|
       format.html do

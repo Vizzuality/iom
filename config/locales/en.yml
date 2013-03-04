@@ -21,3 +21,7 @@ en:
             one: '1 change'
             other: '%{count} changes'
           by_html: 'by %{user}, from %{organization}'
+  activerecord:
+    attributes:
+      organization:
+        organization_id: "Organization ID"

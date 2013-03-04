@@ -37,6 +37,8 @@ class ApplicationController < ActionController::Base
           'localhost.lan'
         when 'test'
           'example.com'
+        when 'staging'
+          Settings.main_site_host
         when 'production'
           Settings.main_site_host
       end
@@ -61,7 +63,7 @@ class ApplicationController < ActionController::Base
         end
       else
         # Sessions controller doesn't depend on the host
-        return true if controller_name == 'sessions'
+        return true if %w(sessions passwords).include?(controller_name)
         # If root path, just go out
         return false if controller_name == 'sites' && params[:site_id].blank?
         # If the controller is not in the namespace /admin,
@@ -106,7 +108,12 @@ class ApplicationController < ActionController::Base
     end
 
   def sites_layout
-    @site ? 'site_layout' : 'root_layout'
+    if params[:embed].present?
+      'map_layout'
+    else
+      @site ? 'site_layout' : 'root_layout'
+    end
   end
+
   protected :sites_layout
 end
