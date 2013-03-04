@@ -52,6 +52,11 @@ class Project < ActiveRecord::Base
 
   scope :active, where("end_date > ?", Date.today.to_s(:db))
   scope :closed, where("end_date < ?", Date.today.to_s(:db))
+  scope :with_no_country, select('projects.*').
+                          joins(:regions).
+                          includes(:countries).
+                          where('countries_projects.project_id IS NULL AND regions.id IS NOT NULL')
+
   validates_presence_of :primary_organization_id, :name, :description, :start_date, :end_date
   validate :location_presence
   validate :dates_consistency#, :presence_of_clusters_and_sectors
