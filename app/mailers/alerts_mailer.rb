@@ -12,7 +12,12 @@ class AlertsMailer < ActionMailer::Base
   end
 
   def six_months_since_last_login(user)
-    mail(:to => user.email, :subject => "NGO Aid Map - We Miss You!")
+    cc = if Rails.env.production?
+           'mappinginfo@interaction.org'
+         else
+           'fer@ferdev.com'
+         end
+    mail(:to => user.email, :cc => cc, :subject => "NGO Aid Map - We Miss You!")
   end
 
   if Rails.env.development?

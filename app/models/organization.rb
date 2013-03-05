@@ -426,7 +426,7 @@ SQL
       end
     end
 
-    if location_id.present? && location_id.to_i > 0
+    if location_id.present?
       if location_id.size == 1
         location_join = "inner join countries_projects cp on cp.project_id = p.id and cp.country_id = #{location_id.first}"
       else

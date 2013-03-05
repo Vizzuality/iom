@@ -10,7 +10,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130218104721) do
+ActiveRecord::Schema.define(:version => 20130304121255) do
+
+  create_table "agencies", :force => true do |t|
+    t.integer  "donor_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "changes_history_records", :force => true do |t|
     t.integer  "user_id"
@@ -516,22 +523,23 @@ ActiveRecord::Schema.define(:version => 20130218104721) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "name",                      :limit => 100, :default => ""
-    t.string   "email",                     :limit => 100
-    t.string   "crypted_password",          :limit => 40
-    t.string   "salt",                      :limit => 40
+    t.string   "name",                                   :limit => 100, :default => ""
+    t.string   "email",                                  :limit => 100
+    t.string   "crypted_password",                       :limit => 40
+    t.string   "salt",                                   :limit => 40
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "remember_token",            :limit => 40
+    t.string   "remember_token",                         :limit => 40
     t.datetime "remember_token_expires_at"
     t.integer  "organization_id"
     t.string   "role"
-    t.boolean  "blocked",                                  :default => false
+    t.boolean  "blocked",                                               :default => false
     t.string   "site_id"
     t.text     "description"
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
     t.datetime "last_login"
+    t.boolean  "six_months_since_last_login_alert_sent",                :default => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"
