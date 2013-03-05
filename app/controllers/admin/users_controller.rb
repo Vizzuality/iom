@@ -24,7 +24,7 @@ class Admin::UsersController < Admin::AdminController
 
   def new
     @user          = User.new
-    @organizations = Organization.with_admin_user.all
+    @organizations = Organization.all
   end
 
   def create
@@ -32,21 +32,21 @@ class Admin::UsersController < Admin::AdminController
     if @user.save
       redirect_to :admin_users
     else
-      @organizations = Organization.with_admin_user.all
+      @organizations = Organization.all
       get_sites
       render :new
     end
   end
 
   def edit
-    @organizations = Organization.with_admin_user.all
+    @organizations = Organization.all
   end
 
   def update
     if @user.update_attributes(params[:user])
       redirect_to :admin_users
     else
-      @organizations = Organization.with_admin_user.all
+      @organizations = Organization.all
       get_sites
       render :edit
     end
