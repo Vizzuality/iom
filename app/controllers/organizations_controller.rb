@@ -12,8 +12,21 @@ class OrganizationsController < ApplicationController
     end
     @organization.attributes = @organization.attributes_for_site(@site)
 
-    @filter_by_category = params[:category_id].to_i
-    @filter_by_location = params[:location_id].split('/').map(&:to_i) if params[:location_id] && params[:location_id].is_a?(String)
+    @filter_by_category = if params[:category_id].present?
+                            params[:category_id].to_i
+                          else
+                            nil
+                          end
+    @filter_by_location = if params[:location_id].present?
+                            case params[:location_id]
+                            when String
+                              params[:location_id].split('/').map(&:to_i)
+                            else
+                              params[:location_id].map(&:to_i)
+                            end
+                          else
+                            nil
+                          end
 
     @carry_on_filters = {}
     @carry_on_filters[:category_id] = params[:category_id] if params[:category_id].present?
