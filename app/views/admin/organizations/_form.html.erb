@@ -17,7 +17,7 @@
 
   <% if current_user.admin? %>
   <div class="field">
-    <label>Organization ID</label>
+    <label>Organization ID  <strong>*</strong></label>
     <%= f.text_field :organization_id, :class=>"long #{'error' if !@organization.errors[:organization_id].empty? && action_name != 'new'}" %>
     <%= errors_for @organization, :organization_id %>
   </div>
