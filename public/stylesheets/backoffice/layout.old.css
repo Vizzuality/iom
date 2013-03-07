@@ -2664,7 +2664,6 @@ cursor:pointer;
     margin-bottom: 7px;
   }
 
-
   .chzn-container-single .chzn-single {
     line-height:30px!important;
   }
@@ -2711,218 +2710,6 @@ cursor:pointer;
     border: none;
   }
   div.long_search input[type="submit"]:hover {
-    background-position:0 -41px;
-    cursor:pointer;
-  }
-
-  /* Agencies search */
-  div.agencies_search {
-    width:937px;
-    height:auto;
-    margin:20px 10px 0 0;
-  }
-  div.agencies_search span.top {
-    display: block;
-    width:942px;
-    height:9px;
-    background:url('/images/backoffice/backgrounds/top_long.png') no-repeat 0 0;
-  }
-  div.agencies_search div.content {
-    width:882px;
-    height:auto;
-    background:url('/images/backoffice/backgrounds/mid_long.png') repeat-y 0;
-    padding:15px 30px 10px;
-  }
-  div.agencies_search div.content.padding {
-    padding:25px 30px 25px!important;
-  }
-  div.activity .agencies_search div.content.padding {
-    padding:13px 30px 25px!important;
-  }
-  div.agencies_search span.bottom {
-    display: block;
-    width:942px;
-    height:13px;
-    background:url('/images/backoffice/backgrounds/bottom_white_long.png') no-repeat 0 0;
-  }
-  div.agencies_search ul.combos {
-    width:800px;
-    height:60px;
-    margin:20px 0 0 0;
-  }
-  div.agencies_search ul.combos li.comboselect {
-    width:190px;
-    height:100%;
-  }
-  div.agencies_search ul.combos li.comboselect.status {
-    width:190px;
-  }
-  div.agencies_search ul.combos li.comboselect.date {
-    width:140px;
-  }
-  div.agencies_search ul.combos li.comboselect.date .chzn-container-single .chzn-single span {
-    display:inline-block;
-  }
-
-  div.agencies_search ul.combos li.comboselect span.combo {
-    margin:6px 0 0 0;
-    background:url('/images/backoffice/projects/single_combo_head.png') no-repeat 0 0;
-    font:normal 13px Arial;
-    color:#333333;
-    text-decoration:none;
-    width:134px;
-    height:24px;
-    padding:8px 0 0 11px;
-    position:relative;
-  }
-  div.agencies_search ul.combos li.comboselect span.combo:focus {
-    outline:none;
-  }
-  div.agencies_search ul.combos li.comboselect span.combo p {
-    width:130px;
-  }
-  div.agencies_search ul.combos li.comboselect span.combo ul.elements {
-    display:none;
-  }
-  div.agencies_search ul.combos li.comboselect span.combo.clicked {
-    background:url('/images/backoffice/projects/combos/index_search_head.png') no-repeat 0 0;
-    width:135px;
-    position:relative;
-  }
-  div.agencies_search ul.combos li.comboselect span.combo.clicked div.elements_content {
-    position:absolute;
-    top:31px;
-    left:0;
-    display:inline;
-    background:url('/images/backoffice/projects/combos/body_combo_search.png') no-repeat 0 0;
-    width:148px;
-    height:198px;
-    z-index:50;
-  }
-  div.agencies_search ul.combos li.comboselect span.combo.clicked ul.elements {
-    width:148px;
-    height:194px;
-    overflow-x:hidden;
-    overflow-y:auto;
-    display:inline;
-  }
-  div.agencies_search ul.combos li.comboselect span.combo.clicked ul.elements li {
-    width:88px;
-    height:auto;
-    padding:5px 30px 5px 12px;
-    margin:0 0 0 1px;
-  }
-  div.agencies_search ul.combos li.comboselect span.combo.clicked ul.elements li:hover {
-    background-color:#E4F0CA;
-  }
-  div.agencies_search ul.combos li.comboselect span.combo ul.elements.short {
-    display:none;
-  }
-  div.agencies_search ul.combos li.comboselect span.combo.clicked ul.elements.short {
-    position:absolute;
-    top:31px;
-    left:-1px;
-    display:inline;
-    width:148px;
-    height:auto;
-    background:none;
-    z-index:50;
-  }
-  div.agencies_search ul.combos li.comboselect span.combo.clicked ul.elements.short li {
-    width:120px;
-    height:auto;
-    background:url('/images/backoffice/projects/combos/index_search_content.png')
-    repeat-y 0;
-    padding:5px 5px 5px 12px;
-    margin:0 0 0 1px;
-  }
-  div.agencies_search ul.combos li.comboselect span.combo.clicked ul.elements.short li:hover {
-    width:264px;
-    background:url('/images/backoffice/projects/combos/index_search_content_hover.png') repeat-y 0;
-  }
-  div.agencies_search ul.combos li.comboselect span.combo.clicked ul.elements.short li.first {
-    width:135px;
-    height:6px;
-    background:url('/images/backoffice/projects/combos/index_search_content_first.png') no-repeat 0 0;
-    margin:0 0 0 0 1px;
-    padding:0;
-  }
-  div.agencies_search ul.combos li.comboselect span.combo.clicked ul.elements.short li.last {
-    width:135px;
-    height:6px;
-    background:url('/images/backoffice/projects/combos/index_search_bottom.png') no-repeat 0 0;
-  }
-  div.agencies_search ul.combos li.comboselect span.combo.clicked ul.elements.short li.last:hover {
-    background:url('/images/backoffice/projects/combos/index_search_bottom.png') no-repeat 0 0;
-  }
-  div.agencies_search ul.combos li.comboselect span.combo:hover {
-    cursor:pointer;
-  }
-  div.agencies_search ul.combos li.comboselect  label {
-    display:block;
-    clear:both;
-    width: 104px;
-    margin-bottom: 7px;
-  }
-
-
-  .chzn-container-single .chzn-single {
-    line-height:30px!important;
-  }
-  div .chzn-container .chzn-results li  {
-    color:#333;
-  }
-  div .chzn-container .chzn-results li.active-result:hover {
-    color:#fff;
-  }
-  div #status_chzn .chzn-search {
-    display:none;
-  }
-
-  div.agencies_search label {
-    display: block;
-    margin:0 0 0 3px;
-    font:bold 11px Arial;
-    color:#999999;
-  }
-  div.agencies_search form.search {
-    position:relative;
-    width:100%;
-  }
-
-  div.agencies_search form.search .field {
-    float: none;
-  }
-
-  div.agencies_search form.search .field,
-  div.agencies_search form.search .comboselect {
-    display:inline-block;
-    vertical-align:top;
-    zoom:1;
-    *display:inline;
-  }
-
-  div.agencies_search input[type="text"].main_search {
-    width:525px;
-    height:29px;
-    margin:5px 0 0 0;
-    padding:7px 10px 5px 10px;
-    font:normal 17px Arial;
-    color:#333;
-    border:none;
-    background:url('/images/backoffice/projects/agencies_search.png') no-repeat 0 0;
-    line-height:27px;
-  }
-  div.agencies_search input[type="submit"] {
-    position: absolute;
-    width: 152px;
-    height: 41px;
-    right: 5px;
-    top: 17px;
-    background: url('/images/backoffice/common/agencies_search.png') no-repeat 0 0;
-    border: none;
-  }
-  div.agencies_search input[type="submit"]:hover {
     background-position:0 -41px;
     cursor:pointer;
   }
@@ -4112,7 +3899,7 @@ div.field_info {
   padding:0;
   display:inline-block;
   vertical-align:top;
-  zoom:1;
+  zoom: 1;
   *display:inline;
   width:18px;
   height:18px;
@@ -4369,6 +4156,7 @@ div.block.project_info div.med div.left form input[type="submit"] {
     width:572px;
     position:relative;
   }
+  div.block.donations_project div.med div.left p {
   div.block.donations_project div.med div.left div.field input[type="text"],
   div.block.donations_project div.med div.left div.field input[type="password"],
   div.block.donations_project div.med div.left div.field input[type="email"] {

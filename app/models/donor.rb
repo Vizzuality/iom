@@ -29,6 +29,7 @@ class Donor < ActiveRecord::Base
   has_many :donations, :dependent => :destroy
   has_many :donated_projects, :through => :donations, :source => :project, :uniq => true, :conditions => "(projects.end_date is null or projects.end_date > now())"
   has_many :all_donated_projects, :through => :donations, :source => :project, :uniq => true
+  has_many :agencies, :dependent => :destroy
 
   has_attached_file :logo, :styles => {
                                       :small => {

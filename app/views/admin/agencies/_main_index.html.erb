@@ -1,0 +1,83 @@
+
+<div class="main_layout">
+  <div class="block">
+    <div class="agencies_search">
+      <span class="top"></span>
+      <div class="content padding">
+        <%= form_tag(admin_agencies_path, :method => :get, :class => :search) do %>
+          <div class="field">
+            <label>SEARCH BY TEXT</label>
+            <%= text_field_tag :q, params[:q], :class => 'main_search', :placeholder => 'Search agencies by name' %>
+          </div>
+          <div class="comboselect">
+            <label>DONOR   <strong>*</strong></label>
+            <%= select_tag :filter_donor_id, options_for_select(@donors, params[:filter_donor_id]), :class => :"chzn-select" %>
+          </div>
+          <input type="submit" value=""  />
+        <% end %>
+      </div>
+      <span class="bottom"></span>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="top"></div>
+    <div class="med agencies_list">
+      <% unless @agencies.empty? %>
+        <div class="header no_border">
+          <h2><%= pluralize(@agencies.total_entries, 'agency', 'agencies') %> supporting projects
+            <% if params[:q].present? %>
+              on <a class="remove" href="<%= admin_agencies_path %>"><%= params[:q] %></a>
+            <% elsif @donor_filter.present? %>
+              depending on <a class="remove" href="<%= admin_agencies_path %>"><%= @donor_filter.name %></a>
+            <% end %>
+          </h2>
+          <span class="buttons">
+            <a class="add_project museo_sans shadow_green" href="<%= new_admin_agency_path %>">New agency</a>
+          </span>
+        </div>
+        <ul>
+          <% @agencies.each do |agency| %>
+            <li>
+              <h3><%= link_to(truncate(agency.name,:length=>40).html_safe, edit_admin_agency_path(agency)) %></h3>
+              <p class="red"><a href="<%= projects_admin_donor_path(agency.donor) %>"><%= agency.donor.name %></a></p>
+              <p><%= pluralize(agency.donor.all_donated_projects.count, 'project', 'projects') %></p>
+            </li>
+          <% end -%>
+        </ul>
+      <% else %>
+        <% if @agencies.count > 1 %>
+          <div class="no_results">
+            <h2>There are not agencies for your search</h2>
+            <p>Try to search with different terms or simply <a href="<%= admin_agencies_path %>">browse all agencies</a>.</p>
+          </div>
+        <% else %>
+          <div class="no_results">
+            <h2>There are not agencies in the site</h2>
+            <p>Try to <a href="/admin/agencies/new">add a new one</a>.</p>
+          </div>
+        <% end %>
+      <% end -%>
+    </div>
+    <div class="bottom_grey paginate">
+      <%= will_paginate(@agencies) %>
+    </div>
+  </div>
+
+  <div class="add_new">
+    <a href="<%= new_admin_agency_path %>" class="museo_sans">
+      Add a new agency<br/>
+      <strong>There are already <%= pluralize(@agencies.count, 'agency', 'agencies') %> registered</strong>
+    </a>
+  </div>
+</div>
+
+<script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>
+<script src="/javascripts/plugins/jquery.mousewheel.js" type="text/javascript" charset="utf-8"></script>
+<script src="/javascripts/plugins/jquery.jscrollpane.js" type="text/javascript" charset="utf-8"></script>
+<script src="/javascripts/plugins/chosen/chosen.jquery.js" type="text/javascript" charset="utf-8"></script>
+<script type="text/javascript">
+  $(function(){
+    $(".chzn-select").chosen({widths: {filter_donor_id_chzn: 160}});
+  });
+</script>

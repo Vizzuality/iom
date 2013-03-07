@@ -1,0 +1,15 @@
+<ul>
+  <li <%= selected_if_current_page(edit_admin_agency_path(@agency), !params[:site_id].nil?) %>>
+    <div class="bottom_selected">
+      <%= link_to('Basic information', edit_admin_agency_path(@agency), :class=>"basic") %>
+    </div>
+  </li>
+</ul>
+
+<div class="delete">
+  <h5>DELETE THIS AGENCY</h5>
+  <p>Clicking the link below will permanently delete this agency and its references within the sites</p>
+  <%= link_to("Delete this agency", '#', :destroy_url=>admin_agency_path(@agency), :att_name=>"agency") %>
+</div>
+
+
