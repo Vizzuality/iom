@@ -1,0 +1,28 @@
+<div class="main_layout">
+  <div class="block first donor_funded">
+    <div class="top"></div>
+    <div class="med">
+      <div class="left">
+        <h2 class="museo_sans"><%= @donor.name.html_safe %></h2>
+
+        <p><%= pluralize(@agencies.count, ' agency', ' agencies') %></p>
+        <% unless @agencies.empty? %>
+          <ul>
+            <% @agencies.each do |agency| %>
+            <li>
+              <span class="first">
+                <h3><%= link_to(truncate(agency.name, :length => 43), edit_admin_agency_path(agency), :title => agency.name) %></h3>
+              </span>
+            </li>
+            <% end -%>
+          </ul>
+        <% end -%>
+      </div>
+      <div class="right menu">
+        <%= render 'admin/donors/sidebar' %>
+      </div>
+    </div>
+    <div class="bottom"></div>
+  </div>
+  </div>
+  <script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>
