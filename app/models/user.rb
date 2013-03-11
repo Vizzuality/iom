@@ -155,6 +155,5 @@ class User < ActiveRecord::Base
     self.six_months_since_last_login_alert_sent = false
     self.save if persisted?
   end
-  private :update_last_login
 
 end
