@@ -31,7 +31,7 @@ namespace :iom do
 
     desc 'Send an email alert to all managers who have not logged in in the last six months'
     task :six_months_since_last_login => :environment do
-      User.where(<<-SQL, false, 1.minute.ago).find_each do |user|
+      User.where(<<-SQL, false, 6.months.ago).find_each do |user|
         (six_months_since_last_login_alert_sent IS NULL OR
          six_months_since_last_login_alert_sent = ?) AND
         (last_login IS NULL OR last_login < ?)
