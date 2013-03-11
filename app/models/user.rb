@@ -35,6 +35,8 @@ class User < ActiveRecord::Base
   # anything else you want your user to change should be added here.
   attr_accessible :email, :name, :password, :password_confirmation, :description, :organization_id, :site_id, :role
 
+  before_create :update_last_login
+
   # Authenticates a user by their email name and unencrypted password.  Returns the user or nil.
   #
   # uff.  this is really an authorization, not authentication routine.
@@ -147,5 +149,11 @@ class User < ActiveRecord::Base
     end while User.exists?(column => self[column])
   end
   private :generate_token
+
+  def update_last_login
+    self.last_login = Time.now
+    self.save if persisted?
+  end
+  private :update_last_login
 
 end
