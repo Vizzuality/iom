@@ -24,7 +24,7 @@
           <% elsif @organization.present? -%>
             <p class="title"><%= t('.header.changes_count_html', :count => change.changes_count) %></p>
           <% else -%>
-            <p class="title"><%= t('.header.changes_count_all_html', :count => change.changes_count, :what => link_to(truncate(change.what_name, :length => 70), edit_admin_project_path(change.what), :title => change.what_name)) %></p>
+            <p class="title"><%= t('.header.changes_count_all_html', :count => change.changes_count, :what => changes_history_what_link(change)) %></p>
           <% end -%>
           <p class="by"><%= t('.header.by_html', :user => change.who_email, :organization => link_to(truncate(change.who_organization_name, :length => 26), url_for_user_organization(change.who_organization), :title => change.who_organization_name)) %></p>
         </div>
