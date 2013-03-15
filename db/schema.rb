@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130304121255) do
+ActiveRecord::Schema.define(:version => 20130325161448) do
 
   create_table "agencies", :force => true do |t|
     t.integer  "donor_id"
@@ -27,7 +27,9 @@ ActiveRecord::Schema.define(:version => 20130304121255) do
     t.datetime "updated_at"
     t.integer  "what_id"
     t.string   "what_type"
-    t.boolean  "reviewed",   :default => false
+    t.boolean  "reviewed",         :default => false
+    t.string   "who_email"
+    t.string   "who_organization"
   end
 
   add_index "changes_history_records", ["user_id", "what_type", "when"], :name => "index_changes_history_records_on_user_id_and_what_type_and_when"
@@ -89,11 +91,16 @@ ActiveRecord::Schema.define(:version => 20130304121255) do
     t.date     "start_date"
   end
 
+  add_index "data_denormalization", ["cluster_ids"], :name => "data_denormalization_cluster_idsx"
+  add_index "data_denormalization", ["countries_ids"], :name => "data_denormalization_countries_idsx"
+  add_index "data_denormalization", ["donors_ids"], :name => "data_denormalization_donors_idsx"
   add_index "data_denormalization", ["is_active"], :name => "data_denormalization_is_activex"
   add_index "data_denormalization", ["organization_id"], :name => "data_denormalization_organization_idx"
   add_index "data_denormalization", ["organization_name"], :name => "data_denormalization_organization_namex"
   add_index "data_denormalization", ["project_id"], :name => "data_denormalization_project_idx"
   add_index "data_denormalization", ["project_name"], :name => "data_denormalization_project_name_idx"
+  add_index "data_denormalization", ["regions_ids"], :name => "data_denormalization_regions_idsx"
+  add_index "data_denormalization", ["sector_ids"], :name => "data_denormalization_sector_idsx"
   add_index "data_denormalization", ["site_id"], :name => "data_denormalization_site_idx"
 
   create_table "data_export", :id => false, :force => true do |t|
@@ -399,6 +406,12 @@ ActiveRecord::Schema.define(:version => 20130304121255) do
   add_index "projects_sites", ["project_id", "site_id"], :name => "index_projects_sites_on_project_id_and_site_id", :unique => true
   add_index "projects_sites", ["project_id"], :name => "index_projects_sites_on_project_id"
   add_index "projects_sites", ["site_id"], :name => "index_projects_sites_on_site_id"
+
+  create_table "projects_synchronizations", :force => true do |t|
+    t.text     "projects_file_data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "projects_tags", :id => false, :force => true do |t|
     t.integer "tag_id"

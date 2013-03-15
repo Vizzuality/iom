@@ -34,7 +34,7 @@ class ChangesHistoryRecord < ActiveRecord::Base
   end
 
   def who_email
-    who.email rescue ''
+    who.email rescue attributes['who_email']
   end
 
   def who_organization
@@ -42,7 +42,7 @@ class ChangesHistoryRecord < ActiveRecord::Base
   end
 
   def who_organization_name
-    who_organization.name rescue 'Interaction'
+    who_organization.name rescue attributes['who_organization'] || 'Interaction'
   end
 
   def reviewed=(value)
