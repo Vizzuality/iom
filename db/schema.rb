@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130321180629) do
+ActiveRecord::Schema.define(:version => 20130325152416) do
 
   create_table "agencies", :force => true do |t|
     t.integer  "donor_id"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(:version => 20130321180629) do
     t.integer  "what_id"
     t.string   "what_type"
     t.boolean  "reviewed",   :default => false
+    t.string   "who_email"
   end
 
   add_index "changes_history_records", ["user_id", "what_type", "when"], :name => "index_changes_history_records_on_user_id_and_what_type_and_when"
