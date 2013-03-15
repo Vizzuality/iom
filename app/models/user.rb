@@ -54,7 +54,7 @@ class User < ActiveRecord::Base
   end
 
   def self.export_headers
-    %w(name email created_at updated_at organization role site_id description last_login)
+    %w(name email created_at updated_at organization_id role site_id description last_login)
   end
 
   def self.to_excel(organization_id = nil)

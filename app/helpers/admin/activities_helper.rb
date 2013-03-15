@@ -46,4 +46,13 @@ module Admin::ActivitiesHelper
       value
     end
   end
+
+  def changes_history_what_link(change)
+    if change.what.present?
+      link_to(truncate(change.what_name, :length => 60), send("edit_admin_#{change.what_type.downcase}_path", change.what), :title => change.what_name)
+    else
+      link_to("#{change.what_type.downcase} deleted", '#', :title => 'deleted')
+    end
+  end
+
 end
