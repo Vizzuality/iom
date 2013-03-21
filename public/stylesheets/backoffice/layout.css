@@ -244,7 +244,7 @@ div.med div.header.no_border {
   padding:0;
 }
 div.med div.header h2 {
-  width:580px;
+  width:428px;
 }
 div.med div.header h2 a {
   color:#EB3F40;
@@ -1734,7 +1734,7 @@ cursor:pointer;
     height:26px;
     margin:3px 0 0 46px;
     padding:6px 0 0 27px;
-    background:url('/images/backoffice/projects/import_csv_bttn.png') no-repeat 0 0;
+    background:url('/images/backoffice/projects/export_csv_btn.png') no-repeat 0 0;
     font:normal 19px "Museo Sans",Arial;
     color:white;
     text-shadow:0 1px #000000;
@@ -2993,7 +2993,7 @@ cursor:pointer;
     height:26px;
     margin:0;
     padding:6px 0 0 0;
-    background:url('/images/backoffice/projects/import_csv_bttn.png') no-repeat 0 0;
+    background:url('/images/backoffice/projects/export_csv_btn.png') no-repeat 0 0;
     font:normal 19px "Museo Sans",Arial;
     color:white;
     text-shadow:0 1px #000000;
@@ -3001,6 +3001,14 @@ cursor:pointer;
   }
   a.import_csv:hover {
     background-position:0 -32px;
+  }
+
+
+  .sync_projects {
+  }
+
+  .sync_projects #synchronization_projects_file {
+    display: none;
   }
 
   div.med.projects_list h2 a.remove {
@@ -6146,6 +6154,9 @@ div.block.site_info div.med div.left form input[type="submit"] {
     float:right;
     margin:20px 0 0 0;
   }
+  div#modal_window div.alert.importer span {
+    float: left;
+  }
   div#modal_window div.alert span a.cancel {
     float:left;
     margin:5px 12px 0 0;
@@ -6167,7 +6178,7 @@ div.block.site_info div.med div.left form input[type="submit"] {
   div#modal_window div.alert span a.button:hover {
     background-position:0 -26px;
   }
-  div#modal_window div.alert ul#errors_csv {
+  div#modal_window div.alert ul#errors {
     display:none;
   }
   div#modal_window div.alert span a.button.remove {
@@ -6176,28 +6187,28 @@ div.block.site_info div.med div.left form input[type="submit"] {
     height:26px;
   }
 
-  div#modal_window div.alert.import_csv {
+  div#modal_window div.alert {
     background:url('/images/backoffice/common/alert_csv_bkg.png') no-repeat 0 0!important;
     width:450px;
     height:46px;
   }
-  div#modal_window div.alert.import_csv.ok p {
+  div#modal_window div.alert.ok p {
     margin:15px 0 0 0;
   }
-  div#modal_window div.alert.import_csv.error p {
+  div#modal_window div.alert.error p {
     margin:19px 0 0 0;
   }
-  div#modal_window div.alert.import_csv.ok span {
-    margin:5px 0 0 0;
+  div#modal_window div.alert.ok span {
+    margin:15px 0 0 0;
   }
 
-  div#modal_window div.alert.import_csv span a.cancel {
+  div#modal_window div.alert span a.cancel {
     display:none;
   }
-  div#modal_window div.alert.import_csv span a.remove {
+  div#modal_window div.alert span a.remove {
     display:none;
   }
-  div#modal_window div.alert.import_csv span a.cancel.ok {
+  div#modal_window div.alert span a.cancel.ok {
     float:left;
     width:63px;
     height:26px;
@@ -6208,27 +6219,27 @@ div.block.site_info div.med div.left form input[type="submit"] {
     line-height:0;
     margin:5px 5px 0 0;
   }
-  div#modal_window div.alert.import_csv span a.cancel.ok:hover {
+  div#modal_window div.alert span a.cancel.ok:hover {
     background-position:0 -26px;
   }
-  div#modal_window div.alert.import_csv span a.cancel.ok.error {
+  div#modal_window div.alert span a.cancel.ok.error {
   background-position:0 -52px}
-  div#modal_window div.alert.import_csv span a.cancel.ok.error:hover {
+  div#modal_window div.alert span a.cancel.ok.error:hover {
   background-position:0 -78px}
 
-  div#modal_window div.alert.import_csv.ok {
+  div#modal_window div.alert.ok {
     background:url('/images/backoffice/common/alert_csv_ok_bkg.png') no-repeat 0 0!important;
     width:450px;
     height:96px;
   }
-  div#modal_window div.alert.import_csv.error {
+  div#modal_window div.alert.error {
     background:url('/images/backoffice/common/alert_csv_error_bkg.png') no-repeat 0 0!important;
     width:450px;
     height:340px;
     top:30%;
     left:50%;
   }
-  div#modal_window div.alert.import_csv.error ul#errors_csv {
+  div#modal_window div.alert.error ul#errors {
     float:left;
     margin:15px 0 0 15px;
     display:inline;
@@ -6237,7 +6248,7 @@ div.block.site_info div.med div.left form input[type="submit"] {
     overflow-x:hidden;
     overflow-y:auto;
   }
-  div#modal_window div.alert.import_csv.error ul#errors_csv li {
+  div#modal_window div.alert.error ul#errors li {
     float:left;
     margin:7px 0 0 0;
     background:url('/images/backoffice/common/li_style.png') no-repeat 0 7px;
@@ -7309,3 +7320,23 @@ div.block.site_info div.med div.left form input[type="submit"] {
     margin-top: -8px;
   }
 
+  #uploader {
+    float: left;
+  }
+  #uploader .qq-uploader {
+  }
+  #uploader .qq-uploader .qq-upload-button {
+    width:153px;
+    height:18px;
+    margin:0px 0 0 9px;
+    background:url('/images/backoffice/projects/export_csv_btn.png') no-repeat 0 0;
+    font:normal 19px "Museo Sans",Arial;
+    color:white;
+    text-shadow:0 1px #000000;
+  }
+  #uploader .qq-uploader qq-drop-processing {
+    display: none;
+  }
+  #uploader .qq-uploader qq-upload-list {
+    display: none;
+  }

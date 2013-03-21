@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>IOM - Administrator</title>
-    <%= stylesheet_link_tag 'backoffice/jscroll.css','backoffice/layout.css', 'backoffice/chosen.css'  %>
+    <%= stylesheet_link_tag 'backoffice/jscroll.css','backoffice/layout.css', 'backoffice/chosen.css', 'plugins/fineuploader-3.3.0.css'  %>
 
     <%= javascript_include_tag 'jquery.min', 'jquery.ui.core', 'jquery.ui.widget', 'jquery.ui.position', 'jquery.ui.autocomplete', 'rails', 'plugins/chosen/chosen.jquery.js', 'plugins/jquery.mousewheel.js','plugins/jquery.jscrollpane.js', 'plugins/date_combos.js' %>
     <%= csrf_meta_tag %>
@@ -66,23 +66,12 @@
 
       <div id="modal_window">
         <div class="alert">
-          <h4>You are about deleting this Donor</h4>
+          <h4></h4>
 
-          <ul id="errors_csv">
-
-            <li>Organization name is mandatory on line 150.</li>
-            <li>Organization name is mandatory on line 150.</li>
-            <li>Organization name is mandatory on line 150.</li>
-            <li>Organization name is mandatory on line 150.</li>
-            <li>Organization name is mandatory on line 150.</li>
-            <li>Organization name is mandatory on line 150.</li>
-            <li>Organization name is mandatory on line 150.</li>
-            <li>Organization name is mandatory on line 150.</li>
-            <li>Organization name is mandatory on line 150.</li>
-
+          <ul id="errors">
           </ul>
 
-          <p>If you delete this donor, it will not appear in any site.</p>
+          <p></p>
           <span><a class="cancel">cancel</a><a href="#" class="button remove">delete</a></span>
         </div>
       </div>

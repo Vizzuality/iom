@@ -94,6 +94,7 @@ Iom::Application.routes.draw do
     resource :activity
     resources :changes_history_records, :controller => "activities"
     resources :pages
+    resources :synchronizations, :only => [:create]
   end
 
   if Rails.env.development?
