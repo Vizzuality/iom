@@ -295,7 +295,7 @@ $(document).ready(function(ev){
 
                 $('div.import_csv').addClass('error');
 
-                $('ul#errors_csv').jScrollPane({
+                $('ul#errors').jScrollPane({
                                    autoReinitialise:false });
 
                 if (!$('div#modal_window').find('a.ok').hasClass('error')){
