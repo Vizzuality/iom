@@ -84,11 +84,16 @@ ActiveRecord::Schema.define(:version => 20130419202532) do
     t.date     "start_date"
   end
 
+  add_index "data_denormalization", ["cluster_ids"], :name => "data_denormalization_cluster_idsx"
+  add_index "data_denormalization", ["countries_ids"], :name => "data_denormalization_countries_idsx"
+  add_index "data_denormalization", ["donors_ids"], :name => "data_denormalization_donors_idsx"
   add_index "data_denormalization", ["is_active"], :name => "data_denormalization_is_activex"
   add_index "data_denormalization", ["organization_id"], :name => "data_denormalization_organization_idx"
   add_index "data_denormalization", ["organization_name"], :name => "data_denormalization_organization_namex"
   add_index "data_denormalization", ["project_id"], :name => "data_denormalization_project_idx"
   add_index "data_denormalization", ["project_name"], :name => "data_denormalization_project_name_idx"
+  add_index "data_denormalization", ["regions_ids"], :name => "data_denormalization_regions_idsx"
+  add_index "data_denormalization", ["sector_ids"], :name => "data_denormalization_sector_idsx"
   add_index "data_denormalization", ["site_id"], :name => "data_denormalization_site_idx"
 
   create_table "data_export", :id => false, :force => true do |t|
