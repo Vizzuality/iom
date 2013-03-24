@@ -1,50 +1,23 @@
-class Synchronization
-  include ActiveModel::Validations
-  include ActiveModel::Conversion
-  extend ActiveModel::Naming
+class ProjectsSynchronization < ActiveRecord::Base
 
   attr_accessor :projects_file, :projects_errors
 
-  validates_presence_of :projects_file
-  validate :projects_file_data
+  serialize :projects_file_data, Array
 
-  def persisted?
-    false
-  end
+  validates_presence_of :projects_file, :on => :create
 
-  def valid?
+  before_save :process_projects_file_data
+  before_create :save_projects_if_no_errors
+  before_update :save_projects_anyway
+
+  def valid?(context = nil)
     super && projects_errors.blank?
   end
 
-  def initialize(file = nil)
-    return if file.blank?
+  def setup_book
+    book    = Spreadsheet.open projects_file.tempfile
 
-    self.projects_file = file
-
-    setup_book(projects_file.tempfile)
-  end
-
-  #def projects_file=(file)
-    #return if file.blank?
-
-    #CsvMapper.import(file, :type => :io) do
-      #map_to Project
-      #after_row lambda{ |row, project|
-        #csv_projects << project
-      #}
-
-      #start_at_row 1
-      #read_attributes_from_file
-    #end
-
-    #Project.delete(projects_ids_to_delete - csv_projects.map{|p| p.id})
-  #end
-
-  def setup_book(file)
-    @book   = Spreadsheet.open file
-    @sheet  = @book.worksheet(0)
-    @header = @sheet.row(0)
-    @line   = 0
+    convert_file_to_hash_array(book.worksheet(0))
   end
 
   def projects_errors
@@ -55,22 +28,33 @@ class Synchronization
     projects_errors.size
   end
 
+  def projects_updated_count
+    @projects.count
+  end
+
   def as_json(options = {})
     {
-      :success => self.valid?,
-      :title => "There are #{projects_errors_count} problems with the selected file",
-      :errors => projects_errors
+      :id                     => id,
+      :success                => self.valid?,
+      :title                  => "There are #{projects_errors_count} problems with the selected file",
+      :errors                 => projects_errors,
+      :projects_updated_count => projects.count
     }
   end
 
   private
 
-  def projects_file_data
-    @sheet.each do |file_raw_row|
-      @line += 1
-      next if file_raw_row == @header
+  def projects
+    @projects ||= []
+  end
 
-      row_hash   = convert_excel_row_to_hash(file_raw_row)
+  def process_projects_file_data
+    setup_book unless persisted?
+
+    @line   = 0
+    projects_file_data.each do |row_hash|
+      @line += 1
+      next if row_hash.values - row_hash.keys == []
 
       project             = instantiate_project(row_hash)
       project.attributes  = row_hash.slice(*Project.columns_hash.keys)
@@ -80,7 +64,20 @@ class Synchronization
       process_project_associations(row_hash, project)
 
       process_project_validations(row_hash, project)
+
     end
+  end
+
+  def save_projects_if_no_errors
+    if projects_errors.blank?
+      projects.each(&:save)
+      false
+    end
+  end
+
+  def save_projects_anyway
+    projects.each(&:save)
+    self.destroy
   end
 
   def projects_ids_to_delete
@@ -91,34 +88,39 @@ class Synchronization
     @csv_projects ||= []
   end
 
-  def convert_excel_row_to_hash(sheet)
-    Hash[*(@header.to_a).zip(sheet.to_a).flatten]
+  def convert_file_to_hash_array(sheet)
+    header = sheet.row(0).to_a
+
+    self.projects_file_data = []
+    sheet.each do |sheet_row|
+      self.projects_file_data << Hash[*(header).zip(sheet_row.to_a).flatten]
+    end
   end
 
   def instantiate_project(project_hash)
     if project_hash['interaction_intervention_id'].present?
-      Project.where(:intervention_id => project_hash.delete('interaction_intervention_id')).first
+      Project.where(:intervention_id => project_hash['interaction_intervention_id']).first
     else
       Project.new
     end
   end
 
   def process_project_associations(row_hash, project)
-      process_organization(row_hash, project)
+    process_organization(row_hash, project)
 
-      process_countries(row_hash, project)
+    process_countries(row_hash, project)
 
-      process_first_admin_level(row_hash, project)
+    process_first_admin_level(row_hash, project)
 
-      process_second_admin_level(row_hash, project)
+    process_second_admin_level(row_hash, project)
 
-      process_third_admin_level(row_hash, project)
+    process_third_admin_level(row_hash, project)
 
-      process_sectors(row_hash, project)
+    process_sectors(row_hash, project)
 
-      process_clusters(row_hash, project)
+    process_clusters(row_hash, project)
 
-      process_donors(row_hash, project)
+    process_donors(row_hash, project)
   end
 
   def process_organization(row_hash, project)
@@ -137,6 +139,7 @@ class Synchronization
           next
         end
         project.countries << country
+        project.countries.reload
       end
     end
   end
@@ -151,6 +154,7 @@ class Synchronization
           next
         end
         project.regions << region
+        project.regions.reload
       end
     end
   end
@@ -165,6 +169,7 @@ class Synchronization
           next
         end
         project.regions << region
+        project.regions.reload
       end
     end
   end
@@ -179,6 +184,7 @@ class Synchronization
           next
         end
         project.regions << region
+        project.regions.reload
       end
     end
   end
@@ -193,6 +199,7 @@ class Synchronization
           next
         end
         project.sectors << sector
+        project.sectors.reload
       end
     end
   end
@@ -207,6 +214,7 @@ class Synchronization
           next
         end
         project.clusters << cluster
+        project.clusters.reload
       end
     end
   end
@@ -215,18 +223,23 @@ class Synchronization
     if row_hash['donors'] && (donors = row_hash['donors'].text2array) && donors.present?
       project.donors.clear
       donors.each do |donor_name|
-        donor = Donor.where(:name => donor_name).first
+        donor = Donor.find_by_name(donor_name)
         if donor.blank?
           self.projects_errors << "donor #{donor_name} doesn't exist on line #@line"
           next
         end
         project.donors << donor
+        project.donors.reload
       end
     end
   end
 
   def process_project_validations(row_hash, project)
-    self.projects_errors += project.errors.to_a.map{|msg| "#{msg} on line #@line"} unless project.valid?
+    if project.valid?
+      projects << project
+    else
+      self.projects_errors += project.errors.to_a.map{|msg| "#{msg} on line #@line"}
+    end
   end
 
 end

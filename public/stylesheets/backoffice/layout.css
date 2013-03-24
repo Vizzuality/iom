@@ -7334,9 +7334,9 @@ div.block.site_info div.med div.left form input[type="submit"] {
     color:white;
     text-shadow:0 1px #000000;
   }
-  #uploader .qq-uploader qq-drop-processing {
+  #uploader .qq-uploader .qq-drop-processing {
     display: none;
   }
-  #uploader .qq-uploader qq-upload-list {
+  #uploader .qq-uploader .qq-upload-list {
     display: none;
   }

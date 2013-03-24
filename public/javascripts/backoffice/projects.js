@@ -4,14 +4,13 @@ function createUploader() {
       request: {
         endpoint: endpoint
       },
+      text: {
+        uploadButton: 'Import projects'
+      },
       multiple: false,
       callbacks: {
         onSubmit: function(){
-          var modal_window = $('div#modal_window');
-          modal_window.find('h4').html('Processing file...');
-          modal_window.find('p').html('Please wait.');
-          modal_window.find('ul').empty();
-          modal_window.fadeIn();
+          restartModalWindow().fadeIn();
         },
         onComplete: function(id, fileName, response) {
           var modal_window = $('div#modal_window');
@@ -30,11 +29,13 @@ function createUploader() {
             };
 
             if (response.success){
-              $('div.alert').addClass('ok');
-              $('div#modal_window h4').text('Great!');
-              $('div#modal_window p').text(' projects updated successfully :-)');
+              modal_window.find('.alert').addClass('ok');
+              modal_window.find('h4').text('Great!');
+              modal_window.find('p').text(response.projects_updated_count + ' projects updated successfully :-)');
             } else {
-              $('div.alert').addClass('error');
+              modal_window.find('a.ok').attr('href', '/admin/projects_synchronizations/' + response.id);
+              modal_window.find('a.ok').click(processFileWithErrors)
+              modal_window.find('.alert').addClass('error');
               modal_window.find('ul').jScrollPane({autoReinitialise: false});
               if (!modal_window.find('a.ok').hasClass('error')){
                 modal_window.find('a.ok').addClass('error');
@@ -52,3 +53,42 @@ function createUploader() {
 }
 
 window.onload = createUploader;
+
+function restartModalWindow() {
+  var modal_window = $('div#modal_window');
+
+  modal_window.find('.alert').removeClass('ok').removeClass('error');
+  modal_window.find('a.ok').removeClass('error');
+  modal_window.find('a.cancel').hide();
+
+  modal_window.find('h4').html('Processing file...');
+  modal_window.find('p').html('Please wait.');
+  modal_window.find('ul').empty();
+  return modal_window;
+};
+
+function processFileWithErrors(evt){
+  evt.preventDefault();
+
+  var modal_window = $('div#modal_window');
+  var link = $(this);
+
+  $.ajax({
+    url: $(this).attr('href'),
+    type: 'PUT',
+    dataType: 'json',
+    complete: function(result) {
+      synchronization_json = JSON.parse(result.response);
+      modal_window.find('.alert').addClass('ok');
+      modal_window.find('h4').text('Great!');
+      modal_window.find('p').text(synchronization_json.projects_updated_count + ' projects updated successfully :-)');
+      link.attr('href', '#').unbind('click').click(function(){
+        modal_window.fadeOut();
+      });
+      link.css('display','inline');
+    }
+  });
+  modal_window.fadeOut(function(){
+    restartModalWindow().fadeIn();
+  });
+};
