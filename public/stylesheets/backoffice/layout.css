@@ -4480,13 +4480,15 @@ div.block.project_info div.med div.left form input[type="submit"] {
     margin:50px 0 0 2px;
     background:url('/images/backoffice/projects/bkg_add_donation_form.png') no-repeat center center;
   }
-  div.block.donations_project div.med div.left form div#donor_name {
+  div.block.donations_project div.med div.left form div#donor_name,
+  div.block.donations_project div.med div.left form div#agency_name {
     float:left;
     width:280px;
     height:64px;
     margin:0 10px 0 15px;
   }
-  div.block.donations_project div.med div.left form div#donor_name span {
+  div.block.donations_project div.med div.left form div#donor_name span,
+  div.block.donations_project div.med div.left form div#agency_name span {
     float:left;
     background:url('/images/backoffice/projects/input_donor_name.png') no-repeat 0 0;
     width:272px;
@@ -4494,14 +4496,17 @@ div.block.project_info div.med div.left form input[type="submit"] {
     position:relative;
     margin:3px 0 0 7px;
   }
-  div.block.donations_project div.med div.left form div#donor_name span.error {
+  div.block.donations_project div.med div.left form div#donor_name span.error,
+  div.block.donations_project div.med div.left form div#agency_name span.error {
     background-position:0 -32px;
   }
-  div.block.donations_project div.med div.left form div#donor_name span.active {
+  div.block.donations_project div.med div.left form div#donor_name span.active,
+  div.block.donations_project div.med div.left form div#agency_name span.active {
     background:url('/images/backoffice/projects/input_donation_name_active.png') no-repeat 0 0;
     height:33px;
   }
-  div.block.donations_project div.med div.left form div#donor_name span input[type="text"] {
+  div.block.donations_project div.med div.left form div#donor_name span input[type="text"],
+  div.block.donations_project div.med div.left form div#agency_name span input[type="text"] {
     border:none;
     font:normal 13px Arial;
     color:#999999;
@@ -4510,7 +4515,8 @@ div.block.project_info div.med div.left form input[type="submit"] {
     left:10px;
     width:253px;
   }
-  div.block.donations_project div.med div.left form div#donor_name span .spinner {
+  div.block.donations_project div.med div.left form div#donor_name span .spinner,
+  div.block.donations_project div.med div.left form div#agency_name span .spinner {
     display: none;
     position: absolute;
     top: 8px;

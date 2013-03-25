@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130325161448) do
+ActiveRecord::Schema.define(:version => 20130325172919) do
 
   create_table "agencies", :force => true do |t|
     t.integer  "donor_id"
@@ -145,6 +145,7 @@ ActiveRecord::Schema.define(:version => 20130325161448) do
     t.integer "project_id"
     t.float   "amount"
     t.date    "date"
+    t.integer "agency_id"
   end
 
   add_index "donations", ["donor_id"], :name => "index_donations_on_donor_id"

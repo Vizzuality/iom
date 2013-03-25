@@ -23,6 +23,7 @@ Iom::Application.routes.draw do
 
   # Front urls
   resources :donors,        :only => [:index, :show]
+  resources :agencies,      :only => [:show]
   resources :projects,      :only => [:index, :show]
   resources :organizations, :only => [:index, :show]
 

@@ -63,6 +63,18 @@
           </span>
         </div>
 
+        <div id="agency_name" class="field">
+          <%= f.hidden_field :agency_id %>
+          <%= f.label :agency_id, raw('AGENCY') %>
+          <span id="agency_name_input">
+            <%= f.fields_for :agency, f.object.build_agency do |agency_fields| %>
+              <%= agency_fields.hidden_field :donor_id %>
+              <%= agency_fields.text_field :name, :id => :autocomplete_agency_name, :disabled => true %>
+            <% end -%>
+            <div class="spinner"></div>
+          </span>
+        </div>
+
         <div id="donation_amount" class="field">
           <%= f.label :amount, 'AMOUNT' %>
         <span>
