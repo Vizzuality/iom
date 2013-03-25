@@ -3,29 +3,40 @@ class Admin::AgenciesController < Admin::AdminController
 
   def index
     @agencies = if @donor.present?
-                  @donor.agencies.order('name asc').all
+                  agencies = @donor.agencies.order('name asc')
+
+                  if params[:q].present?
+                    q = "%#{params[:q].sanitize_sql!}%"
+                    agencies = agencies.where(["name ilike ?", q])
+                  end
+                  agencies
                 else
+                  agencies = Agency
                   if params[:q].present? || params[:filter_donor_id].present?
-                    @agencies = Agency
-                    if params[:q].present?
-                      q = "%#{params[:q].sanitize_sql!}%"
-                      @agencies = @agencies.where(["name ilike ?", q])
-                    end
                     if params[:filter_donor_id].present?
-                      @agencies = @agencies.where(["donor_id =?", params[:filter_donor_id]])
+                      agencies = agencies.where(["donor_id =?", params[:filter_donor_id]])
                       @donor_filter = Donor.find(params[:filter_donor_id])
                     end
-                  else
-                    @agencies = Agency
+                    if params[:q].present?
+                      q = "%#{params[:q].sanitize_sql!}%"
+                      agencies = agencies.where(["name ilike ?", q])
+                    end
                   end
-
-                  @agencies = @agencies.order('name asc').all
+                  agencies
                 end
 
+    @agencies = @agencies.order('name asc').all
     @agencies = @agencies.paginate :per_page => 20,
                                                      :order => 'created_at DESC',
                                                      :page => params[:page]
     @donors = [['All', nil]] + Donor.all.map{|d| [d.name, d.id]}
+
+    respond_to do |format|
+      format.html
+      format.json do
+        render :json => @agencies.first(5).map{ |agency| {:value => agency.name.html_safe, :label => agency.name.html_safe.truncate(40), :element_id => agency.id} }.to_json
+      end
+    end
   end
 
   def new

@@ -5,8 +5,10 @@ class Admin::DonationsController < Admin::AdminController
   def create
     @project = Project.find(params[:project_id])
     donor = Donor.where(:id => params[:donation][:donor_id]).first
-    @donation = Donation.new(params[:donation].slice!(:donor_id))
+    agency = Agency.where(:id => params[:donation][:agency_id]).first
+    @donation = Donation.new(params[:donation].slice!(:donor_id, :agency_id))
     @donation.donor = donor if donor.present?
+    @donation.agency = agency if agency.present?
     @project.donations << @donation
     @project.updated_by = current_user
 
