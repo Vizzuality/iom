@@ -34,7 +34,7 @@ class ChangesHistoryRecord < ActiveRecord::Base
   end
 
   def who_email
-    who.email rescue ''
+    who.email rescue attributes['who_email']
   end
 
   def who_organization

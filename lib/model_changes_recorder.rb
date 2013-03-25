@@ -31,10 +31,11 @@ module ModelChangesRecorder
       return if valid_changes.blank?
 
       self.changes_history_records << ChangesHistoryRecord.create!(
-        :who  => updated_by,
-        :what => self,
-        :how  => valid_changes.to_json,
-        :when => Time.now
+        :who       => updated_by,
+        :who_email => updated_by.email,
+        :what      => self,
+        :how       => valid_changes.to_json,
+        :when      => Time.now
       )
     end
 
