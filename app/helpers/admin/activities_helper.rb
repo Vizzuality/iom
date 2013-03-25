@@ -37,7 +37,7 @@ module Admin::ActivitiesHelper
   def extract(value)
     case value
     when Hash
-      return "#{value['geometries'][0]['y']}, #{value['geometries'][0]['x']}" if value.has_key?('geometries')
+      return "#{value['geometries'][0]['y']}, #{value['geometries'][0]['x']}" if value.has_key?('geometries') && value['geometries'].present?
       return value['deleted'] if value.has_key?('deleted')
       return value['new'] if value.has_key?('new')
     when Date
