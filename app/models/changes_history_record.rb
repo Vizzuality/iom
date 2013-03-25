@@ -42,7 +42,7 @@ class ChangesHistoryRecord < ActiveRecord::Base
   end
 
   def who_organization_name
-    who_organization.name rescue 'Interaction'
+    who_organization.name rescue attributes['who_organization'] || 'Interaction'
   end
 
   def reviewed=(value)
