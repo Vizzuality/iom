@@ -38,7 +38,7 @@ class ChangesHistoryRecord < ActiveRecord::Base
   end
 
   def who_organization
-    who.organization rescue ''
+    who.organization rescue Organization.find_by_name(attributes['who_organization']) rescue nil
   end
 
   def who_organization_name
