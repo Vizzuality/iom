@@ -10,7 +10,7 @@
 
               <li class="comboselect">
                 <%= form.label :who, 'NGO USER' %>
-                <%= form.select :who, User.all.map{|u| [u.organization_name, u.id]}, {:include_blank => 'All users' }, { :class => :"chzn-users-select"} %>
+                <%= form.select :who, User.all.map{|u| [(u.name.presence || u.email), u.id]}, {:include_blank => 'All users' }, { :class => :"chzn-users-select"} %>
               </li>
               <li class="comboselect">
                 <%= form.label :what_type, 'TYPE' %>

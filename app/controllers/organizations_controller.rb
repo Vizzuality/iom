@@ -121,9 +121,30 @@ class OrganizationsController < ApplicationController
                 group by r.id,r.path,lon,lat,r.name,r.code"
         else
           if @filter_by_location
-            location_filter = @filter_by_location.size == 1 ? "r.country_id = #{@filter_by_location.first}" : "r.id = #{@filter_by_location.last}"
-
-            sql="select c.id,count(distinct ps.project_id) as count,c.name,c.center_lon as lon,
+            sql = if @filter_by_location.size == 1
+                    <<-SQL
+                      SELECT r.id,
+                             count(ps.project_id) AS count,
+                             r.name,
+                             r.center_lon AS lon,
+                             r.center_lat AS lat,
+                             r.name,
+                             CASE WHEN count(ps.project_id) > 1 THEN
+                               '/location/'||r.path
+                             ELSE
+                               '/projects/'||(array_to_string(array_agg(ps.project_id),''))
+                             END AS url,
+                             r.code
+                      FROM projects_regions AS pr
+                      INNER JOIN projects_sites AS ps ON pr.project_id=ps.project_id AND ps.site_id=#{@site.id}
+                      INNER JOIN projects AS p ON pr.project_id=p.id AND (p.end_date is NULL OR p.end_date > now())
+                      INNER JOIN regions AS r ON pr.region_id=r.id AND r.level=#{@site.levels_for_region.min} AND r.country_id=#{@filter_by_location.first}
+                      #{category_join}
+                      WHERE p.primary_organization_id = #{params[:id].sanitize_sql!.to_i}
+                      GROUP BY r.id,r.name,lon,lat,r.name,r.path,r.code
+                    SQL
+            else
+              "select c.id,count(distinct ps.project_id) as count,c.name,c.center_lon as lon,
                         c.center_lat as lat,c.name,
                         CASE WHEN count(distinct ps.project_id) > 1 THEN
                             '#{carry_on_url}'||c.id
@@ -139,8 +160,9 @@ class OrganizationsController < ApplicationController
                     inner join countries as c on cp.country_id=c.id)
                     inner join regions as r on r.country_id=c.id)
                     #{category_join}
-                    where #{location_filter} and r.level=#{@site.level_for_region}
+                    where r.id = #{@filter_by_location.last} and r.level=#{@site.level_for_region}
                     group by c.id,c.name,lon,lat,c.name,c.iso2_code"
+            end
           else
             sql="select c.id,count(distinct ps.project_id) as count,c.name,c.center_lon as lon,
                         c.center_lat as lat,c.name,
@@ -162,9 +184,14 @@ class OrganizationsController < ApplicationController
 
         end
 
+        require 'ruby-debug'; debugger
         result=ActiveRecord::Base.connection.execute(sql)
         @map_data = result.map do |r|
-          r['url'] = r['url'] + "?force_site_id=#{@site.id}" unless @site.published?
+          uri = URI.parse(r['url'])
+          params = Hash[uri.query.split('&').map{|p| p.split('=')}] rescue {}
+          params['force_site_id'] = @site.id unless @site.published?
+          uri.query = params.to_a.map{|p| p.join('=')}.join('&')
+          r['url'] = uri.to_s
           r
         end.to_json
         @overview_map_chco = @site.theme.data[:overview_map_chco]
@@ -181,9 +208,7 @@ class OrganizationsController < ApplicationController
             @map_data_max_count=c["count"].to_i
           end
         end
-        #@chld = areas.join("|")
         @chld = ""
-        #@chd  = "t:"+data.join(",")
         @chd = ""
       end
       format.js do

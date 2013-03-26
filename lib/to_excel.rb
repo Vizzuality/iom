@@ -40,6 +40,9 @@ module ExcelMethods
     if field_name.match(/date/) && value.present? && value.is_a?(String)
       value = DateTime.parse(row[field_name]).strftime('%m/%d/%Y')
     end
+
+    value = value.join(', ') if value.is_a?(Array)
+
     value
   end
   private :cell_value
