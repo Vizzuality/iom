@@ -39,7 +39,7 @@
         <ul>
           <% @agencies.each do |agency| %>
             <li>
-              <h3><%= link_to(truncate(agency.name,:length=>40).html_safe, edit_admin_agency_path(agency)) %></h3>
+              <h3><%= link_to(truncate(agency.name,:length=>40), edit_admin_agency_path(agency)) %></h3>
               <p class="red"><a href="<%= projects_admin_donor_path(agency.donor) %>"><%= agency.donor.name %></a></p>
               <p><%= pluralize(agency.donor.all_donated_projects.count, 'project', 'projects') %></p>
             </li>

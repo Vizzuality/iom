@@ -25,7 +25,7 @@ class Admin::AgenciesController < Admin::AdminController
                   agencies
                 end
 
-    @agencies = @agencies.order('name asc').all
+    @agencies = @agencies.joins(:donor).order('name asc').all
     @agencies = @agencies.paginate :per_page => 20,
                                                      :order => 'created_at DESC',
                                                      :page => params[:page]
