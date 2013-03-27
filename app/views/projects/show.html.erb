@@ -248,6 +248,9 @@ var video_players = {};
                   <% end %>
                 <% else %>
                   <li class="out"><%= link_to(donation.donor.name.html_safe, donor_path(donation.donor)) %></li>
+                  <% if donation.agency.present? %>
+                  <li class="out agency"><%= link_to(donation.agency.name.html_safe, agency_path(donation.agency)) %></li>
+                  <% end %>
                 <% end %>
                 <% index = index + 1 %>
               <% end %>

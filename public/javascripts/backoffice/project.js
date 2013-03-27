@@ -751,6 +751,7 @@ $(function() {
         $('#donation_donor_id').val(ui.item.element_id);
         $('#donation_agency_attributes_donor_id').val(ui.item.element_id);
         $('#autocomplete_agency_name').attr('disabled', false);
+        $('#autocomplete_agency_name').closest('span').removeClass('disabled');
       },
       refresh: function(){
         console.log('entra')
@@ -790,7 +791,6 @@ $(function() {
         return false;
       },
       select: function( event, ui ) {
-        console.log(ui.item.element_id);
         $('#donation_agency_id').val(ui.item.element_id);
       },
       refresh: function(){

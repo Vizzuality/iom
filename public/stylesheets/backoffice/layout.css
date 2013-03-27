@@ -4443,6 +4443,13 @@ div.block.project_info div.med div.left form input[type="submit"] {
     font:bold 17px Arial;
     color:#E93E3F;
   }
+  div.block.donations_project div.med div.left ul.donations li div.name_box span {
+    color: #666666;
+    font-size: 13px;
+  }
+  div.block.donations_project div.med div.left ul.donations li div.name_box span a {
+    color:#E93E3F;
+  }
   div.block.donations_project div.med div.left ul.donations li p {
     float:left;
     padding:5px 0 0 0;
@@ -4475,7 +4482,7 @@ div.block.project_info div.med div.left form input[type="submit"] {
     position:relative;
     float:left;
     width:571px;
-    height:185px;
+    height:244px;
     padding:0;
     margin:50px 0 0 2px;
     background:url('/images/backoffice/projects/bkg_add_donation_form.png') no-repeat center center;
@@ -4483,7 +4490,7 @@ div.block.project_info div.med div.left form input[type="submit"] {
   div.block.donations_project div.med div.left form div#donor_name,
   div.block.donations_project div.med div.left form div#agency_name {
     float:left;
-    width:280px;
+    width:385px;
     height:64px;
     margin:0 10px 0 15px;
   }
@@ -4491,10 +4498,13 @@ div.block.project_info div.med div.left form input[type="submit"] {
   div.block.donations_project div.med div.left form div#agency_name span {
     float:left;
     background:url('/images/backoffice/projects/input_donor_name.png') no-repeat 0 0;
-    width:272px;
+    width:380px;
     height:32px;
     position:relative;
     margin:3px 0 0 7px;
+  }
+  div.block.donations_project div.med div.left form div#agency_name span.disabled {
+    background:url('/images/backoffice/projects/input_donor_name_disabled.png') no-repeat 0 0;
   }
   div.block.donations_project div.med div.left form div#donor_name span.error,
   div.block.donations_project div.med div.left form div#agency_name span.error {
@@ -4648,17 +4658,17 @@ div.block.project_info div.med div.left form input[type="submit"] {
 
   div.block.donations_project div.med div.left form div#donation_amount {
     float:left;
-    width:92px;
+    width:132px;
     height:64px;
-    margin:4px 0 0 10px;
+    margin: 0;
   }
   div.block.donations_project div.med div.left form div#donation_amount span {
     float:left;
-    width:92px;
-    height:32px;
+    width:132px;
+    height:34px;
     background:url('/images/backoffice/projects/amount_donation_input.png') no-repeat 0 0;
     position:relative;
-    margin:3px 0 0 8px;
+    margin:0 0 0 8px;
   }
   div.block.donations_project div.med div.left form div#donation_amount span input[type="text"] {
     position:absolute;
@@ -6158,7 +6168,7 @@ div.block.site_info div.med div.left form input[type="submit"] {
   }
   div#modal_window div.alert span {
     float:right;
-    margin:20px 0 0 0;
+    margin:0;
   }
   div#modal_window div.alert.importer span {
     float: left;
@@ -6188,6 +6198,7 @@ div.block.site_info div.med div.left form input[type="submit"] {
     display:none;
   }
   div#modal_window div.alert span a.button.remove {
+    display: inline;
     background:url('/images/backoffice/common/delete_button.png') no-repeat 0 0;
     width:63px;
     height:26px;
