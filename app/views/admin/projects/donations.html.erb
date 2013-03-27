@@ -14,9 +14,17 @@
           <% @project.donations.each do |donation| %>
           <li>
             <div class="name_box">
-              <h3>
-                <%= link_to(truncate(donation.donor.name, :length => 44).html_safe, edit_admin_donor_path(donation.donor)) %>
-              </h3>
+              <% if donation.agency.present? %>
+                <h3>
+                  <%= link_to(truncate(donation.agency.name, :length => 44).html_safe, edit_admin_agency_path(donation.agency)) %>
+                </h3>
+                <span>Agency from <%= link_to donation.agency.name, edit_admin_donor_path(donation.donor) %></span>
+              <% else %>
+                <h3>
+                  <%= link_to(truncate(donation.donor.name, :length => 44).html_safe, edit_admin_donor_path(donation.donor)) %>
+                </h3>
+                <span>Donor</span>
+              <% end %>
             </div>
             <div class="date_box">
               <%if donation.date.present? %>
@@ -66,7 +74,7 @@
         <div id="agency_name" class="field">
           <%= f.hidden_field :agency_id %>
           <%= f.label :agency_id, raw('AGENCY') %>
-          <span id="agency_name_input">
+          <span id="agency_name_input" class="disabled">
             <%= f.fields_for :agency, f.object.build_agency do |agency_fields| %>
               <%= agency_fields.hidden_field :donor_id %>
               <%= agency_fields.text_field :name, :id => :autocomplete_agency_name, :disabled => true %>
