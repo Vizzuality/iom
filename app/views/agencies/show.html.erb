@@ -5,7 +5,7 @@
         <div class="outer_head">
           <div class="head">
             <%= link_to "Office of #{@donor.name}", donor_path(@donor) %>
-            <h1><%= @donor.name.html_safe %></h1>
+            <h1><%= @agency.name.html_safe %></h1>
             <p>Funding <%= pluralize(@donor.donated_projects_count(@site), 'project', 'projects') %></p>
           </div>
         </div>
