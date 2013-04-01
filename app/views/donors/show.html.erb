@@ -67,6 +67,21 @@
           <% end %>
         </div>
 
+        <!-- OFFICES -->
+        <% if @donor.agencies.present? %>
+        <div class="block border statistics">
+          <h2>DONOR'S OFFICES</h2>
+          <ul>
+            <% @donor.agencies.each do |office| %>
+              <li>
+                <%= link_to office.name, agency_path(office) %>
+                <p>Funding <%= pluralize(office.donations.count, 'project') %></p>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+        <% end %>
+
         <% unless @donor.resources.empty? %>
         <div class="block border">
           <h2>Additional information</h2>
