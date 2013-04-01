@@ -26,7 +26,7 @@
   </li>
   <li <%= selected_if_current_page(admin_donor_agencies_path(@donor)) %>>
     <div class="bottom_selected">
-    <%= link_to("Agencies", admin_donor_agencies_path(@donor)) %><% if !@donor.agencies.empty? %> <p><span><%=@donor.agencies.count%></span></p><% end %>
+    <%= link_to("Offices", admin_donor_agencies_path(@donor)) %><% if !@donor.agencies.empty? %> <p><span><%=@donor.agencies.count%></span></p><% end %>
     </div>
   </li>
 </ul>
