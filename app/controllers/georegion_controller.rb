@@ -150,7 +150,11 @@ class GeoregionController < ApplicationController
         result = ActiveRecord::Base.connection.execute(sql)
         if @area.is_a?(Country) && @site.navigate_by_regions?
           @map_data = result.map do |r|
-            r['url'] = r['url'] + "?force_site_id=#{@site.id}" unless @site.published?
+            uri = URI.parse(r['url'])
+            params = Hash[uri.query.split('&').map{|p| p.split('=')}]
+            params['force_site_id'] = @site.id unless @site.published?
+            uri.query = params.to_a.map{|p| p.join('=')}.join('&')
+            r['url'] = uri.to_s
             r
           end.to_json
           @map_type = 'administrative_map'
