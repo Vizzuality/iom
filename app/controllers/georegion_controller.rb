@@ -151,7 +151,7 @@ class GeoregionController < ApplicationController
         if @area.is_a?(Country) && @site.navigate_by_regions?
           @map_data = result.map do |r|
             uri = URI.parse(r['url'])
-            params = Hash[uri.query.split('&').map{|p| p.split('=')}]
+            params = Hash[uri.query.split('&').map{|p| p.split('=')}] rescue {}
             params['force_site_id'] = @site.id unless @site.published?
             uri.query = params.to_a.map{|p| p.join('=')}.join('&')
             r['url'] = uri.to_s
