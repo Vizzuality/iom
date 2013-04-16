@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
       case Rails.env
         when 'development'
           # '192.168.1.140'  # to test in ie
-          'localhost.lan'
+          'ngoaidmap.dev'
         when 'test'
           'example.com'
         when 'staging'
