@@ -574,8 +574,11 @@ SQL
       Region.find_by_sql(<<-SQL
         select id,name,path from regions
         where level=#{level_for_region}
-        and id in (select region_id from projects_regions as pr
-        inner join projects_sites as ps on pr.project_id=ps.project_id and site_id=#{self.id})
+        and id in (
+          select region_id from projects_regions as pr
+          inner join projects_sites as ps on pr.project_id=ps.project_id and site_id=#{self.id}
+          inner join projects as p on p.id = pr.project_id and (p.end_date is null OR p.end_date > now())
+        )
         order by name
 SQL
       )
