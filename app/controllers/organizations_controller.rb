@@ -121,9 +121,22 @@ class OrganizationsController < ApplicationController
                 group by r.id,r.path,lon,lat,r.name,r.code"
         else
           if @filter_by_location
-            location_filter = @filter_by_location.size == 1 ? "r.country_id = #{@filter_by_location.first}" : "r.id = #{@filter_by_location.last}"
-
-            sql="select c.id,count(distinct ps.project_id) as count,c.name,c.center_lon as lon,
+            sql = if @filter_by_location.size == 1
+              "select r.id,count(ps.project_id) as count,r.name,r.center_lon as lon,
+              r.center_lat as lat,r.name,
+              CASE WHEN count(ps.project_id) > 1 THEN
+              '/location/'||r.path
+              ELSE
+              '/projects/'||(array_to_string(array_agg(ps.project_id),''))
+              END as url,
+                r.code
+              from ((projects_regions as pr inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{@site.id})
+                     inner join projects as p on pr.project_id=p.id and (p.end_date is null OR p.end_date > now())
+              inner join regions as r on pr.region_id=r.id and r.level=#{@site.levels_for_region.min} and r.country_id=#{@filter_by_location.first})
+              #{category_join}
+              group by r.id,r.name,lon,lat,r.name,r.path,r.code"
+            else
+              "select c.id,count(distinct ps.project_id) as count,c.name,c.center_lon as lon,
                         c.center_lat as lat,c.name,
                         CASE WHEN count(distinct ps.project_id) > 1 THEN
                             '#{carry_on_url}'||c.id
@@ -139,8 +152,9 @@ class OrganizationsController < ApplicationController
                     inner join countries as c on cp.country_id=c.id)
                     inner join regions as r on r.country_id=c.id)
                     #{category_join}
-                    where #{location_filter} and r.level=#{@site.level_for_region}
+                    where r.id = #{@filter_by_location.last} and r.level=#{@site.level_for_region}
                     group by c.id,c.name,lon,lat,c.name,c.iso2_code"
+            end
           else
             sql="select c.id,count(distinct ps.project_id) as count,c.name,c.center_lon as lon,
                         c.center_lat as lat,c.name,
