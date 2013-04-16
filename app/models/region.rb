@@ -144,7 +144,7 @@ class Region < ActiveRecord::Base
              order by dist
         ) as subq
         where count>0
-        order by count DESC
+        order by dist, count DESC
         limit  #{limit}
 SQL
       )
