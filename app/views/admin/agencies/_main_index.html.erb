@@ -10,7 +10,7 @@
             <%= text_field_tag :q, params[:q], :class => 'main_search', :placeholder => 'Search agencies by name' %>
           </div>
           <div class="comboselect">
-            <label>DONOR   <strong>*</strong></label>
+            <label>DONOR</label>
             <%= select_tag :filter_donor_id, options_for_select(@donors, params[:filter_donor_id]), :class => :"chzn-select" %>
           </div>
           <input type="submit" value=""  />
