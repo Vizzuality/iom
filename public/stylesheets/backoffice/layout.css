@@ -362,7 +362,7 @@ div.block div.med div.right {
   position:relative;
   float:right;
   width:284px;
-  min-height:420px;
+  /*min-height:420px;*/
 }
 div.block div.med div.right ul {
   float:left;
@@ -1432,7 +1432,7 @@ cursor:pointer;
     float:right;
     width:157px;
     height:32px;
-    margin:20px 8px 0 0;
+    margin:40px 8px 0 0;
     text-indent:-9999px;
     font-size:0;
     display:block;
