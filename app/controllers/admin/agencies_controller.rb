@@ -54,6 +54,10 @@ class Admin::AgenciesController < Admin::AdminController
     end
   end
 
+  def projects
+    @agency = Agency.find(params[:id])
+  end
+
   def edit
     @agency = Agency.find(params[:id])
     @donors = Donor.all.map{|d| [d.name, d.id]}

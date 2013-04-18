@@ -73,7 +73,9 @@ Iom::Application.routes.draw do
       get 'specific_information/:site_id', :on => :member, :action => 'specific_information', :as => 'donor_site_specific_information'
       put 'destroy_logo', :on => :member
     end
-    resources :agencies
+    resources :agencies do
+      get 'projects', :on => :member
+    end
     resources :projects do
       resources :media_resources, :only => [:index, :create, :update, :destroy]
       resources :resources, :only => [:index, :create, :destroy, :update]
