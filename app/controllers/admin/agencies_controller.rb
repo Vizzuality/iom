@@ -48,7 +48,7 @@ class Admin::AgenciesController < Admin::AdminController
     @agency = Agency.new(params[:agency])
     if @agency.save
       flash[:notice] = 'Agency created successfully.'
-      redirect_to edit_admin_agency_path(@agency), :flash => {:success => 'Agency created successfully.'}
+      redirect_to admin_agencies_path, :flash => {:success => 'Agency created successfully.'}
     else
       render :action => 'new'
     end
