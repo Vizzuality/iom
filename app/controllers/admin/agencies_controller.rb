@@ -3,11 +3,11 @@ class Admin::AgenciesController < Admin::AdminController
 
   def index
     @agencies = if @donor.present?
-                  agencies = @donor.agencies.order('name asc')
+                  agencies = @donor.agencies.order('agencies.name asc')
 
                   if params[:q].present?
                     q = "%#{params[:q].sanitize_sql!}%"
-                    agencies = agencies.where(["name ilike ?", q])
+                    agencies = agencies.where(["agencies.name ilike ?", q])
                   end
                   agencies
                 else
@@ -19,13 +19,13 @@ class Admin::AgenciesController < Admin::AdminController
                     end
                     if params[:q].present?
                       q = "%#{params[:q].sanitize_sql!}%"
-                      agencies = agencies.where(["name ilike ?", q])
+                      agencies = agencies.where(["agencies.name ilike ?", q])
                     end
                   end
                   agencies
                 end
 
-    @agencies = @agencies.joins(:donor).order('name asc').all
+    @agencies = @agencies.joins(:donor).order('agencies.name asc').all
     @agencies = @agencies.paginate :per_page => 20,
                                                      :order => 'created_at DESC',
                                                      :page => params[:page]
