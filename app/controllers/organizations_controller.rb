@@ -122,19 +122,27 @@ class OrganizationsController < ApplicationController
         else
           if @filter_by_location
             sql = if @filter_by_location.size == 1
-              "select r.id,count(ps.project_id) as count,r.name,r.center_lon as lon,
-              r.center_lat as lat,r.name,
-              CASE WHEN count(ps.project_id) > 1 THEN
-              '/location/'||r.path
-              ELSE
-              '/projects/'||(array_to_string(array_agg(ps.project_id),''))
-              END as url,
-                r.code
-              from ((projects_regions as pr inner join projects_sites as ps on pr.project_id=ps.project_id and ps.site_id=#{@site.id})
-                     inner join projects as p on pr.project_id=p.id and (p.end_date is null OR p.end_date > now())
-              inner join regions as r on pr.region_id=r.id and r.level=#{@site.levels_for_region.min} and r.country_id=#{@filter_by_location.first})
-              #{category_join}
-              group by r.id,r.name,lon,lat,r.name,r.path,r.code"
+                    <<-SQL
+                      SELECT r.id,
+                             count(ps.project_id) AS count,
+                             r.name,
+                             r.center_lon AS lon,
+                             r.center_lat AS lat,
+                             r.name,
+                             CASE WHEN count(ps.project_id) > 1 THEN
+                               '/location/'||r.path
+                             ELSE
+                               '/projects/'||(array_to_string(array_agg(ps.project_id),''))
+                             END AS url,
+                             r.code
+                      FROM projects_regions AS pr
+                      INNER JOIN projects_sites AS ps ON pr.project_id=ps.project_id AND ps.site_id=#{@site.id}
+                      INNER JOIN projects AS p ON pr.project_id=p.id AND (p.end_date is NULL OR p.end_date > now())
+                      INNER JOIN regions AS r ON pr.region_id=r.id AND r.level=#{@site.levels_for_region.min} AND r.country_id=#{@filter_by_location.first}
+                      #{category_join}
+                      WHERE p.primary_organization_id = #{params[:id].sanitize_sql!.to_i}
+                      GROUP BY r.id,r.name,lon,lat,r.name,r.path,r.code
+                    SQL
             else
               "select c.id,count(distinct ps.project_id) as count,c.name,c.center_lon as lon,
                         c.center_lat as lat,c.name,
@@ -176,6 +184,7 @@ class OrganizationsController < ApplicationController
 
         end
 
+        require 'ruby-debug'; debugger
         result=ActiveRecord::Base.connection.execute(sql)
         @map_data = result.map do |r|
           uri = URI.parse(r['url'])
@@ -199,9 +208,7 @@ class OrganizationsController < ApplicationController
             @map_data_max_count=c["count"].to_i
           end
         end
-        #@chld = areas.join("|")
         @chld = ""
-        #@chd  = "t:"+data.join(",")
         @chd = ""
       end
       format.js do
