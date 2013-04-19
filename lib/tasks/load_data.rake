@@ -778,7 +778,6 @@ namespace :iom do
     task :load_organization_codes => :environment do
       csv_path = Rails.root.join('db/data/ngoaidmap_organization_codes.csv')
 
-      #require 'ruby-debug'; debugger
       csv_data = Hash[FasterCSV.read(csv_path, :col_sep => ',')]
 
       Organization.find_each do |organization|

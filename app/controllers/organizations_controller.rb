@@ -184,7 +184,6 @@ class OrganizationsController < ApplicationController
 
         end
 
-        require 'ruby-debug'; debugger
         result=ActiveRecord::Base.connection.execute(sql)
         @map_data = result.map do |r|
           uri = URI.parse(r['url'])
