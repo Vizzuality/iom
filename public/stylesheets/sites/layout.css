@@ -690,7 +690,7 @@ div.projects div.right div.block div.logo a:hover {text-decoration:underline;}
 div.projects div.right div.block ul {width:100%; margin:7px 0 0 0; padding:0; list-style:none;}
 div.projects div.right div.block ul.donor_list {margin:7px 0 0px 0;}
 div.projects div.right div.block ul li {padding:3px 0 3px 10px; background:url('/images/sites/icons/list_disc.png') no-repeat 0 10px; font:normal 13px Arial; color:#999999;}
-div.projects div.right div.block ul li.agency {margin-left: 10px; background:url('/images/sites/icons/list_dash.png') no-repeat 0 10px;}
+div.projects div.right div.block ul li.office {margin-left: 10px; background:url('/images/sites/icons/list_dash.png') no-repeat 0 10px;}
 div.projects div.right div.block ul li a {color:#CE5D4C; text-decoration:none;}
 div.projects div.right div.block ul li a:hover {text-decoration:underline;}
 div.projects div.right div.block p {width:252px; padding:7px 0 0 0; font:normal 13px Arial; color:#666666; line-height:17px;}

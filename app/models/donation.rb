@@ -13,11 +13,11 @@ class Donation < ActiveRecord::Base
 
   belongs_to :project
   belongs_to :donor
-  belongs_to :agency
+  belongs_to :office
 
   validates_presence_of :donor, :project
 
-  accepts_nested_attributes_for :donor, :agency
+  accepts_nested_attributes_for :donor, :office
 
   def amount=(ammount)
     if ammount.blank?

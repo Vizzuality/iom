@@ -1,9 +1,9 @@
-<%= form_for(@agency, :url => (@agency.new_record? ? admin_agencies_path : admin_agency_path(@agency)), :html => { :multipart => true }) do |f| %>
+<%= form_for(@office, :url => (@office.new_record? ? admin_offices_path : admin_office_path(@office)), :html => { :multipart => true }) do |f| %>
 
   <div class="field">
     <label>NAME   <strong>*</strong></label>
-    <%= f.text_field :name, :class=>"long #{'error' if !@agency.errors[:name].empty? && action_name != 'new'}", :value => @agency.name.try(:html_safe) %>
-    <%= errors_for @agency, :name %>
+    <%= f.text_field :name, :class=>"long #{'error' if !@office.errors[:name].empty? && action_name != 'new'}", :value => @office.name.try(:html_safe) %>
+    <%= errors_for @office, :name %>
   </div>
 
   <div class="comboselect">
@@ -11,7 +11,7 @@
     <%= f.select :donor_id, @donors, {}, :class => :"chzn-select" %>
   </div>
 
-  <%= f.submit 'Save', :class => "#{'error' if @agency.invalid? && action_name != 'new'}" %>
+  <%= f.submit 'Save', :class => "#{'error' if @office.invalid? && action_name != 'new'}" %>
 
 <% end -%>
 
@@ -20,6 +20,6 @@
 <script src="/javascripts/plugins/chosen/chosen.jquery.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
   $(function(){
-    $(".chzn-select").chosen({widths: {agency_donor_id_chzn: 419}});
+    $(".chzn-select").chosen({widths: {office_donor_id_chzn: 419}});
   });
 </script>

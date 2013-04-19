@@ -68,13 +68,13 @@
         </div>
 
         <!-- OFFICES -->
-        <% if @donor.agencies.present? %>
+        <% if @donor.offices.present? %>
         <div class="block border statistics">
           <h2>DONOR'S OFFICES</h2>
           <ul>
-            <% @donor.agencies.each do |office| %>
+            <% @donor.offices.each do |office| %>
               <li>
-                <%= link_to office.name, agency_path(office) %>
+                <%= link_to office.name, office_path(office) %>
                 <p>Funding <%= pluralize(office.donations.count, 'project') %></p>
               </li>
             <% end %>

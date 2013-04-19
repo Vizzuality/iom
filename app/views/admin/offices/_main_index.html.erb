@@ -1,13 +1,13 @@
 
 <div class="main_layout">
   <div class="block">
-    <div class="agencies_search">
+    <div class="offices_search">
       <span class="top"></span>
       <div class="content padding">
-        <%= form_tag(admin_agencies_path, :method => :get, :class => :search) do %>
+        <%= form_tag(admin_offices_path, :method => :get, :class => :search) do %>
           <div class="field">
             <label>SEARCH BY TEXT</label>
-            <%= text_field_tag :q, params[:q], :class => 'main_search', :placeholder => 'Search agencies by name' %>
+            <%= text_field_tag :q, params[:q], :class => 'main_search', :placeholder => 'Search offices by name' %>
           </div>
           <div class="comboselect">
             <label>DONOR</label>
@@ -22,52 +22,52 @@
 
   <div class="block">
     <div class="top"></div>
-    <div class="med agencies_list">
-      <% unless @agencies.empty? %>
+    <div class="med offices_list">
+      <% unless @offices.empty? %>
         <div class="header no_border">
-          <h2><%= pluralize(@agencies.total_entries, 'agency', 'agencies') %> supporting projects
+          <h2><%= pluralize(@offices.total_entries, 'office', 'offices') %> supporting projects
             <% if params[:q].present? %>
-              on <a class="remove" href="<%= admin_agencies_path %>"><%= params[:q] %></a>
+              on <a class="remove" href="<%= admin_offices_path %>"><%= params[:q] %></a>
             <% elsif @donor_filter.present? %>
-              depending on <a class="remove" href="<%= admin_agencies_path %>"><%= @donor_filter.name %></a>
+              depending on <a class="remove" href="<%= admin_offices_path %>"><%= @donor_filter.name %></a>
             <% end %>
           </h2>
           <span class="buttons">
-            <a class="add_project museo_sans shadow_green" href="<%= new_admin_agency_path %>">New agency</a>
+            <a class="add_project museo_sans shadow_green" href="<%= new_admin_office_path %>">New office</a>
           </span>
         </div>
         <ul>
-          <% @agencies.each do |agency| %>
+          <% @offices.each do |office| %>
             <li>
-              <h3><%= link_to(truncate(agency.name,:length=>40), edit_admin_agency_path(agency)) %></h3>
-              <p class="red"><a href="<%= projects_admin_donor_path(agency.donor) %>"><%= agency.donor.name %></a></p>
-              <p><%= pluralize(agency.all_donated_projects.count, 'project', 'projects') %></p>
+              <h3><%= link_to(truncate(office.name,:length=>40), edit_admin_office_path(office)) %></h3>
+              <p class="red"><a href="<%= projects_admin_donor_path(office.donor) %>"><%= office.donor.name %></a></p>
+              <p><%= pluralize(office.all_donated_projects.count, 'project', 'projects') %></p>
             </li>
           <% end -%>
         </ul>
       <% else %>
-        <% if @agencies.count > 1 %>
+        <% if @offices.count > 1 %>
           <div class="no_results">
-            <h2>There are not agencies for your search</h2>
-            <p>Try to search with different terms or simply <a href="<%= admin_agencies_path %>">browse all agencies</a>.</p>
+            <h2>There are not offices for your search</h2>
+            <p>Try to search with different terms or simply <a href="<%= admin_offices_path %>">browse all offices</a>.</p>
           </div>
         <% else %>
           <div class="no_results">
-            <h2>There are not agencies in the site</h2>
-            <p>Try to <a href="/admin/agencies/new">add a new one</a>.</p>
+            <h2>There are not offices in the site</h2>
+            <p>Try to <a href="/admin/offices/new">add a new one</a>.</p>
           </div>
         <% end %>
       <% end -%>
     </div>
     <div class="bottom_grey paginate">
-      <%= will_paginate(@agencies) %>
+      <%= will_paginate(@offices) %>
     </div>
   </div>
 
   <div class="add_new">
-    <a href="<%= new_admin_agency_path %>" class="museo_sans">
-      Add a new agency<br/>
-      <strong>There are already <%= pluralize(@agencies.count, 'agency', 'agencies') %> registered</strong>
+    <a href="<%= new_admin_office_path %>" class="museo_sans">
+      Add a new office<br/>
+      <strong>There are already <%= pluralize(@offices.count, 'office', 'offices') %> registered</strong>
     </a>
   </div>
 </div>

@@ -5,13 +5,13 @@
       <div class="left">
         <h2 class="museo_sans"><%= @donor.name.html_safe %></h2>
 
-        <p><%= pluralize(@agencies.count, ' agency', ' agencies') %></p>
-        <% unless @agencies.empty? %>
+        <p><%= pluralize(@offices.count, ' office', ' offices') %></p>
+        <% unless @offices.empty? %>
           <ul>
-            <% @agencies.each do |agency| %>
+            <% @offices.each do |office| %>
             <li>
               <span class="first">
-                <h3><%= link_to(truncate(agency.name, :length => 43), edit_admin_agency_path(agency), :title => agency.name) %></h3>
+                <h3><%= link_to(truncate(office.name, :length => 43), edit_admin_office_path(office), :title => office.name) %></h3>
               </span>
             </li>
             <% end -%>

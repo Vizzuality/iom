@@ -747,9 +747,9 @@ $(function() {
       },
       select: function( event, ui ) {
         $('#donation_donor_id').val(ui.item.element_id);
-        $('#donation_agency_attributes_donor_id').val(ui.item.element_id);
-        $('#autocomplete_agency_name').attr('disabled', false);
-        $('#autocomplete_agency_name').closest('span').removeClass('disabled');
+        $('#donation_office_attributes_donor_id').val(ui.item.element_id);
+        $('#autocomplete_office_name').attr('disabled', false);
+        $('#autocomplete_office_name').closest('span').removeClass('disabled');
       },
       refresh: function(){
         console.log('entra')
@@ -760,20 +760,20 @@ $(function() {
   }
 
 
-  if ($('#autocomplete_agency_name').length > 0){
-    // AUTOCOMPLETE FOR AGENCIES IN PROJECT
-    $("#autocomplete_agency_name").autocomplete({
+  if ($('#autocomplete_office_name').length > 0){
+    // AUTOCOMPLETE FOR offices IN PROJECT
+    $("#autocomplete_office_name").autocomplete({
       style:'donor_names',
       source: function( request, response ) {
-        if($('#autocomplete_agency_name:disabled')[0]) {
+        if($('#autocomplete_office_name:disabled')[0]) {
           return false;
         };
-        var custom_agencies_url = '/admin/donors/' + $('#donation_agency_attributes_donor_id').val() + '/agencies?q=';
-        var textbox = $('#autocomplete_agency_name');
-        var value = $("#autocomplete_agency_name").val();
+        var custom_offices_url = '/admin/donors/' + $('#donation_office_attributes_donor_id').val() + '/offices?q=';
+        var textbox = $('#autocomplete_office_name');
+        var value = $("#autocomplete_office_name").val();
         textbox.next('.spinner').fadeIn('fast');
         $.ajax({
-          url: custom_agencies_url + value,
+          url: custom_offices_url + value,
           dataType: "json",
           success: function( data ) {
             textbox.next('.spinner').fadeOut('fast');
@@ -789,11 +789,11 @@ $(function() {
         return false;
       },
       select: function( event, ui ) {
-        $('#donation_agency_id').val(ui.item.element_id);
+        $('#donation_office_id').val(ui.item.element_id);
       },
       refresh: function(){
         this.element.children("li.ui-menu-item:odd a").addClass("ui-menu-item-alternate");
-        $('span#agency_name_input').addClass('active');
+        $('span#office_name_input').addClass('active');
       }
     });
   }

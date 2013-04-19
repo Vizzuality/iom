@@ -1,20 +1,17 @@
-
   <div class="main_layout">
     <div class="block first edit">
       <div class="top"></div>
       <div class="med">
         <div class="left">
-          <h2 class="museo_sans">New agency</h2>
+          <h2 class="museo_sans"><%= @office.name.html_safe %></h2>
           <%= render :partial => 'form' %>
         </div>
         <div class="right menu">
-          <ul>
-            <li class="selected"><a>Basic information</a></li>
-            <li class="disabled"><a>Funded projects</a></li>
-          </ul>
+          <%= render 'admin/offices/sidebar' %>
         </div>
       </div>
       <div class="bottom"></div>
     </div>
   </div>
 
+  <script src="/javascripts/backoffice/application.js" type="text/javascript" charset="utf-8"></script>

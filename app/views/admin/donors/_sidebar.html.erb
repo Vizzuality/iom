@@ -24,9 +24,9 @@
     <%= link_to("Resources", admin_donor_resources_path(@donor)) %><% if !@donor.resources.empty? %> <p><span><%=@donor.resources.count%></span></p><% end %>
     </div>
   </li>
-  <li <%= selected_if_current_page(admin_donor_agencies_path(@donor)) %>>
+  <li <%= selected_if_current_page(admin_donor_offices_path(@donor)) %>>
     <div class="bottom_selected">
-    <%= link_to("Offices", admin_donor_agencies_path(@donor)) %><% if !@donor.agencies.empty? %> <p><span><%=@donor.agencies.count%></span></p><% end %>
+    <%= link_to("Offices", admin_donor_offices_path(@donor)) %><% if !@donor.offices.empty? %> <p><span><%=@donor.offices.count%></span></p><% end %>
     </div>
   </li>
 </ul>

@@ -3,25 +3,25 @@
     <div class="top"></div>
     <div class="med">
       <div class="left">
-        <h2 class="museo_sans"><%= @agency.name.html_safe %></h2>
+        <h2 class="museo_sans"><%= @office.name.html_safe %></h2>
 
-        <p><%= pluralize(@agency.all_donated_projects.count, ' funded project', 'funded projects') %></p>
-        <% unless @agency.all_donated_projects.empty? %>
+        <p><%= pluralize(@office.all_donated_projects.count, ' funded project', 'funded projects') %></p>
+        <% unless @office.all_donated_projects.empty? %>
           <ul>
-            <% @agency.all_donated_projects.each do |project| %>
+            <% @office.all_donated_projects.each do |project| %>
             <li>
               <span class="first">
                 <h3><%= link_to(truncate(project.name, :length => 43), edit_admin_project_path(project), :title => project.name) %></h3>
                 <p class="<%= project.finished? ? 'closed' : 'active' %>"><%= project.finished? ? 'Closed' : 'Active' %></p>
               </span>
-              <p>$<%= @agency.donations.where(:project_id => project.id).first.try(:amount) || 0 %></p>
+              <p>$<%= @office.donations.where(:project_id => project.id).first.try(:amount) || 0 %></p>
             </li>
             <% end -%>
           </ul>
         <% end -%>
       </div>
-      <div class="right menu">
-        <%= render 'admin/agencies/sidebar' %>
+      <div class="right menu" style="min-height: 300px;">
+        <%= render 'admin/offices/sidebar' %>
       </div>
     </div>
     <div class="bottom"></div>

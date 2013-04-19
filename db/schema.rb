@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130325172919) do
+ActiveRecord::Schema.define(:version => 20130419201156) do
 
   create_table "agencies", :force => true do |t|
     t.integer  "donor_id"
@@ -146,6 +146,7 @@ ActiveRecord::Schema.define(:version => 20130325172919) do
     t.float   "amount"
     t.date    "date"
     t.integer "agency_id"
+    t.integer "office_id"
   end
 
   add_index "donations", ["donor_id"], :name => "index_donations_on_donor_id"
@@ -193,6 +194,13 @@ ActiveRecord::Schema.define(:version => 20130325172919) do
   end
 
   add_index "media_resources", ["element_type", "element_id"], :name => "index_media_resources_on_element_type_and_element_id"
+
+  create_table "offices", :force => true do |t|
+    t.integer  "donor_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "organizations", :force => true do |t|
     t.string   "name"

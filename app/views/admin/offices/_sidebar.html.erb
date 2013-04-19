@@ -1,0 +1,18 @@
+<ul>
+  <li <%= selected_if_current_page(edit_admin_office_path(@office), !params[:site_id].nil?) %>>
+    <div class="bottom_selected">
+      <%= link_to('Basic information', edit_admin_office_path(@office), :class=>"basic") %>
+    </div>
+  </li>
+  <li <%= selected_if_current_page(projects_admin_office_path(@office)) %>>
+    <%= link_to('Funded projects', projects_admin_office_path(@office)) %><% if !@office.all_donated_projects.empty? %> <p><span><%=@office.all_donated_projects.count%></span></p><% end %>
+  </li>
+</ul>
+
+<div class="delete">
+  <h5>DELETE THIS OFFICE</h5>
+  <p>Clicking the link below will permanently delete this office and its references within the sites</p>
+  <%= link_to("Delete this office", '#', :destroy_url=>admin_office_path(@office), :att_name=>"office") %>
+</div>
+
+
