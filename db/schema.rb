@@ -10,14 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130419201156) do
-
-  create_table "agencies", :force => true do |t|
-    t.integer  "donor_id"
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(:version => 20130419202532) do
 
   create_table "changes_history_records", :force => true do |t|
     t.integer  "user_id"
@@ -145,7 +138,6 @@ ActiveRecord::Schema.define(:version => 20130419201156) do
     t.integer "project_id"
     t.float   "amount"
     t.date    "date"
-    t.integer "agency_id"
     t.integer "office_id"
   end
 
