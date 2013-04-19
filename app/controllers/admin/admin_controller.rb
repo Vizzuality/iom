@@ -63,20 +63,18 @@ class Admin::AdminController < ApplicationController
     options[:organization]    = params[:organization_id] if params[:organization_id].present?
     options[:organization]    = current_user.organization_id unless current_user.admin?
     options[:headers_options] = {:show_private_fields => true}
-    results_in_csv            = Project.to_csv(nil, options)
-    results_in_excel          = Project.to_excel(nil, options)
 
     respond_to do |format|
       format.html do
-        render :text => results_in_csv
+        render :text => Project.to_csv(nil, options)
       end
       format.csv do
-        send_data results_in_csv,
+        send_data Project.to_csv(nil, options),
           :type => 'text/plain; charset=utf-8; application/download',
           :disposition => "attachment; filename=ngoaidmap_projects.csv"
       end
       format.xls do
-        send_data results_in_excel,
+        send_data Project.to_excel(nil, options),
           :type => 'application/vnd.ms-excel',
           :disposition => "attachment; filename=ngoaidmap_projects.xls"
       end
