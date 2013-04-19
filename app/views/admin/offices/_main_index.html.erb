@@ -10,7 +10,7 @@
             <%= text_field_tag :q, params[:q], :class => 'main_search', :placeholder => 'Search offices by name' %>
           </div>
           <div class="comboselect">
-            <label>DONOR</label>
+            <label>DONOR   <strong>*</strong></label>
             <%= select_tag :filter_donor_id, options_for_select(@donors, params[:filter_donor_id]), :class => :"chzn-select" %>
           </div>
           <input type="submit" value=""  />
@@ -39,9 +39,9 @@
         <ul>
           <% @offices.each do |office| %>
             <li>
-              <h3><%= link_to(truncate(office.name,:length=>40), edit_admin_office_path(office)) %></h3>
-              <p class="red"><a href="<%= projects_admin_donor_path(office.donor) %>"><%= office.donor.name %></a></p>
-              <p><%= pluralize(office.all_donated_projects.count, 'project', 'projects') %></p>
+              <h3><%= link_to(truncate(agency.name,:length=>40).html_safe, edit_admin_agency_path(agency)) %></h3>
+              <p class="red"><a href="<%= projects_admin_donor_path(agency.donor) %>"><%= agency.donor.name %></a></p>
+              <p><%= pluralize(agency.donor.all_donated_projects.count, 'project', 'projects') %></p>
             </li>
           <% end -%>
         </ul>
@@ -78,6 +78,6 @@
 <script src="/javascripts/plugins/chosen/chosen.jquery.js" type="text/javascript" charset="utf-8"></script>
 <script type="text/javascript">
   $(function(){
-    $(".chzn-select").chosen({widths: {filter_donor_id_chzn: 246}});
+    $(".chzn-select").chosen({widths: {filter_donor_id_chzn: 160}});
   });
 </script>

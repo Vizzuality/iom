@@ -1742,19 +1742,19 @@ cursor:pointer;
   div.one_donor a.import_csv:hover {
     background-position:0 -32px;
   }
-  div.med.agencies_list h2 a.remove,
+  div.med.offices_list h2 a.remove,
   div.med.donors_list h2 a.remove {
     padding:0 10px 0 0;
     color:#333333;
     border-bottom:1px dotted #EB4142;
     background:url('/images/backoffice/icons/red_x.png') no-repeat right 17px;
   }
-  div.med.agencies_list h2 a.remove:hover,
+  div.med.offices_list h2 a.remove:hover,
   div.med.donors_list h2 a.remove:hover {
     border-bottom:1px solid #EB4142;
     text-decoration:none;
   }
-  div.med.agencies_list ul,
+  div.med.offices_list ul,
   div.med.donors_list ul {
     float:left;
     width:100%;
@@ -1762,7 +1762,7 @@ cursor:pointer;
     margin:23px 0 0 0;
     border-top:1px solid #CCCCCC;
   }
-  div.med.agencies_list ul li,
+  div.med.offices_list ul li,
   div.med.donors_list ul li {
     float:left;
     width:100%;
@@ -1771,11 +1771,11 @@ cursor:pointer;
     border-bottom:1px solid #CCCCCC;
     height:71px;
   }
-  div.med.agencies_list ul li.last,
+  div.med.offices_list ul li.last,
   div.med.donors_list ul li.last {
     border:none;
   }
-  div.med.agencies_list ul li h3,
+  div.med.offices_list ul li h3,
   div.med.donors_list ul li h3 {
     float:left;
     width:546px!important;
@@ -1784,19 +1784,19 @@ cursor:pointer;
     padding:27px 0;
     display:inline;
   }
-  div.med.agencies_list ul li h3 {
+  div.med.offices_list ul li h3 {
     width:400px!important;
   }
-  div.med.agencies_list ul li h3 a,
+  div.med.offices_list ul li h3 a,
   div.med.donors_list ul li h3 a {
     font:bold 17px Arial;
     color:#E93E3F;
   }
-  div.med.agencies_list ul li h3 a:hover,
+  div.med.offices_list ul li h3 a:hover,
   div.med.donors_list ul li h3 a:hover {
     text-decoration:underline;
   }
-  div.med.agencies_list ul li p,
+  div.med.offices_list ul li p,
   div.med.donors_list ul li p {
     float:left;
     width:167px;
@@ -1807,36 +1807,36 @@ cursor:pointer;
     color:#666666;
     text-align:center;
   }
-  div.med.agencies_list ul li p a,
+  div.med.offices_list ul li p a,
   div.med.donors_list ul li p a {
     padding:0;
     font:normal 13px Arial;
     color:#EB4142;
   }
-  div.med.agencies_list ul li p a:hover,
+  div.med.offices_list ul li p a:hover,
   div.med.donors_list ul li p a:hover {
     text-decoration:underline;
   }
-  div.med.agencies_list ul li p.red,
+  div.med.offices_list ul li p.red,
   div.med.donors_list ul li p.red {
     background:#f7f7f7;
   }
-  div.med.agencies_list ul li p.red {
+  div.med.offices_list ul li p.red {
     width: 300px;
   }
-  div.med.agencies_list div.no_results,
+  div.med.offices_list div.no_results,
   div.med.donors_list div.no_results {
     float:left;
     width:100%;
     padding:70px 0 80px;
   }
-  div.med.agencies_list div.no_results h2,
+  div.med.offices_list div.no_results h2,
   div.med.donors_list div.no_results h2 {
     float:left;
     width:100%;
     text-align:center;
   }
-  div.med.agencies_list div.no_results p,
+  div.med.offices_list div.no_results p,
   div.med.donors_list div.no_results p {
     float:left;
     width:100%;
@@ -1845,12 +1845,12 @@ cursor:pointer;
     font:normal 17px Arial;
     color:#666666;
   }
-  div.med.agencies_list div.no_results p a,
+  div.med.offices_list div.no_results p a,
   div.med.donors_list div.no_results p a {
     color:#E93E3F;
     text-decoration:underline;
   }
-  div.med.agencies_list div.no_results p a:hover,
+  div.med.offices_list div.no_results p a:hover,
   div.med.donors_list div.no_results p a:hover {
     color:#7F2023;
   }
