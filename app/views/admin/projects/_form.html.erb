@@ -25,14 +25,12 @@
     </div>
   </div>
 
-  <% if current_user.admin? %>
-  <div class="field">
+  <div class="field <%= 'hidden' unless current_user.admin? %>">
     <label>InterAction Intervention ID</label>
     <span class="input_large">
-      <%= f.text_field :intervention_id, :class => if action_name == 'new' then 'editable' end, :disabled => action_name == 'edit' %>
+      <%= f.text_field :intervention_id %>
     </span>
   </div>
-  <% end %>
 
   <div class="field">
     <label>Organization Intervention ID
@@ -726,6 +724,12 @@
 
   <!-- COMMON IN EDIT AND NEW FORM -->
 
+  <script type="text/javascript">
+    var organization_id     = '<%= @project.primary_organization.try(:organization_id).presence || 'XXXX' %>';
+    var project_id          = '<%= @project.organization_id.presence || 'XXX' %>';
+    var organizations_ids   = <%= (@organizations_ids || {}).to_json.html_safe %>;
+    var countries_iso_codes = <%= (@countries_iso_codes || {}).to_json.html_safe %>;
+  </script>
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
   <script src="/javascripts/backoffice/project_map.js" type="text/javascript" charset="utf-8"></script>
   <script src="/javascripts/plugins/jquery.mousewheel.js" type="text/javascript" charset="utf-8"></script>
@@ -734,7 +738,3 @@
   <script src="/javascripts/plugins/jquery.stylish-select.js" type="text/javascript" charset="utf-8"></script>
   <script src="/javascripts/backoffice/project.js" type="text/javascript" charset="utf-8"></script>
   <script src="/javascripts/backoffice/project_region.js" type="text/javascript" charset="utf-8"></script>
-  <script type="text/javascript">
-    var organizations_ids =   <%= (@organizations_ids || {}).to_json.html_safe %>;
-    var countries_iso_codes = <%= (@countries_iso_codes || {}).to_json.html_safe %>;
-  </script>

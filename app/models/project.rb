@@ -755,6 +755,10 @@ SQL
     save!
   end
 
+  def generate_intervention_id
+    self.intervention_id = [primary_organization.try(:organization_id).presence || 'XXXX', countries.first.try(:iso2_code).presence || 'XX', Time.now.strftime('%y'), organization_id.presence || 'XXX'].join('-')
+  end
+
   private
 
   def location_presence

@@ -78,7 +78,8 @@ class Admin::ProjectsController < Admin::AdminController
   end
 
   def new
-    @project             = new_project(:date_provided => Time.now)
+    @project = new_project(:date_provided => Time.now)
+    @project.generate_intervention_id
 
     if Rails.env.development?
       @project.start_date  = Time.now
@@ -91,11 +92,14 @@ class Admin::ProjectsController < Admin::AdminController
 
   def create
     @project = new_project(params[:project])
+    @project.generate_intervention_id
     @project.updated_by = current_user
     if @project.valid? && @project.save
       flash[:notice] = "Project created! Now you can <a href='#{donations_admin_project_path(@project)}'>provide the donor information</a> for this project."
       redirect_to edit_admin_project_path(@project), :flash => {:success => 'Project has been created successfully'}
     else
+      @organizations_ids   = organizations_ids
+      @countries_iso_codes = countries_iso_codes
       @countries = @project.country_ids.map{|id| Country.find(id)}
       @regions = @project.region_ids.map{|id| Region.find(id)}
       render :action => 'new'
@@ -109,6 +113,8 @@ class Admin::ProjectsController < Admin::AdminController
   def edit
     @project              = find_project(params[:id])
     @project.date_updated = Time.now
+    @organizations_ids   = organizations_ids
+    @countries_iso_codes = countries_iso_codes
   end
 
   def update
@@ -120,6 +126,8 @@ class Admin::ProjectsController < Admin::AdminController
       flash[:notice] = 'Project updated successfully.'
       redirect_to edit_admin_project_path(@project), :flash => {:success => 'Project has been updated successfully'}
     else
+      @organizations_ids   = organizations_ids
+      @countries_iso_codes = countries_iso_codes
       flash.now[:error] = 'Sorry, there are some errors that must be corrected.'
       render :action => 'edit'
     end

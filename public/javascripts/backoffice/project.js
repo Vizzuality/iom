@@ -8,10 +8,8 @@ var clusters_id              = 9; // clusters_
 var clusterToAdd             = 13; // clusterToAdd_
 var sectors_id               = 8; // sectors_
 var sectorToAdd              = 12; // sectorToAdd_
-var organization_id          = 'XXXX';
-var country_iso_codes         = [];
+var country_iso_codes        = [];
 var current_year_last_digits = (new Date()).getFullYear().toString().substr(2, 2);
-var project_id               = 'XXX';
 $(document).ready(function(ev){
 
   $('div.long_search form.search select').change(function(){
@@ -815,7 +813,7 @@ function update_project_intervention_id() {
                                 current_year_last_digits + '-' +
                                 project_id;
 
-  $('input#project_intervention_id.editable').val(project_intervention_id);
+  $('input#project_intervention_id').val(project_intervention_id);
 }
 
 function updateCountryIsoCode(country_id) {
