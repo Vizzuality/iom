@@ -140,7 +140,8 @@ class Region < ActiveRecord::Base
             ) as count
              from regions as re
              where id!=#{self.id} and
-             level=#{site.level_for_region}
+             level=#{site.level_for_region} and
+             country_id = #{self.country_id}
              order by dist
         ) as subq
         where count>0
