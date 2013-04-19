@@ -54,15 +54,15 @@ class User < ActiveRecord::Base
   end
 
   def self.export_headers
-    %w(name email created_at updated_at organization_id role site_id description last_login)
+    %w(name email created_at updated_at organization_id role sites description last_login)
   end
 
   def self.to_excel(organization_id = nil)
     users = if organization_id.blank? || organization_id.to_i < 1
-              User.all
+              User
             else
-              User.where(:organization_id => organization_id).all
-            end.as_json(:root => false)
+              User.where(:organization_id => organization_id)
+            end.all.as_json(:root => false)
 
     users.to_excel(:headers => User.export_headers)
   end
@@ -104,6 +104,10 @@ class User < ActiveRecord::Base
     @site_id ||= (attributes['site_id'] || '').split(',')
   end
 
+  def sites_names
+    Site.find(site_id).map(&:name).join(', ')
+  end
+
   def organization_id=(value)
     value = value.to_i
     write_attribute(:organization_id, value.to_i) if value > 0
@@ -131,15 +135,15 @@ class User < ActiveRecord::Base
 
   def as_json(attributes = {})
     {
-      'name'            => name,
-      'email'           => email,
-      'created_at'      => created_at,
-      'updated_at'      => updated_at,
-      'organization'    => organization.try(:name),
-      'role'            => role,
-      'site_id'         => site_id,
-      'description'     => description,
-      'last_login'      => last_login
+      'name'         => name,
+      'email'        => email,
+      'created_at'   => created_at,
+      'updated_at'   => updated_at,
+      'organization' => organization.try(:name),
+      'role'         => role,
+      'sites'        => sites_names,
+      'description'  => description,
+      'last_login'   => last_login
     }
   end
 
