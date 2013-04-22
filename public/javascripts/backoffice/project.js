@@ -813,7 +813,7 @@ function update_project_intervention_id() {
                                 current_year_last_digits + '-' +
                                 project_id;
 
-  $('input#project_intervention_id').val(project_intervention_id);
+  $('input#project_intervention_id.auto').val(project_intervention_id);
 }
 
 function updateCountryIsoCode(country_id) {

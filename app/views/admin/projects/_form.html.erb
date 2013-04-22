@@ -28,7 +28,7 @@
   <div class="field <%= 'hidden' unless current_user.admin? %>">
     <label>InterAction Intervention ID</label>
     <span class="input_large">
-      <%= f.text_field :intervention_id %>
+      <%= f.text_field :intervention_id, :class => action_name == 'new' ? 'auto' : nil %>
     </span>
   </div>
 
