@@ -5467,6 +5467,7 @@ div.block.site_info div.med div.left form input[type="text"] {
   left:7px;
   width:400px;
   height:21px;
+  background:none;
   font:normal 15px Arial;
   color:#333333;
   border:none;
