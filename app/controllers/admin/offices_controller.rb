@@ -40,7 +40,7 @@ class Admin::OfficesController < Admin::AdminController
   end
 
   def new
-    @office = Office.new
+    @office = Office.new(:donor_id => params[:donor_id])
     @donors = Donor.all.map{|d| [d.name, d.id]}
   end
 

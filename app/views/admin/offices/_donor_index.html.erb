@@ -4,9 +4,9 @@
     <div class="med">
       <div class="left">
         <h2 class="museo_sans"><%= @donor.name.html_safe %></h2>
+        <% unless @offices.empty? %>
 
         <p><%= pluralize(@offices.count, ' office', ' offices') %></p>
-        <% unless @offices.empty? %>
           <ul>
             <% @offices.each do |office| %>
             <li>
@@ -16,6 +16,11 @@
             </li>
             <% end -%>
           </ul>
+        <% else %>
+          <div class="no_results">
+            <h2>No offices defined for this donor. </h2>
+            <p><%= link_to 'Add one?', new_admin_office_path(:donor_id => @donor.id) %></p>
+          </div>
         <% end -%>
       </div>
       <div class="right menu" style="min-height: 300px;">
