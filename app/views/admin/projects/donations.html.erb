@@ -18,7 +18,7 @@
                 <h3>
                   <%= link_to(truncate(donation.office.name, :length => 44), edit_admin_office_path(donation.office)) %>
                 </h3>
-                <span>Office from <%= link_to donation.office.name, edit_admin_donor_path(donation.donor) %></span>
+                <span>Office from <%= link_to donation.office.donor.name, edit_admin_donor_path(donation.donor) %></span>
               <% else %>
                 <h3>
                   <%= link_to(truncate(donation.donor.name, :length => 44), edit_admin_donor_path(donation.donor)) %>
