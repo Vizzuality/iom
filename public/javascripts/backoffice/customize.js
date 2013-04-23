@@ -15,8 +15,8 @@
       var position = $('a.manage_partners').position();
       if ($('#manage_partners').hasClass('show')){
         $('#manage_partners')
-        .css('top',position.top-436+'px')
-        .css('left',position.left-145+'px')
+        .css('top',position.top-210+'px')
+        .css('left',position.left-80+'px')
         .fadeIn();
       }
 
@@ -24,14 +24,14 @@
         ev.preventDefault();
         ev.stopPropagation();
         var position = $('a.manage_partners').position();
-        $('#manage_partners').css('top',position.top-436+'px');
-        $('#manage_partners').css('left',position.left-145+'px');
+        $('#manage_partners').css('top',position.top-210+'px');
+        $('#manage_partners').css('left',position.left+80+'px');
         $('#manage_partners').fadeIn();
 
         $(window).resize(function() {
           var position = $('a.manage_partners').position();
-          $('#manage_partners').css('top',position.top-436+'px');
-          $('#manage_partners').css('left',position.left-145+'px');
+          $('#manage_partners').css('top',position.top-210+'px');
+          $('#manage_partners').css('left',position.left-80+'px');
         });
       });
 

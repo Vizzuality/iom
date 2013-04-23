@@ -1,12 +1,21 @@
 <div class="main_head">
   <div class="inner_main_head">
-    <div class="left">
+    <div class="left home">
       <h1><%= @site.name %></h1>
       <% unless @site.short_description.nil? %><h3><%= @site.short_description %></h3><%end%>
       <div class="float_head home">
         <h1><%= @site.name %></h1>
         <% unless @site.short_description.nil? %><h3><%= @site.short_description %></h3><%end%>
       </div>
+
+      <% if @site.partners.present? %>
+        <div class="sponsor">
+          <p class="sponsor_label"><%= @site.partners.first.label %></p>
+          <div class="sponsor_logo"><%= link_to image_tag(@site.partners.first.logo.url(:small)), @site.partners.first.url, :target => '_blank' %></div>
+        </div>        
+      <% end -%>
+
+
     </div>
     <div class="right home">
       <% unless @site.short_description.nil? %><p><%= anglo(@site.long_description) %> <a href="<%= page_path(Page.about(@site)) %>">Learn more</a></p><%end%>
@@ -119,16 +128,6 @@
       <a href="#" class="close button">Close</a>
     </div>
     <div class="popup_background"></div>
-
-    <% if @site.partners.present? %>
-      <div id="sponsor">
-        <span><%= @site.partners.first.label %></span>
-        <div id="logo">
-          <%= link_to image_tag(@site.partners.first.logo.url(:small)), @site.partners.first.url, :target => '_blank' %>
-        </div>
-        <div id="logo_bottom_border"></div>
-      </div>
-    <% end -%>
 
     <div id="projects">
       <%= render 'projects/projects' %>
