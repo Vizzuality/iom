@@ -144,24 +144,27 @@ class OrganizationsController < ApplicationController
                       GROUP BY r.id,r.name,lon,lat,r.name,r.path,r.code
                     SQL
             else
-              "select c.id,count(distinct ps.project_id) as count,c.name,c.center_lon as lon,
-                        c.center_lat as lat,c.name,
-                        CASE WHEN count(distinct ps.project_id) > 1 THEN
-                            '#{carry_on_url}'||c.id
-                        ELSE
-                            '/projects/'||(array_to_string(array_agg(ps.project_id),''))
-                        END as url,
-                        c.iso2_code as code,
-                        (select count(*) from data_denormalization where countries_ids && ('{'||c.id||'}')::integer[] and (end_date is null OR end_date > now()) and site_id=#{@site.id}) as total_in_region
-                  from (((((
-                    projects as p inner join organizations as o on o.id=p.primary_organization_id and o.id=#{params[:id].sanitize_sql!.to_i})
-                    inner join projects_sites as ps on p.id=ps.project_id and ps.site_id=#{@site.id}) inner join countries_projects as cp on cp.project_id=p.id)
-                    inner join projects as prj on ps.project_id=prj.id and (prj.end_date is null OR prj.end_date > now())
-                    inner join countries as c on cp.country_id=c.id)
-                    inner join regions as r on r.country_id=c.id)
-                    #{category_join}
-                    where r.id = #{@filter_by_location.last} and r.level=#{@site.level_for_region}
-                    group by c.id,c.name,lon,lat,c.name,c.iso2_code"
+                <<-SQL
+                  SELECT r.id,
+                         count(ps.project_id) AS count,
+                         r.name,
+                         r.center_lon AS lon,
+                         r.center_lat AS lat,
+                         r.name,
+                         CASE WHEN count(ps.project_id) > 1 THEN
+                           '#{carry_on_url}'||r.path
+                         ELSE
+                           '/projects/'||(array_to_string(array_agg(ps.project_id),''))
+                         END AS url,
+                         r.code
+                  FROM projects_regions AS pr
+                  INNER JOIN projects_sites AS ps ON pr.project_id=ps.project_id AND ps.site_id=#{@site.id}
+                  INNER JOIN projects AS p ON pr.project_id=p.id AND (p.end_date is NULL OR p.end_date > now())
+                  INNER JOIN regions AS r ON pr.region_id=r.id AND r.level=#{@site.levels_for_region.min} AND r.country_id=#{@filter_by_location.shift} AND r.id IN (#{@filter_by_location.join(',')})
+                  #{category_join}
+                  WHERE p.primary_organization_id = #{params[:id].sanitize_sql!.to_i}
+                  GROUP BY r.id,r.name,lon,lat,r.name,r.path,r.code
+                SQL
             end
           else
             sql="select c.id,count(distinct ps.project_id) as count,c.name,c.center_lon as lon,
