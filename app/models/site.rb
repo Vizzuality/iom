@@ -516,7 +516,6 @@ class Site < ActiveRecord::Base
   end
 
   def countries_select
-
     filter = if geographic_context_country_id? && geographic_context_region_id.blank?
                <<-SQL
                  INNER JOIN countries_projects cp ON cp.project_id = projects.id AND cp.country_id = #{self.geographic_context_country_id} AND cp.country_id = c.id
@@ -528,6 +527,9 @@ class Site < ActiveRecord::Base
              elsif geographic_context_geometry?
                <<-SQL
                  INNER JOIN sites s ON ST_Intersects(s.geographic_context_geometry, ST_SetSRID(ST_Point(c.center_lon, c.center_lat), 4326)) AND s.id = #{id}
+                 INNER JOIN countries_projects AS pr ON pr.country_id = c.id
+                 INNER JOIN projects_sites     AS ps ON pr.project_id = ps.project_id AND ps.site_id = #{id}
+                 INNER JOIN projects           AS p  ON ps.project_id=p.id AND (p.end_date IS NULL OR p.end_date > now())
                SQL
              else
                <<-SQL
@@ -576,8 +578,8 @@ SQL
         where level=#{level_for_region}
         and id in (
           select region_id from projects_regions as pr
-          inner join projects_sites as ps on pr.project_id=ps.project_id and site_id=#{self.id}
           inner join projects as p on p.id = pr.project_id and (p.end_date is null OR p.end_date > now())
+          inner join projects_sites as ps on p.id=ps.project_id and site_id=#{self.id}
         )
         order by name
 SQL
