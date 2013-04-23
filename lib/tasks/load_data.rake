@@ -781,8 +781,9 @@ namespace :iom do
       csv_data = Hash[FasterCSV.read(csv_path, :col_sep => ',')]
 
       Organization.find_each do |organization|
+        organization.updated_by = User.find(1)
         organization.organization_id = Hash[csv_data][organization.name.strip]
-        organization.save!(false)
+        organization.save(:validate => false)
       end
 
       #bbdd_organizations_names       = Organization.where(:organization_id => nil).map(&:name)
