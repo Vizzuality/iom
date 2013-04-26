@@ -41,7 +41,7 @@ class Admin::OfficesController < Admin::AdminController
 
   def new
     @office = Office.new(:donor_id => params[:donor_id])
-    @donors = Donor.all.map{|d| [d.name, d.id]}
+    @donors = Donor.all.map{|d| [d.name, d.id]}.sort{|a, b| a[0] <=> b[0]}
   end
 
   def create
