@@ -1,0 +1,172 @@
+a {
+  color: #008BB0;
+}
+
+div {
+  &.main_head div {
+    &.left {
+      h1 {
+        text-shadow: 0 1px #003F4F;
+      }
+      p {
+        color: #003F4F;
+      }
+    }
+    &.float_head {
+      background: url('/images/sites/search/head_mask.png') repeat 0 0 #008bb0 !important;
+      h2 {
+        color: #003f4f !important;
+        text-shadow: none;
+      }
+    }
+  }
+  &#left_column div {
+    &.float_left div {
+      &.head {
+        h2 {
+          color: white;
+          text-shadow: 0 1px #003F4F;
+        }
+        background: url('/images/sites/search/head_mask.png') repeat 0 0 #008bb0;
+      }
+      &.block {
+        a, ul.clusters li a {
+          color: #008BB0;
+        }
+      }
+    }
+    &.right {
+      ul li {
+        h4 a, p.info a {
+          color: #008BB0;
+        }
+      }
+      h3 ul.download li a {
+        color: #008BB0;
+      }
+    }
+  }
+  &#pages div {
+    &.left div {
+      &.outer_head div.head {
+        border-bottom: 1px solid #003F4F;
+        background: url('/images/sites/search/head_mask.png') repeat 0 0 #008bb0 !important;
+        h1 {
+          text-shadow: 0 1px #003F4F;
+        }
+        p {
+          color: #003F4F;
+        }
+        a {
+          color: #003F4F;
+          text-decoration: underline;
+        }
+      }
+      &.body {
+        p a, ul li a {
+          color: #008BB0;
+          text-decoration: none;
+        }
+      }
+      &.results_list ul li div.project_name h3 a {
+        color: #008BB0;
+      }
+    }
+    &.right div.block {
+      p a, ul li a {
+        color: #008BB0;
+      }
+    }
+  }
+  &#project div {
+    &.left div.block div.logo a {
+      color: #008bb0 !important;
+    }
+    &.float_right div {
+      &.head {
+        background: url('/images/sites/search/head_mask.png') repeat 0 0 #008bb0;
+        h1 {
+          text-shadow: 0 1px #008BB0;
+        }
+        p {
+          color: #008BB0;
+          a {
+            color: #008BB0;
+            &:hover {
+              color: #003F4F;
+            }
+          }
+        }
+      }
+      &.block ul li div.info h4 a {
+        color: #008BB0;
+      }
+    }
+    &.left div.block {
+      ul li a, p a {
+        color: #008BB0;
+      }
+    }
+  }
+}
+
+ul.breadcrumb li a {
+  color: #003f4f !important;
+}
+
+div {
+  &.main_head {
+    div.float_head.home {
+      h3, sup.beta {
+        color: #003F4F;
+      }
+    }
+    &.projects div.float_head p a {
+      color: #003F4F;
+      text-decoration: underline;
+    }
+  }
+  &.projects div {
+    &.right div.block {
+      p a, ul li a {
+        color: #008BB0;
+      }
+      div.logo a {
+        color: #008BB0;
+        &.long {
+          color: #008BB0;
+        }
+      }
+    }
+    &.float_left div.block ul.related_projects li div.info h4 a {
+      color: #008BB0;
+    }
+  }
+}
+
+p.sub a {
+  color: #008BB0;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+a#see_all {
+  color: #008BB0;
+}
+
+div {
+  &.view_more a, &.block h3 a {
+    color: #008BB0;
+  }
+}
+
+a.more {
+  color: #008BB0;
+}
+
+div#superfooter_pages {
+  h2, a {
+    color: #008BB0;
+  }
+}

@@ -21,6 +21,7 @@ gem 'memcache-client'
 gem 'spreadsheet'
 gem 'roadie'
 gem 'ruby-oembed'
+gem 'sass'
 
 group :development do
   gem 'git-up'
