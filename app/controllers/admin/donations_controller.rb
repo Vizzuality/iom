@@ -5,7 +5,7 @@ class Admin::DonationsController < Admin::AdminController
   def create
     @project = Project.find(params[:project_id])
     donor = Donor.where(:id => params[:donation][:donor_id]).first
-    office = Office.where(:id => params[:donation][:office_id]).first
+    office = Office.where(:id => params[:donation][:office_id]).first || Office.create(:donor_id => params[:donation][:donor_id], :name => params[:donation][:office_attributes][:name])
     @donation = Donation.new(params[:donation].slice!(:donor_id, :office_id))
     @donation.donor = donor if donor.present?
     @donation.office = office if office.present?
