@@ -1,0 +1,155 @@
+a {
+  color: #F5007D;
+}
+
+div {
+  &.main_head div {
+    &.left {
+      h1 {
+        text-shadow: 0 1px #79003E;
+      }
+      p {
+        color: #79003E;
+      }
+    }
+    &.float_head {
+      background: url('/images/sites/search/head_mask.png') repeat 0 0 #f5007d !important;
+      h2 {
+        color: #79003e !important;
+        text-shadow: none;
+      }
+    }
+  }
+  &#left_column div {
+    &.float_left div {
+      &.head {
+        h2 {
+          color: white;
+          text-shadow: 0 1px #79003E;
+        }
+        background: url('/images/sites/search/head_mask.png') repeat 0 0 #f5007d !important;
+      }
+      &.block {
+        a, ul.clusters li a {
+          color: #F5007D;
+        }
+      }
+    }
+    &.right {
+      ul li {
+        h4 a, p.info a {
+          color: #F5007D;
+        }
+      }
+      h3 ul.download li a {
+        color: #F5007D;
+      }
+    }
+  }
+  &#pages div {
+    &.float_left div {
+      &.outer_head div.head {
+        background: url('/images/sites/search/head_mask.png') no-repeat 0 0 #f5007d !important;
+        p {
+          color: #79003E;
+        }
+      }
+      &.body p a {
+        color: #F5007D;
+        text-decoration: none;
+      }
+      &.results_list ul li div.project_name h3 a {
+        color: #F5007D;
+      }
+    }
+    &.right div.block {
+      p a, ul li a {
+        color: #F5007D;
+      }
+    }
+  }
+  &#project div {
+    &.left div.block div.logo a {
+      color: #F5007D;
+    }
+    &.float_right div {
+      &.head {
+        background: url('/images/sites/search/head_mask.png') no-repeat 0 0 #f5007d !important;
+        p {
+          color: #79003E;
+          a {
+            color: #79003E;
+            &:hover {
+              color: #470025;
+            }
+          }
+        }
+      }
+      &.block ul li div.info h4 a {
+        color: #F5007D;
+      }
+    }
+    &.left div.block {
+      ul li a, p a {
+        color: #F5007D;
+      }
+    }
+  }
+  &.main_head div.float_head.home {
+    h3, sup.beta {
+      color: #79003E;
+    }
+  }
+  &#pages div.float_left div.outer_head div.head {
+    h1 {
+      text-shadow: 0 1px #79003E;
+    }
+    border-bottom: 1px solid #79003E;
+  }
+  &.main_head.projects div.float_head p a {
+    color: #79003E;
+    text-decoration: underline;
+  }
+  &.projects div {
+    &.right div.block {
+      p a, ul li a, div.logo a.long {
+        color: #F5007D;
+      }
+    }
+    &.float_left div.block ul.related_projects li div.info h4 a {
+      color: #F5007D;
+    }
+  }
+}
+
+p.sub a {
+  color: #F5007D;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+a#see_all {
+  color: #F5007D;
+}
+
+div {
+  &.view_more a, &.block h3 a {
+    color: #F5007D;
+  }
+}
+
+a.more {
+  color: #F5007D;
+}
+
+div {
+  &#pages div.right div.block a.more {
+    background: url('/images/themes/2/down.png') no-repeat right 6px;
+  }
+  &#superfooter_pages {
+    h2, a {
+      color: #F5007D;
+    }
+  }
+}

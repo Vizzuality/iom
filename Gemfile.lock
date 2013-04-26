@@ -180,6 +180,7 @@ GEM
     rubyzip (0.9.4)
     sanitize (2.0.2)
       nokogiri (~> 1.4.4)
+    sass (3.2.8)
     selenium-webdriver (0.2.1)
       childprocess (>= 0.1.7)
       ffi (>= 1.0.7)
@@ -241,6 +242,7 @@ DEPENDENCIES
   ruby-debug
   ruby-oembed
   sanitize
+  sass
   spatial_adapter
   spreadsheet
   steak!

@@ -1,0 +1,172 @@
+a {
+  color: #518842;
+}
+
+div {
+  &.main_head div {
+    &.left {
+      h1 {
+        text-shadow: 0 1px #1E3218;
+      }
+      p {
+        color: #1E3218;
+      }
+    }
+    &.float_head {
+      background: url('/images/sites/search/head_mask.png') repeat 0 0 #518842 !important;
+      h2 {
+        color: #1e3218 !important;
+        text-shadow: none;
+      }
+    }
+  }
+  &#left_column div {
+    &.float_left div {
+      &.head {
+        h2 {
+          color: white;
+          text-shadow: 0 1px #1E3218;
+        }
+        background: url('/images/sites/search/head_mask.png') repeat 0 0 #518842 !important;
+      }
+      &.block {
+        a, ul.clusters li a {
+          color: #518842;
+        }
+      }
+    }
+    &.right {
+      ul li {
+        h4 a, p.info a {
+          color: #518842;
+        }
+      }
+      h3 ul.download li a {
+        color: #518842;
+      }
+    }
+  }
+  &#pages div {
+    &.left div {
+      &.outer_head div.head {
+        border-bottom: 1px solid #003F4F;
+        background: url('/images/sites/search/head_mask.png') repeat 0 0 #518842 !important;
+        h1 {
+          text-shadow: 0 1px #1E3218;
+        }
+        p {
+          color: #518842;
+        }
+        a {
+          color: #518842;
+          text-decoration: underline;
+        }
+      }
+      &.body {
+        p a, ul li a {
+          color: #518842;
+          text-decoration: none;
+        }
+      }
+      &.results_list ul li div.project_name h3 a {
+        color: #518842;
+      }
+    }
+    &.right div.block {
+      p a, ul li a {
+        color: #518842;
+      }
+    }
+  }
+  &#project div {
+    &.left div.block div.logo a {
+      color: #518842 !important;
+    }
+    &.float_right div {
+      &.head {
+        background: url('/images/sites/search/head_mask.png') repeat 0 0 #518842;
+        h1 {
+          text-shadow: 0 1px #008BB0;
+        }
+        p {
+          color: #1E3218;
+          a {
+            color: #1E3218;
+            &:hover {
+              color: #1E3218;
+            }
+          }
+        }
+      }
+      &.block ul li div.info h4 a {
+        color: #518842;
+      }
+    }
+    &.left div.block {
+      ul li a, p a {
+        color: #518842;
+      }
+    }
+  }
+}
+
+ul.breadcrumb li a {
+  color: #1e3218 !important;
+}
+
+div {
+  &.main_head {
+    div.float_head.home {
+      h3, sup.beta {
+        color: #1E3218;
+      }
+    }
+    &.projects div.float_head p a {
+      color: #1E3218;
+      text-decoration: underline;
+    }
+  }
+  &.projects div {
+    &.right div.block {
+      p a, ul li a {
+        color: #518842;
+      }
+      div.logo a {
+        color: #518842;
+        &.long {
+          color: #518842;
+        }
+      }
+    }
+    &.float_left div.block ul.related_projects li div.info h4 a {
+      color: #518842;
+    }
+  }
+}
+
+p.sub a {
+  color: #518842;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+a#see_all {
+  color: #518842;
+}
+
+div {
+  &.view_more a, &.block h3 a {
+    color: #518842;
+  }
+}
+
+a.more {
+  color: #518842;
+}
+
+div#superfooter_pages {
+  h2, a {
+    color: #518842;
+  }
+}

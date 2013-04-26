@@ -1,0 +1,105 @@
+/*default layout color*/
+
+a {
+  color: #CE5D4C;
+}
+
+div {
+  &.main_head div {
+    &.left {
+      h1 {
+        text-shadow: 0 1px #8E4035;
+      }
+      p {
+        color: #8E4035;
+      }
+    }
+    &.float_head {
+      background: url('/images/sites/search/head_mask.png') repeat 0 0 #ce5d4c;
+      h2 {
+        color: #7c3b32 !important;
+        text-shadow: none;
+      }
+    }
+  }
+  &#left_column div {
+    &.float_left div {
+      &.head {
+        h2 {
+          color: white;
+          text-shadow: 0 1px #8E4035;
+        }
+        background: url('/images/sites/search/head_mask.png') repeat 0 0 #ce5d4c;
+      }
+      &.block {
+        a, ul.clusters li a {
+          color: #CE5D4C;
+        }
+      }
+    }
+    &.right {
+      ul li {
+        h4 a, p.info a {
+          color: #CE5D4C;
+        }
+      }
+      h3 ul.download li a {
+        color: #CE5D4C;
+      }
+    }
+  }
+  &#pages div {
+    &.float_left div {
+      &.outer_head div.head {
+        background: url('/images/sites/search/head_mask.png') repeat-x 0 0 #ce5d4c;
+        p {
+          color: #8E4035;
+        }
+      }
+      &.body p a {
+        color: #CE5D4C;
+        text-decoration: none;
+      }
+      &.results_list ul li div.project_name h3 a {
+        color: #CE5D4C;
+      }
+    }
+    &.right div.block {
+      p a, ul li a {
+        color: #CE5D4C;
+      }
+    }
+  }
+  &#project div {
+    &.left div.block div.logo a {
+      color: #CE5D4C;
+    }
+    &.float_right div {
+      &.head {
+        background: url('/images/sites/search/head_mask.png') no-repeat 0 0 #d16150;
+        p {
+          color: #8E4035;
+          a {
+            color: #8E4035;
+            &:hover {
+              color: #6F322A;
+            }
+          }
+        }
+      }
+      &.block ul li div.info h4 a {
+        color: #CE5D4C;
+      }
+    }
+    &.left div.block {
+      ul li a, p a {
+        color: #CE5D4C;
+      }
+    }
+  }
+  &#superfooter_pages {
+    h2, a {
+      color: #CE5D4C;
+    }
+  }
+}

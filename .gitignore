@@ -8,3 +8,4 @@ public/system
 bin/
 install/
 config/app_config.yml
+public/stylesheets/**/*.css
