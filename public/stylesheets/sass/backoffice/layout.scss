@@ -6321,72 +6321,102 @@ div {
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('/images/backoffice/common/modal_bkg.png') repeat 0 0;
     z-index: 10;
+
     div.alert {
-      position: absolute;
+      position: relative;
       top: 50%;
       left: 50%;
       width: 450px;
-      height: 88px;
       padding: 22px;
       margin: -66px 0 0 -247px;
-      background: url('/images/backoffice/common/alert_bkg.png') no-repeat 0 0 !important;
+      background: url('/images/backoffice/common/modal_middle.png') repeat 0 0;
+
+      .top_border, .bottom_border {
+        position: relative;
+        width: 494px;
+        height: 4px;
+        padding: 0;
+      }
+      .top_border {
+        top: -26px;
+        left: -22px;
+        background: url('/images/backoffice/common/modal_top.png') repeat 0 0;
+      }
+
+      .bottom_border {
+        bottom: -26px;
+        left: -22px;
+        background: url('/images/backoffice/common/modal_bottom.png') repeat 0 0;
+      }
+
       h4 {
-        float: left;
         width: 100%;
         font: bold 17px Arial;
         color: #333333;
       }
       p {
-        float: left;
         width: 100%;
         margin: 5px 0 0 0;
         font: normal 15px Arial;
         color: #666666;
       }
-      span {
-        float: right;
+      div {
         margin: 0;
-      }
-      &.importer span {
-        float: left;
-      }
-      span a {
-        &.cancel {
-          float: left;
-          margin: 5px 12px 0 0;
-          font: normal 15px Arial;
-          color: #E93E3F;
-          text-decoration: underline;
-          &:hover {
-            color: #7F2023;
-            cursor: pointer;
+        text-align: right;
+        padding: 15px 0 0;
+        a {
+          display: inline-block;
+          zoom: 1;
+          *display: inline;
+          vertical-align: top;
+          &.cancel {
+            margin: 5px 12px 0 0;
+            font: normal 15px Arial;
+            color: #E93E3F;
+            text-decoration: underline;
+            &:hover {
+              color: #7F2023;
+              cursor: pointer;
+            }
           }
-        }
-        &.button {
-          float: left;
-          text-indent: -9999px;
-          font-size: 0;
-          display: block;
-          line-height: 0;
-          &:hover {
-            background-position: 0 -26px;
+          &.button {
+            text-indent: -9999px;
+            font-size: 0;
+            line-height: 0;
+            &:hover {
+              background-position: 0 -26px;
+            }
+          }
+          &.cancel.ok {
+            width: 63px;
+            height: 26px;
+            background: url('/images/backoffice/common/ok_button.png') no-repeat 0 0;
+            text-indent: -9999px;
+            font-size: 0;
+            display: block;
+            line-height: 0;
+            margin: 5px 5px 0 0;
+            &:hover {
+              background-position: 0 -26px;
+            }
+            &.error {
+              background-position: 0 -52px;
+              &:hover {
+                background-position: 0 -78px;
+              }
+            }
+          }
+          &.button.remove {
+            background: url('/images/backoffice/common/delete_button.png') no-repeat 0 0;
+            width: 63px;
+            height: 26px;
           }
         }
       }
       ul#errors {
         display: none;
       }
-      span a.button.remove {
-        display: inline;
-        background: url('/images/backoffice/common/delete_button.png') no-repeat 0 0;
-        width: 63px;
-        height: 26px;
-      }
-      background: url('/images/backoffice/common/alert_csv_bkg.png') no-repeat 0 0 !important;
-      width: 450px;
-      height: 46px;
       &.ok p {
         margin: 15px 0 0 0;
       }
@@ -6395,31 +6425,6 @@ div {
       }
       &.ok span {
         margin: 15px 0 0 0;
-      }
-      span a {
-        &.cancel, &.remove {
-          display: none;
-        }
-        &.cancel.ok {
-          float: left;
-          width: 63px;
-          height: 26px;
-          background: url('/images/backoffice/common/ok_button.png') no-repeat 0 0;
-          text-indent: -9999px;
-          font-size: 0;
-          display: block;
-          line-height: 0;
-          margin: 5px 5px 0 0;
-          &:hover {
-            background-position: 0 -26px;
-          }
-          &.error {
-            background-position: 0 -52px;
-            &:hover {
-              background-position: 0 -78px;
-            }
-          }
-        }
       }
       &.ok {
         background: url('/images/backoffice/common/alert_csv_ok_bkg.png') no-repeat 0 0 !important;
@@ -6433,7 +6438,6 @@ div {
         top: 30%;
         left: 50%;
         ul#errors {
-          float: left;
           margin: 15px 0 0 15px;
           display: inline;
           width: 425px;
@@ -6441,7 +6445,6 @@ div {
           overflow-x: hidden;
           overflow-y: auto;
           li {
-            float: left;
             margin: 7px 0 0 0;
             background: url('/images/backoffice/common/li_style.png') no-repeat 0 7px;
             padding: 0 0 0 7px;
