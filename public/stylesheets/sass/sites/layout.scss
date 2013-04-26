@@ -67,13 +67,11 @@ div {
     padding: 35px 0 0 0;
     margin: 0 0 0 10px;
     h1 {
-      float: left;
-      position: relative;
-      font: bold 24px "Open Sans Bold";
-      color: #4A4A4A;
-      width: auto;
-      text-shadow: 0 -1px white;
-      margin: 0 5px 0 0;
+      display: inline-block;
+      text-indent: -99999px;
+      background: url('/images/ngoaidmap_logo.png');
+      width: 184px;
+      height: 40px;
       a {
         color: #4A4A4A;
       }
@@ -964,23 +962,25 @@ div {
           color: #7B3932;
         }
       }
+
       &.float_head {
-        position: absolute;
-        top: 0;
-        left: 5px;
-        width: 238px;
-        padding: 30px 32px 44px 32px;
-        background: url('/images/sites/search/head_mask.png') repeat 0 0 #c45a4b;
-        z-index: 100;
+        position:absolute;
+        top:0;
+        left:5px;
+        width:238px;
+        padding:30px 32px 44px 32px;
+        background:url('/images/sites/search/head_mask.png') repeat 0 0 #C45A4B;
+        z-index:100;
+
         &.home {
-          padding: 20px 32px 70px 32px;
+          padding:20px 32px 70px 32px;
           h1 {
-            font: bold 15px "Open Sans Bold";
-            font-size: 32px;
+            font:bold 15px "Open Sans Bold";
+            font-size:32px;
             line-height: 36px;
-            text-transform: uppercase;
-            position: relative;
-            width: 200px;
+            text-transform:uppercase;
+            position:relative;
+            width:200px;
           }
           sup.beta {
             font: normal 11px "Open Sans";
@@ -996,7 +996,8 @@ div {
           }
         }
       }
-      &.sponsor {
+
+      &.fund {
         position: relative;
         left: -27px;
         top: 105px;
@@ -1005,7 +1006,7 @@ div {
         background: #ffffff;
         z-index: 200;
         vertical-align: middle;
-        p.sponsor_label {
+        p.fund_label {
           display: inline-block;
           width: 210px;
           text-align: right;
@@ -1013,7 +1014,7 @@ div {
           color: #666666;
           vertical-align: middle;
         }
-        div.sponsor_logo {
+        div.fund_logo {
           display: inline-block;
           width: 70px;
           height: 40px;
@@ -3323,17 +3324,29 @@ div {
     zoom: 1;
     *display: inline;
   }
-  &#footer_pages div.left a.logo {
-    float: left;
-    display: block;
-    width: 67px;
-    height: 43px;
-    margin: 0 15px 0 0;
-    background: url('/images/sites/common/logo_interaction.png') no-repeat 0 0;
+  &#footer_pages a.logo {
+    float:right;
+    display:block;
+    width:67px;
+    height:43px;
+    margin:0;
+    background:url('/images/sites/common/logo_interaction.png') no-repeat 0 0;
   }
+  &#footer_pages a.logo_ngoaidmap {
+    float:right;
+    display:block;
+    width:130px;
+    height:43px;
+    margin:10px 20px 0 0;
+    background:url('/images/sites/common/logo_ngoaidmap.png') no-repeat 0 0;
+  }
+
   &.dark_footer#footer_pages div.left {
     a.logo {
-      background: url('/images/sites/common/logo_interaction_light.png') no-repeat 0 0;
+      background:url('/images/sites/common/logo_interaction_light.png') no-repeat 0 0;
+    }
+    a.logo_ngoaidmap {
+      background:url('/images/sites/common/logo_ngoaidmap_light.png') no-repeat 0 0;
     }
     div.project p {
       &.site_name, &.all_rights {
