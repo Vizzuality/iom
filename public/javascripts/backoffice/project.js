@@ -281,6 +281,14 @@ $(document).ready(function(ev){
     ev.stopPropagation();
     ev.preventDefault();
 
+    // Check if clicks in jscrollpane
+    if (
+      $(ev.target).hasClass('jspTrack') ||
+      $(ev.target).hasClass('jspDrag')
+    ) {
+      return false;
+    }
+
     if (!$(this).hasClass('clicked')){
 
       // THIS IS A IE HACK
@@ -349,6 +357,14 @@ $(document).ready(function(ev){
   $('span#sector').click(function(ev){
     ev.stopPropagation();
     ev.preventDefault();
+
+    // Check if clicks in jscrollpane
+    if (
+      $(ev.target).hasClass('jspTrack') ||
+      $(ev.target).hasClass('jspDrag')
+    ) {
+      return false;
+    }
 
     if (!$(this).hasClass('clicked')){
       $(this).css('position','relative');

@@ -14,11 +14,18 @@
     });
 
 
-
-
     $('span.region_combo').click(function(ev){
       ev.stopPropagation();
       ev.preventDefault();
+
+      // Check if clicks in jscrollpane
+      if (
+        $(ev.target).hasClass('jspTrack') ||
+        $(ev.target).hasClass('jspDrag')
+      ) {
+        return false;
+      }
+
       if (!$(this).hasClass('clicked')){
         $('span.clicked').removeClass('clicked');
         $(this).addClass('clicked');
