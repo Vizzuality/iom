@@ -209,9 +209,9 @@ div.main_head div.float_head.home {padding:20px 32px 70px 32px;}
 div.main_head div.float_head.home h1 {font:bold 15px "Open Sans Bold"; font-size:32px; line-height: 36px; text-transform:uppercase; position:relative; width:200px;}
 div.main_head div.float_head.home sup.beta {font:normal 11px "Open Sans"; color:#73352B; padding:3px;}
 div.main_head div.float_head.home h3 {width:100%; font:bold 15px "Open Sans Bold"; color:#7B3C32; text-transform:uppercase; margin:10px 0 0 0;}
-div.main_head div.sponsor {position: relative; left: -27px; top: 105px; height: 45px; width: 302px; background: #ffffff; z-index: 200; vertical-align: middle;}
-div.main_head div.sponsor p.sponsor_label {display: inline-block; width: 210px; text-align: right; font:bold 13px "Open Sans Bold"; color:#666666; vertical-align: middle;}
-div.main_head div.sponsor div.sponsor_logo {display: inline-block; width: 70px; height: 40px; margin: 0 10px 0 0; vertical-align: middle;}
+div.main_head div.fund {position: relative; left: -27px; top: 105px; height: 45px; width: 302px; background: #ffffff; z-index: 200; vertical-align: middle;}
+div.main_head div.fund p.fund_label {display: inline-block; width: 210px; text-align: right; font:bold 13px "Open Sans Bold"; color:#666666; vertical-align: middle;}
+div.main_head div.fund div.fund_logo {display: inline-block; width: 70px; height: 40px; margin: 0 10px 0 0; vertical-align: middle;}
 
 div.main_head a.filter {position: absolute; padding: 5px; display: block; width: 239px; font: bold 13px "Open Sans Bold"; color: white; font-weight: normal; text-transform: uppercase; z-index: 100;}
 div.main_head a.filter img{margin: 2px 5px;}
