@@ -9,13 +9,10 @@ class Admin::DonationsController < Admin::AdminController
     @donation = Donation.new(params[:donation].slice!(:donor_id, :office_id))
     if donor.present?
       @donation.donor = donor
-      if office.present?
-        @donation.office = office
-      elsif @donation.office.present?
-        @donation.office.donor = donor
-      end
+      @donation.office = office if office.present?
     end
     @donation.office = nil unless @donation.office.valid?
+    @donation.office.donor = @donation.donor if @donation.office.present? && @donation.office.donor.blank?
     @project.donations << @donation
     @project.updated_by = current_user
 
