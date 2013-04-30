@@ -240,16 +240,22 @@ var video_players = {};
             <h3>Donors & Offices</h3>
             <ul class="donor_list">
               <% index = 0 %>
-              <% @project.donations.each do |donation, count| %>
-                <% if index<5 %>
-                  <li><%= link_to(donation.donor.name.html_safe, donor_path(donation.donor)) %></li>
-                  <% if donation.office.present? %>
-                  <li class="office"><%= link_to(donation.office.name.html_safe, office_path(donation.office)) %></li>
+              <% @project.donations.group_by(&:donor).each_with_index do |donor_with_donations, index| %>
+                <% donor = donor_with_donations.first %>
+                <% donations = donor_with_donations.last %>
+                <% if index < 5 %>
+                  <li><%= link_to(donor.name.html_safe, donor_path(donor)) %></li>
+                  <% donations.map(&:office).uniq.each do |office| %>
+                    <% if office.present? %>
+                      <li class="office"><%= link_to(office.name.html_safe, office_path(office)) %></li>
+                    <% end %>
                   <% end %>
                 <% else %>
-                  <li class="out"><%= link_to(donation.donor.name.html_safe, donor_path(donation.donor)) %></li>
-                  <% if donation.office.present? %>
-                  <li class="out office"><%= link_to(donation.office.name.html_safe, office_path(donation.office)) %></li>
+                  <li class="out"><%= link_to(donor.name.html_safe, donor_path(donor)) %></li>
+                  <% donations.map(&:office).uniq.each do |office| %>
+                    <% if office.present? %>
+                    <li class="out office"><%= link_to(office.name.html_safe, office_path(office)) %></li>
+                    <% end %>
                   <% end %>
                 <% end %>
                 <% index = index + 1 %>
