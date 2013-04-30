@@ -22,7 +22,6 @@ gem 'spreadsheet'
 gem 'roadie'
 gem 'ruby-oembed'
 gem 'sass'
-gem 'rods'
 
 group :development do
   gem 'git-up'

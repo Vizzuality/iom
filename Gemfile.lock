@@ -156,7 +156,6 @@ GEM
       css_parser
       nokogiri (>= 1.4.4)
       sprockets
-    rods (0.9.1)
     rr (1.0.2)
     rspec (2.6.0)
       rspec-core (~> 2.6.0)
@@ -237,7 +236,6 @@ DEPENDENCIES
   railroady
   rails (= 3.0.19)
   roadie
-  rods
   rr
   rspec (>= 2.0.0.beta.13)
   rspec-rails (>= 2.0.0.beta.8)
