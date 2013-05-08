@@ -63,8 +63,8 @@ div {
         }
       }
       &.body {
-        p a, ul li a {
-          color: #008BB0;
+        a {
+          color: #008BB0 !important;
           text-decoration: none;
         }
       }
