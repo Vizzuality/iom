@@ -15,7 +15,7 @@ div {
       }
     }
     &.float_head {
-      background: url('/images/sites/search/head_mask.png') repeat 0 0 #ce5d4c;
+      background: url('/images/sites/search/head_mask.png') repeat 0 0 #ce5d4c !important;
       h2 {
         color: #7c3b32 !important;
         text-shadow: none;
@@ -29,7 +29,7 @@ div {
           color: white;
           text-shadow: 0 1px #8E4035;
         }
-        background: url('/images/sites/search/head_mask.png') repeat 0 0 #ce5d4c;
+        background: url('/images/sites/search/head_mask.png') repeat 0 0 #ce5d4c !important;
       }
       &.block {
         a, ul.clusters li a {
@@ -49,16 +49,26 @@ div {
     }
   }
   &#pages div {
-    &.float_left div {
+    &.left div {
       &.outer_head div.head {
-        background: url('/images/sites/search/head_mask.png') repeat-x 0 0 #ce5d4c;
+        border-bottom: 1px solid #8E4035;
+        background: url('/images/sites/search/head_mask.png') repeat 0 0 #ce5d4c !important;
+        h1 {
+          text-shadow: 0 1px #8E4035;
+        }
         p {
           color: #8E4035;
         }
+        a {
+          color: #CE5D4C;
+          text-decoration: underline;
+        }
       }
-      &.body p a {
-        color: #CE5D4C;
-        text-decoration: none;
+      &.body {
+        a {
+          color: #CE5D4C !important;
+          text-decoration: none;
+        }
       }
       &.results_list ul li div.project_name h3 a {
         color: #CE5D4C;
@@ -70,13 +80,14 @@ div {
       }
     }
   }
+
   &#project div {
     &.left div.block div.logo a {
       color: #CE5D4C;
     }
     &.float_right div {
       &.head {
-        background: url('/images/sites/search/head_mask.png') no-repeat 0 0 #d16150;
+        background: url('/images/sites/search/head_mask.png') no-repeat 0 0 #d16150 !important;
         p {
           color: #8E4035;
           a {
