@@ -1008,17 +1008,17 @@ div {
         vertical-align: middle;
         p.fund_label {
           display: inline-block;
-          width: 210px;
+          float: right;
+          padding: 13px 5px 0 0;
           text-align: right;
           font: bold 13px "Open Sans Bold";
           color: #666666;
           vertical-align: middle;
         }
         div.fund_logo {
+          float: right;
           display: inline-block;
-          width: 70px;
-          height: 40px;
-          margin: 0 10px 0 0;
+          margin: 0 10px 0 0;          
           vertical-align: middle;
         }
       }
