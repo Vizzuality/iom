@@ -9,9 +9,9 @@
       </div>
 
       <% if @site.partners.present? %>
-        <div class="fund">
+        <div class="fund">          
+          <div class="fund_logo"><%= link_to image_tag(@site.partners.first.logo.url(:original)), @site.partners.first.url, :target => '_blank' %></div>
           <p class="fund_label"><%= @site.partners.first.label %></p>
-          <div class="fund_logo"><%= link_to image_tag(@site.partners.first.logo.url(:small)), @site.partners.first.url, :target => '_blank' %></div>
         </div>        
       <% end -%>
 
