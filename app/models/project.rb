@@ -211,11 +211,11 @@ class Project < ActiveRecord::Base
         , CASE WHEN regions_ids IS NOT NULL AND regions_ids != ('{}')::integer[] THEN
         (select
         '<MultiGeometry><Point><coordinates>'|| array_to_string(array_agg(distinct center_lon ||','|| center_lat),'</coordinates></Point><Point><coordinates>') || '</coordinates></Point></MultiGeometry>' as lat
-        from regions as r INNER JOIN projects_regions AS pr ON r.id=pr.region_id where ('{'||r.id||'}')::integer[] && regions_ids and pr.project_id=dd.project_id)
+        from regions as r INNER JOIN projects_regions AS pr ON r.id=pr.region_id where ('{'||r.id||'}')::integer[] && regions_ids and pr.project_id=p.id)
         ELSE
         (select
         '<MultiGeometry><Point><coordinates>'|| array_to_string(array_agg(distinct center_lon ||','|| center_lat),'</coordinates></Point><Point><coordinates>') || '</coordinates></Point></MultiGeometry>' as lat
-        from countries as c INNER JOIN countries_projects AS cp ON c.id=cp.country_id where ('{'||c.id||'}')::integer[] && countries_ids and cp.project_id=dd.project_id)
+        from countries as c INNER JOIN countries_projects AS cp ON c.id=cp.country_id where ('{'||c.id||'}')::integer[] && countries_ids and cp.project_id=p.id)
         END
         as kml
       SQL
@@ -252,7 +252,7 @@ class Project < ActiveRecord::Base
       where << "regions_ids && '{#{options[:sector_region_id]}}'" if options[:sector_region_id]
       where << "countries_ids && '{#{options[:sector_country_id]}}'" if options[:sector_country_id]
     elsif options[:organization]
-      where << "dd.organization_id = #{options[:organization]}"
+      where << "p.primary_organization_id = #{options[:organization]}"
       where << "site_id=#{site.id}" if site
 
       if options[:organization_category_id]
@@ -273,22 +273,22 @@ class Project < ActiveRecord::Base
 
     sql = <<-SQL
         SELECT DISTINCT
-        project_id,
-        project_name,
-        project_description,
-        dd.organization_id,
-        organization_name AS organization,
+        p.id,
+        p.name,
+        p.description,
+        primary_organization_id,
+        o.name AS organization,
         implementing_organization as international_partners,
         partner_organizations AS local_partners,
         cross_cutting_issues,
         p.start_date,
         p.end_date,
-        CASE WHEN budget=0 THEN null ELSE budget END AS budget_numeric,
+        CASE WHEN p.budget=0 THEN null ELSE p.budget END AS budget_numeric,
         target as target_groups,
-        estimated_people_reached,
+        p.estimated_people_reached,
         contact_person AS project_contact_person,
-        contact_email AS project_contact_email,
-        contact_phone_number AS project_contact_phone_number,
+        p.contact_email AS project_contact_email,
+        p.contact_phone_number AS project_contact_phone_number,
         activities,
         intervention_id,
         intervention_id as interaction_intervention_id,
@@ -296,40 +296,41 @@ class Project < ActiveRecord::Base
         awardee_type as prime_awardee,
         date_provided,
         date_updated,
-        contact_position AS project_contact_position,
-        website AS project_website,
+        p.contact_position AS project_contact_position,
+        p.website AS project_website,
         verbatim_location,
-        sectors,
-        clusters,
-        '|' || array_to_string(array_agg(distinct site_id),'|') ||'|' as site_ids,
-        (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM tags AS t INNER JOIN projects_tags AS pt ON t.id=pt.tag_id WHERE pt.project_id=dd.project_id) AS project_tags,
-        countries,
-        (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM regions AS r INNER JOIN projects_regions AS pr ON r.id=pr.region_id WHERE r.level=1 AND pr.project_id=dd.project_id) AS regions_level1,
-        (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM regions AS r INNER JOIN projects_regions AS pr ON r.id=pr.region_id WHERE r.level=2 AND pr.project_id=dd.project_id) AS regions_level2,
-        (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM regions AS r INNER JOIN projects_regions AS pr ON r.id=pr.region_id WHERE r.level=3 AND pr.project_id=dd.project_id) AS regions_level3,
-        (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM donors AS d INNER JOIN donations AS dn ON d.id=dn.donor_id AND dn.project_id=dd.project_id) AS donors,
+        (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM sectors AS s INNER JOIN projects_sectors AS ps ON s.id=ps.sector_id WHERE ps.project_id=p.id) AS sectors,
+        (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM clusters AS c INNER JOIN clusters_projects AS cp ON c.id=cp.cluster_id WHERE cp.project_id=p.id) AS clusters,
+        '|' || array_to_string(array_agg(distinct ps.site_id),'|') ||'|' as site_ids,
+        (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM tags AS t INNER JOIN projects_tags AS pt ON t.id=pt.tag_id WHERE pt.project_id=p.id) AS project_tags,
+        (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM countries AS c INNER JOIN countries_projects AS cp ON c.id=cp.country_id WHERE cp.project_id=p.id) AS countries,
+        (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM regions AS r INNER JOIN projects_regions AS pr ON r.id=pr.region_id WHERE r.level=1 AND pr.project_id=p.id) AS regions_level1,
+        (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM regions AS r INNER JOIN projects_regions AS pr ON r.id=pr.region_id WHERE r.level=2 AND pr.project_id=p.id) AS regions_level2,
+        (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM regions AS r INNER JOIN projects_regions AS pr ON r.id=pr.region_id WHERE r.level=3 AND pr.project_id=p.id) AS regions_level3,
+        (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM donors AS d INNER JOIN donations AS dn ON d.id=dn.donor_id AND dn.project_id=p.id) AS donors,
         p.organization_id as org_intervention_id
         #{kml_select}
-        FROM data_denormalization AS dd
-        INNER JOIN projects AS p ON dd.project_id=p.id
+        FROM projects AS p
+        LEFT OUTER JOIN organizations o ON o.id = p.primary_organization_id
+        LEFT OUTER JOIN projects_sites ps ON ps.project_id = p.id
         #{where}
         GROUP BY
-        project_id,
-        project_name,
-        project_description,
-        dd.organization_id,
-        organization_name,
+        p.id,
+        p.name,
+        p.description,
+        primary_organization_id,
+        o.name,
         implementing_organization,
         partner_organizations,
         cross_cutting_issues,
         p.start_date,
         p.end_date,
-        budget,
+        p.budget,
         target,
-        estimated_people_reached,
+        p.estimated_people_reached,
         contact_person,
-        contact_email,
-        contact_phone_number,
+        p.contact_email,
+        p.contact_phone_number,
         activities,
         intervention_id,
         p.organization_id,
@@ -337,8 +338,8 @@ class Project < ActiveRecord::Base
         awardee_type,
         date_provided,
         date_updated,
-        contact_position,
-        website,
+        p.contact_position,
+        p.website,
         verbatim_location,
         idprefugee_camp,
         countries,
