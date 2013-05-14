@@ -1,6 +1,6 @@
 class ProjectsSynchronization < ActiveRecord::Base
 
-  attr_accessor :projects_file, :projects_errors
+  attr_accessor :projects_file, :projects_errors, :user
 
   serialize :projects_file_data, Array
 
@@ -15,7 +15,8 @@ class ProjectsSynchronization < ActiveRecord::Base
   end
 
   def setup_book
-    book    = Spreadsheet.open projects_file.tempfile
+    book = Spreadsheet.open projects_file.tempfile
+    book.add_format Spreadsheet::Format.new(:number_format => 'MM/DD/YYYY')
 
     convert_file_to_hash_array(book.worksheet(0))
   end
@@ -56,7 +57,9 @@ class ProjectsSynchronization < ActiveRecord::Base
       @line += 1
       next if row_hash.values - row_hash.keys == []
 
+
       project             = instantiate_project(row_hash)
+      project.updated_by  = user
       project.attributes  = row_hash.slice(*Project.columns_hash.keys)
       project.name        = row_hash['project_name']
       project.description = row_hash['project_description']
@@ -92,14 +95,19 @@ class ProjectsSynchronization < ActiveRecord::Base
     header = sheet.row(0).to_a
 
     self.projects_file_data = []
-    sheet.each do |sheet_row|
-      self.projects_file_data << Hash[*(header).zip(sheet_row.to_a).flatten]
+    sheet.each_with_index do |sheet_row, i|
+      next if i == 0
+      row_hash = {}
+      sheet_row.each_with_index do |c, j|
+        row_hash[header[j]] = sheet_row[j]
+      end
+      self.projects_file_data << row_hash
     end
   end
 
   def instantiate_project(project_hash)
     if project_hash['interaction_intervention_id'].present?
-      Project.where(:intervention_id => project_hash['interaction_intervention_id']).first
+      Project.where(:intervention_id => project_hash['interaction_intervention_id']).first || Project.new
     else
       Project.new
     end
@@ -139,7 +147,7 @@ class ProjectsSynchronization < ActiveRecord::Base
           next
         end
         project.countries << country
-        project.countries.reload
+        project.countries
       end
     end
   end
@@ -154,7 +162,7 @@ class ProjectsSynchronization < ActiveRecord::Base
           next
         end
         project.regions << region
-        project.regions.reload
+        project.regions
       end
     end
   end
@@ -169,7 +177,7 @@ class ProjectsSynchronization < ActiveRecord::Base
           next
         end
         project.regions << region
-        project.regions.reload
+        project.regions
       end
     end
   end
@@ -184,7 +192,7 @@ class ProjectsSynchronization < ActiveRecord::Base
           next
         end
         project.regions << region
-        project.regions.reload
+        project.regions
       end
     end
   end
@@ -199,7 +207,7 @@ class ProjectsSynchronization < ActiveRecord::Base
           next
         end
         project.sectors << sector
-        project.sectors.reload
+        project.sectors
       end
     end
   end
@@ -214,7 +222,7 @@ class ProjectsSynchronization < ActiveRecord::Base
           next
         end
         project.clusters << cluster
-        project.clusters.reload
+        project.clusters
       end
     end
   end
@@ -229,7 +237,7 @@ class ProjectsSynchronization < ActiveRecord::Base
           next
         end
         project.donors << donor
-        project.donors.reload
+        project.donors
       end
     end
   end

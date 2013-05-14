@@ -19,6 +19,7 @@ function createUploader() {
             modal_window.find('.alert').addClass('importer');
             modal_window.find('h4').html(response.title);
             modal_window.find('ul').empty();
+            modal_window.find('a.button').removeClass('remove').addClass('ok').show();
 
             for (var i=0; i < response.errors.length; i++) {
               modal_window.find('ul').append($('<li>').text(response.errors[i]));
@@ -60,6 +61,7 @@ function restartModalWindow() {
   modal_window.find('.alert').removeClass('ok').removeClass('error');
   modal_window.find('a.ok').removeClass('error');
   modal_window.find('a.cancel').hide();
+  modal_window.find('a.button').hide();
 
   modal_window.find('h4').html('Processing file...');
   modal_window.find('p').html('Please wait.');
@@ -82,10 +84,10 @@ function processFileWithErrors(evt){
       modal_window.find('.alert').addClass('ok');
       modal_window.find('h4').text('Great!');
       modal_window.find('p').text(synchronization_json.projects_updated_count + ' projects updated successfully :-)');
+      modal_window.find('a.button').show();
       link.attr('href', '#').unbind('click').click(function(){
         modal_window.fadeOut();
       });
-      link.css('display','inline');
     }
   });
   modal_window.fadeOut(function(){

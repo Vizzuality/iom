@@ -4,6 +4,7 @@ class Admin::ProjectsSynchronizationsController < Admin::AdminController
 
   def create
     synchronization = ProjectsSynchronization.new(:projects_file => params[:qqfile])
+    synchronization.user = current_user
     synchronization.save
 
     render :json => synchronization
@@ -11,6 +12,7 @@ class Admin::ProjectsSynchronizationsController < Admin::AdminController
 
   def update
     synchronization = ProjectsSynchronization.find(params[:id])
+    synchronization.user = current_user
     synchronization.save
 
     render :json => synchronization
