@@ -192,9 +192,9 @@ class Project < ActiveRecord::Base
     options = {:show_private_fields => false}.merge(options || {})
 
     if options[:show_private_fields]
-      %w(organization interaction_intervention_id org_intervention_id project_name project_description activities additional_information start_date end_date budget_numeric clusters sectors cross_cutting_issues international_partners local_partners donors prime_awardee estimated_people_reached target_groups countries regions_level1 regions_level2 regions_level3 verbatim_location idprefugee_camp project_contact_person project_contact_position project_contact_email project_contact_phone_number project_website date_provided date_updated)
+      %w(organization interaction_intervention_id org_intervention_id project_name project_description activities additional_information start_date end_date budget_numeric clusters sectors cross_cutting_issues international_partners local_partners prime_awardee estimated_people_reached target_groups countries regions_level1 regions_level2 regions_level3 project_tags donors verbatim_location idprefugee_camp project_contact_person project_contact_position project_contact_email project_contact_phone_number project_website date_provided date_updated status)
     else
-      %w(organization interaction_intervention_id org_intervention_id project_name project_description activities additional_information start_date end_date budget_numeric clusters sectors cross_cutting_issues international_partners local_partners donors prime_awardee estimated_people_reached target_groups countries regions_level1 regions_level2 regions_level3 project_contact_person project_contact_position project_contact_email project_contact_phone_number project_website date_provided date_updated)
+      %w(organization interaction_intervention_id org_intervention_id project_name project_description activities additional_information start_date end_date budget_numeric clusters sectors cross_cutting_issues international_partners local_partners donors prime_awardee estimated_people_reached target_groups countries regions_level1 regions_level2 regions_level3 project_tags project_contact_person project_contact_position project_contact_email project_contact_phone_number project_website date_provided date_updated status)
     end
   end
 
@@ -308,7 +308,8 @@ class Project < ActiveRecord::Base
         (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM regions AS r INNER JOIN projects_regions AS pr ON r.id=pr.region_id WHERE r.level=2 AND pr.project_id=p.id) AS regions_level2,
         (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM regions AS r INNER JOIN projects_regions AS pr ON r.id=pr.region_id WHERE r.level=3 AND pr.project_id=p.id) AS regions_level3,
         (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM donors AS d INNER JOIN donations AS dn ON d.id=dn.donor_id AND dn.project_id=p.id) AS donors,
-        o.organization_id as org_intervention_id
+        o.organization_id as org_intervention_id,
+        CASE WHEN p.end_date > current_date THEN 'active' ELSE 'closed' END AS status
         #{kml_select}
         FROM projects AS p
         LEFT OUTER JOIN organizations o ON o.id = p.primary_organization_id
@@ -343,6 +344,7 @@ class Project < ActiveRecord::Base
         verbatim_location,
         idprefugee_camp,
         countries,
+        status,
         #{kml_group_by}
         sectors,
         clusters
