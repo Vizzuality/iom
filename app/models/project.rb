@@ -346,6 +346,7 @@ class Project < ActiveRecord::Base
         #{kml_group_by}
         sectors,
         clusters
+        ORDER BY interaction_intervention_id
     SQL
     ActiveRecord::Base.connection.execute(sql)
   end
