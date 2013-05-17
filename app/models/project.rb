@@ -274,8 +274,8 @@ class Project < ActiveRecord::Base
     sql = <<-SQL
         SELECT DISTINCT
         p.id,
-        p.name,
-        p.description,
+        p.name as project_name,
+        p.description as project_description,
         primary_organization_id,
         o.name AS organization,
         implementing_organization as international_partners,
@@ -308,7 +308,7 @@ class Project < ActiveRecord::Base
         (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM regions AS r INNER JOIN projects_regions AS pr ON r.id=pr.region_id WHERE r.level=2 AND pr.project_id=p.id) AS regions_level2,
         (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM regions AS r INNER JOIN projects_regions AS pr ON r.id=pr.region_id WHERE r.level=3 AND pr.project_id=p.id) AS regions_level3,
         (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM donors AS d INNER JOIN donations AS dn ON d.id=dn.donor_id AND dn.project_id=p.id) AS donors,
-        p.organization_id as org_intervention_id
+        o.organization_id as org_intervention_id
         #{kml_select}
         FROM projects AS p
         LEFT OUTER JOIN organizations o ON o.id = p.primary_organization_id
@@ -333,7 +333,7 @@ class Project < ActiveRecord::Base
         p.contact_phone_number,
         activities,
         intervention_id,
-        p.organization_id,
+        o.organization_id,
         additional_information,
         awardee_type,
         date_provided,
