@@ -33,6 +33,9 @@ function createUploader() {
               modal_window.find('.alert').addClass('ok');
               modal_window.find('h4').text('Great!');
               modal_window.find('p').text(response.projects_updated_count + ' projects updated successfully :-)');
+              modal_window.find('a.button').show().attr('href', '#').unbind('click').click(function(){
+                modal_window.fadeOut();
+              });
             } else {
               modal_window.find('a.ok').attr('href', '/admin/projects_synchronizations/' + response.id);
               modal_window.find('a.ok').click(processFileWithErrors)
