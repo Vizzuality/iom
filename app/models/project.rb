@@ -57,6 +57,8 @@ class Project < ActiveRecord::Base
                           includes(:countries).
                           where('countries_projects.project_id IS NULL AND regions.id IS NOT NULL')
 
+  attr_accessor :sync_errors
+
   validates_presence_of :primary_organization_id, :name, :description, :start_date, :end_date
   validate :location_presence
   validate :dates_consistency#, :presence_of_clusters_and_sectors
@@ -762,6 +764,176 @@ SQL
   def generate_intervention_id
     self.intervention_id = [primary_organization.try(:organization_id).presence || 'XXXX', countries.first.try(:iso2_code).presence || 'XX', Time.now.strftime('%y'), organization_id.presence || 'XXX'].join('-')
   end
+
+  ##############################
+  # PROJECT SYNCHRONIZATION
+
+  def sync_errors
+    @sync_errors ||= []
+  end
+
+  def project_name=(value)
+    self.name = value
+  end
+
+  def project_description=(value)
+    self.description = value
+  end
+
+  def org_intervention_id=(value)
+    self.organization_id = value
+  end
+
+  def international_partners=(value)
+    self.implementing_organization = value
+  end
+
+  def local_partners=(value)
+    self.partner_organizations = value
+  end
+
+  def budget_numeric=(value)
+    self.budget = value
+  end
+
+  def target_groups=(value)
+    self.target = value
+  end
+
+  def project_contact_person=(value)
+    self.contact_person = value
+  end
+
+  def project_contact_email=(value)
+    self.contact_email = value
+  end
+
+  def project_contact_phone_number=(value)
+    self.contact_phone_number = value
+  end
+
+  def interaction_intervention_id=(value)
+    self.intervention_id = value
+  end
+
+  def prime_awardee=(value)
+    self.awardee_type = value
+  end
+
+  def project_contact_position=(value)
+    self.contact_position = value
+  end
+
+  def project_website=(value)
+    self.website = value
+  end
+
+  def organization=(value)
+    if value && (organization = Organization.find_by_name(value)) && organization.present?
+      self.primary_organization = organization
+    end
+  end
+
+  def countries=(value)
+    if value && (countries = value.text2array) && countries.present?
+      countries.clear
+      countries.each do |country_name|
+        country = Country.where(:name => country_name).first
+        if country.blank?
+          self.sync_errors << "Country #{country_name} doesn't exist on line #@line"
+          next
+        end
+        self.countries << country
+      end
+    end
+  end
+
+  def regions_level1=(value)
+    if value && (first_admin_levels = value.text2array) && first_admin_levels.present?
+      regions.where(:level => 1).clear
+      first_admin_levels.each do |first_admin_level_name|
+        region = Region.where(:name => first_admin_level_name).first
+        if region.blank?
+          self.sync_errors << "1st Admin level #{first_admin_level_name} doesn't exist on line #@line"
+          next
+        end
+        self.regions << region
+      end
+    end
+  end
+
+  def regions_level2=(value)
+    if value && (second_admin_levels = value.text2array) && second_admin_levels.present?
+      regions.where(:level => 2).clear
+      second_admin_levels.each do |second_admin_level_name|
+        region = Region.where(:name => second_admin_level_name).first
+        if region.blank?
+          self.sync_errors << "2nd Admin level #{second_admin_level_name} doesn't exist on line #@line"
+          next
+        end
+        self.regions << region
+      end
+    end
+  end
+
+  def regions_level3=(value)
+    if value && (third_admin_levels = value.text2array) && third_admin_levels.present?
+      regions.where(:level => 3).clear
+      third_admin_levels.each do |third_admin_level_name|
+        region = Region.where(:name => third_admin_level_name).first
+        if region.blank?
+          self.sync_errors << "3rd Admin level #{third_admin_level_name} doesn't exist on line #@line"
+          next
+        end
+        self.regions << region
+      end
+    end
+  end
+
+  def sectors=(value)
+    if value && (sectors = value.text2array) && sectors.present?
+      sectors.clear
+      sectors.each do |sector_name|
+        sector = Sector.where(:name => sector_name).first
+        if sector.blank?
+          self.sync_errors << "Sector #{sector_name} doesn't exist on line #@line"
+          next
+        end
+        self.sectors << sector
+      end
+    end
+  end
+
+  def clusters=(value)
+    if value && (clusters = value.text2array) && clusters.present?
+      clusters.clear
+      clusters.each do |cluster_name|
+        cluster = Cluster.where(:name => cluster_name).first
+        if cluster.blank?
+          self.sync_errors << "cluster #{cluster_name} doesn't exist on line #@line"
+          next
+        end
+        self.clusters << cluster
+      end
+    end
+  end
+
+  def donors=(value)
+    if value && (donors = value.text2array) && donors.present?
+      donors.clear
+      donors.each do |donor_name|
+        donor = Donor.find_by_name(donor_name)
+        if donor.blank?
+          self.sync_errors << "donor #{donor_name} doesn't exist on line #@line"
+          next
+        end
+        self.donors << donor
+      end
+    end
+  end
+
+  # PROJECT SYNCHRONIZATION
+  ##############################
 
   private
 
