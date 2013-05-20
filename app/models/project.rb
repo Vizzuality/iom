@@ -772,70 +772,70 @@ SQL
     @sync_errors ||= []
   end
 
-  def project_name=(value)
+  def project_name_sync=(value)
     self.name = value
   end
 
-  def project_description=(value)
+  def project_description_sync=(value)
     self.description = value
   end
 
-  def org_intervention_id=(value)
+  def org_intervention_id_sync=(value)
     self.organization_id = value
   end
 
-  def international_partners=(value)
+  def international_partners_sync=(value)
     self.implementing_organization = value
   end
 
-  def local_partners=(value)
+  def local_partners_sync=(value)
     self.partner_organizations = value
   end
 
-  def budget_numeric=(value)
+  def budget_numeric_sync=(value)
     self.budget = value
   end
 
-  def target_groups=(value)
+  def target_groups_sync=(value)
     self.target = value
   end
 
-  def project_contact_person=(value)
+  def project_contact_person_sync=(value)
     self.contact_person = value
   end
 
-  def project_contact_email=(value)
+  def project_contact_email_sync=(value)
     self.contact_email = value
   end
 
-  def project_contact_phone_number=(value)
+  def project_contact_phone_number_sync=(value)
     self.contact_phone_number = value
   end
 
-  def interaction_intervention_id=(value)
+  def interaction_intervention_id_sync=(value)
     self.intervention_id = value
   end
 
-  def prime_awardee=(value)
+  def prime_awardee_sync=(value)
     self.awardee_type = value
   end
 
-  def project_contact_position=(value)
+  def project_contact_position_sync=(value)
     self.contact_position = value
   end
 
-  def project_website=(value)
+  def project_website_sync=(value)
     self.website = value
   end
 
-  def organization=(value)
+  def organization_sync=(value)
     if value && (organization = Organization.find_by_name(value)) && organization.present?
       self.primary_organization = organization
     end
   end
 
-  def countries=(value)
-    if value && (countries = value.text2array) && countries.present?
+  def countries_sync=(value)
+    if value && value.is_a?(String) && (countries = value.text2array) && countries.present?
       countries.clear
       countries.each do |country_name|
         country = Country.where(:name => country_name).first
@@ -848,7 +848,7 @@ SQL
     end
   end
 
-  def regions_level1=(value)
+  def regions_level1_sync=(value)
     if value && (first_admin_levels = value.text2array) && first_admin_levels.present?
       regions.where(:level => 1).clear
       first_admin_levels.each do |first_admin_level_name|
@@ -862,7 +862,7 @@ SQL
     end
   end
 
-  def regions_level2=(value)
+  def regions_level2_sync=(value)
     if value && (second_admin_levels = value.text2array) && second_admin_levels.present?
       regions.where(:level => 2).clear
       second_admin_levels.each do |second_admin_level_name|
@@ -876,7 +876,7 @@ SQL
     end
   end
 
-  def regions_level3=(value)
+  def regions_level3_sync=(value)
     if value && (third_admin_levels = value.text2array) && third_admin_levels.present?
       regions.where(:level => 3).clear
       third_admin_levels.each do |third_admin_level_name|
@@ -890,8 +890,10 @@ SQL
     end
   end
 
-  def sectors=(value)
-    if value && (sectors = value.text2array) && sectors.present?
+  def sectors_sync=(value)
+    return super unless sync_mode
+
+    if value && value.is_a?(String) && (sectors = value.text2array) && sectors.present?
       sectors.clear
       sectors.each do |sector_name|
         sector = Sector.where(:name => sector_name).first
@@ -904,8 +906,10 @@ SQL
     end
   end
 
-  def clusters=(value)
-    if value && (clusters = value.text2array) && clusters.present?
+  def clusters_sync=(value)
+    return super unless sync_mode
+
+    if value && value.is_a?(String) && (clusters = value.text2array) && clusters.present?
       clusters.clear
       clusters.each do |cluster_name|
         cluster = Cluster.where(:name => cluster_name).first
@@ -918,8 +922,10 @@ SQL
     end
   end
 
-  def donors=(value)
-    if value && (donors = value.text2array) && donors.present?
+  def donors_sync=(value)
+    return super unless sync_mode
+
+    if value && value.is_a?(String) && (donors = value.text2array) && donors.present?
       donors.clear
       donors.each do |donor_name|
         donor = Donor.find_by_name(donor_name)
