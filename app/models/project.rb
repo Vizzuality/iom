@@ -888,8 +888,8 @@ SQL
   end
 
   def countries_sync=(value)
-    if value && value.is_a?(String) && (countries = value.text2array) && countries.present?
-      countries.clear
+    if value && (countries = value.text2array) && countries.present?
+      self.countries.clear
       countries.each do |country_name|
         country = Country.where(:name => country_name).first
         if country.blank?
@@ -944,8 +944,8 @@ SQL
   end
 
   def sectors_sync=(value)
-    if value && value.is_a?(String) && (sectors = value.text2array) && sectors.present?
-      sectors.clear
+    if value && (sectors = value.text2array) && sectors.present?
+      self.sectors.clear
       sectors.each do |sector_name|
         sector = Sector.where(:name => sector_name).first
         if sector.blank?
@@ -958,8 +958,8 @@ SQL
   end
 
   def clusters_sync=(value)
-    if value && value.is_a?(String) && (clusters = value.text2array) && clusters.present?
-      clusters.clear
+    if value && (clusters = value.text2array) && clusters.present?
+      self.clusters.clear
       clusters.each do |cluster_name|
         cluster = Cluster.where(:name => cluster_name).first
         if cluster.blank?
@@ -972,8 +972,8 @@ SQL
   end
 
   def donors_sync=(value)
-    if value && value.is_a?(String) && (donors = value.text2array) && donors.present?
-      donors.clear
+    if value && (donors = value.text2array) && donors.present?
+      self.donors.clear
       donors.each do |donor_name|
         donor = Donor.find_by_name(donor_name)
         if donor.blank?
