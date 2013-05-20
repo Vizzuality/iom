@@ -772,6 +772,10 @@ SQL
     @sync_errors ||= []
   end
 
+  def sync_line=(value)
+    @sync_line = value
+  end
+
   def project_name_sync=(value)
     self.name = value
   end
@@ -828,9 +832,58 @@ SQL
     self.website = value
   end
 
+  def activities_sync=(value)
+    self.activities = value
+  end
+
+  def additional_information_sync=(value)
+    self.additional_information = value
+  end
+
+  def start_date_sync=(value)
+    self.start_date = value
+  end
+
+  def end_date_sync=(value)
+    self.end_date = value
+  end
+
+  def cross_cutting_issues_sync=(value)
+    self.cross_cutting_issues = value
+  end
+
+  def estimated_people_reached_sync=(value)
+    self.estimated_people_reached = value
+  end
+
+  def project_tags_sync=(value)
+    self.project_tags = value
+  end
+
+  def verbatim_location_sync=(value)
+    self.verbatim_location = value
+  end
+
+  def idprefugee_camp_sync=(value)
+    self.idprefugee_camp = value
+  end
+
+  def date_provided_sync=(value)
+    self.date_provided = value
+  end
+
+  def date_updated_sync=(value)
+    self.date_updated = value
+  end
+
+  def status_sync=(value)
+  end
+
   def organization_sync=(value)
     if value && (organization = Organization.find_by_name(value)) && organization.present?
       self.primary_organization = organization
+    else
+      self.sync_errors << %Q{Organization "#{value}" doesn't exist on line #@sync_line}
     end
   end
 
@@ -840,7 +893,7 @@ SQL
       countries.each do |country_name|
         country = Country.where(:name => country_name).first
         if country.blank?
-          self.sync_errors << "Country #{country_name} doesn't exist on line #@line"
+          self.sync_errors << "Country #{country_name} doesn't exist on line #@sync_line"
           next
         end
         self.countries << country
@@ -854,7 +907,7 @@ SQL
       first_admin_levels.each do |first_admin_level_name|
         region = Region.where(:name => first_admin_level_name).first
         if region.blank?
-          self.sync_errors << "1st Admin level #{first_admin_level_name} doesn't exist on line #@line"
+          self.sync_errors << "1st Admin level #{first_admin_level_name} doesn't exist on line #@sync_line"
           next
         end
         self.regions << region
@@ -868,7 +921,7 @@ SQL
       second_admin_levels.each do |second_admin_level_name|
         region = Region.where(:name => second_admin_level_name).first
         if region.blank?
-          self.sync_errors << "2nd Admin level #{second_admin_level_name} doesn't exist on line #@line"
+          self.sync_errors << "2nd Admin level #{second_admin_level_name} doesn't exist on line #@sync_line"
           next
         end
         self.regions << region
@@ -882,7 +935,7 @@ SQL
       third_admin_levels.each do |third_admin_level_name|
         region = Region.where(:name => third_admin_level_name).first
         if region.blank?
-          self.sync_errors << "3rd Admin level #{third_admin_level_name} doesn't exist on line #@line"
+          self.sync_errors << "3rd Admin level #{third_admin_level_name} doesn't exist on line #@sync_line"
           next
         end
         self.regions << region
@@ -891,14 +944,12 @@ SQL
   end
 
   def sectors_sync=(value)
-    return super unless sync_mode
-
     if value && value.is_a?(String) && (sectors = value.text2array) && sectors.present?
       sectors.clear
       sectors.each do |sector_name|
         sector = Sector.where(:name => sector_name).first
         if sector.blank?
-          self.sync_errors << "Sector #{sector_name} doesn't exist on line #@line"
+          self.sync_errors << "Sector #{sector_name} doesn't exist on line #@sync_line"
           next
         end
         self.sectors << sector
@@ -907,14 +958,12 @@ SQL
   end
 
   def clusters_sync=(value)
-    return super unless sync_mode
-
     if value && value.is_a?(String) && (clusters = value.text2array) && clusters.present?
       clusters.clear
       clusters.each do |cluster_name|
         cluster = Cluster.where(:name => cluster_name).first
         if cluster.blank?
-          self.sync_errors << "cluster #{cluster_name} doesn't exist on line #@line"
+          self.sync_errors << "cluster #{cluster_name} doesn't exist on line #@sync_line"
           next
         end
         self.clusters << cluster
@@ -923,14 +972,12 @@ SQL
   end
 
   def donors_sync=(value)
-    return super unless sync_mode
-
     if value && value.is_a?(String) && (donors = value.text2array) && donors.present?
       donors.clear
       donors.each do |donor_name|
         donor = Donor.find_by_name(donor_name)
         if donor.blank?
-          self.sync_errors << "donor #{donor_name} doesn't exist on line #@line"
+          self.sync_errors << "donor #{donor_name} doesn't exist on line #@sync_line"
           next
         end
         self.donors << donor

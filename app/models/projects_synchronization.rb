@@ -57,8 +57,8 @@ class ProjectsSynchronization < ActiveRecord::Base
       @line += 1
       next if row_hash.values - row_hash.keys == []
 
-      project             = instantiate_project(row_hash)
-      project.sync_mode   = true
+      project           = instantiate_project(row_hash)
+      project.sync_line = @line
       row_hash.each{|k, v| project.send("#{k}_sync=", v) }
       self.projects_errors += project.sync_errors
       project.updated_by  = user
