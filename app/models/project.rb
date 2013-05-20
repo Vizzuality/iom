@@ -857,7 +857,6 @@ SQL
   end
 
   def project_tags_sync=(value)
-    self.project_tags = value
   end
 
   def verbatim_location_sync=(value)
