@@ -887,8 +887,8 @@ SQL
   end
 
   def countries_sync=(value)
+    self.countries.clear
     if value && (countries = value.text2array)
-      self.countries.clear
       countries.each do |country_name|
         country = Country.where(:name => country_name).first
         if country.blank?
@@ -901,8 +901,8 @@ SQL
   end
 
   def regions_level1_sync=(value)
+    regions.where(:level => 1).clear
     if value && (first_admin_levels = value.text2array)
-      regions.where(:level => 1).clear
       first_admin_levels.each do |first_admin_level_name|
         region = Region.where(:name => first_admin_level_name).first
         if region.blank?
@@ -915,8 +915,8 @@ SQL
   end
 
   def regions_level2_sync=(value)
+    regions.where(:level => 2).clear
     if value && (second_admin_levels = value.text2array)
-      regions.where(:level => 2).clear
       second_admin_levels.each do |second_admin_level_name|
         region = Region.where(:name => second_admin_level_name).first
         if region.blank?
@@ -929,8 +929,8 @@ SQL
   end
 
   def regions_level3_sync=(value)
+    regions.where(:level => 3).clear
     if value && (third_admin_levels = value.text2array)
-      regions.where(:level => 3).clear
       third_admin_levels.each do |third_admin_level_name|
         region = Region.where(:name => third_admin_level_name).first
         if region.blank?
@@ -943,8 +943,8 @@ SQL
   end
 
   def sectors_sync=(value)
+    self.sectors.clear
     if value && (sectors = value.text2array)
-      self.sectors.clear
       sectors.each do |sector_name|
         sector = Sector.where(:name => sector_name).first
         if sector.blank?
@@ -957,8 +957,8 @@ SQL
   end
 
   def clusters_sync=(value)
+    self.clusters.clear
     if value && (clusters = value.text2array)
-      self.clusters.clear
       clusters.each do |cluster_name|
         cluster = Cluster.where(:name => cluster_name).first
         if cluster.blank?
@@ -971,13 +971,11 @@ SQL
   end
 
   def donors_sync=(value)
+    self.donors.clear
     if value && (donors = value.text2array)
-      self.donors.clear
       donors.each do |donor_name|
         donor = Donor.find_by_name(donor_name)
-        if donor.blank?
-          next
-        end
+        next if donor.blank?
         self.donors << donor
       end
     end
