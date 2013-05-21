@@ -38,7 +38,11 @@ function createUploader() {
               });
             } else {
               modal_window.find('a.ok').attr('href', '/admin/projects_synchronizations/' + response.id);
-              modal_window.find('a.ok').click(processFileWithErrors)
+              if (response.projects_updated_count == 0) {
+                modal_window.find('a.ok').click(cancel);
+              } else {
+                modal_window.find('a.ok').click(processFileWithErrors);
+              }
               modal_window.find('.alert').addClass('error');
               modal_window.find('ul').jScrollPane({autoReinitialise: false});
               if (!modal_window.find('a.ok').hasClass('error')){
@@ -96,4 +100,9 @@ function processFileWithErrors(evt){
   modal_window.fadeOut(function(){
     restartModalWindow().fadeIn();
   });
+};
+
+function cancel(evt){
+  evt.preventDefault();
+  $('div#modal_window a.cancel').click();
 };
