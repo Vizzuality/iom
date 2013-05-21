@@ -887,7 +887,7 @@ SQL
   end
 
   def countries_sync=(value)
-    if value && (countries = value.text2array) && countries.present?
+    if value && (countries = value.text2array)
       self.countries.clear
       countries.each do |country_name|
         country = Country.where(:name => country_name).first
@@ -901,7 +901,7 @@ SQL
   end
 
   def regions_level1_sync=(value)
-    if value && (first_admin_levels = value.text2array) && first_admin_levels.present?
+    if value && (first_admin_levels = value.text2array)
       regions.where(:level => 1).clear
       first_admin_levels.each do |first_admin_level_name|
         region = Region.where(:name => first_admin_level_name).first
@@ -915,7 +915,7 @@ SQL
   end
 
   def regions_level2_sync=(value)
-    if value && (second_admin_levels = value.text2array) && second_admin_levels.present?
+    if value && (second_admin_levels = value.text2array)
       regions.where(:level => 2).clear
       second_admin_levels.each do |second_admin_level_name|
         region = Region.where(:name => second_admin_level_name).first
@@ -929,7 +929,7 @@ SQL
   end
 
   def regions_level3_sync=(value)
-    if value && (third_admin_levels = value.text2array) && third_admin_levels.present?
+    if value && (third_admin_levels = value.text2array)
       regions.where(:level => 3).clear
       third_admin_levels.each do |third_admin_level_name|
         region = Region.where(:name => third_admin_level_name).first
@@ -943,7 +943,7 @@ SQL
   end
 
   def sectors_sync=(value)
-    if value && (sectors = value.text2array) && sectors.present?
+    if value && (sectors = value.text2array)
       self.sectors.clear
       sectors.each do |sector_name|
         sector = Sector.where(:name => sector_name).first
@@ -957,7 +957,7 @@ SQL
   end
 
   def clusters_sync=(value)
-    if value && (clusters = value.text2array) && clusters.present?
+    if value && (clusters = value.text2array)
       self.clusters.clear
       clusters.each do |cluster_name|
         cluster = Cluster.where(:name => cluster_name).first
@@ -971,12 +971,11 @@ SQL
   end
 
   def donors_sync=(value)
-    if value && (donors = value.text2array) && donors.present?
+    if value && (donors = value.text2array)
       self.donors.clear
       donors.each do |donor_name|
         donor = Donor.find_by_name(donor_name)
         if donor.blank?
-          self.sync_errors << "donor #{donor_name} doesn't exist on line #@sync_line"
           next
         end
         self.donors << donor
