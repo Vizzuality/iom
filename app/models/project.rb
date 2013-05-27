@@ -60,7 +60,7 @@ class Project < ActiveRecord::Base
   attr_accessor :sync_errors
 
   validates_presence_of :name, :description, :start_date, :end_date
-  validates_presence_of :primary_organization_id, :unless => :importing_project?
+  validates_presence_of :primary_organization_id
   validate :location_presence
   validate :dates_consistency#, :presence_of_clusters_and_sectors
 
@@ -883,8 +883,7 @@ SQL
     if value && (organization = Organization.find_by_name(value)) && organization.present?
       self.primary_organization = organization
     else
-      @sync_organization_invalid = true
-      self.sync_errors << %Q{Organization "#{value}" doesn't exist on line #@sync_line}
+      self.errors.add(:primary_organization_id, %Q{Organization "#{value}" doesn't exist on line #@sync_line})
     end
   end
 
@@ -981,10 +980,6 @@ SQL
         self.donors << donor
       end
     end
-  end
-
-  def importing_project?
-    @sync_organization_invalid
   end
 
   # PROJECT SYNCHRONIZATION

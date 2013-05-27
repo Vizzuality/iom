@@ -110,10 +110,10 @@ class ProjectsSynchronization < ActiveRecord::Base
   end
 
   def process_project_validations(row_hash, project)
-    if project.valid?
-      projects << project
-    else
+    if project.reload.errors.present?
       self.projects_errors += project.errors.to_a.map{|msg| "#{msg} on line #@line"}
+    else
+      projects << project
     end
   end
 
