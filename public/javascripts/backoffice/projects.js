@@ -41,6 +41,7 @@ function createUploader() {
               if (response.projects_updated_count == 0) {
                 modal_window.find('a.ok').click(cancel);
               } else {
+                modal_window.find('a.cancel').removeClass('ok').click(cancel);
                 modal_window.find('a.ok').click(processFileWithErrors);
               }
               modal_window.find('.alert').addClass('error');
