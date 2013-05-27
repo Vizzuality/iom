@@ -45,7 +45,6 @@ function createUploader() {
                 modal_window.find('a.ok').click(processFileWithErrors);
               }
               modal_window.find('.alert').addClass('error');
-              modal_window.find('ul').jScrollPane({autoReinitialise: false});
               if (!modal_window.find('a.ok').hasClass('error')){
                 modal_window.find('a.ok').addClass('error');
                 modal_window.find('p').text('This data will not be registered in the database.');
@@ -53,7 +52,9 @@ function createUploader() {
             }
 
             modal_window.find('a.cancel').css('display','inline');
-            modal_window.fadeIn();
+            modal_window.fadeIn(function(){
+              modal_window.find('ul').jScrollPane({autoReinitialise: false});
+            });
           });
 
         }

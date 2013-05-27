@@ -6362,7 +6362,7 @@ div {
         font: normal 15px Arial;
         color: #666666;
       }
-      div {
+      div.messages {
         margin: 0;
         text-align: right;
         padding: 15px 0 0;
@@ -6441,7 +6441,7 @@ div {
           display: none;
         }
 
-        div {
+        div.messages {
           a.button.ok {
             background: url('/images/backoffice/common/ok_button.png') no-repeat 0 0;
             width: 63px;
@@ -6454,9 +6454,9 @@ div {
         top: 30%;
         left: 50%;
         ul#errors {
-          margin: 15px 0 0 15px;
-          display: inline;
-          width: 425px;
+          padding: 15px 0 0 15px;
+          display: block;
+          width: 466px;
           height: 190px;
           overflow-x: hidden;
           overflow-y: auto;
