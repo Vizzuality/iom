@@ -954,6 +954,8 @@ SQL
         end
         self.sectors << sector
       end
+
+      self.errors.add(:sectors, %Q{You have to specify at least one valid sector}) if self.sectors.blank?
     end
   end
 
@@ -968,6 +970,8 @@ SQL
         end
         self.clusters << cluster
       end
+
+      self.errors.add(:clusters, %Q{You have to specify at least one valid cluster}) if self.clusters.blank?
     end
   end
 
