@@ -880,7 +880,7 @@ SQL
   end
 
   def organization_sync=(value)
-    if value && (organization = Organization.find_by_name(value)) && organization.present?
+    if value && (organization = Organization.where('trim(name) = ?', value).first) && organization.present?
       self.primary_organization = organization
     else
       self.errors.add(:primary_organization_id, %Q{Organization "#{value}" doesn't exist on line #@sync_line})
