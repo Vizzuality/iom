@@ -778,6 +778,7 @@ SQL
   end
 
   def project_name_sync=(value)
+    self.errors.add(:name, "A project name is required") if value.blank?
     self.name = value
   end
 
@@ -818,6 +819,7 @@ SQL
   end
 
   def interaction_intervention_id_sync=(value)
+    self.errors.add(:intervention_id, "An intervention id is required") if value.blank?
     self.intervention_id = value
   end
 
