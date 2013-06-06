@@ -47,7 +47,13 @@ function createUploader() {
               modal_window.find('.alert').addClass('error');
               if (!modal_window.find('a.ok').hasClass('error')){
                 modal_window.find('a.ok').addClass('error');
-                modal_window.find('p').text('This data will not be registered in the database.');
+                modal_window.find('p').empty();
+                modal_window.find('p').append($('<div/>').text(response.projects_not_updated_count + " rows with errors won't be updated."));
+                if (response.projects_updated_count == 0) {
+                  modal_window.find('p').append($('<div/>').text("Any of the rows will be updated."));
+                } else {
+                  modal_window.find('p').append($('<div/>').text(response.projects_updated_count + " rows without errors will be updated."));
+                }
               }
             }
 

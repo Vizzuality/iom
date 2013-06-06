@@ -35,11 +35,12 @@ class ProjectsSynchronization < ActiveRecord::Base
 
   def as_json(options = {})
     {
-      :id                     => id,
-      :success                => self.valid?,
-      :title                  => "There are #{projects_errors_count} problems with the selected file",
-      :errors                 => projects_errors,
-      :projects_updated_count => projects.count
+      :id                         => id,
+      :success                    => self.valid?,
+      :title                      => "There are #{projects_errors_count} problems with the selected file",
+      :errors                     => projects_errors,
+      :projects_updated_count     => projects.count,
+      :projects_not_updated_count => project_not_updated.count
     }
   end
 
@@ -47,6 +48,10 @@ class ProjectsSynchronization < ActiveRecord::Base
 
   def projects
     @projects ||= []
+  end
+
+  def project_not_updated
+    @project_not_updated ||= []
   end
 
   def process_projects_file_data
@@ -112,6 +117,7 @@ class ProjectsSynchronization < ActiveRecord::Base
   def process_project_validations(row_hash, project)
     if project.errors.present?
       self.projects_errors += project.errors.values.flatten.map{|msg| "#{msg} on line #@line"}
+      project_not_updated << project
     else
       projects << project
     end
