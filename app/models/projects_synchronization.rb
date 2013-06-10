@@ -57,7 +57,7 @@ class ProjectsSynchronization < ActiveRecord::Base
   def process_projects_file_data
     setup_book unless persisted?
 
-    @line   = 0
+    @line   = 1
     projects_file_data.each do |row_hash|
       @line += 1
       next if row_hash.values - row_hash.keys == []
@@ -116,7 +116,7 @@ class ProjectsSynchronization < ActiveRecord::Base
 
   def process_project_validations(row_hash, project)
     if project.errors.present?
-      self.projects_errors += project.errors.values.flatten.map{|msg| "#{msg} on line #@line"}
+      self.projects_errors += project.errors.values.flatten.map{|msg| "#{msg} on row #@line"}
       project_not_updated << project
     else
       projects << project
