@@ -844,11 +844,11 @@ SQL
   end
 
   def start_date_sync=(value)
-    self.start_date = value
+    self.start_date = Date.parse(value) rescue self.errors.add(:start_date, "Start date is invalid")
   end
 
   def end_date_sync=(value)
-    self.end_date = value
+    self.end_date = Date.parse(value) rescue self.errors.add(:end_date, "End date is invalid")
   end
 
   def cross_cutting_issues_sync=(value)
