@@ -57,7 +57,8 @@ function createUploader() {
 
             modal_window.find('a.cancel').css('display','inline');
             modal_window.fadeIn(function(){
-              modal_window.find('ul').jScrollPane({autoReinitialise: false});
+              modal_window.find('ul').data('jsp', null);
+              modal_window.find('ul').jScrollPane({});
             });
           });
 
