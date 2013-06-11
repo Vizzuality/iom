@@ -168,41 +168,20 @@ class Project < ActiveRecord::Base
     the_geom.as_kml if the_geom.present?
   end
 
-  # execute "CREATE TABLE data_denormalization
-  # (
-  #   project_id integer,
-  #   project_name character varying(2000),
-  #   project_description text,
-  #   organization_id integer,
-  #   organization_name character varying(2000),
-  #   end_date date,
-  #   regions text,
-  #   regions_ids integer[],
-  #   countries text,
-  #   countries_ids integer[],
-  #   sectors text,
-  #   sector_ids integer[],
-  #   clusters text,
-  #   cluster_ids integer[],
-  #   donors_ids integer[],
-  #   is_active boolean,
-  #   site_id integer,
-  #   created_at timestamp without time zone
-  # ) WITH (OIDS=FALSE)"
-
-
   def self.export_headers(options = {})
     options = {:show_private_fields => false}.merge(options || {})
 
     if options[:show_private_fields]
-      %w(organization interaction_intervention_id org_intervention_id project_tags project_name project_description activities additional_information start_date end_date clusters sectors cross_cutting_issues budget_numeric international_partners local_partners prime_awardee estimated_people_reached target_groups countries regions_level1 regions_level2 regions_level3 verbatim_location idprefugee_camp project_contact_person project_contact_position project_contact_email project_contact_phone_number project_website date_provided date_updated status)
+      %w(organization interaction_intervention_id org_intervention_id project_tags project_name project_description activities additional_information start_date end_date clusters sectors cross_cutting_issues budget_numeric international_partners local_partners prime_awardee estimated_people_reached target_groups location verbatim_location idprefugee_camp project_contact_person project_contact_position project_contact_email project_contact_phone_number project_website date_provided date_updated status)
     else
-      %w(organization interaction_intervention_id org_intervention_id project_tags project_name project_description activities additional_information start_date end_date clusters sectors cross_cutting_issues budget_numeric international_partners local_partners prime_awardee estimated_people_reached target_groups countries regions_level1 regions_level2 regions_level3 project_contact_person project_contact_position project_contact_email project_contact_phone_number project_website date_provided date_updated status)
+      %w(organization interaction_intervention_id org_intervention_id project_tags project_name project_description activities additional_information start_date end_date clusters sectors cross_cutting_issues budget_numeric international_partners local_partners prime_awardee estimated_people_reached target_groups location project_contact_person project_contact_position project_contact_email project_contact_phone_number project_website date_provided date_updated status)
     end
   end
 
   def self.list_for_export(site = nil, options = {})
     where = []
+
+    where << "(cp.country_id IS NOT NULL OR pr.region_id IS NOT NULL)"
     where << "site_id = #{site.id}" if site
 
     where << '(p.end_date is null OR p.end_date > now())' if !options[:include_non_active]
@@ -274,7 +253,27 @@ class Project < ActiveRecord::Base
 
     where = "WHERE #{where.join(' AND ')}" if where.present?
 
+
     sql = <<-SQL
+      WITH r3 AS (SELECT r3.id, c.name || '>' || r1.name || '>' || r2.name || '>' || r3.name AS name
+                    FROM regions r3
+                    INNER JOIN regions r2 ON r3.parent_region_id = r2.id
+                    INNER JOIN regions r1 ON r2.parent_region_id = r1.id
+                    INNER JOIN countries c ON r1.country_id = c.id
+                  ),
+                  r2 AS (SELECT r2.id, c.name || '>' || r1.name || '>' || r2.name AS name
+                    FROM regions r2
+                    INNER JOIN regions r1 ON r2.parent_region_id = r1.id
+                    INNER JOIN countries c ON r1.country_id = c.id
+                  ),
+                  r1 AS (SELECT r1.id, c.name || '>' || r1.name AS name
+                    FROM regions r1
+                    INNER JOIN countries c ON r1.country_id = c.id),
+                  c AS (SELECT c.id, c.name AS name
+                    from countries c
+                  )
+
+
         SELECT DISTINCT
         p.id,
         p.name as project_name,
@@ -305,18 +304,29 @@ class Project < ActiveRecord::Base
         (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM sectors AS s INNER JOIN projects_sectors AS ps ON s.id=ps.sector_id WHERE ps.project_id=p.id) AS sectors,
         (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM clusters AS c INNER JOIN clusters_projects AS cp ON c.id=cp.cluster_id WHERE cp.project_id=p.id) AS clusters,
         '|' || array_to_string(array_agg(distinct ps.site_id),'|') ||'|' as site_ids,
+        array_to_string(
+          array_agg(
+            distinct CASE WHEN r3.name is not null THEN r3.name
+                          WHEN r2.name is not null THEN r2.name
+                          WHEN r1.name is not null THEN r1.name
+                          WHEN c.name is not null THEN c.name
+                          END
+            ),'|'
+        ) as location,
         (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM tags AS t INNER JOIN projects_tags AS pt ON t.id=pt.tag_id WHERE pt.project_id=p.id) AS project_tags,
-        (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM countries AS c INNER JOIN countries_projects AS cp ON c.id=cp.country_id WHERE cp.project_id=p.id) AS countries,
-        (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM regions AS r INNER JOIN projects_regions AS pr ON r.id=pr.region_id WHERE r.level=1 AND pr.project_id=p.id) AS regions_level1,
-        (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM regions AS r INNER JOIN projects_regions AS pr ON r.id=pr.region_id WHERE r.level=2 AND pr.project_id=p.id) AS regions_level2,
-        (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM regions AS r INNER JOIN projects_regions AS pr ON r.id=pr.region_id WHERE r.level=3 AND pr.project_id=p.id) AS regions_level3,
         (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM donors AS d INNER JOIN donations AS dn ON d.id=dn.donor_id AND dn.project_id=p.id) AS donors,
         o.organization_id as org_intervention_id,
         CASE WHEN p.end_date > current_date THEN 'active' ELSE 'closed' END AS status
         #{kml_select}
         FROM projects AS p
-        LEFT OUTER JOIN organizations o ON o.id = p.primary_organization_id
-        LEFT OUTER JOIN projects_sites ps ON ps.project_id = p.id
+        LEFT OUTER JOIN organizations o        ON  o.id = p.primary_organization_id
+        LEFT OUTER JOIN projects_sites ps      ON  ps.project_id = p.id
+        LEFT OUTER JOIN countries_projects cp  ON  cp.project_id = p.id
+        LEFT OUTER JOIN c                      ON  cp.country_id = c.id
+        LEFT OUTER JOIN projects_regions pr    ON  pr.project_id = p.id
+        LEFT OUTER JOIN r1                     ON  pr.region_id = r1.id
+        LEFT OUTER JOIN r2                     ON  pr.region_id = r2.id
+        LEFT OUTER JOIN r3                     ON  pr.region_id = r3.id
         #{where}
         GROUP BY
         p.id,
@@ -346,7 +356,6 @@ class Project < ActiveRecord::Base
         p.website,
         verbatim_location,
         idprefugee_camp,
-        countries,
         status,
         #{kml_group_by}
         sectors,
@@ -885,62 +894,39 @@ SQL
     if value && (organization = Organization.where('trim(name) = ?', value).first) && organization.present?
       self.primary_organization = organization
     else
-      self.errors.add(:primary_organization_id, %Q{Organization "#{value}" doesn't exist on line #@sync_line})
+      self.errors.add(:primary_organization_id, %Q{Organization "#{value}" doesn't exist on row #@sync_line})
     end
   end
 
-  def countries_sync=(value)
+  def location_sync=(value)
     self.countries.clear
-    if value && (countries = value.text2array)
-      countries.each do |country_name|
-        country = Country.where(:name => country_name).first
-        if country.blank?
-          self.sync_errors << "Country #{country_name} doesn't exist on line #@sync_line"
-          next
-        end
-        self.countries << country
-      end
-    end
-  end
+    self.regions.clear
 
-  def regions_level1_sync=(value)
-    regions.where(:level => 1).clear
-    if value && (first_admin_levels = value.text2array)
-      first_admin_levels.each do |first_admin_level_name|
-        region = Region.where(:name => first_admin_level_name).first
-        if region.blank?
-          self.sync_errors << "1st Admin level #{first_admin_level_name} doesn't exist on line #@sync_line"
-          next
-        end
-        self.regions << region
-      end
-    end
-  end
+    if value && (locations = value.text2array)
+      locations.each do |location|
+        country_name, *regions = location.split('>')
 
-  def regions_level2_sync=(value)
-    regions.where(:level => 2).clear
-    if value && (second_admin_levels = value.text2array)
-      second_admin_levels.each do |second_admin_level_name|
-        region = Region.where(:name => second_admin_level_name).first
-        if region.blank?
-          self.sync_errors << "2nd Admin level #{second_admin_level_name} doesn't exist on line #@sync_line"
-          next
+        if country_name
+          country = Country.where(:name => country_name).first
+          if country.blank?
+            self.sync_errors << "Country #{country_name} doesn't exist on row #@sync_line"
+          else
+            self.countries << country
+          end
         end
-        self.regions << region
-      end
-    end
-  end
 
-  def regions_level3_sync=(value)
-    regions.where(:level => 3).clear
-    if value && (third_admin_levels = value.text2array)
-      third_admin_levels.each do |third_admin_level_name|
-        region = Region.where(:name => third_admin_level_name).first
-        if region.blank?
-          self.sync_errors << "3rd Admin level #{third_admin_level_name} doesn't exist on line #@sync_line"
-          next
+        if regions.present?
+          regions.each_with_index do |region_name, level|
+            level += 1
+
+            region = Region.where(:name => region_name).first
+            if region.blank?
+              self.sync_errors << "#{level.ordinalize} Admin level #{region_name} doesn't exist on row #@sync_line"
+              next
+            end
+            self.regions << region
+          end
         end
-        self.regions << region
       end
     end
   end
@@ -951,7 +937,7 @@ SQL
       sectors.each do |sector_name|
         sector = Sector.where(:name => sector_name).first
         if sector.blank?
-          self.sync_errors << "Sector #{sector_name} doesn't exist on line #@sync_line"
+          self.sync_errors << "Sector #{sector_name} doesn't exist on row #@sync_line"
           next
         end
         self.sectors << sector
@@ -967,7 +953,7 @@ SQL
       clusters.each do |cluster_name|
         cluster = Cluster.where(:name => cluster_name).first
         if cluster.blank?
-          self.sync_errors << "cluster #{cluster_name} doesn't exist on line #@sync_line"
+          self.sync_errors << "cluster #{cluster_name} doesn't exist on row #@sync_line"
           next
         end
         self.clusters << cluster
