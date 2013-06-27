@@ -853,11 +853,21 @@ SQL
   end
 
   def start_date_sync=(value)
-    self.start_date = Date.parse(value) rescue self.errors.add(:start_date, "Start date is invalid")
+    self.start_date = case value
+                      when Date, DateTime, Time
+                        value
+                      when String
+                        Date.parse(value) rescue self.errors.add(:start_date, "Start date is invalid")
+                      end
   end
 
   def end_date_sync=(value)
-    self.end_date = Date.parse(value) rescue self.errors.add(:end_date, "End date is invalid")
+    self.end_date = case value
+                    when Date, DateTime, Time
+                      value
+                    when String
+                      Date.parse(value) rescue self.errors.add(:end_date, "End date is invalid")
+                    end
   end
 
   def cross_cutting_issues_sync=(value)
