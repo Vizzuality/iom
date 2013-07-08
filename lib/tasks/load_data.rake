@@ -10,6 +10,10 @@ namespace :db do
 
   desc 'reset 3'
   task :reset_3 => %w(db:seed iom:data:load_adm_levels iom:data:load_orgs iom:data:load_food_security_projects)
+
+  desc 'load data in proper order for Haiti map (full schema)'
+  task :iom => %w(db:drop db:create db:schema:load iom:data:load_countries db:seed iom:data:load_adm_levels iom:data:load_orgs)
+
 end
 
 namespace :iom do
@@ -41,75 +45,86 @@ namespace :iom do
       DB = ActiveRecord::Base.connection
 
       puts "Loading adm levels"
-      puts " Level 1:"
-      csv = CsvMapper.import("#{Rails.root}/db/data/gadm.csv") do
+
+      puts " Level 1"
+      csv = CsvMapper.import("#{Rails.root}/db/data/gadm_data/gadm_level1.csv") do
         read_attributes_from_file
       end
       csv.each do |row|
-        next if row.iso == 'HTI'
         unless country = Country.find_by_iso3_code(row.iso, :select => Country.custom_fields)
           puts " [KO] Country not found #{row.iso}"
           next
         end
-        unless region = Region.find_by_country_id_and_level_and_name(country.id, 1, row._1st_administrative_level_name)
+        unless region = Region.find_by_gadm_id_and_level(row.gadm1_id,1)
           r = Region.new
-          r.name = row._1st_administrative_level_name.strip.gsub(/,/,'')
+          r.name = row.name
           r.level = 1
           r.country_id = country.id
+          r.gadm_id = row.gadm1_id
           r.center_lat = row.lat
           r.center_lon = row.lon
-          r.the_geom = Point.from_x_y(row.lon,row.lat)
+          r.the_geom = Point.from_x_y(row.lon, row.lat)
+          r.ia_name = row.ia_name
           r.save!
-          puts " [OK] created: #{r.name}"
+          puts "created: 1 #{row.name}"
         else
-          puts " [KO] existing region name #{row._1st_administrative_level_name}"
+          puts "already existing: 1 #{row.name}"
         end
       end
 
-      DB.execute "UPDATE regions SET the_geom_geojson=ST_AsGeoJSON(the_geom,6) where level=1"
+      puts " Level 2"
+      csv = CsvMapper.import("#{Rails.root}/db/data/gadm_data/gadm_level2.csv") do
+        read_attributes_from_file
+      end
+      csv.each do |row|
+        unless country = Country.find_by_iso3_code(row.iso, :select => Country.custom_fields)
+          puts " [KO] Country not found #{row.iso}"
+          next
+        end
+        unless region = Region.find_by_gadm_id_and_level(row.gadm2_id,2)
+          r = Region.new
+          r.name = row.name
+          r.level = 2
+          r.country_id = country.id
+          r.gadm_id = row.gadm2_id
+          r.center_lat = row.lat
+          r.center_lon = row.lon
+          r.the_geom = Point.from_x_y(row.lon, row.lat)
+          r.parent_region_id = Region.find_by_gadm_id_and_level(row.gadm1_id,1).id
+          r.ia_name = row.ia_name
+          r.save!
+          puts "created: 2 #{row.name}"
+        else
+          puts "already existing: 2 #{row.name}"
+        end
+      end
 
-
-      # csv = CsvMapper.import("#{Rails.root}/db/data/gadm_data/gadm_level2.csv") do
-      #   read_attributes_from_file
-      # end
-      # csv.each do |row|
-      #   if (Region.find_by_gadm_id_and_level(row.gadm2_id,2).blank?)
-      #     r = Region.new
-      #     r.name = row.name
-      #     r.level = 2
-      #     r.country = Country.find_by_code(row.iso)
-      #     r.center_lat = row.lat
-      #     r.center_lon = row.lon
-      #     r.gadm_id = row.gadm2_id
-      #     r.parent_region_id = Region.find_by_gadm_id_and_level(row.gadm1_id,1).id
-      #     r.ia_name = row.ia_name
-      #     r.save!
-      #     puts "created: 2 #{row.name}"
-      #   else
-      #     puts "already existing: 2 #{row.name}"
-      #   end
-      # end
-      #
-      # csv = CsvMapper.import("#{Rails.root}/db/data/gadm_data/gadm_level3.csv") do
-      #   read_attributes_from_file
-      # end
-      # csv.each do |row|
-      #   if (Region.find_by_gadm_id_and_level(row.gadm3_id,3).blank?)
-      #     r = Region.new
-      #     r.name = row.name
-      #     r.level = 3
-      #     r.country = Country.find_by_code(row.iso)
-      #     r.center_lat = row.lat
-      #     r.center_lon = row.lon
-      #     r.gadm_id = row.gadm3_id
-      #     r.ia_name = row.ia_name
-      #     r.parent_region_id = Region.find_by_gadm_id_and_level(row.gadm2_id,2).id
-      #     r.save!
-      #     puts "created: 3 #{row.name}"
-      #   else
-      #     puts "already existing: 3 #{row.name}"
-      #   end
-      # end
+      puts " Level 3"
+      csv = CsvMapper.import("#{Rails.root}/db/data/gadm_data/gadm_level3.csv") do
+        read_attributes_from_file
+      end
+      csv.each do |row|
+        unless country = Country.find_by_iso3_code(row.iso, :select => Country.custom_fields)
+          puts " [KO] Country not found #{row.iso}"
+          next
+        end
+        unless region = Region.find_by_gadm_id_and_level(row.gadm3_id,3)
+          r = Region.new
+          r.name = row.name
+          r.level = 3
+          r.country_id = country.id
+          r.gadm_id = row.gadm3_id
+          r.center_lat = row.lat
+          r.center_lon = row.lon
+          r.the_geom = Point.from_x_y(row.lon, row.lat)
+          r.parent_region_id = Region.find_by_gadm_id_and_level(row.gadm2_id,2).id
+          r.ia_name = row.ia_name
+          r.save!
+          puts "created: 3 #{row.name}"
+        else
+          puts "already existing: 3 #{row.name}"
+        end
+      end
     end
 
     desc 'Load organizations data'
@@ -118,6 +133,9 @@ namespace :iom do
       csv_orgs = CsvMapper.import("#{Rails.root}/db/data/haiti_organizations.csv") do
         read_attributes_from_file
       end
+      csv_codes_path = Rails.root.join('db/data/ngoaidmap_organization_codes.csv')
+      csv_codes = Hash[FasterCSV.read(csv_codes_path, :col_sep => ',')]
+
       csv_orgs.each do |row|
         if(Organization.find_by_name(row.organization).blank?)
           o = Organization.new
@@ -130,6 +148,10 @@ namespace :iom do
           o.contact_phone_number    = row.us_contact_phone
           o.contact_email           = row.us_contact_email
           o.donation_address        = [row.donation_address_line_1,row.address_line_2].join("\n")
+          o.organization_id         = Hash[csv_codes][row.organization.strip]
+          if o.organization_id.blank?
+            o.organization_id = row.organization.delete " "
+          end
           o.city                    = row.city
           o.state                   = row.state
           o.zip_code                = row.zip_code
