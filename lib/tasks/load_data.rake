@@ -11,9 +11,6 @@ namespace :db do
   desc 'reset 3'
   task :reset_3 => %w(db:seed iom:data:load_adm_levels iom:data:load_orgs iom:data:load_food_security_projects)
 
-  desc 'load data in proper order for Haiti map (full schema)'
-  task :iom => %w(db:drop db:create db:schema:load iom:data:load_countries db:seed iom:data:load_adm_levels iom:data:load_orgs)
-
 end
 
 namespace :iom do
@@ -205,6 +202,7 @@ namespace :iom do
         read_attributes_from_file
       end
       csv_projs.each do |row|
+
         # Organization names mapping
         if row.organization.strip == "U.S. Committee for Refugees & Immigrants (USCRI)"
           row.organization = "US Committee for Refugees & Immigrants (USCRI)"
@@ -214,13 +212,14 @@ namespace :iom do
           puts "ORG NOT FOUND: \"#{row.organization}\""
           next
         end
+
         unless Project.find_by_intervention_id(row.ipc)
+          puts "#{row.ipc} : #{row.project_title}"
           p = Project.new
-          #puts "#{row.ipc} : #{row.project_title}"
           p.primary_organization      = o
           p.intervention_id           = row.ipc
           p.name                      = (row.project_title.blank? ? "Unknown" : row.project_title)
-          p.description               = row.project_description
+          p.description               = (row.project_description.blank? ? p.name : row.project_description)
           p.activities                = row.project_activities
           p.additional_information    = row.additional_information
           p.awardee_type              = row.awardee_type
@@ -228,7 +227,18 @@ namespace :iom do
           p.calculation_of_number_of_people_reached = row.calculation_of_number_of_people_reached
           p.project_needs             = row.project_needs
           p.idprefugee_camp           = row.idprefugee_camp
+          p.budget                    = row.budget.to_money.dollars unless (row.budget.blank?)
+          p.cross_cutting_issues      = row.crosscutting_issues
+          p.implementing_organization = row.implementing_organizations
+          p.partner_organizations     = row.partner_organizations
+          p.estimated_people_reached  = row.number_of_people_reached_target
+          p.target                    = row.target_groups
+          p.contact_person            = row.contact_name
+          p.contact_position          = row.contact_title
+          p.contact_email             = row.contact_email
+          p.website                   = row.website
 
+          # Dates
           unless row.est_start_date.blank?
             begin
               if(row.est_end_date=="2/29/2010")
@@ -259,22 +269,10 @@ namespace :iom do
           end
 
           if p.end_date && p.start_date && p.end_date < p.start_date
-            puts p.name
-            puts row.est_start_date
-            puts row.est_end_date
+            puts "NOT IMPORTED - #{p.intervention_id} : date start = #{row.est_start_date}, date_end = #{row.est_end_date}"
             next
           end
 
-          p.budget                    = row.budget.to_money.dollars unless (row.budget.blank?)
-          p.cross_cutting_issues      = row.crosscutting_issues
-          p.implementing_organization = row.implementing_organizations
-          p.partner_organizations     = row.partner_organizations
-          p.estimated_people_reached  = row.number_of_people_reached_target
-          p.target                    = row.target_groups
-          p.contact_person            = row.contact_name
-          p.contact_position          = row.contact_title
-          p.contact_email             = row.contact_email
-          p.website                   = row.website
           unless row.date_provided.blank?
             begin
               p.date_provided = Date.strptime(row.date_provided, '%m/%d/%Y')
@@ -287,6 +285,7 @@ namespace :iom do
               end
             end
           end
+
           unless row.date_updated.blank?
             begin
               p.date_updated = Date.strptime(row.date_updated, '%m/%d/%Y')
@@ -321,6 +320,18 @@ namespace :iom do
           if(!row.ia_sectors.blank?)
             parsed_sectors = row.ia_sectors.split(",").map{|e|e.strip}
             parsed_sectors.each do |sec|
+              sec = case sec.strip
+                    when 'Human Rights Democracy & Governance'
+                      'Human Rights Democracy and Governance'
+                    when 'Peace & Security'
+                      'Peace and Security'
+                    when 'Shelter & Housing'
+                      'Shelter and Housing'
+                    when 'Economic Recovery & Development'
+                      'Economic Recovery and Development'
+                    else
+                      sec.strip
+                    end
               sect = Sector.find_by_name(sec.strip)
               if sect
                 p.sectors << sect
@@ -348,7 +359,7 @@ namespace :iom do
             end
           end
 
-          p.save!
+          # p.save!
 
           # -->Country
           if (!row.country.blank?)
@@ -426,6 +437,8 @@ namespace :iom do
             multi_point = nil
             multi_point = "ST_MPointFromText('MULTIPOINT(#{locations.join(',')})',4326)" unless (locations.length<1)
           end
+
+          p.save! # we need the project id before executing the SQL
 
           #save the Geom that we created before
           if(!multi_point.blank?)

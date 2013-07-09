@@ -59,7 +59,8 @@ class Project < ActiveRecord::Base
 
   attr_accessor :sync_errors
 
-  validates_presence_of :name, :description, :start_date, :end_date
+  validates_presence_of :name, :description
+  # validates_presence_of :start_date, :end_date
   validates_presence_of :primary_organization_id
   validate :location_presence
   validate :dates_consistency#, :presence_of_clusters_and_sectors
