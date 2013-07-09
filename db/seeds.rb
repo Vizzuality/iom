@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Mandatory seeds
 
-User.create :name => 'admin', :email => 'admin@example.com', :password => 'admin', :password_confirmation => 'admin'
+User.create :name => 'admin', :email => 'admin@example.com', :password => 'admin', :password_confirmation => 'admin', :role => 'admin'
 
 
 
