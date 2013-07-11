@@ -858,6 +858,8 @@ SQL
                         value
                       when String
                         Date.parse(value) rescue self.errors.add(:start_date, "Start date is invalid")
+                      else
+                        self.errors.add(:start_date, "Start date is invalid")
                       end
   end
 
@@ -867,6 +869,8 @@ SQL
                       value
                     when String
                       Date.parse(value) rescue self.errors.add(:end_date, "End date is invalid")
+                    else
+                      self.errors.add(:end_date, "End date is invalid")
                     end
   end
 
@@ -921,7 +925,7 @@ SQL
           if country.blank?
             self.sync_errors << "Country #{country_name} doesn't exist on row #@sync_line"
           else
-            self.countries << country
+            self.countries << country unless self.countries.include?(country)
           end
         end
 
@@ -934,7 +938,7 @@ SQL
               self.sync_errors << "#{level.ordinalize} Admin level #{region_name} doesn't exist on row #@sync_line"
               next
             end
-            self.regions << region
+            self.regions << region unless self.regions.include?(region)
           end
         end
       end
