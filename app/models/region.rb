@@ -227,11 +227,18 @@ SQL
             nil
           end
         when 3
-          "update regions as ur set path=(
-          SELECT (((((( r3.country_id) || '/'::text) || r2.parent_region_id) || '/'::text) || r2.id) || '/'::text) || r3.id AS url
-          FROM regions r3
-          JOIN regions r2 ON r3.parent_region_id = r2.id
-          WHERE r3.id=#{self.id})"
+          "UPDATE regions rall
+           SET path = r.path
+           FROM (SELECT r3.country_id AS country,
+                        r2.id AS first,
+                        r2.parent_region_id AS second,
+                        r3.id AS third,
+                        (((((( r3.country_id) || '/'::text) || r2.parent_region_id)|| '/'::text) || r2.id) || '/'::text) || r3.id AS path
+                 FROM regions r3 JOIN regions r2
+                      ON r3.parent_region_id = r2.id AND r2.parent_region_id IS NOT NULL
+                 WHERE r3.level = 3
+                 ORDER BY country, first, second, third) r
+           WHERE rall.id = r.third AND rall.id = #{self.id}"
       end
       unless sql.blank?
         ActiveRecord::Base.connection.execute(sql)
