@@ -7,7 +7,14 @@ class Admin::ProjectsSynchronizationsController < Admin::AdminController
     synchronization.user = current_user
     synchronization.save
 
-    render :json => synchronization
+    respond_to do |format|
+      format.html {
+        render :json => synchronization, :content_type => 'text/html', :layout => false
+      }
+      format.json {
+        render :json => synchronization
+      }
+    end
   end
 
   def update
