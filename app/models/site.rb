@@ -51,7 +51,7 @@
 
 class Site < ActiveRecord::Base
 
-  @@main_domain = 'ngoaidmap.org'
+  @@main_domain = 'ngoaidmap.dev'
 
   has_many :resources, :conditions => 'resources.element_type = #{Iom::ActsAsResource::SITE_TYPE}', :foreign_key => :element_id, :dependent => :destroy
   has_many :media_resources, :conditions => 'media_resources.element_type = #{Iom::ActsAsResource::SITE_TYPE}', :foreign_key => :element_id, :dependent => :destroy, :order => 'position ASC'

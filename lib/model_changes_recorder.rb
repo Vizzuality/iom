@@ -32,7 +32,7 @@ module ModelChangesRecorder
 
       self.changes_history_records << ChangesHistoryRecord.create!(
         :who              => updated_by,
-        :who_email        => updated_by.email,
+        :who_email        => (updated_by.email rescue nil),
         :who_organization => (updated_by.organization.name rescue nil),
         :what             => self,
         :how              => valid_changes.to_json,

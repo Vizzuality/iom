@@ -1,12 +1,13 @@
+# -*- coding: utf-8 -*-
 # Mandatory seeds
 
-User.create :email => 'admin@example.com', :password => 'admin', :password_confirmation => 'admin'
+User.create :name => 'admin', :email => 'admin@example.com', :password => 'admin', :password_confirmation => 'admin', :role => 'admin'
 
 
 
 settings = Settings.find_or_create_by_id(1)
 data = HashWithIndifferentAccess.new
-data[:main_site_host] = 'ngoaidmap.org'
+data[:main_site_host] = 'ngoaidmap.dev'
 settings.data = data
 settings.save!
 
@@ -91,9 +92,9 @@ Tag.create :name => 'earthquake'
 
 # Sites
 #  sites for testing purposes. Add this line to your /etc/hosts:
-#  127.0.0.1       dev-haiti.ngoaidmap.org
+#  127.0.0.1       dev-haiti.ngoaidmap.dev
 site = Site.new :name              => 'Haiti Aid Map',
-                :url               => "#{Rails.env.eql?('development') ? 'dev-' : ''}haiti.ngoaidmap.org",
+                :url               => "#{Rails.env.eql?('development') ? 'dev-' : ''}haiti.ngoaidmap.dev",
                 :status            => true,
                 :project_classification => 1,
                 :short_description =>'Mapping efforts to reduce poverty and suffering',
@@ -155,9 +156,9 @@ site.pages.find_by_title('Highlights').update_attribute(:body, <<-HTML
               HTML
 )
 
-#  127.0.0.1       dev-food.ngoaidmap.org
+#  127.0.0.1       dev-food.ngoaidmap.dev
 site = Site.new :name => 'Food Security',
-                :url => "#{Rails.env.eql?('development') ? 'dev-' : ''}food.ngoaidmap.org",
+                :url => "#{Rails.env.eql?('development') ? 'dev-' : ''}food.ngoaidmap.dev",
                 :status => true,
                 :project_classification => 1,
                 :short_description => 'Food security refers to the availability of food and one’s access to it',

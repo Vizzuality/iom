@@ -10,6 +10,7 @@ namespace :db do
 
   desc 'reset 3'
   task :reset_3 => %w(db:seed iom:data:load_adm_levels iom:data:load_orgs iom:data:load_food_security_projects)
+
 end
 
 namespace :iom do
@@ -20,8 +21,9 @@ namespace :iom do
     desc "load country data"
     task :load_countries => :environment do
       DB = ActiveRecord::Base.connection
+      db_name = Rails.configuration.database_configuration[Rails.env]["database"]
       system("unzip -o #{Rails.root}/db/data/countries/TM_WORLD_BORDERS-0.3.zip -d #{Rails.root}/db/data/countries/")
-      system("shp2pgsql -d -s 4326 -gthe_geom -i -WLATIN1 #{Rails.root}/db/data/countries/TM_WORLD_BORDERS-0.3.shp public.tmp_countries | psql -Upostgres -diom_#{RAILS_ENV}")
+      system("shp2pgsql -d -s 4326 -gthe_geom -i -WLATIN1 #{Rails.root}/db/data/countries/TM_WORLD_BORDERS-0.3.shp public.tmp_countries | psql -Upostgres -d#{db_name}")
 
       #Insert the country and get the value
       sql="INSERT INTO countries(\"name\",code,center_lat,center_lon,iso2_code,iso3_code)
@@ -41,75 +43,86 @@ namespace :iom do
       DB = ActiveRecord::Base.connection
 
       puts "Loading adm levels"
-      puts " Level 1:"
-      csv = CsvMapper.import("#{Rails.root}/db/data/gadm.csv") do
+
+      puts " Level 1"
+      csv = CsvMapper.import("#{Rails.root}/db/data/gadm_data/gadm_level1.csv") do
         read_attributes_from_file
       end
       csv.each do |row|
-        next if row.iso == 'HTI'
         unless country = Country.find_by_iso3_code(row.iso, :select => Country.custom_fields)
           puts " [KO] Country not found #{row.iso}"
           next
         end
-        unless region = Region.find_by_country_id_and_level_and_name(country.id, 1, row._1st_administrative_level_name)
+        unless region = Region.find_by_gadm_id_and_level(row.gadm1_id,1)
           r = Region.new
-          r.name = row._1st_administrative_level_name.strip.gsub(/,/,'')
+          r.name = row.name
           r.level = 1
           r.country_id = country.id
+          r.gadm_id = row.gadm1_id
           r.center_lat = row.lat
           r.center_lon = row.lon
-          r.the_geom = Point.from_x_y(row.lon,row.lat)
+          r.the_geom = Point.from_x_y(row.lon, row.lat)
+          r.ia_name = row.ia_name
           r.save!
-          puts " [OK] created: #{r.name}"
+          puts "created: 1 #{row.name}"
         else
-          puts " [KO] existing region name #{row._1st_administrative_level_name}"
+          puts "already existing: 1 #{row.name}"
         end
       end
 
-      DB.execute "UPDATE regions SET the_geom_geojson=ST_AsGeoJSON(the_geom,6) where level=1"
+      puts " Level 2"
+      csv = CsvMapper.import("#{Rails.root}/db/data/gadm_data/gadm_level2.csv") do
+        read_attributes_from_file
+      end
+      csv.each do |row|
+        unless country = Country.find_by_iso3_code(row.iso, :select => Country.custom_fields)
+          puts " [KO] Country not found #{row.iso}"
+          next
+        end
+        unless region = Region.find_by_gadm_id_and_level(row.gadm2_id,2)
+          r = Region.new
+          r.name = row.name
+          r.level = 2
+          r.country_id = country.id
+          r.gadm_id = row.gadm2_id
+          r.center_lat = row.lat
+          r.center_lon = row.lon
+          r.the_geom = Point.from_x_y(row.lon, row.lat)
+          r.parent_region_id = Region.find_by_gadm_id_and_level(row.gadm1_id,1).id
+          r.ia_name = row.ia_name
+          r.save!
+          puts "created: 2 #{row.name}"
+        else
+          puts "already existing: 2 #{row.name}"
+        end
+      end
 
-
-      # csv = CsvMapper.import("#{Rails.root}/db/data/gadm_data/gadm_level2.csv") do
-      #   read_attributes_from_file
-      # end
-      # csv.each do |row|
-      #   if (Region.find_by_gadm_id_and_level(row.gadm2_id,2).blank?)
-      #     r = Region.new
-      #     r.name = row.name
-      #     r.level = 2
-      #     r.country = Country.find_by_code(row.iso)
-      #     r.center_lat = row.lat
-      #     r.center_lon = row.lon
-      #     r.gadm_id = row.gadm2_id
-      #     r.parent_region_id = Region.find_by_gadm_id_and_level(row.gadm1_id,1).id
-      #     r.ia_name = row.ia_name
-      #     r.save!
-      #     puts "created: 2 #{row.name}"
-      #   else
-      #     puts "already existing: 2 #{row.name}"
-      #   end
-      # end
-      #
-      # csv = CsvMapper.import("#{Rails.root}/db/data/gadm_data/gadm_level3.csv") do
-      #   read_attributes_from_file
-      # end
-      # csv.each do |row|
-      #   if (Region.find_by_gadm_id_and_level(row.gadm3_id,3).blank?)
-      #     r = Region.new
-      #     r.name = row.name
-      #     r.level = 3
-      #     r.country = Country.find_by_code(row.iso)
-      #     r.center_lat = row.lat
-      #     r.center_lon = row.lon
-      #     r.gadm_id = row.gadm3_id
-      #     r.ia_name = row.ia_name
-      #     r.parent_region_id = Region.find_by_gadm_id_and_level(row.gadm2_id,2).id
-      #     r.save!
-      #     puts "created: 3 #{row.name}"
-      #   else
-      #     puts "already existing: 3 #{row.name}"
-      #   end
-      # end
+      puts " Level 3"
+      csv = CsvMapper.import("#{Rails.root}/db/data/gadm_data/gadm_level3.csv") do
+        read_attributes_from_file
+      end
+      csv.each do |row|
+        unless country = Country.find_by_iso3_code(row.iso, :select => Country.custom_fields)
+          puts " [KO] Country not found #{row.iso}"
+          next
+        end
+        unless region = Region.find_by_gadm_id_and_level(row.gadm3_id,3)
+          r = Region.new
+          r.name = row.name
+          r.level = 3
+          r.country_id = country.id
+          r.gadm_id = row.gadm3_id
+          r.center_lat = row.lat
+          r.center_lon = row.lon
+          r.the_geom = Point.from_x_y(row.lon, row.lat)
+          r.parent_region_id = Region.find_by_gadm_id_and_level(row.gadm2_id,2).id
+          r.ia_name = row.ia_name
+          r.save!
+          puts "created: 3 #{row.name}"
+        else
+          puts "already existing: 3 #{row.name}"
+        end
+      end
     end
 
     desc 'Load organizations data'
@@ -118,6 +131,9 @@ namespace :iom do
       csv_orgs = CsvMapper.import("#{Rails.root}/db/data/haiti_organizations.csv") do
         read_attributes_from_file
       end
+      csv_codes_path = Rails.root.join('db/data/ngoaidmap_organization_codes.csv')
+      csv_codes = Hash[FasterCSV.read(csv_codes_path, :col_sep => ',')]
+
       csv_orgs.each do |row|
         if(Organization.find_by_name(row.organization).blank?)
           o = Organization.new
@@ -130,6 +146,10 @@ namespace :iom do
           o.contact_phone_number    = row.us_contact_phone
           o.contact_email           = row.us_contact_email
           o.donation_address        = [row.donation_address_line_1,row.address_line_2].join("\n")
+          o.organization_id         = Hash[csv_codes][row.organization.strip]
+          if o.organization_id.blank?
+            o.organization_id = row.organization.delete " "
+          end
           o.city                    = row.city
           o.state                   = row.state
           o.zip_code                = row.zip_code
@@ -183,6 +203,7 @@ namespace :iom do
         read_attributes_from_file
       end
       csv_projs.each do |row|
+
         # Organization names mapping
         if row.organization.strip == "U.S. Committee for Refugees & Immigrants (USCRI)"
           row.organization = "US Committee for Refugees & Immigrants (USCRI)"
@@ -192,13 +213,14 @@ namespace :iom do
           puts "ORG NOT FOUND: \"#{row.organization}\""
           next
         end
+
         unless Project.find_by_intervention_id(row.ipc)
+          puts "#{row.ipc} : #{row.project_title}"
           p = Project.new
-          #puts "#{row.ipc} : #{row.project_title}"
           p.primary_organization      = o
           p.intervention_id           = row.ipc
           p.name                      = (row.project_title.blank? ? "Unknown" : row.project_title)
-          p.description               = row.project_description
+          p.description               = (row.project_description.blank? ? p.name : row.project_description)
           p.activities                = row.project_activities
           p.additional_information    = row.additional_information
           p.awardee_type              = row.awardee_type
@@ -206,7 +228,18 @@ namespace :iom do
           p.calculation_of_number_of_people_reached = row.calculation_of_number_of_people_reached
           p.project_needs             = row.project_needs
           p.idprefugee_camp           = row.idprefugee_camp
+          p.budget                    = row.budget.to_money.dollars unless (row.budget.blank?)
+          p.cross_cutting_issues      = row.crosscutting_issues
+          p.implementing_organization = row.implementing_organizations
+          p.partner_organizations     = row.partner_organizations
+          p.estimated_people_reached  = row.number_of_people_reached_target
+          p.target                    = row.target_groups
+          p.contact_person            = row.contact_name
+          p.contact_position          = row.contact_title
+          p.contact_email             = row.contact_email
+          p.website                   = row.website
 
+          # Dates
           unless row.est_start_date.blank?
             begin
               if(row.est_end_date=="2/29/2010")
@@ -237,22 +270,10 @@ namespace :iom do
           end
 
           if p.end_date && p.start_date && p.end_date < p.start_date
-            puts p.name
-            puts row.est_start_date
-            puts row.est_end_date
+            puts "NOT IMPORTED - #{p.intervention_id} : date start = #{row.est_start_date}, date_end = #{row.est_end_date}"
             next
           end
 
-          p.budget                    = row.budget.to_money.dollars unless (row.budget.blank?)
-          p.cross_cutting_issues      = row.crosscutting_issues
-          p.implementing_organization = row.implementing_organizations
-          p.partner_organizations     = row.partner_organizations
-          p.estimated_people_reached  = row.number_of_people_reached_target
-          p.target                    = row.target_groups
-          p.contact_person            = row.contact_name
-          p.contact_position          = row.contact_title
-          p.contact_email             = row.contact_email
-          p.website                   = row.website
           unless row.date_provided.blank?
             begin
               p.date_provided = Date.strptime(row.date_provided, '%m/%d/%Y')
@@ -265,6 +286,7 @@ namespace :iom do
               end
             end
           end
+
           unless row.date_updated.blank?
             begin
               p.date_updated = Date.strptime(row.date_updated, '%m/%d/%Y')
@@ -299,6 +321,18 @@ namespace :iom do
           if(!row.ia_sectors.blank?)
             parsed_sectors = row.ia_sectors.split(",").map{|e|e.strip}
             parsed_sectors.each do |sec|
+              sec = case sec.strip
+                    when 'Human Rights Democracy & Governance'
+                      'Human Rights Democracy and Governance'
+                    when 'Peace & Security'
+                      'Peace and Security'
+                    when 'Shelter & Housing'
+                      'Shelter and Housing'
+                    when 'Economic Recovery & Development'
+                      'Economic Recovery and Development'
+                    else
+                      sec.strip
+                    end
               sect = Sector.find_by_name(sec.strip)
               if sect
                 p.sectors << sect
@@ -326,7 +360,7 @@ namespace :iom do
             end
           end
 
-          p.save!
+          # p.save!
 
           # -->Country
           if (!row.country.blank?)
@@ -404,6 +438,8 @@ namespace :iom do
             multi_point = nil
             multi_point = "ST_MPointFromText('MULTIPOINT(#{locations.join(',')})',4326)" unless (locations.length<1)
           end
+
+          p.save! # we need the project id before executing the SQL
 
           #save the Geom that we created before
           if(!multi_point.blank?)
