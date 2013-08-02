@@ -7,7 +7,7 @@ gem 'pg',                       '0.9.0'
 gem 'nofxx-georuby',                          :require => 'geo_ruby'
 gem 'spatial_adapter'
 
-gem "will_paginate", "~> 3.0.pre2"
+gem "will_paginate", "3.0.pre2"
 gem 'sanitize', '2.0.3'
 gem 'paperclip', '~> 2.7'
 gem 'garb'
