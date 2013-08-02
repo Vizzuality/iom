@@ -8,15 +8,15 @@ gem 'nofxx-georuby',                          :require => 'geo_ruby'
 gem 'spatial_adapter'
 
 gem "will_paginate", "~> 3.0.pre2"
-gem 'sanitize'
-gem 'paperclip'
+gem 'sanitize', '2.0.3'
+gem 'paperclip', '~> 2.7'
 gem 'garb'
 gem 'csv-mapper'
 gem 'fastercsv'
 gem 'money'
 gem 'geokit'
-gem 'nokogiri'
-gem 'hoptoad_notifier'
+gem 'nokogiri', '< 1.6.0'
+gem 'rollbar'
 gem 'memcache-client'
 gem 'spreadsheet'
 gem 'roadie'
@@ -34,9 +34,7 @@ end
 
 group :test, :development do
   gem 'rr', :tag => 'v1.0.0'
-  gem 'steak', :git => 'git://github.com/cavalle/steak.git'
-  gem 'rspec', '>= 2.0.0.beta.13'
-  gem "rspec-rails", ">= 2.0.0.beta.8"
+  gem "rspec-rails"
   gem 'launchy'
   gem 'capybara', '~> 0.4.0'
   gem 'webrat'

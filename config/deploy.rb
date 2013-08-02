@@ -1,10 +1,15 @@
 require 'capistrano/ext/multistage'
 require 'config/boot'
-require 'hoptoad_notifier/capistrano'
+require "bundler/capistrano"
+require 'rollbar/capistrano'
 
 set :stages, %w(staging production)
 
-require "bundler/capistrano"
+APP_CONFIG = YAML.load_file("config/app_config.yml")['production']
+
+set :rollbar_token, APP_CONFIG['rollbar_token']
+set(:rollbar_env) { stage }
+
 
 default_run_options[:pty] = true
 
