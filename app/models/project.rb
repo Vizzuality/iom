@@ -63,7 +63,13 @@ class Project < ActiveRecord::Base
   validates_presence_of :primary_organization_id
   validate :location_presence
   validate :dates_consistency#, :presence_of_clusters_and_sectors
+  validates_uniqueness_of :intervention_id, :if => (lambda do
+    intervention_id.present?
+  end)
 
+  before_create :generate_intervention_id, :if => (lambda do
+    intervention_id.blank?
+  end)
   after_commit :set_cached_sites
   after_destroy :remove_cached_sites
 
@@ -792,6 +798,7 @@ SQL
   end
 
   def project_description_sync=(value)
+    self.errors.add(:description, "A project description is required") if value.blank?
     self.description = value
   end
 
@@ -808,7 +815,9 @@ SQL
   end
 
   def budget_numeric_sync=(value)
-    self.budget = value
+    self.budget = Float(value)
+  rescue
+    self.errors.add(:budget_numeric, "Only numeric values are allowed for the budget_numeric field")
   end
 
   def target_groups_sync=(value)
@@ -828,7 +837,6 @@ SQL
   end
 
   def interaction_intervention_id_sync=(value)
-    self.errors.add(:intervention_id, "An intervention id is required") if value.blank?
     self.intervention_id = value
   end
 
@@ -879,7 +887,9 @@ SQL
   end
 
   def estimated_people_reached_sync=(value)
-    self.estimated_people_reached = value
+    self.estimated_people_reached = Float(value)
+  rescue
+    self.errors.add(:estimated_people_reached, "Only numeric values are allowed for the estimated_people_reached field")
   end
 
   def project_tags_sync=(value)
@@ -894,7 +904,7 @@ SQL
   end
 
   def date_provided_sync=(value)
-    self.date_provided = value
+    self.date_provided = Time.now.to_date
   end
 
   def date_updated_sync=(value)
@@ -902,6 +912,10 @@ SQL
   end
 
   def status_sync=(value)
+  end
+
+  def project_tags_sync=(value)
+    self.tags = value
   end
 
   def organization_sync=(value)
@@ -943,6 +957,8 @@ SQL
         end
       end
     end
+
+    errors.add(:location, %Q{You have to specify at least one valid location}) if countries.blank? && regions.blank?
   end
 
   def sectors_sync=(value)
@@ -957,8 +973,8 @@ SQL
         self.sectors << sector
       end
 
-      self.errors.add(:sectors, %Q{You have to specify at least one valid sector}) if self.sectors.blank?
     end
+    errors.add(:sectors, %Q{You have to specify at least one valid sector}) if sectors.blank?
   end
 
   def clusters_sync=(value)

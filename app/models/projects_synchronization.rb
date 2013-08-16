@@ -1,4 +1,5 @@
 class ProjectsSynchronization < ActiveRecord::Base
+  class InvalidHeaders < Exception; end
 
   attr_accessor :projects_file, :projects_errors, :user
 
@@ -71,6 +72,12 @@ class ProjectsSynchronization < ActiveRecord::Base
       process_project_validations(row_hash, project)
 
     end
+  rescue Ole::Storage::FormatError
+    self.projects_errors << 'Invalid File. File must be an Excel 97-2003 file'
+  rescue InvalidHeaders
+    self.projects_errors << 'Invalid file headers. Please provide a file with all the required columns.'
+  rescue
+    self.projects_errors << 'Unexpected error. Please, try again later.'
   end
 
   def save_projects_if_no_errors
@@ -94,6 +101,8 @@ class ProjectsSynchronization < ActiveRecord::Base
 
   def convert_file_to_hash_array(sheet)
     header = sheet.row(0).to_a
+
+    raise InvalidHeaders if Project.export_headers(:show_private_fields => true) - header != []
 
     self.projects_file_data = []
     sheet.each_with_index do |sheet_row, i|
