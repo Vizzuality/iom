@@ -57,11 +57,12 @@ class Project < ActiveRecord::Base
                           includes(:countries).
                           where('countries_projects.project_id IS NULL AND regions.id IS NOT NULL')
 
-  attr_accessor :sync_errors
+  attr_accessor :sync_errors, :sync_mode
 
+  validate :sync_mode_validations, :if => lambda { sync_mode }
   validates_presence_of :name, :description, :start_date, :end_date
   validates_presence_of :primary_organization_id
-  validate :location_presence
+  validate :location_presence, :unless => lambda { sync_mode }
   validate :dates_consistency#, :presence_of_clusters_and_sectors
   validates_uniqueness_of :intervention_id, :if => (lambda do
     intervention_id.present?
@@ -793,12 +794,10 @@ SQL
   end
 
   def project_name_sync=(value)
-    self.errors.add(:name, "A project name is required") if value.blank?
     self.name = value
   end
 
   def project_description_sync=(value)
-    self.errors.add(:description, "A project description is required") if value.blank?
     self.description = value
   end
 
@@ -815,9 +814,7 @@ SQL
   end
 
   def budget_numeric_sync=(value)
-    self.budget = Float(value)
-  rescue
-    self.errors.add(:budget_numeric, "Only numeric values are allowed for the budget_numeric field")
+    @budget = value
   end
 
   def target_groups_sync=(value)
@@ -861,25 +858,11 @@ SQL
   end
 
   def start_date_sync=(value)
-    self.start_date = case value
-                      when Date, DateTime, Time
-                        value
-                      when String
-                        Date.parse(value) rescue self.errors.add(:start_date, "Start date is invalid")
-                      else
-                        self.errors.add(:start_date, "Start date is invalid")
-                      end
+    self.start_date = value
   end
 
   def end_date_sync=(value)
-    self.end_date = case value
-                    when Date, DateTime, Time
-                      value
-                    when String
-                      Date.parse(value) rescue self.errors.add(:end_date, "End date is invalid")
-                    else
-                      self.errors.add(:end_date, "End date is invalid")
-                    end
+    self.end_date = value
   end
 
   def cross_cutting_issues_sync=(value)
@@ -887,9 +870,7 @@ SQL
   end
 
   def estimated_people_reached_sync=(value)
-    self.estimated_people_reached = Float(value)
-  rescue
-    self.errors.add(:estimated_people_reached, "Only numeric values are allowed for the estimated_people_reached field")
+    self.estimated_people_reached = value
   end
 
   def project_tags_sync=(value)
@@ -919,11 +900,7 @@ SQL
   end
 
   def organization_sync=(value)
-    if value && (organization = Organization.where('trim(name) = ?', value).first) && organization.present?
-      self.primary_organization = organization
-    else
-      self.errors.add(:primary_organization_id, %Q{Organization "#{value}" doesn't exist on row #@sync_line})
-    end
+    @organization_name = value
   end
 
   def location_sync=(value)
@@ -935,7 +912,7 @@ SQL
         country_name, *regions = location.split('>')
 
         if country_name
-          country = Country.where(:name => country_name).first
+          country = Country.where('trim(name) = ?', country_name).first
           if country.blank?
             self.sync_errors << "Country #{country_name} doesn't exist on row #@sync_line"
           else
@@ -947,7 +924,7 @@ SQL
           regions.each_with_index do |region_name, level|
             level += 1
 
-            region = Region.where(:name => region_name).first
+            region = Region.where('trim(name) = ?', region_name).first
             if region.blank?
               self.sync_errors << "#{level.ordinalize} Admin level #{region_name} doesn't exist on row #@sync_line"
               next
@@ -958,14 +935,13 @@ SQL
       end
     end
 
-    errors.add(:location, %Q{You have to specify at least one valid location}) if countries.blank? && regions.blank?
   end
 
   def sectors_sync=(value)
     self.sectors.clear
     if value && (sectors = value.text2array)
       sectors.each do |sector_name|
-        sector = Sector.where(:name => sector_name).first
+        sector = Sector.where('trim(name) = ?', sector_name).first
         if sector.blank?
           self.sync_errors << "Sector #{sector_name} doesn't exist on row #@sync_line"
           next
@@ -974,14 +950,13 @@ SQL
       end
 
     end
-    errors.add(:sectors, %Q{You have to specify at least one valid sector}) if sectors.blank?
   end
 
   def clusters_sync=(value)
     self.clusters.clear
     if value && (clusters = value.text2array)
       clusters.each do |cluster_name|
-        cluster = Cluster.where(:name => cluster_name).first
+        cluster = Cluster.where('trim(name) = ?', cluster_name).first
         if cluster.blank?
           self.sync_errors << "cluster #{cluster_name} doesn't exist on row #@sync_line"
           next
@@ -989,7 +964,6 @@ SQL
         self.clusters << cluster
       end
 
-      self.errors.add(:clusters, %Q{You have to specify at least one valid cluster}) if self.clusters.blank?
     end
   end
 
@@ -997,11 +971,57 @@ SQL
     self.donors.clear
     if value && (donors = value.text2array)
       donors.each do |donor_name|
-        donor = Donor.find_by_name(donor_name)
-        next if donor.blank?
+        donor = Donor.where('trim(name) = ?', donor_name)
+        if donor.blank?
+          self.sync_errors << "donor #{donor_name} doesn't exist on row #@sync_line"
+          next
+        end
         self.donors << donor
       end
     end
+  end
+
+  def sync_mode_validations
+    begin
+      self.budget = Float(@budget)
+    rescue
+      errors.add(:budget, "only accepts numeric values")
+    end if @budget.present?
+
+    self.start_date = case start_date
+                      when Date, DateTime, Time
+                        start_date
+                      when String
+                        Date.parse(start_date) rescue self.errors.add(:start_date, "Start date is invalid")
+                      else
+                        self.errors.add(:start_date, "Start date is invalid")
+                      end if start_date.present?
+
+    self.end_date = case end_date
+                    when Date, DateTime, Time
+                      end_date
+                    when String
+                      Date.parse(end_date) rescue self.errors.add(:end_date, "End date is invalid")
+                    else
+                      self.errors.add(:end_date, "End date is invalid")
+                    end if end_date.present?
+
+    begin
+      self.estimated_people_reached = Float(estimated_people_reached)
+    rescue
+      self.errors.add(:estimated_people_reached, "only accepts numeric values")
+    end if estimated_people_reached.present?
+
+    if @organization_name && (organization = Organization.where('trim(name) = ?', @organization_name).first) && organization.present?
+      self.primary_organization_id = organization.id
+    else
+      self.errors.add(:organization, %Q{"#{@organization_name}" doesn't exist on row #@sync_line})
+    end
+
+    errors.add(:location, "can't be blank") if countries.blank? && regions.blank?
+    errors.add(:sectors, :blank)            if sectors.blank?
+    errors.add(:clusters, :blank)           if self.clusters.blank?
+
   end
 
   # PROJECT SYNCHRONIZATION

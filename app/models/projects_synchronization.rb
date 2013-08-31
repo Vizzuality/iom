@@ -1,5 +1,6 @@
 class ProjectsSynchronization < ActiveRecord::Base
-  class InvalidHeaders < Exception; end
+
+  REQUIRED_HEADERS = %w(organization project_name project_description start_date end_date sectors)
 
   attr_accessor :projects_file, :projects_errors, :user
 
@@ -64,6 +65,7 @@ class ProjectsSynchronization < ActiveRecord::Base
       next if row_hash.values - row_hash.keys == []
 
       project           = instantiate_project(row_hash)
+      project.sync_mode = true
       project.sync_line = @line
       row_hash.each{|k, v| project.send("#{k}_sync=", v) }
       self.projects_errors += project.sync_errors
@@ -74,9 +76,9 @@ class ProjectsSynchronization < ActiveRecord::Base
     end
   rescue Ole::Storage::FormatError
     self.projects_errors << 'Invalid File. File must be an Excel 97-2003 file'
-  rescue InvalidHeaders
-    self.projects_errors << 'Invalid file headers. Please provide a file with all the required columns.'
-  rescue
+  rescue Exception => e
+    logger.error e
+    logger.error e.backtrace.join("\n")
     self.projects_errors << 'Unexpected error. Please, try again later.'
   end
 
@@ -102,8 +104,6 @@ class ProjectsSynchronization < ActiveRecord::Base
   def convert_file_to_hash_array(sheet)
     header = sheet.row(0).to_a
 
-    raise InvalidHeaders if Project.export_headers(:show_private_fields => true) - header != []
-
     self.projects_file_data = []
     sheet.each_with_index do |sheet_row, i|
       next if i == 0
@@ -124,11 +124,17 @@ class ProjectsSynchronization < ActiveRecord::Base
   end
 
   def process_project_validations(row_hash, project)
-    if project.errors.present?
-      self.projects_errors += project.errors.values.flatten.map{|msg| "#{msg} on row #@line"}
+    if project.invalid?
+      self.projects_errors += project.errors.full_messages.flatten.map{|msg| "#{msg} on row #@line"}
       project_not_updated << project
     else
       projects << project
+    end
+
+    if row_hash['interaction_intervention_id'].present?
+      self.projects_errors << "Missing required fields on line #@line" if  row_hash.keys - ['interaction_intervention_id'] == []
+    else
+      self.projects_errors << "Missing required fields on line #@line" if REQUIRED_HEADERS - row_hash.keys != []
     end
   end
 

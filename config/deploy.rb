@@ -1,7 +1,6 @@
 require 'capistrano/ext/multistage'
 require 'config/boot'
 require "bundler/capistrano"
-require 'rollbar/capistrano'
 
 set :stages, %w(staging production)
 
