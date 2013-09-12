@@ -68,7 +68,7 @@ class Project < ActiveRecord::Base
     intervention_id.present?
   end)
 
-  before_create :generate_intervention_id, :if => (lambda do
+  after_create :generate_intervention_id, :if => (lambda do
     intervention_id.blank?
   end)
   after_commit :set_cached_sites
@@ -779,7 +779,12 @@ SQL
   end
 
   def generate_intervention_id
-    self.intervention_id = [primary_organization.try(:organization_id).presence || 'XXXX', countries.first.try(:iso2_code).presence || 'XX', Time.now.strftime('%y'), organization_id.presence || 'XXX'].join('-')
+    update_attribute(:intervention_id, [
+      primary_organization.try(:organization_id).presence || 'XXXX',
+      countries.first.try(:iso2_code).presence || 'XX',
+      Time.now.strftime('%y'),
+      id
+    ].join('-'))
   end
 
   ##############################
@@ -834,7 +839,6 @@ SQL
   end
 
   def interaction_intervention_id_sync=(value)
-    self.intervention_id = value
   end
 
   def prime_awardee_sync=(value)
@@ -870,10 +874,7 @@ SQL
   end
 
   def estimated_people_reached_sync=(value)
-    self.estimated_people_reached = value
-  end
-
-  def project_tags_sync=(value)
+    @estimated_people_reached_sync = value
   end
 
   def verbatim_location_sync=(value)
@@ -938,47 +939,15 @@ SQL
   end
 
   def sectors_sync=(value)
-    self.sectors.clear
-    if value && (sectors = value.text2array)
-      sectors.each do |sector_name|
-        sector = Sector.where('lower(trim(name)) = lower(trim(?))', sector_name).first
-        if sector.blank?
-          self.sync_errors << "Sector #{sector_name} doesn't exist on row #@sync_line"
-          next
-        end
-        self.sectors << sector
-      end
-
-    end
+    @sectors_sync = value
   end
 
   def clusters_sync=(value)
-    self.clusters.clear
-    if value && (clusters = value.text2array)
-      clusters.each do |cluster_name|
-        cluster = Cluster.where('lower(trim(name)) = lower(trim(?))', cluster_name).first
-        if cluster.blank?
-          self.sync_errors << "cluster #{cluster_name} doesn't exist on row #@sync_line"
-          next
-        end
-        self.clusters << cluster
-      end
-
-    end
+    @clusters_sync = value
   end
 
   def donors_sync=(value)
-    self.donors.clear
-    if value && (donors = value.text2array)
-      donors.each do |donor_name|
-        donor = Donor.where('lower(trim(name)) = lower(trim(?))', donor_name)
-        if donor.blank?
-          self.sync_errors << "donor #{donor_name} doesn't exist on row #@sync_line"
-          next
-        end
-        self.donors << donor
-      end
-    end
+    @donors_sync = value
   end
 
   def sync_mode_validations
@@ -1007,10 +976,10 @@ SQL
                     end if end_date.present?
 
     begin
-      self.estimated_people_reached = Float(estimated_people_reached)
+      self.estimated_people_reached = Float(@estimated_people_reached_sync)
     rescue
       self.errors.add(:estimated_people_reached, "only accepts numeric values")
-    end if estimated_people_reached.present?
+    end if @estimated_people_reached_sync.present?
 
     if @organization_name && (organization = Organization.where('lower(trim(name)) = lower(trim(?))', @organization_name).first) && organization.present?
       self.primary_organization_id = organization.id
@@ -1019,9 +988,52 @@ SQL
     end
 
     errors.add(:location, "can't be blank") if countries.blank? && regions.blank?
-    errors.add(:sectors, :blank)            if sectors.blank?
-    errors.add(:clusters, :blank)           if self.clusters.blank?
 
+    if @sectors_sync.present?
+      self.sectors.clear
+      if @sectors_sync && (sectors = @sectors_sync.text2array)
+        sectors.each do |sector_name|
+          sector = Sector.where('lower(trim(name)) = lower(trim(?))', sector_name).first
+          if sector.blank?
+            errors.add(:sector,  "#{sector_name} doesn't exist")
+            next
+          end
+          self.sectors << sector
+        end
+
+      end
+    end
+
+    if @clusters_sync.present?
+      self.clusters.clear
+      if @clusters_sync && (clusters = @clusters_sync.text2array)
+        clusters.each do |cluster_name|
+          cluster = Cluster.where('lower(trim(name)) = lower(trim(?))', cluster_name).first
+          if cluster.blank?
+            errors.add(:cluster,  "#{cluster_name} doesn't exist")
+            next
+          end
+          self.clusters << cluster
+        end
+
+      end
+    end
+
+    if @donors_sync.present?
+      self.donors.clear
+      if @donors_sync && (donors = @donors_sync.text2array)
+        donors.each do |donor_name|
+          donor = Donor.where('lower(trim(name)) = lower(trim(?))', donor_name)
+          if donor.blank?
+            errors.add(:donor,  "#{donor_name} doesn't exist")
+            next
+          end
+          self.donors << donor
+        end
+      end
+    end
+
+    errors.add(:sectors, :blank) if sectors.blank?
   end
 
   # PROJECT SYNCHRONIZATION

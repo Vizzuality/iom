@@ -117,7 +117,7 @@ class ProjectsSynchronization < ActiveRecord::Base
 
   def instantiate_project(project_hash)
     if project_hash['interaction_intervention_id'].present?
-      Project.where(:intervention_id => project_hash['interaction_intervention_id'].try(:to_s)).first || Project.new
+      Project.where('lower(trim(intervention_id)) = lower(trim(?))', project_hash['interaction_intervention_id'].try(:to_s)).first || Project.new
     else
       Project.new
     end
