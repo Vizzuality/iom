@@ -67,7 +67,7 @@ class ProjectsSynchronization < ActiveRecord::Base
       project           = instantiate_project(row_hash)
       project.sync_mode = true
       project.sync_line = @line
-      row_hash.each{|k, v| project.send("#{k}_sync=", v) }
+      row_hash.each{|k, v| project.send("#{k.downcase}_sync=", v) rescue nil }
       self.projects_errors += project.sync_errors
       project.updated_by  = user
 
@@ -134,7 +134,7 @@ class ProjectsSynchronization < ActiveRecord::Base
     if row_hash['interaction_intervention_id'].present?
       self.projects_errors << "Missing required fields on line #@line" if  row_hash.keys - ['interaction_intervention_id'] == []
     else
-      self.projects_errors << "Missing required fields on line #@line" if REQUIRED_HEADERS - row_hash.keys != []
+      self.projects_errors << "Missing required fields on line #@line" if REQUIRED_HEADERS - row_hash.keys.map(&:downcase) != []
     end
   end
 

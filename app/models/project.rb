@@ -912,7 +912,7 @@ SQL
         country_name, *regions = location.split('>')
 
         if country_name
-          country = Country.where('trim(name) = ?', country_name).first
+          country = Country.where('lower(trim(name)) = lower(trim(?))', country_name).first
           if country.blank?
             self.sync_errors << "Country #{country_name} doesn't exist on row #@sync_line"
           else
@@ -924,7 +924,7 @@ SQL
           regions.each_with_index do |region_name, level|
             level += 1
 
-            region = Region.where('trim(name) = ?', region_name).first
+            region = Region.where('lower(trim(name)) = lower(trim(?))', region_name).first
             if region.blank?
               self.sync_errors << "#{level.ordinalize} Admin level #{region_name} doesn't exist on row #@sync_line"
               next
@@ -941,7 +941,7 @@ SQL
     self.sectors.clear
     if value && (sectors = value.text2array)
       sectors.each do |sector_name|
-        sector = Sector.where('trim(name) = ?', sector_name).first
+        sector = Sector.where('lower(trim(name)) = lower(trim(?))', sector_name).first
         if sector.blank?
           self.sync_errors << "Sector #{sector_name} doesn't exist on row #@sync_line"
           next
@@ -956,7 +956,7 @@ SQL
     self.clusters.clear
     if value && (clusters = value.text2array)
       clusters.each do |cluster_name|
-        cluster = Cluster.where('trim(name) = ?', cluster_name).first
+        cluster = Cluster.where('lower(trim(name)) = lower(trim(?))', cluster_name).first
         if cluster.blank?
           self.sync_errors << "cluster #{cluster_name} doesn't exist on row #@sync_line"
           next
@@ -971,7 +971,7 @@ SQL
     self.donors.clear
     if value && (donors = value.text2array)
       donors.each do |donor_name|
-        donor = Donor.where('trim(name) = ?', donor_name)
+        donor = Donor.where('lower(trim(name)) = lower(trim(?))', donor_name)
         if donor.blank?
           self.sync_errors << "donor #{donor_name} doesn't exist on row #@sync_line"
           next
@@ -1012,7 +1012,7 @@ SQL
       self.errors.add(:estimated_people_reached, "only accepts numeric values")
     end if estimated_people_reached.present?
 
-    if @organization_name && (organization = Organization.where('trim(name) = ?', @organization_name).first) && organization.present?
+    if @organization_name && (organization = Organization.where('lower(trim(name)) = lower(trim(?))', @organization_name).first) && organization.present?
       self.primary_organization_id = organization.id
     else
       self.errors.add(:organization, %Q{"#{@organization_name}" doesn't exist on row #@sync_line})
