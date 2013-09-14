@@ -67,7 +67,7 @@ class ProjectsSynchronization < ActiveRecord::Base
       project           = instantiate_project(row_hash)
       project.sync_mode = true
       project.sync_line = @line
-      row_hash.each{|k, v| project.send("#{k.downcase}_sync=", v) rescue nil }
+      row_hash.each{|k, v| puts "#{k}_sync=";project.send("#{k.downcase.strip}_sync=", v) rescue nil }
       self.projects_errors += project.sync_errors
       project.updated_by  = user
 
@@ -102,7 +102,7 @@ class ProjectsSynchronization < ActiveRecord::Base
   end
 
   def convert_file_to_hash_array(sheet)
-    header = sheet.row(0).to_a
+    header = sheet.row(0).to_a.map(&:downcase).map(&:strip)
 
     self.projects_file_data = []
     sheet.each_with_index do |sheet_row, i|

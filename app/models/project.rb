@@ -59,10 +59,10 @@ class Project < ActiveRecord::Base
 
   attr_accessor :sync_errors, :sync_mode
 
-  validate :sync_mode_validations, :if => lambda { sync_mode }
-  validates_presence_of :name, :description, :start_date, :end_date
-  validates_presence_of :primary_organization_id
-  validate :location_presence, :unless => lambda { sync_mode }
+  validate :sync_mode_validations,                                   :if     => lambda { sync_mode }
+  validates_presence_of :name, :description, :start_date, :end_date, :unless => lambda { sync_mode }
+  validates_presence_of :primary_organization_id,                    :unless => lambda { sync_mode }
+  validate :location_presence,                                       :unless => lambda { sync_mode }
   validate :dates_consistency#, :presence_of_clusters_and_sectors
   validates_uniqueness_of :intervention_id, :if => (lambda do
     intervention_id.present?
@@ -951,6 +951,11 @@ SQL
   end
 
   def sync_mode_validations
+    errors.add(:name, :blank)        if new_record? && name.blank?
+    errors.add(:description, :blank) if new_record? && description.blank?
+    errors.add(:start_date, :blank)  if new_record? && start_date.blank?
+    errors.add(:end_date, :blank)    if new_record? && end_date.blank?
+
     begin
       self.budget = Float(@budget)
     rescue
@@ -984,8 +989,8 @@ SQL
     if @organization_name && (organization = Organization.where('lower(trim(name)) = lower(trim(?))', @organization_name).first) && organization.present?
       self.primary_organization_id = organization.id
     else
-      self.errors.add(:organization, %Q{"#{@organization_name}" doesn't exist on row #@sync_line})
-    end
+      self.errors.add(:organization, %Q{"#{@organization_name}" doesn't exist})
+    end if new_record?
 
     errors.add(:location, "can't be blank") if countries.blank? && regions.blank?
 
@@ -1000,40 +1005,34 @@ SQL
           end
           self.sectors << sector
         end
-
       end
-    end
+    end if new_record?
 
-    if @clusters_sync.present?
-      self.clusters.clear
-      if @clusters_sync && (clusters = @clusters_sync.text2array)
-        clusters.each do |cluster_name|
-          cluster = Cluster.where('lower(trim(name)) = lower(trim(?))', cluster_name).first
-          if cluster.blank?
-            errors.add(:cluster,  "#{cluster_name} doesn't exist")
-            next
-          end
-          self.clusters << cluster
+    self.clusters.clear
+    if @clusters_sync && (clusters = @clusters_sync.text2array)
+      clusters.each do |cluster_name|
+        cluster = Cluster.where('lower(trim(name)) = lower(trim(?))', cluster_name).first
+        if cluster.blank?
+          errors.add(:cluster,  "#{cluster_name} doesn't exist")
+          next
         end
-
+        self.clusters << cluster
       end
     end
 
-    if @donors_sync.present?
-      self.donors.clear
-      if @donors_sync && (donors = @donors_sync.text2array)
-        donors.each do |donor_name|
-          donor = Donor.where('lower(trim(name)) = lower(trim(?))', donor_name)
-          if donor.blank?
-            errors.add(:donor,  "#{donor_name} doesn't exist")
-            next
-          end
-          self.donors << donor
+    self.donors.clear
+    if @donors_sync && (donors = @donors_sync.text2array)
+      donors.each do |donor_name|
+        donor = Donor.where('lower(trim(name)) = lower(trim(?))', donor_name)
+        if donor.blank?
+          errors.add(:donor,  "#{donor_name} doesn't exist")
+          next
         end
+        self.donors << donor
       end
     end
 
-    errors.add(:sectors, :blank) if sectors.blank?
+    errors.add(:sectors, :blank) if sectors.blank? && new_record?
   end
 
   # PROJECT SYNCHRONIZATION
