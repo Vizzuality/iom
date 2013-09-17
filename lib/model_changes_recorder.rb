@@ -28,7 +28,7 @@ module ModelChangesRecorder
 
     def record_changes
       valid_changes = valid(last_changes)
-      return if valid_changes.blank?
+      return if valid_changes.blank? || updated_by.nil?
 
       self.changes_history_records << ChangesHistoryRecord.create!(
         :who              => updated_by,

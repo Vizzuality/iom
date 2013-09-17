@@ -799,10 +799,12 @@ SQL
   end
 
   def project_name_sync=(value)
+    return unless value.present? || new_record?
     self.name = value
   end
 
   def project_description_sync=(value)
+    return unless value.present? || new_record?
     self.description = value
   end
 
@@ -862,10 +864,12 @@ SQL
   end
 
   def start_date_sync=(value)
+    return unless value.present? || new_record?
     self.start_date = value
   end
 
   def end_date_sync=(value)
+    return unless value.present? || new_record?
     self.end_date = value
   end
 
