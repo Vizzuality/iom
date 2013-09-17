@@ -999,14 +999,14 @@ SQL
       if @sectors_sync && (sectors = @sectors_sync.text2array)
         sectors.each do |sector_name|
           sector = Sector.where('lower(trim(name)) = lower(trim(?))', sector_name).first
-          if sector.blank?
+          if sector.blank? && new_record?
             errors.add(:sector,  "#{sector_name} doesn't exist")
             next
           end
           self.sectors << sector
         end
       end
-    end if new_record?
+    end
 
     self.clusters.clear
     if @clusters_sync && (clusters = @clusters_sync.text2array)
