@@ -1,6 +1,6 @@
 class ProjectsSynchronization < ActiveRecord::Base
 
-  REQUIRED_HEADERS = %w(organization project_name project_description start_date end_date sectors)
+  REQUIRED_HEADERS = %w(organization project_name project_description start_date end_date sectors location)
 
   attr_accessor :projects_file, :projects_errors, :user
 
@@ -107,7 +107,7 @@ class ProjectsSynchronization < ActiveRecord::Base
     self.projects_file_data = []
     sheet.each_with_index do |sheet_row, i|
       next if i == 0
-      row_hash = {}
+      row_hash = Hash[header.map{|h| [h, nil]}]
       sheet_row.each_with_index do |c, j|
         row_hash[header[j]] = sheet_row[j]
       end
@@ -132,7 +132,7 @@ class ProjectsSynchronization < ActiveRecord::Base
     end
 
     if row_hash['interaction_intervention_id'].present?
-      self.projects_errors << "Missing required fields on line #@line" if  row_hash.keys - ['interaction_intervention_id'] == []
+      #self.projects_errors << "Missing interaction_intervention_id on line #@line" if  row_hash.keys - ['interaction_intervention_id'] == []
     else
       missing_fields = REQUIRED_HEADERS - row_hash.keys.map(&:downcase)
       self.projects_errors << %Q{Missing required fields "#{missing_fields.join(', ')}" on line #@line} if missing_fields != []

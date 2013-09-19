@@ -57,7 +57,7 @@ class Project < ActiveRecord::Base
                           includes(:countries).
                           where('countries_projects.project_id IS NULL AND regions.id IS NOT NULL')
 
-  attr_accessor :sync_errors, :sync_mode
+  attr_accessor :sync_errors, :sync_mode, :location
 
   validate :sync_mode_validations,                                   :if     => lambda { sync_mode }
   validates_presence_of :name, :description, :start_date, :end_date, :unless => lambda { sync_mode }
@@ -799,12 +799,10 @@ SQL
   end
 
   def project_name_sync=(value)
-    return unless value.present? || new_record?
     self.name = value
   end
 
   def project_description_sync=(value)
-    return unless value.present? || new_record?
     self.description = value
   end
 
@@ -864,12 +862,10 @@ SQL
   end
 
   def start_date_sync=(value)
-    return unless value.present? || new_record?
     self.start_date = value
   end
 
   def end_date_sync=(value)
-    return unless value.present? || new_record?
     self.end_date = value
   end
 
@@ -905,58 +901,28 @@ SQL
   end
 
   def location_sync=(value)
-    self.countries.clear
-    self.regions.clear
-
-    if value && (locations = value.text2array)
-      locations.each do |location|
-        country_name, *regions = location.split('>')
-
-        if country_name
-          country = Country.where('lower(trim(name)) = lower(trim(?))', country_name).first
-          if country.blank?
-            self.sync_errors << "Country #{country_name} doesn't exist on row #@sync_line"
-          else
-            self.countries << country unless self.countries.include?(country)
-          end
-        end
-
-        if regions.present?
-          regions.each_with_index do |region_name, level|
-            level += 1
-
-            region = Region.where('lower(trim(name)) = lower(trim(?))', region_name).first
-            if region.blank?
-              self.sync_errors << "#{level.ordinalize} Admin level #{region_name} doesn't exist on row #@sync_line"
-              next
-            end
-            self.regions << region unless self.regions.include?(region)
-          end
-        end
-      end
-    end
-
+    @location_sync = value || []
   end
 
   def sectors_sync=(value)
-    @sectors_sync = value
+    @sectors_sync = value || []
   end
 
   def clusters_sync=(value)
-    @clusters_sync = value
+    @clusters_sync = value || []
   end
 
   def donors_sync=(value)
-    @donors_sync = value
+    @donors_sync = value || []
   end
 
   def sync_mode_validations
     self.date_provided = Time.now.to_date if new_record?
 
-    errors.add(:name, :blank)        if new_record? && name.blank?
-    errors.add(:description, :blank) if new_record? && description.blank?
-    errors.add(:start_date, :blank)  if new_record? && start_date.blank?
-    errors.add(:end_date, :blank)    if new_record? && end_date.blank?
+    errors.add(:name,        :blank ) if name.blank?
+    errors.add(:description, :blank ) if description.blank?
+    errors.add(:start_date,  :blank ) if start_date.blank?
+    errors.add(:end_date,    :blank ) if end_date.blank?
 
     begin
       self.budget = Float(@budget)
@@ -994,11 +960,43 @@ SQL
       self.errors.add(:organization, %Q{"#{@organization_name}" doesn't exist})
     end if new_record?
 
-    errors.add(:location, "can't be blank") if countries.blank? && regions.blank?
 
-    if @sectors_sync.present?
+    if @location_sync
+      self.countries.clear
+      self.regions.clear
+
+      if @location_sync.present? && (locations = @location_sync.text2array)
+        locations.each do |location|
+          country_name, *regions = location.split('>')
+
+          if country_name
+            country = Country.where('lower(trim(name)) = lower(trim(?))', country_name).first
+            if country.blank?
+              self.sync_errors << "Country #{country_name} doesn't exist on row #@sync_line"
+            else
+              self.countries << country unless self.countries.include?(country)
+            end
+          end
+
+          if regions.present?
+            regions.each_with_index do |region_name, level|
+              level += 1
+
+              region = Region.where('lower(trim(name)) = lower(trim(?))', region_name).first
+              if region.blank?
+                self.sync_errors << "#{level.ordinalize} Admin level #{region_name} doesn't exist on row #@sync_line"
+                next
+              end
+              self.regions << region unless self.regions.include?(region)
+            end
+          end
+        end
+      end
+    end
+
+    if @sectors_sync
       self.sectors.clear
-      if @sectors_sync && (sectors = @sectors_sync.text2array)
+      if @sectors_sync.present? && (sectors = @sectors_sync.text2array)
         sectors.each do |sector_name|
           sector = Sector.where('lower(trim(name)) = lower(trim(?))', sector_name).first
           if sector.blank? && new_record?
@@ -1010,31 +1008,36 @@ SQL
       end
     end
 
-    self.clusters.clear
-    if @clusters_sync && (clusters = @clusters_sync.text2array)
-      clusters.each do |cluster_name|
-        cluster = Cluster.where('lower(trim(name)) = lower(trim(?))', cluster_name).first
-        if cluster.blank?
-          errors.add(:cluster,  "#{cluster_name} doesn't exist")
-          next
+    if @clusters_sync
+      self.clusters.clear
+      if @clusters_sync.present? && (clusters = @clusters_sync.text2array)
+        clusters.each do |cluster_name|
+          cluster = Cluster.where('lower(trim(name)) = lower(trim(?))', cluster_name).first
+          if cluster.blank?
+            errors.add(:cluster,  "#{cluster_name} doesn't exist")
+            next
+          end
+          self.clusters << cluster
         end
-        self.clusters << cluster
       end
     end
 
-    self.donors.clear
-    if @donors_sync && (donors = @donors_sync.text2array)
-      donors.each do |donor_name|
-        donor = Donor.where('lower(trim(name)) = lower(trim(?))', donor_name)
-        if donor.blank?
-          errors.add(:donor,  "#{donor_name} doesn't exist")
-          next
+    if @donors_sync
+      self.donors.clear
+      if @donors_sync.present? && (donors = @donors_sync.text2array)
+        donors.each do |donor_name|
+          donor = Donor.where('lower(trim(name)) = lower(trim(?))', donor_name)
+          if donor.blank?
+            errors.add(:donor,  "#{donor_name} doesn't exist")
+            next
+          end
+          self.donors << donor
         end
-        self.donors << donor
       end
     end
 
-    errors.add(:sectors, :blank) if sectors.blank? && new_record?
+    errors.add(:sectors, :blank)  if (new_record? && self.sectors.blank?) || (@sectors_sync && @sectors_sync.empty?)
+    errors.add(:location, :blank) if (new_record? && self.countries.blank? && self.regions.blank?) || (@location_sync && @location_sync.empty?)
   end
 
   # PROJECT SYNCHRONIZATION
