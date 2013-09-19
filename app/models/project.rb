@@ -889,10 +889,6 @@ SQL
     self.idprefugee_camp = value
   end
 
-  def date_provided_sync=(value)
-    self.date_provided = Time.now.to_date
-  end
-
   def date_updated_sync=(value)
     self.date_updated = value
   end
@@ -955,6 +951,8 @@ SQL
   end
 
   def sync_mode_validations
+    self.date_provided = Time.now.to_date if new_record?
+
     errors.add(:name, :blank)        if new_record? && name.blank?
     errors.add(:description, :blank) if new_record? && description.blank?
     errors.add(:start_date, :blank)  if new_record? && start_date.blank?
