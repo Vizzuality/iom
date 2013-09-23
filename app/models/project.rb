@@ -885,8 +885,10 @@ SQL
     self.idprefugee_camp = value
   end
 
+  def date_provided_sync=(value)
+  end
+
   def date_updated_sync=(value)
-    self.date_updated = value
   end
 
   def status_sync=(value)
@@ -897,7 +899,7 @@ SQL
   end
 
   def organization_sync=(value)
-    @organization_name = value
+    @organization_name = value || ''
   end
 
   def location_sync=(value)
@@ -1036,8 +1038,9 @@ SQL
       end
     end
 
-    errors.add(:sectors, :blank)  if (new_record? && self.sectors.blank?) || (@sectors_sync && @sectors_sync.empty?)
-    errors.add(:location, :blank) if (new_record? && self.countries.blank? && self.regions.blank?) || (@location_sync && @location_sync.empty?)
+    errors.add(:sectors, :blank)                 if (new_record? && self.sectors.blank?) || (@sectors_sync && @sectors_sync.empty?)
+    errors.add(:location, :blank)                if (new_record? && self.countries.blank? && self.regions.blank?) || (@location_sync && @location_sync.empty?)
+    errors.add(:primary_organization_id, :blank) if (new_record? && self.primary_organization_id.blank?) || (@organization_name && @organization_name.empty?)
   end
 
   # PROJECT SYNCHRONIZATION
