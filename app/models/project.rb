@@ -80,7 +80,7 @@ class Project < ActiveRecord::Base
       return
     end
     if tag_names.is_a?(String)
-      tag_names = tag_names.split(',').map{ |t| t.strip }.compact.delete_if{ |t| t.blank? }
+      tag_names = tag_names.split(/[\||,]/).map{ |t| t.strip }.compact.delete_if{ |t| t.blank? }
     end
     Tag.transaction do
       tags.clear
@@ -949,6 +949,9 @@ SQL
                     else
                       self.errors.add(:end_date, "End date is invalid")
                     end if end_date.present?
+
+    self.date_provided = Time.now if new_record?
+    self.date_updated = Time.now
 
     begin
       self.estimated_people_reached = Float(@estimated_people_reached_sync)
