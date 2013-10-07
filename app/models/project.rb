@@ -68,9 +68,10 @@ class Project < ActiveRecord::Base
     intervention_id.present?
   end)
 
-  after_create :generate_intervention_id, :if => (lambda do
-    intervention_id.blank?
+  before_validation :update_intervention_id, :unless => (lambda do
+    new_record? || intervention_id.blank?
   end)
+  after_create :create_intervention_id
   after_commit :set_cached_sites
   after_destroy :remove_cached_sites
 
@@ -779,12 +780,21 @@ SQL
   end
 
   def generate_intervention_id
-    update_attribute(:intervention_id, [
+    self.intervention_id = [
       primary_organization.try(:organization_id).presence || 'XXXX',
       countries.first.try(:iso2_code).presence || 'XX',
       Time.now.strftime('%y'),
       id
-    ].join('-'))
+    ].join('-')
+  end
+
+  def create_intervention_id
+    generate_intervention_id
+    update_attribute(:intervention_id, intervention_id)
+  end
+
+  def update_intervention_id
+    generate_intervention_id if Project.where('intervention_id = ? AND id <> ?', intervention_id, id).count > 0
   end
 
   ##############################
