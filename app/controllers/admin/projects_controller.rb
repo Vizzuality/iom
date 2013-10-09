@@ -79,7 +79,6 @@ class Admin::ProjectsController < Admin::AdminController
 
   def new
     @project = new_project(:date_provided => Time.now)
-    @project.generate_intervention_id
 
     if Rails.env.development?
       @project.start_date  = Time.now
@@ -92,9 +91,9 @@ class Admin::ProjectsController < Admin::AdminController
 
   def create
     @project = new_project(params[:project])
-    @project.generate_intervention_id
+    @project.intervention_id = nil
     @project.updated_by = current_user
-    if @project.valid? && @project.save
+    if @project.save
       flash[:notice] = "Project created! Now you can <a href='#{donations_admin_project_path(@project)}'>provide the donor information</a> for this project."
       redirect_to edit_admin_project_path(@project), :flash => {:success => 'Project has been created successfully'}
     else
