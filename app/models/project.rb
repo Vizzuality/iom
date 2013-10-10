@@ -64,14 +64,12 @@ class Project < ActiveRecord::Base
   validates_presence_of :primary_organization_id,                    :unless => lambda { sync_mode }
   validate :location_presence,                                       :unless => lambda { sync_mode }
   validate :dates_consistency#, :presence_of_clusters_and_sectors
-  validates_uniqueness_of :intervention_id, :if => (lambda do
-    intervention_id.present?
-  end)
 
-  before_validation :update_intervention_id, :unless => (lambda do
-    new_record? || intervention_id.blank?
-  end)
-  after_create :create_intervention_id
+  #validates_uniqueness_of :intervention_id, :if => (lambda do
+    #intervention_id.present?
+  #end)
+
+  after_save :generate_intervention_id
   after_commit :set_cached_sites
   after_destroy :remove_cached_sites
 
@@ -780,12 +778,12 @@ SQL
   end
 
   def generate_intervention_id
-    self.intervention_id = [
+    Project.where(:id => id).update_all(:intervention_id => [
       primary_organization.try(:organization_id).presence || 'XXXX',
       countries.first.try(:iso2_code).presence || 'XX',
       Time.now.strftime('%y'),
       id
-    ].join('-')
+    ].join('-'))
   end
 
   def create_intervention_id
