@@ -321,7 +321,7 @@ class Project < ActiveRecord::Base
         ) as location,
         (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM tags AS t INNER JOIN projects_tags AS pt ON t.id=pt.tag_id WHERE pt.project_id=p.id) AS project_tags,
         (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM donors AS d INNER JOIN donations AS dn ON d.id=dn.donor_id AND dn.project_id=p.id) AS donors,
-        o.organization_id as org_intervention_id,
+        p.organization_id as org_intervention_id,
         CASE WHEN p.end_date > current_date THEN 'active' ELSE 'closed' END AS status
         #{kml_select}
         FROM projects AS p
@@ -353,7 +353,7 @@ class Project < ActiveRecord::Base
         p.contact_phone_number,
         activities,
         intervention_id,
-        o.organization_id,
+        p.organization_id,
         additional_information,
         awardee_type,
         date_provided,
