@@ -69,7 +69,7 @@ class Project < ActiveRecord::Base
     #intervention_id.present?
   #end)
 
-  after_save :generate_intervention_id
+  after_create :generate_intervention_id
   after_commit :set_cached_sites
   after_destroy :remove_cached_sites
 
