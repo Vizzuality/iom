@@ -25,10 +25,10 @@
     </div>
   </div>
 
-  <div class="field <%= 'hidden' unless current_user.admin? %>">
+  <div class="field <%= 'hidden' unless current_user.admin? && @project.persisted? %>">
     <label>InterAction Intervention ID</label>
     <span class="input_large">
-      <%= f.text_field :intervention_id, :class => action_name == 'new' ? 'auto' : nil %>
+      <%= f.text_field :intervention_id, :readonly => true %>
     </span>
   </div>
 

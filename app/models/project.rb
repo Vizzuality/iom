@@ -781,7 +781,7 @@ SQL
     Project.where(:id => id).update_all(:intervention_id => [
       primary_organization.try(:organization_id).presence || 'XXXX',
       countries.first.try(:iso2_code).presence || 'XX',
-      Time.now.strftime('%y'),
+      start_date.strftime('%y'),
       id
     ].join('-'))
   end
