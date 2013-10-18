@@ -11,7 +11,7 @@ class Admin::DonationsController < Admin::AdminController
       @donation.donor = donor
       @donation.office = office if office.present?
     end
-    @donation.office = nil unless @donation.office.valid?
+    @donation.office = nil unless @donation.office && @donation.office.valid?
     @donation.office.donor = @donation.donor if @donation.office.present? && @donation.office.donor.blank?
     @project.donations << @donation
     @project.updated_by = current_user

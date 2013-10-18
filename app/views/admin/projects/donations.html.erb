@@ -14,17 +14,9 @@
           <% @project.donations.each do |donation| %>
           <li>
             <div class="name_box">
-              <% if donation.office.present? %>
-                <h3>
-                  <%= link_to(truncate(donation.office.name, :length => 44), edit_admin_office_path(donation.office)) %>
-                </h3>
-                <span>Office from <%= link_to donation.office.donor.name, edit_admin_donor_path(donation.donor) %></span>
-              <% else %>
-                <h3>
-                  <%= link_to(truncate(donation.donor.name, :length => 44), edit_admin_donor_path(donation.donor)) %>
-                </h3>
-                <span>Donor</span>
-              <% end %>
+              <h3>
+                <%= link_to(truncate(donation.donor.name, :length => 44).html_safe, edit_admin_donor_path(donation.donor)) %>
+              </h3>
             </div>
             <div class="date_box">
               <%if donation.date.present? %>
@@ -68,18 +60,6 @@
 
             <%= f.date_select :date, { :start_year => 1970, :end_year=>100.years.since.year, :order => [:month, :day, :year],  :prompt => '-'}, { :class => :"chzn-date-select", :"data-placeholder" => ' '}  %>
           </div>
-          </span>
-        </div>
-
-        <div id="office_name" class="field">
-          <%= f.hidden_field :office_id %>
-          <%= f.label :office_id, raw('office') %>
-          <span id="office_name_input">
-            <%= f.fields_for :office, f.object.build_office do |office_fields| %>
-              <%= office_fields.hidden_field :donor_id %>
-              <%= office_fields.text_field :name, :id => :autocomplete_office_name %>
-            <% end -%>
-            <div class="spinner"></div>
           </span>
         </div>
 

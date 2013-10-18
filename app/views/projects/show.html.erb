@@ -237,7 +237,8 @@ var video_players = {};
 
         <% unless @project.donations.empty? %>
           <div class="block">
-            <h3>Donors & Offices</h3>
+            <!--<h3>Donors & Offices</h3>-->
+            <h3>Donors</h3>
             <ul class="donor_list">
               <% index = 0 %>
               <% @project.donations.group_by(&:donor).each_with_index do |donor_with_donations, index| %>
@@ -245,18 +246,18 @@ var video_players = {};
                 <% donations = donor_with_donations.last %>
                 <% if index < 5 %>
                   <li><%= link_to(donor.name.html_safe, donor_path(donor)) %></li>
-                  <% donations.map(&:office).uniq.each do |office| %>
+                  <!--<% donations.map(&:office).uniq.each do |office| %>
                     <% if office.present? %>
                       <li class="office"><%= link_to(office.name.html_safe, office_path(office)) %></li>
                     <% end %>
-                  <% end %>
+                  <% end %>-->
                 <% else %>
                   <li class="out"><%= link_to(donor.name.html_safe, donor_path(donor)) %></li>
-                  <% donations.map(&:office).uniq.each do |office| %>
+                  <!--<% donations.map(&:office).uniq.each do |office| %>
                     <% if office.present? %>
                     <li class="out office"><%= link_to(office.name.html_safe, office_path(office)) %></li>
                     <% end %>
-                  <% end %>
+                  <% end %>-->
                 <% end %>
                 <% index = index + 1 %>
               <% end %>
