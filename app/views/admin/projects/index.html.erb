@@ -64,7 +64,9 @@
       <span class="buttons">
         <a class="add_project museo_sans shadow_green" href="<%= new_admin_project_path %>">New project</a>
         <a class="import_csv museo_sans shadow_black" href="<%= admin_export_projects_path(:format => 'xls') %>">Export projects</a>
-        <div id="uploader"></div>
+        <% if current_user.administrator? %>
+          <div id="uploader"></div>
+        <% end %>
       </span>
     </div>
     <div class="projects_list">
