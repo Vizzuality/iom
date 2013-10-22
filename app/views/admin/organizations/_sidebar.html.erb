@@ -37,6 +37,11 @@
 </ul>
 
 <% if current_user.admin? -%>
+  <div class="export_import">
+    <div id="links">
+      <%= link_to 'Export Projects', admin_export_projects_path(:organization_id => @organization.to_param, :format => :xls) %>
+      </div>
+  </div>
   <div class="delete">
     <h5>DELETE THIS ORGANIZATION</h5>
     <p>Clicking the link below will permanently delete this organization and its references within the sites</p>
