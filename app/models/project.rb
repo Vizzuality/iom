@@ -263,6 +263,7 @@ class Project < ActiveRecord::Base
     sql = <<-SQL
         WITH r AS (
           SELECT r3.id,
+                 r3.level,
           c.name || '>' || r1.name || '>' || r2.name || '>' || r3.name AS full_name
           FROM regions r3
           LEFT OUTER JOIN regions r2 ON  r3.parent_region_id = r2.id
@@ -271,6 +272,7 @@ class Project < ActiveRecord::Base
           WHERE r3.level = 3
           UNION
           SELECT r2.id,
+                 r2.level,
           c.name || '>' || r1.name || '>' || r2.name AS full_name
           FROM regions r2
           LEFT OUTER JOIN regions r1 ON  r2.parent_region_id = r1.id
@@ -278,6 +280,7 @@ class Project < ActiveRecord::Base
           WHERE r2.level = 2
           UNION
           SELECT r1.id,
+                 r1.level,
           c.name || '>' || r1.name AS full_name
           FROM regions r1
           INNER JOIN countries c ON r1.country_id = c.id
@@ -319,13 +322,12 @@ class Project < ActiveRecord::Base
         (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM sectors AS s INNER JOIN projects_sectors AS ps ON s.id=ps.sector_id WHERE ps.project_id=p.id) AS sectors,
         (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM clusters AS c INNER JOIN clusters_projects AS cp ON c.id=cp.cluster_id WHERE cp.project_id=p.id) AS clusters,
         '|' || array_to_string(array_agg(distinct ps.site_id),'|') ||'|' as site_ids,
-        array_to_string(
-          array_agg(
-            distinct CASE WHEN r.full_name is not null THEN r.full_name
-                          WHEN c.name is not null THEN c.name
-                          END
-            ),'|'
-        ) as location,
+        COALESCE(
+          (SELECT '|' || array_to_string(array_agg(distinct full_name),'|') || '|' FROM r INNER JOIN projects_regions pr ON pr.project_id = p.id AND pr.region_id = r.id WHERE r.level = 3),
+          (SELECT '|' || array_to_string(array_agg(distinct full_name),'|') || '|' FROM r INNER JOIN projects_regions pr ON pr.project_id = p.id AND pr.region_id = r.id WHERE r.level = 2),
+          (SELECT '|' || array_to_string(array_agg(distinct full_name),'|') || '|' FROM r INNER JOIN projects_regions pr ON pr.project_id = p.id AND pr.region_id = r.id WHERE r.level = 1),
+          (SELECT '|' || array_to_string(array_agg(distinct name),'|') || '|' FROM c INNER JOIN countries_projects cp ON cp.project_id = p.id AND cp.country_id = c.id)
+        ) AS location,
         (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM tags AS t INNER JOIN projects_tags AS pt ON t.id=pt.tag_id WHERE pt.project_id=p.id) AS project_tags,
         (SELECT '|' || array_to_string(array_agg(distinct name),'|') ||'|' FROM donors AS d INNER JOIN donations AS dn ON d.id=dn.donor_id AND dn.project_id=p.id) AS donors,
         p.organization_id as org_intervention_id,
@@ -335,9 +337,7 @@ class Project < ActiveRecord::Base
         LEFT OUTER JOIN organizations o        ON  o.id = p.primary_organization_id
         LEFT OUTER JOIN projects_sites ps      ON  ps.project_id = p.id
         LEFT OUTER JOIN countries_projects cp  ON  cp.project_id = p.id
-        LEFT OUTER JOIN c                      ON  cp.country_id = c.id
         LEFT OUTER JOIN projects_regions pr    ON  pr.project_id = p.id
-        LEFT OUTER JOIN r                      ON  pr.region_id  = r.id
         #{where}
         GROUP BY
         p.id,
