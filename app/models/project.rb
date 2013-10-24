@@ -261,23 +261,32 @@ class Project < ActiveRecord::Base
 
 
     sql = <<-SQL
-      WITH r3 AS (SELECT r3.id, c.name || '>' || r1.name || '>' || r2.name || '>' || r3.name AS name
-                    FROM regions r3
-                    INNER JOIN regions r2 ON r3.parent_region_id = r2.id
-                    INNER JOIN regions r1 ON r2.parent_region_id = r1.id
-                    INNER JOIN countries c ON r1.country_id = c.id
-                  ),
-                  r2 AS (SELECT r2.id, c.name || '>' || r1.name || '>' || r2.name AS name
-                    FROM regions r2
-                    INNER JOIN regions r1 ON r2.parent_region_id = r1.id
-                    INNER JOIN countries c ON r1.country_id = c.id
-                  ),
-                  r1 AS (SELECT r1.id, c.name || '>' || r1.name AS name
-                    FROM regions r1
-                    INNER JOIN countries c ON r1.country_id = c.id),
-                  c AS (SELECT c.id, c.name AS name
-                    from countries c
-                  )
+        WITH r AS (
+          SELECT r3.id,
+          c.name || '>' || r1.name || '>' || r2.name || '>' || r3.name AS full_name
+          FROM regions r3
+          LEFT OUTER JOIN regions r2 ON  r3.parent_region_id = r2.id
+          LEFT OUTER JOIN regions r1 ON  r2.parent_region_id = r1.id
+          INNER JOIN countries c ON r3.country_id = c.id
+          WHERE r3.level = 3
+          UNION
+          SELECT r2.id,
+          c.name || '>' || r1.name || '>' || r2.name AS full_name
+          FROM regions r2
+          LEFT OUTER JOIN regions r1 ON  r2.parent_region_id = r1.id
+          INNER JOIN countries c ON r2.country_id = c.id
+          WHERE r2.level = 2
+          UNION
+          SELECT r1.id,
+          c.name || '>' || r1.name AS full_name
+          FROM regions r1
+          INNER JOIN countries c ON r1.country_id = c.id
+          WHERE r1.level = 1
+        ),
+        c AS (
+          SELECT c.id, c.name AS name
+          FROM countries c
+        )
 
 
         SELECT DISTINCT
@@ -312,9 +321,7 @@ class Project < ActiveRecord::Base
         '|' || array_to_string(array_agg(distinct ps.site_id),'|') ||'|' as site_ids,
         array_to_string(
           array_agg(
-            distinct CASE WHEN r3.name is not null THEN r3.name
-                          WHEN r2.name is not null THEN r2.name
-                          WHEN r1.name is not null THEN r1.name
+            distinct CASE WHEN r.full_name is not null THEN r.full_name
                           WHEN c.name is not null THEN c.name
                           END
             ),'|'
@@ -330,9 +337,7 @@ class Project < ActiveRecord::Base
         LEFT OUTER JOIN countries_projects cp  ON  cp.project_id = p.id
         LEFT OUTER JOIN c                      ON  cp.country_id = c.id
         LEFT OUTER JOIN projects_regions pr    ON  pr.project_id = p.id
-        LEFT OUTER JOIN r1                     ON  pr.region_id = r1.id
-        LEFT OUTER JOIN r2                     ON  pr.region_id = r2.id
-        LEFT OUTER JOIN r3                     ON  pr.region_id = r3.id
+        LEFT OUTER JOIN r                      ON  pr.region_id  = r.id
         #{where}
         GROUP BY
         p.id,
