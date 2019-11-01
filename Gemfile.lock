@@ -177,7 +177,7 @@ GEM
       linecache (>= 0.3)
     ruby-oembed (0.8.8)
     ruby-ole (1.2.11.1)
-    rubyzip (0.9.4)
+    rubyzip (2.0.0)
     sanitize (2.0.2)
       nokogiri (~> 1.4.4)
     sass (3.2.8)
